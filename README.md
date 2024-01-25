@@ -78,7 +78,7 @@ Due to these diverse applications of the Netzgrafik-Editor and its increasing va
 areas,
 the decision was made to release it as open source software, governed by the license specified in
 this
-[LICENCE.md](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/LICENSE.md)
+[LICENCE.md](./LICENSE.md)
 document.
 This is intended to promote broad use and collaboration at the planning level,
 as well as actively support the further development of new ideas from different industries so that
@@ -86,7 +86,7 @@ the editor constantly improves and,
 in the best case, establishes itself as a standard tool across different public transportation
 industries.
 
-Community [participation and collaboration](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/CONTRIBUTING.md)
+Community [participation and collaboration](./CONTRIBUTING.md)
 in the development process is extremely important and desired to ensure that the editor gains
 diversity
 and functionality and meets the needs and challenges of different application domains.
