@@ -77,7 +77,7 @@ Please also have a look at the [Introduction](#Introduction) chapter, where some
 | Shift + Mouse (or alternatively with the right mouse button and drag) |                                                Multi-select nodes and notes for subsequent moving or delete all selected elements by using "Delete".                                                |
 |                               ctrl + z                                |                                                                                 Undo - Reverse the previous action.                                                                                 |
 |                               ctrl + c                                | Copy the currently visible train runs. The copied content remains in the browser's memory/cache and can be pasted into different variants (even after closing the browser, the data remains saved). |
-|                      ctrl + v                                         |                                                                                    Paste the copied train runs.                                                                                     |
+|                               ctrl + v                                |                                                                                    Paste the copied train runs.                                                                                     |
 |                               ctrl + a                                |                                                                                             Select all.                                                                                             |
 
 ### Duplicate trainrun
