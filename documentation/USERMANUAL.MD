@@ -60,7 +60,8 @@ Key Features
 
 To create a new variant of a project, simply click on the "+" symbol and enter a name. You have
 already created a new variant in the project.
-![Alt text](./animated_images/2024-01-25-Create_New_Variant.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-01-25-Create_New_Variant.gif"></p>
 
 
 --- 
@@ -99,20 +100,24 @@ To duplicate a train in the project, follow these steps:
 > pearls view will open on the right side. At the top, there is an option to edit the train similarly
 > to the dialog window. Use this option to make any additional edits to the train.
 
-![Alt text](./animated_images/2024-1-25-Duplicate_Trainrun_ctr_d.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Duplicate_Trainrun_ctr_d.gif"></p>
 
 <!--- 
 ### Copy all visible elements
 
-![Alt text](./animated_images/2024-1-25-SelectAll_ctrl-a-and-copy-ctrl-c.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-SelectAll_ctrl-a-and-copy-ctrl-c.gif"></p>
 
 ### Insert copied elements
 
-![Alt text](./animated_images/2024-1-25-CtrlV-Insert_copied.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-CtrlV-Insert_copied.gif"></p>
 
 ### Delete all visible elements
 
-![Alt text](./animated_images/2024-1-25-SelectAll-ctrl_a-delete.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-SelectAll-ctrl_a-delete.gif"></p>
 --->
 
 ---
@@ -122,7 +127,8 @@ To duplicate a train in the project, follow these steps:
 
 ### Move nodes and clean up drawing
 
-![Alt text](./animated_images/2024-1-25-Move_nodes_reoute_notes_ports.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Move_nodes_reoute_notes_ports.gif"></p>
 
 <a id="Trains"></a>
 
@@ -139,7 +145,8 @@ To create a new train route, proceed as follows:
 - Configure the train route: Give the new train an appropriate name and specify the necessary
   details, such as train number or other relevant information.
 
-![Alt text](./animated_images/2024-01-25-Create_New_Trainrun.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-01-25-Create_New_Trainrun.gif"></p>
 
 > **Note:** Importantly, you don't have to select a train route - otherwise, just edit the selected
 > train route instead of creating a new one.
@@ -158,9 +165,11 @@ To reroute a train, follow these steps:
   the hexagon button, and both train sections will move together. Drag the sections to a different
   node to reroute them.
 
-![Alt text](./animated_images/2024-1-25-Rerouting_extend_remove_trainrunsections-001.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Rerouting_extend_remove_trainrunsections-001.gif"></p>
 
-![Alt text](./animated_images/2024-1-25-Rerouting_trainrunsections-001.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Rerouting_trainrunsections-001.gif"></p>
 
 ### Toggle stop / non-stop at node (trainrun transition)
 
@@ -171,7 +180,8 @@ To switch a train from a stop to a non-stop at a node, follow these steps:
 - Access train transitions: Locate the hexagon button within the node representation. This button
   signifies train transitions (Stop/Non-Stop).
 
-![Alt text](./animated_images/2024-01-25-Toogle_Stop_NonStop_trainrun_at_node.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-01-25-Toogle_Stop_NonStop_trainrun_at_node.gif"></p>
 
 <a id="Streckengrafik"></a>
 
@@ -184,7 +194,8 @@ To do this, first select a train and then click on the "Graphical Timetable" ico
 the bottom.
 The graphical timetable view will open, displaying the train's route and timeline.
 
-![Alt text](./animated_images/2024-01-25-Project_Along_Trainrun_Streckengrafik.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-01-25-Project_Along_Trainrun_Streckengrafik.gif"></p>
 
 
 ---
@@ -210,7 +221,8 @@ To access it, select a train first. Then, by clicking on the train again, the pe
 on the right side,
 displaying the train's route as a vertical chain of nodes and trainrunsections.
 
-![Alt text](./animated_images/2024-1-25_DeleteConnections-Perlenkette-Show_Connections.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-1-25_DeleteConnections-Perlenkette-Show_Connections.gif"></p>
 
 
 ---
@@ -231,13 +243,15 @@ Drag the line to the desired circle using drag and drop, and the connection will
 
 ### Create connections
 
-![Alt text](./animated_images/2024-1-25_DrawConnections.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-1-25_DrawConnections.gif"></p>
 
 ### Delete connections
 
 If you want to delete a connection, simply release the pin outside a node.
 
-![Alt text](./animated_images/2024-1-25_DeleteConnections-001.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-1-25_DeleteConnections-001.gif"></p>
 
 ### Delete connections with the help of pearls view
 
@@ -250,7 +264,8 @@ for a selected train. To delete a connection, follow these steps:
 
 Once the connections are marked, press the "Delete" key (DEL) to delete all the marked connections.
 
-![Alt text](./animated_images/2024-1-25_DeleteConnections_Perlenkette_select_delete-002.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-1-25_DeleteConnections_Perlenkette_select_delete-002.gif"></p>
 
 
 ---
@@ -294,27 +309,34 @@ These functions provide flexibility in managing and customizing labels according
 
 ### Simple Filtering
 
-![Alt text](./animated_images/2024-1-25-Filtering-001.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Filtering-001.gif"></p>
 
 ### Filtering trainrun
 
-![Alt text](./animated_images/2024-1-25-Filtering-002.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Filtering-002.gif"></p>
 
 ### Modifiy filterable labels
 
-![Alt text](./animated_images/2024-1-25-Filtering-Modify_Labelgroups_003.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Filtering-Modify_Labelgroups_003.gif"></p>
 
 ### Filtering Nodes
 
-![Alt text](./animated_images/2024-1-25-Filtering-NodeLabels_Editing.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Filtering-NodeLabels_Editing.gif"></p>
  
-![Alt text](./animated_images/2024-1-25-Filtering-NodeLabels_Editing-FilterOnOff.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Filtering-NodeLabels_Editing-FilterOnOff.gif"></p>
 
 ### Filer text (display)
 
-![Alt text](./animated_images/2024-1-25-Filtering-Display_Text.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Filtering-Display_Text.gif"></p>
 
-![Alt text](./animated_images/2024-1-25-Filtering-Display_Text-001.gif)
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Filtering-Display_Text-001.gif"></p>
 
 
 ---
