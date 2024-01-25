@@ -1,6 +1,4 @@
-# Netzgrafik-Editor 
-
-# Netzgrafik-Editor
+# Netzgrafik-Editor  
 
 > **Note:** This is a repository template. This README is under creation.
  
@@ -37,21 +35,23 @@ It offers various functions to enhance the efficiency and optimization of the lo
   aiding in infrastructure planning and decision-making.
 
 - **Rolling Stock Calculation:** The software calculates the required number of rolling stocks based on the timetable,
-  supporting fleet sizing and ensuring sufficient availability for smooth operations.
+  supporting fleet sizing.
 
 ## Origin and Open Source Collaboration
 The Netzgrafik-Editor, initially developed as an internal innovation project at the *[Swiss Railways company (SBB CFF FFS)](https://www.sbb.ch)*,
 has reached a mature stage and evolved into a powerful tool with applications beyond railways.
-It can now be utilized in any domain that requires integrated synchronized clock-faced timetables as a planning foundation.
+It can now be utilized in any domain that requires integrated synchronized clock-faced timetables as a planning basis.
 
 The versatility of the editor makes it suitable for various logistics planning scenarios, enabling efficient timetable creation and analysis.
 The software's key features can be leveraged in a broader context.
 
-Industries and sectors that can benefit from the Netzgrafik-Editor include:
+Industries and sectors that could benefit from the Netzgrafik-Editor include:
 - **Public Transportation Systems:** Other public transport networks can utilize the editor's flexibility and features to effectively
   visualize and plan their transportation systems, leading to improved efficiency and better services.
 
-- **Education Systems:** The editor's capabilities can be utilized in educational institutions to create integrated timetables for classes,
+- ...
+
+- **Educations:** The editor's capabilities can be utilized in educational institutions to create integrated timetables for classes,
   exams, and other activities, facilitating efficient scheduling and minimizing conflicts.
 
 By extending the scope of its application beyond railways, the Netzgrafik-Editor has the potential to become a valuable tool in numerous sectors,
@@ -62,10 +62,11 @@ it was decided to publish the editor as open source. This is intended to promote
 as well as actively support the further development of new ideas from different industries so that the editor constantly improves and,
 in the best case, establishes itself as a standard tool across different public transportation industries.
 
-Community participation and collaboration in the development process is extremely important and desired to ensure that the editor gains diversity
+Community [participation and collaboration](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/1-initial-opensource-template-guidelines-issue-1/CONTRIBUTING.md) 
+in the development process is extremely important and desired to ensure that the editor gains diversity
 and functionality and meets the needs and challenges of different application domains.
 The openness of the project encourages innovation, expertise from different sectors and continuous improvements to optimize the
-planning and synchronization of time-based processes.
+planning processes.
 
 <a id="Getting-Started"></a>
 
