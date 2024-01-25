@@ -6,6 +6,7 @@
 
 - [Introduction](#Introduction)
 - [Origin and Open Source Collaboration](#Origin-and-Open-Source-Collaboration)
+- [User Manual](#UserManual)
 - [Getting Started](#Getting-Started)
 - [Contributing](#Contributing)
 - [Documentation](#Documentation)
@@ -93,6 +94,12 @@ and functionality and meets the needs and challenges of different application do
 The openness of the project encourages innovation, expertise from different sectors and continuous
 improvements to optimize the
 planning processes.
+
+<a id="UserManual"></a>
+
+## User Manual 
+The user manual can be found here [USERMANUAL.MD](./documentation/USERMANUAL.MD)
+
 
 <a id="Getting-Started"></a>
 
