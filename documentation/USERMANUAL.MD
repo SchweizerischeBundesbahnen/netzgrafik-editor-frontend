@@ -38,10 +38,10 @@ Key Features
 |:-------------------------------------------------------------:|:---------------------------------------------------------------------------:|
 |                                                               |                                                                             |
 |                   ```Create new variant```                    | [![Create_New_Variant](./animated_images/2024-01-25-Create_New_Variant.gif) |
-|                   ```Create new trainrun```                   | [![Create_New_Variant](./animated_images/2024-01-25-Create_New_Trainrun) |
-|          ```Project the trainrun (Streckengrafik)```          | [![Create_New_Variant](./animated_images/2024-01-25-Project_Along_Trainrun_Streckengrafik) |
-| ```Toggle trainruns behavior at node : stop / non-stop at ``` | [![Create_New_Variant](./animated_images/2024-01-25-Toogle_Stop_NonStop_trainrun_at_node) |
-|                ```Duplicate trainrun```                       | [![Create_New_Variant](./animated_images/2024-1-25-Duplicate_Trainrun_ctr_d) |
+|                   ```Create new trainrun```                   | [![Create_New_Variant](./animated_images/2024-01-25-Create_New_Trainrun.gif) |
+|          ```Project the trainrun (Streckengrafik)```          | [![Create_New_Variant](./animated_images/2024-01-25-Project_Along_Trainrun_Streckengrafik.gif) |
+| ```Toggle trainruns behavior at node : stop / non-stop at ``` | [![Create_New_Variant](./animated_images/2024-01-25-Toogle_Stop_NonStop_trainrun_at_node.gif) |
+|                ```Duplicate trainrun```                       | [![Create_New_Variant](./animated_images/2024-1-25-Duplicate_Trainrun_ctr_d.gif) |
 
 ## Conclusion
 
