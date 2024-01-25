@@ -58,8 +58,8 @@ By extending the scope of its application beyond railways, the Netzgrafik-Editor
 providing comprehensive control, optimization, and synchronization of time-based planning.
 
 Due to these diverse applications of the Netzgrafik-Editor and its increasing value in various areas,
-it was decided to publish the editor as open source under the license defined here 
-[LICENCE.md](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/LICENSE.md) 
+the decision was made to release it as open source software, governed by the license specified in this 
+[LICENCE.md](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/LICENSE.md) document.
 This is intended to promote broad use and collaboration at the planning level,
 as well as actively support the further development of new ideas from different industries so that the editor constantly improves and,
 in the best case, establishes itself as a standard tool across different public transportation industries.
