@@ -3,8 +3,8 @@
 #### Table Of Contents
 
 - [Introduction](#Introduction)
-- [New Project/Variant](#CreateNewProjectVariant)
-- [BasicFunctions](#BasicFunctions)
+- [Project/Variant](#CreateNewProjectVariant)
+- [Advanced editing operations](#BasicFunctions)
 - [Nodes](#Nodes)
 - [Trainruns](#Trainruns)
 - [Connections](#Connections)
@@ -54,7 +54,7 @@ Key Features
 ---
 <a id="CreateNewProjectVariant"></a>
 
-## New Project/Variant
+## Project/Variant
 
 ### Create a new Variant within an Project
 
@@ -65,7 +65,20 @@ To create a new variant of a project, simply click on the "+" symbol and enter a
 --- 
 <a id="BasicFunctions"></a>
 
-## BasicFunctions
+## Advanced editing operations
+Please also have a look at the [Introduction](#Introduction) chapter, where some general information is provided.
+
+|                               Keyboard                                |                                                                                             description                                                                                             |
+|:---------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|                               'delete'                                |                                                                          Delete nodes, comments, and selected train runs.                                                                           |
+|                          ctrl + d / 'insert'                          |                                   Duplicate nodes, comments, and selected train runs (if multiple nodes are selected, trains including nodes will be duplicated).                                   |
+|                               'insert'                                |                                                                         Add new nodes under the mouse on the drawing area.                                                                          |
+|                               'Escape'                                |                                                         Select train runs / In multi-node move mode, all selected nodes will be unselected.                                                         |
+| Shift + Mouse (or alternatively with the right mouse button and drag) |                                                Multi-select nodes and notes for subsequent moving or delete all selected elements by using "Delete".                                                |
+|                               ctrl + z                                |                                                                                 Undo - Reverse the previous action.                                                                                 |
+|                               ctrl + c                                | Copy the currently visible train runs. The copied content remains in the browser's memory/cache and can be pasted into different variants (even after closing the browser, the data remains saved). |
+|                      ctrl + v                                         |                                                                                    Paste the copied train runs.                                                                                     |
+|                               ctrl + a                                |                                                                                             Select all.                                                                                             |
 
 ### Duplicate trainrun
 To duplicate a train in the project, follow these steps:
