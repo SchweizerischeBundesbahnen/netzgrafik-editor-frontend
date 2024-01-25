@@ -101,6 +101,7 @@ To duplicate a train in the project, follow these steps:
 
 ![Alt text](./animated_images/2024-1-25-Duplicate_Trainrun_ctr_d.gif)
 
+<!--- 
 ### Copy all visible elements
 
 ![Alt text](./animated_images/2024-1-25-SelectAll_ctrl-a-and-copy-ctrl-c.gif)
@@ -112,7 +113,7 @@ To duplicate a train in the project, follow these steps:
 ### Delete all visible elements
 
 ![Alt text](./animated_images/2024-1-25-SelectAll-ctrl_a-delete.gif)
-
+--->
 
 ---
 <a id="Nodes"></a>
