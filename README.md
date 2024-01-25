@@ -5,7 +5,7 @@
 #### Table Of Contents
 
 - [Introduction](#Introduction)
-- [Origin and Open Source Collaboration](#Origin and Open Source Collaboration)
+- [Origin and Open Source Collaboration](#Origin-and-Open-Source-Collaboration)
 - [Getting Started](#Getting-Started)
 - [Contributing](#Contributing)
 - [Documentation](#Documentation)
@@ -49,7 +49,7 @@ Some of the key features include:
   on the timetable,
   supporting fleet sizing.
 
-<a id="Origin and Open Source Collaboration"></a>
+<a id="Origin-and-Open-Source-Collaboration"></a>
 
 ## Origin and Open Source Collaboration
 
