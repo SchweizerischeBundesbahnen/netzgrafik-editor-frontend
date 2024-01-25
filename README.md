@@ -60,17 +60,11 @@ It can now be utilized in any domain that requires integrated synchronized clock
 a planning basis.
 
 The versatility of the editor makes it suitable for various logistics planning scenarios, enabling
-efficient timetable creation and analysis.
-The software's key features can be leveraged in a broader context.
-
-Industries and sectors that could benefit from the Netzgrafik-Editor include:
+efficient timetable creation and analysis. The software's key features can be leveraged in a broader context, such as:
 
 - **Public Transportation Systems:** Other public transport networks can utilize the editor's
-  flexibility and features to effectively
-  visualize and plan their transportation systems, leading to improved efficiency and better
-  services.
-
-- ...
+  flexibility and features to effectively visualize and plan their transportation systems, 
+  leading to improved efficiency and better services.
 
 - **Educations:** The editor's capabilities can be utilized in educational institutions to create
   integrated timetables for classes,
