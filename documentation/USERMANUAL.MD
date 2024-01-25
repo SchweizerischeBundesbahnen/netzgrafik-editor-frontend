@@ -59,7 +59,7 @@ Key Features
 ### Create a new Variant within an Project
 
 To create a new variant of a project, simply click on the "+" symbol and enter a name. You have already created a new variant in the project.
-[![Create_New_Variant](./animated_images/2024-01-25-Create_New_Variant.gif)
+![Create_New_Variant](./animated_images/2024-01-25-Create_New_Variant.gif)
 
 
 --- 
@@ -75,19 +75,19 @@ To duplicate a train in the project, follow these steps:
 - Edit the train name: Click on the train name with the left mouse button, and a dialog window will open, allowing you to edit the train's details. Make the necessary changes to the train name or any other relevant information.
 > **Optional:** Edit the train in the pearls view: If you click on the selected train again, the pearls view will open on the right side. At the top, there is an option to edit the train similarly to the dialog window. Use this option to make any additional edits to the train.
 
-[![Create_New_Variant](./animated_images/2024-1-25-Duplicate_Trainrun_ctr_d.gif)
+![Create_New_Variant](./animated_images/2024-1-25-Duplicate_Trainrun_ctr_d.gif)
 
 ### Copy all visible elements
 
-[![Create_New_Variant](./animated_images/2024-1-25-SelectAll_ctrl-a-and-copy-ctrl-c.gif)
+![Create_New_Variant](./animated_images/2024-1-25-SelectAll_ctrl-a-and-copy-ctrl-c.gif)
 
 ### Insert copied elements
 
-[![Create_New_Variant](./animated_images/2024-1-25-CtrlV-Insert_copied.gif)
+![Create_New_Variant](./animated_images/2024-1-25-CtrlV-Insert_copied.gif)
 
 ### Delete all visible elements
 
-[![Create_New_Variant](./animated_images/2024-1-25-SelectAll-ctrl_a-delete.gif)
+![Create_New_Variant](./animated_images/2024-1-25-SelectAll-ctrl_a-delete.gif)
 
 
 ---
@@ -97,7 +97,7 @@ To duplicate a train in the project, follow these steps:
 
 ### Move nodes and clean up drawing
 
-[![Create_New_Variant](./animated_images/2024-1-25-Move_nodes_reoute_notes_ports.gif)
+![Create_New_Variant](./animated_images/2024-1-25-Move_nodes_reoute_notes_ports.gif)
 
 <a id="Trains"></a>
 
@@ -114,7 +114,7 @@ To create a new train route, proceed as follows:
 - Configure the train route: Give the new train an appropriate name and specify the necessary
   details, such as train number or other relevant information.
 
-[![Create_New_Variant](./animated_images/2024-01-25-Create_New_Trainrun.gif)
+![Create_New_Variant](./animated_images/2024-01-25-Create_New_Trainrun.gif)
 
 > **Note:** Importantly, you don't have to select a train route - otherwise, just edit the selected
 > train route instead of creating a new one.
@@ -125,9 +125,9 @@ To reroute a train, follow these steps:
 - Drag and drop sections on the node: After selecting the train, you can rearrange sections of the train by dragging and dropping the small pins on the nodes. This allows you to reassign sections to different parts of the train's route.
 - Redirect train sections: If you want to redirect (reroute) two sections, you can easily do so by clicking and holding the left mouse button on the hexagon button on the node. Then, drag and drop the hexagon button, and both train sections will move together. Drag the sections to a different node to reroute them.
 
-[![Create_New_Variant](./animated_images/2024-1-25-Rerouting_extend_remove_trainrunsections-001.gif)
+![Create_New_Variant](./animated_images/2024-1-25-Rerouting_extend_remove_trainrunsections-001.gif)
 
-[![Create_New_Variant](./animated_images/2024-1-25-Rerouting_trainrunsections-001.gif)
+![Create_New_Variant](./animated_images/2024-1-25-Rerouting_trainrunsections-001.gif)
 
 ### Toggle stop / non-stop at node (trainrun transition)
 To switch a train from a stop to a non-stop at a node, follow these steps:
@@ -136,7 +136,7 @@ To switch a train from a stop to a non-stop at a node, follow these steps:
 - Access train transitions: Locate the hexagon button within the node representation. This button signifies train transitions (Stop/Non-Stop).
 
 
-[![Create_New_Variant](./animated_images/2024-01-25-Toogle_Stop_NonStop_trainrun_at_node.gif)
+![Create_New_Variant](./animated_images/2024-01-25-Toogle_Stop_NonStop_trainrun_at_node.gif)
 
 <a id="Streckengrafik"></a>
 
@@ -146,7 +146,7 @@ This corridor is shown on the horizinal axes of the chart. The time is displayed
 To do this, first select a train and then click on the "Graphical Timetable" icon in the menu bar at the bottom. 
 The graphical timetable view will open, displaying the train's route and timeline.
 
-[![Create_New_Variant](./animated_images/2024-01-25-Project_Along_Trainrun_Streckengrafik.gif)
+![Create_New_Variant](./animated_images/2024-01-25-Project_Along_Trainrun_Streckengrafik.gif)
 
 
 ---
@@ -167,7 +167,7 @@ Similarly, clicking on a train section will center that section in the Netzgrafi
 To access it, select a train first. Then, by clicking on the train again, the pearls view will open on the right side, 
 displaying the train's route as a vertical chain of nodes and trainrunsections.
 
-[![Create_New_Variant](./animated_images/2024-1-25_DeleteConnections-Perlenkette-Show_Connections.gif)
+![Create_New_Variant](./animated_images/2024-1-25_DeleteConnections-Perlenkette-Show_Connections.gif)
 
 
 ---
@@ -186,12 +186,12 @@ Drag the line to the desired circle using drag and drop, and the connection will
 
 ### Create connections
 
-[![Create_New_Variant](./animated_images/2024-1-25_DrawConnections.gif)
+![Create_New_Variant](./animated_images/2024-1-25_DrawConnections.gif)
 
 ### Delete connections
 If you want to delete a connection, simply release the pin outside a node.
 
-[![Create_New_Variant](./animated_images/2024-1-25_DeleteConnections-001.gif)
+![Create_New_Variant](./animated_images/2024-1-25_DeleteConnections-001.gif)
 
 ### Delete connections with the help of pearls view
 By using the pearls view, connections can be easily deleted. In the pearls view, you can see all the connections 
@@ -202,7 +202,7 @@ for a selected train. To delete a connection, follow these steps:
 
 Once the connections are marked, press the "Delete" key (DEL) to delete all the marked connections.
 
-[![Create_New_Variant](./animated_images/2024-1-25_DeleteConnections_Perlenkette_select_delete-002.gif) |
+![Create_New_Variant](./animated_images/2024-1-25_DeleteConnections_Perlenkette_select_delete-002.gif) |
 
 
 ---
@@ -216,31 +216,31 @@ from simple filtering to very complex and user-specific settings, allowing you t
 
 ### Simple Filtering
 
-[![Create_New_Variant](./animated_images/2024-1-25-Filtering-001.gif)
+![Create_New_Variant](./animated_images/2024-1-25-Filtering-001.gif)
 
 ### Filtering with the help of trainrun filterable labels
 
-[![Create_New_Variant](./animated_images/2024-1-25-Filtering-002.gif)
+![Create_New_Variant](./animated_images/2024-1-25-Filtering-002.gif)
 
 ### Modifiy filterable labels
 
-[![Create_New_Variant](./animated_images/2024-1-25-Filtering-Modify_Labelgroups_003.gif)
+![Create_New_Variant](./animated_images/2024-1-25-Filtering-Modify_Labelgroups_003.gif)
 
 ### Filtering Node filterable labels
 
-[![Create_New_Variant](./animated_images/2024-1-25-Filtering-NodeLabels_Editing.gif)
+![Create_New_Variant](./animated_images/2024-1-25-Filtering-NodeLabels_Editing.gif)
 
 ### Filtering Nodes
 
-[![Create_New_Variant](./animated_images/2024-1-25-Filtering-NodeLabels_Editing-FilterOnOff.gif)
+![Create_New_Variant](./animated_images/2024-1-25-Filtering-NodeLabels_Editing-FilterOnOff.gif)
 
 ### Filer text (display)
 
-[![Create_New_Variant](./animated_images/2024-1-25-Filtering-Display_Text.gif)
+![Create_New_Variant](./animated_images/2024-1-25-Filtering-Display_Text.gif)
 
 ### Filer text (display)
 
-[![Create_New_Variant](./animated_images/2024-1-25-Filtering-Display_Text-001.gif)
+![Create_New_Variant](./animated_images/2024-1-25-Filtering-Display_Text-001.gif)
 
 
 ---
