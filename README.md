@@ -1,4 +1,4 @@
-# Open Source Repo Template
+# Netzgrafik-Editor
 
 > **Note:** This is a repository template. This README serves both as an example for your new repository, and also contains information on how to use the repository template.
 
@@ -17,16 +17,7 @@ This repository is a template for creating new open-source repositories. It cont
 <a id="Introduction"></a>
 
 ## Introduction
-
-When creating an open-source project, it's important to establish a clear structure and set of guidelines to ensure that the project is maintainable and sustainable. This repository provides a basic template that can be used as a starting point for new projects.
-
-The template includes the following features:
-
-- A basic file structure for organizing code, documentation, and related files
-- A CONTRIBUTING.md file with guidelines for contributing to the project
-- A CODE_OF_CONDUCT.md file with guidelines for community behavior
-- A LICENSE.md file with information about the open-source license that applies to the project
-
+ 
 <a id="Getting-Started"></a>
 
 ## Getting-Started
