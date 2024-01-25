@@ -1,9 +1,9 @@
+# Netzgrafik-Editor 
+
 # Netzgrafik-Editor
 
-> **Note:** This is a repository template. This README serves both as an example for your new repository, and also contains information on how to use the repository template.
-
-This repository is a template for creating new open-source repositories. It contains all the necessary files and documents to ensure that your open-source project is well-organized and follows best practices.
-
+> **Note:** This is a repository template. This README is under creation.
+ 
 #### Table Of Contents
 
 - [Introduction](#Introduction)
@@ -17,7 +17,56 @@ This repository is a template for creating new open-source repositories. It cont
 <a id="Introduction"></a>
 
 ## Introduction
- 
+
+This is the repository for the Netzgrafik-Editor. The Netzgrafik-Editor is a powerful software that enables the creation, modification, and analysis of [integrated synchronised clock-faced timetables](https://en.wikipedia.org/wiki/Clock-face_scheduling).
+It offers various functions to enhance the efficiency and optimization of the logistics network. Some of the key features include:
+
+- **Interactive drawing tool to edit the Netzgrafik:** A user-friendly and interactive graphical editor for creating and editing the
+  integrated synchronised clock-faced timetables. It provides a visual interface to easily visualize and adjust the logistics network.
+
+- **Trainrun Editing:** Planners can manually draw and edit the trainruns as a chain, allowing them to define crucial aspects of the logistics network and tailor it
+  to specific requirements and constraints.
+
+- **Logistical Information Extraction:** The software extracts important logistical information from the integrated synchronised clock-faced timetables,
+  such as departure and destination stations, departure and arrival times, and train frequency.
+
+- **Logistics Network Analysis:** Planners can analyze the logistics network based on the timetable representation.
+  The software provides insights into connection coordination, transfer times, and logistical connections, facilitating optimization and efficiency improvement.
+
+- **Infrastructure Requirement Estimation:** Infrastructure requirements can be estimated based on the entered timetable representation,
+  aiding in infrastructure planning and decision-making.
+
+- **Rolling Stock Calculation:** The software calculates the required number of rolling stocks based on the timetable,
+  supporting fleet sizing and ensuring sufficient availability for smooth operations.
+
+## Origin and Open Source Collaboration
+The Netzgrafik-Editor, initially developed as an internal innovation project at the *[Swiss Railways company (SBB CFF FFS)](https://www.sbb.ch)*,
+has reached a mature stage and evolved into a powerful tool with applications beyond railways.
+It can now be utilized in any domain that requires integrated synchronized clock-faced timetables as a planning foundation.
+
+The versatility of the editor makes it suitable for various logistics planning scenarios, enabling efficient timetable creation and analysis.
+The software's key features can be leveraged in a broader context.
+
+Industries and sectors that can benefit from the Netzgrafik-Editor include:
+- **Public Transportation Systems:** Other public transport networks can utilize the editor's flexibility and features to effectively
+  visualize and plan their transportation systems, leading to improved efficiency and better services.
+
+- **Education Systems:** The editor's capabilities can be utilized in educational institutions to create integrated timetables for classes,
+  exams, and other activities, facilitating efficient scheduling and minimizing conflicts.
+
+By extending the scope of its application beyond railways, the Netzgrafik-Editor has the potential to become a valuable tool in numerous sectors,
+providing comprehensive control, optimization, and synchronization of time-based planning.
+
+Due to these diverse applications of the Netzgrafik-Editor and its increasing value in various areas,
+it was decided to publish the editor as open source. This is intended to promote broad use and collaboration at the planning level,
+as well as actively support the further development of new ideas from different industries so that the editor constantly improves and,
+in the best case, establishes itself as a standard tool across different public transportation industries.
+
+Community participation and collaboration in the development process is extremely important and desired to ensure that the editor gains diversity
+and functionality and meets the needs and challenges of different application domains.
+The openness of the project encourages innovation, expertise from different sectors and continuous improvements to optimize the
+planning and synchronization of time-based processes.
+
 <a id="Getting-Started"></a>
 
 ## Getting-Started
