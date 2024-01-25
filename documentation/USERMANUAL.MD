@@ -70,6 +70,7 @@ Please also have a look at the [Introduction](#Introduction) chapter, where some
 
 |                               Keyboard                                |                                                                                             description                                                                                             |
 |:---------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|                                                                       |                                                                                                                                                                                                     |
 |                               'delete'                                |                                                                          Delete nodes, comments, and selected train runs.                                                                           |
 |                          ctrl + d / 'insert'                          |                                   Duplicate nodes, comments, and selected train runs (if multiple nodes are selected, trains including nodes will be duplicated).                                   |
 |                               'insert'                                |                                                                         Add new nodes under the mouse on the drawing area.                                                                          |
@@ -176,7 +177,7 @@ These nodes are displayed as buttons, which enable quick synchronization with th
 If you click on a node button, the viewpoint (center) will automatically be readjusted. 
 Similarly, clicking on a train section will center that section in the Netzgrafik, allowing for easy navigation and visualization.
 
-### Show perlenkette
+### Show pearls view
 To access it, select a train first. Then, by clicking on the train again, the pearls view will open on the right side, 
 displaying the train's route as a vertical chain of nodes and trainrunsections.
 
