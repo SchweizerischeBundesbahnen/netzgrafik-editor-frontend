@@ -42,8 +42,8 @@ Key Features
 4. **Advanced Editing:**
    Users can perform advanced editing operations such as copy (Ctrl+C), paste (Ctrl+V),
    duplicate (Ctrl+D), delete (Del) and undo (Ctrl+Z) in multiple steps - either using the
-   standard Ctrl+z key command or with help of the version history. These editing functions 
-5. make it easier to manage and edit complex network structures. User don't need to
+   standard Ctrl+z key command or with help of the version history. These editing functions make it
+   easier to manage and edit complex network structures. User don't need to
    explicitly save the latest changes. The system save it automatically.
 
 5. **Collaboration and Sharing:**
@@ -97,7 +97,8 @@ To duplicate a train in the project, follow these steps:
   any other relevant information.
 
 > **Optional:** Edit the train in the pearls view: If you click on the selected train again, the
-> pearls view will open on the right side. At the top, there is an option to edit the train similarly
+> pearls view will open on the right side. At the top, there is an option to edit the train
+> similarly
 > to the dialog window. Use this option to make any additional edits to the train.
 
 <p align="left" width="100%" height="100%" >
@@ -326,7 +327,7 @@ These functions provide flexibility in managing and customizing labels according
 
 <p align="left" width="100%" height="100%" >
     <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Filtering-NodeLabels_Editing.gif"></p>
- 
+
 <p align="left" width="100%" height="100%" >
     <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Filtering-NodeLabels_Editing-FilterOnOff.gif"></p>
 
