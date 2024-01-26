@@ -42,8 +42,8 @@ Key Features
 4. **Advanced Editing:**
    Users can perform advanced editing operations such as copy (Ctrl+C), paste (Ctrl+V),
    duplicate (Ctrl+D), delete (Del) and undo (Ctrl+Z) in multiple steps - either using the
-   standard Ctrl+z key command or with help of the version history. These editing features make
-   management easier to process complex network structures efficiently. User don't need to
+   standard Ctrl+z key command or with help of the version history. These editing functions 
+5. make it easier to manage and edit complex network structures. User don't need to
    explicitly save the latest changes. The system save it automatically.
 
 5. **Collaboration and Sharing:**
