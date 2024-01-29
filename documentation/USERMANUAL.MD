@@ -22,7 +22,7 @@ the editor effectively.
 
 Key Features
 
-1. **![Creation](CREATION.md):**
+1. **[Creation](CREATION.md):**
    The user can define nodes, trains with their routes and attributes to create a comprehensive
    Netzgrafik.
 
@@ -57,15 +57,8 @@ Key Features
 
 ## Project/Variant
 
-### Create a new Variant within an Project
+For mor details have a look into [Creation](CREATION.md).
 
-To create a new variant of a project, simply click on the "+" symbol and enter a name. You have
-already created a new variant in the project.
-<p align="left" width="100%" height="100%" >
-    <img width="1000px" height="478px"  src="./animated_images/2024-01-25-Create_New_Variant.gif"></p>
-
-
---- 
 <a id="BasicFunctions"></a>
 
 ## Advanced editing operations
