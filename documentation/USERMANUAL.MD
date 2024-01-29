@@ -167,6 +167,8 @@ For mor details have a look into [create and modifiy connections](CREATE_CONNECT
 ---
 <a id="Filter"></a>
 
+## Filters
+
 For mor details have a look into [create and modifiy filters](CREATE_FILTERS.md).
 
 
