@@ -22,7 +22,7 @@ the editor effectively.
 
 Key Features
 
-1. **Netzgrafik Creation:**
+1. **Creation:**
    The user can define nodes, trains with their routes and attributes to create a comprehensive
    Netzgrafik.
 
