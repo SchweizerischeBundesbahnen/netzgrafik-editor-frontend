@@ -74,10 +74,10 @@ If you move the node - the Netzgrafik routes all trainrun section automatically.
 recalculates the routing and results in a new well aligned readable layout.
 
 Example 1:
-![node move small](29-01-2024-006-move-nodes-reroute_trainrun.gif)
+![node move small](./animated_images/29-01-2024-006-move-nodes-reroute_trainrun.gif)
 
 Example 2:
-![node move big](29-01-2024-006-move-nodes-reroute_trainrun-big.gif)
+![node move big](./animated_images/29-01-2024-006-move-nodes-reroute_trainrun-big.gif)
 
 
 
