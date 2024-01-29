@@ -23,23 +23,23 @@ the editor effectively.
 Key Features
 
 1. **Network Creation:**
-   The Netzgrafik-Editor enables users to create network graphics from scratch.
-   Users can define nodes, trainruns and attributes to build a comprehensive Netzgrafik
-   representation.
+   The user can define nodes, trains with their routes and attributes to create a comprehensive
+   network graphic.
 
-2. **Node and Trainrun Customization:**
+2. **Drag-and-Drop Interface:**
+   The editor offers a user-friendly drag-and-drop interface. This interface allows the user to
+   easily draw the mesh graphic and position the nodes, which has a direct effect on the course of
+   the edges, e.g. on train routes and transitions. The network graphic always remains clear and
+   easy to read. In addition, even the connections within the node between trains can be defined
+   using drag-and-drop. This intuitive function simplifies the creation and customisation of the
+   network layout.
+
+3. **Node and Trainrun Customization:**
    Users can customize nodes, trainrun with its sections and connections in the network graphics.
-   This includes changing the appearance (trainrun category, frequency), labeling, and adding
-   additional information such as connections.
+   This includes changing the appearance (trainrun category, frequency) and adding
+   additional information such as connections or filterable labels.
 
-3. **Drag-and-Drop Interface:**
-   The editor offers a user-friendly drag-and-drop interface, allowing users to easily position
-   nodes
-   which impacts directly visual the routing of the edges (trainruns) and transitions and
-   connections
-   within the node. This intuitive feature simplifies the creation and adjustment of network layout.
-
-4. **Advanced Editing:**
+4. **Advanced Editing Short-cuts:**
    Users can perform advanced editing operations such as copy (Ctrl+C), paste (Ctrl+V),
    duplicate (Ctrl+D), delete (Del) and undo (Ctrl+Z) in multiple steps - either using the
    standard Ctrl+z key command or with help of the version history. These editing functions make it
@@ -49,7 +49,8 @@ Key Features
 5. **Collaboration and Sharing:**
    The Netzgrafik-Editor provides collaboration features, enabling multiple users to work on the  
    same network graphic simultaneously. Users can share their work with others, track changes,
-   and collaborate seamlessly.
+   and collaborate seamlessly. Exporting and sharing the designed network graphic is also a useful
+   function that improves further processing with third parties.
 
 ---
 <a id="CreateNewProjectVariant"></a>
