@@ -86,14 +86,24 @@ To duplicate a train in the project, follow these steps:
 - Select the train: Use the left mouse click to select the train that you want to duplicate.
 - Duplicate the train: Once the train is selected, press "Ctrl + D" on your keyboard to duplicate
   it. This action will create an identical copy of the selected train.
+  > There are alternative editing path to process duplication:
+    - Use the copy-past idea: Select the train und press CTRL+C then CTRL+V
+
 - Edit the train name: Click on the train name with the left mouse button, and a dialog window will
   open, allowing you to edit the train's details. Make the necessary changes to the train name or
   any other relevant information.
 
-> **Optional:** Edit the train in the Perlenkette: If you click on the selected train again, the
-> Perlenkette will open on the right side. At the top, there is an option to edit the train
-> similarly
-> to the dialog window. Use this option to make any additional edits to the train.
+> **Optional:** Edit the train in the [Perlenkette](#Perlenkette)
+
+### Duplicate nodes
+
+To duplicate a node, ensure there is no trainrun selected. Move with the mouse pointer over the node
+to duplicate and press CTRL+D.
+
+### Duplicate notes
+
+To duplicate a note, ensure there is no trainrun selected. Move with the mouse pointer over the note
+to duplicate and press CTRL+D.
 
 <p align="left" width="100%" height="100%" >
     <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Duplicate_Trainrun_ctr_d.gif"></p>
@@ -125,7 +135,6 @@ For mor details have a look into [create and modifiy nodes](CREATE_NODES.md).
 <a id="Trains"></a>
 
 ## Trainruns
-
 
 For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
 
