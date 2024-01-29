@@ -1,4 +1,4 @@
-> ** This README is under creation.**
+> This README is under creation.
 ---
 
 # Netzgrafik-Editor
