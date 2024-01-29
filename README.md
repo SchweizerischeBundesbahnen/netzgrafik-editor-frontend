@@ -100,9 +100,7 @@ industries.
 Community [participation and collaboration](./CONTRIBUTING.md)
 in the development process is extremely important and desired to ensure that the editor gains
 diversity
-and functionality and meets the needs and challenges of different application domains -
-some early state ideas can be found in
-this [](https://xd.adobe.com/view/e4664ae0-be8f-40e4-6a55-88aec9eafd8d-9257/)
+and functionality and meets the needs and challenges of different application domains.
 The openness of the project encourages innovation, expertise from different sectors and continuous
 improvements to optimize the
 planning processes.
