@@ -56,9 +56,9 @@ Some of the key features include:
 
 The Netzgrafik-Editor, initially developed as an internal innovation project at the
 *[Swiss Railways company (SBB CFF FFS)](https://www.sbb.ch)*.
-The project started with a clickable prototype. At this early stage of the project, 
-there are still ideas and concepts that have not yet been implemented, so it's worth taking a look 
-[here](https://xd.adobe.com/view/e4664ae0-be8f-40e4-6a55-88aec9eafd8d-9257/) too.
+The project started with a clickable prototype. From this early stage of the project,
+there are still ideas and concepts that have not yet been realised, so it is always worth taking a look  
+[at this document](https://xd.adobe.com/view/e4664ae0-be8f-40e4-6a55-88aec9eafd8d-9257/).
 It now has reached a mature stage and evolved into a powerful tool with applications beyond railways.
 It can now be utilized in any domain that requires integrated synchronized clock-faced timetables as
 a planning basis.
