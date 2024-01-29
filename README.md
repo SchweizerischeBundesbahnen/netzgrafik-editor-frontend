@@ -55,8 +55,11 @@ Some of the key features include:
 ## Origin and Open Source Collaboration
 
 The Netzgrafik-Editor, initially developed as an internal innovation project at the
-*[Swiss Railways company (SBB CFF FFS)](https://www.sbb.ch)*,
-has reached a mature stage and evolved into a powerful tool with applications beyond railways.
+*[Swiss Railways company (SBB CFF FFS)](https://www.sbb.ch)*.
+The project started with a clickable prototype. At this early stage of the project, 
+there are still ideas and concepts that have not yet been implemented, so it's worth taking a look 
+[here](https://xd.adobe.com/view/e4664ae0-be8f-40e4-6a55-88aec9eafd8d-9257/) too.
+It now has reached a mature stage and evolved into a powerful tool with applications beyond railways.
 It can now be utilized in any domain that requires integrated synchronized clock-faced timetables as
 a planning basis.
 
@@ -90,7 +93,8 @@ industries.
 Community [participation and collaboration](./CONTRIBUTING.md)
 in the development process is extremely important and desired to ensure that the editor gains
 diversity
-and functionality and meets the needs and challenges of different application domains.
+and functionality and meets the needs and challenges of different application domains - 
+some early state ideas can be found in this [](https://xd.adobe.com/view/e4664ae0-be8f-40e4-6a55-88aec9eafd8d-9257/)
 The openness of the project encourages innovation, expertise from different sectors and continuous
 improvements to optimize the
 planning processes.
