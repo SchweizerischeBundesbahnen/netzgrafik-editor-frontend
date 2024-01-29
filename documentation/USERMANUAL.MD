@@ -8,9 +8,9 @@
 - [Nodes](#Nodes)
 - [Trainruns](#Trainruns)
 - [Connections](#Connections)
+- [Filters](#Filter)
 - [Graphic timetable (Streckengrafik)](#Streckengrafik)
 - [Pearls view (Perlenkette)](#Perlenkette)
-- [Filters](#Filter)
 - [Conclusion](#Conclusion)
 
 <a id="Introduction"></a>
@@ -128,6 +128,28 @@ For mor details have a look into [create and modifiy nodes](CREATE_NODES.md).
 
 For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
 
+---
+<a id="Connections"></a>
+
+## Connections
+
+For mor details have a look into [create and modifiy connections](CREATE_CONNECTIONS.md).
+
+
+---
+<a id="Filter"></a>
+
+## Filters
+
+For mor details have a look into [create and modifiy filters](CREATE_FILTERS.md).
+
+---
+<a id="Streckengrafik"></a>
+
+## Graphic timetable (Streckengrafik)
+
+For mor details have a look into [graphic timetable](Graphic_Timetable.md).
+
 
 ---
 <a id="Perlenkette"></a>
@@ -155,21 +177,6 @@ displaying the train's route as a vertical chain of nodes and trainrunsections.
 <p align="left" width="100%" height="100%" >
     <img width="1000px" height="478px"  src="./animated_images/2024-1-25_DeleteConnections-Perlenkette-Show_Connections.gif"></p>
 
-
----
-<a id="Connections"></a>
-
-## Connections
-
-For mor details have a look into [create and modifiy connections](CREATE_CONNECTIONS.md).
-
-
----
-<a id="Filter"></a>
-
-## Filters
-
-For mor details have a look into [create and modifiy filters](CREATE_FILTERS.md).
 
 
 
