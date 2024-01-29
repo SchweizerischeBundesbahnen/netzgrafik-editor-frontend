@@ -1,6 +1,10 @@
+> ** This README is under creation.**
+---
+
 # Netzgrafik-Editor
 
-> **Note:** This is the repository for the Netzgrafik-Editor. This README is under creation.
+> **Note:** This is the repository for the Netzgrafik-Editor. 
+
 
 #### Table Of Contents
 
