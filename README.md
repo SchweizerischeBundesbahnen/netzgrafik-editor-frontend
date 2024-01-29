@@ -1,6 +1,6 @@
 # Netzgrafik-Editor
 
-> **Note:** This is a repository template. This README is under creation.
+> **Note:** This is the repository for the Netzgrafik-Editor. This README is under creation.
 
 #### Table Of Contents
 
@@ -18,8 +18,7 @@
 
 ## Introduction
 
-This is the repository for the Netzgrafik-Editor. The Netzgrafik-Editor is a powerful software that
-enables the creation, modification, and analysis
+The Netzgrafik-Editor is a powerful software that enables the creation, modification, and analysis
 of [integrated synchronised clock-faced timetables](https://en.wikipedia.org/wiki/Clock-face_scheduling).
 It offers various functions to enhance the efficiency and optimization of the logistics network.
 Some of the key features include:
