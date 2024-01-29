@@ -1,9 +1,10 @@
 > This README is under creation.
 ---
 
-# Netzgrafik-Editor
+<img src="icon.png" align="right" />
+# Netzgrafik-Editor [![Awesome](./images/Overview_Editor_Screenshot_001.PNG)](https://github.com/sindresorhus/awesome#readme)
 
-> **Note:** This is the repository for the Netzgrafik-Editor. 
+> This is the repository for the Netzgrafik-Editor.
 
 
 #### Table Of Contents
