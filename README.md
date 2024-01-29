@@ -57,17 +57,19 @@ Some of the key features include:
 The Netzgrafik-Editor, initially developed as an internal innovation project at the
 *[Swiss Railways company (SBB CFF FFS)](https://www.sbb.ch)*.
 The project started with a clickable prototype. From this early stage of the project,
-there are still ideas and concepts that have not yet been realised, so it is always worth taking a look  
-[at this document](https://xd.adobe.com/view/e4664ae0-be8f-40e4-6a55-88aec9eafd8d-9257/).
-It now has reached a mature stage and evolved into a powerful tool with applications beyond railways.
+there are still ideas and concepts that have not yet been realised, so it is always worth taking a
+look [at this document](https://xd.adobe.com/view/e4664ae0-be8f-40e4-6a55-88aec9eafd8d-9257/).
+It now has reached a mature stage and evolved into a powerful tool with applications beyond
+railways.
 It can now be utilized in any domain that requires integrated synchronized clock-faced timetables as
 a planning basis.
 
 The versatility of the editor makes it suitable for various logistics planning scenarios, enabling
-efficient timetable creation and analysis. The software's key features can be leveraged in a broader context, such as:
+efficient timetable creation and analysis. The software's key features can be leveraged in a broader
+context, such as:
 
 - **Public Transportation Systems:** Other public transport networks can utilize the editor's
-  flexibility and features to effectively visualize and plan their transportation systems, 
+  flexibility and features to effectively visualize and plan their transportation systems,
   leading to improved efficiency and better services.
 
 - **Educations:** The editor's capabilities can be utilized in educational institutions to create
@@ -93,17 +95,18 @@ industries.
 Community [participation and collaboration](./CONTRIBUTING.md)
 in the development process is extremely important and desired to ensure that the editor gains
 diversity
-and functionality and meets the needs and challenges of different application domains - 
-some early state ideas can be found in this [](https://xd.adobe.com/view/e4664ae0-be8f-40e4-6a55-88aec9eafd8d-9257/)
+and functionality and meets the needs and challenges of different application domains -
+some early state ideas can be found in
+this [](https://xd.adobe.com/view/e4664ae0-be8f-40e4-6a55-88aec9eafd8d-9257/)
 The openness of the project encourages innovation, expertise from different sectors and continuous
 improvements to optimize the
 planning processes.
 
 <a id="UserManual"></a>
 
-## User Manual 
-The user manual can be found here [USERMANUAL.MD](./documentation/USERMANUAL.MD)
+## User Manual
 
+The user manual can be found here [USERMANUAL.MD](./documentation/USERMANUAL.MD)
 
 <a id="Getting-Started"></a>
 
@@ -119,9 +122,11 @@ Instructions for getting started with the repository, for e.g.:
 > - If creating via Self Service Portal (WIP)
 > - If Creating via GitHub Interface
     >
+
 - Click the "Use this template" button above, select "Create a new repository"
->   - Give your repository a name, and optionally a description. The owner will always be "
-      SchweizerischeBundesbahnen".
+
+> - Give your repository a name, and optionally a description. The owner will always be "
+    SchweizerischeBundesbahnen".
 >   - Set the visibility of your repository to "Public".
 >   - Do not select "Include all branches".
 >   - Click the "Create repository from template" button and you're done!
