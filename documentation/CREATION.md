@@ -83,6 +83,7 @@ Example 1:
 Example 2:
 ![node move big](./animated_images/29-01-2024-006-move-nodes-reroute_trainrun-big.gif)
 
+For mor details have a look into [create and modifiy nodes](CREATE_NODES.md).
 
 
 
