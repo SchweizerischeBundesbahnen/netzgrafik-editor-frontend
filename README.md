@@ -59,10 +59,9 @@ The Netzgrafik-Editor, initially developed as an internal innovation project at 
 The project started with a clickable prototype. From this early stage of the project,
 there are still ideas and concepts that have not yet been realised, so it is always worth taking a
 look [at this document](https://xd.adobe.com/view/e4664ae0-be8f-40e4-6a55-88aec9eafd8d-9257/).
-It now has reached a mature stage and evolved into a powerful tool with applications beyond
-railways.
-It can now be utilized in any domain that requires integrated synchronized clock-faced timetables as
-a planning basis.
+The entire project has now reached a mature stage and evolved into a powerful tool with applications
+beyond railways. It can now be utilized in any domain that requires integrated synchronized
+clock-faced timetables as a planning basis.
 
 The versatility of the editor makes it suitable for various logistics planning scenarios, enabling
 efficient timetable creation and analysis. The software's key features can be leveraged in a broader
@@ -127,9 +126,13 @@ Instructions for getting started with the repository, for e.g.:
 
 > - Give your repository a name, and optionally a description. The owner will always be "
     SchweizerischeBundesbahnen".
->   - Set the visibility of your repository to "Public".
->   - Do not select "Include all branches".
->   - Click the "Create repository from template" button and you're done!
+    >
+
+- Set the visibility of your repository to "Public".
+
+> - Do not select "Include all branches".
+    >
+- Click the "Create repository from template" button and you're done!
 
 <a id="Documentation"></a>
 
