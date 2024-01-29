@@ -96,6 +96,11 @@ To duplicate a train in the project, follow these steps:
   open, allowing you to edit the train's details. Make the necessary changes to the train name or
   any other relevant information.
 
+<p align="left" width="100%" height="100%" >
+    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Duplicate_Trainrun_ctr_d.gif"></p>
+
+<!--- 
+
 > **Optional:** Edit the train in the [Perlenkette](#Perlenkette)
 
 #### Duplicate nodes
@@ -108,10 +113,6 @@ to duplicate and press ctrl + d.
 To duplicate a note, ensure there is no trainrun selected. Move with the mouse pointer over the note
 to duplicate and press ctrl + d.
 
-<p align="left" width="100%" height="100%" >
-    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Duplicate_Trainrun_ctr_d.gif"></p>
-
-<!--- 
 ### Copy all visible elements
 
 <p align="left" width="100%" height="100%" >
