@@ -68,6 +68,10 @@ can modify it. Click for a second time the pearls view gets opened.
 
 ![start creating trainrun](./animated_images/29-01-2024-005-start-creating_trainrun.gif)
 
+
+For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
+
+
 ##### Move nodes
 
 If you move the node - the Netzgrafik routes all trainrun section automatically. The Netzgrafik
