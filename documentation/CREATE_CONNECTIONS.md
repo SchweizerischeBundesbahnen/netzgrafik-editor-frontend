@@ -25,13 +25,13 @@ If you want to delete a connection, simply release the pin outside a node.
 <p align="left" width="100%" height="100%" >
     <img width="1000px" height="478px"  src="./animated_images/2024-1-25_DeleteConnections-001.gif"></p>
 
-### Delete connections with the help of pearls view
+### Delete connections with the help of Perlenkette
 
-By using the pearls view, connections can be easily deleted. In the pearls view, you can see all the
+By using the Perlenkette, connections can be easily deleted. In the Perlenkette, you can see all the
 connections
 for a selected train. To delete a connection, follow these steps:
 
-- In the pearls view, locate the connections for the selected train which should be deleted.
+- In the Perlenkette, locate the connections for the selected train which should be deleted.
 - Click on the connections to mark them. (Clicking again removes the marking.)
 
 Once the connections are marked, press the "Delete" key (DEL) to delete all the marked connections.

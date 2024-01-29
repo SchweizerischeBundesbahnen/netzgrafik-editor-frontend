@@ -10,7 +10,7 @@
 - [Connections](#Connections)
 - [Filters](#Filter)
 - [Graphic timetable (Streckengrafik)](#Streckengrafik)
-- [Pearls view (Perlenkette)](#Perlenkette)
+- [Perlenkette](#Perlenkette)
 - [Conclusion](#Conclusion)
 
 <a id="Introduction"></a>
@@ -90,8 +90,8 @@ To duplicate a train in the project, follow these steps:
   open, allowing you to edit the train's details. Make the necessary changes to the train name or
   any other relevant information.
 
-> **Optional:** Edit the train in the pearls view: If you click on the selected train again, the
-> pearls view will open on the right side. At the top, there is an option to edit the train
+> **Optional:** Edit the train in the Perlenkette: If you click on the selected train again, the
+> Perlenkette will open on the right side. At the top, there is an option to edit the train
 > similarly
 > to the dialog window. Use this option to make any additional edits to the train.
 
@@ -159,11 +159,11 @@ For mor details have a look into [graphic timetable](Graphic_Timetable.md).
 ---
 <a id="Perlenkette"></a>
 
-## Pearls view (Perlenkette)
+## Perlenkette
 
-The pearls view allows you to view and edit the entire trainrun from a vertical perspective. It is
+The Perlenkette allows you to view and edit the entire trainrun from a vertical perspective. It is
 displayed on the right-hand side.
-In the upper part of the pearls view, the train information is displayed.
+In the upper part of the Perlenkette, the train information is displayed.
 It can also be expanded to get more information. It also allows to edit the train name, category or
 frequency.
 
@@ -173,9 +173,9 @@ If you click on a node button, the viewpoint (center) will automatically be read
 Similarly, clicking on a train section will center that section in the Netzgrafik, allowing for easy
 navigation and visualization.
 
-### Show pearls view
+### Show Perlenkette
 
-To access it, select a train first. Then, by clicking on the train again, the pearls view will open
+To access it, select a train first. Then, by clicking on the train again, the Perlenkette will open
 on the right side,
 displaying the train's route as a vertical chain of nodes and trainrunsections.
 

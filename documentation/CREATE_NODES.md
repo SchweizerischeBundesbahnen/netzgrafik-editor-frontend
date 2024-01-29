@@ -33,7 +33,7 @@ pressed button and the trainrun gets created. The trainrun dialog opens - enter 
 information about the trainrun. Then click outside the window or press 'ESC' to close the dialog
 window. If you like to reopen the dialog just click on the trainrun name in the editor or click any
 time (number). The dialog gets shown again. If you click on the trainrun - its gets selected and you
-can modify it. Click for a second time the pearls view gets opened.
+can modify it. Click for a second time the Perlenkette gets opened.
 
 ![start creating trainrun](./animated_images/29-01-2024-005-start-creating_trainrun.gif)
 

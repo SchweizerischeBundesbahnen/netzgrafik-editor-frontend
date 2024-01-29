@@ -35,7 +35,7 @@ Some of the key features include:
   integrated synchronised clock-faced timetables. It provides a visual interface to easily visualize
   and adjust the logistics network.
 
-- **Pearls view trainrun editing:** Planners can manually draw and edit the trainruns as a chain, allowing them
+- **Perlenkette trainrun editing:** Planners can manually draw and edit the trainruns as a chain, allowing them
   to define crucial aspects of the logistics network and tailor it
   to specific requirements and constraints.
 
