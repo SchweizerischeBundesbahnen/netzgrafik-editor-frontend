@@ -57,7 +57,7 @@ Key Features
 
 ## Project/Variant
 
-For mor details have a look into [Creation](CREATION.md).
+For mor details have a look into [Creation](CREATE_PROJECT.md).
 
 <a id="BasicFunctions"></a>
 
