@@ -66,7 +66,7 @@ window. If you like to reopen the dialog just click on the trainrun name in the 
 time (number). The dialog gets shown again. If you click on the trainrun - its gets selected and you
 can modify it. Click for a second time the pearls view gets opened.
 
-![start creating trainrun](./animated_images/29-01-2024-005-start-creating_trainrun.gig)
+![start creating trainrun](./animated_images/29-01-2024-005-start-creating_trainrun.gif)
 
 ##### Move nodes
 
