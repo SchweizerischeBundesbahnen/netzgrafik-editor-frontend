@@ -1,10 +1,11 @@
 > This README is under creation.
 ---
-
-<img src="icon.png" align="right" />
-# Netzgrafik-Editor [![Awesome](./images/Overview_Editor_Screenshot_001.PNG)](https://github.com/sindresorhus/awesome#readme)
-
+ 
+ 
+# Netzgrafik-Editor [![Netzgrafik-Editor](./images/Overview_Editor_Screenshot_001.PNG)](https://www.sbb.ch)
 > This is the repository for the Netzgrafik-Editor.
+
+Elements in beautiful READMEs include, but are not limited to: images, screenshots, GIFs, text formatting, etc.
 
 
 #### Table Of Contents
