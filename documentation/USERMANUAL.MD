@@ -126,7 +126,6 @@ For mor details have a look into [create and modifiy nodes](CREATE_NODES.md).
 
 ## Trainruns
 
-![Draw_New_TrainrunSection](./images/Draw_New_TrainrunSection.png)
 
 For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
 
@@ -152,7 +151,7 @@ For mor details have a look into [create and modifiy filters](CREATE_FILTERS.md)
 
 ## Graphic timetable (Streckengrafik)
 
-![Overview_Streckengrafik_Screenshot_001](./images/Overview_Streckengrafik_Screenshot_001.png)
+![Overview_Streckengrafik_Screenshot_001](./images/Overview_Streckengrafik_Screenshot_001.PNG)
 
 ![Overview_Streckengrafik_Screenshot_002](./images/Overview_Streckengrafik_Screenshot_002.png)
 
