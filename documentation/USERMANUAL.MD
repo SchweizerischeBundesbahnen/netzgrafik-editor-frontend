@@ -10,7 +10,7 @@
 - [Connections](#Connections)
 - [Graphic timetable (Streckengrafik)](#Streckengrafik)
 - [Pearls view (Perlenkette)](#Perlenkette)
-- [Filter](#Filter)
+- [Filters](#Filter)
 - [Conclusion](#Conclusion)
 
 <a id="Introduction"></a>
