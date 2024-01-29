@@ -8,8 +8,6 @@
 
 ![Netzgrafik-Editor](./documentation/images/Overview_Editor_Screenshot_001.PNG)  
 
-Elements in beautiful READMEs include, but are not limited to: images, screenshots, GIFs, text formatting, etc.
-
 
 #### Table Of Contents
 
