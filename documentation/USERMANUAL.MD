@@ -24,20 +24,20 @@ Key Features
 
 1. **Network Creation:**
    The user can define nodes, trains with their routes and attributes to create a comprehensive
-   network graphic.
+   Netzgrafik.
 
 2. **Drag-and-Drop Interface:**
    The editor offers a user-friendly drag-and-drop interface. This interface allows the user to
-   easily draw the mesh graphic and position the nodes, which has a direct effect on the course of
-   the edges, e.g. on train routes and transitions. The network graphic always remains clear and
+   easily draw the Netzgrafik and position the nodes, which has a direct impact to the edges, e.g.
+   trainrun sections and transitions. The Netzgrafik always remains clear and
    easy to read. In addition, even the connections within the node between trains can be defined
    using drag-and-drop. This intuitive function simplifies the creation and customisation of the
    network layout.
 
 3. **Node and Trainrun Customization:**
-   Users can customize nodes, trainrun with its sections and connections in the network graphics.
-   This includes changing the appearance (trainrun category, frequency) and adding
-   additional information such as connections or filterable labels.
+   Users can customize nodes, trainrun with its sections and connections in the Netzgrafik just
+   using the left mouse button. This includes changing the general appearance (trainrun category,
+   frequency) and additional information such as connections or filterable labels.
 
 4. **Advanced Editing Short-cuts:**
    Users can perform advanced editing operations such as copy (Ctrl+C), paste (Ctrl+V),
@@ -48,8 +48,8 @@ Key Features
 
 5. **Collaboration and Sharing:**
    The Netzgrafik-Editor provides collaboration features, enabling multiple users to work on the  
-   same network graphic simultaneously. Users can share their work with others, track changes,
-   and collaborate seamlessly. Exporting and sharing the designed network graphic is also a useful
+   same Netzgrafik simultaneously. Users can share their work with others, track changes,
+   and collaborate seamlessly. Exporting and sharing the designed Netzgrafik is also a useful
    function that improves further processing with third parties.
 
 ---
