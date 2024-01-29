@@ -1,11 +1,8 @@
-# Creation
+## Project/Variant
 
 The user can define nodes, trains with their routes and attributes to create a comprehensive
 Netzgrafik.
 
-<a id="CreateNewProjectVariant"></a>
-
-## Project/Variant
 
 ### Create a new Project
 
@@ -34,7 +31,7 @@ delete them.
 #### Create/import nodes
 For mor details have a look into [create and modifiy nodes](CREATE_NODES.md).
  
-#### Create trainruns
+### Create trainruns
 
 For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
 

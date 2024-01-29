@@ -1,4 +1,7 @@
-## Trainrun
+## Trainruns
+
+![Editing_Connections](./images/Draw_New_TrainrunSections.png)
+
 
 ### Create new trainrun
 

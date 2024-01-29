@@ -1,8 +1,6 @@
+## Nodes
 
-### Move nodes and clean up drawing
-
-
-#### Import nodes from a comma-seperate-value file (CSV)
+### Import nodes from a comma-seperate-value file (CSV)
 
 Nodes can be imported using a predefined semicolon-separated file (CSV). This allows the basis to be
 created very quickly. In addition to node properties, such as stopping times per train type, node
@@ -10,7 +8,7 @@ positions can also be imported so that the layout comes directly from the import
 
 ![import basedata](./animated_images/29-01-2024-004-import_basedata.gif)
 
-##### Import CSV interface description
+#### Import CSV interface description
 
 |                  |                      BP                      |                     Bahnhof                      |   Kategorie    |    Region     |              Fahrgastwechselzeit_IPV               |               Fahrgastwechselzeit_A                |               Fahrgastwechselzeit_B                |               Fahrgastwechselzeit_C                |               Fahrgastwechselzeit_D                |      ZAZ      |           Umsteigezeit           |              Labels              |         X         |          Y          |                            Erstellen                            |
 |:----------------:|:--------------------------------------------:|:------------------------------------------------:|:--------------:|:-------------:|:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|:-------------:|:--------------------------------:|:--------------------------------:|:-----------------:|:-------------------:|:---------------------------------------------------------------:|
@@ -27,7 +25,7 @@ region label.
 
 [>> Demo base data CSV file]29-01-2024-004-Stammdaten_importieren.csv)
 
-#### Create new trainrun
+### Create new trainrun
 
 Drag-and-drop a new trainrun from a node to another node. Just use the left mouse button, press
 mouse button on a node and hold the button pressed while moving to another node. Then release the
@@ -43,7 +41,7 @@ can modify it. Click for a second time the pearls view gets opened.
 For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
 
 
-##### Move nodes
+### Move nodes
 
 If you move the node - the Netzgrafik routes all trainrun section automatically. The Netzgrafik
 recalculates the routing and results in a new well aligned readable layout.

@@ -1,4 +1,9 @@
-## Show graphic timetable (Streckengrafik)
+## Graphic timetable (Streckengrafik)
+
+![Overview_Streckengrafik_Screenshot_002](./images/Overview_Streckengrafik_Screenshot_002.png)
+
+
+### Show graphic timetable (Streckengrafik)
 
 To display the graphical timetable, a train must be selected. It defines the corridor along which
 the graphical representation will be created.

@@ -1,5 +1,7 @@
 ## Conncetions
 
+![Editing_Connections](./images/Editing_Connections.png)
+
 Connections can be easily created by following these steps:
 
 - Select the train for which you want to create a connection.

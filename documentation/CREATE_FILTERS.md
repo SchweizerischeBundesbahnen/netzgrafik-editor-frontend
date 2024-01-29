@@ -1,5 +1,4 @@
-
-## Filter
+## Filters
 
 In the network Netzgrafik-Editor, the "What You See Is What You Get" principle applies.
 This means that everything you have displayed will be drawn, analyzed, and can be edited.
