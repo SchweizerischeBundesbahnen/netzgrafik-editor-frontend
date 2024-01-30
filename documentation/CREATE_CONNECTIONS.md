@@ -15,13 +15,13 @@ Drag the line to the desired circle using drag and drop, and the connection will
 
 ### Create connections
 
-![./animated_images/2024-1-25_DrawConnections.gif]
+![''](./animated_images/2024-1-25_DrawConnections.gif)
 
 ### Delete connections
 
 If you want to delete a connection, simply release the pin outside a node.
 
-![./animated_images/2024-1-25_DeleteConnections-001.gif]
+![''](./animated_images/2024-1-25_DeleteConnections-001.gif)
 
 ### Delete connections with the help of Perlenkette
 
@@ -29,10 +29,10 @@ By using the Perlenkette, connections can be easily deleted. In the Perlenkette,
 connections
 for a selected train. To delete a connection, follow these steps:
 
-- In the Perlenkette, locate the connections for the selected train which should be deleted.
+- In the pearls view, locate the connections for the selected train which should be deleted.
 - Click on the connections to mark them. (Clicking again removes the marking.)
 
 Once the connections are marked, press the "Delete" key (DEL) to delete all the marked connections.
 
-![./animated_images/2024-1-25_DeleteConnections_Perlenkette_select_delete-002.gif]
+![''](./animated_images/2024-1-25_DeleteConnections_Perlenkette_select_delete-002.gif)
 
