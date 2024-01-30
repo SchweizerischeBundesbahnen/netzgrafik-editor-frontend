@@ -36,25 +36,39 @@ These functions provide flexibility in managing and customizing labels according
 
 ### Simple Filtering
 
-<video src='./animated_images/2024-1-25-Filtering-001.mp4' width='100%'/>
+<video controls>
+<source src='./animated_images/2024-1-25-Filtering-001.mp4'  type="video/mp4">
+</video>
 
 ### Filtering trainrun
 
-<video src='./animated_images/2024-1-25-Filtering-002.mp4' width='100%'/>
+<video controls>
+<source src='./animated_images/2024-1-25-Filtering-002.mp4'  type="video/mp4">
+</video>
 
 ### Modifiy filterable labels
 
-<video src='./animated_images/2024-1-25-Filtering-Modify_Labelgroups_003.mp4' width='100%'/>
+<video controls>
+<source src='./animated_images/2024-1-25-Filtering-Modify_Labelgroups_003.mp4'  type="video/mp4">
+</video>
 
 ### Filtering Nodes
 
-<video src='./animated_images/2024-1-25-Filtering-NodeLabels_Editing.mp4' width='100%'/>
+<video controls>
+<source src='./animated_images/2024-1-25-Filtering-NodeLabels_Editing.mp4'  type="video/mp4">
+</video>
 
-<video src='./animated_images/2024-1-25-Filtering-NodeLabels_Editing-FilterOnOff.mp4' width='100%'/>
+<video controls>
+<source src='./animated_images/2024-1-25-Filtering-NodeLabels_Editing-FilterOnOff.mp4'  type="video/mp4">
+</video>
 
 ### Filer text (display)
 
-<video src='./animated_images/2024-1-25-Filtering-Display_Text.mp4' width='100%'/>
+<video controls>
+<source src='./animated_images/2024-1-25-Filtering-Display_Text.mp4'  type="video/mp4">
+</video>
 
-<video src='./animated_images/2024-1-25-Filtering-Display_Text-001.mp4' width='100%'/>
+<video controls>
+<source src='./animated_images/2024-1-25-Filtering-Display_Text-001.mp4'  type="video/mp4">
+</video>
 

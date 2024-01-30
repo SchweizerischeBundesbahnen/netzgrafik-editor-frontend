@@ -10,13 +10,15 @@ To create a new project, simply click on the "+" symbol and enter a name, an abs
 description.
 You have already created a project which can contain many variants.
 
-![Create new project](./animated_images/29-01-2024-001-Create_new_project.mp4' width='100%'/>
+![Create new project](./animated_images/29-01-2024-001-Create_new_project.mp4'  type="video/mp4">
+</video>
 
 ### Create a new Variant within an Project
 
 To create a new variant of a project, simply click on the "+" symbol and enter a name. You have
 already created a new variant in the project and the editor opens automatically
-![Create new variant](./animated_images/29-01-2024-002-create_new_variant.mp4' width='100%'/>
+![Create new variant](./animated_images/29-01-2024-002-create_new_variant.mp4'  type="video/mp4">
+</video>
 
 ### Become creative (start editing)
 
@@ -26,7 +28,8 @@ The editor opens the new created Netzgrafik. The new Netzgrafik contains some in
 from which users could draw trainruns with its sections. In most project those nodes are not
 required. If so press CTRL+A to select all elements of the current Netzgrafik and press DEL to
 delete them.
-![Create variant data](./animated_images/29-01-2024-003-clear_variant_data.mp4' width='100%'/>
+![Create variant data](./animated_images/29-01-2024-003-clear_variant_data.mp4'  type="video/mp4">
+</video>
 
 #### Create/import nodes
 For mor details have a look into [create and modifiy nodes](CREATE_NODES.md).
