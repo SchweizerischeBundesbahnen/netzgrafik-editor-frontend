@@ -81,8 +81,8 @@ is provided.
 
 ### Duplicate
 
-To duplicate one or elements - use *shift + left mouse button pressed* to select several elements
-and press ctrl + d.
+To duplicate one or many elements - use *shift + left mouse button pressed* to select several elements
+and press ctrl + d. 
 
 #### Duplicate trainrun
 
