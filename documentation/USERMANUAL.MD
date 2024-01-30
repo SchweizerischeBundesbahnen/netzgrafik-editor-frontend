@@ -88,7 +88,8 @@ If more than one node is selected, all train sections that are
 connected to two selected nodes are also duplicated. If further notes are selected, the notes are
 duplicated in the same way as the nodes.
 
-> If in the menu the *Knoten-Positionierungswerkzeug* is activated, you can *multi-select* nodes and notes by clicking. If you use shift + right mouse press   
+> If in the menu the *Knoten-Positionierungswerkzeug* is activated, you can *multi-select* nodes and
+> notes by clicking. If you use shift + right mouse press
 
 #### Duplicate trainrun
 
@@ -97,8 +98,8 @@ To duplicate a train in the project, follow these steps:
 - Select the train: Use the left mouse click to select the train that you want to duplicate.
 - Duplicate the train: Once the train is selected, press ctrl + d on your keyboard to duplicate
   it. This action will create an identical copy of the selected train.
-  > There are alternative editing path to process duplication:
-    - Use the copy-past idea: Select the train und press ctrl + c then ctrl + v
+  > There are alternative editing path to process duplication: Use the copy-past idea: Select the
+  train und press ctrl + c then ctrl + v
 
 - Edit the train name: Click on the train name with the left mouse button, and a dialog window will
   open, allowing you to edit the train's details. Make the necessary changes to the train name or
