@@ -36,32 +36,25 @@ These functions provide flexibility in managing and customizing labels according
 
 ### Simple Filtering
 
-<p align="left" width="100%" height="100%" >
-    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Filtering-001.gif"></p>
+![./animated_images/2024-1-25-Filtering-001.gif]
 
 ### Filtering trainrun
 
-<p align="left" width="100%" height="100%" >
-    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Filtering-002.gif"></p>
+![./animated_images/2024-1-25-Filtering-002.gif]
 
 ### Modifiy filterable labels
 
-<p align="left" width="100%" height="100%" >
-    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Filtering-Modify_Labelgroups_003.gif"></p>
+![./animated_images/2024-1-25-Filtering-Modify_Labelgroups_003.gif]
 
 ### Filtering Nodes
 
-<p align="left" width="100%" height="100%" >
-    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Filtering-NodeLabels_Editing.gif"></p>
+![./animated_images/2024-1-25-Filtering-NodeLabels_Editing.gif]
 
-<p align="left" width="100%" height="100%" >
-    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Filtering-NodeLabels_Editing-FilterOnOff.gif"></p>
+![./animated_images/2024-1-25-Filtering-NodeLabels_Editing-FilterOnOff.gif]
 
 ### Filer text (display)
 
-<p align="left" width="100%" height="100%" >
-    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Filtering-Display_Text.gif"></p>
+![./animated_images/2024-1-25-Filtering-Display_Text.gif]
 
-<p align="left" width="100%" height="100%" >
-    <img width="1000px" height="478px"  src="./animated_images/2024-1-25-Filtering-Display_Text-001.gif"></p>
+![./animated_images/2024-1-25-Filtering-Display_Text-001.gif]
 
