@@ -6,7 +6,7 @@ Nodes can be imported using a predefined semicolon-separated file (CSV). This al
 created very quickly. In addition to node properties, such as stopping times per train type, node
 positions can also be imported so that the layout comes directly from the import.
 
-![import basedata](./animated_images/29-01-2024-004-import_basedata.gif)
+![import basedata](./animated_images/29-01-2024-004-import_basedata.mp4)
 
 #### Import CSV interface description
 
@@ -35,7 +35,7 @@ window. If you like to reopen the dialog just click on the trainrun name in the 
 time (number). The dialog gets shown again. If you click on the trainrun - its gets selected and you
 can modify it. Click for a second time the Perlenkette gets opened.
 
-![start creating trainrun](./animated_images/29-01-2024-005-start-creating_trainrun.gif)
+![start creating trainrun](./animated_images/29-01-2024-005-start-creating_trainrun.mp4)
 
 
 For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
@@ -47,11 +47,11 @@ If you move the node - the Netzgrafik routes all trainrun section automatically.
 recalculates the routing and results in a new well aligned readable layout.
 
 Example 1:
-![node move small](./animated_images/29-01-2024-006-move-nodes-reroute_trainrun.gif)
+![node move small](./animated_images/29-01-2024-006-move-nodes-reroute_trainrun.mp4)
 
 Example 2:
-![node move big](./animated_images/29-01-2024-006-move-nodes-reroute_trainrun-big.gif)
+![node move big](./animated_images/29-01-2024-006-move-nodes-reroute_trainrun-big.mp4)
 
 Example 3:
-![node move big](./animated_images/2024-1-25-Move_nodes_reoute_notes_ports.gif)
+![node move big](./animated_images/2024-1-25-Move_nodes_reoute_notes_ports.mp4)
 
