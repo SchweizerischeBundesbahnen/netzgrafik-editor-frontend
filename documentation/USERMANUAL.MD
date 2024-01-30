@@ -79,8 +79,10 @@ is provided.
 |                                                  ctrl + v                                                  |                                                                                    Paste the copied train runs.                                                                                     |
 |                                                  ctrl + a                                                  |                                                                                             Select all.                                                                                             |
 
-### Duplicate 
-To duplicate one or elements - use *shift + left mouse button pressed* to select several elements and press ctrl + d.
+### Duplicate
+
+To duplicate one or elements - use *shift + left mouse button pressed* to select several elements
+and press ctrl + d.
 
 #### Duplicate trainrun
 
