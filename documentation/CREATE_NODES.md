@@ -99,12 +99,12 @@ drawing - first drawn, first aligned (from top to bottom or from left to right o
 
 
 **Sorting heuristic**
-(1) Position Alignment (Top > Bottom > Left > Right)
-(2) Left - Right | Top - Down
-(3) Category Order
-(4) Trainrun name (alphabetically)
-(5) Trainrun (drawing order)
-(6) Trainrun section (drawing order)
+- (1) Position Alignment (Top > Bottom > Left > Right)
+- (2) Left - Right | Top - Down
+- (3) Category Order
+- (4) Trainrun name (alphabetically)
+- (5) Trainrun (drawing order)
+- (6) Trainrun section (drawing order)
 
 ![node move big](./animated_images/compressed/29-01-2024-006-move-nodes-reroute_trainrun-big.gif)
 
