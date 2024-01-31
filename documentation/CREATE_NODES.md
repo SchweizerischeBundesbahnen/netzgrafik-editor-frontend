@@ -49,7 +49,7 @@ region label.
 | ZG   | Zug               | Ost    | 2         | 2                       | 2                     | 2                     | 2                     | 2                     | 4            |     |        | JA        | 866.6159235  | 323.4007965  |
 | ZFH  | Zürich Flughafen  | Ost    | 2         | 3                       | 3                     | 3                     | 3                     | 3                     | 4            |     |        | JA        | 962.4904855  | -647.2111605 |
 
-> [Demo base data CSV file(29-01-2024-004-Stammdaten_importieren.csv)
+> [Demo base data CSV file](29-01-2024-004-Stammdaten_importieren.csv)
 
 ### Create new trainrun
 
