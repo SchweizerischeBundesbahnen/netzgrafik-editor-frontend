@@ -3,7 +3,6 @@
 The user can define nodes, trains with their routes and attributes to create a comprehensive
 Netzgrafik.
 
-
 ### Create a new Project
 
 To create a new project, simply click on the "+" symbol and enter a name, an abstract and a short
@@ -26,11 +25,13 @@ The editor opens the new created Netzgrafik. The new Netzgrafik contains some in
 from which users could draw trainruns with its sections. In most project those nodes are not
 required. If so press CTRL+A to select all elements of the current Netzgrafik and press DEL to
 delete them.
+
 ![Create variant data](./animated_images/compressed/29-01-2024-003-clear_variant_data.gif)
 
 #### Create/import nodes
+
 For mor details have a look into [create and modifiy nodes](CREATE_NODES.md).
- 
+
 ### Create trainruns
 
 For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).

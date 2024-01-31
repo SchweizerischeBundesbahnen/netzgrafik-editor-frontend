@@ -38,7 +38,7 @@ These functions provide flexibility in managing and customizing labels according
 
 ![''](./animated_images/compressed/2024-1-25-Filtering-001.gif)
 
-### Filtering trainrun
+### Filtering trainrun with filterable labels
 
 ![''](./animated_images/compressed/2024-1-25-Filtering-002.gif)
 
@@ -46,7 +46,7 @@ These functions provide flexibility in managing and customizing labels according
 
 ![''](./animated_images/compressed/2024-1-25-Filtering-Modify_Labelgroups_003.gif)
 
-### Filtering Nodes
+### Filtering Nodes with filterable labels
 
 ![''](./animated_images/compressed/2024-1-25-Filtering-NodeLabels_Editing.gif)
 
