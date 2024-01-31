@@ -111,7 +111,7 @@ drawing - first drawn, first aligned (from top to bottom or from left to right o
 
 ##### Inserting new trainruns
 
-Inserting new trainruns affects the pin orders (edge ordering) and the node size (height, width).
+Inserting and deleting trainrun sections affects the pin orders (edge ordering) and the node size (height, width).
 
 ![node move big](./animated_images/compressed/2024-1-25-Move_nodes_reoute_notes_ports.gif)
 
