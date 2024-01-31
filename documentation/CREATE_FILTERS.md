@@ -36,39 +36,25 @@ These functions provide flexibility in managing and customizing labels according
 
 ### Simple Filtering
 
-<video controls>
-<source src='./animated_images/2024-1-25-Filtering-001.mp4'  type="video/mp4">
-</video>
+![''](./animated_images/2024-1-25-Filtering-001.webm)
 
 ### Filtering trainrun
 
-<video controls>
-<source src='./animated_images/2024-1-25-Filtering-002.mp4'  type="video/mp4">
-</video>
+![''](./animated_images/2024-1-25-Filtering-002.webm)
 
 ### Modifiy filterable labels
 
-<video controls>
-<source src='./animated_images/2024-1-25-Filtering-Modify_Labelgroups_003.mp4'  type="video/mp4">
-</video>
+![''](./animated_images/2024-1-25-Filtering-Modify_Labelgroups_003.webm)
 
 ### Filtering Nodes
 
-<video controls>
-<source src='./animated_images/2024-1-25-Filtering-NodeLabels_Editing.mp4'  type="video/mp4">
-</video>
+![''](./animated_images/2024-1-25-Filtering-NodeLabels_Editing.webm)
 
-<video controls>
-<source src='./animated_images/2024-1-25-Filtering-NodeLabels_Editing-FilterOnOff.mp4'  type="video/mp4">
-</video>
+![''](./animated_images/2024-1-25-Filtering-NodeLabels_Editing-FilterOnOff.webm)
 
 ### Filer text (display)
 
-<video controls>
-<source src='./animated_images/2024-1-25-Filtering-Display_Text.mp4'  type="video/mp4">
-</video>
+![''](./animated_images/2024-1-25-Filtering-Display_Text.webm)
 
-<video controls>
-<source src='./animated_images/2024-1-25-Filtering-Display_Text-001.mp4'  type="video/mp4">
-</video>
+![''](./animated_images/2024-1-25-Filtering-Display_Text-001.webm)
 

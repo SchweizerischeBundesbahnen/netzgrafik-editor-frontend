@@ -15,17 +15,13 @@ Drag the line to the desired circle using drag and drop, and the connection will
 
 ### Create connections
 
-<video controls>
-<source src='./animated_images/2024-1-25_DrawConnections.mp4'  type="video/mp4">
-</video>
+![''](./animated_images/2024-1-25_DrawConnections.webm)
 
 ### Delete connections
 
 If you want to delete a connection, simply release the pin outside a node.
 
-<video controls>
-<source src='./animated_images/2024-1-25_DeleteConnections-001.mp4'  type="video/mp4">
-</video>
+![''](./animated_images/2024-1-25_DeleteConnections-001.webm)
 
 ### Delete connections with the help of Perlenkette
 
@@ -38,7 +34,5 @@ for a selected train. To delete a connection, follow these steps:
 
 Once the connections are marked, press the "Delete" key (DEL) to delete all the marked connections.
 
-<video controls>
-<source src='./animated_images/2024-1-25_DeleteConnections_Perlenkette_select_delete-002.mp4'  type="video/mp4">
-</video>
+![''](./animated_images/2024-1-25_DeleteConnections_Perlenkette_select_delete-002.webm)
 

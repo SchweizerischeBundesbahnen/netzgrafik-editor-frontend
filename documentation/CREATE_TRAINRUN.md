@@ -14,9 +14,7 @@ To create a new train route, proceed as follows:
 - Configure the train route: Give the new train an appropriate name and specify the necessary
   details, such as train number or other relevant information.
 
-<video controls>
-<source src='./animated_images/2024-01-25-Create_New_Trainrun.mp4'  type="video/mp4">
-</video>
+![''](./animated_images/2024-01-25-Create_New_Trainrun.webm)
 
 > **Note:** Importantly, you don't have to select a train route - otherwise, just edit the selected
 > train route instead of creating a new one.
@@ -35,13 +33,9 @@ To reroute a train, follow these steps:
   the hexagon button, and both train sections will move together. Drag the sections to a different
   node to reroute them.
 
-<video controls>
-<source src='./animated_images/2024-1-25-Rerouting_extend_remove_trainrunsections-001.mp4'  type="video/mp4">
-</video>
+![''](./animated_images/2024-1-25-Rerouting_extend_remove_trainrunsections-001.webm)
 
-<video controls>
-<source src='./animated_images/2024-1-25-Rerouting_trainrunsections-001.mp4'  type="video/mp4">
-</video>
+![''](./animated_images/2024-1-25-Rerouting_trainrunsections-001.webm)
 
 ### Toggle stop / non-stop at node (trainrun transition)
 
@@ -52,9 +46,7 @@ To switch a train from a stop to a non-stop at a node, follow these steps:
 - Access train transitions: Locate the hexagon button within the node representation. This button
   signifies train transitions (Stop/Non-Stop).
 
-<video controls>
-<source src='./animated_images/2024-01-25-Toogle_Stop_NonStop_trainrun_at_node.mp4'  type="video/mp4">
-</video>
+![''](./animated_images/2024-01-25-Toogle_Stop_NonStop_trainrun_at_node.webm)
 
 <a id="Streckengrafik"></a>
 
