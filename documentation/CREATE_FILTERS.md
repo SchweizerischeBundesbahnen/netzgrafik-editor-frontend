@@ -36,25 +36,25 @@ These functions provide flexibility in managing and customizing labels according
 
 ### Simple Filtering
 
-![''](./animated_images/2024-1-25-Filtering-001.webm)
+![''](./animated_images/compressed/2024-1-25-Filtering-001.webm)
 
 ### Filtering trainrun
 
-![''](./animated_images/2024-1-25-Filtering-002.webm)
+![''](./animated_images/compressed/2024-1-25-Filtering-002.webm)
 
 ### Modifiy filterable labels
 
-![''](./animated_images/2024-1-25-Filtering-Modify_Labelgroups_003.webm)
+![''](./animated_images/compressed/2024-1-25-Filtering-Modify_Labelgroups_003.webm)
 
 ### Filtering Nodes
 
-![''](./animated_images/2024-1-25-Filtering-NodeLabels_Editing.webm)
+![''](./animated_images/compressed/2024-1-25-Filtering-NodeLabels_Editing.webm)
 
-![''](./animated_images/2024-1-25-Filtering-NodeLabels_Editing-FilterOnOff.webm)
+![''](./animated_images/compressed/2024-1-25-Filtering-NodeLabels_Editing-FilterOnOff.webm)
 
 ### Filer text (display)
 
-![''](./animated_images/2024-1-25-Filtering-Display_Text.webm)
+![''](./animated_images/compressed/2024-1-25-Filtering-Display_Text.webm)
 
-![''](./animated_images/2024-1-25-Filtering-Display_Text-001.webm)
+![''](./animated_images/compressed/2024-1-25-Filtering-Display_Text-001.webm)
 

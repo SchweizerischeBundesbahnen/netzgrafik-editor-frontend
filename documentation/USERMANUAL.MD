@@ -105,7 +105,7 @@ To duplicate a train in the project, follow these steps:
   open, allowing you to edit the train's details. Make the necessary changes to the train name or
   any other relevant information.
 
-![''](./animated_images/2024-1-25-Duplicate_Trainrun_ctr_d.webm)
+![''](./animated_images/compressed/2024-1-25-Duplicate_Trainrun_ctr_d.webm)
 
 
 > **Optional:** Edit the train in the [Perlenkette](#Perlenkette)
@@ -151,15 +151,15 @@ to delete and press 'delete'.
 
 ### Copy all visible elements
 
-![''](./animated_images/2024-1-25-SelectAll_ctrl-a-and-copy-ctrl-c.webm)
+![''](./animated_images/compressed/2024-1-25-SelectAll_ctrl-a-and-copy-ctrl-c.webm)
 
 ### Insert copied elements
 
-![''](./animated_images/2024-1-25-CtrlV-Insert_copied.webm)
+![''](./animated_images/compressed/2024-1-25-CtrlV-Insert_copied.webm)
 
 ### Delete all visible elements
 
-![''](./animated_images/2024-1-25-SelectAll-ctrl_a-delete.webm)
+![''](./animated_images/compressed/2024-1-25-SelectAll-ctrl_a-delete.webm)
 --->
 
 ---
@@ -225,7 +225,7 @@ To access it, select a train first. Then, by clicking on the train again, the Pe
 on the right side,
 displaying the train's route as a vertical chain of nodes and trainrunsections.
 
-![''](./animated_images/2024-1-25_DeleteConnections-Perlenkette-Show_Connections.webm)
+![''](./animated_images/compressed/2024-1-25_DeleteConnections-Perlenkette-Show_Connections.webm)
 
 
 
