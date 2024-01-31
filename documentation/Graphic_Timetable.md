@@ -12,5 +12,5 @@ To do this, first select a train and then click on the "Graphical Timetable" ico
 the bottom.
 The graphical timetable view will open, displaying the train's route and timeline.
 
-![Streckengrafik](./animated_images/compressed/2024-01-25-Project_Along_Trainrun_Streckengrafik.webm)
+![Streckengrafik](./animated_images/compressed/2024-01-25-Project_Along_Trainrun_Streckengrafik.gif)
 
