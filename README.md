@@ -1,13 +1,13 @@
 > This README is under creation.
 ---
- 
 
-# Netzgrafik-Editor  
+# Netzgrafik-Editor
 
 > This is the repository for the Netzgrafik-Editor.
 
-![Netzgrafik-Editor](./documentation/images/Overview_Editor_Screenshot_001.PNG)  
-
+|                                Netzgrafik-Editor                                |                                      Graphic timetable (Streckengrafik)                                      |
+|:-------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------:|
+| ![Netzgrafik-Editor](./documentation/images/Overview_Editor_Screenshot_001.PNG) | ![Overview_Streckengrafik_Screenshot_002](./documentation/images/Overview_Streckengrafik_Screenshot_002.png) |
 
 #### Table Of Contents
 
@@ -35,7 +35,8 @@ Some of the key features include:
   integrated synchronised clock-faced timetables. It provides a visual interface to easily visualize
   and adjust the logistics network.
 
-- **Perlenkette trainrun editing:** Planners can manually draw and edit the trainruns as a chain, allowing them
+- **Perlenkette trainrun editing:** Planners can manually draw and edit the trainruns as a chain,
+  allowing them
   to define crucial aspects of the logistics network and tailor it
   to specific requirements and constraints.
 
@@ -136,6 +137,7 @@ Instructions for getting started with the repository, for e.g.:
 
 > - Do not select "Include all branches".
     >
+
 - Click the "Create repository from template" button and you're done!
 
 <a id="Documentation"></a>
