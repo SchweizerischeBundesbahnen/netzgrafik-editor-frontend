@@ -98,7 +98,7 @@ To duplicate a train in the project, follow these steps:
 - Select the train: Use the left mouse click to select the train that you want to duplicate.
 - Duplicate the train: Once the train is selected, press ctrl + d on your keyboard to duplicate
   it. This action will create an identical copy of the selected train.
-  > [!TIP]
+
   > There are alternative editing path to process duplication: Use the copy-past idea: Select the
   train und press ctrl + c then ctrl + v
 
@@ -133,7 +133,7 @@ To delete a train in the project, follow these steps:
 - Select the train: Use the left mouse click to select the train that you want to delete.
 - Delete the train: Once the train is selected, press 'delete' on your keyboard to delete
   it. This action will create an identical copy of the selected train.
-  > [!TIP]
+
   > There are alternative editing path to process duplication: Use the copy-past idea: Select
   the train und press ctrl + c then ctrl + v
 
