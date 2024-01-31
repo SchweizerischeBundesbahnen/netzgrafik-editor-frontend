@@ -11,7 +11,6 @@ positions can also be imported so that the layout comes directly from the import
 <details>
 <summary>Import CSV interface description
 </summary>
- 
 
 |                  |                      BP                      |                     Bahnhof                      |   Kategorie    |    Region     |              Fahrgastwechselzeit_IPV               |               Fahrgastwechselzeit_A                |               Fahrgastwechselzeit_B                |               Fahrgastwechselzeit_C                |               Fahrgastwechselzeit_D                |      ZAZ      |           Umsteigezeit           |              Labels              |         X         |          Y          |                            Erstellen                            |
 |:----------------:|:--------------------------------------------:|:------------------------------------------------:|:--------------:|:-------------:|:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|:-------------:|:--------------------------------:|:--------------------------------:|:-----------------:|:-------------------:|:---------------------------------------------------------------:|
@@ -78,12 +77,32 @@ For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.m
 If you move the node - the Netzgrafik routes all trainrun section automatically. The Netzgrafik
 recalculates the routing and results in a new well aligned readable layout.
 
-Example 1:
+#### Example 1
+
+This example shows how a trainrun is connected to a node and aligned. The outgoing/incoming edge
+depends on the position of the node.
+
 ![node move small](./animated_images/compressed/29-01-2024-006-move-nodes-reroute_trainrun.gif)
 
-Example 2:
+#### Example 2
+
+This example shows how several trainrun are connected to each other and aligned to a node. The
+outgoing/incoming edge depends on the position of the node.
+
+Sorting heuristic
+If two or more trainrun have at least one identical node (start/end does not matter), the
+trainrun are sorted according to the position of the branching node: (from top to bottom or
+from left to right or vice versa).
+
+If two or more trainrun have the same neighbouring nodes, they are sorted by train journey
+category and name. If the name is the same, they are further sorted according to the order of the
+drawing - first drawn, first aligned (from top to bottom or from left to right or vice versa).
+
 ![node move big](./animated_images/compressed/29-01-2024-006-move-nodes-reroute_trainrun-big.gif)
 
-Example 3:
+#### Example 3
+
+Inserting new trainruns affects the pin orders (edge ordering) and the node size (height, width).
+
 ![node move big](./animated_images/compressed/2024-1-25-Move_nodes_reoute_notes_ports.gif)
 
