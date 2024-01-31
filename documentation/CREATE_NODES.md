@@ -8,7 +8,10 @@ positions can also be imported so that the layout comes directly from the import
 
 ![import basedata](./animated_images/compressed/29-01-2024-004-import_basedata.gif)
 
-#### Import CSV interface description
+<details>
+<summary>Import CSV interface description
+</summary>
+ 
 
 |                  |                      BP                      |                     Bahnhof                      |   Kategorie    |    Region     |              Fahrgastwechselzeit_IPV               |               Fahrgastwechselzeit_A                |               Fahrgastwechselzeit_B                |               Fahrgastwechselzeit_C                |               Fahrgastwechselzeit_D                |      ZAZ      |           Umsteigezeit           |              Labels              |         X         |          Y          |                            Erstellen                            |
 |:----------------:|:--------------------------------------------:|:------------------------------------------------:|:--------------:|:-------------:|:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|:-------------:|:--------------------------------:|:--------------------------------:|:-----------------:|:-------------------:|:---------------------------------------------------------------:|
@@ -22,6 +25,8 @@ one category label.
 **region number:** If the node gets created or updated the region number gets added as filterable
 label. The label template ist "Region:" + value. Comma separated values allows to add more than one
 region label.
+
+</details>
 
 <details>
 <summary> Example data  
