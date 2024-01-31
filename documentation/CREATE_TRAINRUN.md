@@ -48,6 +48,8 @@ To switch a train from a stop to a non-stop at a node, follow these steps:
 
 ![''](./animated_images/2024-01-25-Toogle_Stop_NonStop_trainrun_at_node.webm.mov)
 
+https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/1-initial-opensource-template-guidelines-issue-1/documentation/animated_images/2024-01-25-Toogle_Stop_NonStop_trainrun_at_node.webm.mov
+
 
 
 
