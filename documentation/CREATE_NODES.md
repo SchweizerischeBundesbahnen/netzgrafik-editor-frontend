@@ -89,7 +89,6 @@ depends on the position of the node.
 This example shows how several trainrun are connected to each other and aligned to a node. The
 outgoing/incoming edge depends on the position of the node.
 
-Sorting heuristic
 If two or more trainrun have at least one identical node (start/end does not matter), the
 trainrun are sorted according to the position of the branching node: (from top to bottom or
 from left to right or vice versa).
@@ -97,6 +96,15 @@ from left to right or vice versa).
 If two or more trainrun have the same neighbouring nodes, they are sorted by train journey
 category and name. If the name is the same, they are further sorted according to the order of the
 drawing - first drawn, first aligned (from top to bottom or from left to right or vice versa).
+
+
+**Sorting heuristic**
+(1) Position Alignment (Top > Bottom > Left > Right)
+(2) Left - Right | Top - Down
+(3) Category Order
+(4) Trainrun name (alphabetically)
+(5) Trainrun (drawing order)
+(6) Trainrun section (drawing order)
 
 ![node move big](./animated_images/compressed/29-01-2024-006-move-nodes-reroute_trainrun-big.gif)
 
