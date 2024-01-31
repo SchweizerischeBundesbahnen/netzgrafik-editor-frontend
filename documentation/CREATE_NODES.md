@@ -77,14 +77,16 @@ For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.m
 If you move the node - the Netzgrafik routes all trainrun section automatically. The Netzgrafik
 recalculates the routing and results in a new well aligned readable layout.
 
-#### Example 1
+#### Trainrun sorting heuristics
+
+##### Single trainrun
 
 This example shows how a trainrun is connected to a node and aligned. The outgoing/incoming edge
 depends on the position of the node.
 
 ![node move small](./animated_images/compressed/29-01-2024-006-move-nodes-reroute_trainrun.gif)
 
-#### Example 2
+##### Multiple trainruns
 
 This example shows how several trainrun are connected to each other and aligned to a node. The
 outgoing/incoming edge depends on the position of the node.
@@ -97,18 +99,17 @@ If two or more trainrun have the same neighbouring nodes, they are sorted by tra
 category and name. If the name is the same, they are further sorted according to the order of the
 drawing - first drawn, first aligned (from top to bottom or from left to right or vice versa).
 
-
-**Sorting heuristic**
-- (1) Position Alignment (Top > Bottom > Left > Right)
-- (2) Left - Right | Top - Down
-- (3) Category Order
-- (4) Trainrun name (alphabetically)
-- (5) Trainrun (drawing order)
-- (6) Trainrun section (drawing order)
+> **Sorting heuristic**
+> - (1) Position Alignment (Top > Bottom > Left > Right)
+> - (2) Left - Right | Top - Down
+> - (3) Category Order
+> - (4) Trainrun name (alphabetically)
+> - (5) Trainrun (drawing order)
+> - (6) Trainrun section (drawing order)
 
 ![node move big](./animated_images/compressed/29-01-2024-006-move-nodes-reroute_trainrun-big.gif)
 
-#### Example 3
+##### Inserting new trainruns
 
 Inserting new trainruns affects the pin orders (edge ordering) and the node size (height, width).
 
