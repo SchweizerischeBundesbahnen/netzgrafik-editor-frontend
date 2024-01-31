@@ -23,7 +23,7 @@ one category label.
 label. The label template ist "Region:" + value. Comma separated values allows to add more than one
 region label.
 
-[>> Demo base data CSV file]29-01-2024-004-Stammdaten_importieren.csv)
+>> Demo base data CSV file ![''](29-01-2024-004-Stammdaten_importieren.csv)
 
 ### Create new trainrun
 
