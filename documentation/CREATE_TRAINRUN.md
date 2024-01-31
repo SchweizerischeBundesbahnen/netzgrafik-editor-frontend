@@ -46,9 +46,8 @@ To switch a train from a stop to a non-stop at a node, follow these steps:
 - Access train transitions: Locate the hexagon button within the node representation. This button
   signifies train transitions (Stop/Non-Stop).
 
-![''](./animated_images/2024-01-25-Toogle_Stop_NonStop_trainrun_at_node.webm)
+![''](./animated_images/2024-01-25-Toogle_Stop_NonStop_trainrun_at_node.webm.mov)
 
-<a id="Streckengrafik"></a>
 
 
 
