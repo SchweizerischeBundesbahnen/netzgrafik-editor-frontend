@@ -24,7 +24,7 @@ for filename in os.listdir(directory):
         f = str.split(f,'\\')[1]
         s = str.split(f,'.')
         if (s[len(s)-1] == 'gif'):
-            print(f, end='')
+            print('Source: ' + f + ' ', end='')
             clip = mp.VideoFileClip('./' + f)
             clip.write_videofile('./' + s[0] + '.mp4')
             print(' done')

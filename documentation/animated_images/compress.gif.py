@@ -3,6 +3,7 @@
 # conda create python=3.8 --name gif
 # conda activate gif
 # pip install MoviePy
+# pip install opencv-python
 
 # run
 # -----------------------------------
@@ -26,9 +27,13 @@ for filename in os.listdir(directory):
         if not os.path.exists('output'):
             os.mkdir('output')
         if (s[len(s)-1] == 'gif'):
-            print(f, end='')
+            print('Source: ' + f + ' ', end='')
             clip = mp.VideoFileClip('./' + f)
             # https://zulko.github.io/moviepy/ref/VideoClip/VideoClip.html
-            clip.write_gif('./output/' + s[0] + '.gif', fuzz='0.5', opt='wu')
-            clip.write_videofile('./' + s[0] + '.webm', codec="libvpx")
+            print('')
+            print(' before resize =', clip.size)
+            clip = clip.resize(width=730, height=349)
+            print('  after resize =', clip.size)
+            clip.write_gif('./output/' + s[0] + '.gif', fuzz='50', opt='wu', colors='64', fps=None, loop=0, verbose=True)
+            # clip.write_videofile('./' + s[0] + '.webm', codec="libvpx")
             print(' done')
