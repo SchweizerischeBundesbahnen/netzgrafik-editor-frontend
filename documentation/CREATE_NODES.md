@@ -24,8 +24,7 @@ label. The label template ist "Region:" + value. Comma separated values allows t
 region label.
 
 <details>
-<summary> Example data 
-> 
+<summary> Example data  
 </summary>
 
 | BP   | Bahnhof           | Region | Kategorie | Fahrgastwechselzeit_IPV | Fahrgastwechselzeit_A | Fahrgastwechselzeit_B | Fahrgastwechselzeit_C | Fahrgastwechselzeit_D | Umsteigezeit | ZAZ | Labels | Erstellen | X            | Y            |
