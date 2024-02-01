@@ -1,5 +1,17 @@
 ## Nodes
 
+### Create new nodes
+
+Whenever you need to create a new node. You should follow these steps:
+
+- Activate the Topology Editor from the menu bar.
+- Click on the desired location in the main area of the Network Graph Editor, where you want to add
+  the new node.
+- A new node will be created, and the Node Editing window will open on the right-hand side.
+- In the Node Editing window, you can edit all the information about the newly created node.
+
+![Create new nodes](./animated_images/compressed/29-01-2024-005-create_nodes.gif)
+
 ### Import nodes from a comma-seperate-value file (CSV)
 
 Nodes can be imported using a predefined semicolon-separated file (CSV). This allows the basis to be
@@ -97,7 +109,8 @@ drawing - first drawn, first aligned (from top to bottom or from left to right o
 
 ##### Inserting new trainruns
 
-Inserting and deleting trainrun sections affects the pin orders (edge ordering) and the node size (height, width).
+Inserting and deleting trainrun sections affects the pin orders (edge ordering) and the node size (
+height, width).
 
 ![node move big](./animated_images/compressed/2024-1-25-Move_nodes_reoute_notes_ports.gif)
 
