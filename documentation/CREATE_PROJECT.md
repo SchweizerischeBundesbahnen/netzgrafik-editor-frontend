@@ -146,9 +146,11 @@ Step-by-step example
 
 ### Delete a project / variant
 
-Deletion is primarily enabled through the following detour. The variations within a project can be
+Deletion is primarily enabled through the following detour. The variants within a project can be
 archived and will only appear if explicitly requested to display them. The same applies to projects.
-Variations and projects can only be deleted from the archive. Therefore, no variant or project can
+Projects and variants can only be deleted from the archive. Therefore, no variant or project can
 be deleted directly. It must always be moved to the archive first. From the archive, the variant or
 project can be deleted or restored, i.e., the archiving can be undone. This logic is intended to
-prevent projects or variations from being accidentally deleted.
+prevent projects or variations from being accidentally deleted. 
+
+> If a project is deleted, all of its variants will also be deleted.
