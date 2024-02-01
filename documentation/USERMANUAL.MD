@@ -31,10 +31,12 @@ Key Features
    customisation of the network layout.
 
 2. **Graphic timetable (Streckengrafik):**
-   All the lines (trainruns) defined in the Netzgrafik can be transformed into a grapic timetable (
-   Streckengrafik). This graphic timetable offers beside the graphical timetable representation
-   complete new introduce track occupation estimation at nodes and between nodes (line) it estimates
-   the required minimal infrastructure, such as number of track.
+   All lines (trainruns) defined in the Network-Grafik can be transferred into a graphical timetable
+   representation (Streckengrafik). In addition to the graphical timetable display, this graphical
+   timetable offers a complete new track occupancy estimation at the nodes and between the nodes (
+   lines) it estimates the required minimum infrastructure, such as the number of tracks. This
+   enhances the capability for very clear and fast analytics direct in throught the graphical
+   timetable.
 
 3. **Advanced Editing Short-cuts:**
    Users can perform advanced editing operations such as copy (Ctrl+C), paste (Ctrl+V),
