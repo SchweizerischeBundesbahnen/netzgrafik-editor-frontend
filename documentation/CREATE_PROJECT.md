@@ -151,13 +151,13 @@ archived and will only appear if explicitly requested to display them. The same 
 Projects and variants can only be deleted from the archive. Therefore, no variant or project can
 be deleted directly. It must always be moved to the archive first. From the archive, the variant or
 project can be deleted or restored, i.e., the archiving can be undone. This logic is intended to
-prevent projects or variations from being accidentally deleted.
+prevent projects or variants from being accidentally deleted.
 
 > If a project is deleted, all of its variants will also be deleted.
 
 ### Visiblity of versions
 
-It is important to understand that the projects and variations are available to all users with read
+It is important to understand that the projects and variants are available to all users with read
 or write access. The snapshot versions are only visible to the respective editing user and are no
 longer available to the user after publication (saving) since they are automatically deleted after
 successful publishing.
