@@ -90,15 +90,19 @@ Users with the "Admin" role have access to all projects regardless of the "proje
 
 ### Example
 
-We define a project as an initiative that requires variant studies. The following graphic
-illustrates the conceptual structure of project and variant management in the network graphics
-editor.
+Every Netzgrafik project requires one or more variant studies. The following graphic illustrates the
+conceptual structure of project and variant management in the Netzgrafik-Editor.
 
+<details>
+<summary>
+Step-by-step example
+</summary>
 ![Example Project Variants](./images/Example_Project_Variants-001.png)
+</details>
 
-This implemented concept make it possible to manage multiple projects. Furthermore,
-multiple variants can be created for each planning project. For each variant, which corresponds
-to a Netzgrafik, different versions can be able seperatly created.
+This implemented concept makes it possible to manage several planning projects. Several variants can
+be created for each planning project. Different versions can be created separately for each variant
+that corresponds to a Netzgrafik.
 
 <details>
 <summary>
@@ -123,6 +127,7 @@ Step-by-step example
 |         |                  |        |            Alternatively, user u123 can save their modifications as a new variant.             |
 
 #### Flow chart
+
 ![Flow chart](./images/Example_Project_Variants-002.png)
 
 </details>
