@@ -24,7 +24,7 @@ already created a new variant in the project and the editor opens automatically.
 
 The editor opens the new created Netzgrafik. The new Netzgrafik contains some initial created nodes
 from which users could draw trainruns with its sections. In most project those nodes are not
-required. If so press CTRL+A to select all elements of the current Netzgrafik and press DEL to
+required. If so press ctrl+a to select all elements of the current Netzgrafik and press DEL to
 delete them.
 
 ![Create variant data](./animated_images/compressed/29-01-2024-003-clear_variant_data.gif)
