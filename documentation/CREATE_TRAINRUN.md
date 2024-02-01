@@ -4,6 +4,29 @@
 
 ### Create new trainrun
 
+With the help of the left mouse button you can create or modify any trainrun.
+If no trainrun is selected - you can draw and create a new trainrun.
+If a trainrun is selcted you can modify a trainrun, including extending the trainrun traveling
+path (route), reroute the path or change the departure time, arrival time, traveling time or even
+the trainrun category and it's name.
+
+When a new trainrun gets created the system opens a dialog window where you can enter all
+information about the new created trainrun, such a trainrun category and name. Then click outside
+the window or press 'ESC' to close the dialog window.
+
+> - If you like to (re)open the dialog windows just click on the trainrun name in the editor or
+    click
+    > any number (time). The dialog windwo is displayed again with the clicked data input field in
+    > focus.
+> - If you click on the trainrun - its gets selected and you can modify it.
+> - Click for a second time the Perlenkette gets opened.
+
+![start creating trainrun](./animated_images/compressed/29-01-2024-005-start-creating_trainrun.gif)
+
+For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
+
+#### Create new trainrun step by step
+
 To create a new train route, proceed as follows:
 
 - Select the inner node: Click the left mouse button on the inner node from which you want to start

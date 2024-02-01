@@ -58,20 +58,6 @@ region label.
 [Demo base data CSV file](29-01-2024-004-Stammdaten_importieren.csv)
 </details>
 
-### Create new trainrun
-
-Drag-and-drop a new trainrun from a node to another node. Just use the left mouse button, press
-mouse button on a node and hold the button pressed while moving to another node. Then release the
-pressed button and the trainrun gets created. The trainrun dialog opens - enter all
-information about the trainrun. Then click outside the window or press 'ESC' to close the dialog
-window. If you like to reopen the dialog just click on the trainrun name in the editor or click any
-time (number). The dialog gets shown again. If you click on the trainrun - its gets selected and you
-can modify it. Click for a second time the Perlenkette gets opened.
-
-![start creating trainrun](./animated_images/compressed/29-01-2024-005-start-creating_trainrun.gif)
-
-For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
-
 ### Move nodes
 
 If you move the node - the Netzgrafik routes all trainrun section automatically. The Netzgrafik
