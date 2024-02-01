@@ -114,7 +114,7 @@ be resolved manually. An editing conflict can be resolved with the following thr
 
 - By overwriting the previously published version (active enforcement required)
 - By creating a new variant (branch)
-- By deleting the changes - or accepting the published version.
+- By deleting the changes by accepting the published version.
 
 <details>
 <summary>
@@ -144,3 +144,11 @@ Step-by-step example
 
 </details>
 
+### Delete a project / variant
+
+Deletion is primarily enabled through the following detour. The variations within a project can be
+archived and will only appear if explicitly requested to display them. The same applies to projects.
+Variations and projects can only be deleted from the archive. Therefore, no variant or project can
+be deleted directly. It must always be moved to the archive first. From the archive, the variant or
+project can be deleted or restored, i.e., the archiving can be undone. This logic is intended to
+prevent projects or variations from being accidentally deleted.
