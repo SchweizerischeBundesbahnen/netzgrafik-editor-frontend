@@ -1,6 +1,7 @@
 ## Project/Variant
 
-The user can define nodes, trainruns along with their routes and attributes to create a comprehensive
+The user can define nodes, trainruns along with their routes and attributes to create a
+comprehensive
 Netzgrafik.
 
 ### Create a new Project
@@ -22,11 +23,9 @@ already created a new variant in the project, the editor will open automatically
 #### Clear template Netzgrafik
 
 The editor opens the newly created Netzgrafik. The new Netzgrafik contains some initially created
-nodes
-from which users can draw trainruns with their sections. In most projects these nodes are not
+nodes from which users can draw trainruns with their sections. In most projects these nodes are not
 required. If so press (ctrl+a) to select all elements of the current Netzgrafik and press 'delete'
-to
-remove them.
+to remove them.
 
 ![Create variant data](./animated_images/compressed/29-01-2024-003-clear_variant_data.gif)
 
