@@ -4,7 +4,7 @@
 
 - [Introduction](#Introduction)
 - [Project/Variant](#CreateNewProjectVariant)
-- [Advanced editing operations](#BasicFunctions)
+- [Advanced editing short-cuts](#BasicFunctions)
 - [Nodes](#Nodes)
 - [Trainruns](#Trainruns)
 - [Connections](#Connections)
@@ -38,12 +38,11 @@ Key Features
    enhances the capability for very clear and fast analytics direct in throught the graphical
    timetable.
 
-3. **Advanced Editing Short-cuts:**
-   Users can perform advanced editing operations such as copy (Ctrl+C), paste (Ctrl+V),
-   duplicate (Ctrl+D), delete (Del) and undo (Ctrl+Z) in multiple steps - either using the
-   standard Ctrl+z key command or with help of the version history. These editing functions make it
-   easier to manage and edit complex network structures. User don't need to
-   explicitly save the latest changes. The system save it automatically.
+3. **Advanced Analytics:**
+   More and more demands are being placed on advanced analytical skills. Analysing the travel route
+   through the logistics network is very important. A first version has been implemented that allows
+   the user to analyse the shortest route through the network. It provides an indication of the
+   number of train changes that need to be made and where and how long the journey takes.
 
 4. **Collaboration and Sharing:**
    The Netzgrafik-Editor provides collaboration features, enabling multiple users to work on the  
@@ -60,7 +59,13 @@ For mor details have a look into [create a new project](CREATE_PROJECT.md).
 
 <a id="BasicFunctions"></a>
 
-## Advanced editing operations
+## Advanced editing short-cuts
+
+Users can perform advanced editing operations short-cuts such as copy (Ctrl+C), paste (Ctrl+V),
+duplicate (Ctrl+D), delete (Del) and undo (Ctrl+Z) in multiple steps - either using the
+standard Ctrl+z key command or with help of the version history. These editing functions make it
+easier to manage and edit complex network structures. User don't need to
+explicitly save the latest changes. The system save it automatically.
 
 Please also have a look at the [Introduction](#Introduction) chapter, where some general information
 is provided.
