@@ -87,7 +87,7 @@ easier to manage and edit complex network structures.
 ### Duplicate
 
 To duplicate one or many elements - use *shift + left mouse button pressed* to select several
-elements and press ctrl+d.
+elements and press (ctrl+d).
 
 If more than one node is selected, all train sections that are
 connected to two selected nodes are also duplicated. If further notes are selected, the notes are
@@ -101,11 +101,11 @@ duplicated in the same way as the nodes.
 To duplicate a train in the project, follow these steps:
 
 - Select the train: Use the left mouse click to select the train that you want to duplicate.
-- Duplicate the train: Once the train is selected, press ctrl+d on your keyboard to duplicate
+- Duplicate the train: Once the train is selected, press (ctrl+d) on your keyboard to duplicate
   it. This action will create an identical copy of the selected train.
 
   > There are alternative editing path to process duplication: Use the copy-past idea: Select the
-  train und press ctrl+c then ctrl+v
+  train und press (ctrl+c) then (ctrl+v)
 
 - Edit the train name: Click on the train name with the left mouse button, and a dialog window will
   open, allowing you to edit the train's details. Make the necessary changes to the train name or
@@ -119,12 +119,12 @@ To duplicate a train in the project, follow these steps:
 #### Duplicate nodes
 
 To duplicate a node, ensure there is no trainrun selected. Move with the mouse pointer over the node
-to duplicate and press ctrl+d.
+to duplicate and press (ctrl+d).
 
 #### Duplicate notes
 
 To duplicate a note, ensure there is no trainrun selected. Move with the mouse pointer over the note
-to duplicate and press ctrl+d.
+to duplicate and press (ctrl+d).
 
 ### Delete
 
@@ -140,7 +140,7 @@ To delete a train in the project, follow these steps:
   it. This action will create an identical copy of the selected train.
 
   > There are alternative editing path to process duplication: Use the copy-past idea: Select
-  the train und press ctrl+c then ctrl+v
+  the train und press (ctrl+c) then (ctrl+v).
 
 #### Delete nodes
 
