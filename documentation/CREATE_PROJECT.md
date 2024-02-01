@@ -95,9 +95,11 @@ conceptual structure of project and variant management in the Netzgrafik-Editor.
 
 <details>
 <summary>
-Step-by-step example
+Conceptual structure of project and variant management
 </summary>
+
 ![Example Project Variants](./images/Example_Project_Variants-001.png)
+
 </details>
 
 This implemented concept makes it possible to manage several planning projects. Several variants can
