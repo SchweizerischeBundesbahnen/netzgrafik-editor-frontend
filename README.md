@@ -29,9 +29,12 @@ It offers various functions to enhance the efficiency and optimization of the lo
 Some of the key features include:
 
 - **Interactive drawing tool to edit the Netzgrafik:** A user-friendly and interactive graphical
-  editor for creating and editing the
-  integrated synchronised clock-faced timetables. It provides a visual interface to easily visualize
-  and adjust the logistics network.
+  editor for creating and editing the integrated synchronised clock-faced timetables. It provides a
+  visual interface to easily visualize and adjust the logistics network.
+
+- **Graphic timetable (Streckengrafik):**
+  All lines (trainruns) defined in the Network-Grafik can be transferred into a graphical timetable
+  representation (Streckengrafik).
 
 - **Perlenkette trainrun editing:** Planners can manually draw and edit the trainruns as a chain,
   allowing them
