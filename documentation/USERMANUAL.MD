@@ -23,18 +23,18 @@ the editor effectively.
 Key Features
 
 1. **Interactive Drawing Interface:** The user can define nodes, trains with their routes and
-   attributes to
-   create a comprehensive Netzgrafik. The editor offers a user-friendly drag-and-drop interface.
-   This interface allows the user to easily draw the Netzgrafik and position the nodes, which has a
-   direct impact to the edges, e.g. trainrun sections and transitions. The Netzgrafik always remains
-   clear and easy to read. In addition, even the connections within the node between trains can be
-   defined using drag-and-drop. This intuitive function simplifies the creation and customisation of
-   the network layout.
+   attributes to create a comprehensive Netzgrafik. The editor offers a user-friendly drag-and-drop
+   interface. This interface allows the user to easily draw the Netzgrafik and position the nodes,
+   which has a direct impact to the edges, e.g. trainrun sections and transitions. The Netzgrafik
+   always remains clear and easy to read. In addition, even the connections within the node between
+   trains can be defined using drag-and-drop. This intuitive function simplifies the creation and
+   customisation of the network layout.
 
-2. **Node and Trainrun Customization:**
-   Users can customize nodes, trainrun with its sections and connections in the Netzgrafik just
-   using the left mouse button. This includes changing the general appearance (trainrun category,
-   frequency) and additional information such as connections or filterable labels.
+2. **Graphic timetable (Streckengrafik):**
+   All the lines (trainruns) defined in the Netzgrafik can be transformed into a grapic timetable (
+   Streckengrafik). This graphic timetable offers beside the graphical timetable representation
+   complete new introduce track occupation estimation at nodes and between nodes (line) it estimates
+   the required minimal infrastructure, such as number of track.
 
 3. **Advanced Editing Short-cuts:**
    Users can perform advanced editing operations such as copy (Ctrl+C), paste (Ctrl+V),
