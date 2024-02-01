@@ -68,9 +68,6 @@ easier to manage and edit complex network structures.
 
 > User don't need to explicitly save the latest changes. The system save it automatically.
 
-Please also have a look at the [Introduction](#Introduction) chapter, where some general information
-is provided.
-
 ### Short-cuts
 
 |                                                  Keyboard                                                  |                                                                                             description                                                                                             |
