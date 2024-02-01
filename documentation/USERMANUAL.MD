@@ -66,7 +66,8 @@ duplicate (Ctrl+D), delete (Del) and undo (Ctrl+Z) in multiple steps - either us
 standard Ctrl+z key command or with help of the version history. These editing functions make it
 easier to manage and edit complex network structures.
 
-> User don't need to explicitly save the latest changes. The system save it automatically.
+> User don't need to explicitly save the latest changes. The system save it automatically. There is
+> therefore no shortcut for saving changes.
 
 ### Short-cuts
 
