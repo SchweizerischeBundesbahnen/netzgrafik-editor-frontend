@@ -1,20 +1,19 @@
 ## Project/Variant
 
-The user can define nodes, trains with their routes and attributes to create a comprehensive
+The user can define nodes, trainruns along with their routes and attributes to create a comprehensive
 Netzgrafik.
 
 ### Create a new Project
 
-To create a new project, simply click on the "+" symbol and enter a name, an abstract and a short
-description.
-You have already created a project which can contain many variants.
+To create a new project, simply click on the "+" symbol and enter a name, an abstract, and a short
+description. You have already created a project that can contain multiple variants.
 
 ![Create new project](./animated_images/compressed/29-01-2024-001-Create_new_project.gif)
 
 ### Create a new Variant within an Project
 
-To create a new variant of a project, simply click on the "+" symbol and enter a name. You have
-already created a new variant in the project and the editor opens automatically.
+To create a new variant of a project, simply click on the "+" symbol and enter a name. If you have
+already created a new variant in the project, the editor will open automatically.
 
 ![Create new variant](./animated_images/compressed/29-01-2024-002-create_new_variant.gif)
 
@@ -22,10 +21,12 @@ already created a new variant in the project and the editor opens automatically.
 
 #### Clear template Netzgrafik
 
-The editor opens the new created Netzgrafik. The new Netzgrafik contains some initial created nodes
-from which users could draw trainruns with its sections. In most project those nodes are not
-required. If so press (ctrl+a) to select all elements of the current Netzgrafik and press 'delete' to
-delete them.
+The editor opens the newly created Netzgrafik. The new Netzgrafik contains some initially created
+nodes
+from which users can draw trainruns with their sections. In most projects these nodes are not
+required. If so press (ctrl+a) to select all elements of the current Netzgrafik and press 'delete'
+to
+remove them.
 
 ![Create variant data](./animated_images/compressed/29-01-2024-003-clear_variant_data.gif)
 
