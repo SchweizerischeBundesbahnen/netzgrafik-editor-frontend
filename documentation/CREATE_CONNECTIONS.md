@@ -32,7 +32,7 @@ for a selected train. To delete a connection, follow these steps:
 - In the pearls view, locate the connections for the selected train which should be deleted.
 - Click on the connections to mark them. (Clicking again removes the marking.)
 
-Once the connections are marked, press the "Delete" key (DEL) to delete all the marked connections.
+Once the connections are marked, press the "Delete" key ('delete') to delete all the marked connections.
 
 ![''](./animated_images/compressed/2024-1-25_DeleteConnections_Perlenkette_select_delete-002.gif)
 

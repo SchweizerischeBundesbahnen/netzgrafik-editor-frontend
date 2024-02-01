@@ -62,7 +62,7 @@ For mor details have a look into [create a new project](CREATE_PROJECT.md).
 ## Advanced editing short-cuts
 
 Users can perform advanced editing operation short-cuts such as copy (ctrl+c), paste (ctrl+v),
-duplicate (ctrl+d), delete (del) and undo (ctrl+z) in multiple steps - either using the
+duplicate (ctrl+d), delete ('delete') and undo (ctrl+z) in multiple steps - either using the
 standard (ctrl+z) key command or with help of the version history. These editing functions make it
 easier to manage and edit complex network structures.
 
@@ -162,7 +162,7 @@ to delete and press 'delete'.
 
 ### Insert copied elements
 
-![''](./animated_images/compressed/2024-1-25-ctrlV-Insert_copied.gif)
+![''](./animated_images/compressed/2024-1-25-CtrlV-Insert_copied.gif)
 
 ### Delete all visible elements
 
