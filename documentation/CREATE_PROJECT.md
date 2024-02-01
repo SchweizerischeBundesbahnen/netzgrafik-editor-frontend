@@ -11,7 +11,7 @@ description. You have already created a project that can contain multiple varian
 
 ![Create new project](./animated_images/compressed/29-01-2024-001-Create_new_project.gif)
 
-### Create a new Variant within an Project
+### Create a new Variant within a project
 
 To create a new variant of a project, simply click on the "+" symbol and enter a name. If you have
 already created a new variant in the project, the editor will open automatically.
@@ -33,7 +33,7 @@ to remove them.
 
 For mor details have a look into [create and modifiy nodes](CREATE_NODES.md).
 
-### Create trainruns
+#### Create trainruns
 
 For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
 
