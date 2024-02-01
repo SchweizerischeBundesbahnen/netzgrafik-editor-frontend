@@ -39,10 +39,10 @@ Key Features
    timetable.
 
 3. **Advanced Analytics:**
-   More and more demands are being placed on advanced analytical skills. Analysing the travel route
-   through the logistics network is very important. A first version has been implemented that allows
-   the user to analyse the shortest route through the network. It provides an indication of the
-   number of train changes that need to be made and where and how long the journey takes.
+   More and more demands are being placed on advanced analytical abilities. Analysing the travel
+   route through the logistics network is very important. A first version has been implemented that
+   allows the user to analyse the shortest route through the network. It provides an indication of
+   the number of train changes that need to be made and where and how long the journey takes.
 
 4. **Collaboration and Sharing:**
    The Netzgrafik-Editor provides collaboration features, enabling multiple users to work on the  
