@@ -91,11 +91,11 @@ Users with the "Admin" role have access to all projects regardless of the "proje
 ### Concept
 
 Every Netzgrafik project requires one or more variant studies. The following graphic illustrates the
-conceptual structure of project and variant management in the Netzgrafik-Editor.
+conceptual structure of project and variant management in the Netzgrafik-Editor:
 
 <details>
 <summary>
-Conceptual structure of project and variant management
+Conceptual structure of project and variant management - example
 </summary>
 
 ![Example Project Variants](./images/Example_Project_Variants-001.png)
