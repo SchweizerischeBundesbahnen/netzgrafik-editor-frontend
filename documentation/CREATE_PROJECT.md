@@ -88,7 +88,7 @@ automatically granted write access to the project.
 
 Users with the "Admin" role have access to all projects regardless of the "projects_users" table.
 
-### Example
+### Concept
 
 Every Netzgrafik project requires one or more variant studies. The following graphic illustrates the
 conceptual structure of project and variant management in the Netzgrafik-Editor.
