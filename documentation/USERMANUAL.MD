@@ -64,11 +64,14 @@ For mor details have a look into [create a new project](CREATE_PROJECT.md).
 Users can perform advanced editing operation short-cuts such as copy (Ctrl+C), paste (Ctrl+V),
 duplicate (Ctrl+D), delete (Del) and undo (Ctrl+Z) in multiple steps - either using the
 standard Ctrl+z key command or with help of the version history. These editing functions make it
-easier to manage and edit complex network structures. User don't need to
-explicitly save the latest changes. The system save it automatically.
+easier to manage and edit complex network structures.
+
+> User don't need to explicitly save the latest changes. The system save it automatically.
 
 Please also have a look at the [Introduction](#Introduction) chapter, where some general information
 is provided.
+
+### Short-cuts
 
 |                                                  Keyboard                                                  |                                                                                             description                                                                                             |
 |:----------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
