@@ -14,7 +14,8 @@ You have already created a project which can contain many variants.
 ### Create a new Variant within an Project
 
 To create a new variant of a project, simply click on the "+" symbol and enter a name. You have
-already created a new variant in the project and the editor opens automatically
+already created a new variant in the project and the editor opens automatically.
+
 ![Create new variant](./animated_images/compressed/29-01-2024-002-create_new_variant.gif)
 
 ### Become creative (start editing)
