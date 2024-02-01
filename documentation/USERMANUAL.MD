@@ -31,7 +31,7 @@ Key Features
    customisation of the network layout.
 
 2. **Graphic timetable (Streckengrafik):**
-   All lines (trainruns) defined in the Network-Grafik can be transferred into a graphical timetable
+   All lines (trainruns) defined in the Netzgrafik  can be transferred into a graphical timetable
    representation (Streckengrafik). In addition to the graphical timetable display, this graphical
    timetable offers a complete new track occupancy estimation at the nodes and between the nodes (
    lines) it estimates the required minimum infrastructure, such as the number of tracks. This
