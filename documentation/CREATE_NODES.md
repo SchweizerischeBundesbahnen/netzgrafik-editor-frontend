@@ -60,7 +60,7 @@ region label.
 
 ### Move nodes
 
-If you move the node - the Netzgrafik routes all trainrun section automatically. The Netzgrafik
+If you move the node - the Netzgrafik routes all trainrun sections automatically. The Netzgrafik
 recalculates the routing and results in a new well aligned readable layout.
 
 #### Trainrun sorting heuristics
