@@ -121,22 +121,22 @@ be resolved manually. An editing conflict can be resolved with the following thr
 Step-by-step example
 </summary>
 
-| Version | Snapshot version | Author |                                            Comments                                            |
-|:-------:|:----------------:|:------:|:----------------------------------------------------------------------------------------------:|
-|    -    |        1         |  u123  |     Initial empty network diagram that is automatically created when creating the variant.     |
-|    -    |        2         |  u123  |                                First modification by user u123.                                |
-|    -    |        3         |  u123  |                               Second modification by user u123.                                |
-|    -    |        4         |  u123  |                                              ...                                               |
-|    -    |        5         |  u123  |                                              ...                                               |
-|    1    |        6         |  u123  | Main version "1" has been published by user u123. Other users can now see the network diagram. |
-|    1    |        1         |  u123  |                    User u123 makes further changes based on main version 1.                    |
-|    1    |        2         |  u123  |                                              ...                                               |
-|    1    |        1         |  u456  |               User u456 also opens main version 1 in parallel and makes changes.               |
-|    1    |        2         |  u456  |                                              ...                                               |
-|    1    |        3         |  u456  |                                              ...                                               |
-|    1    |        2         |  u456  |     User u456 is the first to publish the new main version 2 based on their modifications.     |
-|    2    |        3         |  u123  |     User u123 also wants to publish their modifications as main version 2 **=> Conflict!**     |
-|         |                  |        |            Alternatively, user u123 can save their modifications as a new variant.             |
+| Version | Snapshot version | Author |                                             Comments                                             |
+|:-------:|:----------------:|:------:|:------------------------------------------------------------------------------------------------:|
+|    -    |        1         |  u123  |      Initial empty network diagram that is automatically created when creating the variant.      |
+|    -    |        2         |  u123  |                                 First modification by user u123.                                 |
+|    -    |        3         |  u123  |                                Second modification by user u123.                                 |
+|    -    |        4         |  u123  |                                               ...                                                |
+|    -    |        5         |  u123  |                                               ...                                                |
+|    1    |        6         |  u123  |  Main version "1" has been published by user u123. Other users can now see the network diagram.  |
+|    1    |        1         |  u123  |                     User u123 makes further changes based on main version 1.                     |
+|    1    |        2         |  u123  |                                               ...                                                |
+|    1    |        1         |  u456  |                User u456 also opens main version 1 in parallel and makes changes.                |
+|    1    |        2         |  u456  |                                               ...                                                |
+|    1    |        3         |  u456  |                                               ...                                                |
+|    1    |        2         |  u456  |      User u456 is the first to publish the new main version 2 based on their modifications.      |
+|    2    |        3         |  u123  | User u123 also wants to publish their modifications as main version 2 **=> editing conflicts !** |
+|         |                  |        |             Alternatively, user u123 can save their modifications as a new variant.              |
 
 #### Flow chart
 
