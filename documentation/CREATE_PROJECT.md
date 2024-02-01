@@ -106,6 +106,16 @@ This implemented concept makes it possible to manage several planning projects. 
 be created for each planning project. Different versions can be created separately for each variant
 that corresponds to a Netzgrafik.
 
+Based on a main version, several different users can create their own snapshot versions in parallel.
+However, only one user at a time can create a new main version.
+
+All other user changes that are made later lead to an editing conflict. All editing conflicts must
+be resolved manually. An editing conflict can be resolved with the following three options:
+
+- By overwriting the previously published version (active enforcement required)
+- By creating a new variant (branch)
+- By deleting the changes - or accepting the published version.
+
 <details>
 <summary>
 Step-by-step example
