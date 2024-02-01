@@ -31,7 +31,7 @@ Key Features
    customisation of the network layout.
 
 2. **Graphic timetable (Streckengrafik):**
-   All lines (trainruns) defined in the Netzgrafik  can be transferred into a graphical timetable
+   All lines (trainruns) defined in the Netzgrafik can be transferred into a graphical timetable
    representation (Streckengrafik). In addition to the graphical timetable display, this graphical
    timetable offers a complete new track occupancy estimation at the nodes and between the nodes (
    lines) it estimates the required minimum infrastructure, such as the number of tracks. This
@@ -41,8 +41,8 @@ Key Features
 3. **Advanced Analytics:**
    More and more demands are being placed on advanced analytical abilities. Analysing the travel
    route through the logistics network is very important. A first version has been implemented that
-   allows the user to analyse the shortest route through the network. It provides an indication of
-   the number of train changes that need to be made and where and how long the journey takes.
+   allows the user to analyse the logistics network based on the timetable representation which
+   provides insights into connection coordination, transfer times and traveling time.
 
 4. **Collaboration and Sharing:**
    The Netzgrafik-Editor provides collaboration features, enabling multiple users to work on the  

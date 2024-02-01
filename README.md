@@ -33,7 +33,7 @@ Some of the key features include:
   visual interface to easily visualize and adjust the logistics network.
 
 - **Graphic timetable (Streckengrafik):**
-  All lines (trainruns) defined in the Netzgrafik  can be transferred into a graphical timetable
+  All lines (trainruns) defined in the Netzgrafik can be transferred into a graphical timetable
   representation (Streckengrafik).
 
 - **Perlenkette trainrun editing:** Planners can manually draw and edit the trainruns as a chain,
