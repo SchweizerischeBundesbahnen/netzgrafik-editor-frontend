@@ -5,9 +5,7 @@
 
 > This is the repository for the Netzgrafik-Editor.
 
-|                                Netzgrafik-Editor                                |                                      Graphic timetable (Streckengrafik)                                      |
-|:-------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------:|
-| ![Netzgrafik-Editor](./documentation/images/Overview_Editor_Screenshot_001.PNG) | ![Overview_Streckengrafik_Screenshot_002](./documentation/images/Overview_Streckengrafik_Screenshot_002.png) |
+![Netzgrafik-Editor](./documentation/images/Overview_Editor_Screenshot_001.PNG)
 
 #### Table Of Contents
 
