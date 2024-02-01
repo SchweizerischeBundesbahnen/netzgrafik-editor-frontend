@@ -23,30 +23,30 @@ the editor effectively.
 Key Features
 
 1. **Interactive Drawing Interface:** The user can define nodes, trains with their routes and
-   attributes to create a comprehensive Netzgrafik. The editor offers a user-friendly drag-and-drop
-   interface. This interface allows the user to easily draw the Netzgrafik and position the nodes,
-   which has a direct impact to the edges, e.g. trainrun sections and transitions. The Netzgrafik
-   always remains clear and easy to read. In addition, even the connections within the node between
-   trains can be defined using drag-and-drop. This intuitive function simplifies the creation and
-   customisation of the network layout.
+   attributes to create a comprehensive Netzgrafik. The editor offers an user-friendly drag-and-drop
+   interface, allowing the user to easily draw the Netzgrafik and position the nodes. This has a
+   direct impact on the edges, such as train run sections and transitions. The Netzgrafik always
+   remains clear and easy to read. Additionally, connections between trains within a node can be
+   defined using drag-and-drop. This intuitive function simplifies the creation and customization of
+   the network layout.
 
 2. **Graphic timetable (Streckengrafik):**
    All lines (trainruns) defined in the Netzgrafik can be transferred into a graphical timetable
-   representation (Streckengrafik). In addition to the graphical timetable display, this graphical
-   timetable offers a complete new track occupancy estimation at the nodes and between the nodes (
-   lines) it estimates the required minimum infrastructure, such as the number of tracks. This
-   enhances the capability for very clear and fast analytics direct in throught the graphical
+   representation (Streckengrafik). In addition to displaying the timetable graphically,
+   this graphical timetable provides a new track occupancy estimation at the nodes and between the
+   nodes (lines). It estimates the required minimum infrastructure, such as the number of tracks.
+   This enhances the capability for clear and quick analytics directly through the graphical
    timetable.
 
 3. **Advanced Analytics:**
-   More and more demands are being placed on advanced analytical abilities. Analysing the travel
-   route through the logistics network is very important. A first version has been implemented that
-   allows the user to analyse the logistics network based on the timetable representation which
-   provides insights into connection coordination, transfer times and traveling time.
+   Increasing demands are being placed on advanced analytical abilities. Analyzing travel routes
+   through the logistics network is crucial. A first version has been implemented that allows users
+   to analyze the logistics network based on the timetable representation. It provides insights into
+   connection coordination, transfer times and travel times.
 
 4. **Collaboration and Sharing:**
-   The Netzgrafik-Editor provides collaboration features, enabling multiple users to work on the  
-   same Netzgrafik simultaneously. Users can share their work with others, track changes,
+   The Netzgrafik-Editor provides collaboration features, enabling multiple users to work on
+   the same Netzgrafik simultaneously. Users can share their work with others, track changes,
    and collaborate seamlessly. Exporting and sharing the designed Netzgrafik is also a useful
    function that improves further processing with third parties.
 
