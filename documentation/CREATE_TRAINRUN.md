@@ -63,7 +63,7 @@ To reroute a train, follow these steps:
 
 ![''](./animated_images/compressed/2024-1-25-Rerouting_trainrunsections-001.gif)
 
-#### Delete a trainrun section
+### Delete a trainrun section
 
 To delete a trainrun section, process as follows:
 
