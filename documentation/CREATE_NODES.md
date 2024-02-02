@@ -78,6 +78,15 @@ If you move a node - the Netzgrafik routes all to the node aligned trainrun sect
 automatically. The Netzgrafik recalculates the routing layout and results in a new well aligned
 readable graphical layout.
 
+If you want to move a node pr ocess as follows:
+
+- Move the mouse pointer of the node to move
+- As soon as the mouse pointer is over a node on the left hand side there will be a move symbol
+  displayed. Move with the mouse pointer over this appeared symbol and press the left mouse button.
+  (You can as well press the left mouse button over the node short name. This behaves equal to the
+  symbol.)
+- As long as the left mouse button is pressed you can move the node by just drag-and-drop.
+
 #### Trainrun sorting heuristics
 
 ##### Single trainrun
@@ -113,7 +122,7 @@ versa).
 
 ##### Inserting and deleting of trainruns
 
-Inserting and deleting trainrun sections affects the pin orders (edge ordering) and the node size 
+Inserting and deleting trainrun sections affects the pin orders (edge ordering) and the node size
 (height, width).
 
 ![node move big](./animated_images/compressed/2024-1-25-Move_nodes_reoute_notes_ports.gif)
