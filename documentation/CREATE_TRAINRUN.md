@@ -17,7 +17,7 @@ information about the new created trainrun, such a trainrun category and name. T
 the window or press 'ESC' to close the dialog window.
 
 > - If you like to (re)open the dialog windows just click on the trainrun name in the editor or
-    click any number (time). The dialog windwo is displayed again with the clicked data input field
+    click any number (time). The dialog window is displayed again with the clicked data input field
     in focus.
 > - If you click on the trainrun - its gets selected and you can modify it.
 > - Click for a second time the Perlenkette gets opened.
@@ -32,8 +32,8 @@ To create a new train or adding new trainrun section to an existing trainrun, pr
 
 - Move with the mouse pointer to the (inner) node: Press the left mouse button on the inner node
   from which you want to start the trainrun section.
-- Hold down the left mouse button and drag the line to the other node. The line display visually the
-  trainrun section you want to create.
+- Hold pressed the left mouse button and drag the line to the other node. The line displays visually
+  the trainrun section you want to create.
 - Configure the train route: Give the new train an appropriate name and specify the necessary
   details, such as train number or other relevant information.
 
@@ -49,15 +49,15 @@ To reroute a train, follow these steps:
 - Select the train to be rerouted: Use the left mouse button and click to select the train that you
   want to reroute.
 - Drag and drop sections on the node: After selecting the train, you can rearrange sections of the
-  train by dragging and dropping the small pins on the nodes. This allows you to reassign sections
-  to other nodes.
+  train by dragging and dropping the small pins (circle) on the nodes. This allows you to reassign
+  sections to other nodes.
 - Redirect train sections: If you want to redirect (reroute) two sections, you can easily do so by
   clicking and holding the left mouse button on the hexagon button on the node. Then, drag and drop
   the hexagon button, and both train sections will move together. Drag the sections to a different
   node to reroute them.
-  > If you drag the hexagon button outside the node it generates an intermediat stop if there was a
+  > If you drag the hexagon button outside the node it generates an intermediate stop if there was a
   stopping transition or it just removed the non-stop transition. For both cases it reroutes the
-  trainrun.
+  trainrun by removing the node alginment where the hexagon/transition was.
 
 ![''](./animated_images/compressed/2024-1-25-Rerouting_extend_remove_trainrunsections-001.gif)
 
