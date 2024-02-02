@@ -5,18 +5,18 @@
 Whenever you need to create a new node. You should follow these steps:
 
 - Activate the Topology Editor from the menu bar.
-- Click on the desired location in the main area of the Network Graph Editor, where you want to add
+- Click on the desired location in the main area of the Netzgrafik-Editor, where you want to add
   the new node.
-- A new node will be created, and the Node Editing window will open on the right-hand side.
-- In the Node Editing window, you can edit all the information about the newly created node.
+- A new node will be created, and the node editor window will open on the right-hand side.
+- In the node editor window, you can edit all the information about the newly created node.
 
 ![Create new nodes](./animated_images/compressed/29-01-2024-005-create_nodes.gif)
 
-### Import nodes from a comma-seperate-value file (CSV)
+### Import nodes from a semicolon-seperate-value file (CSV)
 
-Nodes can be imported using a predefined semicolon-separated file (CSV). This allows the basis to be
-created very quickly. In addition to node properties, such as stopping times per train type, node
-positions can also be imported so that the layout comes directly from the import.
+Nodes can be imported using a predefined **semicolon-separated file** (CSV). This allows the basis
+to be created very quickly. In addition to node properties, such as stopping times per train type,
+node positions can also be imported so that the layout comes directly from the import.
 
 ![import basedata](./animated_images/compressed/29-01-2024-004-import_basedata.gif)
 
@@ -33,6 +33,7 @@ positions can also be imported so that the layout comes directly from the import
 **category label:** If the node gets created or updated the category labels gets added as filterable
 label. The label template ist "Kategorie:" + value. Comma separated values allows to add more than
 one category label.
+
 **region number:** If the node gets created or updated the region number gets added as filterable
 label. The label template ist "Region:" + value. Comma separated values allows to add more than one
 region label.
@@ -72,35 +73,36 @@ region label.
 
 ### Move nodes
 
-If you move the node - the Netzgrafik routes all trainrun sections automatically. The Netzgrafik
-recalculates the routing and results in a new well aligned readable layout.
+If you move a node - the Netzgrafik routes all to the node aligned trainrun sections
+automatically. The Netzgrafik recalculates the routing and results in a new well aligned readable
+layout.
 
 #### Trainrun sorting heuristics
 
 ##### Single trainrun
 
-This example shows how a trainrun is connected to a node and aligned. The outgoing/incoming edge
+This example shows how a trainrun is aligned to a node. The outgoing/incoming edge
 depends on the position of the node.
 
 ![node move small](./animated_images/compressed/29-01-2024-006-move-nodes-reroute_trainrun.gif)
 
 ##### Multiple trainruns
 
-This example shows how several trainrun are connected to each other and aligned to a node. The
+This example shows how several trainrun aligned nodes and . The
 outgoing/incoming edge depends on the position of the node.
 
 If two or more trainrun have at least one identical node (start/end does not matter), the
 trainrun are sorted according to the position of the branching node: (from top to bottom or
 from left to right or vice versa).
 
-If two or more trainrun have the same neighbouring nodes, they are sorted by train journey
+If two or more trainrun have the same neighbouring nodes, they are sorted by trainrun
 category and name. If the name is the same, they are further sorted according to the order of the
 drawing - first drawn, first aligned (from top to bottom or from left to right or vice versa).
 
 > **Sorting heuristic**
 > - Position Alignment (Top > Bottom > Left > Right)
 > - Left - Right | Top - Down
-> - Category Order
+> - Category 
 > - Trainrun name (alphabetically)
 > - Trainrun (drawing order)
 > - Trainrun section (drawing order)

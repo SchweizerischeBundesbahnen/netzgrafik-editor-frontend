@@ -5,10 +5,11 @@
 Connections can be easily created by following these steps:
 
 - Select the train for which you want to create a connection.
-- Instead of re-routing the train, you can use a pin to connect the trainrun to a node. To create
-  the connection, drag and drop the pin from one node to another.
+- Instead of re-routing the train, you can use the pin (circle) to connect the trainrun to another
+  trainrun. To create the connection, drag and drop the pin where the trainrun is connected to node
+  to another trainrun connecting pin (circle).
   > When dragging within a node, the line will appear dashed, and small circles will indicate all
-  > possible connections.
+  > possible connections (pins).
 
 - Drag the line to the desired circle using drag and drop, and the connection will be drawn.
 
@@ -18,7 +19,7 @@ Connections can be easily created by following these steps:
 
 ### Delete connections
 
-To delete a connection, simply release the pin outside of a node.
+To delete a connection, simply release the pin outside of the node.
 
 ![''](./animated_images/compressed/2024-1-25_DeleteConnections-001.gif)
 
