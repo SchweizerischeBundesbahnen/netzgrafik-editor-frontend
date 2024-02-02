@@ -14,9 +14,10 @@ Whenever you need to create a new node. You should follow these steps:
 
 ### Import nodes from a semicolon-seperate-value file (CSV)
 
-Nodes can be imported using a predefined **semicolon-separated file** (CSV). This allows the basis
-to be created very quickly. In addition to node properties, such as stopping times per train type,
-node positions can also be imported so that the layout comes directly from the import.
+Nodes can be imported using a predefined **semicolon-separated file** (CSV). This allows
+creating very quickly the required nodes and the defaults used for planning. In addition to node
+properties, such as default stopping times (per trainrun type), node positions can also be imported
+so that the layout comes directly from the import.
 
 ![import basedata](./animated_images/compressed/29-01-2024-004-import_basedata.gif)
 
@@ -74,45 +75,46 @@ region label.
 ### Move nodes
 
 If you move a node - the Netzgrafik routes all to the node aligned trainrun sections
-automatically. The Netzgrafik recalculates the routing and results in a new well aligned readable
-layout.
+automatically. The Netzgrafik recalculates the routing layout and results in a new well aligned
+readable graphical layout.
 
 #### Trainrun sorting heuristics
 
 ##### Single trainrun
 
-This example shows how a trainrun is aligned to a node. The outgoing/incoming edge
-depends on the position of the node.
+This example shows how a trainrun is aligned to a node. The outgoing/incoming edge (trainrun
+sections) depends on the node position to where the trainrun section is algined to.
 
 ![node move small](./animated_images/compressed/29-01-2024-006-move-nodes-reroute_trainrun.gif)
 
 ##### Multiple trainruns
 
-This example shows how several trainrun aligned nodes and . The
-outgoing/incoming edge depends on the position of the node.
+This example shows how several trainruns and nodes The outgoing/incoming edge alginment depends
+strongly on the position of the node.
 
 If two or more trainrun have at least one identical node (start/end does not matter), the
-trainrun are sorted according to the position of the branching node: (from top to bottom or
-from left to right or vice versa).
+trainrun are sorted according to the position of the branching node -from top to bottom or
+from left to right or vice versa.
 
 If two or more trainrun have the same neighbouring nodes, they are sorted by trainrun
-category and name. If the name is the same, they are further sorted according to the order of the
-drawing - first drawn, first aligned (from top to bottom or from left to right or vice versa).
+category and name. If the category and name are the same, they are further sorted according to the
+order of the drawing - first drawn, first aligned (from top to bottom or from left to right or vice
+versa).
 
 > **Sorting heuristic**
 > - Position Alignment (Top > Bottom > Left > Right)
 > - Left - Right | Top - Down
-> - Category 
+> - Category
 > - Trainrun name (alphabetically)
 > - Trainrun (drawing order)
 > - Trainrun section (drawing order)
 
 ![node move big](./animated_images/compressed/29-01-2024-006-move-nodes-reroute_trainrun-big.gif)
 
-##### Inserting new trainruns
+##### Inserting and deleting of trainruns
 
-Inserting and deleting trainrun sections affects the pin orders (edge ordering) and the node size (
-height, width).
+Inserting and deleting trainrun sections affects the pin orders (edge ordering) and the node size 
+(height, width).
 
 ![node move big](./animated_images/compressed/2024-1-25-Move_nodes_reoute_notes_ports.gif)
 
