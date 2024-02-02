@@ -78,7 +78,7 @@ If you move a node - the Netzgrafik routes all to the node aligned trainrun sect
 automatically. The Netzgrafik recalculates the routing layout and results in a new well aligned
 readable graphical layout.
 
-If you want to move a node pr ocess as follows:
+If you want to move a node process as follows:
 
 - Move the mouse pointer of the node to move
 - As soon as the mouse pointer is over a node on the left hand side there will be a move symbol
