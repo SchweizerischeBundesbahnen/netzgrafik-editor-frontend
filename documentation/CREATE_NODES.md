@@ -80,7 +80,7 @@ readable graphical layout.
 
 If you want to move a node process as follows:
 
-- Move the mouse pointer to the node to move
+- Move the mouse pointer to the node of interest
 - As soon as the mouse pointer is over a node on the left hand side there will be a move symbol
   displayed. Move with the mouse pointer over this appeared symbol and press the left mouse button.
   (You can as well press the left mouse button over the node short name. This behaves equal to the
