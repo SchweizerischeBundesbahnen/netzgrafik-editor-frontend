@@ -37,8 +37,11 @@ No training required. Analysis happens in real time.
 #### Business Value
 
 **More efficient timetable planning** - iterative variant testing early stages interval timetables
+
 **Digital assistant** instead of whiteboard
+
 **User-centric** UX
+
 Improved **collaboration**
 
 ---
