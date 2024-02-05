@@ -43,9 +43,9 @@ enable the representation and analysis of complex relationships in the model.
 - ***TrainrunSection*** corresponds to the edges between nodes in an undirected graph.
 - ***Nodes*** represent the points in the graph, allowing the connection of trainrun section .
 - A *pin* represents a ***port*** (point) in the graph where a trainrun section is connected to a
-  Node.
+  node.
 - The ***transition*** extends the graph within the node. A transition corresponds to an edge that
-  connects two pins within the Node, thereby connecting two trainrun section.
+  connects two pins within the node, thereby connecting two trainrun section.
 - If two trainruns should make a connection at a station, this can be defined using a
   ***connection***. The trainrun connection links two pins, each have to be associated with a
   different train.
@@ -54,7 +54,7 @@ Together, these elements form an undirected graph consisting of edges (TrainrunS
 Transitions) and nodes (Ports).
 
 The last key element is the ***trainrun***. The trainrun consists of an ordered sequence of
-trainrun sections and transitions. This ordered sequence defines the route of the Trainrun and
+trainrun sections and transitions. This ordered sequence defines the route of the trainrun and
 establishes a direction in the undirected graph. This direction corresponds to the exact path of the
 train.
 
