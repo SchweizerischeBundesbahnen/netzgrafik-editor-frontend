@@ -48,4 +48,17 @@ trainrun sections and transitions. This ordered sequence defines the route of th
 establishes a direction in the undirected graph. This direction corresponds to the exact path of the
 train.
 
+```mermaid
+classDiagram
+Node *-- Port
+Node *-- Transition
+Node *-- Connection
+
+Trainrun *-- TrainrunSection
+TrainrunSection *-- Port
+
+Transition --* Port
+Connection --* Port 
+```
+
 
