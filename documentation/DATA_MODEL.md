@@ -34,8 +34,7 @@ enable the representation and analysis of complex relationships in the model.
 - *Nodes* represent the points in the graph, allowing the connection of trainrun section .
 - A *pin* represents a point in the graph where a trainrun section is connected to a Node.
 - The *transition* extends the graph within the node. A transition corresponds to an edge that
-  connects two pins within the Node, thereby
-  connecting two trainrun section.
+  connects two pins within the Node, thereby connecting two trainrun section.
 - If two trains should make a connection at a station, this can be defined using a *connection*. The
   trainrun connection links two pins, each have to be associated with a different train.
 
