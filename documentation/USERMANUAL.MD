@@ -252,4 +252,4 @@ creation of comprehensive and visually appealing network representations.
 
 ## Links
 
-- [DATA MODEL](./documentation/DATA_MODEL.md)
+- [DATA MODEL](DATA_MODEL.md)
