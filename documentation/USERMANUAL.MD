@@ -34,7 +34,7 @@ analysis capabilities.
 **Excellent and intuitive UX:** Using NGE should be as easy and natural as drawing on a whiteboard.
 No training required. Analysis happens in real time.
 
-### Business Value
+#### Business Value
 
 **More efficient timetable planning** - iterative variant testing early stages interval timetables
 **Digital assistant** instead of whiteboard
