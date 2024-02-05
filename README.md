@@ -42,6 +42,7 @@ The Dutch were in 1970 credited with the first junction system, which then was t
 Swiss regular-interval timetable in 1982.
 
 ![Source](https://www.swissinfo.ch/eng/to-the-second_the-swiss-timetable-is-due-to-meticulous-planning/34102496)
+![History - The regular-interval timetable](https://houseofswitzerland.org/swissstories/history/nation-railway-enthusiasts-history-swiss-railways)
 </details>
 
 It offers various functions to enhance the efficiency and optimization of the logistics network.
