@@ -12,6 +12,7 @@
 - [Graphic timetable (Streckengrafik)](#Streckengrafik)
 - [Perlenkette](#Perlenkette)
 - [Conclusion](#Conclusion)
+- [Links](#Links)
 
 <a id="Introduction"></a>
 
@@ -71,18 +72,18 @@ easier to manage and edit complex network structures.
 
 ### Short-cuts
 
-|                                                  Keyboard                                                  |                                                                                             description                                                                                             |
-|:----------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|                                                                                                            |                                                                                                                                                                                                     |
+|                                                  Keyboard                                                  |                                                                                            description                                                                                             |
+|:----------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|                                                                                                            |                                                                                                                                                                                                    |
 |                                                  'delete'                                                  |                                                                          Delete nodes, comments, and selected trainruns.                                                                           |
 |                                             ctrl+d / 'insert'                                              |                                   Duplicate nodes, comments, and selected trainruns (if multiple nodes are selected, trains including nodes will be duplicated).                                   |
-|                                                  'insert'                                                  |                                                                         Add new nodes under the mouse on the drawing area.                                                                          |
+|                                                  'insert'                                                  |                                                                         Add new nodes under the mouse on the drawing area.                                                                         |
 |                                                  'escape'                                                  |                                                         Select trainruns / In multi-node move mode, all selected nodes will be unselected.                                                         |
-| shift + left mouse button pressed and move (or alternatively with the right mouse button pressed and move) |                                                Multi-select nodes and notes for subsequent moving or delete all selected elements by using "Delete".                                                |
-|                                                   ctrl+z                                                   |                                                                                 Undo - Reverse the previous action.                                                                                 |
+| shift + left mouse button pressed and move (or alternatively with the right mouse button pressed and move) |                                               Multi-select nodes and notes for subsequent moving or delete all selected elements by using "Delete".                                                |
+|                                                   ctrl+z                                                   |                                                                                Undo - Reverse the previous action.                                                                                 |
 |                                                   ctrl+c                                                   | Copy the currently visible trainruns. The copied content remains in the browser's memory/cache and can be pasted into different variants (even after closing the browser, the data remains saved). |
 |                                                   ctrl+v                                                   |                                                                                    Paste the copied trainruns.                                                                                     |
-|                                                   ctrl+a                                                   |                                                                                             Select all.                                                                                             |
+|                                                   ctrl+a                                                   |                                                                                            Select all.                                                                                             |
 
 ### Duplicate
 
@@ -244,3 +245,11 @@ displaying the train's route as a vertical chain of nodes and trainrunsections.
 
 By following the instructions in this document, users can effectively create and facilitate the
 creation of comprehensive and visually appealing network representations.
+
+
+---
+<a id="Links"></a>
+
+## Links
+
+- [DATA MODEL](./documentation/DATA_MODEL.md)
