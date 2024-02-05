@@ -80,6 +80,8 @@ classDiagram
     class TrainrunSection {
            ...
            trainrun : Trainrun
+           sourceNode : Node
+           targetNode : Node
     }
 
     class Port {
