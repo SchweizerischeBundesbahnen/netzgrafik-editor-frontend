@@ -146,7 +146,7 @@ Instructions for getting started with the repository, for e.g.:
 ## Documentation
 
 Links to all relevant documentation files, including:
-
+- [DATA MODEL](./documentation/DATA_MODEL.md)
 - [CODING_STANDARDS.md](CODING_STANDARDS.md)
 - [CONTRIBUTING.md](CONTRIBUTING.md)
 - [LICENSE.md](LICENSE.md)
