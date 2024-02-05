@@ -24,12 +24,31 @@
 ## Introduction
 
 The Netzgrafik-Editor is a powerful software that enables the creation, modification, and analysis
-of [integrated synchronised clock-faced timetables](https://en.wikipedia.org/wiki/Clock-face_scheduling).
+of regular-interval timetable.
+
+<details>
+<summary>
+[clock-faced schedules](https://en.wikipedia.org/wiki/Clock-face_scheduling).
+</summary>
+Regular-interval timetables were first developed in Germany at the beginning of the 20th century to 
+coordinate urban traffic in large cities such as Berlin.
+
+The regular schedules aim to increase the attractiveness of public transport because they’re easier
+to memorise for passengers and because the patterns make the planning of resources easier.
+
+Such constant schedules may also improve services during off-peak hours.
+
+The Dutch were in 1970 credited with the first junction system, which then was the basis for the
+Swiss regular-interval timetable in 1982.
+
+![Source](https://www.swissinfo.ch/eng/to-the-second_the-swiss-timetable-is-due-to-meticulous-planning/34102496)
+</details>
+
 It offers various functions to enhance the efficiency and optimization of the logistics network.
 Some of the key features include:
 
 - **Interactive drawing tool to edit the Netzgrafik:** A user-friendly and interactive graphical
-  editor for creating and editing the integrated synchronised clock-faced timetables. It provides a
+  editor for creating and editing the regular-interval timetables. It provides a
   visual interface to easily visualize and adjust the logistics network.
 
 - **Graphic timetable (Streckengrafik):**
@@ -42,7 +61,7 @@ Some of the key features include:
   to specific requirements and constraints.
 
 - **Logistical Information Extraction:** The software extracts important logistical information from
-  the integrated synchronised clock-faced timetables,
+  the regular-interval timetables,
   such as departure and destination stations, departure and arrival times, and train frequency.
 
 - **Logistics Network Analysis:** Planners can analyze the logistics network based on the timetable
@@ -68,8 +87,8 @@ The project started with a clickable prototype. From this early stage of the pro
 there are still ideas and concepts that have not yet been realised, so it is always worth taking a
 look [at this document](https://xd.adobe.com/view/e4664ae0-be8f-40e4-6a55-88aec9eafd8d-9257/).
 The entire project has now reached a mature stage and evolved into a powerful tool with applications
-beyond railways. It can now be utilized in any domain that requires integrated synchronized
-clock-faced timetables as a planning basis.
+beyond railways. It can now be utilized in any domain that requires regular-interval timetables as a
+planning basis.
 
 The versatility of the editor makes it suitable for various logistics planning scenarios, enabling
 efficient timetable creation and analysis. The software's key features can be leveraged in a broader
@@ -146,6 +165,7 @@ Instructions for getting started with the repository, for e.g.:
 ## Documentation
 
 Links to all relevant documentation files, including:
+
 - [DATA MODEL](./documentation/DATA_MODEL.md)
 - [CODING_STANDARDS.md](CODING_STANDARDS.md)
 - [CONTRIBUTING.md](CONTRIBUTING.md)
