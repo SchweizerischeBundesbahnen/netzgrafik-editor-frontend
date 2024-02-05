@@ -33,19 +33,22 @@ Regular-interval timetable
 
 ---
 
-Regular-interval timetables were first developed in Germany at the beginning of the 20th century to 
-coordinate urban traffic in large cities such as Berlin. The regular schedules aim to increase the 
-attractiveness of public transport because they’re easier to memorise for passengers and because the
-patterns make the planning of resources easier.
-
-Such constant schedules may also improve services during off-peak hours.
-
-The Dutch were in 1970 credited with the first junction system, which then was the basis for the
-Swiss regular-interval timetable in 1982.
+> Regular-interval timetables were first developed in Germany at the beginning of the 20th century
+> to coordinate urban traffic in large cities such as Berlin.
+>
+> The regular schedules aim to increase the attractiveness of public transport because they’re
+> easier to memorise for passengers and because the patterns make the planning of resources easier.
+>
+> Such constant schedules may also improve services during off-peak hours.
+>
+> The Dutch were in 1970 credited with the first junction system, which then was the basis for the
+> Swiss regular-interval timetable in 1982.
+>
+> [History - The regular-interval timetable](https://houseofswitzerland.org/swissstories/history/nation-railway-enthusiasts-history-swiss-railways)
+> [clock-faced schedules](https://en.wikipedia.org/wiki/Clock-face_scheduling)
+>
 
 [Source](https://www.swissinfo.ch/eng/to-the-second_the-swiss-timetable-is-due-to-meticulous-planning/34102496)
-[History - The regular-interval timetable](https://houseofswitzerland.org/swissstories/history/nation-railway-enthusiasts-history-swiss-railways)
-[clock-faced schedules](https://en.wikipedia.org/wiki/Clock-face_scheduling)
 
 ---
 </details>
@@ -54,7 +57,7 @@ It offers various functions to enhance the efficiency and optimization of the lo
 Some of the key features include:
 
 - **Interactive drawing tool to edit the Netzgrafik:** A user-friendly and interactive graphical
-  editor for creating and editing  regular-interval timetables. It provides a
+  editor for creating and editing regular-interval timetables. It provides a
   visual interface to easily visualize and adjust the logistics network.
 
 - **Graphic timetable (Streckengrafik):**
