@@ -1,8 +1,7 @@
 ## Data model
 
-The data model consists of the following key elements: **Trainrun**, **TrainrunSection**, *
-*Transition**, **Pin**,
-and **Node*.
+The data model consists of the following key elements: **Trainrun**, **TrainrunSection**,
+**Transition**, **Pin** and **Node**.
 
 - TrainrunSection corresponds to the edges between nodes in an undirected graph.
 - Nodes represent the points in the graph, allowing the connection of TrainrunSections.
