@@ -17,12 +17,12 @@ Further information can be found under the links provided under [Links](#Links).
 
 <details>
 <summary>
-Netgraph-Editor – designed to make better decisions.
+Netzgrafik-Editor – designed to make better decisions.
 </summary>
 
 ---
 
-#### Netgraph-Editor – designed to make better decisions.
+#### Netzgrafik-Editor – designed to make better decisions.
 
 > **Flexible** level of detail: start with a rough sketch, continuously add more detail
 >
