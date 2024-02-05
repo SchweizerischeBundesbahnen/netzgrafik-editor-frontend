@@ -22,6 +22,8 @@ Netgraph-Editor – designed to make better decisions.
 
 ---
 
+#### Netgraph-Editor – designed to make better decisions.
+
 **Flexible** level of detail: start with a rough sketch, continuously add more detail
 
 - applicable across different industries (bus, train, plane)
