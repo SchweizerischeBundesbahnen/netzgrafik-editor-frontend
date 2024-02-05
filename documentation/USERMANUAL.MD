@@ -23,31 +23,28 @@ Netgraph-Editor – designed to make better decisions.
 ---
 
 #### Netgraph-Editor – designed to make better decisions.
-```
-**Flexible** level of detail: start with a rough sketch, continuously add more detail
 
-- applicable across different industries (bus, train, plane)
-- scales with your use-case: from hobbyist timetabling to professional planning
+> **Flexible** level of detail: start with a rough sketch, continuously add more detail
+>
+> - applicable across different industries (bus, train, plane)
+> - scales with your use-case: from hobbyist timetabling to professional planning
+> 
+> **Human-centric:** Timetable planning is a very complex and creative process. Netzgrafik-Editor
+> supports the user by digitalizing the previously paper-driven process, while providing instant
+> analysis capabilities.
 
-**Human-centric:** Timetable planning is a very complex and creative process. Netzgrafik-Editor
-supports the user by digitalizing the previously paper-driven process, while providing instant
-analysis capabilities.
-
-**Excellent and intuitive UX:** Using Netzgrafik-Editor should be as easy and natural as drawing on a whiteboard.
-No training required. Analysis happens in real time.
-```
+> **Excellent and intuitive UX:** Using Netzgrafik-Editor should be as easy and natural as drawing on a whiteboard.
+> No training required. Analysis happens in real time.
 
 #### Business Value
 
-```
-**More efficient timetable planning** - iterative variant testing early stages interval timetables
-
-**Digital assistant** instead of whiteboard
-
-**User-centric** UX
-
-Improved **collaboration**
-```
+> **More efficient timetable planning** - iterative variant testing early stages interval timetables
+> 
+> **Digital assistant** instead of whiteboard
+>
+> **User-centric** UX
+> 
+> Improved **collaboration**
 
 ---
 
