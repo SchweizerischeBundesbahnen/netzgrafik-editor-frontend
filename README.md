@@ -54,7 +54,7 @@ It offers various functions to enhance the efficiency and optimization of the lo
 Some of the key features include:
 
 - **Interactive drawing tool to edit the Netzgrafik:** A user-friendly and interactive graphical
-  editor for creating and editing the regular-interval timetables. It provides a
+  editor for creating and editing  regular-interval timetables. It provides a
   visual interface to easily visualize and adjust the logistics network.
 
 - **Graphic timetable (Streckengrafik):**
@@ -67,7 +67,7 @@ Some of the key features include:
   to specific requirements and constraints.
 
 - **Logistical Information Extraction:** The software extracts important logistical information from
-  the regular-interval timetables,
+  the regular-interval timetable,
   such as departure and destination stations, departure and arrival times, and train frequency.
 
 - **Logistics Network Analysis:** Planners can analyze the logistics network based on the timetable

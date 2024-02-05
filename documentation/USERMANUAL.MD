@@ -33,7 +33,7 @@ Netgraph-Editor – designed to make better decisions.
 supports the user by digitalizing the previously paper-driven process, while providing instant
 analysis capabilities.
 
-**Excellent and intuitive UX:** Using NGE should be as easy and natural as drawing on a whiteboard.
+**Excellent and intuitive UX:** Using Netzgrafik-Editor should be as easy and natural as drawing on a whiteboard.
 No training required. Analysis happens in real time.
 
 #### Business Value
