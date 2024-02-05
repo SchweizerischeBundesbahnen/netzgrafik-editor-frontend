@@ -7,9 +7,9 @@
 With the help of the left mouse button and keyboard you can create or modify any trainrun.
 
 - If no trainrun is selected - you can create a new trainrun just by graphical drawing.
-- If a trainrun is selected you can modify a trainrun, including extending the trainrun traveling
+- If a trainrun is selected you can modify a trainrun, including extending the trainrun journey
   path (route), reroute the path, delete a trainrun or just a trainrun section. Further you can
-  change the times such as departure time, arrival time, traveling time or you can further modify
+  change the times such as departure time, arrival time, journey time or you can further modify
   the trainrun category and name.
 
 When a new trainrun gets created the system opens a dialog window where you can enter all

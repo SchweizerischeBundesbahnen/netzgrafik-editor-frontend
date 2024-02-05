@@ -41,10 +41,10 @@ Key Features
    timetable.
 
 3. **Advanced Analytics:**
-   Increasing demands are being placed on advanced analytical abilities. Analyzing travel routes
+   Increasing demands are being placed on advanced analytical abilities. Analyzing journey routes
    through the logistics network is crucial. A first version has been implemented that allows users
    to analyze the logistics network based on the timetable representation. It provides insights into
-   connection coordination, transfer times and travel times.
+   connection coordination, transfer times and journey times.
 
 4. **Collaboration and Sharing:**
    The Netzgrafik-Editor provides collaboration features, enabling multiple users to work on

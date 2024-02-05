@@ -13,8 +13,8 @@ the trainrun's route, determining where it stops, passes through, or starts and 
 
 On the other hand, the trainrun section represents a specific segment or portion of a trainrun that
 connects two nodes. It encapsulates all the relevant information related to that particular section,
-including temporal details like departure and arrival times. Additionally, it also stores the travel
-time, which indicates the duration it takes for the trainrun to move from one node to another.
+including temporal details like departure and arrival times. Additionally, it also stores the
+journey time, which indicates the duration it takes for the trainrun to move from one node to another.
 
 The trainrun connection signifies the point in the logistic network where two trains need to
 coordinated to ensure a smooth connection between them.
