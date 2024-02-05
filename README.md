@@ -28,7 +28,7 @@ of regular-interval timetable.
 
 <details>
 <summary>
-clock-faced schedules
+Regular-interval timetable
 </summary>
 Regular-interval timetables were first developed in Germany at the beginning of the 20th century to 
 coordinate urban traffic in large cities such as Berlin. The regular schedules aim to increase the 
