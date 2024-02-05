@@ -31,10 +31,9 @@ of regular-interval timetable.
 clock-faced schedules
 </summary>
 Regular-interval timetables were first developed in Germany at the beginning of the 20th century to 
-coordinate urban traffic in large cities such as Berlin.
-
-The regular schedules aim to increase the attractiveness of public transport because they’re easier
-to memorise for passengers and because the patterns make the planning of resources easier.
+coordinate urban traffic in large cities such as Berlin. The regular schedules aim to increase the 
+attractiveness of public transport because they’re easier to memorise for passengers and because the
+patterns make the planning of resources easier.
 
 Such constant schedules may also improve services during off-peak hours.
 
