@@ -3,6 +3,8 @@
 The data model consists of the following key elements: *trainrun*, *trainrun section*,
 *transition*, *pin* and *node*.
 
+![Data model](./images/DataMoel_Sketch_KeyElement_001.jpg)
+
 ### Business orientated description
 
 The nodes in the data model represent the specific locations, such as stations or stops, where a
@@ -39,7 +41,5 @@ The last key element is the trainrun. The trainrun consists of an ordered sequen
 trainrun sections and transitions. This ordered sequence defines the route of the Trainrun and
 establishes a direction in the undirected graph. This direction corresponds to the exact path of the
 train.
-
-![Data model](./images/DataMoel_Sketch_KeyElement_001.jpg)
 
 
