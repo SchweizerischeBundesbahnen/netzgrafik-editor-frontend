@@ -49,16 +49,55 @@ establishes a direction in the undirected graph. This direction corresponds to t
 train.
 
 ```mermaid
-  classDiagram
-  Node *-- Port
-  Node *-- Transition
-  Node *-- Connection
-  
-  Trainrun *-- TrainrunSection
-  TrainrunSection *-- Port
-  
-  Transition --* Port
-  Connection --* Port 
+classDiagram
+    Node *-- Port
+    Node *-- Transition
+    Node *-- Connection
+    
+    Trainrun *-- TrainrunSection
+    TrainrunSection --* Port
+    
+    Transition -- Port
+    Connection -- Port 
+
+    class Node {
+           betriebspunktName : string
+           fullName : string
+           ...
+           ports: Port[]
+           transitions: Transition[]
+           connections: Connection[]
+    }
+
+    class Trainrun {
+            name : string
+           ...
+            trainrunCategory: TrainrunCategory
+            trainrunFrequency: TrainrunFrequency
+            trainrunTimeCategory: TrainrunTimeCategory
+    }
+
+    class TrainrunSection {
+           ...
+           trainrun : Trainrun
+    }
+
+    class Port {
+           ... 
+           trainrunSection : TrainrunSection
+    }
+
+    class Transition {
+        ...
+        port1 : Port
+        port2 : Port
+    }
+
+    class Connection {
+        ...
+        port1 : Port
+        port2 : Port
+    }
 ```
 
 
