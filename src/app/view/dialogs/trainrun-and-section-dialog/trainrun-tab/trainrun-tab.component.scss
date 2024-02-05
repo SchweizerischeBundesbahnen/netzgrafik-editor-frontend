@@ -1,0 +1,90 @@
+@import '../../../rastering/definitions';
+@import '../../../../../variables';
+
+::ng-deep .sbb-trainrun-chip-group {
+  display: flex;
+}
+
+::ng-deep button.TrainrunDialog { // mimic the sbb-chip design (not yet available as stand-alone component)
+  margin-right: $buttonHeight;
+  padding: 6px 6px;
+  min-width: 56px;
+  max-width: 56px;
+
+  color: $COLOR_Default;
+  text-decoration: none;
+
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  background-color: $COLOR_BACKGROUND;
+
+  &.selected {
+    color: $COLOR_Focus;
+    background-color: white;
+    border-color: $COLOR_Focus;
+  }
+}
+
+::ng-deep div.label {
+  font-size: small;
+  text-align: left;
+  padding-left: 10px;
+  color: $COLOR_Default;
+}
+
+
+::ng-deep div.EditTrainrunDialogTabContent {
+  border-style: none;
+  min-height: 250px;
+  max-height: 250px;
+}
+
+::ng-deep div.EditTrainrunDialogTabFooter {
+  border-style: none;
+  padding-right: 15px;
+  max-height: 48px;
+  min-height: 48px;
+}
+
+::ng-deep button.Frequency {
+  color: black;
+  background-color: whitesmoke;
+  border-color: transparent;
+}
+
+::ng-deep button.Frequency.selected {
+  color: white;
+  background-color: $COLOR_Default;
+  border-color: transparent;
+}
+
+::ng-deep button.TimeCategory {
+  color: black;
+  background-color: whitesmoke;
+  border-color: transparent;
+}
+
+::ng-deep button.TimeCategory.selected {
+  color: white;
+  background-color: $COLOR_Default;
+  border-color: transparent;
+}
+
+::ng-deep div.EditTrainrunDialogTabContent {
+  border-style: none;
+  min-height: 250px;
+  max-height: 250px;
+  padding-bottom: 0px;
+
+  .sbb-label{
+    padding-top: 5px;
+    padding-bottom: 3px;
+  }
+
+}
+
+::ng-deep div.EditTrainrunDialogTabContent.IntegratedComponent {
+  padding: 0px;
+  min-height: 270px;
+}

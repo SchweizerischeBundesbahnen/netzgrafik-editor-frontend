@@ -1,0 +1,15 @@
+.sbb-editor-wrapper {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  background-color: whitesmoke;
+}
+sbb-editor-menu {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+}
+button {
+  margin: 10px;
+  display: block;
+}

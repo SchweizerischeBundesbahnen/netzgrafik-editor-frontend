@@ -1,0 +1,27 @@
+@use '@sbb-esta/angular' as sbb;
+
+.card {
+  border-radius: 4px;
+  background: sbb.$sbbColorCloud;
+  padding: 24px;
+  min-width: 320px;
+  min-height: 128px;
+}
+
+.card .title {
+  font-size: 1.4rem;
+  font-family: sbb.$fontSbbLight;
+}
+
+.card .subtitle {
+  font-size: 0.8rem;
+  color: sbb.$sbbColorMetal;
+}
+
+.card.icon {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: sbb.$sbbColorMilk;
+}

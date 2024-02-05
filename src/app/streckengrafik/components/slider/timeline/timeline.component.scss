@@ -1,0 +1,21 @@
+path.TimeLine {
+  stroke: var(--COLOR_Default);
+  opacity: 0.25;
+  stroke-width: 1.0px;
+  pointer-events: none;
+  shape-rendering: crispEdges;
+  transform: translate(1.0px, 1.0px);
+}
+
+text {
+  font-family: var(--sbb-font-roman);
+  font-size: 12px;
+  fill: var(--COLOR_Default);
+  stroke: none;
+  text-anchor: start;
+}
+
+rect {
+  fill:  var(--COLOR_BACKGROUND);
+  stroke: none;
+}

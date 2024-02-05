@@ -1,0 +1,23 @@
+@import './../../view/editor-properties-view-component/editor-properties-view.component.scss';
+@import './../../view/editor-filter-view/editor-filter-view.component.scss';
+@import './../../view/dialogs/trainrun-and-section-dialog/trainrun-tab/trainrun-tab.component.scss';
+@import '../rastering/definitions';
+
+::ng-deep .TrainrunDialog.EditorToolButton {
+  background: $COLOR_Default;
+  border: $COLOR_Default;
+  color: white;
+  max-width: none;
+  min-height: 38px;
+  margin-bottom: 16px;
+}
+
+::ng-deep .TrainrunDialog.EditorToolButton:active {
+  background: lightgrey;
+  color: $COLOR_Default;
+  border: lightgrey;
+}
+
+.link-reset{
+  vertical-align: initial;
+}

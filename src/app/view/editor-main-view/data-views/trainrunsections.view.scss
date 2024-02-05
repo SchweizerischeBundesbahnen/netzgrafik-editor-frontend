@@ -1,0 +1,268 @@
+@import '../../rastering/definitions';
+@import 'trainrunsections.view.edgeline';
+
+/// TEXT fields
+::ng-deep text.edge_text {
+  stroke-width: 0px;
+  stroke: $COLOR_TRAINRUN_SECTION;
+  fill: $COLOR_TRAINRUN_SECTION;
+  dominant-baseline: middle;
+  text-anchor: middle;
+  font-size: $LINE_FONT_SIZE;
+  cursor: pointer;
+}
+
+::ng-deep text.edge_text.TrainrunSectionName {
+  text-anchor: end;
+  text-align: right;
+}
+
+::ng-deep text.edge_text.SourceArrival.OddFrequency {
+  font-style: italic;
+}
+
+::ng-deep text.edge_text.SourceDeparture.OddFrequency {
+  font-style: italic;
+}
+
+::ng-deep text.edge_text.TargetArrival.OddFrequency {
+  font-style: italic;
+}
+
+::ng-deep text.edge_text.TargetDeparture.OddFrequency {
+  font-style: italic;
+}
+
+::ng-deep text.edge_text.TrainrunSectionTravelTime {
+  text-anchor: start;
+  text-align: left;
+}
+
+::ng-deep text.edge_text.warning {
+  stroke: $COLOR_Warning;
+  fill: $COLOR_Warning;
+  stroke-width: 0.25px;
+}
+
+::ng-deep text.edge_text.hover {
+  stroke: $COLOR_Edit;
+  fill: $COLOR_Edit;
+}
+
+::ng-deep text.edge_text.selected {
+  stroke: $COLOR_Edit;
+  fill: $COLOR_Edit;
+}
+
+::ng-deep text.edge_text.muted {
+  stroke: $COLOR_Muted;
+  fill: $COLOR_Muted;
+}
+
+::ng-deep circle.connection_line_pin {
+  cursor: move;
+}
+
+::ng-deep circle.edge_line_pin {
+  stroke: none;
+  fill: none;
+  r: $PIN_RADIUS_HIDDEN;
+  cursor: pointer;
+}
+
+::ng-deep circle.edge_line_pin.selected {
+  cursor: move;
+  stroke: $COLOR_Edit;
+  fill: white;
+  r: $PIN_RADIUS_SELECTED;
+}
+
+::ng-deep circle.edge_line_pin.selected.grayedout {
+  cursor: move;
+  stroke: $COLOR_Default;
+  fill: $COLOR_GRAYEDOUT;
+  r: $PIN_RADIUS_SELECTED;
+}
+
+::ng-deep circle.edge_line_pin.hover {
+  cursor: move;
+  stroke: $COLOR_Edit;
+  fill: white;
+  r: $PIN_RADIUS_HOVER;
+}
+
+::ng-deep circle.edge_line_pin.connection_pin {
+  stroke: $COLOR_Default;
+  fill: $COLOR_MUTED_SILVER;
+  r: $PIN_RADIUS_DOCKABLE;
+  cursor: move;
+}
+
+::ng-deep circle.edge_line_pin.connection_pin.hover {
+  r: $PIN_RADIUS_HOVER;
+  fill: $COLOR_Edit;
+  stroke: $COLOR_Default;
+  cursor: pointer;
+}
+
+::ng-deep rect.edge_text_background {
+  stroke-width: 1px;
+  stroke: $COLOR_BACKGROUND;
+  fill: $COLOR_BACKGROUND;
+  ry: $NODE_ROUND_EDGE_SIZE;
+}
+
+
+::ng-deep rect.edge_text_background.SourceArrival {
+  stroke: $COLOR_BACKGROUND;
+  fill: $COLOR_BACKGROUND;
+}
+
+::ng-deep rect.edge_text_background.SourceDeparture {
+  stroke: $COLOR_BACKGROUND;
+  fill: $COLOR_BACKGROUND;
+}
+
+::ng-deep rect.edge_text_background.TargetArrival {
+  stroke: $COLOR_BACKGROUND;
+  fill: $COLOR_BACKGROUND;
+}
+
+::ng-deep rect.edge_text_background.TargetDeparture {
+  stroke: $COLOR_BACKGROUND;
+  fill: $COLOR_BACKGROUND;
+}
+
+
+::ng-deep rect.edge_text_background.Freq_120.SourceArrival {
+  stroke: none;
+  fill: none;
+}
+
+::ng-deep rect.edge_text_background.Freq_120.SourceDeparture {
+  stroke: none;
+  fill: none;
+}
+
+::ng-deep rect.edge_text_background.Freq_120.TargetArrival {
+  stroke: none;
+  fill: none;
+}
+
+::ng-deep rect.edge_text_background.Freq_120.TargetDeparture {
+  stroke: none;
+  fill: none;
+}
+
+::ng-deep rect.edge_text_background.Freq_60.SourceArrival {
+  stroke: none;
+  fill: none;
+}
+
+::ng-deep rect.edge_text_background.Freq_60.SourceDeparture {
+  stroke: none;
+  fill: none;
+}
+
+::ng-deep rect.edge_text_background.Freq_60.TargetArrival {
+  stroke: none;
+  fill: none;
+}
+
+::ng-deep rect.edge_text_background.Freq_60.TargetDeparture {
+  stroke: none;
+  fill: none;
+}
+
+::ng-deep rect.edge_text_background.Freq_30.SourceArrival {
+  stroke: none;
+  fill: none;
+}
+
+::ng-deep rect.edge_text_background.Freq_30.SourceDeparture {
+  stroke: none;
+  fill: none;
+}
+
+::ng-deep rect.edge_text_background.Freq_30.TargetArrival {
+  stroke: none;
+  fill: none;
+}
+
+::ng-deep rect.edge_text_background.Freq_30.TargetDeparture {
+  stroke: none;
+  fill: none;
+}
+
+
+::ng-deep rect.edge_text_background.TrainrunSectionName {
+  stroke: $COLOR_BACKGROUND;
+  fill: $COLOR_BACKGROUND;
+  opacity: 0;
+  ry: $NODE_ROUND_EDGE_SIZE;
+}
+
+::ng-deep text.edge_text.no_event {
+  pointer-events: none;
+}
+
+::ng-deep rect.edge_text_background.no_event {
+  pointer-events: none;
+}
+
+::ng-deep text.edge_text.hidden {
+  pointer-events: none;
+  opacity: 0.01;
+}
+
+::ng-deep rect.edge_text_background.hidden {
+  pointer-events: none;
+  opacity: 0.01;
+}
+
+::ng-deep text.TrainrunSectionNumberOfStops {
+  font-size: $LINE_STOP_FONT_SIZE;
+}
+
+::ng-deep svg.InputNumberOfStopsButtonPlusMinus {
+  overflow: visible;
+}
+
+::ng-deep circle.edge_line_pin.selected.no_event {
+  pointer-events: none;
+}
+
+::ng-deep text.event_disabled {
+  pointer-events: none;
+  cursor: pointer;
+}
+
+::ng-deep text.edge_text.TrainrunSectionName.start_text_anchor {
+  text-anchor: start;
+}
+
+::ng-deep .event_disabled {
+  pointer-events: none;
+  cursor: pointer;
+}
+
+::ng-deep text.edge_text.analytics_trainrunsection_text_clickable {
+  fill: $NODE_TEXT_FOCUS;
+}
+
+::ng-deep text.edge_text.analytics_trainrunsection_text_clickable:hover {
+  fill: $COLOR_Edit;
+}
+
+::ng-deep text.edge_text.analytics_trainrunsection_text_muted {
+  opacity: 0.5;
+}
+
+::ng-deep text.edge_text.analytics_trainrunsection_text_muted:hover {
+  opacity: 1.0;
+}
+
+::ng-deep text.edge_text.analytics_trainrunsection_text_focused {
+  opacity: 1.0;
+  stroke-width: 0.5px;
+}

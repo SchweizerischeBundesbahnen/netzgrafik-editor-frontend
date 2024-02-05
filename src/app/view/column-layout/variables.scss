@@ -1,0 +1,271 @@
+@use '@sbb-esta/angular' as sbb;
+
+/**
+ * Typography
+ */
+$sizeFontHeader: 1.5rem;
+$optimalLineLength: 500px;
+
+/**
+ * Breakpoints
+ */
+$screenMinWidth: sbb.$sizeBreakpointDesktopLarge;
+
+/**
+ * Vertical Spacings
+ */
+$gutterHeight: 8px; // duplicate from sacl
+$innerComponentSpacing: 24px; // duplicate from sacl
+$interComponentSpacing: 80px; // duplicate from sacl
+$interComponentSpacingSmall: 40px; // duplicate from sacl
+
+/**
+ * Grid
+ */
+// changed_chb -> this was originally 4vw
+$col-gap: 1vw;
+$col-padding-top: $interComponentSpacingSmall;
+$col-padding-right: $innerComponentSpacing * 1.5; // * 1.5 to match sbb-expansion-panel padding
+$col-padding-bottom: $interComponentSpacingSmall;
+$col-padding-left: $innerComponentSpacing * 1.5; // * 1.5 to match sbb-expansion-panel padding
+$col-padding: $col-padding-top $col-padding-right $col-padding-bottom $col-padding-left;
+
+/**
+ * Colors
+ */
+$colorBlack: #000000; // duplicate from sacl
+$colorWhite: #FFFFFF; // duplicate from sacl
+$colorGreyLight: #DCDCDC; // duplicate from sacl
+$colorGreySilver: #CDCDCD; // duplicate from sacl
+$colorGrey: #666666; // duplicate from sacl
+$colorGreyMedium: #979797; // duplicate from sacl
+$colorRed100: #EB0000; // duplicate from sacl
+$colorRed125: #C60018; // duplicate from sacl
+$colorRed150: #A20013; // duplicate from sacl
+$colorBlack5: #F6F6F6; // duplicate from sacl
+$colorBlack10: #E5E5E5; // duplicate from sacl
+$colorBlack20: #D2D2D2; // duplicate from sacl
+$colorBlack30: #BDBDBD; // duplicate from sacl
+$colorBlack40: #A8A8A8; // duplicate from sacl
+$colorBlack60: #767676; // duplicate from sacl
+$colorBlack70: #686868; // duplicate from sacl
+$colorBlack72: #b7b7b7; // duplicate from sacl
+$colorBlack80: #5A5A5A; // duplicate from sacl
+$colorBlack90: #444444; // duplicate from sacl
+$colorBlack100: #1E1E1E; // duplicate from sacl
+$colorBlue: #003399; // duplicate from sacl
+
+$colorSuccess: green;
+$colorMilk: #F6F6F6;
+$colorNight: #143A85;
+$colorSky: #0079C7;
+$colorMulberry: #BA5290;
+
+/**
+ * Custom colors
+ */
+$colorBg: $colorWhite; // duplicate from sacl
+$colorCallToAction: $colorRed100; // duplicate from sacl
+$colorError: $colorRed100; // duplicate from sacl
+$colorCallToActionHover: $colorRed125; // duplicate from sacl
+$colorContentBg: $colorWhite; // duplicate from sacl
+$colorFallbackButton: $colorBlack90; // duplicate from sacl
+$colorFocusOutline: $colorGrey; // duplicate from sacl
+$colorHeadline: $colorBlack; // duplicate from sacl
+$colorMenuBorder: $colorBlack10; // duplicate from sacl
+$colorNavigation: $colorBlue; // duplicate from sacl
+$colorSecondaryButton: $colorBlack20; // duplicate from sacl
+$colorSeparationBorder: $colorBlack10; // duplicate from sacl
+$colorText: $colorBlack; // duplicate from sacl
+$colorMetanav: $colorBlack60; // duplicate from sacl
+
+// Context Colors
+$cdColorError: sbb.$sbbColorError;
+$cdColorError20: mix(sbb.$sbbColorError, sbb.$sbbColorWhite, 20%);
+$cdColorError10: mix(sbb.$sbbColorError, sbb.$sbbColorWhite, 10%);
+$cdColorWarning: sbb.$sbbColorPeach;
+$cdColorWarning20: mix(sbb.$sbbColorPeach, sbb.$sbbColorWhite, 20%);
+$cdColorWarning10: mix(sbb.$sbbColorPeach, sbb.$sbbColorWhite, 10%);
+$cdColorSuccess: sbb.$sbbColorGreen;
+$cdColorSuccess20: mix(sbb.$sbbColorGreen, sbb.$sbbColorWhite, 20%);
+$cdColorSuccess10: mix(sbb.$sbbColorGreen, sbb.$sbbColorWhite, 10%);
+
+
+$colorBgLight: $colorMilk;
+$colorTextMuted: $colorBlack60;
+$colorSender: $colorNight;
+$colorReceiver: $colorSky;
+$colorInvolvement: $colorMulberry;
+$colorSeparationBorderHover: $colorBlack20;
+$colorSeparationBorderActive: $colorBlack60;
+
+/**
+ * Opacity
+ */
+$opacityMuted: 0.5;
+
+/**
+ * Borders
+ */
+$borderRadius: 2px;
+
+/**
+ * Animation-Stuff
+ */
+@function transitionMultipleProperties( $duration, $timing, $properties... ) {
+  $transitions: ();
+  @each $property in $properties {
+    $transitions: append($transitions, unquote('#{$property} #{$duration} #{$timing}'), 'comma');
+  }
+  @return $transitions;
+}
+
+$transitionDefaultDuration: 225ms;
+$transitionDefaultTiming: cubic-bezier(.5, -.02, .5, 1.02);
+$transitionDefaultInDuration: 225ms;
+$transitionDefaultInTiming: cubic-bezier(.25, -.02, .5, 1.02);
+$transitionDefaultOutDuration: 195ms;
+$transitionDefaultOutTiming: cubic-bezier(.5, -.02, .75, 1.02);
+@mixin transitionDefault( $properties... ) {
+  transition: transitionMultipleProperties(
+      $transitionDefaultDuration,
+      $transitionDefaultTiming,
+    $properties...
+  );
+}
+
+@mixin transitionDefaultIn( $properties... ) {
+  transition: transitionMultipleProperties(
+      $transitionDefaultInDuration,
+      $transitionDefaultInTiming,
+    $properties...
+  );
+}
+
+@mixin transitionDefaultOut( $properties... ) {
+  transition: transitionMultipleProperties(
+      $transitionDefaultOutDuration,
+      $transitionDefaultOutTiming,
+    $properties...
+  );
+}
+
+$transitionShortDuration: 195ms;
+$transitionShortTiming: $transitionDefaultTiming;
+$transitionShortInDuration: 195ms;
+$transitionShortInTiming: $transitionDefaultInTiming;
+$transitionShortOutDuration: 180ms;
+$transitionShortOutTiming: $transitionDefaultOutTiming;
+@mixin transitionShort( $properties... ) {
+  transition: transitionMultipleProperties(
+      $transitionShortDuration,
+      $transitionShortTiming,
+    $properties...
+  );
+}
+
+@mixin transitionShortIn( $properties... ) {
+  transition: transitionMultipleProperties(
+      $transitionShortInDuration,
+      $transitionShortInTiming,
+    $properties...
+  );
+}
+
+@mixin transitionShortOut( $properties... ) {
+  transition: transitionMultipleProperties(
+      $transitionShortOutDuration,
+      $transitionShortOutTiming,
+    $properties...
+  );
+}
+
+$transitionLongDuration: 500ms;
+$transitionLongTiming: $transitionDefaultTiming;
+$transitionLongInDuration: 500ms;
+$transitionLongInTiming: $transitionDefaultInTiming;
+$transitionLongOutDuration: 350ms;
+$transitionLongOutTiming: $transitionDefaultOutTiming;
+@mixin transitionLong( $properties... ) {
+  transition: transitionMultipleProperties(
+      $transitionLongDuration,
+      $transitionLongTiming,
+    $properties...
+  );
+}
+
+@mixin transitionLongIn( $properties... ) {
+  transition: transitionMultipleProperties(
+      $transitionLongInDuration,
+      $transitionLongInTiming,
+    $properties...
+  );
+}
+
+@mixin transitionLongOut( $properties... ) {
+  transition: transitionMultipleProperties(
+      $transitionLongOutDuration,
+      $transitionLongOutTiming,
+    $properties...
+  );
+}
+
+/**
+ * Icons
+ */
+$defaultIconSize: 24px;
+$inlineIconSize: 12px;
+
+/**
+ * Context-Menu
+ */
+$contextIconMarginRight: 10px;
+
+/**
+ * Component: App
+ */
+$navbar-height: 54px;
+
+/**
+ * Component: Notification
+ */
+$notificationInfoColor: $colorText;
+$notificationInfoBackgroundColor: $colorBgLight;
+$notificationSuccessColor: $colorWhite;
+$notificationSuccessBackgroundColor: $colorSuccess;
+$notificationErrorColor: $colorWhite;
+$notificationErrorBackgroundColor: $colorRed100; // duplicate from sacl
+$notificationWarningColor: $colorWhite;
+$notificationWarningBackgroundColor: $cdColorWarning;
+$notificationMinHeight: 68px;
+
+/**
+ * Component: ShipmentProgress
+ */
+$defaultRightColumnWidth: 45%;
+
+/**
+ * Component: cd-table
+ */
+$tableColTinyWidth: 30px;
+$tableColSmallWidth: 50px; // eg. one icon
+$tableColSmallPlusWidth: 65px; // eg. a id number
+$tableColMediumWidth: 100px; // eg. a name
+$tableColLargeWidth: 200px; // eg. description
+
+$shipment-icon-border-radius: 2px;
+$lightbox-header-height: 64px;
+
+$shipmentProgressMinWidthSmall: 280px;
+$shipmentProgressMinWidthLarge: 300px;
+
+$assignmentRowFlexUic: 1 0 $tableColLargeWidth;
+$assignmentRowFlexWeight: 1 0 $tableColMediumWidth;
+$assignmentRowFlexWaggonType: 1 0 $tableColMediumWidth;
+$assignmentRowFlexGoods: 1 0 $tableColLargeWidth;
+
+$cdCurtainOpacity: 0.8;
+$cdDetailsDescriptionMaxWidth: 70%;
+
+$accordionPaddingHorizontal: sbb.pxToEm(32); // see projects/sbb-esta/angular-public/accordion/src/_accordion.scss
+

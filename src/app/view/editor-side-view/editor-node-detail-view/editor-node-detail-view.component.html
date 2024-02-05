@@ -1,0 +1,207 @@
+<h2 class="SummaryTitle">{{nodeProperties.nodeBetriebspunktFullName}}
+  ({{nodeProperties.nodeBetriebspunktName}})</h2>
+<sbb-accordion [multi]="true">
+  <sbb-expansion-panel [expanded]="true">
+    <sbb-expansion-panel-header>Stammdaten</sbb-expansion-panel-header>
+    <sbb-form-field label="Betriebspunkt" class="sbb-form-field-long">
+      <input sbbInput
+             [ngModel]="nodeProperties.nodeBetriebspunktName"
+             (keyup)="onBetriebspunktNameChanged($event)"/>
+    </sbb-form-field>
+    <sbb-form-field label="Name" class="sbb-form-field-long">
+      <input sbbInput
+             [ngModel]="nodeProperties.nodeBetriebspunktFullName"
+             (keyup)="onFullNameChanged($event)"/>
+    </sbb-form-field>
+    <sbb-form-field label="Anschlusszeit" class="sbb-form-field-long">
+      <input sbbInput
+             type="number"
+             pattern="^[.0-9]*"
+             [(ngModel)]="nodeProperties.nodeConnectionTime"
+             (change)="onConnectionTimeChanged()"/>
+    </sbb-form-field>
+  </sbb-expansion-panel>
+
+  <sbb-expansion-panel [expanded]="true">
+    <sbb-expansion-panel-header>Auslastung</sbb-expansion-panel-header>
+    <div class="sbb-mt-m">
+      <sbb-knoten-auslastung-view></sbb-knoten-auslastung-view>
+    </div>
+    <sbb-form-field label="Kapazität"
+                    class="sbb-form-field-long">
+      <input sbbInput
+             type="number"
+             pattern="^[.0-9]*"
+             min="1"
+             [(ngModel)]="nodeProperties.nodeCapacity"
+             (input)="onCapacityChanged()"
+             (focusout)="loadCapacityValue()"/>
+    </sbb-form-field>
+
+  </sbb-expansion-panel>
+
+  <sbb-expansion-panel [expanded]="false">
+    <sbb-expansion-panel-header>Filterbare Labels</sbb-expansion-panel-header>
+    <sbb-form-field label="Labels"
+                    class="sbb-form-field-long">
+      <sbb-chip-list aria-label="Labels"
+                     [value]="nodeProperties.labels"
+                     (focusout)="onLabelsFocusout()">
+        <sbb-chip *ngFor="let element of nodeProperties.labels"
+                  [value]="element"
+                  (removed)="remove($event)">
+          {{ element }}
+        </sbb-chip>
+        <input id='nodeLabelsInput'
+               placeholder="New Label..."
+               sbbChipInput
+               [sbbChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               (sbbChipInputTokenEnd)="add($event)"
+               [sbbAutocomplete]="nodeLabelsAutoComplete"/>
+      </sbb-chip-list>
+      <sbb-autocomplete #nodeLabelsAutoComplete="sbbAutocomplete">
+        <sbb-option *ngFor="let option of nodeLabelsAutoCompleteOptions"
+                    [value]="option">{{ option }}</sbb-option>
+      </sbb-autocomplete>
+    </sbb-form-field>
+  </sbb-expansion-panel>
+
+  <sbb-expansion-panel [expanded]="false">
+    <sbb-expansion-panel-header>
+      Haltezeiten
+    </sbb-expansion-panel-header>
+
+    <sbb-label class="sbb-mt-m">Haltezeit pro Produkt</sbb-label>
+
+    <!-- TIM: this should be done with sbb table component, but I don't know how
+      (or better, use flexbox for each line and make it a two column area below a certain breakpoint)-->
+    <table class="NodeDataTable">
+      <tr>
+        <td class="sbb-table-column-s">IPV</td>
+        <td class="sbb-table-column-m">
+          <div
+            *ngIf="!(nodeProperties.nodeTrainrunCategoryHaltezeit['HaltezeitIPV'].no_halt); else noHalt">
+            <input sbbInput type="number"
+                   pattern="^[.0-9]*"
+                   step="0.1"
+                   [(ngModel)]="nodeProperties.nodeTrainrunCategoryHaltezeit['HaltezeitIPV'].haltezeit"
+                   (change)="onHaltezeitChanged()"/>
+          </div>
+          <ng-template #noHalt>
+            <input disabled value="—">
+          </ng-template>
+        </td>
+        <td>
+          <sbb-checkbox
+            [(ngModel)]="nodeProperties.nodeTrainrunCategoryHaltezeit['HaltezeitIPV'].no_halt"
+            (change)="haltezeitIPVNoHaltChanged()">Kein Halt
+          </sbb-checkbox>
+        </td>
+      </tr>
+      <tr>
+        <td>A</td>
+        <td class="sbb-table-column-m">
+          <div
+            *ngIf="!(nodeProperties.nodeTrainrunCategoryHaltezeit['HaltezeitA'].no_halt); else noHalt">
+            <input sbbInput type="number" pattern="^[.0-9]*" step="0.1"
+                   [(ngModel)]="nodeProperties.nodeTrainrunCategoryHaltezeit['HaltezeitA'].haltezeit"
+                   (change)="onHaltezeitChanged()"/>
+          </div>
+          <ng-template #noHalt>
+            <input disabled value="—">
+          </ng-template>
+        </td>
+        <td>
+          <sbb-checkbox
+            [(ngModel)]="nodeProperties.nodeTrainrunCategoryHaltezeit['HaltezeitA'].no_halt"
+            (change)="haltezeitANoHaltChanged()">Kein Halt
+          </sbb-checkbox>
+        </td>
+      </tr>
+      <tr>
+        <td>B</td>
+        <td class="sbb-table-column-m">
+          <div
+            *ngIf="!(nodeProperties.nodeTrainrunCategoryHaltezeit['HaltezeitB'].no_halt); else noHalt">
+            <input sbbInput type="number" pattern="^[.0-9]*" step="0.1"
+                   [(ngModel)]="nodeProperties.nodeTrainrunCategoryHaltezeit['HaltezeitB'].haltezeit"
+                   (change)="onHaltezeitChanged()"/>
+          </div>
+          <ng-template #noHalt>
+            <input disabled value="—">
+          </ng-template>
+        </td>
+        <td>
+          <sbb-checkbox
+            [(ngModel)]="nodeProperties.nodeTrainrunCategoryHaltezeit['HaltezeitB'].no_halt"
+            (change)="haltezeitBNoHaltChanged()">Kein Halt
+          </sbb-checkbox>
+        </td>
+      </tr>
+      <tr>
+        <td>C</td>
+        <td class="sbb-table-column-m">
+          <div
+            *ngIf="!nodeProperties.nodeTrainrunCategoryHaltezeit['HaltezeitC'].no_halt; else noHalt">
+            <input sbbInput type="number" pattern="^[.0-9]*" step="0.1"
+                   [(ngModel)]="nodeProperties.nodeTrainrunCategoryHaltezeit['HaltezeitC'].haltezeit"
+                   (change)="onHaltezeitChanged()"/>
+          </div>
+          <ng-template #noHalt>
+            <input disabled value="—">
+          </ng-template>
+        </td>
+        <td>
+          <sbb-checkbox
+            [(ngModel)]="nodeProperties.nodeTrainrunCategoryHaltezeit['HaltezeitC'].no_halt"
+            (change)="haltezeitCNoHaltChanged()">Kein Halt
+          </sbb-checkbox>
+        </td>
+      </tr>
+      <tr>
+        <td>D</td>
+        <td class="sbb-table-column-m">
+          <div
+            *ngIf="!nodeProperties.nodeTrainrunCategoryHaltezeit['HaltezeitD'].no_halt; else noHalt">
+            <input sbbInput type="number" pattern="^[.0-9]*" step="0.1"
+                   [(ngModel)]="nodeProperties.nodeTrainrunCategoryHaltezeit['HaltezeitD'].haltezeit"
+                   (change)="onHaltezeitChanged()"/>
+          </div>
+          <ng-template #noHalt>
+            <input disabled value="—">
+          </ng-template>
+        </td>
+        <td>
+          <sbb-checkbox
+            [(ngModel)]="nodeProperties.nodeTrainrunCategoryHaltezeit['HaltezeitD'].no_halt"
+            (change)="haltezeitDNoHaltChanged()">Kein Halt
+          </sbb-checkbox>
+        </td>
+      </tr>
+    </table>
+  </sbb-expansion-panel>
+  <sbb-expansion-panel [expanded]="false">
+    <sbb-expansion-panel-header>
+      Links
+    </sbb-expansion-panel-header>
+    <ul>
+      <li>
+        <a sbb-link target="_blank"
+           href="https://data.sbb.ch/explore/embed/dataset/perronkante/table/?q={{nodeProperties.nodeBetriebspunktName}}">
+          Perron Informationen
+        </a>
+      </li>
+      <li>
+        <a sbb-link target="_blank"
+           href="https://data.sbb.ch/explore/dataset/perronoberflache/table/?refine.bps={{nodeProperties.nodeBetriebspunktName}}&sort=-p_lange">
+          Perron-Länge
+        </a>
+      </li>
+    </ul>
+  </sbb-expansion-panel>
+  <button sbb-secondary-button svgIcon="trash-small" class="sbb-mt-m sbb-ml-m"
+          (click)="onDeleteNode()">
+    Knoten löschen
+
+  </button>
+</sbb-accordion>

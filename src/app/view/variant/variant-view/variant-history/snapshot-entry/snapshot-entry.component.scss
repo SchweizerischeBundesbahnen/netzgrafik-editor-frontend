@@ -1,0 +1,19 @@
+.info-fields {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.info-field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 2rem;
+
+  > sbb-icon {
+    margin-right: 0.2rem;
+  }
+}
+
+.comment {
+  font-style: italic;
+}

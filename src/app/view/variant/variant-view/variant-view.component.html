@@ -1,0 +1,30 @@
+<h2 class="title" style="margin-right: -9px">{{(versionControlService.variant$ | async)?.latestVersion?.name}}
+  <ng-container *ngIf="versionControlService.variant.isArchived">
+    (archiviert)
+  </ng-container>
+  <div style="float: right">
+    <button [sbbContextmenuTriggerFor]="menu"></button>
+      <sbb-menu #menu="sbbMenu">
+        <button sbb-menu-item mode="icon" (click)="onOpenVariantDialog()" title="Variante bearbeiten"
+                *ngIf="versionControlService.variant.isWritable">
+          <sbb-icon svgIcon="pen-small"></sbb-icon>
+          Variante bearbeiten
+        </button>
+        <button sbb-menu-item mode="icon" (click)="onDeleteVariant()" title="Variante löschen"
+                *ngIf="versionControlService.variant.isDeletable">
+          <sbb-icon svgIcon="trash-small"></sbb-icon>
+          Variante löschen
+        </button>
+      </sbb-menu>
+    
+  </div>
+</h2>
+
+<sbb-accordion [multi]="true">
+  <sbb-expansion-panel [expanded]="true">
+    <sbb-expansion-panel-header>Versionen</sbb-expansion-panel-header>
+    <sbb-variant-history *ngIf="versionControlService.variant$ | async as variant"
+                         [variant]="variant"
+    ></sbb-variant-history>
+  </sbb-expansion-panel>
+</sbb-accordion>

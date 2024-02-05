@@ -1,0 +1,39 @@
+.versions-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.version-entry {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-height: 3rem;
+}
+
+.icon-container {
+  width: 2em;
+}
+
+.version-id {
+  width: 2rem;
+}
+
+.snapshot-id {
+  width: 7rem;
+}
+
+.version-creator {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 8rem;
+}
+
+.version-date {
+  width: 10rem;
+}
+
+.released-info-fields {
+  display: flex;
+  flex-direction: row;
+}

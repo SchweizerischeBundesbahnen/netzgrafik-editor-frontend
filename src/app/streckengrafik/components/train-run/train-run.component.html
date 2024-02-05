@@ -1,0 +1,8 @@
+<ng-container *ngFor="let trainrun of trainrun$ | async">
+  <svg:g sbb-train-run-item
+         [attr.id]="getId(trainrun)"
+         [trainrun]="trainrun"
+         (mouseover)="bringToFront(trainrun, $event)"
+  >
+  </svg:g>
+</ng-container>

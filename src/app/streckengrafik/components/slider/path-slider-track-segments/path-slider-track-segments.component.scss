@@ -1,0 +1,24 @@
+path {
+  stroke-width: 0.75px;
+  pointer-events: none;
+  shape-rendering: crispEdges;
+  fill: none;
+}
+
+path.MinTracks {
+  stroke: var(--NODE_TEXT_FOCUS);
+  stroke-width: 1.0px;
+}
+
+path.NbrTracks {
+  stroke: var(--NODE_TEXT_FOCUS);
+  opacity: 0.25;
+  stroke-dasharray: 2 2;
+}
+
+text.MinTracks {
+  fill: var(--NODE_TEXT_FOCUS);
+  text-anchor: middle;
+  dominant-baseline: middle;
+  font-size: 10px;
+}

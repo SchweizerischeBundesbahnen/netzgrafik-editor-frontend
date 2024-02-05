@@ -1,0 +1,143 @@
+@import '../../../variables';
+@import '../rastering/definitions';
+@import '../dialogs/trainrun-and-section-dialog/trainrun-tab/trainrun-tab.component';
+
+::ng-deep .TrainrunDialog.EditorToolButton {
+  background: $COLOR_Default;
+  border: $COLOR_Default;
+  color: white;
+  max-width: none;
+  min-height: 38px;
+  margin-bottom: 16px;
+}
+
+::ng-deep .TrainrunDialog.EditorToolButton:active {
+  background: lightgrey;
+  color: $COLOR_Default;
+  border: lightgrey;
+}
+
+
+::ng-deep .SummaryTitle {
+  margin-top: $interComponentSpacingSmall;
+  margin-bottom: $innerComponentSpacing;
+  padding: 0 $innerComponentSpacing;
+}
+
+::ng-deep button.NetzgrafikButton {
+  border-radius: 10px;
+  border: 1px;
+  height: 32px;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  background-color: white;
+  border-color: darkgrey;
+  border-style: solid;
+  font-family: "SBBWeb Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+::ng-deep button.NetzgrafikButton:hover {
+  background-color: whitesmoke;
+}
+
+::ng-deep button.NetzgrafikButton:active {
+  background-color: lightgray;
+}
+
+::ng-deep button.NetzgrafikButton:disabled {
+  background-color: white;
+  color: lightgray;
+  border-color: whitesmoke;
+}
+
+::ng-deep .sbb-expansion-panel-body h4:first-child {
+  margin-top: 0;
+}
+
+::ng-deep .sbb-accordion .sbb-expansion-panel {
+  border-left: none;
+  border-right: none;
+
+  &:not(:last-of-type) {
+    border-bottom: none;
+  }
+
+  .sbb-expansion-panel-header,
+  .sbb-expansion-panel-body {
+    padding-left: $innerComponentSpacing;
+  }
+
+  .sbb-expansion-panel-header.sbb-expanded::after {
+    width: auto;
+    left: $innerComponentSpacing;
+    right: 16px;
+  }
+
+  .sbb-expansion-panel-body {
+    padding-bottom: $interComponentSpacingSmall;
+  }
+
+  &.sbb-expanded {
+    margin-bottom: 0;
+  }
+}
+
+::ng-deep button.FilterSettting {
+  margin-right: $buttonHeight;
+  min-width: 20%;
+  min-height: 43px;
+  max-height: 43px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+
+  color: black;
+  text-decoration: none;
+
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  background-color: whitesmoke;
+
+  &.selected {
+    color: white;
+    background-color: $COLOR_Default;
+    border-color: white;
+  }
+
+  &.add_button {
+    background: whitesmoke;
+    color: black;
+    border: white;
+  }
+
+  &.function {
+    background: white;
+    color: black;
+    border: white;
+    min-width: 40px;
+    max-width: 40px;
+  }
+
+}
+
+::ng-deep .FilterSettting:active {
+  background: $COLOR_Default;
+  color: white;
+  border: lightgrey;
+}
+
+.sbb-filtersetting-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sbb-filtersetting-chip-group > * {
+  flex: 1 1 160px;
+}
+
+::ng-deep .FilterSettting.function:active {
+  color: red;
+}

@@ -1,0 +1,89 @@
+text.edge_text {
+  font-family: var(--sbb-font-roman);
+  font-size: 10px;
+}
+
+text.edge_text.DepartureTime {
+  text-anchor: middle;
+}
+
+text.edge_text.ArrivalTime {
+  text-anchor: middle;
+}
+
+text.edge_text.TextLabel {
+  text-anchor: middle;
+  opacity: 1;
+}
+
+path.edge_line {
+  stroke: black;
+  stroke-width: 2px;
+}
+
+path.hoverarea {
+  stroke-width: 10px;
+  opacity: 0.05;
+  stroke: var(--COLOR_BACKGROUND);
+}
+
+rect.edge_text {
+  rx: 8px
+}
+
+rect.edge_text.DepartureTime {
+  stroke: none;
+  fill: var(--NODE_DOCKABLE); //var(--COLOR_BACKGROUND);
+}
+
+rect.edge_text.ArrivalTime {
+  stroke: none;
+  fill: var(--NODE_DOCKABLE); //var(--COLOR_BACKGROUND);
+}
+
+rect.edge_text.TextLabel {
+  stroke: none;
+  fill: var(--NODE_DOCKABLE);
+}
+
+path.edge_line.bandarea {
+  opacity: 0.1;
+  stroke: none;
+}
+
+path.edge_line.bandarea:hover {
+  opacity: 0.15;
+  stroke: none;
+}
+
+/*
+path.edge_line.trainrunBranchType_Branch {
+  stroke: blue;
+  stroke-width: 2;
+}
+
+path.edge_line.trainrunBranchType_BranchWithSection {
+  stroke: red;
+  stroke-width: 2;
+}
+
+path.edge_line.trainrunBranchType_BranchOnly {
+  stroke: yellow;
+  stroke-width: 2;
+}
+
+path.edge_line.trainrunBranchType_Trainrun {
+  stroke: black;
+  stroke-width: 2;
+}
+*/
+
+/*
+rect.edge_text.ArrivalTime {
+  fill: yellow;
+}
+
+rect.edge_text.DepartureTime {
+  fill: lightgreen;
+}
+*/

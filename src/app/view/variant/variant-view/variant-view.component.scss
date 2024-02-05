@@ -1,0 +1,52 @@
+@import '../../../../variables';
+
+.button-stack {
+  display: flex;
+  flex-direction: row;
+
+  > button {
+    margin-right: 0.2rem;
+  }
+}
+
+.title {
+  margin-top: 40px;
+  margin-bottom: 24px;
+  padding: 0 24px;
+}
+
+.sbb-expansion-panel-body h4:first-child {
+  margin-top: 0;
+}
+
+.sbb-accordion .sbb-expansion-panel {
+  border-left: none;
+  border-right: none;
+
+  &:not(:last-of-type) {
+    border-bottom: none;
+  }
+
+  .sbb-expansion-panel-header,
+  .sbb-expansion-panel-body {
+    padding-left: $innerComponentSpacing;
+  }
+
+  .sbb-expansion-panel-header.sbb-expanded::after {
+    width: auto;
+    left: $innerComponentSpacing;
+    right: 16px;
+  }
+
+  .sbb-expansion-panel-body {
+    padding-bottom: $interComponentSpacingSmall;
+  }
+
+  &.sbb-expanded {
+    margin-bottom: 0;
+  }
+}
+
+::ng-deep .sbb-contextmenu > button {
+  z-index: 1000;
+}

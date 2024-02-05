@@ -1,0 +1,36 @@
+@import 'src/app/view/editor-main-view/data-views/trainrunsections.view';
+
+
+::ng-deep g.AllTrainrunSections:hover path.edge_line {
+  stroke-width: 3px;
+}
+
+::ng-deep g.AllTrainrunSections:hover path.edge_line.TransitLine {
+  stroke-dasharray: 2 3;
+  stroke-width: 1px;
+}
+
+::ng-deep g.AllTrainrunSections:hover path.edge_line.Gleisbelegung {
+  stroke-width: 12px;
+}
+
+::ng-deep g.AllTrainrunSections:hover rect.edge_text.TextLabel {
+  stroke: none;
+  fill: var(--NODE_DOCKABLE); //var(--COLOR_BACKGROUND);
+}
+
+::ng-deep g.AllTrainrunSections:hover text.edge_text.TextLabel {
+  opacity: 1.0;
+}
+
+::ng-deep g.AllTrainrunSections:hover path.edge_line.Gleisbelegung.HeadwayReservation {
+  opacity: 0.5;
+}
+
+::ng-deep g.AllTrainrunSections:hover text.edge_text {
+  font-weight: bold;
+}
+
+::ng-deep g.AllTrainrunSections:hover circle.edge_line_stops {
+  r: 3px
+}

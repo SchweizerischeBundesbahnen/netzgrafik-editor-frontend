@@ -1,0 +1,76 @@
+@use '@sbb-esta/angular' as sbb;
+@import '../../../rastering/definitions';
+
+::ng-deep .ngx-html-editor {
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+
+  .NgxEditor__MenuBar {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    background: whitesmoke;
+  }
+
+  .NgxEditor {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border: none;
+    font-family: sbb.$fontSbbLight;
+  }
+
+  .CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+    margin-bottom: 0.7rem;
+
+    pre {
+      white-space: pre !important;
+    }
+  }
+
+  .NgxEditor__Content {
+    max-height: 150px;
+    min-height: 150px;
+    overflow-y: auto;
+  }
+}
+
+::ng-deep div.ngx-html-editor-color-buttons {
+  width: 100%;
+  height: 34px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  margin: 1px;
+  background: whitesmoke;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+::ng-deep button.ngx-html-editor-color {
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  margin: 1px;
+  padding: 0;
+  border-width: 1px;
+  border: none;
+  font-size: 12px;
+  font-family: sbb.$fontSbbLight;
+}
+
+::ng-deep button.ngx-html-editor-color {
+  opacity: 0.5;
+}
+
+::ng-deep button.ngx-html-editor-color:hover {
+  opacity: 0.35;
+}
+
+::ng-deep button.ngx-html-editor-color.active {
+  opacity: 1.0;
+}
+
+::ng-deep button.ngx-html-editor-color.active:hover {
+  opacity: 0.85;
+}

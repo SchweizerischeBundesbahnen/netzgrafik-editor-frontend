@@ -1,0 +1,22 @@
+@use '@sbb-esta/angular' as sbb;
+
+.preview-button {
+  padding: 6px;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-button, ::ng-deep .preview-button sbb-icon svg {
+  cursor: pointer;
+}
+
+.preview-button:hover {
+  background-color: sbb.$sbbColorMilk;
+  color: sbb.$sbbColorRed150;
+}
+
+.preview-button.active {
+  background-color: sbb.$sbbColorAluminum;
+}

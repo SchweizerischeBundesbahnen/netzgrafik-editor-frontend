@@ -1,0 +1,24 @@
+<div class="content" [ngClass]="getEntryStyle()">
+  <div class="message" *ngIf="message">
+    {{message}}
+  </div>
+  <hr *ngIf="message">
+
+  <div class="info-fields">
+    <div class="info-field title-field" *ngIf="getTitle(); let title">
+      {{title}}
+    </div>
+    <div class="info-field title-field" *ngIf="getUserId(); let userId">
+      <sbb-icon svgIcon="user-small"></sbb-icon>
+      {{userId}}
+    </div>
+    <div class="info-field date-field">
+      <div>
+        {{dateField | date:'dd.MM.yyyy HH:mm'}}
+      </div>
+    </div>
+    <div class="info-field comment-field" *ngIf="commentField && commentField !== ''">
+      «{{commentField}}»
+    </div>
+  </div>
+</div>

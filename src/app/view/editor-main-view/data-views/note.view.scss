@@ -1,0 +1,128 @@
+@import '../../rastering/definitions';
+
+::ng-deep rect.note_hover_root {
+  stroke-width: 0.0px;
+  stroke: $NODE_COLOR;
+  fill: $COLOR_BACKGROUND;
+  rx: $NODE_ROUND_EDGE_SIZE;
+  cursor: move;
+}
+
+::ng-deep rect.note_root {
+  stroke-width: 1.0px;
+  stroke: $NODE_COLOR;
+  fill: $COLOR_BACKGROUND;
+  rx: $NODE_ROUND_EDGE_SIZE;
+  cursor: pointer;
+}
+
+::ng-deep path.note_hover_drag_root {
+  fill: $NODE_COLOR;
+  rx: $NODE_ROUND_EDGE_SIZE;
+  stroke-opacity: 0.0;
+  opacity: 0.0;
+  cursor: move;
+}
+
+::ng-deep path.note_hover_drag_root.muted {
+  fill: $COLOR_Edit;
+  opacity: 0.5;
+}
+
+::ng-deep path.note_hover_drag_root.hover {
+  fill: $COLOR_Edit;
+  stroke: $COLOR_Edit;
+  opacity: 1.0;
+}
+
+::ng-deep path.note_hover_drag_root.hover.multi_selected {
+  fill: $COLOR_Edit;
+  stroke-opacity: 1.0;
+}
+
+::ng-deep rect.note_titelarea {
+  fill: $COLOR_BACKGROUND;
+  stroke: $COLOR_BACKGROUND;
+  stroke-width: 2px;
+  cursor: pointer;
+  rx: $NODE_ROUND_EDGE_SIZE;
+}
+
+::ng-deep text.titel_text {
+  stroke-width: 0.0px;
+  stroke: $NODE_TEXT_COLOR;
+  fill: $NODE_TEXT_FOCUS;
+  font-family: 'SBBWeb Roman';
+  pointer-events: none;
+}
+
+::ng-deep rect.note_textarea {
+  fill: $COLOR_BACKGROUND;
+  stroke: none;
+  stroke-width: 2px;
+  rx: $NODE_ROUND_EDGE_SIZE;
+  cursor: pointer;
+}
+
+::ng-deep text.note_text {
+  stroke-width: 0.0px;
+  stroke: none;
+  fill: $NODE_TEXT_FOCUS;
+  font-family: 'SBBWeb Light';
+  pointer-events: none;
+}
+
+::ng-deep rect.note_root.hover {
+  stroke: $COLOR_Edit;
+  rx: $NODE_ROUND_EDGE_SIZE;
+  stroke-width: 2px;
+}
+
+::ng-deep a {
+  fill: $NODE_TEXT_FOCUS
+}
+
+::ng-deep rect.note_root.multi_selected {
+  fill: $COLOR-Edit;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+::ng-deep rect.note_titelarea.multi_selected {
+  opacity: 0.0;
+}
+
+::ng-deep rect.note_textarea.multi_selected {
+  opacity: 0.0;
+}
+
+::ng-deep rect.note_root.multi_selected.hover {
+  opacity: 100;
+  fill-opacity: 25%;
+  stroke: $COLOR_Edit;
+}
+
+::ng-deep rect.note_hover_drag_root_background {
+  opacity: 0.01;
+  fill: $COLOR_BACKGROUND;
+  cursor: move;
+}
+
+::ng-deep path.note_hover_drag_root.selected {
+  opacity: 1.0;
+  fill: $COLOR_Edit;
+  cursor: move;
+  stroke-width: 0.5;
+  stroke: $COLOR_Edit;
+  stroke-opacity: 1;
+}
+
+::ng-deep rect.note_hover_drag_root_background.selected {
+  stroke: $COLOR_BACKGROUND;
+  fill: $COLOR_BACKGROUND;
+  opacity: 0.01;
+  cursor: move;
+  stroke-width: 64px;
+  transform: translateX(-64px) translateY(-32px);
+}
+

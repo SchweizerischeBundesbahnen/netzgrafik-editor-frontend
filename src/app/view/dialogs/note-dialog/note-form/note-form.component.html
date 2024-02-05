@@ -1,0 +1,10 @@
+<sbb-form-field label="Titel" class="sbb-form-field-long">
+  <input
+    type="text"
+    sbbInput
+    cdkFocusInitial
+    [formControl]="model.getControl('noteTitle')"
+    (focusout)="onUpdate()"
+    (keydown)="onKeydown($event)"
+    placeholder="Name"/>
+</sbb-form-field>

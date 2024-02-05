@@ -1,0 +1,244 @@
+<h2 class="SummaryTitle">
+  Filter
+</h2>
+
+<sbb-accordion [multi]="true">
+  <sbb-expansion-panel [expanded]="true">
+    <sbb-expansion-panel-header>
+      <ng-container *ngIf="isTrainrunFilteringActive()">
+        Allgemein
+      </ng-container>
+      <ng-container *ngIf="!isTrainrunFilteringActive()">
+        <label style="color:red">Allgemein</label>
+      </ng-container>
+    </sbb-expansion-panel-header>
+
+    <sbb-label>Kategorie</sbb-label>
+    <div class="sbb-trainrun-chip-group">
+      <button [class]='getCategoryClassname(trainrunCategory)'
+              (click)='onCategoryChanged(trainrunCategory)'
+              mode="ghost" [title]='getCategoryTooltip(trainrunCategory)'
+              *ngFor="let trainrunCategory of dataService.getTrainrunCategories()">
+        {{makeCategoryButtonLabel(trainrunCategory)}}
+      </button>
+    </div>
+
+    <sbb-label class="sbb-mt-m">Takt</sbb-label>
+    <div class="sbb-trainrun-chip-group">
+      <button [class]='getFrequencyClassname(trainrunFrequency)'
+              (click)='onFrequencyChanged(trainrunFrequency)'
+              mode="ghost" [title]='getFrequencyTooltip(trainrunFrequency)'
+              *ngFor="let trainrunFrequency of dataService.getTrainrunFrequencies()">
+        {{makeFrequencyButtonLabel(trainrunFrequency)}}
+      </button>
+    </div>
+
+    <sbb-label class="sbb-mt-m">Verkehrt</sbb-label>
+    <div class="sbb-trainrun-chip-group">
+      <button [class]='getTimeCategoryClassname(trainrunTimeCategory)'
+              (click)='onTimeCategoryChanged(trainrunTimeCategory)'
+              mode="ghost" [title]='getTimeCategoryTooltip(trainrunTimeCategory)'
+              *ngFor="let trainrunTimeCategory of dataService.getTrainrunTimeCategories()">
+        {{makeTimeCategoryButtonLabel(trainrunTimeCategory)}}
+      </button>
+    </div>
+
+    <button sbb-secondary-button class="sbb-mt-m" [disabled]="isTrainrunFilteringActive()"
+            title="Alle Züge anzeigen" (click)="onResetTrainrunFilter()">
+      Zugfilter zurücksetzen
+    </button>
+  </sbb-expansion-panel>
+
+  <sbb-expansion-panel [expanded]="hasFilteringTrainrunLabels">
+    <sbb-expansion-panel-header>
+      <ng-container *ngIf="!isFilteringTrainrunLabels()">
+        Filterbare Labels: Züge
+      </ng-container>
+      <ng-container *ngIf="isFilteringTrainrunLabels()">
+        <label style="color:red">Filterbare Labels: Züge</label>
+      </ng-container>
+    </sbb-expansion-panel-header>
+
+    <sbb-filterable-label-filter-view
+      [componentLabelRef]="'Trainrun'"></sbb-filterable-label-filter-view>
+  </sbb-expansion-panel>
+
+  <sbb-expansion-panel [expanded]="hasFilteringNodeLabels">
+    <sbb-expansion-panel-header>
+      <ng-container *ngIf="!isFilteringNodeLabels()">
+        Filterbare Labels: Knoten
+      </ng-container>
+      <ng-container *ngIf="isFilteringNodeLabels()">
+        <label style="color:red"> Filterbare Labels: Knoten</label>
+      </ng-container>
+    </sbb-expansion-panel-header>
+
+    <sbb-filterable-label-filter-view
+      [componentLabelRef]="'Node'"></sbb-filterable-label-filter-view>
+  </sbb-expansion-panel>
+
+  <sbb-expansion-panel [expanded]="hasFilteringNoteLabels">
+    <sbb-expansion-panel-header>
+      <ng-container *ngIf="!isFilteringNoteLabels()">
+        Filterbare Labels: Kommentare
+      </ng-container>
+      <ng-container *ngIf="isFilteringNoteLabels()">
+        <label style="color:red"> Filterbare Labels: Kommentare</label>
+      </ng-container>
+    </sbb-expansion-panel-header>
+
+    <sbb-filterable-label-filter-view
+      [componentLabelRef]="'Note'"></sbb-filterable-label-filter-view>
+  </sbb-expansion-panel>
+
+
+  <sbb-expansion-panel [expanded]="false">
+    <sbb-expansion-panel-header>
+      <ng-container *ngIf="isDisplayFilteringActive()">
+        Anzeigen
+      </ng-container>
+      <ng-container *ngIf="!isDisplayFilteringActive()">
+        <label style="color:red">Anzeigen</label>
+      </ng-container>
+    </sbb-expansion-panel-header>
+
+    <sbb-label>Zeiten</sbb-label>
+    <div class="sbb-mt-m">
+      <sbb-form-field label="Anzahl Nachkommastellenanzeigen">
+        <input sbbInput type="number" pattern="^[.0-9]*"
+               [(ngModel)]="timeDisplayPrecision"
+               (change)="onTimeDisplayPrecisionChanged()"/>
+      </sbb-form-field>
+    </div>
+    <div class="sbb-checkbox-group-vertical">
+      <sbb-checkbox [(ngModel)]=" filterArrivalDepartureTime
+          " (change)="filterArrivalDepartureTimeChanged()">Abfahrt-
+        und Ankuftszeiten anzeigen
+      </sbb-checkbox>
+      <sbb-checkbox [(ngModel)]="filterShowNonStopTime" (change)="filterShowNonStopTimeChanged()">
+        Abfahrt-
+        und Ankuftszeiten für Durchfahrten anzeigen
+      </sbb-checkbox>
+      <sbb-checkbox [(ngModel)]="filterTravelTime" (change)="filterTravelTimeChanged()">Fahrzeiten
+        anzeigen
+      </sbb-checkbox>
+      <sbb-checkbox [(ngModel)]="filterTrainrunName" (change)="filterTrainrunNameChanged()">Zugname
+        anzeigen
+      </sbb-checkbox>
+    </div>
+
+    <br>
+    <sbb-label>Anschlüsse</sbb-label>
+    <div class="sbb-checkbox-group-vertical">
+      <sbb-checkbox [(ngModel)]="filterConnections" (change)="filterConnectionsChanged()">Anschlüsse
+        anzeigen
+      </sbb-checkbox>
+    </div>
+
+    <br>
+    <sbb-label>Knoten</sbb-label>
+    <div class="sbb-checkbox-group-vertical">
+      <sbb-checkbox [(ngModel)]="filterAllEmptyNodes"
+                    (change)="filterAllEmptyNodesChanged()">Knoten ohne (angezeigte) Züge anzeigen
+      </sbb-checkbox>
+      <sbb-checkbox [(ngModel)]="filterAllNonStopNodes"
+                    (change)="filterAllNonStopNodesChanged()">Knoten mit nur durchfahrenden Züge
+        anzeigen
+      </sbb-checkbox>
+    </div>
+
+    <br>
+    <sbb-label>Kommentare</sbb-label>
+    <div class="sbb-checkbox-group-vertical">
+      <sbb-checkbox [(ngModel)]="filterNotes"
+                    (change)="filterNotesChanged()">Kommentare anzeigen
+      </sbb-checkbox>
+    </div>
+
+    <button sbb-secondary-button class="sbb-mt-m" [disabled]="isDisplayFilteringActive()"
+            title="Anzeigefilter zurücksetzen" (click)="onResetDisplayFilter()">
+      Anzeigefilter zurücksetzen
+    </button>
+  </sbb-expansion-panel>
+
+  <sbb-expansion-panel [expanded]="false">
+    <sbb-expansion-panel-header>
+      Gespeicherte Filter
+    </sbb-expansion-panel-header>
+    <div class="sbb-filtersetting-chip-group">
+      <ng-container *ngFor="let filterSetting of filterService.getFilterSettings()">
+
+
+        <ng-container *ngIf="!isActiveEditFilterSetting(filterSetting)">
+          <button [class]='getFilterSettingClassname(filterSetting)'
+                  (click)='onFilterSettingChanged(filterSetting)'
+                  mode="ghost" [title]='getFilterSettingTooltip(filterSetting)'
+          >
+            {{makeFilterSettingButtonLabel(filterSetting)}}
+          </button>
+
+          <button [class]='getFilterSettingClassname(filterSetting, true)'
+                  (click)="onEditFilterSetting(filterSetting)"
+                  [disabled]="!checkIsFilterSettingActive(filterSetting)">
+            <ng-container *ngIf="checkIsFilterSettingActive(filterSetting)">
+              <sbb-icon svgIcon="pen-medium"
+                        height="13px" width="13px"
+                        aria-hidden="false">
+              </sbb-icon>
+            </ng-container>
+            <ng-container *ngIf="!checkIsFilterSettingActive(filterSetting)">
+              <sbb-icon svgIcon="pen-medium"
+                        style="color:lightgray;"
+                        height="13px" width="13px"
+                        aria-hidden="false">
+              </sbb-icon>
+            </ng-container>
+          </button>
+        </ng-container>
+
+
+        <ng-container *ngIf="isActiveEditFilterSetting(filterSetting)">
+          <input tabindex="-1"
+                 id="ActiveFilterNameElement"
+                 type="text"
+                 maxlength=128
+                 spellcheck="false"
+                 [(ngModel)]="activeFilterName"
+          />
+
+          <button [class]='getFilterSettingClassname(filterSetting, true)'
+                  (click)="onEditFilterSettingSave(filterSetting)">
+            <sbb-icon svgIcon="circle-tick-medium"
+                      height="13px" width="13px"
+                      aria-hidden="false">
+            </sbb-icon>
+          </button>
+        </ng-container>
+
+
+        <button [class]='getFilterSettingClassname(filterSetting, true)'
+                (click)="onDeleteFilterSetting(filterSetting)">
+          <sbb-icon svgIcon="trash-medium"
+                    height="13px" width="13px"
+                    aria-hidden="false">
+          </sbb-icon>
+        </button>
+        <br>
+      </ng-container>
+      <button [class]='getFilterSettingAddButtonClassname()' (click)="onSaveAsNewFilterSetting()"
+              mode="ghost"
+              title="Filter speichern und als Filtereinstellungen hinzufügen">
+        <sbb-icon svgIcon="circle-plus-medium" style="margin-top: 3px"></sbb-icon>
+      </button>
+    </div>
+  </sbb-expansion-panel>
+
+</sbb-accordion>
+
+<div style="transform: translate(24px, 10px)">
+  <button sbb-secondary-button class="sbb-mt-m" [disabled]="!this.filterService.isAnyFilterActive()"
+          title="Alle Anzeigefilter zurücksetzen" (click)="onResetAllFilter()">
+    Alle Anzeigefilter zurücksetzen
+  </button>
+</div>
+

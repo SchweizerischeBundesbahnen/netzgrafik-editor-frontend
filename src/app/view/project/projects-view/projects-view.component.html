@@ -1,0 +1,26 @@
+<sbb-page-layout>
+
+  <h1>Projekte</h1>
+
+  <div class="actions">
+    <input [formControl]="searchControl" class="search" type="text" sbbInput placeholder="Projekt suchen"/>
+    <div>
+      <sbb-checkbox [formControl]="showArchiveControl">Archiv anzeigen</sbb-checkbox>
+    </div>
+  </div>
+
+  <sbb-card-grid>
+    <sbb-card *ngIf="!(showArchiveControl.value)" icon="plus-medium" (iconClick)="onAddProjectClicked()"></sbb-card>
+    <sbb-card *ngFor="let project of projectService.filteredProjects | async"
+              [title]="project.name + (project.isArchived ? ' (archiviert)' : '')"
+              [route]="['/projects', project.id]"
+              [actions]="getProjectDataActions(project)">
+    </sbb-card>
+  </sbb-card-grid>
+
+  <div style="min-height: 32px"></div>
+
+  <sbb-confirmation-dialog></sbb-confirmation-dialog>
+
+</sbb-page-layout>
+

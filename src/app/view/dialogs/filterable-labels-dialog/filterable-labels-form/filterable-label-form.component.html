@@ -1,0 +1,12 @@
+<div class="content">
+  <sbb-form-field label="Name" class="sbb-form-field-long">
+    <input
+      type="text" sbbInput
+      cdkFocusInitial
+      [formControl]="model.getControl('name')"
+      (focusout)="onUpdate()"
+      (keydown)="onKeydown($event)"
+      placeholder="Name"/>
+    <sbb-error *ngIf="model.getControl('name').errors?.required">Pflichtfeld</sbb-error>
+  </sbb-form-field>
+</div>

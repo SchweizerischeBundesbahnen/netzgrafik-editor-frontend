@@ -1,0 +1,80 @@
+<h2 class="SummaryTitle">Weitere Funktionen</h2>
+<sbb-accordion [multi]="true">
+  <sbb-expansion-panel [expanded]="true">
+    <sbb-expansion-panel-header>
+      Exportieren
+    </sbb-expansion-panel-header>
+    <button class="TrainrunDialog EditorToolButton" (click)="onExportNetzgrafikSVG()"
+            title="Netzgrafik als svg exportieren">
+      <sbb-icon svgIcon="picture-small"></sbb-icon>
+    </button>
+    Exportieren als SVG
+    <br/>
+    <button class="TrainrunDialog EditorToolButton" (click)="onExportNetzgrafikPNG()"
+            title="Netzgrafik als png exportieren">
+      <sbb-icon svgIcon="camera-small"></sbb-icon>
+    </button>
+    Exportieren als PNG
+    <br/>
+    <button class="TrainrunDialog EditorToolButton" (click)="onPrintNetzgrafik()"
+            title="Netzgrafik drucken">
+      <sbb-icon svgIcon="printer-small"></sbb-icon>
+    </button>
+    Drucken
+  </sbb-expansion-panel>
+
+  <sbb-expansion-panel [expanded]="false">
+    <sbb-expansion-panel-header>
+      Netzgrafik
+    </sbb-expansion-panel-header>
+    <button class="TrainrunDialog EditorToolButton" (click)="onSave()" title="Netzgrafik exportieren">
+      <sbb-icon svgIcon="download-small" aria-hidden="false"></sbb-icon>
+    </button>
+      Netzgrafik als JSON exportieren
+    <br/>
+    <button (click)="onLoadButton()" title="Netzgrafik importieren"
+            class="TrainrunDialog EditorToolButton">
+      <sbb-icon svgIcon="upload-small"></sbb-icon>
+    </button>
+    <input hidden #netgrafikJsonFileInput type="file" accept=".json" (change)="onLoad($event)"/>
+      Netzgrafik aus JSON importieren
+    <br/>
+    <button class="TrainrunDialog EditorToolButton" (click)="onExportRailML()" title="RailML Export">
+      <sbb-icon svgIcon="metadata-small"></sbb-icon>
+    </button>
+      Netzgrafik als RailML exportieren
+    <br/>
+    <button (click)="onExportZuglauf()" title="Zuglauf exportieren"
+            class="TrainrunDialog EditorToolButton">
+      <sbb-icon svgIcon="download-large-data-small"></sbb-icon>
+    </button>
+    Zuglauf als .csv exportieren
+    <sbb-tooltip>In Exel : Daten -> Aus Text/CSV -> Filename ... importieren.</sbb-tooltip>
+  </sbb-expansion-panel>
+  <sbb-expansion-panel [expanded]="false">
+    <sbb-expansion-panel-header>
+      Stammdaten
+    </sbb-expansion-panel-header>
+    <button (click)="onLoadStammdatenButton()"
+            title="Stammdaten importieren"
+            class="TrainrunDialog EditorToolButton">
+      <sbb-icon svgIcon="document-plus-small"></sbb-icon>
+    </button>
+    Stammdaten importieren
+    <a href="https://confluence.sbb.ch/x/uJgLdQ"
+       class="sbb-link link-reset"
+       target="_blank">Hilfe: CSV - Datei</a>
+    <input hidden
+           #stammdatenFileInput
+           type="file"
+           accept=".csv"
+           (change)="onLoadStammdaten($event)"/>
+    <br/>
+    <button (click)="onExportStammdaten()" title="Stammdaten exportieren"
+            class="TrainrunDialog EditorToolButton">
+      <sbb-icon svgIcon="download-large-data-small"></sbb-icon>
+    </button>
+    Stammdaten exportieren
+  </sbb-expansion-panel>
+
+</sbb-accordion>

@@ -1,0 +1,31 @@
+<div sbbDialogContent class="EditNoteFilterableLabelsDialogTabContent">
+  <sbb-form-field class="sbb-form-field-long" label="Labels">
+    <sbb-chip-list aria-label="Labels"
+                   [value]="noteLabels"
+                   (focusout)="onLabelsFocusout()">
+      <sbb-chip *ngFor="let element of noteLabels"
+                [value]="element"
+                (removed)="remove($event)">
+        {{ element }}
+      </sbb-chip>
+      <input id='noteLabelsInput'
+             placeholder="New Label..."
+             sbbChipInput
+             cdkFocusInitial
+             [sbbChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             (sbbChipInputTokenEnd)="add($event)"
+             [sbbAutocomplete]="noteLabelsAutoComplete" />
+    </sbb-chip-list>
+    <sbb-autocomplete #noteLabelsAutoComplete="sbbAutocomplete">
+      <sbb-option *ngFor="let option of noteLabelsAutoCompleteOptions" [value]="option">{{ option }}</sbb-option>
+    </sbb-autocomplete>
+  </sbb-form-field>
+</div>
+<div sbbDialogActions class="EditNoteDialogTabFooter">
+  <button class="FunctionButton"
+          tabindex="-1"
+          title="Kommentar löschen"
+          (click)="onDeleteNote()">
+    <sbb-icon svgIcon="trash-medium" aria-hidden="false"></sbb-icon>
+  </button>
+</div>

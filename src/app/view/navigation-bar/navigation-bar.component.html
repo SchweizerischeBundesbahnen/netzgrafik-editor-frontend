@@ -1,0 +1,19 @@
+<div>
+  <sbb-breadcrumbs>
+    
+      <a routerLink="/" routerLinkActive="sbb-active" sbb-breadcrumb-root></a>
+    
+    <sbb-breadcrumb *ngFor="let definition of currentDefinitions">
+      <a [routerLink]="definition.route" routerLinkActive="sbb-active">
+        <ng-container *ngIf="definition.name | async as name; else loading">
+          {{name}}
+        </ng-container>
+      </a>
+    </sbb-breadcrumb>
+  </sbb-breadcrumbs>
+</div>
+<hr>
+
+<ng-template #loading>
+  ...
+</ng-template>

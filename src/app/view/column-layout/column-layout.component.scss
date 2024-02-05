@@ -1,0 +1,262 @@
+@import "variables";
+
+::ng-deep html, body {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+$height: calc(100vh - #{$navbar-height} - 31px);
+$close-padding: $gutterHeight;
+$close-size: $close-padding * 2 + $defaultIconSize;
+
+@function column-width($columns, $main: false) {
+  @if ($main) {
+    @if ($columns == 3) {
+      @return calc((100% - 3 * #{$col-gap}) / 4 * #{$columns} + #{($columns - 1)*$col-gap} + 1 * #{$col-gap});
+    } @else {
+      @return calc((100% - 3 * #{$col-gap}) / 4 * #{$columns} + #{($columns - 1)*$col-gap} + 2 * #{$col-gap});
+    }
+  } @else {
+    @return calc((100% - 3 * #{$col-gap}) / 4 * #{$columns} + #{($columns - 1)*$col-gap});
+  }
+}
+
+#cd-layout-content {
+  display: flex;
+  flex-direction: row;
+  overflow-x: hidden;
+  position: relative;
+  height: $height;
+
+  > * {
+    flex: 0 0 auto;
+  }
+
+  > .cd-layout-panel {
+    position: relative; // absolute positioned children should be relative to column
+    width: column-width(1);
+    @include transitionLong(width, opacity, margin-left);
+    background-color: white;
+
+    &#cd-layout-main {
+      background: transparent;
+    }
+  }
+
+  #cd-layout-filter {
+    border-right: 1px solid $colorSeparationBorder;
+
+    &.hide {
+      opacity: 0;
+      margin-left: calc(0.0 * #{column-width(1)});
+    }
+  }
+
+  #cd-layout-close-filter {
+    cursor: pointer;
+    box-sizing: border-box;
+    position: absolute;
+    top: $interComponentSpacingSmall;
+    border-radius: 50%; // assure scrollbar is only hidden by actual (half-)circle
+
+    z-index: 3;
+    background-color: white;
+    fill: $colorBlack20;
+    padding: $close-padding;
+    margin-left: -(calc($close-size/2));
+    width: $close-size;
+    height: $close-size;
+
+    transition: right $transitionLongDuration $transitionLongTiming,
+    opacity $transitionLongDuration*.2 $transitionLongTiming $transitionLongDuration*.8;
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: block;
+      margin: -$close-padding;
+      border-radius: 50%;
+      border: 1px solid $colorSeparationBorder;
+      border-top-color: transparent;
+      border-left-color: transparent;
+      transform: rotate(-45deg);
+    }
+
+    &.hide {
+      opacity: 0;
+      visibility: hidden;
+      transition: right $transitionLongDuration $transitionLongTiming,
+      opacity $transitionLongDuration*.2 $transitionLongTiming;
+    }
+  }
+
+  #cd-layout-main {
+    .cd-layout-main-content-wrapper { // applying padding directly to #cd-layout-main prevents scroll events in padding!
+      height: 100%;
+    }
+
+    z-index: 2;
+  }
+
+  #cd-layout-aside {
+    z-index: 1; // animate aside from behind main
+    border-left: 1px solid $colorSeparationBorder;
+
+    &.hide {
+      opacity: 0;
+      margin-left: calc(-0.5 * #{column-width(1)});
+    }
+  }
+
+  #cd-layout-close-aside {
+    cursor: pointer;
+    box-sizing: border-box;
+    position: absolute;
+    top: $interComponentSpacingSmall;
+    border-radius: 50%; // assure scrollbar is only hidden by actual (half-)circle
+
+    z-index: 3;
+    background-color: white;
+    fill: $colorBlack20;
+    padding: $close-padding;
+    margin-right: -(calc($close-size/2));
+    width: $close-size;
+    height: $close-size;
+
+    transition: right $transitionLongDuration $transitionLongTiming,
+    opacity $transitionLongDuration*.2 $transitionLongTiming $transitionLongDuration*.8;
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: block;
+      margin: -$close-padding;
+      border-radius: 50%;
+      border: 1px solid $colorSeparationBorder;
+      border-bottom-color: transparent;
+      border-right-color: transparent;
+      transform: rotate(-45deg);
+    }
+
+    &.hide {
+      opacity: 0;
+      visibility: hidden;
+      transition: right $transitionLongDuration $transitionLongTiming,
+      opacity $transitionLongDuration*.2 $transitionLongTiming;
+    }
+  }
+
+  nav {
+    border-bottom: none; // overwrite esta default
+  }
+}
+
+.mode-filter-only {
+  #cd-layout-close-filter {
+    left: column-width(1);
+  }
+
+  #cd-layout-filter {
+    width: column-width(1)
+  }
+
+  #cd-layout-main {
+    width: column-width(3, $main: true)
+  }
+
+  #cd-layout-aside {
+    width: column-width(0)
+  }
+
+  #cd-layout-close-aside {
+    right: 0;
+  }
+}
+
+.mode-detail-only, .mode-perlenkette-only {
+  #cd-layout-close-filter {
+    left: 0;
+  }
+
+  #cd-layout-filter {
+    width: column-width(0)
+  }
+
+  #cd-layout-main {
+    width: column-width(3, $main: true)
+  }
+
+  #cd-layout-aside {
+    width: column-width(1)
+  }
+
+  #cd-layout-close-aside {
+    right: column-width(1);
+  }
+}
+
+.mode-main-full {
+  #cd-layout-close-filter {
+    left: 0;
+  }
+
+  #cd-layout-filter {
+    width: column-width(0)
+  }
+
+  #cd-layout-main {
+    width: column-width(4, $main: true)
+  }
+
+  #cd-layout-aside {
+    width: column-width(0)
+  }
+
+  #cd-layout-close-aside {
+    right: 0;
+  }
+}
+
+.mode-filter-and-detail, .mode-filter-and-perlenkette {
+  #cd-layout-close-filter {
+    left: column-width(1);
+  }
+
+  #cd-layout-filter {
+    width: column-width(1)
+  }
+
+  #cd-layout-main {
+    width: column-width(2, $main: true)
+  }
+
+  #cd-layout-aside {
+    width: column-width(1)
+  }
+
+  #cd-layout-close-aside {
+    right: column-width(1);
+  }
+}
+
+// prevent transition on view change:
+.new-view .cd-layout-panel {
+  transition: none !important;
+}
+
+// scrollbars
+::ng-deep #cd-layout-content  {
+  overflow: hidden !important;/* Hide all scrollbars in "main" window*/
+}
+
+::ng-deep #cd-layout-aside {
+  overflow: auto;
+}
+
+::ng-deep #cd-layout-filter {
+  overflow: auto;
+}

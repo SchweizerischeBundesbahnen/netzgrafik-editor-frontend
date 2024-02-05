@@ -1,0 +1,243 @@
+<div sbbDialogContent class="EditTrainrunSectionDialogTabContent">
+  <table>
+    <tr>
+      <td>
+        <table>
+          <tr>
+            <td class="EditTrainrunSectionDialogHeaderLeft" rowspan="2">
+              <b>{{leftBetriebspunkt[0]}}</b> {{leftBetriebspunkt[1]}}
+            </td>
+            <td class="EditTrainrunSectionDialogHeaderSeparatorLeft"></td>
+            <td
+              [ngClass]="tagNbrStopInput ? 'EditTrainrunSectionDialogHeaderCenter IsActive' :'EditTrainrunSectionDialogHeaderCenter NotActive'"
+              rowspan="2">
+              <input tabindex="-1"
+                     id="NumberOfStopsInputElementMinus"
+                     class="NumberOfStopsInputButtonPlusMinus"
+                     (click)="onInputNumberOfStopsElementButtonMinus()"
+                     (mouseenter)="onMouseEnterNbrStopInput()"
+                     (mouseleave)="onMouseOutNbrStopInput()"
+                     value="-"
+                     type="button"/>
+
+              <input tabindex="-1"
+                     id="NumberOfStopsInputElement"
+                     [class]="getNumberOfStopsInputElementClass()"
+                     type="number"
+                     min=0
+                     max=99
+                     maxlength=2
+                     spellcheck="false"
+                     pattern="^[0-9]*"
+                     [(ngModel)]="numberOfStops"
+                     (change)="onNumberOfStopsChanged()"
+                     (mouseenter)="onMouseEnterNbrStopInput()"
+                     (mouseleave)="onMouseOutNbrStopInput()"
+              />
+
+              <input tabindex="-1"
+                     id="NumberOfStopsInputElementPlus"
+                     class="NumberOfStopsInputButtonPlusMinus"
+                     (click)="onInputNumberOfStopsElementButtonPlus()"
+                     (mouseenter)="onMouseEnterNbrStopInput()"
+                     (mouseleave)="onMouseOutNbrStopInput()"
+                     value="+"
+                     type="button"/>
+
+            </td>
+            <td class="EditTrainrunSectionDialogHeaderSeparatorRight"></td>
+            <td class="EditTrainrunSectionDialogHeaderRight" rowspan="2">
+              <b>{{rightBetriebspunkt[0]}}</b> {{rightBetriebspunkt[1]}}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+    </tr>
+    <tr>
+      <td height="6px"></td>
+    </tr>
+    <tr>
+      <td>
+        <div class="mainGridLayout">
+          <div class="TravelFreqLeft">
+            <svg class="renderer" width="192px" height="32px" border="0" viewBox="0 6 96 16">
+              <path [class]="getEdgeLineClassAttrString(0)" d="M0,16L192,16"></path>
+              <path [class]="getEdgeLineClassAttrString(1)" d="M0,16L192,16"></path>
+              <path [class]="getEdgeLineClassAttrString(2)" d="M0,16L192,16"></path>
+              <path [class]="getEdgeLineClassAttrString(3)" d="M0,16L192,16"></path>
+            </svg>
+
+          </div>
+          <div class="TravelFreqRight">
+            <svg class="renderer" width="192px" height="32px" border="0" viewBox="0 6 96 16">
+              <path [class]="getEdgeLineClassAttrString(0)" d="M0,16L192,16"></path>
+              <path [class]="getEdgeLineClassAttrString(1)" d="M0,16L192,16"></path>
+              <path [class]="getEdgeLineClassAttrString(2)" d="M0,16L192,16"></path>
+              <path [class]="getEdgeLineClassAttrString(3)" d="M0,16L192,16"></path>
+            </svg>
+          </div>
+
+          <div class="NodeLeftArrival"></div>
+          <div class="NodeLeftDeparture"></div>
+          <div class="NodeRightArrival"></div>
+          <div class="NodeRightDeparture"></div>
+          <div class="TravelTime"></div>
+
+          <div class="focusguard" id="focusguard-1" tabindex="1" (focus)="setFocusToEndOfLoop()"></div>
+          <div class="focusguard" id="focusguard-2" tabindex="7" (focus)="setFocusToBeginningOfLoop()"></div>
+
+          <div class="NodeLeftArrivalMinus">
+            <button tabindex="-1" mode="ghost" class="ButtonMinus" (click)="trainrunSectionTimesService.onNodeLeftArrivalTimeButtonMinus()">
+              -
+            </button>
+          </div>
+          <div class="NodeLeftArrivalTime">
+            <input tabindex="6" id="NodeLeftArrivalTimeInputElement" class="InputElement lastInput" type="number"
+                   sbbInput
+                   spellcheck="false"
+                   pattern="^[0-9]*"
+                   [(ngModel)]="trainrunSectionTimesService.getTimeStructure().leftArrivalTime" (change)="trainrunSectionTimesService.onNodeLeftArrivalTimeChanged()"
+                   #leftArrivalTimeInputElement/>
+          </div>
+
+          <div class="NodeLeftArrivalPlus">
+            <button tabindex="-1" mode="ghost" class="ButtonPlus" (click)="trainrunSectionTimesService.onNodeLeftArrivalTimeButtonPlus()">
+              +
+            </button>
+          </div>
+
+          <div class="NodeLeftDepartureMinus">
+            <button tabindex="-1" mode="ghost" class="ButtonMinus" (click)="trainrunSectionTimesService.onNodeLeftDepartureTimeButtonMinus()">
+              -
+            </button>
+          </div>
+          <div class="NodeLeftDepartureTime">
+            <input tabindex="2" id="NodeLeftDepartureTimeInputElement" class="InputElement firstInput" type="number"
+                   sbbInput
+                   spellcheck="false"
+                   pattern="^[0-9]*"
+                   [(ngModel)]="trainrunSectionTimesService.getTimeStructure().leftDepartureTime" (change)="trainrunSectionTimesService.onNodeLeftDepartureTimeChanged()"
+                   #leftDepartureTimeInputElement/>
+          </div>
+          <div class="NodeLeftDeparturePlus">
+            <button tabindex="-1" mode="ghost" class="ButtonPlus" (click)="trainrunSectionTimesService.onNodeLeftDepartureTimeButtonPlus()">
+              +
+            </button>
+          </div>
+
+          <div class="NodeRightArrivalMinus">
+            <button tabindex="-1" mode="ghost" class="ButtonMinus" (click)="trainrunSectionTimesService.onNodeRightArrivalTimeButtonMinus()">
+              -
+            </button>
+          </div>
+          <div class="NodeRightArrivalTime">
+            <input tabindex="4" id="NodeRightArrivalTimeInputElement" class="InputElement" type="number" sbbInput
+                   spellcheck="false"
+                   pattern="^[0-9]*"
+                   [(ngModel)]="trainrunSectionTimesService.getTimeStructure().rightArrivalTime" (change)="trainrunSectionTimesService.onNodeRightArrivalTimeChanged()"
+                   #rightArrivalTimeInputElement/>
+          </div>
+          <div class="NodeRightArrivalPlus">
+            <button tabindex="-1" mode="ghost" class="ButtonPlus" (click)="trainrunSectionTimesService.onNodeRightArrivalTimeButtonPlus()">
+              +
+            </button>
+          </div>
+
+          <div class="NodeRightDepartureMinus">
+            <button tabindex="-1" mode="ghost" class="ButtonMinus" (click)="trainrunSectionTimesService.onNodeRightDepartureTimeButtonMinus()">
+              -
+            </button>
+          </div>
+          <div class="NodeRightDepartureTime">
+            <input tabindex="5" id="NodeRightDepartureTimeInputElement" class="InputElement" type="number" sbbInput
+                   spellcheck="false"
+                   pattern="^[0-9]*"
+                   [(ngModel)]="trainrunSectionTimesService.getTimeStructure().rightDepartureTime" (change)="trainrunSectionTimesService.onNodeRightDepartureTimeChanged()"
+                   #rightDepartureTimeInputElement/>
+          </div>
+          <div class="NodeRightDeparturePlus">
+            <button tabindex="-1" mode="ghost" class="ButtonPlus" (click)="trainrunSectionTimesService.onNodeRightDepartureTimeButtonPlus()">
+              +
+            </button>
+          </div>
+
+          <div class="TravelTimeMinus">
+            <button tabindex="-1" mode="ghost" class="ButtonMinus" (click)="trainrunSectionTimesService.onInputTravelTimeElementButtonMinus()">
+              -
+            </button>
+          </div>
+          <div class="TravelTimeTime">
+            <ng-container>
+              <input tabindex="3" id="TravelTimeTimeInputElement"
+                     [ngClass]="{'InputTravelTimeElement': !trainrunSectionTimesService.getHighlightTravelTimeElement(), 'InputTravelTimeElementHighlighted': trainrunSectionTimesService.getHighlightTravelTimeElement()}"
+                     type="number"
+                     min="1" sbbInput
+                     spellcheck="false"
+                     pattern="^[0-9]*"
+                     minlength="1"
+                     [(ngModel)]="trainrunSectionTimesService.getTimeStructure().travelTime" (change)="trainrunSectionTimesService.onInputTravelTimeChanged()"
+                     #travelTimeInputElement/>
+            </ng-container>
+          </div>
+          <div class="TravelTimePlus">
+            <button tabindex="-1" mode="ghost" class="ButtonPlus" (click)="trainrunSectionTimesService.onInputTravelTimeElementButtonPlus()">
+              +
+            </button>
+          </div>
+
+          <div class="TravelTimeLock">
+            <div *ngIf="trainrunSectionTimesService.getLockStructure().travelTimeLock === false">
+              <sbb-icon svgIcon="lock-open-medium" height="25px" width="25px" aria-hidden="false"
+                        (click)="trainrunSectionTimesService.onButtonTravelTimeLock()">
+              </sbb-icon>
+            </div>
+            <div *ngIf="trainrunSectionTimesService.getLockStructure().travelTimeLock === true">
+              <sbb-icon svgIcon="lock-closed-medium" height="25px" width="25px" aria-hidden="false"
+                        (click)="trainrunSectionTimesService.onButtonTravelTimeLock()">
+              </sbb-icon>
+            </div>
+          </div>
+          <div class="NodeLefttLock">
+            <div *ngIf="trainrunSectionTimesService.getLockStructure().leftLock === false">
+              <sbb-icon svgIcon="lock-open-medium" height="25px" width="25px" aria-hidden="false"
+                        (click)="trainrunSectionTimesService.onButtonNodeLeftLock()">
+              </sbb-icon>
+            </div>
+            <div *ngIf="trainrunSectionTimesService.getLockStructure().leftLock === true">
+              <sbb-icon svgIcon="lock-closed-medium" height="25px" width="25px" aria-hidden="false"
+                        (click)="trainrunSectionTimesService.onButtonNodeLeftLock()">
+              </sbb-icon>
+            </div>
+          </div>
+          <div class="NodeRightLock">
+            <div *ngIf="trainrunSectionTimesService.getLockStructure().rightLock === false">
+              <sbb-icon svgIcon="lock-open-medium" height="25px" width="25px" aria-hidden="false"
+                        (click)="trainrunSectionTimesService.onButtonNodeRightLock()">
+              </sbb-icon>
+            </div>
+            <div *ngIf="trainrunSectionTimesService.getLockStructure().rightLock === true">
+              <sbb-icon svgIcon="lock-closed-medium" height="25px" width="25px" aria-hidden="false"
+                        (click)="trainrunSectionTimesService.onButtonNodeRightLock()">
+              </sbb-icon>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+<div sbbDialogActions class="EditTrainrunDialogTabFooter">
+  <button class="warning" *ngIf="trainrunSectionTimesService.getShowWarningTwoLocks() === true" disabled>{{warningTwoLocks}}</button>
+  <button class="FunctionButton" tabindex="-1" mode="icon"
+          (click)="trainrunSectionTimesService.onPropagateTimeLeft(selectedTrainrunSection)"
+          title="Zeiten nach links propagieren">
+    <sbb-icon svgIcon="arrow-long-left-medium" height="13px" width="13px" aria-hidden="false"></sbb-icon>
+  </button>
+  <button class="FunctionButton" tabindex="-1" mode="icon"
+          (click)="trainrunSectionTimesService.onPropagateTimeRight(selectedTrainrunSection)"
+          title="Zeiten nach rechts propagieren">
+    <sbb-icon svgIcon="arrow-long-right-medium" height="13px" width="13px" aria-hidden="false"></sbb-icon>
+  </button>
+</div>

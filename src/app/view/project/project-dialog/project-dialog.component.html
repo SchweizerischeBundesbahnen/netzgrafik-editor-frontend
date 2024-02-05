@@ -1,0 +1,12 @@
+<div sbbDialogTitle>
+  <ng-container *ngIf="isNewProject">Projekt erstellen</ng-container>
+  <ng-container *ngIf="!isNewProject">Projekt bearbeiten</ng-container>
+</div>
+<div sbbDialogContent>
+  <sbb-project-form [model]="formmodel"></sbb-project-form>
+</div>
+<div sbbDialogActions>
+  <button *ngIf="isNewProject" sbb-button cdkFocusInitial (click)="onCreateClicked()">Erstellen</button>
+  <button *ngIf="!isNewProject" sbb-button cdkFocusInitial (click)="onCreateClicked()">Speichern</button>
+  <button sbb-secondary-button (click)="onCancelClicked()">Abbrechen</button>
+</div>
