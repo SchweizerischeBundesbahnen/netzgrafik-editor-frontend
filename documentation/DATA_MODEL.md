@@ -1,7 +1,7 @@
 ## Data model
 
 The data model consists of the following key elements: *trainrun*, *trainrun section*,
-*transition*, *pin* and *node*.
+*transition*, *connection*, *pin* and *node*.
 
 ![Data model](./images/DataMoel_Sketch_KeyElement_001.jpg)
 
@@ -16,10 +16,14 @@ connects two nodes. It encapsulates all the relevant information related to that
 including temporal details like departure and arrival times. Additionally, it also stores the travel
 time, which indicates the duration it takes for the trainrun to move from one node to another.
 
+The key element connection signifies the point in the logistic network where the two trains need to
+coordinated to ensure a smooth connection between them.
+
 By combining the nodes and trainrun sections in this data model, we can create a representation of
 the trainrun network, mapping out the connections and relationships between the different stations
 and the time it takes to traverse between them. This enables us to analyze and visualize complex
 trainrun routes and schedules.
+
 
 ### Technically orientated description
 
@@ -33,6 +37,8 @@ enable the representation and analysis of complex relationships in the model.
 - The transition extends the graph within the node. A transition corresponds to an edge that
   connects two pins within the Node, thereby
   connecting two trainrun section.
+- If two trains should to make a connection at a station, this can be defined using a connection.
+  The connection links two pins, each have to be associated with a different train.
 
 Together, these elements form an undirected graph consisting of edges (trainrun section,
 transitions) and nodes (pins).
