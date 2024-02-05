@@ -93,7 +93,7 @@ Some of the key features include:
 ## Origin and Open Source Collaboration
 
 The Netzgrafik-Editor, initially developed as an internal innovation project at the
-*[Swiss Railways company (SBB CFF FFS)](https://www.sbb.ch)*.
+[Swiss Federal Railways (SBB CFF FFS)](https://www.sbb.ch).
 The project started with a clickable prototype. From this early stage of the project,
 there are still ideas and concepts that have not yet been realised, so it is always worth taking a
 look [at this document](https://xd.adobe.com/view/e4664ae0-be8f-40e4-6a55-88aec9eafd8d-9257/).
@@ -123,10 +123,7 @@ providing comprehensive control, optimization, and synchronization of time-based
 
 Due to these diverse applications of the Netzgrafik-Editor and its increasing value in various
 areas,
-the decision was made to release it as open source software, governed by the license specified in
-this
-[LICENCE.md](./LICENSE.md)
-document.
+the decision was made to release it as open source software.
 This is intended to promote broad use and collaboration at the planning level,
 as well as actively support the further development of new ideas from different industries so that
 the editor constantly improves and,
@@ -229,7 +226,6 @@ Please consider the following information:
 
 - [CODING_STANDARDS.md](CODING_STANDARDS.md)
 - [CONTRIBUTING.md](CONTRIBUTING.md)
-- [LICENSE.md](LICENSE.md)
 
 and check the
 open [issues](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues)
@@ -237,15 +233,7 @@ and [pull requests](https://github.com/SchweizerischeBundesbahnen/netzgrafik-edi
 
 ## License
 
-> Choose a license that meets the organization's legal requirements and supports the sharing and
-> modification of the code.
-> Please follow the internal Open Source guidelines while chosing the License.
-> This repository includes two [suggested license texts](./suggested_licenses) (Apache 2.0 and EPL
-> 2.0). Rename the license you prefer to [LICENSE.md](LICENSE.md) and remove the other one.
-
-This project is licensed under [INSERT LICENSE].
-
-<a id="Contributing"></a>
+This project is licensed under [Apache 2.0](LICENSE).
 
 ## Contributing
 
