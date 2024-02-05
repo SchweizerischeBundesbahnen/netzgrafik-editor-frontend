@@ -1,7 +1,7 @@
 ## Data model
 
-The data model consists of the following key elements: *trainrun*, *trainrun section*,
-*transition*, *trainrun connection*, *port* and *node*.
+The data model consists of the following key elements: ***trainrun***, ***trainrun section***,
+***transition***, ***trainrun connection***, ***port*** and ***node***.
 
 ![Data model](./images/DataMoel_Sketch_KeyElement_001.jpg)
 
