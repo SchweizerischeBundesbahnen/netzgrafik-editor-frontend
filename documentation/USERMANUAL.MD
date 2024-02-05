@@ -13,7 +13,7 @@
 - [Perlenkette](#Perlenkette)
 - [Conclusion](#Conclusion)
 
-[Links](#Links)
+Further information can be found under the links provided under [Links](#Links).
 
 <a id="Introduction"></a>
 
