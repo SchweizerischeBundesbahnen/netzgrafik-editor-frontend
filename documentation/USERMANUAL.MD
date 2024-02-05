@@ -23,7 +23,7 @@ Netgraph-Editor – designed to make better decisions.
 ---
 
 #### Netgraph-Editor – designed to make better decisions.
-
+```
 **Flexible** level of detail: start with a rough sketch, continuously add more detail
 
 - applicable across different industries (bus, train, plane)
@@ -35,9 +35,11 @@ analysis capabilities.
 
 **Excellent and intuitive UX:** Using Netzgrafik-Editor should be as easy and natural as drawing on a whiteboard.
 No training required. Analysis happens in real time.
+```
 
 #### Business Value
 
+```
 **More efficient timetable planning** - iterative variant testing early stages interval timetables
 
 **Digital assistant** instead of whiteboard
@@ -45,6 +47,7 @@ No training required. Analysis happens in real time.
 **User-centric** UX
 
 Improved **collaboration**
+```
 
 ---
 
