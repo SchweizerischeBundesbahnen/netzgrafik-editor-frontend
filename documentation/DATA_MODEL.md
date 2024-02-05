@@ -19,14 +19,14 @@ time, which indicates the duration it takes for the trainrun to move from one no
 The trainrun connection signifies the point in the logistic network where two trains need to
 coordinated to ensure a smooth connection between them.
 
-In addition, a train journey has references to behaviour-related abstractions such as
-category, frequency and time category, which define the behaviour of a train journey.
+In addition, a trainrun has references to behaviour-related abstractions such as
+category, frequency and time category, which define the behaviour of a trainrun.
 
-- ***Category*** specifies the type of train journey, e.g. a regional train, an intercity train or a
+- ***Category*** specifies the type of trainrun, e.g. a regional train, an intercity train or a
   goods train.
-- ***Frequency*** defines the frequency with which the train journey is carried out, e.g. 1/4h, 1/2h
+- ***Frequency*** defines the frequency with which the trainrun is carried out, e.g. 1/4h, 1/2h
   or every hour.
-- ***TimeCategory*** defines the time categorisation of the train journey, e.g. peak times or
+- ***TimeCategory*** defines the time categorisation of the trainrun, e.g. peak times or
   off-peak times or occasional.
 
 By combining the nodes and trainrun sections in this data model, we can create a representation of

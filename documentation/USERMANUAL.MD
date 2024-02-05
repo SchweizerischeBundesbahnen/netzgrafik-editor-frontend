@@ -25,7 +25,7 @@ Key Features
 1. **Interactive Drawing Interface:** The user can define nodes, trains with their routes and
    attributes to create a comprehensive Netzgrafik. The editor offers an user-friendly drag-and-drop
    interface, allowing the user to easily draw the Netzgrafik and position the nodes. This has a
-   direct impact on the edges, such as train run sections and transitions. The Netzgrafik always
+   direct impact on the edges, such as trainrun sections and transitions. The Netzgrafik always
    remains clear and easy to read. Additionally, connections between trains within a node can be
    defined using drag-and-drop. This intuitive function simplifies the creation and customization of
    the network layout.
