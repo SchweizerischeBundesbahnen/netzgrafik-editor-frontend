@@ -30,6 +30,9 @@ of regular-interval timetable.
 <summary>
 Regular-interval timetable
 </summary>
+
+---
+
 Regular-interval timetables were first developed in Germany at the beginning of the 20th century to 
 coordinate urban traffic in large cities such as Berlin. The regular schedules aim to increase the 
 attractiveness of public transport because they’re easier to memorise for passengers and because the
