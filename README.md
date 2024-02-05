@@ -9,7 +9,6 @@ Netzgrafik-Editor – designed to make better decisions.
 </summary>
 
 ---
-
 > ### Netzgrafik-Editor – designed to make better decisions.
 >
 > **Flexible** level of detail: start with a rough sketch, continuously add more detail
@@ -23,7 +22,7 @@ Netzgrafik-Editor – designed to make better decisions.
 >
 > **Excellent and intuitive UX:** Using Netzgrafik-Editor should be as easy and natural as drawing on a whiteboard.
 > No training required. Analysis happens in real time.
-
+>
 > ### Business Value
 >
 > **More efficient timetable planning** - iterative variant testing early stages interval timetables
@@ -33,7 +32,6 @@ Netzgrafik-Editor – designed to make better decisions.
 > **User-centric** UX
 >
 > Improved **collaboration**
-
 ---
 
 </details>
