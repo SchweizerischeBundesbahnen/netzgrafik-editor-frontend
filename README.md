@@ -32,25 +32,6 @@ Netzgrafik-Editor – designed to make better decisions.
 
 </details>
 
-
-![Netzgrafik-Editor](./documentation/images/Overview_Editor_Screenshot_001.PNG)
-
-This is the repository for the Netzgrafik-Editor.
-
-#### Table Of Contents
-
-- [Introduction](#Introduction)
-- [Origin and Open Source Collaboration](#Origin-and-Open-Source-Collaboration)
-- [User Manual](#UserManual)
-- [Getting Started](#Getting-Started)
-- [Contributing](#Contributing)
-- [Documentation](#Documentation)
-- [Code of Conduct](#code-of-conduct)
-- [Coding Standards](#coding-standards)
-- [License](#License)
-
-<a id="Introduction"></a>
-
 ## Introduction
 
 The Netzgrafik-Editor is a powerful software that enables the creation, modification, and analysis
@@ -114,7 +95,7 @@ Some of the key features include:
   on the timetable,
   supporting fleet sizing.
 
-<a id="Origin-and-Open-Source-Collaboration"></a>
+![Netzgrafik-Editor](./documentation/images/Overview_Editor_Screenshot_001.PNG)
 
 ## Origin and Open Source Collaboration
 
