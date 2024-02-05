@@ -38,10 +38,11 @@ Netzgrafik-Editor – designed to make better decisions.
 
 </details>
 
-This is the repository for the Netzgrafik-Editor.
-
 
 ![Netzgrafik-Editor](./documentation/images/Overview_Editor_Screenshot_001.PNG)
+
+This is the repository for the Netzgrafik-Editor.
+
 
 #### Table Of Contents
 
