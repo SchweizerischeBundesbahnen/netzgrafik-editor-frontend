@@ -1,7 +1,7 @@
 ## Data model
 
 The data model consists of the following key elements: *trainrun*, *trainrun section*,
-*transition*, *trainrun connection*, *pin* and *node*.
+*transition*, *trainrun connection*, *port* and *node*.
 
 ![Data model](./images/DataMoel_Sketch_KeyElement_001.jpg)
 
@@ -30,18 +30,20 @@ Thus, the data model, consisting of TrainrunSection and nodes, forms a network o
 similar to an undirected graph. The TrainrunSections represent the connections between the nodes and
 enable the representation and analysis of complex relationships in the model.
 
-- *TrainrunSection* corresponds to the edges between nodes in an undirected graph.
-- *Nodes* represent the points in the graph, allowing the connection of trainrun section .
-- A *pin* represents a point in the graph where a trainrun section is connected to a Node.
-- The *transition* extends the graph within the node. A transition corresponds to an edge that
+- ***TrainrunSection*** corresponds to the edges between nodes in an undirected graph.
+- ***Nodes*** represent the points in the graph, allowing the connection of trainrun section .
+- A *pin* represents a ***port*** (point) in the graph where a trainrun section is connected to a
+  Node.
+- The ***transition*** extends the graph within the node. A transition corresponds to an edge that
   connects two pins within the Node, thereby connecting two trainrun section.
-- If two trains should make a connection at a station, this can be defined using a *connection*. The
-  trainrun connection links two pins, each have to be associated with a different train.
+- If two trainruns should make a connection at a station, this can be defined using a
+  ***connection***. The trainrun connection links two pins, each have to be associated with a
+  different train.
 
 Together, these elements form an undirected graph consisting of edges (TrainrunSections,
-Transitions) and nodes (Pins).
+Transitions) and nodes (Ports).
 
-The last key element is the trainrun. The trainrun consists of an ordered sequence of
+The last key element is the ***trainrun***. The trainrun consists of an ordered sequence of
 trainrun sections and transitions. This ordered sequence defines the route of the Trainrun and
 establishes a direction in the undirected graph. This direction corresponds to the exact path of the
 train.
