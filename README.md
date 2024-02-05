@@ -147,31 +147,51 @@ The user manual can be found here [USERMANUAL.md](documentation/USERMANUAL.md)
 
 ## Getting-Started
 
-Instructions for getting started with the repository, for e.g.:
+### Development setup
 
-- Installation instructions
-- Usage instructions
+For a working local development setup, you also need to start the [backend](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-backend)!
 
-> To use this template please follow the steps as below:
->
-> - If creating via Self Service Portal (WIP)
-> - If Creating via GitHub Interface
-    >
+```shell
+# clone project from https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend
+git clone https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend.git
 
-- Click the "Use this template" button above, select "Create a new repository"
+# switch into folder
+cd netzgrafik-editor-frontend
 
-> - Give your repository a name, and optionally a description. The owner will always be "
-    SchweizerischeBundesbahnen".
-    >
+# install all npm dependencies
+npm install
 
-- Set the visibility of your repository to "Public".
+# start ng server (connects to local backend, make sure it is set up and running)
+npm run start
 
-> - Do not select "Include all branches".
-    >
+# open address in browser http://localhost:4200/
+# Login with username "user" and password "user"
+```
 
-- Click the "Create repository from template" button and you're done!
+### Testing
 
-<a id="Documentation"></a>
+```
+# just run the test once
+npm run test
+
+# or run the test in the browser
+ng test --browsers Chrome
+```
+
+## Backend API code generation
+
+The backend API is specified using [OpenAPI](https://swagger.io/specification/) (see `api-docs.json`).
+Angular Services for the communication with the backend API are generated based on this specification using [openapi-generator](https://github.com/openapitools/openapi-generator) and added to the repo (see `src/app/api/generated`).
+
+### Update the API Version
+
+In order to update the API Version start the local backend server.
+The new spec can then be downloaded at <http://localhost:8080/v3/api-docs/>.
+
+The new API Service files can be generated using the following command:
+```shell
+npm run generate:api
+```
 
 ## Documentation
 
