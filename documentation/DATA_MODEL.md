@@ -164,7 +164,7 @@ more storage space.
 Additionally, using the native JSON format adds more complexity because the stored path must be
 provided during import.
 
-More details can be found:
+More details can be found in the source code:
 
 - [Node.computeTransitionRouting()](./../src/app/models/node.model.ts)
 - [Node.computeConnectionRouting()](./../src/app/models/node.model.ts)
