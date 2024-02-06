@@ -100,8 +100,7 @@ sections) depends on the node position to where the trainrun section is algined 
 
 ##### Multiple trainruns
 
-This example shows how several trainruns and nodes The outgoing/incoming edge alginment depends
-strongly on the position of the node.
+The outgoing/incoming edge alginment depends strongly on the position of the node.
 
 If two or more trainrun have at least one identical node (start/end does not matter), the
 trainrun are sorted according to the position of the branching node -from top to bottom or
