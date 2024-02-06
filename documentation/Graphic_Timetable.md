@@ -72,8 +72,12 @@ for each trainrun category). If the minimum turnaround time is not reached, anot
 must be used and the other one must wait until the next departure. This ends in an additional track.
 This additional requirement is implemented for each trainrun start and end nodes. This makes the
 track occupier more realistic, but also more complex.
-
+<details>
+<summary>
+Example
+</summary>
 ![track occupier](./images/Overview_Streckengrafik_Screenshot_004.png)
+</details>
 
 #### Minimum number of tracks on sections
 
@@ -92,4 +96,9 @@ capacity can be properly assessed, and appropriate measures can be taken to addr
 or constraints. Again, this information can be helpful in deciding early on whether to continue
 working on the variant or reject it.
 
+<details>
+<summary>
+Example
+</summary>
 ![minum number of tracks on sections](./images/Overview_Streckengrafik_Screenshot_003.png)
+</details>
