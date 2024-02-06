@@ -107,9 +107,9 @@ trainrun are sorted according to the position of the branching node -from top to
 from left to right or vice versa.
 
 If two or more trainrun have the same neighbouring nodes, they are sorted by trainrun
-category and name. If the category and name are the same, they are further sorted according to the
-order of the drawing - first drawn, first aligned (from top to bottom or from left to right or vice
-versa).
+category pre-defined order and trainrun name. If the category pre-defined order and trainrun name
+are the same, they are further sorted according to the order of the drawing - first drawn, first
+aligned (from top to bottom or from left to right or vice versa).
 
 > **Sorting heuristic**
 > - Position Alignment (Top > Bottom > Left > Right)
