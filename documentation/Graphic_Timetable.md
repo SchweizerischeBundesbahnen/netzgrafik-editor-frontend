@@ -73,7 +73,7 @@ must be used and the other one must wait until the next departure. This ends in 
 This additional requirement is implemented for each trainrun start and end nodes. This makes the
 track occupier more realistic, but also more complex.
 
-![track occupier](./images/Overview_Streckengrafik_Screenshot_003.png)
+![track occupier](./images/Overview_Streckengrafik_Screenshot_004.png)
 
 #### Minimum number of tracks on sections
 
