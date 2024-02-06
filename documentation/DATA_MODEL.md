@@ -140,5 +140,11 @@ export enum PortAlignment {
    Right    // 3
 }
 ``
+ 
+See for more details [VisAVisPortPlacement](./../src/app/services/util/node.port.placement.ts).
+
+portSort 
+path 
+SimpleTrainrunSectionRouter
 
 ##### Ports sorting 
