@@ -63,9 +63,7 @@ of regular-interval timetable.
 <summary>
 Regular-interval timetable
 </summary>
-
----
-
+>
 > Regular-interval timetables were first developed in Germany at the beginning of the 20th century
 > to coordinate urban traffic in large cities such as Berlin.
 >
@@ -78,12 +76,12 @@ Regular-interval timetable
 > Swiss regular-interval timetable in 1982.
 >
 > [History - The regular-interval timetable](https://houseofswitzerland.org/swissstories/history/nation-railway-enthusiasts-history-swiss-railways)
+>
 > [clock-faced schedules](https://en.wikipedia.org/wiki/Clock-face_scheduling)
 >
+>
+> [Source](https://www.swissinfo.ch/eng/to-the-second_the-swiss-timetable-is-due-to-meticulous-planning/34102496)
 
-[Source](https://www.swissinfo.ch/eng/to-the-second_the-swiss-timetable-is-due-to-meticulous-planning/34102496)
-
----
 </details>
 
 It offers various functions to enhance the efficiency and optimization of the logistics network.
