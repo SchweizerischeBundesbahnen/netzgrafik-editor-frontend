@@ -150,7 +150,7 @@ The sorting heuristics can be found in the [chapter](./CREATE_NODES.md#MultipleT
 worth taking a look there before diving into the source
 code [Node.sortPorts()](./../src/app/models/node.model.ts) for detailed information.
 
-##### Path
+##### Pre-computed paths
 
 Trainrun sections, connections, and transition all have the path to be drawn stored (pre-defined).
 This storage makes it very easy for the rendering to determine whether the path has
