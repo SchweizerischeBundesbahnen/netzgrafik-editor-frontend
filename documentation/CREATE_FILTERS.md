@@ -70,17 +70,31 @@ apply the label globally or to all nodes, trains, or notes.
 
 These functions provide flexibility in managing and customizing labels according to your needs.
 
-### Filtering trainrun with filterable labels
+<details>
+<summary>
+Filtering trainrun with filterable labels
+</summary>
 
 ![''](./animated_images/compressed/2024-1-25-Filtering-002.gif)
 
-### Modifiy filterable labels
+</details>
+
+<details>
+<summary>
+Modifiy filterable labels
+</summary>
 
 ![''](./animated_images/compressed/2024-1-25-Filtering-Modify_Labelgroups_003.gif)
 
-### Filtering Nodes with filterable labels
+</details>
 
+<details>
+<summary>
+Filtering Nodes with filterable labels
+</summary>
 ![''](./animated_images/compressed/2024-1-25-Filtering-NodeLabels_Editing.gif)
+
+</details>
 
 ![''](./animated_images/compressed/2024-1-25-Filtering-NodeLabels_Editing-FilterOnOff.gif)
 
