@@ -134,10 +134,10 @@ representation of the lines, ensuring clarity and ease of understanding.
 
 ```typescript
 export enum PortAlignment {
-  Top,    // 0
-  Bottom, // 1
-  Left,   // 2
-  Right   // 3
+    Top,    // 0
+    Bottom, // 1
+    Left,   // 2
+    Right   // 3
 }
 ```
 
@@ -149,4 +149,27 @@ details [VisAVisPortPlacement.placePortsOnSourceAndTargetNode(srcNode, targetNod
 The sorting heuristics can be found in the [chapter](./CREATE_NODES.md#MultipleTrainruns), it is
 worth taking a look there before diving into the source
 code [Node.sortPorts()](./../src/app/models/node.model.ts) for detailed information.
+
+##### Path
+
+Trainrun sections, Connections, and Transition all have the path to be drawn stored (pre-defined).
+This storage makes it very easy for the rendering to determine whether the path has
+changed or not. Once the path changes, it is redrawn. Therefore, as long as there are no changes,
+nothing is rendered, which greatly increases the interactivity of the application but also requires
+more storage space.
+
+Additionally, using the native JSON format adds more complexity because the stored path must be
+provided during import.
+
+More details can be found: 
+- [Node.computeTransitionRouting()](./../src/app/models/node.model.ts)  
+- [Node.computeConnectionRouting()](./../src/app/models/node.model.ts)
+- [TrainrunSection.routeEdgeAndPlaceText()](./../src/app/models/trainrunsection.model.ts)
+- [TrainrunSectionService.initializeTrainrunSectionRouting()](./../src/app/services/data/trainrunsection.service.ts)
+
+
+
+
+
  
+
