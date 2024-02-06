@@ -1,6 +1,3 @@
-> This README is under creation.
----
-
 # Netzgrafik-Editor
 
 <details>
