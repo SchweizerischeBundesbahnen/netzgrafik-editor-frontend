@@ -81,16 +81,7 @@ Filtering trainrun with filterable labels
 
 <details>
 <summary>
-Modifiy filterable labels
-</summary>
-
-![''](./animated_images/compressed/2024-1-25-Filtering-Modify_Labelgroups_003.gif)
-
-</details>
-
-<details>
-<summary>
-Filtering Nodes with filterable labels
+Filtering nodes with filterable labels
 </summary>
 
 ![''](./animated_images/compressed/2024-1-25-Filtering-NodeLabels_Editing.gif)
@@ -99,9 +90,26 @@ Filtering Nodes with filterable labels
 
 </details>
 
-### Filer text (display)
+#### Modifiy filterable labels
 
+![''](./animated_images/compressed/2024-1-25-Filtering-Modify_Labelgroups_003.gif)
+
+### Filter display
+
+To show/hide elements, you can use the following steps:
+
+<details>
+<summary>
+Show/hide times and trainrun names
+</summary>
 ![''](./animated_images/compressed/2024-1-25-Filtering-Display_Text.gif)
 
+</details>
+
+<details>
+<summary>
+Show/hide connections
+</summary>
 ![''](./animated_images/compressed/2024-1-25-Filtering-Display_Text-001.gif)
+</details>
 
