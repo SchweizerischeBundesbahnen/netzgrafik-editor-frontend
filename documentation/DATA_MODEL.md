@@ -134,10 +134,10 @@ representation of the lines, ensuring clarity and ease of understanding.
 
 ```typescript
 export enum PortAlignment {
-    Top, // 0
-    Bottom, // 1
-    Left, // 2
-    Right // 3
+  Top,    // 0
+  Bottom, // 1
+  Left,   // 2
+  Right   // 3
 }
 ```
 
