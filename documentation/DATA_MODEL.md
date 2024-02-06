@@ -169,7 +169,7 @@ More details can be found in the source code:
 - [Node.computeTransitionRouting()](./../src/app/models/node.model.ts)
 - [Node.computeConnectionRouting()](./../src/app/models/node.model.ts)
 - [TrainrunSection.routeEdgeAndPlaceText()](./../src/app/models/trainrunsection.model.ts)
-- [TrainrunSectionService.initializeTrainrunSectionRouting()](./../src/app/services/data/trainrunsection.service.ts)
+- [TrainrunSectionService.initializeTrainrunSectionRouting()](./../src/app/services/data/trainrunsection.service.ts:~:text=initializeTrainrunSectionRouting)
 
 
 
