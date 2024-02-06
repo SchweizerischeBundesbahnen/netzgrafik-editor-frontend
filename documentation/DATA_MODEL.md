@@ -115,11 +115,11 @@ classDiagram
 
 ##### Ports alignment
 
-![Port Alignment](./images/PortAlignment.png)
-
 The key concept of network visualization is to obtain a clear and automated representation of
 connections (lines). For this purpose, a routing heuristic is implemented, which arranges the lines
 in a visually organized manner.
+
+![Port Alignment](./images/PortAlignment.png)
 
 To begin with, the heuristic focuses on the pair of nodes that are connected by the trainrun
 section. At each node, a decision is made regarding whether the line exits the node in an
