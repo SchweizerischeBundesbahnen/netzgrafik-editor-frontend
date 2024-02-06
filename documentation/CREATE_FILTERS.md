@@ -12,7 +12,7 @@ function plays a crucial role. It offers a wide range of possibilities, from sim
 very complex and user-specific settings, allowing you to create complex views. This allows for
 complex editing and analysis.
 
-### Simple Filtering
+### Basic filtering
 
 o open the filter, click either on the filter symbol in the sidebar on the left or at the bottom
 center of the same filter symbol. This will open the filter sidebar on the left side. Here, you can
