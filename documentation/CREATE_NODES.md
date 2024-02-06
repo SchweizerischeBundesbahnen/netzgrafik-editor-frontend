@@ -114,7 +114,7 @@ versa).
 > **Sorting heuristic**
 > - Position Alignment (Top > Bottom > Left > Right)
 > - Left - Right | Top - Down
-> - Category
+> - Category short name (predefined order)
 > - Trainrun name (alphabetically)
 > - Trainrun (drawing order)
 > - Trainrun section (drawing order)
