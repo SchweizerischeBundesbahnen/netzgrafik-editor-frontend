@@ -142,11 +142,11 @@ export enum PortAlignment {
 ```
 
 See for more
-details [VisAVisPortPlacement.placePortsOnSourceAndTargetNode(srcNode, targetNode)](./../src/app/services/util/node.port.placement.ts#placePortsOnSourceAndTargetNode).
+details [VisAVisPortPlacement.placePortsOnSourceAndTargetNode(srcNode, targetNode)](./../src/app/services/util/node.port.placement.ts).
 
 ##### Ports sorting
 
 The sorting heuristics can be found in the [chapter](./CREATE_NODES.md#MultipleTrainruns), it is
 worth taking a look there before diving into the source
-code [Node.sortPorts()](./../src/app/models/node.model.ts#sortPorts) for detailed information.
+code [Node.sortPorts()](./../src/app/models/node.model.ts) for detailed information.
  
