@@ -20,7 +20,8 @@ Netzgrafik-Editor – designed to make better decisions.
 > supports the user by digitalizing the previously paper-driven process, while providing instant
 > analysis capabilities.
 >
-> **Excellent and intuitive UX:** Using Netzgrafik-Editor should be as easy and natural as drawing on a whiteboard.
+> **Excellent and intuitive UX:** Using Netzgrafik-Editor should be as easy and natural as drawing
+> on a whiteboard.
 > No training required. Analysis happens in real time.
 >
 > ### Business Value
@@ -40,7 +41,6 @@ Netzgrafik-Editor – designed to make better decisions.
 ![Netzgrafik-Editor](./documentation/images/Overview_Editor_Screenshot_001.PNG)
 
 This is the repository for the Netzgrafik-Editor.
-
 
 #### Table Of Contents
 
@@ -208,13 +208,17 @@ Instructions for getting started with the repository, for e.g.:
 
 ## Documentation
 
-Links to all relevant documentation files, including:
+Please consider the following information:
 
 - [DATA MODEL](./documentation/DATA_MODEL.md)
 
 - [CODING_STANDARDS.md](CODING_STANDARDS.md)
 - [CONTRIBUTING.md](CONTRIBUTING.md)
 - [LICENSE.md](LICENSE.md)
+
+and check the
+open [issues](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues)
+and [pull requests](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/pulls).
 
 <a id="License"></a>
 
