@@ -132,14 +132,19 @@ prioritization is given to the upward-downward direction over the left-right dir
 By implementing this routing heuristic, the network visualization achieves an organized
 representation of the lines, ensuring clarity and ease of understanding.
 
-``typescript
+```typescript
 export enum PortAlignment {
+
 Top, // 0
+
 Bottom, // 1
+
 Left, // 2
+
 Right // 3
+
 }
-``
+```
 
 See for more details [VisAVisPortPlacement](./../src/app/services/util/node.port.placement.ts).
 
