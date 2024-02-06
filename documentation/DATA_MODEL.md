@@ -152,7 +152,7 @@ code [Node.sortPorts()](./../src/app/models/node.model.ts) for detailed informat
 
 ##### Path
 
-Trainrun sections, Connections, and Transition all have the path to be drawn stored (pre-defined).
+Trainrun sections, connections, and transition all have the path to be drawn stored (pre-defined).
 This storage makes it very easy for the rendering to determine whether the path has
 changed or not. Once the path changes, it is redrawn. Therefore, as long as there are no changes,
 nothing is rendered, which greatly increases the interactivity of the application but also requires
