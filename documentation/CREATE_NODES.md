@@ -98,7 +98,7 @@ sections) depends on the node position to where the trainrun section is algined 
 
 <a id="MultipleTrainruns"></a>
 
-##### Multiple trainruns
+##### Multiple trainruns outgoing/ingoing ports order (positions)
 
 The outgoing/incoming edge alginment depends strongly on the position of the node.
 
