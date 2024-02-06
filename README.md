@@ -8,7 +8,6 @@
 Netzgrafik-Editor – designed to make better decisions.
 </summary>
 
----
 > ### Netzgrafik-Editor – designed to make better decisions.
 >
 > **Flexible** level of detail: start with a rough sketch, continuously add more detail
@@ -33,7 +32,6 @@ Netzgrafik-Editor – designed to make better decisions.
 > **User-centric** UX
 >
 > Improved **collaboration**
----
 
 </details>
 
