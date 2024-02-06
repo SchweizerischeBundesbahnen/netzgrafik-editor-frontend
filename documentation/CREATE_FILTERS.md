@@ -113,3 +113,8 @@ Show/hide connections
 ![''](./animated_images/compressed/2024-1-25-Filtering-Display_Text-001.gif)
 </details>
 
+### Saved filters
+
+The function for saving filters makes it possible to save filter settings so that they can be used
+again quickly. It is possible to create, edit and save saved filters. These saved filters are stored
+within the respective project variant. 
