@@ -12,6 +12,36 @@ function plays a crucial role. It offers a wide range of possibilities, from sim
 very complex and user-specific settings, allowing you to create complex views. This allows for
 complex editing and analysis.
 
+### Simple Filtering
+
+o open the filter, click either on the filter symbol in the sidebar on the left or at the bottom
+center of the same filter symbol. This will open the filter sidebar on the left side. Here, you can
+adjust the filter settings. Any changes made to the filter will immediately affect the network map
+or graphical timetable (route graph). When filters are active, the filter symbol will be highlighted
+in red.
+
+If you want to temporarily reset the filtering, click again on the filter symbol at the bottom of
+the menu bar. The filter symbol will display an "x," indicating that the filtering is temporarily
+disabled. Clicking again will reactivate the filter.
+
+To completely reset the filter, click on "Reset Filter" in the filter sidebar.
+
+![''](./animated_images/compressed/2024-1-25-Filtering-001.gif)
+
+To filter trains based on the criteria of train category, frequency, peak-hour service, and off-peak
+service, you can proceed as follows:
+
+- Train category filtering: Determine the desired train category, such as regional trains, intercity
+  trains, or freight trains. Filter the trains according to this category to display only the
+  desired trains.
+
+- Frequency filtering: If you want to view trains with a specific frequency, specify it. For
+  example, you can search for trains that run every half hour, hourly, or every two hours.
+
+- Service during specific periods: Filter the trains according to specific times, such as peak
+  hours, off-peak hours, or irregular service. This allows you to display trains that operate only
+  during specific time periods.
+
 ### Filterable labels
 
 Users can add user-defined labels to trains, notes, and nodes.
@@ -39,10 +69,6 @@ apply the label globally or to all nodes, trains, or notes.
   be added to all existing and future nodes, trains, or notes.
 
 These functions provide flexibility in managing and customizing labels according to your needs.
-
-### Simple Filtering
-
-![''](./animated_images/compressed/2024-1-25-Filtering-001.gif)
 
 ### Filtering trainrun with filterable labels
 
