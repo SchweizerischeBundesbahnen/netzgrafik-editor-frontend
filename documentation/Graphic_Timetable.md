@@ -73,6 +73,8 @@ must be used and the other one must wait until the next departure. This ends in 
 This additional requirement is implemented for each trainrun start and end nodes. This makes the
 track occupier more realistic, but also more complex.
 
+![track occupier](./images/Overview_Streckengrafik_Screenshot_003.png)
+
 #### Minimum number of tracks on sections
 
 The distance-time diagram provides a graphical overview of the entire corridor of interest and
@@ -89,3 +91,5 @@ By considering the potential conflicts or overlaps in the distance-time diagram,
 capacity can be properly assessed, and appropriate measures can be taken to address any bottlenecks
 or constraints. Again, this information can be helpful in deciding early on whether to continue
 working on the variant or reject it.
+
+![minum number of tracks on sections](./images/Overview_Streckengrafik_Screenshot_003.png)
