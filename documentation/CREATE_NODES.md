@@ -103,7 +103,7 @@ sections) depends on the node position to where the trainrun section is algined 
 The outgoing/incoming edge alginment depends strongly on the position of the node.
 
 If two or more trainrun have at least one identical node (start/end does not matter), the
-trainrun are sorted according to the position of the branching node -from top to bottom or
+trainrun are sorted according to the position of the branching node - from top to bottom or
 from left to right or vice versa.
 
 If two or more trainrun have the same neighbouring nodes, they are sorted by trainrun
