@@ -14,7 +14,8 @@ the trainrun's route, determining where it stops, passes through, or starts and 
 On the other hand, the trainrun section represents a specific segment or portion of a trainrun that
 connects two nodes. It encapsulates all the relevant information related to that particular section,
 including temporal details like departure and arrival times. Additionally, it also stores the
-journey time, which indicates the duration it takes for the trainrun to move from one node to another.
+journey time, which indicates the duration it takes for the trainrun to move from one node to
+another.
 
 The trainrun connection signifies the point in the logistic network where two trains need to
 coordinated to ensure a smooth connection between them.
@@ -112,4 +113,32 @@ classDiagram
     }
 ```
 
+##### Ports alignment
 
+![Port Alignment](./images/PortAlignment.png)
+
+The key concept of network visualization is to obtain a clear and automated representation of
+connections (lines). For this purpose, a routing heuristic is implemented, which arranges the lines
+in a visually organized manner.
+
+To begin with, the heuristic focuses on the pair of nodes that are connected by the trainrun
+section. At each node, a decision is made regarding whether the line exits the node in an
+upward-downward direction or a left-right direction. This decision is based on the following logic:
+If the other node is positioned above, the edge will exit upwards; otherwise, it will exit
+downwards. If the other node is located to the right of the current node, the edge will exit the
+node to the right; conversely, if it is located to the left, the edge will exit to the left. The
+prioritization is given to the upward-downward direction over the left-right direction.
+
+By implementing this routing heuristic, the network visualization achieves an organized
+representation of the lines, ensuring clarity and ease of understanding.
+
+``typescript
+export enum PortAlignment {
+   Top,     // 0
+   Bottom,  // 1
+   Left,    // 2
+   Right    // 3
+}
+``
+
+##### Ports sorting 
