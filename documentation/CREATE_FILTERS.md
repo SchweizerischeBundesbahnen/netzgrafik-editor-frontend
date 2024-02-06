@@ -92,11 +92,12 @@ Modifiy filterable labels
 <summary>
 Filtering Nodes with filterable labels
 </summary>
+
 ![''](./animated_images/compressed/2024-1-25-Filtering-NodeLabels_Editing.gif)
 
-</details>
-
 ![''](./animated_images/compressed/2024-1-25-Filtering-NodeLabels_Editing-FilterOnOff.gif)
+
+</details>
 
 ### Filer text (display)
 
