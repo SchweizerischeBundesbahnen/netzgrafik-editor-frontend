@@ -16,9 +16,9 @@ complex editing and analysis.
 
 o open the filter, click either on the filter symbol in the sidebar on the left or at the bottom
 center of the same filter symbol. This will open the filter sidebar on the left side. Here, you can
-adjust the filter settings. Any changes made to the filter will immediately affect the network map
-or graphical timetable (route graph). When filters are active, the filter symbol will be highlighted
-in red.
+adjust the filter settings. Any changes made to the filter will immediately affect the
+Netzgrafik-Editor or graphic timetable (route graph). When filters are active, the filter symbol
+will be highlighted in red.
 
 If you want to temporarily reset the filtering, click again on the filter symbol at the bottom of
 the menu bar. The filter symbol will display an "x," indicating that the filtering is temporarily
