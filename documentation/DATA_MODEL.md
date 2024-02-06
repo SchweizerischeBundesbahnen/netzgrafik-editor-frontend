@@ -149,7 +149,7 @@ details [VisAVisPortPlacement.placePortsOnSourceAndTargetNode(srcNode, targetNod
 The sorting heuristics description can be found in
 the [chapter](./CREATE_NODES.md#MultipleTrainruns), it is
 worth taking a look there before diving into the source
-code [Node.sortPorts()](./../src/app/models/node.model.ts) for detailed information.
+code [Node.sortPorts()](./../src/app/models/node.model.ts#:~:text=sortPorts) for detailed information.
 
 ##### Pre-computed paths
 
@@ -166,10 +166,10 @@ provided during import.
 
 More details can be found in the source code:
 
-- [Node.computeTransitionRouting()](./../src/app/models/node.model.ts)
-- [Node.computeConnectionRouting()](./../src/app/models/node.model.ts)
-- [TrainrunSection.routeEdgeAndPlaceText()](./../src/app/models/trainrunsection.model.ts)
-- [TrainrunSectionService.initializeTrainrunSectionRouting()](./../src/app/services/data/trainrunsection.service.ts:~:text=initializeTrainrunSectionRouting)
+- [Node.computeTransitionRouting()](./../src/app/models/node.model.tss#:~:text=computeTransitionRouting)
+- [Node.computeConnectionRouting()](./../src/app/models/node.model.tss#:~:text=computeConnectionRouting)
+- [TrainrunSection.routeEdgeAndPlaceText()](./../src/app/models/trainrunsection.model.tss#:~:text=routeEdgeAndPlaceText)
+- [TrainrunSectionService.initializeTrainrunSectionRouting()](./../src/app/services/data/trainrunsection.service.ts#:~:text=initializeTrainrunSectionRouting)
 
 
 
