@@ -76,7 +76,9 @@ track occupier more realistic, but also more complex.
 <summary>
 Example
 </summary>
+
 ![track occupier](./images/Overview_Streckengrafik_Screenshot_004.png)
+
 </details>
 
 #### Minimum number of tracks on sections
@@ -100,5 +102,7 @@ working on the variant or reject it.
 <summary>
 Example
 </summary>
+
 ![minum number of tracks on sections](./images/Overview_Streckengrafik_Screenshot_003.png)
+
 </details>
