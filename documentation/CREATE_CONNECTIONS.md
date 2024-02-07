@@ -15,13 +15,13 @@ Connections can be easily created by following these steps:
 
 ### Create connections
 
-![''](./animated_images/compressed/2024-1-25_DrawConnections.gif)
+[2024-1-25_DrawConnections.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/d5a8837c-187b-4fc8-876a-91ca58085828)
 
 ### Delete connections
 
 To delete a connection, simply release the pin holding the connection outside of the node.
 
-![''](./animated_images/compressed/2024-1-25_DeleteConnections-001.gif)
+[2024-1-25_DeleteConnections-001.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/e6b9ff56-d4c3-4c0b-9cf4-56fe5fa249df)
 
 ### Delete connections with the help of Perlenkette
 
@@ -33,5 +33,4 @@ can see all the connections for a selected train. To delete a connection, follow
 - Once the connections are marked, press the "Delete" key ('delete') to delete all the marked
   connections.
 
-![''](./animated_images/compressed/2024-1-25_DeleteConnections_Perlenkette_select_delete-002.gif)
-
+[2024-1-25_DeleteConnections_Perlenkette_select_delete-002.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/7307f446-fc05-41c3-8c1c-a18d04a7dea2)
