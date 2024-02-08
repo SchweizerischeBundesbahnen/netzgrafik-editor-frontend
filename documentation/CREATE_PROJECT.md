@@ -55,7 +55,7 @@ The data model for the basic concept of Project/Variants includes the following 
   or write access.
 
 - **Variant:** This entity represents a variant within a project. It contains information such as
-  the variant name, variant description, variant type, and other variant-specific data.
+  the variant name and description.
 
 - **Version:** This entity represents a version within a variant. Versions are used to store the
   change history and preserve intermediate changes during the creative process. They allow users to
