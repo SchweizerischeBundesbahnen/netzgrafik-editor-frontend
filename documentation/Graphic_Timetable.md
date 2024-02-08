@@ -11,7 +11,7 @@ To generate the graphic timetable user must follow this steps:
   click on the "Graphical Timetable" icon in the menu bar at the bottom.
 - The graphical timetable view will open.
 
-![Streckengrafik](./animated_images/compressed/2024-01-25-Project_Along_Trainrun_Streckengrafik.gif)
+[2024-01-25-Project_Along_Trainrun_Streckengrafik.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/212abe60-6cba-4ac9-96b9-93e923022b75)
 
 #### Explanation
 
