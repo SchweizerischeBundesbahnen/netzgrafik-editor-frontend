@@ -47,7 +47,7 @@ For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.m
 
 ### Data Model
 
-The data model for the basic concept of "Project", "Variants" includes the following entities:
+The data model for the basic concept of Project/Variants includes the following entities:
 
 - **Project:** This entity represents a project. It contains information such as the project name,
   project
