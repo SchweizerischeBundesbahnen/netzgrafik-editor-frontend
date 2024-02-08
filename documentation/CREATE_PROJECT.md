@@ -13,7 +13,7 @@ management of associated variants to each project.
 ### Create a new Project
 
 To create a new project, simply click on the "+" symbol and enter a name, an abstract, and a short
-description. Know you have created a first project that can contain multiple variants.
+description. Now you have created a first project that can contain multiple variants.
 
 [29-01-2024-001-Create_new_project.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/4e34d3a2-5291-4193-ac88-5e522f6223f7)
 
