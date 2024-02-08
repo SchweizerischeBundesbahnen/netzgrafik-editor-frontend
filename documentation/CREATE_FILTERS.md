@@ -11,7 +11,7 @@ views.
 To open the filter, click either on the filter symbol in the sidebar on the left or at the bottom
 center in the menu bar. This will open the filter sidebar on the left side.
 Here, you can adjust the filter settings. Any changes made to the filter will immediately affect the
-Netzgrafik-Editor or graphic timetable (route graph). When filters are active, the filter symbol
+Netzgrafik or graphic timetable (route graph). When filters are active, the filter symbol
 will be highlighted in red.
 
 If you want to temporarily reset the filtering, click again on the filter symbol at the bottom of
@@ -30,7 +30,7 @@ service, you can proceed as follows:
   desired trains.
 
 - Frequency filtering: If you want to view trains with a specific frequency, specify it. For
-  example, you can search for trains that run every half hour, hourly, or every two hours.
+  example, you can filter for trains that run every half hour, hourly, or every two hours.
 
 - Service during specific periods: Filter the trains according to specific times, such as peak
   hours, off-peak hours, or irregular service. This allows you to display trains that operate only
@@ -57,10 +57,11 @@ When clicking on a label (button), a dialog window opens with three functions: r
 apply the label globally or to all nodes, trains, or notes.
 
 - Rename: Allows you to change the name of the label.
-- Delete: Removes the label. If applied globally, it will be removed from all nodes, trains, or
-  notes.
-- Apply globally: Transfers the label to all nodes, trains, or notes. This means that the label will
-  be added to all existing and future nodes, trains, or notes.
+- Delete: Removes the label globally, means it will be removed from all visible elements, such as
+  nodes, trains, or notes. (If filtering is active the label might be still in use and therefore it
+  can not be deleted.)
+- Apply: Transfers the label to all visble elements such as nodes, trains, or notes. This means that
+  the label will be added to all existing and future nodes, trains, or notes.
 
 These functions provide flexibility in managing and customizing labels according to your needs.
 
