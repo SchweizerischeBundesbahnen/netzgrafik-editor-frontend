@@ -63,14 +63,11 @@ The data model for the basic concept of Project/Variants includes the following 
 
 The relationship between the entities is as follows:
 
-- A project can have multiple variants (one-to-many relationship).
-- A variant belongs to exactly one project (one-to-one relationship).
-- A variant can have multiple versions (one-to-many relationship).
-- A version belongs to exactly one variant (one-to-one relationship).
-  The data model version 1.0 provides a basic structure for representing projects, variants, and
-  versions. It supports capturing and preserving version history for variants within projects.
-  Further
-  enhancements can be made based on specific requirements and additional data points.
+```mermaid
+classDiagram
+    Variant ---* Project
+    Version ---* Variant
+```
 
 A user has to publish a version of a variant when he is ready with editing/creating the variant.
 Only publish version becomes visible to all other users with access rights. Until the version is
