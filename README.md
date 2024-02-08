@@ -158,7 +158,6 @@ cd netzgrafik-editor-frontend
 
 ```
 
-#### The
 
 ```shell
 # install all npm dependencies
