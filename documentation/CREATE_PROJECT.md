@@ -64,9 +64,9 @@ The data model for the basic concept of Project/Variants includes the following 
 The relationship between the entities is as follows:
 
 ```mermaid
-classDiagram
-    Variant ---* Project
-    Version ---* Variant
+erDiagram
+    Project o|--|{ Variant : has
+    Variant o|--|{ Version : has 
 ```
 
 A user has to publish a version of a variant when he is ready with editing/creating the variant.
