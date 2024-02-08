@@ -147,8 +147,7 @@ To delete a train in the project, follow these steps:
 #### Delete nodes
 
 To delete a node, ensure there is no trainrun selected. Move with the mouse pointer over the node
-to delete and press 'delete'. Deleting a node causes all train sections connected to the node to be
-deleted to be deleted.
+to delete and press 'delete'. Deleting a node causes all train sections connected to the node to be deleted.
 
 #### Delete notes
 
