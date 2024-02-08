@@ -58,10 +58,10 @@ apply the label globally or to all nodes, trains, or notes.
 
 - Rename: Allows you to change the name of the label.
 - Delete: Removes the label globally, means it will be removed from all visible elements, such as
-  nodes, trains, or notes. (If filtering is active the label might be still in use and therefore it
-  can not be deleted.)
+  nodes, trains, or notes. (If filtering is active the label might be still in use in unvisible
+  elements therefore it can not be deleted.)
 - Apply: Transfers the label to all visble elements such as nodes, trains, or notes. This means that
-  the label will be added to all existing and future nodes, trains, or notes.
+  the label will be added to all visible nodes, trains, or notes.
 
 These functions provide flexibility in managing and customizing labels according to your needs.
 
