@@ -156,15 +156,35 @@ git clone https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-fronte
 # switch into folder
 cd netzgrafik-editor-frontend
 
+```
+
+#### The
+
+```shell
 # install all npm dependencies
 npm install
 
 # start ng server (connects to local backend, make sure it is set up and running)
 npm run start
-
-# open address in browser http://localhost:4200/
-# Login with username "user" and password "user"
 ```
+
+#### The dockerized variant
+
+```shell
+# install 
+apt install docker
+apt install docker-compose-plugin
+
+# build 
+docker compose build
+
+# run
+docker compose up
+```
+
+> # open address in browser http://localhost:4200/
+> # Login with username "user" and password "user"
+
 
 ### Testing
 
