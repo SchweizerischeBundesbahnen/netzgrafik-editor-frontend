@@ -97,14 +97,18 @@ To show/hide elements, you can use the following steps:
 <summary>
 Show/hide times and trainrun names
 </summary>
+
 [2024-1-25-Filtering-Display_Text.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/5c118c27-6fad-499e-a1f9-9c39afb1107b)
+
 </details>
 
 <details>
 <summary>
 Show/hide connections
 </summary>
+
 [2024-1-25-Filtering-Display_Text-001.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/0852cc32-2215-4c57-9544-77b3da1bd44b)
+
 </details>
 
 ### Saved filters
