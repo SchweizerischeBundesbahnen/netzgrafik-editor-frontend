@@ -5,6 +5,7 @@
 Netzgrafik-Editor – designed to make better decisions.
 </summary>
 
+> 
 >
 > **Flexible level of detail** - start with a rough sketch, continuously add more detail
 > 
