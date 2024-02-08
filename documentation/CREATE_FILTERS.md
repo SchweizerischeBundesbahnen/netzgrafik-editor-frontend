@@ -114,5 +114,4 @@ Show/hide connections
 ### Saved filters
 
 The function for saving filters makes it possible to save filter settings so that they can be used
-again quickly. It is possible to create, edit and save saved filters. These saved filters are stored
-within the respective project variant. 
+again quickly. These saved filters are stored within the respective project variant. 
