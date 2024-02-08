@@ -58,6 +58,10 @@ Regular-interval timetable
 
 </details>
 
+
+![Netzgrafik-Editor](./documentation/images/Overview_Editor_Screenshot_001.PNG)
+
+
 It offers various functions to enhance the efficiency and optimization of the logistics network.
 Some of the key features include:
 
@@ -90,8 +94,6 @@ Some of the key features include:
 - **Rolling Stock Calculation:** The software calculates the required number of rolling stocks based
   on the timetable,
   supporting fleet sizing.
-
-![Netzgrafik-Editor](./documentation/images/Overview_Editor_Screenshot_001.PNG)
 
 ## Origin and Open Source Collaboration
 
