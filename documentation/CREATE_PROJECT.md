@@ -19,8 +19,8 @@ description. Now you have created a first project that can contain multiple vari
 
 ### Create a new Variant within a project
 
-To create a new variant of a project, simply click on the "+" symbol and enter a name. If you have
-already created a new variant in the project, the editor will open automatically.
+To create a new variant of a project, simply click on the "+" symbol and enter a name. As soon as you have
+created a new variant in the project, the editor will open automatically.
 
 [29-01-2024-002-create_new_variant.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/1af2c5f5-84cf-43b1-bf3d-85c0ef692ff0)
 
