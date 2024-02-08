@@ -9,14 +9,14 @@ Netzgrafik.
 To create a new project, simply click on the "+" symbol and enter a name, an abstract, and a short
 description. You have already created a project that can contain multiple variants.
 
-![Create new project](./animated_images/compressed/29-01-2024-001-Create_new_project.gif)
+[29-01-2024-001-Create_new_project.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/4e34d3a2-5291-4193-ac88-5e522f6223f7)
 
 ### Create a new Variant within a project
 
 To create a new variant of a project, simply click on the "+" symbol and enter a name. If you have
 already created a new variant in the project, the editor will open automatically.
 
-![Create new variant](./animated_images/compressed/29-01-2024-002-create_new_variant.gif)
+[29-01-2024-002-create_new_variant.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/1af2c5f5-84cf-43b1-bf3d-85c0ef692ff0)
 
 ### Become creative (start editing)
 
@@ -27,7 +27,7 @@ nodes from which users can draw trainruns with their sections. In most projects 
 required. If so press (ctrl+a) to select all elements of the current Netzgrafik and press 'delete'
 to remove them.
 
-![Create variant data](./animated_images/compressed/29-01-2024-003-clear_variant_data.gif)
+[29-01-2024-003-clear_variant_data.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/47c7a9e5-5c4a-4159-a7fa-141347dae264)
 
 #### Create/import nodes
 
