@@ -1,7 +1,5 @@
 ## Trainruns
 
-![Editing_Connections](./images/Draw_New_TrainrunSection.png)
-
 ### Create new trainrun
 
 With the help of the left mouse button and keyboard you can create or modify any trainrun.
