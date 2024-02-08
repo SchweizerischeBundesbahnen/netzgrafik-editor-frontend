@@ -26,7 +26,7 @@ disabled. Clicking again will reactivate the filter.
 
 To completely reset the filter, click on "Reset Filter" in the filter sidebar.
 
-![''](./animated_images/compressed/2024-1-25-Filtering-001.gif)
+[2024-1-25-Filtering-001.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/60666fab-3ce3-4b73-b312-5bd28a1caee8)
 
 To filter trains based on the criteria of train category, frequency, peak-hour service, and off-peak
 service, you can proceed as follows:
@@ -75,7 +75,7 @@ These functions provide flexibility in managing and customizing labels according
 Filtering trainrun with filterable labels
 </summary>
 
-![''](./animated_images/compressed/2024-1-25-Filtering-002.gif)
+[2024-1-25-Filtering-002.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/833ad548-0e1b-4e89-9746-346f1213bc19)
 
 </details>
 
@@ -84,15 +84,15 @@ Filtering trainrun with filterable labels
 Filtering nodes with filterable labels
 </summary>
 
-![''](./animated_images/compressed/2024-1-25-Filtering-NodeLabels_Editing.gif)
+[2024-1-25-Filtering-NodeLabels_Editing.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/270b769d-f0a4-41c9-a01b-913931220326)
 
-![''](./animated_images/compressed/2024-1-25-Filtering-NodeLabels_Editing-FilterOnOff.gif)
+[2024-1-25-Filtering-NodeLabels_Editing-FilterOnOff.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/c8f8a287-5ab5-421d-8b53-d403ba3c243f)
 
 </details>
 
 #### Modifiy filterable labels
 
-![''](./animated_images/compressed/2024-1-25-Filtering-Modify_Labelgroups_003.gif)
+[2024-1-25-Filtering-Modify_Labelgroups_003.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/d9fd62d5-3233-425c-8489-d80c7fe6f558)
 
 ### Filter display
 
@@ -102,15 +102,14 @@ To show/hide elements, you can use the following steps:
 <summary>
 Show/hide times and trainrun names
 </summary>
-![''](./animated_images/compressed/2024-1-25-Filtering-Display_Text.gif)
-
+[2024-1-25-Filtering-Display_Text.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/5c118c27-6fad-499e-a1f9-9c39afb1107b)
 </details>
 
 <details>
 <summary>
 Show/hide connections
 </summary>
-![''](./animated_images/compressed/2024-1-25-Filtering-Display_Text-001.gif)
+[2024-1-25-Filtering-Display_Text-001.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/0852cc32-2215-4c57-9544-77b3da1bd44b)
 </details>
 
 ### Saved filters
