@@ -1,6 +1,6 @@
 ## Filters
 
-In the network Netzgrafik-Editor, the "What You See Is What You Get" principle applies.
+In the Netzgrafik-Editor, the "What You See Is What You Get" principle applies.
 This means that everything you have displayed will be drawn, analyzed, and can be edited.
 Therefore, the filtering function plays a crucial role. It offers a wide range of possibilities,
 from simple filtering to very complex and user-specific settings, allowing you to create complex
