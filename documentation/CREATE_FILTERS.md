@@ -6,12 +6,6 @@ Therefore, the filtering function plays a crucial role. It offers a wide range o
 from simple filtering to very complex and user-specific settings, allowing you to create complex
 views.
 
-In the Netzgrafik-Editor, the "What You See Is What You Get" principle applies. This means that
-everything you have displayed will be drawn, analyzed, and can be edited. Therefore, the filtering
-function plays a crucial role. It offers a wide range of possibilities, from simple filtering to
-very complex and user-specific settings, allowing you to create complex views. This allows for
-complex editing and analysis.
-
 ### Basic filtering
 
 o open the filter, click either on the filter symbol in the sidebar on the left or at the bottom
