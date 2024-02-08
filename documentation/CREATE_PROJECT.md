@@ -49,14 +49,14 @@ For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.m
 
 The data model for the basic concept of "Project", "Variants" includes the following entities:
 
-- Project: This entity represents a project. It contains information such as the project name,
+- **Project:** This entity represents a project. It contains information such as the project name,
   project
   description, project start and end time, and other project-related data.
 
-- Variant: This entity represents a variant within a project. It contains information such as the
+- **Variant:** This entity represents a variant within a project. It contains information such as the
   variant name, variant description, variant type, and other variant-specific data.
 
-- Version: This entity represents a version within a variant. Versions are used to store the change
+- **Version:** This entity represents a version within a variant. Versions are used to store the change
   history and preserve intermediate changes during the creative process. They allow users to restore
   any previous version if needed.
   The relationship between the entities is as follows:
