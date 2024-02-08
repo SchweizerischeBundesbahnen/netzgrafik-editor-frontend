@@ -8,7 +8,7 @@ latest version, all intermediate versions are removed, and the new version is pe
 If the user wants different variants to study, he can duplicate any version to create a new
 independently editable variant within the project. When working on different projects, it is
 recommended that the user creates a separate project for each project. This allows for separate
-management of associated specific variants to each project.
+management of associated variants to each project.
 
 ### Create a new Project
 
