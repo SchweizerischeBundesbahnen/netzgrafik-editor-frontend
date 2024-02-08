@@ -19,7 +19,8 @@ description. Now you have created a first project that can contain multiple vari
 
 ### Create a new Variant within a project
 
-To create a new variant of a project, simply click on the "+" symbol and enter a name. As soon as you have
+To create a new variant of a project, simply click on the "+" symbol and enter a name. As soon as
+you have
 created a new variant in the project, the editor will open automatically.
 
 [29-01-2024-002-create_new_variant.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/1af2c5f5-84cf-43b1-bf3d-85c0ef692ff0)
@@ -50,16 +51,15 @@ For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.m
 The data model for the basic concept of Project/Variants includes the following entities:
 
 - **Project:** This entity represents a project. It contains information such as the project name,
-  project
-  description, project start and end time, and other project-related data.
+  project description, and other project-related data, such as users identifiers with read
+  or write access.
 
-- **Variant:** This entity represents a variant within a project. It contains information such as the
-  variant name, variant description, variant type, and other variant-specific data.
+- **Variant:** This entity represents a variant within a project. It contains information such as
+  the variant name, variant description, variant type, and other variant-specific data.
 
-- **Version:** This entity represents a version within a variant. Versions are used to store the change
-  history and preserve intermediate changes during the creative process. They allow users to restore
-  any previous version if needed.
-  The relationship between the entities is as follows:
+- **Version:** This entity represents a version within a variant. Versions are used to store the
+  change history and preserve intermediate changes during the creative process. They allow users to
+  restore any previous version if needed.  
 
 The relationship between the entities is as follows:
 
