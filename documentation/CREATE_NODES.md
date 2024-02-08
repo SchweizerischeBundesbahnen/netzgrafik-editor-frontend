@@ -74,9 +74,9 @@ region label.
 
 ### Move nodes
 
-If you move a node - the Netzgrafik routes all to the node aligned trainrun sections
-automatically. The Netzgrafik recalculates the routing layout and results in a new well aligned
-readable graphical layout.
+When one or more node(s) is/are repositioned (moved), the edge paths of all train segments at the
+node are redrawn using a heuristic to minimize the number of overlapping edges. The Netzgrafik
+recalculates the routing layout and results in a new well aligned readable graphical layout.
 
 If you want to move a node process as follows:
 
