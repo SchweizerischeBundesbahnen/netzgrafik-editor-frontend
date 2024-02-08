@@ -113,8 +113,7 @@ To duplicate a train in the project, follow these steps:
   open, allowing you to edit the train's details. Make the necessary changes to the train name or
   any other relevant information.
 
-![''](./animated_images/compressed/2024-1-25-Duplicate_Trainrun_ctr_d.gif)
-
+[2024-1-25-Duplicate_Trainrun_ctr_d.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/d04b45e1-c032-4449-a5aa-d7a8f27b43ea)
 
 > **Optional:** Edit the train in the [Perlenkette](#Perlenkette)
 
@@ -160,15 +159,15 @@ to delete and press 'delete'.
 
 ### Copy all visible elements
 
-![''](./animated_images/compressed/2024-1-25-SelectAll_ctrl-a-and-copy-ctrl-c.gif)
+[2024-1-25-SelectAll_ctrl-a-and-copy-ctrl-c.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/9d39523b-4770-4494-9aaa-092780451db7)
 
 ### Insert copied elements
 
-![''](./animated_images/compressed/2024-1-25-CtrlV-Insert_copied.gif)
+[2024-1-25-CtrlV-Insert_copied.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/5c3cd5ff-d505-4f59-bd31-2f12ed62818c)
 
 ### Delete all visible elements
 
-![''](./animated_images/compressed/2024-1-25-SelectAll-ctrl_a-delete.gif)
+[2024-1-25-SelectAll-ctrl_a-delete.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/87c9ee98-98ce-4a20-961a-b878a62aec67)
 --->
 
 ---
@@ -234,10 +233,7 @@ To access it, select a train first. Then, by clicking on the train again, the Pe
 on the right side,
 displaying the train's route as a vertical chain of nodes and trainrunsections.
 
-![''](./animated_images/compressed/2024-1-25_DeleteConnections-Perlenkette-Show_Connections.gif)
-
-
-
+[2024-1-25_DeleteConnections-Perlenkette-Show_Connections.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/d272fc58-3f31-4427-aacf-cc3c50c03905)
 
 ---
 <a id="Conclusion"></a>

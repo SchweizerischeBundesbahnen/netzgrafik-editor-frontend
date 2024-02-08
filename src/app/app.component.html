@@ -2,29 +2,6 @@
 
   <sbb-app-chooser-section label="Seitenmenu" class="noprint">
   </sbb-app-chooser-section>
-  <sbb-app-chooser-section label="Dankesagung" class="noprint">
-    <h3>Idee</h3>
-    <b>Adrian Egli</b> Erik Nygren <br> Christian Eichenberger
-    <h3>Fach</h3>
-    <b>Martin Sojka</b>Corelia Reichen
-    <h3>UX</h3>
-    <b>Tim Schoch</b>Sibylle Trenck <br>Dina Dändliker<br>Simona Manetsch
-    <h3>Entwicklung</h3>
-    <b>Adrian Egli</b> Christian Baumberger <br> Simon Bühlmann <br> Samuel Ueltschi <br> Marc Simon <br> Ensar Memeti
-    <h3>Ein spezielles Dankeschön</h3>
-    <a href="https://sbb.sharepoint.com/sites/innovationsmanagement-sbb-infrastruktur/SitePages/InnoCircle.aspx"
-       class="nav-element">
-      InnoCircle </a>
-    Ausschuss Innovation Infrastruktur
-    <br>
-    <h6>
-      Schweizerische Bundesbahnen (SBB CFF FFS)
-      <br>
-      <br>DSO Trasse - ART KaMa - Mounties : 2023 -
-      <br>Digital Service Analytics : 2021 - 2023
-      <br>Plattform für Forschung & Innovation : 2019 - 2020
-    </h6>
-  </sbb-app-chooser-section>
   <sbb-header-environment class="noprint">{{ environmentLabel }}</sbb-header-environment>
   <sbb-usermenu class="noprint" [menu]="menu" *ngIf="authenticated | async" [userName]="email" [displayName]="userName">
     <sbb-icon svgIcon="user-small" *sbbIcon></sbb-icon>

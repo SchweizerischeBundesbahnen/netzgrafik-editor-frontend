@@ -22,7 +22,7 @@ the window or press 'ESC' to close the dialog window.
 > - If you click on the trainrun - its gets selected and you can modify it.
 > - Click for a second time the Perlenkette gets opened.
 
-![start creating trainrun](./animated_images/compressed/29-01-2024-005-start-creating_trainrun.gif)
+[29-01-2024-005-start-creating_trainrun.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/bc23f079-3aa6-4725-af6f-da4a53627ca3)
 
 For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
 
@@ -37,7 +37,7 @@ To create a new train or adding new trainrun section to an existing trainrun, pr
 - Configure the train route: Give the new train an appropriate name and specify the necessary
   details, such as train number or other relevant information.
 
-![''](./animated_images/compressed/2024-01-25-Create_New_Trainrun.gif)
+[2024-01-25-Create_New_Trainrun.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/99823c8a-b48a-427e-a981-dc9652fde7a1)
 
 > **Note:** Importantly, you don't have to select a train route to create a new trainrun -
 > otherwise, you modify the selected trainrun
@@ -59,9 +59,9 @@ To reroute a train, follow these steps:
   stopping transition or it just removed the non-stop transition. For both cases it reroutes the
   trainrun by removing the node alginment where the hexagon/transition was.
 
-![''](./animated_images/compressed/2024-1-25-Rerouting_extend_remove_trainrunsections-001.gif)
+[2024-1-25-Rerouting_extend_remove_trainrunsections-001.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/d697594c-57a8-4159-b44f-8a9f804f297f)
 
-![''](./animated_images/compressed/2024-1-25-Rerouting_trainrunsections-001.gif)
+[2024-1-25-Rerouting_trainrunsections-001.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/9368c34c-fddf-4698-abf6-e07afba5a1d6)
 
 ### Delete a trainrun section
 
@@ -82,8 +82,4 @@ To switch a train from a stop to a non-stop at a node, follow these steps:
 - Access trainrun transitions: Locate the hexagon button within the node representation. This button
   signifies trainrun transitions (stop/non-stop).
 
-![''](./animated_images/compressed/2024-01-25-Toogle_Stop_NonStop_trainrun_at_node.gif)
- 
-
-
-
+[2024-01-25-Toogle_Stop_NonStop_trainrun_at_node.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/8a72350c-ed19-4395-8183-c33dfe824c5a)

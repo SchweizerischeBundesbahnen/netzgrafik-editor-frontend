@@ -10,7 +10,7 @@ Whenever you need to create a new node. You should follow these steps:
 - A new node will be created, and the node editor window will open on the right-hand side.
 - In the node editor window, you can edit all the information about the newly created node.
 
-![Create new nodes](./animated_images/compressed/29-01-2024-005-create_nodes.gif)
+[29-01-2024-005-create_nodes.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/8ba6957c-de8e-467c-b7ae-c71b451d014e)
 
 ### Import nodes from a semicolon-seperate-value file (CSV)
 
@@ -19,7 +19,7 @@ creating very quickly the required nodes and the defaults used for planning. In 
 properties, such as default stopping times (per trainrun type), node positions can also be imported
 so that the layout comes directly from the import.
 
-![import basedata](./animated_images/compressed/29-01-2024-004-import_basedata.gif)
+[29-01-2024-004-import_basedata.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/93196b1b-31d0-4993-a0eb-7ffb7689bed6)
 
 <details>
 <summary>Import CSV interface description
@@ -94,7 +94,7 @@ If you want to move a node process as follows:
 This example shows how a trainrun is aligned to a node. The outgoing/incoming edge (trainrun
 sections) depends on the node position to where the trainrun section is algined to.
 
-![node move small](./animated_images/compressed/29-01-2024-006-move-nodes-reroute_trainrun.gif)
+[29-01-2024-006-move-nodes-reroute_trainrun.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/9ffb18c9-3f47-4bec-b7da-6368037b6a5f)
 
 <a id="MultipleTrainruns"></a>
 
@@ -119,12 +119,11 @@ aligned.
 > - Trainrun (drawing order)
 > - Trainrun section (drawing order)
 
-![node move big](./animated_images/compressed/29-01-2024-006-move-nodes-reroute_trainrun-big.gif)
+[29-01-2024-006-move-nodes-reroute_trainrun-big.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/525545e1-7097-4187-8424-a3ae68b8985f)
 
 ##### Inserting and deleting of trainruns
 
 Inserting and deleting trainrun sections affects the pin orders (edge ordering) and the node size
 (height, width).
 
-![node move big](./animated_images/compressed/2024-1-25-Move_nodes_reoute_notes_ports.gif)
-
+[2024-1-25-Move_nodes_reoute_notes_ports.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/96e6492d-1c71-4e38-838c-3ce51c80747a)
