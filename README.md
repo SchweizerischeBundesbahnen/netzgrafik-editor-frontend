@@ -5,7 +5,7 @@
 Netzgrafik-Editor – designed to make better decisions.
 </summary>
 
-> 
+> ---
 >
 > **Flexible level of detail** - start with a rough sketch, continuously add more detail
 > 
@@ -33,6 +33,8 @@ of regular-interval timetable.
 Regular-interval timetable
 </summary>
 
+> ---
+> 
 > Regular-interval timetables were first developed in Germany at the beginning of the 20th century
 > to coordinate urban traffic in large cities such as Berlin.
 >
