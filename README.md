@@ -181,7 +181,10 @@ docker compose build
 docker compose up
 ```
 
+#### Access to Netzgrafik-Editor frontend 
+
 > open address in browser http://localhost:4200/
+> 
 > Login with username **user** and password **user**
 
 
