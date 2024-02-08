@@ -8,7 +8,7 @@ views.
 
 ### Basic filtering
 
-o open the filter, click either on the filter symbol in the sidebar on the left or at the bottom
+To open the filter, click either on the filter symbol in the sidebar on the left or at the bottom
 center of the same filter symbol. This will open the filter sidebar on the left side. Here, you can
 adjust the filter settings. Any changes made to the filter will immediately affect the
 Netzgrafik-Editor or graphic timetable (route graph). When filters are active, the filter symbol
