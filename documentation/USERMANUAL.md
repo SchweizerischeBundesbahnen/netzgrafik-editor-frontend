@@ -156,8 +156,7 @@ To delete a note, ensure there is no trainrun selected. Move with the mouse poin
 to delete and press 'delete'.
 
 
-<!--- 
-
+ 
 ### Copy all visible elements
 
 [2024-1-25-SelectAll_ctrl-a-and-copy-ctrl-c.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/9d39523b-4770-4494-9aaa-092780451db7)
@@ -169,7 +168,7 @@ to delete and press 'delete'.
 ### Delete all visible elements
 
 [2024-1-25-SelectAll-ctrl_a-delete.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/87c9ee98-98ce-4a20-961a-b878a62aec67)
---->
+ 
 
 ---
 <a id="Nodes"></a>
