@@ -181,8 +181,8 @@ docker compose build
 docker compose up
 ```
 
-> # open address in browser http://localhost:4200/
-> # Login with username "user" and password "user"
+> open address in browser http://localhost:4200/
+> Login with username **user** and password **user**
 
 
 ### Testing
