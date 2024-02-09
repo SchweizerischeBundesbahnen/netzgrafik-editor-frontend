@@ -1,9 +1,8 @@
-import {PerlenketteItem} from './perlenketteItem';
-import {PerlenketteNode} from './perlenketteNode';
-import {Node} from '../../models/node.model';
+import { PerlenketteItem } from './perlenketteItem';
+import { PerlenketteNode } from './perlenketteNode';
+import { Node } from '../../models/node.model';
 
 export class PerlenketteSection implements PerlenketteItem {
-
   constructor(
     public trainrunSectionId: number,
     public travelTime: number,
@@ -11,8 +10,7 @@ export class PerlenketteSection implements PerlenketteItem {
     public toNode: Node,
     public numberOfStops: number,
     public isBeingEdited: boolean = false,
-  ) {
-  }
+  ) {}
 
   isPerlenketteNode(): boolean {
     return false;

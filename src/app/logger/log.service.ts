@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {LogPublisher} from './log.publishers';
-import {LogPublishersService} from './log.publishers.service';
+import { Injectable } from '@angular/core';
+import { LogPublisher } from './log.publishers';
+import { LogPublishersService } from './log.publishers.service';
 
 export enum LogLevel {
   All = 0,
@@ -9,11 +9,11 @@ export enum LogLevel {
   Warn = 3,
   Error = 4,
   Fatal = 5,
-  Off = 6
+  Off = 6,
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LogService {
   level: LogLevel = LogLevel.All;
@@ -62,14 +62,17 @@ export class LogService {
       entry.logWithDate = this.logWithDate;
 
       for (const logger of this.publishers) {
-        logger.log(entry).subscribe(response => console.log(response));
+        logger.log(entry).subscribe((response) => console.log(response));
       }
     }
   }
 
   private shouldLog(level: LogLevel): boolean {
     let ret = false;
-    if ((level >= this.level && level !== LogLevel.Off) || this.level === LogLevel.All) {
+    if (
+      (level >= this.level && level !== LogLevel.Off) ||
+      this.level === LogLevel.All
+    ) {
       ret = true;
     }
     return ret;
@@ -104,7 +107,7 @@ export class LogEntry {
     let ret: string = params.join(',');
 
     // Is there at least one object in the array?
-    if (params.some(p => typeof p === 'object')) {
+    if (params.some((p) => typeof p === 'object')) {
       ret = '';
 
       // Build comma-delimited string
@@ -116,4 +119,3 @@ export class LogEntry {
     return ret;
   }
 }
-

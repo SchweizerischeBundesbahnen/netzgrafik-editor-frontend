@@ -1,19 +1,20 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {ViewBoxChangeInfo} from '../../model/util/viewBoxChangeInfo';
-import {TimeSliderService} from '../time-slider.service';
-import {ResizeService} from './resize.service';
-import {takeUntil} from 'rxjs/operators';
-import {SliderChangeInfo} from '../../model/util/sliderChangeInfo';
-import {ResizeChangeInfo} from '../../model/util/resizeChangeInfo';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { ViewBoxChangeInfo } from '../../model/util/viewBoxChangeInfo';
+import { TimeSliderService } from '../time-slider.service';
+import { ResizeService } from './resize.service';
+import { takeUntil } from 'rxjs/operators';
+import { SliderChangeInfo } from '../../model/util/sliderChangeInfo';
+import { ResizeChangeInfo } from '../../model/util/resizeChangeInfo';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ViewBoxService implements OnDestroy {
-
-  private readonly viewBoxChangeInfoSubject = new BehaviorSubject<ViewBoxChangeInfo>(new ViewBoxChangeInfo());
-  private readonly viewBoxChangeInfo$ = this.viewBoxChangeInfoSubject.asObservable();
+  private readonly viewBoxChangeInfoSubject =
+    new BehaviorSubject<ViewBoxChangeInfo>(new ViewBoxChangeInfo());
+  private readonly viewBoxChangeInfo$ =
+    this.viewBoxChangeInfoSubject.asObservable();
 
   private readonly destroyed$ = new Subject<void>();
 
@@ -24,16 +25,18 @@ export class ViewBoxService implements OnDestroy {
     private readonly timeSliderService: TimeSliderService,
     private readonly resizeService: ResizeService,
   ) {
-    this.timeSliderService.getSliderChangeObservable()
+    this.timeSliderService
+      .getSliderChangeObservable()
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(sliderChangeInfo => {
+      .subscribe((sliderChangeInfo) => {
         this.sliderChangeInfo = sliderChangeInfo;
         this.renderViewBox();
       });
 
-    this.resizeService.getResizeChangeInfo()
+    this.resizeService
+      .getResizeChangeInfo()
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(resizeChangeInfo => {
+      .subscribe((resizeChangeInfo) => {
         this.resizeChangeInfo = resizeChangeInfo;
         this.renderViewBox();
       });
@@ -54,7 +57,8 @@ export class ViewBoxService implements OnDestroy {
         0,
         this.sliderChangeInfo.move,
         this.resizeChangeInfo.width,
-        this.resizeChangeInfo.height)
+        this.resizeChangeInfo.height,
+      ),
     );
   }
 }

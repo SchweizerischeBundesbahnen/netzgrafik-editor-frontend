@@ -1,6 +1,6 @@
-import {TransitionDto} from '../data-structures/technical.data.structures';
-import {Vec2D} from '../utils/vec2D';
-import {Trainrun} from './trainrun.model';
+import { TransitionDto } from '../data-structures/technical.data.structures';
+import { Vec2D } from '../utils/vec2D';
+import { Trainrun } from './trainrun.model';
 
 export class Transition {
   private static currentId = 0;
@@ -13,12 +13,14 @@ export class Transition {
   private trainrun: Trainrun;
   private path: Vec2D[];
 
-  constructor({id, port1Id, port2Id, isNonStopTransit}: TransitionDto = {
-    id: Transition.incrementId(),
-    port1Id: 0,
-    port2Id: 0,
-    isNonStopTransit: false
-  }) {
+  constructor(
+    { id, port1Id, port2Id, isNonStopTransit }: TransitionDto = {
+      id: Transition.incrementId(),
+      port1Id: 0,
+      port2Id: 0,
+      isNonStopTransit: false,
+    },
+  ) {
     this.id = id;
     this.port1Id = port1Id;
     this.port2Id = port2Id;
@@ -86,7 +88,7 @@ export class Transition {
       id: this.id,
       port1Id: this.port1Id,
       port2Id: this.port2Id,
-      isNonStopTransit: this.isNonStopTransit
+      isNonStopTransit: this.isNonStopTransit,
     };
   }
 }

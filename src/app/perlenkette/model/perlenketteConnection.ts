@@ -1,7 +1,7 @@
-import {Trainrun} from '../../models/trainrun.model';
-import {Port} from '../../models/port.model';
-import {Connection} from '../../models/connection.model';
-import {Node} from '../../models/node.model';
+import { Trainrun } from '../../models/trainrun.model';
+import { Port } from '../../models/port.model';
+import { Connection } from '../../models/connection.model';
+import { Node } from '../../models/node.model';
 
 export class PerlenketteConnection {
   constructor(
@@ -19,7 +19,6 @@ export class PerlenketteConnection {
     public id: number,
     public nodeId: number,
     public connection: Connection,
-    public node: Node
-  ) {
-  }
+    public node: Node,
+  ) {}
 }

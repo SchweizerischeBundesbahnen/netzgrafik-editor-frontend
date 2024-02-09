@@ -1,22 +1,27 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Subject} from 'rxjs';
-import {LogService} from '../../logger/log.service';
-import {LabelDto, LabelRef} from '../../data-structures/business.data.structures';
-import {Label} from '../../models/label.model';
-import {LabelGroupService} from './labelgroup.service';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { LogService } from '../../logger/log.service';
+import {
+  LabelDto,
+  LabelRef,
+} from '../../data-structures/business.data.structures';
+import { Label } from '../../models/label.model';
+import { LabelGroupService } from './labelgroup.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LabelService implements OnDestroy {
   labelSubject = new BehaviorSubject<Label[]>([]);
   readonly labels = this.labelSubject.asObservable();
-  private labelStore: { labels: Label[] } = {labels: []}; // store the data in memory
+  private labelStore: { labels: Label[] } = { labels: [] }; // store the data in memory
 
   private destroyed = new Subject<void>();
 
-  constructor(private logService: LogService,
-              private labelGroupService: LabelGroupService) {
+  constructor(
+    private logService: LogService,
+    private labelGroupService: LabelGroupService,
+  ) {
     labelGroupService.setLabelService(this);
   }
 
@@ -34,17 +39,25 @@ export class LabelService implements OnDestroy {
   }
 
   doUserDefinedLabelsOrdering(labelIds: number[]) {
-    const removedLabels = this.labelStore.labels.filter((el: Label) => labelIds.includes(el.getId()));
-    const others = this.labelStore.labels.filter((el: Label) => !labelIds.includes(el.getId()));
+    const removedLabels = this.labelStore.labels.filter((el: Label) =>
+      labelIds.includes(el.getId()),
+    );
+    const others = this.labelStore.labels.filter(
+      (el: Label) => !labelIds.includes(el.getId()),
+    );
     labelIds.forEach((labelId) => {
-      const labelObject = removedLabels.find((el: Label) => el.getId() === labelId);
+      const labelObject = removedLabels.find(
+        (el: Label) => el.getId() === labelId,
+      );
       others.push(labelObject);
     });
     this.labelStore.labels = others;
   }
 
   getLabelFromLabelAndLabelRef(label: string, labelRef: LabelRef): Label {
-    return this.labelStore.labels.find((el: Label) => el.getLabelRef() === labelRef && el.getLabel() === label);
+    return this.labelStore.labels.find(
+      (el: Label) => el.getLabelRef() === labelRef && el.getLabel() === label,
+    );
   }
 
   getLabelFromId(labelId: number) {
@@ -55,8 +68,14 @@ export class LabelService implements OnDestroy {
     const labelObject = this.getLabelFromId(labelId);
     if (labelObject !== undefined) {
       const groupId = labelObject.getLabelGroupId();
-      this.labelStore.labels = this.labelStore.labels.filter((el: Label) => el.getId() !== labelId);
-      if (this.labelStore.labels.find((el: Label) => el.getLabelGroupId() === groupId) === undefined) {
+      this.labelStore.labels = this.labelStore.labels.filter(
+        (el: Label) => el.getId() !== labelId,
+      );
+      if (
+        this.labelStore.labels.find(
+          (el: Label) => el.getLabelGroupId() === groupId,
+        ) === undefined
+      ) {
         this.labelGroupService.deleteLabelGroup(groupId);
       }
       this.labelUpdated();
@@ -72,17 +91,22 @@ export class LabelService implements OnDestroy {
   }
 
   setLabelData(labelsDto: LabelDto[]) {
-    this.labelStore.labels = labelsDto.map(labelDto => new Label(labelDto));
+    this.labelStore.labels = labelsDto.map((labelDto) => new Label(labelDto));
     this.labelUpdated();
   }
 
-  clearLabel(labelIds: number[], labelIDCounterMap: Map<number, number>): number[] {
-    const deletetLabelIds: number[]  = [];
+  clearLabel(
+    labelIds: number[],
+    labelIDCounterMap: Map<number, number>,
+  ): number[] {
+    const deletetLabelIds: number[] = [];
     if (labelIds !== null && labelIds.length > 0) {
-      labelIds.forEach(labelId => {
+      labelIds.forEach((labelId) => {
         if (labelIDCounterMap.get(labelId) === 1) {
           deletetLabelIds.push(labelId);
-          this.labelStore.labels = this.labelStore.labels.filter(label => label.getId() !== labelId);
+          this.labelStore.labels = this.labelStore.labels.filter(
+            (label) => label.getId() !== labelId,
+          );
         }
       });
     }
@@ -90,7 +114,7 @@ export class LabelService implements OnDestroy {
   }
 
   getDtos() {
-    return this.labelStore.labels.map(label => label.getDto());
+    return this.labelStore.labels.map((label) => label.getDto());
   }
 
   labelUpdated() {
@@ -99,28 +123,35 @@ export class LabelService implements OnDestroy {
 
   getTextLabelsFromIds(labelIds: number[]): string[] {
     return this.labelStore.labels
-      .filter(labelObj => labelIds.includes(labelObj.getId()))
-      .map(labelObj => labelObj.getLabel());
+      .filter((labelObj) => labelIds.includes(labelObj.getId()))
+      .map((labelObj) => labelObj.getLabel());
   }
 
   getLabelsFromIds(labelIds: number[]): Label[] {
-    return Object.assign({}, this.labelStore).labels
-      .filter(labelObj => labelIds.includes(labelObj.getId()));
+    return Object.assign({}, this.labelStore).labels.filter((labelObj) =>
+      labelIds.includes(labelObj.getId()),
+    );
   }
 
   getLabelsFromLabelRef(labelRef: LabelRef): Label[] {
-    return Object.assign({}, this.labelStore).labels.filter(labelObj => labelObj.getLabelRef() === labelRef);
+    return Object.assign({}, this.labelStore).labels.filter(
+      (labelObj) => labelObj.getLabelRef() === labelRef,
+    );
   }
 
   getLabelsFromLabelGroupId(labelGroupId: number): Label[] {
-    return Object.assign({}, this.labelStore).labels.filter(labelObj => labelObj.getLabelGroupId() === labelGroupId);
+    return Object.assign({}, this.labelStore).labels.filter(
+      (labelObj) => labelObj.getLabelGroupId() === labelGroupId,
+    );
   }
 
   private createLabel(label: string, labelRef: LabelRef): Label {
     const newLabel: Label = new Label();
     newLabel.setLabel(label);
     newLabel.setLabelRef(labelRef);
-    newLabel.setLabelGroupId(this.labelGroupService.getDefaultLabelGroup(labelRef).getId());
+    newLabel.setLabelGroupId(
+      this.labelGroupService.getDefaultLabelGroup(labelRef).getId(),
+    );
     this.labelStore.labels.push(newLabel);
     this.labelUpdated();
     return newLabel;

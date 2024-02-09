@@ -1,6 +1,9 @@
-import {PortAlignment, PortDto} from '../data-structures/technical.data.structures';
-import {TrainrunSection} from './trainrunsection.model';
-import {Vec2D} from '../utils/vec2D';
+import {
+  PortAlignment,
+  PortDto,
+} from '../data-structures/technical.data.structures';
+import { TrainrunSection } from './trainrunsection.model';
+import { Vec2D } from '../utils/vec2D';
 
 export class Port {
   private static currentId = 0;
@@ -12,12 +15,14 @@ export class Port {
 
   private trainrunSection: TrainrunSection = null;
 
-  constructor({id, trainrunSectionId, positionIndex, positionAlignment}: PortDto = {
-    id: Port.incrementId(),
-    positionIndex: 0,
-    positionAlignment: PortAlignment.Top,
-    trainrunSectionId: 0
-  }) {
+  constructor(
+    { id, trainrunSectionId, positionIndex, positionAlignment }: PortDto = {
+      id: Port.incrementId(),
+      positionIndex: 0,
+      positionAlignment: PortAlignment.Top,
+      trainrunSectionId: 0,
+    },
+  ) {
     this.id = id;
     this.trainrunSectionId = trainrunSectionId;
     this.positionIndex = positionIndex;
@@ -67,11 +72,15 @@ export class Port {
 
   getOppositeNodePosition(fromNodeId: number): Vec2D {
     if (this.getTrainrunSection().getSourceNodeId() === fromNodeId) {
-      return new Vec2D(this.getTrainrunSection().getTargetNode().getPositionX(),
-        this.getTrainrunSection().getTargetNode().getPositionY());
+      return new Vec2D(
+        this.getTrainrunSection().getTargetNode().getPositionX(),
+        this.getTrainrunSection().getTargetNode().getPositionY(),
+      );
     } else {
-      return new Vec2D(this.getTrainrunSection().getSourceNode().getPositionX(),
-        this.getTrainrunSection().getSourceNode().getPositionY());
+      return new Vec2D(
+        this.getTrainrunSection().getSourceNode().getPositionX(),
+        this.getTrainrunSection().getSourceNode().getPositionY(),
+      );
     }
   }
 
@@ -80,7 +89,7 @@ export class Port {
       id: this.id,
       trainrunSectionId: this.trainrunSectionId,
       positionIndex: this.positionIndex,
-      positionAlignment: this.positionAlignment
+      positionAlignment: this.positionAlignment,
     };
   }
 }

@@ -1,11 +1,20 @@
-import {LinePatternRefs, TrainrunSectionDto} from '../data-structures/business.data.structures';
-import {Node} from './node.model';
-import {Trainrun} from './trainrun.model';
-import {Vec2D} from '../utils/vec2D';
-import {SimpleTrainrunSectionRouter} from '../services/util/trainrunsection.routing';
-import {ColorRefType, PathDto, TimeLockDto, TrainrunSectionText, WarningDto} from '../data-structures/technical.data.structures';
-import {TrainrunsectionValidator} from '../services/util/trainrunsection.validator';
-import {formatDate} from '@angular/common';
+import {
+  LinePatternRefs,
+  TrainrunSectionDto,
+} from '../data-structures/business.data.structures';
+import { Node } from './node.model';
+import { Trainrun } from './trainrun.model';
+import { Vec2D } from '../utils/vec2D';
+import { SimpleTrainrunSectionRouter } from '../services/util/trainrunsection.routing';
+import {
+  ColorRefType,
+  PathDto,
+  TimeLockDto,
+  TrainrunSectionText,
+  WarningDto,
+} from '../data-structures/technical.data.structures';
+import { TrainrunsectionValidator } from '../services/util/trainrunsection.validator';
+import { formatDate } from '@angular/common';
 
 export class TrainrunSection {
   private static currentId = 0;
@@ -38,38 +47,81 @@ export class TrainrunSection {
 
   constructor(
     {
-      id, sourceNodeId, sourcePortId, targetNodeId, targetPortId, sourceDeparture, sourceArrival, targetDeparture,
-      targetArrival, travelTime, numberOfStops,
-      trainrunId, resourceId, specificTrainrunSectionFrequencyId, path,
-      warnings
+      id,
+      sourceNodeId,
+      sourcePortId,
+      targetNodeId,
+      targetPortId,
+      sourceDeparture,
+      sourceArrival,
+      targetDeparture,
+      targetArrival,
+      travelTime,
+      numberOfStops,
+      trainrunId,
+      resourceId,
+      specificTrainrunSectionFrequencyId,
+      path,
+      warnings,
     }: TrainrunSectionDto = {
       id: TrainrunSection.incrementId(),
       sourceNodeId: 0,
       sourcePortId: 0,
       targetNodeId: 0,
       targetPortId: 0,
-      sourceDeparture: {time: 0, consecutiveTime: 0, lock: false, warning: null, timeFormatter: null},
-      sourceArrival: {time: 0, consecutiveTime: 60, lock: false, warning: null, timeFormatter: null},
-      targetDeparture: {time: 59, consecutiveTime: 59, lock: false, warning: null, timeFormatter: null},
-      targetArrival: {time: 1, consecutiveTime: 1, lock: false, warning: null, timeFormatter: null},
-      travelTime: {time: 1, consecutiveTime: 1, lock: true, warning: null, timeFormatter: null},
+      sourceDeparture: {
+        time: 0,
+        consecutiveTime: 0,
+        lock: false,
+        warning: null,
+        timeFormatter: null,
+      },
+      sourceArrival: {
+        time: 0,
+        consecutiveTime: 60,
+        lock: false,
+        warning: null,
+        timeFormatter: null,
+      },
+      targetDeparture: {
+        time: 59,
+        consecutiveTime: 59,
+        lock: false,
+        warning: null,
+        timeFormatter: null,
+      },
+      targetArrival: {
+        time: 1,
+        consecutiveTime: 1,
+        lock: false,
+        warning: null,
+        timeFormatter: null,
+      },
+      travelTime: {
+        time: 1,
+        consecutiveTime: 1,
+        lock: true,
+        warning: null,
+        timeFormatter: null,
+      },
       trainrunId: 0,
       resourceId: 0,
       specificTrainrunSectionFrequencyId: null,
       numberOfStops: 0,
       path: {
-        path: [], textPositions: {
-          [TrainrunSectionText.SourceArrival]: {x: 0, y: 0},
-          [TrainrunSectionText.SourceDeparture]: {x: 0, y: 0},
-          [TrainrunSectionText.TargetArrival]: {x: 0, y: 0},
-          [TrainrunSectionText.TargetDeparture]: {x: 0, y: 0},
-          [TrainrunSectionText.TrainrunSectionName]: {x: 0, y: 0},
-          [TrainrunSectionText.TrainrunSectionTravelTime]: {x: 0, y: 0},
-          [TrainrunSectionText.TrainrunSectionNumberOfStops]: {x: 0, y: 0}
-        }
+        path: [],
+        textPositions: {
+          [TrainrunSectionText.SourceArrival]: { x: 0, y: 0 },
+          [TrainrunSectionText.SourceDeparture]: { x: 0, y: 0 },
+          [TrainrunSectionText.TargetArrival]: { x: 0, y: 0 },
+          [TrainrunSectionText.TargetDeparture]: { x: 0, y: 0 },
+          [TrainrunSectionText.TrainrunSectionName]: { x: 0, y: 0 },
+          [TrainrunSectionText.TrainrunSectionTravelTime]: { x: 0, y: 0 },
+          [TrainrunSectionText.TrainrunSectionNumberOfStops]: { x: 0, y: 0 },
+        },
       },
       warnings: null,
-    }
+    },
   ) {
     this.id = id;
     this.sourceNodeId = sourceNodeId;
@@ -83,7 +135,8 @@ export class TrainrunSection {
     this.travelTime = travelTime;
     this.trainrunId = trainrunId;
     this.resourceId = resourceId;
-    this.specificTrainrunSectionFrequencyId = specificTrainrunSectionFrequencyId;
+    this.specificTrainrunSectionFrequencyId =
+      specificTrainrunSectionFrequencyId;
     this.path = path;
     this.warnings = warnings;
     this.isSelected = false;
@@ -140,17 +193,31 @@ export class TrainrunSection {
     timeDate.setSeconds(((time.time + offset + 24 * 60) % 60) * 60);
 
     formattedText = stylePattern;
-    formattedText = formattedText.replace(consecutiveTimePatternHHMMSS,
-      formatDate(consecutiveTimeDate.toISOString(), 'HH:mm:ss', 'en-US', 'UTC'));
-    formattedText = formattedText.replace(consecutiveTimePatternHHMM,
-      formatDate(consecutiveTimeDate.toISOString(), 'HH:mm', 'en-US', 'UTC'));
-    formattedText = formattedText.replace(consecutiveTimePattern, '' + time.consecutiveTime);
+    formattedText = formattedText.replace(
+      consecutiveTimePatternHHMMSS,
+      formatDate(consecutiveTimeDate.toISOString(), 'HH:mm:ss', 'en-US', 'UTC'),
+    );
+    formattedText = formattedText.replace(
+      consecutiveTimePatternHHMM,
+      formatDate(consecutiveTimeDate.toISOString(), 'HH:mm', 'en-US', 'UTC'),
+    );
+    formattedText = formattedText.replace(
+      consecutiveTimePattern,
+      '' + time.consecutiveTime,
+    );
 
-    formattedText = formattedText.replace(timePatternHHMMSS,
-      formatDate(timeDate.toISOString(), 'HH:mm:ss', 'en-US', 'UTC'));
-    formattedText = formattedText.replace(timePatternHHMM,
-      formatDate(timeDate.toISOString(), 'HH:mm', 'en-US', 'UTC'));
-    formattedText = formattedText.replace(timePattern, '' + ((time.time + offset + 24 * 60) % 60));
+    formattedText = formattedText.replace(
+      timePatternHHMMSS,
+      formatDate(timeDate.toISOString(), 'HH:mm:ss', 'en-US', 'UTC'),
+    );
+    formattedText = formattedText.replace(
+      timePatternHHMM,
+      formatDate(timeDate.toISOString(), 'HH:mm', 'en-US', 'UTC'),
+    );
+    formattedText = formattedText.replace(
+      timePattern,
+      '' + ((time.time + offset + 24 * 60) % 60),
+    );
 
     return formattedText;
   }
@@ -457,7 +524,6 @@ export class TrainrunSection {
     this.travelTime.warning = null;
   }
 
-
   getTrainrunId(): number {
     return this.trainrunId;
   }
@@ -535,12 +601,14 @@ export class TrainrunSection {
       this.sourceNode,
       this.sourceNode.getPort(this.sourcePortId),
       this.targetNode,
-      this.targetNode.getPort(this.targetPortId));
-
-    this.path.textPositions = SimpleTrainrunSectionRouter.placeTextOnTrainrunSection(
-      this.pathVec2D,
-      this.sourceNode.getPort(this.sourcePortId)
+      this.targetNode.getPort(this.targetPortId),
     );
+
+    this.path.textPositions =
+      SimpleTrainrunSectionRouter.placeTextOnTrainrunSection(
+        this.pathVec2D,
+        this.sourceNode.getPort(this.sourcePortId),
+      );
   }
 
   setSourcePortId(sourcePortId: number) {
@@ -571,7 +639,8 @@ export class TrainrunSection {
       trainrunId: this.trainrunId,
       resourceId: this.resourceId,
 
-      specificTrainrunSectionFrequencyId: this.specificTrainrunSectionFrequencyId,
+      specificTrainrunSectionFrequencyId:
+        this.specificTrainrunSectionFrequencyId,
       path: this.path,
       warnings: this.warnings,
     };
@@ -632,14 +701,16 @@ export class TrainrunSection {
   }
 
   private convertPathToVec2D() {
-    this.pathVec2D = this.path.path.map(point => new Vec2D(point.x, point.y));
+    this.pathVec2D = this.path.path.map((point) => new Vec2D(point.x, point.y));
   }
 
   private convertVec2DToPath() {
     this.path = {
-      path: this.pathVec2D.map(point => ({x: point.getX(), y: point.getY()})),
-      textPositions: this.path.textPositions
+      path: this.pathVec2D.map((point) => ({
+        x: point.getX(),
+        y: point.getY(),
+      })),
+      textPositions: this.path.textPositions,
     };
   }
 }
-

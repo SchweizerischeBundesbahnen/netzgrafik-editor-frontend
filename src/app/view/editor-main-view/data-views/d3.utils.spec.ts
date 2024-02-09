@@ -1,30 +1,29 @@
-import {DataService} from '../../../services/data/data.service';
-import {NodeService} from '../../../services/data/node.service';
-import {ResourceService} from '../../../services/data/resource.service';
-import {TrainrunService} from '../../../services/data/trainrun.service';
-import {TrainrunSectionService} from '../../../services/data/trainrunsection.service';
-import {StammdatenService} from '../../../services/data/stammdaten.service';
-import {NoteService} from '../../../services/data/note.service';
-import {Node} from '../../../models/node.model';
-import {TrainrunSection} from '../../../models/trainrunsection.model';
-import {LabelGroupService} from '../../../services/data/labelgroup.service';
-import {LabelService} from '../../../services/data/label.serivce';
-import {NetzgrafikColoringService} from '../../../services/data/netzgrafikColoring.service';
-import {UndoService} from '../../../services/data/undo.service';
-import {CopyService} from '../../../services/data/copy.service';
-import {LogService} from '../../../logger/log.service';
-import {LogPublishersService} from '../../../logger/log.publishers.service';
-import {FilterService} from '../../../services/ui/filter.service';
-import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
-import {LoadPerlenketteService} from '../../../perlenkette/service/load-perlenkette.service';
-import {EditorMainViewComponent} from '../editor-main-view.component';
-import {EditorView} from './editor.view';
-import {D3Utils} from './d3.utils';
-import {NetzgrafikUnitTesting} from '../../../../integration-testing/netzgrafik.unit.testing';
-import {Vec2D} from '../../../utils/vec2D';
+import { DataService } from '../../../services/data/data.service';
+import { NodeService } from '../../../services/data/node.service';
+import { ResourceService } from '../../../services/data/resource.service';
+import { TrainrunService } from '../../../services/data/trainrun.service';
+import { TrainrunSectionService } from '../../../services/data/trainrunsection.service';
+import { StammdatenService } from '../../../services/data/stammdaten.service';
+import { NoteService } from '../../../services/data/note.service';
+import { Node } from '../../../models/node.model';
+import { TrainrunSection } from '../../../models/trainrunsection.model';
+import { LabelGroupService } from '../../../services/data/labelgroup.service';
+import { LabelService } from '../../../services/data/label.serivce';
+import { NetzgrafikColoringService } from '../../../services/data/netzgrafikColoring.service';
+import { UndoService } from '../../../services/data/undo.service';
+import { CopyService } from '../../../services/data/copy.service';
+import { LogService } from '../../../logger/log.service';
+import { LogPublishersService } from '../../../logger/log.publishers.service';
+import { FilterService } from '../../../services/ui/filter.service';
+import { UiInteractionService } from '../../../services/ui/ui.interaction.service';
+import { LoadPerlenketteService } from '../../../perlenkette/service/load-perlenkette.service';
+import { EditorMainViewComponent } from '../editor-main-view.component';
+import { EditorView } from './editor.view';
+import { D3Utils } from './d3.utils';
+import { NetzgrafikUnitTesting } from '../../../../integration-testing/netzgrafik.unit.testing';
+import { Vec2D } from '../../../utils/vec2D';
 
 describe('3d.Utils.tests', () => {
-
   let dataService: DataService;
   let nodeService: NodeService;
   let resourceService: ResourceService;
@@ -54,39 +53,78 @@ describe('3d.Utils.tests', () => {
     labelGroupService = new LabelGroupService(logService);
     labelService = new LabelService(logService, labelGroupService);
     filterService = new FilterService(labelService, labelGroupService);
-    trainrunService = new TrainrunService(logService, labelService, filterService);
-    trainrunSectionService = new TrainrunSectionService(logService, trainrunService, filterService);
-    nodeService = new NodeService(logService, resourceService, trainrunService, trainrunSectionService, labelService, filterService);
+    trainrunService = new TrainrunService(
+      logService,
+      labelService,
+      filterService,
+    );
+    trainrunSectionService = new TrainrunSectionService(
+      logService,
+      trainrunService,
+      filterService,
+    );
+    nodeService = new NodeService(
+      logService,
+      resourceService,
+      trainrunService,
+      trainrunSectionService,
+      labelService,
+      filterService,
+    );
     noteService = new NoteService(logService, labelService, filterService);
     netzgrafikColoringService = new NetzgrafikColoringService(logService);
-    dataService = new DataService(resourceService, nodeService, trainrunSectionService, trainrunService,
-      stammdatenService, noteService, labelService, labelGroupService, filterService, netzgrafikColoringService);
-    nodeService.nodes.subscribe(updatesNodes => nodes = updatesNodes);
-    trainrunSectionService.trainrunSections.subscribe(updatesTrainrunSections => trainrunSections = updatesTrainrunSections);
-
-
-    loadPerlenketteService = new LoadPerlenketteService(trainrunService,
+    dataService = new DataService(
+      resourceService,
+      nodeService,
       trainrunSectionService,
-      nodeService);
+      trainrunService,
+      stammdatenService,
+      noteService,
+      labelService,
+      labelGroupService,
+      filterService,
+      netzgrafikColoringService,
+    );
+    nodeService.nodes.subscribe((updatesNodes) => (nodes = updatesNodes));
+    trainrunSectionService.trainrunSections.subscribe(
+      (updatesTrainrunSections) => (trainrunSections = updatesTrainrunSections),
+    );
 
-    uiInteractionService = new UiInteractionService(filterService,
+    loadPerlenketteService = new LoadPerlenketteService(
+      trainrunService,
+      trainrunSectionService,
+      nodeService,
+    );
+
+    uiInteractionService = new UiInteractionService(
+      filterService,
       nodeService,
       noteService,
       stammdatenService,
       trainrunSectionService,
       trainrunService,
       netzgrafikColoringService,
-      loadPerlenketteService);
+      loadPerlenketteService,
+    );
 
     undoService = new UndoService(
       dataService,
       nodeService,
       noteService,
       trainrunService,
-      filterService
+      filterService,
     );
 
-    copyService = new CopyService(dataService, trainrunService, trainrunSectionService, nodeService, noteService, filterService, uiInteractionService, undoService);
+    copyService = new CopyService(
+      dataService,
+      trainrunService,
+      trainrunSectionService,
+      nodeService,
+      noteService,
+      filterService,
+      uiInteractionService,
+      undoService,
+    );
 
     const controller = new EditorMainViewComponent(
       nodeService,
@@ -98,7 +136,8 @@ describe('3d.Utils.tests', () => {
       undefined,
       undoService,
       copyService,
-      logService);
+      logService,
+    );
     new EditorView(
       controller,
       nodeService,
@@ -109,20 +148,29 @@ describe('3d.Utils.tests', () => {
       uiInteractionService,
       undoService,
       copyService,
-      logService);
+      logService,
+    );
     controller.bindViewToServices();
     editorView = controller.editorView;
   });
 
   it('NotesView.convertText', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
-    const txt0 = D3Utils.getPathAsSVGString(trainrunSectionService.getTrainrunSectionFromId(1).getPath());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
+    const txt0 = D3Utils.getPathAsSVGString(
+      trainrunSectionService.getTrainrunSectionFromId(1).getPath(),
+    );
     expect(txt0).toBe('M418,48L482,48L670,80L734,80');
   });
 
   it('NotesView.getBezierCurveAsSVGString', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
-    const txt0 = D3Utils.getBezierCurveAsSVGString(trainrunSectionService.getTrainrunSectionFromId(1).getPath());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
+    const txt0 = D3Utils.getBezierCurveAsSVGString(
+      trainrunSectionService.getTrainrunSectionFromId(1).getPath(),
+    );
     expect(txt0).toBe('M 418 48C 482 48, 670 80, 734,80');
   });
 
@@ -130,7 +178,9 @@ describe('3d.Utils.tests', () => {
     const txt0 = D3Utils.makeHexagonSVGPoints(new Vec2D(1978, 25), 4);
     expect(txt0).toBe(' 1976,21 1980,21 1982,25 1980,29 1976,29 1974,25');
     const txt1 = D3Utils.makeHexagonSVGPoints(new Vec2D(25, 4), 1978);
-    expect(txt1).toBe(' -964,-1974 1014,-1974 2003,4 1014,1982 -964,1982 -1953,4');
+    expect(txt1).toBe(
+      ' -964,-1974 1014,-1974 2003,4 1014,1982 -964,1982 -1953,4',
+    );
     const txt2 = D3Utils.makeHexagonSVGPoints(new Vec2D(2, 4), -1);
     expect(txt2).toBe(' 2.5,5 1.5,5 1,4 1.5,3 2.5,3 3,4');
     const txt3 = D3Utils.makeHexagonSVGPoints(new Vec2D(1, 1), 0);
@@ -163,7 +213,5 @@ describe('3d.Utils.tests', () => {
 
     const txt10 = D3Utils.formatTime(-1234, 2);
     expect(txt10).toBe('-20:34');
-
   });
-
 });

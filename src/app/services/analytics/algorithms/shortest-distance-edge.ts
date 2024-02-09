@@ -1,5 +1,5 @@
-import {Node} from '../../../models/node.model';
-import {TrainrunSection} from '../../../models/trainrunsection.model';
+import { Node } from '../../../models/node.model';
+import { TrainrunSection } from '../../../models/trainrunsection.model';
 
 export class ShortestDistanceEdge {
   private readonly fullPath: TrainrunSection[];
@@ -10,7 +10,7 @@ export class ShortestDistanceEdge {
     private toNode: Node,
     private departureTime: number,
     private arrivalTime: number,
-    private path: TrainrunSection[]
+    private path: TrainrunSection[],
   ) {
     this.fullPath = Object.assign([], this.path);
     this.fullDistance = this.getTravelTime();
@@ -18,9 +18,11 @@ export class ShortestDistanceEdge {
 
   mergePathAndUpdateCost(inPath: TrainrunSection[], inDistance: number) {
     this.fullPath.reverse();
-    Object.assign([], inPath).reverse().forEach((ts: TrainrunSection) => {
-      this.fullPath.push(ts);
-    });
+    Object.assign([], inPath)
+      .reverse()
+      .forEach((ts: TrainrunSection) => {
+        this.fullPath.push(ts);
+      });
     this.fullPath.reverse();
     this.fullDistance += inDistance;
   }
@@ -63,4 +65,3 @@ export class ShortestDistanceEdge {
     return this.arrivalTime - this.departureTime;
   }
 }
-

@@ -1,14 +1,13 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {HistoryEntryAction} from '../history-entry/history-entry.component';
-import {DownloadVersionModel, VersionId} from '../model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { HistoryEntryAction } from '../history-entry/history-entry.component';
+import { DownloadVersionModel, VersionId } from '../model';
 
 @Component({
   selector: 'sbb-snapshot-entry',
   templateUrl: './snapshot-entry.component.html',
-  styleUrls: ['./snapshot-entry.component.scss']
+  styleUrls: ['./snapshot-entry.component.scss'],
 })
 export class SnapshotEntryComponent {
-
   @Input() model: SnapshotEntryModel;
   @Input() isWritable = false;
 
@@ -21,10 +20,11 @@ export class SnapshotEntryComponent {
     const download = {
       name: 'Download',
       icon: 'download-small',
-      onClick: () => this.download.emit({
-        versionId: this.model.id,
-        fileName: `netzgrafik_aenderung_${this.model.snapshotVersion}.json`
-      })
+      onClick: () =>
+        this.download.emit({
+          versionId: this.model.id,
+          fileName: `netzgrafik_aenderung_${this.model.snapshotVersion}.json`,
+        }),
     };
 
     if (!this.isWritable) {
@@ -35,14 +35,14 @@ export class SnapshotEntryComponent {
       {
         name: 'Wiederherstellen',
         icon: 'arrows-circle-small',
-        onClick: () => this.restore.next(this.model.id)
+        onClick: () => this.restore.next(this.model.id),
       },
       {
         name: 'Als neue Variante',
         icon: 'circle-plus-small',
-        onClick: () => this.saveAsNewVariant.emit(this.model.id)
+        onClick: () => this.saveAsNewVariant.emit(this.model.id),
       },
-      download
+      download,
     ];
   }
 

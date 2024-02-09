@@ -1,13 +1,11 @@
-import {Index} from './index';
-import {IndexNode} from './indexNode';
+import { Index } from './index';
+import { IndexNode } from './indexNode';
 
 export class IndexSection implements Index {
-
   constructor(
     public arrivalNodeIndex: number,
     public departureNodeIndex: number,
-  ) {
-  }
+  ) {}
 
   getIndexNode(): IndexNode {
     return undefined;
@@ -24,5 +22,4 @@ export class IndexSection implements Index {
   isIndexSection(): boolean {
     return true;
   }
-
 }

@@ -4,26 +4,24 @@ import {
   Component,
   Input,
   OnDestroy,
-  OnInit
+  OnInit,
 } from '@angular/core';
-import {Subject} from 'rxjs';
-import {TimeSliderService} from '../../services/time-slider.service';
-import {TrainDataService} from '../../services/train-data-service';
-import {TrainrunService} from '../../../services/data/trainrun.service';
-import {takeUntil} from 'rxjs/operators';
-import {SgTrainrun} from '../../model/streckengrafik-model/sg-trainrun';
-import {SgTrainrunItem} from '../../model/streckengrafik-model/sg-trainrun-item';
-import {Sg6TrackService} from '../../services/sg-6-track.service';
+import { Subject } from 'rxjs';
+import { TimeSliderService } from '../../services/time-slider.service';
+import { TrainDataService } from '../../services/train-data-service';
+import { TrainrunService } from '../../../services/data/trainrun.service';
+import { takeUntil } from 'rxjs/operators';
+import { SgTrainrun } from '../../model/streckengrafik-model/sg-trainrun';
+import { SgTrainrunItem } from '../../model/streckengrafik-model/sg-trainrun-item';
+import { Sg6TrackService } from '../../services/sg-6-track.service';
 import {
   InformSelectedTrainrunClick,
-  TrainrunSectionService
+  TrainrunSectionService,
 } from '../../../services/data/trainrunsection.service';
-import {NodeService} from '../../../services/data/node.service';
-import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
-import {
-  StreckengrafikDisplayElementService
-} from '../../services/util/streckengrafik-display-element.service';
-import {SliderChangeInfo} from '../../model/util/sliderChangeInfo';
+import { NodeService } from '../../../services/data/node.service';
+import { UiInteractionService } from '../../../services/ui/ui.interaction.service';
+import { StreckengrafikDisplayElementService } from '../../services/util/streckengrafik-display-element.service';
+import { SliderChangeInfo } from '../../model/util/sliderChangeInfo';
 import * as d3 from 'd3';
 
 @Component({
@@ -31,10 +29,9 @@ import * as d3 from 'd3';
   selector: '[sbb-trainrun-node]',
   templateUrl: './trainrun-node.component.html',
   styleUrls: ['./trainrun-node.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TrainRunNodeComponent implements OnInit, OnDestroy {
-
   @Input()
   trainrun: SgTrainrun;
 
@@ -56,20 +53,21 @@ export class TrainRunNodeComponent implements OnInit, OnDestroy {
 
   private readonly destroyed$ = new Subject<void>();
 
-  constructor(private readonly timeSliderService: TimeSliderService,
-              private readonly trainDataService: TrainDataService,
-              private readonly sg6TrackService: Sg6TrackService,
-              private readonly trainrunService: TrainrunService,
-              private readonly nodeService: NodeService,
-              private readonly trainrunSectionService: TrainrunSectionService,
-              private readonly uiInteractionService: UiInteractionService,
-              private readonly streckengrafikDisplayElementService: StreckengrafikDisplayElementService,
-              private readonly cd: ChangeDetectorRef) {
-  }
+  constructor(
+    private readonly timeSliderService: TimeSliderService,
+    private readonly trainDataService: TrainDataService,
+    private readonly sg6TrackService: Sg6TrackService,
+    private readonly trainrunService: TrainrunService,
+    private readonly nodeService: NodeService,
+    private readonly trainrunSectionService: TrainrunSectionService,
+    private readonly uiInteractionService: UiInteractionService,
+    private readonly streckengrafikDisplayElementService: StreckengrafikDisplayElementService,
+    private readonly cd: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
-
-    this.timeSliderService.getSliderChangeObservable()
+    this.timeSliderService
+      .getSliderChangeObservable()
       .pipe(takeUntil(this.destroyed$))
       .subscribe((sliderChangeInfo: SliderChangeInfo) => {
         this.yZoom = sliderChangeInfo.zoom;
@@ -84,7 +82,9 @@ export class TrainRunNodeComponent implements OnInit, OnDestroy {
 
   getClassTag(tag: string): string {
     let retTag = tag;
-    retTag += ' ' + this.trainDataService.createColoringClassTags(this.trainrun.trainrunId);
+    retTag +=
+      ' ' +
+      this.trainDataService.createColoringClassTags(this.trainrun.trainrunId);
     /* DEBUG
     if (this.checkRotated()) {
       retTag += ' rotate ';
@@ -108,10 +108,14 @@ export class TrainRunNodeComponent implements OnInit, OnDestroy {
       return false;
     }
     const tn = this.sgTrainrunItem.getTrainrunNode();
-    let idx_arr = this.sgTrainrunItem.getTrainrunNode().arrivalPathSection !== undefined ?
-      this.sgTrainrunItem.getTrainrunNode().arrivalPathSection.index : undefined;
-    let idx_dep = this.sgTrainrunItem.getTrainrunNode().departurePathSection !== undefined ?
-      this.sgTrainrunItem.getTrainrunNode().departurePathSection.index : undefined;
+    let idx_arr =
+      this.sgTrainrunItem.getTrainrunNode().arrivalPathSection !== undefined
+        ? this.sgTrainrunItem.getTrainrunNode().arrivalPathSection.index
+        : undefined;
+    let idx_dep =
+      this.sgTrainrunItem.getTrainrunNode().departurePathSection !== undefined
+        ? this.sgTrainrunItem.getTrainrunNode().departurePathSection.index
+        : undefined;
 
     if (idx_arr === undefined) {
       if (!tn.backward && tn.index !== 0) {
@@ -155,7 +159,6 @@ export class TrainRunNodeComponent implements OnInit, OnDestroy {
     return false;
   }
 
-
   onEdgeLineClick($event: MouseEvent) {
     $event.preventDefault();
     $event.stopImmediatePropagation();
@@ -170,27 +173,35 @@ export class TrainRunNodeComponent implements OnInit, OnDestroy {
       }
     }
 
-    if (!this.trainrunService.getTrainrunFromId(this.trainrun.trainrunId)?.selected()) {
+    if (
+      !this.trainrunService
+        .getTrainrunFromId(this.trainrun.trainrunId)
+        ?.selected()
+    ) {
       this.trainrunService.setTrainrunAsSelected(this.trainrun.trainrunId);
     } else {
       const param: InformSelectedTrainrunClick = {
         trainrunSectionId: trainrunSectionId,
-        open: true
+        open: true,
       };
       this.trainrunSectionService.clickSelectedTrainrunSection(param);
     }
   }
 
-
   getId() {
-    return 'streckengrafik_trainrun_item_' + this.trainrun.getId() +
-      '_' + this.sgTrainrunItem.backward;
+    return (
+      'streckengrafik_trainrun_item_' +
+      this.trainrun.getId() +
+      '_' +
+      this.sgTrainrunItem.backward
+    );
   }
 
   nodePath() {
     const departureTime = this.sgTrainrunItem.departureTime * this.yZoom;
     const arrivalTime = this.sgTrainrunItem.arrivalTime * this.yZoom;
-    const track = this.sgTrainrunItem.getTrainrunNode().trackData.track * this.trackWidth;
+    const track =
+      this.sgTrainrunItem.getTrainrunNode().trackData.track * this.trackWidth;
     const nodeWidth = this.sgTrainrunItem.getPathNode().nodeWidth();
 
     const doRot = this.checkRotated();
@@ -200,40 +211,100 @@ export class TrainRunNodeComponent implements OnInit, OnDestroy {
       if (tn.isEndNode()) {
         if (this.sgTrainrunItem.getTrainrunNode().isTurnaround) {
           if (this.sgTrainrunItem.backward) {
-            let p = (tn.departurePathSection === undefined) ? nodeWidth : 0;
+            let p = tn.departurePathSection === undefined ? nodeWidth : 0;
             if (doRot) {
-              p = (p === 0 ? nodeWidth : 0);
+              p = p === 0 ? nodeWidth : 0;
             }
             const orientation = p === 0 ? 1 : -1;
-            return 'M ' + p + ' ' + arrivalTime +
-              ' L ' + (track + orientation * this.halfStrokeWidth) + ' ' + arrivalTime +
-              ' M ' + (track + orientation * this.halfStrokeWidth) + ' ' + departureTime +
-              ' L ' + p + ' ' + departureTime;
+            return (
+              'M ' +
+              p +
+              ' ' +
+              arrivalTime +
+              ' L ' +
+              (track + orientation * this.halfStrokeWidth) +
+              ' ' +
+              arrivalTime +
+              ' M ' +
+              (track + orientation * this.halfStrokeWidth) +
+              ' ' +
+              departureTime +
+              ' L ' +
+              p +
+              ' ' +
+              departureTime
+            );
           }
-          let p = (tn.arrivalPathSection === undefined) ? nodeWidth : 0;
+          let p = tn.arrivalPathSection === undefined ? nodeWidth : 0;
           if (doRot) {
-            p = (p === 0 ? nodeWidth : 0);
+            p = p === 0 ? nodeWidth : 0;
           }
           const s = p === 0 ? 1 : -1;
-          return 'M ' + p + ' ' + arrivalTime +
-            ' L ' + (track + s * this.halfStrokeWidth) + ' ' + arrivalTime +
-            ' M ' + (track + s * this.halfStrokeWidth) + ' ' + departureTime +
-            ' L ' + p + ' ' + departureTime;
+          return (
+            'M ' +
+            p +
+            ' ' +
+            arrivalTime +
+            ' L ' +
+            (track + s * this.halfStrokeWidth) +
+            ' ' +
+            arrivalTime +
+            ' M ' +
+            (track + s * this.halfStrokeWidth) +
+            ' ' +
+            departureTime +
+            ' L ' +
+            p +
+            ' ' +
+            departureTime
+          );
         }
         if (this.sgTrainrunItem.backward) {
           let path = '';
           if (tn.departurePathSection !== undefined) {
             if (tn.departurePathSection.backward) {
               const x0 = doRot ? nodeWidth : 0;
-              path += ' M ' + x0 + ' ' + departureTime + ' L ' + (track + this.halfStrokeWidth) + ' ' + departureTime;
-              path += ' M ' + x0 + ' ' + arrivalTime + ' L ' + (track + this.halfStrokeWidth) + ' ' + arrivalTime;
+              path +=
+                ' M ' +
+                x0 +
+                ' ' +
+                departureTime +
+                ' L ' +
+                (track + this.halfStrokeWidth) +
+                ' ' +
+                departureTime;
+              path +=
+                ' M ' +
+                x0 +
+                ' ' +
+                arrivalTime +
+                ' L ' +
+                (track + this.halfStrokeWidth) +
+                ' ' +
+                arrivalTime;
             }
           }
           if (tn.arrivalPathSection !== undefined) {
             if (tn.arrivalPathSection.backward) {
               const x1 = doRot ? 0 : nodeWidth;
-              path += ' M ' + (track - this.halfStrokeWidth) + ' ' + arrivalTime + ' L ' + x1 + ' ' + arrivalTime;
-              path += ' M ' + (track - this.halfStrokeWidth) + ' ' + departureTime + ' L ' + x1 + ' ' + departureTime;
+              path +=
+                ' M ' +
+                (track - this.halfStrokeWidth) +
+                ' ' +
+                arrivalTime +
+                ' L ' +
+                x1 +
+                ' ' +
+                arrivalTime;
+              path +=
+                ' M ' +
+                (track - this.halfStrokeWidth) +
+                ' ' +
+                departureTime +
+                ' L ' +
+                x1 +
+                ' ' +
+                departureTime;
             }
           }
           return path;
@@ -242,56 +313,127 @@ export class TrainRunNodeComponent implements OnInit, OnDestroy {
         if (tn.arrivalPathSection !== undefined) {
           if (!tn.arrivalPathSection.backward) {
             const x0 = doRot ? nodeWidth : 0;
-            path += ' M ' + x0 + ' ' + arrivalTime + ' L ' + (track + this.halfStrokeWidth) + ' ' + arrivalTime;
-            path += ' M ' + x0 + ' ' + departureTime + ' L ' + (track + this.halfStrokeWidth) + ' ' + departureTime;
+            path +=
+              ' M ' +
+              x0 +
+              ' ' +
+              arrivalTime +
+              ' L ' +
+              (track + this.halfStrokeWidth) +
+              ' ' +
+              arrivalTime;
+            path +=
+              ' M ' +
+              x0 +
+              ' ' +
+              departureTime +
+              ' L ' +
+              (track + this.halfStrokeWidth) +
+              ' ' +
+              departureTime;
           }
         }
         if (tn.departurePathSection !== undefined) {
           if (!tn.departurePathSection.backward) {
             const x1 = doRot ? 0 : nodeWidth;
-            path += ' M ' + (track - this.halfStrokeWidth) + ' ' + departureTime + ' L ' + x1 + ' ' + departureTime;
-            path += ' M ' + (track - this.halfStrokeWidth) + ' ' + arrivalTime + ' L ' + x1 + ' ' + arrivalTime;
+            path +=
+              ' M ' +
+              (track - this.halfStrokeWidth) +
+              ' ' +
+              departureTime +
+              ' L ' +
+              x1 +
+              ' ' +
+              departureTime;
+            path +=
+              ' M ' +
+              (track - this.halfStrokeWidth) +
+              ' ' +
+              arrivalTime +
+              ' L ' +
+              x1 +
+              ' ' +
+              arrivalTime;
           }
         }
         return path;
       }
       if (this.sgTrainrunItem.backward) {
         const x0 = doRot ? nodeWidth : 0;
-        return 'M ' + x0 + ' ' + departureTime +
-          ' L ' + (track + this.halfStrokeWidth) + ' ' + departureTime +
-          ' M ' + (track - this.halfStrokeWidth) + ' ' + arrivalTime +
-          ' L ' + (nodeWidth - x0) + ' ' + arrivalTime;
+        return (
+          'M ' +
+          x0 +
+          ' ' +
+          departureTime +
+          ' L ' +
+          (track + this.halfStrokeWidth) +
+          ' ' +
+          departureTime +
+          ' M ' +
+          (track - this.halfStrokeWidth) +
+          ' ' +
+          arrivalTime +
+          ' L ' +
+          (nodeWidth - x0) +
+          ' ' +
+          arrivalTime
+        );
       }
       const x0 = doRot ? nodeWidth : 0;
-      return 'M ' + x0 + ' ' + arrivalTime +
-        ' L ' + (track + this.halfStrokeWidth) + ' ' + arrivalTime +
-        ' M ' + (track - this.halfStrokeWidth) + ' ' + departureTime +
-        ' L ' + (nodeWidth - x0) + ' ' + departureTime;
+      return (
+        'M ' +
+        x0 +
+        ' ' +
+        arrivalTime +
+        ' L ' +
+        (track + this.halfStrokeWidth) +
+        ' ' +
+        arrivalTime +
+        ' M ' +
+        (track - this.halfStrokeWidth) +
+        ' ' +
+        departureTime +
+        ' L ' +
+        (nodeWidth - x0) +
+        ' ' +
+        departureTime
+      );
     }
     const x0 = doRot ? nodeWidth : 0;
     return 'M ' + x0 + ' ' + arrivalTime + ' V ' + departureTime;
   }
 
   pathGleisbelegung() {
-    const delta = (this.sgTrainrunItem.departureTime - this.sgTrainrunItem.arrivalTime) === 0 ? 0.1 : 0.0;
-    const departureTime = (this.sgTrainrunItem.departureTime + delta) * this.yZoom;
+    const delta =
+      this.sgTrainrunItem.departureTime - this.sgTrainrunItem.arrivalTime === 0
+        ? 0.1
+        : 0.0;
+    const departureTime =
+      (this.sgTrainrunItem.departureTime + delta) * this.yZoom;
     const arrivalTime = (this.sgTrainrunItem.arrivalTime - delta) * this.yZoom;
-    const track = this.sgTrainrunItem.getTrainrunNode().trackData.track * this.trackWidth;
+    const track =
+      this.sgTrainrunItem.getTrainrunNode().trackData.track * this.trackWidth;
     if (this.sgTrainrunItem.backward) {
-      return 'M ' + (track) + ' ' + departureTime +
-        ' L ' + (track) + ' ' + arrivalTime;
+      return (
+        'M ' + track + ' ' + departureTime + ' L ' + track + ' ' + arrivalTime
+      );
     }
-    return 'M ' + (track) + ' ' + arrivalTime +
-      ' L ' + (track) + ' ' + departureTime;
+    return (
+      'M ' + track + ' ' + arrivalTime + ' L ' + track + ' ' + departureTime
+    );
   }
 
   pathHeadwayReservation() {
-    const track = this.sgTrainrunItem.getTrainrunNode().trackData.track * this.trackWidth;
+    const track =
+      this.sgTrainrunItem.getTrainrunNode().trackData.track * this.trackWidth;
     const departureTime =
-      (this.sgTrainrunItem.departureTime + this.sgTrainrunItem.minimumHeadwayTime) * this.yZoom;
+      (this.sgTrainrunItem.departureTime +
+        this.sgTrainrunItem.minimumHeadwayTime) *
+      this.yZoom;
     const arrivalTime = this.sgTrainrunItem.arrivalTime * this.yZoom;
-    return 'M ' + (track) + ' ' + arrivalTime +
-      ' L ' + (track) + ' ' + departureTime;
+    return (
+      'M ' + track + ' ' + arrivalTime + ' L ' + track + ' ' + departureTime
+    );
   }
 
   isTrackOccupier() {
@@ -304,7 +446,10 @@ export class TrainRunNodeComponent implements OnInit, OnDestroy {
       if (tn.isEndNode()) {
         return false;
       }
-      if (tn.departurePathSection !== undefined && tn.arrivalPathSection !== undefined) {
+      if (
+        tn.departurePathSection !== undefined &&
+        tn.arrivalPathSection !== undefined
+      ) {
         return true;
       }
       return false;

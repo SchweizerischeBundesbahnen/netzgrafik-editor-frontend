@@ -1,15 +1,11 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NavigationService {
-
-  constructor(
-    private readonly router: Router,
-  ) {
-  }
+  constructor(private readonly router: Router) {}
 
   navigateToEditor(projectId: number, variantId: number): void {
     this.router.navigate(this.getRouteToEditor(projectId, variantId));

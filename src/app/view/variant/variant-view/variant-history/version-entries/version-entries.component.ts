@@ -1,14 +1,14 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {VersionDto} from '../../../../../api/generated';
-import {ReleasedEntryModel} from '../released-entry/released-entry.component';
-import {DownloadVersionModel, VersionId} from '../model';
-import {PublishEntryModel} from '../publish-entry/publish-entry.component';
-import {SnapshotEntryModel} from '../snapshot-entry/snapshot-entry.component';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { VersionDto } from '../../../../../api/generated';
+import { ReleasedEntryModel } from '../released-entry/released-entry.component';
+import { DownloadVersionModel, VersionId } from '../model';
+import { PublishEntryModel } from '../publish-entry/publish-entry.component';
+import { SnapshotEntryModel } from '../snapshot-entry/snapshot-entry.component';
 
 @Component({
   selector: 'sbb-version-entries',
   templateUrl: './version-entries.component.html',
-  styleUrls: ['./version-entries.component.scss']
+  styleUrls: ['./version-entries.component.scss'],
 })
 export class VersionEntriesComponent implements OnInit {
   private static SHOW_MORE_JUNK_SIZE = 3;
@@ -66,7 +66,7 @@ export class VersionEntriesComponent implements OnInit {
         createdBy: version.createdBy,
         comment: version.comment,
         conflict: this.hasReleaseConflict(),
-        lastAdded: this.isLastAdded(version.id)
+        lastAdded: this.isLastAdded(version.id),
       };
     }
     return undefined;
@@ -75,7 +75,7 @@ export class VersionEntriesComponent implements OnInit {
   private createPublishEntry(): PublishEntryModel | undefined {
     if (!this.model.releasedVersion && this.model.snapshotVersions.length > 0) {
       return {
-        nextReleaseVersion: this.model.snapshotVersions[0].releaseVersion
+        nextReleaseVersion: this.model.snapshotVersions[0].releaseVersion,
       };
     }
     return undefined;
@@ -84,14 +84,14 @@ export class VersionEntriesComponent implements OnInit {
   private createSnapshotEntries(): SnapshotEntryModel[] {
     return this.model.snapshotVersions
       .slice(0, this.nrDisplayedSnapshots)
-      .map(version => ({
+      .map((version) => ({
         id: version.id,
         releaseVersion: version.releaseVersion,
         snapshotVersion: version.snapshotVersion,
         createdAt: new Date(version.createdAt),
         createdBy: version.createdBy,
         comment: version.comment,
-        lastAdded: this.isLastAdded(version.id)
+        lastAdded: this.isLastAdded(version.id),
       }));
   }
 

@@ -48,7 +48,7 @@ export const BEZIER_CONTROL_SAME_ALIGNMENT_DIFFERENCE = 32;
 export const TRAINRUN_SECTION_LINE_TEXT_HEIGHT = 16;
 
 export const TRAINRUN_SECTION_TIME_CLOSE_NODE = -14; // c : Center close
-export const TRAINRUN_SECTION_TIME_FAR_NODE = 14;    // c : Center far
+export const TRAINRUN_SECTION_TIME_FAR_NODE = 14; // c : Center far
 export const TRAINRUN_SECTION_TIME_CENTER = 32;
 export const TRAINRUN_SECTION_TIME_TOP = -4;
 export const TRAINRUN_SECTION_TIME_BOTTOM = 4;
@@ -57,6 +57,5 @@ export const TRAINRUN_SECTION_TEXT_AREA_WIDTH = 20;
 export const TRAINRUN_SECTION_TEXT_AREA_HEIGHT = 20;
 
 export const EDITOR_MENU_HEIGHT = 60;
-
 
 export const SHOW_MAX_SINGLE_TRAINRUN_SECTIONS_STOPS = 5;

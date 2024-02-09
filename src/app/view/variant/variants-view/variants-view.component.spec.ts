@@ -1,12 +1,17 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {VariantsViewComponent} from './variants-view.component';
-import {SbbDialogModule} from '@sbb-esta/angular/dialog';
-import {ProjectControllerBackendService, ProjectDto, VariantControllerBackendService, VariantCreateDto} from '../../../api/generated';
-import {of} from 'rxjs';
-import {ActivatedRoute} from '@angular/router';
-import {NavigationService} from '../../../services/ui/navigation.service';
-import {VersionControlService} from '../../../services/data/version-control.service';
+import { VariantsViewComponent } from './variants-view.component';
+import { SbbDialogModule } from '@sbb-esta/angular/dialog';
+import {
+  ProjectControllerBackendService,
+  ProjectDto,
+  VariantControllerBackendService,
+  VariantCreateDto,
+} from '../../../api/generated';
+import { of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { NavigationService } from '../../../services/ui/navigation.service';
+import { VersionControlService } from '../../../services/data/version-control.service';
 
 describe('VariantsViewComponent', () => {
   let component: VariantsViewComponent;
@@ -17,10 +22,9 @@ describe('VariantsViewComponent', () => {
   let activatedRoute: Partial<ActivatedRoute>;
   let versionControlService: Partial<VersionControlService>;
 
-
   beforeEach(async () => {
     projectControllerBackendService = {
-      getProject: ((projectId: number) => {
+      getProject: (projectId: number) => {
         const project: ProjectDto = {
           id: 10,
           name: '',
@@ -33,35 +37,39 @@ describe('VariantsViewComponent', () => {
           isArchived: false,
           isDeletable: false,
           writeUsers: [],
-          readUsers: []
+          readUsers: [],
         };
         return of(project as any);
-      })
+      },
     };
     activatedRoute = {
       params: of({
         projectId: '10',
-        variantId: '20'
-      })
+        variantId: '20',
+      }),
     };
     variantControllerBackendService = {
-      createVariant: (projectId: number, variantCreateDto: VariantCreateDto) => of(10 as any)
+      createVariant: (projectId: number, variantCreateDto: VariantCreateDto) =>
+        of(10 as any),
     };
 
     await TestBed.configureTestingModule({
       declarations: [VariantsViewComponent],
-      imports: [
-        SbbDialogModule,
-      ],
+      imports: [SbbDialogModule],
       providers: [
-        {provide: ActivatedRoute, useValue: activatedRoute},
-        {provide: NavigationService, useValue: {}},
-        {provide: ProjectControllerBackendService, useValue: projectControllerBackendService},
-        {provide: VariantControllerBackendService, useValue: variantControllerBackendService},
-        {provide: VersionControlService, useValue: versionControlService}
-      ]
-    })
-      .compileComponents();
+        { provide: ActivatedRoute, useValue: activatedRoute },
+        { provide: NavigationService, useValue: {} },
+        {
+          provide: ProjectControllerBackendService,
+          useValue: projectControllerBackendService,
+        },
+        {
+          provide: VariantControllerBackendService,
+          useValue: variantControllerBackendService,
+        },
+        { provide: VersionControlService, useValue: versionControlService },
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

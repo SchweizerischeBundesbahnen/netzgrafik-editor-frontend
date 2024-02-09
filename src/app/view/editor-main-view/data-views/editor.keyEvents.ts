@@ -1,163 +1,171 @@
 import * as d3 from 'd3';
-import {StaticDomTags} from './static.dom.tags';
-import {NodeService} from '../../../services/data/node.service';
-import {TrainrunService} from '../../../services/data/trainrun.service';
-import {TrainrunSectionService} from '../../../services/data/trainrunsection.service';
-import {SVGMouseController} from '../../util/svg.mouse.controller';
-import {LogService} from '../../../logger/log.service';
-import {NoteService} from '../../../services/data/note.service';
-import {RASTERING_BASIC_GRID_SIZE} from '../../rastering/definitions';
-import {EditorMode} from '../../editor-menu/editor-mode';
-import {Note} from '../../../models/note.model';
-import {Node} from '../../../models/node.model';
-import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
-import {UndoService} from '../../../services/data/undo.service';
-import {CopyService} from '../../../services/data/copy.service';
-import {Port} from '../../../models/port.model';
-import {FilterService} from '../../../services/ui/filter.service';
-import {Connection} from '../../../models/connection.model';
-import {PreviewLineMode, TrainrunSectionPreviewLineView} from './trainrunsection.previewline.view';
-import {TrainrunSection} from '../../../models/trainrunsection.model';
-import {Trainrun} from '../../../models/trainrun.model';
+import { StaticDomTags } from './static.dom.tags';
+import { NodeService } from '../../../services/data/node.service';
+import { TrainrunService } from '../../../services/data/trainrun.service';
+import { TrainrunSectionService } from '../../../services/data/trainrunsection.service';
+import { SVGMouseController } from '../../util/svg.mouse.controller';
+import { LogService } from '../../../logger/log.service';
+import { NoteService } from '../../../services/data/note.service';
+import { RASTERING_BASIC_GRID_SIZE } from '../../rastering/definitions';
+import { EditorMode } from '../../editor-menu/editor-mode';
+import { Note } from '../../../models/note.model';
+import { Node } from '../../../models/node.model';
+import { UiInteractionService } from '../../../services/ui/ui.interaction.service';
+import { UndoService } from '../../../services/data/undo.service';
+import { CopyService } from '../../../services/data/copy.service';
+import { Port } from '../../../models/port.model';
+import { FilterService } from '../../../services/ui/filter.service';
+import { Connection } from '../../../models/connection.model';
+import {
+  PreviewLineMode,
+  TrainrunSectionPreviewLineView,
+} from './trainrunsection.previewline.view';
+import { TrainrunSection } from '../../../models/trainrunsection.model';
+import { Trainrun } from '../../../models/trainrun.model';
 
 export class EditorKeyEvents {
   private editorMode: EditorMode;
 
-  constructor(private nodeSerivce: NodeService,
-              private trainrunService: TrainrunService,
-              private trainrunSectionService: TrainrunSectionService,
-              private noteSerivce: NoteService,
-              private filterService: FilterService,
-              private uiInteractionService: UiInteractionService,
-              private logService: LogService,
-              private undoService: UndoService,
-              private copyService: CopyService,
-              private svgMouseController: SVGMouseController,
-              private trainrunSectionPreviewLineView: TrainrunSectionPreviewLineView) {
+  constructor(
+    private nodeSerivce: NodeService,
+    private trainrunService: TrainrunService,
+    private trainrunSectionService: TrainrunSectionService,
+    private noteSerivce: NoteService,
+    private filterService: FilterService,
+    private uiInteractionService: UiInteractionService,
+    private logService: LogService,
+    private undoService: UndoService,
+    private copyService: CopyService,
+    private svgMouseController: SVGMouseController,
+    private trainrunSectionPreviewLineView: TrainrunSectionPreviewLineView,
+  ) {
     this.activateMousekeyDownHandler(EditorMode.NetzgrafikEditing);
   }
 
   deactivateMousekeyDownHandler() {
-    d3.select('body')
-      .on('keydown', () => {
-      });
+    d3.select('body').on('keydown', () => {});
   }
 
   ignoreKeyEvent(event: KeyboardEvent): boolean {
-    return (document.body !== event.target);
+    return document.body !== event.target;
   }
 
   activateMousekeyDownHandler(editorMode: EditorMode) {
     this.editorMode = editorMode;
 
-    d3.select('body')
-      .on('keydown', () => {
-        if (this.ignoreKeyEvent(d3.event)) {
-          return;
-        }
+    d3.select('body').on('keydown', () => {
+      if (this.ignoreKeyEvent(d3.event)) {
+        return;
+      }
 
-        if (this.trainrunSectionPreviewLineView.getMode() !== PreviewLineMode.NotDragging) {
-          d3.event.preventDefault();
-          return;
-        }
+      if (
+        this.trainrunSectionPreviewLineView.getMode() !==
+        PreviewLineMode.NotDragging
+      ) {
+        d3.event.preventDefault();
+        return;
+      }
 
-        const keycode = d3.event.code;
-        const ctrlKey = d3.event.ctrlKey;
-        switch (keycode) {
-          case 'Delete':
-            this.onKeyPressedDelete();
-            break;
-          case 'Insert':
-            this.onKeyPressedInsert();
-            break;
-          case 'Escape':
-            if (this.onKeyPressedEscape()) {
+      const keycode = d3.event.code;
+      const ctrlKey = d3.event.ctrlKey;
+      switch (keycode) {
+        case 'Delete':
+          this.onKeyPressedDelete();
+          break;
+        case 'Insert':
+          this.onKeyPressedInsert();
+          break;
+        case 'Escape':
+          if (this.onKeyPressedEscape()) {
+            d3.event.preventDefault();
+          }
+          break;
+        case 'KeyA':
+          if (ctrlKey) {
+            if (this.onSelectAll()) {
               d3.event.preventDefault();
             }
-            break;
-          case 'KeyA':
-            if (ctrlKey) {
-              if (this.onSelectAll()) {
-                d3.event.preventDefault();
-              }
-            }
-            break;
-          case 'KeyC':
-            if (ctrlKey) {
-              if (this.onCopyAllVisibleElementsToCopyCache()) {
-                d3.event.preventDefault();
-              }
-            }
-            break;
-          case 'KeyV':
-            if (ctrlKey) {
-              if (this.onInsertAllVisibleElementsFromCopyCache()) {
-                d3.event.preventDefault();
-              }
-            }
-            break;
-          case 'KeyZ':
-            if (ctrlKey) {
-              if (this.onRevertLastChange()) {
-                d3.event.preventDefault();
-              }
-            }
-            break;
-          case 'KeyY':
-            if (ctrlKey) {
-              if (this.onRevertLastChange()) {
-                d3.event.preventDefault();
-              }
-            }
-            break;
-          case 'KeyD':
-            if (ctrlKey) {
-              this.onDuplicate();
+          }
+          break;
+        case 'KeyC':
+          if (ctrlKey) {
+            if (this.onCopyAllVisibleElementsToCopyCache()) {
               d3.event.preventDefault();
             }
-            break;
-          default:
-            break;
-        }
-      });
+          }
+          break;
+        case 'KeyV':
+          if (ctrlKey) {
+            if (this.onInsertAllVisibleElementsFromCopyCache()) {
+              d3.event.preventDefault();
+            }
+          }
+          break;
+        case 'KeyZ':
+          if (ctrlKey) {
+            if (this.onRevertLastChange()) {
+              d3.event.preventDefault();
+            }
+          }
+          break;
+        case 'KeyY':
+          if (ctrlKey) {
+            if (this.onRevertLastChange()) {
+              d3.event.preventDefault();
+            }
+          }
+          break;
+        case 'KeyD':
+          if (ctrlKey) {
+            this.onDuplicate();
+            d3.event.preventDefault();
+          }
+          break;
+        default:
+          break;
+      }
+    });
   }
 
   private getSelectedTrainSectionId(): number {
     let selectedTrainrunSectionId: number = undefined;
-    d3.select(StaticDomTags.EDGE_LINE_DOM_REF + '.' + StaticDomTags.TAG_SELECTED)
-      .classed('KeyEventHandling', (tsvo) => {
-        if (tsvo === undefined) {
-          const trainRun = this.trainrunService.getSelectedTrainrun();
-          if (trainRun !== null) {
-            selectedTrainrunSectionId = trainRun.getId();
-          }
-          return false;
-        }
-        if (tsvo.trainrunSection.getTrainrun().selected()) {
-          selectedTrainrunSectionId = tsvo.trainrunSection.getTrainrunId();
+    d3.select(
+      StaticDomTags.EDGE_LINE_DOM_REF + '.' + StaticDomTags.TAG_SELECTED,
+    ).classed('KeyEventHandling', (tsvo) => {
+      if (tsvo === undefined) {
+        const trainRun = this.trainrunService.getSelectedTrainrun();
+        if (trainRun !== null) {
+          selectedTrainrunSectionId = trainRun.getId();
         }
         return false;
-      });
+      }
+      if (tsvo.trainrunSection.getTrainrun().selected()) {
+        selectedTrainrunSectionId = tsvo.trainrunSection.getTrainrunId();
+      }
+      return false;
+    });
     return selectedTrainrunSectionId;
   }
 
   private getHoveredNoteId(): number {
     let noteHoveredId: number = undefined;
-    d3.select(StaticDomTags.NOTE_ROOT_DOM_REF + '.' + StaticDomTags.TAG_HOVER)
-      .classed('KeyEventHandling', (tsvo) => {
-        noteHoveredId = tsvo.note.getId();
-        return false;
-      });
+    d3.select(
+      StaticDomTags.NOTE_ROOT_DOM_REF + '.' + StaticDomTags.TAG_HOVER,
+    ).classed('KeyEventHandling', (tsvo) => {
+      noteHoveredId = tsvo.note.getId();
+      return false;
+    });
     return noteHoveredId;
   }
 
   private getHoveredNodeId(): number {
     let hoveredNodeId: number = undefined;
-    d3.select(StaticDomTags.NODE_ROOT_DOM_REF + '.' + StaticDomTags.TAG_HOVER)
-      .classed('KeyEventHandling', (nvo) => {
-        hoveredNodeId = nvo.node.getId();
-        return false;
-      });
+    d3.select(
+      StaticDomTags.NODE_ROOT_DOM_REF + '.' + StaticDomTags.TAG_HOVER,
+    ).classed('KeyEventHandling', (nvo) => {
+      hoveredNodeId = nvo.node.getId();
+      return false;
+    });
     return hoveredNodeId;
   }
 
@@ -207,10 +215,13 @@ export class EditorKeyEvents {
     const hoveredNoteId = this.getHoveredNoteId();
     if (hoveredNoteId !== undefined) {
       const note = this.noteSerivce.duplicateNote(hoveredNoteId);
-      this.noteSerivce.moveNote(note.getId(),
-        RASTERING_BASIC_GRID_SIZE, RASTERING_BASIC_GRID_SIZE,
+      this.noteSerivce.moveNote(
+        note.getId(),
+        RASTERING_BASIC_GRID_SIZE,
+        RASTERING_BASIC_GRID_SIZE,
         1,
-        true);
+        true,
+      );
       this.noteSerivce.unselectNote(note.getId());
       return true;
     }
@@ -218,7 +229,9 @@ export class EditorKeyEvents {
   }
 
   private doDuplicateNode(): boolean {
-    if (this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving) {
+    if (
+      this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving
+    ) {
       return false;
     }
     const hoveredNodeId = this.getHoveredNodeId();
@@ -231,7 +244,9 @@ export class EditorKeyEvents {
   }
 
   private doDuplicateMultiSelectedNode(): boolean {
-    if (this.uiInteractionService.getEditorMode() !== EditorMode.MultiNodeMoving) {
+    if (
+      this.uiInteractionService.getEditorMode() !== EditorMode.MultiNodeMoving
+    ) {
       return false;
     }
 
@@ -246,23 +261,39 @@ export class EditorKeyEvents {
     // --- Pass 2 ---- collect all trains that have at least one section between the two marked "nodes"
     // >>> Pass 2.1 -- filter all trainruns
     const collectedTrainrunSectionBetweenSelectedNodes =
-      this.trainrunSectionService.getTrainrunSections().filter((ts: TrainrunSection) =>
-        ts.getSourceNode().selected() && ts.getTargetNode().selected()
-      );
+      this.trainrunSectionService
+        .getTrainrunSections()
+        .filter(
+          (ts: TrainrunSection) =>
+            ts.getSourceNode().selected() && ts.getTargetNode().selected(),
+        );
 
     // >>> Pass 2.2 -- collect all trainruns to duplicate
     const collectedTrainrun: Trainrun[] = [];
-    collectedTrainrunSectionBetweenSelectedNodes.forEach((ts: TrainrunSection) => {
-      if (collectedTrainrun.find((t: Trainrun) => t.getId() === ts.getTrainrunId()) === undefined) {
-        collectedTrainrun.push(ts.getTrainrun());
-      }
-    });
+    collectedTrainrunSectionBetweenSelectedNodes.forEach(
+      (ts: TrainrunSection) => {
+        if (
+          collectedTrainrun.find(
+            (t: Trainrun) => t.getId() === ts.getTrainrunId(),
+          ) === undefined
+        ) {
+          collectedTrainrun.push(ts.getTrainrun());
+        }
+      },
+    );
 
     // >>> Pass 2.3 -- remove all duplicate trainrun sections that are not encapsulated by marked nodes
     const newTrainrunSectionToModify: TrainrunSection[] = [];
     collectedTrainrun.forEach((t: Trainrun) => {
-      const newTrainrun = this.trainrunService.duplicateTrainrun(t.getId(), false, '');
-      const newTrainrunSections = this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(newTrainrun.getId());
+      const newTrainrun = this.trainrunService.duplicateTrainrun(
+        t.getId(),
+        false,
+        '',
+      );
+      const newTrainrunSections =
+        this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(
+          newTrainrun.getId(),
+        );
       newTrainrunSections.forEach((ts: TrainrunSection) => {
         if (ts.getSourceNode().selected() && ts.getTargetNode().selected()) {
           newTrainrunSectionToModify.push(ts);
@@ -292,20 +323,36 @@ export class EditorKeyEvents {
     const srcNonStop: boolean[] = [];
     const trgNonStop: boolean[] = [];
     newTrainrunSectionToModify.forEach((ts: TrainrunSection) => {
-      const newSrcNodeId = newNodes[collectedSelectedNodes.indexOf(ts.getSourceNode())].getId();
-      const newTrgNodeId = newNodes[collectedSelectedNodes.indexOf(ts.getTargetNode())].getId();
+      const newSrcNodeId =
+        newNodes[collectedSelectedNodes.indexOf(ts.getSourceNode())].getId();
+      const newTrgNodeId =
+        newNodes[collectedSelectedNodes.indexOf(ts.getTargetNode())].getId();
 
       const transSrc = ts.getSourceNode().getTransition(ts.getId());
-      const transNonStopSrc = transSrc !== undefined ? transSrc.getIsNonStopTransit() : false;
+      const transNonStopSrc =
+        transSrc !== undefined ? transSrc.getIsNonStopTransit() : false;
       const transTrg = ts.getTargetNode().getTransition(ts.getId());
-      const transNonStopTrg = transTrg !== undefined ? transTrg.getIsNonStopTransit() : false;
+      const transNonStopTrg =
+        transTrg !== undefined ? transTrg.getIsNonStopTransit() : false;
       srcNonStop.push(transNonStopSrc);
       trgNonStop.push(transNonStopTrg);
 
-      this.trainrunSectionService.reconnectTrainrunSection(ts.getSourceNodeId(), newTrgNodeId,
-        ts.getId(), ts.getTargetNodeId(), ts.getSourceNodeId(), false);
-      this.trainrunSectionService.reconnectTrainrunSection(ts.getTargetNodeId(), newSrcNodeId,
-        ts.getId(), ts.getTargetNodeId(), ts.getSourceNodeId(), false);
+      this.trainrunSectionService.reconnectTrainrunSection(
+        ts.getSourceNodeId(),
+        newTrgNodeId,
+        ts.getId(),
+        ts.getTargetNodeId(),
+        ts.getSourceNodeId(),
+        false,
+      );
+      this.trainrunSectionService.reconnectTrainrunSection(
+        ts.getTargetNodeId(),
+        newSrcNodeId,
+        ts.getId(),
+        ts.getTargetNodeId(),
+        ts.getSourceNodeId(),
+        false,
+      );
     });
 
     // >>> Pass 4.2 -- correct the non-stop transitions
@@ -336,7 +383,9 @@ export class EditorKeyEvents {
   }
 
   private doDuplicateMultiSelectedNote(): boolean {
-    if (this.uiInteractionService.getEditorMode() !== EditorMode.MultiNodeMoving) {
+    if (
+      this.uiInteractionService.getEditorMode() !== EditorMode.MultiNodeMoving
+    ) {
       return false;
     }
 
@@ -359,12 +408,14 @@ export class EditorKeyEvents {
     });
     collectedSelectedNotes.forEach((n: Note) => {
       const cNode = this.noteSerivce.duplicateNote(n.getId());
-      this.noteSerivce.moveNote(cNode.getId(),
+      this.noteSerivce.moveNote(
+        cNode.getId(),
         maxW + RASTERING_BASIC_GRID_SIZE,
         maxH + RASTERING_BASIC_GRID_SIZE,
         1,
         true,
-        false);
+        false,
+      );
       newNotes.push(cNode);
     });
 
@@ -378,15 +429,20 @@ export class EditorKeyEvents {
     return true;
   }
 
-
-  private duplicateNode(node: Node, nodeWidth: number, nodeHeight: number, enforceUpdate = true): Node {
-
+  private duplicateNode(
+    node: Node,
+    nodeWidth: number,
+    nodeHeight: number,
+    enforceUpdate = true,
+  ): Node {
     const newNode = this.nodeSerivce.duplicateNode(node.getId());
-    this.nodeSerivce.changeNodePosition(newNode.getId(),
+    this.nodeSerivce.changeNodePosition(
+      newNode.getId(),
       newNode.getPositionX() + nodeWidth + RASTERING_BASIC_GRID_SIZE,
       newNode.getPositionY() + nodeHeight + RASTERING_BASIC_GRID_SIZE,
       true,
-      enforceUpdate);
+      enforceUpdate,
+    );
     this.nodeSerivce.unselectNode(newNode.getId(), enforceUpdate);
     return newNode;
   }
@@ -401,8 +457,11 @@ export class EditorKeyEvents {
   }
 
   private onSelectAll(): boolean {
-    if (this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving ||
-      this.uiInteractionService.getEditorMode() === EditorMode.NetzgrafikEditing) {
+    if (
+      this.uiInteractionService.getEditorMode() ===
+        EditorMode.MultiNodeMoving ||
+      this.uiInteractionService.getEditorMode() === EditorMode.NetzgrafikEditing
+    ) {
       this.uiInteractionService.setEditorMode(EditorMode.MultiNodeMoving);
       this.noteSerivce.getNotes().forEach((n: Note) => n.select());
       this.nodeSerivce.getNodes().forEach((n: Node) => n.select());
@@ -420,11 +479,17 @@ export class EditorKeyEvents {
     const mousePosition = this.svgMouseController.getLastMousePosition();
     const hoveredNodeId = this.getHoveredNodeId();
     if (hoveredNodeId !== undefined) {
-      this.nodeSerivce.addNodeWithPosition(mousePosition.getX(), mousePosition.getY());
+      this.nodeSerivce.addNodeWithPosition(
+        mousePosition.getX(),
+        mousePosition.getY(),
+      );
       return true;
     }
 
-    this.nodeSerivce.addNodeWithPosition(mousePosition.getX(), mousePosition.getY());
+    this.nodeSerivce.addNodeWithPosition(
+      mousePosition.getX(),
+      mousePosition.getY(),
+    );
     return true;
   }
 
@@ -440,9 +505,14 @@ export class EditorKeyEvents {
         });
       }
     });
-    visibleTrainrunSections = visibleTrainrunSections.filter((v, i, a) => a.indexOf(v) === i);
+    visibleTrainrunSections = visibleTrainrunSections.filter(
+      (v, i, a) => a.indexOf(v) === i,
+    );
     visibleTrainrunSections.forEach((trainrunSectionId: number) => {
-      this.trainrunSectionService.deleteTrainrunSection(trainrunSectionId, false);
+      this.trainrunSectionService.deleteTrainrunSection(
+        trainrunSectionId,
+        false,
+      );
     });
 
     let selectedNodeDeleted = false;
@@ -490,10 +560,19 @@ export class EditorKeyEvents {
     const connections = this.nodeSerivce.getAllSelectedConnections();
     if (connections.length > 0) {
       connections.forEach((connection: Connection) => {
-        const node = this.nodeSerivce.getNodes().find((n: Node) =>
-          n.getConnections().find((c) => connection.getId() === c.getId()) !== undefined);
+        const node = this.nodeSerivce
+          .getNodes()
+          .find(
+            (n: Node) =>
+              n
+                .getConnections()
+                .find((c) => connection.getId() === c.getId()) !== undefined,
+          );
         if (node !== undefined) {
-          this.nodeSerivce.removeConnectionFromNode(node.getId(), connection.getId());
+          this.nodeSerivce.removeConnectionFromNode(
+            node.getId(),
+            connection.getId(),
+          );
         }
       });
       return true;
@@ -527,7 +606,9 @@ export class EditorKeyEvents {
     }
 
     if (selectedTrainrunSectionId !== undefined) {
-      this.trainrunSectionService.deleteAllTrainrunSectionsOfTrainrun(selectedTrainrunSectionId);
+      this.trainrunSectionService.deleteAllTrainrunSectionsOfTrainrun(
+        selectedTrainrunSectionId,
+      );
       return true;
     }
 
@@ -549,5 +630,4 @@ export class EditorKeyEvents {
 
     return false;
   }
-
 }

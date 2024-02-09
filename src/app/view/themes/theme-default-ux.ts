@@ -1,11 +1,18 @@
-import {ThemeBase} from './theme-base';
-import {ThemeRegistration} from './theme-registration';
-import {StaticDomTags} from '../editor-main-view/data-views/static.dom.tags';
+import { ThemeBase } from './theme-base';
+import { ThemeRegistration } from './theme-registration';
+import { StaticDomTags } from '../editor-main-view/data-views/static.dom.tags';
 
 export class ThemeDefaultUx extends ThemeBase {
-  constructor(backgroundColor = 'white',
-              backgroundStreckengraphikColor = 'white') {
-    super(ThemeRegistration.ThemeDefaultUx, backgroundColor, backgroundStreckengraphikColor, false);
+  constructor(
+    backgroundColor = 'white',
+    backgroundStreckengraphikColor = 'white',
+  ) {
+    super(
+      ThemeRegistration.ThemeDefaultUx,
+      backgroundColor,
+      backgroundStreckengraphikColor,
+      false,
+    );
     ThemeBase.setUIColors(ThemeDefaultUx.getThemeDefaultUxColors());
     ThemeBase.setRenderingColors(ThemeDefaultUx.getThemeDefaultUxColors());
   }
@@ -63,14 +70,13 @@ export class ThemeDefaultUx extends ThemeBase {
       StaticDomTags.PREFIX_COLOR_VARIABLE + '_G_MUTED: #DCDCDC',
       StaticDomTags.PREFIX_COLOR_VARIABLE + '_G_RELATED: #DCDCDC',
 
-
       'COLOR_GRAYEDOUT: white',
       'COLOR_TRANSITION_GRAYEDOUT: whitesmoke',
 
       'COLOR_STRECKENGRAPHIK_LINE_GRID_X: darkgray',
       'COLOR_STRECKENGRAPHIK_LINE_GRID_Y: darkgray',
 
-      'COLOR_Edit: rgb(47, 210, 204)'
+      'COLOR_Edit: rgb(47, 210, 204)',
     ];
   }
 }

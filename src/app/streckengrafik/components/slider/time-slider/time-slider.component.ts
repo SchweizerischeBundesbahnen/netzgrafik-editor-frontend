@@ -5,31 +5,30 @@ import {
   HostListener,
   Input,
   OnDestroy,
-  OnInit
+  OnInit,
 } from '@angular/core';
-import {TimeSliderService} from '../../../services/time-slider.service';
-import {SliderChangeInfo} from '../../../model/util/sliderChangeInfo';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {ViewBoxChangeInfo} from '../../../model/util/viewBoxChangeInfo';
-import {ViewBoxService} from '../../../services/util/view-box.service';
-import {TimeFormatter} from '../../../model/util/timeFormatter';
+import { TimeSliderService } from '../../../services/time-slider.service';
+import { SliderChangeInfo } from '../../../model/util/sliderChangeInfo';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { ViewBoxChangeInfo } from '../../../model/util/viewBoxChangeInfo';
+import { ViewBoxService } from '../../../services/util/view-box.service';
+import { TimeFormatter } from '../../../model/util/timeFormatter';
 import {
   UpdateCounterController,
   UpdateCounterHandler,
-  UpdateCounterTriggerSerivce
+  UpdateCounterTriggerSerivce,
 } from '../../../services/util/update-counter.service';
-
 
 @Component({
   selector: 'sbb-time-slider',
   templateUrl: './time-slider.component.html',
   styleUrls: ['./time-slider.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TimeSliderComponent implements OnInit, OnDestroy, UpdateCounterHandler {
-
-
+export class TimeSliderComponent
+  implements OnInit, OnDestroy, UpdateCounterHandler
+{
   @Input()
   sliderLinePos = 0;
 
@@ -68,14 +67,16 @@ export class TimeSliderComponent implements OnInit, OnDestroy, UpdateCounterHand
   private readonly destroyed$ = new Subject<void>();
   private lastMouseMoveButtons = 0;
 
-  constructor(private readonly timeSliderService: TimeSliderService,
-              private readonly viewBoxService: ViewBoxService,
-              private readonly updateCounterTriggerSerivce: UpdateCounterTriggerSerivce,
-              private readonly cd: ChangeDetectorRef) {
-  }
+  constructor(
+    private readonly timeSliderService: TimeSliderService,
+    private readonly viewBoxService: ViewBoxService,
+    private readonly updateCounterTriggerSerivce: UpdateCounterTriggerSerivce,
+    private readonly cd: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
-    this.timeSliderService.getSliderChangeObservable()
+    this.timeSliderService
+      .getSliderChangeObservable()
       .pipe(takeUntil(this.destroyed$))
       .subscribe((sliderChangeInfo: SliderChangeInfo) => {
         const changed =
@@ -95,7 +96,8 @@ export class TimeSliderComponent implements OnInit, OnDestroy, UpdateCounterHand
         }
       });
 
-    this.viewBoxService.getViewBox()
+    this.viewBoxService
+      .getViewBox()
       .pipe(takeUntil(this.destroyed$))
       .subscribe((viewBoxChangeInfo: ViewBoxChangeInfo) => {
         const changed =
@@ -110,7 +112,8 @@ export class TimeSliderComponent implements OnInit, OnDestroy, UpdateCounterHand
         }
       });
 
-    this.timeSliderService.getTimelineChangeObservable()
+    this.timeSliderService
+      .getTimelineChangeObservable()
       .pipe(takeUntil(this.destroyed$))
       .subscribe((timeLinePos: number) => {
         const changed = this.timelineChangeInfo !== timeLinePos;
@@ -121,7 +124,9 @@ export class TimeSliderComponent implements OnInit, OnDestroy, UpdateCounterHand
         }
       });
 
-    this.timeSliderService.changeZoom(this.timeSliderService.getYZoom() + 0.000001);
+    this.timeSliderService.changeZoom(
+      this.timeSliderService.getYZoom() + 0.000001,
+    );
   }
 
   ngOnDestroy(): void {
@@ -134,9 +139,17 @@ export class TimeSliderComponent implements OnInit, OnDestroy, UpdateCounterHand
     event.preventDefault();
     event.stopImmediatePropagation();
     if (this.horizontal) {
-      this.timeSliderService.handleWheelZoom(event.offsetX, event.deltaY, event.timeStamp);
+      this.timeSliderService.handleWheelZoom(
+        event.offsetX,
+        event.deltaY,
+        event.timeStamp,
+      );
     } else {
-      this.timeSliderService.handleWheelZoom(event.offsetY, event.deltaY, event.timeStamp);
+      this.timeSliderService.handleWheelZoom(
+        event.offsetY,
+        event.deltaY,
+        event.timeStamp,
+      );
     }
   }
 
@@ -146,9 +159,13 @@ export class TimeSliderComponent implements OnInit, OnDestroy, UpdateCounterHand
     event.stopImmediatePropagation();
     if (event.buttons !== 0) {
       if (this.horizontal) {
-        this.timeSliderService.yMoveChange(this.timeSliderService.getYMove() - event.movementX);
+        this.timeSliderService.yMoveChange(
+          this.timeSliderService.getYMove() - event.movementX,
+        );
       } else {
-        this.timeSliderService.yMoveChange(this.timeSliderService.getYMove() - event.movementY);
+        this.timeSliderService.yMoveChange(
+          this.timeSliderService.getYMove() - event.movementY,
+        );
       }
       this.lastMouseMoveButtons = event.buttons;
     }
@@ -218,7 +235,9 @@ export class TimeSliderComponent implements OnInit, OnDestroy, UpdateCounterHand
   }
 
   getTimeSliderClassTag(time: TimeDate): string {
-    return 'TimeSliderComponent HorizontalLine ' + this.getTimeGroupClassTag(time);
+    return (
+      'TimeSliderComponent HorizontalLine ' + this.getTimeGroupClassTag(time)
+    );
   }
 
   getTimeLineClassTag(): string {
@@ -242,9 +261,12 @@ export class TimeSliderComponent implements OnInit, OnDestroy, UpdateCounterHand
       this.timeLinePos = undefined;
       return;
     }
-    this.timeLinePos = (this.timelineChangeInfo + this.sliderChangeInfo.move) / this.sliderChangeInfo.zoom;
+    this.timeLinePos =
+      (this.timelineChangeInfo + this.sliderChangeInfo.move) /
+      this.sliderChangeInfo.zoom;
     if (this.roundTimeLine > 0.01) {
-      this.timeLinePos = Math.round(this.timeLinePos / this.roundTimeLine) * this.roundTimeLine;
+      this.timeLinePos =
+        Math.round(this.timeLinePos / this.roundTimeLine) * this.roundTimeLine;
     }
     if (isNaN(this.timeLinePos)) {
       this.timeLinePos = undefined;
@@ -253,14 +275,21 @@ export class TimeSliderComponent implements OnInit, OnDestroy, UpdateCounterHand
 
   private render() {
     if (this.horizontal) {
-      this.viewBox = ' ' + this.sliderChangeInfo.move + ' ' +
+      this.viewBox =
+        ' ' +
+        this.sliderChangeInfo.move +
+        ' ' +
         '0 ' +
-        this.viewBoxChangeInfo.width + ' ' +
+        this.viewBoxChangeInfo.width +
+        ' ' +
         40;
     } else {
-      this.viewBox = '0 ' +
-        this.sliderChangeInfo.move + ' ' +
-        40 + ' ' +
+      this.viewBox =
+        '0 ' +
+        this.sliderChangeInfo.move +
+        ' ' +
+        40 +
+        ' ' +
         this.viewBoxChangeInfo.height;
     }
     this.delayedRender();
@@ -277,7 +306,9 @@ export class TimeSliderComponent implements OnInit, OnDestroy, UpdateCounterHand
       this.updateCounterCallback();
     } else {
       this.updateCounterController = new UpdateCounterController(
-        this.fullDetailRenderingUpdateCounter, this);
+        this.fullDetailRenderingUpdateCounter,
+        this,
+      );
     }
   }
 
@@ -300,18 +331,21 @@ export class TimeSliderComponent implements OnInit, OnDestroy, UpdateCounterHand
 
   updateTicksRenderingSpace() {
     const block = 60 * this.getScaleFactor();
-    let minTime = this.horizontal ?
-      Math.floor(this.viewBoxChangeInfo.x / block) :
-      Math.floor(this.viewBoxChangeInfo.y / block);
-    let maxTime = this.horizontal ?
-      Math.ceil((this.viewBoxChangeInfo.x + this.viewBoxChangeInfo.width) / block) :
-      Math.ceil((this.viewBoxChangeInfo.y + this.viewBoxChangeInfo.height) / block);
-
+    let minTime = this.horizontal
+      ? Math.floor(this.viewBoxChangeInfo.x / block)
+      : Math.floor(this.viewBoxChangeInfo.y / block);
+    let maxTime = this.horizontal
+      ? Math.ceil(
+          (this.viewBoxChangeInfo.x + this.viewBoxChangeInfo.width) / block,
+        )
+      : Math.ceil(
+          (this.viewBoxChangeInfo.y + this.viewBoxChangeInfo.height) / block,
+        );
 
     if (this.timesTicksIndices.length > 0) {
       const first = this.timesTicksIndices[0];
       const last = this.timesTicksIndices[this.timesTicksIndices.length - 1];
-      if ((first > minTime) && (last < maxTime)) {
+      if (first > minTime && last < maxTime) {
         return;
       }
       minTime = Math.min(minTime, first);
@@ -322,8 +356,12 @@ export class TimeSliderComponent implements OnInit, OnDestroy, UpdateCounterHand
     for (let idx = minTime; idx <= maxTime; idx++) {
       this.timesTicksIndices.push(idx);
     }
-    this.timesTicks = this.orgTimesTicks.filter((t: TimeDate) => t.time < (60 * (maxTime - minTime) + 1));
-    this.times = this.orgTimes.filter((t: TimeDate) => (t.time > (60 * minTime - 1)) && (t.time < (60 * maxTime + 1)));
+    this.timesTicks = this.orgTimesTicks.filter(
+      (t: TimeDate) => t.time < 60 * (maxTime - minTime) + 1,
+    );
+    this.times = this.orgTimes.filter(
+      (t: TimeDate) => t.time > 60 * minTime - 1 && t.time < 60 * maxTime + 1,
+    );
   }
 
   updateYZoom() {
@@ -371,49 +409,51 @@ export class TimeSliderComponent implements OnInit, OnDestroy, UpdateCounterHand
     return '';
   }
 
-  private createOrUpdateTimeData(timeResolution: number, timeVisualResolution: number) {
+  private createOrUpdateTimeData(
+    timeResolution: number,
+    timeVisualResolution: number,
+  ) {
     if (this.timeResolution !== timeResolution || this.times.length === 0) {
-
       const block = 60 * this.getScaleFactor();
-      let timeRangeMinValueSeconds = this.horizontal ?
-        Math.floor(this.viewBoxChangeInfo.x / block) :
-        Math.floor(this.viewBoxChangeInfo.y / block);
-      let timeRangeMaxValueSeconds = this.horizontal ?
-        Math.ceil((this.viewBoxChangeInfo.x + this.viewBoxChangeInfo.width) / block) :
-        Math.ceil((this.viewBoxChangeInfo.y + this.viewBoxChangeInfo.height) / block);
+      let timeRangeMinValueSeconds = this.horizontal
+        ? Math.floor(this.viewBoxChangeInfo.x / block)
+        : Math.floor(this.viewBoxChangeInfo.y / block);
+      let timeRangeMaxValueSeconds = this.horizontal
+        ? Math.ceil(
+            (this.viewBoxChangeInfo.x + this.viewBoxChangeInfo.width) / block,
+          )
+        : Math.ceil(
+            (this.viewBoxChangeInfo.y + this.viewBoxChangeInfo.height) / block,
+          );
       timeRangeMinValueSeconds = timeRangeMinValueSeconds * 3600 - 24 * 3600;
       timeRangeMaxValueSeconds = timeRangeMaxValueSeconds * 3600 + 24 * 3600;
 
       const times: TimeDate[] = [];
       const timesTicks: TimeDate[] = [];
-      const minTime = (timeRangeMinValueSeconds / (timeVisualResolution * 60));
-      const maxTime = (timeRangeMaxValueSeconds / (timeVisualResolution * 60));
+      const minTime = timeRangeMinValueSeconds / (timeVisualResolution * 60);
+      const maxTime = timeRangeMaxValueSeconds / (timeVisualResolution * 60);
       for (let i = minTime; i <= maxTime; i++) {
         const time = i * timeVisualResolution;
-        const check = ((time) % timeResolution === 0) && (time % 15 === 0);
+        const check = time % timeResolution === 0 && time % 15 === 0;
         if (check) {
-          times.push(
-            {
-              text: TimeFormatter.formatHHMM(time * 60),
-              time: time,
-              sliderTimeLineLen: this.transformSliderTimeToLineLen(time),
-              timeGroupClassTag: this.transformTimeGroupClassTag(time)
-            }
-          );
+          times.push({
+            text: TimeFormatter.formatHHMM(time * 60),
+            time: time,
+            sliderTimeLineLen: this.transformSliderTimeToLineLen(time),
+            timeGroupClassTag: this.transformTimeGroupClassTag(time),
+          });
         }
       }
 
       for (let i = 0; i < 24 * 15; i++) {
         const time = i * timeVisualResolution;
-        const check = ((time) % timeResolution === 0) && (time % 15 === 0);
-        timesTicks.push(
-          {
-            text: check ? 'FullHour' : '',
-            time: time,
-            sliderTimeLineLen: this.transformSliderTimeToLineLen(time),
-            timeGroupClassTag: this.transformTimeGroupClassTag(time)
-          }
-        );
+        const check = time % timeResolution === 0 && time % 15 === 0;
+        timesTicks.push({
+          text: check ? 'FullHour' : '',
+          time: time,
+          sliderTimeLineLen: this.transformSliderTimeToLineLen(time),
+          timeGroupClassTag: this.transformTimeGroupClassTag(time),
+        });
       }
 
       this.times = times;
@@ -423,7 +463,6 @@ export class TimeSliderComponent implements OnInit, OnDestroy, UpdateCounterHand
       this.timeResolution = timeResolution;
     }
   }
-
 }
 
 export class TimeDate {

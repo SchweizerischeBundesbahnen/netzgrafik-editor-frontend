@@ -1,8 +1,8 @@
-import {SgTrainrunItem} from './sg-trainrun-item';
-import {SgPathNode} from './sg-path-node';
-import {SgTrainrunSection} from './sg-trainrun-section';
-import {SgPathSection} from './sg-path-section';
-import {TrackData} from '../trackData';
+import { SgTrainrunItem } from './sg-trainrun-item';
+import { SgPathNode } from './sg-path-node';
+import { SgTrainrunSection } from './sg-trainrun-section';
+import { SgPathSection } from './sg-path-section';
+import { TrackData } from '../trackData';
 
 export class SgTrainrunNode implements SgTrainrunItem {
   static currentId = 0;
@@ -33,14 +33,20 @@ export class SgTrainrunNode implements SgTrainrunItem {
   }
 
   static copy(item: SgTrainrunNode): SgTrainrunNode {
-    return new SgTrainrunNode(item.index,
+    return new SgTrainrunNode(
+      item.index,
       item.nodeId,
       item.nodeShortName,
       item.trainrunId,
       item.departureTime,
       item.arrivalTime,
       item.backward,
-      new TrackData(item.trackData.track, item.trackData.nodeId1, item.trackData.nodeId2, item.trackData.sectionTrackSegments),
+      new TrackData(
+        item.trackData.track,
+        item.trackData.nodeId1,
+        item.trackData.nodeId2,
+        item.trackData.sectionTrackSegments,
+      ),
       item.sgPathNode,
       item.endNode,
       item.departurePathSection,
@@ -50,7 +56,8 @@ export class SgTrainrunNode implements SgTrainrunItem {
       item.unrollOnlyEvenFrequencyOffsets,
       item.maxUnrollOnlyEvenFrequencyOffsets,
       item.extraTrains,
-      item.minimumHeadwayTime);
+      item.minimumHeadwayTime,
+    );
   }
 
   getId(): number {
@@ -101,13 +108,15 @@ export class SgTrainrunNode implements SgTrainrunItem {
     if (this.maxUnrollOnlyEvenFrequencyOffsets < 1) {
       return true;
     }
-    if (((offset + Math.abs(Math.floor(Math.min(0, offset) / 24) * 24)) % (this.maxUnrollOnlyEvenFrequencyOffsets + 1)) === this.unrollOnlyEvenFrequencyOffsets) {
+    if (
+      (offset + Math.abs(Math.floor(Math.min(0, offset) / 24) * 24)) %
+        (this.maxUnrollOnlyEvenFrequencyOffsets + 1) ===
+      this.unrollOnlyEvenFrequencyOffsets
+    ) {
       return true;
     }
     return false;
-  };
-
-  changeOrientation(): void {
   }
 
+  changeOrientation(): void {}
 }

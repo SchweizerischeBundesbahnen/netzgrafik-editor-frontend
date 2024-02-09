@@ -1,24 +1,23 @@
-import {DataService} from '../data/data.service';
-import {NodeService} from '../data/node.service';
-import {ResourceService} from '../data/resource.service';
-import {TrainrunService} from '../data/trainrun.service';
-import {TrainrunSectionService} from '../data/trainrunsection.service';
-import {StammdatenService} from '../data/stammdaten.service';
-import {NoteService} from '../data/note.service';
-import {Node} from '../../models/node.model';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {LogService} from '../../logger/log.service';
-import {LogPublishersService} from '../../logger/log.publishers.service';
-import {LabelGroupService} from '../data/labelgroup.service';
-import {LabelService} from '../data/label.serivce';
-import {NetzgrafikUnitTesting} from '../../../integration-testing/netzgrafik.unit.testing';
-import {FilterService} from '../ui/filter.service';
-import {AnalyticsService} from '../analytics/analytics.service';
-import {NetzgrafikColoringService} from '../data/netzgrafikColoring.service';
-import {FilterSetting} from '../../models/filterSettings.model';
+import { DataService } from '../data/data.service';
+import { NodeService } from '../data/node.service';
+import { ResourceService } from '../data/resource.service';
+import { TrainrunService } from '../data/trainrun.service';
+import { TrainrunSectionService } from '../data/trainrunsection.service';
+import { StammdatenService } from '../data/stammdaten.service';
+import { NoteService } from '../data/note.service';
+import { Node } from '../../models/node.model';
+import { TrainrunSection } from '../../models/trainrunsection.model';
+import { LogService } from '../../logger/log.service';
+import { LogPublishersService } from '../../logger/log.publishers.service';
+import { LabelGroupService } from '../data/labelgroup.service';
+import { LabelService } from '../data/label.serivce';
+import { NetzgrafikUnitTesting } from '../../../integration-testing/netzgrafik.unit.testing';
+import { FilterService } from '../ui/filter.service';
+import { AnalyticsService } from '../analytics/analytics.service';
+import { NetzgrafikColoringService } from '../data/netzgrafikColoring.service';
+import { FilterSetting } from '../../models/filterSettings.model';
 
 describe('FilterService', () => {
-
   let dataService: DataService;
   let nodeService: NodeService;
   let resourceService: ResourceService;
@@ -45,39 +44,85 @@ describe('FilterService', () => {
     labelGroupService = new LabelGroupService(logService);
     labelService = new LabelService(logService, labelGroupService);
     filterService = new FilterService(labelService, labelGroupService);
-    trainrunService = new TrainrunService(logService, labelService, filterService);
-    trainrunSectionService = new TrainrunSectionService(logService, trainrunService, filterService);
-    nodeService = new NodeService(logService, resourceService, trainrunService, trainrunSectionService, labelService, filterService);
+    trainrunService = new TrainrunService(
+      logService,
+      labelService,
+      filterService,
+    );
+    trainrunSectionService = new TrainrunSectionService(
+      logService,
+      trainrunService,
+      filterService,
+    );
+    nodeService = new NodeService(
+      logService,
+      resourceService,
+      trainrunService,
+      trainrunSectionService,
+      labelService,
+      filterService,
+    );
     noteService = new NoteService(logService, labelService, filterService);
     netzgrafikColoringService = new NetzgrafikColoringService(logService);
-    dataService = new DataService(resourceService, nodeService, trainrunSectionService, trainrunService,
-      stammdatenService, noteService, labelService, labelGroupService, filterService, netzgrafikColoringService);
-    nodeService.nodes.subscribe(updatesNodes => nodes = updatesNodes);
-    analyticsService = new AnalyticsService(nodeService, trainrunSectionService, trainrunService, filterService);
+    dataService = new DataService(
+      resourceService,
+      nodeService,
+      trainrunSectionService,
+      trainrunService,
+      stammdatenService,
+      noteService,
+      labelService,
+      labelGroupService,
+      filterService,
+      netzgrafikColoringService,
+    );
+    nodeService.nodes.subscribe((updatesNodes) => (nodes = updatesNodes));
+    analyticsService = new AnalyticsService(
+      nodeService,
+      trainrunSectionService,
+      trainrunService,
+      filterService,
+    );
 
-    nodeService.nodes.subscribe(updatesNodes => nodes = updatesNodes);
-    trainrunSectionService.trainrunSections.subscribe(updatesTrainrunSections => trainrunSections = updatesTrainrunSections);
-    filterService.filter.subscribe(() => gotFilterChangedSignal = true);
-
+    nodeService.nodes.subscribe((updatesNodes) => (nodes = updatesNodes));
+    trainrunSectionService.trainrunSections.subscribe(
+      (updatesTrainrunSections) => (trainrunSections = updatesTrainrunSections),
+    );
+    filterService.filter.subscribe(() => (gotFilterChangedSignal = true));
   });
 
   it('Filter default all off', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     expect(nodes.length).toBe(5);
     expect(trainrunSections.length).toBe(8);
 
-    nodes.forEach((n: Node) => expect(filterService.checkFilterNode(n)).toBe(true));
-    trainrunSections.forEach((ts: TrainrunSection) => expect(filterService.filterTrainrun(ts.getTrainrun())).toBe(true));
+    nodes.forEach((n: Node) =>
+      expect(filterService.checkFilterNode(n)).toBe(true),
+    );
+    trainrunSections.forEach((ts: TrainrunSection) =>
+      expect(filterService.filterTrainrun(ts.getTrainrun())).toBe(true),
+    );
   });
 
   it('Filter Trainrun Category', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     expect(trainrunSections.length).toBe(8);
 
-    filterService.disableFilterTrainrunCategory(dataService.getTrainrunCategory(3));
-    filterService.disableFilterTrainrunCategory(dataService.getTrainrunCategory(4));
+    filterService.disableFilterTrainrunCategory(
+      dataService.getTrainrunCategory(3),
+    );
+    filterService.disableFilterTrainrunCategory(
+      dataService.getTrainrunCategory(4),
+    );
     trainrunSections.forEach((ts: TrainrunSection) => {
-      if (ts.getTrainrun().getCategoryShortName() === 'RE' || ts.getTrainrun().getCategoryShortName() === 'S') {
+      if (
+        ts.getTrainrun().getCategoryShortName() === 'RE' ||
+        ts.getTrainrun().getCategoryShortName() === 'S'
+      ) {
         expect(filterService.filterTrainrun(ts.getTrainrun())).toBe(false);
       } else {
         expect(filterService.filterTrainrun(ts.getTrainrun())).toBe(true);
@@ -86,10 +131,14 @@ describe('FilterService', () => {
   });
 
   it('Filter Trainrun Frequency', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     expect(trainrunSections.length).toBe(8);
 
-    filterService.disableFilterTrainrunFrequency(dataService.getTrainrunFrequency(3));
+    filterService.disableFilterTrainrunFrequency(
+      dataService.getTrainrunFrequency(3),
+    );
     trainrunSections.forEach((ts: TrainrunSection) => {
       if (ts.getTrainrun().getTrainrunFrequency().shortName === '60') {
         expect(filterService.filterTrainrun(ts.getTrainrun())).toBe(false);
@@ -100,7 +149,9 @@ describe('FilterService', () => {
   });
 
   it('Filter Trainrun Labels - Sub-Test: 1', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     expect(trainrunSections.length).toBe(8);
     labelGroupService.getLabelGroup(0).enableLogicalFilterOperatorOr();
     filterService.setFilterTrainrunLabels([0]);
@@ -113,7 +164,9 @@ describe('FilterService', () => {
     });
   });
   it('Filter Trainrun Labels - Sub-Test: 2', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     expect(trainrunSections.length).toBe(8);
     labelGroupService.getLabelGroup(0).enableLogicalFilterOperatorOr();
     filterService.setFilterTrainrunLabels([1]);
@@ -124,10 +177,11 @@ describe('FilterService', () => {
         expect(filterService.filterTrainrun(ts.getTrainrun())).toBe(true);
       }
     });
-
   });
   it('Filter Trainrun Labels - Sub-Test: 3', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     expect(trainrunSections.length).toBe(8);
     labelGroupService.getLabelGroup(0).enableLogicalFilterOperatorOr();
     filterService.setFilterTrainrunLabels([1, 2]);
@@ -140,7 +194,9 @@ describe('FilterService', () => {
     });
   });
   it('Filter Trainrun Labels - Sub-Test: 4', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     expect(trainrunSections.length).toBe(8);
     labelGroupService.getLabelGroup(0).enableLogicalFilterOperatorOr();
     filterService.setFilterTrainrunLabels([0, 1, 2]);
@@ -153,7 +209,9 @@ describe('FilterService', () => {
     });
   });
   it('Filter Trainrun Labels - Sub-Test: 5', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     expect(trainrunSections.length).toBe(8);
     labelGroupService.getLabelGroup(0).enableLogicalFilterOperatorAnd();
     filterService.setFilterTrainrunLabels([]);
@@ -166,11 +224,13 @@ describe('FilterService', () => {
     });
   });
 
-
   it('setFilterTrainrunLabels', () => {
     const ids = [19, 78, 25, 4];
     filterService.setFilterTrainrunLabels(ids);
-    expect(filterService.getFilterTrainrunLabels().filter((v) => ids.includes(v)).length).toBe(4);
+    expect(
+      filterService.getFilterTrainrunLabels().filter((v) => ids.includes(v))
+        .length,
+    ).toBe(4);
     filterService.clearFilterTrainrunLabels();
     expect(filterService.getFilterTrainrunLabels().length).toBe(0);
   });
@@ -178,7 +238,9 @@ describe('FilterService', () => {
   it('setFilterNodeLabels', () => {
     const ids = [25, 4];
     filterService.setFilterNodeLabels(ids);
-    expect(filterService.getFilterNodeLabels().filter((v) => ids.includes(v)).length).toBe(2);
+    expect(
+      filterService.getFilterNodeLabels().filter((v) => ids.includes(v)).length,
+    ).toBe(2);
     filterService.clearFilterNodeLabels();
     expect(filterService.getFilterNodeLabels().length).toBe(0);
   });
@@ -197,7 +259,9 @@ describe('FilterService', () => {
   });
 
   it('enableFilterTrainrunCategory', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     expect(trainrunSections.length).toBe(8);
 
     const trainrun = trainrunService.getTrainrunFromId(0);
@@ -215,14 +279,18 @@ describe('FilterService', () => {
   });
 
   it('enableFilterTrainrunTimeCategory', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     expect(trainrunSections.length).toBe(8);
 
     const trainrun = trainrunService.getTrainrunFromId(0);
     const trainrunTimeCategory = dataService.getTrainrunTimeCategory(0);
 
     filterService.disableFilterTrainrunTimeCategory(trainrunTimeCategory);
-    expect(filterService.isFilterTrainrunTimeCategoryEnabled(trainrunTimeCategory)).toBe(false);
+    expect(
+      filterService.isFilterTrainrunTimeCategoryEnabled(trainrunTimeCategory),
+    ).toBe(false);
     expect(filterService.isAnyFilterActive()).toBe(true);
     expect(filterService.filterTrainrun(trainrun)).toBe(false);
 
@@ -233,14 +301,18 @@ describe('FilterService', () => {
   });
 
   it('enableFilterTrainrunFrequency', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     expect(trainrunSections.length).toBe(8);
 
     const trainrun = trainrunService.getTrainrunFromId(0);
     const frequency = dataService.getTrainrunFrequency(3);
 
     filterService.disableFilterTrainrunFrequency(frequency);
-    expect(filterService.isFilterTrainrunFrequencyEnabled(frequency)).toBe(false);
+    expect(filterService.isFilterTrainrunFrequencyEnabled(frequency)).toBe(
+      false,
+    );
     expect(filterService.isAnyFilterActive()).toBe(true);
     expect(filterService.filterTrainrun(trainrun)).toBe(false);
 
@@ -281,7 +353,6 @@ describe('FilterService', () => {
     expect(filterService.isFilterShowNonStopTimeEnabled()).toBe(true);
   });
 
-
   it('enableFilterTrainrunName', () => {
     expect(filterService.isFilterTrainrunNameEnabled()).toBe(true);
     filterService.disableFilterTrainrunName();
@@ -308,7 +379,9 @@ describe('FilterService', () => {
   });
 
   it('checkFilterNodeLabels', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
 
     filterService.setFilterNodeLabels([3]);
     nodes.forEach((n: Node) => {
@@ -319,7 +392,6 @@ describe('FilterService', () => {
       }
     });
 
-
     filterService.setFilterNodeLabels([3, 4]);
     nodes.forEach((n: Node) => {
       if ([0, 1].includes(n.getId())) {
@@ -328,8 +400,6 @@ describe('FilterService', () => {
         expect(filterService.checkFilterNode(n)).toBe(true);
       }
     });
-
-
   });
 
   it('FilterSetting - copy test 001', () => {
@@ -347,9 +417,13 @@ describe('FilterService', () => {
     const defaultFilterSettings = filterService.getActiveFilterSetting();
     const copiedFS = defaultFilterSettings.copy();
     copiedFS.id = defaultFilterSettings.id;
-    expect(defaultFilterSettings.areFilteringAttributesEqual(copiedFS)).toBe(true);
+    expect(defaultFilterSettings.areFilteringAttributesEqual(copiedFS)).toBe(
+      true,
+    );
     copiedFS.description = 'description changed **';
-    expect(defaultFilterSettings.areFilteringAttributesEqual(copiedFS)).toBe(false);
+    expect(defaultFilterSettings.areFilteringAttributesEqual(copiedFS)).toBe(
+      false,
+    );
   });
 
   it('FilterSetting - copy test 002', () => {
@@ -367,16 +441,26 @@ describe('FilterService', () => {
     const copiedFS = defaultFilterSettings.copy();
     defaultFilterSettings.copyFilteringAttributes(copiedFS);
     copiedFS.id = defaultFilterSettings.id;
-    expect(defaultFilterSettings.areFilteringAttributesEqual(copiedFS)).toBe(true);
+    expect(defaultFilterSettings.areFilteringAttributesEqual(copiedFS)).toBe(
+      true,
+    );
   });
 
   it('FilterService.deleteClearFilterSetting', () => {
     filterService.resetFiltering();
     const fs: FilterSetting = filterService.saveAsNewFilterSetting();
     filterService.saveAsNewFilterSetting();
-    expect(filterService.getFilterSettings().find((f: FilterSetting) => f.id === fs.id) !== undefined).toBe(true);
+    expect(
+      filterService
+        .getFilterSettings()
+        .find((f: FilterSetting) => f.id === fs.id) !== undefined,
+    ).toBe(true);
     filterService.deleteClearFilterSetting(fs);
-    expect(filterService.getFilterSettings().find((f: FilterSetting) => f.id === fs.id) !== undefined).toBe(false);
+    expect(
+      filterService
+        .getFilterSettings()
+        .find((f: FilterSetting) => f.id === fs.id) !== undefined,
+    ).toBe(false);
   });
 
   it('filterService.isActiveFilterSettingEqual', () => {
@@ -431,6 +515,4 @@ describe('FilterService', () => {
     filterService.deleteFilterSetting(filterService.getFilterSettings()[0].id);
     expect(filterService.getFilterSettings().length).toBe(0);
   });
-
-
 });

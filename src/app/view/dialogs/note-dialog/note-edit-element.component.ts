@@ -1,14 +1,21 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {FormModel} from '../../../utils/form-model';
-import {NoteFormComponentModel} from './note-form/note-form.component';
-import {Subject} from 'rxjs';
-import {NoteDialogParameter} from './note-dialog.component';
-import {Note} from '../../../models/note.model';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { FormModel } from '../../../utils/form-model';
+import { NoteFormComponentModel } from './note-form/note-form.component';
+import { Subject } from 'rxjs';
+import { NoteDialogParameter } from './note-dialog.component';
+import { Note } from '../../../models/note.model';
 
 @Component({
   selector: 'sbb-note-edit-element',
   templateUrl: './note-edit-element.component.html',
-  styleUrls: ['./note-edit-element.component.scss']
+  styleUrls: ['./note-edit-element.component.scss'],
 })
 export class NoteEditElementComponent implements OnInit, OnDestroy {
   @Input()
@@ -17,21 +24,31 @@ export class NoteEditElementComponent implements OnInit, OnDestroy {
   @Output()
   noteDeleted = new EventEmitter<void>();
 
-
   formmodel: FormModel<NoteFormComponentModel>;
   private destroyed = new Subject<void>();
   private deleteNoteCallback = null;
   private saveNoteCallback = null;
 
   ngOnInit(): void {
-    this.formmodel = new FormModel<NoteFormComponentModel>(this.noteDialogParameter.noteFormComponentModel ?? {
-      id: 0, noteTitle: '', noteText: '', noteHeight: Note.DEFAULT_NOTE_HEIGHT, noteWidth: Note.DEFAULT_NOTE_WIDTH,
-      notePositionX: 0, notePositionY: 0,
-      saveNoteCallback: null, deleteNoteCallback: null, updateNoteCallback: null
-    });
+    this.formmodel = new FormModel<NoteFormComponentModel>(
+      this.noteDialogParameter.noteFormComponentModel ?? {
+        id: 0,
+        noteTitle: '',
+        noteText: '',
+        noteHeight: Note.DEFAULT_NOTE_HEIGHT,
+        noteWidth: Note.DEFAULT_NOTE_WIDTH,
+        notePositionX: 0,
+        notePositionY: 0,
+        saveNoteCallback: null,
+        deleteNoteCallback: null,
+        updateNoteCallback: null,
+      },
+    );
 
-    this.deleteNoteCallback = this.noteDialogParameter.noteFormComponentModel.deleteNoteCallback;
-    this.saveNoteCallback = this.noteDialogParameter.noteFormComponentModel.saveNoteCallback;
+    this.deleteNoteCallback =
+      this.noteDialogParameter.noteFormComponentModel.deleteNoteCallback;
+    this.saveNoteCallback =
+      this.noteDialogParameter.noteFormComponentModel.saveNoteCallback;
   }
 
   ngOnDestroy(): void {
@@ -50,6 +67,12 @@ export class NoteEditElementComponent implements OnInit, OnDestroy {
     const newNoteText: string = this.formmodel.getControl('noteText').value;
     const newNoteHeight: string = this.formmodel.getControl('noteHeight').value;
     const newNoteWidth: string = this.formmodel.getControl('noteWidth').value;
-    this.saveNoteCallback(this.noteDialogParameter.noteFormComponentModel.id, newNoteTitle, newNoteText, newNoteHeight, newNoteWidth);
+    this.saveNoteCallback(
+      this.noteDialogParameter.noteFormComponentModel.id,
+      newNoteTitle,
+      newNoteText,
+      newNoteHeight,
+      newNoteWidth,
+    );
   }
 }

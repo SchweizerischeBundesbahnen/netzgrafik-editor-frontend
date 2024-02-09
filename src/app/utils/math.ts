@@ -8,5 +8,3 @@ export class MathUtils {
     return Math.round(value * multiplier) / multiplier;
   }
 }
-
-

@@ -1,9 +1,9 @@
-import {SgTrainrunItem} from './sg-trainrun-item';
-import {SgPathSection} from './sg-path-section';
-import {SgTrainrunNode} from './sg-trainrun-node';
-import {TrainrunBranchType} from '../enum/trainrun-branch-type-type';
-import {SgPathNode} from './sg-path-node';
-import {TrackData} from '../trackData';
+import { SgTrainrunItem } from './sg-trainrun-item';
+import { SgPathSection } from './sg-path-section';
+import { SgTrainrunNode } from './sg-trainrun-node';
+import { TrainrunBranchType } from '../enum/trainrun-branch-type-type';
+import { SgPathNode } from './sg-path-node';
+import { TrackData } from '../trackData';
 
 export class SgTrainrunSection implements SgTrainrunItem {
   static currentId = 0;
@@ -71,16 +71,19 @@ export class SgTrainrunSection implements SgTrainrunItem {
     if (this.maxUnrollOnlyEvenFrequencyOffsets < 1) {
       return true;
     }
-    if (((offset + Math.abs(Math.floor(Math.min(0, offset) / 24) * 24)) % (this.maxUnrollOnlyEvenFrequencyOffsets + 1)) === this.unrollOnlyEvenFrequencyOffsets) {
+    if (
+      (offset + Math.abs(Math.floor(Math.min(0, offset) / 24) * 24)) %
+        (this.maxUnrollOnlyEvenFrequencyOffsets + 1) ===
+      this.unrollOnlyEvenFrequencyOffsets
+    ) {
       return true;
     }
     return false;
-  };
+  }
 
   changeOrientation(): void {
     const departureTime = this.departureTime;
     this.departureTime = this.arrivalTime;
     this.arrivalTime = departureTime;
   }
-
 }

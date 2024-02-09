@@ -1,48 +1,52 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {SgSelectedTrainrun} from '../model/streckengrafik-model/sg-selected-trainrun';
-import {Sg1LoadTrainrunItemService} from './sg-1-load-trainrun-item.service';
-import {TrainrunItem} from '../model/trainrunItem';
-import {SgPathNode} from '../model/streckengrafik-model/sg-path-node';
-import {PathNode} from '../model/pathNode';
-import {PathSection} from '../model/pathSection';
-import {SgPathSection} from '../model/streckengrafik-model/sg-path-section';
-import {SgTrainrunNode} from '../model/streckengrafik-model/sg-trainrun-node';
-import {SgTrainrunSection} from '../model/streckengrafik-model/sg-trainrun-section';
-import {SgTrainrunItem} from '../model/streckengrafik-model/sg-trainrun-item';
-import {SgTrainrun} from '../model/streckengrafik-model/sg-trainrun';
-import {TrainrunBranchType} from '../model/enum/trainrun-branch-type-type';
-import {PathItem} from '../model/pathItem';
-import {TrackData} from '../model/trackData';
-import {Sg2TrainrunPathService} from './sg-2-trainrun-path.service';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { SgSelectedTrainrun } from '../model/streckengrafik-model/sg-selected-trainrun';
+import { Sg1LoadTrainrunItemService } from './sg-1-load-trainrun-item.service';
+import { TrainrunItem } from '../model/trainrunItem';
+import { SgPathNode } from '../model/streckengrafik-model/sg-path-node';
+import { PathNode } from '../model/pathNode';
+import { PathSection } from '../model/pathSection';
+import { SgPathSection } from '../model/streckengrafik-model/sg-path-section';
+import { SgTrainrunNode } from '../model/streckengrafik-model/sg-trainrun-node';
+import { SgTrainrunSection } from '../model/streckengrafik-model/sg-trainrun-section';
+import { SgTrainrunItem } from '../model/streckengrafik-model/sg-trainrun-item';
+import { SgTrainrun } from '../model/streckengrafik-model/sg-trainrun';
+import { TrainrunBranchType } from '../model/enum/trainrun-branch-type-type';
+import { PathItem } from '../model/pathItem';
+import { TrackData } from '../model/trackData';
+import { Sg2TrainrunPathService } from './sg-2-trainrun-path.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class Sg3TrainrunsService implements OnDestroy {
-
-  private readonly sgSelectedTrainrunSubject = new BehaviorSubject<SgSelectedTrainrun>(undefined);
-  private readonly sgSelectedTrainrun$ = this.sgSelectedTrainrunSubject.asObservable();
+  private readonly sgSelectedTrainrunSubject =
+    new BehaviorSubject<SgSelectedTrainrun>(undefined);
+  private readonly sgSelectedTrainrun$ =
+    this.sgSelectedTrainrunSubject.asObservable();
 
   private selectedTrainrun: SgSelectedTrainrun;
   private trainrunItems: TrainrunItem[];
 
   private readonly destroyed$ = new Subject<void>();
 
-  constructor(private readonly sg2TrainrunPathService: Sg2TrainrunPathService,
-              private readonly sg1LoadTrainrunItemService: Sg1LoadTrainrunItemService
+  constructor(
+    private readonly sg2TrainrunPathService: Sg2TrainrunPathService,
+    private readonly sg1LoadTrainrunItemService: Sg1LoadTrainrunItemService,
   ) {
-    this.sg2TrainrunPathService.getSgSelectedTrainrun()
+    this.sg2TrainrunPathService
+      .getSgSelectedTrainrun()
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(selectedTrainrun => {
+      .subscribe((selectedTrainrun) => {
         this.selectedTrainrun = selectedTrainrun;
         this.render();
       });
 
-    this.sg1LoadTrainrunItemService.getTrainrunItems()
+    this.sg1LoadTrainrunItemService
+      .getTrainrunItems()
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(trainrunItems => {
+      .subscribe((trainrunItems) => {
         this.trainrunItems = trainrunItems;
         this.render();
       });
@@ -65,7 +69,7 @@ export class Sg3TrainrunsService implements OnDestroy {
       return;
     }
     this.selectedTrainrun.trainruns = [];
-    this.trainrunItems.forEach(trainrunItem => {
+    this.trainrunItems.forEach((trainrunItem) => {
       if (trainrunItem === undefined) {
         return;
       }
@@ -79,13 +83,15 @@ export class Sg3TrainrunsService implements OnDestroy {
         trainrunItem.categoryShortName,
         trainrunItem.colorRef,
         [],
-        this.selectedTrainrun
+        this.selectedTrainrun,
       );
       const trainrunItems: SgTrainrunItem[] = [];
 
-      trainrunItem.pathItems.forEach(pathItem => {
+      trainrunItem.pathItems.forEach((pathItem) => {
         if (pathItem.isNode()) {
-          const pathNodes: SgPathNode[] = this.searchAllPathNodes(pathItem.getPathNode());
+          const pathNodes: SgPathNode[] = this.searchAllPathNodes(
+            pathItem.getPathNode(),
+          );
           pathNodes.forEach((pathNode: SgPathNode) => {
             const trainrunNode = new SgTrainrunNode(
               pathNode.index,
@@ -97,7 +103,8 @@ export class Sg3TrainrunsService implements OnDestroy {
               pathItem.backward,
               new TrackData(this.getTrack(pathItem)),
               pathNode,
-              this.checkIsEndNode(pathItem));
+              this.checkIsEndNode(pathItem),
+            );
             pathNode.trainrunNodes.push(trainrunNode);
             trainrunItems.push(trainrunNode);
           });
@@ -106,8 +113,9 @@ export class Sg3TrainrunsService implements OnDestroy {
         let isAddSection = false;
         if (pathItem.isSection()) {
           const pathSection = pathItem.getPathSection();
-          const pathSections: SgPathSection[] = this.searchAllPathSection(pathSection);
-          pathSections.forEach(sgpathSection => {
+          const pathSections: SgPathSection[] =
+            this.searchAllPathSection(pathSection);
+          pathSections.forEach((sgpathSection) => {
             const trainrunSection = new SgTrainrunSection(
               sgpathSection.index,
               pathItem.getPathSection().trainrunSectionId,
@@ -115,15 +123,21 @@ export class Sg3TrainrunsService implements OnDestroy {
               pathItem.arrivalTime,
               pathItem.getPathSection().departurePathNode.nodeId,
               pathItem.getPathSection().arrivalPathNode.nodeId,
-              this.getNodeShortName(pathItem.getPathSection().departurePathNode),
+              this.getNodeShortName(
+                pathItem.getPathSection().departurePathNode,
+              ),
               this.getNodeShortName(pathItem.getPathSection().arrivalPathNode),
-              this.getNodeShortName(pathItem.getPathSection().departureBranchEndNode),
-              this.getNodeShortName(pathItem.getPathSection().arrivalBranchEndNode),
+              this.getNodeShortName(
+                pathItem.getPathSection().departureBranchEndNode,
+              ),
+              this.getNodeShortName(
+                pathItem.getPathSection().arrivalBranchEndNode,
+              ),
               pathItem.backward,
               pathItem.getPathSection().numberOfStops,
               new TrackData(this.getTrack(pathItem)),
               sgpathSection,
-              TrainrunBranchType.Trainrun
+              TrainrunBranchType.Trainrun,
             );
 
             /**** Adrian Egli (adrian.egli@sbb.ch)
@@ -132,7 +146,10 @@ export class Sg3TrainrunsService implements OnDestroy {
               There is sill an issue in the CODE - if the trainrun passes the second time a node, the in-/out
               branching edge will not all be rendered!
                */
-            if (this.isInDirectedPath(pathSection, sgpathSection) !== this.isInPath(pathSection, sgpathSection)) {
+            if (
+              this.isInDirectedPath(pathSection, sgpathSection) !==
+              this.isInPath(pathSection, sgpathSection)
+            ) {
               trainrunSection.changeOrientation();
             }
             sgpathSection.trainrunSections.push(trainrunSection);
@@ -141,8 +158,9 @@ export class Sg3TrainrunsService implements OnDestroy {
           });
           if (!isAddSection) {
             // ----- all arrival path section with incoming section
-            const arravebelPathSectionWithSection: SgPathSection[] = this.searchAllArrivalPathSectionBranchWithSection(pathSection);
-            arravebelPathSectionWithSection.forEach(pathSectionBranch => {
+            const arravebelPathSectionWithSection: SgPathSection[] =
+              this.searchAllArrivalPathSectionBranchWithSection(pathSection);
+            arravebelPathSectionWithSection.forEach((pathSectionBranch) => {
               const trainrunSection = new SgTrainrunSection(
                 pathSectionBranch.index,
                 pathItem.getPathSection().trainrunSectionId,
@@ -150,10 +168,18 @@ export class Sg3TrainrunsService implements OnDestroy {
                 pathItem.arrivalTime,
                 pathItem.getPathSection().departurePathNode.nodeId,
                 pathItem.getPathSection().arrivalPathNode.nodeId,
-                this.getNodeShortName(pathItem.getPathSection().departurePathNode),
-                this.getNodeShortName(pathItem.getPathSection().arrivalPathNode),
-                this.getNodeShortName(pathItem.getPathSection().departureBranchEndNode),
-                this.getNodeShortName(pathItem.getPathSection().arrivalBranchEndNode),
+                this.getNodeShortName(
+                  pathItem.getPathSection().departurePathNode,
+                ),
+                this.getNodeShortName(
+                  pathItem.getPathSection().arrivalPathNode,
+                ),
+                this.getNodeShortName(
+                  pathItem.getPathSection().departureBranchEndNode,
+                ),
+                this.getNodeShortName(
+                  pathItem.getPathSection().arrivalBranchEndNode,
+                ),
                 pathItem.backward,
                 pathItem.getPathSection().numberOfStops,
                 new TrackData(this.getTrack(pathItem)),
@@ -166,33 +192,45 @@ export class Sg3TrainrunsService implements OnDestroy {
             });
 
             // ----- all departure path section with outgoing section
-            const departurePathSectionBranchWithSection: SgPathSection[] = this.searchAllDeparturePathSectionBranchWithSection(pathSection);
-            departurePathSectionBranchWithSection.forEach(pathSectionBranch => {
-              const trainrunSection = new SgTrainrunSection(
-                pathSectionBranch.index,
-                pathItem.getPathSection().trainrunSectionId,
-                pathItem.departureTime,
-                pathItem.arrivalTime,
-                pathItem.getPathSection().departurePathNode.nodeId,
-                pathItem.getPathSection().arrivalPathNode.nodeId,
-                this.getNodeShortName(pathItem.getPathSection().departurePathNode),
-                this.getNodeShortName(pathItem.getPathSection().arrivalPathNode),
-                this.getNodeShortName(pathItem.getPathSection().departureBranchEndNode),
-                this.getNodeShortName(pathItem.getPathSection().arrivalBranchEndNode),
-                pathItem.backward,
-                pathItem.getPathSection().numberOfStops,
-                new TrackData(this.getTrack(pathItem)),
-                pathSectionBranch,
-                TrainrunBranchType.DepartureBranchWithSection,
-              );
+            const departurePathSectionBranchWithSection: SgPathSection[] =
+              this.searchAllDeparturePathSectionBranchWithSection(pathSection);
+            departurePathSectionBranchWithSection.forEach(
+              (pathSectionBranch) => {
+                const trainrunSection = new SgTrainrunSection(
+                  pathSectionBranch.index,
+                  pathItem.getPathSection().trainrunSectionId,
+                  pathItem.departureTime,
+                  pathItem.arrivalTime,
+                  pathItem.getPathSection().departurePathNode.nodeId,
+                  pathItem.getPathSection().arrivalPathNode.nodeId,
+                  this.getNodeShortName(
+                    pathItem.getPathSection().departurePathNode,
+                  ),
+                  this.getNodeShortName(
+                    pathItem.getPathSection().arrivalPathNode,
+                  ),
+                  this.getNodeShortName(
+                    pathItem.getPathSection().departureBranchEndNode,
+                  ),
+                  this.getNodeShortName(
+                    pathItem.getPathSection().arrivalBranchEndNode,
+                  ),
+                  pathItem.backward,
+                  pathItem.getPathSection().numberOfStops,
+                  new TrackData(this.getTrack(pathItem)),
+                  pathSectionBranch,
+                  TrainrunBranchType.DepartureBranchWithSection,
+                );
 
-              pathSectionBranch.trainrunSections.push(trainrunSection);
-              trainrunItems.push(trainrunSection);
-            });
+                pathSectionBranch.trainrunSections.push(trainrunSection);
+                trainrunItems.push(trainrunSection);
+              },
+            );
 
             // ----- all arrival path section (branch only)
-            const arrivalPathSectionBranchOnly: SgPathSection[] = this.searchAllArrivalPathSectionBranchOnly(pathSection);
-            arrivalPathSectionBranchOnly.forEach(pathSectionBranch => {
+            const arrivalPathSectionBranchOnly: SgPathSection[] =
+              this.searchAllArrivalPathSectionBranchOnly(pathSection);
+            arrivalPathSectionBranchOnly.forEach((pathSectionBranch) => {
               const trainrunSection = new SgTrainrunSection(
                 pathSectionBranch.index,
                 pathItem.getPathSection().trainrunSectionId,
@@ -200,10 +238,18 @@ export class Sg3TrainrunsService implements OnDestroy {
                 pathItem.arrivalTime,
                 pathItem.getPathSection().departurePathNode.nodeId,
                 pathItem.getPathSection().arrivalPathNode.nodeId,
-                this.getNodeShortName(pathItem.getPathSection().departurePathNode),
-                this.getNodeShortName(pathItem.getPathSection().arrivalPathNode),
-                this.getNodeShortName(pathItem.getPathSection().departureBranchEndNode),
-                this.getNodeShortName(pathItem.getPathSection().arrivalBranchEndNode),
+                this.getNodeShortName(
+                  pathItem.getPathSection().departurePathNode,
+                ),
+                this.getNodeShortName(
+                  pathItem.getPathSection().arrivalPathNode,
+                ),
+                this.getNodeShortName(
+                  pathItem.getPathSection().departureBranchEndNode,
+                ),
+                this.getNodeShortName(
+                  pathItem.getPathSection().arrivalBranchEndNode,
+                ),
                 pathItem.backward,
                 pathItem.getPathSection().numberOfStops,
                 new TrackData(this.getTrack(pathItem)),
@@ -215,8 +261,9 @@ export class Sg3TrainrunsService implements OnDestroy {
             });
 
             // ----- all depature path section (branch only)
-            const departurePathSectionBranchOnly: SgPathSection[] = this.searchAllDeparturePathSectionBranchOnly(pathSection);
-            departurePathSectionBranchOnly.forEach(pathSectionBranch => {
+            const departurePathSectionBranchOnly: SgPathSection[] =
+              this.searchAllDeparturePathSectionBranchOnly(pathSection);
+            departurePathSectionBranchOnly.forEach((pathSectionBranch) => {
               const trainrunSection = new SgTrainrunSection(
                 pathSectionBranch.index,
                 pathSection.trainrunSectionId,
@@ -224,10 +271,18 @@ export class Sg3TrainrunsService implements OnDestroy {
                 pathItem.arrivalTime,
                 pathItem.getPathSection().departurePathNode.nodeId,
                 pathItem.getPathSection().arrivalPathNode.nodeId,
-                this.getNodeShortName(pathItem.getPathSection().departurePathNode),
-                this.getNodeShortName(pathItem.getPathSection().arrivalPathNode),
-                this.getNodeShortName(pathItem.getPathSection().departureBranchEndNode),
-                this.getNodeShortName(pathItem.getPathSection().arrivalBranchEndNode),
+                this.getNodeShortName(
+                  pathItem.getPathSection().departurePathNode,
+                ),
+                this.getNodeShortName(
+                  pathItem.getPathSection().arrivalPathNode,
+                ),
+                this.getNodeShortName(
+                  pathItem.getPathSection().departureBranchEndNode,
+                ),
+                this.getNodeShortName(
+                  pathItem.getPathSection().arrivalBranchEndNode,
+                ),
                 pathItem.backward,
                 pathItem.getPathSection().numberOfStops,
                 new TrackData(this.getTrack(pathItem)),
@@ -238,9 +293,9 @@ export class Sg3TrainrunsService implements OnDestroy {
               trainrunItems.push(trainrunSection);
             });
           }
-        }// --- end if pathItem.isSection()
+        } // --- end if pathItem.isSection()
       });
-      trainrunItems.forEach(trainrunItem => {
+      trainrunItems.forEach((trainrunItem) => {
         trainrun.sgTrainrunItems.push(trainrunItem);
       });
       this.addNodesSectionRelation(trainrun);
@@ -261,11 +316,18 @@ export class Sg3TrainrunsService implements OnDestroy {
       return false;
     }
     const pn = path.getPathNode();
-    if (pn.departurePathSection !== undefined && pn.arrivalPathSection !== undefined) {
-      return pn.departurePathSection.backward !== pn.arrivalPathSection.backward;
+    if (
+      pn.departurePathSection !== undefined &&
+      pn.arrivalPathSection !== undefined
+    ) {
+      return (
+        pn.departurePathSection.backward !== pn.arrivalPathSection.backward
+      );
     }
-    return pn.arrivalPathSection !== undefined ||
-      pn.departurePathSection !== undefined;
+    return (
+      pn.arrivalPathSection !== undefined ||
+      pn.departurePathSection !== undefined
+    );
   }
 
   private getTrack(path: PathItem) {
@@ -278,7 +340,7 @@ export class Sg3TrainrunsService implements OnDestroy {
 
   private searchAllPathNodes(pathNode: PathNode): SgPathNode[] {
     const path: SgPathNode[] = [];
-    this.selectedTrainrun.paths.forEach(sgPath => {
+    this.selectedTrainrun.paths.forEach((sgPath) => {
       if (sgPath.isNode()) {
         const sgPathNode = sgPath.getPathNode();
         if (sgPathNode.nodeId === pathNode.getPathNode().nodeId) {
@@ -291,7 +353,7 @@ export class Sg3TrainrunsService implements OnDestroy {
 
   private searchAllPathSection(pathSection: PathSection): SgPathSection[] {
     const path: SgPathSection[] = [];
-    this.selectedTrainrun.paths.forEach(sgPath => {
+    this.selectedTrainrun.paths.forEach((sgPath) => {
       if (sgPath.isSection()) {
         const sgPathSection = sgPath.getPathSection();
         if (this.isInPath(pathSection, sgPathSection)) {
@@ -302,28 +364,36 @@ export class Sg3TrainrunsService implements OnDestroy {
     return path;
   }
 
-  isInDirectedPath(pathSection: PathSection, sgPathSection: SgPathSection): boolean {
-    return ((!pathSection.backward) &&
-        (sgPathSection.arrivalNodeId === pathSection.arrivalPathNode.nodeId) &&
-        (sgPathSection.departureNodeId === pathSection.departurePathNode.nodeId)) ||
-      ((pathSection.backward) &&
-        (sgPathSection.arrivalNodeId === pathSection.departurePathNode.nodeId) &&
-        (sgPathSection.departureNodeId === pathSection.arrivalPathNode.nodeId));
+  isInDirectedPath(
+    pathSection: PathSection,
+    sgPathSection: SgPathSection,
+  ): boolean {
+    return (
+      (!pathSection.backward &&
+        sgPathSection.arrivalNodeId === pathSection.arrivalPathNode.nodeId &&
+        sgPathSection.departureNodeId ===
+          pathSection.departurePathNode.nodeId) ||
+      (pathSection.backward &&
+        sgPathSection.arrivalNodeId === pathSection.departurePathNode.nodeId &&
+        sgPathSection.departureNodeId === pathSection.arrivalPathNode.nodeId)
+    );
   }
 
   isInPath(pathSection: PathSection, sgPathSection: SgPathSection): boolean {
     return (
-      (sgPathSection.arrivalNodeId === pathSection.arrivalPathNode.nodeId) &&
-      (sgPathSection.departureNodeId === pathSection.departurePathNode.nodeId)
-    ) || (
-      (sgPathSection.arrivalNodeId === pathSection.departurePathNode.nodeId) &&
-      (sgPathSection.departureNodeId === pathSection.arrivalPathNode.nodeId)
+      (sgPathSection.arrivalNodeId === pathSection.arrivalPathNode.nodeId &&
+        sgPathSection.departureNodeId ===
+          pathSection.departurePathNode.nodeId) ||
+      (sgPathSection.arrivalNodeId === pathSection.departurePathNode.nodeId &&
+        sgPathSection.departureNodeId === pathSection.arrivalPathNode.nodeId)
     );
   }
 
-  private searchAllArrivalPathSectionBranchWithSection(pathSection: PathSection): SgPathSection[] {
+  private searchAllArrivalPathSectionBranchWithSection(
+    pathSection: PathSection,
+  ): SgPathSection[] {
     const paths: SgPathSection[] = [];
-    this.selectedTrainrun.paths.forEach(path => {
+    this.selectedTrainrun.paths.forEach((path) => {
       if (path.isSection()) {
         const sgPathSection = path.getPathSection();
         if (this.isNextArrivalPathSectionBranch(pathSection, sgPathSection)) {
@@ -334,20 +404,51 @@ export class Sg3TrainrunsService implements OnDestroy {
     return paths;
   }
 
-  isNextArrivalPathSectionBranch(pathSection: PathSection, sgPathSection: SgPathSection): boolean {
-    if ((!pathSection.backward) && sgPathSection.arrivalNodeId === pathSection.arrivalPathNode.nodeId) {
-      if (pathSection.arrivalPathNode.departurePathSection && pathSection.arrivalPathNode.departurePathSection.arrivalPathNode) {
-        if (sgPathSection.arrivalPathNode.departurePathSection && sgPathSection.arrivalPathNode.departurePathSection.arrivalPathNode) {
-          if (pathSection.arrivalPathNode.departurePathSection.arrivalPathNode.nodeId === sgPathSection.arrivalPathNode.departurePathSection.arrivalPathNode.nodeId) {
+  isNextArrivalPathSectionBranch(
+    pathSection: PathSection,
+    sgPathSection: SgPathSection,
+  ): boolean {
+    if (
+      !pathSection.backward &&
+      sgPathSection.arrivalNodeId === pathSection.arrivalPathNode.nodeId
+    ) {
+      if (
+        pathSection.arrivalPathNode.departurePathSection &&
+        pathSection.arrivalPathNode.departurePathSection.arrivalPathNode
+      ) {
+        if (
+          sgPathSection.arrivalPathNode.departurePathSection &&
+          sgPathSection.arrivalPathNode.departurePathSection.arrivalPathNode
+        ) {
+          if (
+            pathSection.arrivalPathNode.departurePathSection.arrivalPathNode
+              .nodeId ===
+            sgPathSection.arrivalPathNode.departurePathSection.arrivalPathNode
+              .nodeId
+          ) {
             return true;
           }
         }
       }
     }
-    if ((pathSection.backward) && sgPathSection.departureNodeId === pathSection.arrivalPathNode.nodeId) {
-      if (pathSection.arrivalPathNode.departurePathSection && pathSection.arrivalPathNode.departurePathSection.arrivalPathNode) {
-        if (sgPathSection.departurePathNode.arrivalPathSection && sgPathSection.departurePathNode.arrivalPathSection.departurePathNode) {
-          if (pathSection.arrivalPathNode.departurePathSection.arrivalPathNode.nodeId === sgPathSection.departurePathNode.arrivalPathSection.departurePathNode.nodeId) {
+    if (
+      pathSection.backward &&
+      sgPathSection.departureNodeId === pathSection.arrivalPathNode.nodeId
+    ) {
+      if (
+        pathSection.arrivalPathNode.departurePathSection &&
+        pathSection.arrivalPathNode.departurePathSection.arrivalPathNode
+      ) {
+        if (
+          sgPathSection.departurePathNode.arrivalPathSection &&
+          sgPathSection.departurePathNode.arrivalPathSection.departurePathNode
+        ) {
+          if (
+            pathSection.arrivalPathNode.departurePathSection.arrivalPathNode
+              .nodeId ===
+            sgPathSection.departurePathNode.arrivalPathSection.departurePathNode
+              .nodeId
+          ) {
             return true;
           }
         }
@@ -356,12 +457,16 @@ export class Sg3TrainrunsService implements OnDestroy {
     return false;
   }
 
-  private searchAllDeparturePathSectionBranchWithSection(pathSection: PathSection): SgPathSection[] {
+  private searchAllDeparturePathSectionBranchWithSection(
+    pathSection: PathSection,
+  ): SgPathSection[] {
     const paths: SgPathSection[] = [];
-    this.selectedTrainrun.paths.forEach(path => {
+    this.selectedTrainrun.paths.forEach((path) => {
       if (path.isSection()) {
         const sgPathSection = path.getPathSection();
-        if (this.getNextDeparturePathSectionBranch(pathSection, sgPathSection)) {
+        if (
+          this.getNextDeparturePathSectionBranch(pathSection, sgPathSection)
+        ) {
           paths.push(sgPathSection);
         }
       }
@@ -369,20 +474,51 @@ export class Sg3TrainrunsService implements OnDestroy {
     return paths;
   }
 
-  getNextDeparturePathSectionBranch(pathSection: PathSection, sgPathSection: SgPathSection): boolean {
-    if ((pathSection.backward) && sgPathSection.arrivalNodeId === pathSection.departurePathNode.nodeId) {
-      if (pathSection.departurePathNode.arrivalPathSection && pathSection.departurePathNode.arrivalPathSection.departurePathNode) {
-        if (sgPathSection.arrivalPathNode.departurePathSection && sgPathSection.arrivalPathNode.departurePathSection.arrivalPathNode) {
-          if (pathSection.departurePathNode.arrivalPathSection.departurePathNode.nodeId === sgPathSection.arrivalPathNode.departurePathSection.arrivalPathNode.nodeId) {
+  getNextDeparturePathSectionBranch(
+    pathSection: PathSection,
+    sgPathSection: SgPathSection,
+  ): boolean {
+    if (
+      pathSection.backward &&
+      sgPathSection.arrivalNodeId === pathSection.departurePathNode.nodeId
+    ) {
+      if (
+        pathSection.departurePathNode.arrivalPathSection &&
+        pathSection.departurePathNode.arrivalPathSection.departurePathNode
+      ) {
+        if (
+          sgPathSection.arrivalPathNode.departurePathSection &&
+          sgPathSection.arrivalPathNode.departurePathSection.arrivalPathNode
+        ) {
+          if (
+            pathSection.departurePathNode.arrivalPathSection.departurePathNode
+              .nodeId ===
+            sgPathSection.arrivalPathNode.departurePathSection.arrivalPathNode
+              .nodeId
+          ) {
             return true;
           }
         }
       }
     }
-    if ((!pathSection.backward) && sgPathSection.departureNodeId === pathSection.departurePathNode.nodeId) {
-      if (pathSection.departurePathNode.arrivalPathSection && pathSection.departurePathNode.arrivalPathSection.departurePathNode) {
-        if (sgPathSection.departurePathNode.arrivalPathSection && sgPathSection.departurePathNode.arrivalPathSection.departurePathNode) {
-          if (pathSection.departurePathNode.arrivalPathSection.departurePathNode.nodeId === sgPathSection.departurePathNode.arrivalPathSection.departurePathNode.nodeId) {
+    if (
+      !pathSection.backward &&
+      sgPathSection.departureNodeId === pathSection.departurePathNode.nodeId
+    ) {
+      if (
+        pathSection.departurePathNode.arrivalPathSection &&
+        pathSection.departurePathNode.arrivalPathSection.departurePathNode
+      ) {
+        if (
+          sgPathSection.departurePathNode.arrivalPathSection &&
+          sgPathSection.departurePathNode.arrivalPathSection.departurePathNode
+        ) {
+          if (
+            pathSection.departurePathNode.arrivalPathSection.departurePathNode
+              .nodeId ===
+            sgPathSection.departurePathNode.arrivalPathSection.departurePathNode
+              .nodeId
+          ) {
             return true;
           }
         }
@@ -391,9 +527,11 @@ export class Sg3TrainrunsService implements OnDestroy {
     return false;
   }
 
-  private searchAllDeparturePathSectionBranchOnly(pathSection: PathSection): SgPathSection[] {
+  private searchAllDeparturePathSectionBranchOnly(
+    pathSection: PathSection,
+  ): SgPathSection[] {
     const paths: SgPathSection[] = [];
-    this.selectedTrainrun.paths.forEach(path => {
+    this.selectedTrainrun.paths.forEach((path) => {
       if (path.isSection()) {
         const sgPathSection = path.getPathSection();
         if (this.isDeparturePathNodeInBranchOnly(pathSection, sgPathSection)) {
@@ -404,18 +542,28 @@ export class Sg3TrainrunsService implements OnDestroy {
     return paths;
   }
 
-  isDeparturePathNodeInBranchOnly(pathSection: PathSection, sgPathSection: SgPathSection): boolean {
-    return (((pathSection.backward) && sgPathSection.arrivalNodeId === pathSection.departurePathNode.nodeId) ||
-      ((!pathSection.backward) && sgPathSection.departureNodeId === pathSection.departurePathNode.nodeId)
+  isDeparturePathNodeInBranchOnly(
+    pathSection: PathSection,
+    sgPathSection: SgPathSection,
+  ): boolean {
+    return (
+      (pathSection.backward &&
+        sgPathSection.arrivalNodeId === pathSection.departurePathNode.nodeId) ||
+      (!pathSection.backward &&
+        sgPathSection.departureNodeId === pathSection.departurePathNode.nodeId)
     );
   }
 
-  private searchAllArrivalPathSectionBranchOnly(pathSection: PathSection): SgPathSection[] {
+  private searchAllArrivalPathSectionBranchOnly(
+    pathSection: PathSection,
+  ): SgPathSection[] {
     const paths: SgPathSection[] = [];
-    this.selectedTrainrun.paths.forEach(path => {
+    this.selectedTrainrun.paths.forEach((path) => {
       if (path.isSection()) {
         const sgPathSection = path.getPathSection();
-        if (this.isArrivalPathNodePathNodeInBranchOnly(pathSection, sgPathSection)) {
+        if (
+          this.isArrivalPathNodePathNodeInBranchOnly(pathSection, sgPathSection)
+        ) {
           paths.push(sgPathSection);
         }
       }
@@ -423,9 +571,15 @@ export class Sg3TrainrunsService implements OnDestroy {
     return paths;
   }
 
-  isArrivalPathNodePathNodeInBranchOnly(pathSection: PathSection, sgPathSection: SgPathSection): boolean {
-    return (((!pathSection.backward) && sgPathSection.arrivalNodeId === pathSection.arrivalPathNode.nodeId) ||
-      ((pathSection.backward) && sgPathSection.departureNodeId === pathSection.arrivalPathNode.nodeId)
+  isArrivalPathNodePathNodeInBranchOnly(
+    pathSection: PathSection,
+    sgPathSection: SgPathSection,
+  ): boolean {
+    return (
+      (!pathSection.backward &&
+        sgPathSection.arrivalNodeId === pathSection.arrivalPathNode.nodeId) ||
+      (pathSection.backward &&
+        sgPathSection.departureNodeId === pathSection.arrivalPathNode.nodeId)
     );
   }
 
@@ -433,18 +587,33 @@ export class Sg3TrainrunsService implements OnDestroy {
     trainrun.sgTrainrunItems.forEach((sgTrainrunItems, index) => {
       if (sgTrainrunItems.isNode()) {
         const pathNode = sgTrainrunItems.getTrainrunNode();
-        pathNode.arrivalPathSection = this.getPreviousTrainrunSection(trainrun.sgTrainrunItems, index);
-        pathNode.departurePathSection = this.getNextTrainrunSection(trainrun.sgTrainrunItems, index);
+        pathNode.arrivalPathSection = this.getPreviousTrainrunSection(
+          trainrun.sgTrainrunItems,
+          index,
+        );
+        pathNode.departurePathSection = this.getNextTrainrunSection(
+          trainrun.sgTrainrunItems,
+          index,
+        );
       }
       if (sgTrainrunItems.isSection()) {
         const pathSection = sgTrainrunItems.getTrainrunSection();
-        pathSection.departurePathNode = this.getLastPathNode(trainrun.sgTrainrunItems, index);
-        pathSection.arrivalPathNode = this.getPreviousPathNode(trainrun.sgTrainrunItems, index);
+        pathSection.departurePathNode = this.getLastPathNode(
+          trainrun.sgTrainrunItems,
+          index,
+        );
+        pathSection.arrivalPathNode = this.getPreviousPathNode(
+          trainrun.sgTrainrunItems,
+          index,
+        );
       }
     });
   }
 
-  private getPreviousTrainrunSection(paths: SgTrainrunItem[], i: number): SgTrainrunSection {
+  private getPreviousTrainrunSection(
+    paths: SgTrainrunItem[],
+    i: number,
+  ): SgTrainrunSection {
     if (i > 0) {
       const path = paths[i - 1];
       if (path instanceof SgTrainrunSection) {
@@ -456,7 +625,10 @@ export class Sg3TrainrunsService implements OnDestroy {
     return undefined;
   }
 
-  private getNextTrainrunSection(paths: SgTrainrunItem[], i: number): SgTrainrunSection {
+  private getNextTrainrunSection(
+    paths: SgTrainrunItem[],
+    i: number,
+  ): SgTrainrunSection {
     if (i + 1 < paths.length) {
       const path = paths[i + 1];
       if (path instanceof SgTrainrunSection) {
@@ -478,7 +650,10 @@ export class Sg3TrainrunsService implements OnDestroy {
     return undefined;
   }
 
-  private getPreviousPathNode(paths: SgTrainrunItem[], i: number): SgTrainrunNode {
+  private getPreviousPathNode(
+    paths: SgTrainrunItem[],
+    i: number,
+  ): SgTrainrunNode {
     if (i + 1 < paths.length) {
       const path = paths[i + 1];
       if (path instanceof SgTrainrunNode) {
@@ -487,5 +662,4 @@ export class Sg3TrainrunsService implements OnDestroy {
     }
     return undefined;
   }
-
 }

@@ -1,16 +1,9 @@
-import {PerlenketteNode} from './perlenketteNode';
-import {PerlenketteSection} from './perlenketteSection';
+import { PerlenketteNode } from './perlenketteNode';
+import { PerlenketteSection } from './perlenketteSection';
 
 describe('PerlenketteModelTests', () => {
-
   it('Perlenkette-Model - Test - PerlenketteNode - 001', () => {
-    const node = new PerlenketteNode(
-      0,
-      'BN',
-      'Berm',
-      10,
-      [],
-      undefined);
+    const node = new PerlenketteNode(0, 'BN', 'Berm', 10, [], undefined);
 
     expect(node.isPerlenketteNode()).toBe(true);
     expect(node.isPerlenketteSection()).toBe(false);
@@ -25,7 +18,7 @@ describe('PerlenketteModelTests', () => {
       undefined,
       undefined,
       0,
-      false
+      false,
     );
 
     expect(section.isPerlenketteNode()).toBe(false);

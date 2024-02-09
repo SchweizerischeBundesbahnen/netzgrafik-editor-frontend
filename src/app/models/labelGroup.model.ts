@@ -1,8 +1,11 @@
-import {LabelGroupDto, LabelRef} from '../data-structures/business.data.structures';
+import {
+  LabelGroupDto,
+  LabelRef,
+} from '../data-structures/business.data.structures';
 
 export enum LogicalFilterOperator {
   OR,
-  AND
+  AND,
 }
 
 export class LabelGroup {
@@ -11,14 +14,15 @@ export class LabelGroup {
   private id: number;
   private name: string;
   private labelRef: LabelRef;
-  private logicalFilterOperator: LogicalFilterOperator = LogicalFilterOperator.OR;
+  private logicalFilterOperator: LogicalFilterOperator =
+    LogicalFilterOperator.OR;
 
   constructor(
-    {id, name, labelRef}: LabelGroupDto = {
+    { id, name, labelRef }: LabelGroupDto = {
       id: LabelGroup.incrementId(),
       name: LabelGroup.defaultGroupName,
-      labelRef: LabelRef.Undefinded
-    }
+      labelRef: LabelRef.Undefinded,
+    },
   ) {
     this.id = id;
     this.name = name;
@@ -69,7 +73,7 @@ export class LabelGroup {
     return {
       id: this.id,
       name: this.name,
-      labelRef: this.labelRef
+      labelRef: this.labelRef,
     };
   }
 }

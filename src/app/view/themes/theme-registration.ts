@@ -5,5 +5,5 @@ export enum ThemeRegistration {
   ThemeFachDark,
   ThemeFachPrint,
   ThemeGray,
-  ThemeGrayDark
+  ThemeGrayDark,
 }

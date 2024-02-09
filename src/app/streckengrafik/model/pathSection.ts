@@ -1,11 +1,10 @@
-import {PathItem} from './pathItem';
-import {PathNode} from './pathNode';
-import {TrainrunBranchType} from './enum/trainrun-branch-type-type';
-import {TrackData} from './trackData';
-import {TrainrunTemplatePathAlignmentType} from './enum/trainrun-template-path-alignment-type';
+import { PathItem } from './pathItem';
+import { PathNode } from './pathNode';
+import { TrainrunBranchType } from './enum/trainrun-branch-type-type';
+import { TrackData } from './trackData';
+import { TrainrunTemplatePathAlignmentType } from './enum/trainrun-template-path-alignment-type';
 
 export class PathSection implements PathItem {
-
   branchWith = 70;
 
   constructor(
@@ -24,8 +23,7 @@ export class PathSection implements PathItem {
     public isFilteredArrivalNode: boolean = false,
     public isPartOfTemplatePath: TrainrunTemplatePathAlignmentType = TrainrunTemplatePathAlignmentType.SectionSameDirection,
     public oppDirectionTemplatePath: boolean = false,
-  ) {
-  }
+  ) {}
 
   xPath(): number {
     if (this.xPathFix()) {
@@ -35,7 +33,7 @@ export class PathSection implements PathItem {
   }
 
   xPathFix(): boolean {
-    return (this.isFilteredDepartureNode || this.isFilteredArrivalNode);
+    return this.isFilteredDepartureNode || this.isFilteredArrivalNode;
   }
 
   zommedXPath(xZoom): number {
@@ -53,14 +51,22 @@ export class PathSection implements PathItem {
   }
 
   shortKey(): string {
-    if (this.departurePathNode === undefined ||
-      this.arrivalPathNode === undefined) {
+    if (
+      this.departurePathNode === undefined ||
+      this.arrivalPathNode === undefined
+    ) {
       return undefined;
     }
     if (this.backward) {
-      return this.arrivalPathNode.shortKey() + ':' + this.departurePathNode.shortKey();
+      return (
+        this.arrivalPathNode.shortKey() +
+        ':' +
+        this.departurePathNode.shortKey()
+      );
     }
-    return this.departurePathNode.shortKey() + ':' + this.arrivalPathNode.shortKey();
+    return (
+      this.departurePathNode.shortKey() + ':' + this.arrivalPathNode.shortKey()
+    );
   }
 
   isNode(): boolean {
@@ -80,11 +86,11 @@ export class PathSection implements PathItem {
   }
 
   isFilterOnOneNode(): boolean {
-    return (this.isFilteredDepartureNode) || (this.isFilteredArrivalNode);
+    return this.isFilteredDepartureNode || this.isFilteredArrivalNode;
   }
 
   isFilter(): boolean {
-    return (this.isFilteredDepartureNode) && (this.isFilteredArrivalNode);
+    return this.isFilteredDepartureNode && this.isFilteredArrivalNode;
   }
 
   travelTime() {
@@ -92,24 +98,24 @@ export class PathSection implements PathItem {
   }
 
   equal(pathSection: PathSection): boolean {
-
     if (this === pathSection) {
       return true;
     }
-    return (this.trainrunSectionId === pathSection.trainrunSectionId) &&
-      (this.departureTime === pathSection.departureTime) &&
-      (this.arrivalTime === pathSection.arrivalTime) &&
-      (this.numberOfStops === pathSection.numberOfStops) &&
-      (this.backward === pathSection.backward) &&
-      (this.trainrunBranchType === pathSection.trainrunBranchType) &&
-      (this.departurePathNode === pathSection.departurePathNode) &&
-      (this.arrivalPathNode === pathSection.arrivalPathNode) &&
-      (this.arrivalBranchEndNode === pathSection.arrivalBranchEndNode) &&
-      (this.departureBranchEndNode === pathSection.departureBranchEndNode) &&
-      (this.isFilteredDepartureNode === pathSection.isFilteredDepartureNode) &&
-      (this.isFilteredArrivalNode === pathSection.isFilteredArrivalNode);
+    return (
+      this.trainrunSectionId === pathSection.trainrunSectionId &&
+      this.departureTime === pathSection.departureTime &&
+      this.arrivalTime === pathSection.arrivalTime &&
+      this.numberOfStops === pathSection.numberOfStops &&
+      this.backward === pathSection.backward &&
+      this.trainrunBranchType === pathSection.trainrunBranchType &&
+      this.departurePathNode === pathSection.departurePathNode &&
+      this.arrivalPathNode === pathSection.arrivalPathNode &&
+      this.arrivalBranchEndNode === pathSection.arrivalBranchEndNode &&
+      this.departureBranchEndNode === pathSection.departureBranchEndNode &&
+      this.isFilteredDepartureNode === pathSection.isFilteredDepartureNode &&
+      this.isFilteredArrivalNode === pathSection.isFilteredArrivalNode
+    );
   }
-
 
   clone(): PathItem {
     return new PathSection(

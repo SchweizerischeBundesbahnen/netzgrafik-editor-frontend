@@ -1,26 +1,23 @@
-import {DataService} from '../data/data.service';
-import {NodeService} from '../data/node.service';
-import {ResourceService} from '../data/resource.service';
-import {TrainrunService} from '../data/trainrun.service';
-import {TrainrunSectionService} from '../data/trainrunsection.service';
-import {StammdatenService} from '../data/stammdaten.service';
-import {NoteService} from '../data/note.service';
-import {Node} from '../../models/node.model';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {LogService} from '../../logger/log.service';
-import {LogPublishersService} from '../../logger/log.publishers.service';
-import {LabelGroupService} from '../data/labelgroup.service';
-import {LabelService} from '../data/label.serivce';
-import {NetzgrafikUnitTesting} from '../../../integration-testing/netzgrafik.unit.testing';
-import {FilterService} from '../ui/filter.service';
-import {NetzgrafikColoringService} from '../data/netzgrafikColoring.service';
-import {TrainrunsectionHelper} from './trainrunsection.helper';
-import {
-  LeftAndRightTimeStructure
-} from '../../view/dialogs/trainrun-and-section-dialog/trainrunsection-tab/trainrun-section-tab.component';
+import { DataService } from '../data/data.service';
+import { NodeService } from '../data/node.service';
+import { ResourceService } from '../data/resource.service';
+import { TrainrunService } from '../data/trainrun.service';
+import { TrainrunSectionService } from '../data/trainrunsection.service';
+import { StammdatenService } from '../data/stammdaten.service';
+import { NoteService } from '../data/note.service';
+import { Node } from '../../models/node.model';
+import { TrainrunSection } from '../../models/trainrunsection.model';
+import { LogService } from '../../logger/log.service';
+import { LogPublishersService } from '../../logger/log.publishers.service';
+import { LabelGroupService } from '../data/labelgroup.service';
+import { LabelService } from '../data/label.serivce';
+import { NetzgrafikUnitTesting } from '../../../integration-testing/netzgrafik.unit.testing';
+import { FilterService } from '../ui/filter.service';
+import { NetzgrafikColoringService } from '../data/netzgrafikColoring.service';
+import { TrainrunsectionHelper } from './trainrunsection.helper';
+import { LeftAndRightTimeStructure } from '../../view/dialogs/trainrun-and-section-dialog/trainrunsection-tab/trainrun-section-tab.component';
 
 describe('TrainrunsectionHelper', () => {
-
   let dataService: DataService;
   let nodeService: NodeService;
   let resourceService: ResourceService;
@@ -46,28 +43,55 @@ describe('TrainrunsectionHelper', () => {
     labelGroupService = new LabelGroupService(logService);
     labelService = new LabelService(logService, labelGroupService);
     filterService = new FilterService(labelService, labelGroupService);
-    trainrunService = new TrainrunService(logService, labelService, filterService);
-    trainrunSectionService = new TrainrunSectionService(logService, trainrunService, filterService);
-    nodeService = new NodeService(logService, resourceService, trainrunService, trainrunSectionService, labelService, filterService);
+    trainrunService = new TrainrunService(
+      logService,
+      labelService,
+      filterService,
+    );
+    trainrunSectionService = new TrainrunSectionService(
+      logService,
+      trainrunService,
+      filterService,
+    );
+    nodeService = new NodeService(
+      logService,
+      resourceService,
+      trainrunService,
+      trainrunSectionService,
+      labelService,
+      filterService,
+    );
     noteService = new NoteService(logService, labelService, filterService);
     netzgrafikColoringService = new NetzgrafikColoringService(logService);
-    dataService = new DataService(resourceService, nodeService, trainrunSectionService, trainrunService,
-      stammdatenService, noteService, labelService, labelGroupService, filterService, netzgrafikColoringService);
+    dataService = new DataService(
+      resourceService,
+      nodeService,
+      trainrunSectionService,
+      trainrunService,
+      stammdatenService,
+      noteService,
+      labelService,
+      labelGroupService,
+      filterService,
+      netzgrafikColoringService,
+    );
 
-
-    nodeService.nodes.subscribe(updatesNodes => nodes = updatesNodes);
-    trainrunSectionService.trainrunSections.subscribe(updatesTrainrunSections => trainrunSections = updatesTrainrunSections);
+    nodeService.nodes.subscribe((updatesNodes) => (nodes = updatesNodes));
+    trainrunSectionService.trainrunSections.subscribe(
+      (updatesTrainrunSections) => (trainrunSections = updatesTrainrunSections),
+    );
 
     trainrunsectionHelper = new TrainrunsectionHelper(trainrunService);
   });
 
   it('Test load data', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     expect(nodes.length).toBe(5);
     expect(trainrunSections.length).toBe(8);
   });
 
-
   it('getDefaultTimeStructure', () => {
     const larts: LeftAndRightTimeStructure = {
       leftDepartureTime: 10,
@@ -186,7 +210,6 @@ describe('TrainrunsectionHelper', () => {
     expect(a).toEqual(NaN);
   });
 
-
   it('getDefaultTimeStructure', () => {
     const larts: LeftAndRightTimeStructure = {
       leftDepartureTime: 10,
@@ -304,69 +327,103 @@ describe('TrainrunsectionHelper', () => {
     const a = TrainrunsectionHelper.getRightDepartureTime(d);
     expect(a).toEqual(NaN);
   });
-
 
   it('trainrunSectionService.getTrainrunSectionFromId', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
 
     const ts = trainrunSectionService.getTrainrunSectionFromId(1);
-    const nodes = trainrunService.getBothEndNodesWithTrainrunId(ts.getTrainrunId());
-    const d = trainrunsectionHelper.getLeftAndRightLock(ts, [nodes.endNode1, nodes.endNode2]);
+    const nodes = trainrunService.getBothEndNodesWithTrainrunId(
+      ts.getTrainrunId(),
+    );
+    const d = trainrunsectionHelper.getLeftAndRightLock(ts, [
+      nodes.endNode1,
+      nodes.endNode2,
+    ]);
     expect(d.leftLock).toBe(false);
     expect(d.rightLock).toBe(false);
     expect(d.travelTimeLock).toBe(true);
   });
 
   it('getLeftBetriebspunkt - 001', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     const ts = trainrunSectionService.getTrainrunSectionFromId(1);
-    const nodes = trainrunService.getBothEndNodesWithTrainrunId(ts.getTrainrunId());
-    const d = trainrunsectionHelper.getLeftBetriebspunkt(ts, [nodes.endNode1, nodes.endNode2]);
+    const nodes = trainrunService.getBothEndNodesWithTrainrunId(
+      ts.getTrainrunId(),
+    );
+    const d = trainrunsectionHelper.getLeftBetriebspunkt(ts, [
+      nodes.endNode1,
+      nodes.endNode2,
+    ]);
     expect(d[0]).toBe('OL');
     expect(d[1]).toBe('(Olten)');
   });
 
   it('getRightBetriebspunkt - 001', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     const ts = trainrunSectionService.getTrainrunSectionFromId(1);
-    const nodes = trainrunService.getBothEndNodesWithTrainrunId(ts.getTrainrunId());
-    const d = trainrunsectionHelper.getRightBetriebspunkt(ts, [nodes.endNode1, nodes.endNode2]);
+    const nodes = trainrunService.getBothEndNodesWithTrainrunId(
+      ts.getTrainrunId(),
+    );
+    const d = trainrunsectionHelper.getRightBetriebspunkt(ts, [
+      nodes.endNode1,
+      nodes.endNode2,
+    ]);
     expect(d[0]).toBe('ZUE');
     expect(d[1]).toBe('(Zuerich)');
   });
 
   it('getSourceLock - 001', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     const ts = trainrunSectionService.getTrainrunSectionFromId(1);
-    const nodes = trainrunService.getBothEndNodesWithTrainrunId(ts.getTrainrunId());
-    const d = trainrunsectionHelper.getSourceLock({
-      leftLock: true,
-      rightLock: false,
-      travelTimeLock: true,
-    }, ts);
+    const nodes = trainrunService.getBothEndNodesWithTrainrunId(
+      ts.getTrainrunId(),
+    );
+    const d = trainrunsectionHelper.getSourceLock(
+      {
+        leftLock: true,
+        rightLock: false,
+        travelTimeLock: true,
+      },
+      ts,
+    );
     expect(d).toBe(false);
   });
 
   it('getTargetLock - 001', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     const ts = trainrunSectionService.getTrainrunSectionFromId(1);
-    const nodes = trainrunService.getBothEndNodesWithTrainrunId(ts.getTrainrunId());
+    const nodes = trainrunService.getBothEndNodesWithTrainrunId(
+      ts.getTrainrunId(),
+    );
 
-
-    const d = trainrunsectionHelper.getTargetLock({
-      leftLock: false,
-      rightLock: true,
-      travelTimeLock: true,
-    }, ts);
+    const d = trainrunsectionHelper.getTargetLock(
+      {
+        leftLock: false,
+        rightLock: true,
+        travelTimeLock: true,
+      },
+      ts,
+    );
     expect(d).toBe(false);
 
-    const d1 = trainrunsectionHelper.getTargetLock({
-      leftLock: true,
-      rightLock: false,
-      travelTimeLock: true,
-    }, ts);
+    const d1 = trainrunsectionHelper.getTargetLock(
+      {
+        leftLock: true,
+        rightLock: false,
+        travelTimeLock: true,
+      },
+      ts,
+    );
     expect(d1).toBe(true);
   });
-
-
 });

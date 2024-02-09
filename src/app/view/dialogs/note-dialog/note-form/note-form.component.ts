@@ -1,10 +1,10 @@
-import {Component, Input} from '@angular/core';
-import {FormModel} from '../../../../utils/form-model';
+import { Component, Input } from '@angular/core';
+import { FormModel } from '../../../../utils/form-model';
 
 @Component({
   selector: 'sbb-note-form',
   templateUrl: './note-form.component.html',
-  styleUrls: ['./note-form.component.scss']
+  styleUrls: ['./note-form.component.scss'],
 })
 export class NoteFormComponent {
   @Input() model!: FormModel<NoteFormComponentModel>;
@@ -26,7 +26,13 @@ export class NoteFormComponent {
     const newNoteHeight: string = this.model.getControl('noteHeight').value;
     const newNoteWidth: string = this.model.getControl('noteWidth').value;
     const saveNoteCallback = this.model.getControl('saveNoteCallback').value;
-    saveNoteCallback(this.model.getControl('id').value, newNoteTitle, newNoteText, newNoteHeight, newNoteWidth);
+    saveNoteCallback(
+      this.model.getControl('id').value,
+      newNoteTitle,
+      newNoteText,
+      newNoteHeight,
+      newNoteWidth,
+    );
   }
 }
 

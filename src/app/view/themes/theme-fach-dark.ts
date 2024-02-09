@@ -1,12 +1,19 @@
-import {ThemeBase} from './theme-base';
-import {ThemeFach} from './theme-fach';
-import {ThemeRegistration} from './theme-registration';
-import {StaticDomTags} from '../editor-main-view/data-views/static.dom.tags';
+import { ThemeBase } from './theme-base';
+import { ThemeFach } from './theme-fach';
+import { ThemeRegistration } from './theme-registration';
+import { StaticDomTags } from '../editor-main-view/data-views/static.dom.tags';
 
 export class ThemeFachDark extends ThemeBase {
-  constructor(backgroundColor = 'whitesmoke',
-              backgroundStreckengraphikColor = 'white') {
-    super(ThemeRegistration.ThemeFachDark, backgroundColor, backgroundStreckengraphikColor, true);
+  constructor(
+    backgroundColor = 'whitesmoke',
+    backgroundStreckengraphikColor = 'white',
+  ) {
+    super(
+      ThemeRegistration.ThemeFachDark,
+      backgroundColor,
+      backgroundStreckengraphikColor,
+      true,
+    );
     ThemeBase.setUIColors(ThemeFach.getThemeFachColors());
     ThemeBase.setRenderingColors(ThemeFachDark.getThemeFachDarkColors());
   }
@@ -70,7 +77,7 @@ export class ThemeFachDark extends ThemeBase {
       'COLOR_STRECKENGRAPHIK_LINE_GRID_X: whitesmoke',
       'COLOR_STRECKENGRAPHIK_LINE_GRID_Y: whitesmoke',
 
-      'COLOR_Edit: #eb61ff'
+      'COLOR_Edit: #eb61ff',
     ];
   }
 }

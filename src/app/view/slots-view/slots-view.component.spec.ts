@@ -1,5 +1,5 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {SlotsViewComponent} from './slots-view.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SlotsViewComponent } from './slots-view.component';
 
 describe('SlotViewComponent', () => {
   let component: SlotsViewComponent;
@@ -7,9 +7,8 @@ describe('SlotViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SlotsViewComponent ]
-    })
-    .compileComponents();
+      declarations: [SlotsViewComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

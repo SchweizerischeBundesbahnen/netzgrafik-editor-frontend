@@ -5,24 +5,24 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Output
+  Output,
 } from '@angular/core';
-import {DataService} from '../../../../services/data/data.service';
-import {LabelService} from '../../../../services/data/label.serivce';
-import {LabelRef} from '../../../../data-structures/business.data.structures';
-import {LabelGroupService} from '../../../../services/data/labelgroup.service';
-import {Subject} from 'rxjs';
-import {NoteService} from '../../../../services/data/note.service';
-import {takeUntil} from 'rxjs/operators';
-import {Note} from '../../../../models/note.model';
-import {NoteDialogParameter} from '../note-dialog.component';
-import {SbbChipEvent, SbbChipInputEvent} from '@sbb-esta/angular/chips';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { DataService } from '../../../../services/data/data.service';
+import { LabelService } from '../../../../services/data/label.serivce';
+import { LabelRef } from '../../../../data-structures/business.data.structures';
+import { LabelGroupService } from '../../../../services/data/labelgroup.service';
+import { Subject } from 'rxjs';
+import { NoteService } from '../../../../services/data/note.service';
+import { takeUntil } from 'rxjs/operators';
+import { Note } from '../../../../models/note.model';
+import { NoteDialogParameter } from '../note-dialog.component';
+import { SbbChipEvent, SbbChipInputEvent } from '@sbb-esta/angular/chips';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'sbb-note-filter-tab',
   templateUrl: './note-filter-tab.component.html',
-  styleUrls: ['./note-filter-tab.component.scss']
+  styleUrls: ['./note-filter-tab.component.scss'],
 })
 export class NoteFilterTabComponent implements OnInit, OnDestroy {
   @Input() noteDialogParameter: NoteDialogParameter;
@@ -34,12 +34,13 @@ export class NoteFilterTabComponent implements OnInit, OnDestroy {
   readonly separatorKeysCodes = [ENTER, COMMA];
   private destroyed = new Subject<void>();
 
-  constructor(public dataService: DataService,
-              private noteService: NoteService,
-              private labelService: LabelService,
-              private labelGroupService: LabelGroupService,
-              private cd: ChangeDetectorRef) {
-  }
+  constructor(
+    public dataService: DataService,
+    private noteService: NoteService,
+    private labelService: LabelService,
+    private labelGroupService: LabelGroupService,
+    private cd: ChangeDetectorRef,
+  ) {}
 
   ngOnInit() {
     this.initializeWithCurrentNote();
@@ -60,7 +61,9 @@ export class NoteFilterTabComponent implements OnInit, OnDestroy {
     if (!value) {
       return;
     }
-    this.noteLabels = this.noteLabels.filter(labels => labels !== valueDelete);
+    this.noteLabels = this.noteLabels.filter(
+      (labels) => labels !== valueDelete,
+    );
     this.noteService.setLabels(this.note.getId(), this.noteLabels);
   }
 
@@ -81,23 +84,32 @@ export class NoteFilterTabComponent implements OnInit, OnDestroy {
       charCode: 13,
       keyCode: 13,
       view: window,
-      bubbles: true
+      bubbles: true,
     });
     document.getElementById('noteLabelsInput').dispatchEvent(keyboardEvent);
   }
 
   onDeleteNote(): void {
-    this.noteService.deleteNote(this.noteDialogParameter.noteFormComponentModel.id);
+    this.noteService.deleteNote(
+      this.noteDialogParameter.noteFormComponentModel.id,
+    );
     this.noteDeleted.emit();
   }
 
   getAutoCompleteLabels(): string[] {
-    return this.labelGroupService.getAutoCompleteLabels(this.noteLabels, LabelRef.Note);
+    return this.labelGroupService.getAutoCompleteLabels(
+      this.noteLabels,
+      LabelRef.Note,
+    );
   }
 
   private initializeWithCurrentNote() {
-    this.note = this.noteService.getNoteFromId(this.noteDialogParameter.noteFormComponentModel.id);
-    this.noteLabels = this.labelService.getTextLabelsFromIds(this.note.getLabelIds());
+    this.note = this.noteService.getNoteFromId(
+      this.noteDialogParameter.noteFormComponentModel.id,
+    );
+    this.noteLabels = this.labelService.getTextLabelsFromIds(
+      this.note.getLabelIds(),
+    );
   }
 
   private updateNoteLabelsAutoCompleteOptions() {

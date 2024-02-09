@@ -1,4 +1,8 @@
-import {HaltezeitFachCategories, LinePatternRefs, NetzgrafikDto} from '../app/data-structures/business.data.structures';
+import {
+  HaltezeitFachCategories,
+  LinePatternRefs,
+  NetzgrafikDto,
+} from '../app/data-structures/business.data.structures';
 
 export class NetzgrafikUnitTestingReconnectTrainrunSection {
   static getUnitTestReconnectTrainrunSectionNetzgrafik(): NetzgrafikDto {
@@ -15,22 +19,22 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
               id: 4,
               trainrunSectionId: 2,
               positionIndex: 0,
-              positionAlignment: 3
+              positionAlignment: 3,
             },
             {
               id: 5,
               trainrunSectionId: 3,
               positionIndex: 1,
-              positionAlignment: 3
-            }
+              positionAlignment: 3,
+            },
           ],
           transitions: [
             {
               id: 1,
               port1Id: 4,
               port2Id: 5,
-              isNonStopTransit: false
-            }
+              isNonStopTransit: false,
+            },
           ],
           connections: [],
           resourceId: 1,
@@ -39,32 +43,32 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
           trainrunCategoryHaltezeiten: {
             HaltezeitIPV: {
               haltezeit: 2,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitA: {
               haltezeit: 2,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitB: {
               haltezeit: 2,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitC: {
               haltezeit: 1.5,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitD: {
               haltezeit: 1,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitUncategorized: {
               haltezeit: 0,
-              no_halt: true
-            }
+              no_halt: true,
+            },
           },
           symmetryAxis: 0,
           warnings: null,
-          labelIds: []
+          labelIds: [],
         },
         {
           id: 1,
@@ -77,22 +81,22 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
               id: 2,
               trainrunSectionId: 1,
               positionIndex: 0,
-              positionAlignment: 2
+              positionAlignment: 2,
             },
             {
               id: 8,
               trainrunSectionId: 4,
               positionIndex: 1,
-              positionAlignment: 2
-            }
+              positionAlignment: 2,
+            },
           ],
           transitions: [
             {
               id: 4,
               port1Id: 8,
               port2Id: 2,
-              isNonStopTransit: false
-            }
+              isNonStopTransit: false,
+            },
           ],
           connections: [],
           resourceId: 2,
@@ -101,32 +105,32 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
           trainrunCategoryHaltezeiten: {
             HaltezeitIPV: {
               haltezeit: 2,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitA: {
               haltezeit: 2,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitB: {
               haltezeit: 2,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitC: {
               haltezeit: 1.5,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitD: {
               haltezeit: 1,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitUncategorized: {
               haltezeit: 0,
-              no_halt: true
-            }
+              no_halt: true,
+            },
           },
           symmetryAxis: null,
           warnings: null,
-          labelIds: []
+          labelIds: [],
         },
         {
           id: 7,
@@ -143,32 +147,32 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
           trainrunCategoryHaltezeiten: {
             HaltezeitIPV: {
               haltezeit: 2,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitA: {
               haltezeit: 2,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitB: {
               haltezeit: 2,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitC: {
               haltezeit: 1.5,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitD: {
               haltezeit: 1,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitUncategorized: {
               haltezeit: 0,
-              no_halt: true
-            }
+              no_halt: true,
+            },
           },
           symmetryAxis: null,
           warnings: null,
-          labelIds: []
+          labelIds: [],
         },
         {
           id: 8,
@@ -181,34 +185,34 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
               id: 3,
               trainrunSectionId: 2,
               positionIndex: 0,
-              positionAlignment: 2
+              positionAlignment: 2,
             },
             {
               id: 6,
               trainrunSectionId: 3,
               positionIndex: 1,
-              positionAlignment: 2
+              positionAlignment: 2,
             },
             {
               id: 9,
               trainrunSectionId: 1,
               positionIndex: 0,
-              positionAlignment: 3
+              positionAlignment: 3,
             },
             {
               id: 10,
               trainrunSectionId: 4,
               positionIndex: 1,
-              positionAlignment: 3
-            }
+              positionAlignment: 3,
+            },
           ],
           transitions: [
             {
               id: 3,
               port1Id: 3,
               port2Id: 9,
-              isNonStopTransit: false
-            }
+              isNonStopTransit: false,
+            },
           ],
           connections: [],
           resourceId: 9,
@@ -217,32 +221,32 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
           trainrunCategoryHaltezeiten: {
             HaltezeitIPV: {
               haltezeit: 2,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitA: {
               haltezeit: 2,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitB: {
               haltezeit: 2,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitC: {
               haltezeit: 1.5,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitD: {
               haltezeit: 1,
-              no_halt: false
+              no_halt: false,
             },
             HaltezeitUncategorized: {
               haltezeit: 0,
-              no_halt: true
-            }
+              no_halt: true,
+            },
           },
           symmetryAxis: null,
           warnings: null,
-          labelIds: []
+          labelIds: [],
         },
       ],
       trainrunSections: [
@@ -257,35 +261,35 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
             consecutiveTime: 10,
             lock: true,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           sourceDeparture: {
             time: 0,
             consecutiveTime: 60,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           sourceArrival: {
             time: 0,
             consecutiveTime: 60,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           targetDeparture: {
             time: 50,
             consecutiveTime: 50,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           targetArrival: {
             time: 10,
             consecutiveTime: 70,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           numberOfStops: 0,
           trainrunId: 1,
@@ -295,53 +299,53 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
             path: [
               {
                 x: 418,
-                y: 208
+                y: 208,
               },
               {
                 x: 482,
-                y: 208
+                y: 208,
               },
               {
                 x: 766,
-                y: 48
+                y: 48,
               },
               {
                 x: 830,
-                y: 48
-              }
+                y: 48,
+              },
             ],
             textPositions: {
               0: {
                 x: 436,
-                y: 220
+                y: 220,
               },
               1: {
                 x: 464,
-                y: 196
+                y: 196,
               },
               2: {
                 x: 812,
-                y: 36
+                y: 36,
               },
               3: {
                 x: 784,
-                y: 60
+                y: 60,
               },
               4: {
                 x: 624,
-                y: 116
+                y: 116,
               },
               5: {
                 x: 624,
-                y: 116
+                y: 116,
               },
               6: {
                 x: 624,
-                y: 140
-              }
-            }
+                y: 140,
+              },
+            },
           },
-          warnings: null
+          warnings: null,
         },
         {
           id: 2,
@@ -354,35 +358,35 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
             consecutiveTime: 10,
             lock: true,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           sourceDeparture: {
             time: 0,
             consecutiveTime: 60,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           sourceArrival: {
             time: 0,
             consecutiveTime: 60,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           targetDeparture: {
             time: 50,
             consecutiveTime: 50,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           targetArrival: {
             time: 10,
             consecutiveTime: 70,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           numberOfStops: 0,
           trainrunId: 1,
@@ -392,53 +396,53 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
             path: [
               {
                 x: 318,
-                y: 208
+                y: 208,
               },
               {
                 x: 254,
-                y: 208
+                y: 208,
               },
               {
                 x: -30,
-                y: 48
+                y: 48,
               },
               {
                 x: -94,
-                y: 48
-              }
+                y: 48,
+              },
             ],
             textPositions: {
               0: {
                 x: 300,
-                y: 196
+                y: 196,
               },
               1: {
                 x: 272,
-                y: 220
+                y: 220,
               },
               2: {
                 x: -76,
-                y: 60
+                y: 60,
               },
               3: {
                 x: -48,
-                y: 36
+                y: 36,
               },
               4: {
                 x: 112,
-                y: 116
+                y: 116,
               },
               5: {
                 x: 112,
-                y: 116
+                y: 116,
               },
               6: {
                 x: 112,
-                y: 140
-              }
-            }
+                y: 140,
+              },
+            },
           },
-          warnings: null
+          warnings: null,
         },
         {
           id: 3,
@@ -451,35 +455,35 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
             consecutiveTime: 10,
             lock: true,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           sourceDeparture: {
             time: 12,
             consecutiveTime: 72,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           sourceArrival: {
             time: 48,
             consecutiveTime: 48,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           targetDeparture: {
             time: 38,
             consecutiveTime: 38,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           targetArrival: {
             time: 22,
             consecutiveTime: 82,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           numberOfStops: 0,
           trainrunId: 1,
@@ -489,53 +493,53 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
             path: [
               {
                 x: -94,
-                y: 80
+                y: 80,
               },
               {
                 x: -30,
-                y: 80
+                y: 80,
               },
               {
                 x: 254,
-                y: 240
+                y: 240,
               },
               {
                 x: 318,
-                y: 240
-              }
+                y: 240,
+              },
             ],
             textPositions: {
               0: {
                 x: -76,
-                y: 92
+                y: 92,
               },
               1: {
                 x: -48,
-                y: 68
+                y: 68,
               },
               2: {
                 x: 300,
-                y: 228
+                y: 228,
               },
               3: {
                 x: 272,
-                y: 252
+                y: 252,
               },
               4: {
                 x: 112,
-                y: 148
+                y: 148,
               },
               5: {
                 x: 112,
-                y: 148
+                y: 148,
               },
               6: {
                 x: 112,
-                y: 172
-              }
-            }
+                y: 172,
+              },
+            },
           },
-          warnings: null
+          warnings: null,
         },
         {
           id: 4,
@@ -548,35 +552,35 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
             consecutiveTime: 10,
             lock: true,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           sourceDeparture: {
             time: 2,
             consecutiveTime: 2,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           sourceArrival: {
             time: 58,
             consecutiveTime: 118,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           targetDeparture: {
             time: 48,
             consecutiveTime: 108,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           targetArrival: {
             time: 12,
             consecutiveTime: 12,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           numberOfStops: 0,
           trainrunId: 1,
@@ -586,54 +590,54 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
             path: [
               {
                 x: 418,
-                y: 240
+                y: 240,
               },
               {
                 x: 482,
-                y: 240
+                y: 240,
               },
               {
                 x: 766,
-                y: 80
+                y: 80,
               },
               {
                 x: 830,
-                y: 80
-              }
+                y: 80,
+              },
             ],
             textPositions: {
               0: {
                 x: 436,
-                y: 252
+                y: 252,
               },
               1: {
                 x: 464,
-                y: 228
+                y: 228,
               },
               2: {
                 x: 812,
-                y: 68
+                y: 68,
               },
               3: {
                 x: 784,
-                y: 92
+                y: 92,
               },
               4: {
                 x: 624,
-                y: 148
+                y: 148,
               },
               5: {
                 x: 624,
-                y: 148
+                y: 148,
               },
               6: {
                 x: 624,
-                y: 172
-              }
-            }
+                y: 172,
+              },
+            },
           },
-          warnings: null
-        }
+          warnings: null,
+        },
       ],
       trainruns: [
         {
@@ -642,113 +646,141 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
-        }
+          labelIds: [],
+        },
       ],
       resources: [
         {
           id: 1,
-          capacity: 2
+          capacity: 2,
         },
         {
           id: 2,
-          capacity: 2
+          capacity: 2,
         },
         {
           id: 3,
-          capacity: 2
+          capacity: 2,
         },
         {
           id: 4,
-          capacity: 2
+          capacity: 2,
         },
         {
           id: 5,
-          capacity: 2
+          capacity: 2,
         },
         {
           id: 6,
-          capacity: 2
+          capacity: 2,
         },
         {
           id: 7,
-          capacity: 2
+          capacity: 2,
         },
         {
           id: 8,
-          capacity: 2
+          capacity: 2,
         },
         {
           id: 9,
-          capacity: 2
+          capacity: 2,
         },
         {
           id: 10,
-          capacity: 2
+          capacity: 2,
         },
         {
           id: 11,
-          capacity: 2
-        }
+          capacity: 2,
+        },
       ],
       metadata: {
         trainrunCategories: [
           {
-            id: 0, order: 0, shortName: 'EC', name: 'International', colorRef: 'EC',
+            id: 0,
+            order: 0,
+            shortName: 'EC',
+            name: 'International',
+            colorRef: 'EC',
             fachCategory: HaltezeitFachCategories.IPV,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
             nodeHeadwayNonStop: 2,
             sectionHeadway: 2,
-          },                // -> Gruppe ROT
+          }, // -> Gruppe ROT
           {
-            id: 1, order: 1, shortName: 'IC', name: 'InterCity', colorRef: 'IC',
+            id: 1,
+            order: 1,
+            shortName: 'IC',
+            name: 'InterCity',
+            colorRef: 'IC',
             fachCategory: HaltezeitFachCategories.A,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
             nodeHeadwayNonStop: 2,
             sectionHeadway: 2,
-          },                // -> Gruppe ROT
+          }, // -> Gruppe ROT
           {
-            id: 2, order: 2, shortName: 'IR', name: 'InterRegio', colorRef: 'IR',
+            id: 2,
+            order: 2,
+            shortName: 'IR',
+            name: 'InterRegio',
+            colorRef: 'IR',
             fachCategory: HaltezeitFachCategories.B,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
             nodeHeadwayNonStop: 2,
             sectionHeadway: 2,
-          },                // -> Gruppe BLAU
+          }, // -> Gruppe BLAU
           {
-            id: 3, order: 3, shortName: 'RE', name: 'RegioExpress', colorRef: 'RE',
+            id: 3,
+            order: 3,
+            shortName: 'RE',
+            name: 'RegioExpress',
+            colorRef: 'RE',
             fachCategory: HaltezeitFachCategories.C,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
             nodeHeadwayNonStop: 2,
             sectionHeadway: 2,
-          },                 // -> Gruppe GRÜN
+          }, // -> Gruppe GRÜN
           {
-            id: 4, order: 4, shortName: 'S', name: 'RegioUndSBahnverkehr', colorRef: 'S',
+            id: 4,
+            order: 4,
+            shortName: 'S',
+            name: 'RegioUndSBahnverkehr',
+            colorRef: 'S',
             fachCategory: HaltezeitFachCategories.D,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
             nodeHeadwayNonStop: 2,
             sectionHeadway: 2,
-          },                 // -> Gruppe SCHWARZ
+          }, // -> Gruppe SCHWARZ
           {
-            id: 5, order: 5, shortName: 'GEX', name: 'GüterExpress', colorRef: 'GEX',
+            id: 5,
+            order: 5,
+            shortName: 'GEX',
+            name: 'GüterExpress',
+            colorRef: 'GEX',
             fachCategory: HaltezeitFachCategories.Uncategorized,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 3,
             nodeHeadwayNonStop: 3,
             sectionHeadway: 3,
-          },     // -> Gruppe BLAUVIOLETT
+          }, // -> Gruppe BLAUVIOLETT
           {
-            id: 6, order: 6, shortName: 'G', name: 'Güterverkehr', colorRef: 'G',
+            id: 6,
+            order: 6,
+            shortName: 'G',
+            name: 'Güterverkehr',
+            colorRef: 'G',
             fachCategory: HaltezeitFachCategories.Uncategorized,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 3,
             nodeHeadwayNonStop: 3,
             sectionHeadway: 3,
-          },     // -> Gruppe BLAUVIOLETT
+          }, // -> Gruppe BLAUVIOLETT
         ],
         trainrunFrequencies: [
           {
@@ -758,7 +790,7 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
             offset: 0,
             shortName: '15',
             name: 'verkehrt viertelstündlich',
-            linePatternRef: LinePatternRefs.Freq15
+            linePatternRef: LinePatternRefs.Freq15,
           },
           {
             id: 1,
@@ -767,7 +799,7 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
             offset: 0,
             shortName: '20',
             name: 'verkehrt im 20 Minuten Takt',
-            linePatternRef: LinePatternRefs.Freq20
+            linePatternRef: LinePatternRefs.Freq20,
           },
           {
             id: 2,
@@ -776,9 +808,17 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
             offset: 0,
             shortName: '30',
             name: 'verkehrt halbstündlich',
-            linePatternRef: LinePatternRefs.Freq30
+            linePatternRef: LinePatternRefs.Freq30,
           },
-          {id: 3, order: 0, frequency: 60, offset: 0, shortName: '60', name: 'verkehrt stündlich', linePatternRef: LinePatternRefs.Freq60},
+          {
+            id: 3,
+            order: 0,
+            frequency: 60,
+            offset: 0,
+            shortName: '60',
+            name: 'verkehrt stündlich',
+            linePatternRef: LinePatternRefs.Freq60,
+          },
           {
             id: 4,
             order: 0,
@@ -786,26 +826,30 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
             offset: 0,
             shortName: '120',
             name: 'verkehrt zweistündlich',
-            linePatternRef: LinePatternRefs.Freq120
+            linePatternRef: LinePatternRefs.Freq120,
           },
         ],
         trainrunTimeCategories: [
           {
             id: 0,
             order: 0,
-            shortName: '7/24', name: 'verkehrt uneingeschränkt',
+            shortName: '7/24',
+            name: 'verkehrt uneingeschränkt',
             dayTimeInterval: [],
             weekday: [1, 2, 3, 4, 5, 6, 7],
-            linePatternRef: LinePatternRefs.TimeCat7_24
+            linePatternRef: LinePatternRefs.TimeCat7_24,
           },
           {
             id: 1,
             order: 0,
             shortName: 'HVZ',
             name: 'verkehrt zur Hauptverkehrszeit',
-            dayTimeInterval: [{from: 360, to: 420}, {from: 960, to: 1140}],
+            dayTimeInterval: [
+              { from: 360, to: 420 },
+              { from: 960, to: 1140 },
+            ],
             weekday: [1, 2, 3, 4, 5, 6, 7],
-            linePatternRef: LinePatternRefs.TimeCatHVZ
+            linePatternRef: LinePatternRefs.TimeCatHVZ,
           },
           {
             id: 2,
@@ -814,17 +858,17 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
             name: 'verkehrt zeitweise',
             dayTimeInterval: [],
             weekday: [],
-            linePatternRef: LinePatternRefs.TimeZeitweise
+            linePatternRef: LinePatternRefs.TimeZeitweise,
           },
         ],
-        netzgrafikColors: []
+        netzgrafikColors: [],
       },
       freeFloatingTexts: [],
       labels: [],
       labelGroups: [],
       filterData: {
-        filterSettings: []
-      }
+        filterSettings: [],
+      },
     };
   }
 }

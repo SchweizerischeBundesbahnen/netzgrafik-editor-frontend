@@ -1,7 +1,7 @@
 import {
   HaltezeitFachCategories,
   LinePatternRefs,
-  NetzgrafikDto
+  NetzgrafikDto,
 } from '../data-structures/business.data.structures';
 
 export class NetzgrafikDefault {
@@ -23,7 +23,7 @@ export class NetzgrafikDefault {
           trainrunCategoryHaltezeiten: null,
           symmetryAxis: 0,
           warnings: null,
-          labelIds: []
+          labelIds: [],
         },
         {
           id: 1,
@@ -40,7 +40,7 @@ export class NetzgrafikDefault {
           trainrunCategoryHaltezeiten: null,
           symmetryAxis: null,
           warnings: null,
-          labelIds: []
+          labelIds: [],
         },
         {
           id: 2,
@@ -57,7 +57,7 @@ export class NetzgrafikDefault {
           trainrunCategoryHaltezeiten: null,
           symmetryAxis: null,
           warnings: null,
-          labelIds: []
+          labelIds: [],
         },
         {
           id: 3,
@@ -74,7 +74,7 @@ export class NetzgrafikDefault {
           trainrunCategoryHaltezeiten: null,
           symmetryAxis: null,
           warnings: null,
-          labelIds: []
+          labelIds: [],
         },
         {
           id: 4,
@@ -91,7 +91,7 @@ export class NetzgrafikDefault {
           trainrunCategoryHaltezeiten: null,
           symmetryAxis: null,
           warnings: null,
-          labelIds: []
+          labelIds: [],
         },
         {
           id: 5,
@@ -108,7 +108,7 @@ export class NetzgrafikDefault {
           trainrunCategoryHaltezeiten: null,
           symmetryAxis: null,
           warnings: null,
-          labelIds: []
+          labelIds: [],
         },
         {
           id: 6,
@@ -125,7 +125,7 @@ export class NetzgrafikDefault {
           trainrunCategoryHaltezeiten: null,
           symmetryAxis: null,
           warnings: null,
-          labelIds: []
+          labelIds: [],
         },
         {
           id: 7,
@@ -142,7 +142,7 @@ export class NetzgrafikDefault {
           trainrunCategoryHaltezeiten: null,
           symmetryAxis: null,
           warnings: null,
-          labelIds: []
+          labelIds: [],
         },
         {
           id: 8,
@@ -159,7 +159,7 @@ export class NetzgrafikDefault {
           trainrunCategoryHaltezeiten: null,
           symmetryAxis: null,
           warnings: null,
-          labelIds: []
+          labelIds: [],
         },
         {
           id: 9,
@@ -176,7 +176,7 @@ export class NetzgrafikDefault {
           trainrunCategoryHaltezeiten: null,
           symmetryAxis: null,
           warnings: null,
-          labelIds: []
+          labelIds: [],
         },
         {
           id: 10,
@@ -193,8 +193,8 @@ export class NetzgrafikDefault {
           trainrunCategoryHaltezeiten: null,
           symmetryAxis: null,
           warnings: null,
-          labelIds: []
-        }
+          labelIds: [],
+        },
       ],
       trainrunSections: [],
       trainruns: [],
@@ -202,61 +202,89 @@ export class NetzgrafikDefault {
       metadata: {
         trainrunCategories: [
           {
-            id: 0, order: 0, shortName: 'EC', name: 'International', colorRef: 'EC',
+            id: 0,
+            order: 0,
+            shortName: 'EC',
+            name: 'International',
+            colorRef: 'EC',
             fachCategory: HaltezeitFachCategories.IPV,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
             nodeHeadwayNonStop: 2,
             sectionHeadway: 2,
-          },                // -> Gruppe ROT
+          }, // -> Gruppe ROT
           {
-            id: 1, order: 1, shortName: 'IC', name: 'InterCity', colorRef: 'IC',
+            id: 1,
+            order: 1,
+            shortName: 'IC',
+            name: 'InterCity',
+            colorRef: 'IC',
             fachCategory: HaltezeitFachCategories.A,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
             nodeHeadwayNonStop: 2,
             sectionHeadway: 2,
-          },                // -> Gruppe ROT
+          }, // -> Gruppe ROT
           {
-            id: 2, order: 2, shortName: 'IR', name: 'InterRegio', colorRef: 'IR',
+            id: 2,
+            order: 2,
+            shortName: 'IR',
+            name: 'InterRegio',
+            colorRef: 'IR',
             fachCategory: HaltezeitFachCategories.B,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
             nodeHeadwayNonStop: 2,
             sectionHeadway: 2,
-          },                // -> Gruppe BLAU
+          }, // -> Gruppe BLAU
           {
-            id: 3, order: 3, shortName: 'RE', name: 'RegioExpress', colorRef: 'RE',
+            id: 3,
+            order: 3,
+            shortName: 'RE',
+            name: 'RegioExpress',
+            colorRef: 'RE',
             fachCategory: HaltezeitFachCategories.C,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
             nodeHeadwayNonStop: 2,
             sectionHeadway: 2,
-          },                 // -> Gruppe GRÜN
+          }, // -> Gruppe GRÜN
           {
-            id: 4, order: 4, shortName: 'S', name: 'RegioUndSBahnverkehr', colorRef: 'S',
+            id: 4,
+            order: 4,
+            shortName: 'S',
+            name: 'RegioUndSBahnverkehr',
+            colorRef: 'S',
             fachCategory: HaltezeitFachCategories.D,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
             nodeHeadwayNonStop: 2,
             sectionHeadway: 2,
-          },                 // -> Gruppe SCHWARZ
+          }, // -> Gruppe SCHWARZ
           {
-            id: 5, order: 5, shortName: 'GEX', name: 'GüterExpress', colorRef: 'GEX',
+            id: 5,
+            order: 5,
+            shortName: 'GEX',
+            name: 'GüterExpress',
+            colorRef: 'GEX',
             fachCategory: HaltezeitFachCategories.Uncategorized,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 3,
             nodeHeadwayNonStop: 3,
             sectionHeadway: 3,
-          },     // -> Gruppe BLAUVIOLETT
+          }, // -> Gruppe BLAUVIOLETT
           {
-            id: 6, order: 6, shortName: 'G', name: 'Güterverkehr', colorRef: 'G',
+            id: 6,
+            order: 6,
+            shortName: 'G',
+            name: 'Güterverkehr',
+            colorRef: 'G',
             fachCategory: HaltezeitFachCategories.Uncategorized,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 3,
             nodeHeadwayNonStop: 3,
             sectionHeadway: 3,
-          },     // -> Gruppe BLAUVIOLETT
+          }, // -> Gruppe BLAUVIOLETT
         ],
         trainrunFrequencies: [
           {
@@ -266,7 +294,7 @@ export class NetzgrafikDefault {
             offset: 0,
             shortName: '15',
             name: 'verkehrt viertelstündlich',
-            linePatternRef: LinePatternRefs.Freq15
+            linePatternRef: LinePatternRefs.Freq15,
           },
           {
             id: 1,
@@ -275,7 +303,7 @@ export class NetzgrafikDefault {
             offset: 0,
             shortName: '20',
             name: 'verkehrt im 20 Minuten Takt',
-            linePatternRef: LinePatternRefs.Freq20
+            linePatternRef: LinePatternRefs.Freq20,
           },
           {
             id: 2,
@@ -284,7 +312,7 @@ export class NetzgrafikDefault {
             offset: 0,
             shortName: '30',
             name: 'verkehrt halbstündlich',
-            linePatternRef: LinePatternRefs.Freq30
+            linePatternRef: LinePatternRefs.Freq30,
           },
           {
             id: 3,
@@ -293,7 +321,7 @@ export class NetzgrafikDefault {
             offset: 0,
             shortName: '60',
             name: 'verkehrt stündlich',
-            linePatternRef: LinePatternRefs.Freq60
+            linePatternRef: LinePatternRefs.Freq60,
           },
           {
             id: 4,
@@ -302,7 +330,7 @@ export class NetzgrafikDefault {
             offset: 0,
             shortName: '120',
             name: 'verkehrt zweistündlich (gerade)',
-            linePatternRef: LinePatternRefs.Freq120
+            linePatternRef: LinePatternRefs.Freq120,
           },
           {
             id: 5,
@@ -311,26 +339,30 @@ export class NetzgrafikDefault {
             offset: 60,
             shortName: '120+',
             name: 'verkehrt zweistündlich (ungerade)',
-            linePatternRef: LinePatternRefs.Freq120
+            linePatternRef: LinePatternRefs.Freq120,
           },
         ],
         trainrunTimeCategories: [
           {
             id: 0,
             order: 0,
-            shortName: '7/24', name: 'verkehrt uneingeschränkt',
+            shortName: '7/24',
+            name: 'verkehrt uneingeschränkt',
             dayTimeInterval: [],
             weekday: [1, 2, 3, 4, 5, 6, 7],
-            linePatternRef: LinePatternRefs.TimeCat7_24
+            linePatternRef: LinePatternRefs.TimeCat7_24,
           },
           {
             id: 1,
             order: 0,
             shortName: 'HVZ',
             name: 'verkehrt zur Hauptverkehrszeit',
-            dayTimeInterval: [{from: 360, to: 420}, {from: 960, to: 1140}],
+            dayTimeInterval: [
+              { from: 360, to: 420 },
+              { from: 960, to: 1140 },
+            ],
             weekday: [1, 2, 3, 4, 5, 6, 7],
-            linePatternRef: LinePatternRefs.TimeCatHVZ
+            linePatternRef: LinePatternRefs.TimeCatHVZ,
           },
           {
             id: 2,
@@ -339,17 +371,17 @@ export class NetzgrafikDefault {
             name: 'verkehrt zeitweise',
             dayTimeInterval: [],
             weekday: [],
-            linePatternRef: LinePatternRefs.TimeZeitweise
+            linePatternRef: LinePatternRefs.TimeZeitweise,
           },
         ],
-        netzgrafikColors: []
+        netzgrafikColors: [],
       },
       freeFloatingTexts: [],
       labels: [],
       labelGroups: [],
       filterData: {
-        filterSettings: []
-      }
+        filterSettings: [],
+      },
     };
   }
 }

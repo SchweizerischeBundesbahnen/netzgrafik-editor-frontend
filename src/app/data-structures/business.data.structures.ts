@@ -8,7 +8,7 @@ import {
   PortDto,
   TimeLockDto,
   TransitionDto,
-  WarningDto
+  WarningDto,
 } from './technical.data.structures';
 
 export interface FreeFloatingTextDto {
@@ -24,7 +24,6 @@ export interface FreeFloatingTextDto {
   labelIds: number[];
 }
 
-
 export interface NetzgrafikColorDto {
   id: number;
   colorRef: ColorRefType; // uniqueness (business id)
@@ -38,7 +37,6 @@ export interface NetzgrafikColorDto {
   colorDarkModeFocus: string;
   colorDarkModeMuted: string;
   colorDarkModeRelated: string;
-
 }
 
 export interface TrainrunCategory {
@@ -106,7 +104,7 @@ export enum LabelRef {
   Undefinded = 'Undefined',
   Node = 'Node',
   Trainrun = 'Trainrun',
-  Note = 'Note'
+  Note = 'Note',
 }
 
 export interface LabelDto {
@@ -124,8 +122,8 @@ export interface LabelGroupDto {
 
 export interface NodeDto {
   id: number;
-  betriebspunktName: string;      // BN -> 2-4 char name (theoretisch länger, im UI einfach abschneiden aber in der DB zulassen)
-  fullName: string;               // optional, beim workshop kann der auch mal leer sein. -> in UI, falls leer, fallback to Betriebspunk
+  betriebspunktName: string; // BN -> 2-4 char name (theoretisch länger, im UI einfach abschneiden aber in der DB zulassen)
+  fullName: string; // optional, beim workshop kann der auch mal leer sein. -> in UI, falls leer, fallback to Betriebspunk
   positionX: number;
   positionY: number;
 
@@ -135,7 +133,7 @@ export interface NodeDto {
 
   resourceId: number;
   perronkanten: number;
-  connectionTime: number;         // aka Umsteigezeit
+  connectionTime: number; // aka Umsteigezeit
   trainrunCategoryHaltezeiten: TrainrunCategoryHaltezeit;
   symmetryAxis: number;
   warnings: WarningDto[];
@@ -159,7 +157,7 @@ export enum HaltezeitFachCategories {
   B = 'HaltezeitB',
   C = 'HaltezeitC',
   D = 'HaltezeitD',
-  Uncategorized = 'HaltezeitUncategorized'
+  Uncategorized = 'HaltezeitUncategorized',
 }
 
 export enum LinePatternRefs {
@@ -170,7 +168,7 @@ export enum LinePatternRefs {
   Freq15 = '15',
   TimeCat7_24 = '7/24',
   TimeCatHVZ = 'HVZ',
-  TimeZeitweise = 'ZEITWEISE'
+  TimeZeitweise = 'ZEITWEISE',
 }
 
 export interface TrainrunCategoryHaltezeit {
@@ -187,14 +185,12 @@ export interface Haltezeit {
   no_halt: boolean;
 }
 
-
 export interface MetadataDto {
   trainrunCategories: TrainrunCategory[];
   trainrunFrequencies: TrainrunFrequency[];
   trainrunTimeCategories: TrainrunTimeCategory[];
   netzgrafikColors: NetzgrafikColorDto[];
 }
-
 
 export interface ResourceDto {
   id: number;
@@ -227,7 +223,6 @@ export interface FilterSettingDto {
 export interface FilterDataDto {
   filterSettings: FilterSettingDto[];
 }
-
 
 export interface NetzgrafikDto {
   nodes: NodeDto[];

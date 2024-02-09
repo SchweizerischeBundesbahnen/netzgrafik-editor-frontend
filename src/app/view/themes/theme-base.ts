@@ -1,5 +1,5 @@
-import {ThemeRegistration} from './theme-registration';
-import {StaticDomTags} from '../editor-main-view/data-views/static.dom.tags';
+import { ThemeRegistration } from './theme-registration';
+import { StaticDomTags } from '../editor-main-view/data-views/static.dom.tags';
 
 export class ThemeBase {
   themeRegistration: ThemeRegistration = null;
@@ -7,18 +7,28 @@ export class ThemeBase {
   backgroundStreckengraphikColor: string = null;
   isDark = false;
 
-  constructor(themeReference: ThemeRegistration,
-              backgroundColor = 'whitesmoke',
-              backgroundStreckengraphikColor = 'white',
-              isDark = false) {
+  constructor(
+    themeReference: ThemeRegistration,
+    backgroundColor = 'whitesmoke',
+    backgroundStreckengraphikColor = 'white',
+    isDark = false,
+  ) {
     this.themeRegistration = themeReference;
     this.backgroundColor = backgroundColor;
     this.backgroundStreckengraphikColor = backgroundStreckengraphikColor;
     this.isDark = isDark;
-    ThemeBase.setColors(ThemeBase.getGlobalColors(backgroundColor, backgroundStreckengraphikColor));
+    ThemeBase.setColors(
+      ThemeBase.getGlobalColors(
+        backgroundColor,
+        backgroundStreckengraphikColor,
+      ),
+    );
   }
 
-  static getGlobalColors(backgroundColor = 'whitesmoke', backgroundStreckengraphikColor = 'white'): string[] {
+  static getGlobalColors(
+    backgroundColor = 'whitesmoke',
+    backgroundStreckengraphikColor = 'white',
+  ): string[] {
     return [
       'COLOR_Default: rgb(118, 118, 118)',
       'COLOR_Focus: rgb(0, 0, 0)',
@@ -34,7 +44,7 @@ export class ThemeBase {
       'COLOR_TRAINRUN_SECTION_HOVER: rgb(128, 128, 128)',
 
       'COLOR_TRAINRUN_TRANSITION: rgb(192, 192, 192)',
-      'COLOR_TRAINRUN_TRANSITION_HOVER: rgb(128, 128, 128)'
+      'COLOR_TRAINRUN_TRANSITION_HOVER: rgb(128, 128, 128)',
     ];
   }
 
@@ -49,8 +59,10 @@ export class ThemeBase {
   private static setColors(colorStrings: string[], colorPrefix = '') {
     for (const colorString of colorStrings) {
       const keyValue = colorString.split(':');
-      document.documentElement.style.setProperty('--' + colorPrefix + keyValue[0], keyValue[1]);
+      document.documentElement.style.setProperty(
+        '--' + colorPrefix + keyValue[0],
+        keyValue[1],
+      );
     }
   }
-
 }

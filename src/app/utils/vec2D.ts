@@ -1,11 +1,10 @@
-import {PointDto} from '../data-structures/technical.data.structures';
+import { PointDto } from '../data-structures/technical.data.structures';
 
 export class Vec2D {
-
   private x: number;
   private y: number;
 
-  constructor(x= 0.0, y= 0.0) {
+  constructor(x = 0.0, y = 0.0) {
     this.setData(x, y);
   }
 
@@ -60,13 +59,12 @@ export class Vec2D {
     return Vec2D.scale(a, 1.0 / n);
   }
 
-
   static calculateCentroidOfPoints(points: Vec2D[]): Vec2D {
     let x = 0;
     let y = 0;
-    points.forEach(p => {
-      x += (p.getX() / points.length);
-      y += (p.getY() / points.length);
+    points.forEach((p) => {
+      x += p.getX() / points.length;
+      y += p.getY() / points.length;
     });
     return new Vec2D(x, y);
   }
@@ -106,11 +104,10 @@ export class Vec2D {
   }
 
   public toPointDto(): PointDto {
-    return {x: this.x, y: this.y};
+    return { x: this.x, y: this.y };
   }
 
   public copy(): Vec2D {
     return new Vec2D().setData(this.getX(), this.getY());
   }
-
 }

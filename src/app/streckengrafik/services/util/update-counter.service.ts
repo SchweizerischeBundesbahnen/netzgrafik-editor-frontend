@@ -1,4 +1,4 @@
-import {Directive, Injectable, OnDestroy} from '@angular/core';
+import { Directive, Injectable, OnDestroy } from '@angular/core';
 
 export interface UpdateCounterHandler {
   updateCounterCallback: () => void;
@@ -6,14 +6,15 @@ export interface UpdateCounterHandler {
   getUpdateCounterTriggerSerivce: () => UpdateCounterTriggerSerivce;
 }
 
-
 @Directive()
 export class UpdateCounterController implements OnDestroy {
-
-  constructor(private counter: number,
-              private updateCounterHandler: UpdateCounterHandler
+  constructor(
+    private counter: number,
+    private updateCounterHandler: UpdateCounterHandler,
   ) {
-    this.updateCounterHandler.getUpdateCounterTriggerSerivce().registerUpdateHandler(updateCounterHandler, counter);
+    this.updateCounterHandler
+      .getUpdateCounterTriggerSerivce()
+      .registerUpdateHandler(updateCounterHandler, counter);
   }
 
   ngOnDestroy() {
@@ -21,22 +22,24 @@ export class UpdateCounterController implements OnDestroy {
   }
 
   clear() {
-    this.updateCounterHandler.getUpdateCounterTriggerSerivce().clear(this.updateCounterHandler);
+    this.updateCounterHandler
+      .getUpdateCounterTriggerSerivce()
+      .clear(this.updateCounterHandler);
   }
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UpdateCounterTriggerSerivce {
-
   private updateMap = new Map<UpdateCounterHandler, number>();
 
-  constructor() {
-  }
+  constructor() {}
 
-  registerUpdateHandler(updateCounterHandler: UpdateCounterHandler,
-                        counter: number) {
+  registerUpdateHandler(
+    updateCounterHandler: UpdateCounterHandler,
+    counter: number,
+  ) {
     this.updateMap.set(updateCounterHandler, counter);
   }
 
@@ -52,5 +55,4 @@ export class UpdateCounterTriggerSerivce {
   clear(updateCounterHandler: UpdateCounterHandler) {
     this.updateMap.delete(updateCounterHandler);
   }
-
 }

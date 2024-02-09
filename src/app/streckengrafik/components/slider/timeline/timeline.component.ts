@@ -1,29 +1,35 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {SliderChangeInfo} from '../../../model/util/sliderChangeInfo';
-import {TimeSliderService} from '../../../services/time-slider.service';
 import {
-  DrawingBackgroundMouseListenerService
-} from '../../../services/util/drawingBackgroundMouseListener.service';
-import {Subject} from 'rxjs';
-import {ViewBoxChangeInfo} from '../../../model/util/viewBoxChangeInfo';
-import {takeUntil} from 'rxjs/operators';
-import {ViewBoxService} from '../../../services/util/view-box.service';
-import {Vec2D} from '../../../../utils/vec2D';
-import {TimeFormatter} from '../../../model/util/timeFormatter';
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { SliderChangeInfo } from '../../../model/util/sliderChangeInfo';
+import { TimeSliderService } from '../../../services/time-slider.service';
+import { DrawingBackgroundMouseListenerService } from '../../../services/util/drawingBackgroundMouseListener.service';
+import { Subject } from 'rxjs';
+import { ViewBoxChangeInfo } from '../../../model/util/viewBoxChangeInfo';
+import { takeUntil } from 'rxjs/operators';
+import { ViewBoxService } from '../../../services/util/view-box.service';
+import { Vec2D } from '../../../../utils/vec2D';
+import { TimeFormatter } from '../../../model/util/timeFormatter';
 import {
   UpdateCounterController,
   UpdateCounterHandler,
-  UpdateCounterTriggerSerivce
+  UpdateCounterTriggerSerivce,
 } from '../../../services/util/update-counter.service';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[sbb-timeline]',
   templateUrl: './timeline.component.html',
-  styleUrls: ['./timeline.component.scss']
+  styleUrls: ['./timeline.component.scss'],
 })
-export class TimelineComponent implements OnInit, OnDestroy, UpdateCounterHandler {
-
+export class TimelineComponent
+  implements OnInit, OnDestroy, UpdateCounterHandler
+{
   @ViewChild('componentElement')
   componentElementRef: ElementRef;
 
@@ -43,44 +49,49 @@ export class TimelineComponent implements OnInit, OnDestroy, UpdateCounterHandle
 
   textPosition = new Vec2D(0.0, 0.0);
 
-
   private sliderChangeInfo: SliderChangeInfo = new SliderChangeInfo();
   private viewBoxChangeInfo: ViewBoxChangeInfo = new ViewBoxChangeInfo();
   private timelineChangeInfo: number = undefined;
 
-  constructor(private timeSliderService: TimeSliderService,
-              private readonly viewBoxService: ViewBoxService,
-              private readonly updateCounterTriggerSerivce: UpdateCounterTriggerSerivce,
-              private readonly drawingBackgroundMouseListenerComponent: DrawingBackgroundMouseListenerService) {
-  }
+  constructor(
+    private timeSliderService: TimeSliderService,
+    private readonly viewBoxService: ViewBoxService,
+    private readonly updateCounterTriggerSerivce: UpdateCounterTriggerSerivce,
+    private readonly drawingBackgroundMouseListenerComponent: DrawingBackgroundMouseListenerService,
+  ) {}
 
   ngOnInit() {
-    this.drawingBackgroundMouseListenerComponent.getMouseMoveObservable()
+    this.drawingBackgroundMouseListenerComponent
+      .getMouseMoveObservable()
       .pipe(takeUntil(this.destroyed$))
       .subscribe((event: MouseEvent) => {
         this.onMouseMove(event);
       });
 
-    this.drawingBackgroundMouseListenerComponent.getMouseEnterObservable()
+    this.drawingBackgroundMouseListenerComponent
+      .getMouseEnterObservable()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
         this.onMouseEnter();
       });
 
-    this.drawingBackgroundMouseListenerComponent.getMouseLeaveObservable()
+    this.drawingBackgroundMouseListenerComponent
+      .getMouseLeaveObservable()
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
         this.onMouseLeave();
       });
 
-    this.timeSliderService.getSliderChangeObservable()
+    this.timeSliderService
+      .getSliderChangeObservable()
       .pipe(takeUntil(this.destroyed$))
       .subscribe((sliderChangeInfo: SliderChangeInfo) => {
         this.sliderChangeInfo = sliderChangeInfo;
         this.doDelayedRendering();
       });
 
-    this.viewBoxService.getViewBox()
+    this.viewBoxService
+      .getViewBox()
       .pipe(takeUntil(this.destroyed$))
       .subscribe((viewBoxChangeInfo: ViewBoxChangeInfo) => {
         this.viewBoxChangeInfo = viewBoxChangeInfo;
@@ -98,18 +109,24 @@ export class TimelineComponent implements OnInit, OnDestroy, UpdateCounterHandle
   }
 
   getTimeText() {
-    return TimeFormatter.formatHHMM(30 +
-      (
-        this.timelineChangeInfo + this.sliderChangeInfo.move) / this.sliderChangeInfo.zoom * 60
+    return TimeFormatter.formatHHMM(
+      30 +
+        ((this.timelineChangeInfo + this.sliderChangeInfo.move) /
+          this.sliderChangeInfo.zoom) *
+          60,
     );
   }
 
   getTimeLinePos() {
     let timeLinePos = this.timelineChangeInfo;
     if (this.roundTimeLine > 0.01) {
-      timeLinePos = (this.timelineChangeInfo + this.sliderChangeInfo.move) / this.sliderChangeInfo.zoom;
-      timeLinePos = Math.round(timeLinePos / this.roundTimeLine) * this.roundTimeLine;
-      timeLinePos = timeLinePos * this.sliderChangeInfo.zoom - this.sliderChangeInfo.move;
+      timeLinePos =
+        (this.timelineChangeInfo + this.sliderChangeInfo.move) /
+        this.sliderChangeInfo.zoom;
+      timeLinePos =
+        Math.round(timeLinePos / this.roundTimeLine) * this.roundTimeLine;
+      timeLinePos =
+        timeLinePos * this.sliderChangeInfo.zoom - this.sliderChangeInfo.move;
     }
     if (isNaN(timeLinePos)) {
       timeLinePos = 0.0;
@@ -121,9 +138,11 @@ export class TimelineComponent implements OnInit, OnDestroy, UpdateCounterHandle
     const timeLinePos = this.getTimeLinePos();
     if (!isNaN(timeLinePos)) {
       if (this.horizontal) {
-        this.linePath = 'M ' + timeLinePos + ' 0 L ' + timeLinePos + ' ' + 1000000;
+        this.linePath =
+          'M ' + timeLinePos + ' 0 L ' + timeLinePos + ' ' + 1000000;
       } else {
-        this.linePath = 'M 0 ' + timeLinePos + ' L ' + 1000000 + ' ' + timeLinePos;
+        this.linePath =
+          'M 0 ' + timeLinePos + ' L ' + 1000000 + ' ' + timeLinePos;
       }
     } else {
       this.linePath = 'M 0 0 L 0 0';
@@ -137,7 +156,6 @@ export class TimelineComponent implements OnInit, OnDestroy, UpdateCounterHandle
   private onMouseEnter() {
     this.drawLine = true;
   }
-
 
   private onMouseMove(event: MouseEvent) {
     if (this.delayedRendering && this.drawLine) {
@@ -157,12 +175,15 @@ export class TimelineComponent implements OnInit, OnDestroy, UpdateCounterHandle
           pos.setX(v);
           changed = true;
         }
-        const newY = Math.max(5, Math.min(event.offsetY + 64, this.viewBoxChangeInfo.height - 64));
+        const newY = Math.max(
+          5,
+          Math.min(event.offsetY + 64, this.viewBoxChangeInfo.height - 64),
+        );
         if (pos.getY() !== newY) {
           pos.setY(newY);
           changed = true;
         }
-        if ((pos.getY() + 64) > this.viewBoxChangeInfo.height - 64) {
+        if (pos.getY() + 64 > this.viewBoxChangeInfo.height - 64) {
           pos.setY(event.offsetY - 48 - 32);
           changed = true;
         }
@@ -174,12 +195,15 @@ export class TimelineComponent implements OnInit, OnDestroy, UpdateCounterHandle
           pos.setY(v);
           changed = true;
         }
-        const newX = Math.max(5, Math.min(event.offsetX + 64, this.viewBoxChangeInfo.width - 64));
+        const newX = Math.max(
+          5,
+          Math.min(event.offsetX + 64, this.viewBoxChangeInfo.width - 64),
+        );
         if (pos.getX() !== newX) {
           pos.setX(newX);
           changed = true;
         }
-        if ((pos.getX() + 64) > this.viewBoxChangeInfo.width - 64) {
+        if (pos.getX() + 64 > this.viewBoxChangeInfo.width - 64) {
           pos.setX(event.offsetX - 48 - 32);
           changed = true;
         }
@@ -206,7 +230,9 @@ export class TimelineComponent implements OnInit, OnDestroy, UpdateCounterHandle
       this.updateCounterCallback();
     } else {
       this.updateCounterController = new UpdateCounterController(
-        this.fullDetailRenderingUpdateCounter, this);
+        this.fullDetailRenderingUpdateCounter,
+        this,
+      );
     }
   }
 

@@ -1,21 +1,22 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {SgSelectedTrainrun} from '../model/streckengrafik-model/sg-selected-trainrun';
-import {ResizeService} from './util/resize.service';
-import {UiInteractionService} from '../../services/ui/ui.interaction.service';
-import {ResizeChangeInfo} from '../model/util/resizeChangeInfo';
-import {StreckengrafikRenderingType} from '../../view/themes/streckengrafik-rendering-type';
-import {SgPath} from '../model/streckengrafik-model/sg-path';
-import {Sg6TrackService} from './sg-6-track.service';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { SgSelectedTrainrun } from '../model/streckengrafik-model/sg-selected-trainrun';
+import { ResizeService } from './util/resize.service';
+import { UiInteractionService } from '../../services/ui/ui.interaction.service';
+import { ResizeChangeInfo } from '../model/util/resizeChangeInfo';
+import { StreckengrafikRenderingType } from '../../view/themes/streckengrafik-rendering-type';
+import { SgPath } from '../model/streckengrafik-model/sg-path';
+import { Sg6TrackService } from './sg-6-track.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class Sg7PathSliderService implements OnDestroy {
-
-  private readonly sgSelectedTrainrunSubject = new BehaviorSubject<SgSelectedTrainrun>(undefined);
-  private readonly sgSelectedTrainrun$ = this.sgSelectedTrainrunSubject.asObservable();
+  private readonly sgSelectedTrainrunSubject =
+    new BehaviorSubject<SgSelectedTrainrun>(undefined);
+  private readonly sgSelectedTrainrun$ =
+    this.sgSelectedTrainrunSubject.asObservable();
 
   private selectedTrainrun: SgSelectedTrainrun;
 
@@ -23,25 +24,26 @@ export class Sg7PathSliderService implements OnDestroy {
 
   private readonly destroyed$ = new Subject<void>();
 
-  constructor(private readonly sg6TrackService: Sg6TrackService,
-              private readonly resizeService: ResizeService,
-              private readonly uiInteractionService: UiInteractionService
+  constructor(
+    private readonly sg6TrackService: Sg6TrackService,
+    private readonly resizeService: ResizeService,
+    private readonly uiInteractionService: UiInteractionService,
   ) {
-
-    this.sg6TrackService.getSgSelectedTrainrun()
+    this.sg6TrackService
+      .getSgSelectedTrainrun()
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(selectedTrainrun => {
+      .subscribe((selectedTrainrun) => {
         this.selectedTrainrun = selectedTrainrun;
         this.render();
       });
 
-    this.resizeService.getResizeChangeInfo()
+    this.resizeService
+      .getResizeChangeInfo()
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(resizeChangeInfo => {
+      .subscribe((resizeChangeInfo) => {
         this.resizeChangeInfo = resizeChangeInfo;
         this.render();
       });
-
   }
 
   ngOnDestroy() {
@@ -64,7 +66,7 @@ export class Sg7PathSliderService implements OnDestroy {
     let xPathFix = 0;
     let xPathSection = 0;
     let xPathSectionCount = 0;
-    this.selectedTrainrun.paths.forEach(path => {
+    this.selectedTrainrun.paths.forEach((path) => {
       if (path.xPathFix()) {
         xPathFix += path.xPath();
       } else {
@@ -77,8 +79,13 @@ export class Sg7PathSliderService implements OnDestroy {
 
     // fahrzeitskaliert oder false gleichmässig
     let startPosition = 0;
-    this.selectedTrainrun.paths.forEach(path => {
-      path.xZoom = this.getXZoom(path, xPathFix, xPathSection, xPathSectionCount);
+    this.selectedTrainrun.paths.forEach((path) => {
+      path.xZoom = this.getXZoom(
+        path,
+        xPathFix,
+        xPathSection,
+        xPathSectionCount,
+      );
       const zommedXPath = path.zoomedXPath();
       path.startPosition = startPosition;
       startPosition += zommedXPath;
@@ -87,12 +94,23 @@ export class Sg7PathSliderService implements OnDestroy {
     this.sgSelectedTrainrunSubject.next(this.selectedTrainrun);
   }
 
-  getXZoom(path: SgPath, xPathFix: number, xPathSection: number, xPathSectionCount: number) {
-    if (this.uiInteractionService.getActiveStreckengrafikRenderingType() === StreckengrafikRenderingType.TimeScaledDistance) {
+  getXZoom(
+    path: SgPath,
+    xPathFix: number,
+    xPathSection: number,
+    xPathSectionCount: number,
+  ) {
+    if (
+      this.uiInteractionService.getActiveStreckengrafikRenderingType() ===
+      StreckengrafikRenderingType.TimeScaledDistance
+    ) {
       return (this.resizeChangeInfo.width - xPathFix) / xPathSection;
     } else {
-      return ((this.resizeChangeInfo.width - xPathFix) / xPathSectionCount) / path.travelTime();
+      return (
+        (this.resizeChangeInfo.width - xPathFix) /
+        xPathSectionCount /
+        path.travelTime()
+      );
     }
   }
-
 }

@@ -1,5 +1,5 @@
-import {SgPath} from './sg-path';
-import {SgTrainrun} from './sg-trainrun';
+import { SgPath } from './sg-path';
+import { SgTrainrun } from './sg-trainrun';
 
 export class SgSelectedTrainrun {
   constructor(
@@ -13,7 +13,6 @@ export class SgSelectedTrainrun {
     public colorRef: string,
     public paths: SgPath[],
     public trainruns: SgTrainrun[],
-    public counter: number
-  ) {
-  }
+    public counter: number,
+  ) {}
 }

@@ -1,51 +1,57 @@
-import {parse, ParseResult} from 'papaparse';
-import {Component, ElementRef, ViewChild} from '@angular/core';
-import {RailMLExporter} from '../../utils/railMLExporter';
+import { parse, ParseResult } from 'papaparse';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { RailMLExporter } from '../../utils/railMLExporter';
 import * as svg from 'save-svg-as-png';
-import {DataService} from '../../services/data/data.service';
-import {TrainrunService} from '../../services/data/trainrun.service';
-import {NodeService} from '../../services/data/node.service';
-import {FilterService} from '../../services/ui/filter.service';
-import {TrainrunSectionService} from '../../services/data/trainrunsection.service';
-import {UiInteractionService} from '../../services/ui/ui.interaction.service';
-import {StammdatenService} from '../../services/data/stammdaten.service';
-import {LogService} from '../../logger/log.service';
-import {VersionControlService} from '../../services/data/version-control.service';
+import { DataService } from '../../services/data/data.service';
+import { TrainrunService } from '../../services/data/trainrun.service';
+import { NodeService } from '../../services/data/node.service';
+import { FilterService } from '../../services/ui/filter.service';
+import { TrainrunSectionService } from '../../services/data/trainrunsection.service';
+import { UiInteractionService } from '../../services/ui/ui.interaction.service';
+import { StammdatenService } from '../../services/data/stammdaten.service';
+import { LogService } from '../../logger/log.service';
+import { VersionControlService } from '../../services/data/version-control.service';
 import {
   HaltezeitFachCategories,
   NetzgrafikDto,
-  TrainrunCategoryHaltezeit
+  TrainrunCategoryHaltezeit,
 } from '../../data-structures/business.data.structures';
-import {downloadBlob} from '../util/download-utils';
-import {map} from 'rxjs/operators';
-import {LabelService} from '../../services/data/label.serivce';
-import {NetzgrafikColoringService} from '../../services/data/netzgrafikColoring.service';
+import { downloadBlob } from '../util/download-utils';
+import { map } from 'rxjs/operators';
+import { LabelService } from '../../services/data/label.serivce';
+import { NetzgrafikColoringService } from '../../services/data/netzgrafikColoring.service';
 
 @Component({
   selector: 'sbb-editor-tools-view-component',
   templateUrl: './editor-tools-view.component.html',
-  styleUrls: ['./editor-tools-view.component.scss']
+  styleUrls: ['./editor-tools-view.component.scss'],
 })
 export class EditorToolsViewComponent {
-  @ViewChild('stammdatenFileInput', {static: false}) stammdatenFileInput: ElementRef;
-  @ViewChild('netgrafikJsonFileInput', {static: false}) netgrafikJsonFileInput: ElementRef;
+  @ViewChild('stammdatenFileInput', { static: false })
+  stammdatenFileInput: ElementRef;
+  @ViewChild('netgrafikJsonFileInput', { static: false })
+  netgrafikJsonFileInput: ElementRef;
 
-  public isDeletable$ = this.versionControlService.variant$.pipe(map(v => v?.isDeletable));
-  public isWritable$ = this.versionControlService.variant$.pipe(map(v => v?.isWritable));
+  public isDeletable$ = this.versionControlService.variant$.pipe(
+    map((v) => v?.isDeletable),
+  );
+  public isWritable$ = this.versionControlService.variant$.pipe(
+    map((v) => v?.isWritable),
+  );
 
-  constructor(private dataService: DataService,
-              private trainrunService: TrainrunService,
-              private nodeService: NodeService,
-              public filterService: FilterService,
-              private trainrunSectionService: TrainrunSectionService,
-              private uiInteractionService: UiInteractionService,
-              private stammdatenService: StammdatenService,
-              private labelService: LabelService,
-              private logger: LogService,
-              private versionControlService: VersionControlService,
-              private netzgrafikColoringService: NetzgrafikColoringService
-  ) {
-  }
+  constructor(
+    private dataService: DataService,
+    private trainrunService: TrainrunService,
+    private nodeService: NodeService,
+    public filterService: FilterService,
+    private trainrunSectionService: TrainrunSectionService,
+    private uiInteractionService: UiInteractionService,
+    private stammdatenService: StammdatenService,
+    private labelService: LabelService,
+    private logger: LogService,
+    private versionControlService: VersionControlService,
+    private netzgrafikColoringService: NetzgrafikColoringService,
+  ) {}
 
   onLoadButton() {
     this.netgrafikJsonFileInput.nativeElement.click();
@@ -61,7 +67,8 @@ export class EditorToolsViewComponent {
         'trainrunSections' in netzgrafikDto &&
         'trainruns' in netzgrafikDto &&
         'resources' in netzgrafikDto &&
-        'metadata' in netzgrafikDto) {
+        'metadata' in netzgrafikDto
+      ) {
         this.logger.log('onLoad; load netzgrafik: ', netzgrafikDto);
         this.uiInteractionService.showNetzgrafik();
         this.uiInteractionService.closeNodeStammdaten();
@@ -78,7 +85,7 @@ export class EditorToolsViewComponent {
 
   onSave() {
     const data: NetzgrafikDto = this.dataService.getNetzgrafikDto();
-    const blob = new Blob([JSON.stringify(data)], {type: 'application/json'});
+    const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
     downloadBlob(blob, 'netzgrafik.json');
   }
 
@@ -90,10 +97,12 @@ export class EditorToolsViewComponent {
       this.dataService,
       this.nodeService,
       this.trainrunService,
-      this.trainrunSectionService
+      this.trainrunSectionService,
     );
 
-    const bb = new Blob([railMLExporter.createRailML()], {type: 'text/plain'});
+    const bb = new Blob([railMLExporter.createRailML()], {
+      type: 'text/plain',
+    });
 
     pom.setAttribute('href', window.URL.createObjectURL(bb));
     pom.setAttribute('download', filename);
@@ -109,16 +118,24 @@ export class EditorToolsViewComponent {
     // option 2: save svg as svg
     // https://www.npmjs.com/package/save-svg-as-png
     const containerInfo = this.getContainertoExport();
-    svg.svgAsDataUri(containerInfo.documentToExport, containerInfo.exportParameter,).then(uri => {
-      const a = document.createElement('a');
-      document.body.appendChild(a);
-      a.href = uri;
-      a.download = 'netzgrafik.svg';
-      a.click();
-      URL.revokeObjectURL(a.href);
-      a.remove();
-      containerInfo.documentToExport.setAttribute('style', containerInfo.documentSavedStyle);
-    });
+    svg
+      .svgAsDataUri(
+        containerInfo.documentToExport,
+        containerInfo.exportParameter,
+      )
+      .then((uri) => {
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.href = uri;
+        a.download = 'netzgrafik.svg';
+        a.click();
+        URL.revokeObjectURL(a.href);
+        a.remove();
+        containerInfo.documentToExport.setAttribute(
+          'style',
+          containerInfo.documentSavedStyle,
+        );
+      });
   }
 
   onPrintNetzgrafik() {
@@ -130,7 +147,11 @@ export class EditorToolsViewComponent {
     // option 1: save svg as png
     // https://www.npmjs.com/package/save-svg-as-png
     const containerInfo = this.getContainertoExport();
-    svg.saveSvgAsPng(containerInfo.documentToExport, 'netzgrafik.png', containerInfo.exportParameter);
+    svg.saveSvgAsPng(
+      containerInfo.documentToExport,
+      'netzgrafik.png',
+      containerInfo.exportParameter,
+    );
     //containerInfo.documentToExport.setAttribute('style', containerInfo.documentSavedStyle);
   }
 
@@ -142,7 +163,9 @@ export class EditorToolsViewComponent {
     const file = param.target.files[0];
     const reader = new FileReader();
     reader.onload = () => {
-      const finalResult: ParseResult = parse(reader.result.toString(), {header: true});
+      const finalResult: ParseResult = parse(reader.result.toString(), {
+        header: true,
+      });
       this.stammdatenService.setStammdaten(finalResult.data);
     };
     reader.readAsText(file);
@@ -165,11 +188,11 @@ export class EditorToolsViewComponent {
 
   onExport(filename: string, csvData: string) {
     const blob = new Blob([csvData], {
-      type: 'text/csv'
+      type: 'text/csv',
     });
     const url = window.URL.createObjectURL(blob);
 
-    const nav = (window.navigator as any);
+    const nav = window.navigator as any;
     if (nav.msSaveOrOpenBlob) {
       nav.msSaveBlob(blob, filename);
     } else {
@@ -207,8 +230,11 @@ export class EditorToolsViewComponent {
     const contentData: string[] = [];
     contentData.push(headers.join(separator));
     this.nodeService.getNodes().forEach((nodeElement) => {
-      const trainrunCategoryHaltezeit: TrainrunCategoryHaltezeit = nodeElement.getTrainrunCategoryHaltezeit();
-      const stammdaten = this.stammdatenService.getBPStammdaten(nodeElement.getBetriebspunktName());
+      const trainrunCategoryHaltezeit: TrainrunCategoryHaltezeit =
+        nodeElement.getTrainrunCategoryHaltezeit();
+      const stammdaten = this.stammdatenService.getBPStammdaten(
+        nodeElement.getBetriebspunktName(),
+      );
       const zaz = stammdaten !== null ? stammdaten.getZAZ() : 0;
       const erstellen = stammdaten !== null ? stammdaten.getErstellen() : 'JA';
       const kategorien = stammdaten !== null ? stammdaten.getKategorien() : [];
@@ -217,27 +243,57 @@ export class EditorToolsViewComponent {
       const row: string[] = [];
       row.push(nodeElement.getBetriebspunktName());
       row.push(nodeElement.getFullName());
-      row.push(kategorien.map(kat => '' + kat).join(comma));
-      row.push(regions.map(reg => '' + reg).join(comma));
-      row.push('' + (trainrunCategoryHaltezeit[HaltezeitFachCategories.IPV].no_halt ? 0 :
-        trainrunCategoryHaltezeit[HaltezeitFachCategories.IPV].haltezeit - zaz));
-      row.push('' + (trainrunCategoryHaltezeit[HaltezeitFachCategories.A].no_halt ? 0 :
-        trainrunCategoryHaltezeit[HaltezeitFachCategories.A].haltezeit - zaz));
-      row.push('' + (trainrunCategoryHaltezeit[HaltezeitFachCategories.B].no_halt ? 0 :
-        trainrunCategoryHaltezeit[HaltezeitFachCategories.B].haltezeit - zaz));
-      row.push('' + (trainrunCategoryHaltezeit[HaltezeitFachCategories.C].no_halt ? 0 :
-        trainrunCategoryHaltezeit[HaltezeitFachCategories.C].haltezeit - zaz));
-      row.push('' + (trainrunCategoryHaltezeit[HaltezeitFachCategories.D].no_halt ? 0 :
-        trainrunCategoryHaltezeit[HaltezeitFachCategories.D].haltezeit - zaz));
+      row.push(kategorien.map((kat) => '' + kat).join(comma));
+      row.push(regions.map((reg) => '' + reg).join(comma));
+      row.push(
+        '' +
+          (trainrunCategoryHaltezeit[HaltezeitFachCategories.IPV].no_halt
+            ? 0
+            : trainrunCategoryHaltezeit[HaltezeitFachCategories.IPV].haltezeit -
+              zaz),
+      );
+      row.push(
+        '' +
+          (trainrunCategoryHaltezeit[HaltezeitFachCategories.A].no_halt
+            ? 0
+            : trainrunCategoryHaltezeit[HaltezeitFachCategories.A].haltezeit -
+              zaz),
+      );
+      row.push(
+        '' +
+          (trainrunCategoryHaltezeit[HaltezeitFachCategories.B].no_halt
+            ? 0
+            : trainrunCategoryHaltezeit[HaltezeitFachCategories.B].haltezeit -
+              zaz),
+      );
+      row.push(
+        '' +
+          (trainrunCategoryHaltezeit[HaltezeitFachCategories.C].no_halt
+            ? 0
+            : trainrunCategoryHaltezeit[HaltezeitFachCategories.C].haltezeit -
+              zaz),
+      );
+      row.push(
+        '' +
+          (trainrunCategoryHaltezeit[HaltezeitFachCategories.D].no_halt
+            ? 0
+            : trainrunCategoryHaltezeit[HaltezeitFachCategories.D].haltezeit -
+              zaz),
+      );
       row.push('' + zaz);
       row.push('' + nodeElement.getConnectionTime());
-      row.push(nodeElement.getLabelIds().map(labelID => {
-        const labelOfInterest = this.labelService.getLabelFromId(labelID);
-        if (labelOfInterest !== undefined) {
-          return labelOfInterest.getLabel();
-        }
-        return '';
-      }).join(comma));
+      row.push(
+        nodeElement
+          .getLabelIds()
+          .map((labelID) => {
+            const labelOfInterest = this.labelService.getLabelFromId(labelID);
+            if (labelOfInterest !== undefined) {
+              return labelOfInterest.getLabel();
+            }
+            return '';
+          })
+          .join(comma),
+      );
       row.push('' + nodeElement.getPositionX());
       row.push('' + nodeElement.getPositionY());
       row.push(erstellen);
@@ -247,7 +303,9 @@ export class EditorToolsViewComponent {
   }
 
   private getContainertoExport() {
-    let htmlElementToExport = document.getElementById('main-streckengrafik-container');
+    let htmlElementToExport = document.getElementById(
+      'main-streckengrafik-container',
+    );
     let param = {};
     console.log(htmlElementToExport);
 
@@ -261,7 +319,8 @@ export class EditorToolsViewComponent {
         top: boundingBox.minCoordY - 32,
         width: boundingBox.maxCoordX - boundingBox.minCoordX + 64,
         height: boundingBox.maxCoordY - boundingBox.minCoordY + 64,
-        backgroundColor: this.uiInteractionService.getActiveTheme().backgroundColor
+        backgroundColor:
+          this.uiInteractionService.getActiveTheme().backgroundColor,
       };
     } else {
       param = {
@@ -271,7 +330,8 @@ export class EditorToolsViewComponent {
         top: 80,
         width: htmlElementToExport.offsetWidth,
         height: htmlElementToExport.offsetHeight,
-        backgroundColor: this.uiInteractionService.getActiveTheme().backgroundColor
+        backgroundColor:
+          this.uiInteractionService.getActiveTheme().backgroundColor,
       };
     }
     const oldStyle = htmlElementToExport.getAttribute('style');
@@ -282,20 +342,22 @@ export class EditorToolsViewComponent {
 
       const styles = this.netzgrafikColoringService.generateGlobalStyles(
         this.dataService.getTrainrunCategories(),
-        this.trainrunSectionService.getTrainrunSections()
+        this.trainrunSectionService.getTrainrunSections(),
       );
 
-      styles.forEach(s => {
+      styles.forEach((s) => {
         const docStyles = htmlRoot.ownerDocument.styleSheets;
         for (let i = 0; i < s.cssRules.length; i++) {
-          htmlRoot.ownerDocument.styleSheets[docStyles.length - 1].insertRule(s.cssRules[i].cssText);
+          htmlRoot.ownerDocument.styleSheets[docStyles.length - 1].insertRule(
+            s.cssRules[i].cssText,
+          );
         }
       });
     }
     return {
       documentToExport: htmlElementToExport,
       exportParameter: param,
-      documentSavedStyle: oldStyle
+      documentSavedStyle: oldStyle,
     };
   }
 
@@ -305,16 +367,29 @@ export class EditorToolsViewComponent {
     let minY;
     let maxY;
     this.nodeService.nodesStore.nodes.forEach((n) => {
-      minX = minX === undefined ? n.getPositionX() :
-        Math.min(minX, n.getPositionX());
-      maxX = maxX === undefined ? n.getPositionX() + n.getNodeWidth() :
-        Math.max(maxX, n.getPositionX() + n.getNodeWidth());
-      minY = minY === undefined ? n.getPositionY() :
-        Math.min(minY, n.getPositionY());
-      maxY = maxY === undefined ? n.getPositionY() + n.getNodeHeight() :
-        Math.max(maxY, n.getPositionY() + n.getNodeHeight());
+      minX =
+        minX === undefined
+          ? n.getPositionX()
+          : Math.min(minX, n.getPositionX());
+      maxX =
+        maxX === undefined
+          ? n.getPositionX() + n.getNodeWidth()
+          : Math.max(maxX, n.getPositionX() + n.getNodeWidth());
+      minY =
+        minY === undefined
+          ? n.getPositionY()
+          : Math.min(minY, n.getPositionY());
+      maxY =
+        maxY === undefined
+          ? n.getPositionY() + n.getNodeHeight()
+          : Math.max(maxY, n.getPositionY() + n.getNodeHeight());
     });
-    return {minCoordX: minX, minCoordY: minY, maxCoordX: maxX, maxCoordY: maxY};
+    return {
+      minCoordX: minX,
+      minCoordY: minY,
+      maxCoordX: maxX,
+      maxCoordY: maxY,
+    };
   }
 
   private convertToZuglaufCSV(): string {
@@ -340,10 +415,10 @@ export class EditorToolsViewComponent {
     headers.push('Labels');
 
     contentData.push(headers.join(separator));
-    this.trainrunService.getTrainruns()
-      .filter(trainrun => this.filterService.filterTrainrun(trainrun))
+    this.trainrunService
+      .getTrainruns()
+      .filter((trainrun) => this.filterService.filterTrainrun(trainrun))
       .forEach((trainrun) => {
-
         let startBetriebspunktName = '';
         let endBetriebspunktName = '';
         let travelTimeFoewart = 0;
@@ -356,40 +431,70 @@ export class EditorToolsViewComponent {
         let endNodeArrival = undefined;
         let endNodeDeparture = undefined;
         let startNodeArrival = undefined;
-        this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(trainrun.getId())
-          .filter(trainrunSection => this.filterService.filterTrainrunsection(trainrunSection))
+        this.trainrunSectionService
+          .getAllTrainrunSectionsForTrainrun(trainrun.getId())
+          .filter((trainrunSection) =>
+            this.filterService.filterTrainrunsection(trainrunSection),
+          )
           .forEach((trainrunSection, index) => {
-
             if (index === 0) {
-              startBetriebspunktName = trainrunSection.getSourceNode().getBetriebspunktName();
+              startBetriebspunktName = trainrunSection
+                .getSourceNode()
+                .getBetriebspunktName();
               startNodeArrival = trainrunSection.getSourceArrival();
               startNodeDeparture = trainrunSection.getSourceDeparture();
-              waitingTimeOnStartStation = this.calcWaitingTime(trainrunSection.getSourceArrival(), trainrunSection.getSourceDeparture());
+              waitingTimeOnStartStation = this.calcWaitingTime(
+                trainrunSection.getSourceArrival(),
+                trainrunSection.getSourceDeparture(),
+              );
             }
 
             if (endNodeArrival) {
-              foewartHoldtime = foewartHoldtime + this.calcWaitingTime(endNodeArrival, trainrunSection.getSourceDeparture());
+              foewartHoldtime =
+                foewartHoldtime +
+                this.calcWaitingTime(
+                  endNodeArrival,
+                  trainrunSection.getSourceDeparture(),
+                );
             }
 
             if (endNodeDeparture) {
-              backwardHoldtime = backwardHoldtime + this.calcWaitingTime(trainrunSection.getSourceArrival(), endNodeDeparture);
+              backwardHoldtime =
+                backwardHoldtime +
+                this.calcWaitingTime(
+                  trainrunSection.getSourceArrival(),
+                  endNodeDeparture,
+                );
             }
             endNodeArrival = trainrunSection.getTargetArrival();
             endNodeDeparture = trainrunSection.getTargetDeparture();
-            endBetriebspunktName = trainrunSection.getTargetNode().getBetriebspunktName();
-            travelTimeFoewart = travelTimeFoewart + trainrunSection.getTravelTime();
-            travelTimeBackward = travelTimeBackward + trainrunSection.getTravelTime();
-            waitingTimeOnEndStation = this.calcWaitingTime(trainrunSection.getTargetArrival(), trainrunSection.getTargetDeparture());
+            endBetriebspunktName = trainrunSection
+              .getTargetNode()
+              .getBetriebspunktName();
+            travelTimeFoewart =
+              travelTimeFoewart + trainrunSection.getTravelTime();
+            travelTimeBackward =
+              travelTimeBackward + trainrunSection.getTravelTime();
+            waitingTimeOnEndStation = this.calcWaitingTime(
+              trainrunSection.getTargetArrival(),
+              trainrunSection.getTargetDeparture(),
+            );
           });
 
         if (trainrun.getFrequency() < 60) {
-          waitingTimeOnEndStation = waitingTimeOnEndStation % trainrun.getFrequency();
-          waitingTimeOnStartStation = waitingTimeOnStartStation % trainrun.getFrequency();
+          waitingTimeOnEndStation =
+            waitingTimeOnEndStation % trainrun.getFrequency();
+          waitingTimeOnStartStation =
+            waitingTimeOnStartStation % trainrun.getFrequency();
         }
 
         travelTimeFoewart = travelTimeFoewart + foewartHoldtime;
         travelTimeBackward = travelTimeBackward + backwardHoldtime;
-        const timeOfCirculation = travelTimeFoewart + waitingTimeOnEndStation + travelTimeBackward + waitingTimeOnStartStation;
+        const timeOfCirculation =
+          travelTimeFoewart +
+          waitingTimeOnEndStation +
+          travelTimeBackward +
+          waitingTimeOnStartStation;
         const row: string[] = [];
         row.push(trainrun.getTrainrunCategory().shortName);
         row.push(trainrun.getTitle());
@@ -406,7 +511,14 @@ export class EditorToolsViewComponent {
         row.push('' + startNodeArrival);
         row.push('' + waitingTimeOnStartStation);
         row.push('' + timeOfCirculation);
-        row.push(trainrun.getLabelIds().map(labelID => this.labelService.getLabelFromId(labelID).getLabel()).join(comma));
+        row.push(
+          trainrun
+            .getLabelIds()
+            .map((labelID) =>
+              this.labelService.getLabelFromId(labelID).getLabel(),
+            )
+            .join(comma),
+        );
 
         contentData.push(row.join(separator));
       });
@@ -419,5 +531,4 @@ export class EditorToolsViewComponent {
     }
     return departure - arrival;
   }
-
 }

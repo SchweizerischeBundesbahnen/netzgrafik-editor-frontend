@@ -1,4 +1,4 @@
-import {Vec2D} from './vec2D';
+import { Vec2D } from './vec2D';
 
 describe('vec2D', () => {
   it('constructor', () => {
@@ -12,10 +12,7 @@ describe('vec2D', () => {
     expect(result.getX()).toEqual(5.0);
     expect(result.getY()).toEqual(2.0);
   });
-
-
 });
-
 
 describe('calculation_Vec2d', () => {
   it('equal', () => {
@@ -67,7 +64,6 @@ describe('calculation_Vec2d', () => {
     expect(result).toEqual(Math.sqrt(5 * 5 + 2 * 2));
   });
 
-
   it('normalize', () => {
     const a: Vec2D = new Vec2D(5, -10);
     const result: Vec2D = Vec2D.normalize(a);
@@ -115,5 +111,4 @@ describe('calculation_Vec2d', () => {
     expect(result.getX()).toEqual(25.4);
     expect(result.getY()).toEqual(1978);
   });
-
 });

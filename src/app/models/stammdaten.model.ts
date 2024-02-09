@@ -1,12 +1,11 @@
-import {TrainrunCategoryHaltezeit} from '../data-structures/business.data.structures';
-import {Vec2D} from '../utils/vec2D';
+import { TrainrunCategoryHaltezeit } from '../data-structures/business.data.structures';
+import { Vec2D } from '../utils/vec2D';
 
 export class Stammdaten {
-
   private bp: string;
   private haltezeiten: TrainrunCategoryHaltezeit;
   private zaz: number;
-  private connectionTime: number;         // aka Umsteigezeit
+  private connectionTime: number; // aka Umsteigezeit
   private regions: string[];
   private filterableLabels: string[];
   private kategorien: string[];
@@ -14,9 +13,18 @@ export class Stammdaten {
   private bahnhof: string;
   private erstellen: string;
 
-  constructor(bp: string, haltezeiten: TrainrunCategoryHaltezeit, zaz: number, connectionTime: number,
-              regions: string[], filterableLabels: string[], kategorien: string[],
-              bahnhof: string, position: Vec2D, erstellen: string) {
+  constructor(
+    bp: string,
+    haltezeiten: TrainrunCategoryHaltezeit,
+    zaz: number,
+    connectionTime: number,
+    regions: string[],
+    filterableLabels: string[],
+    kategorien: string[],
+    bahnhof: string,
+    position: Vec2D,
+    erstellen: string,
+  ) {
     this.bp = bp;
     this.haltezeiten = haltezeiten;
     this.zaz = zaz;
