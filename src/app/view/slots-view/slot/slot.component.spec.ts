@@ -8,7 +8,7 @@ describe('SlotComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SlotComponent, SbbMenu],
+      declarations: [SlotComponent],
     }).compileComponents();
   });
 
