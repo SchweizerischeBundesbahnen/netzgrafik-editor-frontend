@@ -5,7 +5,9 @@ name: Run all test - Node.js CI
 
 on:
   push:
-    branches: [ "**" , "main" ]
+    branches:
+      - "**"
+      - "main"
   pull_request:
     branches: [ "main" ]
 
