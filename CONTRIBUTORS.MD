@@ -5,7 +5,7 @@ would not have been possible. Thank you for your current and future contribution
 
 ## Special thanks to
 
-It all It all started with the idea of creating an interactive planning tool with minimal complexity
+It all started with the idea of creating an interactive planning tool with minimal complexity
 and maximum usability. To achieve this ambitious goal, a comprehensive UX design concept was
 developed and consistently implemented. However, even the best concept can only be successful when
 an interdisciplinary team contributes its entire knowledge to the conception, implementation, and
