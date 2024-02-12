@@ -95,9 +95,11 @@ You can file new issues by providing the above information [here](https://github
 Before you submit your Pull Request (PR) consider the following guidelines:
 
 * Make your changes in a new git branch:
+
      ```shell
      git checkout -b my-fix-branch main
      ```
+
 * Create your patch, **including appropriate test cases**.
 * Follow our [Coding Rules](#rules).
 * Test your changes with our supported browsers and screen readers.
@@ -105,14 +107,17 @@ Before you submit your Pull Request (PR) consider the following guidelines:
 * Commit your changes using a descriptive commit message that follows our
   [commit message conventions](#commit). Adherence to these conventions
   is necessary because release notes are automatically generated from these messages.
+
   ```shell
   git commit -a
   ```
   Note: the optional commit `-a` command line option will automatically "add" and "rm" edited files.
 * Push your branch to GitHub:
+
   ```shell
   git push my-fork my-fix-branch
   ```
+
 * In GitHub, send a pull request to `sbb-your-project:main`.
   The PR title and message should as well conform to the [commit message conventions](#commit).
 
@@ -125,6 +130,7 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 * Also see [CODING_STANDARDS](./CODING_STANDARDS.md)
 
 ## <a id="commit"></a> Commit Message Guidelines
+
 This project uses [Conventional Commits](https://www.conventionalcommits.org/) to generate the changelog.
 As an example, please refer to: https://github.com/sbb-design-systems/sbb-angular 
 
