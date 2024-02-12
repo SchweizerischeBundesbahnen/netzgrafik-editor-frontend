@@ -12,7 +12,7 @@ export enum TrainrunSectionText {
   TargetDeparture,
   TrainrunSectionName,
   TrainrunSectionTravelTime,
-  TrainrunSectionNumberOfStops
+  TrainrunSectionNumberOfStops,
 }
 
 export interface TrainrunSectionTextPositions {
@@ -34,7 +34,7 @@ export enum PortAlignment {
   Top,
   Bottom,
   Left,
-  Right
+  Right,
 }
 
 export interface WarningDto {
@@ -75,14 +75,16 @@ export interface PortDto {
   trainrunSectionId: number;
 }
 
-export interface TransitionDto { // Durchfahrt
+export interface TransitionDto {
+  // Durchfahrt
   id: number;
   port1Id: number;
   port2Id: number;
   isNonStopTransit: boolean;
 }
 
-export interface ConnectionDto { // Anschluss
+export interface ConnectionDto {
+  // Anschluss
   id: number;
   port1Id: number;
   port2Id: number;

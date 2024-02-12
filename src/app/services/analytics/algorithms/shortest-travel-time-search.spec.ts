@@ -1,25 +1,24 @@
-import {DataService} from '../../data/data.service';
-import {NodeService} from '../../data/node.service';
-import {ResourceService} from '../../data/resource.service';
-import {TrainrunService} from '../../data/trainrun.service';
-import {TrainrunSectionService} from '../../data/trainrunsection.service';
-import {StammdatenService} from '../../data/stammdaten.service';
-import {NoteService} from '../../data/note.service';
-import {Node} from '../../../models/node.model';
-import {TrainrunSection} from '../../../models/trainrunsection.model';
-import {LogService} from '../../../logger/log.service';
-import {LogPublishersService} from '../../../logger/log.publishers.service';
-import {LabelGroupService} from '../../data/labelgroup.service';
-import {LabelService} from '../../data/label.serivce';
-import {NetzgrafikUnitTesting} from '../../../../integration-testing/netzgrafik.unit.testing';
-import {AnalyticsService} from '../analytics.service';
-import {FilterService} from '../../ui/filter.service';
-import {ShortestDistanceNode} from './shortest-distance-node';
-import {ShortestDistanceEdge} from './shortest-distance-edge';
-import {NetzgrafikColoringService} from '../../data/netzgrafikColoring.service';
+import { DataService } from '../../data/data.service';
+import { NodeService } from '../../data/node.service';
+import { ResourceService } from '../../data/resource.service';
+import { TrainrunService } from '../../data/trainrun.service';
+import { TrainrunSectionService } from '../../data/trainrunsection.service';
+import { StammdatenService } from '../../data/stammdaten.service';
+import { NoteService } from '../../data/note.service';
+import { Node } from '../../../models/node.model';
+import { TrainrunSection } from '../../../models/trainrunsection.model';
+import { LogService } from '../../../logger/log.service';
+import { LogPublishersService } from '../../../logger/log.publishers.service';
+import { LabelGroupService } from '../../data/labelgroup.service';
+import { LabelService } from '../../data/label.serivce';
+import { NetzgrafikUnitTesting } from '../../../../integration-testing/netzgrafik.unit.testing';
+import { AnalyticsService } from '../analytics.service';
+import { FilterService } from '../../ui/filter.service';
+import { ShortestDistanceNode } from './shortest-distance-node';
+import { ShortestDistanceEdge } from './shortest-distance-edge';
+import { NetzgrafikColoringService } from '../../data/netzgrafikColoring.service';
 
 describe('ShortestTravelTimeSearch', () => {
-
   let dataService: DataService;
   let nodeService: NodeService;
   let resourceService: ResourceService;
@@ -45,25 +44,62 @@ describe('ShortestTravelTimeSearch', () => {
     labelGroupService = new LabelGroupService(logService);
     labelService = new LabelService(logService, labelGroupService);
     filterService = new FilterService(labelService, labelGroupService);
-    trainrunService = new TrainrunService(logService, labelService, filterService);
-    trainrunSectionService = new TrainrunSectionService(logService, trainrunService, filterService);
-    nodeService = new NodeService(logService, resourceService, trainrunService, trainrunSectionService, labelService, filterService);
+    trainrunService = new TrainrunService(
+      logService,
+      labelService,
+      filterService,
+    );
+    trainrunSectionService = new TrainrunSectionService(
+      logService,
+      trainrunService,
+      filterService,
+    );
+    nodeService = new NodeService(
+      logService,
+      resourceService,
+      trainrunService,
+      trainrunSectionService,
+      labelService,
+      filterService,
+    );
     noteService = new NoteService(logService, labelService, filterService);
-    analyticsService = new AnalyticsService(nodeService, trainrunSectionService, trainrunService, filterService);
+    analyticsService = new AnalyticsService(
+      nodeService,
+      trainrunSectionService,
+      trainrunService,
+      filterService,
+    );
     netzgrafikColoringService = new NetzgrafikColoringService(logService);
-    dataService = new DataService(resourceService, nodeService, trainrunSectionService, trainrunService,
-      stammdatenService, noteService, labelService, labelGroupService, filterService, netzgrafikColoringService);
-    nodeService.nodes.subscribe(updatesNodes => nodes = updatesNodes);
+    dataService = new DataService(
+      resourceService,
+      nodeService,
+      trainrunSectionService,
+      trainrunService,
+      stammdatenService,
+      noteService,
+      labelService,
+      labelGroupService,
+      filterService,
+      netzgrafikColoringService,
+    );
+    nodeService.nodes.subscribe((updatesNodes) => (nodes = updatesNodes));
 
-    nodeService.nodes.subscribe(updatesNodes => nodes = updatesNodes);
-    trainrunSectionService.trainrunSections.subscribe(updatesTrainrunSections => trainrunSections = updatesTrainrunSections);
-
+    nodeService.nodes.subscribe((updatesNodes) => (nodes = updatesNodes));
+    trainrunSectionService.trainrunSections.subscribe(
+      (updatesTrainrunSections) => (trainrunSections = updatesTrainrunSections),
+    );
   });
 
   it('ShortestDistanceEdge', () => {
     const node1 = new Node();
     const node2 = new Node();
-    const edge: ShortestDistanceEdge = new ShortestDistanceEdge(node1, node2, 19, 78, []);
+    const edge: ShortestDistanceEdge = new ShortestDistanceEdge(
+      node1,
+      node2,
+      19,
+      78,
+      [],
+    );
     expect(edge.getFromNode().getId()).toBe(node1.getId());
     expect(edge.getToNode().getId()).toBe(node2.getId());
     expect(edge.getArrivalTime()).toBe(78);
@@ -75,7 +111,13 @@ describe('ShortestTravelTimeSearch', () => {
     const node1 = new Node();
     const node2 = new Node();
     const ts = new TrainrunSection();
-    const edge: ShortestDistanceEdge = new ShortestDistanceEdge(node1, node2, 19, 78, [ts]);
+    const edge: ShortestDistanceEdge = new ShortestDistanceEdge(
+      node1,
+      node2,
+      19,
+      78,
+      [ts],
+    );
     expect(edge.getFromNode().getId()).toBe(node1.getId());
     expect(edge.getToNode().getId()).toBe(node2.getId());
     expect(edge.getArrivalTime()).toBe(78);
@@ -83,16 +125,22 @@ describe('ShortestTravelTimeSearch', () => {
     expect(edge.getFullDistance()).toBe(59);
   });
 
-
   it('Search shortest distance nodes: Starting trainrun section (ZUE -> OL)', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     expect(nodes.length).toBe(5);
     expect(trainrunSections.length).toBe(8);
 
     let shortestDistancenodeData: ShortestDistanceNode[] = [];
-    analyticsService.shortestDistanceNode.subscribe(data => shortestDistancenodeData = data);
-    analyticsService.calculateShortestDistanceNodesFromStartingTrainrunSection(1, 2);
-    shortestDistancenodeData.forEach(sdn => {
+    analyticsService.shortestDistanceNode.subscribe(
+      (data) => (shortestDistancenodeData = data),
+    );
+    analyticsService.calculateShortestDistanceNodesFromStartingTrainrunSection(
+      1,
+      2,
+    );
+    shortestDistancenodeData.forEach((sdn) => {
       switch (sdn.node.getId()) {
         case 0:
           if (sdn !== undefined) {
@@ -115,13 +163,17 @@ describe('ShortestTravelTimeSearch', () => {
         case 3:
           if (sdn !== undefined) {
             expect(sdn.node.getBetriebspunktName()).toBe('SG');
-            expect('not reachable').toBe('this is a bug in the method, should no occur in the ShortestDistanceNode[]');
+            expect('not reachable').toBe(
+              'this is a bug in the method, should no occur in the ShortestDistanceNode[]',
+            );
           }
           break;
         case 4:
           if (sdn !== undefined) {
             expect(sdn.node.getBetriebspunktName()).toBe('CH');
-            expect('not reachable').toBe('this is a bug in the method, should no occur in the ShortestDistanceNode[]');
+            expect('not reachable').toBe(
+              'this is a bug in the method, should no occur in the ShortestDistanceNode[]',
+            );
           }
           break;
       }
@@ -131,15 +183,19 @@ describe('ShortestTravelTimeSearch', () => {
   });
 
   it('Search shortest distance nodes: Starting Node: BN', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     expect(nodes.length).toBe(5);
     expect(trainrunSections.length).toBe(8);
 
     let shortestDistancenodeData: ShortestDistanceNode[] = [];
-    analyticsService.shortestDistanceNode.subscribe(data => shortestDistancenodeData = data);
+    analyticsService.shortestDistanceNode.subscribe(
+      (data) => (shortestDistancenodeData = data),
+    );
     analyticsService.calculateShortestDistanceNodesFromStartingNode(0);
 
-    shortestDistancenodeData.forEach(sdn => {
+    shortestDistancenodeData.forEach((sdn) => {
       switch (sdn.node.getId()) {
         case 0:
           expect(sdn.node.getBetriebspunktName()).toBe('BN');
@@ -168,18 +224,26 @@ describe('ShortestTravelTimeSearch', () => {
   });
 
   it('Search shortest distance nodes: Starting Node: BN with filtering', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     expect(nodes.length).toBe(5);
     expect(trainrunSections.length).toBe(8);
 
     filterService.resetFilterTrainrunCategory();
-    filterService.disableFilterTrainrunCategory(dataService.getTrainrunCategory(1));
-    filterService.disableFilterTrainrunCategory(dataService.getTrainrunCategory(3));
+    filterService.disableFilterTrainrunCategory(
+      dataService.getTrainrunCategory(1),
+    );
+    filterService.disableFilterTrainrunCategory(
+      dataService.getTrainrunCategory(3),
+    );
 
     let shortestDistancenodeData: ShortestDistanceNode[] = [];
-    analyticsService.shortestDistanceNode.subscribe(data => shortestDistancenodeData = data);
+    analyticsService.shortestDistanceNode.subscribe(
+      (data) => (shortestDistancenodeData = data),
+    );
     analyticsService.calculateShortestDistanceNodesFromStartingNode(0);
-    shortestDistancenodeData.forEach(sdn => {
+    shortestDistancenodeData.forEach((sdn) => {
       switch (sdn.node.getId()) {
         case 0:
           if (sdn !== undefined) {
@@ -208,7 +272,9 @@ describe('ShortestTravelTimeSearch', () => {
         case 4:
           if (sdn !== undefined) {
             expect(sdn.node.getBetriebspunktName()).toBe('CH');
-            expect('not reachable').toBe('this is a bug in the method, should no occur in the ShortestDistanceNode[]');
+            expect('not reachable').toBe(
+              'this is a bug in the method, should no occur in the ShortestDistanceNode[]',
+            );
           }
           break;
       }
@@ -216,5 +282,4 @@ describe('ShortestTravelTimeSearch', () => {
 
     expect(shortestDistancenodeData.length === nodes.length);
   });
-
 });

@@ -1,4 +1,4 @@
-@import './../../view/rastering/definitions';
+@import "./../../view/rastering/definitions";
 
 .node-container {
   position: relative;
@@ -7,7 +7,6 @@
     position: absolute;
   }
 }
-
 
 .title_rect {
   cursor: pointer;
@@ -48,14 +47,13 @@
 
 .non_stop_toogle:hover {
   fill: $COLOR_Edit;
-  fill-opacity: 1.0;
+  fill-opacity: 1;
 }
 
 text.edge_text.station {
   font-size: 14px;
   dominant-baseline: text-after-edge;
 }
-
 
 text.edge_text.start {
   text-anchor: start;

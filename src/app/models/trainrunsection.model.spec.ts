@@ -1,12 +1,14 @@
-import {TrainrunSection} from './trainrunsection.model';
-import {Node} from './node.model';
-import {Trainrun} from './trainrun.model';
-import {PortAlignment, TimeLockDto} from '../data-structures/technical.data.structures';
-import {Resource} from './resource.model';
-import {Connection} from './connection.model';
+import { TrainrunSection } from './trainrunsection.model';
+import { Node } from './node.model';
+import { Trainrun } from './trainrun.model';
+import {
+  PortAlignment,
+  TimeLockDto,
+} from '../data-structures/technical.data.structures';
+import { Resource } from './resource.model';
+import { Connection } from './connection.model';
 
 describe('TrainrunSection Model Test', () => {
-
   it('setSourceAndTargetNodeReference', () => {
     const ts = new TrainrunSection();
     const node1 = new Node();
@@ -33,9 +35,9 @@ describe('TrainrunSection Model Test', () => {
       lock: false,
       warning: {
         title: 'test warning',
-        description: 'just for test'
+        description: 'just for test',
       },
-      timeFormatter: null
+      timeFormatter: null,
     };
     const ts = new TrainrunSection();
     ts.setSourceDepartureDto(timeLockDto);
@@ -54,9 +56,9 @@ describe('TrainrunSection Model Test', () => {
       lock: true,
       warning: {
         title: 'test warning',
-        description: 'just for test'
+        description: 'just for test',
       },
-      timeFormatter: null
+      timeFormatter: null,
     };
     const ts = new TrainrunSection();
     ts.setSourceArrivalDto(timeLockDto);
@@ -75,9 +77,9 @@ describe('TrainrunSection Model Test', () => {
       lock: false,
       warning: {
         title: 'test warning',
-        description: 'just for test'
+        description: 'just for test',
       },
-      timeFormatter: null
+      timeFormatter: null,
     };
     const ts = new TrainrunSection();
     ts.setTargetDepartureDto(timeLockDto);
@@ -96,9 +98,9 @@ describe('TrainrunSection Model Test', () => {
       lock: true,
       warning: {
         title: 'test warning',
-        description: 'just for test'
+        description: 'just for test',
       },
-      timeFormatter: null
+      timeFormatter: null,
     };
     const ts = new TrainrunSection();
     ts.setTargetArrivalDto(timeLockDto);
@@ -117,9 +119,9 @@ describe('TrainrunSection Model Test', () => {
       lock: true,
       warning: {
         title: 'test warning',
-        description: 'just for test'
+        description: 'just for test',
       },
-      timeFormatter: null
+      timeFormatter: null,
     };
     const ts = new TrainrunSection();
     ts.setTravelTimeDto(timeLockDto);
@@ -249,7 +251,6 @@ describe('TrainrunSection Model Test', () => {
     expect(ts.selected()).toBe(true);
   });
 
-
   it('testTimeFormatter_001', () => {
     const timeLockDto: TimeLockDto = {
       time: -25,
@@ -257,14 +258,14 @@ describe('TrainrunSection Model Test', () => {
       lock: true,
       warning: {
         title: 'test warning',
-        description: 'just for test'
+        description: 'just for test',
       },
       timeFormatter: {
         colorRef: null,
         stylePattern: null,
         textWidth: 20,
         htmlStyle: undefined,
-      }
+      },
     };
     const ts = new TrainrunSection();
     ts.setTravelTimeDto(timeLockDto);
@@ -278,14 +279,14 @@ describe('TrainrunSection Model Test', () => {
       lock: true,
       warning: {
         title: 'test warning',
-        description: 'just for test'
+        description: 'just for test',
       },
       timeFormatter: {
         colorRef: null,
         stylePattern: 'Adrian',
         textWidth: 20,
-        htmlStyle: undefined
-      }
+        htmlStyle: undefined,
+      },
     };
     const ts = new TrainrunSection();
     ts.setTravelTimeDto(timeLockDto);
@@ -299,14 +300,14 @@ describe('TrainrunSection Model Test', () => {
       lock: true,
       warning: {
         title: 'test warning',
-        description: 'just for test'
+        description: 'just for test',
       },
       timeFormatter: {
         colorRef: null,
         stylePattern: '{{time}}',
         textWidth: 20,
-        htmlStyle: undefined
-      }
+        htmlStyle: undefined,
+      },
     };
     const ts = new TrainrunSection();
     ts.setTravelTimeDto(timeLockDto);
@@ -320,14 +321,14 @@ describe('TrainrunSection Model Test', () => {
       lock: true,
       warning: {
         title: 'test warning',
-        description: 'just for test'
+        description: 'just for test',
       },
       timeFormatter: {
         colorRef: null,
         stylePattern: '{{consecutiveTime}}',
         textWidth: 20,
-        htmlStyle: undefined
-      }
+        htmlStyle: undefined,
+      },
     };
     const ts = new TrainrunSection();
     ts.setTravelTimeDto(timeLockDto);
@@ -341,14 +342,14 @@ describe('TrainrunSection Model Test', () => {
       lock: true,
       warning: {
         title: 'test warning',
-        description: 'just for test'
+        description: 'just for test',
       },
       timeFormatter: {
         colorRef: null,
         stylePattern: 'Negative? : {{consecutiveTime}}.format(HH:mm:ss)',
         textWidth: 20,
-        htmlStyle: undefined
-      }
+        htmlStyle: undefined,
+      },
     };
     const ts = new TrainrunSection();
     ts.setTravelTimeDto(timeLockDto);
@@ -362,14 +363,14 @@ describe('TrainrunSection Model Test', () => {
       lock: true,
       warning: {
         title: 'test warning',
-        description: 'just for test'
+        description: 'just for test',
       },
       timeFormatter: {
         colorRef: null,
         stylePattern: 'Positiv? : {{consecutiveTime}}.format(HH:mm:ss)',
         textWidth: 20,
-        htmlStyle: undefined
-      }
+        htmlStyle: undefined,
+      },
     };
     const ts = new TrainrunSection();
     ts.setTravelTimeDto(timeLockDto);
@@ -383,14 +384,14 @@ describe('TrainrunSection Model Test', () => {
       lock: true,
       warning: {
         title: 'test warning',
-        description: 'just for test'
+        description: 'just for test',
       },
       timeFormatter: {
         colorRef: null,
         stylePattern: '{{time}} : {{consecutiveTime}}.format(HH:mm)',
         textWidth: 20,
-        htmlStyle: undefined
-      }
+        htmlStyle: undefined,
+      },
     };
     const ts = new TrainrunSection();
     ts.setTravelTimeDto(timeLockDto);
@@ -404,18 +405,21 @@ describe('TrainrunSection Model Test', () => {
       lock: true,
       warning: {
         title: 'test warning',
-        description: 'just for test'
+        description: 'just for test',
       },
       timeFormatter: {
         colorRef: null,
-        stylePattern: 'Start {{time}} : {{consecutiveTime}}.format(HH:mm) : {{consecutiveTime}}.format(HH:mm:ss) : {{consecutiveTime}} END',
+        stylePattern:
+          'Start {{time}} : {{consecutiveTime}}.format(HH:mm) : {{consecutiveTime}}.format(HH:mm:ss) : {{consecutiveTime}} END',
         textWidth: 20,
-        htmlStyle: undefined
-      }
+        htmlStyle: undefined,
+      },
     };
     const ts = new TrainrunSection();
     ts.setTravelTimeDto(timeLockDto);
-    expect(ts.getTravelTimeFormattedDisplayText()).toBe('Start 25.5 : 02:05 : 02:05:30 : 125.5 END');
+    expect(ts.getTravelTimeFormattedDisplayText()).toBe(
+      'Start 25.5 : 02:05 : 02:05:30 : 125.5 END',
+    );
   });
 
   it('testTimeFormatter_009', () => {
@@ -425,18 +429,21 @@ describe('TrainrunSection Model Test', () => {
       lock: true,
       warning: {
         title: 'test warning',
-        description: 'just for test'
+        description: 'just for test',
       },
       timeFormatter: {
         colorRef: null,
-        stylePattern: 'Start {{time}} : {{time}}.format(HH:mm) : {{time}}.format(HH:mm:ss) : {{consecutiveTime}} END',
+        stylePattern:
+          'Start {{time}} : {{time}}.format(HH:mm) : {{time}}.format(HH:mm:ss) : {{consecutiveTime}} END',
         textWidth: 20,
-        htmlStyle: undefined
-      }
+        htmlStyle: undefined,
+      },
     };
     const ts = new TrainrunSection();
     ts.setTravelTimeDto(timeLockDto);
-    expect(ts.getTravelTimeFormattedDisplayText()).toBe('Start 25.5 : 00:25 : 00:25:30 : 125.5 END');
+    expect(ts.getTravelTimeFormattedDisplayText()).toBe(
+      'Start 25.5 : 00:25 : 00:25:30 : 125.5 END',
+    );
   });
 
   it('Resource - id check', () => {
@@ -506,7 +513,12 @@ describe('TrainrunSection Model Test', () => {
 
     const port1 = node2.addPort(PortAlignment.Left, ts1);
     const port2 = node2.addPort(PortAlignment.Right, ts2);
-    node2.addTransitionAndComputeRouting(node2.getPort(port1), node2.getPort(port2), tr, true);
+    node2.addTransitionAndComputeRouting(
+      node2.getPort(port1),
+      node2.getPort(port2),
+      tr,
+      true,
+    );
 
     const t1 = node1.getTransition(ts1.getId());
     const t2 = node1.getTransition(ts2.getId());
@@ -531,7 +543,6 @@ describe('TrainrunSection Model Test', () => {
     expect(t9).toBe(undefined);
   });
 
-
   it('isEndNode with trainrunsection - 001', () => {
     const tr = new Trainrun();
     const ts1 = new TrainrunSection();
@@ -546,7 +557,12 @@ describe('TrainrunSection Model Test', () => {
 
     const port1 = node2.addPort(PortAlignment.Left, ts1);
     const port2 = node2.addPort(PortAlignment.Right, ts2);
-    node2.addTransitionAndComputeRouting(node2.getPort(port1), node2.getPort(port2), tr, true);
+    node2.addTransitionAndComputeRouting(
+      node2.getPort(port1),
+      node2.getPort(port2),
+      tr,
+      true,
+    );
 
     const e1 = node1.isEndNode(ts1);
     const e2 = node1.isEndNode(ts2);
@@ -563,7 +579,6 @@ describe('TrainrunSection Model Test', () => {
     expect(e6).toBe(true);
   });
 
-
   it('getStartTrainrunSection with trainrunsection - 001', () => {
     const tr = new Trainrun();
     const ts1 = new TrainrunSection();
@@ -578,7 +593,12 @@ describe('TrainrunSection Model Test', () => {
 
     const port1 = node2.addPort(PortAlignment.Left, ts1);
     const port2 = node2.addPort(PortAlignment.Right, ts2);
-    node2.addTransitionAndComputeRouting(node2.getPort(port1), node2.getPort(port2), tr, true);
+    node2.addTransitionAndComputeRouting(
+      node2.getPort(port1),
+      node2.getPort(port2),
+      tr,
+      true,
+    );
 
     const ts001 = node1.getStartTrainrunSection(tr.getId());
     const ts002 = node2.getStartTrainrunSection(tr.getId());
@@ -588,5 +608,4 @@ describe('TrainrunSection Model Test', () => {
     expect(ts002).toBe(undefined);
     expect(ts003).toBe(undefined);
   });
-
 });

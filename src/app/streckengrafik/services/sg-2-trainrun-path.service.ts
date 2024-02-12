@@ -1,34 +1,37 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {Sg1LoadTrainrunItemService} from './sg-1-load-trainrun-item.service';
-import {takeUntil} from 'rxjs/operators';
-import {SgSelectedTrainrun} from '../model/streckengrafik-model/sg-selected-trainrun';
-import {TrainrunItem} from '../model/trainrunItem';
-import {SgPath} from '../model/streckengrafik-model/sg-path';
-import {SgPathSection} from '../model/streckengrafik-model/sg-path-section';
-import {SgPathNode} from '../model/streckengrafik-model/sg-path-node';
-import {PathItem} from '../model/pathItem';
-import {TrackData} from '../model/trackData';
-import {SgStopService} from './sg-stop-.service';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Sg1LoadTrainrunItemService } from './sg-1-load-trainrun-item.service';
+import { takeUntil } from 'rxjs/operators';
+import { SgSelectedTrainrun } from '../model/streckengrafik-model/sg-selected-trainrun';
+import { TrainrunItem } from '../model/trainrunItem';
+import { SgPath } from '../model/streckengrafik-model/sg-path';
+import { SgPathSection } from '../model/streckengrafik-model/sg-path-section';
+import { SgPathNode } from '../model/streckengrafik-model/sg-path-node';
+import { PathItem } from '../model/pathItem';
+import { TrackData } from '../model/trackData';
+import { SgStopService } from './sg-stop-.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class Sg2TrainrunPathService implements OnDestroy {
-
-  private readonly sgSelectedTrainrunSubject = new BehaviorSubject<SgSelectedTrainrun>(undefined);
-  private readonly sgSelectedTrainrun$ = this.sgSelectedTrainrunSubject.asObservable();
+  private readonly sgSelectedTrainrunSubject =
+    new BehaviorSubject<SgSelectedTrainrun>(undefined);
+  private readonly sgSelectedTrainrun$ =
+    this.sgSelectedTrainrunSubject.asObservable();
 
   private trainrunItem: TrainrunItem;
 
   private readonly destroyed$ = new Subject<void>();
 
-  constructor(private readonly sg1LoadTrainrunItemService: Sg1LoadTrainrunItemService,
-              private readonly sgStopService: SgStopService
+  constructor(
+    private readonly sg1LoadTrainrunItemService: Sg1LoadTrainrunItemService,
+    private readonly sgStopService: SgStopService,
   ) {
-    this.sg1LoadTrainrunItemService.getTrainrunItem()
+    this.sg1LoadTrainrunItemService
+      .getTrainrunItem()
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(trainrunItem => {
+      .subscribe((trainrunItem) => {
         this.trainrunItem = trainrunItem;
         this.render();
       });
@@ -44,12 +47,13 @@ export class Sg2TrainrunPathService implements OnDestroy {
   }
 
   private render() {
-
     if (!this.trainrunItem) {
       return;
     }
 
-    const sgSelectedTrainrun = this.addSelectedTrainrunsToPath(this.getSelectedTrainrun(this.trainrunItem));
+    const sgSelectedTrainrun = this.addSelectedTrainrunsToPath(
+      this.getSelectedTrainrun(this.trainrunItem),
+    );
 
     this.sgSelectedTrainrunSubject.next(sgSelectedTrainrun);
   }
@@ -76,18 +80,20 @@ export class Sg2TrainrunPathService implements OnDestroy {
     trainrunItem.pathItems.forEach((pathItem, index) => {
       if (pathItem.isSection()) {
         const pathSection = pathItem.getPathSection();
-        returnSgPath.push(new SgPathSection(
-          index,
-          pathSection.trainrunSectionId,
-          pathSection.arrivalTime,
-          pathSection.departureTime,
-          pathSection.departurePathNode.nodeId,
-          pathSection.arrivalPathNode.nodeId,
-          pathSection.departurePathNode.nodeShortName,
-          pathSection.arrivalPathNode.nodeShortName,
-          new TrackData(this.getTrack(pathSection)),
-          pathSection.isFilterOnOneNode(),
-        ));
+        returnSgPath.push(
+          new SgPathSection(
+            index,
+            pathSection.trainrunSectionId,
+            pathSection.arrivalTime,
+            pathSection.departureTime,
+            pathSection.departurePathNode.nodeId,
+            pathSection.arrivalPathNode.nodeId,
+            pathSection.departurePathNode.nodeShortName,
+            pathSection.arrivalPathNode.nodeShortName,
+            new TrackData(this.getTrack(pathSection)),
+            pathSection.isFilterOnOneNode(),
+          ),
+        );
       }
       if (pathItem.isNode()) {
         const pathNode = pathItem.getPathNode();
@@ -100,13 +106,15 @@ export class Sg2TrainrunPathService implements OnDestroy {
           undefined,
           undefined,
           new TrackData(this.getTrack(pathNode)),
-          pathNode.filter
-        );  // backward
+          pathNode.filter,
+        ); // backward
         if (pathNode.arrivalPathSection) {
-          sgPathNode.arrivalTrainrunSectionId = pathNode.arrivalPathSection.trainrunSectionId;
+          sgPathNode.arrivalTrainrunSectionId =
+            pathNode.arrivalPathSection.trainrunSectionId;
         }
         if (pathNode.departurePathSection) {
-          sgPathNode.departureTrainrunSectionId = pathNode.departurePathSection.trainrunSectionId;
+          sgPathNode.departureTrainrunSectionId =
+            pathNode.departurePathSection.trainrunSectionId;
         }
 
         returnSgPath.push(sgPathNode);
@@ -180,7 +188,7 @@ export class Sg2TrainrunPathService implements OnDestroy {
   }
 
   private addSelectedTrainrunsToPath(trainrun: SgSelectedTrainrun) {
-    trainrun.paths.forEach(path => {
+    trainrun.paths.forEach((path) => {
       path.trainrun = trainrun;
     });
     return trainrun;

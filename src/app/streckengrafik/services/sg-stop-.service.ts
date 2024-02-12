@@ -1,22 +1,19 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SgStopService {
-
   private count = 0;
 
-  constructor() {
-  }
+  constructor() {}
 
-  public countPlus() : number {
+  public countPlus(): number {
     this.count = this.count + 1;
     return this.count;
   }
 
-  public isGO(count : number) {
+  public isGO(count: number) {
     return this.count === count;
   }
-
 }

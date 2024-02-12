@@ -1,8 +1,7 @@
-import {FreeFloatingTextDto} from '../data-structures/business.data.structures';
-import {DataMigration} from '../utils/data-migration';
+import { FreeFloatingTextDto } from '../data-structures/business.data.structures';
+import { DataMigration } from '../utils/data-migration';
 
 export class Note {
-
   public static DEFAULT_NOTE_WIDTH = 192;
   public static DEFAULT_NOTE_HEIGHT = 64;
   public static DEFAULT_NOTE_POSITION_X = 0;
@@ -36,7 +35,7 @@ export class Note {
       text,
       backgroundColor,
       textColor,
-      labelIds
+      labelIds,
     }: FreeFloatingTextDto = {
       id: Note.incrementId(),
       x: Note.DEFAULT_NOTE_POSITION_X,
@@ -47,8 +46,8 @@ export class Note {
       text: Note.DEFAULT_NOTE_TEXT,
       backgroundColor: Note.DEFAULT_NOTE_BACKGROUND_COLOR,
       textColor: Note.DEFAULT_NOTE_TEXT_COLOR,
-      labelIds: []
-    }
+      labelIds: [],
+    },
   ) {
     this.id = id;
     this.x = x;
@@ -67,7 +66,6 @@ export class Note {
     }
 
     DataMigration.migrateNoteLabelIds(this);
-
   }
 
   private static incrementId(): number {
@@ -162,7 +160,7 @@ export class Note {
       text: this.text,
       backgroundColor: this.backgroundColor,
       textColor: this.textColor,
-      labelIds: this.labelIds
+      labelIds: this.labelIds,
     };
   }
 }

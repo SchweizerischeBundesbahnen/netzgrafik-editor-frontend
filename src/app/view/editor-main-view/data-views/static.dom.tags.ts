@@ -23,10 +23,12 @@ export class StaticDomTags {
   static TAG_HEADWAY_BAND = 'headway_band';
   static TAG_HOVER_AREA = 'hover_area';
   static TAG_MULTI_SELECTED = 'multi_selected';
-  static TAG_ENFORCE_DISABLE_ALL_POINTER_EVENTS = 'enforce_disable_all_pointer_events';
+  static TAG_ENFORCE_DISABLE_ALL_POINTER_EVENTS =
+    'enforce_disable_all_pointer_events';
   static TAG_ANALYTICS_ENFORCE_DISABLE = 'analyitcs_enforce_disable';
 
-  static TAG_Streckengraphik_not_displayable = 'streckengraphik_not_displayable';
+  static TAG_Streckengraphik_not_displayable =
+    'streckengraphik_not_displayable';
 
   static TAG_ANALYTICS_LEVEL = 'analytics_level_';
   static TAG_ANALYTICS_LEVEL_0 = 'analytics_level_0';
@@ -35,9 +37,12 @@ export class StaticDomTags {
   static TAG_ANALYTICS_LEVEL_3 = 'analytics_level_3';
   static TAG_ANALYTICS_LEVEL_4 = 'analytics_level_4';
   static TAG_ANALYTICS_LEVEL_5 = 'analytics_level_5';
-  static TAG_ANALYTICS_TRAINRUNSECTION_TEXT_CLICKABLE = 'analytics_trainrunsection_text_clickable';
-  static TAG_ANALYTICS_TRAINRUNSECTION_TEXT_MUTED = 'analytics_trainrunsection_text_muted';
-  static TAG_ANALYTICS_TRAINRUNSECTION_TEXT_FOCUSED = 'analytics_trainrunsection_text_focused';
+  static TAG_ANALYTICS_TRAINRUNSECTION_TEXT_CLICKABLE =
+    'analytics_trainrunsection_text_clickable';
+  static TAG_ANALYTICS_TRAINRUNSECTION_TEXT_MUTED =
+    'analytics_trainrunsection_text_muted';
+  static TAG_ANALYTICS_TRAINRUNSECTION_TEXT_FOCUSED =
+    'analytics_trainrunsection_text_focused';
 
   static LINE_LAYER = 'layer';
   static FREQ_LINE_PATTERN = 'Freq';
@@ -98,12 +103,13 @@ export class StaticDomTags {
 
   static NODE_ANALYTICSAREA_TEXT_LEFT_SVG = 'text';
   static NODE_ANALYTICSAREA_TEXT_LEFT_CLASS = 'node_title_analyticsarea_left';
-  static NODE_ANALYTICSAREA_TEXT_LEFT_DOM_REF = 'text.node_title_analyticsarea_left';
+  static NODE_ANALYTICSAREA_TEXT_LEFT_DOM_REF =
+    'text.node_title_analyticsarea_left';
 
   static NODE_ANALYTICSAREA_TEXT_RIGHT_SVG = 'text';
   static NODE_ANALYTICSAREA_TEXT_RIGHT_CLASS = 'node_title_analyticsarea_right';
-  static NODE_ANALYTICSAREA_TEXT_RIGHT_DOM_REF = 'text.node_title_analyticsarea_right';
-
+  static NODE_ANALYTICSAREA_TEXT_RIGHT_DOM_REF =
+    'text.node_title_analyticsarea_right';
 
   static NODE_LABELAREA_TEXT_SVG = 'text';
   static NODE_LABELAREA_TEXT_CLASS = 'node_text';
@@ -118,8 +124,10 @@ export class StaticDomTags {
   static NODE_HOVER_DRAG_AREA_DOM_REF = 'path.node_hover_drag_root';
 
   static NODE_HOVER_DRAG_AREA_BACKGROUND_SVG = 'rect';
-  static NODE_HOVER_DRAG_AREA_BACKGROUND_CLASS = 'node_hover_drag_root_background';
-  static NODE_HOVER_DRAG_AREA_BACKGROUND_DOM_REF = 'rect.node_hover_drag_root_background';
+  static NODE_HOVER_DRAG_AREA_BACKGROUND_CLASS =
+    'node_hover_drag_root_background';
+  static NODE_HOVER_DRAG_AREA_BACKGROUND_DOM_REF =
+    'rect.node_hover_drag_root_background';
 
   static NODE_EDIT_AREA_SVG = 'path';
   static NODE_EDIT_AREA_CLASS = 'node_edit_button';
@@ -128,7 +136,6 @@ export class StaticDomTags {
   static NODE_EDIT_AREA_BACKGROUND_SVG = 'rect';
   static NODE_EDIT_AREA_BACKGROUND_CLASS = 'node_edit_button_background';
   static NODE_EDIT_AREA_BACKGROUND_DOM_REF = 'rect.node_edit_button_background';
-
 
   /*
     EDGE (root group)
@@ -155,7 +162,6 @@ export class StaticDomTags {
   static EDGE_IS_SOURCE = 'is_source';
   static EDGE_IS_TARGET = 'is_target';
 
-
   static EDGE_LINE_SVG = 'path';
   static EDGE_LINE_CLASS = 'edge_line';
   static EDGE_LINE_DOM_REF = 'path.edge_line';
@@ -172,7 +178,6 @@ export class StaticDomTags {
   static EDGE_LINE_PIN_CLASS = 'edge_line_pin';
   static EDGE_LINE_PIN_DOM_REF = 'circle.edge_line_pin';
   static EDGE_LINE_PIN_CONNECTION = 'connection_pin';
-
 
   static EDGE_LINE_STOP_ICON_SVG = 'path';
   static EDGE_LINE_STOP_ICON_CLASS = 'edge_line_stop_arcs';
@@ -274,7 +279,8 @@ export class StaticDomTags {
 
   static PREVIEW_CONNECTION_LINE_ROOT_SVG = 'g';
   static PREVIEW_CONNECTION_LINE_ROOT_CLASS = 'connection_preview_line_root';
-  static PREVIEW_CONNECTION_LINE_ROOT_DOM_REF = 'g.connection_preview_line_root';
+  static PREVIEW_CONNECTION_LINE_ROOT_DOM_REF =
+    'g.connection_preview_line_root';
 
   static PREVIEW_LINE_SVG = 'path';
   static PREVIEW_LINE_CLASS = 'preview_line';
@@ -300,9 +306,10 @@ export class StaticDomTags {
   static NOTE_HOVER_DRAG_AREA_DOM_REF = 'path.note_hover_drag_root';
 
   static NOTE_HOVER_DRAG_AREA_BACKGROUND_SVG = 'rect';
-  static NOTE_HOVER_DRAG_AREA_BACKGROUND_CLASS = 'note_hover_drag_root_background';
-  static NOTE_HOVER_DRAG_AREA_BACKGROUND_DOM_REF = 'rect.note_hover_drag_root_background';
-
+  static NOTE_HOVER_DRAG_AREA_BACKGROUND_CLASS =
+    'note_hover_drag_root_background';
+  static NOTE_HOVER_DRAG_AREA_BACKGROUND_DOM_REF =
+    'rect.note_hover_drag_root_background';
 
   static NOTE_ROOT_SVG = 'rect';
   static NOTE_ROOT_CLASS = 'note_root';
@@ -324,17 +331,13 @@ export class StaticDomTags {
   static NOTE_TEXT_CLASS = 'note_text';
   static NOTE_TEXT_DOM_REF = 'text.note_text';
 
-
   static KNOTENAUSLASTUNG_DATA_GROUP = 'KnotenAuslastungDataGroup';
   static KNOTENAUSLASTUNG_DATA_GROUP_G = 'g.KnotenAuslastungDataGroup';
 
   static KNOTENAUSLASTUNG_DATA_GROUP_PATH = 'path.KnotenAuslastungDataGroup';
   static KNOTENAUSLASTUNG_DATA_GROUP_TEXT = 'text.KnotenAuslastungDataGroup';
 
-
   static makeClassTag(tag: string, data: string): string {
     return ' ' + tag + '_' + data;
   }
-
 }
-

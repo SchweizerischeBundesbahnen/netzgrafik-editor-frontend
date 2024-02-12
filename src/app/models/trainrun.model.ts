@@ -3,14 +3,14 @@ import {
   TrainrunCategory,
   TrainrunDto,
   TrainrunFrequency,
-  TrainrunTimeCategory
+  TrainrunTimeCategory,
 } from '../data-structures/business.data.structures';
-import {DataMigration} from '../utils/data-migration';
+import { DataMigration } from '../utils/data-migration';
 
 export class Trainrun {
   public static DEFAULT_TRAINRUN_NAME = 'X';
-  public static DEFAULT_TRAINRUN_CATEGORY = 1;   // default is IC
-  public static DEFAULT_TRAINRUN_FREQUENCY = 3;  // default is stuendlich
+  public static DEFAULT_TRAINRUN_CATEGORY = 1; // default is IC
+  public static DEFAULT_TRAINRUN_FREQUENCY = 3; // default is stuendlich
   public static DEFAULT_TRAINRUN_TIME_CATEGORY = 0; // default is täglich, immer
   private static currentId = 0;
   private id: number;
@@ -25,14 +25,21 @@ export class Trainrun {
   private labelIds: number[];
 
   constructor(
-    {id, name, categoryId, frequencyId, trainrunTimeCategoryId, labelIds}: TrainrunDto = {
+    {
+      id,
+      name,
+      categoryId,
+      frequencyId,
+      trainrunTimeCategoryId,
+      labelIds,
+    }: TrainrunDto = {
       id: Trainrun.incrementId(),
       name: Trainrun.DEFAULT_TRAINRUN_NAME,
       categoryId: Trainrun.DEFAULT_TRAINRUN_CATEGORY,
       frequencyId: Trainrun.DEFAULT_TRAINRUN_FREQUENCY,
       trainrunTimeCategoryId: Trainrun.DEFAULT_TRAINRUN_TIME_CATEGORY,
-      labelIds: []
-    }
+      labelIds: [],
+    },
   ) {
     this.id = id;
     this.name = name;
@@ -148,7 +155,7 @@ export class Trainrun {
       categoryId: this.trainrunCategory.id,
       frequencyId: this.trainrunFrequency.id,
       trainrunTimeCategoryId: this.trainrunTimeCategory.id,
-      labelIds: this.labelIds
+      labelIds: this.labelIds,
     };
   }
 }

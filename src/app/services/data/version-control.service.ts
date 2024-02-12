@@ -1,25 +1,23 @@
-import {Injectable, OnDestroy} from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import {
   VariantControllerBackendService,
   VariantDto,
   VersionControllerBackendService,
   VersionDto,
 } from '../../api/generated';
-import {filter, map, takeUntil} from 'rxjs/operators';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {DataService} from './data.service';
-import {NetzgrafikDto} from '../../data-structures/business.data.structures';
-import {AutoSaveService} from './auto-save.service';
-import {LogService} from '../../logger/log.service';
-import {VersionId} from '../../view/variant/variant-view/variant-history/model';
-import {UndoService} from './undo.service';
-
+import { filter, map, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { DataService } from './data.service';
+import { NetzgrafikDto } from '../../data-structures/business.data.structures';
+import { AutoSaveService } from './auto-save.service';
+import { LogService } from '../../logger/log.service';
+import { VersionId } from '../../view/variant/variant-view/variant-history/model';
+import { UndoService } from './undo.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VersionControlService implements OnDestroy {
-
   readonly variantSubject = new BehaviorSubject<VariantDto | null>(null);
   readonly variant$ = this.variantSubject.asObservable();
 
@@ -34,10 +32,13 @@ export class VersionControlService implements OnDestroy {
     private readonly dataService: DataService,
     private readonly autoSaveService: AutoSaveService,
     private readonly undoService: UndoService,
-    private readonly logService: LogService
+    private readonly logService: LogService,
   ) {
     autoSaveService.autosaveTrigger$
-      .pipe(takeUntil(this.destroyed), filter(() => this.variant.isWritable))
+      .pipe(
+        takeUntil(this.destroyed),
+        filter(() => this.variant.isWritable),
+      )
       .subscribe(() => {
         logService.debug('auto saving changes');
         this.createSnapshot();
@@ -54,9 +55,10 @@ export class VersionControlService implements OnDestroy {
   }
 
   load(variantId: number, loadModel: boolean): void {
-    this.variantsBackendService.getVariant(variantId)
+    this.variantsBackendService
+      .getVariant(variantId)
       .pipe(takeUntil(this.destroyed))
-      .subscribe(variant => {
+      .subscribe((variant) => {
         this.variantSubject.next(variant);
         if (loadModel) {
           this.loadModel(variant.latestVersion);
@@ -73,45 +75,49 @@ export class VersionControlService implements OnDestroy {
 
   createSnapshot(newName?: string): void {
     const name = newName || this.variant.latestVersion.name;
-    this.versionsBackendService.createSnapshotVersion(this.variant.latestVersion.id, {
-      name,
-      comment: newName ? `Neuer Name: ${newName}` : '',
-      model: JSON.stringify(this.dataService.getNetzgrafikDto())
-    })
+    this.versionsBackendService
+      .createSnapshotVersion(this.variant.latestVersion.id, {
+        name,
+        comment: newName ? `Neuer Name: ${newName}` : '',
+        model: JSON.stringify(this.dataService.getNetzgrafikDto()),
+      })
       .pipe(takeUntil(this.destroyed))
-      .subscribe(versionId => {
+      .subscribe((versionId) => {
         this.versionCreatedSubject.next(versionId);
         this.reload();
       });
   }
 
   createRelease(comment: string): void {
-    this.versionsBackendService.createReleaseVersion(this.variant.latestVersion.id, {
-      comment
-    })
+    this.versionsBackendService
+      .createReleaseVersion(this.variant.latestVersion.id, {
+        comment,
+      })
       .pipe(takeUntil(this.destroyed))
-      .subscribe(versionId => {
+      .subscribe((versionId) => {
         this.versionCreatedSubject.next(versionId);
         this.reload();
       });
   }
 
   restoreVersion(versionId: number): void {
-    this.versionsBackendService.restoreVersion(versionId)
+    this.versionsBackendService
+      .restoreVersion(versionId)
       .pipe(takeUntil(this.destroyed))
-      .subscribe(newVersionId => {
+      .subscribe((newVersionId) => {
         this.versionCreatedSubject.next(newVersionId);
         this.reload(true);
       });
   }
 
   loadModel(version: VersionDto): void {
-    this.versionsBackendService.getVersionModel(this.variant.latestVersion.id)
+    this.versionsBackendService
+      .getVersionModel(this.variant.latestVersion.id)
       .pipe(
         takeUntil(this.destroyed),
-        map(model => model as NetzgrafikDto)
+        map((model) => model as NetzgrafikDto),
       )
-      .subscribe(netzgrafik => {
+      .subscribe((netzgrafik) => {
         this.dataService.loadNetzgrafikDto(netzgrafik);
         this.autoSaveService.reset();
         this.undoService.reset(version.variantId);
@@ -119,40 +125,48 @@ export class VersionControlService implements OnDestroy {
   }
 
   dropChanges(): void {
-    this.variantsBackendService.dropSnapshots(this.variant.id)
+    this.variantsBackendService
+      .dropSnapshots(this.variant.id)
       .pipe(takeUntil(this.destroyed))
       .subscribe(() => this.reload(true));
   }
 
   raiseSnapshotsToNewestReleaseVersion(): void {
-    this.variantsBackendService.raiseSnapshotsToNewestReleaseVersion(this.variant.id)
+    this.variantsBackendService
+      .raiseSnapshotsToNewestReleaseVersion(this.variant.id)
       .pipe(takeUntil(this.destroyed))
       .subscribe(() => this.reload());
   }
 
   archiveVariant(): void {
-    this.variantsBackendService.archiveVariant(this.variant.id)
+    this.variantsBackendService
+      .archiveVariant(this.variant.id)
       .pipe(takeUntil(this.destroyed))
       .subscribe(() => this.reload());
   }
 
   unarchiveVariant(): void {
-    this.variantsBackendService.unarchiveVariant(this.variant.id)
+    this.variantsBackendService
+      .unarchiveVariant(this.variant.id)
       .pipe(takeUntil(this.destroyed))
       .subscribe(() => this.reload());
   }
 
   archiveVariantWithId(variantId: number): Observable<any> {
-    return this.variantsBackendService.archiveVariant(variantId)
+    return this.variantsBackendService
+      .archiveVariant(variantId)
       .pipe(takeUntil(this.destroyed));
   }
 
   unarchiveVariantWithId(variantId: number): Observable<any> {
-    return this.variantsBackendService.unarchiveVariant(variantId)
+    return this.variantsBackendService
+      .unarchiveVariant(variantId)
       .pipe(takeUntil(this.destroyed));
   }
 
   deleteVariant(): Observable<void> {
-    return this.variantsBackendService.deleteVariant(this.variant.id).pipe(map(() => null));
+    return this.variantsBackendService
+      .deleteVariant(this.variant.id)
+      .pipe(map(() => null));
   }
 }

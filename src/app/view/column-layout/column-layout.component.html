@@ -1,34 +1,51 @@
-<div id="cd-layout-content" [ngClass]="['mode-'+mode]" [class.new-view]="newView">
-  <div id="cd-layout-filter"
-       class="cd-layout-panel sbb-scrollbar"
-       [ngClass]="{'hide': hideFilter()}">
+<div
+  id="cd-layout-content"
+  [ngClass]="['mode-' + mode]"
+  [class.new-view]="newView"
+>
+  <div
+    id="cd-layout-filter"
+    class="cd-layout-panel sbb-scrollbar"
+    [ngClass]="{ hide: hideFilter() }"
+  >
     <ng-content select="[filter]"></ng-content>
     <div [class.cd-curtain]="curtain"></div>
   </div>
-  <div id="cd-layout-close-filter"
-       *ngIf="showFilterClose"
-       [ngClass]="{'hide': hideFilter()}"
-       (click)="filterClosed?.emit(true)">
+  <div
+    id="cd-layout-close-filter"
+    *ngIf="showFilterClose"
+    [ngClass]="{ hide: hideFilter() }"
+    (click)="filterClosed?.emit(true)"
+  >
     <sbb-icon svgIcon="cross-small" aria-hidden="false"></sbb-icon>
   </div>
 
-  <div id="cd-layout-main"
-      class="cd-layout-panel">
+  <div id="cd-layout-main" class="cd-layout-panel">
     <div class="cd-layout-main-content-wrapper">
       <ng-content select="[main]"></ng-content>
     </div>
     <div [class.cd-curtain]="curtain"></div>
   </div>
 
-  <div id="cd-layout-aside"
-       class="cd-layout-panel sbb-scrollbar"
-       [ngClass]="{'hide': hideAside()}" [ngStyle]="(mode === LayoutModeEnum.PERLENKETTE_ONLY || mode === LayoutModeEnum.FILTER_AND_PERLENKETTE) && {'height': 'fit-content'}">
+  <div
+    id="cd-layout-aside"
+    class="cd-layout-panel sbb-scrollbar"
+    [ngClass]="{ hide: hideAside() }"
+    [ngStyle]="
+      (mode === LayoutModeEnum.PERLENKETTE_ONLY ||
+        mode === LayoutModeEnum.FILTER_AND_PERLENKETTE) && {
+        height: 'fit-content'
+      }
+    "
+  >
     <ng-content select="[aside]"></ng-content>
   </div>
-  <div id="cd-layout-close-aside"
-       *ngIf="showAsideClose"
-       [ngClass]="{'hide': hideAside()}"
-       (click)="asideClosed?.emit(true)">
+  <div
+    id="cd-layout-close-aside"
+    *ngIf="showAsideClose"
+    [ngClass]="{ hide: hideAside() }"
+    (click)="asideClosed?.emit(true)"
+  >
     <sbb-icon svgIcon="cross-small" aria-hidden="false"></sbb-icon>
   </div>
 </div>

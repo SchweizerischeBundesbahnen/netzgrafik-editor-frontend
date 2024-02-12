@@ -4,18 +4,18 @@ import {
   Component,
   Input,
   OnDestroy,
-  OnInit
+  OnInit,
 } from '@angular/core';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {SliderChangeInfo} from '../../../model/util/sliderChangeInfo';
-import {ViewBoxChangeInfo} from '../../../model/util/viewBoxChangeInfo';
-import {TimeSliderService} from '../../../services/time-slider.service';
-import {ViewBoxService} from '../../../services/util/view-box.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { SliderChangeInfo } from '../../../model/util/sliderChangeInfo';
+import { ViewBoxChangeInfo } from '../../../model/util/viewBoxChangeInfo';
+import { TimeSliderService } from '../../../services/time-slider.service';
+import { ViewBoxService } from '../../../services/util/view-box.service';
 import {
   UpdateCounterController,
   UpdateCounterHandler,
-  UpdateCounterTriggerSerivce
+  UpdateCounterTriggerSerivce,
 } from '../../../services/util/update-counter.service';
 
 @Component({
@@ -23,9 +23,11 @@ import {
   selector: '[sbb-time-grid]',
   templateUrl: './time-grid.component.html',
   styleUrls: ['./time-grid.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TimeGridComponent implements OnInit, OnDestroy, UpdateCounterHandler {
+export class TimeGridComponent
+  implements OnInit, OnDestroy, UpdateCounterHandler
+{
   @Input() horizontal = true;
 
   timesTicksIndices: number[] = [];
@@ -37,14 +39,16 @@ export class TimeGridComponent implements OnInit, OnDestroy, UpdateCounterHandle
   private fullDetailRenderingUpdateCounter = 0;
   private updateCounterController: UpdateCounterController = undefined;
 
-  constructor(private timeSliderService: TimeSliderService,
-              private readonly viewBoxService: ViewBoxService,
-              private readonly updateCounterTriggerSerivce: UpdateCounterTriggerSerivce,
-              private readonly cd: ChangeDetectorRef) {
-  }
+  constructor(
+    private timeSliderService: TimeSliderService,
+    private readonly viewBoxService: ViewBoxService,
+    private readonly updateCounterTriggerSerivce: UpdateCounterTriggerSerivce,
+    private readonly cd: ChangeDetectorRef,
+  ) {}
 
   ngOnInit() {
-    this.timeSliderService.getSliderChangeObservable()
+    this.timeSliderService
+      .getSliderChangeObservable()
       .pipe(takeUntil(this.destroyed$))
       .subscribe((sliderChangeInfo: SliderChangeInfo) => {
         const changed =
@@ -63,7 +67,8 @@ export class TimeGridComponent implements OnInit, OnDestroy, UpdateCounterHandle
         }
       });
 
-    this.viewBoxService.getViewBox()
+    this.viewBoxService
+      .getViewBox()
       .pipe(takeUntil(this.destroyed$))
       .subscribe((viewBoxChangeInfo: ViewBoxChangeInfo) => {
         const changed =
@@ -77,7 +82,6 @@ export class TimeGridComponent implements OnInit, OnDestroy, UpdateCounterHandle
           this.cd.markForCheck();
         }
       });
-
   }
 
   ngOnDestroy(): void {
@@ -124,7 +128,9 @@ export class TimeGridComponent implements OnInit, OnDestroy, UpdateCounterHandle
       this.updateCounterCallback();
     } else {
       this.updateCounterController = new UpdateCounterController(
-        this.fullDetailRenderingUpdateCounter, this);
+        this.fullDetailRenderingUpdateCounter,
+        this,
+      );
     }
   }
 
@@ -137,24 +143,27 @@ export class TimeGridComponent implements OnInit, OnDestroy, UpdateCounterHandle
     return this.fullDetailRenderingUpdateCounter;
   }
 
-
   render() {
     this.delayedRender();
   }
 
   private updateTicksRenderingSpace() {
     const block = this.getInverseScaleFactor() / 15;
-    let minTime = !this.horizontal ?
-      Math.floor(this.viewBoxChangeInfo.x * block) :
-      Math.floor(this.viewBoxChangeInfo.y * block);
-    let maxTime = !this.horizontal ?
-      Math.ceil((this.viewBoxChangeInfo.x + this.viewBoxChangeInfo.width) * block) :
-      Math.ceil((this.viewBoxChangeInfo.y + this.viewBoxChangeInfo.height) * block);
+    let minTime = !this.horizontal
+      ? Math.floor(this.viewBoxChangeInfo.x * block)
+      : Math.floor(this.viewBoxChangeInfo.y * block);
+    let maxTime = !this.horizontal
+      ? Math.ceil(
+          (this.viewBoxChangeInfo.x + this.viewBoxChangeInfo.width) * block,
+        )
+      : Math.ceil(
+          (this.viewBoxChangeInfo.y + this.viewBoxChangeInfo.height) * block,
+        );
 
     if (this.timesTicks.length > 0) {
       const first = this.timesTicks[0] / 15;
       const last = this.timesTicks[this.timesTicks.length - 1] / 15;
-      if ((first > minTime) && (last < maxTime)) {
+      if (first > minTime && last < maxTime) {
         return;
       }
       minTime = Math.min(minTime, first);

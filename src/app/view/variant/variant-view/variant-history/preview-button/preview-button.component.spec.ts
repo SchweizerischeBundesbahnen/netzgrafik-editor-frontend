@@ -1,6 +1,6 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {PreviewButtonComponent} from './preview-button.component';
+import { PreviewButtonComponent } from './preview-button.component';
 
 describe('PreviewButtonComponent', () => {
   let component: PreviewButtonComponent;
@@ -8,9 +8,8 @@ describe('PreviewButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PreviewButtonComponent ]
-    })
-    .compileComponents();
+      declarations: [PreviewButtonComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

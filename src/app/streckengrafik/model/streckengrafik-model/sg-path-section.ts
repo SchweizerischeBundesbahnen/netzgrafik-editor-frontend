@@ -1,11 +1,10 @@
-import {SgPathNode} from './sg-path-node';
-import {SgPath} from './sg-path';
-import {SgSelectedTrainrun} from './sg-selected-trainrun';
-import {SgTrainrunSection} from './sg-trainrun-section';
-import {TrackData} from '../trackData';
+import { SgPathNode } from './sg-path-node';
+import { SgPath } from './sg-path';
+import { SgSelectedTrainrun } from './sg-selected-trainrun';
+import { SgTrainrunSection } from './sg-trainrun-section';
+import { TrackData } from '../trackData';
 
 export class SgPathSection implements SgPath {
-
   branchWidth = 70;
 
   constructor(
@@ -26,8 +25,7 @@ export class SgPathSection implements SgPath {
     public arrivalPathNode: SgPathNode = undefined,
     public trainrun: SgSelectedTrainrun = undefined,
     public trainrunSections: SgTrainrunSection[] = [],
-  ) {
-  }
+  ) {}
 
   getPathNode(): SgPathNode {
     return undefined;
@@ -68,6 +66,6 @@ export class SgPathSection implements SgPath {
   }
 
   travelTime(): number {
-    return Math.max(1/60, this.departureTime - this.arrivalTime);
+    return Math.max(1 / 60, this.departureTime - this.arrivalTime);
   }
 }

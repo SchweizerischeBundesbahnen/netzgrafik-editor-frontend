@@ -1,7 +1,7 @@
-@import './../../view/editor-properties-view-component/editor-properties-view.component.scss';
-@import './../../view/editor-filter-view/editor-filter-view.component.scss';
-@import './../../view/dialogs/trainrun-and-section-dialog/trainrun-tab/trainrun-tab.component.scss';
-@import '../rastering/definitions';
+@import "./../../view/editor-properties-view-component/editor-properties-view.component.scss";
+@import "./../../view/editor-filter-view/editor-filter-view.component.scss";
+@import "./../../view/dialogs/trainrun-and-section-dialog/trainrun-tab/trainrun-tab.component.scss";
+@import "../rastering/definitions";
 
 ::ng-deep .TrainrunDialog.EditorToolButton {
   background: $COLOR_Default;
@@ -54,7 +54,7 @@
   float: right;
   width: 44px;
   padding: 10px 0px 10px 0px;
-  margin: 5px 0px 5px 0px
+  margin: 5px 0px 5px 0px;
 }
 
 ::ng-deep button.filterable-label-grp-delete-add-button-button {

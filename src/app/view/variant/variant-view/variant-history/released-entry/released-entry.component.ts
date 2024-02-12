@@ -1,15 +1,14 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {HistoryEntryAction} from '../history-entry/history-entry.component';
-import {DownloadVersionModel, VersionId} from '../model';
-import {UserId} from '../version-entry-layout/version-entry-layout.component';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { HistoryEntryAction } from '../history-entry/history-entry.component';
+import { DownloadVersionModel, VersionId } from '../model';
+import { UserId } from '../version-entry-layout/version-entry-layout.component';
 
 @Component({
   selector: 'sbb-released-entry',
   templateUrl: './released-entry.component.html',
-  styleUrls: ['./released-entry.component.scss']
+  styleUrls: ['./released-entry.component.scss'],
 })
 export class ReleasedEntryComponent {
-
   @Input() model: ReleasedEntryModel;
   @Input() isWritable = false;
 
@@ -24,10 +23,11 @@ export class ReleasedEntryComponent {
     const download = {
       name: 'Download',
       icon: 'download-small',
-      onClick: () => this.download.next({
-        versionId: this.model.id,
-        fileName: `netzgrafik_version_${this.model.releaseVersion}.json`
-      })
+      onClick: () =>
+        this.download.next({
+          versionId: this.model.id,
+          fileName: `netzgrafik_version_${this.model.releaseVersion}.json`,
+        }),
     };
 
     if (!this.isWritable) {
@@ -39,14 +39,14 @@ export class ReleasedEntryComponent {
         {
           name: 'Änderungen Verwerfen',
           icon: 'trash-small',
-          onClick: () => this.dropChanges.emit()
+          onClick: () => this.dropChanges.emit(),
         },
         {
           name: 'Konflikt ignorieren',
           icon: 'tick-small',
-          onClick: () => this.ignoreConflict.emit()
+          onClick: () => this.ignoreConflict.emit(),
         },
-        download
+        download,
       ];
     }
 
@@ -54,14 +54,14 @@ export class ReleasedEntryComponent {
       {
         name: 'Wiederherstellen',
         icon: 'arrows-circle-small',
-        onClick: () => this.restore.next(this.model.id)
+        onClick: () => this.restore.next(this.model.id),
       },
       {
         name: 'Als neue Variante',
         icon: 'circle-plus-small',
-        onClick: () => this.saveAsNewVariant.emit(this.model.id)
+        onClick: () => this.saveAsNewVariant.emit(this.model.id),
       },
-      download
+      download,
     ];
   }
 

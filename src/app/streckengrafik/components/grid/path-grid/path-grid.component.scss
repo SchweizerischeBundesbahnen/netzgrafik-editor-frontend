@@ -1,13 +1,13 @@
 line.PathGridLine {
   stroke: var(--NODE_TEXT_FOCUS);
-  stroke-width: 1.0px;
+  stroke-width: 1px;
   stroke-opacity: 0.5;
   shape-rendering: optimizeSpeed;
   pointer-events: none;
 }
 
 line.PathGridLine.TrackOccupier {
-  stroke-width: 1.0px;
+  stroke-width: 1px;
   stroke-opacity: 0.5;
 }
 
@@ -39,4 +39,3 @@ text.TrackGridLabelText.TrackGroup_0 {
 text.TrackGridLabelText.TrackGroup_1 {
   text-anchor: middle;
 }
-

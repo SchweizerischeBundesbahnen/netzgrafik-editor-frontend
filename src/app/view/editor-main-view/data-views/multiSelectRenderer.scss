@@ -1,12 +1,11 @@
-@import '../../rastering/definitions';
+@import "../../rastering/definitions";
 
 ::ng-deep rect.multi_select_box_root {
   stroke: $COLOR_Edit;
-  stroke-width: 2.0px;
+  stroke-width: 2px;
   pointer-events: none;
-  opacity: 1.0;
+  opacity: 1;
   stroke-dasharray: 3 3;
   fill: $COLOR_Edit;
   fill-opacity: 0.1;
 }
-

@@ -1,4 +1,4 @@
-@use '@sbb-esta/angular' as sbb;
+@use "@sbb-esta/angular" as sbb;
 
 .preview-button {
   padding: 6px;
@@ -8,7 +8,8 @@
   justify-content: center;
 }
 
-.preview-button, ::ng-deep .preview-button sbb-icon svg {
+.preview-button,
+::ng-deep .preview-button sbb-icon svg {
   cursor: pointer;
 }
 

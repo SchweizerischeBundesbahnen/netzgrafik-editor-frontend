@@ -1,43 +1,53 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {FilterService} from '../../../services/ui/filter.service';
-import {LabelRef} from '../../../data-structures/business.data.structures';
-import {DataService} from '../../../services/data/data.service';
-import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
-import {LabelService} from '../../../services/data/label.serivce';
-import {Label} from '../../../models/label.model';
-import {takeUntil} from 'rxjs/operators';
-import {LabelGroupService} from '../../../services/data/labelgroup.service';
-import {LabelGroup, LogicalFilterOperator} from '../../../models/labelGroup.model';
-import {Subject} from 'rxjs';
-import {StaticDomTags} from '../../editor-main-view/data-views/static.dom.tags';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FilterService } from '../../../services/ui/filter.service';
+import { LabelRef } from '../../../data-structures/business.data.structures';
+import { DataService } from '../../../services/data/data.service';
+import { UiInteractionService } from '../../../services/ui/ui.interaction.service';
+import { LabelService } from '../../../services/data/label.serivce';
+import { Label } from '../../../models/label.model';
+import { takeUntil } from 'rxjs/operators';
+import { LabelGroupService } from '../../../services/data/labelgroup.service';
+import {
+  LabelGroup,
+  LogicalFilterOperator,
+} from '../../../models/labelGroup.model';
+import { Subject } from 'rxjs';
+import { StaticDomTags } from '../../editor-main-view/data-views/static.dom.tags';
 
 @Component({
   selector: 'sbb-filterable-label-filter-view',
   templateUrl: './filterable-label-filter.component.html',
-  styleUrls: ['./filterable-label-filter.component.scss']
+  styleUrls: ['./filterable-label-filter.component.scss'],
 })
 export class FilterableLabelFilterComponent implements OnInit, OnDestroy {
   @Input() componentLabelRef: string;
   public filterableLabelGroups: LabelGroup[];
   private destroyed = new Subject<void>();
 
-  constructor(public dataService: DataService,
-              public uiInteractionService: UiInteractionService,
-              public filterService: FilterService,
-              public labelService: LabelService,
-              public labelGroupService: LabelGroupService) {
-  }
+  constructor(
+    public dataService: DataService,
+    public uiInteractionService: UiInteractionService,
+    public filterService: FilterService,
+    public labelService: LabelService,
+    public labelGroupService: LabelGroupService,
+  ) {}
 
   ngOnInit(): void {
-    this.labelGroupService.labelGroups.pipe(takeUntil(this.destroyed)).subscribe(
-      () => {
-        this.filterableLabelGroups = this.labelGroupService.getLabelGroupsFromLabelRef(this.translateComponentLabelRef());
+    this.labelGroupService.labelGroups
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(() => {
+        this.filterableLabelGroups =
+          this.labelGroupService.getLabelGroupsFromLabelRef(
+            this.translateComponentLabelRef(),
+          );
       });
 
-    this.labelService.labels.pipe(takeUntil(this.destroyed)).subscribe(
-      () => {
-        this.filterableLabelGroups = this.labelGroupService.getLabelGroupsFromLabelRef(this.translateComponentLabelRef());
-      });
+    this.labelService.labels.pipe(takeUntil(this.destroyed)).subscribe(() => {
+      this.filterableLabelGroups =
+        this.labelGroupService.getLabelGroupsFromLabelRef(
+          this.translateComponentLabelRef(),
+        );
+    });
 
     this.filterService.filterChanged();
   }
@@ -58,7 +68,10 @@ export class FilterableLabelFilterComponent implements OnInit, OnDestroy {
   }
 
   hasNoFilterableLabels(): boolean {
-    return this.labelService.getLabelsFromLabelRef(this.translateComponentLabelRef()).length === 0;
+    return (
+      this.labelService.getLabelsFromLabelRef(this.translateComponentLabelRef())
+        .length === 0
+    );
   }
 
   getFilterLabels(): number[] {
@@ -73,8 +86,14 @@ export class FilterableLabelFilterComponent implements OnInit, OnDestroy {
 
   onFilterableLabelChanged(labelObject: Label) {
     let filterLabels = this.getFilterLabels();
-    if (filterLabels.find(filterLabel => filterLabel === labelObject.getId()) !== undefined) {
-      filterLabels = filterLabels.filter(filterLabel => filterLabel !== labelObject.getId());
+    if (
+      filterLabels.find(
+        (filterLabel) => filterLabel === labelObject.getId(),
+      ) !== undefined
+    ) {
+      filterLabels = filterLabels.filter(
+        (filterLabel) => filterLabel !== labelObject.getId(),
+      );
     } else {
       filterLabels.push(labelObject.getId());
     }
@@ -90,14 +109,18 @@ export class FilterableLabelFilterComponent implements OnInit, OnDestroy {
   }
 
   isFilterFunctionOrEnabled(labelGroupObject: LabelGroup): boolean {
-    return labelGroupObject.getLogicalFilterOperator() === LogicalFilterOperator.OR;
+    return (
+      labelGroupObject.getLogicalFilterOperator() === LogicalFilterOperator.OR
+    );
   }
 
   enableLogicalFilterOperatorAnd(labelGroupObject: LabelGroup) {
     labelGroupObject.enableLogicalFilterOperatorAnd();
 
     const filterLabels = this.getFilterLabels();
-    const labelsObject = this.labelService.getLabelsFromLabelGroupId(labelGroupObject.getId());
+    const labelsObject = this.labelService.getLabelsFromLabelGroupId(
+      labelGroupObject.getId(),
+    );
     labelsObject.forEach((filterLabel: Label) => {
       if (!filterLabels.includes(filterLabel.getId())) {
         filterLabels.push(filterLabel.getId());
@@ -120,8 +143,12 @@ export class FilterableLabelFilterComponent implements OnInit, OnDestroy {
     labelGroupObject.enableLogicalFilterOperatorOr();
 
     let filterLabels = this.getFilterLabels();
-    const labelsObject = this.labelService.getLabelsFromLabelGroupId(labelGroupObject.getId()).map((label: Label) => label.getId());
-    filterLabels = filterLabels.filter((labelId: number) => !labelsObject.includes(labelId));
+    const labelsObject = this.labelService
+      .getLabelsFromLabelGroupId(labelGroupObject.getId())
+      .map((label: Label) => label.getId());
+    filterLabels = filterLabels.filter(
+      (labelId: number) => !labelsObject.includes(labelId),
+    );
     if (this.translateComponentLabelRef() === LabelRef.Node) {
       this.filterService.setFilterNodeLabels(filterLabels);
     } else {
@@ -133,7 +160,11 @@ export class FilterableLabelFilterComponent implements OnInit, OnDestroy {
 
   getLabelTooltip(labelObject: Label): string {
     const filterLabels = this.getFilterLabels();
-    if (filterLabels.find(filterLabel => filterLabel === labelObject.getId()) !== undefined) {
+    if (
+      filterLabels.find(
+        (filterLabel) => filterLabel === labelObject.getId(),
+      ) !== undefined
+    ) {
       return labelObject.getLabel() + ': einblenden';
     }
     return labelObject.getLabel() + ': ausblenden';
@@ -150,8 +181,11 @@ export class FilterableLabelFilterComponent implements OnInit, OnDestroy {
   }
 
   OnResetFilterableLabels() {
-    this.labelGroupService.getLabelGroupsFromLabelRef(this.translateComponentLabelRef())
-      .forEach((labelGrp: LabelGroup) => labelGrp.enableLogicalFilterOperatorOr());
+    this.labelGroupService
+      .getLabelGroupsFromLabelRef(this.translateComponentLabelRef())
+      .forEach((labelGrp: LabelGroup) =>
+        labelGrp.enableLogicalFilterOperatorOr(),
+      );
 
     if (this.translateComponentLabelRef() === LabelRef.Node) {
       this.filterService.clearFilterNodeLabels();
@@ -167,11 +201,12 @@ export class FilterableLabelFilterComponent implements OnInit, OnDestroy {
   getLabelClassname(labelObject: Label) {
     const tag = 'TrainrunDialog FilterableLabel';
     const labels = this.getFilterLabels();
-    if (labels.find(filterLabel => filterLabel === labelObject.getId()) !== undefined) {
+    if (
+      labels.find((filterLabel) => filterLabel === labelObject.getId()) !==
+      undefined
+    ) {
       return tag + ' ' + StaticDomTags.TAG_SELECTED;
     }
     return tag;
   }
-
-
 }

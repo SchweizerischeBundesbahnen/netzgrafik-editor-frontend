@@ -1,14 +1,17 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
-import {DataService} from './data.service';
-import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
-
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { DataService } from './data.service';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+} from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AutoSaveService implements OnDestroy {
-
   private static readonly AUTOSAVE_TIMEOUT = 5000;
 
   modified$: Observable<boolean>;
@@ -24,9 +27,9 @@ export class AutoSaveService implements OnDestroy {
     this.modifiedSubject = new BehaviorSubject(false);
     this.modified$ = this.modifiedSubject.pipe(distinctUntilChanged());
     this.autosaveTrigger$ = this.modifiedSubject.pipe(
-      filter(modified => modified),
+      filter((modified) => modified),
       debounceTime(AutoSaveService.AUTOSAVE_TIMEOUT),
-      map(() => null)
+      map(() => null),
     );
   }
 
@@ -41,10 +44,15 @@ export class AutoSaveService implements OnDestroy {
       this.changesSubscription.unsubscribe();
     }
     this.modifiedSubject.next(false);
-    this.currentNetzgrafikJSON = JSON.stringify(this.dataService.getNetzgrafikDto());
-    this.changesSubscription = this.dataService.getNetzgrafikChangesObservable(300)
+    this.currentNetzgrafikJSON = JSON.stringify(
+      this.dataService.getNetzgrafikDto(),
+    );
+    this.changesSubscription = this.dataService
+      .getNetzgrafikChangesObservable(300)
       .subscribe(() => {
-        const newNetzgrafikJson = JSON.stringify(this.dataService.getNetzgrafikDto());
+        const newNetzgrafikJson = JSON.stringify(
+          this.dataService.getNetzgrafikDto(),
+        );
         const modified = newNetzgrafikJson !== this.currentNetzgrafikJSON;
         this.currentNetzgrafikJSON = newNetzgrafikJson;
         this.modifiedSubject.next(modified);
@@ -57,5 +65,4 @@ export class AutoSaveService implements OnDestroy {
     }
     this.modifiedSubject.next(false);
   }
-
 }

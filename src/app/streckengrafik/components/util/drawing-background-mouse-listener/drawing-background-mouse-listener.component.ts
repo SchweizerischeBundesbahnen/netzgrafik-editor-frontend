@@ -1,24 +1,23 @@
-import {Component, HostListener} from '@angular/core';
-import {
-  DrawingBackgroundMouseListenerService
-} from '../../../services/util/drawingBackgroundMouseListener.service';
-import {TrainrunService} from '../../../../services/data/trainrun.service';
-import {Sg8RenderService} from '../../../services/sg-8-render.service';
-import {UpdateCounterTriggerSerivce} from '../../../services/util/update-counter.service';
+import { Component, HostListener } from '@angular/core';
+import { DrawingBackgroundMouseListenerService } from '../../../services/util/drawingBackgroundMouseListener.service';
+import { TrainrunService } from '../../../../services/data/trainrun.service';
+import { Sg8RenderService } from '../../../services/sg-8-render.service';
+import { UpdateCounterTriggerSerivce } from '../../../services/util/update-counter.service';
 
 @Component({
   selector: 'sbb-drawing-background-mouse-listener',
   templateUrl: './drawing-background-mouse-listener.component.html',
-  styleUrls: ['./drawing-background-mouse-listener.component.scss']
+  styleUrls: ['./drawing-background-mouse-listener.component.scss'],
 })
 export class DrawingBackgroundMouseListenerComponent {
   private isMouseMovingButtonDown = false;
 
-  constructor(private drawingBackgroundMouseListenerService: DrawingBackgroundMouseListenerService,
-              private readonly trainrunService: TrainrunService,
-              private readonly updateCounterTriggerSerivce: UpdateCounterTriggerSerivce,
-              private sg8RenderService: Sg8RenderService) {
-  }
+  constructor(
+    private drawingBackgroundMouseListenerService: DrawingBackgroundMouseListenerService,
+    private readonly trainrunService: TrainrunService,
+    private readonly updateCounterTriggerSerivce: UpdateCounterTriggerSerivce,
+    private sg8RenderService: Sg8RenderService,
+  ) {}
 
   @HostListener('mouseup', ['$event'])
   public onMouseUp(event: MouseEvent) {
@@ -67,5 +66,4 @@ export class DrawingBackgroundMouseListenerComponent {
 
     return;
   }
-
 }

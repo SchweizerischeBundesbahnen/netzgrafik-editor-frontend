@@ -1,30 +1,24 @@
 <ng-container *ngIf="horizontal">
+  <svg:path
+    *ngFor="let trackItem of getTrackData(false, 4)"
+    [attr.d]="trackItem"
+    class="NbrTracks"
+  ></svg:path>
 
-  <svg:path *ngFor="let trackItem of getTrackData(false, 4)"
-            [attr.d]="trackItem"
-            class="NbrTracks"
-  >
-  </svg:path>
-
-  <svg:path *ngFor="let trackItem of getTrackData(true, 4)"
-            [attr.d]="trackItem"
-            class="MinTracks"
-  >
-  </svg:path>
+  <svg:path
+    *ngFor="let trackItem of getTrackData(true, 4)"
+    [attr.d]="trackItem"
+    class="MinTracks"
+  ></svg:path>
 
   <ng-container *ngFor="let rectData of getTrackDataRect(true, 4)">
-    <svg:path
-      [attr.d]=" rectData.d"
-      class="MinTracks"
-    >
-    </svg:path>
+    <svg:path [attr.d]="rectData.d" class="MinTracks"></svg:path>
     <svg:text
-      [attr.x]="(rectData.x2+rectData.x1)/2"
-      [attr.y]="(rectData.y2+rectData.y1)/2"
+      [attr.x]="(rectData.x2 + rectData.x1) / 2"
+      [attr.y]="(rectData.y2 + rectData.y1) / 2"
       class="MinTracks"
     >
-      {{rectData.nbr}}
+      {{ rectData.nbr }}
     </svg:text>
-
   </ng-container>
 </ng-container>

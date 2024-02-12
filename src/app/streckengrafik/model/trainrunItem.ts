@@ -1,4 +1,4 @@
-import {PathItem} from './pathItem';
+import { PathItem } from './pathItem';
 
 export class TrainrunItem {
   constructor(
@@ -10,24 +10,24 @@ export class TrainrunItem {
     public title: string,
     public categoryShortName: string,
     public colorRef: string,
-    public pathItems: PathItem[]
-  ) {
-  }
+    public pathItems: PathItem[],
+  ) {}
 
   equal(trainrunItem: TrainrunItem) {
     if (this === trainrunItem) {
       return true;
     }
-    return (this.trainrunId === trainrunItem.trainrunId) &&
-      (this.frequency === trainrunItem.frequency) &&
-      (this.frequencyOffset === trainrunItem.frequencyOffset) &&
-      (this.startTime === trainrunItem.startTime) &&
-      (this.endTime === trainrunItem.endTime) &&
-      (this.title === trainrunItem.title) &&
-      (this.categoryShortName === trainrunItem.categoryShortName) &&
-      (this.colorRef === trainrunItem.colorRef) &&
-      (this.equalPathItem(this.pathItems, trainrunItem.pathItems));
-
+    return (
+      this.trainrunId === trainrunItem.trainrunId &&
+      this.frequency === trainrunItem.frequency &&
+      this.frequencyOffset === trainrunItem.frequencyOffset &&
+      this.startTime === trainrunItem.startTime &&
+      this.endTime === trainrunItem.endTime &&
+      this.title === trainrunItem.title &&
+      this.categoryShortName === trainrunItem.categoryShortName &&
+      this.colorRef === trainrunItem.colorRef &&
+      this.equalPathItem(this.pathItems, trainrunItem.pathItems)
+    );
   }
 
   private equalPathItem(pathItems: PathItem[], pathItems2: PathItem[]) {
@@ -39,21 +39,23 @@ export class TrainrunItem {
     }
     let equal = true;
     this.pathItems.forEach((pathItem1) => {
-        let equal2 = false;
-        pathItems2.forEach((pathItems2) => {
-          if (pathItem1.equal(pathItems2)) {
-            equal2 = true;
-          }
-        });
-        if (!equal2) {
-          equal = false;
+      let equal2 = false;
+      pathItems2.forEach((pathItems2) => {
+        if (pathItem1.equal(pathItems2)) {
+          equal2 = true;
         }
+      });
+      if (!equal2) {
+        equal = false;
       }
-    );
+    });
     return equal;
   }
 
-  static equalTrainrunItems(trainrunItems1: TrainrunItem[], trainrunItems2: TrainrunItem[]) {
+  static equalTrainrunItems(
+    trainrunItems1: TrainrunItem[],
+    trainrunItems2: TrainrunItem[],
+  ) {
     if (trainrunItems1 === undefined) {
       return true;
     }
@@ -67,9 +69,9 @@ export class TrainrunItem {
       return false;
     }
     let equal1 = true;
-    trainrunItems1.forEach(trainrunItem1 => {
+    trainrunItems1.forEach((trainrunItem1) => {
       let equal2 = false;
-      trainrunItems2.forEach(trainrunItem2 => {
+      trainrunItems2.forEach((trainrunItem2) => {
         if (trainrunItem1.equal(trainrunItem2)) {
           equal2 = true;
         }

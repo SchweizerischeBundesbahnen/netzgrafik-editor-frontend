@@ -1,31 +1,39 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {TrainrunService} from '../../services/data/trainrun.service';
-import {TrainrunSectionService} from '../../services/data/trainrunsection.service';
-import {StaticDomTags} from '../../view/editor-main-view/data-views/static.dom.tags';
-import {TrainrunSectionText} from '../../data-structures/technical.data.structures';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {NodeService} from '../../services/data/node.service';
+import { Injectable, OnDestroy } from '@angular/core';
+import { TrainrunService } from '../../services/data/trainrun.service';
+import { TrainrunSectionService } from '../../services/data/trainrunsection.service';
+import { StaticDomTags } from '../../view/editor-main-view/data-views/static.dom.tags';
+import { TrainrunSectionText } from '../../data-structures/technical.data.structures';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { NodeService } from '../../services/data/node.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TrainDataService implements OnDestroy {
   private lruCacheIsTrainrunConnected = new Map<number, boolean>();
   private destroyed = new Subject<void>();
 
-  constructor(private trainrunService: TrainrunService,
-              private trainrunSectionService: TrainrunSectionService,
-              private nodeService: NodeService) {
-    this.trainrunService.trainruns.pipe(takeUntil(this.destroyed)).subscribe(() => {
-      this.lruCacheIsTrainrunConnected.clear();
-    });
-    this.trainrunSectionService.trainrunSections.pipe(takeUntil(this.destroyed)).subscribe(() => {
-      this.lruCacheIsTrainrunConnected.clear();
-    });
-    this.nodeService.transitions.pipe(takeUntil(this.destroyed)).subscribe(() => {
-      this.lruCacheIsTrainrunConnected.clear();
-    });
+  constructor(
+    private trainrunService: TrainrunService,
+    private trainrunSectionService: TrainrunSectionService,
+    private nodeService: NodeService,
+  ) {
+    this.trainrunService.trainruns
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(() => {
+        this.lruCacheIsTrainrunConnected.clear();
+      });
+    this.trainrunSectionService.trainrunSections
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(() => {
+        this.lruCacheIsTrainrunConnected.clear();
+      });
+    this.nodeService.transitions
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(() => {
+        this.lruCacheIsTrainrunConnected.clear();
+      });
   }
 
   ngOnDestroy() {
@@ -44,10 +52,12 @@ export class TrainDataService implements OnDestroy {
       if (data !== undefined) {
         return data;
       }
-      const connectedTrainruns = this.trainrunService.getConnectedTrainrunIdsFirstOrder(
-        selectedTrainrun.getId()
-      );
-      const ret = (connectedTrainruns.find((id) => id === trainrunId) !== undefined);
+      const connectedTrainruns =
+        this.trainrunService.getConnectedTrainrunIdsFirstOrder(
+          selectedTrainrun.getId(),
+        );
+      const ret =
+        connectedTrainruns.find((id) => id === trainrunId) !== undefined;
       this.lruCacheIsTrainrunConnected.set(trainrunId, ret);
       return ret;
     }
@@ -69,8 +79,12 @@ export class TrainDataService implements OnDestroy {
     return tag;
   }
 
-  getDisplayTextHtmlStyle(trainrunSectionId: number, textElement: TrainrunSectionText): string {
-    const trainrunSection = this.trainrunSectionService.getTrainrunSectionFromId(trainrunSectionId);
+  getDisplayTextHtmlStyle(
+    trainrunSectionId: number,
+    textElement: TrainrunSectionText,
+  ): string {
+    const trainrunSection =
+      this.trainrunSectionService.getTrainrunSectionFromId(trainrunSectionId);
     if (trainrunSection === undefined) {
       return undefined;
     }
@@ -90,8 +104,13 @@ export class TrainDataService implements OnDestroy {
     }
   }
 
-  getDisplayText(trainrunSectionId: number, textElement: TrainrunSectionText, offset: number): string {
-    const trainrunSection = this.trainrunSectionService.getTrainrunSectionFromId(trainrunSectionId);
+  getDisplayText(
+    trainrunSectionId: number,
+    textElement: TrainrunSectionText,
+    offset: number,
+  ): string {
+    const trainrunSection =
+      this.trainrunSectionService.getTrainrunSectionFromId(trainrunSectionId);
     if (trainrunSection === undefined) {
       return undefined;
     }
@@ -111,8 +130,12 @@ export class TrainDataService implements OnDestroy {
     }
   }
 
-  getDisplayTextColorRef(trainrunSectionId: number, textElement: TrainrunSectionText): string {
-    const trainrunSection = this.trainrunSectionService.getTrainrunSectionFromId(trainrunSectionId);
+  getDisplayTextColorRef(
+    trainrunSectionId: number,
+    textElement: TrainrunSectionText,
+  ): string {
+    const trainrunSection =
+      this.trainrunSectionService.getTrainrunSectionFromId(trainrunSectionId);
     if (trainrunSection === undefined) {
       return undefined;
     }
@@ -132,8 +155,12 @@ export class TrainDataService implements OnDestroy {
     }
   }
 
-  getDisplayTextWidth(trainrunSectionId: number, textElement: TrainrunSectionText): number {
-    const trainrunSection = this.trainrunSectionService.getTrainrunSectionFromId(trainrunSectionId);
+  getDisplayTextWidth(
+    trainrunSectionId: number,
+    textElement: TrainrunSectionText,
+  ): number {
+    const trainrunSection =
+      this.trainrunSectionService.getTrainrunSectionFromId(trainrunSectionId);
     if (trainrunSection === undefined) {
       return undefined;
     }
@@ -152,6 +179,4 @@ export class TrainDataService implements OnDestroy {
         return undefined;
     }
   }
-
-
 }

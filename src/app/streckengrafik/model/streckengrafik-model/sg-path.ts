@@ -1,9 +1,8 @@
-import {SgPathNode} from './sg-path-node';
-import {SgPathSection} from './sg-path-section';
-import {SgSelectedTrainrun} from './sg-selected-trainrun';
+import { SgPathNode } from './sg-path-node';
+import { SgPathSection } from './sg-path-section';
+import { SgSelectedTrainrun } from './sg-selected-trainrun';
 
 export interface SgPath {
-
   index: number;
   xZoom: number;
   startPosition: number;
@@ -28,5 +27,4 @@ export interface SgPath {
   zoomedXPath();
 
   travelTime(): number;
-
 }

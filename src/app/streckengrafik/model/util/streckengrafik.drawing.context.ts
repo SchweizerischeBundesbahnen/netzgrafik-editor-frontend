@@ -1,4 +1,4 @@
-import {D3Utils} from '../../../view/editor-main-view/data-views/d3.utils';
+import { D3Utils } from '../../../view/editor-main-view/data-views/d3.utils';
 
 export class StreckengrafikDrawingContext {
   static oldRect: DOMRect = undefined;
@@ -15,13 +15,27 @@ export class StreckengrafikDrawingContext {
         StreckengrafikDrawingContext.oldRect = rect;
         enforceUpdate = true;
       }
-      if (enforceUpdate ||
+      if (
+        enforceUpdate ||
         StreckengrafikDrawingContext.oldRect.width !== rect.width ||
-        StreckengrafikDrawingContext.oldRect.height !== rect.height) {
-        document.documentElement.style.setProperty('--STRECKENGRAFIK_MAIN_CONTENT_WIDTH', rect.width + 'px');
-        document.documentElement.style.setProperty('--STRECKENGRAFIK_MAIN_CONTENT_HEIGHT', rect.height + 'px');
-        document.documentElement.style.setProperty('--STRECKENGRAFIK_MAIN_W', (rect.width - 100) + 'px');
-        document.documentElement.style.setProperty('--STRECKENGRAFIK_MAIN_H', (rect.height - 120) + 'px');
+        StreckengrafikDrawingContext.oldRect.height !== rect.height
+      ) {
+        document.documentElement.style.setProperty(
+          '--STRECKENGRAFIK_MAIN_CONTENT_WIDTH',
+          rect.width + 'px',
+        );
+        document.documentElement.style.setProperty(
+          '--STRECKENGRAFIK_MAIN_CONTENT_HEIGHT',
+          rect.height + 'px',
+        );
+        document.documentElement.style.setProperty(
+          '--STRECKENGRAFIK_MAIN_W',
+          rect.width - 100 + 'px',
+        );
+        document.documentElement.style.setProperty(
+          '--STRECKENGRAFIK_MAIN_H',
+          rect.height - 120 + 'px',
+        );
         StreckengrafikDrawingContext.oldRect = rect;
       }
     }

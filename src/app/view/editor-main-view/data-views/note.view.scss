@@ -1,7 +1,7 @@
-@import '../../rastering/definitions';
+@import "../../rastering/definitions";
 
 ::ng-deep rect.note_hover_root {
-  stroke-width: 0.0px;
+  stroke-width: 0px;
   stroke: $NODE_COLOR;
   fill: $COLOR_BACKGROUND;
   rx: $NODE_ROUND_EDGE_SIZE;
@@ -9,7 +9,7 @@
 }
 
 ::ng-deep rect.note_root {
-  stroke-width: 1.0px;
+  stroke-width: 1px;
   stroke: $NODE_COLOR;
   fill: $COLOR_BACKGROUND;
   rx: $NODE_ROUND_EDGE_SIZE;
@@ -19,8 +19,8 @@
 ::ng-deep path.note_hover_drag_root {
   fill: $NODE_COLOR;
   rx: $NODE_ROUND_EDGE_SIZE;
-  stroke-opacity: 0.0;
-  opacity: 0.0;
+  stroke-opacity: 0;
+  opacity: 0;
   cursor: move;
 }
 
@@ -32,12 +32,12 @@
 ::ng-deep path.note_hover_drag_root.hover {
   fill: $COLOR_Edit;
   stroke: $COLOR_Edit;
-  opacity: 1.0;
+  opacity: 1;
 }
 
 ::ng-deep path.note_hover_drag_root.hover.multi_selected {
   fill: $COLOR_Edit;
-  stroke-opacity: 1.0;
+  stroke-opacity: 1;
 }
 
 ::ng-deep rect.note_titelarea {
@@ -49,10 +49,10 @@
 }
 
 ::ng-deep text.titel_text {
-  stroke-width: 0.0px;
+  stroke-width: 0px;
   stroke: $NODE_TEXT_COLOR;
   fill: $NODE_TEXT_FOCUS;
-  font-family: 'SBBWeb Roman';
+  font-family: "SBBWeb Roman";
   pointer-events: none;
 }
 
@@ -65,10 +65,10 @@
 }
 
 ::ng-deep text.note_text {
-  stroke-width: 0.0px;
+  stroke-width: 0px;
   stroke: none;
   fill: $NODE_TEXT_FOCUS;
-  font-family: 'SBBWeb Light';
+  font-family: "SBBWeb Light";
   pointer-events: none;
 }
 
@@ -79,7 +79,7 @@
 }
 
 ::ng-deep a {
-  fill: $NODE_TEXT_FOCUS
+  fill: $NODE_TEXT_FOCUS;
 }
 
 ::ng-deep rect.note_root.multi_selected {
@@ -89,11 +89,11 @@
 }
 
 ::ng-deep rect.note_titelarea.multi_selected {
-  opacity: 0.0;
+  opacity: 0;
 }
 
 ::ng-deep rect.note_textarea.multi_selected {
-  opacity: 0.0;
+  opacity: 0;
 }
 
 ::ng-deep rect.note_root.multi_selected.hover {
@@ -109,7 +109,7 @@
 }
 
 ::ng-deep path.note_hover_drag_root.selected {
-  opacity: 1.0;
+  opacity: 1;
   fill: $COLOR_Edit;
   cursor: move;
   stroke-width: 0.5;
@@ -125,4 +125,3 @@
   stroke-width: 64px;
   transform: translateX(-64px) translateY(-32px);
 }
-

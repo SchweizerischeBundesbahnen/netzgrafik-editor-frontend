@@ -1,13 +1,14 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StreckengrafikDisplayElementService {
-
-  private readonly streckengrafikDisplayElementSubject = new BehaviorSubject<string>('all');
-  private readonly streckengrafikDisplayElement$ = this.streckengrafikDisplayElementSubject.asObservable();
+  private readonly streckengrafikDisplayElementSubject =
+    new BehaviorSubject<string>('all');
+  private readonly streckengrafikDisplayElement$ =
+    this.streckengrafikDisplayElementSubject.asObservable();
 
   private filterStreckengrafikTimeNotFocusNorSelected = false;
   private filterStreckengrafikNameNotFocusNorSelected = false;
@@ -15,8 +16,7 @@ export class StreckengrafikDisplayElementService {
   private showRailTrackSlider = true;
   private showHeadwayBands = false;
 
-  constructor() {
-  }
+  constructor() {}
 
   changed(eventTyp: string) {
     this.streckengrafikDisplayElementSubject.next(eventTyp);
@@ -108,6 +108,4 @@ export class StreckengrafikDisplayElementService {
       this.changed('headwayOff');
     }
   }
-
-
 }

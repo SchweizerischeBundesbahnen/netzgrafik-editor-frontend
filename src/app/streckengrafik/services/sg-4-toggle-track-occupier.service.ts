@@ -1,22 +1,23 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {Sg3TrainrunsService} from './sg-3-trainruns.service';
-import {takeUntil} from 'rxjs/operators';
-import {SgSelectedTrainrun} from '../model/streckengrafik-model/sg-selected-trainrun';
-import {SgPath} from '../model/streckengrafik-model/sg-path';
-import {UiInteractionService} from '../../services/ui/ui.interaction.service';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Sg3TrainrunsService } from './sg-3-trainruns.service';
+import { takeUntil } from 'rxjs/operators';
+import { SgSelectedTrainrun } from '../model/streckengrafik-model/sg-selected-trainrun';
+import { SgPath } from '../model/streckengrafik-model/sg-path';
+import { UiInteractionService } from '../../services/ui/ui.interaction.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class Sg4ToggleTrackOccupierService implements OnDestroy {
-
-  private readonly sgSelectedTrainrunSubject = new BehaviorSubject<SgSelectedTrainrun>(undefined);
-  private readonly sgSelectedTrainrun$ = this.sgSelectedTrainrunSubject.asObservable();
+  private readonly sgSelectedTrainrunSubject =
+    new BehaviorSubject<SgSelectedTrainrun>(undefined);
+  private readonly sgSelectedTrainrun$ =
+    this.sgSelectedTrainrunSubject.asObservable();
 
   private readonly trackOccupierOnOffSubject = new BehaviorSubject<void>(null);
-  private readonly trackOccupierOnOff$ = this.trackOccupierOnOffSubject.asObservable();
-
+  private readonly trackOccupierOnOff$ =
+    this.trackOccupierOnOffSubject.asObservable();
 
   private selectedTrainrun: SgSelectedTrainrun;
 
@@ -24,12 +25,14 @@ export class Sg4ToggleTrackOccupierService implements OnDestroy {
 
   private readonly destroyed$ = new Subject<void>();
 
-  constructor(private readonly sg3TrainrunsService: Sg3TrainrunsService,
-              private readonly uiInteractionService: UiInteractionService) {
-
-    this.sg3TrainrunsService.getSgSelectedTrainrun()
+  constructor(
+    private readonly sg3TrainrunsService: Sg3TrainrunsService,
+    private readonly uiInteractionService: UiInteractionService,
+  ) {
+    this.sg3TrainrunsService
+      .getSgSelectedTrainrun()
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(selectedTrainrun => {
+      .subscribe((selectedTrainrun) => {
         this.selectedTrainrun = selectedTrainrun;
         this.render();
       });
@@ -50,7 +53,7 @@ export class Sg4ToggleTrackOccupierService implements OnDestroy {
     if (!this.selectedTrainrun) {
       return;
     }
-    this.selectedTrainrun.paths.forEach(path => {
+    this.selectedTrainrun.paths.forEach((path) => {
       if (path.isNode()) {
         if (this.nodeIdMap.has(path.getPathNode().nodeId)) {
           path.trackOccupier = this.nodeIdMap.get(path.getPathNode().nodeId);
@@ -79,7 +82,6 @@ export class Sg4ToggleTrackOccupierService implements OnDestroy {
     this.render();
     this.trackOccupierOnOffSubject.next();
   }
-
 
   public expandAllPathNode() {
     this.selectedTrainrun.paths.forEach((path: SgPath) => {
@@ -116,6 +118,4 @@ export class Sg4ToggleTrackOccupierService implements OnDestroy {
     });
     return !retVal;
   }
-
-
 }

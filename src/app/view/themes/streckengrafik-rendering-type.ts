@@ -1,4 +1,4 @@
 export enum StreckengrafikRenderingType {
   TimeScaledDistance,
-  UniformDistance
+  UniformDistance,
 }

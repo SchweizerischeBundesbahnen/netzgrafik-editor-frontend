@@ -1,5 +1,5 @@
-import {AuthConfig} from 'angular-oauth2-oidc';
-import {Environment} from './environment.model';
+import { AuthConfig } from 'angular-oauth2-oidc';
+import { Environment } from './environment.model';
 
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
@@ -15,14 +15,14 @@ const authConfig: AuthConfig = {
   // Note that these URIs must also be added to allowed redirect URIs in Azure (e.g. https://your-domain/en/, https://your-domain/de/, ...)
   redirectUri: location.origin,
   responseType: 'code',
-  scope: 'openid profile email offline_access'
+  scope: 'openid profile email offline_access',
 };
 
 export const environment: Environment = {
   production: false,
   label: 'local',
   backendUrl: 'http://localhost:8080',
-  authConfig
+  authConfig,
 };
 
 /*

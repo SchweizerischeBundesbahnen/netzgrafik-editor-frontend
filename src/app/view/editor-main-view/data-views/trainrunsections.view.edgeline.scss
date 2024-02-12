@@ -1,79 +1,78 @@
-@import '../../rastering/definitions';
-
+@import "../../rastering/definitions";
 
 ::ng-deep path.edge_line {
   fill: none;
 }
 
 ::ng-deep path.edge_line.layer_0 {
-  stroke-width: 32.0px;
+  stroke-width: 32px;
   stroke: $COLOR_BACKGROUND;
   stroke-opacity: 0.001;
 }
 
 ::ng-deep path.edge_line.layer_1 {
-  stroke-width: 0.0px;
+  stroke-width: 0px;
   stroke: $COLOR_BACKGROUND;
 }
 
 ::ng-deep path.edge_line.layer_2 {
-  stroke-width: 0.0px;
+  stroke-width: 0px;
   stroke: $COLOR_BACKGROUND;
 }
 
 ::ng-deep path.edge_line.layer_3 {
-  stroke-width: 0.0px;
+  stroke-width: 0px;
   stroke: $COLOR_BACKGROUND;
 }
 
 /// FREQ_120
 ::ng-deep path.edge_line.layer_1.Freq_120 {
-  stroke-width: 2.0px;
+  stroke-width: 2px;
 }
 
 /// FREQ_60
 ::ng-deep path.edge_line.layer_1.Freq_60 {
-  stroke-width: 2.0px;
+  stroke-width: 2px;
 }
 
 /// FREQ_30
 ::ng-deep path.edge_line.layer_2.Freq_30 {
-  stroke-width: 6.0px;
+  stroke-width: 6px;
 }
 
 ::ng-deep path.edge_line.layer_3.Freq_30 {
-  stroke-width: 2.0px;
+  stroke-width: 2px;
 }
 
 /// FREQ_20
 ::ng-deep path.edge_line.layer_1.Freq_20 {
-  stroke-width: 5.0px;
+  stroke-width: 5px;
 }
 
 ::ng-deep path.edge_line.layer_2.Freq_20 {
-  stroke-width: 3.0px;
+  stroke-width: 3px;
 }
 
 ::ng-deep path.edge_line.layer_3.Freq_20 {
-  stroke-width: 1.0px;
+  stroke-width: 1px;
 }
 
 /// FREQ_15
 ::ng-deep path.edge_line.layer_0.Freq_15 {
-  stroke-width: 7.0px;
-  stroke-opacity: 1.0;
+  stroke-width: 7px;
+  stroke-opacity: 1;
 }
 
 ::ng-deep path.edge_line.layer_1.Freq_15 {
-  stroke-width: 5.0px;
+  stroke-width: 5px;
 }
 
 ::ng-deep path.edge_line.layer_2.Freq_15 {
-  stroke-width: 3.0px;
+  stroke-width: 3px;
 }
 
 ::ng-deep path.edge_line.layer_3.Freq_15 {
-  stroke-width: 1.0px;
+  stroke-width: 1px;
 }
 
 ::ng-deep path.edge_line.no_event {
@@ -92,7 +91,7 @@
 }
 
 ::ng-deep path.edge_line_stop_arcs.hidden {
-  stroke-opacity: 0.0;
+  stroke-opacity: 0;
 }
 
 ::ng-deep path.edge_line_stop_arcs.selected {
@@ -109,7 +108,7 @@
 }
 
 ::ng-deep path.edge_line.Freq_120 {
-  stroke-dasharray: 8.0px;
+  stroke-dasharray: 8px;
 }
 
 ::ng-deep path.edge_line.Freq_120.LinePatternRef_HVZ {

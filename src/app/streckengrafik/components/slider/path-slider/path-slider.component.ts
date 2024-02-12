@@ -1,22 +1,21 @@
-import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
-import {Subject} from 'rxjs';
-import {ResizeChangeInfo} from '../../../model/util/resizeChangeInfo';
-import {ViewBoxChangeInfo} from '../../../model/util/viewBoxChangeInfo';
-import {ResizeService} from '../../../services/util/resize.service';
-import {ViewBoxService} from '../../../services/util/view-box.service';
-import {takeUntil} from 'rxjs/operators';
-import {SgSelectedTrainrun} from '../../../model/streckengrafik-model/sg-selected-trainrun';
-import {SgPath} from '../../../model/streckengrafik-model/sg-path';
-import {Sg4ToggleTrackOccupierService} from '../../../services/sg-4-toggle-track-occupier.service';
-import {Sg8RenderService} from '../../../services/sg-8-render.service';
+import { Component, Input, OnDestroy, ViewChild } from '@angular/core';
+import { Subject } from 'rxjs';
+import { ResizeChangeInfo } from '../../../model/util/resizeChangeInfo';
+import { ViewBoxChangeInfo } from '../../../model/util/viewBoxChangeInfo';
+import { ResizeService } from '../../../services/util/resize.service';
+import { ViewBoxService } from '../../../services/util/view-box.service';
+import { takeUntil } from 'rxjs/operators';
+import { SgSelectedTrainrun } from '../../../model/streckengrafik-model/sg-selected-trainrun';
+import { SgPath } from '../../../model/streckengrafik-model/sg-path';
+import { Sg4ToggleTrackOccupierService } from '../../../services/sg-4-toggle-track-occupier.service';
+import { Sg8RenderService } from '../../../services/sg-8-render.service';
 
 @Component({
   selector: 'sbb-path-slider',
   templateUrl: './path-slider.component.html',
-  styleUrls: ['./path-slider.component.scss']
+  styleUrls: ['./path-slider.component.scss'],
 })
 export class PathSliderComponent implements OnDestroy {
-
   @Input()
   horizontal = true;
 
@@ -39,35 +38,36 @@ export class PathSliderComponent implements OnDestroy {
 
   private readonly destroyed$ = new Subject<void>();
 
-
   constructor(
     private readonly resizeService: ResizeService,
     private readonly viewBoxService: ViewBoxService,
     private readonly sg4ToggleTrackOccupierService: Sg4ToggleTrackOccupierService,
-    private readonly sg8RenderService: Sg8RenderService) {
-
-    this.sg8RenderService.getSgSelectedTrainrun()
+    private readonly sg8RenderService: Sg8RenderService,
+  ) {
+    this.sg8RenderService
+      .getSgSelectedTrainrun()
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(selectedTrainrun => {
+      .subscribe((selectedTrainrun) => {
         if (selectedTrainrun) {
           this.selectedTrainrun = selectedTrainrun;
         }
       });
 
-    this.resizeService.getResizeChangeInfo()
+    this.resizeService
+      .getResizeChangeInfo()
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(resizeChangeInfo => {
+      .subscribe((resizeChangeInfo) => {
         this.resizeChangeInfo = resizeChangeInfo;
         this.renderResize();
       });
 
-    this.viewBoxService.getViewBox()
+    this.viewBoxService
+      .getViewBox()
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(viewBoxChangeInfo => {
+      .subscribe((viewBoxChangeInfo) => {
         this.viewBoxChangeInfo = viewBoxChangeInfo;
         this.renderViewBox();
       });
-
   }
 
   ngOnDestroy(): void {
@@ -110,7 +110,6 @@ export class PathSliderComponent implements OnDestroy {
       return 'M 0,40 L ' + this.nodeWidth(path) + ',40';
     }
     return 'M 0,40 L ' + path.zoomedXPath() + ',40';
-
   }
 
   pathSliderStartLine() {
@@ -145,7 +144,10 @@ export class PathSliderComponent implements OnDestroy {
 
   isStartOrEndNode(path: SgPath) {
     if (path.isNode()) {
-      return (path.getPathNode().departurePathSection === undefined) || (path.getPathNode().arrivalPathSection === undefined);
+      return (
+        path.getPathNode().departurePathSection === undefined ||
+        path.getPathNode().arrivalPathSection === undefined
+      );
     }
     return false;
   }
@@ -166,7 +168,9 @@ export class PathSliderComponent implements OnDestroy {
 
   doClick(path: SgPath) {
     if (path.isNode()) {
-      this.sg4ToggleTrackOccupierService.toggleTrackOccupier(path.getPathNode().nodeId);
+      this.sg4ToggleTrackOccupierService.toggleTrackOccupier(
+        path.getPathNode().nodeId,
+      );
     }
   }
 
@@ -179,15 +183,17 @@ export class PathSliderComponent implements OnDestroy {
   private renderViewBox() {
     const pathSliderMove = 0;
     if (this.horizontal) {
-      this.viewBox = ' ' + pathSliderMove + ' ' +
+      this.viewBox =
+        ' ' +
+        pathSliderMove +
+        ' ' +
         '0 ' +
-        this.viewBoxChangeInfo.width + ' ' +
+        this.viewBoxChangeInfo.width +
+        ' ' +
         40;
     } else {
-      this.viewBox = '0 ' +
-        pathSliderMove + ' ' +
-        40 + ' ' +
-        this.viewBoxChangeInfo.height;
+      this.viewBox =
+        '0 ' + pathSliderMove + ' ' + 40 + ' ' + this.viewBoxChangeInfo.height;
     }
   }
 
@@ -196,18 +202,23 @@ export class PathSliderComponent implements OnDestroy {
       if (path.startPosition <= this.viewBoxChangeInfo.x) {
         return 1;
       }
-      if ((path.startPosition + 10) >= (this.viewBoxChangeInfo.x + this.viewBoxChangeInfo.width)) {
+      if (
+        path.startPosition + 10 >=
+        this.viewBoxChangeInfo.x + this.viewBoxChangeInfo.width
+      ) {
         return 2;
       }
     } else {
       if (path.startPosition <= this.viewBoxChangeInfo.y) {
         return 1;
       }
-      if ((path.startPosition + 10) >= (this.viewBoxChangeInfo.y + this.viewBoxChangeInfo.height)) {
+      if (
+        path.startPosition + 10 >=
+        this.viewBoxChangeInfo.y + this.viewBoxChangeInfo.height
+      ) {
         return 2;
       }
     }
     return 0;
   }
-
 }

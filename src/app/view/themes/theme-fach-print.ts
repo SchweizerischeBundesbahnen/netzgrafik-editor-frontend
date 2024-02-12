@@ -1,12 +1,19 @@
-import {ThemeBase} from './theme-base';
-import {ThemeFach} from './theme-fach';
-import {ThemeRegistration} from './theme-registration';
-import {StaticDomTags} from '../editor-main-view/data-views/static.dom.tags';
+import { ThemeBase } from './theme-base';
+import { ThemeFach } from './theme-fach';
+import { ThemeRegistration } from './theme-registration';
+import { StaticDomTags } from '../editor-main-view/data-views/static.dom.tags';
 
 export class ThemeFachPrint extends ThemeBase {
-  constructor(backgroundColor = 'whitesmoke',
-              backgroundStreckengraphikColor = 'white') {
-    super(ThemeRegistration.ThemeFachPrint, backgroundColor, backgroundStreckengraphikColor, false);
+  constructor(
+    backgroundColor = 'whitesmoke',
+    backgroundStreckengraphikColor = 'white',
+  ) {
+    super(
+      ThemeRegistration.ThemeFachPrint,
+      backgroundColor,
+      backgroundStreckengraphikColor,
+      false,
+    );
     ThemeBase.setUIColors(ThemeFach.getThemeFachColors());
     ThemeBase.setRenderingColors(ThemeFachPrint.getThemeFachPrintColors());
   }
@@ -70,7 +77,7 @@ export class ThemeFachPrint extends ThemeBase {
       'COLOR_STRECKENGRAPHIK_LINE_GRID_X: darkgray',
       'COLOR_STRECKENGRAPHIK_LINE_GRID_Y: darkgray',
 
-      'COLOR_Edit: #eb00ff'
+      'COLOR_Edit: #eb00ff',
     ];
   }
 }

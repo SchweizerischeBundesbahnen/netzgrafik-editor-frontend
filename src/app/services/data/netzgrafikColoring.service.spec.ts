@@ -1,26 +1,25 @@
-import {DataService} from '../data/data.service';
-import {NodeService} from '../data/node.service';
-import {ResourceService} from '../data/resource.service';
-import {TrainrunService} from '../data/trainrun.service';
-import {TrainrunSectionService} from '../data/trainrunsection.service';
-import {StammdatenService} from '../data/stammdaten.service';
-import {NoteService} from '../data/note.service';
-import {Node} from '../../models/node.model';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {LogService} from '../../logger/log.service';
-import {LogPublishersService} from '../../logger/log.publishers.service';
-import {LabelGroupService} from '../data/labelgroup.service';
-import {LabelService} from '../data/label.serivce';
-import {FilterService} from '../ui/filter.service';
-import {NetzgrafikColoringService} from '../data/netzgrafikColoring.service';
-import {UndoService} from '../data/undo.service';
-import {CopyService} from './copy.service';
-import {UiInteractionService} from '../ui/ui.interaction.service';
-import {LoadPerlenketteService} from '../../perlenkette/service/load-perlenkette.service';
-import {NetzgrafikUnitTesting} from '../../../integration-testing/netzgrafik.unit.testing';
+import { DataService } from '../data/data.service';
+import { NodeService } from '../data/node.service';
+import { ResourceService } from '../data/resource.service';
+import { TrainrunService } from '../data/trainrun.service';
+import { TrainrunSectionService } from '../data/trainrunsection.service';
+import { StammdatenService } from '../data/stammdaten.service';
+import { NoteService } from '../data/note.service';
+import { Node } from '../../models/node.model';
+import { TrainrunSection } from '../../models/trainrunsection.model';
+import { LogService } from '../../logger/log.service';
+import { LogPublishersService } from '../../logger/log.publishers.service';
+import { LabelGroupService } from '../data/labelgroup.service';
+import { LabelService } from '../data/label.serivce';
+import { FilterService } from '../ui/filter.service';
+import { NetzgrafikColoringService } from '../data/netzgrafikColoring.service';
+import { UndoService } from '../data/undo.service';
+import { CopyService } from './copy.service';
+import { UiInteractionService } from '../ui/ui.interaction.service';
+import { LoadPerlenketteService } from '../../perlenkette/service/load-perlenkette.service';
+import { NetzgrafikUnitTesting } from '../../../integration-testing/netzgrafik.unit.testing';
 
 describe('NetzgraphikColoringSerivce', () => {
-
   let dataService: DataService;
   let nodeService: NodeService;
   let resourceService: ResourceService;
@@ -49,57 +48,95 @@ describe('NetzgraphikColoringSerivce', () => {
     labelGroupService = new LabelGroupService(logService);
     labelService = new LabelService(logService, labelGroupService);
     filterService = new FilterService(labelService, labelGroupService);
-    trainrunService = new TrainrunService(logService, labelService, filterService);
-    trainrunSectionService = new TrainrunSectionService(logService, trainrunService, filterService);
-    nodeService = new NodeService(logService, resourceService, trainrunService, trainrunSectionService, labelService, filterService);
+    trainrunService = new TrainrunService(
+      logService,
+      labelService,
+      filterService,
+    );
+    trainrunSectionService = new TrainrunSectionService(
+      logService,
+      trainrunService,
+      filterService,
+    );
+    nodeService = new NodeService(
+      logService,
+      resourceService,
+      trainrunService,
+      trainrunSectionService,
+      labelService,
+      filterService,
+    );
     noteService = new NoteService(logService, labelService, filterService);
     netzgrafikColoringService = new NetzgrafikColoringService(logService);
-    dataService = new DataService(resourceService, nodeService, trainrunSectionService, trainrunService,
-      stammdatenService, noteService, labelService, labelGroupService, filterService, netzgrafikColoringService);
-    nodeService.nodes.subscribe(updatesNodes => nodes = updatesNodes);
-    trainrunSectionService.trainrunSections.subscribe(updatesTrainrunSections => trainrunSections = updatesTrainrunSections);
-
-
-    loadPerlenketteService = new LoadPerlenketteService(trainrunService,
+    dataService = new DataService(
+      resourceService,
+      nodeService,
       trainrunSectionService,
-      nodeService);
+      trainrunService,
+      stammdatenService,
+      noteService,
+      labelService,
+      labelGroupService,
+      filterService,
+      netzgrafikColoringService,
+    );
+    nodeService.nodes.subscribe((updatesNodes) => (nodes = updatesNodes));
+    trainrunSectionService.trainrunSections.subscribe(
+      (updatesTrainrunSections) => (trainrunSections = updatesTrainrunSections),
+    );
 
-    uiInteractionService = new UiInteractionService(filterService,
+    loadPerlenketteService = new LoadPerlenketteService(
+      trainrunService,
+      trainrunSectionService,
+      nodeService,
+    );
+
+    uiInteractionService = new UiInteractionService(
+      filterService,
       nodeService,
       noteService,
       stammdatenService,
       trainrunSectionService,
       trainrunService,
       netzgrafikColoringService,
-      loadPerlenketteService);
+      loadPerlenketteService,
+    );
 
     undoService = new UndoService(
       dataService,
       nodeService,
       noteService,
       trainrunService,
-      filterService
+      filterService,
     );
 
-    copyService = new CopyService(dataService, trainrunService, trainrunSectionService, nodeService, noteService, filterService, uiInteractionService, undoService);
+    copyService = new CopyService(
+      dataService,
+      trainrunService,
+      trainrunSectionService,
+      nodeService,
+      noteService,
+      filterService,
+      uiInteractionService,
+      undoService,
+    );
     copyService.resetLocalStorage();
-
   });
 
   it('test NetzgrafikColor.createDefaultColorForNotExistingColors', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     const loadedNetzgrafik = dataService.getNetzgrafikDto();
     netzgrafikColoringService.generateColors();
     const styles = netzgrafikColoringService.generateGlobalStyles(
       dataService.getTrainrunCategories(),
-      trainrunSectionService.getTrainrunSections()
+      trainrunSectionService.getTrainrunSections(),
     );
     const v1 = netzgrafikColoringService.getNetzgrafikColor('S');
     expect(v1).toBe(undefined);
 
-    netzgrafikColoringService.createDefaultColorForNotExistingColors(
-      'Adrian'
-    );
+    netzgrafikColoringService.createDefaultColorForNotExistingColors('Adrian');
     const v2 = netzgrafikColoringService.getNetzgrafikColor('Adrian');
     expect(v2.getColorRef()).toBe('Adrian');
     expect(v2.getColors(false).color).toBe('#767676');
@@ -113,25 +150,24 @@ describe('NetzgraphikColoringSerivce', () => {
   });
 
   it('test NetzgrafikColor.generateColors', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     const loadedNetzgrafik = dataService.getNetzgrafikDto();
 
-
-    netzgrafikColoringService.createDefaultColorForNotExistingColors(
-      'Adrian'
-    );
+    netzgrafikColoringService.createDefaultColorForNotExistingColors('Adrian');
     netzgrafikColoringService.generateColors();
     const v2 = netzgrafikColoringService.getNetzgrafikColor('Adrian');
     expect(v2.getColorRef()).toBe('Adrian');
   });
 
   it('test NetzgrafikColor.changeColorRef', () => {
-    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
     const loadedNetzgrafik = dataService.getNetzgrafikDto();
 
-    netzgrafikColoringService.createDefaultColorForNotExistingColors(
-      'Adrian'
-    );
+    netzgrafikColoringService.createDefaultColorForNotExistingColors('Adrian');
     const v1 = netzgrafikColoringService.getNetzgrafikColor('Adrian');
     expect(v1.getColorRef()).toBe('Adrian');
     netzgrafikColoringService.changeColorRef(v1.getId(), 'Egli');
@@ -143,6 +179,4 @@ describe('NetzgraphikColoringSerivce', () => {
     const v3 = netzgrafikColoringService.getNetzgrafikColor('XYZ');
     expect(v3).toBe(undefined);
   });
-
-
 });

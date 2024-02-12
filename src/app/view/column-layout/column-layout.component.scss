@@ -1,6 +1,7 @@
 @import "variables";
 
-::ng-deep html, body {
+::ng-deep html,
+body {
   height: 100% !important;
   width: 100% !important;
 }
@@ -12,12 +13,20 @@ $close-size: $close-padding * 2 + $defaultIconSize;
 @function column-width($columns, $main: false) {
   @if ($main) {
     @if ($columns == 3) {
-      @return calc((100% - 3 * #{$col-gap}) / 4 * #{$columns} + #{($columns - 1)*$col-gap} + 1 * #{$col-gap});
+      @return calc(
+        (100% - 3 * #{$col-gap}) / 4 * #{$columns} + #{($columns - 1) * $col-gap} +
+          1 * #{$col-gap}
+      );
     } @else {
-      @return calc((100% - 3 * #{$col-gap}) / 4 * #{$columns} + #{($columns - 1)*$col-gap} + 2 * #{$col-gap});
+      @return calc(
+        (100% - 3 * #{$col-gap}) / 4 * #{$columns} + #{($columns - 1) * $col-gap} +
+          2 * #{$col-gap}
+      );
     }
   } @else {
-    @return calc((100% - 3 * #{$col-gap}) / 4 * #{$columns} + #{($columns - 1)*$col-gap});
+    @return calc(
+      (100% - 3 * #{$col-gap}) / 4 * #{$columns} + #{($columns - 1) * $col-gap}
+    );
   }
 }
 
@@ -48,7 +57,7 @@ $close-size: $close-padding * 2 + $defaultIconSize;
 
     &.hide {
       opacity: 0;
-      margin-left: calc(0.0 * #{column-width(1)});
+      margin-left: calc(0 * #{column-width(1)});
     }
   }
 
@@ -67,11 +76,13 @@ $close-size: $close-padding * 2 + $defaultIconSize;
     width: $close-size;
     height: $close-size;
 
-    transition: right $transitionLongDuration $transitionLongTiming,
-    opacity $transitionLongDuration*.2 $transitionLongTiming $transitionLongDuration*.8;
+    transition:
+      right $transitionLongDuration $transitionLongTiming,
+      opacity $transitionLongDuration * 0.2 $transitionLongTiming
+        $transitionLongDuration * 0.8;
 
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       width: 100%;
       height: 100%;
@@ -87,13 +98,15 @@ $close-size: $close-padding * 2 + $defaultIconSize;
     &.hide {
       opacity: 0;
       visibility: hidden;
-      transition: right $transitionLongDuration $transitionLongTiming,
-      opacity $transitionLongDuration*.2 $transitionLongTiming;
+      transition:
+        right $transitionLongDuration $transitionLongTiming,
+        opacity $transitionLongDuration * 0.2 $transitionLongTiming;
     }
   }
 
   #cd-layout-main {
-    .cd-layout-main-content-wrapper { // applying padding directly to #cd-layout-main prevents scroll events in padding!
+    .cd-layout-main-content-wrapper {
+      // applying padding directly to #cd-layout-main prevents scroll events in padding!
       height: 100%;
     }
 
@@ -125,11 +138,13 @@ $close-size: $close-padding * 2 + $defaultIconSize;
     width: $close-size;
     height: $close-size;
 
-    transition: right $transitionLongDuration $transitionLongTiming,
-    opacity $transitionLongDuration*.2 $transitionLongTiming $transitionLongDuration*.8;
+    transition:
+      right $transitionLongDuration $transitionLongTiming,
+      opacity $transitionLongDuration * 0.2 $transitionLongTiming
+        $transitionLongDuration * 0.8;
 
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       width: 100%;
       height: 100%;
@@ -145,8 +160,9 @@ $close-size: $close-padding * 2 + $defaultIconSize;
     &.hide {
       opacity: 0;
       visibility: hidden;
-      transition: right $transitionLongDuration $transitionLongTiming,
-      opacity $transitionLongDuration*.2 $transitionLongTiming;
+      transition:
+        right $transitionLongDuration $transitionLongTiming,
+        opacity $transitionLongDuration * 0.2 $transitionLongTiming;
     }
   }
 
@@ -161,15 +177,15 @@ $close-size: $close-padding * 2 + $defaultIconSize;
   }
 
   #cd-layout-filter {
-    width: column-width(1)
+    width: column-width(1);
   }
 
   #cd-layout-main {
-    width: column-width(3, $main: true)
+    width: column-width(3, $main: true);
   }
 
   #cd-layout-aside {
-    width: column-width(0)
+    width: column-width(0);
   }
 
   #cd-layout-close-aside {
@@ -177,21 +193,22 @@ $close-size: $close-padding * 2 + $defaultIconSize;
   }
 }
 
-.mode-detail-only, .mode-perlenkette-only {
+.mode-detail-only,
+.mode-perlenkette-only {
   #cd-layout-close-filter {
     left: 0;
   }
 
   #cd-layout-filter {
-    width: column-width(0)
+    width: column-width(0);
   }
 
   #cd-layout-main {
-    width: column-width(3, $main: true)
+    width: column-width(3, $main: true);
   }
 
   #cd-layout-aside {
-    width: column-width(1)
+    width: column-width(1);
   }
 
   #cd-layout-close-aside {
@@ -205,15 +222,15 @@ $close-size: $close-padding * 2 + $defaultIconSize;
   }
 
   #cd-layout-filter {
-    width: column-width(0)
+    width: column-width(0);
   }
 
   #cd-layout-main {
-    width: column-width(4, $main: true)
+    width: column-width(4, $main: true);
   }
 
   #cd-layout-aside {
-    width: column-width(0)
+    width: column-width(0);
   }
 
   #cd-layout-close-aside {
@@ -221,21 +238,22 @@ $close-size: $close-padding * 2 + $defaultIconSize;
   }
 }
 
-.mode-filter-and-detail, .mode-filter-and-perlenkette {
+.mode-filter-and-detail,
+.mode-filter-and-perlenkette {
   #cd-layout-close-filter {
     left: column-width(1);
   }
 
   #cd-layout-filter {
-    width: column-width(1)
+    width: column-width(1);
   }
 
   #cd-layout-main {
-    width: column-width(2, $main: true)
+    width: column-width(2, $main: true);
   }
 
   #cd-layout-aside {
-    width: column-width(1)
+    width: column-width(1);
   }
 
   #cd-layout-close-aside {
@@ -249,8 +267,8 @@ $close-size: $close-padding * 2 + $defaultIconSize;
 }
 
 // scrollbars
-::ng-deep #cd-layout-content  {
-  overflow: hidden !important;/* Hide all scrollbars in "main" window*/
+::ng-deep #cd-layout-content {
+  overflow: hidden !important; /* Hide all scrollbars in "main" window*/
 }
 
 ::ng-deep #cd-layout-aside {

@@ -1,14 +1,23 @@
-import {ThemeBase} from './theme-base';
-import {ThemeDefaultUx} from './theme-default-ux';
-import {ThemeRegistration} from './theme-registration';
-import {StaticDomTags} from '../editor-main-view/data-views/static.dom.tags';
+import { ThemeBase } from './theme-base';
+import { ThemeDefaultUx } from './theme-default-ux';
+import { ThemeRegistration } from './theme-registration';
+import { StaticDomTags } from '../editor-main-view/data-views/static.dom.tags';
 
 export class ThemeDefaultUxDark extends ThemeBase {
-  constructor(backgroundColor = 'whitesmoke',
-              backgroundStreckengraphikColor = 'white') {
-    super(ThemeRegistration.ThemeDefaultUxDark, backgroundColor, backgroundStreckengraphikColor, true);
+  constructor(
+    backgroundColor = 'whitesmoke',
+    backgroundStreckengraphikColor = 'white',
+  ) {
+    super(
+      ThemeRegistration.ThemeDefaultUxDark,
+      backgroundColor,
+      backgroundStreckengraphikColor,
+      true,
+    );
     ThemeBase.setUIColors(ThemeDefaultUx.getThemeDefaultUxColors());
-    ThemeBase.setRenderingColors(ThemeDefaultUxDark.getThemeDefaultUxDarkColors());
+    ThemeBase.setRenderingColors(
+      ThemeDefaultUxDark.getThemeDefaultUxDarkColors(),
+    );
   }
 
   static getThemeDefaultUxDarkColors(): string[] {
@@ -70,7 +79,7 @@ export class ThemeDefaultUxDark extends ThemeBase {
       'COLOR_STRECKENGRAPHIK_LINE_GRID_X: whitesmoke',
       'COLOR_STRECKENGRAPHIK_LINE_GRID_Y: whitesmoke',
 
-      'COLOR_Edit: rgb(47, 210, 204)'
+      'COLOR_Edit: rgb(47, 210, 204)',
     ];
   }
 }

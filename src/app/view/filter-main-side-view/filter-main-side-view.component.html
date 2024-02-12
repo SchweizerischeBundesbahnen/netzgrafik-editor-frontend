@@ -1,20 +1,26 @@
-<sbb-column-layout [mode]="mode"
-                   [showAsideClose]="showToggleAside"
-                   (asideClosed)="asideClosed()"
-                   [showFilterClose]="showToggleFilter"
-                   (filterClosed)="filterClosed()">
+<sbb-column-layout
+  [mode]="mode"
+  [showAsideClose]="showToggleAside"
+  (asideClosed)="asideClosed()"
+  [showFilterClose]="showToggleFilter"
+  (filterClosed)="filterClosed()"
+>
   <div filter class="col-padding">
     <sbb-variant-view *ngIf="showVariantInfo"></sbb-variant-view>
     <sbb-editor-filter-view *ngIf="showEditorFilter"></sbb-editor-filter-view>
     <sbb-editor-edit-tools-view-component
-      *ngIf="showEditorEditTools"></sbb-editor-edit-tools-view-component>
-    <sbb-editor-tools-view-component *ngIf="showEditorTools"></sbb-editor-tools-view-component>
+      *ngIf="showEditorEditTools"
+    ></sbb-editor-edit-tools-view-component>
+    <sbb-editor-tools-view-component
+      *ngIf="showEditorTools"
+    ></sbb-editor-tools-view-component>
     <sbb-editor-properties-view-component
-      *ngIf="showEditorProperties"></sbb-editor-properties-view-component>
+      *ngIf="showEditorProperties"
+    ></sbb-editor-properties-view-component>
   </div>
 
   <div main class="sbb-editor-wrapper">
-    <div id="main-drawing-container-root" style="width: 98%; height: 100%;">
+    <div id="main-drawing-container-root" style="width: 98%; height: 100%">
       <ng-container *ngIf="isMainView()">
         <sbb-editor-main-view></sbb-editor-main-view>
       </ng-container>
@@ -33,8 +39,15 @@
   </div>
 
   <div aside class="col-padding">
-    <sbb-editor-side-view *ngIf="showDetail" (closeSideView)="asideClosed()"></sbb-editor-side-view>
-    <sbb-perlenkette *ngIf="showPerlenkette"
-                     [sidebarElementHeight]="filterMainSideViewElement.nativeElement.offsetHeight"></sbb-perlenkette>
+    <sbb-editor-side-view
+      *ngIf="showDetail"
+      (closeSideView)="asideClosed()"
+    ></sbb-editor-side-view>
+    <sbb-perlenkette
+      *ngIf="showPerlenkette"
+      [sidebarElementHeight]="
+        filterMainSideViewElement.nativeElement.offsetHeight
+      "
+    ></sbb-perlenkette>
   </div>
 </sbb-column-layout>

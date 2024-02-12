@@ -1,5 +1,5 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {CardGridComponent} from './card-grid.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CardGridComponent } from './card-grid.component';
 
 describe('CardGridComponent', () => {
   let component: CardGridComponent;
@@ -7,9 +7,8 @@ describe('CardGridComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CardGridComponent ]
-    })
-    .compileComponents();
+      declarations: [CardGridComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

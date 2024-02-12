@@ -6,63 +6,101 @@ HORIZONTAL - Pattern may cause performance issue - VERTICAL opt. and works reall
 HORIZONTAL - is broken !!! not removed because the code could help to fix the slider !!!
 --->
 
-
 <!---- HORIZONTAL ---->
 <ng-container *ngIf="horizontal">
-  <svg xmlns="http://www.w3.org/2000/svg"
-       [attr.viewBox]="viewBox"
-       height="40"
-       width="100%"
-       style="cursor: ew-resize"
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    [attr.viewBox]="viewBox"
+    height="40"
+    width="100%"
+    style="cursor: ew-resize"
   >
-    <line [attr.x1]="-1000000" [attr.y1]="sliderLinePos" [attr.x2]="1000000"
-          [attr.y2]="sliderLinePos"
-          class="Slider"/>
+    <line
+      [attr.x1]="-1000000"
+      [attr.y1]="sliderLinePos"
+      [attr.x2]="1000000"
+      [attr.y2]="sliderLinePos"
+      class="Slider"
+    />
 
-    <pattern [attr.id]="'horizontal_timeSliderTicks_'+sliderLinePos"
-             patternUnits="userSpaceOnUse"
-             x="0"
-             y="0"
-             height="40"
-             [attr.width]="(getScaleFactor() * 60)"
-             [attr.viewBox]="'0 0 '+(getScaleFactor() * 60) + '40'">
-
-      <g [attr.transform]="'matrix('+getScaleFactor()+',0.00,0.00,1.00,0.00,0.00)'">
+    <pattern
+      [attr.id]="'horizontal_timeSliderTicks_' + sliderLinePos"
+      patternUnits="userSpaceOnUse"
+      x="0"
+      y="0"
+      height="40"
+      [attr.width]="getScaleFactor() * 60"
+      [attr.viewBox]="'0 0 ' + getScaleFactor() * 60 + '40'"
+    >
+      <g
+        [attr.transform]="
+          'matrix(' + getScaleFactor() + ',0.00,0.00,1.00,0.00,0.00)'
+        "
+      >
         <g *ngFor="let time of timesTicks">
-          <g [attr.transform]="'matrix(1.00,0.00,0.00,1.00,'+ time.time +',0.00)'">
+          <g
+            [attr.transform]="
+              'matrix(1.00,0.00,0.00,1.00,' + time.time + ',0.00)'
+            "
+          >
             <g
-              [attr.transform]="'matrix('+  getInverseScaleFactor()+', 0.00, 0.00, 1.00, 0.00, 0.00)'">
-              <line x1="0"
-                    [attr.y1]="sliderLinePos-getSliderTimeLineLen(time)"
-                    x2="0"
-                    [attr.y2]="sliderLinePos+getSliderTimeLineLen(time)"
-                    [class]="getTimeSliderClassTag(time)"/>
+              [attr.transform]="
+                'matrix(' +
+                getInverseScaleFactor() +
+                ', 0.00, 0.00, 1.00, 0.00, 0.00)'
+              "
+            >
+              <line
+                x1="0"
+                [attr.y1]="sliderLinePos - getSliderTimeLineLen(time)"
+                x2="0"
+                [attr.y2]="sliderLinePos + getSliderTimeLineLen(time)"
+                [class]="getTimeSliderClassTag(time)"
+              />
             </g>
           </g>
         </g>
       </g>
     </pattern>
 
-    <pattern [attr.id]="'horizontal_timeSliderTicksText_'+sliderLinePos"
-             patternUnits="userSpaceOnUse"
-             x="0"
-             y="0"
-             height="40"
-             [attr.width]="(getScaleFactor() * 24*60)"
-             [attr.viewBox]="'0 0 '+(getScaleFactor() * 24*60) + '40'">
-
+    <pattern
+      [attr.id]="'horizontal_timeSliderTicksText_' + sliderLinePos"
+      patternUnits="userSpaceOnUse"
+      x="0"
+      y="0"
+      height="40"
+      [attr.width]="getScaleFactor() * 24 * 60"
+      [attr.viewBox]="'0 0 ' + getScaleFactor() * 24 * 60 + '40'"
+    >
       <ng-container *ngIf="!disableText">
-        <g [attr.transform]="'matrix('+getScaleFactor()+',0.00,0.00,1.00,0.00,0.00)'">
+        <g
+          [attr.transform]="
+            'matrix(' + getScaleFactor() + ',0.00,0.00,1.00,0.00,0.00)'
+          "
+        >
           <g *ngFor="let time of times">
-            <ng-container *ngIf="time.text!==''">
-              <g [attr.transform]="'matrix(1.00,0.00,0.00,1.00,'+ time.time +',0.00)'">
+            <ng-container *ngIf="time.text !== ''">
+              <g
+                [attr.transform]="
+                  'matrix(1.00,0.00,0.00,1.00,' + time.time + ',0.00)'
+                "
+              >
                 <g
-                  [attr.transform]="'matrix('+  getInverseScaleFactor()+', 0.00, 0.00, 1.00, 0.00, 0.00)'">
-                  <text transform="rotate(90)"
-                        x="7"
-                        [attr.y]="sliderTextPos"
-                        [class]="getTimeSliderTextClassTag(time)"
-                        style="text-anchor: middle;">{{time.text}}</text>
+                  [attr.transform]="
+                    'matrix(' +
+                    getInverseScaleFactor() +
+                    ', 0.00, 0.00, 1.00, 0.00, 0.00)'
+                  "
+                >
+                  <text
+                    transform="rotate(90)"
+                    x="7"
+                    [attr.y]="sliderTextPos"
+                    [class]="getTimeSliderTextClassTag(time)"
+                    style="text-anchor: middle"
+                  >
+                    {{ time.text }}
+                  </text>
                 </g>
               </g>
             </ng-container>
@@ -71,52 +109,82 @@ HORIZONTAL - is broken !!! not removed because the code could help to fix the sl
       </ng-container>
     </pattern>
 
-
     <ng-container *ngFor="let index of [].constructor(72); index as hourOffset">
       <g
-        [attr.transform]="'matrix(1.00, 0.00, 0.00, 1.00, '+ ((hourOffset-24)*60*getScaleFactor()) +', 0.00)'">
-        <rect class="TickLine"
-              id="gridlines"
-              x="0"
-              y="0"
-              [attr.width]="(getScaleFactor() * 60)"
-              height="40"
-              [attr.fill]="'url(#horizontal_timeSliderTicks_'+sliderLinePos+')'"
+        [attr.transform]="
+          'matrix(1.00, 0.00, 0.00, 1.00, ' +
+          (hourOffset - 24) * 60 * getScaleFactor() +
+          ', 0.00)'
+        "
+      >
+        <rect
+          class="TickLine"
+          id="gridlines"
+          x="0"
+          y="0"
+          [attr.width]="getScaleFactor() * 60"
+          height="40"
+          [attr.fill]="'url(#horizontal_timeSliderTicks_' + sliderLinePos + ')'"
         />
       </g>
     </ng-container>
 
-
     <ng-container *ngFor="let index of [].constructor(3); index as hourOffset">
       <g
-        [attr.transform]="'matrix(1.00, 0.00, 0.00, 1.00, '+ ((hourOffset-1)*24*60*getScaleFactor()) +',0.00)'">
-        <rect class="TickText"
-              id="gridlines"
-              x="0"
-              y="0"
-              [attr.width]="(getScaleFactor() * 24 * 60)"
-              height="40"
-              [attr.fill]="'url(#horizontal_timeSliderTicksText_'+sliderLinePos+')'"
+        [attr.transform]="
+          'matrix(1.00, 0.00, 0.00, 1.00, ' +
+          (hourOffset - 1) * 24 * 60 * getScaleFactor() +
+          ',0.00)'
+        "
+      >
+        <rect
+          class="TickText"
+          id="gridlines"
+          x="0"
+          y="0"
+          [attr.width]="getScaleFactor() * 24 * 60"
+          height="40"
+          [attr.fill]="
+            'url(#horizontal_timeSliderTicksText_' + sliderLinePos + ')'
+          "
         />
       </g>
     </ng-container>
 
     <ng-container *ngIf="disableText">
-      <g [attr.transform]="'matrix('+getScaleFactor()+',0.00,0.00,1.00,0.00,0.00)'">
-        <ng-container *ngIf="timeLinePos!==undefined">
-          <g [attr.transform]="'matrix(1.00,0.00,0.00,1.00,'+timeLinePos+',0.00)'">
+      <g
+        [attr.transform]="
+          'matrix(' + getScaleFactor() + ',0.00,0.00,1.00,0.00,0.00)'
+        "
+      >
+        <ng-container *ngIf="timeLinePos !== undefined">
+          <g
+            [attr.transform]="
+              'matrix(1.00,0.00,0.00,1.00,' + timeLinePos + ',0.00)'
+            "
+          >
             <g
-              [attr.transform]="'matrix('+ getInverseScaleFactor()+', 0.00, 0.00, 1.00, 0.00, 0.00)'">
-
-              <line x1="0"
-                    [attr.y1]="sliderLinePos-getTimeLineLen()"
-                    x2="0"
-                    [attr.y2]="sliderLinePos+getTimeLineLen()"
-                    [class]="getTimeLineClassTag()"/>
-              <text x="7"
-                    [attr.y]="sliderTextPos"
-                    [class]="getTimeLineTextClassTag()"
-                    style="text-anchor: end;">{{getTimeLineText(timeLinePos)}}</text>
+              [attr.transform]="
+                'matrix(' +
+                getInverseScaleFactor() +
+                ', 0.00, 0.00, 1.00, 0.00, 0.00)'
+              "
+            >
+              <line
+                x1="0"
+                [attr.y1]="sliderLinePos - getTimeLineLen()"
+                x2="0"
+                [attr.y2]="sliderLinePos + getTimeLineLen()"
+                [class]="getTimeLineClassTag()"
+              />
+              <text
+                x="7"
+                [attr.y]="sliderTextPos"
+                [class]="getTimeLineTextClassTag()"
+                style="text-anchor: end"
+              >
+                {{ getTimeLineText(timeLinePos) }}
+              </text>
             </g>
           </g>
         </ng-container>
@@ -125,32 +193,50 @@ HORIZONTAL - is broken !!! not removed because the code could help to fix the sl
   </svg>
 </ng-container>
 
-
 <!---- VERTICAL ---->
 <ng-container *ngIf="!horizontal">
   <div #componentElement class="container">
-    <svg xmlns="http://www.w3.org/2000/svg"
-         [attr.viewBox]="viewBox"
-         height="100%"
-         width="40"
-         style="cursor: ns-resize"
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      [attr.viewBox]="viewBox"
+      height="100%"
+      width="40"
+      style="cursor: ns-resize"
     >
       <ng-container *ngIf="delayedRendering">
         <ng-container *ngFor="let hourOffset of timesTicksIndices">
           <g
-            [attr.transform]="'matrix(1.00, 0.00, 0.00, 1.00, 0.00,'+ (hourOffset*60*getScaleFactor()-4) +')'">
-
-            <g [attr.transform]="'matrix(1.00, 0.00, 0.00, '+getScaleFactor()+', 0.00, 0.00)'">
+            [attr.transform]="
+              'matrix(1.00, 0.00, 0.00, 1.00, 0.00,' +
+              (hourOffset * 60 * getScaleFactor() - 4) +
+              ')'
+            "
+          >
+            <g
+              [attr.transform]="
+                'matrix(1.00, 0.00, 0.00, ' + getScaleFactor() + ', 0.00, 0.00)'
+              "
+            >
               <g *ngFor="let time of timesTicks">
-                <g [attr.transform]="'matrix(1.00, 0.00, 0.00, 1.00, 0.00, '+(time.time)+')'">
+                <g
+                  [attr.transform]="
+                    'matrix(1.00, 0.00, 0.00, 1.00, 0.00, ' + time.time + ')'
+                  "
+                >
                   <g
-                    [attr.transform]="'matrix(1.00, 0.00, 0.00, '+ getInverseScaleFactor()+', 0.00, 0.00)'">
-                    <line [attr.x1]="sliderLinePos-getSliderTimeLineLen(time)"
-                          y1="0"
-                          [attr.x2]="sliderLinePos+getSliderTimeLineLen(time)"
-                          y2="0"
-                          [class]="getTimeSliderClassTag(time)"
-                          shape-rendering="crispEdges"
+                    [attr.transform]="
+                      'matrix(1.00, 0.00, 0.00, ' +
+                      getInverseScaleFactor() +
+                      ', 0.00, 0.00)'
+                    "
+                  >
+                    <line
+                      [attr.x1]="sliderLinePos - getSliderTimeLineLen(time)"
+                      y1="0"
+                      [attr.x2]="sliderLinePos + getSliderTimeLineLen(time)"
+                      y2="0"
+                      [class]="getTimeSliderClassTag(time)"
+                      shape-rendering="crispEdges"
                     />
                   </g>
                 </g>
@@ -161,19 +247,43 @@ HORIZONTAL - is broken !!! not removed because the code could help to fix the sl
       </ng-container>
 
       <ng-container *ngIf="!disableText">
-        <ng-container *ngFor="let index of [].constructor(3); index as hourOffset">
+        <ng-container
+          *ngFor="let index of [].constructor(3); index as hourOffset"
+        >
           <g
-            [attr.transform]="'matrix(1.00, 0.00, 0.00, 1.00, 0.00,'+ ((hourOffset-1)*24*60*getScaleFactor()-4) +')'">
-            <g [attr.transform]="'matrix(1.00, 0.00, 0.00, '+getScaleFactor()+', 0.00, 0.00)'">
+            [attr.transform]="
+              'matrix(1.00, 0.00, 0.00, 1.00, 0.00,' +
+              ((hourOffset - 1) * 24 * 60 * getScaleFactor() - 4) +
+              ')'
+            "
+          >
+            <g
+              [attr.transform]="
+                'matrix(1.00, 0.00, 0.00, ' + getScaleFactor() + ', 0.00, 0.00)'
+              "
+            >
               <g *ngFor="let time of times">
-                <ng-container *ngIf="time.text!==''">
-                  <g [attr.transform]="'matrix(1.00,0.00,0.00,1.00, 0.00,'+time.time+')'">
+                <ng-container *ngIf="time.text !== ''">
+                  <g
+                    [attr.transform]="
+                      'matrix(1.00,0.00,0.00,1.00, 0.00,' + time.time + ')'
+                    "
+                  >
                     <g
-                      [attr.transform]="'matrix(1.00, 0.00, 0.00, '+ getInverseScaleFactor()+', 0.00, 0.00)'">
-                      <text [attr.x]="sliderTextPos"
-                            y="-2.5"
-                            [class]="getTimeSliderTextClassTag(time)"
-                            style="text-anchor: end;">{{time.text}}</text>
+                      [attr.transform]="
+                        'matrix(1.00, 0.00, 0.00, ' +
+                        getInverseScaleFactor() +
+                        ', 0.00, 0.00)'
+                      "
+                    >
+                      <text
+                        [attr.x]="sliderTextPos"
+                        y="-2.5"
+                        [class]="getTimeSliderTextClassTag(time)"
+                        style="text-anchor: end"
+                      >
+                        {{ time.text }}
+                      </text>
                     </g>
                   </g>
                 </ng-container>
@@ -184,20 +294,39 @@ HORIZONTAL - is broken !!! not removed because the code could help to fix the sl
       </ng-container>
 
       <ng-container *ngIf="disableText">
-        <g [attr.transform]="'matrix(1.00, 0.00, 0.00, '+getScaleFactor()+', 0.00, 0.00)'">
-          <ng-container *ngIf="timeLinePos!==undefined">
-            <g [attr.transform]="'matrix(1.00,0.00,0.00,1.00,0.00,'+timeLinePos+')'">
+        <g
+          [attr.transform]="
+            'matrix(1.00, 0.00, 0.00, ' + getScaleFactor() + ', 0.00, 0.00)'
+          "
+        >
+          <ng-container *ngIf="timeLinePos !== undefined">
+            <g
+              [attr.transform]="
+                'matrix(1.00,0.00,0.00,1.00,0.00,' + timeLinePos + ')'
+              "
+            >
               <g
-                [attr.transform]="'matrix(1.00, 0.00, 0.00, '+ getInverseScaleFactor()+', 0.00, 0.00)'">
-                <line [attr.x1]="sliderLinePos-getTimeLineLen()"
-                      y1="-3.5"
-                      [attr.x2]="sliderLinePos+getTimeLineLen()"
-                      y2="-3.5"
-                      [class]="getTimeLineClassTag()"/>
-                <text [attr.x]="sliderTextPos"
-                      y="-7"
-                      [class]="getTimeLineTextClassTag()"
-                      style="text-anchor: end;">{{getTimeLineText(timeLinePos)}}</text>
+                [attr.transform]="
+                  'matrix(1.00, 0.00, 0.00, ' +
+                  getInverseScaleFactor() +
+                  ', 0.00, 0.00)'
+                "
+              >
+                <line
+                  [attr.x1]="sliderLinePos - getTimeLineLen()"
+                  y1="-3.5"
+                  [attr.x2]="sliderLinePos + getTimeLineLen()"
+                  y2="-3.5"
+                  [class]="getTimeLineClassTag()"
+                />
+                <text
+                  [attr.x]="sliderTextPos"
+                  y="-7"
+                  [class]="getTimeLineTextClassTag()"
+                  style="text-anchor: end"
+                >
+                  {{ getTimeLineText(timeLinePos) }}
+                </text>
               </g>
             </g>
           </ng-container>

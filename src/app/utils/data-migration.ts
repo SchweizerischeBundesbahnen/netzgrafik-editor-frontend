@@ -1,11 +1,13 @@
-import {Trainrun} from '../models/trainrun.model';
-import {Node} from '../models/node.model';
-import {NetzgrafikDefault} from '../sample-netzgrafik/netzgrafik.default';
-import {NetzgrafikDto, TrainrunCategory} from '../data-structures/business.data.structures';
-import {Note} from '../models/note.model';
+import { Trainrun } from '../models/trainrun.model';
+import { Node } from '../models/node.model';
+import { NetzgrafikDefault } from '../sample-netzgrafik/netzgrafik.default';
+import {
+  NetzgrafikDto,
+  TrainrunCategory,
+} from '../data-structures/business.data.structures';
+import { Note } from '../models/note.model';
 
 export class DataMigration {
-
   static getMinimalTurnaroundTime(): number {
     return 8;
   }
@@ -50,49 +52,65 @@ export class DataMigration {
 
   static migrateNetzgrafikDto(netzgrafikDto: NetzgrafikDto) {
     // Change of data structure requires this migration step: separation of coloring / line pattern
-    const checkFirstElement = netzgrafikDto.metadata.trainrunTimeCategories.find(() => true);
-    if (checkFirstElement !== undefined && checkFirstElement.linePatternRef === undefined) {
-      netzgrafikDto.metadata.trainrunCategories = NetzgrafikDefault.getDefaultNetzgrafik().metadata.trainrunCategories;
-      netzgrafikDto.metadata.trainrunFrequencies = NetzgrafikDefault.getDefaultNetzgrafik().metadata.trainrunFrequencies;
-      netzgrafikDto.metadata.trainrunTimeCategories = NetzgrafikDefault.getDefaultNetzgrafik().metadata.trainrunTimeCategories;
+    const checkFirstElement =
+      netzgrafikDto.metadata.trainrunTimeCategories.find(() => true);
+    if (
+      checkFirstElement !== undefined &&
+      checkFirstElement.linePatternRef === undefined
+    ) {
+      netzgrafikDto.metadata.trainrunCategories =
+        NetzgrafikDefault.getDefaultNetzgrafik().metadata.trainrunCategories;
+      netzgrafikDto.metadata.trainrunFrequencies =
+        NetzgrafikDefault.getDefaultNetzgrafik().metadata.trainrunFrequencies;
+      netzgrafikDto.metadata.trainrunTimeCategories =
+        NetzgrafikDefault.getDefaultNetzgrafik().metadata.trainrunTimeCategories;
     }
-    const checkFirstFrequencyElement = netzgrafikDto.metadata.trainrunFrequencies.find(() => true);
-    if (checkFirstFrequencyElement !== undefined && checkFirstFrequencyElement.offset === undefined) {
-      netzgrafikDto.metadata.trainrunFrequencies = NetzgrafikDefault.getDefaultNetzgrafik().metadata.trainrunFrequencies;
+    const checkFirstFrequencyElement =
+      netzgrafikDto.metadata.trainrunFrequencies.find(() => true);
+    if (
+      checkFirstFrequencyElement !== undefined &&
+      checkFirstFrequencyElement.offset === undefined
+    ) {
+      netzgrafikDto.metadata.trainrunFrequencies =
+        NetzgrafikDefault.getDefaultNetzgrafik().metadata.trainrunFrequencies;
     }
 
     if (netzgrafikDto.metadata.netzgrafikColors === undefined) {
-      netzgrafikDto.metadata.netzgrafikColors = NetzgrafikDefault.getDefaultNetzgrafik().metadata.netzgrafikColors;
+      netzgrafikDto.metadata.netzgrafikColors =
+        NetzgrafikDefault.getDefaultNetzgrafik().metadata.netzgrafikColors;
     }
 
     if (netzgrafikDto.freeFloatingTexts === undefined) {
-      netzgrafikDto.freeFloatingTexts = NetzgrafikDefault.getDefaultNetzgrafik().freeFloatingTexts;
+      netzgrafikDto.freeFloatingTexts =
+        NetzgrafikDefault.getDefaultNetzgrafik().freeFloatingTexts;
     }
     if (netzgrafikDto.labels === undefined) {
       netzgrafikDto.labels = NetzgrafikDefault.getDefaultNetzgrafik().labels;
     }
     if (netzgrafikDto.labelGroups === undefined) {
-      netzgrafikDto.labelGroups = NetzgrafikDefault.getDefaultNetzgrafik().labelGroups;
+      netzgrafikDto.labelGroups =
+        NetzgrafikDefault.getDefaultNetzgrafik().labelGroups;
     }
     if (netzgrafikDto.filterData === undefined) {
-      netzgrafikDto.filterData = NetzgrafikDefault.getDefaultNetzgrafik().filterData;
+      netzgrafikDto.filterData =
+        NetzgrafikDefault.getDefaultNetzgrafik().filterData;
     }
 
-    netzgrafikDto.metadata.trainrunCategories.forEach((cat: TrainrunCategory) => {
-      if (cat.minimalTurnaroundTime === undefined) {
-        cat.minimalTurnaroundTime = DataMigration.getMinimalTurnaroundTime();
-      }
-      if (cat.nodeHeadwayStop === undefined) {
-        cat.nodeHeadwayStop = DataMigration.getNodeHeadwayStop(cat);
-      }
-      if (cat.nodeHeadwayNonStop === undefined) {
-        cat.nodeHeadwayNonStop = DataMigration.getNodeHeadwayNonStop(cat);
-      }
-      if (cat.sectionHeadway === undefined) {
-        cat.sectionHeadway = DataMigration.getSectionHeadway(cat);
-      }
-    });
-
+    netzgrafikDto.metadata.trainrunCategories.forEach(
+      (cat: TrainrunCategory) => {
+        if (cat.minimalTurnaroundTime === undefined) {
+          cat.minimalTurnaroundTime = DataMigration.getMinimalTurnaroundTime();
+        }
+        if (cat.nodeHeadwayStop === undefined) {
+          cat.nodeHeadwayStop = DataMigration.getNodeHeadwayStop(cat);
+        }
+        if (cat.nodeHeadwayNonStop === undefined) {
+          cat.nodeHeadwayNonStop = DataMigration.getNodeHeadwayNonStop(cat);
+        }
+        if (cat.sectionHeadway === undefined) {
+          cat.sectionHeadway = DataMigration.getSectionHeadway(cat);
+        }
+      },
+    );
   }
-
 }

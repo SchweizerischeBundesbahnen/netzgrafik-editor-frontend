@@ -1,14 +1,13 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {HistoryEntryAction} from '../history-entry/history-entry.component';
-import {UntypedFormControl} from '@angular/forms';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { HistoryEntryAction } from '../history-entry/history-entry.component';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'sbb-publish-entry',
   templateUrl: './publish-entry.component.html',
-  styleUrls: ['./publish-entry.component.scss']
+  styleUrls: ['./publish-entry.component.scss'],
 })
 export class PublishEntryComponent {
-
   @Input() model: PublishEntryModel;
   @Input() publishDisabled = false;
 
@@ -22,8 +21,8 @@ export class PublishEntryComponent {
       {
         name: 'Änderungen Verwerfen',
         icon: 'trash-small',
-        onClick: () => this.dropChangedClicked.next()
-      }
+        onClick: () => this.dropChangedClicked.next(),
+      },
     ];
   }
 

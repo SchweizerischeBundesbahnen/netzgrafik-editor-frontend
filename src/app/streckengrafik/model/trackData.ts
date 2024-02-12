@@ -4,21 +4,20 @@ export class TrackSegments {
     public endPos: number,
     public nbrTracks: number,
     public minNbrTracks: number,
-    public backward: boolean) {
-  }
+    public backward: boolean,
+  ) {}
 }
 
 export class TrackData {
-
-
   private nodeTracks: TrackData[] = [];
   private trackGrp: number = undefined;
 
-  constructor(public track: number,
-              public nodeId1: number = undefined,
-              public nodeId2: number = undefined,
-              public sectionTrackSegments: TrackSegments[] = []) {
-  }
+  constructor(
+    public track: number,
+    public nodeId1: number = undefined,
+    public nodeId2: number = undefined,
+    public sectionTrackSegments: TrackSegments[] = [],
+  ) {}
 
   setTrackGrp(grp: number) {
     this.trackGrp = grp;

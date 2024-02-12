@@ -1,7 +1,6 @@
-import {NetzgrafikColorDto} from '../data-structures/business.data.structures';
-import {ColorRefType} from '../data-structures/technical.data.structures';
+import { NetzgrafikColorDto } from '../data-structures/business.data.structures';
+import { ColorRefType } from '../data-structures/technical.data.structures';
 export class NetzgrafikColor {
-
   private static currentId = 0;
 
   private id: number;
@@ -16,27 +15,35 @@ export class NetzgrafikColor {
   private colorDarkModeMuted: string;
   private colorDarkModeRelated: string;
 
-  constructor({
-                id, colorRef,
-                color, colorFocus, colorMuted, colorRelated,
-                colorDarkMode, colorDarkModeFocus, colorDarkModeMuted, colorDarkModeRelated
-              }: NetzgrafikColorDto = {
-    id: NetzgrafikColor.incrementId(),
-    colorRef: 'UserDefined',
+  constructor(
+    {
+      id,
+      colorRef,
+      color,
+      colorFocus,
+      colorMuted,
+      colorRelated,
+      colorDarkMode,
+      colorDarkModeFocus,
+      colorDarkModeMuted,
+      colorDarkModeRelated,
+    }: NetzgrafikColorDto = {
+      id: NetzgrafikColor.incrementId(),
+      colorRef: 'UserDefined',
 
-    color: '#767676',
-    colorFocus: '#000000',
-    colorMuted: '#DCDCDC',
-    colorRelated: '#767676',
+      color: '#767676',
+      colorFocus: '#000000',
+      colorMuted: '#DCDCDC',
+      colorRelated: '#767676',
 
-    colorDarkMode: '#767676',
-    colorDarkModeFocus: '#DCDCDC',
-    colorDarkModeMuted: '#000000',
-    colorDarkModeRelated: '#767676',
-  }) {
+      colorDarkMode: '#767676',
+      colorDarkModeFocus: '#DCDCDC',
+      colorDarkModeMuted: '#000000',
+      colorDarkModeRelated: '#767676',
+    },
+  ) {
     this.id = id;
     this.colorRef = colorRef;
-
 
     this.color = color;
     this.colorFocus = colorFocus;

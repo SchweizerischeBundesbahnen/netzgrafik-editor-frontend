@@ -6,11 +6,13 @@
       r="1.5px"
       [attr.class]="getClassTag('edge_line_stops')"
     ></svg:circle>
-    <svg:text *ngIf="checkIsCollapsedStops()"
-              [attr.class]="getClassTag('edge_text stops')"
-              [attr.x]="stopElement.getX()+5"
-              [attr.y]="stopElement.getY()+8"
-    >{{getNumberOfStops()}}
+    <svg:text
+      *ngIf="checkIsCollapsedStops()"
+      [attr.class]="getClassTag('edge_text stops')"
+      [attr.x]="stopElement.getX() + 5"
+      [attr.y]="stopElement.getY() + 8"
+    >
+      {{ getNumberOfStops() }}
     </svg:text>
   </svg:g>
 </ng-container>

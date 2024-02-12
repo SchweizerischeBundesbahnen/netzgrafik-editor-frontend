@@ -1,8 +1,8 @@
-import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
-import {SbbDialog, SbbDialogConfig} from '@sbb-esta/angular/dialog';
-import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
-import {Observable, Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import { Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
+import { SbbDialog, SbbDialogConfig } from '@sbb-esta/angular/dialog';
+import { UiInteractionService } from '../../../services/ui/ui.interaction.service';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 export class ConfirmationDialogParameter {
   public dialogTitle: string;
@@ -12,10 +12,12 @@ export class ConfirmationDialogParameter {
   public subject: Subject<boolean>;
   public dialogFeedback: Observable<boolean>;
 
-  constructor(dialogTitle: string,
-              dialogContent: string,
-              dialogConfirmationButtonLabel= 'Ja',
-              dialogAbortButtonLabel= 'Nein') {
+  constructor(
+    dialogTitle: string,
+    dialogContent: string,
+    dialogConfirmationButtonLabel = 'Ja',
+    dialogAbortButtonLabel = 'Nein',
+  ) {
     this.dialogTitle = dialogTitle;
     this.dialogContent = dialogContent;
     this.dialogConfirmationButtonLabel = dialogConfirmationButtonLabel;
@@ -30,11 +32,11 @@ export class ConfirmationDialogParameter {
 @Component({
   selector: 'sbb-confirmation-dialog',
   templateUrl: './confirmation-dialog.component.html',
-  styleUrls: ['./confirmation-dialog.component.scss']
+  styleUrls: ['./confirmation-dialog.component.scss'],
 })
-
 export class ConfirmationDialogComponent implements OnDestroy {
-  @ViewChild('confirmationDialogTemplate', {static: true}) confirmationDialogTemplate: TemplateRef<any>;
+  @ViewChild('confirmationDialogTemplate', { static: true })
+  confirmationDialogTemplate: TemplateRef<any>;
 
   public dialogTitle: string;
   public dialogContent: string;
@@ -43,15 +45,17 @@ export class ConfirmationDialogComponent implements OnDestroy {
 
   private destroyed = new Subject<void>();
 
-  constructor(public dialog: SbbDialog,
-              private uiInteractionService: UiInteractionService) {
-
+  constructor(
+    public dialog: SbbDialog,
+    private uiInteractionService: UiInteractionService,
+  ) {
     this.uiInteractionService.confirmationDiagramDialog
       .pipe(takeUntil(this.destroyed))
       .subscribe((parameter: ConfirmationDialogParameter) => {
         this.dialogTitle = parameter.dialogTitle;
         this.dialogContent = parameter.dialogContent;
-        this.dialogConfirmationButtonLabel = parameter.dialogConfirmationButtonLabel;
+        this.dialogConfirmationButtonLabel =
+          parameter.dialogConfirmationButtonLabel;
         this.dialogAbortButtonLabel = parameter.dialogAbortButtonLabel;
         this.openDialog(parameter);
       });
@@ -78,18 +82,19 @@ export class ConfirmationDialogComponent implements OnDestroy {
 
   openDialog(parameter: ConfirmationDialogParameter) {
     const dialogConfig = ConfirmationDialogComponent.getDialogConfig();
-    const dialogRef = this.dialog.open(this.confirmationDialogTemplate, dialogConfig);
+    const dialogRef = this.dialog.open(
+      this.confirmationDialogTemplate,
+      dialogConfig,
+    );
     let userHasConfirmed;
     dialogRef.afterClosed().subscribe((result) => {
-        if (result === true) {
-          userHasConfirmed = true;
-          parameter.subject.next(userHasConfirmed);
-        } else {
-          userHasConfirmed = false;
-          parameter.subject.next(userHasConfirmed);
-        }
+      if (result === true) {
+        userHasConfirmed = true;
+        parameter.subject.next(userHasConfirmed);
+      } else {
+        userHasConfirmed = false;
+        parameter.subject.next(userHasConfirmed);
       }
-    );
+    });
   }
-
 }

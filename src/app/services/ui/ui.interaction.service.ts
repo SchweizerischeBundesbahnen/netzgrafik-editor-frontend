@@ -1,37 +1,36 @@
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {EditorMode} from '../../view/editor-menu/editor-mode';
-import {Injectable, OnDestroy} from '@angular/core';
-import {Stammdaten} from '../../models/stammdaten.model';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { EditorMode } from '../../view/editor-menu/editor-mode';
+import { Injectable, OnDestroy } from '@angular/core';
+import { Stammdaten } from '../../models/stammdaten.model';
+import { TrainrunDialogParameter } from '../../view/dialogs/trainrun-and-section-dialog/trainrun-and-section-dialog.component';
+import { ThemeBase } from '../../view/themes/theme-base';
+import { ConfirmationDialogParameter } from '../../view/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { FilterService } from './filter.service';
+import { NodeService } from '../data/node.service';
+import { StammdatenService } from '../data/stammdaten.service';
 import {
-  TrainrunDialogParameter
-} from '../../view/dialogs/trainrun-and-section-dialog/trainrun-and-section-dialog.component';
-import {ThemeBase} from '../../view/themes/theme-base';
-import {
-  ConfirmationDialogParameter
-} from '../../view/dialogs/confirmation-dialog/confirmation-dialog.component';
-import {FilterService} from './filter.service';
-import {NodeService} from '../data/node.service';
-import {StammdatenService} from '../data/stammdaten.service';
-import {InformSelectedTrainrunClick, TrainrunSectionService} from '../data/trainrunsection.service';
-import {Vec2D} from '../../utils/vec2D';
-import {FilterWindowType} from '../../view/filter-main-side-view/filter-main-side-view.component';
-import {takeUntil} from 'rxjs/operators';
-import {ThemeFach} from '../../view/themes/theme-fach';
-import {ThemeDefaultUxDark} from '../../view/themes/theme-default-ux-dark';
-import {ThemeDefaultUx} from '../../view/themes/theme-default-ux';
-import {ThemeGrayDark} from '../../view/themes/theme-gray-dark';
-import {ThemeGray} from '../../view/themes/theme-gray';
-import {ThemeFachDark} from '../../view/themes/theme-fach-dark';
-import {ThemeFachPrint} from '../../view/themes/theme-fach-print';
-import {ThemeRegistration} from '../../view/themes/theme-registration';
-import {NoteService} from '../data/note.service';
-import {NoteDialogParameter} from '../../view/dialogs/note-dialog/note-dialog.component';
-import {StreckengrafikRenderingType} from '../../view/themes/streckengrafik-rendering-type';
-import {NetzgrafikColoringService} from '../data/netzgrafikColoring.service';
-import {MainViewMode} from '../../view/filter-main-side-view/main-view-mode';
-import {TrainrunService} from '../data/trainrun.service';
-import {Trainrun} from '../../models/trainrun.model';
-import {LoadPerlenketteService} from '../../perlenkette/service/load-perlenkette.service';
+  InformSelectedTrainrunClick,
+  TrainrunSectionService,
+} from '../data/trainrunsection.service';
+import { Vec2D } from '../../utils/vec2D';
+import { FilterWindowType } from '../../view/filter-main-side-view/filter-main-side-view.component';
+import { takeUntil } from 'rxjs/operators';
+import { ThemeFach } from '../../view/themes/theme-fach';
+import { ThemeDefaultUxDark } from '../../view/themes/theme-default-ux-dark';
+import { ThemeDefaultUx } from '../../view/themes/theme-default-ux';
+import { ThemeGrayDark } from '../../view/themes/theme-gray-dark';
+import { ThemeGray } from '../../view/themes/theme-gray';
+import { ThemeFachDark } from '../../view/themes/theme-fach-dark';
+import { ThemeFachPrint } from '../../view/themes/theme-fach-print';
+import { ThemeRegistration } from '../../view/themes/theme-registration';
+import { NoteService } from '../data/note.service';
+import { NoteDialogParameter } from '../../view/dialogs/note-dialog/note-dialog.component';
+import { StreckengrafikRenderingType } from '../../view/themes/streckengrafik-rendering-type';
+import { NetzgrafikColoringService } from '../data/netzgrafikColoring.service';
+import { MainViewMode } from '../../view/filter-main-side-view/main-view-mode';
+import { TrainrunService } from '../data/trainrun.service';
+import { Trainrun } from '../../models/trainrun.model';
+import { LoadPerlenketteService } from '../../perlenkette/service/load-perlenkette.service';
 
 export interface ViewboxProperties {
   currentViewBox: string;
@@ -45,12 +44,12 @@ export interface ViewboxProperties {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UiInteractionService implements OnDestroy {
-
   updateNodeStammdatenSubject = new Subject<void>();
-  readonly updateNodeStammdatenWindow = this.updateNodeStammdatenSubject.asObservable();
+  readonly updateNodeStammdatenWindow =
+    this.updateNodeStammdatenSubject.asObservable();
 
   showNodeStammdatenSubject = new Subject<boolean>();
   readonly nodeStammdatenWindow = this.showNodeStammdatenSubject.asObservable();
@@ -62,8 +61,8 @@ export class UiInteractionService implements OnDestroy {
   readonly perlenketteWindow = this.showPerlenketteSubject.asObservable();
 
   sendPerlenketteTrainrunSectionClicked = new Subject<number>();
-  readonly perlenketteTrainrunSectionClicked = this.sendPerlenketteTrainrunSectionClicked.asObservable();
-
+  readonly perlenketteTrainrunSectionClicked =
+    this.sendPerlenketteTrainrunSectionClicked.asObservable();
 
   printGraphikSubject = new Subject<null>();
   readonly printGraphik = this.printGraphikSubject.asObservable();
@@ -74,11 +73,14 @@ export class UiInteractionService implements OnDestroy {
   showNoteDialogSubject = new Subject<NoteDialogParameter>();
   readonly noteDialog = this.showNoteDialogSubject.asObservable();
 
-  showConfirmationDiagramDialogSubject = new Subject<ConfirmationDialogParameter>();
-  readonly confirmationDiagramDialog = this.showConfirmationDiagramDialogSubject.asObservable();
+  showConfirmationDiagramDialogSubject =
+    new Subject<ConfirmationDialogParameter>();
+  readonly confirmationDiagramDialog =
+    this.showConfirmationDiagramDialogSubject.asObservable();
 
   showStammdatenEditDialogSubject = new Subject<Stammdaten[]>();
-  readonly stammdatenEditDialog = this.showStammdatenEditDialogSubject.asObservable();
+  readonly stammdatenEditDialog =
+    this.showStammdatenEditDialogSubject.asObservable();
 
   zoomInSubject = new Subject<Vec2D>();
   readonly zoomInObservable = this.zoomInSubject.asObservable();
@@ -95,11 +97,14 @@ export class UiInteractionService implements OnDestroy {
   setEditorModeSubject = new Subject<number>();
   readonly setEditorModeObservable = this.setEditorModeSubject.asObservable();
 
-  showStreckengrafikSubject = new BehaviorSubject<MainViewMode>(MainViewMode.Netzgrafik);
+  showStreckengrafikSubject = new BehaviorSubject<MainViewMode>(
+    MainViewMode.Netzgrafik,
+  );
   readonly streckengrafikWindow = this.showStreckengrafikSubject.asObservable();
 
   moveNetzgrafikEditorViewFocalPointSubject = new Subject<Vec2D>();
-  readonly moveNetzgrafikEditorViewFocalPointObservable = this.moveNetzgrafikEditorViewFocalPointSubject.asObservable();
+  readonly moveNetzgrafikEditorViewFocalPointObservable =
+    this.moveNetzgrafikEditorViewFocalPointSubject.asObservable();
 
   private activeTheme: ThemeBase = null;
   private activeStreckengrafikRenderingType: StreckengrafikRenderingType = null;
@@ -110,14 +115,16 @@ export class UiInteractionService implements OnDestroy {
   private filterWindowType = null;
   private oldSelectedTrainrunId: number = null;
 
-  constructor(private filterService: FilterService,
-              private nodeService: NodeService,
-              private noteService: NoteService,
-              private stammdatenService: StammdatenService,
-              private trainrunSectionService: TrainrunSectionService,
-              private trainrunService: TrainrunService,
-              private netzgrafikColoringService: NetzgrafikColoringService,
-              private loadPerlenketteService: LoadPerlenketteService) {
+  constructor(
+    private filterService: FilterService,
+    private nodeService: NodeService,
+    private noteService: NoteService,
+    private stammdatenService: StammdatenService,
+    private trainrunSectionService: TrainrunSectionService,
+    private trainrunService: TrainrunService,
+    private netzgrafikColoringService: NetzgrafikColoringService,
+    private loadPerlenketteService: LoadPerlenketteService,
+  ) {
     this.activeTheme = null;
     this.activeStreckengrafikRenderingType = null;
 
@@ -135,24 +142,29 @@ export class UiInteractionService implements OnDestroy {
         this.showPerlenkette(informSelectedTrainrunClick);
       });
 
-    this.trainrunService.trainruns.pipe(takeUntil(this.destroyed)).subscribe((trainrun: Trainrun[]) => {
-      const st = trainrunService.getSelectedTrainrun();
-      if (st !== null) {
-        this.oldSelectedTrainrunId = st.getId();
-        return;
-      }
-      this.closePerlenkette();
-      this.oldSelectedTrainrunId = null;
-    });
+    this.trainrunService.trainruns
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((trainrun: Trainrun[]) => {
+        const st = trainrunService.getSelectedTrainrun();
+        if (st !== null) {
+          this.oldSelectedTrainrunId = st.getId();
+          return;
+        }
+        this.closePerlenkette();
+        this.oldSelectedTrainrunId = null;
+      });
 
-
-    this.stammdatenService.stammdatenObservable.pipe(takeUntil(this.destroyed)).subscribe((stammdaten: Stammdaten[]) => {
-      this.updateNodeStammdaten();
-      this.showStammdatenEditDialog(stammdaten);
-    });
-    this.filterWindow.pipe(takeUntil(this.destroyed)).subscribe((type: FilterWindowType | null) => {
-      this.filterWindowType = type;
-    });
+    this.stammdatenService.stammdatenObservable
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((stammdaten: Stammdaten[]) => {
+        this.updateNodeStammdaten();
+        this.showStammdatenEditDialog(stammdaten);
+      });
+    this.filterWindow
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((type: FilterWindowType | null) => {
+        this.filterWindowType = type;
+      });
   }
 
   ngOnDestroy(): void {
@@ -171,7 +183,7 @@ export class UiInteractionService implements OnDestroy {
         panZoomHeight: 0,
         zoomFactor: 100,
         origWidth: 0,
-        origHeight: 0
+        origHeight: 0,
       };
     }
 
@@ -189,24 +201,44 @@ export class UiInteractionService implements OnDestroy {
       this.netzgrafikColoringService.setDarkMode(this.activeTheme.isDark);
     }
     if (this.activeStreckengrafikRenderingType === null) {
-      this.activeStreckengrafikRenderingType = StreckengrafikRenderingType.UniformDistance;
+      this.activeStreckengrafikRenderingType =
+        StreckengrafikRenderingType.UniformDistance;
     }
   }
 
-  createTheme(themeRegistration: ThemeRegistration, activeBackgroundColor: string, activeDarkBackgroundColor: string) {
+  createTheme(
+    themeRegistration: ThemeRegistration,
+    activeBackgroundColor: string,
+    activeDarkBackgroundColor: string,
+  ) {
     let activeTheme = this.activeTheme;
     if (themeRegistration === ThemeRegistration.ThemeDefaultUxDark) {
-      activeTheme = new ThemeDefaultUxDark(activeDarkBackgroundColor, activeDarkBackgroundColor);
+      activeTheme = new ThemeDefaultUxDark(
+        activeDarkBackgroundColor,
+        activeDarkBackgroundColor,
+      );
     } else if (themeRegistration === ThemeRegistration.ThemeDefaultUx) {
-      activeTheme = new ThemeDefaultUx(activeBackgroundColor, activeBackgroundColor);
+      activeTheme = new ThemeDefaultUx(
+        activeBackgroundColor,
+        activeBackgroundColor,
+      );
     } else if (themeRegistration === ThemeRegistration.ThemeGrayDark) {
-      activeTheme = new ThemeGrayDark(activeDarkBackgroundColor, activeDarkBackgroundColor);
+      activeTheme = new ThemeGrayDark(
+        activeDarkBackgroundColor,
+        activeDarkBackgroundColor,
+      );
     } else if (themeRegistration === ThemeRegistration.ThemeGray) {
       activeTheme = new ThemeGray(activeBackgroundColor, activeBackgroundColor);
     } else if (themeRegistration === ThemeRegistration.ThemeFachPrint) {
-      activeTheme = new ThemeFachPrint(activeBackgroundColor, activeBackgroundColor);
+      activeTheme = new ThemeFachPrint(
+        activeBackgroundColor,
+        activeBackgroundColor,
+      );
     } else if (themeRegistration === ThemeRegistration.ThemeFachDark) {
-      activeTheme = new ThemeFachDark(activeDarkBackgroundColor, activeDarkBackgroundColor);
+      activeTheme = new ThemeFachDark(
+        activeDarkBackgroundColor,
+        activeDarkBackgroundColor,
+      );
     } else {
       activeTheme = new ThemeFach(activeBackgroundColor, activeBackgroundColor);
     }
@@ -221,7 +253,9 @@ export class UiInteractionService implements OnDestroy {
     return this.activeStreckengrafikRenderingType;
   }
 
-  setActiveStreckengrafikRenderingType(streckengrafikRenderingType: StreckengrafikRenderingType) {
+  setActiveStreckengrafikRenderingType(
+    streckengrafikRenderingType: StreckengrafikRenderingType,
+  ) {
     this.activeStreckengrafikRenderingType = streckengrafikRenderingType;
     this.saveUserSettingToLocalStorage();
     this.trainrunSectionService.trainrunSectionsUpdated();
@@ -273,7 +307,9 @@ export class UiInteractionService implements OnDestroy {
     if (informSelectedTrainrunClick.open) {
       this.showPerlenketteSubject.next(true);
     }
-    this.sendPerlenketteTrainrunSectionClicked.next(informSelectedTrainrunClick.trainrunSectionId);
+    this.sendPerlenketteTrainrunSectionClicked.next(
+      informSelectedTrainrunClick.trainrunSectionId,
+    );
   }
 
   closePerlenkette() {
@@ -289,8 +325,12 @@ export class UiInteractionService implements OnDestroy {
     this.showTrainrunDialogSubject.next(parameter);
   }
 
-  showConfirmationDiagramDialog(confirmationDiagramParameter: ConfirmationDialogParameter): Observable<boolean> {
-    this.showConfirmationDiagramDialogSubject.next(confirmationDiagramParameter);
+  showConfirmationDiagramDialog(
+    confirmationDiagramParameter: ConfirmationDialogParameter,
+  ): Observable<boolean> {
+    this.showConfirmationDiagramDialogSubject.next(
+      confirmationDiagramParameter,
+    );
     return confirmationDiagramParameter.dialogFeedback;
   }
 
@@ -332,16 +372,24 @@ export class UiInteractionService implements OnDestroy {
   private loadUserSettingFromLocalStorage() {
     try {
       const serializedState = localStorage.getItem('UiInteractionService');
-      if (serializedState === null || serializedState === undefined || serializedState === 'undefined') {
+      if (
+        serializedState === null ||
+        serializedState === undefined ||
+        serializedState === 'undefined'
+      ) {
         return;
       }
       const localStoredInfo = JSON.parse(serializedState);
       console.log(localStoredInfo);
       const activeTheme = localStoredInfo.activeTheme;
-      this.createTheme(activeTheme.themeRegistration,
+      this.createTheme(
+        activeTheme.themeRegistration,
         activeTheme.backgroundColor,
-        activeTheme.backgroundStreckengraphikColor);
-      this.setActiveStreckengrafikRenderingType(localStoredInfo.streckengrafikRenderingType);
+        activeTheme.backgroundStreckengraphikColor,
+      );
+      this.setActiveStreckengrafikRenderingType(
+        localStoredInfo.streckengrafikRenderingType,
+      );
     } catch (err) {
       console.error(err);
     }
@@ -349,18 +397,26 @@ export class UiInteractionService implements OnDestroy {
 
   private saveUserSettingToLocalStorage() {
     try {
-      localStorage.setItem(`UiInteractionService`,
+      localStorage.setItem(
+        `UiInteractionService`,
         JSON.stringify({
           activeTheme: this.getActiveTheme(),
-          streckengrafikRenderingType: this.getActiveStreckengrafikRenderingType()
-        }));
+          streckengrafikRenderingType:
+            this.getActiveStreckengrafikRenderingType(),
+        }),
+      );
     } catch (err) {
       console.error(err);
     }
   }
 
   private handlePerlenketteOnFilterChanged() {
-    if (this.loadPerlenketteService.getSelectedTrainrun() && !this.filterService.filterTrainrun(this.loadPerlenketteService.getSelectedTrainrun())) {
+    if (
+      this.loadPerlenketteService.getSelectedTrainrun() &&
+      !this.filterService.filterTrainrun(
+        this.loadPerlenketteService.getSelectedTrainrun(),
+      )
+    ) {
       this.closePerlenkette();
     }
   }

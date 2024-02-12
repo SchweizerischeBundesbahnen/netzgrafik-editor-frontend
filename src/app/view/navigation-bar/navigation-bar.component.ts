@@ -1,47 +1,69 @@
-import {Component, OnInit} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
-import {filter, map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
-import {NavigationService} from '../../services/ui/navigation.service';
-import {ProjectControllerBackendService, VariantControllerBackendService} from '../../api/generated';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { NavigationService } from '../../services/ui/navigation.service';
+import {
+  ProjectControllerBackendService,
+  VariantControllerBackendService,
+} from '../../api/generated';
 
 @Component({
   selector: 'sbb-navigation-bar',
   templateUrl: './navigation-bar.component.html',
-  styleUrls: ['./navigation-bar.component.scss']
+  styleUrls: ['./navigation-bar.component.scss'],
 })
 export class NavigationBarComponent implements OnInit {
-
   currentDefinitions: BreadcrumbDefinition[] = [];
 
   private readonly definitions: BreadcrumbsDefinition[] = [
     {
       when: '/projects/{}',
-      then: params => [
+      then: (params) => [
         {
-          name: this.projectsBackendService.getProject(params[0].asNumber())
-            .pipe(map(project => `Projekt «${project.name}»`)),
-          route: this.navigationService.getRouteToVariants(params[0].asNumber())
-        }
-      ]
+          name: this.projectsBackendService
+            .getProject(params[0].asNumber())
+            .pipe(map((project) => `Projekt «${project.name}»`)),
+          route: this.navigationService.getRouteToVariants(
+            params[0].asNumber(),
+          ),
+        },
+      ],
     },
     {
       when: '/projects/{}/variants/{}',
-      then: params => [
+      then: (params) => [
         {
-          name: this.projectsBackendService.getProject(params[0].asNumber())
-            .pipe(map(project => (project.isArchived === false) ?
-              `Projekt «${project.name}»` : `Projekt «${project.name}» (archiviert)`)),
-          route: this.navigationService.getRouteToVariants(params[0].asNumber())
+          name: this.projectsBackendService
+            .getProject(params[0].asNumber())
+            .pipe(
+              map((project) =>
+                project.isArchived === false
+                  ? `Projekt «${project.name}»`
+                  : `Projekt «${project.name}» (archiviert)`,
+              ),
+            ),
+          route: this.navigationService.getRouteToVariants(
+            params[0].asNumber(),
+          ),
         },
         {
-          name: this.variantsBackendService.getVariant(params[1].asNumber())
-            .pipe(map(variant => (variant.isArchived === false) ?
-              `Variante «${variant.latestVersion.name}»` : `Variante «${variant.latestVersion.name}» (archiviert)`)),
-          route: this.navigationService.getRouteToEditor(params[0].asNumber(), params[1].asNumber())
+          name: this.variantsBackendService
+            .getVariant(params[1].asNumber())
+            .pipe(
+              map((variant) =>
+                variant.isArchived === false
+                  ? `Variante «${variant.latestVersion.name}»`
+                  : `Variante «${variant.latestVersion.name}» (archiviert)`,
+              ),
+            ),
+          route: this.navigationService.getRouteToEditor(
+            params[0].asNumber(),
+            params[1].asNumber(),
+          ),
         },
-      ]
-    }
+      ],
+    },
   ];
 
   private readonly definitionHandlers: BreadcrumbsDefinitionsHandler[];
@@ -52,21 +74,28 @@ export class NavigationBarComponent implements OnInit {
     private readonly projectsBackendService: ProjectControllerBackendService,
     private readonly variantsBackendService: VariantControllerBackendService,
   ) {
-    this.definitionHandlers = this.definitions.map(definition => new BreadcrumbsDefinitionsHandler(definition));
+    this.definitionHandlers = this.definitions.map(
+      (definition) => new BreadcrumbsDefinitionsHandler(definition),
+    );
   }
 
   ngOnInit(): void {
     this.router.events
       .pipe(
-        filter(event => event instanceof NavigationEnd),
-        map(event => event as NavigationEnd),
+        filter((event) => event instanceof NavigationEnd),
+        map((event) => event as NavigationEnd),
       )
-      .subscribe(event => {
+      .subscribe((event) => {
         const urlHandler = new UrlHandler(event.url);
-        const definitionHandler = this.definitionHandlers.find(manager => manager.doesMatch(urlHandler));
+        const definitionHandler = this.definitionHandlers.find((manager) =>
+          manager.doesMatch(urlHandler),
+        );
         const params = definitionHandler?.getParams(urlHandler);
 
-        this.currentDefinitions = definitionHandler && params ? definitionHandler.definition.then(params) : [];
+        this.currentDefinitions =
+          definitionHandler && params
+            ? definitionHandler.definition.then(params)
+            : [];
       });
   }
 }
@@ -99,7 +128,7 @@ class BreadcrumbsDefinitionsHandler {
     }
 
     return urlHandler.splittedUrl.every((value, index) => {
-      if (!this.parameterPointers.find(pointer => pointer === index)) {
+      if (!this.parameterPointers.find((pointer) => pointer === index)) {
         // not a parameter
         return value === this.splittedWhenPattern[index];
       }
@@ -109,8 +138,10 @@ class BreadcrumbsDefinitionsHandler {
 
   getParams(urlHandler: UrlHandler): Param[] {
     return urlHandler.splittedUrl
-      .filter((value, index) => this.parameterPointers.find(pointer => pointer === index))
-      .map(value => new Param(value));
+      .filter((value, index) =>
+        this.parameterPointers.find((pointer) => pointer === index),
+      )
+      .map((value) => new Param(value));
   }
 }
 
@@ -125,8 +156,7 @@ interface BreadcrumbDefinition {
 }
 
 class Param {
-  constructor(private readonly value: string) {
-  }
+  constructor(private readonly value: string) {}
 
   asNumber(): number {
     return +this.value;

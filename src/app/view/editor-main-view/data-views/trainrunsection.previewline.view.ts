@@ -1,37 +1,39 @@
-import {StaticDomTags} from './static.dom.tags';
-import {Vec2D} from '../../../utils/vec2D';
+import { StaticDomTags } from './static.dom.tags';
+import { Vec2D } from '../../../utils/vec2D';
 import * as d3 from 'd3';
-import {D3Utils,} from './d3.utils';
-import {Node} from '../../../models/node.model';
-import {TrainrunSection} from '../../../models/trainrunsection.model';
-import {Transition} from '../../../models/transition.model';
-import {SimpleTrainrunSectionRouter} from '../../../services/util/trainrunsection.routing';
-import {NodeService} from '../../../services/data/node.service';
-import {FilterService} from '../../../services/ui/filter.service';
+import { D3Utils } from './d3.utils';
+import { Node } from '../../../models/node.model';
+import { TrainrunSection } from '../../../models/trainrunsection.model';
+import { Transition } from '../../../models/transition.model';
+import { SimpleTrainrunSectionRouter } from '../../../services/util/trainrunsection.routing';
+import { NodeService } from '../../../services/data/node.service';
+import { FilterService } from '../../../services/ui/filter.service';
 
 export enum PreviewLineMode {
   NotDragging,
   DragExistingTrainrunSection,
   DragNewTrainrunSection,
   DragIntermediateStop,
-  DragTransition
+  DragTransition,
 }
 
 export class DragIntermediateStopInfo {
-  constructor(public trainrunSection: TrainrunSection,
-              public intermediateStopIndex: number,
-              public domRef: any) {
-  }
+  constructor(
+    public trainrunSection: TrainrunSection,
+    public intermediateStopIndex: number,
+    public domRef: any,
+  ) {}
 }
 
 export class DragTransitionInfo {
-  constructor(public node: Node,
-              public trainrunSection1: TrainrunSection,
-              public trainrunSection2: TrainrunSection,
-              public transition: Transition,
-              public insideNode: boolean,
-              public domRef: any) {
-  }
+  constructor(
+    public node: Node,
+    public trainrunSection1: TrainrunSection,
+    public trainrunSection2: TrainrunSection,
+    public transition: Transition,
+    public insideNode: boolean,
+    public domRef: any,
+  ) {}
 
   setInsideNode(flag: boolean) {
     this.insideNode = flag;
@@ -39,7 +41,6 @@ export class DragTransitionInfo {
 }
 
 export class TrainrunSectionPreviewLineView {
-
   private mode: PreviewLineMode = PreviewLineMode.NotDragging;
   private startNode: Node = null;
   private startPos: Vec2D = null;
@@ -51,17 +52,20 @@ export class TrainrunSectionPreviewLineView {
   private dragIntermediateStopInfo: DragIntermediateStopInfo = null;
   private dragTransitionInfo: DragTransitionInfo = null;
 
-  constructor(private nodeService: NodeService,
-              private filterService: FilterService) {
-  }
+  constructor(
+    private nodeService: NodeService,
+    private filterService: FilterService,
+  ) {}
 
   static setGroup(nodeGroup: d3.Selector) {
-    nodeGroup.append(StaticDomTags.PREVIEW_LINE_ROOT_SVG)
+    nodeGroup
+      .append(StaticDomTags.PREVIEW_LINE_ROOT_SVG)
       .attr('class', StaticDomTags.PREVIEW_LINE_ROOT_CLASS);
   }
 
   static setConnectionGroup(nodeGroup: d3.Selector) {
-    nodeGroup.append(StaticDomTags.PREVIEW_CONNECTION_LINE_ROOT_SVG)
+    nodeGroup
+      .append(StaticDomTags.PREVIEW_CONNECTION_LINE_ROOT_SVG)
       .attr('class', StaticDomTags.PREVIEW_CONNECTION_LINE_ROOT_CLASS);
   }
 
@@ -79,11 +83,16 @@ export class TrainrunSectionPreviewLineView {
 
   setExistingTrainrunSection(trainrunSection: TrainrunSection) {
     this.mode = PreviewLineMode.DragExistingTrainrunSection;
-    this.existingTrainrunSection = new TrainrunSection(trainrunSection.getDto());
+    this.existingTrainrunSection = new TrainrunSection(
+      trainrunSection.getDto(),
+    );
     this.existingTrainrunSection.setTrainrun(trainrunSection.getTrainrun());
   }
 
-  startDragIntermediateStop(dragIntermediateStopInfo: DragIntermediateStopInfo, startPosition: Vec2D) {
+  startDragIntermediateStop(
+    dragIntermediateStopInfo: DragIntermediateStopInfo,
+    startPosition: Vec2D,
+  ) {
     this.mode = PreviewLineMode.DragIntermediateStop;
     this.dragIntermediateStopInfo = dragIntermediateStopInfo;
     this.startIntermediatePos = startPosition;
@@ -92,7 +101,10 @@ export class TrainrunSectionPreviewLineView {
     D3Utils.doGrayout(dragIntermediateStopInfo.trainrunSection);
   }
 
-  startDragTransition(dragTransition: DragTransitionInfo, startPosition: Vec2D) {
+  startDragTransition(
+    dragTransition: DragTransitionInfo,
+    startPosition: Vec2D,
+  ) {
     this.filterService.switchOffTemporaryEmptyAndNonStopFiltering();
     this.mode = PreviewLineMode.DragTransition;
     this.dragTransitionInfo = dragTransition;
@@ -100,10 +112,15 @@ export class TrainrunSectionPreviewLineView {
     this.displayTrainrunSectionPreviewLine();
     D3Utils.disableTrainrunSectionForEventHandling();
     D3Utils.doGrayoutTransition(dragTransition.transition);
-    D3Utils.doGrayoutTrainrunSectionPin(dragTransition.trainrunSection1, dragTransition.node);
-    D3Utils.doGrayoutTrainrunSectionPin(dragTransition.trainrunSection2, dragTransition.node);
+    D3Utils.doGrayoutTrainrunSectionPin(
+      dragTransition.trainrunSection1,
+      dragTransition.node,
+    );
+    D3Utils.doGrayoutTrainrunSectionPin(
+      dragTransition.trainrunSection2,
+      dragTransition.node,
+    );
   }
-
 
   getStartNode(): Node {
     return this.startNode;
@@ -127,7 +144,9 @@ export class TrainrunSectionPreviewLineView {
 
   startPreviewLine(nodeId: number) {
     this.mode = PreviewLineMode.DragNewTrainrunSection;
-    const mousePosition = d3.mouse(d3.select(StaticDomTags.PREVIEW_LINE_ROOT_DOM_REF).node());
+    const mousePosition = d3.mouse(
+      d3.select(StaticDomTags.PREVIEW_LINE_ROOT_DOM_REF).node(),
+    );
     const startPosition = new Vec2D(mousePosition[0], mousePosition[1]);
     const startNode: Node = this.nodeService.getNodeFromId(nodeId);
     this.startPreviewLineAtPosition(startNode, startPosition);
@@ -151,7 +170,8 @@ export class TrainrunSectionPreviewLineView {
       this.displayTrainrunSectionPreviewLine();
       D3Utils.updateIntermediateStopOrTransitionPreviewLine(
         this.dragIntermediateStopInfo.trainrunSection.getPath()[0],
-        this.dragIntermediateStopInfo.trainrunSection.getPath()[3]);
+        this.dragIntermediateStopInfo.trainrunSection.getPath()[3],
+      );
       return true;
     }
 
@@ -164,17 +184,31 @@ export class TrainrunSectionPreviewLineView {
         D3Utils.updateIntermediateStopOrTransitionPreviewLine(startPos, endPos);
       } else {
         const node1 =
-          this.dragTransitionInfo.trainrunSection1.getSourceNodeId() === this.dragTransitionInfo.node.getId() ?
-            this.dragTransitionInfo.trainrunSection1.getTargetNode() :
-            this.dragTransitionInfo.trainrunSection1.getSourceNode();
+          this.dragTransitionInfo.trainrunSection1.getSourceNodeId() ===
+          this.dragTransitionInfo.node.getId()
+            ? this.dragTransitionInfo.trainrunSection1.getTargetNode()
+            : this.dragTransitionInfo.trainrunSection1.getSourceNode();
         const node2 =
-          this.dragTransitionInfo.trainrunSection2.getSourceNodeId() === this.dragTransitionInfo.node.getId() ?
-            this.dragTransitionInfo.trainrunSection2.getTargetNode() :
-            this.dragTransitionInfo.trainrunSection2.getSourceNode();
-        const port1 = node1.getPortOfTrainrunSection(this.dragTransitionInfo.trainrunSection1.getId());
-        const port2 = node2.getPortOfTrainrunSection(this.dragTransitionInfo.trainrunSection2.getId());
-        const startPos = SimpleTrainrunSectionRouter.getPortPositionForTrainrunSectionRouting(node1, port1);
-        const endPos = SimpleTrainrunSectionRouter.getPortPositionForTrainrunSectionRouting(node2, port2);
+          this.dragTransitionInfo.trainrunSection2.getSourceNodeId() ===
+          this.dragTransitionInfo.node.getId()
+            ? this.dragTransitionInfo.trainrunSection2.getTargetNode()
+            : this.dragTransitionInfo.trainrunSection2.getSourceNode();
+        const port1 = node1.getPortOfTrainrunSection(
+          this.dragTransitionInfo.trainrunSection1.getId(),
+        );
+        const port2 = node2.getPortOfTrainrunSection(
+          this.dragTransitionInfo.trainrunSection2.getId(),
+        );
+        const startPos =
+          SimpleTrainrunSectionRouter.getPortPositionForTrainrunSectionRouting(
+            node1,
+            port1,
+          );
+        const endPos =
+          SimpleTrainrunSectionRouter.getPortPositionForTrainrunSectionRouting(
+            node2,
+            port2,
+          );
         D3Utils.updateIntermediateStopOrTransitionPreviewLine(startPos, endPos);
       }
       return true;
@@ -206,12 +240,18 @@ export class TrainrunSectionPreviewLineView {
     this.undisplayConnectionPreviewLine();
     if (this.dragIntermediateStopInfo !== null) {
       D3Utils.removeGrayout(this.dragIntermediateStopInfo.trainrunSection);
-      d3.select(this.dragIntermediateStopInfo.domRef).classed(StaticDomTags.TAG_HOVER, false);
+      d3.select(this.dragIntermediateStopInfo.domRef).classed(
+        StaticDomTags.TAG_HOVER,
+        false,
+      );
     }
     if (this.dragTransitionInfo !== null) {
       D3Utils.removeGrayoutTransition(this.dragTransitionInfo.transition);
       D3Utils.removeGrayoutTrainrunSectionPin();
-      d3.select(this.dragTransitionInfo.domRef).classed(StaticDomTags.TAG_HOVER, false);
+      d3.select(this.dragTransitionInfo.domRef).classed(
+        StaticDomTags.TAG_HOVER,
+        false,
+      );
     }
     if (this.startNode !== null) {
       D3Utils.unhighlightNode(this.startNode);

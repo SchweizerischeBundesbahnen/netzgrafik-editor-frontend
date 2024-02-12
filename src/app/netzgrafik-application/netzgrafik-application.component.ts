@@ -1,31 +1,30 @@
-import {Component} from '@angular/core';
-import {DataService} from '../services/data/data.service';
-import {UiInteractionService} from '../services/ui/ui.interaction.service';
-import {map, takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {ActivatedRoute} from '@angular/router';
-import {FilterWindowType} from '../view/filter-main-side-view/filter-main-side-view.component';
-import {VersionControlService} from '../services/data/version-control.service';
-import {NavigationParameters} from '../utils/navigation-parameters';
-import {FilterService} from '../services/ui/filter.service';
-import {DomSanitizer} from '@angular/platform-browser';
-import {EditorMode} from '../view/editor-menu/editor-mode';
-import {UndoService} from '../services/data/undo.service';
+import { Component } from '@angular/core';
+import { DataService } from '../services/data/data.service';
+import { UiInteractionService } from '../services/ui/ui.interaction.service';
+import { map, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { FilterWindowType } from '../view/filter-main-side-view/filter-main-side-view.component';
+import { VersionControlService } from '../services/data/version-control.service';
+import { NavigationParameters } from '../utils/navigation-parameters';
+import { FilterService } from '../services/ui/filter.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { EditorMode } from '../view/editor-menu/editor-mode';
+import { UndoService } from '../services/data/undo.service';
 
 export enum IconSidebarMode {
   VARIANTEN = 'varianten',
   FILTER = 'filter',
   NONE = 'none',
-  PROPERTIES = 'properties'
+  PROPERTIES = 'properties',
 }
 
 @Component({
   selector: 'sbb-netzgrafik-editor',
   templateUrl: './netzgrafik-application.component.html',
-  styleUrls: ['./netzgrafik-application.component.scss']
+  styleUrls: ['./netzgrafik-application.component.scss'],
 })
 export class NetzgrafikApplicationComponent {
-
   mode = IconSidebarMode.NONE;
   expanded = false;
 
@@ -38,16 +37,18 @@ export class NetzgrafikApplicationComponent {
     private readonly activatedRoute: ActivatedRoute,
     private readonly versionControlService: VersionControlService,
     private readonly undoService: UndoService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
   ) {
-    activatedRoute.params.pipe(
-      map(params => new NavigationParameters(params)),
-      takeUntil(this.destroyed)
-    ).subscribe(params => {
-      uiInteractionService.setEditorMode(EditorMode.NetzgrafikEditing);
-      uiInteractionService.showNetzgrafik();
-      versionControlService.load(params.getVariantId(), true);
-    });
+    activatedRoute.params
+      .pipe(
+        map((params) => new NavigationParameters(params)),
+        takeUntil(this.destroyed),
+      )
+      .subscribe((params) => {
+        uiInteractionService.setEditorMode(EditorMode.NetzgrafikEditing);
+        uiInteractionService.showNetzgrafik();
+        versionControlService.load(params.getVariantId(), true);
+      });
   }
 
   getVariantIsWritable(): boolean {
@@ -76,7 +77,6 @@ export class NetzgrafikApplicationComponent {
   onPropertiesClicked() {
     this.uiInteractionService.showOrCloseFilter(FilterWindowType.PROPERTIES);
   }
-
 
   setMode(mode: string) {
     this.mode = mode as IconSidebarMode;

@@ -1,11 +1,11 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {ProjectsViewComponent} from './projects-view.component';
-import {of} from 'rxjs';
-import {ProjectsViewService} from './projects-view.service';
-import {SbbDialogModule} from '@sbb-esta/angular/dialog';
-import {ProjectControllerBackendService} from '../../../api/generated';
-import {NavigationService} from '../../../services/ui/navigation.service';
+import { ProjectsViewComponent } from './projects-view.component';
+import { of } from 'rxjs';
+import { ProjectsViewService } from './projects-view.service';
+import { SbbDialogModule } from '@sbb-esta/angular/dialog';
+import { ProjectControllerBackendService } from '../../../api/generated';
+import { NavigationService } from '../../../services/ui/navigation.service';
 
 describe('ProjectsViewComponent', () => {
   let component: ProjectsViewComponent;
@@ -15,24 +15,27 @@ describe('ProjectsViewComponent', () => {
 
   beforeEach(async () => {
     projectViewService = {
-      filteredProjects: of([])
+      filteredProjects: of([]),
     };
 
     await TestBed.configureTestingModule({
       declarations: [ProjectsViewComponent],
       imports: [SbbDialogModule],
       providers: [
-        {provide: ProjectsViewService, useValue: projectViewService},
-        {provide: ProjectControllerBackendService, useValue: projectControllerBackendService},
-        {provide: NavigationService, useValue: {}},
-      ]
+        { provide: ProjectsViewService, useValue: projectViewService },
+        {
+          provide: ProjectControllerBackendService,
+          useValue: projectControllerBackendService,
+        },
+        { provide: NavigationService, useValue: {} },
+      ],
     })
       .overrideComponent(ProjectsViewComponent, {
         set: {
           providers: [
-            {provide: ProjectsViewService, useValue: projectViewService}
-          ]
-        }
+            { provide: ProjectsViewService, useValue: projectViewService },
+          ],
+        },
       })
       .compileComponents();
   });

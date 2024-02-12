@@ -1,34 +1,58 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Editor, Toolbar} from 'ngx-editor';
-import {FormModel} from '../../../../utils/form-model';
-import {NoteFormComponentModel} from '../note-form/note-form.component';
-import {HtmlEditorColor} from './html-editor-color';
-import {Subscription} from 'rxjs';
-import {getSelectionMarks, isMarkActive} from 'ngx-editor/helpers';
-import {StaticDomTags} from '../../../editor-main-view/data-views/static.dom.tags';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Editor, Toolbar } from 'ngx-editor';
+import { FormModel } from '../../../../utils/form-model';
+import { NoteFormComponentModel } from '../note-form/note-form.component';
+import { HtmlEditorColor } from './html-editor-color';
+import { Subscription } from 'rxjs';
+import { getSelectionMarks, isMarkActive } from 'ngx-editor/helpers';
+import { StaticDomTags } from '../../../editor-main-view/data-views/static.dom.tags';
 
 @Component({
   selector: 'sbb-html-editor',
   templateUrl: './html-editor.component.html',
-  styleUrls: ['./html-editor.component.scss']
+  styleUrls: ['./html-editor.component.scss'],
 })
 export class HtmlEditorComponent implements OnInit, OnDestroy {
   @Input() model!: FormModel<NoteFormComponentModel>;
 
   editor: Editor;
-  toolbar: Toolbar = [
-    ['bold', 'italic'],
-    ['bullet_list'],
-    ['link'],
-  ];
+  toolbar: Toolbar = [['bold', 'italic'], ['bullet_list'], ['link']];
   colorPresets: HtmlEditorColor[] = [
-    new HtmlEditorColor('Verwende die Frabe des Frabschemas für EC', 'EC', 'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_EC)'),
-    new HtmlEditorColor('Verwende die Frabe des Frabschemas für IC', 'IC', 'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_IC)'),
-    new HtmlEditorColor('Verwende die Frabe des Frabschemas für IR', 'IR', 'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_IR)'),
-    new HtmlEditorColor('Verwende die Frabe des Frabschemas für RE', 'RE', 'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_RE)'),
-    new HtmlEditorColor('Verwende die Frabe des Frabschemas für S', 'S', 'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_S)'),
-    new HtmlEditorColor('Verwende die Frabe des Frabschemas für GEX', 'GEX', 'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_GEX)'),
-    new HtmlEditorColor('Verwende die Frabe des Frabschemas für G', 'G', 'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_G)'),
+    new HtmlEditorColor(
+      'Verwende die Frabe des Frabschemas für EC',
+      'EC',
+      'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_EC)',
+    ),
+    new HtmlEditorColor(
+      'Verwende die Frabe des Frabschemas für IC',
+      'IC',
+      'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_IC)',
+    ),
+    new HtmlEditorColor(
+      'Verwende die Frabe des Frabschemas für IR',
+      'IR',
+      'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_IR)',
+    ),
+    new HtmlEditorColor(
+      'Verwende die Frabe des Frabschemas für RE',
+      'RE',
+      'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_RE)',
+    ),
+    new HtmlEditorColor(
+      'Verwende die Frabe des Frabschemas für S',
+      'S',
+      'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_S)',
+    ),
+    new HtmlEditorColor(
+      'Verwende die Frabe des Frabschemas für GEX',
+      'GEX',
+      'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_GEX)',
+    ),
+    new HtmlEditorColor(
+      'Verwende die Frabe des Frabschemas für G',
+      'G',
+      'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_G)',
+    ),
     new HtmlEditorColor('grün', '', 'green'),
     new HtmlEditorColor('blau', '', 'blue'),
     new HtmlEditorColor('rosa', '', 'magenta'),
@@ -63,7 +87,11 @@ export class HtmlEditorComponent implements OnInit, OnDestroy {
   }
 
   onColor(color: HtmlEditorColor) {
-    if (this.textBasedActiveColor.find((col: string) => col === color.colorCode) !== undefined) {
+    if (
+      this.textBasedActiveColor.find(
+        (col: string) => col === color.colorCode,
+      ) !== undefined
+    ) {
       this.editor.commands.removeTextColor().exec();
       this.onUpdate();
       return;
@@ -93,7 +121,11 @@ export class HtmlEditorComponent implements OnInit, OnDestroy {
       }
       return 'inactive';
     }
-    if (this.textBasedActiveColor.find((col: string) => col === color.colorCode) !== undefined) {
+    if (
+      this.textBasedActiveColor.find(
+        (col: string) => col === color.colorCode,
+      ) !== undefined
+    ) {
       return 'active';
     }
     return 'inactive';
@@ -119,16 +151,22 @@ export class HtmlEditorComponent implements OnInit, OnDestroy {
     const newNoteHeight: string = this.model.getControl('noteHeight').value;
     const newNoteWidth: string = this.model.getControl('noteWidth').value;
     const saveNoteCallback = this.model.getControl('saveNoteCallback').value;
-    saveNoteCallback(this.model.getControl('id').value, newNoteTitle, newNoteText, newNoteHeight, newNoteWidth);
+    saveNoteCallback(
+      this.model.getControl('id').value,
+      newNoteTitle,
+      newNoteText,
+      newNoteHeight,
+      newNoteWidth,
+    );
   }
 
   private update = (view: any) => {
-    const {state} = view;
+    const { state } = view;
     this.textBasedActiveColor = this.getColorActive(state);
   };
 
   private getColorActive(state: any): string[] {
-    const {schema} = state;
+    const { schema } = state;
     const type = schema.marks.text_color;
     if (!type) {
       return [];
@@ -137,8 +175,8 @@ export class HtmlEditorComponent implements OnInit, OnDestroy {
       return [];
     }
     return getSelectionMarks(state)
-      .filter(mark => mark.type === type)
-      .map(mark => mark.attrs.color)
+      .filter((mark) => mark.type === type)
+      .map((mark) => mark.attrs.color)
       .filter(Boolean);
   }
 }

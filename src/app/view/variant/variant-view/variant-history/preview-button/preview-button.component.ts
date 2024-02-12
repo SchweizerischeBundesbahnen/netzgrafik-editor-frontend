@@ -1,23 +1,28 @@
-import {Component, ElementRef, EventEmitter, Inject, Output, ViewChild} from '@angular/core';
-import {DOCUMENT} from '@angular/common';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'sbb-preview-button',
   templateUrl: './preview-button.component.html',
-  styleUrls: ['./preview-button.component.scss']
+  styleUrls: ['./preview-button.component.scss'],
 })
 export class PreviewButtonComponent {
-
   @Output()
   active = new EventEmitter<boolean>();
 
-  @ViewChild('previewButton', {read: ElementRef})
+  @ViewChild('previewButton', { read: ElementRef })
   previewButton: ElementRef;
 
   isActive = false;
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
-  }
+  constructor(@Inject(DOCUMENT) private document: Document) {}
 
   onMouseDown() {
     // lock the users pointer to always trigger the mouseup event
@@ -34,5 +39,4 @@ export class PreviewButtonComponent {
     this.isActive = isActive;
     this.active.next(this.isActive);
   }
-
 }

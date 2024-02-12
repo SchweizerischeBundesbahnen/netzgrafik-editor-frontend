@@ -1,29 +1,28 @@
-import {PathItem} from './pathItem';
-import {PathSection} from './pathSection';
-import {TrainrunBranchType} from './enum/trainrun-branch-type-type';
-import {TrackData} from './trackData';
-import {TrainrunTemplatePathAlignmentType} from './enum/trainrun-template-path-alignment-type';
+import { PathItem } from './pathItem';
+import { PathSection } from './pathSection';
+import { TrainrunBranchType } from './enum/trainrun-branch-type-type';
+import { TrackData } from './trackData';
+import { TrainrunTemplatePathAlignmentType } from './enum/trainrun-template-path-alignment-type';
 
 export class PathNode implements PathItem {
-
   private width = 20;
 
-  constructor(public departureTime: number,
-              public arrivalTime: number,
-              public nodeId: number,
-              public nodeShortName: string,
-              public index: number,
-              public trackData: TrackData,
-              public backward = false,
-              public filter = false,
-              public trackOccupier = false,
-              public arrivalPathSection: PathSection = undefined,
-              public departurePathSection: PathSection = undefined,
-              public trainrunBranchType: TrainrunBranchType = TrainrunBranchType.Trainrun,
-              public isPartOfTemplatePath: TrainrunTemplatePathAlignmentType = TrainrunTemplatePathAlignmentType.NodeFound,
-              public oppDirectionTemplatePath: boolean = false,
-  ) {
-  }
+  constructor(
+    public departureTime: number,
+    public arrivalTime: number,
+    public nodeId: number,
+    public nodeShortName: string,
+    public index: number,
+    public trackData: TrackData,
+    public backward = false,
+    public filter = false,
+    public trackOccupier = false,
+    public arrivalPathSection: PathSection = undefined,
+    public departurePathSection: PathSection = undefined,
+    public trainrunBranchType: TrainrunBranchType = TrainrunBranchType.Trainrun,
+    public isPartOfTemplatePath: TrainrunTemplatePathAlignmentType = TrainrunTemplatePathAlignmentType.NodeFound,
+    public oppDirectionTemplatePath: boolean = false,
+  ) {}
 
   xPath() {
     if (this.trackOccupier) {
@@ -50,7 +49,7 @@ export class PathNode implements PathItem {
   }
 
   nodeWidth() {
-    return this.width + (this.width * this.trackData.track);
+    return this.width + this.width * this.trackData.track;
   }
 
   isNode(): boolean {
@@ -78,18 +77,20 @@ export class PathNode implements PathItem {
   }
 
   equal(pathNode: PathNode): boolean {
-    return (this.departureTime === pathNode.departureTime) &&
-      (this.arrivalTime === pathNode.arrivalTime) &&
-      (this.nodeId === pathNode.nodeId) &&
-      (this.nodeShortName === pathNode.nodeShortName) &&
-      (this.trackData === pathNode.trackData) &&
-      (this.backward === pathNode.backward) &&
-      (this.filter === pathNode.filter) &&
-      (this.trackOccupier === pathNode.trackOccupier) &&
-      (this.arrivalPathSection === pathNode.arrivalPathSection) &&
-      (this.departurePathSection === pathNode.departurePathSection) &&
-      (this.trainrunBranchType === pathNode.trainrunBranchType) &&
-      (this.isPartOfTemplatePath === pathNode.isPartOfTemplatePath);
+    return (
+      this.departureTime === pathNode.departureTime &&
+      this.arrivalTime === pathNode.arrivalTime &&
+      this.nodeId === pathNode.nodeId &&
+      this.nodeShortName === pathNode.nodeShortName &&
+      this.trackData === pathNode.trackData &&
+      this.backward === pathNode.backward &&
+      this.filter === pathNode.filter &&
+      this.trackOccupier === pathNode.trackOccupier &&
+      this.arrivalPathSection === pathNode.arrivalPathSection &&
+      this.departurePathSection === pathNode.departurePathSection &&
+      this.trainrunBranchType === pathNode.trainrunBranchType &&
+      this.isPartOfTemplatePath === pathNode.isPartOfTemplatePath
+    );
   }
 
   clone(): PathItem {

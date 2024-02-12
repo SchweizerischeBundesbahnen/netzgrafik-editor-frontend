@@ -1,4 +1,4 @@
-@use '@sbb-esta/angular' as sbb;
+@use "@sbb-esta/angular" as sbb;
 
 /**
  * Typography
@@ -28,38 +28,39 @@ $col-padding-top: $interComponentSpacingSmall;
 $col-padding-right: $innerComponentSpacing * 1.5; // * 1.5 to match sbb-expansion-panel padding
 $col-padding-bottom: $interComponentSpacingSmall;
 $col-padding-left: $innerComponentSpacing * 1.5; // * 1.5 to match sbb-expansion-panel padding
-$col-padding: $col-padding-top $col-padding-right $col-padding-bottom $col-padding-left;
+$col-padding: $col-padding-top $col-padding-right $col-padding-bottom
+  $col-padding-left;
 
 /**
  * Colors
  */
 $colorBlack: #000000; // duplicate from sacl
-$colorWhite: #FFFFFF; // duplicate from sacl
-$colorGreyLight: #DCDCDC; // duplicate from sacl
-$colorGreySilver: #CDCDCD; // duplicate from sacl
+$colorWhite: #ffffff; // duplicate from sacl
+$colorGreyLight: #dcdcdc; // duplicate from sacl
+$colorGreySilver: #cdcdcd; // duplicate from sacl
 $colorGrey: #666666; // duplicate from sacl
 $colorGreyMedium: #979797; // duplicate from sacl
-$colorRed100: #EB0000; // duplicate from sacl
-$colorRed125: #C60018; // duplicate from sacl
-$colorRed150: #A20013; // duplicate from sacl
-$colorBlack5: #F6F6F6; // duplicate from sacl
-$colorBlack10: #E5E5E5; // duplicate from sacl
-$colorBlack20: #D2D2D2; // duplicate from sacl
-$colorBlack30: #BDBDBD; // duplicate from sacl
-$colorBlack40: #A8A8A8; // duplicate from sacl
+$colorRed100: #eb0000; // duplicate from sacl
+$colorRed125: #c60018; // duplicate from sacl
+$colorRed150: #a20013; // duplicate from sacl
+$colorBlack5: #f6f6f6; // duplicate from sacl
+$colorBlack10: #e5e5e5; // duplicate from sacl
+$colorBlack20: #d2d2d2; // duplicate from sacl
+$colorBlack30: #bdbdbd; // duplicate from sacl
+$colorBlack40: #a8a8a8; // duplicate from sacl
 $colorBlack60: #767676; // duplicate from sacl
 $colorBlack70: #686868; // duplicate from sacl
 $colorBlack72: #b7b7b7; // duplicate from sacl
-$colorBlack80: #5A5A5A; // duplicate from sacl
+$colorBlack80: #5a5a5a; // duplicate from sacl
 $colorBlack90: #444444; // duplicate from sacl
-$colorBlack100: #1E1E1E; // duplicate from sacl
+$colorBlack100: #1e1e1e; // duplicate from sacl
 $colorBlue: #003399; // duplicate from sacl
 
 $colorSuccess: green;
-$colorMilk: #F6F6F6;
-$colorNight: #143A85;
-$colorSky: #0079C7;
-$colorMulberry: #BA5290;
+$colorMilk: #f6f6f6;
+$colorNight: #143a85;
+$colorSky: #0079c7;
+$colorMulberry: #ba5290;
 
 /**
  * Custom colors
@@ -90,7 +91,6 @@ $cdColorSuccess: sbb.$sbbColorGreen;
 $cdColorSuccess20: mix(sbb.$sbbColorGreen, sbb.$sbbColorWhite, 20%);
 $cdColorSuccess10: mix(sbb.$sbbColorGreen, sbb.$sbbColorWhite, 10%);
 
-
 $colorBgLight: $colorMilk;
 $colorTextMuted: $colorBlack60;
 $colorSender: $colorNight;
@@ -112,40 +112,44 @@ $borderRadius: 2px;
 /**
  * Animation-Stuff
  */
-@function transitionMultipleProperties( $duration, $timing, $properties... ) {
+@function transitionMultipleProperties($duration, $timing, $properties...) {
   $transitions: ();
   @each $property in $properties {
-    $transitions: append($transitions, unquote('#{$property} #{$duration} #{$timing}'), 'comma');
+    $transitions: append(
+      $transitions,
+      unquote("#{$property} #{$duration} #{$timing}"),
+      "comma"
+    );
   }
   @return $transitions;
 }
 
 $transitionDefaultDuration: 225ms;
-$transitionDefaultTiming: cubic-bezier(.5, -.02, .5, 1.02);
+$transitionDefaultTiming: cubic-bezier(0.5, -0.02, 0.5, 1.02);
 $transitionDefaultInDuration: 225ms;
-$transitionDefaultInTiming: cubic-bezier(.25, -.02, .5, 1.02);
+$transitionDefaultInTiming: cubic-bezier(0.25, -0.02, 0.5, 1.02);
 $transitionDefaultOutDuration: 195ms;
-$transitionDefaultOutTiming: cubic-bezier(.5, -.02, .75, 1.02);
-@mixin transitionDefault( $properties... ) {
+$transitionDefaultOutTiming: cubic-bezier(0.5, -0.02, 0.75, 1.02);
+@mixin transitionDefault($properties...) {
   transition: transitionMultipleProperties(
-      $transitionDefaultDuration,
-      $transitionDefaultTiming,
+    $transitionDefaultDuration,
+    $transitionDefaultTiming,
     $properties...
   );
 }
 
-@mixin transitionDefaultIn( $properties... ) {
+@mixin transitionDefaultIn($properties...) {
   transition: transitionMultipleProperties(
-      $transitionDefaultInDuration,
-      $transitionDefaultInTiming,
+    $transitionDefaultInDuration,
+    $transitionDefaultInTiming,
     $properties...
   );
 }
 
-@mixin transitionDefaultOut( $properties... ) {
+@mixin transitionDefaultOut($properties...) {
   transition: transitionMultipleProperties(
-      $transitionDefaultOutDuration,
-      $transitionDefaultOutTiming,
+    $transitionDefaultOutDuration,
+    $transitionDefaultOutTiming,
     $properties...
   );
 }
@@ -156,26 +160,26 @@ $transitionShortInDuration: 195ms;
 $transitionShortInTiming: $transitionDefaultInTiming;
 $transitionShortOutDuration: 180ms;
 $transitionShortOutTiming: $transitionDefaultOutTiming;
-@mixin transitionShort( $properties... ) {
+@mixin transitionShort($properties...) {
   transition: transitionMultipleProperties(
-      $transitionShortDuration,
-      $transitionShortTiming,
+    $transitionShortDuration,
+    $transitionShortTiming,
     $properties...
   );
 }
 
-@mixin transitionShortIn( $properties... ) {
+@mixin transitionShortIn($properties...) {
   transition: transitionMultipleProperties(
-      $transitionShortInDuration,
-      $transitionShortInTiming,
+    $transitionShortInDuration,
+    $transitionShortInTiming,
     $properties...
   );
 }
 
-@mixin transitionShortOut( $properties... ) {
+@mixin transitionShortOut($properties...) {
   transition: transitionMultipleProperties(
-      $transitionShortOutDuration,
-      $transitionShortOutTiming,
+    $transitionShortOutDuration,
+    $transitionShortOutTiming,
     $properties...
   );
 }
@@ -186,26 +190,26 @@ $transitionLongInDuration: 500ms;
 $transitionLongInTiming: $transitionDefaultInTiming;
 $transitionLongOutDuration: 350ms;
 $transitionLongOutTiming: $transitionDefaultOutTiming;
-@mixin transitionLong( $properties... ) {
+@mixin transitionLong($properties...) {
   transition: transitionMultipleProperties(
-      $transitionLongDuration,
-      $transitionLongTiming,
+    $transitionLongDuration,
+    $transitionLongTiming,
     $properties...
   );
 }
 
-@mixin transitionLongIn( $properties... ) {
+@mixin transitionLongIn($properties...) {
   transition: transitionMultipleProperties(
-      $transitionLongInDuration,
-      $transitionLongInTiming,
+    $transitionLongInDuration,
+    $transitionLongInTiming,
     $properties...
   );
 }
 
-@mixin transitionLongOut( $properties... ) {
+@mixin transitionLongOut($properties...) {
   transition: transitionMultipleProperties(
-      $transitionLongOutDuration,
-      $transitionLongOutTiming,
+    $transitionLongOutDuration,
+    $transitionLongOutTiming,
     $properties...
   );
 }
@@ -267,5 +271,6 @@ $assignmentRowFlexGoods: 1 0 $tableColLargeWidth;
 $cdCurtainOpacity: 0.8;
 $cdDetailsDescriptionMaxWidth: 70%;
 
-$accordionPaddingHorizontal: sbb.pxToEm(32); // see projects/sbb-esta/angular-public/accordion/src/_accordion.scss
-
+$accordionPaddingHorizontal: sbb.pxToEm(
+  32
+); // see projects/sbb-esta/angular-public/accordion/src/_accordion.scss

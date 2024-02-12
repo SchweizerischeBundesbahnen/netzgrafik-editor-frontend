@@ -6,7 +6,21 @@
   <sbb-project-form [model]="formmodel"></sbb-project-form>
 </div>
 <div sbbDialogActions>
-  <button *ngIf="isNewProject" sbb-button cdkFocusInitial (click)="onCreateClicked()">Erstellen</button>
-  <button *ngIf="!isNewProject" sbb-button cdkFocusInitial (click)="onCreateClicked()">Speichern</button>
+  <button
+    *ngIf="isNewProject"
+    sbb-button
+    cdkFocusInitial
+    (click)="onCreateClicked()"
+  >
+    Erstellen
+  </button>
+  <button
+    *ngIf="!isNewProject"
+    sbb-button
+    cdkFocusInitial
+    (click)="onCreateClicked()"
+  >
+    Speichern
+  </button>
   <button sbb-secondary-button (click)="onCancelClicked()">Abbrechen</button>
 </div>

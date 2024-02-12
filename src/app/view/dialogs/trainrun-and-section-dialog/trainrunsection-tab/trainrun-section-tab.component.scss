@@ -1,5 +1,5 @@
-@import '../../../rastering/definitions';
-@import '../../../editor-main-view/data-views/trainrunsections.view.edgeline';
+@import "../../../rastering/definitions";
+@import "../../../editor-main-view/data-views/trainrunsections.view.edgeline";
 
 ::ng-deep .EditTrainrunSectionDialogHeaderSeparatorLeft {
   width: 40px;
@@ -43,7 +43,7 @@
   max-width: 110px;
   padding: 1px;
   height: 40px;
-  border: 0.1px solid white
+  border: 0.1px solid white;
 }
 
 ::ng-deep .EditTrainrunSectionDialogHeaderCenter.IsActive {
@@ -59,7 +59,6 @@
   height: 40px;
   font-family: "SBBWeb Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
 
 ::ng-deep input.NumberOfStopsInputElement {
   background-color: white;
@@ -99,7 +98,6 @@ input.NumberOfStopsInputElement.IsActive {
   grid-auto-columns: 32px;
 }
 
-
 ::ng-deep .NodeLeftArrival {
   grid-column: 1/5;
   grid-row: 3;
@@ -124,7 +122,6 @@ input.NumberOfStopsInputElement.IsActive {
   grid-row: 3;
 }
 
-
 ::ng-deep .NodeLeftDeparture {
   grid-column: 2/6;
   grid-row: 1;
@@ -140,7 +137,7 @@ input.NumberOfStopsInputElement.IsActive {
 }
 
 ::ng-deep .NodeLeftDepartureTime {
-  grid-column: 3/span 2;
+  grid-column: 3 / span 2;
   grid-row: 1;
 }
 
@@ -154,7 +151,6 @@ input.NumberOfStopsInputElement.IsActive {
   grid-row: 2;
   background: white;
 }
-
 
 ::ng-deep .NodeRightArrival {
   grid-column: 14/18;
@@ -210,7 +206,6 @@ input.NumberOfStopsInputElement.IsActive {
   grid-row: 3;
 }
 
-
 ::ng-deep .TravelTime {
   grid-column: 7/11;
   grid-row: 2;
@@ -250,7 +245,6 @@ input.NumberOfStopsInputElement.IsActive {
   grid-column: 12/15;
   grid-row: 2;
 }
-
 
 ::ng-deep .renderer {
   shape-rendering: geometricPrecision;
@@ -297,7 +291,6 @@ input.NumberOfStopsInputElement.IsActive {
 ::ng-deep input.InputTravelTimeElementHighlighted:read-only {
   color: lightgray;
 }
-
 
 ::ng-deep .ButtonPlus {
   width: 26px;
@@ -352,7 +345,6 @@ input.NumberOfStopsInputElement.IsActive {
   width: 350px;
 }
 
-
 ::ng-deep input.NumberOfStopsInputButtonPlusMinus {
   width: 32px;
   height: 30px;
@@ -371,7 +363,6 @@ input.NumberOfStopsInputElement.IsActive {
 ::ng-deep input.NumberOfStopsInputButtonPlusMinus:hover {
   background-color: whitesmoke;
 }
-
 
 ::ng-deep path.edgeLineTitle {
   stroke: lightgray;
@@ -401,7 +392,8 @@ input.NumberOfStopsInputElement.IsActive {
   background-color: lightgray;
 }
 
-::ng-deep div.sbb-dialog-content.sbb-scrollbar.EditTrainrunSectionDialogTabContent {
+::ng-deep
+  div.sbb-dialog-content.sbb-scrollbar.EditTrainrunSectionDialogTabContent {
   border-style: none;
   min-height: 250px;
   max-height: 250px;

@@ -1,13 +1,12 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'sbb-version-entry-layout',
   templateUrl: './version-entry-layout.component.html',
-  styleUrls: ['./version-entry-layout.component.scss']
+  styleUrls: ['./version-entry-layout.component.scss'],
 })
 export class VersionEntryLayoutComponent {
-
-  @Input() state?: 'conflict' |'added';
+  @Input() state?: 'conflict' | 'added';
   @Input() message?: string;
 
   @Input() titleField: string | UserId;
@@ -45,6 +44,5 @@ export class VersionEntryLayoutComponent {
 }
 
 export class UserId {
-  constructor(readonly value: string) {
-  }
+  constructor(readonly value: string) {}
 }

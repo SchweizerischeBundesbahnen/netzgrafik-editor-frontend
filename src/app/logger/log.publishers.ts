@@ -1,5 +1,5 @@
-import {Observable, of} from 'rxjs';
-import {LogEntry} from './log.service';
+import { Observable, of } from 'rxjs';
+import { LogEntry } from './log.service';
 
 export abstract class LogPublisher {
   location: string;

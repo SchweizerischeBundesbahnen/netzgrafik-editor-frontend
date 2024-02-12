@@ -1,11 +1,14 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {NavigationBarComponent} from './navigation-bar.component';
-import {ProjectControllerBackendService, VariantControllerBackendService} from '../../api/generated';
-import {NavigationEnd, Router, RouterEvent} from '@angular/router';
-import {NavigationService} from '../../services/ui/navigation.service';
-import {NEVER} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { NavigationBarComponent } from './navigation-bar.component';
+import {
+  ProjectControllerBackendService,
+  VariantControllerBackendService,
+} from '../../api/generated';
+import { NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { NavigationService } from '../../services/ui/navigation.service';
+import { NEVER } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 describe('NavigationBarComponent', () => {
   let component: NavigationBarComponent;
@@ -16,22 +19,25 @@ describe('NavigationBarComponent', () => {
   let router: Partial<Router>;
 
   beforeEach(async () => {
-
     router = {
-      events: NEVER.pipe(map(() => new NavigationEnd(0, '','')))
+      events: NEVER.pipe(map(() => new NavigationEnd(0, '', ''))),
     };
-
 
     await TestBed.configureTestingModule({
       declarations: [NavigationBarComponent],
       providers: [
-        {provide: Router, useValue: router},
-        {provide: NavigationService, useValue: {}},
-        {provide: ProjectControllerBackendService, useValue: projectControllerBackendService},
-        {provide: VariantControllerBackendService, useValue: variantControllerBackendService},
-      ]
-    })
-      .compileComponents();
+        { provide: Router, useValue: router },
+        { provide: NavigationService, useValue: {} },
+        {
+          provide: ProjectControllerBackendService,
+          useValue: projectControllerBackendService,
+        },
+        {
+          provide: VariantControllerBackendService,
+          useValue: variantControllerBackendService,
+        },
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

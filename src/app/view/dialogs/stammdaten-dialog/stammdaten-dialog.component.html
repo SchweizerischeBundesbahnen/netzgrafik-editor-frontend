@@ -7,61 +7,53 @@
       <table sbb-table [dataSource]="dataSource">
         <ng-container sbbColumnDef="betriebspunkt">
           <th sbb-header-cell *sbbHeaderCellDef>Betriebspunkt</th>
-          <td sbb-cell *sbbCellDef="let element">{{ element.betriebspunkt }}</td>
+          <td sbb-cell *sbbCellDef="let element">
+            {{ element.betriebspunkt }}
+          </td>
         </ng-container>
         <ng-container sbbColumnDef="haltezeit_I_P_V">
           <th sbb-header-cell *sbbHeaderCellDef>Haltezeit IPV</th>
           <td sbb-cell *sbbCellDef="let element">
             <div *ngIf="!element['HaltezeitIPV'].no_halt; else noHalt">
-              {{ element['HaltezeitIPV'].haltezeit }}
+              {{ element["HaltezeitIPV"].haltezeit }}
             </div>
-            <ng-template #noHalt>
-              —
-            </ng-template>
+            <ng-template #noHalt> — </ng-template>
           </td>
         </ng-container>
         <ng-container sbbColumnDef="haltezeit_A">
           <th sbb-header-cell *sbbHeaderCellDef>Haltezeit A</th>
           <td sbb-cell *sbbCellDef="let element">
             <div *ngIf="!element['HaltezeitA'].no_halt; else noHalt">
-              {{ element['HaltezeitA'].haltezeit }}
+              {{ element["HaltezeitA"].haltezeit }}
             </div>
-            <ng-template #noHalt>
-              —
-            </ng-template>
+            <ng-template #noHalt> — </ng-template>
           </td>
         </ng-container>
         <ng-container sbbColumnDef="haltezeit_B">
           <th sbb-header-cell *sbbHeaderCellDef>Haltezeit B</th>
           <td sbb-cell *sbbCellDef="let element">
             <div *ngIf="!element['HaltezeitB'].no_halt; else noHalt">
-              {{ element['HaltezeitB'].haltezeit }}
+              {{ element["HaltezeitB"].haltezeit }}
             </div>
-            <ng-template #noHalt>
-              —
-            </ng-template>
+            <ng-template #noHalt> — </ng-template>
           </td>
         </ng-container>
         <ng-container sbbColumnDef="haltezeit_C">
           <th sbb-header-cell *sbbHeaderCellDef>Haltezeit C</th>
           <td sbb-cell *sbbCellDef="let element">
             <div *ngIf="!element['HaltezeitC'].no_halt; else noHalt">
-              {{ element['HaltezeitC'].haltezeit }}
+              {{ element["HaltezeitC"].haltezeit }}
             </div>
-            <ng-template #noHalt>
-              —
-            </ng-template>
+            <ng-template #noHalt> — </ng-template>
           </td>
         </ng-container>
         <ng-container sbbColumnDef="haltezeit_D">
           <th sbb-header-cell *sbbHeaderCellDef>Haltezeit D</th>
           <td sbb-cell *sbbCellDef="let element">
             <div *ngIf="!element['HaltezeitD'].no_halt; else noHalt">
-              {{ element['HaltezeitD'].haltezeit }}
+              {{ element["HaltezeitD"].haltezeit }}
             </div>
-            <ng-template #noHalt>
-              —
-            </ng-template>
+            <ng-template #noHalt> — </ng-template>
           </td>
         </ng-container>
         <ng-container sbbColumnDef="zaz">
@@ -70,9 +62,7 @@
             <div *ngIf="element.zaz !== 0; else noZAZ">
               {{ element.zaz }}
             </div>
-            <ng-template #noZAZ>
-              —
-            </ng-template>
+            <ng-template #noZAZ> — </ng-template>
           </td>
         </ng-container>
         <ng-container sbbColumnDef="connection_time">
@@ -81,9 +71,7 @@
             <div *ngIf="element.connection_time !== 0; else noHalt">
               {{ element.connection_time }}
             </div>
-            <ng-template #noHalt>
-              —
-            </ng-template>
+            <ng-template #noHalt> — </ng-template>
           </td>
         </ng-container>
         <ng-container sbbColumnDef="region">
@@ -92,9 +80,7 @@
             <div *ngIf="element.region !== ''; else noRegion">
               {{ element.region }}
             </div>
-            <ng-template #noRegion>
-              —
-            </ng-template>
+            <ng-template #noRegion> — </ng-template>
           </td>
         </ng-container>
         <ng-container sbbColumnDef="kategorie">
@@ -103,9 +89,7 @@
             <div *ngIf="element.kategorie !== ''; else noKategorie">
               {{ element.kategorie }}
             </div>
-            <ng-template #noKategorie>
-              —
-            </ng-template>
+            <ng-template #noKategorie> — </ng-template>
           </td>
         </ng-container>
         <ng-container sbbColumnDef="filterableLabels">
@@ -114,20 +98,17 @@
             <div *ngIf="element.filterableLabels.length !== 0; else noLabels">
               {{ element.filterableLabels }}
             </div>
-            <ng-template #noLabels>
-              —
-            </ng-template>
+            <ng-template #noLabels> — </ng-template>
           </td>
         </ng-container>
         <ng-container sbbColumnDef="pos">
           <th sbb-header-cell *sbbHeaderCellDef>Position</th>
           <td sbb-cell *sbbCellDef="let element">
             <div *ngIf="element.pos !== undefined; else noPos">
-              {{ element.pos.getX() }} <br> {{ element.pos.getY() }}
+              {{ element.pos.getX() }} <br />
+              {{ element.pos.getY() }}
             </div>
-            <ng-template #noPos>
-              —
-            </ng-template>
+            <ng-template #noPos> — </ng-template>
           </td>
         </ng-container>
 
@@ -142,5 +123,3 @@
     </div>
   </div>
 </ng-template>
-
-

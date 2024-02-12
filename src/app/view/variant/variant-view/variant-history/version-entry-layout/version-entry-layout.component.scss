@@ -1,4 +1,4 @@
-@use '@sbb-esta/angular' as sbb;
+@use "@sbb-esta/angular" as sbb;
 .content {
   padding: 0.2rem 1rem;
 }
@@ -26,7 +26,7 @@
 
 .title-field {
   grid-column: 1;
-  grid-row: 1
+  grid-row: 1;
 }
 
 .date-field {
@@ -40,9 +40,8 @@
 .comment-field {
   grid-column-start: 1;
   grid-column-end: span 2;
-  grid-row: 2
+  grid-row: 2;
 }
-
 
 .in-conflict {
   background-color: sbb.$sbbColorOrange;

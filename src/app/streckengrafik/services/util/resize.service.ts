@@ -1,14 +1,16 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {ResizeChangeInfo} from '../../model/util/resizeChangeInfo';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ResizeChangeInfo } from '../../model/util/resizeChangeInfo';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ResizeService {
   private oldResizeChangeInfo: ResizeChangeInfo = undefined;
-  private readonly resizeChangeInfoSubject = new BehaviorSubject<ResizeChangeInfo>(new ResizeChangeInfo());
-  private readonly resizeChangeInfo$ = this.resizeChangeInfoSubject.asObservable();
+  private readonly resizeChangeInfoSubject =
+    new BehaviorSubject<ResizeChangeInfo>(new ResizeChangeInfo());
+  private readonly resizeChangeInfo$ =
+    this.resizeChangeInfoSubject.asObservable();
 
   getResizeChangeInfo(): Observable<ResizeChangeInfo> {
     return this.resizeChangeInfo$;
@@ -22,11 +24,12 @@ export class ResizeService {
       this.oldResizeChangeInfo = resizeChangeInfo;
       this.resizeChangeInfoSubject.next(resizeChangeInfo);
     }
-    if (this.oldResizeChangeInfo.width !== resizeChangeInfo.width ||
-      this.oldResizeChangeInfo.height !== resizeChangeInfo.height) {
+    if (
+      this.oldResizeChangeInfo.width !== resizeChangeInfo.width ||
+      this.oldResizeChangeInfo.height !== resizeChangeInfo.height
+    ) {
       this.oldResizeChangeInfo = resizeChangeInfo;
       this.resizeChangeInfoSubject.next(resizeChangeInfo);
     }
   }
-
 }

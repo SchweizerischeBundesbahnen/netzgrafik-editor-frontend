@@ -1,25 +1,28 @@
-import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {SbbDialog} from '@sbb-esta/angular/dialog';
-import {CdkDragDrop, CdkDropList, CdkDropListGroup} from '@angular/cdk/drag-drop';
-import {NodeService} from '../../../services/data/node.service';
-import {TrainrunService} from '../../../services/data/trainrun.service';
-import {LabelService} from '../../../services/data/label.serivce';
-import {LabelGroupService} from '../../../services/data/labelgroup.service';
-import {FilterService} from '../../../services/ui/filter.service';
-import {LabelRef} from '../../../data-structures/business.data.structures';
-import {LabelGroup} from '../../../models/labelGroup.model';
-import {FilterableLabelDialogComponent} from '../../dialogs/filterable-labels-dialog/filterable-label-dialog.component';
-import {Label} from '../../../models/label.model';
-import {NoteService} from '../../../services/data/note.service';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { SbbDialog } from '@sbb-esta/angular/dialog';
+import {
+  CdkDragDrop,
+  CdkDropList,
+  CdkDropListGroup,
+} from '@angular/cdk/drag-drop';
+import { NodeService } from '../../../services/data/node.service';
+import { TrainrunService } from '../../../services/data/trainrun.service';
+import { LabelService } from '../../../services/data/label.serivce';
+import { LabelGroupService } from '../../../services/data/labelgroup.service';
+import { FilterService } from '../../../services/ui/filter.service';
+import { LabelRef } from '../../../data-structures/business.data.structures';
+import { LabelGroup } from '../../../models/labelGroup.model';
+import { FilterableLabelDialogComponent } from '../../dialogs/filterable-labels-dialog/filterable-label-dialog.component';
+import { Label } from '../../../models/label.model';
+import { NoteService } from '../../../services/data/note.service';
 
 @Component({
   selector: 'sbb-label-drop-list-component',
   templateUrl: './label-drop-list.component.html',
-  styleUrls: ['./label-drop-list.component.scss']
+  styleUrls: ['./label-drop-list.component.scss'],
 })
-
 export class LabelDropListComponent implements OnInit, OnDestroy {
   @Input() componentLabelRef: string;
 
@@ -40,21 +43,27 @@ export class LabelDropListComponent implements OnInit, OnDestroy {
     public labelService: LabelService,
     public labelGroupService: LabelGroupService,
     public filterService: FilterService,
-    private readonly dialog: SbbDialog) {
-  }
+    private readonly dialog: SbbDialog,
+  ) {}
 
   ngOnInit(): void {
-    this.labelGroups = this.labelGroupService.getLabelGroupsFromLabelRef(this.translateComponentLabelRef());
+    this.labelGroups = this.labelGroupService.getLabelGroupsFromLabelRef(
+      this.translateComponentLabelRef(),
+    );
 
-    this.labelGroupService.labelGroups.pipe(takeUntil(this.destroyed)).subscribe(
-      () => {
-        this.labelGroups = this.labelGroupService.getLabelGroupsFromLabelRef(this.translateComponentLabelRef());
+    this.labelGroupService.labelGroups
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(() => {
+        this.labelGroups = this.labelGroupService.getLabelGroupsFromLabelRef(
+          this.translateComponentLabelRef(),
+        );
       });
 
-    this.labelService.labels.pipe(takeUntil(this.destroyed)).subscribe(
-      () => {
-        this.labelGroups = this.labelGroupService.getLabelGroupsFromLabelRef(this.translateComponentLabelRef());
-      });
+    this.labelService.labels.pipe(takeUntil(this.destroyed)).subscribe(() => {
+      this.labelGroups = this.labelGroupService.getLabelGroupsFromLabelRef(
+        this.translateComponentLabelRef(),
+      );
+    });
   }
 
   ngOnDestroy(): void {
@@ -73,16 +82,24 @@ export class LabelDropListComponent implements OnInit, OnDestroy {
   }
 
   hasNoFilterableLabels(): boolean {
-    return this.labelService.getLabelsFromLabelRef(this.translateComponentLabelRef()).length === 0;
+    return (
+      this.labelService.getLabelsFromLabelRef(this.translateComponentLabelRef())
+        .length === 0
+    );
   }
 
   onLabelClicked(labelId: number) {
     const labelObject = this.labelService.getLabelFromId(labelId);
     const callbackObject = {
       name: labelObject.getLabel(),
-      dialogTitel: (labelObject.getLabelRef() === LabelRef.Trainrun) ? 'Züge' : (
-        (labelObject.getLabelRef() === LabelRef.Note) ? 'Kommentare' : 'Knoten'),
-      saveLabelCallback: (refLabel, updatedLabel) => this.labelService.updateLabel(labelObject.getId(), updatedLabel),
+      dialogTitel:
+        labelObject.getLabelRef() === LabelRef.Trainrun
+          ? 'Züge'
+          : labelObject.getLabelRef() === LabelRef.Note
+            ? 'Kommentare'
+            : 'Knoten',
+      saveLabelCallback: (refLabel, updatedLabel) =>
+        this.labelService.updateLabel(labelObject.getId(), updatedLabel),
       deleteLabelCallback: (refLabel) => {
         if (labelObject.getLabelRef() === LabelRef.Trainrun) {
           this.trainrunService.visibleTrainrunsDeleteLabel(refLabel);
@@ -94,21 +111,26 @@ export class LabelDropListComponent implements OnInit, OnDestroy {
           this.nodeService.visibleNodesDeleteLabel(refLabel);
         }
       },
-      transferLabelCallback: (refLabel) => (labelObject.getLabelRef() === LabelRef.Trainrun) ?
-        this.trainrunService.visibleTrainrunsSetLabel(refLabel) : (
-          (labelObject.getLabelRef() === LabelRef.Note) ?
-            this.noteService.visibleNotesSetLabel(refLabel) : this.nodeService.visibleNodesSetLabel(refLabel)
-        )
+      transferLabelCallback: (refLabel) =>
+        labelObject.getLabelRef() === LabelRef.Trainrun
+          ? this.trainrunService.visibleTrainrunsSetLabel(refLabel)
+          : labelObject.getLabelRef() === LabelRef.Note
+            ? this.noteService.visibleNotesSetLabel(refLabel)
+            : this.nodeService.visibleNodesSetLabel(refLabel),
     };
     FilterableLabelDialogComponent.open(this.dialog, callbackObject);
   }
 
-
-  dropLabelElement(event: CdkDragDrop<Label[]>, labelId: number, grpId: number) {
+  dropLabelElement(
+    event: CdkDragDrop<Label[]>,
+    labelId: number,
+    grpId: number,
+  ) {
     if (event.previousContainer === event.container) {
       return;
     } else {
-      const movedLabelObject: Label = event.previousContainer.data[event.previousIndex];
+      const movedLabelObject: Label =
+        event.previousContainer.data[event.previousIndex];
       if (movedLabelObject.getLabelGroupId() !== grpId) {
         movedLabelObject.setLabelGroupId(grpId);
         this.labelService.labelUpdated();
@@ -156,6 +178,11 @@ export class LabelDropListComponent implements OnInit, OnDestroy {
 
   isDefaultLabelGroup(labelGrpId: number) {
     const labelGroup = this.labelGroupService.getLabelGroup(labelGrpId);
-    return labelGrpId !== this.labelGroupService.getDefaultLabelGroup(labelGroup.getLabelRef()).getId();
+    return (
+      labelGrpId !==
+      this.labelGroupService
+        .getDefaultLabelGroup(labelGroup.getLabelRef())
+        .getId()
+    );
   }
 }

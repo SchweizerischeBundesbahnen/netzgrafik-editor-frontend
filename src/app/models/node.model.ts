@@ -1,28 +1,29 @@
 import {
   HaltezeitFachCategories,
   NodeDto,
-  TrainrunCategoryHaltezeit
+  TrainrunCategoryHaltezeit,
 } from '../data-structures/business.data.structures';
 import {
   NODE_MIN_HEIGHT,
   NODE_MIN_WIDTH,
   NODE_PIN_SPAN,
-  NODE_TEXT_AREA_HEIGHT
+  NODE_TEXT_AREA_HEIGHT,
 } from '../view/rastering/definitions';
-import {Port} from './port.model';
-import {TrainrunSection} from './trainrunsection.model';
-import {Transition} from './transition.model';
-import {SimpleTrainrunSectionRouter} from '../services/util/trainrunsection.routing';
-import {Trainrun} from './trainrun.model';
-import {PortAlignment, WarningDto} from '../data-structures/technical.data.structures';
-import {Connection} from './connection.model';
-import {ConnectionValidator} from '../services/util/connection.validator';
-import {VisAVisPortPlacement} from '../services/util/node.port.placement';
-import {DataMigration} from '../utils/data-migration';
-
+import { Port } from './port.model';
+import { TrainrunSection } from './trainrunsection.model';
+import { Transition } from './transition.model';
+import { SimpleTrainrunSectionRouter } from '../services/util/trainrunsection.routing';
+import { Trainrun } from './trainrun.model';
+import {
+  PortAlignment,
+  WarningDto,
+} from '../data-structures/technical.data.structures';
+import { Connection } from './connection.model';
+import { ConnectionValidator } from '../services/util/connection.validator';
+import { VisAVisPortPlacement } from '../services/util/node.port.placement';
+import { DataMigration } from '../utils/data-migration';
 
 export class Node {
-
   private static currentId = 0;
   private id: number;
   private betriebspunktName: string;
@@ -43,9 +44,21 @@ export class Node {
 
   constructor(
     {
-      id, betriebspunktName, fullName, positionX, positionY,
-      ports, transitions, connections, resourceId, perronkanten,
-      connectionTime, trainrunCategoryHaltezeiten, symmetryAxis, warnings, labelIds
+      id,
+      betriebspunktName,
+      fullName,
+      positionX,
+      positionY,
+      ports,
+      transitions,
+      connections,
+      resourceId,
+      perronkanten,
+      connectionTime,
+      trainrunCategoryHaltezeiten,
+      symmetryAxis,
+      warnings,
+      labelIds,
     }: NodeDto = {
       id: Node.incrementId(),
       betriebspunktName: 'NEW',
@@ -62,21 +75,27 @@ export class Node {
       symmetryAxis: null,
       warnings: null,
       labelIds: [],
-    }
+    },
   ) {
     this.id = id;
     this.betriebspunktName = betriebspunktName;
     this.fullName = fullName;
     this.positionX = positionX;
     this.positionY = positionY;
-    this.ports = ports.map(portDto => new Port(portDto));
-    this.transitions = transitions.map(transitionDto => new Transition(transitionDto));
-    this.connections = connections.map(connectionDto => new Connection(connectionDto));
+    this.ports = ports.map((portDto) => new Port(portDto));
+    this.transitions = transitions.map(
+      (transitionDto) => new Transition(transitionDto),
+    );
+    this.connections = connections.map(
+      (connectionDto) => new Connection(connectionDto),
+    );
     this.resourceId = resourceId;
     this.perronkanten = perronkanten;
     this.connectionTime = connectionTime;
-    this.trainrunCategoryHaltezeiten = trainrunCategoryHaltezeiten === null ?
-      Node.getDefaultHaltezeit() : trainrunCategoryHaltezeiten;
+    this.trainrunCategoryHaltezeiten =
+      trainrunCategoryHaltezeiten === null
+        ? Node.getDefaultHaltezeit()
+        : trainrunCategoryHaltezeiten;
     this.symmetryAxis = symmetryAxis;
     this.warnings = warnings;
     this.isSelected = false;
@@ -94,12 +113,12 @@ export class Node {
 
   static getDefaultHaltezeit(): TrainrunCategoryHaltezeit {
     return {
-      [HaltezeitFachCategories.IPV]: {haltezeit: 3, no_halt: false},
-      [HaltezeitFachCategories.A]: {haltezeit: 2, no_halt: false},
-      [HaltezeitFachCategories.B]: {haltezeit: 2, no_halt: false},
-      [HaltezeitFachCategories.C]: {haltezeit: 1, no_halt: false},
-      [HaltezeitFachCategories.D]: {haltezeit: 1, no_halt: false},
-      [HaltezeitFachCategories.Uncategorized]: {haltezeit: 0, no_halt: true}
+      [HaltezeitFachCategories.IPV]: { haltezeit: 3, no_halt: false },
+      [HaltezeitFachCategories.A]: { haltezeit: 2, no_halt: false },
+      [HaltezeitFachCategories.B]: { haltezeit: 2, no_halt: false },
+      [HaltezeitFachCategories.C]: { haltezeit: 1, no_halt: false },
+      [HaltezeitFachCategories.D]: { haltezeit: 1, no_halt: false },
+      [HaltezeitFachCategories.Uncategorized]: { haltezeit: 0, no_halt: true },
     };
   }
 
@@ -120,9 +139,15 @@ export class Node {
   }
 
   static orderPortsTrainrunId(a: Port, b: Port): number {
-    if (a.getTrainrunSection().getTrainrun().getId() > b.getTrainrunSection().getTrainrun().getId()) {
+    if (
+      a.getTrainrunSection().getTrainrun().getId() >
+      b.getTrainrunSection().getTrainrun().getId()
+    ) {
       return 1;
-    } else if (a.getTrainrunSection().getTrainrun().getId() === b.getTrainrunSection().getTrainrun().getId()) {
+    } else if (
+      a.getTrainrunSection().getTrainrun().getId() ===
+      b.getTrainrunSection().getTrainrun().getId()
+    ) {
       return Node.orderPortsTrainrunSectionId(a, b);
     } else {
       return -1;
@@ -130,9 +155,15 @@ export class Node {
   }
 
   static orderPortsAlphabetically(a: Port, b: Port): number {
-    if (a.getTrainrunSection().getTrainrun().getTitle() > b.getTrainrunSection().getTrainrun().getTitle()) {
+    if (
+      a.getTrainrunSection().getTrainrun().getTitle() >
+      b.getTrainrunSection().getTrainrun().getTitle()
+    ) {
       return 1;
-    } else if (a.getTrainrunSection().getTrainrun().getTitle() === b.getTrainrunSection().getTrainrun().getTitle()) {
+    } else if (
+      a.getTrainrunSection().getTrainrun().getTitle() ===
+      b.getTrainrunSection().getTrainrun().getTitle()
+    ) {
       return Node.orderPortsTrainrunId(a, b);
     } else {
       return -1;
@@ -140,9 +171,15 @@ export class Node {
   }
 
   static orderPortsTrainCategory(a: Port, b: Port): number {
-    if (a.getTrainrunSection().getTrainrun().getCategoryOrder() > b.getTrainrunSection().getTrainrun().getCategoryOrder()) {
+    if (
+      a.getTrainrunSection().getTrainrun().getCategoryOrder() >
+      b.getTrainrunSection().getTrainrun().getCategoryOrder()
+    ) {
       return 1;
-    } else if (a.getTrainrunSection().getTrainrun().getCategoryOrder() === b.getTrainrunSection().getTrainrun().getCategoryOrder()) {
+    } else if (
+      a.getTrainrunSection().getTrainrun().getCategoryOrder() ===
+      b.getTrainrunSection().getTrainrun().getCategoryOrder()
+    ) {
       return Node.orderPortsAlphabetically(a, b);
     } else {
       return -1;
@@ -153,23 +190,32 @@ export class Node {
     return ++Node.currentId;
   }
 
-  initializePortsWithReferencesToTrainrunSections(trainrunSections: TrainrunSection[]) {
-    this.ports.forEach(port => {
-      const trainrunSection = trainrunSections.find((ts) => ts.getId() === port.getTrainrunSectionId());
+  initializePortsWithReferencesToTrainrunSections(
+    trainrunSections: TrainrunSection[],
+  ) {
+    this.ports.forEach((port) => {
+      const trainrunSection = trainrunSections.find(
+        (ts) => ts.getId() === port.getTrainrunSectionId(),
+      );
       if (trainrunSection !== undefined) {
         port.setTrainrunSection(trainrunSection);
       } else {
         // In some cases the exported json contains ports with references to trainrunsections that do not exist,
         // unfortunately we don't know how this could happen
         // the fix implemented here deletes these ports
-        console.log('ERROR-fix: initializePortsWithReferencesToTrainrunSections', port, port.getTrainrunSectionId(), trainrunSection);
+        console.log(
+          'ERROR-fix: initializePortsWithReferencesToTrainrunSections',
+          port,
+          port.getTrainrunSectionId(),
+          trainrunSection,
+        );
         this.ports = this.ports.filter((p) => p.getId() !== port.getId());
       }
     });
   }
 
   initializeTransitionsWithTrainruns() {
-    this.transitions.forEach(transition => {
+    this.transitions.forEach((transition) => {
       const portId1 = transition.getPortId1();
       const port1 = this.getPort(portId1);
       transition.setTrainrun(port1.getTrainrunSection().getTrainrun());
@@ -240,31 +286,38 @@ export class Node {
   getNodeWidth(): number {
     let maxIndex = 0;
     this.ports.forEach((port) => {
-      if (port.getPositionAlignment() === PortAlignment.Top ||
-        port.getPositionAlignment() === PortAlignment.Bottom) {
+      if (
+        port.getPositionAlignment() === PortAlignment.Top ||
+        port.getPositionAlignment() === PortAlignment.Bottom
+      ) {
         if (maxIndex <= port.getPositionIndex()) {
           maxIndex = port.getPositionIndex() + 1;
         }
       }
     });
-    return Math.max(NODE_MIN_WIDTH, (maxIndex) * NODE_PIN_SPAN);
+    return Math.max(NODE_MIN_WIDTH, maxIndex * NODE_PIN_SPAN);
   }
 
   getNodeHeight(): number {
     let maxIndex = 0;
     this.ports.forEach((port) => {
-      if (port.getPositionAlignment() === PortAlignment.Left ||
-        port.getPositionAlignment() === PortAlignment.Right) {
+      if (
+        port.getPositionAlignment() === PortAlignment.Left ||
+        port.getPositionAlignment() === PortAlignment.Right
+      ) {
         if (maxIndex <= port.getPositionIndex()) {
           maxIndex = port.getPositionIndex() + 1;
         }
       }
     });
-    return Math.max(NODE_MIN_HEIGHT, (maxIndex) * NODE_PIN_SPAN + NODE_TEXT_AREA_HEIGHT);
+    return Math.max(
+      NODE_MIN_HEIGHT,
+      maxIndex * NODE_PIN_SPAN + NODE_TEXT_AREA_HEIGHT,
+    );
   }
 
   getPort(portId: number): Port {
-    return this.ports.find(p => p.getId() === portId);
+    return this.ports.find((p) => p.getId() === portId);
   }
 
   getNextFreePinPositionIndex(alignment: PortAlignment): number {
@@ -282,13 +335,17 @@ export class Node {
   computeTransitionRouting(transition: Transition) {
     const port1 = this.getPort(transition.getPortId1());
     const port2 = this.getPort(transition.getPortId2());
-    transition.setPath(SimpleTrainrunSectionRouter.routeTransition(this, port1, port2));
+    transition.setPath(
+      SimpleTrainrunSectionRouter.routeTransition(this, port1, port2),
+    );
   }
 
   computeConnectionRouting(connection: Connection) {
     const port1 = this.getPort(connection.getPortId1());
     const port2 = this.getPort(connection.getPortId2());
-    connection.setPath(SimpleTrainrunSectionRouter.routeConnection(this, port1, port2));
+    connection.setPath(
+      SimpleTrainrunSectionRouter.routeConnection(this, port1, port2),
+    );
   }
 
   addPort(alignment: PortAlignment, trainrunSection: TrainrunSection): number {
@@ -303,7 +360,6 @@ export class Node {
   getOppositeNode(trainrunSection: TrainrunSection): Node | undefined {
     if (this.getId() === trainrunSection.getSourceNodeId()) {
       return trainrunSection.getTargetNode();
-
     } else if (this.getId() === trainrunSection.getTargetNodeId()) {
       return trainrunSection.getSourceNode();
     }
@@ -312,37 +368,36 @@ export class Node {
 
   getTransition(trainrunSectionId: number): Transition {
     return this.getTransitions().find((trans: Transition) => {
-        const port = this.getPortOfTrainrunSection(trainrunSectionId);
-        if (port === undefined) {
-          return false;
-        }
-        return trans.getPortId1() === port.getId() ||
-          trans.getPortId2() === port.getId();
+      const port = this.getPortOfTrainrunSection(trainrunSectionId);
+      if (port === undefined) {
+        return false;
       }
-    );
+      return (
+        trans.getPortId1() === port.getId() ||
+        trans.getPortId2() === port.getId()
+      );
+    });
   }
 
   getNextTrainrunSection(trainrunSection: TrainrunSection): TrainrunSection {
     let transition = this.getTransitions().find((trans: Transition) => {
-        const t = this.getPortOfTrainrunSection(trainrunSection.getId());
-        if (t === undefined) {
-          return false;
-        }
-        return trans.getPortId1() === t.getId();
+      const t = this.getPortOfTrainrunSection(trainrunSection.getId());
+      if (t === undefined) {
+        return false;
       }
-    );
+      return trans.getPortId1() === t.getId();
+    });
     if (transition !== undefined) {
       return this.getPort(transition.getPortId2()).getTrainrunSection();
     }
 
     transition = this.getTransitions().find((trans: Transition) => {
-        const t = this.getPortOfTrainrunSection(trainrunSection.getId());
-        if (t === undefined) {
-          return false;
-        }
-        return trans.getPortId2() === t.getId();
+      const t = this.getPortOfTrainrunSection(trainrunSection.getId());
+      if (t === undefined) {
+        return false;
       }
-    );
+      return trans.getPortId2() === t.getId();
+    });
     if (transition !== undefined) {
       return this.getPort(transition.getPortId1()).getTrainrunSection();
     }
@@ -356,16 +411,27 @@ export class Node {
       return true;
     }
     const portId = port.getId();
-    return this.getTransitions().find((transition: Transition) =>
-      transition.getPortId1() === portId || transition.getPortId2() === portId
-    ) === undefined;
+    return (
+      this.getTransitions().find(
+        (transition: Transition) =>
+          transition.getPortId1() === portId ||
+          transition.getPortId2() === portId,
+      ) === undefined
+    );
   }
 
   getStartTrainrunSection(trainrunId: number): TrainrunSection {
-    const portsForTrainrun = this.ports.filter(port => port.getTrainrunSection().getTrainrunId() === trainrunId);
-    const portWithNoTransition = portsForTrainrun.find(port =>
-      this.transitions.find(transition => transition.getPortId1() === port.getId()
-        || transition.getPortId2() === port.getId()) === undefined);
+    const portsForTrainrun = this.ports.filter(
+      (port) => port.getTrainrunSection().getTrainrunId() === trainrunId,
+    );
+    const portWithNoTransition = portsForTrainrun.find(
+      (port) =>
+        this.transitions.find(
+          (transition) =>
+            transition.getPortId1() === port.getId() ||
+            transition.getPortId2() === port.getId(),
+        ) === undefined,
+    );
     if (portWithNoTransition === undefined) {
       return undefined;
     }
@@ -386,18 +452,33 @@ export class Node {
         return 1;
       } else {
         if (a.getPositionAlignment() === b.getPositionAlignment()) {
-          if (a.getPositionAlignment() === PortAlignment.Left || a.getPositionAlignment() === PortAlignment.Right) {
-            if (a.getOppositeNodePosition(this.getId()).getY() > b.getOppositeNodePosition(this.getId()).getY()) {
+          if (
+            a.getPositionAlignment() === PortAlignment.Left ||
+            a.getPositionAlignment() === PortAlignment.Right
+          ) {
+            if (
+              a.getOppositeNodePosition(this.getId()).getY() >
+              b.getOppositeNodePosition(this.getId()).getY()
+            ) {
               return 1;
-            } else if (a.getOppositeNodePosition(this.getId()).getY() === b.getOppositeNodePosition(this.getId()).getY()) {
+            } else if (
+              a.getOppositeNodePosition(this.getId()).getY() ===
+              b.getOppositeNodePosition(this.getId()).getY()
+            ) {
               return Node.orderPortsTrainCategory(a, b);
             } else {
               return -1;
             }
           } else {
-            if (a.getOppositeNodePosition(this.getId()).getX() > b.getOppositeNodePosition(this.getId()).getX()) {
+            if (
+              a.getOppositeNodePosition(this.getId()).getX() >
+              b.getOppositeNodePosition(this.getId()).getX()
+            ) {
               return 1;
-            } else if (a.getOppositeNodePosition(this.getId()).getX() === b.getOppositeNodePosition(this.getId()).getX()) {
+            } else if (
+              a.getOppositeNodePosition(this.getId()).getX() ===
+              b.getOppositeNodePosition(this.getId()).getX()
+            ) {
               return Node.orderPortsTrainCategory(a, b);
             } else {
               return -1;
@@ -412,7 +493,7 @@ export class Node {
 
   resetPositionIndex(alignment: PortAlignment) {
     let positionIndex = 0;
-    this.ports.forEach(port => {
+    this.ports.forEach((port) => {
       if (port.getPositionAlignment() === alignment) {
         port.setPositionIndex(positionIndex++);
       }
@@ -424,7 +505,9 @@ export class Node {
   }
 
   getTransitionFromPortId(portId) {
-    return this.transitions.find((t: Transition) => (t.getPortId1() === portId || t.getPortId2() === portId));
+    return this.transitions.find(
+      (t: Transition) => t.getPortId1() === portId || t.getPortId2() === portId,
+    );
   }
 
   getTransitionFromId(transitionId: number): Transition {
@@ -440,22 +523,41 @@ export class Node {
   }
 
   getFreePortsForTrainrun(trainrunId: number): Port[] {
-    const portsForTrainrun = this.ports.filter(port => port.getTrainrunSection().getTrainrunId() === trainrunId);
-    return portsForTrainrun.filter(port =>
-      this.transitions.find(transition => transition.getPortId1() === port.getId()
-        || transition.getPortId2() === port.getId()) === undefined);
+    const portsForTrainrun = this.ports.filter(
+      (port) => port.getTrainrunSection().getTrainrunId() === trainrunId,
+    );
+    return portsForTrainrun.filter(
+      (port) =>
+        this.transitions.find(
+          (transition) =>
+            transition.getPortId1() === port.getId() ||
+            transition.getPortId2() === port.getId(),
+        ) === undefined,
+    );
   }
 
   getPortOfTrainrunSection(trainrunSectionId: number): Port {
-    return this.ports.find(port => port.getTrainrunSectionId() === trainrunSectionId);
+    return this.ports.find(
+      (port) => port.getTrainrunSectionId() === trainrunSectionId,
+    );
   }
 
-  addTransitionAndComputeRouting(port1: Port, port2: Port, trainrun: Trainrun, isNonStop = false) {
+  addTransitionAndComputeRouting(
+    port1: Port,
+    port2: Port,
+    trainrun: Trainrun,
+    isNonStop = false,
+  ) {
     const transition: Transition = new Transition();
     transition.setPort1Id(port1.getId());
     transition.setPort2Id(port2.getId());
-    transition.setIsNonStopTransit(isNonStop ? true :
-      this.trainrunCategoryHaltezeiten[trainrun.getTrainrunCategory().fachCategory].no_halt);
+    transition.setIsNonStopTransit(
+      isNonStop
+        ? true
+        : this.trainrunCategoryHaltezeiten[
+            trainrun.getTrainrunCategory().fachCategory
+          ].no_halt,
+    );
     transition.setTrainrun(trainrun);
     this.computeTransitionRouting(transition);
     this.transitions.push(transition);
@@ -477,13 +579,13 @@ export class Node {
   }
 
   updateTransitionsRouting() {
-    this.transitions.forEach(transition => {
+    this.transitions.forEach((transition) => {
       this.computeTransitionRouting(transition);
     });
   }
 
   updateConnectionsRouting() {
-    this.connections.forEach(connection => {
+    this.connections.forEach((connection) => {
       this.computeConnectionRouting(connection);
       ConnectionValidator.validateConnection(connection, this);
     });
@@ -503,7 +605,7 @@ export class Node {
     if (this.getId() === trainrunSection.getTargetNodeId()) {
       portId = trainrunSection.getTargetPortId();
     }
-    this.ports = this.ports.filter(port => port.getId() !== portId);
+    this.ports = this.ports.filter((port) => port.getId() !== portId);
   }
 
   removeTransition(trainrunSection: TrainrunSection) {
@@ -511,7 +613,11 @@ export class Node {
     if (this.getId() === trainrunSection.getTargetNodeId()) {
       portId = trainrunSection.getTargetPortId();
     }
-    this.transitions = this.transitions.filter(transition => transition.getPortId1() !== portId && transition.getPortId2() !== portId);
+    this.transitions = this.transitions.filter(
+      (transition) =>
+        transition.getPortId1() !== portId &&
+        transition.getPortId2() !== portId,
+    );
   }
 
   removeConnectionFromTrainrunSection(trainrunSection: TrainrunSection) {
@@ -519,16 +625,31 @@ export class Node {
     if (this.getId() === trainrunSection.getTargetNodeId()) {
       portId = trainrunSection.getTargetPortId();
     }
-    this.connections = this.connections.filter(connection => connection.getPortId1() !== portId && connection.getPortId2() !== portId);
+    this.connections = this.connections.filter(
+      (connection) =>
+        connection.getPortId1() !== portId &&
+        connection.getPortId2() !== portId,
+    );
   }
 
   removeConnection(connectionId: number) {
-    this.connections = this.connections.filter(connection => !(connection.getId() === connectionId));
+    this.connections = this.connections.filter(
+      (connection) => !(connection.getId() === connectionId),
+    );
   }
 
-  addPortWithRespectToOppositeNode(oppositeNode: Node, trainrunSection: TrainrunSection) {
-    const portAlignments = VisAVisPortPlacement.placePortsOnSourceAndTargetNode(this, oppositeNode);
-    const portId = this.addPort(portAlignments.sourcePortPlacement, trainrunSection);
+  addPortWithRespectToOppositeNode(
+    oppositeNode: Node,
+    trainrunSection: TrainrunSection,
+  ) {
+    const portAlignments = VisAVisPortPlacement.placePortsOnSourceAndTargetNode(
+      this,
+      oppositeNode,
+    );
+    const portId = this.addPort(
+      portAlignments.sourcePortPlacement,
+      trainrunSection,
+    );
     this.updateTransitionsAndConnections();
     if (this.getId() === trainrunSection.getSourceNodeId()) {
       trainrunSection.setSourcePortId(portId);
@@ -537,15 +658,21 @@ export class Node {
     }
   }
 
-  reAlignPortWithRespectToOppositeNode(oppositeNode: Node, trainrunSection: TrainrunSection) {
-    const portAlignments = VisAVisPortPlacement.placePortsOnSourceAndTargetNode(this, oppositeNode);
+  reAlignPortWithRespectToOppositeNode(
+    oppositeNode: Node,
+    trainrunSection: TrainrunSection,
+  ) {
+    const portAlignments = VisAVisPortPlacement.placePortsOnSourceAndTargetNode(
+      this,
+      oppositeNode,
+    );
     const port = this.getPortOfTrainrunSection(trainrunSection.getId());
     port.setPositionAlignment(portAlignments.sourcePortPlacement);
     this.updateTransitionsAndConnections();
   }
 
   getConnectedTrainrunSections(): TrainrunSection[] {
-    return this.ports.map(port => port.getTrainrunSection());
+    return this.ports.map((port) => port.getTrainrunSection());
   }
 
   getDepartureTime(trainrunSection: TrainrunSection): number {
@@ -564,7 +691,10 @@ export class Node {
     }
   }
 
-  setDepartureConsecutiveTime(trainrunSection: TrainrunSection, accumulatedTime: number) {
+  setDepartureConsecutiveTime(
+    trainrunSection: TrainrunSection,
+    accumulatedTime: number,
+  ) {
     if (trainrunSection.getSourceNodeId() === this.getId()) {
       trainrunSection.setSourceDepartureConsecutiveTime(accumulatedTime);
     } else {
@@ -572,7 +702,10 @@ export class Node {
     }
   }
 
-  setArrivalConsecutiveTime(trainrunSection: TrainrunSection, accumulatedTime: number) {
+  setArrivalConsecutiveTime(
+    trainrunSection: TrainrunSection,
+    accumulatedTime: number,
+  ) {
     if (trainrunSection.getSourceNodeId() === this.getId()) {
       trainrunSection.setSourceArrivalConsecutiveTime(accumulatedTime);
     } else {
@@ -611,7 +744,7 @@ export class Node {
   }
 
   validateAllConnections() {
-    this.connections.forEach(connection => {
+    this.connections.forEach((connection) => {
       ConnectionValidator.validateConnection(connection, this);
     });
   }
@@ -634,8 +767,8 @@ export class Node {
       return false;
     }
     const portId = port.getId();
-    const transition = this.getTransitions().find((t: Transition) =>
-      t.getPortId1() === portId || t.getPortId2() === portId
+    const transition = this.getTransitions().find(
+      (t: Transition) => t.getPortId1() === portId || t.getPortId2() === portId,
     );
     return transition !== undefined ? transition.getIsNonStopTransit() : false;
   }
@@ -644,20 +777,34 @@ export class Node {
     if (this.getTransitions().length === 0) {
       return false;
     }
-    let transitionCheck = (this.getTransitions().find(transition => !transition.getIsNonStopTransit()) === undefined);
+    let transitionCheck =
+      this.getTransitions().find(
+        (transition) => !transition.getIsNonStopTransit(),
+      ) === undefined;
     this.ports.forEach((p) => {
-      transitionCheck = transitionCheck && (this.getNextTrainrunSection(p.getTrainrunSection()) !== undefined);
+      transitionCheck =
+        transitionCheck &&
+        this.getNextTrainrunSection(p.getTrainrunSection()) !== undefined;
     });
     return transitionCheck;
   }
 
   containsTrainrun(trainrun: Trainrun): boolean {
-    return this.ports.find(port => (port.getTrainrunSection().getTrainrunId() === trainrun.getId()))
-      !== undefined;
+    return (
+      this.ports.find(
+        (port) =>
+          port.getTrainrunSection().getTrainrunId() === trainrun.getId(),
+      ) !== undefined
+    );
   }
 
   getTrainrunSection(trainrun: Trainrun): TrainrunSection {
-    return this.ports.find(port => (port.getTrainrunSection().getTrainrunId() === trainrun.getId())).getTrainrunSection();
+    return this.ports
+      .find(
+        (port) =>
+          port.getTrainrunSection().getTrainrunId() === trainrun.getId(),
+      )
+      .getTrainrunSection();
   }
 
   getPorts(): Port[] {
@@ -676,7 +823,10 @@ export class Node {
     const port2 = this.getPort(portId2);
     const trainrunsection1 = port1.getTrainrunSection();
     const trainrunsection2 = port2.getTrainrunSection();
-    return {trainrunSection1: trainrunsection1, trainrunSection2: trainrunsection2};
+    return {
+      trainrunSection1: trainrunsection1,
+      trainrunSection2: trainrunsection2,
+    };
   }
 
   getAllConnectedTrainruns(trainrunSection: TrainrunSection): number[] {
@@ -686,14 +836,17 @@ export class Node {
     if (port === undefined) {
       return [];
     }
-    connections.forEach(connection => {
+    connections.forEach((connection) => {
       if (connection.getPortId1() === port.getId()) {
         const oppositePort = this.getPort(connection.getPortId2());
-        connectedTrainrunIds.push(oppositePort.getTrainrunSection().getTrainrunId());
-
+        connectedTrainrunIds.push(
+          oppositePort.getTrainrunSection().getTrainrunId(),
+        );
       } else if (connection.getPortId2() === port.getId()) {
         const oppositePort = this.getPort(connection.getPortId1());
-        connectedTrainrunIds.push(oppositePort.getTrainrunSection().getTrainrunId());
+        connectedTrainrunIds.push(
+          oppositePort.getTrainrunSection().getTrainrunId(),
+        );
       }
     });
     return connectedTrainrunIds;
@@ -706,20 +859,23 @@ export class Node {
       fullName: this.fullName,
       positionX: this.positionX,
       positionY: this.positionY,
-      ports: this.ports.map(port => port.getDto()),
-      transitions: this.transitions.map(transition => transition.getDto()),
-      connections: this.connections.map(connection => connection.getDto()),
+      ports: this.ports.map((port) => port.getDto()),
+      transitions: this.transitions.map((transition) => transition.getDto()),
+      connections: this.connections.map((connection) => connection.getDto()),
       resourceId: this.resourceId,
       perronkanten: this.perronkanten,
       connectionTime: this.connectionTime,
       trainrunCategoryHaltezeiten: this.trainrunCategoryHaltezeiten,
       symmetryAxis: this.symmetryAxis,
       warnings: this.warnings,
-      labelIds: this.labelIds
+      labelIds: this.labelIds,
     };
   }
 
-  replaceTrainrunSectionOnPort(trainrunSectionOld: TrainrunSection, trainrunSectionNew: TrainrunSection) {
+  replaceTrainrunSectionOnPort(
+    trainrunSectionOld: TrainrunSection,
+    trainrunSectionNew: TrainrunSection,
+  ) {
     const port = this.getPortOfTrainrunSection(trainrunSectionOld.getId());
     port.setTrainrunSection(trainrunSectionNew);
     if (this.getId() === trainrunSectionOld.getSourceNodeId()) {
