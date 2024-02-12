@@ -9,9 +9,9 @@ Netzgrafik-Editor – designed to make better decisions.
 
 >
 > **Flexible level of detail** - start with a rough sketch, continuously add more detail
-> 
+>
 > Applicable across **different industries** (bus, train, plane)
-> 
+>
 > **Scales with your use-case**: from hobbyist timetabling to professional planning
 >
 > **Human-centric:** Timetable planning is a very complex and creative process. Netzgrafik-Editor
@@ -36,7 +36,7 @@ Regular-interval timetable
 
 <br>
 
-> 
+>
 > Regular-interval timetables were first developed in Germany at the beginning of the 20th century
 > to coordinate urban traffic in large cities such as Berlin.
 >
@@ -170,21 +170,21 @@ npm run start
 #### The dockerized variant
 
 ```shell
-# install 
+# install
 apt install docker
 apt install docker-compose-plugin
 
-# build 
+# build
 docker compose build
 
 # run
 docker compose up
 ```
 
-#### Access to Netzgrafik-Editor frontend 
+#### Access to Netzgrafik-Editor frontend
 
 > open address in browser http://localhost:4200/
-> 
+>
 > Login with username **user** and password **user**
 
 
