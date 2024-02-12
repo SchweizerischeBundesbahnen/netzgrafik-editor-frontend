@@ -1,10 +1,10 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {TrainrunService} from './trainrun.service';
+import {Injectable, OnDestroy} from "@angular/core";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
+import {TrainrunService} from "./trainrun.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class IsTrainrunSelectedService implements OnDestroy {
   // Description of observable data service: https://coryrylan.com/blog/angular-observable-data-services

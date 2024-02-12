@@ -4,31 +4,31 @@ import {
   OnChanges,
   OnDestroy,
   SimpleChanges,
-} from '@angular/core';
-import {DownloadVersionModel, VersionId} from './model';
-import {VersionControlService} from '../../../../services/data/version-control.service';
+} from "@angular/core";
+import {DownloadVersionModel, VersionId} from "./model";
+import {VersionControlService} from "../../../../services/data/version-control.service";
 import {
   VariantDto,
   VersionControllerBackendService,
   VersionDto,
   VariantControllerBackendService,
-} from '../../../../api/generated';
-import {VersionEntries} from './version-entries/version-entries.component';
-import {Subject} from 'rxjs';
-import {mergeMap, takeUntil} from 'rxjs/operators';
-import {PreviewService} from '../../../../services/data/preview.service';
-import {UiInteractionService} from '../../../../services/ui/ui.interaction.service';
-import {ConfirmationDialogParameter} from '../../../dialogs/confirmation-dialog/confirmation-dialog.component';
-import {downloadBlob} from '../../../util/download-utils';
-import {VariantDialogComponent} from '../../variant-dialog/variant-dialog.component';
-import {SbbDialog} from '@sbb-esta/angular/dialog';
-import {NavigationService} from '../../../../services/ui/navigation.service';
-import {AutoSaveService} from '../../../../services/data/auto-save.service';
+} from "../../../../api/generated";
+import {VersionEntries} from "./version-entries/version-entries.component";
+import {Subject} from "rxjs";
+import {mergeMap, takeUntil} from "rxjs/operators";
+import {PreviewService} from "../../../../services/data/preview.service";
+import {UiInteractionService} from "../../../../services/ui/ui.interaction.service";
+import {ConfirmationDialogParameter} from "../../../dialogs/confirmation-dialog/confirmation-dialog.component";
+import {downloadBlob} from "../../../util/download-utils";
+import {VariantDialogComponent} from "../../variant-dialog/variant-dialog.component";
+import {SbbDialog} from "@sbb-esta/angular/dialog";
+import {NavigationService} from "../../../../services/ui/navigation.service";
+import {AutoSaveService} from "../../../../services/data/auto-save.service";
 
 @Component({
-  selector: 'sbb-variant-history',
-  templateUrl: './variant-history.component.html',
-  styleUrls: ['./variant-history.component.scss'],
+  selector: "sbb-variant-history",
+  templateUrl: "./variant-history.component.html",
+  styleUrls: ["./variant-history.component.scss"],
 })
 export class VariantHistoryComponent implements OnChanges, OnDestroy {
   @Input() variant: VariantDto;
@@ -72,8 +72,8 @@ export class VariantHistoryComponent implements OnChanges, OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          'Neue Version publizieren',
-          'Möchten Sie Ihre persönlichen Änderungen als neue Version publizieren?',
+          "Neue Version publizieren",
+          "Möchten Sie Ihre persönlichen Änderungen als neue Version publizieren?",
         ),
       )
       .pipe(takeUntil(this.destroyed))
@@ -88,8 +88,8 @@ export class VariantHistoryComponent implements OnChanges, OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          'Änderungen verwerfen',
-          'Möchten Sie Ihre persönlichen Änderungen unwiderruflich verwerfen?',
+          "Änderungen verwerfen",
+          "Möchten Sie Ihre persönlichen Änderungen unwiderruflich verwerfen?",
         ),
       )
       .pipe(takeUntil(this.destroyed))
@@ -112,8 +112,8 @@ export class VariantHistoryComponent implements OnChanges, OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          'Version wiederherstellen',
-          'Möchten Sie den Stand dieser Version wiederherstellen?',
+          "Version wiederherstellen",
+          "Möchten Sie den Stand dieser Version wiederherstellen?",
         ),
       )
       .pipe(takeUntil(this.destroyed))
@@ -128,8 +128,8 @@ export class VariantHistoryComponent implements OnChanges, OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          'Konflikt ignorieren',
-          'Möchten Sie, dass der aktuelle Stand auf der höchsten publizierten Version aufbaut?',
+          "Konflikt ignorieren",
+          "Möchten Sie, dass der aktuelle Stand auf der höchsten publizierten Version aufbaut?",
         ),
       )
       .pipe(takeUntil(this.destroyed))
@@ -164,7 +164,7 @@ export class VariantHistoryComponent implements OnChanges, OnDestroy {
       .pipe(takeUntil(this.destroyed))
       .subscribe((model) => {
         const blob = new Blob([JSON.stringify(model)], {
-          type: 'application/json',
+          type: "application/json",
         });
         downloadBlob(blob, downloadVersion.fileName);
       });

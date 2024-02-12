@@ -1,20 +1,20 @@
-import {NodeService} from '../app/services/data/node.service';
-import {TrainrunService} from '../app/services/data/trainrun.service';
-import {TrainrunSectionService} from '../app/services/data/trainrunsection.service';
-import {StammdatenService} from '../app/services/data/stammdaten.service';
-import {DataService} from '../app/services/data/data.service';
-import {ResourceService} from '../app/services/data/resource.service';
-import {LogService} from '../app/logger/log.service';
-import {LogPublishersService} from '../app/logger/log.publishers.service';
-import {NoteService} from '../app/services/data/note.service';
-import {LabelService} from '../app/services/data/label.serivce';
-import {LabelGroupService} from '../app/services/data/labelgroup.service';
-import {NetzgrafikUnitTesting} from './netzgrafik.unit.testing';
-import {Resource} from '../app/models/resource.model';
-import {FilterService} from '../app/services/ui/filter.service';
-import {NetzgrafikColoringService} from '../app/services/data/netzgrafikColoring.service';
+import {NodeService} from "../app/services/data/node.service";
+import {TrainrunService} from "../app/services/data/trainrun.service";
+import {TrainrunSectionService} from "../app/services/data/trainrunsection.service";
+import {StammdatenService} from "../app/services/data/stammdaten.service";
+import {DataService} from "../app/services/data/data.service";
+import {ResourceService} from "../app/services/data/resource.service";
+import {LogService} from "../app/logger/log.service";
+import {LogPublishersService} from "../app/logger/log.publishers.service";
+import {NoteService} from "../app/services/data/note.service";
+import {LabelService} from "../app/services/data/label.serivce";
+import {LabelGroupService} from "../app/services/data/labelgroup.service";
+import {NetzgrafikUnitTesting} from "./netzgrafik.unit.testing";
+import {Resource} from "../app/models/resource.model";
+import {FilterService} from "../app/services/ui/filter.service";
+import {NetzgrafikColoringService} from "../app/services/data/netzgrafikColoring.service";
 
-describe('ResourceService Test', () => {
+describe("ResourceService Test", () => {
   let resources: Resource[] = null;
 
   let dataService: DataService = null;
@@ -77,7 +77,7 @@ describe('ResourceService Test', () => {
     );
   });
 
-  it('setResourceData', () => {
+  it("setResourceData", () => {
     const netzgrafik = NetzgrafikUnitTesting.getUnitTestNetzgrafik();
     dataService.loadNetzgrafikDto(netzgrafik);
     resourceService.setResourceData(netzgrafik.resources);
@@ -85,7 +85,7 @@ describe('ResourceService Test', () => {
     expect(netzgrafik.resources.length).toBe(resources.length);
   });
 
-  it('getResource', () => {
+  it("getResource", () => {
     const netzgrafik = NetzgrafikUnitTesting.getUnitTestNetzgrafik();
     netzgrafik.resources = [];
     dataService.loadNetzgrafikDto(netzgrafik);
@@ -93,7 +93,7 @@ describe('ResourceService Test', () => {
     expect(res).toBe(undefined);
   });
 
-  it('createAndGetResource', () => {
+  it("createAndGetResource", () => {
     const netzgrafik = NetzgrafikUnitTesting.getUnitTestNetzgrafik();
     netzgrafik.resources = [];
     dataService.loadNetzgrafikDto(netzgrafik);
@@ -104,7 +104,7 @@ describe('ResourceService Test', () => {
     expect(res !== undefined).toBe(true);
   });
 
-  it('changeCapacity', () => {
+  it("changeCapacity", () => {
     const netzgrafik = NetzgrafikUnitTesting.getUnitTestNetzgrafik();
     netzgrafik.resources = [];
     dataService.loadNetzgrafikDto(netzgrafik);
@@ -115,7 +115,7 @@ describe('ResourceService Test', () => {
     expect(resourceService.getResource(res.getId()).getCapacity()).toBe(1);
   });
 
-  it('changeCapacity', () => {
+  it("changeCapacity", () => {
     const netzgrafik = NetzgrafikUnitTesting.getUnitTestNetzgrafik();
     dataService.loadNetzgrafikDto(netzgrafik);
     resourceService.createAndGetResource();

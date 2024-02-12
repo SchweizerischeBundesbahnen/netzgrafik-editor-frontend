@@ -4,45 +4,45 @@ import {
   Component,
   Input,
   OnDestroy,
-} from '@angular/core';
-import {SgTrainrun} from '../../model/streckengrafik-model/sg-trainrun';
-import {SgTrainrunItem} from '../../model/streckengrafik-model/sg-trainrun-item';
-import {TrainrunService} from '../../../services/data/trainrun.service';
-import {TrainDataService} from '../../services/train-data-service';
-import {TrainrunBranchType} from '../../model/enum/trainrun-branch-type-type';
-import {Vec2D} from '../../../utils/vec2D';
-import {takeUntil} from 'rxjs/operators';
-import {TimeSliderService} from '../../services/time-slider.service';
-import {Subject} from 'rxjs';
-import {TrainrunSectionText} from '../../../data-structures/technical.data.structures';
+} from "@angular/core";
+import {SgTrainrun} from "../../model/streckengrafik-model/sg-trainrun";
+import {SgTrainrunItem} from "../../model/streckengrafik-model/sg-trainrun-item";
+import {TrainrunService} from "../../../services/data/trainrun.service";
+import {TrainDataService} from "../../services/train-data-service";
+import {TrainrunBranchType} from "../../model/enum/trainrun-branch-type-type";
+import {Vec2D} from "../../../utils/vec2D";
+import {takeUntil} from "rxjs/operators";
+import {TimeSliderService} from "../../services/time-slider.service";
+import {Subject} from "rxjs";
+import {TrainrunSectionText} from "../../../data-structures/technical.data.structures";
 import {
   TrainrunDialogParameter,
   TrainrunDialogType,
-} from '../../../view/dialogs/trainrun-and-section-dialog/trainrun-and-section-dialog.component';
-import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
+} from "../../../view/dialogs/trainrun-and-section-dialog/trainrun-and-section-dialog.component";
+import {UiInteractionService} from "../../../services/ui/ui.interaction.service";
 import {
   InformSelectedTrainrunClick,
   TrainrunSectionService,
-} from '../../../services/data/trainrunsection.service';
-import {FilterService} from '../../../services/ui/filter.service';
+} from "../../../services/data/trainrunsection.service";
+import {FilterService} from "../../../services/ui/filter.service";
 import {
   UpdateCounterController,
   UpdateCounterHandler,
   UpdateCounterTriggerSerivce,
-} from '../../services/util/update-counter.service';
-import {SliderChangeInfo} from '../../model/util/sliderChangeInfo';
-import {NodeService} from '../../../services/data/node.service';
-import {SgTrainrunSection} from '../../model/streckengrafik-model/sg-trainrun-section';
-import {StreckengrafikDisplayElementService} from '../../services/util/streckengrafik-display-element.service';
-import {ViewBoxChangeInfo} from '../../model/util/viewBoxChangeInfo';
-import {ViewBoxService} from '../../services/util/view-box.service';
-import {Sg4ToggleTrackOccupierService} from '../../services/sg-4-toggle-track-occupier.service';
+} from "../../services/util/update-counter.service";
+import {SliderChangeInfo} from "../../model/util/sliderChangeInfo";
+import {NodeService} from "../../../services/data/node.service";
+import {SgTrainrunSection} from "../../model/streckengrafik-model/sg-trainrun-section";
+import {StreckengrafikDisplayElementService} from "../../services/util/streckengrafik-display-element.service";
+import {ViewBoxChangeInfo} from "../../model/util/viewBoxChangeInfo";
+import {ViewBoxService} from "../../services/util/view-box.service";
+import {Sg4ToggleTrackOccupierService} from "../../services/sg-4-toggle-track-occupier.service";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[sbb-train-run-section]',
-  templateUrl: './train-run-section.component.html',
-  styleUrls: ['./train-run-section.component.scss'],
+  selector: "[sbb-train-run-section]",
+  templateUrl: "./train-run-section.component.html",
+  styleUrls: ["./train-run-section.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TrainRunSectionComponent
@@ -146,10 +146,10 @@ export class TrainRunSectionComponent
 
   public getClassTag(tag: string): string {
     let retTag = this.getGeneralNoColorRefClassTag(tag);
-    retTag += ' ColorRef_' + this.trainrun.colorRef;
-    retTag += ' backward_' + this.trainrunItem.backward;
+    retTag += " ColorRef_" + this.trainrun.colorRef;
+    retTag += " backward_" + this.trainrunItem.backward;
     retTag +=
-      ' trainrunBranchType_' +
+      " trainrunBranchType_" +
       TrainrunBranchType[
         this.trainrunItem.getTrainrunSection().trainrunBranchType
       ];
@@ -159,7 +159,7 @@ export class TrainRunSectionComponent
 
   getGeneralNoColorRefClassTag(tag: string): string {
     tag +=
-      ' ' +
+      " " +
       this.trainDataService.createColoringClassTags(this.trainrun.trainrunId);
     return tag;
   }
@@ -178,25 +178,25 @@ export class TrainRunSectionComponent
         ? this.yZoom * ts.getTrainrun().getTrainrunCategory().sectionHeadway
         : this.yZoom * 2;
     return (
-      'M ' +
+      "M " +
       scaledPath.scaledPathFrom.getX() +
-      ' ' +
+      " " +
       scaledPath.scaledPathFrom.getY() +
-      ' L ' +
+      " L " +
       scaledPath.scaledPathTo.getX() +
-      ' ' +
+      " " +
       scaledPath.scaledPathTo.getY() +
-      ' L ' +
+      " L " +
       scaledPath.scaledPathTo.getX() +
-      ' ' +
+      " " +
       (scaledPath.scaledPathTo.getY() + scaledBand) +
-      ' L ' +
+      " L " +
       scaledPath.scaledPathFrom.getX() +
-      ' ' +
+      " " +
       (scaledPath.scaledPathFrom.getY() + scaledBand) +
-      ' L ' +
+      " L " +
       scaledPath.scaledPathFrom.getX() +
-      ' ' +
+      " " +
       scaledPath.scaledPathFrom.getY()
     );
   }
@@ -361,13 +361,13 @@ export class TrainRunSectionComponent
 
   private path(scaledPath: ScaledPath) {
     return (
-      'M ' +
+      "M " +
       scaledPath.scaledPathFrom.getX() +
-      ' ' +
+      " " +
       scaledPath.scaledPathFrom.getY() +
-      ' L ' +
+      " L " +
       scaledPath.scaledPathTo.getX() +
-      ' ' +
+      " " +
       scaledPath.scaledPathTo.getY()
     );
   }
@@ -380,9 +380,9 @@ export class TrainRunSectionComponent
         : TrainrunSectionText.SourceDeparture,
     );
     if (formattedTimeStyle !== undefined) {
-      return '' + formattedTimeStyle;
+      return "" + formattedTimeStyle;
     }
-    return '21';
+    return "21";
   }
 
   getArrivalTextWidth(): string {
@@ -393,9 +393,9 @@ export class TrainRunSectionComponent
         : TrainrunSectionText.TargetArrival,
     );
     if (formattedTimeStyle !== undefined) {
-      return '' + formattedTimeStyle;
+      return "" + formattedTimeStyle;
     }
-    return '21';
+    return "21";
   }
 
   getDepartureTextStyle(): string {
@@ -425,7 +425,7 @@ export class TrainRunSectionComponent
     );
     if (formattedTimeStyle !== undefined) {
       return this.getGeneralNoColorRefClassTag(
-        tag + ' ColorRef_' + formattedTimeStyle,
+        tag + " ColorRef_" + formattedTimeStyle,
       );
     }
     return this.getClassTag(tag);
@@ -440,7 +440,7 @@ export class TrainRunSectionComponent
     );
     if (formattedTimeStyle !== undefined) {
       return this.getGeneralNoColorRefClassTag(
-        tag + ' ColorRef_' + formattedTimeStyle,
+        tag + " ColorRef_" + formattedTimeStyle,
       );
     }
     return this.getClassTag(tag);
@@ -521,7 +521,7 @@ export class TrainRunSectionComponent
         orgTime = this.trainrunItem.arrivalTime;
       }
     }
-    return '' + (Math.floor(orgTime + this.freqOffset + 10080) % 60);
+    return "" + (Math.floor(orgTime + this.freqOffset + 10080) % 60);
   }
 
   getArrivalText(): string {
@@ -586,7 +586,7 @@ export class TrainRunSectionComponent
       }
     }
 
-    return '' + (Math.floor(orgTime + this.freqOffset + 10080) % 60);
+    return "" + (Math.floor(orgTime + this.freqOffset + 10080) % 60);
   }
 
   isArrivalTimeTextFiltering() {
@@ -718,9 +718,9 @@ export class TrainRunSectionComponent
 
   getTextTransform(): string {
     if (this.trainrunItem.getTrainrunSection().numberOfStops > 0) {
-      return 'translate(0,-8)';
+      return "translate(0,-8)";
     }
-    return 'translate(0,0)';
+    return "translate(0,0)";
   }
 
   isShowText() {
@@ -877,18 +877,18 @@ export class TrainRunSectionComponent
       a = 0;
     }
     return (
-      ' translate(' +
+      " translate(" +
       position.getX() +
-      ',' +
+      "," +
       position.getY() +
-      ')' +
-      ' rotate(' +
+      ")" +
+      " rotate(" +
       a +
-      ',' +
+      "," +
       -alignOffset.getX() +
-      ',' +
+      "," +
       -alignOffset.getY() +
-      ') '
+      ") "
     );
   }
 

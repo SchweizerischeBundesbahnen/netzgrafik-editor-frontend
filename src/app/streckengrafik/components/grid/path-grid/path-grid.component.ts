@@ -5,24 +5,24 @@ import {
   Input,
   OnDestroy,
   OnInit,
-} from '@angular/core';
-import {Subject} from 'rxjs';
-import {ResizeChangeInfo} from '../../../model/util/resizeChangeInfo';
-import {ViewBoxChangeInfo} from '../../../model/util/viewBoxChangeInfo';
-import {ResizeService} from '../../../services/util/resize.service';
-import {ViewBoxService} from '../../../services/util/view-box.service';
-import {NodeService} from '../../../../services/data/node.service';
-import {takeUntil} from 'rxjs/operators';
-import {TrackData} from '../../../model/trackData';
-import {Sg7PathSliderService} from '../../../services/sg-7-path-slider.service';
-import {SgSelectedTrainrun} from '../../../model/streckengrafik-model/sg-selected-trainrun';
-import {SgPath} from '../../../model/streckengrafik-model/sg-path';
+} from "@angular/core";
+import {Subject} from "rxjs";
+import {ResizeChangeInfo} from "../../../model/util/resizeChangeInfo";
+import {ViewBoxChangeInfo} from "../../../model/util/viewBoxChangeInfo";
+import {ResizeService} from "../../../services/util/resize.service";
+import {ViewBoxService} from "../../../services/util/view-box.service";
+import {NodeService} from "../../../../services/data/node.service";
+import {takeUntil} from "rxjs/operators";
+import {TrackData} from "../../../model/trackData";
+import {Sg7PathSliderService} from "../../../services/sg-7-path-slider.service";
+import {SgSelectedTrainrun} from "../../../model/streckengrafik-model/sg-selected-trainrun";
+import {SgPath} from "../../../model/streckengrafik-model/sg-path";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[sbb-path-grid]',
-  templateUrl: './path-grid.component.html',
-  styleUrls: ['./path-grid.component.scss'],
+  selector: "[sbb-path-grid]",
+  templateUrl: "./path-grid.component.html",
+  styleUrls: ["./path-grid.component.scss"],
 })
 export class PathGridComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input()
@@ -154,16 +154,16 @@ export class PathGridComponent implements OnInit, OnDestroy, AfterViewInit {
     const trackNbr = Math.round(
       1 + (gridTrackPos - this.trackWidth) / this.trackWidth,
     );
-    return '' + trackNbr;
+    return "" + trackNbr;
   }
 
   getTrackTitel(path: SgPath, gridTrackPos: number): string {
     const trackData = this.getTrackData(path, gridTrackPos);
     if (trackData.nodeId1 === undefined && trackData.nodeId2 === undefined) {
-      return '';
+      return "";
     }
 
-    let ret = '[ ';
+    let ret = "[ ";
     if (trackData.nodeId1 !== undefined) {
       const node1 = this.nodeSerivce.getNodeFromId(trackData.nodeId1);
       if (node1 !== undefined && node1) {
@@ -174,14 +174,14 @@ export class PathGridComponent implements OnInit, OnDestroy, AfterViewInit {
     if (trackData.nodeId2 !== undefined) {
       const node2 = this.nodeSerivce.getNodeFromId(trackData.nodeId2);
       if (node2 !== undefined && node2) {
-        if (ret !== '') {
-          ret += ' , ';
+        if (ret !== "") {
+          ret += " , ";
         }
         ret += node2.getBetriebspunktName();
       }
     }
 
-    return ret + ' ]';
+    return ret + " ]";
   }
 
   isTrackOccupier(path: SgPath) {
@@ -204,7 +204,7 @@ export class PathGridComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getClassTag(tag: string, path: SgPath): string {
     if (this.isTrackOccupier(path)) {
-      return tag + ' TrackOccupier';
+      return tag + " TrackOccupier";
     }
     return tag;
   }
@@ -218,7 +218,7 @@ export class PathGridComponent implements OnInit, OnDestroy, AfterViewInit {
     const trackData = this.getTrackData(path, gridTrackPos);
     if (trackData !== undefined) {
       const grp = trackData.getTrackGrp();
-      ret += ' TrackGroup_' + (grp % 2);
+      ret += " TrackGroup_" + (grp % 2);
     }
     return ret;
   }

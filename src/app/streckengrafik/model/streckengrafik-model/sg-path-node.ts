@@ -1,8 +1,8 @@
-import {SgPath} from './sg-path';
-import {SgPathSection} from './sg-path-section';
-import {SgSelectedTrainrun} from './sg-selected-trainrun';
-import {SgTrainrunNode} from './sg-trainrun-node';
-import {TrackData} from '../trackData';
+import {SgPath} from "./sg-path";
+import {SgPathSection} from "./sg-path-section";
+import {SgSelectedTrainrun} from "./sg-selected-trainrun";
+import {SgTrainrunNode} from "./sg-trainrun-node";
+import {TrackData} from "../trackData";
 
 export class SgPathNode implements SgPath {
   width = 20;

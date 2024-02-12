@@ -1,22 +1,22 @@
-import {NodeService} from '../app/services/data/node.service';
-import {TrainrunService} from '../app/services/data/trainrun.service';
-import {TrainrunSectionService} from '../app/services/data/trainrunsection.service';
-import {StammdatenService} from '../app/services/data/stammdaten.service';
-import {DataService} from '../app/services/data/data.service';
-import {ResourceService} from '../app/services/data/resource.service';
-import {LogService} from '../app/logger/log.service';
-import {LogPublishersService} from '../app/logger/log.publishers.service';
-import {NoteService} from '../app/services/data/note.service';
-import {LabelService} from '../app/services/data/label.serivce';
-import {LabelGroupService} from '../app/services/data/labelgroup.service';
-import {NetzgrafikUnitTesting} from './netzgrafik.unit.testing';
-import {Label} from '../app/models/label.model';
-import {LabelGroup} from '../app/models/labelGroup.model';
-import {LabelRef} from '../app/data-structures/business.data.structures';
-import {FilterService} from '../app/services/ui/filter.service';
-import {NetzgrafikColoringService} from '../app/services/data/netzgrafikColoring.service';
+import {NodeService} from "../app/services/data/node.service";
+import {TrainrunService} from "../app/services/data/trainrun.service";
+import {TrainrunSectionService} from "../app/services/data/trainrunsection.service";
+import {StammdatenService} from "../app/services/data/stammdaten.service";
+import {DataService} from "../app/services/data/data.service";
+import {ResourceService} from "../app/services/data/resource.service";
+import {LogService} from "../app/logger/log.service";
+import {LogPublishersService} from "../app/logger/log.publishers.service";
+import {NoteService} from "../app/services/data/note.service";
+import {LabelService} from "../app/services/data/label.serivce";
+import {LabelGroupService} from "../app/services/data/labelgroup.service";
+import {NetzgrafikUnitTesting} from "./netzgrafik.unit.testing";
+import {Label} from "../app/models/label.model";
+import {LabelGroup} from "../app/models/labelGroup.model";
+import {LabelRef} from "../app/data-structures/business.data.structures";
+import {FilterService} from "../app/services/ui/filter.service";
+import {NetzgrafikColoringService} from "../app/services/data/netzgrafikColoring.service";
 
-describe('LabelService Test', () => {
+describe("LabelService Test", () => {
   let dataService: DataService = null;
   let nodeService: NodeService = null;
   let resourceService: ResourceService = null;
@@ -73,13 +73,13 @@ describe('LabelService Test', () => {
     );
   });
 
-  it('getLabelFromId', () => {
+  it("getLabelFromId", () => {
     expect(labelService.getLabelFromId(-1)).toBe(undefined);
     expect(labelService.getLabelFromId(undefined)).toBe(undefined);
     expect(labelService.getLabelFromId(null)).toBe(undefined);
   });
 
-  it('check label and labelgrp', () => {
+  it("check label and labelgrp", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -101,27 +101,27 @@ describe('LabelService Test', () => {
     expect(labelNode.getDto().id).toBe(3);
   });
 
-  it('check label operators', () => {
+  it("check label operators", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
     const labelTrainrun: Label = labelService.getLabelFromId(0);
     expect(labelTrainrun.getId()).toBe(0);
-    expect(labelTrainrun.getLabel()).toBe('TestLabel');
+    expect(labelTrainrun.getLabel()).toBe("TestLabel");
     expect(labelTrainrun.getLabelRef()).toBe(LabelRef.Trainrun);
     expect(labelTrainrun.getLabelGroupId()).toBe(0);
   });
 
-  it('check label set operators', () => {
+  it("check label set operators", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
     const labelTrainrun: Label = labelService.getLabelFromId(0);
-    labelTrainrun.setLabel('test');
-    expect(labelTrainrun.getLabel()).toBe('test');
+    labelTrainrun.setLabel("test");
+    expect(labelTrainrun.getLabel()).toBe("test");
   });
 
-  it('getLabelsFromLabelRef', () => {
+  it("getLabelsFromLabelRef", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -134,7 +134,7 @@ describe('LabelService Test', () => {
     );
   });
 
-  it('getLabelsFromLabelGroupId', () => {
+  it("getLabelsFromLabelGroupId", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -149,40 +149,40 @@ describe('LabelService Test', () => {
     expect(labelsGrp3).toEqual([]);
   });
 
-  it('getOrCreateLabel', () => {
+  it("getOrCreateLabel", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
     expect(
-      labelService.getOrCreateLabel('TestLabel', LabelRef.Trainrun).getId(),
+      labelService.getOrCreateLabel("TestLabel", LabelRef.Trainrun).getId(),
     ).toBe(0);
     const newLabelTrainrun: Label = labelService.getOrCreateLabel(
-      'SBB',
+      "SBB",
       LabelRef.Trainrun,
     );
-    expect(newLabelTrainrun.getLabel()).toBe('SBB');
+    expect(newLabelTrainrun.getLabel()).toBe("SBB");
     expect(newLabelTrainrun.getLabelRef()).toBe(LabelRef.Trainrun);
     const newLabelNode: Label = labelService.getOrCreateLabel(
-      'SBB',
+      "SBB",
       LabelRef.Node,
     );
-    expect(newLabelNode.getLabel()).toBe('SBB');
+    expect(newLabelNode.getLabel()).toBe("SBB");
     expect(newLabelNode.getLabelRef()).toBe(LabelRef.Node);
     expect(newLabelNode.getId() !== newLabelTrainrun.getId()).toBe(true);
     const oldLabelNode: Label = labelService.getOrCreateLabel(
-      'SBB',
+      "SBB",
       LabelRef.Node,
     );
     expect(newLabelNode.getId() === oldLabelNode.getId()).toBe(true);
     const undefinedLabelNode: Label = labelService.getOrCreateLabel(
-      'SBB',
+      "SBB",
       LabelRef.Undefinded,
     );
-    expect(undefinedLabelNode.getLabel()).toBe('SBB');
+    expect(undefinedLabelNode.getLabel()).toBe("SBB");
     expect(undefinedLabelNode.getLabelRef()).toBe(LabelRef.Undefinded);
   });
 
-  it('getLabelsFromIds', () => {
+  it("getLabelsFromIds", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -192,7 +192,7 @@ describe('LabelService Test', () => {
     expect(labelService.getLabelsFromIds([]).length).toBe(0);
   });
 
-  it('trainrun and labels', () => {
+  it("trainrun and labels", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -202,14 +202,14 @@ describe('LabelService Test', () => {
     expect(trainrunService.getTrainrunFromId(0).getLabelIds().length).toBe(2);
   });
 
-  it('node and labels', () => {
+  it("node and labels", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
     expect(nodeService.getAllNodeLabels().length).toBe(2);
   });
 
-  it('doUserDefinedLabelsOrdering', () => {
+  it("doUserDefinedLabelsOrdering", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -265,58 +265,58 @@ describe('LabelService Test', () => {
     ).toBe(1);
   });
 
-  it('getLabelFromLabelAndLabelRef', () => {
+  it("getLabelFromLabelAndLabelRef", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
     expect(
-      labelService.getLabelFromLabelAndLabelRef('Test', LabelRef.Node).getId(),
+      labelService.getLabelFromLabelAndLabelRef("Test", LabelRef.Node).getId(),
     ).toBe(4);
     expect(
-      labelService.getLabelFromLabelAndLabelRef('Te2st', LabelRef.Node),
+      labelService.getLabelFromLabelAndLabelRef("Te2st", LabelRef.Node),
     ).toBe(undefined);
     expect(
-      labelService.getLabelFromLabelAndLabelRef('test', LabelRef.Node),
+      labelService.getLabelFromLabelAndLabelRef("test", LabelRef.Node),
     ).toBe(undefined);
     expect(
-      labelService.getLabelFromLabelAndLabelRef(' test', LabelRef.Node),
+      labelService.getLabelFromLabelAndLabelRef(" test", LabelRef.Node),
     ).toBe(undefined);
     expect(
-      labelService.getLabelFromLabelAndLabelRef(' test ', LabelRef.Node),
+      labelService.getLabelFromLabelAndLabelRef(" test ", LabelRef.Node),
     ).toBe(undefined);
 
     expect(
       labelService
-        .getLabelFromLabelAndLabelRef('Test', LabelRef.Trainrun)
+        .getLabelFromLabelAndLabelRef("Test", LabelRef.Trainrun)
         .getId(),
     ).toBe(1);
     expect(
-      labelService.getLabelFromLabelAndLabelRef('Te2st', LabelRef.Trainrun),
+      labelService.getLabelFromLabelAndLabelRef("Te2st", LabelRef.Trainrun),
     ).toBe(undefined);
     expect(
-      labelService.getLabelFromLabelAndLabelRef('test', LabelRef.Trainrun),
+      labelService.getLabelFromLabelAndLabelRef("test", LabelRef.Trainrun),
     ).toBe(undefined);
     expect(
-      labelService.getLabelFromLabelAndLabelRef(' test', LabelRef.Trainrun),
+      labelService.getLabelFromLabelAndLabelRef(" test", LabelRef.Trainrun),
     ).toBe(undefined);
     expect(
-      labelService.getLabelFromLabelAndLabelRef(' test ', LabelRef.Trainrun),
+      labelService.getLabelFromLabelAndLabelRef(" test ", LabelRef.Trainrun),
     ).toBe(undefined);
 
     expect(
-      labelService.getLabelFromLabelAndLabelRef('Test', LabelRef.Undefinded),
+      labelService.getLabelFromLabelAndLabelRef("Test", LabelRef.Undefinded),
     ).toBe(undefined);
     expect(
-      labelService.getLabelFromLabelAndLabelRef('Te2st', LabelRef.Undefinded),
+      labelService.getLabelFromLabelAndLabelRef("Te2st", LabelRef.Undefinded),
     ).toBe(undefined);
     expect(
-      labelService.getLabelFromLabelAndLabelRef('test', LabelRef.Undefinded),
+      labelService.getLabelFromLabelAndLabelRef("test", LabelRef.Undefinded),
     ).toBe(undefined);
     expect(
-      labelService.getLabelFromLabelAndLabelRef(' test', LabelRef.Undefinded),
+      labelService.getLabelFromLabelAndLabelRef(" test", LabelRef.Undefinded),
     ).toBe(undefined);
     expect(
-      labelService.getLabelFromLabelAndLabelRef(' test ', LabelRef.Undefinded),
+      labelService.getLabelFromLabelAndLabelRef(" test ", LabelRef.Undefinded),
     ).toBe(undefined);
 
     expect(labelService.getLabelFromLabelAndLabelRef(null, LabelRef.Node)).toBe(
@@ -340,7 +340,7 @@ describe('LabelService Test', () => {
     ).toBe(undefined);
   });
 
-  it('getLabelsFromLabelGroupId', () => {
+  it("getLabelsFromLabelGroupId", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -351,7 +351,7 @@ describe('LabelService Test', () => {
     expect(labelService.getLabelsFromLabelGroupId(2).length).toBe(0);
   });
 
-  it('deleteLabel', () => {
+  it("deleteLabel", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -359,12 +359,12 @@ describe('LabelService Test', () => {
     expect(labelService.getLabelFromId(0)).toBe(undefined);
   });
 
-  it('updateLabel', () => {
+  it("updateLabel", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
-    labelService.updateLabel(0, 'qwertz');
-    expect(labelService.getLabelFromId(0).getLabel()).toBe('qwertz');
+    labelService.updateLabel(0, "qwertz");
+    expect(labelService.getLabelFromId(0).getLabel()).toBe("qwertz");
     labelService.updateLabel(0, undefined);
     expect(labelService.getLabelFromId(0).getLabel()).toBe(undefined);
   });

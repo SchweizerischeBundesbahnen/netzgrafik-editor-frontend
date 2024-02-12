@@ -1,13 +1,13 @@
-import {Node} from '../../models/node.model';
-import {GeneralViewFunctions} from './generalViewFunctions';
-import {Vec2D} from '../../utils/vec2D';
+import {Node} from "../../models/node.model";
+import {GeneralViewFunctions} from "./generalViewFunctions";
+import {Vec2D} from "../../utils/vec2D";
 
-describe('general view functions', () => {
-  it('calcDialogTopLeftScreenCoordinate', () => {
+describe("general view functions", () => {
+  it("calcDialogTopLeftScreenCoordinate", () => {
     // not testable
   });
 
-  it('calcDialogTopLeftScreenCoordinate - case 1', () => {
+  it("calcDialogTopLeftScreenCoordinate - case 1", () => {
     const retVal =
       GeneralViewFunctions.calcDialogTopLeftScreenCoordinateClientRectInfo(
         new Vec2D(100, 200),
@@ -21,7 +21,7 @@ describe('general view functions', () => {
     expect(retVal.getY()).toBe(16);
   });
 
-  it('calcDialogTopLeftScreenCoordinate - case 2', () => {
+  it("calcDialogTopLeftScreenCoordinate - case 2", () => {
     const retVal =
       GeneralViewFunctions.calcDialogTopLeftScreenCoordinateClientRectInfo(
         new Vec2D(-100, -200),
@@ -35,7 +35,7 @@ describe('general view functions', () => {
     expect(retVal.getY()).toBe(16);
   });
 
-  it('calcDialogTopLeftScreenCoordinate - case 3', () => {
+  it("calcDialogTopLeftScreenCoordinate - case 3", () => {
     const retVal =
       GeneralViewFunctions.calcDialogTopLeftScreenCoordinateClientRectInfo(
         new Vec2D(1000, 2000),
@@ -50,7 +50,7 @@ describe('general view functions', () => {
     expect(retVal.getY()).toBe(305);
   });
 
-  it('calcDialogTopLeftScreenCoordinate - case 4', () => {
+  it("calcDialogTopLeftScreenCoordinate - case 4", () => {
     const retVal =
       GeneralViewFunctions.calcDialogTopLeftScreenCoordinateClientRectInfo(
         new Vec2D(100, 200),
@@ -64,7 +64,7 @@ describe('general view functions', () => {
     expect(retVal.getY()).toBe(16);
   });
 
-  it('calcDialogTopLeftScreenCoordinate - case 5', () => {
+  it("calcDialogTopLeftScreenCoordinate - case 5", () => {
     const retVal =
       GeneralViewFunctions.calcDialogTopLeftScreenCoordinateClientRectInfo(
         new Vec2D(100, 200),
@@ -78,7 +78,7 @@ describe('general view functions', () => {
     expect(retVal.getY()).toBe(68);
   });
 
-  it('getLeftOrTopNode - case 1', () => {
+  it("getLeftOrTopNode - case 1", () => {
     const node1 = new Node();
     node1.setPosition(0, 10);
     const node2 = new Node();
@@ -87,7 +87,7 @@ describe('general view functions', () => {
     expect(retNode.getId() === node1.getId()).toBe(false);
   });
 
-  it('getLeftOrTopNode - case 2', () => {
+  it("getLeftOrTopNode - case 2", () => {
     const node1 = new Node();
     node1.setPosition(10, 10);
     const node2 = new Node();
@@ -96,7 +96,7 @@ describe('general view functions', () => {
     expect(retNode.getId() === node1.getId()).toBe(false);
   });
 
-  it('getLeftOrTopNode - case 3', () => {
+  it("getLeftOrTopNode - case 3", () => {
     const node1 = new Node();
     node1.setPosition(0, 10);
     const node2 = new Node();
@@ -105,7 +105,7 @@ describe('general view functions', () => {
     expect(retNode.getId() === node1.getId()).toBe(true);
   });
 
-  it('getLeftOrTopNode - case 4', () => {
+  it("getLeftOrTopNode - case 4", () => {
     const node1 = new Node();
     node1.setPosition(0, 0);
     const node2 = new Node();
@@ -114,7 +114,7 @@ describe('general view functions', () => {
     expect(retNode.getId() === node1.getId()).toBe(true);
   });
 
-  it('getLeftOrTopNode - case 5', () => {
+  it("getLeftOrTopNode - case 5", () => {
     const node1 = new Node();
     node1.setPosition(0, 0);
     const node2 = new Node();
@@ -123,7 +123,7 @@ describe('general view functions', () => {
     expect(retNode.getId() === node1.getId()).toBe(true);
   });
 
-  it('getLeftOrTopNode - case 6', () => {
+  it("getLeftOrTopNode - case 6", () => {
     const node1 = new Node();
     node1.setPosition(0, 10);
     const node2 = new Node();
@@ -132,7 +132,7 @@ describe('general view functions', () => {
     expect(retNode.getId() === node1.getId()).toBe(false);
   });
 
-  it('getRightOrBottomNode - case 1', () => {
+  it("getRightOrBottomNode - case 1", () => {
     const node1 = new Node();
     node1.setPosition(0, 10);
     const node2 = new Node();
@@ -141,7 +141,7 @@ describe('general view functions', () => {
     expect(retNode.getId() === node1.getId()).toBe(true);
   });
 
-  it('getRightOrBottomNode - case 2', () => {
+  it("getRightOrBottomNode - case 2", () => {
     const node1 = new Node();
     node1.setPosition(10, 10);
     const node2 = new Node();
@@ -150,7 +150,7 @@ describe('general view functions', () => {
     expect(retNode.getId() === node1.getId()).toBe(true);
   });
 
-  it('getRightOrBottomNode - case 3', () => {
+  it("getRightOrBottomNode - case 3", () => {
     const node1 = new Node();
     node1.setPosition(0, 10);
     const node2 = new Node();
@@ -159,7 +159,7 @@ describe('general view functions', () => {
     expect(retNode.getId() === node1.getId()).toBe(false);
   });
 
-  it('getRightOrBottomNode - case 4', () => {
+  it("getRightOrBottomNode - case 4", () => {
     const node1 = new Node();
     node1.setPosition(0, 0);
     const node2 = new Node();
@@ -168,7 +168,7 @@ describe('general view functions', () => {
     expect(retNode.getId() === node1.getId()).toBe(false);
   });
 
-  it('getRightOrBottomNode - case 5', () => {
+  it("getRightOrBottomNode - case 5", () => {
     const node1 = new Node();
     node1.setPosition(0, 0);
     const node2 = new Node();
@@ -177,7 +177,7 @@ describe('general view functions', () => {
     expect(retNode.getId() === node1.getId()).toBe(false);
   });
 
-  it('getRightOrBottomNode - case 6', () => {
+  it("getRightOrBottomNode - case 6", () => {
     const node1 = new Node();
     node1.setPosition(0, 10);
     const node2 = new Node();
@@ -186,7 +186,7 @@ describe('general view functions', () => {
     expect(retNode.getId() === node1.getId()).toBe(true);
   });
 
-  it('getLeftNodeAccordingToOrder - case 1', () => {
+  it("getLeftNodeAccordingToOrder - case 1", () => {
     const node1 = new Node();
     node1.setPosition(0, 10);
     const node2 = new Node();
@@ -220,7 +220,7 @@ describe('general view functions', () => {
     expect(retNode.getId() === node1.getId()).toBe(true);
   });
 
-  it('getLeftNodeAccordingToOrder - case 2', () => {
+  it("getLeftNodeAccordingToOrder - case 2", () => {
     const node1 = new Node();
     node1.setPosition(0, 10);
     const node2 = new Node();
@@ -246,7 +246,7 @@ describe('general view functions', () => {
     expect(retNode.getId() === node2.getId()).toBe(true);
   });
 
-  it('getLeftNodeAccordingToOrder - case 3', () => {
+  it("getLeftNodeAccordingToOrder - case 3", () => {
     const node1 = new Node();
     node1.setPosition(0, 10);
     const node2 = new Node();
@@ -272,7 +272,7 @@ describe('general view functions', () => {
     expect(retNode).toBe(undefined);
   });
 
-  it('getLeftNodeAccordingToOrder - case 4', () => {
+  it("getLeftNodeAccordingToOrder - case 4", () => {
     const node1 = new Node();
     node1.setPosition(0, 10);
     const node2 = new Node();
@@ -306,7 +306,7 @@ describe('general view functions', () => {
     expect(retNode.getId() === node2.getId()).toBe(true);
   });
 
-  it('getRightNodeAccordingToOrder - case 1', () => {
+  it("getRightNodeAccordingToOrder - case 1", () => {
     const node1 = new Node();
     node1.setPosition(0, 10);
     const node2 = new Node();
@@ -340,7 +340,7 @@ describe('general view functions', () => {
     expect(retNode.getId() === node2.getId()).toBe(true);
   });
 
-  it('getRightNodeAccordingToOrder - case 2', () => {
+  it("getRightNodeAccordingToOrder - case 2", () => {
     const node1 = new Node();
     node1.setPosition(0, 10);
     const node2 = new Node();
@@ -366,7 +366,7 @@ describe('general view functions', () => {
     expect(retNode.getId() === node2.getId()).toBe(true);
   });
 
-  it('getRightNodeAccordingToOrder - case 3', () => {
+  it("getRightNodeAccordingToOrder - case 3", () => {
     const node1 = new Node();
     node1.setPosition(0, 10);
     const node2 = new Node();
@@ -392,7 +392,7 @@ describe('general view functions', () => {
     expect(retNode).toBe(undefined);
   });
 
-  it('getRightNodeAccordingToOrder - case 4', () => {
+  it("getRightNodeAccordingToOrder - case 4", () => {
     const node1 = new Node();
     node1.setPosition(0, 10);
     const node2 = new Node();

@@ -1,18 +1,18 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject} from "@angular/core";
 import {
   SBB_DIALOG_DATA,
   SbbDialog,
   SbbDialogRef,
-} from '@sbb-esta/angular/dialog';
-import {FormModel} from '../../../utils/form-model';
-import {VariantFormComponentModel} from './variant-form/variant-form.component';
-import {Observable} from 'rxjs';
-import {filter} from 'rxjs/operators';
+} from "@sbb-esta/angular/dialog";
+import {FormModel} from "../../../utils/form-model";
+import {VariantFormComponentModel} from "./variant-form/variant-form.component";
+import {Observable} from "rxjs";
+import {filter} from "rxjs/operators";
 
 @Component({
-  selector: 'sbb-variant-dialog',
-  templateUrl: './variant-dialog.component.html',
-  styleUrls: ['./variant-dialog.component.scss'],
+  selector: "sbb-variant-dialog",
+  templateUrl: "./variant-dialog.component.html",
+  styleUrls: ["./variant-dialog.component.scss"],
 })
 export class VariantDialogComponent {
   readonly formmodel: FormModel<VariantFormComponentModel>;
@@ -26,7 +26,7 @@ export class VariantDialogComponent {
     @Inject(SBB_DIALOG_DATA) data?: VariantFormComponentModel,
   ) {
     this.formmodel = new FormModel<VariantFormComponentModel>(
-      data ?? {name: ''},
+      data ?? {name: ""},
     );
     this.isNewVariant = !!!data;
   }

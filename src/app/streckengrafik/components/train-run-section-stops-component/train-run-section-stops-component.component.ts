@@ -1,16 +1,16 @@
-import {Component, Input} from '@angular/core';
-import {TrainDataService} from '../../services/train-data-service';
-import {SHOW_MAX_SINGLE_TRAINRUN_SECTIONS_STOPS} from '../../../view/rastering/definitions';
-import {Vec2D} from '../../../utils/vec2D';
-import {SgTrainrun} from '../../model/streckengrafik-model/sg-trainrun';
-import {SgTrainrunItem} from '../../model/streckengrafik-model/sg-trainrun-item';
-import {ScaledPath} from '../train-run-section/train-run-section.component';
+import {Component, Input} from "@angular/core";
+import {TrainDataService} from "../../services/train-data-service";
+import {SHOW_MAX_SINGLE_TRAINRUN_SECTIONS_STOPS} from "../../../view/rastering/definitions";
+import {Vec2D} from "../../../utils/vec2D";
+import {SgTrainrun} from "../../model/streckengrafik-model/sg-trainrun";
+import {SgTrainrunItem} from "../../model/streckengrafik-model/sg-trainrun-item";
+import {ScaledPath} from "../train-run-section/train-run-section.component";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[sbb-train-run-section-stops-component]',
-  templateUrl: './train-run-section-stops-component.component.html',
-  styleUrls: ['./train-run-section-stops-component.component.scss'],
+  selector: "[sbb-train-run-section-stops-component]",
+  templateUrl: "./train-run-section-stops-component.component.html",
+  styleUrls: ["./train-run-section-stops-component.component.scss"],
 })
 export class TrainRunSectionStopsComponentComponent {
   @Input()
@@ -38,16 +38,16 @@ export class TrainRunSectionStopsComponentComponent {
   getNumberOfStops(): string {
     if (this.trainrunItem.isSection()) {
       const ps = this.trainrunItem.getTrainrunSection();
-      return '' + ps.numberOfStops;
+      return "" + ps.numberOfStops;
     }
-    return '';
+    return "";
   }
 
   getClassTag(tag: string): string {
     let retTag = tag;
-    retTag += ' ColorRef_' + this.trainrun.colorRef;
+    retTag += " ColorRef_" + this.trainrun.colorRef;
     retTag +=
-      ' ' +
+      " " +
       this.trainDataService.createColoringClassTags(this.trainrun.trainrunId);
 
     if (!this.trainrunItem.isSection()) {
@@ -55,7 +55,7 @@ export class TrainRunSectionStopsComponentComponent {
     }
     const ps = this.trainrunItem.getTrainrunSection();
     if (ps.numberOfStops <= SHOW_MAX_SINGLE_TRAINRUN_SECTIONS_STOPS) {
-      retTag += ' fill ';
+      retTag += " fill ";
     }
     return retTag;
   }

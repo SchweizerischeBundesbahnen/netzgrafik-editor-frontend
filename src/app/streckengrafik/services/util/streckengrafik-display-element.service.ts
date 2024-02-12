@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {Injectable} from "@angular/core";
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class StreckengrafikDisplayElementService {
   private readonly streckengrafikDisplayElementSubject =
-    new BehaviorSubject<string>('all');
+    new BehaviorSubject<string>("all");
   private readonly streckengrafikDisplayElement$ =
     this.streckengrafikDisplayElementSubject.asObservable();
 
@@ -32,12 +32,12 @@ export class StreckengrafikDisplayElementService {
 
   enableFilterStreckengrafikTimeNotFocusNorSelected() {
     this.filterStreckengrafikTimeNotFocusNorSelected = true;
-    this.changed('timeOn');
+    this.changed("timeOn");
   }
 
   disableFilterStreckengrafikTimeNotFocusNorSelected() {
     this.filterStreckengrafikTimeNotFocusNorSelected = false;
-    this.changed('timeOff');
+    this.changed("timeOff");
   }
 
   toggleFilterStreckengrafikTimeNotFocusNorSelected() {
@@ -54,12 +54,12 @@ export class StreckengrafikDisplayElementService {
 
   enableFilterStreckengrafikNameNotFocusNorSelected() {
     this.filterStreckengrafikNameNotFocusNorSelected = true;
-    this.changed('nameOn');
+    this.changed("nameOn");
   }
 
   disableFilterStreckengrafikNameNotFocusNorSelected() {
     this.filterStreckengrafikNameNotFocusNorSelected = false;
-    this.changed('nameOff');
+    this.changed("nameOff");
   }
 
   toggleFilterStreckengrafikNameNotFocusNorSelected() {
@@ -77,9 +77,9 @@ export class StreckengrafikDisplayElementService {
   toggleTimeSliderVisibility() {
     this.showTimeSlider = !this.showTimeSlider;
     if (this.showTimeSlider) {
-      this.changed('timeSliderOn');
+      this.changed("timeSliderOn");
     } else {
-      this.changed('timeSliderOff');
+      this.changed("timeSliderOff");
     }
   }
 
@@ -90,9 +90,9 @@ export class StreckengrafikDisplayElementService {
   toggleRailTrackSliderVisibility() {
     this.showRailTrackSlider = !this.showRailTrackSlider;
     if (this.showTimeSlider) {
-      this.changed('railTrackSliderOn');
+      this.changed("railTrackSliderOn");
     } else {
-      this.changed('railTrackSliderOff');
+      this.changed("railTrackSliderOff");
     }
   }
 
@@ -103,9 +103,9 @@ export class StreckengrafikDisplayElementService {
   toggleHeadwayBands() {
     this.showHeadwayBands = !this.showHeadwayBands;
     if (this.showTimeSlider) {
-      this.changed('headwayOn');
+      this.changed("headwayOn");
     } else {
-      this.changed('headwayOff');
+      this.changed("headwayOff");
     }
   }
 }

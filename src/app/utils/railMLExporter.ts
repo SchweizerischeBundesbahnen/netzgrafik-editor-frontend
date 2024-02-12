@@ -1,14 +1,14 @@
-import {DataService} from '../services/data/data.service';
-import {TrainrunService} from '../services/data/trainrun.service';
-import {NodeService} from '../services/data/node.service';
-import {TrainrunSectionService} from '../services/data/trainrunsection.service';
-import {Trainrun} from '../models/trainrun.model';
-import {Node} from '../models/node.model';
-import {TrainrunSection} from '../models/trainrunsection.model';
-import {TrainrunIterator} from '../services/util/trainrun.iterator';
-import {TimeUtils} from './time';
-import {GeneralViewFunctions} from '../view/util/generalViewFunctions';
-import {TrainrunCategory} from '../data-structures/business.data.structures';
+import {DataService} from "../services/data/data.service";
+import {TrainrunService} from "../services/data/trainrun.service";
+import {NodeService} from "../services/data/node.service";
+import {TrainrunSectionService} from "../services/data/trainrunsection.service";
+import {Trainrun} from "../models/trainrun.model";
+import {Node} from "../models/node.model";
+import {TrainrunSection} from "../models/trainrunsection.model";
+import {TrainrunIterator} from "../services/util/trainrun.iterator";
+import {TimeUtils} from "./time";
+import {GeneralViewFunctions} from "../view/util/generalViewFunctions";
+import {TrainrunCategory} from "../data-structures/business.data.structures";
 
 export class RailMLExporter {
   private;
@@ -21,26 +21,26 @@ export class RailMLExporter {
   ) {}
 
   private static createMetaData(doc: XMLDocument): HTMLElement {
-    const metadata = doc.createElement('metadata');
+    const metadata = doc.createElement("metadata");
 
-    const organizationalUnits = doc.createElement('organizationalUnits');
+    const organizationalUnits = doc.createElement("organizationalUnits");
     metadata.append(organizationalUnits);
 
-    const customer = doc.createElement('customer');
-    customer.setAttribute('id', 'cust01');
-    customer.setAttribute('code', 'sbb');
+    const customer = doc.createElement("customer");
+    customer.setAttribute("id", "cust01");
+    customer.setAttribute("code", "sbb");
     customer.setAttribute(
-      'name',
-      'Schweizerische Bundesbahnen - Netzgrafik-Editor Export',
+      "name",
+      "Schweizerische Bundesbahnen - Netzgrafik-Editor Export",
     );
     organizationalUnits.append(customer);
 
-    const operationalUndertaking = doc.createElement('operationalUndertaking');
-    operationalUndertaking.setAttribute('id', 'opu01');
-    operationalUndertaking.setAttribute('code', 'sbb');
+    const operationalUndertaking = doc.createElement("operationalUndertaking");
+    operationalUndertaking.setAttribute("id", "opu01");
+    operationalUndertaking.setAttribute("code", "sbb");
     operationalUndertaking.setAttribute(
-      'name',
-      'Schweizerische Bundesbahnen - Netzgrafik-Editor Export',
+      "name",
+      "Schweizerische Bundesbahnen - Netzgrafik-Editor Export",
     );
     organizationalUnits.append(operationalUndertaking);
 
@@ -48,24 +48,24 @@ export class RailMLExporter {
   }
 
   private static createRollinstock(doc: XMLDocument): HTMLElement {
-    return doc.createElement('rollinstock');
+    return doc.createElement("rollinstock");
   }
 
   createRailML(): string {
     // https://wiki2.railml.org/wiki/Dev:XMLtree
-    const doc = document.implementation.createDocument('', '', null);
-    const railml = doc.createElement('railml');
+    const doc = document.implementation.createDocument("", "", null);
+    const railml = doc.createElement("railml");
 
     railml.setAttribute(
-      'xmlns:xsi',
-      'http://www.w3.org/2001/XMLSchema-instance',
+      "xmlns:xsi",
+      "http://www.w3.org/2001/XMLSchema-instance",
     );
-    railml.setAttribute('xmlns', 'http://www.railml.org/schemas/2013');
+    railml.setAttribute("xmlns", "http://www.railml.org/schemas/2013");
     railml.setAttribute(
-      'xsi:schemaLocation',
-      'http://www.railml.org/schemas/2013 http://www.railml.org/schemas/2013/railML-2.2/railML.xsd',
+      "xsi:schemaLocation",
+      "http://www.railml.org/schemas/2013 http://www.railml.org/schemas/2013/railML-2.2/railML.xsd",
     );
-    railml.setAttribute('version', '2.2');
+    railml.setAttribute("version", "2.2");
     doc.append(railml);
     railml.append(RailMLExporter.createMetaData(doc));
     railml.append(this.createInfrastructure(doc));
@@ -81,7 +81,7 @@ export class RailMLExporter {
     startNode: Node,
     timeOffset: number,
   ): HTMLElement {
-    const ocpsTT = doc.createElement('ocpsTT');
+    const ocpsTT = doc.createElement("ocpsTT");
     let visitingNode = startNode;
     let prevVisitingNode = visitingNode;
     let trainrunSection: TrainrunSection = visitingNode.getStartTrainrunSection(
@@ -157,20 +157,20 @@ export class RailMLExporter {
     arrivalTime: number,
     isEndOCP: boolean,
   ): HTMLElement {
-    const ocpTT = doc.createElement('ocpTT');
-    ocpTT.setAttribute('sequence', '' + sequence);
-    ocpTT.setAttribute('ocpRef', this.createOCPId(node));
-    ocpTT.setAttribute('trackInfo', node.getBetriebspunktName());
+    const ocpTT = doc.createElement("ocpTT");
+    ocpTT.setAttribute("sequence", "" + sequence);
+    ocpTT.setAttribute("ocpRef", this.createOCPId(node));
+    ocpTT.setAttribute("trackInfo", node.getBetriebspunktName());
     // ocpTT.setAttribute('trackRef', 'trackRef ???? ');
     if (!node.isNonStop(trainrunSection)) {
-      ocpTT.setAttribute('ocpType', 'stop');
+      ocpTT.setAttribute("ocpType", "stop");
       ocpTT.append(
         this.createTime(
           doc,
           departureTime,
           arrivalTime,
           timeOffset,
-          'published',
+          "published",
         ),
       );
       ocpTT.append(
@@ -179,22 +179,22 @@ export class RailMLExporter {
           departureTime,
           arrivalTime,
           timeOffset,
-          'scheduled',
+          "scheduled",
         ),
       );
       if (!isEndOCP) {
         ocpTT.append(this.createSectionTT(doc, trainrunSection, node));
       }
-      const stopDescription = doc.createElement('stopDescription');
-      stopDescription.setAttribute('commercial', 'true');
+      const stopDescription = doc.createElement("stopDescription");
+      stopDescription.setAttribute("commercial", "true");
       //stopDescription.setAttribute('purpose', 'stop');
-      const stopTimes = doc.createElement('stopTimes');
+      const stopTimes = doc.createElement("stopTimes");
       stopDescription.append(stopTimes);
       ocpTT.append(stopDescription);
     } else {
-      ocpTT.setAttribute('ocpType', 'pass');
+      ocpTT.setAttribute("ocpType", "pass");
       ocpTT.append(
-        this.createTime(doc, arrivalTime, undefined, timeOffset, 'scheduled'),
+        this.createTime(doc, arrivalTime, undefined, timeOffset, "scheduled"),
       );
       if (!isEndOCP) {
         ocpTT.append(this.createSectionTT(doc, trainrunSection, node));
@@ -208,16 +208,16 @@ export class RailMLExporter {
     trainrunSection: TrainrunSection,
     node: Node,
   ): HTMLElement {
-    const sectionTT = doc.createElement('sectionTT');
+    const sectionTT = doc.createElement("sectionTT");
     sectionTT.setAttribute(
-      'section',
+      "section",
       this.createTrackId(
         trainrunSection.getSourceNode(),
         trainrunSection.getTargetNode(),
       ),
     );
     sectionTT.setAttribute(
-      'lineRef',
+      "lineRef",
       this.createLineId(
         trainrunSection.getSourceNode(),
         trainrunSection.getTargetNode(),
@@ -232,15 +232,15 @@ export class RailMLExporter {
     doc: XMLDocument,
     trainrunSection: TrainrunSection,
   ): HTMLElement {
-    const runTimes = doc.createElement('runTimes');
+    const runTimes = doc.createElement("runTimes");
     const minutes = Math.floor(trainrunSection.getTravelTime());
     const seconds = (trainrunSection.getTravelTime() - minutes) * 60;
-    let mt = 'PT' + minutes + 'M';
+    let mt = "PT" + minutes + "M";
     if (seconds !== 0) {
-      mt += seconds + 'S';
+      mt += seconds + "S";
     }
-    runTimes.setAttribute('minimalTime', mt);
-    runTimes.setAttribute('operationalReserve', 'PT0S');
+    runTimes.setAttribute("minimalTime", mt);
+    runTimes.setAttribute("operationalReserve", "PT0S");
     return runTimes;
   }
 
@@ -249,9 +249,9 @@ export class RailMLExporter {
     trainrunSection: TrainrunSection,
     node: Node,
   ): HTMLElement {
-    const trackRef = doc.createElement('trackRef');
+    const trackRef = doc.createElement("trackRef");
     trackRef.setAttribute(
-      'ref',
+      "ref",
       this.createTrackId(
         trainrunSection.getSourceNode(),
         trainrunSection.getTargetNode(),
@@ -261,9 +261,9 @@ export class RailMLExporter {
     const node2 = trainrunSection.getTargetNode();
     const t1 = GeneralViewFunctions.getLeftOrTopNode(node1, node2);
     if (node === t1) {
-      trackRef.setAttribute('dir', 'down');
+      trackRef.setAttribute("dir", "down");
     } else {
-      trackRef.setAttribute('dir', 'up');
+      trackRef.setAttribute("dir", "up");
     }
     return trackRef;
   }
@@ -275,17 +275,17 @@ export class RailMLExporter {
     timeOffset: number,
     scope: string,
   ) {
-    const times = doc.createElement('times');
-    times.setAttribute('scope', scope);
+    const times = doc.createElement("times");
+    times.setAttribute("scope", scope);
     if (arrivalTime !== undefined) {
       times.setAttribute(
-        'arrival',
+        "arrival",
         TimeUtils.convertTime2HHMMSS((timeOffset + arrivalTime) * 60),
       );
     }
     if (departureTime !== undefined) {
       times.setAttribute(
-        'departure',
+        "departure",
         TimeUtils.convertTime2HHMMSS((timeOffset + departureTime) * 60),
       );
     }
@@ -317,37 +317,37 @@ export class RailMLExporter {
     let forwardRollout = 1;
     freqRollout.forEach((fLoop) => {
       const timeOffset = trainrun.getFrequencyOffset() + fLoop * freq;
-      const trainPart1 = doc.createElement('trainPart');
-      const idForward = 'tp_' + trainrun.getId() + '_forward_' + timeOffset;
-      trainPart1.setAttribute('id', idForward);
+      const trainPart1 = doc.createElement("trainPart");
+      const idForward = "tp_" + trainrun.getId() + "_forward_" + timeOffset;
+      trainPart1.setAttribute("id", idForward);
       trainPart1.setAttribute(
-        'name',
+        "name",
         trainrun.getTitle() +
-          ' ' +
+          " " +
           startNode.getBetriebspunktName().trim() +
-          '-' +
+          "-" +
           endNode.getBetriebspunktName().trim() +
-          ' (' +
+          " (" +
           trainrun.getId() +
-          ')',
+          ")",
       );
       trainPart1.setAttribute(
-        'categoryRef',
+        "categoryRef",
         this.createCategoryId(trainrun.getTrainrunCategory()),
       );
       trainPart1.setAttribute(
-        'code',
+        "code",
         '{"trainrunId":' +
           trainrun.getId() +
           ',"direction": "forward", "timeOffset": ' +
           timeOffset +
-          ',' +
+          "," +
           '"trainNumber": ' +
           trainrun.getId() +
-          ',' +
+          "," +
           '"additionalTrainNumber": ' +
           forwardRollout +
-          ',' +
+          "," +
           '"startNode": "' +
           startNode.getBetriebspunktName() +
           '", "endNode": "' +
@@ -366,37 +366,37 @@ export class RailMLExporter {
     let backwardRollout = 0;
     freqRollout.forEach((fLoop) => {
       const timeOffset = fLoop * freq;
-      const trainPart2 = doc.createElement('trainPart');
-      const idBackward = 'tp_' + trainrun.getId() + '_backward_' + timeOffset;
-      trainPart2.setAttribute('id', idBackward);
+      const trainPart2 = doc.createElement("trainPart");
+      const idBackward = "tp_" + trainrun.getId() + "_backward_" + timeOffset;
+      trainPart2.setAttribute("id", idBackward);
       trainPart2.setAttribute(
-        'name',
+        "name",
         trainrun.getTitle() +
-          ' ' +
+          " " +
           endNode.getBetriebspunktName().trim() +
-          '-' +
+          "-" +
           startNode.getBetriebspunktName().trim() +
-          ' (' +
+          " (" +
           trainrun.getId() +
-          ')',
+          ")",
       );
       trainPart2.setAttribute(
-        'categoryRef',
+        "categoryRef",
         this.createCategoryId(trainrun.getTrainrunCategory()),
       );
       trainPart2.setAttribute(
-        'code',
+        "code",
         '{"trainrunId":' +
           trainrun.getId() +
           ',"direction": "backward", "timeOffset": ' +
           timeOffset +
-          ',' +
+          "," +
           '"trainNumber": ' +
           trainrun.getId() +
-          ',' +
+          "," +
           '"additionalTrainNumber": ' +
           backwardRollout +
-          ',' +
+          "," +
           '"startNode": "' +
           endNode.getBetriebspunktName() +
           '", "endNode": "' +
@@ -415,26 +415,26 @@ export class RailMLExporter {
     doc: XMLDocument,
     trainParts: HTMLElement,
   ): HTMLElement {
-    const trainGroups = doc.createElement('trainGroups');
+    const trainGroups = doc.createElement("trainGroups");
     let trainGroup: HTMLElement;
-    let trainRunId = '';
+    let trainRunId = "";
     let grpCounter = 1;
     let sequence = 1;
     trainParts.childNodes.forEach((trainPart: HTMLElement) => {
-      const codeObject = JSON.parse(trainPart.getAttribute('code'));
+      const codeObject = JSON.parse(trainPart.getAttribute("code"));
       const currentTrainRunId =
-        codeObject.trainrunId + '@' + codeObject.direction;
+        codeObject.trainrunId + "@" + codeObject.direction;
       if (trainRunId !== currentTrainRunId) {
-        trainGroup = doc.createElement('trainGroup');
-        trainGroup.setAttribute('id', 'tg_' + grpCounter);
+        trainGroup = doc.createElement("trainGroup");
+        trainGroup.setAttribute("id", "tg_" + grpCounter);
         trainGroups.append(trainGroup);
         trainRunId = currentTrainRunId;
         grpCounter += 1;
         sequence = 1;
       }
-      const trainRef = doc.createElement('trainRef');
-      trainRef.setAttribute('sequence', '' + sequence);
-      trainRef.setAttribute('ref', 'tr_' + trainPart.getAttribute('id'));
+      const trainRef = doc.createElement("trainRef");
+      trainRef.setAttribute("sequence", "" + sequence);
+      trainRef.setAttribute("ref", "tr_" + trainPart.getAttribute("id"));
       trainGroup.append(trainRef);
       sequence += 1;
     });
@@ -442,39 +442,39 @@ export class RailMLExporter {
   }
 
   private createTrains(doc: XMLDocument, trainParts: HTMLElement): HTMLElement {
-    const trains = doc.createElement('trains');
+    const trains = doc.createElement("trains");
     trainParts.childNodes.forEach((trainPart: HTMLElement) => {
-      const train = doc.createElement('train');
-      const codeObject = JSON.parse(trainPart.getAttribute('code'));
+      const train = doc.createElement("train");
+      const codeObject = JSON.parse(trainPart.getAttribute("code"));
       const currentTrainRunId = codeObject.trainrunId;
       const trainrun =
         this.trainrunService.getTrainrunFromId(currentTrainRunId);
-      train.setAttribute('id', 'tr_' + trainPart.getAttribute('id'));
-      train.setAttribute('name', trainPart.getAttribute('name'));
-      train.setAttribute('type', 'commercial');
+      train.setAttribute("id", "tr_" + trainPart.getAttribute("id"));
+      train.setAttribute("name", trainPart.getAttribute("name"));
+      train.setAttribute("type", "commercial");
       //train.setAttribute('trainNumber', '' + codeObject.trainNumber);
       train.setAttribute(
-        'additionalTrainNumber',
-        '' + codeObject.additionalTrainNumber,
+        "additionalTrainNumber",
+        "" + codeObject.additionalTrainNumber,
       );
       train.setAttribute(
-        'description',
+        "description",
         trainrun.getCategoryShortName() +
-          ' ' +
+          " " +
           trainrun.getTitle() +
-          ' [' +
+          " [" +
           codeObject.startNode +
-          '-' +
+          "-" +
           codeObject.endNode +
-          ']',
+          "]",
       );
-      const trainPartSequence = doc.createElement('trainPartSequence');
-      trainPartSequence.setAttribute('sequence', '1');
-      trainPartSequence.setAttribute('pathStatus', 'planned');
+      const trainPartSequence = doc.createElement("trainPartSequence");
+      trainPartSequence.setAttribute("sequence", "1");
+      trainPartSequence.setAttribute("pathStatus", "planned");
       train.append(trainPartSequence);
-      const trainPartRef = doc.createElement('trainPartRef');
-      trainPartRef.setAttribute('position', '1');
-      trainPartRef.setAttribute('ref', trainPart.getAttribute('id'));
+      const trainPartRef = doc.createElement("trainPartRef");
+      trainPartRef.setAttribute("position", "1");
+      trainPartRef.setAttribute("ref", trainPart.getAttribute("id"));
       trainPartSequence.append(trainPartRef);
       trains.append(train);
     });
@@ -482,7 +482,7 @@ export class RailMLExporter {
   }
 
   private createTrainParts(doc: XMLDocument): HTMLElement {
-    const trainParts = doc.createElement('trainParts');
+    const trainParts = doc.createElement("trainParts");
     this.trainrunService.getTrainruns().forEach((trainrun) => {
       const trainPartForwardBackward = this.createTrainPart(doc, trainrun);
       trainPartForwardBackward.forEach((tp) => {
@@ -493,23 +493,23 @@ export class RailMLExporter {
   }
 
   private createCategories(doc: XMLDocument): HTMLElement {
-    const categories = doc.createElement('categories');
+    const categories = doc.createElement("categories");
     this.dataService
       .getNetzgrafikDto()
       .metadata.trainrunCategories.forEach((cat) => {
-        const category = doc.createElement('category');
-        category.setAttribute('id', this.createCategoryId(cat));
-        category.setAttribute('name', cat.shortName);
-        category.setAttribute('code', cat.shortName);
-        category.setAttribute('description', cat.name);
+        const category = doc.createElement("category");
+        category.setAttribute("id", this.createCategoryId(cat));
+        category.setAttribute("name", cat.shortName);
+        category.setAttribute("code", cat.shortName);
+        category.setAttribute("description", cat.name);
         categories.append(category);
       });
     return categories;
   }
 
   private createTimetable(doc: XMLDocument): HTMLElement {
-    const timetable = doc.createElement('timetable');
-    timetable.setAttribute('id', 'tt01');
+    const timetable = doc.createElement("timetable");
+    timetable.setAttribute("id", "tt01");
     // const timetablePeriods = doc.createElement('timetablePeriods');
     // timetable.append(timetablePeriods);
     timetable.append(this.createCategories(doc));
@@ -522,46 +522,46 @@ export class RailMLExporter {
     timetable.append(this.createTrainGroups(doc, trainParts));
     // clean up 'code'
     trainParts.childNodes.forEach((trainPart: HTMLElement) =>
-      trainPart.removeAttribute('code'),
+      trainPart.removeAttribute("code"),
     );
     return timetable;
   }
 
   private createOperationControlPoints(doc: XMLDocument): HTMLElement {
-    const operationControlPoints = doc.createElement('operationControlPoints');
+    const operationControlPoints = doc.createElement("operationControlPoints");
     this.nodeService.getNodes().forEach((node) => {
-      const ocp = doc.createElement('ocp');
-      ocp.setAttribute('id', this.createOCPId(node));
-      ocp.setAttribute('name', node.getFullName());
-      ocp.setAttribute('code', node.getBetriebspunktName());
+      const ocp = doc.createElement("ocp");
+      ocp.setAttribute("id", this.createOCPId(node));
+      ocp.setAttribute("name", node.getFullName());
+      ocp.setAttribute("code", node.getBetriebspunktName());
       ocp.setAttribute(
-        'description',
-        'Schweizerische Bundesbahnen - Netzgrafik-Editor Export',
+        "description",
+        "Schweizerische Bundesbahnen - Netzgrafik-Editor Export",
       );
       ocp.setAttribute(
-        'type',
-        node.isNonStopNode() ? 'operationalName' : 'trafficName',
+        "type",
+        node.isNonStopNode() ? "operationalName" : "trafficName",
       );
       operationControlPoints.append(ocp);
 
       // added "fake" GeoCoord for debug
-      const geoCoord = doc.createElement('geoCoord');
+      const geoCoord = doc.createElement("geoCoord");
       geoCoord.setAttribute(
-        'coord',
+        "coord",
         46.94 -
           node.getPositionY() / 5000 +
-          ' ' +
+          " " +
           (7.43 + node.getPositionX() / 5000),
       );
-      geoCoord.setAttribute('epsgCode', 'urn:ogc:def:crs:EPSG::4326');
+      geoCoord.setAttribute("epsgCode", "urn:ogc:def:crs:EPSG::4326");
       ocp.append(geoCoord);
     });
     return operationControlPoints;
   }
 
   private createInfrastructure(doc: XMLDocument): HTMLElement {
-    const infrastructure = doc.createElement('infrastructure');
-    infrastructure.setAttribute('id', 'inf01');
+    const infrastructure = doc.createElement("infrastructure");
+    infrastructure.setAttribute("id", "inf01");
     this.createTracksAndTrackgroups(doc).forEach((el) =>
       infrastructure.append(el),
     );
@@ -598,13 +598,13 @@ export class RailMLExporter {
         ) === i,
     );
 
-    const tracks = doc.createElement('tracks');
+    const tracks = doc.createElement("tracks");
     distinctNodeConnections.forEach((t) => {
       const track = this.createTrack(doc, t.node1, t.node2);
       tracks.append(track);
     });
 
-    const trackGroups = doc.createElement('trackGroups');
+    const trackGroups = doc.createElement("trackGroups");
     distinctNodeConnections.forEach((t) => {
       const line = this.createLine(doc, t.node1, t.node2);
       trackGroups.append(line);
@@ -617,26 +617,26 @@ export class RailMLExporter {
     node1: Node,
     node2: Node,
   ): HTMLElement {
-    const trackTopology = doc.createElement('trackTopology');
+    const trackTopology = doc.createElement("trackTopology");
 
     const trackId = this.createTrackId(node1, node2);
 
     const t1 = GeneralViewFunctions.getLeftOrTopNode(node1, node2);
     const t2 = t1 === node1 ? node2 : node1;
 
-    const trackBegin = doc.createElement('trackBegin');
-    trackBegin.setAttribute('id', trackId + '-begin');
-    trackBegin.setAttribute('pos', '0');
-    const macroscopicNode1 = doc.createElement('macroscopicNode');
-    macroscopicNode1.setAttribute('ocpRef', this.createOCPId(t1));
+    const trackBegin = doc.createElement("trackBegin");
+    trackBegin.setAttribute("id", trackId + "-begin");
+    trackBegin.setAttribute("pos", "0");
+    const macroscopicNode1 = doc.createElement("macroscopicNode");
+    macroscopicNode1.setAttribute("ocpRef", this.createOCPId(t1));
     trackBegin.append(macroscopicNode1);
     trackTopology.append(trackBegin);
 
-    const trackEnd = doc.createElement('trackEnd');
-    trackEnd.setAttribute('id', trackId + '-end');
-    trackEnd.setAttribute('pos', '400');
-    const macroscopicNode2 = doc.createElement('macroscopicNode');
-    macroscopicNode2.setAttribute('ocpRef', this.createOCPId(t2));
+    const trackEnd = doc.createElement("trackEnd");
+    trackEnd.setAttribute("id", trackId + "-end");
+    trackEnd.setAttribute("pos", "400");
+    const macroscopicNode2 = doc.createElement("macroscopicNode");
+    macroscopicNode2.setAttribute("ocpRef", this.createOCPId(t2));
     trackEnd.append(macroscopicNode2);
     trackTopology.append(trackEnd);
 
@@ -644,24 +644,24 @@ export class RailMLExporter {
   }
 
   private createTrack(doc: XMLDocument, node1: Node, node2: Node): HTMLElement {
-    const track = doc.createElement('track');
+    const track = doc.createElement("track");
     const trackId = this.createTrackId(node1, node2);
-    track.setAttribute('id', trackId);
-    track.setAttribute('name', this.createTrackName(node1, node2));
-    track.setAttribute('type', 'mainTrack');
-    track.setAttribute('mainDir', 'none');
+    track.setAttribute("id", trackId);
+    track.setAttribute("name", this.createTrackName(node1, node2));
+    track.setAttribute("type", "mainTrack");
+    track.setAttribute("mainDir", "none");
     track.append(this.createTrackTopology(doc, node1, node2));
     return track;
   }
 
   private createLine(doc: XMLDocument, node1: Node, node2: Node): HTMLElement {
-    const line = doc.createElement('line');
+    const line = doc.createElement("line");
     const lineId = this.createLineId(node1, node2);
-    line.setAttribute('id', lineId);
-    line.setAttribute('name', this.createLineName(node1, node2));
-    line.setAttribute('description', this.createLineDescription(node1, node2));
-    const trackRef = doc.createElement('trackRef');
-    trackRef.setAttribute('ref', this.createTrackId(node1, node2));
+    line.setAttribute("id", lineId);
+    line.setAttribute("name", this.createLineName(node1, node2));
+    line.setAttribute("description", this.createLineDescription(node1, node2));
+    const trackRef = doc.createElement("trackRef");
+    trackRef.setAttribute("ref", this.createTrackId(node1, node2));
     line.append(trackRef);
     return line;
   }
@@ -670,7 +670,7 @@ export class RailMLExporter {
     const t1 = GeneralViewFunctions.getLeftOrTopNode(node1, node2);
     const t2 = t1 === node1 ? node2 : node1;
     return (
-      t1.getBetriebspunktName().trim() + '-' + t2.getBetriebspunktName().trim()
+      t1.getBetriebspunktName().trim() + "-" + t2.getBetriebspunktName().trim()
     );
   }
 
@@ -678,7 +678,7 @@ export class RailMLExporter {
     const t1 = GeneralViewFunctions.getLeftOrTopNode(node1, node2);
     const t2 = t1 === node1 ? node2 : node1;
     return (
-      'st' +
+      "st" +
       t1.getId() +
       t1.getBetriebspunktName().trim() +
       t2.getId() +
@@ -690,21 +690,21 @@ export class RailMLExporter {
     const t1 = GeneralViewFunctions.getLeftOrTopNode(node1, node2);
     const t2 = t1 === node1 ? node2 : node1;
     return (
-      t1.getBetriebspunktName().trim() + '-' + t2.getBetriebspunktName().trim()
+      t1.getBetriebspunktName().trim() + "-" + t2.getBetriebspunktName().trim()
     );
   }
 
   private createLineDescription(node1: Node, node2: Node): string {
     const t1 = GeneralViewFunctions.getLeftOrTopNode(node1, node2);
     const t2 = t1 === node1 ? node2 : node1;
-    return t1.getFullName().trim() + ' - ' + t2.getFullName().trim();
+    return t1.getFullName().trim() + " - " + t2.getFullName().trim();
   }
 
   private createLineId(node1: Node, node2: Node): string {
     const t1 = GeneralViewFunctions.getLeftOrTopNode(node1, node2);
     const t2 = t1 === node1 ? node2 : node1;
     return (
-      's' +
+      "s" +
       t1.getId() +
       t1.getBetriebspunktName().trim() +
       t2.getId() +
@@ -713,10 +713,10 @@ export class RailMLExporter {
   }
 
   private createOCPId(node: Node): string {
-    return 'n0085' + node.getBetriebspunktName().trim() + node.getId();
+    return "n0085" + node.getBetriebspunktName().trim() + node.getId();
   }
 
   private createCategoryId(cat: TrainrunCategory): string {
-    return 'cat' + cat.id + cat.shortName.trim();
+    return "cat" + cat.id + cat.shortName.trim();
   }
 }

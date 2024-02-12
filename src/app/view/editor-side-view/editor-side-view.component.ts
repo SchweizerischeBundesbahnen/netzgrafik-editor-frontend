@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from "@angular/core";
 
 @Component({
-  selector: 'sbb-editor-side-view',
-  templateUrl: './editor-side-view.component.html',
-  styleUrls: ['./editor-side-view.component.scss'],
+  selector: "sbb-editor-side-view",
+  templateUrl: "./editor-side-view.component.html",
+  styleUrls: ["./editor-side-view.component.scss"],
 })
 export class EditorSideViewComponent {
   @Output()

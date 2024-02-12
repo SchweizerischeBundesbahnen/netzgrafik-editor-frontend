@@ -1,14 +1,14 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {SgSelectedTrainrun} from '../model/streckengrafik-model/sg-selected-trainrun';
-import {Sg7PathSliderService} from './sg-7-path-slider.service';
-import {takeUntil} from 'rxjs/operators';
-import {SgTrainrun} from '../model/streckengrafik-model/sg-trainrun';
-import {SgStopService} from './sg-stop-.service';
-import {UpdateCounterTriggerSerivce} from './util/update-counter.service';
+import {Injectable, OnDestroy} from "@angular/core";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {SgSelectedTrainrun} from "../model/streckengrafik-model/sg-selected-trainrun";
+import {Sg7PathSliderService} from "./sg-7-path-slider.service";
+import {takeUntil} from "rxjs/operators";
+import {SgTrainrun} from "../model/streckengrafik-model/sg-trainrun";
+import {SgStopService} from "./sg-stop-.service";
+import {UpdateCounterTriggerSerivce} from "./util/update-counter.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class Sg8RenderService implements OnDestroy {
   private readonly selectedTrainrunSubject =

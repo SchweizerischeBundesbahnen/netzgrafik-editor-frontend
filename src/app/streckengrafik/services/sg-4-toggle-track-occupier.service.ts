@@ -1,13 +1,13 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {Sg3TrainrunsService} from './sg-3-trainruns.service';
-import {takeUntil} from 'rxjs/operators';
-import {SgSelectedTrainrun} from '../model/streckengrafik-model/sg-selected-trainrun';
-import {SgPath} from '../model/streckengrafik-model/sg-path';
-import {UiInteractionService} from '../../services/ui/ui.interaction.service';
+import {Injectable, OnDestroy} from "@angular/core";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {Sg3TrainrunsService} from "./sg-3-trainruns.service";
+import {takeUntil} from "rxjs/operators";
+import {SgSelectedTrainrun} from "../model/streckengrafik-model/sg-selected-trainrun";
+import {SgPath} from "../model/streckengrafik-model/sg-path";
+import {UiInteractionService} from "../../services/ui/ui.interaction.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class Sg4ToggleTrackOccupierService implements OnDestroy {
   private readonly sgSelectedTrainrunSubject =

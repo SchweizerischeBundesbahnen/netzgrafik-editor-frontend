@@ -1,7 +1,7 @@
 import {
   LabelGroupDto,
   LabelRef,
-} from '../data-structures/business.data.structures';
+} from "../data-structures/business.data.structures";
 
 export enum LogicalFilterOperator {
   OR,
@@ -9,7 +9,7 @@ export enum LogicalFilterOperator {
 }
 
 export class LabelGroup {
-  private static defaultGroupName = 'Standard';
+  private static defaultGroupName = "Standard";
   private static currentId = 0;
   private id: number;
   private name: string;

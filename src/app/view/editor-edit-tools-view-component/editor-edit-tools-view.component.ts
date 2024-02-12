@@ -1,30 +1,30 @@
-import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
-import {DataService} from '../../services/data/data.service';
-import {UiInteractionService} from '../../services/ui/ui.interaction.service';
-import {ConfirmationDialogParameter} from '../dialogs/confirmation-dialog/confirmation-dialog.component';
-import {NodeService} from '../../services/data/node.service';
-import {TrainrunSectionService} from '../../services/data/trainrunsection.service';
-import {EditorMode} from '../editor-menu/editor-mode';
-import {LogService} from '../../logger/log.service';
-import {FilterService} from '../../services/ui/filter.service';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {TrainrunService} from '../../services/data/trainrun.service';
-import {NoteService} from '../../services/data/note.service';
-import {LabelRef} from '../../data-structures/business.data.structures';
-import {LabelService} from '../../services/data/label.serivce';
-import {LabelGroupService} from '../../services/data/labelgroup.service';
-import {LabelGroup} from '../../models/labelGroup.model';
+import {Component, ElementRef, OnDestroy, ViewChild} from "@angular/core";
+import {DataService} from "../../services/data/data.service";
+import {UiInteractionService} from "../../services/ui/ui.interaction.service";
+import {ConfirmationDialogParameter} from "../dialogs/confirmation-dialog/confirmation-dialog.component";
+import {NodeService} from "../../services/data/node.service";
+import {TrainrunSectionService} from "../../services/data/trainrunsection.service";
+import {EditorMode} from "../editor-menu/editor-mode";
+import {LogService} from "../../logger/log.service";
+import {FilterService} from "../../services/ui/filter.service";
+import {takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
+import {TrainrunService} from "../../services/data/trainrun.service";
+import {NoteService} from "../../services/data/note.service";
+import {LabelRef} from "../../data-structures/business.data.structures";
+import {LabelService} from "../../services/data/label.serivce";
+import {LabelGroupService} from "../../services/data/labelgroup.service";
+import {LabelGroup} from "../../models/labelGroup.model";
 
 @Component({
-  selector: 'sbb-editor-edit-tools-view-component',
-  templateUrl: './editor-edit-tools-view.component.html',
-  styleUrls: ['./editor-edit-tools-view.component.scss'],
+  selector: "sbb-editor-edit-tools-view-component",
+  templateUrl: "./editor-edit-tools-view.component.html",
+  styleUrls: ["./editor-edit-tools-view.component.scss"],
 })
 export class EditorEditToolsViewComponent implements OnDestroy {
-  @ViewChild('netzgrafikMergeFileInput', {static: false})
+  @ViewChild("netzgrafikMergeFileInput", {static: false})
   netzgrafikMergeFileInput: ElementRef;
-  @ViewChild('netzgrafikMergeAsACopyFileInput', {static: false})
+  @ViewChild("netzgrafikMergeAsACopyFileInput", {static: false})
   netzgrafikMergeAsACopyFileInput: ElementRef;
 
   public editorMode: EditorMode = EditorMode.NetzgrafikEditing;
@@ -74,9 +74,9 @@ export class EditorEditToolsViewComponent implements OnDestroy {
   }
 
   onClearAllFiltered() {
-    const dialogTitle = 'Löschen';
+    const dialogTitle = "Löschen";
     const dialogContent =
-      'Sollen alle nicht sichtbare Elemene aus der Netzgrafik definitiv gelöscht werden?';
+      "Sollen alle nicht sichtbare Elemene aus der Netzgrafik definitiv gelöscht werden?";
     const confirmationDialogParamter = new ConfirmationDialogParameter(
       dialogTitle,
       dialogContent,
@@ -93,9 +93,9 @@ export class EditorEditToolsViewComponent implements OnDestroy {
   }
 
   onClear() {
-    const dialogTitle = 'Löschen';
+    const dialogTitle = "Löschen";
     const dialogContent =
-      'Sollen alle sichtbare Elemene aus der Netzgrafik definitiv gelöscht werden?';
+      "Sollen alle sichtbare Elemene aus der Netzgrafik definitiv gelöscht werden?";
     const confirmationDialogParamter = new ConfirmationDialogParameter(
       dialogTitle,
       dialogContent,
@@ -112,9 +112,9 @@ export class EditorEditToolsViewComponent implements OnDestroy {
   }
 
   onClearAllTrainruns() {
-    const dialogTitle = 'Löschen';
+    const dialogTitle = "Löschen";
     const dialogContent =
-      'Sollen alle sichtbare Züge definitiv gelöscht werden?';
+      "Sollen alle sichtbare Züge definitiv gelöscht werden?";
     const confirmationDialogParamter = new ConfirmationDialogParameter(
       dialogTitle,
       dialogContent,
@@ -129,9 +129,9 @@ export class EditorEditToolsViewComponent implements OnDestroy {
   }
 
   onClearAllNotes() {
-    const dialogTitle = 'Löschen';
+    const dialogTitle = "Löschen";
     const dialogContent =
-      'Sollen alle sichtbare Kommentare definitiv gelöscht werden?';
+      "Sollen alle sichtbare Kommentare definitiv gelöscht werden?";
     const confirmationDialogParamter = new ConfirmationDialogParameter(
       dialogTitle,
       dialogContent,
@@ -175,14 +175,14 @@ export class EditorEditToolsViewComponent implements OnDestroy {
     reader.onload = () => {
       const netzgrafikDto = JSON.parse(reader.result.toString());
       if (
-        'nodes' in netzgrafikDto &&
-        'trainrunSections' in netzgrafikDto &&
-        'trainruns' in netzgrafikDto &&
-        'resources' in netzgrafikDto &&
-        'metadata' in netzgrafikDto
+        "nodes" in netzgrafikDto &&
+        "trainrunSections" in netzgrafikDto &&
+        "trainruns" in netzgrafikDto &&
+        "resources" in netzgrafikDto &&
+        "metadata" in netzgrafikDto
       ) {
         this.logger.log(
-          'onLoadNetzgrafikToMerge; load netzgrafik: ',
+          "onLoadNetzgrafikToMerge; load netzgrafik: ",
           netzgrafikDto,
         );
         this.setEditModeToNetzgrafikEditing();

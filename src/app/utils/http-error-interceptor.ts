@@ -4,12 +4,12 @@ import {
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
-} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
-import {catchError} from 'rxjs/operators';
-import {Router} from '@angular/router';
-import {LogService} from '../logger/log.service';
-import {Injectable} from '@angular/core';
+} from "@angular/common/http";
+import {Observable, throwError} from "rxjs";
+import {catchError} from "rxjs/operators";
+import {Router} from "@angular/router";
+import {LogService} from "../logger/log.service";
+import {Injectable} from "@angular/core";
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
@@ -34,19 +34,19 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           );
           switch (error.status) {
             case 401:
-              this.router.navigateByUrl('/401');
+              this.router.navigateByUrl("/401");
               break;
             case 403:
-              this.router.navigateByUrl('/403');
+              this.router.navigateByUrl("/403");
               break;
             case 404:
-              this.router.navigateByUrl('/404');
+              this.router.navigateByUrl("/404");
               break;
             case 409:
-              this.router.navigateByUrl('/409');
+              this.router.navigateByUrl("/409");
               break;
             default:
-              this.router.navigateByUrl('/error');
+              this.router.navigateByUrl("/error");
               break;
           }
         }

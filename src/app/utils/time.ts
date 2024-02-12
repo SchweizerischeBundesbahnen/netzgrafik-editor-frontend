@@ -5,8 +5,8 @@ export class TimeUtils {
     const seconds = timeSecondsAfterMidnight % 60;
 
     const retVal: string = [hours, minutes, seconds]
-      .map((v) => (v < 10 ? '0' + v : v))
-      .join(':');
+      .map((v) => (v < 10 ? "0" + v : v))
+      .join(":");
     return retVal;
   }
 }

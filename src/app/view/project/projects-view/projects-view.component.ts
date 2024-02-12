@@ -1,29 +1,29 @@
-import {Component, OnDestroy} from '@angular/core';
-import {Observable, of, ReplaySubject, Subject} from 'rxjs';
-import {UntypedFormControl} from '@angular/forms';
-import {ProjectsViewService} from './projects-view.service';
-import {debounceTime, filter, mergeMap, takeUntil} from 'rxjs/operators';
-import {SbbDialog} from '@sbb-esta/angular/dialog';
-import {ProjectDialogComponent} from '../project-dialog/project-dialog.component';
+import {Component, OnDestroy} from "@angular/core";
+import {Observable, of, ReplaySubject, Subject} from "rxjs";
+import {UntypedFormControl} from "@angular/forms";
+import {ProjectsViewService} from "./projects-view.service";
+import {debounceTime, filter, mergeMap, takeUntil} from "rxjs/operators";
+import {SbbDialog} from "@sbb-esta/angular/dialog";
+import {ProjectDialogComponent} from "../project-dialog/project-dialog.component";
 import {
   ProjectControllerBackendService,
   ProjectDto,
   ProjectSummaryDto,
-} from '../../../api/generated';
-import {ConfirmationDialogParameter} from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
-import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
-import {NavigationService} from '../../../services/ui/navigation.service';
-import {SlotAction} from '../../action-menu/action-menu/action-menu.component';
+} from "../../../api/generated";
+import {ConfirmationDialogParameter} from "../../dialogs/confirmation-dialog/confirmation-dialog.component";
+import {UiInteractionService} from "../../../services/ui/ui.interaction.service";
+import {NavigationService} from "../../../services/ui/navigation.service";
+import {SlotAction} from "../../action-menu/action-menu/action-menu.component";
 
 @Component({
-  selector: 'sbb-projects-view',
-  templateUrl: './projects-view.component.html',
-  styleUrls: ['./projects-view.component.scss'],
+  selector: "sbb-projects-view",
+  templateUrl: "./projects-view.component.html",
+  styleUrls: ["./projects-view.component.scss"],
   providers: [ProjectsViewService],
 })
 export class ProjectsViewComponent implements OnDestroy {
   readonly projectSubject = new ReplaySubject<ProjectDto>(1);
-  searchControl = new UntypedFormControl('');
+  searchControl = new UntypedFormControl("");
 
   showArchiveControl = new UntypedFormControl(false);
 
@@ -88,8 +88,8 @@ export class ProjectsViewComponent implements OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          'Projekt archivieren',
-          'Möchten Sie das Projekt jetzt archivieren?',
+          "Projekt archivieren",
+          "Möchten Sie das Projekt jetzt archivieren?",
         ),
       )
       .pipe(
@@ -109,8 +109,8 @@ export class ProjectsViewComponent implements OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          'Archivierung rückgängig machen',
-          'Möchten Sie die Archivierung des Projekts rückgängig machen?',
+          "Archivierung rückgängig machen",
+          "Möchten Sie die Archivierung des Projekts rückgängig machen?",
         ),
       )
       .pipe(
@@ -132,21 +132,21 @@ export class ProjectsViewComponent implements OnDestroy {
     if (project.isArchived) {
       return of([
         {
-          name: 'Archivierung rückgängig machen',
-          icon: 'arrow-circle-eye-small',
+          name: "Archivierung rückgängig machen",
+          icon: "arrow-circle-eye-small",
           action: () => this.onUnarchiveProjectClicked(project),
         },
       ]);
     }
     return of([
       {
-        name: 'Bearbeiten',
-        icon: 'pen-small',
+        name: "Bearbeiten",
+        icon: "pen-small",
         action: () => this.onEditProjectClicked(project),
       },
       {
-        name: 'Archivieren',
-        icon: 'archive-box-small',
+        name: "Archivieren",
+        icon: "archive-box-small",
         action: () => this.onArchiveProjectClicked(project),
       },
     ]);

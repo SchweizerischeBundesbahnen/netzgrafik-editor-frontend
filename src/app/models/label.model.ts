@@ -1,4 +1,4 @@
-import {LabelDto, LabelRef} from '../data-structures/business.data.structures';
+import {LabelDto, LabelRef} from "../data-structures/business.data.structures";
 
 export class Label {
   private static currentId = 0;
@@ -10,7 +10,7 @@ export class Label {
   constructor(
     {id, label, labelGroupId, labelRef}: LabelDto = {
       id: Label.incrementId(),
-      label: '',
+      label: "",
       labelGroupId: 0,
       labelRef: LabelRef.Undefinded,
     },

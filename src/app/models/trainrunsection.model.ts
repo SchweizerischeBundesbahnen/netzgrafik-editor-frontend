@@ -1,20 +1,20 @@
 import {
   LinePatternRefs,
   TrainrunSectionDto,
-} from '../data-structures/business.data.structures';
-import {Node} from './node.model';
-import {Trainrun} from './trainrun.model';
-import {Vec2D} from '../utils/vec2D';
-import {SimpleTrainrunSectionRouter} from '../services/util/trainrunsection.routing';
+} from "../data-structures/business.data.structures";
+import {Node} from "./node.model";
+import {Trainrun} from "./trainrun.model";
+import {Vec2D} from "../utils/vec2D";
+import {SimpleTrainrunSectionRouter} from "../services/util/trainrunsection.routing";
 import {
   ColorRefType,
   PathDto,
   TimeLockDto,
   TrainrunSectionText,
   WarningDto,
-} from '../data-structures/technical.data.structures';
-import {TrainrunsectionValidator} from '../services/util/trainrunsection.validator';
-import {formatDate} from '@angular/common';
+} from "../data-structures/technical.data.structures";
+import {TrainrunsectionValidator} from "../services/util/trainrunsection.validator";
+import {formatDate} from "@angular/common";
 
 export class TrainrunSection {
   private static currentId = 0;
@@ -179,13 +179,13 @@ export class TrainrunSection {
       return undefined;
     }
     const stylePattern = time.timeFormatter.stylePattern;
-    let formattedText = '';
-    const consecutiveTimePatternHHMMSS = '{{consecutiveTime}}.format(HH:mm:ss)';
-    const consecutiveTimePatternHHMM = '{{consecutiveTime}}.format(HH:mm)';
-    const consecutiveTimePattern = '{{consecutiveTime}}';
-    const timePatternHHMMSS = '{{time}}.format(HH:mm:ss)';
-    const timePatternHHMM = '{{time}}.format(HH:mm)';
-    const timePattern = '{{time}}';
+    let formattedText = "";
+    const consecutiveTimePatternHHMMSS = "{{consecutiveTime}}.format(HH:mm:ss)";
+    const consecutiveTimePatternHHMM = "{{consecutiveTime}}.format(HH:mm)";
+    const consecutiveTimePattern = "{{consecutiveTime}}";
+    const timePatternHHMMSS = "{{time}}.format(HH:mm:ss)";
+    const timePatternHHMM = "{{time}}.format(HH:mm)";
+    const timePattern = "{{time}}";
 
     const consecutiveTimeDate = new Date(null);
     consecutiveTimeDate.setSeconds((time.consecutiveTime + offset) * 60);
@@ -195,28 +195,28 @@ export class TrainrunSection {
     formattedText = stylePattern;
     formattedText = formattedText.replace(
       consecutiveTimePatternHHMMSS,
-      formatDate(consecutiveTimeDate.toISOString(), 'HH:mm:ss', 'en-US', 'UTC'),
+      formatDate(consecutiveTimeDate.toISOString(), "HH:mm:ss", "en-US", "UTC"),
     );
     formattedText = formattedText.replace(
       consecutiveTimePatternHHMM,
-      formatDate(consecutiveTimeDate.toISOString(), 'HH:mm', 'en-US', 'UTC'),
+      formatDate(consecutiveTimeDate.toISOString(), "HH:mm", "en-US", "UTC"),
     );
     formattedText = formattedText.replace(
       consecutiveTimePattern,
-      '' + time.consecutiveTime,
+      "" + time.consecutiveTime,
     );
 
     formattedText = formattedText.replace(
       timePatternHHMMSS,
-      formatDate(timeDate.toISOString(), 'HH:mm:ss', 'en-US', 'UTC'),
+      formatDate(timeDate.toISOString(), "HH:mm:ss", "en-US", "UTC"),
     );
     formattedText = formattedText.replace(
       timePatternHHMM,
-      formatDate(timeDate.toISOString(), 'HH:mm', 'en-US', 'UTC'),
+      formatDate(timeDate.toISOString(), "HH:mm", "en-US", "UTC"),
     );
     formattedText = formattedText.replace(
       timePattern,
-      '' + ((time.time + offset + 24 * 60) % 60),
+      "" + ((time.time + offset + 24 * 60) % 60),
     );
 
     return formattedText;

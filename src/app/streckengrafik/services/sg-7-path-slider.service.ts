@@ -1,16 +1,16 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {SgSelectedTrainrun} from '../model/streckengrafik-model/sg-selected-trainrun';
-import {ResizeService} from './util/resize.service';
-import {UiInteractionService} from '../../services/ui/ui.interaction.service';
-import {ResizeChangeInfo} from '../model/util/resizeChangeInfo';
-import {StreckengrafikRenderingType} from '../../view/themes/streckengrafik-rendering-type';
-import {SgPath} from '../model/streckengrafik-model/sg-path';
-import {Sg6TrackService} from './sg-6-track.service';
+import {Injectable, OnDestroy} from "@angular/core";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
+import {SgSelectedTrainrun} from "../model/streckengrafik-model/sg-selected-trainrun";
+import {ResizeService} from "./util/resize.service";
+import {UiInteractionService} from "../../services/ui/ui.interaction.service";
+import {ResizeChangeInfo} from "../model/util/resizeChangeInfo";
+import {StreckengrafikRenderingType} from "../../view/themes/streckengrafik-rendering-type";
+import {SgPath} from "../model/streckengrafik-model/sg-path";
+import {Sg6TrackService} from "./sg-6-track.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class Sg7PathSliderService implements OnDestroy {
   private readonly sgSelectedTrainrunSubject =

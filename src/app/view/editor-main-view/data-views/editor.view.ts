@@ -1,39 +1,39 @@
-import * as d3 from 'd3';
-import {NodesView} from './nodes.view';
-import {TrainrunSectionsView} from './trainrunsections.view';
-import {TrainrunSectionPreviewLineView} from './trainrunsection.previewline.view';
-import {StaticDomTags} from './static.dom.tags';
-import {TransitionsView} from './transitions.view';
-import {Vec2D} from '../../../utils/vec2D';
-import {EditorMainViewComponent} from '../editor-main-view.component';
+import * as d3 from "d3";
+import {NodesView} from "./nodes.view";
+import {TrainrunSectionsView} from "./trainrunsections.view";
+import {TrainrunSectionPreviewLineView} from "./trainrunsection.previewline.view";
+import {StaticDomTags} from "./static.dom.tags";
+import {TransitionsView} from "./transitions.view";
+import {Vec2D} from "../../../utils/vec2D";
+import {EditorMainViewComponent} from "../editor-main-view.component";
 import {
   UiInteractionService,
   ViewboxProperties,
-} from '../../../services/ui/ui.interaction.service';
-import {EditorMode} from '../../editor-menu/editor-mode';
-import {ConnectionsView} from './connections.view';
+} from "../../../services/ui/ui.interaction.service";
+import {EditorMode} from "../../editor-menu/editor-mode";
+import {ConnectionsView} from "./connections.view";
 import {
   SVGMouseController,
   SVGMouseControllerObserver,
-} from '../../util/svg.mouse.controller';
-import {D3Utils} from './d3.utils';
-import {NotesView} from './notes.view';
-import {NodeService} from '../../../services/data/node.service';
-import {FilterService} from '../../../services/ui/filter.service';
-import {Node} from '../../../models/node.model';
-import {Note} from '../../../models/note.model';
-import {TrainrunSectionService} from '../../../services/data/trainrunsection.service';
-import {TrainrunService} from '../../../services/data/trainrun.service';
-import {LogService} from '../../../logger/log.service';
-import {NoteService} from '../../../services/data/note.service';
-import {EditorKeyEvents} from './editor.keyEvents';
-import {MultiSelectRenderer} from './multiSelectRenderer';
-import {UndoService} from '../../../services/data/undo.service';
-import {CopyService} from '../../../services/data/copy.service';
-import {StreckengrafikDrawingContext} from '../../../streckengrafik/model/util/streckengrafik.drawing.context';
+} from "../../util/svg.mouse.controller";
+import {D3Utils} from "./d3.utils";
+import {NotesView} from "./notes.view";
+import {NodeService} from "../../../services/data/node.service";
+import {FilterService} from "../../../services/ui/filter.service";
+import {Node} from "../../../models/node.model";
+import {Note} from "../../../models/note.model";
+import {TrainrunSectionService} from "../../../services/data/trainrunsection.service";
+import {TrainrunService} from "../../../services/data/trainrun.service";
+import {LogService} from "../../../logger/log.service";
+import {NoteService} from "../../../services/data/note.service";
+import {EditorKeyEvents} from "./editor.keyEvents";
+import {MultiSelectRenderer} from "./multiSelectRenderer";
+import {UndoService} from "../../../services/data/undo.service";
+import {CopyService} from "../../../services/data/copy.service";
+import {StreckengrafikDrawingContext} from "../../../streckengrafik/model/util/streckengrafik.drawing.context";
 
 export class EditorView implements SVGMouseControllerObserver {
-  static svgName = 'graphContainer';
+  static svgName = "graphContainer";
   editorMode: EditorMode = EditorMode.NetzgrafikEditing;
   controller: EditorMainViewComponent;
   svgMouseController: SVGMouseController;
@@ -499,7 +499,7 @@ export class EditorView implements SVGMouseControllerObserver {
       if (
         d3.event.button === 0 &&
         this.editorMode === EditorMode.TopologyEditing &&
-        d3.select(d3.event.target).attr('id') === EditorView.svgName
+        d3.select(d3.event.target).attr("id") === EditorView.svgName
       ) {
         this.uiInteractionService.setEditorMode(EditorMode.NetzgrafikEditing);
         this.addNode(mousePosition.getX(), mousePosition.getY());
@@ -513,7 +513,7 @@ export class EditorView implements SVGMouseControllerObserver {
       if (
         d3.event.button === 0 &&
         this.editorMode === EditorMode.MultiNodeMoving &&
-        d3.select(d3.event.target).attr('id') === EditorView.svgName
+        d3.select(d3.event.target).attr("id") === EditorView.svgName
       ) {
         this.unselectAllNodes();
         this.unselectAllNotes();
@@ -522,7 +522,7 @@ export class EditorView implements SVGMouseControllerObserver {
       if (
         d3.event.button === 0 &&
         this.editorMode === EditorMode.NoteEditing &&
-        d3.select(d3.event.target).attr('id') === EditorView.svgName
+        d3.select(d3.event.target).attr("id") === EditorView.svgName
       ) {
         const clickPosition = new Vec2D(
           d3.event.pageX + Note.DEFAULT_NOTE_WIDTH / 2,
@@ -640,11 +640,11 @@ export class EditorView implements SVGMouseControllerObserver {
       this.editorMode === EditorMode.TopologyEditing ||
       this.editorMode === EditorMode.NoteEditing
     ) {
-      const el = d3.select('#' + EditorView.svgName);
-      el.classed('ShowCellCursor', true);
+      const el = d3.select("#" + EditorView.svgName);
+      el.classed("ShowCellCursor", true);
     } else {
-      const el = d3.select('#' + EditorView.svgName);
-      el.classed('ShowCellCursor', false);
+      const el = d3.select("#" + EditorView.svgName);
+      el.classed("ShowCellCursor", false);
     }
   }
 }

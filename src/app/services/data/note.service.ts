@@ -1,19 +1,19 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import {Note} from '../../models/note.model';
-import {LogService} from '../../logger/log.service';
+import {Injectable} from "@angular/core";
+import {BehaviorSubject} from "rxjs";
+import {Note} from "../../models/note.model";
+import {LogService} from "../../logger/log.service";
 import {
   FreeFloatingTextDto,
   LabelRef,
-} from '../../data-structures/business.data.structures';
-import {Vec2D} from '../../utils/vec2D';
-import {MathUtils} from '../../utils/math';
-import {NOTE_POSITION_BASIC_RASTER} from '../../view/rastering/definitions';
-import {LabelService} from './label.serivce';
-import {FilterService} from '../ui/filter.service';
+} from "../../data-structures/business.data.structures";
+import {Vec2D} from "../../utils/vec2D";
+import {MathUtils} from "../../utils/math";
+import {NOTE_POSITION_BASIC_RASTER} from "../../view/rastering/definitions";
+import {LabelService} from "./label.serivce";
+import {FilterService} from "../ui/filter.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class NoteService {
   noteSubject = new BehaviorSubject<Note[]>([]);
@@ -56,7 +56,7 @@ export class NoteService {
     });
   }
 
-  addNote(position: Vec2D, title = 'Titel', text = 'Text'): Note {
+  addNote(position: Vec2D, title = "Titel", text = "Text"): Note {
     const newNote = new Note();
     newNote.setPosition(position.getX(), position.getY());
     newNote.setTitle(title);

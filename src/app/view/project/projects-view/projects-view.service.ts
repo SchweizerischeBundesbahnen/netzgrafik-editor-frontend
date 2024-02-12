@@ -1,18 +1,18 @@
-import {Injectable, OnDestroy} from '@angular/core';
+import {Injectable, OnDestroy} from "@angular/core";
 import {
   ProjectControllerBackendService,
   ProjectCreateUpdateDto,
   ProjectSummaryDto,
-} from '../../../api/generated';
-import {BehaviorSubject, combineLatest, Observable, Subject} from 'rxjs';
-import {map, takeUntil} from 'rxjs/operators';
+} from "../../../api/generated";
+import {BehaviorSubject, combineLatest, Observable, Subject} from "rxjs";
+import {map, takeUntil} from "rxjs/operators";
 
 @Injectable()
 export class ProjectsViewService implements OnDestroy {
   filteredProjects: Observable<ProjectSummaryDto[]>;
 
   private allProjects = new BehaviorSubject<ProjectSummaryDto[]>([]);
-  private searchQuery = new BehaviorSubject('');
+  private searchQuery = new BehaviorSubject("");
   private showArchive = new BehaviorSubject(false);
 
   private destroyed = new Subject<void>();

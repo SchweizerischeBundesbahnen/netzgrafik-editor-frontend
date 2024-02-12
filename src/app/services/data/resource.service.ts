@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import {Resource} from '../../models/resource.model';
-import {ResourceDto} from '../../data-structures/business.data.structures';
+import {Injectable} from "@angular/core";
+import {BehaviorSubject} from "rxjs";
+import {Resource} from "../../models/resource.model";
+import {ResourceDto} from "../../data-structures/business.data.structures";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class ResourceService {
   // Description of observable data service: https://coryrylan.com/blog/angular-observable-data-services

@@ -1,4 +1,4 @@
-import {Trainrun} from '../../models/trainrun.model';
+import {Trainrun} from "../../models/trainrun.model";
 import {
   LabelDto,
   LabelRef,
@@ -7,25 +7,25 @@ import {
   TrainrunDto,
   TrainrunFrequency,
   TrainrunTimeCategory,
-} from '../../data-structures/business.data.structures';
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import {NodeService} from './node.service';
-import {TrainrunSectionService} from './trainrunsection.service';
-import {DataService} from './data.service';
-import {Node} from '../../models/node.model';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {GeneralViewFunctions} from '../../view/util/generalViewFunctions';
+} from "../../data-structures/business.data.structures";
+import {Injectable} from "@angular/core";
+import {BehaviorSubject} from "rxjs";
+import {NodeService} from "./node.service";
+import {TrainrunSectionService} from "./trainrunsection.service";
+import {DataService} from "./data.service";
+import {Node} from "../../models/node.model";
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {GeneralViewFunctions} from "../../view/util/generalViewFunctions";
 import {
   NonStopTrainrunIterator,
   TrainrunIterator,
-} from '../util/trainrun.iterator';
-import {LogService} from '../../logger/log.service';
-import {LabelService} from './label.serivce';
-import {FilterService} from '../ui/filter.service';
+} from "../util/trainrun.iterator";
+import {LogService} from "../../logger/log.service";
+import {LabelService} from "./label.serivce";
+import {FilterService} from "../ui/filter.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class TrainrunService {
   // Description of observable data service: https://coryrylan.com/blog/angular-observable-data-services
@@ -362,7 +362,7 @@ export class TrainrunService {
   duplicateTrainrun(
     trainrunId: number,
     enforceUpdate = true,
-    postfix = ' COPY',
+    postfix = " COPY",
   ): Trainrun {
     const trainrun = this.getTrainrunFromId(trainrunId);
     const copiedtrainrun = new Trainrun();

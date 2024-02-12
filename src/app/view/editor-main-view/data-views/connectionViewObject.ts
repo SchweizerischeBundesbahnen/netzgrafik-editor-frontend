@@ -1,6 +1,6 @@
-import {Connection} from '../../../models/connection.model';
-import {Node} from '../../../models/node.model';
-import {EditorView} from './editor.view';
+import {Connection} from "../../../models/connection.model";
+import {Node} from "../../../models/node.model";
+import {EditorView} from "./editor.view";
 
 export class ConnectionsViewObject {
   key: string;
@@ -27,29 +27,29 @@ export class ConnectionsViewObject {
     displayConnectionPin2: boolean,
   ): string {
     let key =
-      '#' +
+      "#" +
       connection.getId() +
-      '@' +
+      "@" +
       connection.hasWarning() +
-      '_' +
+      "_" +
       connection.getPortId1() +
-      '_' +
+      "_" +
       connection.getPortId2() +
-      '_' +
+      "_" +
       connection.selected() +
-      '_' +
+      "_" +
       connection.getPath()[0] +
-      '_' +
+      "_" +
       connection.getPath()[1] +
-      '_' +
+      "_" +
       connection.getPath()[2] +
-      '_' +
+      "_" +
       connection.getPath()[3] +
-      '_' +
+      "_" +
       displayConnectionPin1 +
-      '_' +
+      "_" +
       displayConnectionPin2 +
-      '_' +
+      "_" +
       editorView.isTemporaryDisableFilteringOfItemsInViewEnabled();
 
     connection.getPath().forEach((p) => {

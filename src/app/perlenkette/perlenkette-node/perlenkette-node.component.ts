@@ -1,23 +1,23 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {PerlenketteNode} from '../model/perlenketteNode';
-import {NodeService} from '../../services/data/node.service';
-import {PerlenketteTrainrun} from '../model/perlenketteTrainrun';
-import {TrainrunService} from '../../services/data/trainrun.service';
-import {Transition} from '../../models/transition.model';
-import {D3Utils} from '../../view/editor-main-view/data-views/d3.utils';
-import {Vec2D} from '../../utils/vec2D';
-import {StaticDomTags} from '../../view/editor-main-view/data-views/static.dom.tags';
-import {PerlenketteSection} from '../model/perlenketteSection';
-import {FilterService} from '../../services/ui/filter.service';
-import {Trainrun} from '../../models/trainrun.model';
-import {PerlenketteConnection} from '../model/perlenketteConnection';
-import {PerlenketteItem} from '../model/perlenketteItem';
-import {UiInteractionService} from '../../services/ui/ui.interaction.service';
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {PerlenketteNode} from "../model/perlenketteNode";
+import {NodeService} from "../../services/data/node.service";
+import {PerlenketteTrainrun} from "../model/perlenketteTrainrun";
+import {TrainrunService} from "../../services/data/trainrun.service";
+import {Transition} from "../../models/transition.model";
+import {D3Utils} from "../../view/editor-main-view/data-views/d3.utils";
+import {Vec2D} from "../../utils/vec2D";
+import {StaticDomTags} from "../../view/editor-main-view/data-views/static.dom.tags";
+import {PerlenketteSection} from "../model/perlenketteSection";
+import {FilterService} from "../../services/ui/filter.service";
+import {Trainrun} from "../../models/trainrun.model";
+import {PerlenketteConnection} from "../model/perlenketteConnection";
+import {PerlenketteItem} from "../model/perlenketteItem";
+import {UiInteractionService} from "../../services/ui/ui.interaction.service";
 
 @Component({
-  selector: 'sbb-perlenkette-node',
-  templateUrl: './perlenkette-node.component.html',
-  styleUrls: ['./perlenkette-node.component.scss'],
+  selector: "sbb-perlenkette-node",
+  templateUrl: "./perlenkette-node.component.html",
+  styleUrls: ["./perlenkette-node.component.scss"],
 })
 export class PerlenketteNodeComponent implements OnInit {
   @Input() perlenketteNode: PerlenketteNode;
@@ -49,12 +49,12 @@ export class PerlenketteNodeComponent implements OnInit {
         mockConnection.connectionWarning && amountOfWarningConnections++,
     );
     if (amountOfWarningConnections === 0) {
-      return 'Kein fehlerhafter Anschluss';
+      return "Kein fehlerhafter Anschluss";
     }
     if (amountOfWarningConnections === 1) {
-      return '1 fehlerhafter Anschluss';
+      return "1 fehlerhafter Anschluss";
     }
-    return amountOfWarningConnections + ' fehlerhafte Anschlüsse';
+    return amountOfWarningConnections + " fehlerhafte Anschlüsse";
   }
 
   getFittingConnections(): string {
@@ -64,12 +64,12 @@ export class PerlenketteNodeComponent implements OnInit {
         !mockConnection.connectionWarning && amountOfFittingConnections++,
     );
     if (amountOfFittingConnections === 0) {
-      return 'Kein passender Anschluss';
+      return "Kein passender Anschluss";
     }
     if (amountOfFittingConnections === 1) {
-      return '1 passender Anschluss';
+      return "1 passender Anschluss";
     }
-    return amountOfFittingConnections + ' passende Anschlüsse';
+    return amountOfFittingConnections + " passende Anschlüsse";
   }
 
   expandConnections() {
@@ -120,33 +120,33 @@ export class PerlenketteNodeComponent implements OnInit {
   }
 
   getNodeClassTag() {
-    let tag = '';
+    let tag = "";
     if (this.hasConnections()) {
-      tag += ' has_connections';
+      tag += " has_connections";
     }
     if (!this.isStopNode()) {
-      tag += ' junction_only';
+      tag += " junction_only";
       if (this.hasAnyTrainConnections()) {
-        tag += ' has_connections';
+        tag += " has_connections";
       }
     }
     if (
       this.perlenketteNode?.transition?.getIsNonStopTransit() &&
       this.hasConnections()
     ) {
-      tag += ' no_stop_has_connections';
+      tag += " no_stop_has_connections";
     }
     return tag;
   }
 
   getNonStopClassTag(): string {
     if (this.perlenketteNode.transition === undefined) {
-      return '';
+      return "";
     }
     if (!this.perlenketteNode.transition.getIsNonStopTransit()) {
-      return '';
+      return "";
     }
-    return 'nonstop';
+    return "nonstop";
   }
 
   getConnectionsSize(
@@ -188,8 +188,8 @@ export class PerlenketteNodeComponent implements OnInit {
     pos: number,
   ) {
     return pos === 0
-      ? connection.categoryShortName + '' + connection.title
-      : '' + connection.remainingTime;
+      ? connection.categoryShortName + "" + connection.title
+      : "" + connection.remainingTime;
   }
 
   transformIndex(index: number, connectionGrpKey: number): number {
@@ -215,11 +215,11 @@ export class PerlenketteNodeComponent implements OnInit {
 
   getColoringClassTag(connection: PerlenketteConnection = undefined): string {
     let trainrun2: Trainrun = undefined;
-    let selected_tag = '';
+    let selected_tag = "";
     if (connection !== undefined) {
       trainrun2 = connection.connectedTrainrun;
       if (connection.connection.selected()) {
-        selected_tag = ' ' + StaticDomTags.TAG_SELECTED;
+        selected_tag = " " + StaticDomTags.TAG_SELECTED;
       }
     }
     if (trainrun2 === undefined) {
@@ -228,11 +228,11 @@ export class PerlenketteNodeComponent implements OnInit {
       );
     }
     return (
-      ' ColorRef_' +
+      " ColorRef_" +
       trainrun2.getCategoryColorRef() +
-      ' Freq_' +
+      " Freq_" +
       trainrun2.getFrequency() +
-      ' LinePatternRef_' +
+      " LinePatternRef_" +
       trainrun2.getFrequencyLinePatternRef() +
       selected_tag
     );
@@ -245,10 +245,10 @@ export class PerlenketteNodeComponent implements OnInit {
   ): string {
     let retVal = this.getColoringClassTag(connection);
     if (pos !== 0 && this.isNonStopTransition(connection)) {
-      retVal = retVal + ' ' + StaticDomTags.TAG_WARNING;
+      retVal = retVal + " " + StaticDomTags.TAG_WARNING;
     }
 
-    return pos === 0 ? retVal + ' TrainrunName' : retVal + ' RemainingTime';
+    return pos === 0 ? retVal + " TrainrunName" : retVal + " RemainingTime";
   }
 
   getTextTerminalStationlassTag(
@@ -257,30 +257,30 @@ export class PerlenketteNodeComponent implements OnInit {
     pos: number,
   ): string {
     const retVal = this.getColoringClassTag(connection);
-    return pos === 0 ? retVal + ' FROM' : retVal + ' TO';
+    return pos === 0 ? retVal + " FROM" : retVal + " TO";
   }
 
   getPathClassTag(connection: PerlenketteConnection = undefined): string {
     if (connection === undefined) {
-      return 'UI_DIALOG ' + this.getColoringClassTag();
+      return "UI_DIALOG " + this.getColoringClassTag();
     }
-    let selected_tag = '';
+    let selected_tag = "";
     if (connection.connection.selected()) {
-      selected_tag = ' ' + StaticDomTags.TAG_SELECTED;
+      selected_tag = " " + StaticDomTags.TAG_SELECTED;
     }
-    return 'UI_DIALOG ' + selected_tag + this.getColoringClassTag(connection);
+    return "UI_DIALOG " + selected_tag + this.getColoringClassTag(connection);
   }
 
   getConnectedTrainEdgeLineTransform(
     startPosX: number,
     startPosY: number,
   ): string {
-    return 'translate(' + startPosX + ',' + startPosY + ')';
+    return "translate(" + startPosX + "," + startPosY + ")";
   }
 
   getInitialExpanedTranform(): string {
     const len = this.perlenketteNode.connections.length + 2;
-    return 'translate(0,' + this.surplus / len + ')';
+    return "translate(0," + this.surplus / len + ")";
   }
 
   getConnectedTrainEdgeLine(
@@ -289,13 +289,13 @@ export class PerlenketteNodeComponent implements OnInit {
     width: number,
   ): string {
     return (
-      'M' +
+      "M" +
       startPosX +
-      ',' +
+      "," +
       startPosY +
-      ' L' +
+      " L" +
       (startPosX + width) +
-      ',' +
+      "," +
       startPosY
     );
   }
@@ -327,12 +327,12 @@ export class PerlenketteNodeComponent implements OnInit {
 
   createPolygon(x: number, y: number): string {
     return (
-      'M' +
+      "M" +
       D3Utils.makeHexagonSVGPoints(
         new Vec2D(x, y),
         StaticDomTags.TRANSITION_BUTTON_SIZE,
       ) +
-      'z'
+      "z"
     );
   }
 
@@ -348,7 +348,7 @@ export class PerlenketteNodeComponent implements OnInit {
         item
           .getPerlenketteNode()
           .connections.forEach((connection: PerlenketteConnection) => {
-            const name = connection.categoryShortName + '' + connection.title;
+            const name = connection.categoryShortName + "" + connection.title;
             maxTrainrunNameLen = Math.max(
               3 + connection.terminalStationBackward.length,
               Math.max(

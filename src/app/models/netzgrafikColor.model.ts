@@ -1,5 +1,5 @@
-import {NetzgrafikColorDto} from '../data-structures/business.data.structures';
-import {ColorRefType} from '../data-structures/technical.data.structures';
+import {NetzgrafikColorDto} from "../data-structures/business.data.structures";
+import {ColorRefType} from "../data-structures/technical.data.structures";
 export class NetzgrafikColor {
   private static currentId = 0;
 
@@ -29,17 +29,17 @@ export class NetzgrafikColor {
       colorDarkModeRelated,
     }: NetzgrafikColorDto = {
       id: NetzgrafikColor.incrementId(),
-      colorRef: 'UserDefined',
+      colorRef: "UserDefined",
 
-      color: '#767676',
-      colorFocus: '#000000',
-      colorMuted: '#DCDCDC',
-      colorRelated: '#767676',
+      color: "#767676",
+      colorFocus: "#000000",
+      colorMuted: "#DCDCDC",
+      colorRelated: "#767676",
 
-      colorDarkMode: '#767676',
-      colorDarkModeFocus: '#DCDCDC',
-      colorDarkModeMuted: '#000000',
-      colorDarkModeRelated: '#767676',
+      colorDarkMode: "#767676",
+      colorDarkModeFocus: "#DCDCDC",
+      colorDarkModeMuted: "#000000",
+      colorDarkModeRelated: "#767676",
     },
   ) {
     this.id = id;

@@ -6,7 +6,7 @@ import {
   EventEmitter,
   Input,
   Output,
-} from '@angular/core';
+} from "@angular/core";
 
 /**
  * Different layout modes. Generally the layout contains (up to) 3 columns that are distributed over a 4 columen layout:
@@ -33,18 +33,18 @@ import {
  */
 
 export enum LayoutMode {
-  FILTER_ONLY = 'filter-only',
-  PERLENKETTE_ONLY = 'perlenkette-only',
-  DETAIL_ONLY = 'detail-only',
-  FILTER_AND_DETAIL = 'filter-and-detail',
-  FILTER_AND_PERLENKETTE = 'filter-and-perlenkette',
-  MAIN_FULL = 'main-full',
+  FILTER_ONLY = "filter-only",
+  PERLENKETTE_ONLY = "perlenkette-only",
+  DETAIL_ONLY = "detail-only",
+  FILTER_AND_DETAIL = "filter-and-detail",
+  FILTER_AND_PERLENKETTE = "filter-and-perlenkette",
+  MAIN_FULL = "main-full",
 }
 
 @Component({
-  selector: 'sbb-column-layout',
-  templateUrl: './column-layout.component.html',
-  styleUrls: ['./column-layout.component.scss'],
+  selector: "sbb-column-layout",
+  templateUrl: "./column-layout.component.html",
+  styleUrls: ["./column-layout.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColumnLayoutComponent implements AfterViewInit {

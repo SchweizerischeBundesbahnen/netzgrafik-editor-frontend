@@ -1,13 +1,13 @@
-import {StaticDomTags} from './static.dom.tags';
-import {Vec2D} from '../../../utils/vec2D';
-import * as d3 from 'd3';
-import {D3Utils} from './d3.utils';
-import {Node} from '../../../models/node.model';
-import {TrainrunSection} from '../../../models/trainrunsection.model';
-import {Transition} from '../../../models/transition.model';
-import {SimpleTrainrunSectionRouter} from '../../../services/util/trainrunsection.routing';
-import {NodeService} from '../../../services/data/node.service';
-import {FilterService} from '../../../services/ui/filter.service';
+import {StaticDomTags} from "./static.dom.tags";
+import {Vec2D} from "../../../utils/vec2D";
+import * as d3 from "d3";
+import {D3Utils} from "./d3.utils";
+import {Node} from "../../../models/node.model";
+import {TrainrunSection} from "../../../models/trainrunsection.model";
+import {Transition} from "../../../models/transition.model";
+import {SimpleTrainrunSectionRouter} from "../../../services/util/trainrunsection.routing";
+import {NodeService} from "../../../services/data/node.service";
+import {FilterService} from "../../../services/ui/filter.service";
 
 export enum PreviewLineMode {
   NotDragging,
@@ -60,13 +60,13 @@ export class TrainrunSectionPreviewLineView {
   static setGroup(nodeGroup: d3.Selector) {
     nodeGroup
       .append(StaticDomTags.PREVIEW_LINE_ROOT_SVG)
-      .attr('class', StaticDomTags.PREVIEW_LINE_ROOT_CLASS);
+      .attr("class", StaticDomTags.PREVIEW_LINE_ROOT_CLASS);
   }
 
   static setConnectionGroup(nodeGroup: d3.Selector) {
     nodeGroup
       .append(StaticDomTags.PREVIEW_CONNECTION_LINE_ROOT_SVG)
-      .attr('class', StaticDomTags.PREVIEW_CONNECTION_LINE_ROOT_CLASS);
+      .attr("class", StaticDomTags.PREVIEW_CONNECTION_LINE_ROOT_CLASS);
   }
 
   getMode(): PreviewLineMode {
@@ -268,7 +268,7 @@ export class TrainrunSectionPreviewLineView {
     this.drawingTrainrunSectionObjectCreated = true;
     d3.selectAll(StaticDomTags.PREVIEW_LINE_ROOT_DOM_REF)
       .append(StaticDomTags.PREVIEW_LINE_SVG)
-      .attr('class', StaticDomTags.PREVIEW_LINE_CLASS);
+      .attr("class", StaticDomTags.PREVIEW_LINE_CLASS);
   }
 
   private undisplayTrainrunSectionPreviewLine() {
@@ -289,7 +289,7 @@ export class TrainrunSectionPreviewLineView {
     this.drawingConnectionObjectCreated = true;
     d3.selectAll(StaticDomTags.PREVIEW_CONNECTION_LINE_ROOT_DOM_REF)
       .append(StaticDomTags.PREVIEW_CONNECTION_LINE_SVG)
-      .attr('class', StaticDomTags.PREVIEW_CONNECTION_LINE_CLASS);
+      .attr("class", StaticDomTags.PREVIEW_CONNECTION_LINE_CLASS);
   }
 
   private undisplayConnectionPreviewLine() {

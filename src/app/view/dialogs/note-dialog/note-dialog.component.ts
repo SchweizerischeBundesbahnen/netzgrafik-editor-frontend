@@ -1,15 +1,15 @@
-import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnDestroy, TemplateRef, ViewChild} from "@angular/core";
 import {
   SbbDialog,
   SbbDialogConfig,
   SbbDialogPosition,
-} from '@sbb-esta/angular/dialog';
-import {Vec2D} from '../../../utils/vec2D';
-import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
-import {GeneralViewFunctions} from '../../util/generalViewFunctions';
-import {Subject} from 'rxjs';
-import {NoteFormComponentModel} from './note-form/note-form.component';
-import {takeUntil} from 'rxjs/operators';
+} from "@sbb-esta/angular/dialog";
+import {Vec2D} from "../../../utils/vec2D";
+import {UiInteractionService} from "../../../services/ui/ui.interaction.service";
+import {GeneralViewFunctions} from "../../util/generalViewFunctions";
+import {Subject} from "rxjs";
+import {NoteFormComponentModel} from "./note-form/note-form.component";
+import {takeUntil} from "rxjs/operators";
 
 export enum NoteDialogType {
   NOTE_DIALOG,
@@ -34,12 +34,12 @@ export class NoteDialogParameter {
 }
 
 @Component({
-  selector: 'sbb-note-dialog',
-  templateUrl: './note-dialog.component.html',
-  styleUrls: ['./note-dialog.component.scss'],
+  selector: "sbb-note-dialog",
+  templateUrl: "./note-dialog.component.html",
+  styleUrls: ["./note-dialog.component.scss"],
 })
 export class NoteDialogComponent implements OnDestroy {
-  @ViewChild('noteEditorTabsViewTemplate', {static: true})
+  @ViewChild("noteEditorTabsViewTemplate", {static: true})
   noteEditorTabsViewTemplate: TemplateRef<any>;
 
   public data = null;
@@ -89,18 +89,18 @@ export class NoteDialogComponent implements OnDestroy {
       new Vec2D(width, height),
     );
     dialogConfig.position = {
-      top: topLeft.getY() + 'px',
-      left: topLeft.getX() + 'px',
+      top: topLeft.getY() + "px",
+      left: topLeft.getX() + "px",
     };
 
-    dialogConfig.width = width + 'px';
+    dialogConfig.width = width + "px";
     dialogConfig.minWidth = dialogConfig.width;
     dialogConfig.maxWidth = dialogConfig.width;
-    dialogConfig.height = height + 'px';
+    dialogConfig.height = height + "px";
     dialogConfig.minHeight = dialogConfig.height;
     dialogConfig.maxHeight = dialogConfig.height;
-    dialogConfig.panelClass = '';
-    dialogConfig.id = 'NoteEditorTabsViewId';
+    dialogConfig.panelClass = "";
+    dialogConfig.id = "NoteEditorTabsViewId";
     return dialogConfig;
   }
 
@@ -134,7 +134,7 @@ export class NoteDialogComponent implements OnDestroy {
   onMouseDown(event: MouseEvent) {
     if (event.buttons === 1) {
       const eventTarget = event.target as HTMLElement;
-      if (eventTarget.className === 'sbb-tab-labels') {
+      if (eventTarget.className === "sbb-tab-labels") {
         this.dialogMovementLastPosition = new Vec2D(
           event.screenX,
           event.screenY,
@@ -167,10 +167,10 @@ export class NoteDialogComponent implements OnDestroy {
 
   private convertDialogPos(dialogPos: SbbDialogPosition): SbbDialogPosition {
     return {
-      bottom: dialogPos.bottom + 'px',
-      left: dialogPos.left + 'px',
-      right: dialogPos.right + 'px',
-      top: dialogPos.top + 'px',
+      bottom: dialogPos.bottom + "px",
+      left: dialogPos.left + "px",
+      right: dialogPos.right + "px",
+      top: dialogPos.top + "px",
     };
   }
 }

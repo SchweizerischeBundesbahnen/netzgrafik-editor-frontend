@@ -1,9 +1,9 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from "@angular/core/testing";
 
-import {ProjectDialogComponent} from './project-dialog.component';
-import {SBB_DIALOG_DATA, SbbDialogRef} from '@sbb-esta/angular/dialog';
+import {ProjectDialogComponent} from "./project-dialog.component";
+import {SBB_DIALOG_DATA, SbbDialogRef} from "@sbb-esta/angular/dialog";
 
-describe('ProjectDialogComponent', () => {
+describe("ProjectDialogComponent", () => {
   let component: ProjectDialogComponent;
   let fixture: ComponentFixture<ProjectDialogComponent>;
 
@@ -23,7 +23,7 @@ describe('ProjectDialogComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

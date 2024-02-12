@@ -6,23 +6,23 @@ import {
   OnDestroy,
   OnInit,
   Output,
-} from '@angular/core';
-import {DataService} from '../../../../services/data/data.service';
-import {LabelService} from '../../../../services/data/label.serivce';
-import {LabelRef} from '../../../../data-structures/business.data.structures';
-import {LabelGroupService} from '../../../../services/data/labelgroup.service';
-import {Subject} from 'rxjs';
-import {NoteService} from '../../../../services/data/note.service';
-import {takeUntil} from 'rxjs/operators';
-import {Note} from '../../../../models/note.model';
-import {NoteDialogParameter} from '../note-dialog.component';
-import {SbbChipEvent, SbbChipInputEvent} from '@sbb-esta/angular/chips';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+} from "@angular/core";
+import {DataService} from "../../../../services/data/data.service";
+import {LabelService} from "../../../../services/data/label.serivce";
+import {LabelRef} from "../../../../data-structures/business.data.structures";
+import {LabelGroupService} from "../../../../services/data/labelgroup.service";
+import {Subject} from "rxjs";
+import {NoteService} from "../../../../services/data/note.service";
+import {takeUntil} from "rxjs/operators";
+import {Note} from "../../../../models/note.model";
+import {NoteDialogParameter} from "../note-dialog.component";
+import {SbbChipEvent, SbbChipInputEvent} from "@sbb-esta/angular/chips";
+import {COMMA, ENTER} from "@angular/cdk/keycodes";
 
 @Component({
-  selector: 'sbb-note-filter-tab',
-  templateUrl: './note-filter-tab.component.html',
-  styleUrls: ['./note-filter-tab.component.scss'],
+  selector: "sbb-note-filter-tab",
+  templateUrl: "./note-filter-tab.component.html",
+  styleUrls: ["./note-filter-tab.component.scss"],
 })
 export class NoteFilterTabComponent implements OnInit, OnDestroy {
   @Input() noteDialogParameter: NoteDialogParameter;
@@ -57,7 +57,7 @@ export class NoteFilterTabComponent implements OnInit, OnDestroy {
 
   remove(chipEvent: SbbChipEvent): void {
     const valueDelete = chipEvent.chip.value as string;
-    const value = (valueDelete || '').trim();
+    const value = (valueDelete || "").trim();
     if (!value) {
       return;
     }
@@ -68,7 +68,7 @@ export class NoteFilterTabComponent implements OnInit, OnDestroy {
   }
 
   add(chipInputEvent: SbbChipInputEvent): void {
-    const value = (chipInputEvent.value || '').trim();
+    const value = (chipInputEvent.value || "").trim();
     if (!value) {
       return;
     }
@@ -78,15 +78,15 @@ export class NoteFilterTabComponent implements OnInit, OnDestroy {
   }
 
   onLabelsFocusout() {
-    const keyboardEvent = new KeyboardEvent('keydown', {
-      code: 'Enter',
-      key: 'Enter',
+    const keyboardEvent = new KeyboardEvent("keydown", {
+      code: "Enter",
+      key: "Enter",
       charCode: 13,
       keyCode: 13,
       view: window,
       bubbles: true,
     });
-    document.getElementById('noteLabelsInput').dispatchEvent(keyboardEvent);
+    document.getElementById("noteLabelsInput").dispatchEvent(keyboardEvent);
   }
 
   onDeleteNote(): void {

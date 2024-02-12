@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
+import {Injectable} from "@angular/core";
+import {Router} from "@angular/router";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class NavigationService {
   constructor(private readonly router: Router) {}
@@ -20,14 +20,14 @@ export class NavigationService {
   }
 
   getRouteToEditor(projectId: number, variantId: number): any[] {
-    return ['/projects', projectId, 'variants', variantId];
+    return ["/projects", projectId, "variants", variantId];
   }
 
   getRouteToVariants(projectId: number): any[] {
-    return ['/projects', projectId];
+    return ["/projects", projectId];
   }
 
   getRouteToProjects(): any[] {
-    return ['/'];
+    return ["/"];
   }
 }

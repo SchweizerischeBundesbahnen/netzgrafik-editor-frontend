@@ -1,36 +1,36 @@
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {EditorMode} from '../../view/editor-menu/editor-mode';
-import {Injectable, OnDestroy} from '@angular/core';
-import {Stammdaten} from '../../models/stammdaten.model';
-import {TrainrunDialogParameter} from '../../view/dialogs/trainrun-and-section-dialog/trainrun-and-section-dialog.component';
-import {ThemeBase} from '../../view/themes/theme-base';
-import {ConfirmationDialogParameter} from '../../view/dialogs/confirmation-dialog/confirmation-dialog.component';
-import {FilterService} from './filter.service';
-import {NodeService} from '../data/node.service';
-import {StammdatenService} from '../data/stammdaten.service';
+import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {EditorMode} from "../../view/editor-menu/editor-mode";
+import {Injectable, OnDestroy} from "@angular/core";
+import {Stammdaten} from "../../models/stammdaten.model";
+import {TrainrunDialogParameter} from "../../view/dialogs/trainrun-and-section-dialog/trainrun-and-section-dialog.component";
+import {ThemeBase} from "../../view/themes/theme-base";
+import {ConfirmationDialogParameter} from "../../view/dialogs/confirmation-dialog/confirmation-dialog.component";
+import {FilterService} from "./filter.service";
+import {NodeService} from "../data/node.service";
+import {StammdatenService} from "../data/stammdaten.service";
 import {
   InformSelectedTrainrunClick,
   TrainrunSectionService,
-} from '../data/trainrunsection.service';
-import {Vec2D} from '../../utils/vec2D';
-import {FilterWindowType} from '../../view/filter-main-side-view/filter-main-side-view.component';
-import {takeUntil} from 'rxjs/operators';
-import {ThemeFach} from '../../view/themes/theme-fach';
-import {ThemeDefaultUxDark} from '../../view/themes/theme-default-ux-dark';
-import {ThemeDefaultUx} from '../../view/themes/theme-default-ux';
-import {ThemeGrayDark} from '../../view/themes/theme-gray-dark';
-import {ThemeGray} from '../../view/themes/theme-gray';
-import {ThemeFachDark} from '../../view/themes/theme-fach-dark';
-import {ThemeFachPrint} from '../../view/themes/theme-fach-print';
-import {ThemeRegistration} from '../../view/themes/theme-registration';
-import {NoteService} from '../data/note.service';
-import {NoteDialogParameter} from '../../view/dialogs/note-dialog/note-dialog.component';
-import {StreckengrafikRenderingType} from '../../view/themes/streckengrafik-rendering-type';
-import {NetzgrafikColoringService} from '../data/netzgrafikColoring.service';
-import {MainViewMode} from '../../view/filter-main-side-view/main-view-mode';
-import {TrainrunService} from '../data/trainrun.service';
-import {Trainrun} from '../../models/trainrun.model';
-import {LoadPerlenketteService} from '../../perlenkette/service/load-perlenkette.service';
+} from "../data/trainrunsection.service";
+import {Vec2D} from "../../utils/vec2D";
+import {FilterWindowType} from "../../view/filter-main-side-view/filter-main-side-view.component";
+import {takeUntil} from "rxjs/operators";
+import {ThemeFach} from "../../view/themes/theme-fach";
+import {ThemeDefaultUxDark} from "../../view/themes/theme-default-ux-dark";
+import {ThemeDefaultUx} from "../../view/themes/theme-default-ux";
+import {ThemeGrayDark} from "../../view/themes/theme-gray-dark";
+import {ThemeGray} from "../../view/themes/theme-gray";
+import {ThemeFachDark} from "../../view/themes/theme-fach-dark";
+import {ThemeFachPrint} from "../../view/themes/theme-fach-print";
+import {ThemeRegistration} from "../../view/themes/theme-registration";
+import {NoteService} from "../data/note.service";
+import {NoteDialogParameter} from "../../view/dialogs/note-dialog/note-dialog.component";
+import {StreckengrafikRenderingType} from "../../view/themes/streckengrafik-rendering-type";
+import {NetzgrafikColoringService} from "../data/netzgrafikColoring.service";
+import {MainViewMode} from "../../view/filter-main-side-view/main-view-mode";
+import {TrainrunService} from "../data/trainrun.service";
+import {Trainrun} from "../../models/trainrun.model";
+import {LoadPerlenketteService} from "../../perlenkette/service/load-perlenkette.service";
 
 export interface ViewboxProperties {
   currentViewBox: string;
@@ -44,7 +44,7 @@ export interface ViewboxProperties {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class UiInteractionService implements OnDestroy {
   updateNodeStammdatenSubject = new Subject<void>();
@@ -371,11 +371,11 @@ export class UiInteractionService implements OnDestroy {
 
   private loadUserSettingFromLocalStorage() {
     try {
-      const serializedState = localStorage.getItem('UiInteractionService');
+      const serializedState = localStorage.getItem("UiInteractionService");
       if (
         serializedState === null ||
         serializedState === undefined ||
-        serializedState === 'undefined'
+        serializedState === "undefined"
       ) {
         return;
       }
@@ -398,7 +398,7 @@ export class UiInteractionService implements OnDestroy {
   private saveUserSettingToLocalStorage() {
     try {
       localStorage.setItem(
-        `UiInteractionService`,
+        "UiInteractionService",
         JSON.stringify({
           activeTheme: this.getActiveTheme(),
           streckengrafikRenderingType:

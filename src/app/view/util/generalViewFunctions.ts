@@ -1,8 +1,8 @@
-import * as d3 from 'd3';
-import {Vec2D} from '../../utils/vec2D';
-import {RASTERING_BASIC_GRID_SIZE} from '../rastering/definitions';
-import {Node} from '../../models/node.model';
-import {VisAVisPortPlacement} from '../../services/util/node.port.placement';
+import * as d3 from "d3";
+import {Vec2D} from "../../utils/vec2D";
+import {RASTERING_BASIC_GRID_SIZE} from "../rastering/definitions";
+import {Node} from "../../models/node.model";
+import {VisAVisPortPlacement} from "../../services/util/node.port.placement";
 
 export class GeneralViewFunctions {
   static calcDialogTopLeftScreenCoordinate(
@@ -13,7 +13,7 @@ export class GeneralViewFunctions {
       The SVG (netzgrafik) rendering area has its own local coordinate system and can be different
       to the real screen visible coordinates.
      */
-    const element = d3.select('html').node();
+    const element = d3.select("html").node();
     const rectHtml = element.getBoundingClientRect();
 
     return GeneralViewFunctions.calcDialogTopLeftScreenCoordinateClientRectInfo(

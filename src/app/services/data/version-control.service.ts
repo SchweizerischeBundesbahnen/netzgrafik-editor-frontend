@@ -1,21 +1,21 @@
-import {Injectable, OnDestroy} from '@angular/core';
+import {Injectable, OnDestroy} from "@angular/core";
 import {
   VariantControllerBackendService,
   VariantDto,
   VersionControllerBackendService,
   VersionDto,
-} from '../../api/generated';
-import {filter, map, takeUntil} from 'rxjs/operators';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {DataService} from './data.service';
-import {NetzgrafikDto} from '../../data-structures/business.data.structures';
-import {AutoSaveService} from './auto-save.service';
-import {LogService} from '../../logger/log.service';
-import {VersionId} from '../../view/variant/variant-view/variant-history/model';
-import {UndoService} from './undo.service';
+} from "../../api/generated";
+import {filter, map, takeUntil} from "rxjs/operators";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {DataService} from "./data.service";
+import {NetzgrafikDto} from "../../data-structures/business.data.structures";
+import {AutoSaveService} from "./auto-save.service";
+import {LogService} from "../../logger/log.service";
+import {VersionId} from "../../view/variant/variant-view/variant-history/model";
+import {UndoService} from "./undo.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class VersionControlService implements OnDestroy {
   readonly variantSubject = new BehaviorSubject<VariantDto | null>(null);
@@ -40,7 +40,7 @@ export class VersionControlService implements OnDestroy {
         filter(() => this.variant.isWritable),
       )
       .subscribe(() => {
-        logService.debug('auto saving changes');
+        logService.debug("auto saving changes");
         this.createSnapshot();
       });
   }
@@ -78,7 +78,7 @@ export class VersionControlService implements OnDestroy {
     this.versionsBackendService
       .createSnapshotVersion(this.variant.latestVersion.id, {
         name,
-        comment: newName ? `Neuer Name: ${newName}` : '',
+        comment: newName ? `Neuer Name: ${newName}` : "",
         model: JSON.stringify(this.dataService.getNetzgrafikDto()),
       })
       .pipe(takeUntil(this.destroyed))

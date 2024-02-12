@@ -1,25 +1,25 @@
-import {DataService} from '../data/data.service';
-import {NodeService} from '../data/node.service';
-import {ResourceService} from '../data/resource.service';
-import {TrainrunService} from '../data/trainrun.service';
-import {TrainrunSectionService} from '../data/trainrunsection.service';
-import {StammdatenService} from '../data/stammdaten.service';
-import {NoteService} from '../data/note.service';
-import {Node} from '../../models/node.model';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {LogService} from '../../logger/log.service';
-import {LogPublishersService} from '../../logger/log.publishers.service';
-import {LabelGroupService} from '../data/labelgroup.service';
-import {LabelService} from '../data/label.serivce';
-import {FilterService} from '../ui/filter.service';
-import {NetzgrafikColoringService} from '../data/netzgrafikColoring.service';
-import {UndoService} from '../data/undo.service';
-import {CopyService} from './copy.service';
-import {UiInteractionService} from '../ui/ui.interaction.service';
-import {LoadPerlenketteService} from '../../perlenkette/service/load-perlenkette.service';
-import {NetzgrafikUnitTesting} from '../../../integration-testing/netzgrafik.unit.testing';
+import {DataService} from "../data/data.service";
+import {NodeService} from "../data/node.service";
+import {ResourceService} from "../data/resource.service";
+import {TrainrunService} from "../data/trainrun.service";
+import {TrainrunSectionService} from "../data/trainrunsection.service";
+import {StammdatenService} from "../data/stammdaten.service";
+import {NoteService} from "../data/note.service";
+import {Node} from "../../models/node.model";
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {LogService} from "../../logger/log.service";
+import {LogPublishersService} from "../../logger/log.publishers.service";
+import {LabelGroupService} from "../data/labelgroup.service";
+import {LabelService} from "../data/label.serivce";
+import {FilterService} from "../ui/filter.service";
+import {NetzgrafikColoringService} from "../data/netzgrafikColoring.service";
+import {UndoService} from "../data/undo.service";
+import {CopyService} from "./copy.service";
+import {UiInteractionService} from "../ui/ui.interaction.service";
+import {LoadPerlenketteService} from "../../perlenkette/service/load-perlenkette.service";
+import {NetzgrafikUnitTesting} from "../../../integration-testing/netzgrafik.unit.testing";
 
-describe('NetzgraphikColoringSerivce', () => {
+describe("NetzgraphikColoringSerivce", () => {
   let dataService: DataService;
   let nodeService: NodeService;
   let resourceService: ResourceService;
@@ -123,7 +123,7 @@ describe('NetzgraphikColoringSerivce', () => {
     copyService.resetLocalStorage();
   });
 
-  it('test NetzgrafikColor.createDefaultColorForNotExistingColors', () => {
+  it("test NetzgrafikColor.createDefaultColorForNotExistingColors", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -133,50 +133,50 @@ describe('NetzgraphikColoringSerivce', () => {
       dataService.getTrainrunCategories(),
       trainrunSectionService.getTrainrunSections(),
     );
-    const v1 = netzgrafikColoringService.getNetzgrafikColor('S');
+    const v1 = netzgrafikColoringService.getNetzgrafikColor("S");
     expect(v1).toBe(undefined);
 
-    netzgrafikColoringService.createDefaultColorForNotExistingColors('Adrian');
-    const v2 = netzgrafikColoringService.getNetzgrafikColor('Adrian');
-    expect(v2.getColorRef()).toBe('Adrian');
-    expect(v2.getColors(false).color).toBe('#767676');
-    expect(v2.getColors(true).color).toBe('#767676');
-    expect(v2.getColors(false).colorFocus).toBe('#000000');
-    expect(v2.getColors(true).colorFocus).toBe('#DCDCDC');
-    expect(v2.getColors(false).colorMuted).toBe('#DCDCDC');
-    expect(v2.getColors(true).colorMuted).toBe('#000000');
-    expect(v2.getColors(false).colorRelated).toBe('#767676');
-    expect(v2.getColors(true).colorRelated).toBe('#767676');
+    netzgrafikColoringService.createDefaultColorForNotExistingColors("Adrian");
+    const v2 = netzgrafikColoringService.getNetzgrafikColor("Adrian");
+    expect(v2.getColorRef()).toBe("Adrian");
+    expect(v2.getColors(false).color).toBe("#767676");
+    expect(v2.getColors(true).color).toBe("#767676");
+    expect(v2.getColors(false).colorFocus).toBe("#000000");
+    expect(v2.getColors(true).colorFocus).toBe("#DCDCDC");
+    expect(v2.getColors(false).colorMuted).toBe("#DCDCDC");
+    expect(v2.getColors(true).colorMuted).toBe("#000000");
+    expect(v2.getColors(false).colorRelated).toBe("#767676");
+    expect(v2.getColors(true).colorRelated).toBe("#767676");
   });
 
-  it('test NetzgrafikColor.generateColors', () => {
+  it("test NetzgrafikColor.generateColors", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
     const loadedNetzgrafik = dataService.getNetzgrafikDto();
 
-    netzgrafikColoringService.createDefaultColorForNotExistingColors('Adrian');
+    netzgrafikColoringService.createDefaultColorForNotExistingColors("Adrian");
     netzgrafikColoringService.generateColors();
-    const v2 = netzgrafikColoringService.getNetzgrafikColor('Adrian');
-    expect(v2.getColorRef()).toBe('Adrian');
+    const v2 = netzgrafikColoringService.getNetzgrafikColor("Adrian");
+    expect(v2.getColorRef()).toBe("Adrian");
   });
 
-  it('test NetzgrafikColor.changeColorRef', () => {
+  it("test NetzgrafikColor.changeColorRef", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
     const loadedNetzgrafik = dataService.getNetzgrafikDto();
 
-    netzgrafikColoringService.createDefaultColorForNotExistingColors('Adrian');
-    const v1 = netzgrafikColoringService.getNetzgrafikColor('Adrian');
-    expect(v1.getColorRef()).toBe('Adrian');
-    netzgrafikColoringService.changeColorRef(v1.getId(), 'Egli');
-    expect(v1.getColorRef()).toBe('Egli');
+    netzgrafikColoringService.createDefaultColorForNotExistingColors("Adrian");
+    const v1 = netzgrafikColoringService.getNetzgrafikColor("Adrian");
+    expect(v1.getColorRef()).toBe("Adrian");
+    netzgrafikColoringService.changeColorRef(v1.getId(), "Egli");
+    expect(v1.getColorRef()).toBe("Egli");
 
-    const v2 = netzgrafikColoringService.getNetzgrafikColor('XYZ');
+    const v2 = netzgrafikColoringService.getNetzgrafikColor("XYZ");
     expect(v2).toBe(undefined);
-    netzgrafikColoringService.changeColorRef(-1, 'XYZ');
-    const v3 = netzgrafikColoringService.getNetzgrafikColor('XYZ');
+    netzgrafikColoringService.changeColorRef(-1, "XYZ");
+    const v3 = netzgrafikColoringService.getNetzgrafikColor("XYZ");
     expect(v3).toBe(undefined);
   });
 });

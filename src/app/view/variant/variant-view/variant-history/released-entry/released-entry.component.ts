@@ -1,12 +1,12 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {HistoryEntryAction} from '../history-entry/history-entry.component';
-import {DownloadVersionModel, VersionId} from '../model';
-import {UserId} from '../version-entry-layout/version-entry-layout.component';
+import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {HistoryEntryAction} from "../history-entry/history-entry.component";
+import {DownloadVersionModel, VersionId} from "../model";
+import {UserId} from "../version-entry-layout/version-entry-layout.component";
 
 @Component({
-  selector: 'sbb-released-entry',
-  templateUrl: './released-entry.component.html',
-  styleUrls: ['./released-entry.component.scss'],
+  selector: "sbb-released-entry",
+  templateUrl: "./released-entry.component.html",
+  styleUrls: ["./released-entry.component.scss"],
 })
 export class ReleasedEntryComponent {
   @Input() model: ReleasedEntryModel;
@@ -21,8 +21,8 @@ export class ReleasedEntryComponent {
 
   get actions(): HistoryEntryAction[] {
     const download = {
-      name: 'Download',
-      icon: 'download-small',
+      name: "Download",
+      icon: "download-small",
       onClick: () =>
         this.download.next({
           versionId: this.model.id,
@@ -37,13 +37,13 @@ export class ReleasedEntryComponent {
     if (this.model.conflict) {
       return [
         {
-          name: 'Änderungen Verwerfen',
-          icon: 'trash-small',
+          name: "Änderungen Verwerfen",
+          icon: "trash-small",
           onClick: () => this.dropChanges.emit(),
         },
         {
-          name: 'Konflikt ignorieren',
-          icon: 'tick-small',
+          name: "Konflikt ignorieren",
+          icon: "tick-small",
           onClick: () => this.ignoreConflict.emit(),
         },
         download,
@@ -52,25 +52,25 @@ export class ReleasedEntryComponent {
 
     return [
       {
-        name: 'Wiederherstellen',
-        icon: 'arrows-circle-small',
+        name: "Wiederherstellen",
+        icon: "arrows-circle-small",
         onClick: () => this.restore.next(this.model.id),
       },
       {
-        name: 'Als neue Variante',
-        icon: 'circle-plus-small',
+        name: "Als neue Variante",
+        icon: "circle-plus-small",
         onClick: () => this.saveAsNewVariant.emit(this.model.id),
       },
       download,
     ];
   }
 
-  getState(): 'conflict' | 'added' | undefined {
+  getState(): "conflict" | "added" | undefined {
     if (this.model.conflict) {
-      return 'conflict';
+      return "conflict";
     }
     if (this.model.lastAdded) {
-      return 'added';
+      return "added";
     }
 
     return undefined;
@@ -78,10 +78,10 @@ export class ReleasedEntryComponent {
 
   getMessage(): string | undefined {
     if (this.model.conflict) {
-      return 'Version bereits vorhanden';
+      return "Version bereits vorhanden";
     }
     if (this.model.lastAdded) {
-      return 'Erfolgreich publiziert';
+      return "Erfolgreich publiziert";
     }
 
     return undefined;

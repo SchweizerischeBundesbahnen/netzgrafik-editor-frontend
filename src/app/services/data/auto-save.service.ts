@@ -1,10 +1,10 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
-import {DataService} from './data.service';
-import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
+import {Injectable, OnDestroy} from "@angular/core";
+import {BehaviorSubject, Observable, Subscription} from "rxjs";
+import {DataService} from "./data.service";
+import {debounceTime, distinctUntilChanged, filter, map} from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AutoSaveService implements OnDestroy {
   private static readonly AUTOSAVE_TIMEOUT = 5000;

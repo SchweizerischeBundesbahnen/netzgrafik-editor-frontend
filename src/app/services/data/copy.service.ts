@@ -1,31 +1,31 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {DataService} from './data.service';
+import {Injectable, OnDestroy} from "@angular/core";
+import {DataService} from "./data.service";
 import {
   FreeFloatingTextDto,
   NetzgrafikDto,
   NodeDto,
   TrainrunDto,
   TrainrunSectionDto,
-} from '../../data-structures/business.data.structures';
-import {Trainrun} from '../../models/trainrun.model';
-import {FilterService} from '../ui/filter.service';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {TrainrunService} from './trainrun.service';
-import {TrainrunSectionService} from './trainrunsection.service';
-import {UndoService} from './undo.service';
-import {UiInteractionService} from '../ui/ui.interaction.service';
-import {EditorMode} from '../../view/editor-menu/editor-mode';
-import {NodeService} from './node.service';
-import {Node} from '../../models/node.model';
+} from "../../data-structures/business.data.structures";
+import {Trainrun} from "../../models/trainrun.model";
+import {FilterService} from "../ui/filter.service";
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {TrainrunService} from "./trainrun.service";
+import {TrainrunSectionService} from "./trainrunsection.service";
+import {UndoService} from "./undo.service";
+import {UiInteractionService} from "../ui/ui.interaction.service";
+import {EditorMode} from "../../view/editor-menu/editor-mode";
+import {NodeService} from "./node.service";
+import {Node} from "../../models/node.model";
 import {
   ConnectionDto,
   PortDto,
-} from '../../data-structures/technical.data.structures';
-import {NoteService} from './note.service';
-import {Note} from '../../models/note.model';
+} from "../../data-structures/technical.data.structures";
+import {NoteService} from "./note.service";
+import {Note} from "../../models/note.model";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class CopyService implements OnDestroy {
   constructor(
@@ -212,11 +212,11 @@ export class CopyService implements OnDestroy {
 
   loadCopiedDataFromLocalStorage(): NetzgrafikDto {
     try {
-      const serializedState = localStorage.getItem('CopyService');
+      const serializedState = localStorage.getItem("CopyService");
       if (
         serializedState === null ||
         serializedState === undefined ||
-        serializedState === 'undefined'
+        serializedState === "undefined"
       ) {
         return undefined;
       }
@@ -231,7 +231,7 @@ export class CopyService implements OnDestroy {
   private saveCopiedDataToLocalStorage(netzgrafik: NetzgrafikDto) {
     try {
       localStorage.setItem(
-        `CopyService`,
+        "CopyService",
         JSON.stringify({
           netzgrafik: netzgrafik,
         }),

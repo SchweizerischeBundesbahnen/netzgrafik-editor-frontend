@@ -1,16 +1,16 @@
-import * as d3 from 'd3';
-import {Node} from '../../../models/node.model';
-import {EditorView} from './editor.view';
-import {StaticDomTags} from './static.dom.tags';
-import {Transition} from '../../../models/transition.model';
-import {Trainrun} from '../../../models/trainrun.model';
-import {D3Utils} from './d3.utils';
+import * as d3 from "d3";
+import {Node} from "../../../models/node.model";
+import {EditorView} from "./editor.view";
+import {StaticDomTags} from "./static.dom.tags";
+import {Transition} from "../../../models/transition.model";
+import {Trainrun} from "../../../models/trainrun.model";
+import {D3Utils} from "./d3.utils";
 import {
   DragTransitionInfo,
   PreviewLineMode,
-} from './trainrunsection.previewline.view';
-import {Vec2D} from '../../../utils/vec2D';
-import {TransitionViewObject} from './transitionViewObject';
+} from "./trainrunsection.previewline.view";
+import {Vec2D} from "../../../utils/vec2D";
+import {TransitionViewObject} from "./transitionViewObject";
 
 export class TransitionsView {
   transitionsGroup;
@@ -68,7 +68,7 @@ export class TransitionsView {
         connectedTrainrunIds,
       ) === true
     ) {
-      classAttribute = classAttribute + ' ' + StaticDomTags.TAG_MUTED;
+      classAttribute = classAttribute + " " + StaticDomTags.TAG_MUTED;
     }
     return classAttribute;
   }
@@ -106,12 +106,12 @@ export class TransitionsView {
     grpEnter
       .append(StaticDomTags.TRANSITION_LINE_SVG)
       .attr(
-        'class',
+        "class",
         (t: TransitionViewObject) =>
           StaticDomTags.TRANSITION_LINE_CLASS +
-          ' ' +
+          " " +
           classRef +
-          ' ' +
+          " " +
           TransitionsView.createTrainrunClassAttribute(
             t.transition.getTrainrun(),
             selectedTrainrun,
@@ -123,7 +123,7 @@ export class TransitionsView {
         (t: TransitionViewObject) => {
           const n: Node = editorView.getNodeFromTransition(t.transition);
           return (
-            '' +
+            "" +
             n.getPort(t.transition.getPortId1()).getTrainrunSection().getId()
           );
         },
@@ -133,7 +133,7 @@ export class TransitionsView {
         (t: TransitionViewObject) => {
           const n: Node = editorView.getNodeFromTransition(t.transition);
           return (
-            '' +
+            "" +
             n.getPort(t.transition.getPortId2()).getTrainrunSection().getId()
           );
         },
@@ -141,7 +141,7 @@ export class TransitionsView {
       .classed(StaticDomTags.TAG_SELECTED, (t: TransitionViewObject) =>
         t.transition.getTrainrun().selected(),
       )
-      .attr('d', (t: TransitionViewObject) =>
+      .attr("d", (t: TransitionViewObject) =>
         D3Utils.getPathAsSVGString(t.transition.getPath()),
       );
   }
@@ -154,10 +154,10 @@ export class TransitionsView {
     grpEnter
       .append(StaticDomTags.TRANSITION_BUTTON_SVG)
       .attr(
-        'class',
+        "class",
         (t: TransitionViewObject) =>
           StaticDomTags.TRANSITION_BUTTON_CLASS +
-          ' ' +
+          " " +
           TransitionsView.createTrainrunClassAttribute(
             t.transition.getTrainrun(),
             selectedTrainrun,
@@ -167,7 +167,7 @@ export class TransitionsView {
       .classed(StaticDomTags.TAG_SELECTED, (t: TransitionViewObject) =>
         t.transition.getTrainrun().selected(),
       )
-      .attr('points', (t: TransitionViewObject) =>
+      .attr("points", (t: TransitionViewObject) =>
         D3Utils.makeHexagonSVGPoints(
           Vec2D.scale(
             Vec2D.add(t.transition.getPath()[1], t.transition.getPath()[2]),
@@ -179,22 +179,22 @@ export class TransitionsView {
       .classed(StaticDomTags.TRANSITION_IS_NONSTOP, (t: TransitionViewObject) =>
         t.transition.getIsNonStopTransit(),
       )
-      .on('mousemove', () => this.onTransitionMousemove())
-      .on('mouseover', (t: TransitionViewObject, i, a) =>
+      .on("mousemove", () => this.onTransitionMousemove())
+      .on("mouseover", (t: TransitionViewObject, i, a) =>
         this.onTransitionMouseover(
           t.transition.getTrainrun(),
           a[i],
           t.transition,
         ),
       )
-      .on('mouseup', (t: TransitionViewObject, i, a) =>
+      .on("mouseup", (t: TransitionViewObject, i, a) =>
         this.onTransitionMouseup(
           t.transition.getTrainrun(),
           a[i],
           t.transition,
         ),
       )
-      .on('mouseout', (t: TransitionViewObject, i, a) =>
+      .on("mouseout", (t: TransitionViewObject, i, a) =>
         this.onTransitionButtonOut(
           t.transition.getTrainrun(),
           a[i],
@@ -204,13 +204,13 @@ export class TransitionsView {
   }
 
   setGroup(transitionsGroup) {
-    transitionsGroup.attr('class', 'TransitionsView');
+    transitionsGroup.attr("class", "TransitionsView");
     this.transitionsGroup = transitionsGroup.append(StaticDomTags.GROUP_SVG);
-    this.transitionsGroup.attr('class', 'transitions');
+    this.transitionsGroup.attr("class", "transitions");
     this.selectedTransitionsGroup = transitionsGroup.append(
       StaticDomTags.GROUP_SVG,
     );
-    this.selectedTransitionsGroup.attr('class', 'selectedTansitions');
+    this.selectedTransitionsGroup.attr("class", "selectedTansitions");
   }
 
   filtertransitionToDisplay(transition: Transition, trainrun: Trainrun) {
@@ -283,7 +283,7 @@ export class TransitionsView {
     const grpEnter = transitionsGroup
       .enter()
       .append(StaticDomTags.GROUP_SVG)
-      .attr('class', StaticDomTags.TRANSITION_ROOT_CONTAINER);
+      .attr("class", StaticDomTags.TRANSITION_ROOT_CONTAINER);
 
     TransitionsView.createTransitionLineLayer(
       grpEnter,

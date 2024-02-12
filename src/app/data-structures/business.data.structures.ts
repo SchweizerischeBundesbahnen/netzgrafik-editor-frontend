@@ -9,7 +9,7 @@ import {
   TimeLockDto,
   TransitionDto,
   WarningDto,
-} from './technical.data.structures';
+} from "./technical.data.structures";
 
 export interface FreeFloatingTextDto {
   id: number;
@@ -101,10 +101,10 @@ export interface TrainrunSectionDto {
 }
 
 export enum LabelRef {
-  Undefinded = 'Undefined',
-  Node = 'Node',
-  Trainrun = 'Trainrun',
-  Note = 'Note',
+  Undefinded = "Undefined",
+  Node = "Node",
+  Trainrun = "Trainrun",
+  Note = "Note",
 }
 
 export interface LabelDto {
@@ -152,23 +152,23 @@ export interface TrainrunDto {
 }
 
 export enum HaltezeitFachCategories {
-  IPV = 'HaltezeitIPV',
-  A = 'HaltezeitA',
-  B = 'HaltezeitB',
-  C = 'HaltezeitC',
-  D = 'HaltezeitD',
-  Uncategorized = 'HaltezeitUncategorized',
+  IPV = "HaltezeitIPV",
+  A = "HaltezeitA",
+  B = "HaltezeitB",
+  C = "HaltezeitC",
+  D = "HaltezeitD",
+  Uncategorized = "HaltezeitUncategorized",
 }
 
 export enum LinePatternRefs {
-  Freq120 = '120',
-  Freq60 = '60',
-  Freq30 = '30',
-  Freq20 = '20',
-  Freq15 = '15',
-  TimeCat7_24 = '7/24',
-  TimeCatHVZ = 'HVZ',
-  TimeZeitweise = 'ZEITWEISE',
+  Freq120 = "120",
+  Freq60 = "60",
+  Freq30 = "30",
+  Freq20 = "20",
+  Freq15 = "15",
+  TimeCat7_24 = "7/24",
+  TimeCatHVZ = "HVZ",
+  TimeZeitweise = "ZEITWEISE",
 }
 
 export interface TrainrunCategoryHaltezeit {

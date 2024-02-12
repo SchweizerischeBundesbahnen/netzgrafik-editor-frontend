@@ -1,8 +1,8 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {VariantDialogComponent} from './variant-dialog.component';
-import {SBB_DIALOG_DATA, SbbDialogRef} from '@sbb-esta/angular/dialog';
+import {ComponentFixture, TestBed} from "@angular/core/testing";
+import {VariantDialogComponent} from "./variant-dialog.component";
+import {SBB_DIALOG_DATA, SbbDialogRef} from "@sbb-esta/angular/dialog";
 
-describe('VariantDialogComponent', () => {
+describe("VariantDialogComponent", () => {
   let component: VariantDialogComponent;
   let fixture: ComponentFixture<VariantDialogComponent>;
 
@@ -22,7 +22,7 @@ describe('VariantDialogComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

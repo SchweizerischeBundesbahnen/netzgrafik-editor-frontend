@@ -1,5 +1,5 @@
-import {Node} from '../../../models/node.model';
-import {EditorView} from './editor.view';
+import {Node} from "../../../models/node.model";
+import {EditorView} from "./editor.view";
 
 export class NodeViewObject {
   key: string;
@@ -18,31 +18,31 @@ export class NodeViewObject {
     isNodeStopNode: boolean,
   ): string {
     return (
-      '#' +
+      "#" +
       n.getId() +
-      '@' +
+      "@" +
       n.getPositionX() +
-      '_' +
+      "_" +
       n.getPositionY() +
-      '_' +
+      "_" +
       n.getBetriebspunktName() +
-      '_' +
+      "_" +
       n.getPorts().length +
-      '_' +
+      "_" +
       n.getConnectionTime() +
-      '_' +
+      "_" +
       n.getNodeWidth() +
-      '_' +
+      "_" +
       n.getNodeHeight() +
-      '_' +
+      "_" +
       n.selected() +
-      '_' +
+      "_" +
       n.getConnections().length +
-      '_' +
+      "_" +
       isNodeStopNode +
-      '_' +
+      "_" +
       editorView.isJunctionNode(n) +
-      '_' +
+      "_" +
       editorView.isTemporaryDisableFilteringOfItemsInViewEnabled()
     );
   }

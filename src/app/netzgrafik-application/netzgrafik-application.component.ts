@@ -1,28 +1,28 @@
-import {Component} from '@angular/core';
-import {DataService} from '../services/data/data.service';
-import {UiInteractionService} from '../services/ui/ui.interaction.service';
-import {map, takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {ActivatedRoute} from '@angular/router';
-import {FilterWindowType} from '../view/filter-main-side-view/filter-main-side-view.component';
-import {VersionControlService} from '../services/data/version-control.service';
-import {NavigationParameters} from '../utils/navigation-parameters';
-import {FilterService} from '../services/ui/filter.service';
-import {DomSanitizer} from '@angular/platform-browser';
-import {EditorMode} from '../view/editor-menu/editor-mode';
-import {UndoService} from '../services/data/undo.service';
+import {Component} from "@angular/core";
+import {DataService} from "../services/data/data.service";
+import {UiInteractionService} from "../services/ui/ui.interaction.service";
+import {map, takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
+import {FilterWindowType} from "../view/filter-main-side-view/filter-main-side-view.component";
+import {VersionControlService} from "../services/data/version-control.service";
+import {NavigationParameters} from "../utils/navigation-parameters";
+import {FilterService} from "../services/ui/filter.service";
+import {DomSanitizer} from "@angular/platform-browser";
+import {EditorMode} from "../view/editor-menu/editor-mode";
+import {UndoService} from "../services/data/undo.service";
 
 export enum IconSidebarMode {
-  VARIANTEN = 'varianten',
-  FILTER = 'filter',
-  NONE = 'none',
-  PROPERTIES = 'properties',
+  VARIANTEN = "varianten",
+  FILTER = "filter",
+  NONE = "none",
+  PROPERTIES = "properties",
 }
 
 @Component({
-  selector: 'sbb-netzgrafik-editor',
-  templateUrl: './netzgrafik-application.component.html',
-  styleUrls: ['./netzgrafik-application.component.scss'],
+  selector: "sbb-netzgrafik-editor",
+  templateUrl: "./netzgrafik-application.component.html",
+  styleUrls: ["./netzgrafik-application.component.scss"],
 })
 export class NetzgrafikApplicationComponent {
   mode = IconSidebarMode.NONE;
@@ -84,9 +84,9 @@ export class NetzgrafikApplicationComponent {
 
   getFilterStyle() {
     if (this.filterService.isAnyFilterActive()) {
-      return this.sanitizer.bypassSecurityTrustStyle('color:red');
+      return this.sanitizer.bypassSecurityTrustStyle("color:red");
     }
-    return this.sanitizer.bypassSecurityTrustStyle('');
+    return this.sanitizer.bypassSecurityTrustStyle("");
   }
 
   getFilterActivatedTag() {
@@ -111,8 +111,8 @@ export class NetzgrafikApplicationComponent {
 
   private getActivatedTag(type: FilterWindowType): string {
     if (this.uiInteractionService.isFilterWindowType(type)) {
-      return 'SideBarMainIcon sbb-active';
+      return "SideBarMainIcon sbb-active";
     }
-    return 'SideBarMainIcon';
+    return "SideBarMainIcon";
   }
 }

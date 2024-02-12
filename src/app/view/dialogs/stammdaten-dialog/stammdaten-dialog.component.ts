@@ -1,35 +1,35 @@
-import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
-import {TrainrunSectionService} from '../../../services/data/trainrunsection.service';
-import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
-import {SbbDialog, SbbDialogConfig} from '@sbb-esta/angular/dialog';
-import {SbbTableDataSource} from '@sbb-esta/angular/table';
-import {Stammdaten} from '../../../models/stammdaten.model';
-import {HaltezeitFachCategories} from '../../../data-structures/business.data.structures';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import {Component, OnDestroy, TemplateRef, ViewChild} from "@angular/core";
+import {TrainrunSectionService} from "../../../services/data/trainrunsection.service";
+import {UiInteractionService} from "../../../services/ui/ui.interaction.service";
+import {SbbDialog, SbbDialogConfig} from "@sbb-esta/angular/dialog";
+import {SbbTableDataSource} from "@sbb-esta/angular/table";
+import {Stammdaten} from "../../../models/stammdaten.model";
+import {HaltezeitFachCategories} from "../../../data-structures/business.data.structures";
+import {takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
 
 @Component({
-  selector: 'sbb-stammdaten-dialog',
-  templateUrl: './stammdaten-dialog.component.html',
-  styleUrls: ['./stammdaten-dialog.component.scss'],
+  selector: "sbb-stammdaten-dialog",
+  templateUrl: "./stammdaten-dialog.component.html",
+  styleUrls: ["./stammdaten-dialog.component.scss"],
 })
 export class StammdatenDialogComponent implements OnDestroy {
-  @ViewChild('stammdatenTemplate', {static: true})
+  @ViewChild("stammdatenTemplate", {static: true})
   stammdatenTemplate: TemplateRef<any>;
   public stammdaten = [];
   displayedColumns: string[] = [
-    'betriebspunkt',
-    'haltezeit_I_P_V',
-    'haltezeit_A',
-    'haltezeit_B',
-    'haltezeit_C',
-    'haltezeit_D',
-    'zaz',
-    'connection_time',
-    'region',
-    'kategorie',
-    'filterableLabels',
-    'pos',
+    "betriebspunkt",
+    "haltezeit_I_P_V",
+    "haltezeit_A",
+    "haltezeit_B",
+    "haltezeit_C",
+    "haltezeit_D",
+    "zaz",
+    "connection_time",
+    "region",
+    "kategorie",
+    "filterableLabels",
+    "pos",
   ];
   dataSource: SbbTableDataSource<any>;
   private destroyed = new Subject<void>();
@@ -50,13 +50,13 @@ export class StammdatenDialogComponent implements OnDestroy {
     const dialogConfig = new SbbDialogConfig();
     const width = 1200;
     const height = 512;
-    dialogConfig.width = width + 'px';
+    dialogConfig.width = width + "px";
     dialogConfig.minWidth = dialogConfig.width;
     dialogConfig.maxWidth = dialogConfig.width;
-    dialogConfig.height = height + 'px';
+    dialogConfig.height = height + "px";
     dialogConfig.minHeight = dialogConfig.height;
     dialogConfig.maxHeight = dialogConfig.height;
-    dialogConfig.panelClass = '';
+    dialogConfig.panelClass = "";
     return dialogConfig;
   }
 

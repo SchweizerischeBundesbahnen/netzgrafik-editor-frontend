@@ -1,22 +1,22 @@
-import {Injectable} from '@angular/core';
-import {MathUtils} from '../../utils/math';
+import {Injectable} from "@angular/core";
+import {MathUtils} from "../../utils/math";
 import {
   LeftAndRightElement,
   TrainrunsectionHelper,
-} from '../util/trainrunsection.helper';
+} from "../util/trainrunsection.helper";
 import {
   LeftAndRightLockStructure,
   LeftAndRightTimeStructure,
-} from '../../view/dialogs/trainrun-and-section-dialog/trainrunsection-tab/trainrun-section-tab.component';
-import {TrainrunService} from './trainrun.service';
-import {TrainrunSectionService} from './trainrunsection.service';
-import {FilterService} from '../ui/filter.service';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {Node} from '../../models/node.model';
-import {LoadPerlenketteService} from '../../perlenkette/service/load-perlenkette.service';
+} from "../../view/dialogs/trainrun-and-section-dialog/trainrunsection-tab/trainrun-section-tab.component";
+import {TrainrunService} from "./trainrun.service";
+import {TrainrunSectionService} from "./trainrunsection.service";
+import {FilterService} from "../ui/filter.service";
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {Node} from "../../models/node.model";
+import {LoadPerlenketteService} from "../../perlenkette/service/load-perlenkette.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class TrainrunSectionTimesService {
   private trainrunSectionHelper: TrainrunsectionHelper;

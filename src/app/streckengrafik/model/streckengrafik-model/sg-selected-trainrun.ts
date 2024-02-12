@@ -1,5 +1,5 @@
-import {SgPath} from './sg-path';
-import {SgTrainrun} from './sg-trainrun';
+import {SgPath} from "./sg-path";
+import {SgTrainrun} from "./sg-trainrun";
 
 export class SgSelectedTrainrun {
   constructor(

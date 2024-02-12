@@ -1,24 +1,24 @@
-import {TrainrunSection} from '../../models/trainrunsection.model';
+import {TrainrunSection} from "../../models/trainrunsection.model";
 import {
   NodeDto,
   TrainrunCategoryHaltezeit,
   TrainrunSectionDto,
-} from '../../data-structures/business.data.structures';
-import {Node} from '../../models/node.model';
-import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Subject} from 'rxjs';
-import {TrainrunService} from './trainrun.service';
-import {NodeService} from './node.service';
-import {TrainrunsectionValidator} from '../util/trainrunsection.validator';
-import {Trainrun} from '../../models/trainrun.model';
-import {MathUtils} from '../../utils/math';
-import {GeneralViewFunctions} from '../../view/util/generalViewFunctions';
-import {LeftAndRightTimeStructure} from '../../view/dialogs/trainrun-and-section-dialog/trainrunsection-tab/trainrun-section-tab.component';
-import {TrainrunsectionHelper} from '../util/trainrunsection.helper';
-import {LogService} from '../../logger/log.service';
-import {Transition} from '../../models/transition.model';
-import {takeUntil} from 'rxjs/operators';
-import {FilterService} from '../ui/filter.service';
+} from "../../data-structures/business.data.structures";
+import {Node} from "../../models/node.model";
+import {Injectable, OnDestroy} from "@angular/core";
+import {BehaviorSubject, Subject} from "rxjs";
+import {TrainrunService} from "./trainrun.service";
+import {NodeService} from "./node.service";
+import {TrainrunsectionValidator} from "../util/trainrunsection.validator";
+import {Trainrun} from "../../models/trainrun.model";
+import {MathUtils} from "../../utils/math";
+import {GeneralViewFunctions} from "../../view/util/generalViewFunctions";
+import {LeftAndRightTimeStructure} from "../../view/dialogs/trainrun-and-section-dialog/trainrunsection-tab/trainrun-section-tab.component";
+import {TrainrunsectionHelper} from "../util/trainrunsection.helper";
+import {LogService} from "../../logger/log.service";
+import {Transition} from "../../models/transition.model";
+import {takeUntil} from "rxjs/operators";
+import {FilterService} from "../ui/filter.service";
 
 interface DepartureAndArrivalTimes {
   nodeFromDepartureTime: number;
@@ -33,7 +33,7 @@ export interface InformSelectedTrainrunClick {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class TrainrunSectionService implements OnDestroy {
   // Description of observable data service: https://coryrylan.com/blog/angular-observable-data-services
@@ -514,7 +514,7 @@ export class TrainrunSectionService implements OnDestroy {
     trainrunSection.setSourceAndTargetNodeReference(sourceNode, targetNode);
     this.trainrunSectionsStore.trainrunSections.push(trainrunSection);
     this.logger.log(
-      'create new trainrunSection between nodes',
+      "create new trainrunSection between nodes",
       sourceNode.getBetriebspunktName(),
       targetNode.getBetriebspunktName(),
     );
@@ -929,21 +929,21 @@ export class TrainrunSectionService implements OnDestroy {
       travelTimeIssue
     ) {
       const description =
-        'Zwischenhalteumwandlung führte bei der Vergabe der Zeiten zu inkonsistenzen!';
+        "Zwischenhalteumwandlung führte bei der Vergabe der Zeiten zu inkonsistenzen!";
       trainrunSection1.setTargetArrivalWarning(
-        'Zwischenhalteumwandlung',
+        "Zwischenhalteumwandlung",
         description,
       );
       trainrunSection1.setTargetDepartureWarning(
-        'Zwischenhalteumwandlung',
+        "Zwischenhalteumwandlung",
         description,
       );
       trainrunSection2.setSourceArrivalWarning(
-        'Zwischenhalteumwandlung',
+        "Zwischenhalteumwandlung",
         description,
       );
       trainrunSection2.setSourceDepartureWarning(
-        'Zwischenhalteumwandlung',
+        "Zwischenhalteumwandlung",
         description,
       );
     }

@@ -6,23 +6,23 @@ import {
   Input,
   OnDestroy,
   ViewChild,
-} from '@angular/core';
-import {TrainrunSectionService} from '../../../../services/data/trainrunsection.service';
-import {TrainrunSection} from '../../../../models/trainrunsection.model';
-import {TrainrunService} from '../../../../services/data/trainrun.service';
-import {TrainrunDialogParameter} from '../trainrun-and-section-dialog.component';
-import {DataService} from '../../../../services/data/data.service';
+} from "@angular/core";
+import {TrainrunSectionService} from "../../../../services/data/trainrunsection.service";
+import {TrainrunSection} from "../../../../models/trainrunsection.model";
+import {TrainrunService} from "../../../../services/data/trainrun.service";
+import {TrainrunDialogParameter} from "../trainrun-and-section-dialog.component";
+import {DataService} from "../../../../services/data/data.service";
 import {
   LeftAndRightElement,
   TrainrunsectionHelper,
-} from '../../../../services/util/trainrunsection.helper';
-import {FilterService} from '../../../../services/ui/filter.service';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {LinePatternRefs} from '../../../../data-structures/business.data.structures';
-import {StaticDomTags} from '../../../editor-main-view/data-views/static.dom.tags';
-import {ColorRefType} from '../../../../data-structures/technical.data.structures';
-import {TrainrunSectionTimesService} from '../../../../services/data/trainrun-section-times.service';
+} from "../../../../services/util/trainrunsection.helper";
+import {FilterService} from "../../../../services/ui/filter.service";
+import {takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
+import {LinePatternRefs} from "../../../../data-structures/business.data.structures";
+import {StaticDomTags} from "../../../editor-main-view/data-views/static.dom.tags";
+import {ColorRefType} from "../../../../data-structures/technical.data.structures";
+import {TrainrunSectionTimesService} from "../../../../services/data/trainrun-section-times.service";
 
 export interface LeftAndRightTimeStructure {
   leftDepartureTime: number;
@@ -39,28 +39,28 @@ export interface LeftAndRightLockStructure {
 }
 
 @Component({
-  selector: 'sbb-trainrunsection-tab',
-  templateUrl: './trainrun-section-tab.component.html',
-  styleUrls: ['./trainrun-section-tab.component.scss'],
+  selector: "sbb-trainrunsection-tab",
+  templateUrl: "./trainrun-section-tab.component.html",
+  styleUrls: ["./trainrun-section-tab.component.scss"],
   providers: [TrainrunSectionTimesService],
 })
 export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   @Input()
   trainrunDialogParameter: TrainrunDialogParameter;
-  @ViewChild('leftDepartureTimeInputElement')
+  @ViewChild("leftDepartureTimeInputElement")
   leftDepartureTimeInputElement: ElementRef;
-  @ViewChild('leftArrivalTimeInputElement')
+  @ViewChild("leftArrivalTimeInputElement")
   leftArrivalTimeInputElement: ElementRef;
-  @ViewChild('rightDepartureTimeInputElement')
+  @ViewChild("rightDepartureTimeInputElement")
   rightDepartureTimeInputElement: ElementRef;
-  @ViewChild('rightArrivalTimeInputElement')
+  @ViewChild("rightArrivalTimeInputElement")
   rightArrivalTimeInputElement: ElementRef;
-  @ViewChild('travelTimeInputElement')
+  @ViewChild("travelTimeInputElement")
   travelTimeInputElement: ElementRef;
 
   public selectedTrainrunSection: TrainrunSection;
-  public leftBetriebspunkt: string[] = ['', ''];
-  public rightBetriebspunkt: string[] = ['', ''];
+  public leftBetriebspunkt: string[] = ["", ""];
+  public rightBetriebspunkt: string[] = ["", ""];
   public tagNbrStopInput = false;
   public numberOfStops: number;
   public frequency: number;
@@ -69,7 +69,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   public categoryColorRef: ColorRefType;
   public timeCategoryShortName: string;
   public timeCategoryLinePattern: LinePatternRefs;
-  public warningTwoLocks = 'Warnung: Zu viele Zeiten sind gelockt!';
+  public warningTwoLocks = "Warnung: Zu viele Zeiten sind gelockt!";
 
   private trainrunSectionHelper: TrainrunsectionHelper;
   private destroyed = new Subject<void>();
@@ -210,14 +210,14 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   getEdgeLineClassAttrString(layer: number) {
     return (
       StaticDomTags.EDGE_LINE_CLASS +
-      StaticDomTags.makeClassTag(StaticDomTags.LINE_LAYER, '' + layer) +
+      StaticDomTags.makeClassTag(StaticDomTags.LINE_LAYER, "" + layer) +
       StaticDomTags.makeClassTag(
         StaticDomTags.FREQ_LINE_PATTERN,
         this.frequencyLinePattern,
       ) +
-      ' ' +
+      " " +
       StaticDomTags.TAG_UI_DIALOG +
-      ' ' +
+      " " +
       StaticDomTags.makeClassTag(
         StaticDomTags.TAG_COLOR_REF,
         this.categoryColorRef,
@@ -270,11 +270,11 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   }
 
   getNumberOfStopsInputElementClass() {
-    const activeTag = this.tagNbrStopInput ? ' IsActive' : ' NotActive';
+    const activeTag = this.tagNbrStopInput ? " IsActive" : " NotActive";
     if (this.numberOfStops > 0) {
-      return 'NumberOfStopsInputElement show' + activeTag;
+      return "NumberOfStopsInputElement show" + activeTag;
     }
-    return 'NumberOfStopsInputElement' + activeTag;
+    return "NumberOfStopsInputElement" + activeTag;
   }
 
   private resetOffsetAfterTrainrunChanged() {

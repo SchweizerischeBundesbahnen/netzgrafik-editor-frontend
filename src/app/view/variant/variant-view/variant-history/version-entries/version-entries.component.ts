@@ -1,14 +1,14 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {VersionDto} from '../../../../../api/generated';
-import {ReleasedEntryModel} from '../released-entry/released-entry.component';
-import {DownloadVersionModel, VersionId} from '../model';
-import {PublishEntryModel} from '../publish-entry/publish-entry.component';
-import {SnapshotEntryModel} from '../snapshot-entry/snapshot-entry.component';
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {VersionDto} from "../../../../../api/generated";
+import {ReleasedEntryModel} from "../released-entry/released-entry.component";
+import {DownloadVersionModel, VersionId} from "../model";
+import {PublishEntryModel} from "../publish-entry/publish-entry.component";
+import {SnapshotEntryModel} from "../snapshot-entry/snapshot-entry.component";
 
 @Component({
-  selector: 'sbb-version-entries',
-  templateUrl: './version-entries.component.html',
-  styleUrls: ['./version-entries.component.scss'],
+  selector: "sbb-version-entries",
+  templateUrl: "./version-entries.component.html",
+  styleUrls: ["./version-entries.component.scss"],
 })
 export class VersionEntriesComponent implements OnInit {
   private static SHOW_MORE_JUNK_SIZE = 3;

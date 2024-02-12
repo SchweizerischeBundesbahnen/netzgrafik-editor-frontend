@@ -5,49 +5,49 @@ import {
   HostListener,
   OnDestroy,
   ViewChild,
-} from '@angular/core';
-import {Node} from '../../models/node.model';
-import {Trainrun} from '../../models/trainrun.model';
-import {Vec2D} from '../../utils/vec2D';
-import {NodeService} from '../../services/data/node.service';
+} from "@angular/core";
+import {Node} from "../../models/node.model";
+import {Trainrun} from "../../models/trainrun.model";
+import {Vec2D} from "../../utils/vec2D";
+import {NodeService} from "../../services/data/node.service";
 import {
   InformSelectedTrainrunClick,
   TrainrunSectionService,
-} from '../../services/data/trainrunsection.service';
-import {TrainrunService} from '../../services/data/trainrun.service';
-import {EditorView} from './data-views/editor.view';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {UiInteractionService} from '../../services/ui/ui.interaction.service';
-import {Connection} from '../../models/connection.model';
-import {Transition} from '../../models/transition.model';
-import {FilterService} from '../../services/ui/filter.service';
+} from "../../services/data/trainrunsection.service";
+import {TrainrunService} from "../../services/data/trainrun.service";
+import {EditorView} from "./data-views/editor.view";
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {UiInteractionService} from "../../services/ui/ui.interaction.service";
+import {Connection} from "../../models/connection.model";
+import {Transition} from "../../models/transition.model";
+import {FilterService} from "../../services/ui/filter.service";
 import {
   TrainrunCategory,
   TrainrunFrequency,
-} from '../../data-structures/business.data.structures';
+} from "../../data-structures/business.data.structures";
 import {
   TrainrunDialogParameter,
   TrainrunDialogType,
-} from '../dialogs/trainrun-and-section-dialog/trainrun-and-section-dialog.component';
-import {TrainrunSectionText} from '../../data-structures/technical.data.structures';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {NoteService} from '../../services/data/note.service';
+} from "../dialogs/trainrun-and-section-dialog/trainrun-and-section-dialog.component";
+import {TrainrunSectionText} from "../../data-structures/technical.data.structures";
+import {takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
+import {NoteService} from "../../services/data/note.service";
 import {
   NoteDialogParameter,
   NoteDialogType,
-} from '../dialogs/note-dialog/note-dialog.component';
-import {AnalyticsService} from '../../services/analytics/analytics.service';
-import {Note} from '../../models/note.model';
-import {LogService} from '../../logger/log.service';
-import {UndoService} from '../../services/data/undo.service';
-import {CopyService} from '../../services/data/copy.service';
-import {StreckengrafikDrawingContext} from '../../streckengrafik/model/util/streckengrafik.drawing.context';
+} from "../dialogs/note-dialog/note-dialog.component";
+import {AnalyticsService} from "../../services/analytics/analytics.service";
+import {Note} from "../../models/note.model";
+import {LogService} from "../../logger/log.service";
+import {UndoService} from "../../services/data/undo.service";
+import {CopyService} from "../../services/data/copy.service";
+import {StreckengrafikDrawingContext} from "../../streckengrafik/model/util/streckengrafik.drawing.context";
 
 @Component({
-  selector: 'sbb-editor-main-view',
-  templateUrl: './editor-main-view.component.html',
-  styleUrls: ['./editor-main-view.component.scss'],
+  selector: "sbb-editor-main-view",
+  templateUrl: "./editor-main-view.component.html",
+  styleUrls: ["./editor-main-view.component.scss"],
 })
 export class EditorMainViewComponent implements AfterViewInit, OnDestroy {
   /* MVC/MVVM structure:
@@ -56,7 +56,7 @@ export class EditorMainViewComponent implements AfterViewInit, OnDestroy {
    * The observable data service is described here: https://coryrylan.com/blog/angular-observable-data-services
    * The MVVM usually applied in angular applications is described here: https://scotch.io/tutorials/mvc-in-an-angular-world */
 
-  @ViewChild('graphContainer')
+  @ViewChild("graphContainer")
   graphContainer: ElementRef;
 
   editorView: EditorView;
@@ -112,7 +112,7 @@ export class EditorMainViewComponent implements AfterViewInit, OnDestroy {
       );
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener("window:resize", ["$event"])
   getScreenSize() {
     this.editorView.svgMouseController.resize(
       window.innerWidth,

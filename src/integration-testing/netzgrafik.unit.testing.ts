@@ -3,8 +3,8 @@ import {
   LabelRef,
   LinePatternRefs,
   NetzgrafikDto,
-} from '../app/data-structures/business.data.structures';
-import {TrainrunSectionText} from '../app/data-structures/technical.data.structures';
+} from "../app/data-structures/business.data.structures";
+import {TrainrunSectionText} from "../app/data-structures/technical.data.structures";
 
 export class NetzgrafikUnitTesting {
   static getUnitTestNetzgrafik(): NetzgrafikDto {
@@ -12,8 +12,8 @@ export class NetzgrafikUnitTesting {
       nodes: [
         {
           id: 0,
-          betriebspunktName: 'BN',
-          fullName: 'Bern',
+          betriebspunktName: "BN",
+          fullName: "Bern",
           positionX: 32,
           positionY: 32,
           ports: [
@@ -52,8 +52,8 @@ export class NetzgrafikUnitTesting {
         },
         {
           id: 1,
-          betriebspunktName: 'OL',
-          fullName: 'Olten',
+          betriebspunktName: "OL",
+          fullName: "Olten",
           positionX: 320,
           positionY: 32,
           ports: [
@@ -123,8 +123,8 @@ export class NetzgrafikUnitTesting {
         },
         {
           id: 2,
-          betriebspunktName: 'ZUE',
-          fullName: 'Zuerich',
+          betriebspunktName: "ZUE",
+          fullName: "Zuerich",
           positionX: 736,
           positionY: 64,
           ports: [
@@ -205,8 +205,8 @@ export class NetzgrafikUnitTesting {
         },
         {
           id: 3,
-          betriebspunktName: 'SG',
-          fullName: 'St. Gallen',
+          betriebspunktName: "SG",
+          fullName: "St. Gallen",
           positionX: 1184,
           positionY: 64,
           ports: [
@@ -239,8 +239,8 @@ export class NetzgrafikUnitTesting {
         },
         {
           id: 4,
-          betriebspunktName: 'CH',
-          fullName: 'Chur',
+          betriebspunktName: "CH",
+          fullName: "Chur",
           positionX: 1056,
           positionY: 256,
           ports: [
@@ -779,7 +779,7 @@ export class NetzgrafikUnitTesting {
       trainruns: [
         {
           id: 0,
-          name: '1',
+          name: "1",
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
@@ -787,7 +787,7 @@ export class NetzgrafikUnitTesting {
         },
         {
           id: 1,
-          name: '1',
+          name: "1",
           categoryId: 4,
           frequencyId: 2,
           trainrunTimeCategoryId: 0,
@@ -795,7 +795,7 @@ export class NetzgrafikUnitTesting {
         },
         {
           id: 2,
-          name: '1234',
+          name: "1234",
           categoryId: 4,
           frequencyId: 1,
           trainrunTimeCategoryId: 0,
@@ -803,7 +803,7 @@ export class NetzgrafikUnitTesting {
         },
         {
           id: 3,
-          name: '5678',
+          name: "5678",
           categoryId: 3,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
@@ -811,7 +811,7 @@ export class NetzgrafikUnitTesting {
         },
         {
           id: 4,
-          name: '5678-2',
+          name: "5678-2",
           categoryId: 3,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
@@ -824,9 +824,9 @@ export class NetzgrafikUnitTesting {
           {
             id: 0,
             order: 0,
-            shortName: 'EC',
-            name: 'International',
-            colorRef: 'EC',
+            shortName: "EC",
+            name: "International",
+            colorRef: "EC",
             fachCategory: HaltezeitFachCategories.IPV,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
@@ -836,9 +836,9 @@ export class NetzgrafikUnitTesting {
           {
             id: 1,
             order: 1,
-            shortName: 'IC',
-            name: 'InterCity',
-            colorRef: 'IC',
+            shortName: "IC",
+            name: "InterCity",
+            colorRef: "IC",
             fachCategory: HaltezeitFachCategories.A,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
@@ -848,9 +848,9 @@ export class NetzgrafikUnitTesting {
           {
             id: 2,
             order: 2,
-            shortName: 'IR',
-            name: 'InterRegio',
-            colorRef: 'IR',
+            shortName: "IR",
+            name: "InterRegio",
+            colorRef: "IR",
             fachCategory: HaltezeitFachCategories.B,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
@@ -860,9 +860,9 @@ export class NetzgrafikUnitTesting {
           {
             id: 3,
             order: 3,
-            shortName: 'RE',
-            name: 'RegioExpress',
-            colorRef: 'RE',
+            shortName: "RE",
+            name: "RegioExpress",
+            colorRef: "RE",
             fachCategory: HaltezeitFachCategories.C,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
@@ -872,9 +872,9 @@ export class NetzgrafikUnitTesting {
           {
             id: 4,
             order: 4,
-            shortName: 'S',
-            name: 'RegioUndSBahnverkehr',
-            colorRef: 'S',
+            shortName: "S",
+            name: "RegioUndSBahnverkehr",
+            colorRef: "S",
             fachCategory: HaltezeitFachCategories.D,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
@@ -884,9 +884,9 @@ export class NetzgrafikUnitTesting {
           {
             id: 5,
             order: 5,
-            shortName: 'GEX',
-            name: 'GüterExpress',
-            colorRef: 'GEX',
+            shortName: "GEX",
+            name: "GüterExpress",
+            colorRef: "GEX",
             fachCategory: HaltezeitFachCategories.Uncategorized,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 3,
@@ -896,9 +896,9 @@ export class NetzgrafikUnitTesting {
           {
             id: 6,
             order: 6,
-            shortName: 'G',
-            name: 'Güterverkehr',
-            colorRef: 'G',
+            shortName: "G",
+            name: "Güterverkehr",
+            colorRef: "G",
             fachCategory: HaltezeitFachCategories.Uncategorized,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 3,
@@ -912,8 +912,8 @@ export class NetzgrafikUnitTesting {
             order: 0,
             frequency: 15,
             offset: 0,
-            shortName: '15',
-            name: 'verkehrt viertelstündlich',
+            shortName: "15",
+            name: "verkehrt viertelstündlich",
             linePatternRef: LinePatternRefs.Freq15,
           },
           {
@@ -921,8 +921,8 @@ export class NetzgrafikUnitTesting {
             order: 0,
             frequency: 20,
             offset: 0,
-            shortName: '20',
-            name: 'verkehrt im 20 Minuten Takt',
+            shortName: "20",
+            name: "verkehrt im 20 Minuten Takt",
             linePatternRef: LinePatternRefs.Freq20,
           },
           {
@@ -930,8 +930,8 @@ export class NetzgrafikUnitTesting {
             order: 0,
             frequency: 30,
             offset: 0,
-            shortName: '30',
-            name: 'verkehrt halbstündlich',
+            shortName: "30",
+            name: "verkehrt halbstündlich",
             linePatternRef: LinePatternRefs.Freq30,
           },
           {
@@ -939,8 +939,8 @@ export class NetzgrafikUnitTesting {
             order: 0,
             frequency: 60,
             offset: 0,
-            shortName: '60',
-            name: 'verkehrt stündlich',
+            shortName: "60",
+            name: "verkehrt stündlich",
             linePatternRef: LinePatternRefs.Freq60,
           },
           {
@@ -948,8 +948,8 @@ export class NetzgrafikUnitTesting {
             order: 0,
             frequency: 120,
             offset: 0,
-            shortName: '120',
-            name: 'verkehrt zweistündlich',
+            shortName: "120",
+            name: "verkehrt zweistündlich",
             linePatternRef: LinePatternRefs.Freq120,
           },
         ],
@@ -957,8 +957,8 @@ export class NetzgrafikUnitTesting {
           {
             id: 0,
             order: 0,
-            shortName: '7/24',
-            name: 'verkehrt uneingeschränkt',
+            shortName: "7/24",
+            name: "verkehrt uneingeschränkt",
             dayTimeInterval: [],
             weekday: [1, 2, 3, 4, 5, 6, 7],
             linePatternRef: LinePatternRefs.TimeCat7_24,
@@ -966,8 +966,8 @@ export class NetzgrafikUnitTesting {
           {
             id: 1,
             order: 0,
-            shortName: 'HVZ',
-            name: 'verkehrt zur Hauptverkehrszeit',
+            shortName: "HVZ",
+            name: "verkehrt zur Hauptverkehrszeit",
             dayTimeInterval: [
               {from: 360, to: 420},
               {from: 960, to: 1140},
@@ -978,8 +978,8 @@ export class NetzgrafikUnitTesting {
           {
             id: 2,
             order: 0,
-            shortName: 'zeitweise',
-            name: 'verkehrt zeitweise',
+            shortName: "zeitweise",
+            name: "verkehrt zeitweise",
             dayTimeInterval: [],
             weekday: [],
             linePatternRef: LinePatternRefs.TimeZeitweise,
@@ -994,41 +994,41 @@ export class NetzgrafikUnitTesting {
           y: 160,
           width: 192,
           height: 64,
-          title: 'Frabcodierter Text',
-          text: '<p><em>Folgendes</em></p>spannend<p><strong>FETT</strong>',
-          backgroundColor: '#ffffff',
-          textColor: '#000000',
+          title: "Frabcodierter Text",
+          text: "<p><em>Folgendes</em></p>spannend<p><strong>FETT</strong>",
+          backgroundColor: "#ffffff",
+          textColor: "#000000",
           labelIds: [],
         },
       ],
       labels: [
         {
           id: 0,
-          label: 'TestLabel',
+          label: "TestLabel",
           labelGroupId: 0,
           labelRef: LabelRef.Trainrun,
         },
         {
           id: 1,
-          label: 'Test',
+          label: "Test",
           labelGroupId: 0,
           labelRef: LabelRef.Trainrun,
         },
         {
           id: 2,
-          label: 'Label',
+          label: "Label",
           labelGroupId: 0,
           labelRef: LabelRef.Trainrun,
         },
         {
           id: 3,
-          label: 'Label',
+          label: "Label",
           labelGroupId: 1,
           labelRef: LabelRef.Node,
         },
         {
           id: 4,
-          label: 'Test',
+          label: "Test",
           labelGroupId: 1,
           labelRef: LabelRef.Node,
         },
@@ -1036,12 +1036,12 @@ export class NetzgrafikUnitTesting {
       labelGroups: [
         {
           id: 0,
-          name: 'Standard',
+          name: "Standard",
           labelRef: LabelRef.Trainrun,
         },
         {
           id: 1,
-          name: 'Standard',
+          name: "Standard",
           labelRef: LabelRef.Node,
         },
       ],

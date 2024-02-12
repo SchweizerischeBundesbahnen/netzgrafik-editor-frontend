@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 
 @Component({
-  selector: 'sbb-history-entry',
-  templateUrl: './history-entry.component.html',
-  styleUrls: ['./history-entry.component.scss'],
+  selector: "sbb-history-entry",
+  templateUrl: "./history-entry.component.html",
+  styleUrls: ["./history-entry.component.scss"],
 })
 export class HistoryEntryComponent {
   @Input() version?: string;

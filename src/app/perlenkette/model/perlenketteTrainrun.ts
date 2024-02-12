@@ -1,5 +1,5 @@
-import {PerlenketteItem} from './perlenketteItem';
-import {TrainrunTimeCategory} from '../../data-structures/business.data.structures';
+import {PerlenketteItem} from "./perlenketteItem";
+import {TrainrunTimeCategory} from "../../data-structures/business.data.structures";
 
 export class PerlenketteTrainrun {
   constructor(

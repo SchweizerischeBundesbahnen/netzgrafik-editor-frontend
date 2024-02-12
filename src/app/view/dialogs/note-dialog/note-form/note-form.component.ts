@@ -1,16 +1,16 @@
-import {Component, Input} from '@angular/core';
-import {FormModel} from '../../../../utils/form-model';
+import {Component, Input} from "@angular/core";
+import {FormModel} from "../../../../utils/form-model";
 
 @Component({
-  selector: 'sbb-note-form',
-  templateUrl: './note-form.component.html',
-  styleUrls: ['./note-form.component.scss'],
+  selector: "sbb-note-form",
+  templateUrl: "./note-form.component.html",
+  styleUrls: ["./note-form.component.scss"],
 })
 export class NoteFormComponent {
   @Input() model!: FormModel<NoteFormComponentModel>;
 
   onKeydown(event) {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       this.onUpdate();
     }
   }
@@ -21,13 +21,13 @@ export class NoteFormComponent {
 
   private updateNote() {
     this.model.tryGetValid();
-    const newNoteTitle: string = this.model.getControl('noteTitle').value;
-    const newNoteText: string = this.model.getControl('noteText').value;
-    const newNoteHeight: string = this.model.getControl('noteHeight').value;
-    const newNoteWidth: string = this.model.getControl('noteWidth').value;
-    const saveNoteCallback = this.model.getControl('saveNoteCallback').value;
+    const newNoteTitle: string = this.model.getControl("noteTitle").value;
+    const newNoteText: string = this.model.getControl("noteText").value;
+    const newNoteHeight: string = this.model.getControl("noteHeight").value;
+    const newNoteWidth: string = this.model.getControl("noteWidth").value;
+    const saveNoteCallback = this.model.getControl("saveNoteCallback").value;
     saveNoteCallback(
-      this.model.getControl('id').value,
+      this.model.getControl("id").value,
       newNoteTitle,
       newNoteText,
       newNoteHeight,

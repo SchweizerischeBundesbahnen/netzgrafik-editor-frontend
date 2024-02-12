@@ -1,27 +1,27 @@
-import {DataService} from '../data/data.service';
-import {NodeService} from '../data/node.service';
-import {ResourceService} from '../data/resource.service';
-import {TrainrunService} from '../data/trainrun.service';
-import {TrainrunSectionService} from '../data/trainrunsection.service';
-import {StammdatenService} from '../data/stammdaten.service';
-import {NoteService} from '../data/note.service';
-import {Node} from '../../models/node.model';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {LogService} from '../../logger/log.service';
-import {LogPublishersService} from '../../logger/log.publishers.service';
-import {LabelGroupService} from '../data/labelgroup.service';
-import {LabelService} from '../data/label.serivce';
-import {FilterService} from './filter.service';
-import {AnalyticsService} from '../analytics/analytics.service';
-import {UiInteractionService} from './ui.interaction.service';
-import {EditorView} from '../../view/editor-main-view/data-views/editor.view';
-import {EditorMode} from '../../view/editor-menu/editor-mode';
-import {ThemeRegistration} from '../../view/themes/theme-registration';
-import {EditorPropertiesViewComponent} from '../../view/editor-properties-view-component/editor-properties-view.component';
-import {NetzgrafikColoringService} from '../data/netzgrafikColoring.service';
-import {LoadPerlenketteService} from '../../perlenkette/service/load-perlenkette.service';
+import {DataService} from "../data/data.service";
+import {NodeService} from "../data/node.service";
+import {ResourceService} from "../data/resource.service";
+import {TrainrunService} from "../data/trainrun.service";
+import {TrainrunSectionService} from "../data/trainrunsection.service";
+import {StammdatenService} from "../data/stammdaten.service";
+import {NoteService} from "../data/note.service";
+import {Node} from "../../models/node.model";
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {LogService} from "../../logger/log.service";
+import {LogPublishersService} from "../../logger/log.publishers.service";
+import {LabelGroupService} from "../data/labelgroup.service";
+import {LabelService} from "../data/label.serivce";
+import {FilterService} from "./filter.service";
+import {AnalyticsService} from "../analytics/analytics.service";
+import {UiInteractionService} from "./ui.interaction.service";
+import {EditorView} from "../../view/editor-main-view/data-views/editor.view";
+import {EditorMode} from "../../view/editor-menu/editor-mode";
+import {ThemeRegistration} from "../../view/themes/theme-registration";
+import {EditorPropertiesViewComponent} from "../../view/editor-properties-view-component/editor-properties-view.component";
+import {NetzgrafikColoringService} from "../data/netzgrafikColoring.service";
+import {LoadPerlenketteService} from "../../perlenkette/service/load-perlenkette.service";
 
-describe('UiInteractionService', () => {
+describe("UiInteractionService", () => {
   let dataService: DataService;
   let nodeService: NodeService;
   let resourceService: ResourceService;
@@ -111,7 +111,7 @@ describe('UiInteractionService', () => {
     );
   });
 
-  it('checkFilterNodeLabels', () => {
+  it("checkFilterNodeLabels", () => {
     const viewboxProperties = uiInteractionService.getViewboxProperties(
       EditorView.svgName,
     );
@@ -122,13 +122,13 @@ describe('UiInteractionService', () => {
     expect(viewboxProperties.currentViewBox).toBe(null);
   });
 
-  it('getEditorMode', () => {
+  it("getEditorMode", () => {
     expect(uiInteractionService.getEditorMode()).toBe(
       EditorMode.NetzgrafikEditing,
     );
   });
 
-  it('setEditorMode', () => {
+  it("setEditorMode", () => {
     uiInteractionService.setEditorMode(EditorMode.Analytics);
     expect(uiInteractionService.getEditorMode()).toBe(EditorMode.Analytics);
     uiInteractionService.setEditorMode(EditorMode.NetzgrafikEditing);
@@ -137,7 +137,7 @@ describe('UiInteractionService', () => {
     );
   });
 
-  it('createTheme', () => {
+  it("createTheme", () => {
     uiInteractionService.createTheme(
       ThemeRegistration.ThemeDefaultUx,
       EditorPropertiesViewComponent.DEFAULT_BACKGROUNDCOLOR,

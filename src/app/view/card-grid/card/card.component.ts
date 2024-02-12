@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {SlotAction} from '../../action-menu/action-menu/action-menu.component';
-import {Observable} from 'rxjs';
+import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {SlotAction} from "../../action-menu/action-menu/action-menu.component";
+import {Observable} from "rxjs";
 
 @Component({
-  selector: 'sbb-card',
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss'],
+  selector: "sbb-card",
+  templateUrl: "./card.component.html",
+  styleUrls: ["./card.component.scss"],
 })
 export class CardComponent {
   @Input()

@@ -71,9 +71,10 @@
         ],
         "@typescript-eslint/quotes": [
           "error",
-          "single",
+          "double",
           {
-            "allowTemplateLiterals": true
+            "avoidEscape": true,
+            "allowTemplateLiterals": false
           }
         ],
         "@typescript-eslint/semi": [

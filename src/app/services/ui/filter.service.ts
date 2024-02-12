@@ -1,26 +1,26 @@
-import {Injectable, OnDestroy} from '@angular/core';
+import {Injectable, OnDestroy} from "@angular/core";
 import {
   FilterDataDto,
   LabelRef,
   TrainrunCategory,
   TrainrunFrequency,
   TrainrunTimeCategory,
-} from '../../data-structures/business.data.structures';
-import {BehaviorSubject, Subject} from 'rxjs';
-import {DataService} from '../data/data.service';
-import {Node} from '../../models/node.model';
-import {LabelService} from '../data/label.serivce';
-import {Label} from '../../models/label.model';
-import {LabelGroupService} from '../data/labelgroup.service';
-import {LabelGroup, LogicalFilterOperator} from '../../models/labelGroup.model';
-import {Trainrun} from '../../models/trainrun.model';
-import {Port} from '../../models/port.model';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {Note} from '../../models/note.model';
-import {FilterSetting} from '../../models/filterSettings.model';
+} from "../../data-structures/business.data.structures";
+import {BehaviorSubject, Subject} from "rxjs";
+import {DataService} from "../data/data.service";
+import {Node} from "../../models/node.model";
+import {LabelService} from "../data/label.serivce";
+import {Label} from "../../models/label.model";
+import {LabelGroupService} from "../data/labelgroup.service";
+import {LabelGroup, LogicalFilterOperator} from "../../models/labelGroup.model";
+import {Trainrun} from "../../models/trainrun.model";
+import {Port} from "../../models/port.model";
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {Note} from "../../models/note.model";
+import {FilterSetting} from "../../models/filterSettings.model";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class FilterService implements OnDestroy {
   filterSubject = new BehaviorSubject<void>(null);
@@ -131,7 +131,7 @@ export class FilterService implements OnDestroy {
     const fs = this.activeFilterSetting.copy();
     this.filterSettingStore.filterSettings.push(fs);
     this.activateFilterSetting(fs.getId());
-    this.setActiveFilterSettingName('Neuer Filter', fs.getId());
+    this.setActiveFilterSettingName("Neuer Filter", fs.getId());
     this.filterSettingUpdated();
     return fs;
   }
@@ -868,11 +868,11 @@ export class FilterService implements OnDestroy {
             (value) => groupedLabelsAllMinusFilter.indexOf(value) !== -1,
           ).length === groupedLabelsAllMinusFilter.length;
         console.log(
-          'groupedLabelsAllMinusFilter',
+          "groupedLabelsAllMinusFilter",
           groupedLabelsAllMinusFilter,
-          'groupedLabelsFromEnvironment',
+          "groupedLabelsFromEnvironment",
           groupedLabelsFromEnvironment,
-          'doFiltering',
+          "doFiltering",
           doFiltering,
         );
       }

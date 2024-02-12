@@ -1,15 +1,15 @@
-import {FreeFloatingTextDto} from '../data-structures/business.data.structures';
-import {DataMigration} from '../utils/data-migration';
+import {FreeFloatingTextDto} from "../data-structures/business.data.structures";
+import {DataMigration} from "../utils/data-migration";
 
 export class Note {
   public static DEFAULT_NOTE_WIDTH = 192;
   public static DEFAULT_NOTE_HEIGHT = 64;
   public static DEFAULT_NOTE_POSITION_X = 0;
   public static DEFAULT_NOTE_POSITION_Y = 0;
-  public static DEFAULT_NOTE_TITLE = 'Kommentar Titel';
-  public static DEFAULT_NOTE_TEXT = 'Kommentar Text';
-  public static DEFAULT_NOTE_BACKGROUND_COLOR = '#ffffff';
-  public static DEFAULT_NOTE_TEXT_COLOR = '#000000';
+  public static DEFAULT_NOTE_TITLE = "Kommentar Titel";
+  public static DEFAULT_NOTE_TEXT = "Kommentar Text";
+  public static DEFAULT_NOTE_BACKGROUND_COLOR = "#ffffff";
+  public static DEFAULT_NOTE_TEXT_COLOR = "#000000";
 
   private static currentId = 0;
   private id: number;

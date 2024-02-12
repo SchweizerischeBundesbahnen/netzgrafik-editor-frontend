@@ -1,18 +1,18 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from "@angular/core/testing";
 
-import {VariantHistoryComponent} from './variant-history.component';
-import {VersionControlService} from '../../../../services/data/version-control.service';
-import {of} from 'rxjs';
-import {PreviewService} from '../../../../services/data/preview.service';
-import {SbbDialogModule} from '@sbb-esta/angular/dialog';
-import {NavigationService} from '../../../../services/ui/navigation.service';
+import {VariantHistoryComponent} from "./variant-history.component";
+import {VersionControlService} from "../../../../services/data/version-control.service";
+import {of} from "rxjs";
+import {PreviewService} from "../../../../services/data/preview.service";
+import {SbbDialogModule} from "@sbb-esta/angular/dialog";
+import {NavigationService} from "../../../../services/ui/navigation.service";
 import {
   VariantControllerBackendService,
   VariantCreateDto,
-} from '../../../../api/generated';
-import {VersionControllerBackendService} from '../../../../api/generated';
+} from "../../../../api/generated";
+import {VersionControllerBackendService} from "../../../../api/generated";
 
-describe('VariantHistoryComponent', () => {
+describe("VariantHistoryComponent", () => {
   let component: VariantHistoryComponent;
   let fixture: ComponentFixture<VariantHistoryComponent>;
 
@@ -42,7 +42,7 @@ describe('VariantHistoryComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

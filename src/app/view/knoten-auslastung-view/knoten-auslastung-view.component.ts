@@ -1,21 +1,21 @@
-import * as d3 from 'd3';
-import {AfterViewInit, Component, Input, OnDestroy} from '@angular/core';
-import {NodeService} from '../../services/data/node.service';
-import {TrainrunSectionService} from '../../services/data/trainrunsection.service';
-import {TrainrunService} from '../../services/data/trainrun.service';
-import {UiInteractionService} from '../../services/ui/ui.interaction.service';
-import {StaticDomTags} from '../editor-main-view/data-views/static.dom.tags';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {Trainrun} from '../../models/trainrun.model';
-import {ResourceService} from '../../services/data/resource.service';
-import {KnotenAuslastungDataPreparation} from './knoten.auslastung.data.preparation';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import * as d3 from "d3";
+import {AfterViewInit, Component, Input, OnDestroy} from "@angular/core";
+import {NodeService} from "../../services/data/node.service";
+import {TrainrunSectionService} from "../../services/data/trainrunsection.service";
+import {TrainrunService} from "../../services/data/trainrun.service";
+import {UiInteractionService} from "../../services/ui/ui.interaction.service";
+import {StaticDomTags} from "../editor-main-view/data-views/static.dom.tags";
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {Trainrun} from "../../models/trainrun.model";
+import {ResourceService} from "../../services/data/resource.service";
+import {KnotenAuslastungDataPreparation} from "./knoten.auslastung.data.preparation";
+import {takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
 
 @Component({
-  selector: 'sbb-knoten-auslastung-view',
-  templateUrl: './knoten-auslastung-view.component.html',
-  styleUrls: ['./knoten-auslastung-view.component.scss'],
+  selector: "sbb-knoten-auslastung-view",
+  templateUrl: "./knoten-auslastung-view.component.html",
+  styleUrls: ["./knoten-auslastung-view.component.scss"],
 })
 export class KnotenAuslastungViewComponent implements AfterViewInit, OnDestroy {
   private svgDrawingContext: any;
@@ -66,7 +66,7 @@ export class KnotenAuslastungViewComponent implements AfterViewInit, OnDestroy {
         trainrunSection.getFrequencyLinePatternRef(),
       ) +
       StaticDomTags.makeClassTag(
-        StaticDomTags.TAG_UI_DIALOG + '_' + StaticDomTags.TAG_COLOR_REF,
+        StaticDomTags.TAG_UI_DIALOG + "_" + StaticDomTags.TAG_COLOR_REF,
         trainrunSection.getTrainrun().getCategoryColorRef(),
       );
 
@@ -74,7 +74,7 @@ export class KnotenAuslastungViewComponent implements AfterViewInit, OnDestroy {
       selectedTrainrun !== null &&
       selectedTrainrun.getId() === trainrunSection.getTrainrunId()
     ) {
-      classAttribute += ' ' + StaticDomTags.TAG_SELECTED;
+      classAttribute += " " + StaticDomTags.TAG_SELECTED;
     }
     if (
       !KnotenAuslastungViewComponent.isMuted(
@@ -83,17 +83,17 @@ export class KnotenAuslastungViewComponent implements AfterViewInit, OnDestroy {
         connectedTrainIds,
       )
     ) {
-      classAttribute += ' ' + StaticDomTags.TAG_FOCUS;
+      classAttribute += " " + StaticDomTags.TAG_FOCUS;
     } else {
-      classAttribute += ' ' + StaticDomTags.TAG_MUTED;
+      classAttribute += " " + StaticDomTags.TAG_MUTED;
     }
     return classAttribute;
   }
 
   ngAfterViewInit(): void {
     this.svgDrawingContext = d3
-      .select('#knotenAuslastungContainer')
-      .attr('oncontextmenu', 'return false;');
+      .select("#knotenAuslastungContainer")
+      .attr("oncontextmenu", "return false;");
 
     this.init();
   }
@@ -179,20 +179,20 @@ export class KnotenAuslastungViewComponent implements AfterViewInit, OnDestroy {
       );
 
     this.svgDrawingContext
-      .selectAll('g.KnotenAuslastungResourceGroup')
+      .selectAll("g.KnotenAuslastungResourceGroup")
       .remove();
     const rootResourceGroup = this.svgDrawingContext
-      .selectAll('g.KnotenAuslastungResourceGroup')
+      .selectAll("g.KnotenAuslastungResourceGroup")
       .data(resourceDatas);
     rootResourceGroup
       .enter()
       .append(StaticDomTags.GROUP_SVG)
-      .attr('class', 'KnotenAuslastungResourceGroup')
-      .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
-      .append('path')
-      .attr('class', 'KnotenAuslastungResourceGroup')
-      .attr('d', arc)
-      .classed('capacityLimitReached', (d) => d.capacityLimitReached);
+      .attr("class", "KnotenAuslastungResourceGroup")
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+      .append("path")
+      .attr("class", "KnotenAuslastungResourceGroup")
+      .attr("d", arc)
+      .classed("capacityLimitReached", (d) => d.capacityLimitReached);
 
     this.svgDrawingContext
       .selectAll(StaticDomTags.KNOTENAUSLASTUNG_DATA_GROUP_G)
@@ -203,11 +203,11 @@ export class KnotenAuslastungViewComponent implements AfterViewInit, OnDestroy {
     rootDataGroup
       .enter()
       .append(StaticDomTags.GROUP_SVG)
-      .attr('class', StaticDomTags.KNOTENAUSLASTUNG_DATA_GROUP)
-      .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
-      .append('path')
+      .attr("class", StaticDomTags.KNOTENAUSLASTUNG_DATA_GROUP)
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+      .append("path")
       .attr(
-        'class',
+        "class",
         (d) =>
           StaticDomTags.KNOTENAUSLASTUNG_DATA_GROUP +
           KnotenAuslastungViewComponent.createTrainrunSectionFrequencyClassAttribute(
@@ -216,23 +216,23 @@ export class KnotenAuslastungViewComponent implements AfterViewInit, OnDestroy {
             connectedTrainIds,
           ),
       )
-      .attr('d', arc)
-      .on('mousedown', (d) =>
+      .attr("d", arc)
+      .on("mousedown", (d) =>
         this.trainrunService.setTrainrunAsSelected(
           d.trainrunSection.getTrainrunId(),
         ),
       )
-      .append('title')
+      .append("title")
       .html((d) => d.tooltip);
 
     const groupText = rootDataGroup
       .enter()
       .append(StaticDomTags.GROUP_SVG)
-      .attr('class', StaticDomTags.KNOTENAUSLASTUNG_DATA_GROUP)
-      .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
-      .append('text')
+      .attr("class", StaticDomTags.KNOTENAUSLASTUNG_DATA_GROUP)
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+      .append("text")
       .attr(
-        'class',
+        "class",
         (d) =>
           StaticDomTags.KNOTENAUSLASTUNG_DATA_GROUP +
           KnotenAuslastungViewComponent.createTrainrunSectionFrequencyClassAttribute(
@@ -241,7 +241,7 @@ export class KnotenAuslastungViewComponent implements AfterViewInit, OnDestroy {
             connectedTrainIds,
           ),
       )
-      .attr('transform', (d) => {
+      .attr("transform", (d) => {
         const midAngle =
           d.endAngle < Math.PI
             ? d.startAngle / 2 + d.endAngle / 2
@@ -254,83 +254,83 @@ export class KnotenAuslastungViewComponent implements AfterViewInit, OnDestroy {
           angle += 180;
         }
         return (
-          'translate(' +
+          "translate(" +
           arc.centroid(d)[0] +
-          ',' +
+          "," +
           arc.centroid(d)[1] +
-          ') rotate(-90) rotate(' +
+          ") rotate(-90) rotate(" +
           angle +
-          ')'
+          ")"
         );
       })
-      .attr('dy', '.35em')
-      .attr('x', 0)
-      .attr('y', 0)
-      .attr('text-anchor', 'middle')
-      .on('mousedown', (d) =>
+      .attr("dy", ".35em")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("text-anchor", "middle")
+      .on("mousedown", (d) =>
         this.trainrunService.setTrainrunAsSelected(
           d.trainrunSection.getTrainrunId(),
         ),
       )
-      .append('title')
-      .html((d) => d.name + '<br>' + d.tooltip);
+      .append("title")
+      .html((d) => d.name + "<br>" + d.tooltip);
 
     this.svgDrawingContext
-      .selectAll('g.KnotenAuslastungNbrTrackGroup')
+      .selectAll("g.KnotenAuslastungNbrTrackGroup")
       .remove();
     const nbrOfTrackGroup = this.svgDrawingContext
-      .selectAll('g.KnotenAuslastungNbrTrackGroup')
+      .selectAll("g.KnotenAuslastungNbrTrackGroup")
       .data([nbrUsedOfTrackFound + 1]);
     nbrOfTrackGroup
       .enter()
       .append(StaticDomTags.GROUP_SVG)
-      .attr('class', 'KnotenAuslastungNbrTrackGroup')
-      .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
-      .append('text')
-      .attr('class', 'KnotenAuslastungNbrTrackGroup')
-      .attr('x', 0)
-      .attr('y', 6)
-      .attr('text-anchor', 'middle')
+      .attr("class", "KnotenAuslastungNbrTrackGroup")
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+      .append("text")
+      .attr("class", "KnotenAuslastungNbrTrackGroup")
+      .attr("x", 0)
+      .attr("y", 6)
+      .attr("text-anchor", "middle")
       .html(
         (d) =>
-          '' +
+          "" +
           Math.round(
             (100 * d) /
               this.resourceService
                 .getResource(selectedNode.getResourceId())
                 .getCapacity(),
           ) +
-          '%',
+          "%",
       );
 
-    this.svgDrawingContext.selectAll('g.KnotenAuslastungTimeGroup').remove();
+    this.svgDrawingContext.selectAll("g.KnotenAuslastungTimeGroup").remove();
     const timeGroup = this.svgDrawingContext
-      .selectAll('g.KnotenAuslastungTimeGroup')
+      .selectAll("g.KnotenAuslastungTimeGroup")
       .data([0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55]);
     timeGroup
       .enter()
       .append(StaticDomTags.GROUP_SVG)
-      .attr('class', 'KnotenAuslastungTimeGroup')
-      .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
-      .append('text')
-      .attr('class', 'KnotenAuslastungTimeGroup')
+      .attr("class", "KnotenAuslastungTimeGroup")
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+      .append("text")
+      .attr("class", "KnotenAuslastungTimeGroup")
       .attr(
-        'x',
+        "x",
         (d) =>
           (pixelRadius / 0.95) * Math.sin(Math.PI - (d / 60) * 2.0 * Math.PI),
       )
       .attr(
-        'y',
+        "y",
         (d) =>
           6 +
           (pixelRadius / 0.95) * Math.cos(Math.PI - (d / 60) * 2.0 * Math.PI),
       )
-      .attr('text-anchor', 'middle')
-      .text((d) => '' + d);
+      .attr("text-anchor", "middle")
+      .text((d) => "" + d);
 
     this.svgDrawingContext.attr(
-      'viewBox',
-      '0 -4 ' + width + ' ' + (height + 8),
+      "viewBox",
+      "0 -4 " + width + " " + (height + 8),
     );
   }
 }

@@ -1,5 +1,5 @@
-import {Component, OnDestroy} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, OnDestroy} from "@angular/core";
+import {ActivatedRoute} from "@angular/router";
 import {
   BehaviorSubject,
   combineLatest,
@@ -7,7 +7,7 @@ import {
   of,
   ReplaySubject,
   Subject,
-} from 'rxjs';
+} from "rxjs";
 import {
   debounceTime,
   filter,
@@ -15,37 +15,37 @@ import {
   mergeMap,
   startWith,
   takeUntil,
-} from 'rxjs/operators';
+} from "rxjs/operators";
 import {
   ProjectControllerBackendService,
   ProjectDto,
   ProjectSummaryDto,
   VariantControllerBackendService,
   VariantSummaryDto,
-} from '../../../api/generated';
-import {SbbDialog} from '@sbb-esta/angular/dialog';
-import {ProjectDialogComponent} from '../../project/project-dialog/project-dialog.component';
-import {NavigationParameters} from '../../../utils/navigation-parameters';
-import {NetzgrafikDefault} from '../../../sample-netzgrafik/netzgrafik.default';
-import {VariantDialogComponent} from '../variant-dialog/variant-dialog.component';
-import {ConfirmationDialogParameter} from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
-import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
-import {UntypedFormControl} from '@angular/forms';
-import {NavigationService} from '../../../services/ui/navigation.service';
-import {VersionControlService} from '../../../services/data/version-control.service';
-import {SlotAction} from '../../action-menu/action-menu/action-menu.component';
+} from "../../../api/generated";
+import {SbbDialog} from "@sbb-esta/angular/dialog";
+import {ProjectDialogComponent} from "../../project/project-dialog/project-dialog.component";
+import {NavigationParameters} from "../../../utils/navigation-parameters";
+import {NetzgrafikDefault} from "../../../sample-netzgrafik/netzgrafik.default";
+import {VariantDialogComponent} from "../variant-dialog/variant-dialog.component";
+import {ConfirmationDialogParameter} from "../../dialogs/confirmation-dialog/confirmation-dialog.component";
+import {UiInteractionService} from "../../../services/ui/ui.interaction.service";
+import {UntypedFormControl} from "@angular/forms";
+import {NavigationService} from "../../../services/ui/navigation.service";
+import {VersionControlService} from "../../../services/data/version-control.service";
+import {SlotAction} from "../../action-menu/action-menu/action-menu.component";
 
 @Component({
-  selector: 'sbb-variants-view',
-  templateUrl: './variants-view.component.html',
-  styleUrls: ['./variants-view.component.scss'],
+  selector: "sbb-variants-view",
+  templateUrl: "./variants-view.component.html",
+  styleUrls: ["./variants-view.component.scss"],
 })
 export class VariantsViewComponent implements OnDestroy {
   readonly projectSubject = new ReplaySubject<ProjectDto>(1);
   project?: ProjectDto;
-  searchControl = new UntypedFormControl('');
+  searchControl = new UntypedFormControl("");
   showArchiveControl = new UntypedFormControl(false);
-  searchQuery = new BehaviorSubject('');
+  searchQuery = new BehaviorSubject("");
 
   readonly variants = combineLatest([
     this.projectSubject,
@@ -79,26 +79,26 @@ export class VariantsViewComponent implements OnDestroy {
         if (project.isWritable) {
           return [
             {
-              name: 'Projekt bearbeiten',
-              icon: 'pen-small',
+              name: "Projekt bearbeiten",
+              icon: "pen-small",
               action: () => this.onEditProjectClicked(),
             },
             {
-              name: 'Projekt archivieren',
-              icon: 'archive-box-small',
+              name: "Projekt archivieren",
+              icon: "archive-box-small",
               action: () => this.onArchiveProjectClicked(),
             },
           ];
         } else if (project.isDeletable && project.isArchived) {
           return [
             {
-              name: 'Archivierung rückgängig machen',
-              icon: 'arrow-circle-eye-small',
+              name: "Archivierung rückgängig machen",
+              icon: "arrow-circle-eye-small",
               action: () => this.onUnarchiveProjectClicked(),
             },
             {
-              name: 'Projekt löschen',
-              icon: 'trash-small',
+              name: "Projekt löschen",
+              icon: "trash-small",
               action: () => this.onDeleteProjectClicked(),
             },
           ];
@@ -114,12 +114,10 @@ export class VariantsViewComponent implements OnDestroy {
     a: VariantSummaryDto,
     b: VariantSummaryDto,
   ) {
+    // prettier-ignore
     if (a.latestSnapshotVersion && b.latestSnapshotVersion) {
-      if (a.latestSnapshotVersion.name === b.latestSnapshotVersion.name)
-        return 0;
-      return [a.latestSnapshotVersion.name] > [b.latestSnapshotVersion.name]
-        ? 1
-        : -1;
+      if (a.latestSnapshotVersion.name === b.latestSnapshotVersion.name) return 0;
+      return [a.latestSnapshotVersion.name] > [b.latestSnapshotVersion.name] ? 1 : -1;
     }
     if (a.id === b.id) return 0;
     return [a.id] > [b.id] ? 1 : -1;
@@ -158,16 +156,16 @@ export class VariantsViewComponent implements OnDestroy {
     if (variant.isArchived) {
       return of([
         {
-          name: 'Archivierung rückgängig machen',
-          icon: 'arrow-circle-eye-small',
+          name: "Archivierung rückgängig machen",
+          icon: "arrow-circle-eye-small",
           action: () => this.onUnarchiveVariantClicked(variant),
         },
       ]);
     }
     return of([
       {
-        name: 'Archivieren',
-        icon: 'archive-box-small',
+        name: "Archivieren",
+        icon: "archive-box-small",
         action: () => this.onArchiveVariantClicked(variant),
       },
     ]);
@@ -177,8 +175,8 @@ export class VariantsViewComponent implements OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          'Variante archivieren',
-          'Möchten Sie die Variante jetzt archivieren?',
+          "Variante archivieren",
+          "Möchten Sie die Variante jetzt archivieren?",
         ),
       )
       .pipe(
@@ -200,8 +198,8 @@ export class VariantsViewComponent implements OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          'Archivierung rückgängig machen',
-          'Möchten Sie die Archivierung der Variante rückgängig machen?',
+          "Archivierung rückgängig machen",
+          "Möchten Sie die Archivierung der Variante rückgängig machen?",
         ),
       )
       .pipe(
@@ -220,7 +218,7 @@ export class VariantsViewComponent implements OnDestroy {
   }
 
   onAddVariantClicked(): void {
-    VariantDialogComponent.open(this.dialog, {name: ''})
+    VariantDialogComponent.open(this.dialog, {name: ""})
       .pipe(
         takeUntil(this.destroyed),
         mergeMap((model) => this.createVariant(this.project.id, model.name)),
@@ -246,8 +244,8 @@ export class VariantsViewComponent implements OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          'Projekt archivieren',
-          'Möchten Sie das Projekt jetzt archivieren?',
+          "Projekt archivieren",
+          "Möchten Sie das Projekt jetzt archivieren?",
         ),
       )
       .pipe(
@@ -263,8 +261,8 @@ export class VariantsViewComponent implements OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          'Archivierung rückgängig machen',
-          'Möchten Sie die Archivierung des Projekts rückgängig machen?',
+          "Archivierung rückgängig machen",
+          "Möchten Sie die Archivierung des Projekts rückgängig machen?",
         ),
       )
       .pipe(
@@ -280,9 +278,9 @@ export class VariantsViewComponent implements OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          'Projekt löschen',
-          'Möchten Sie das Projekt und alle enthaltenen Varianten endgültig löschen? ' +
-            'Diese Aktion kann nicht rückgängig gemacht werden.',
+          "Projekt löschen",
+          "Möchten Sie das Projekt und alle enthaltenen Varianten endgültig löschen? " +
+            "Diese Aktion kann nicht rückgängig gemacht werden.",
         ),
       )
       .pipe(
@@ -294,17 +292,17 @@ export class VariantsViewComponent implements OnDestroy {
   }
 
   getTitleCurrentVersion(variant: VariantSummaryDto): string {
-    const archivedSuffix = variant.isArchived ? ' (archiviert)' : '';
+    const archivedSuffix = variant.isArchived ? " (archiviert)" : "";
 
     if (variant.latestSnapshotVersion) {
-      return variant.latestSnapshotVersion.name + '*' + archivedSuffix;
+      return variant.latestSnapshotVersion.name + "*" + archivedSuffix;
     }
 
     if (variant.latestReleaseVersion) {
       return variant.latestReleaseVersion.name + archivedSuffix;
     }
 
-    throw new Error('Unexpected data: No snapshot and no released version.');
+    throw new Error("Unexpected data: No snapshot and no released version.");
   }
 
   getChangedAtCurrentVersion(variant: VariantSummaryDto): Date {
@@ -316,7 +314,7 @@ export class VariantsViewComponent implements OnDestroy {
       return new Date(variant.latestReleaseVersion.createdAt);
     }
 
-    throw new Error('Unexpected data: No snapshot and no released version.');
+    throw new Error("Unexpected data: No snapshot and no released version.");
   }
 
   private updateProject(project: ProjectDto): void {

@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {ActionMenuComponent} from './action-menu.component';
+import {ComponentFixture, TestBed} from "@angular/core/testing";
+import {ActionMenuComponent} from "./action-menu.component";
 
-describe('ActionMenuComponent', () => {
+describe("ActionMenuComponent", () => {
   let component: ActionMenuComponent;
   let fixture: ComponentFixture<ActionMenuComponent>;
 
@@ -15,7 +15,7 @@ describe('ActionMenuComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

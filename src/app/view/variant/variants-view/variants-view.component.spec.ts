@@ -1,19 +1,19 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from "@angular/core/testing";
 
-import {VariantsViewComponent} from './variants-view.component';
-import {SbbDialogModule} from '@sbb-esta/angular/dialog';
+import {VariantsViewComponent} from "./variants-view.component";
+import {SbbDialogModule} from "@sbb-esta/angular/dialog";
 import {
   ProjectControllerBackendService,
   ProjectDto,
   VariantControllerBackendService,
   VariantCreateDto,
-} from '../../../api/generated';
-import {of} from 'rxjs';
-import {ActivatedRoute} from '@angular/router';
-import {NavigationService} from '../../../services/ui/navigation.service';
-import {VersionControlService} from '../../../services/data/version-control.service';
+} from "../../../api/generated";
+import {of} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
+import {NavigationService} from "../../../services/ui/navigation.service";
+import {VersionControlService} from "../../../services/data/version-control.service";
 
-describe('VariantsViewComponent', () => {
+describe("VariantsViewComponent", () => {
   let component: VariantsViewComponent;
   let fixture: ComponentFixture<VariantsViewComponent>;
 
@@ -27,12 +27,12 @@ describe('VariantsViewComponent', () => {
       getProject: (projectId: number) => {
         const project: ProjectDto = {
           id: 10,
-          name: '',
-          description: '',
-          summary: '',
+          name: "",
+          description: "",
+          summary: "",
           variants: [],
-          createdAt: '',
-          createdBy: '',
+          createdAt: "",
+          createdBy: "",
           isWritable: true,
           isArchived: false,
           isDeletable: false,
@@ -44,8 +44,8 @@ describe('VariantsViewComponent', () => {
     };
     activatedRoute = {
       params: of({
-        projectId: '10',
-        variantId: '20',
+        projectId: "10",
+        variantId: "20",
       }),
     };
     variantControllerBackendService = {
@@ -78,7 +78,7 @@ describe('VariantsViewComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

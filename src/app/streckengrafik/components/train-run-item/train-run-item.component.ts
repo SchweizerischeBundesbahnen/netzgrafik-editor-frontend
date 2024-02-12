@@ -1,24 +1,24 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {SgTrainrun} from '../../model/streckengrafik-model/sg-trainrun';
-import {SgTrainrunItem} from '../../model/streckengrafik-model/sg-trainrun-item';
-import {TimeSliderService} from '../../services/time-slider.service';
-import {takeUntil} from 'rxjs/operators';
-import {SliderChangeInfo} from '../../model/util/sliderChangeInfo';
-import {Subject} from 'rxjs';
-import {ViewBoxChangeInfo} from '../../model/util/viewBoxChangeInfo';
-import {ViewBoxService} from '../../services/util/view-box.service';
-import * as d3 from 'd3';
+import {Component, Input, OnDestroy, OnInit} from "@angular/core";
+import {SgTrainrun} from "../../model/streckengrafik-model/sg-trainrun";
+import {SgTrainrunItem} from "../../model/streckengrafik-model/sg-trainrun-item";
+import {TimeSliderService} from "../../services/time-slider.service";
+import {takeUntil} from "rxjs/operators";
+import {SliderChangeInfo} from "../../model/util/sliderChangeInfo";
+import {Subject} from "rxjs";
+import {ViewBoxChangeInfo} from "../../model/util/viewBoxChangeInfo";
+import {ViewBoxService} from "../../services/util/view-box.service";
+import * as d3 from "d3";
 import {
   UpdateCounterController,
   UpdateCounterHandler,
   UpdateCounterTriggerSerivce,
-} from '../../services/util/update-counter.service';
+} from "../../services/util/update-counter.service";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[sbb-train-run-item]',
-  templateUrl: './train-run-item.component.html',
-  styleUrls: ['./train-run-item.component.scss'],
+  selector: "[sbb-train-run-item]",
+  templateUrl: "./train-run-item.component.html",
+  styleUrls: ["./train-run-item.component.scss"],
 })
 export class TrainRunItemComponent
   implements OnInit, OnDestroy, UpdateCounterHandler
@@ -87,14 +87,14 @@ export class TrainRunItemComponent
   }
 
   public getTranslate(path: SgTrainrunItem): string {
-    return '' + path.getStartposition();
+    return "" + path.getStartposition();
   }
 
   getId(trainrun: SgTrainrun, trainrunItem: SgTrainrunItem) {
     return (
-      'streckengrafik_trainrun_item_' +
+      "streckengrafik_trainrun_item_" +
       trainrun.getId() +
-      '_' +
+      "_" +
       trainrunItem.backward
     );
   }
@@ -107,7 +107,7 @@ export class TrainRunItemComponent
     if (event.buttons !== 0) {
       return;
     }
-    const key = '#' + this.getId(trainrun, trainrunItem);
+    const key = "#" + this.getId(trainrun, trainrunItem);
     d3.selectAll(key).raise();
   }
 

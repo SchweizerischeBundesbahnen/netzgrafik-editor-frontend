@@ -3,12 +3,12 @@ import {
   TrainrunCategory,
   TrainrunFrequency,
   TrainrunTimeCategory,
-} from '../data-structures/business.data.structures';
+} from "../data-structures/business.data.structures";
 
 export class FilterSetting {
   // special field/case: isTemporaryDisableFilteringOfItemsInView should not be compared nor copied
   private static isTemporaryDisableFilteringOfItemsInViewAttribute =
-    'isTemporaryDisableFilteringOfItemsInView';
+    "isTemporaryDisableFilteringOfItemsInView";
 
   private static currentId = 0;
 
@@ -57,8 +57,8 @@ export class FilterSetting {
       temporaryEmptyAndNonStopFilteringSwitchedOff,
     }: FilterSettingDto = {
       id: FilterSetting.incrementId(),
-      name: 'Filter',
-      description: '',
+      name: "Filter",
+      description: "",
       filterNodeLabels: [],
       filterNoteLabels: [],
       filterTrainrunLabels: [],

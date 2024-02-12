@@ -1,16 +1,16 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from "@angular/core/testing";
 
-import {NavigationBarComponent} from './navigation-bar.component';
+import {NavigationBarComponent} from "./navigation-bar.component";
 import {
   ProjectControllerBackendService,
   VariantControllerBackendService,
-} from '../../api/generated';
-import {NavigationEnd, Router, RouterEvent} from '@angular/router';
-import {NavigationService} from '../../services/ui/navigation.service';
-import {NEVER} from 'rxjs';
-import {map} from 'rxjs/operators';
+} from "../../api/generated";
+import {NavigationEnd, Router, RouterEvent} from "@angular/router";
+import {NavigationService} from "../../services/ui/navigation.service";
+import {NEVER} from "rxjs";
+import {map} from "rxjs/operators";
 
-describe('NavigationBarComponent', () => {
+describe("NavigationBarComponent", () => {
   let component: NavigationBarComponent;
   let fixture: ComponentFixture<NavigationBarComponent>;
 
@@ -20,7 +20,7 @@ describe('NavigationBarComponent', () => {
 
   beforeEach(async () => {
     router = {
-      events: NEVER.pipe(map(() => new NavigationEnd(0, '', ''))),
+      events: NEVER.pipe(map(() => new NavigationEnd(0, "", ""))),
     };
 
     await TestBed.configureTestingModule({
@@ -46,7 +46,7 @@ describe('NavigationBarComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

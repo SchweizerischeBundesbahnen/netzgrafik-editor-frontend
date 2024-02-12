@@ -1,4 +1,4 @@
-import {PointDto} from '../data-structures/technical.data.structures';
+import {PointDto} from "../data-structures/technical.data.structures";
 
 export class Vec2D {
   private x: number;
@@ -70,7 +70,7 @@ export class Vec2D {
   }
 
   public toString(): string {
-    return '(' + this.getX() + ',' + this.getY() + ')';
+    return "(" + this.getX() + "," + this.getY() + ")";
   }
 
   public setDataFromString(x: string, y: string): Vec2D {

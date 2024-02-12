@@ -1,24 +1,24 @@
-import {Component, OnInit} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
-import {filter, map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
-import {NavigationService} from '../../services/ui/navigation.service';
+import {Component, OnInit} from "@angular/core";
+import {NavigationEnd, Router} from "@angular/router";
+import {filter, map} from "rxjs/operators";
+import {Observable} from "rxjs";
+import {NavigationService} from "../../services/ui/navigation.service";
 import {
   ProjectControllerBackendService,
   VariantControllerBackendService,
-} from '../../api/generated';
+} from "../../api/generated";
 
 @Component({
-  selector: 'sbb-navigation-bar',
-  templateUrl: './navigation-bar.component.html',
-  styleUrls: ['./navigation-bar.component.scss'],
+  selector: "sbb-navigation-bar",
+  templateUrl: "./navigation-bar.component.html",
+  styleUrls: ["./navigation-bar.component.scss"],
 })
 export class NavigationBarComponent implements OnInit {
   currentDefinitions: BreadcrumbDefinition[] = [];
 
   private readonly definitions: BreadcrumbsDefinition[] = [
     {
-      when: '/projects/{}',
+      when: "/projects/{}",
       then: (params) => [
         {
           name: this.projectsBackendService
@@ -31,7 +31,7 @@ export class NavigationBarComponent implements OnInit {
       ],
     },
     {
-      when: '/projects/{}/variants/{}',
+      when: "/projects/{}/variants/{}",
       then: (params) => [
         {
           name: this.projectsBackendService
@@ -104,7 +104,7 @@ class UrlHandler {
   readonly splittedUrl: string[];
 
   constructor(readonly url: string) {
-    this.splittedUrl = url.split('/');
+    this.splittedUrl = url.split("/");
   }
 }
 
@@ -113,10 +113,10 @@ class BreadcrumbsDefinitionsHandler {
   private readonly parameterPointers: number[] = [];
 
   constructor(readonly definition: BreadcrumbsDefinition) {
-    this.splittedWhenPattern = definition.when.split('/');
+    this.splittedWhenPattern = definition.when.split("/");
 
     this.splittedWhenPattern.forEach((value, index) => {
-      if (value === '{}') {
+      if (value === "{}") {
         this.parameterPointers.push(index);
       }
     });

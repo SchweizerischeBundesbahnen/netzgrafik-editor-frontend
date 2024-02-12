@@ -1,8 +1,8 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {SlotComponent} from './slot.component';
-import {SbbMenu} from '@sbb-esta/angular/menu';
+import {ComponentFixture, TestBed} from "@angular/core/testing";
+import {SlotComponent} from "./slot.component";
+import {SbbMenu} from "@sbb-esta/angular/menu";
 
-describe('SlotComponent', () => {
+describe("SlotComponent", () => {
   let component: SlotComponent;
   let fixture: ComponentFixture<SlotComponent>;
 
@@ -18,7 +18,7 @@ describe('SlotComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

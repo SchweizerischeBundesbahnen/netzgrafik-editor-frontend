@@ -1,24 +1,24 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from "@angular/core";
 import {
   TrainrunCategory,
   TrainrunFrequency,
   TrainrunTimeCategory,
-} from '../../../../data-structures/business.data.structures';
-import {Trainrun} from '../../../../models/trainrun.model';
-import {TrainrunService} from '../../../../services/data/trainrun.service';
-import {TrainrunSectionService} from '../../../../services/data/trainrunsection.service';
-import {UiInteractionService} from '../../../../services/ui/ui.interaction.service';
-import {ConfirmationDialogParameter} from '../../confirmation-dialog/confirmation-dialog.component';
-import {DataService} from '../../../../services/data/data.service';
-import {StaticDomTags} from '../../../editor-main-view/data-views/static.dom.tags';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {TrainrunDialogParameter} from '../trainrun-and-section-dialog.component';
+} from "../../../../data-structures/business.data.structures";
+import {Trainrun} from "../../../../models/trainrun.model";
+import {TrainrunService} from "../../../../services/data/trainrun.service";
+import {TrainrunSectionService} from "../../../../services/data/trainrunsection.service";
+import {UiInteractionService} from "../../../../services/ui/ui.interaction.service";
+import {ConfirmationDialogParameter} from "../../confirmation-dialog/confirmation-dialog.component";
+import {DataService} from "../../../../services/data/data.service";
+import {StaticDomTags} from "../../../editor-main-view/data-views/static.dom.tags";
+import {takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
+import {TrainrunDialogParameter} from "../trainrun-and-section-dialog.component";
 
 @Component({
-  selector: 'sbb-trainrun-tab',
-  templateUrl: './trainrun-tab.component.html',
-  styleUrls: ['./trainrun-tab.component.scss'],
+  selector: "sbb-trainrun-tab",
+  templateUrl: "./trainrun-tab.component.html",
+  styleUrls: ["./trainrun-tab.component.scss"],
 })
 export class TrainrunTabComponent implements OnDestroy {
   @Output() trainrunDeleted = new EventEmitter<void>();
@@ -55,39 +55,39 @@ export class TrainrunTabComponent implements OnDestroy {
 
   getDialogContentClassTag(): string {
     if (this.isIntegratedComponent) {
-      return 'EditTrainrunDialogTabContent IntegratedComponent';
+      return "EditTrainrunDialogTabContent IntegratedComponent";
     }
-    return 'EditTrainrunDialogTabContent';
+    return "EditTrainrunDialogTabContent";
   }
 
   getFrequencyClassname(trainrunFrequency: TrainrunFrequency): string {
     if (trainrunFrequency.id === this.selectedFrequency.id) {
       return (
-        'TrainrunDialog Frequency Frequency_' +
+        "TrainrunDialog Frequency Frequency_" +
         trainrunFrequency.linePatternRef +
-        ' ' +
+        " " +
         StaticDomTags.TAG_SELECTED
       );
     }
     return (
-      'TrainrunDialog Frequency Frequency_' + trainrunFrequency.linePatternRef
+      "TrainrunDialog Frequency Frequency_" + trainrunFrequency.linePatternRef
     );
   }
 
   getCategoryClassname(trainrunCategory: TrainrunCategory): string {
     if (trainrunCategory.id === this.selectedCategory.id) {
       return (
-        'TrainrunDialog ' +
+        "TrainrunDialog " +
         StaticDomTags.makeClassTag(
           StaticDomTags.TAG_COLOR_REF,
           trainrunCategory.colorRef,
         ) +
-        ' ' +
+        " " +
         StaticDomTags.TAG_SELECTED
       );
     }
     return (
-      'TrainrunDialog ' +
+      "TrainrunDialog " +
       StaticDomTags.makeClassTag(
         StaticDomTags.TAG_COLOR_REF,
         trainrunCategory.colorRef,
@@ -98,17 +98,17 @@ export class TrainrunTabComponent implements OnDestroy {
   getTimeCategoryClassname(trainrunTimeCategory: TrainrunTimeCategory): string {
     if (trainrunTimeCategory.id === this.selectedTimeCategory.id) {
       return (
-        'TrainrunDialog TimeCategory ' +
+        "TrainrunDialog TimeCategory " +
         StaticDomTags.makeClassTag(
           StaticDomTags.TAG_LINEPATTERN_REF,
           trainrunTimeCategory.linePatternRef,
         ) +
-        ' ' +
+        " " +
         StaticDomTags.TAG_SELECTED
       );
     }
     return (
-      'TrainrunDialog TimeCategory ' +
+      "TrainrunDialog TimeCategory " +
       StaticDomTags.makeClassTag(
         StaticDomTags.TAG_LINEPATTERN_REF,
         trainrunTimeCategory.linePatternRef,
@@ -155,14 +155,14 @@ export class TrainrunTabComponent implements OnDestroy {
 
   makeButtonLabel(label: string): string {
     if (label.length > 4) {
-      return label.substring(0, 3) + '...';
+      return label.substring(0, 3) + "...";
     }
     return label;
   }
 
   onDeleteTrainrun() {
-    const dialogTitle = 'Löschen';
-    const dialogContent = 'Soll der gesamte Zuglauf definitiv gelöscht werden?';
+    const dialogTitle = "Löschen";
+    const dialogContent = "Soll der gesamte Zuglauf definitiv gelöscht werden?";
     const confirmationDialogParamter = new ConfirmationDialogParameter(
       dialogTitle,
       dialogContent,

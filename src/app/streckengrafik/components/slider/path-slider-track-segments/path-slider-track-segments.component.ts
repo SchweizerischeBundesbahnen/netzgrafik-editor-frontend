@@ -1,12 +1,12 @@
-import {Component, Input} from '@angular/core';
-import {SgPath} from '../../../model/streckengrafik-model/sg-path';
-import {TrackSegments} from '../../../model/trackData';
+import {Component, Input} from "@angular/core";
+import {SgPath} from "../../../model/streckengrafik-model/sg-path";
+import {TrackSegments} from "../../../model/trackData";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[sbb-path-slider-track-segments]',
-  templateUrl: './path-slider-track-segments.component.html',
-  styleUrls: ['./path-slider-track-segments.component.scss'],
+  selector: "[sbb-path-slider-track-segments]",
+  templateUrl: "./path-slider-track-segments.component.html",
+  styleUrls: ["./path-slider-track-segments.component.scss"],
 })
 export class PathSliderTrackSegmentsComponent {
   @Input()
@@ -39,20 +39,20 @@ export class PathSliderTrackSegmentsComponent {
             const p =
               this.zeroPoint + this.makePositionSymmetric(i, sts.nbrTracks) * 3;
             const d: string =
-              '' +
+              "" +
               (index !== 0
-                ? ' M ' + startAt + ',' + this.zeroPoint + ' L '
-                : ' M ') +
+                ? " M " + startAt + "," + this.zeroPoint + " L "
+                : " M ") +
               startAt +
-              ',' +
+              "," +
               p +
-              ' L ' +
+              " L " +
               endAt +
-              ',' +
+              "," +
               p +
               (index === ps.trackData.sectionTrackSegments.length - 1
-                ? ' '
-                : ' L ' + endAt + ',' + this.zeroPoint);
+                ? " "
+                : " L " + endAt + "," + this.zeroPoint);
             path.push(d);
           }
         }
@@ -95,31 +95,31 @@ export class PathSliderTrackSegmentsComponent {
             y2: y2,
             nbr: nbrTracks,
             d:
-              'M ' +
+              "M " +
               startAt +
-              ', ' +
+              ", " +
               y1 +
-              ' ' +
-              ' L ' +
+              " " +
+              " L " +
               endAt +
-              ', ' +
+              ", " +
               y1 +
-              ' ' +
-              ' L ' +
+              " " +
+              " L " +
               endAt +
-              ', ' +
+              ", " +
               y2 +
-              ' ' +
-              ' L ' +
+              " " +
+              " L " +
               startAt +
-              ', ' +
+              ", " +
               y2 +
-              ' ' +
-              ' L ' +
+              " " +
+              " L " +
               startAt +
-              ', ' +
+              ", " +
               y1 +
-              ' ',
+              " ",
           });
         }
       },

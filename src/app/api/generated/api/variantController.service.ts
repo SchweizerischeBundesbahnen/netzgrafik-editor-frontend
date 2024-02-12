@@ -11,7 +11,7 @@
  */
 /* tslint:disable:no-unused-variable member-ordering */
 
-import {Inject, Injectable, Optional} from '@angular/core';
+import {Inject, Injectable, Optional} from "@angular/core";
 import {
   HttpClient,
   HttpHeaders,
@@ -19,25 +19,25 @@ import {
   HttpResponse,
   HttpEvent,
   HttpParameterCodec,
-} from '@angular/common/http';
-import {CustomHttpParameterCodec} from '../encoder';
-import {Observable} from 'rxjs';
+} from "@angular/common/http";
+import {CustomHttpParameterCodec} from "../encoder";
+import {Observable} from "rxjs";
 
-import {VariantCreateDto} from '../model/models';
-import {VariantCreateFromVersionDto} from '../model/models';
-import {VariantDto} from '../model/models';
+import {VariantCreateDto} from "../model/models";
+import {VariantCreateFromVersionDto} from "../model/models";
+import {VariantDto} from "../model/models";
 
-import {BASE_PATH, COLLECTION_FORMATS} from '../variables';
-import {Configuration} from '../configuration';
-import {VariantControllerBackendServiceInterface} from './variantController.serviceInterface';
+import {BASE_PATH, COLLECTION_FORMATS} from "../variables";
+import {Configuration} from "../configuration";
+import {VariantControllerBackendServiceInterface} from "./variantController.serviceInterface";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class VariantControllerBackendService
   implements VariantControllerBackendServiceInterface
 {
-  protected basePath = 'http://localhost:8080';
+  protected basePath = "http://localhost:8080";
   public defaultHeaders = new HttpHeaders();
   public configuration = new Configuration();
   public encoder: HttpParameterCodec;
@@ -50,8 +50,8 @@ export class VariantControllerBackendService
     if (configuration) {
       this.configuration = configuration;
     }
-    if (typeof this.configuration.basePath !== 'string') {
-      if (typeof basePath !== 'string') {
+    if (typeof this.configuration.basePath !== "string") {
+      if (typeof basePath !== "string") {
         basePath = this.basePath;
       }
       this.configuration.basePath = basePath;
@@ -64,7 +64,7 @@ export class VariantControllerBackendService
     value: any,
     key?: string,
   ): HttpParams {
-    if (typeof value === 'object' && value instanceof Date === false) {
+    if (typeof value === "object" && value instanceof Date === false) {
       httpParams = this.addToHttpParamsRecursive(httpParams, value);
     } else {
       httpParams = this.addToHttpParamsRecursive(httpParams, value, key);
@@ -81,7 +81,7 @@ export class VariantControllerBackendService
       return httpParams;
     }
 
-    if (typeof value === 'object') {
+    if (typeof value === "object") {
       if (Array.isArray(value)) {
         (value as any[]).forEach(
           (elem) =>
@@ -94,7 +94,7 @@ export class VariantControllerBackendService
             (value as Date).toISOString().substr(0, 10),
           );
         } else {
-          throw Error('key may not be null if value is Date');
+          throw Error("key may not be null if value is Date");
         }
       } else {
         Object.keys(value).forEach(
@@ -109,7 +109,7 @@ export class VariantControllerBackendService
     } else if (key != null) {
       httpParams = httpParams.append(key, value);
     } else {
-      throw Error('key may not be null if value is not object or array');
+      throw Error("key may not be null if value is not object or array");
     }
     return httpParams;
   }
@@ -121,31 +121,31 @@ export class VariantControllerBackendService
    */
   public archiveVariant(
     variantId: number,
-    observe?: 'body',
+    observe?: "body",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<any>;
   public archiveVariant(
     variantId: number,
-    observe?: 'response',
+    observe?: "response",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpResponse<any>>;
   public archiveVariant(
     variantId: number,
-    observe?: 'events',
+    observe?: "events",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpEvent<any>>;
   public archiveVariant(
     variantId: number,
-    observe: any = 'body',
+    observe: any = "body",
     reportProgress: boolean = false,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<any> {
     if (variantId === null || variantId === undefined) {
       throw new Error(
-        'Required parameter variantId was null or undefined when calling archiveVariant.',
+        "Required parameter variantId was null or undefined when calling archiveVariant.",
       );
     }
 
@@ -153,9 +153,9 @@ export class VariantControllerBackendService
 
     let credential: string | undefined;
     // authentication (OAuth) required
-    credential = this.configuration.lookupCredential('OAuth');
+    credential = this.configuration.lookupCredential("OAuth");
     if (credential) {
-      headers = headers.set('Authorization', 'Bearer ' + credential);
+      headers = headers.set("Authorization", "Bearer " + credential);
     }
 
     let httpHeaderAcceptSelected: string | undefined =
@@ -167,15 +167,15 @@ export class VariantControllerBackendService
         this.configuration.selectHeaderAccept(httpHeaderAccepts);
     }
     if (httpHeaderAcceptSelected !== undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
+      headers = headers.set("Accept", httpHeaderAcceptSelected);
     }
 
-    let responseType: 'text' | 'json' = 'json';
+    let responseType: "text" | "json" = "json";
     if (
       httpHeaderAcceptSelected &&
-      httpHeaderAcceptSelected.startsWith('text')
+      httpHeaderAcceptSelected.startsWith("text")
     ) {
-      responseType = 'text';
+      responseType = "text";
     }
 
     return this.httpClient.put<any>(
@@ -200,39 +200,39 @@ export class VariantControllerBackendService
   public createVariant(
     projectId: number,
     variantCreateDto: VariantCreateDto,
-    observe?: 'body',
+    observe?: "body",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<number>;
   public createVariant(
     projectId: number,
     variantCreateDto: VariantCreateDto,
-    observe?: 'response',
+    observe?: "response",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<HttpResponse<number>>;
   public createVariant(
     projectId: number,
     variantCreateDto: VariantCreateDto,
-    observe?: 'events',
+    observe?: "events",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<HttpEvent<number>>;
   public createVariant(
     projectId: number,
     variantCreateDto: VariantCreateDto,
-    observe: any = 'body',
+    observe: any = "body",
     reportProgress: boolean = false,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<any> {
     if (projectId === null || projectId === undefined) {
       throw new Error(
-        'Required parameter projectId was null or undefined when calling createVariant.',
+        "Required parameter projectId was null or undefined when calling createVariant.",
       );
     }
     if (variantCreateDto === null || variantCreateDto === undefined) {
       throw new Error(
-        'Required parameter variantCreateDto was null or undefined when calling createVariant.',
+        "Required parameter variantCreateDto was null or undefined when calling createVariant.",
       );
     }
 
@@ -240,37 +240,37 @@ export class VariantControllerBackendService
 
     let credential: string | undefined;
     // authentication (OAuth) required
-    credential = this.configuration.lookupCredential('OAuth');
+    credential = this.configuration.lookupCredential("OAuth");
     if (credential) {
-      headers = headers.set('Authorization', 'Bearer ' + credential);
+      headers = headers.set("Authorization", "Bearer " + credential);
     }
 
     let httpHeaderAcceptSelected: string | undefined =
       options && options.httpHeaderAccept;
     if (httpHeaderAcceptSelected === undefined) {
       // to determine the Accept header
-      const httpHeaderAccepts: string[] = ['application/json'];
+      const httpHeaderAccepts: string[] = ["application/json"];
       httpHeaderAcceptSelected =
         this.configuration.selectHeaderAccept(httpHeaderAccepts);
     }
     if (httpHeaderAcceptSelected !== undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
+      headers = headers.set("Accept", httpHeaderAcceptSelected);
     }
 
     // to determine the Content-Type header
-    const consumes: string[] = ['application/json'];
+    const consumes: string[] = ["application/json"];
     const httpContentTypeSelected: string | undefined =
       this.configuration.selectHeaderContentType(consumes);
     if (httpContentTypeSelected !== undefined) {
-      headers = headers.set('Content-Type', httpContentTypeSelected);
+      headers = headers.set("Content-Type", httpContentTypeSelected);
     }
 
-    let responseType: 'text' | 'json' = 'json';
+    let responseType: "text" | "json" = "json";
     if (
       httpHeaderAcceptSelected &&
-      httpHeaderAcceptSelected.startsWith('text')
+      httpHeaderAcceptSelected.startsWith("text")
     ) {
-      responseType = 'text';
+      responseType = "text";
     }
 
     return this.httpClient.post<number>(
@@ -295,34 +295,34 @@ export class VariantControllerBackendService
   public createVariantFromVersion(
     versionId: number,
     variantCreateFromVersionDto: VariantCreateFromVersionDto,
-    observe?: 'body',
+    observe?: "body",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<number>;
   public createVariantFromVersion(
     versionId: number,
     variantCreateFromVersionDto: VariantCreateFromVersionDto,
-    observe?: 'response',
+    observe?: "response",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<HttpResponse<number>>;
   public createVariantFromVersion(
     versionId: number,
     variantCreateFromVersionDto: VariantCreateFromVersionDto,
-    observe?: 'events',
+    observe?: "events",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<HttpEvent<number>>;
   public createVariantFromVersion(
     versionId: number,
     variantCreateFromVersionDto: VariantCreateFromVersionDto,
-    observe: any = 'body',
+    observe: any = "body",
     reportProgress: boolean = false,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<any> {
     if (versionId === null || versionId === undefined) {
       throw new Error(
-        'Required parameter versionId was null or undefined when calling createVariantFromVersion.',
+        "Required parameter versionId was null or undefined when calling createVariantFromVersion.",
       );
     }
     if (
@@ -330,7 +330,7 @@ export class VariantControllerBackendService
       variantCreateFromVersionDto === undefined
     ) {
       throw new Error(
-        'Required parameter variantCreateFromVersionDto was null or undefined when calling createVariantFromVersion.',
+        "Required parameter variantCreateFromVersionDto was null or undefined when calling createVariantFromVersion.",
       );
     }
 
@@ -338,37 +338,37 @@ export class VariantControllerBackendService
 
     let credential: string | undefined;
     // authentication (OAuth) required
-    credential = this.configuration.lookupCredential('OAuth');
+    credential = this.configuration.lookupCredential("OAuth");
     if (credential) {
-      headers = headers.set('Authorization', 'Bearer ' + credential);
+      headers = headers.set("Authorization", "Bearer " + credential);
     }
 
     let httpHeaderAcceptSelected: string | undefined =
       options && options.httpHeaderAccept;
     if (httpHeaderAcceptSelected === undefined) {
       // to determine the Accept header
-      const httpHeaderAccepts: string[] = ['application/json'];
+      const httpHeaderAccepts: string[] = ["application/json"];
       httpHeaderAcceptSelected =
         this.configuration.selectHeaderAccept(httpHeaderAccepts);
     }
     if (httpHeaderAcceptSelected !== undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
+      headers = headers.set("Accept", httpHeaderAcceptSelected);
     }
 
     // to determine the Content-Type header
-    const consumes: string[] = ['application/json'];
+    const consumes: string[] = ["application/json"];
     const httpContentTypeSelected: string | undefined =
       this.configuration.selectHeaderContentType(consumes);
     if (httpContentTypeSelected !== undefined) {
-      headers = headers.set('Content-Type', httpContentTypeSelected);
+      headers = headers.set("Content-Type", httpContentTypeSelected);
     }
 
-    let responseType: 'text' | 'json' = 'json';
+    let responseType: "text" | "json" = "json";
     if (
       httpHeaderAcceptSelected &&
-      httpHeaderAcceptSelected.startsWith('text')
+      httpHeaderAcceptSelected.startsWith("text")
     ) {
-      responseType = 'text';
+      responseType = "text";
     }
 
     return this.httpClient.post<number>(
@@ -391,31 +391,31 @@ export class VariantControllerBackendService
    */
   public deleteVariant(
     variantId: number,
-    observe?: 'body',
+    observe?: "body",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<string>;
   public deleteVariant(
     variantId: number,
-    observe?: 'response',
+    observe?: "response",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<HttpResponse<string>>;
   public deleteVariant(
     variantId: number,
-    observe?: 'events',
+    observe?: "events",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<HttpEvent<string>>;
   public deleteVariant(
     variantId: number,
-    observe: any = 'body',
+    observe: any = "body",
     reportProgress: boolean = false,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<any> {
     if (variantId === null || variantId === undefined) {
       throw new Error(
-        'Required parameter variantId was null or undefined when calling deleteVariant.',
+        "Required parameter variantId was null or undefined when calling deleteVariant.",
       );
     }
 
@@ -423,29 +423,29 @@ export class VariantControllerBackendService
 
     let credential: string | undefined;
     // authentication (OAuth) required
-    credential = this.configuration.lookupCredential('OAuth');
+    credential = this.configuration.lookupCredential("OAuth");
     if (credential) {
-      headers = headers.set('Authorization', 'Bearer ' + credential);
+      headers = headers.set("Authorization", "Bearer " + credential);
     }
 
     let httpHeaderAcceptSelected: string | undefined =
       options && options.httpHeaderAccept;
     if (httpHeaderAcceptSelected === undefined) {
       // to determine the Accept header
-      const httpHeaderAccepts: string[] = ['application/json'];
+      const httpHeaderAccepts: string[] = ["application/json"];
       httpHeaderAcceptSelected =
         this.configuration.selectHeaderAccept(httpHeaderAccepts);
     }
     if (httpHeaderAcceptSelected !== undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
+      headers = headers.set("Accept", httpHeaderAcceptSelected);
     }
 
-    let responseType: 'text' | 'json' = 'json';
+    let responseType: "text" | "json" = "json";
     if (
       httpHeaderAcceptSelected &&
-      httpHeaderAcceptSelected.startsWith('text')
+      httpHeaderAcceptSelected.startsWith("text")
     ) {
-      responseType = 'text';
+      responseType = "text";
     }
 
     return this.httpClient.delete<string>(
@@ -467,31 +467,31 @@ export class VariantControllerBackendService
    */
   public dropSnapshots(
     variantId: number,
-    observe?: 'body',
+    observe?: "body",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<any>;
   public dropSnapshots(
     variantId: number,
-    observe?: 'response',
+    observe?: "response",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpResponse<any>>;
   public dropSnapshots(
     variantId: number,
-    observe?: 'events',
+    observe?: "events",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpEvent<any>>;
   public dropSnapshots(
     variantId: number,
-    observe: any = 'body',
+    observe: any = "body",
     reportProgress: boolean = false,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<any> {
     if (variantId === null || variantId === undefined) {
       throw new Error(
-        'Required parameter variantId was null or undefined when calling dropSnapshots.',
+        "Required parameter variantId was null or undefined when calling dropSnapshots.",
       );
     }
 
@@ -499,9 +499,9 @@ export class VariantControllerBackendService
 
     let credential: string | undefined;
     // authentication (OAuth) required
-    credential = this.configuration.lookupCredential('OAuth');
+    credential = this.configuration.lookupCredential("OAuth");
     if (credential) {
-      headers = headers.set('Authorization', 'Bearer ' + credential);
+      headers = headers.set("Authorization", "Bearer " + credential);
     }
 
     let httpHeaderAcceptSelected: string | undefined =
@@ -513,15 +513,15 @@ export class VariantControllerBackendService
         this.configuration.selectHeaderAccept(httpHeaderAccepts);
     }
     if (httpHeaderAcceptSelected !== undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
+      headers = headers.set("Accept", httpHeaderAcceptSelected);
     }
 
-    let responseType: 'text' | 'json' = 'json';
+    let responseType: "text" | "json" = "json";
     if (
       httpHeaderAcceptSelected &&
-      httpHeaderAcceptSelected.startsWith('text')
+      httpHeaderAcceptSelected.startsWith("text")
     ) {
-      responseType = 'text';
+      responseType = "text";
     }
 
     return this.httpClient.delete<any>(
@@ -543,31 +543,31 @@ export class VariantControllerBackendService
    */
   public getVariant(
     variantId: number,
-    observe?: 'body',
+    observe?: "body",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<VariantDto>;
   public getVariant(
     variantId: number,
-    observe?: 'response',
+    observe?: "response",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<HttpResponse<VariantDto>>;
   public getVariant(
     variantId: number,
-    observe?: 'events',
+    observe?: "events",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<HttpEvent<VariantDto>>;
   public getVariant(
     variantId: number,
-    observe: any = 'body',
+    observe: any = "body",
     reportProgress: boolean = false,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<any> {
     if (variantId === null || variantId === undefined) {
       throw new Error(
-        'Required parameter variantId was null or undefined when calling getVariant.',
+        "Required parameter variantId was null or undefined when calling getVariant.",
       );
     }
 
@@ -575,29 +575,29 @@ export class VariantControllerBackendService
 
     let credential: string | undefined;
     // authentication (OAuth) required
-    credential = this.configuration.lookupCredential('OAuth');
+    credential = this.configuration.lookupCredential("OAuth");
     if (credential) {
-      headers = headers.set('Authorization', 'Bearer ' + credential);
+      headers = headers.set("Authorization", "Bearer " + credential);
     }
 
     let httpHeaderAcceptSelected: string | undefined =
       options && options.httpHeaderAccept;
     if (httpHeaderAcceptSelected === undefined) {
       // to determine the Accept header
-      const httpHeaderAccepts: string[] = ['application/json'];
+      const httpHeaderAccepts: string[] = ["application/json"];
       httpHeaderAcceptSelected =
         this.configuration.selectHeaderAccept(httpHeaderAccepts);
     }
     if (httpHeaderAcceptSelected !== undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
+      headers = headers.set("Accept", httpHeaderAcceptSelected);
     }
 
-    let responseType: 'text' | 'json' = 'json';
+    let responseType: "text" | "json" = "json";
     if (
       httpHeaderAcceptSelected &&
-      httpHeaderAcceptSelected.startsWith('text')
+      httpHeaderAcceptSelected.startsWith("text")
     ) {
-      responseType = 'text';
+      responseType = "text";
     }
 
     return this.httpClient.get<VariantDto>(
@@ -619,31 +619,31 @@ export class VariantControllerBackendService
    */
   public raiseSnapshotsToNewestReleaseVersion(
     variantId: number,
-    observe?: 'body',
+    observe?: "body",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<any>;
   public raiseSnapshotsToNewestReleaseVersion(
     variantId: number,
-    observe?: 'response',
+    observe?: "response",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpResponse<any>>;
   public raiseSnapshotsToNewestReleaseVersion(
     variantId: number,
-    observe?: 'events',
+    observe?: "events",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpEvent<any>>;
   public raiseSnapshotsToNewestReleaseVersion(
     variantId: number,
-    observe: any = 'body',
+    observe: any = "body",
     reportProgress: boolean = false,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<any> {
     if (variantId === null || variantId === undefined) {
       throw new Error(
-        'Required parameter variantId was null or undefined when calling raiseSnapshotsToNewestReleaseVersion.',
+        "Required parameter variantId was null or undefined when calling raiseSnapshotsToNewestReleaseVersion.",
       );
     }
 
@@ -651,9 +651,9 @@ export class VariantControllerBackendService
 
     let credential: string | undefined;
     // authentication (OAuth) required
-    credential = this.configuration.lookupCredential('OAuth');
+    credential = this.configuration.lookupCredential("OAuth");
     if (credential) {
-      headers = headers.set('Authorization', 'Bearer ' + credential);
+      headers = headers.set("Authorization", "Bearer " + credential);
     }
 
     let httpHeaderAcceptSelected: string | undefined =
@@ -665,15 +665,15 @@ export class VariantControllerBackendService
         this.configuration.selectHeaderAccept(httpHeaderAccepts);
     }
     if (httpHeaderAcceptSelected !== undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
+      headers = headers.set("Accept", httpHeaderAcceptSelected);
     }
 
-    let responseType: 'text' | 'json' = 'json';
+    let responseType: "text" | "json" = "json";
     if (
       httpHeaderAcceptSelected &&
-      httpHeaderAcceptSelected.startsWith('text')
+      httpHeaderAcceptSelected.startsWith("text")
     ) {
-      responseType = 'text';
+      responseType = "text";
     }
 
     return this.httpClient.put<any>(
@@ -696,31 +696,31 @@ export class VariantControllerBackendService
    */
   public unarchiveVariant(
     variantId: number,
-    observe?: 'body',
+    observe?: "body",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<any>;
   public unarchiveVariant(
     variantId: number,
-    observe?: 'response',
+    observe?: "response",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpResponse<any>>;
   public unarchiveVariant(
     variantId: number,
-    observe?: 'events',
+    observe?: "events",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpEvent<any>>;
   public unarchiveVariant(
     variantId: number,
-    observe: any = 'body',
+    observe: any = "body",
     reportProgress: boolean = false,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<any> {
     if (variantId === null || variantId === undefined) {
       throw new Error(
-        'Required parameter variantId was null or undefined when calling unarchiveVariant.',
+        "Required parameter variantId was null or undefined when calling unarchiveVariant.",
       );
     }
 
@@ -728,9 +728,9 @@ export class VariantControllerBackendService
 
     let credential: string | undefined;
     // authentication (OAuth) required
-    credential = this.configuration.lookupCredential('OAuth');
+    credential = this.configuration.lookupCredential("OAuth");
     if (credential) {
-      headers = headers.set('Authorization', 'Bearer ' + credential);
+      headers = headers.set("Authorization", "Bearer " + credential);
     }
 
     let httpHeaderAcceptSelected: string | undefined =
@@ -742,15 +742,15 @@ export class VariantControllerBackendService
         this.configuration.selectHeaderAccept(httpHeaderAccepts);
     }
     if (httpHeaderAcceptSelected !== undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
+      headers = headers.set("Accept", httpHeaderAcceptSelected);
     }
 
-    let responseType: 'text' | 'json' = 'json';
+    let responseType: "text" | "json" = "json";
     if (
       httpHeaderAcceptSelected &&
-      httpHeaderAcceptSelected.startsWith('text')
+      httpHeaderAcceptSelected.startsWith("text")
     ) {
-      responseType = 'text';
+      responseType = "text";
     }
 
     return this.httpClient.put<any>(

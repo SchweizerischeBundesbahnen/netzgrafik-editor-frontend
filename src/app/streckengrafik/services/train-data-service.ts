@@ -1,14 +1,14 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {TrainrunService} from '../../services/data/trainrun.service';
-import {TrainrunSectionService} from '../../services/data/trainrunsection.service';
-import {StaticDomTags} from '../../view/editor-main-view/data-views/static.dom.tags';
-import {TrainrunSectionText} from '../../data-structures/technical.data.structures';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {NodeService} from '../../services/data/node.service';
+import {Injectable, OnDestroy} from "@angular/core";
+import {TrainrunService} from "../../services/data/trainrun.service";
+import {TrainrunSectionService} from "../../services/data/trainrunsection.service";
+import {StaticDomTags} from "../../view/editor-main-view/data-views/static.dom.tags";
+import {TrainrunSectionText} from "../../data-structures/technical.data.structures";
+import {takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
+import {NodeService} from "../../services/data/node.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class TrainDataService implements OnDestroy {
   private lruCacheIsTrainrunConnected = new Map<number, boolean>();
@@ -65,15 +65,15 @@ export class TrainDataService implements OnDestroy {
   }
 
   createColoringClassTags(trainrunId: number): string {
-    let tag = '';
+    let tag = "";
     if (this.trainrunService.getSelectedTrainrun() === null) {
       return tag;
     }
     if (this.isTrainrunSelected(trainrunId)) {
-      tag += ' ' + StaticDomTags.TAG_SELECTED;
+      tag += " " + StaticDomTags.TAG_SELECTED;
     } else {
       if (!this.isTrainrunConnected(trainrunId)) {
-        tag += ' ' + StaticDomTags.TAG_MUTED;
+        tag += " " + StaticDomTags.TAG_MUTED;
       }
     }
     return tag;

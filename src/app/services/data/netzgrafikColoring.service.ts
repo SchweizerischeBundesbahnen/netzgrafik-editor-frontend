@@ -1,17 +1,17 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {Injectable} from "@angular/core";
+import {BehaviorSubject} from "rxjs";
 import {
   NetzgrafikColorDto,
   TrainrunCategory,
-} from '../../data-structures/business.data.structures';
-import {StaticDomTags} from '../../view/editor-main-view/data-views/static.dom.tags';
-import {NetzgrafikColor} from '../../models/netzgrafikColor.model';
-import {LogService} from '../../logger/log.service';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {ColorRefType} from '../../data-structures/technical.data.structures';
+} from "../../data-structures/business.data.structures";
+import {StaticDomTags} from "../../view/editor-main-view/data-views/static.dom.tags";
+import {NetzgrafikColor} from "../../models/netzgrafikColor.model";
+import {LogService} from "../../logger/log.service";
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {ColorRefType} from "../../data-structures/technical.data.structures";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class NetzgrafikColoringService {
   // Description of observable data service: https://coryrylan.com/blog/angular-observable-data-services
@@ -34,21 +34,21 @@ export class NetzgrafikColoringService {
     verbose = false,
   ) {
     [
-      'path.edge_line.layer_3.Freq_30.' +
+      "path.edge_line.layer_3.Freq_30." +
         StaticDomTags.TAG_UI_DIALOG +
-        ' {  stroke: whitesmoke; }',
-      'path.edge_line.layer_2.Freq_20.' +
+        " {  stroke: whitesmoke; }",
+      "path.edge_line.layer_2.Freq_20." +
         StaticDomTags.TAG_UI_DIALOG +
-        ' {  stroke: whitesmoke; }',
-      'path.edge_line.layer_1.Freq_15.' +
+        " {  stroke: whitesmoke; }",
+      "path.edge_line.layer_1.Freq_15." +
         StaticDomTags.TAG_UI_DIALOG +
-        ' {  stroke: whitesmoke; }',
-      'path.edge_line.layer_3.Freq_15.' +
+        " {  stroke: whitesmoke; }",
+      "path.edge_line.layer_3.Freq_15." +
         StaticDomTags.TAG_UI_DIALOG +
-        ' {  stroke: whitesmoke; }',
-      'path.edge_line.layer_3.Freq_15.' +
+        " {  stroke: whitesmoke; }",
+      "path.edge_line.layer_3.Freq_15." +
         StaticDomTags.TAG_UI_DIALOG +
-        ' {  stroke: whitesmoke; }',
+        " {  stroke: whitesmoke; }",
     ].forEach((rule) => {
       sheet.insertRule(rule, sheet.cssRules.length);
       if (verbose) {
@@ -62,14 +62,14 @@ export class NetzgrafikColoringService {
     verbose = false,
   ) {
     [
-      'path.edge_line.layer_3.Freq_30           {  stroke: var(--COLOR_BACKGROUND); }',
-      'path.edge_line.layer_2.Freq_20           {  stroke: var(--COLOR_BACKGROUND); }',
-      'path.edge_line.layer_1.Freq_15           {  stroke: var(--COLOR_BACKGROUND); }',
-      'path.edge_line.layer_3.Freq_15           {  stroke: var(--COLOR_BACKGROUND); }',
-      'path.transition_line.layer_3.Freq_30     {  stroke: var(--NODE_DOCKABLE); }',
-      'path.transition_line.layer_2.Freq_20     {  stroke: var(--NODE_DOCKABLE); }',
-      'path.transition_line.layer_1.Freq_15     {  stroke: var(--NODE_DOCKABLE); }',
-      'path.transition_line.layer_3.Freq_15     {  stroke: var(--NODE_DOCKABLE); }',
+      "path.edge_line.layer_3.Freq_30           {  stroke: var(--COLOR_BACKGROUND); }",
+      "path.edge_line.layer_2.Freq_20           {  stroke: var(--COLOR_BACKGROUND); }",
+      "path.edge_line.layer_1.Freq_15           {  stroke: var(--COLOR_BACKGROUND); }",
+      "path.edge_line.layer_3.Freq_15           {  stroke: var(--COLOR_BACKGROUND); }",
+      "path.transition_line.layer_3.Freq_30     {  stroke: var(--NODE_DOCKABLE); }",
+      "path.transition_line.layer_2.Freq_20     {  stroke: var(--NODE_DOCKABLE); }",
+      "path.transition_line.layer_1.Freq_15     {  stroke: var(--NODE_DOCKABLE); }",
+      "path.transition_line.layer_3.Freq_15     {  stroke: var(--NODE_DOCKABLE); }",
     ].forEach((rule) => {
       sheet.insertRule(rule, sheet.cssRules.length);
       if (verbose) {
@@ -85,54 +85,54 @@ export class NetzgrafikColoringService {
   ) {
     [
       {
-        tag: '',
+        tag: "",
         color:
           StaticDomTags.TAG_UI_DIALOG +
-          '_' +
+          "_" +
           StaticDomTags.PREFIX_COLOR_VARIABLE +
-          '_' +
+          "_" +
           colorRef +
-          '_' +
+          "_" +
           StaticDomTags.TAG_FOCUS.toUpperCase(),
         backgroundColor:
           StaticDomTags.TAG_UI_DIALOG +
-          '_' +
+          "_" +
           StaticDomTags.PREFIX_COLOR_VARIABLE +
-          '_' +
+          "_" +
           colorRef +
-          '_' +
+          "_" +
           StaticDomTags.TAG_MUTED.toUpperCase(),
       },
       {
         tag: StaticDomTags.TAG_SELECTED,
         color:
           StaticDomTags.TAG_UI_DIALOG +
-          '_' +
+          "_" +
           StaticDomTags.PREFIX_COLOR_VARIABLE +
-          '_' +
+          "_" +
           colorRef +
-          '_' +
+          "_" +
           StaticDomTags.TAG_MUTED.toUpperCase(),
         backgroundColor:
           StaticDomTags.TAG_UI_DIALOG +
-          '_' +
+          "_" +
           StaticDomTags.PREFIX_COLOR_VARIABLE +
-          '_' +
+          "_" +
           colorRef +
-          '_' +
+          "_" +
           StaticDomTags.TAG_FOCUS.toUpperCase(),
       },
     ].forEach((d) => {
       const rule =
-        'button.' +
-        'ColorRef_' +
+        "button." +
+        "ColorRef_" +
         colorRef +
-        (d.tag !== '' ? '.' + d.tag : '') +
-        ' { color: var(--' +
+        (d.tag !== "" ? "." + d.tag : "") +
+        " { color: var(--" +
         d.color +
-        '); background-color: var(--' +
+        "); background-color: var(--" +
         d.backgroundColor +
-        '); border-color: transparent; }';
+        "); border-color: transparent; }";
       sheet.insertRule(rule, sheet.cssRules.length);
       if (verbose) {
         console.log(rule);
@@ -149,64 +149,64 @@ export class NetzgrafikColoringService {
   ) {
     [
       {
-        tag: '',
-        color: StaticDomTags.PREFIX_COLOR_VARIABLE + '_' + colorRef,
+        tag: "",
+        color: StaticDomTags.PREFIX_COLOR_VARIABLE + "_" + colorRef,
       },
       {
         tag: StaticDomTags.TAG_HOVER,
         color:
           StaticDomTags.PREFIX_COLOR_VARIABLE +
-          '_' +
+          "_" +
           colorRef +
-          '_' +
+          "_" +
           StaticDomTags.TAG_FOCUS.toUpperCase(),
       },
       {
         tag: StaticDomTags.TAG_MUTED,
         color:
           StaticDomTags.PREFIX_COLOR_VARIABLE +
-          '_' +
+          "_" +
           colorRef +
-          '_' +
+          "_" +
           StaticDomTags.TAG_MUTED.toUpperCase(),
       },
       {
         tag: StaticDomTags.TAG_FOCUS,
         color:
           StaticDomTags.PREFIX_COLOR_VARIABLE +
-          '_' +
+          "_" +
           colorRef +
-          '_' +
+          "_" +
           StaticDomTags.TAG_FOCUS.toUpperCase(),
       },
       {
         tag: StaticDomTags.TAG_SELECTED,
-        color: 'COLOR_Edit',
+        color: "COLOR_Edit",
       },
       {
         tag: StaticDomTags.TAG_GRAYEDOUT,
-        color: 'COLOR_GRAYEDOUT',
+        color: "COLOR_GRAYEDOUT",
       },
       {
-        tag: StaticDomTags.TAG_SELECTED + '.' + StaticDomTags.TAG_GRAYEDOUT,
-        color: 'COLOR_GRAYEDOUT',
+        tag: StaticDomTags.TAG_SELECTED + "." + StaticDomTags.TAG_GRAYEDOUT,
+        color: "COLOR_GRAYEDOUT",
       },
       {
         tag: StaticDomTags.TAG_WARNING,
-        color: 'COLOR_Warning',
+        color: "COLOR_Warning",
       },
     ].forEach((d) => {
       const rule =
         domElement +
-        '.' +
-        'ColorRef_' +
+        "." +
+        "ColorRef_" +
         colorRef +
-        (d.tag !== '' ? '.' + d.tag : '') +
-        ' { ' +
+        (d.tag !== "" ? "." + d.tag : "") +
+        " { " +
         cssElement +
-        ': var(--' +
+        ": var(--" +
         d.color +
-        '); }';
+        "); }";
       sheet.insertRule(rule, sheet.cssRules.length);
       if (verbose) {
         console.log(rule);
@@ -223,77 +223,77 @@ export class NetzgrafikColoringService {
   ) {
     [
       {
-        tag: '',
+        tag: "",
         color:
           StaticDomTags.TAG_UI_DIALOG +
-          '_' +
+          "_" +
           StaticDomTags.PREFIX_COLOR_VARIABLE +
-          '_' +
+          "_" +
           colorRef,
       },
       {
         tag: StaticDomTags.TAG_HOVER,
         color:
           StaticDomTags.TAG_UI_DIALOG +
-          '_' +
+          "_" +
           StaticDomTags.PREFIX_COLOR_VARIABLE +
-          '_' +
+          "_" +
           colorRef +
-          '_' +
+          "_" +
           StaticDomTags.TAG_FOCUS.toUpperCase(),
       },
       {
         tag: StaticDomTags.TAG_MUTED,
         color:
           StaticDomTags.TAG_UI_DIALOG +
-          '_' +
+          "_" +
           StaticDomTags.PREFIX_COLOR_VARIABLE +
-          '_' +
+          "_" +
           colorRef +
-          '_' +
+          "_" +
           StaticDomTags.TAG_MUTED.toUpperCase(),
       },
       {
         tag: StaticDomTags.TAG_FOCUS,
         color:
           StaticDomTags.TAG_UI_DIALOG +
-          '_' +
+          "_" +
           StaticDomTags.PREFIX_COLOR_VARIABLE +
-          '_' +
+          "_" +
           colorRef +
-          '_' +
+          "_" +
           StaticDomTags.TAG_FOCUS.toUpperCase(),
       },
       {
         tag: StaticDomTags.TAG_SELECTED,
-        color: 'COLOR_Edit',
+        color: "COLOR_Edit",
       },
       {
         tag: StaticDomTags.TAG_GRAYEDOUT,
-        color: 'COLOR_GRAYEDOUT',
+        color: "COLOR_GRAYEDOUT",
       },
       {
-        tag: StaticDomTags.TAG_SELECTED + '.' + StaticDomTags.TAG_GRAYEDOUT,
-        color: 'COLOR_GRAYEDOUT',
+        tag: StaticDomTags.TAG_SELECTED + "." + StaticDomTags.TAG_GRAYEDOUT,
+        color: "COLOR_GRAYEDOUT",
       },
       {
         tag: StaticDomTags.TAG_WARNING,
-        color: 'COLOR_Warning',
+        color: "COLOR_Warning",
       },
     ].forEach((d) => {
       const rule =
         domElement +
-        '.' +
+        "." +
         StaticDomTags.TAG_UI_DIALOG +
-        '_' +
-        'ColorRef_' +
+        "_" +
+        "ColorRef_" +
         colorRef +
-        (d.tag !== '' ? '.' + d.tag : '') +
-        ' { ' +
+        (d.tag !== "" ? "." + d.tag : "") +
+        " { " +
         cssElement +
-        ': var(--' +
+        ": var(--" +
         d.color +
-        '); }';
+        "); }";
       sheet.insertRule(rule, sheet.cssRules.length);
       if (verbose) {
         console.log(rule);
@@ -311,80 +311,80 @@ export class NetzgrafikColoringService {
       const colors = netzgrafikColor.getColors(this.isDarkMode);
 
       document.documentElement.style.setProperty(
-        '--' +
+        "--" +
           StaticDomTags.PREFIX_COLOR_VARIABLE +
-          '_' +
+          "_" +
           netzgrafikColor.getColorRef(),
         colors.color,
       );
       document.documentElement.style.setProperty(
-        '--' +
+        "--" +
           StaticDomTags.PREFIX_COLOR_VARIABLE +
-          '_' +
+          "_" +
           netzgrafikColor.getColorRef() +
-          '_' +
+          "_" +
           StaticDomTags.TAG_FOCUS.toUpperCase(),
         colors.colorFocus,
       );
       document.documentElement.style.setProperty(
-        '--' +
+        "--" +
           StaticDomTags.PREFIX_COLOR_VARIABLE +
-          '_' +
+          "_" +
           netzgrafikColor.getColorRef() +
-          '_' +
+          "_" +
           StaticDomTags.TAG_MUTED.toUpperCase(),
         colors.colorMuted,
       );
       document.documentElement.style.setProperty(
-        '--' +
+        "--" +
           StaticDomTags.PREFIX_COLOR_VARIABLE +
-          '_' +
+          "_" +
           netzgrafikColor.getColorRef() +
-          '_' +
+          "_" +
           StaticDomTags.TAG_RELATED.toUpperCase(),
         colors.colorRelated,
       );
 
       const uiColors = netzgrafikColor.getColors(false);
       document.documentElement.style.setProperty(
-        '--' +
+        "--" +
           StaticDomTags.TAG_UI_DIALOG +
-          '_' +
+          "_" +
           StaticDomTags.PREFIX_COLOR_VARIABLE +
-          '_' +
+          "_" +
           netzgrafikColor.getColorRef(),
         uiColors.color,
       );
       document.documentElement.style.setProperty(
-        '--' +
+        "--" +
           StaticDomTags.TAG_UI_DIALOG +
-          '_' +
+          "_" +
           StaticDomTags.PREFIX_COLOR_VARIABLE +
-          '_' +
+          "_" +
           netzgrafikColor.getColorRef() +
-          '_' +
+          "_" +
           StaticDomTags.TAG_FOCUS.toUpperCase(),
         uiColors.colorFocus,
       );
       document.documentElement.style.setProperty(
-        '--' +
+        "--" +
           StaticDomTags.TAG_UI_DIALOG +
-          '_' +
+          "_" +
           StaticDomTags.PREFIX_COLOR_VARIABLE +
-          '_' +
+          "_" +
           netzgrafikColor.getColorRef() +
-          '_' +
+          "_" +
           StaticDomTags.TAG_MUTED.toUpperCase(),
         uiColors.colorMuted,
       );
       document.documentElement.style.setProperty(
-        '--' +
+        "--" +
           StaticDomTags.TAG_UI_DIALOG +
-          '_' +
+          "_" +
           StaticDomTags.PREFIX_COLOR_VARIABLE +
-          '_' +
+          "_" +
           netzgrafikColor.getColorRef() +
-          '_' +
+          "_" +
           StaticDomTags.TAG_RELATED.toUpperCase(),
         uiColors.colorRelated,
       );
@@ -472,7 +472,7 @@ export class NetzgrafikColoringService {
 
   createDefaultColorForNotExistingColors(
     colorRef: ColorRefType,
-    defaults: ColorRefType[] = ['EC', 'IC', 'IR', 'RE', 'S', 'G', 'GEX'],
+    defaults: ColorRefType[] = ["EC", "IC", "IR", "RE", "S", "G", "GEX"],
   ) {
     if (defaults.find((d) => d === colorRef) !== undefined) {
       return;
@@ -481,7 +481,7 @@ export class NetzgrafikColoringService {
     if (netzgrafikColor === undefined) {
       netzgrafikColor = new NetzgrafikColor();
       netzgrafikColor.setColorRef(colorRef);
-      console.log('created default color - for colorRef:', colorRef);
+      console.log("created default color - for colorRef:", colorRef);
       this.netzgrafikColorStore.netzgrafikColors.push(netzgrafikColor);
       this.netzgrafikColorUpdated();
     }
@@ -522,14 +522,14 @@ export class NetzgrafikColoringService {
     NetzgrafikColoringService.generateColors(
       sheet,
       colorRef,
-      'stroke',
+      "stroke",
       StaticDomTags.EDGE_LINE_DOM_REF,
       verbose,
     );
     NetzgrafikColoringService.generateColors(
       sheet,
       colorRef,
-      'stroke',
+      "stroke",
       StaticDomTags.EDGE_LINE_STOPS_DOM_REF,
       verbose,
     );
@@ -537,61 +537,61 @@ export class NetzgrafikColoringService {
     NetzgrafikColoringService.generateColors(
       sheet,
       colorRef,
-      'fill',
-      StaticDomTags.EDGE_LINE_DOM_REF + '.' + StaticDomTags.TAG_HEADWAY_BAND,
+      "fill",
+      StaticDomTags.EDGE_LINE_DOM_REF + "." + StaticDomTags.TAG_HEADWAY_BAND,
       verbose,
     );
 
     NetzgrafikColoringService.generateColors(
       sheet,
       colorRef,
-      'fill',
+      "fill",
       StaticDomTags.EDGE_LINE_STOPS_DOM_REF +
-        '.' +
+        "." +
         StaticDomTags.EDGE_LINE_STOPS_FILL,
       verbose,
     );
     NetzgrafikColoringService.generateColors(
       sheet,
       colorRef,
-      'stroke',
+      "stroke",
       StaticDomTags.EDGE_LINE_STOPS_DOM_REF,
       verbose,
     );
     NetzgrafikColoringService.generateColors(
       sheet,
       colorRef,
-      'fill',
-      StaticDomTags.EDGE_LINE_STOPS_DOM_REF + '.' + StaticDomTags.TAG_FILL,
+      "fill",
+      StaticDomTags.EDGE_LINE_STOPS_DOM_REF + "." + StaticDomTags.TAG_FILL,
       verbose,
     );
     NetzgrafikColoringService.generateColors(
       sheet,
       colorRef,
-      'stroke',
+      "stroke",
       StaticDomTags.EDGE_LINE_STOP_ICON_CLASS_DOM_REF,
       verbose,
     );
     NetzgrafikColoringService.generateColors(
       sheet,
       colorRef,
-      'fill',
+      "fill",
       StaticDomTags.EDGE_LINE_STOP_ICON_CLASS_DOM_REF +
-        '.' +
+        "." +
         StaticDomTags.TAG_FILL,
       verbose,
     );
     NetzgrafikColoringService.generateColors(
       sheet,
       colorRef,
-      'fill',
+      "fill",
       StaticDomTags.EDGE_LINE_TEXT_DOM_REF,
       verbose,
     );
     NetzgrafikColoringService.generateColors(
       sheet,
       colorRef,
-      'stroke',
+      "stroke",
       StaticDomTags.TRANSITION_LINE_DOM_REF,
       verbose,
     );
@@ -600,21 +600,21 @@ export class NetzgrafikColoringService {
     NetzgrafikColoringService.generateUIColors(
       sheetKnotenauslastung,
       colorRef,
-      'stroke',
+      "stroke",
       StaticDomTags.KNOTENAUSLASTUNG_DATA_GROUP_PATH,
       verbose,
     );
     NetzgrafikColoringService.generateUIColors(
       sheetKnotenauslastung,
       colorRef,
-      'fill',
+      "fill",
       StaticDomTags.KNOTENAUSLASTUNG_DATA_GROUP_PATH,
       verbose,
     );
     NetzgrafikColoringService.generateUIColors(
       sheetKnotenauslastung,
       colorRef,
-      'fill',
+      "fill",
       StaticDomTags.KNOTENAUSLASTUNG_DATA_GROUP_TEXT,
       verbose,
     );

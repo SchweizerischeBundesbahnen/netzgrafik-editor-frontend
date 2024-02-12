@@ -1,4 +1,4 @@
-import {Node} from '../../models/node.model';
+import {Node} from "../../models/node.model";
 
 export class TransitionValidator {
   static validateTransition(node: Node, transitionId: number) {
@@ -36,42 +36,42 @@ export class TransitionValidator {
           trainrunSections.trainrunSection1.getSourceNodeId() === node.getId()
         ) {
           trainrunSections.trainrunSection1.setSourceArrivalWarning(
-            'Source Arrival Warning',
-            'Time cannot be reached',
+            "Source Arrival Warning",
+            "Time cannot be reached",
           );
           trainrunSections.trainrunSection1.setSourceDepartureWarning(
-            'Source Departure Warning',
-            'Time cannot be reached',
+            "Source Departure Warning",
+            "Time cannot be reached",
           );
         } else {
           trainrunSections.trainrunSection1.setTargetArrivalWarning(
-            'Target Arrival Warning',
-            'Time cannot be reached',
+            "Target Arrival Warning",
+            "Time cannot be reached",
           );
           trainrunSections.trainrunSection1.setTargetDepartureWarning(
-            'Target Departure Warning',
-            'Time cannot be reached',
+            "Target Departure Warning",
+            "Time cannot be reached",
           );
         }
         if (
           trainrunSections.trainrunSection2.getSourceNodeId() === node.getId()
         ) {
           trainrunSections.trainrunSection2.setSourceArrivalWarning(
-            'Source Arrival Warning',
-            'Time cannot be reached',
+            "Source Arrival Warning",
+            "Time cannot be reached",
           );
           trainrunSections.trainrunSection2.setSourceDepartureWarning(
-            'Source Departure Warning',
-            'Time cannot be reached',
+            "Source Departure Warning",
+            "Time cannot be reached",
           );
         } else {
           trainrunSections.trainrunSection2.setTargetArrivalWarning(
-            'Target Arrival Warning',
-            'Time cannot be reached',
+            "Target Arrival Warning",
+            "Time cannot be reached",
           );
           trainrunSections.trainrunSection2.setTargetDepartureWarning(
-            'Target Departure Warning',
-            'Time cannot be reached',
+            "Target Departure Warning",
+            "Time cannot be reached",
           );
         }
       } else {

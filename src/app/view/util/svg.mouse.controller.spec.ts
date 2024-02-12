@@ -1,9 +1,9 @@
 import {
   SVGMouseController,
   SVGMouseControllerObserver,
-} from './svg.mouse.controller';
-import {Vec2D} from '../../utils/vec2D';
-import {ViewboxProperties} from '../../services/ui/ui.interaction.service';
+} from "./svg.mouse.controller";
+import {Vec2D} from "../../utils/vec2D";
+import {ViewboxProperties} from "../../services/ui/ui.interaction.service";
 
 class DummySVGMouseControllerObserver implements SVGMouseControllerObserver {
   onEarlyReturnFromMousemove(): boolean {
@@ -23,13 +23,13 @@ class DummySVGMouseControllerObserver implements SVGMouseControllerObserver {
   onEndMultiSelect() {}
 }
 
-describe('general view functions', () => {
+describe("general view functions", () => {
   let viewboxProperties: ViewboxProperties;
   let dummySVGMouseControllerObserver: DummySVGMouseControllerObserver = null;
 
   beforeEach(() => {
     viewboxProperties = {
-      currentViewBox: '0 0 1920 937',
+      currentViewBox: "0 0 1920 937",
       origHeight: 937,
       origWidth: 1920,
       panZoomHeight: 937,
@@ -42,17 +42,17 @@ describe('general view functions', () => {
     dummySVGMouseControllerObserver = new DummySVGMouseControllerObserver();
   });
 
-  it('getCurrentMousePosition', () => {
+  it("getCurrentMousePosition", () => {
     // not testable
   });
 
-  it('onGraphContainerMousedown', () => {
+  it("onGraphContainerMousedown", () => {
     // not testable
   });
 
-  it('fixViewbox - in', () => {
+  it("fixViewbox - in", () => {
     const svgMouseController = new SVGMouseController(
-      'graphContainer',
+      "graphContainer",
       dummySVGMouseControllerObserver,
     );
     svgMouseController.init(viewboxProperties);
@@ -72,9 +72,9 @@ describe('general view functions', () => {
     expect(postProp.zoomFactor).toBe(100);
   });
 
-  it('fixViewbox - out', () => {
+  it("fixViewbox - out", () => {
     const svgMouseController = new SVGMouseController(
-      'graphContainer',
+      "graphContainer",
       dummySVGMouseControllerObserver,
     );
     svgMouseController.init(viewboxProperties);
@@ -94,9 +94,9 @@ describe('general view functions', () => {
     expect(postProp.zoomFactor).toBe(100);
   });
 
-  it('zoomIn', () => {
+  it("zoomIn", () => {
     const svgMouseController = new SVGMouseController(
-      'graphContainer',
+      "graphContainer",
       dummySVGMouseControllerObserver,
     );
     svgMouseController.init(viewboxProperties);
@@ -110,9 +110,9 @@ describe('general view functions', () => {
     expect(postProp.zoomFactor).toBe(110);
   });
 
-  it('zoomOut', () => {
+  it("zoomOut", () => {
     const svgMouseController = new SVGMouseController(
-      'graphContainer',
+      "graphContainer",
       dummySVGMouseControllerObserver,
     );
     svgMouseController.init(viewboxProperties);

@@ -1,30 +1,30 @@
-import {DataService} from '../../../services/data/data.service';
-import {NodeService} from '../../../services/data/node.service';
-import {ResourceService} from '../../../services/data/resource.service';
-import {TrainrunService} from '../../../services/data/trainrun.service';
-import {TrainrunSectionService} from '../../../services/data/trainrunsection.service';
-import {StammdatenService} from '../../../services/data/stammdaten.service';
-import {NoteService} from '../../../services/data/note.service';
-import {Node} from '../../../models/node.model';
-import {TrainrunSection} from '../../../models/trainrunsection.model';
-import {LabelGroupService} from '../../../services/data/labelgroup.service';
-import {LabelService} from '../../../services/data/label.serivce';
-import {NetzgrafikColoringService} from '../../../services/data/netzgrafikColoring.service';
-import {UndoService} from '../../../services/data/undo.service';
-import {CopyService} from '../../../services/data/copy.service';
-import {LogService} from '../../../logger/log.service';
-import {LogPublishersService} from '../../../logger/log.publishers.service';
-import {FilterService} from '../../../services/ui/filter.service';
-import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
-import {LoadPerlenketteService} from '../../../perlenkette/service/load-perlenkette.service';
-import {NotesView} from './notes.view';
-import {EditorMainViewComponent} from '../editor-main-view.component';
-import {EditorView} from './editor.view';
-import {NetzgrafikUnitTesting} from '../../../../integration-testing/netzgrafik.unit.testing';
-import {NodesView} from './nodes.view';
-import {TransitionsView} from './transitions.view';
+import {DataService} from "../../../services/data/data.service";
+import {NodeService} from "../../../services/data/node.service";
+import {ResourceService} from "../../../services/data/resource.service";
+import {TrainrunService} from "../../../services/data/trainrun.service";
+import {TrainrunSectionService} from "../../../services/data/trainrunsection.service";
+import {StammdatenService} from "../../../services/data/stammdaten.service";
+import {NoteService} from "../../../services/data/note.service";
+import {Node} from "../../../models/node.model";
+import {TrainrunSection} from "../../../models/trainrunsection.model";
+import {LabelGroupService} from "../../../services/data/labelgroup.service";
+import {LabelService} from "../../../services/data/label.serivce";
+import {NetzgrafikColoringService} from "../../../services/data/netzgrafikColoring.service";
+import {UndoService} from "../../../services/data/undo.service";
+import {CopyService} from "../../../services/data/copy.service";
+import {LogService} from "../../../logger/log.service";
+import {LogPublishersService} from "../../../logger/log.publishers.service";
+import {FilterService} from "../../../services/ui/filter.service";
+import {UiInteractionService} from "../../../services/ui/ui.interaction.service";
+import {LoadPerlenketteService} from "../../../perlenkette/service/load-perlenkette.service";
+import {NotesView} from "./notes.view";
+import {EditorMainViewComponent} from "../editor-main-view.component";
+import {EditorView} from "./editor.view";
+import {NetzgrafikUnitTesting} from "../../../../integration-testing/netzgrafik.unit.testing";
+import {NodesView} from "./nodes.view";
+import {TransitionsView} from "./transitions.view";
 
-describe('Notes-View', () => {
+describe("Notes-View", () => {
   let dataService: DataService;
   let nodeService: NodeService;
   let resourceService: ResourceService;
@@ -155,15 +155,15 @@ describe('Notes-View', () => {
     editorView = controller.editorView;
   });
 
-  it('notesView constructor test', () => {
+  it("notesView constructor test", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
     const notesView = new NotesView(editorView);
   });
 
-  it('NotesView.convertText', () => {
-    const txt0 = NotesView.convertText('qwertz');
-    expect(txt0).toBe('qwertz');
+  it("NotesView.convertText", () => {
+    const txt0 = NotesView.convertText("qwertz");
+    expect(txt0).toBe("qwertz");
   });
 });

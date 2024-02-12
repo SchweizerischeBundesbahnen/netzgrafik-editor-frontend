@@ -1,5 +1,5 @@
-import {Transition} from '../../../models/transition.model';
-import {EditorView} from './editor.view';
+import {Transition} from "../../../models/transition.model";
+import {EditorView} from "./editor.view";
 
 export class TransitionViewObject {
   key: string;
@@ -22,37 +22,37 @@ export class TransitionViewObject {
     isMuted: boolean,
   ): string {
     let key =
-      '#' +
+      "#" +
       transition.getId() +
-      '@' +
+      "@" +
       transition.getIsNonStopTransit() +
-      '_' +
+      "_" +
       transition.getTrainrun().selected() +
-      '_' +
+      "_" +
       transition.getTrainrun().getTrainrunCategory().shortName +
-      '_' +
+      "_" +
       transition.getTrainrun().getTrainrunFrequency().shortName +
-      '_' +
+      "_" +
       transition.getTrainrun().getTrainrunTimeCategory().shortName +
-      '_' +
+      "_" +
       transition.getTrainrun().getTrainrunCategory().id +
-      '_' +
+      "_" +
       transition.getTrainrun().getTrainrunFrequency().id +
-      '_' +
+      "_" +
       transition.getTrainrun().getTrainrunTimeCategory().id +
-      '_' +
+      "_" +
       transition.getTrainrun().getTrainrunCategory().colorRef +
-      '_' +
+      "_" +
       transition.getTrainrun().getTrainrunFrequency().linePatternRef +
-      '_' +
+      "_" +
       transition.getTrainrun().getTrainrunTimeCategory().linePatternRef +
-      '_' +
+      "_" +
       transition.getTrainrun().getTrainrunFrequency().frequency +
-      '_' +
+      "_" +
       editorView.isTemporaryDisableFilteringOfItemsInViewEnabled() +
-      '_' +
+      "_" +
       isMuted +
-      '_';
+      "_";
 
     transition.getPath().forEach((p) => {
       key += p.toString();

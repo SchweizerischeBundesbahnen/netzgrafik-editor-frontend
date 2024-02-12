@@ -1,8 +1,8 @@
-import {PerlenketteItem} from './perlenketteItem';
-import {PerlenketteSection} from './perlenketteSection';
-import {PerlenketteConnection} from './perlenketteConnection';
-import {Transition} from '../../models/transition.model';
-import {PerlenketteTrainrun} from './perlenketteTrainrun';
+import {PerlenketteItem} from "./perlenketteItem";
+import {PerlenketteSection} from "./perlenketteSection";
+import {PerlenketteConnection} from "./perlenketteConnection";
+import {Transition} from "../../models/transition.model";
+import {PerlenketteTrainrun} from "./perlenketteTrainrun";
 
 export class PerlenketteNode implements PerlenketteItem {
   constructor(

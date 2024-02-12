@@ -1,6 +1,6 @@
-import {Node} from '../../models/node.model';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {LogService} from '../../logger/log.service';
+import {Node} from "../../models/node.model";
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {LogService} from "../../logger/log.service";
 
 export class TrainrunSectionNodePair {
   constructor(
@@ -58,7 +58,7 @@ export class TrainrunIterator {
       this.pointerElement = new TrainrunSectionNodePair(undefined, undefined);
       // log the issue
       this.logService.error(
-        'Iterator has detected an infinity loop. The iteration terminated early!',
+        "Iterator has detected an infinity loop. The iteration terminated early!",
         new Error().stack,
       );
       return this.currentElement;

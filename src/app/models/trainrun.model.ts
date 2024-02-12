@@ -4,11 +4,11 @@ import {
   TrainrunDto,
   TrainrunFrequency,
   TrainrunTimeCategory,
-} from '../data-structures/business.data.structures';
-import {DataMigration} from '../utils/data-migration';
+} from "../data-structures/business.data.structures";
+import {DataMigration} from "../utils/data-migration";
 
 export class Trainrun {
-  public static DEFAULT_TRAINRUN_NAME = 'X';
+  public static DEFAULT_TRAINRUN_NAME = "X";
   public static DEFAULT_TRAINRUN_CATEGORY = 1; // default is IC
   public static DEFAULT_TRAINRUN_FREQUENCY = 3; // default is stuendlich
   public static DEFAULT_TRAINRUN_TIME_CATEGORY = 0; // default is täglich, immer

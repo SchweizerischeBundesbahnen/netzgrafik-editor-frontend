@@ -1,9 +1,9 @@
 import {
   PortAlignment,
   PortDto,
-} from '../data-structures/technical.data.structures';
-import {TrainrunSection} from './trainrunsection.model';
-import {Vec2D} from '../utils/vec2D';
+} from "../data-structures/technical.data.structures";
+import {TrainrunSection} from "./trainrunsection.model";
+import {Vec2D} from "../utils/vec2D";
 
 export class Port {
   private static currentId = 0;

@@ -5,25 +5,25 @@ import {
   OnDestroy,
   OnInit,
   Output,
-} from '@angular/core';
-import {Trainrun} from '../../../../models/trainrun.model';
-import {TrainrunService} from '../../../../services/data/trainrun.service';
-import {TrainrunSectionService} from '../../../../services/data/trainrunsection.service';
-import {UiInteractionService} from '../../../../services/ui/ui.interaction.service';
-import {ConfirmationDialogParameter} from '../../confirmation-dialog/confirmation-dialog.component';
-import {DataService} from '../../../../services/data/data.service';
-import {LabelService} from '../../../../services/data/label.serivce';
-import {LabelRef} from '../../../../data-structures/business.data.structures';
-import {LabelGroupService} from '../../../../services/data/labelgroup.service';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {SbbChipEvent, SbbChipInputEvent} from '@sbb-esta/angular/chips';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+} from "@angular/core";
+import {Trainrun} from "../../../../models/trainrun.model";
+import {TrainrunService} from "../../../../services/data/trainrun.service";
+import {TrainrunSectionService} from "../../../../services/data/trainrunsection.service";
+import {UiInteractionService} from "../../../../services/ui/ui.interaction.service";
+import {ConfirmationDialogParameter} from "../../confirmation-dialog/confirmation-dialog.component";
+import {DataService} from "../../../../services/data/data.service";
+import {LabelService} from "../../../../services/data/label.serivce";
+import {LabelRef} from "../../../../data-structures/business.data.structures";
+import {LabelGroupService} from "../../../../services/data/labelgroup.service";
+import {Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
+import {SbbChipEvent, SbbChipInputEvent} from "@sbb-esta/angular/chips";
+import {COMMA, ENTER} from "@angular/cdk/keycodes";
 
 @Component({
-  selector: 'sbb-trainrun-filter-tab',
-  templateUrl: './trainrun-filter-tab.component.html',
-  styleUrls: ['./trainrun-filter-tab.component.scss'],
+  selector: "sbb-trainrun-filter-tab",
+  templateUrl: "./trainrun-filter-tab.component.html",
+  styleUrls: ["./trainrun-filter-tab.component.scss"],
 })
 export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
   @Output() trainrunDeleted = new EventEmitter<void>();
@@ -62,7 +62,7 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
 
   remove(chipEvent: SbbChipEvent): void {
     const valueDelete = chipEvent.chip.value as string;
-    const value = (valueDelete || '').trim();
+    const value = (valueDelete || "").trim();
     if (!value) {
       return;
     }
@@ -76,11 +76,11 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
   }
 
   add(inputEvent: SbbChipInputEvent): void {
-    const value = (inputEvent.value || '').trim();
+    const value = (inputEvent.value || "").trim();
     if (!value) {
       return;
     }
-    console.log('add', value);
+    console.log("add", value);
     this.trainrunLabels.push(value);
     this.trainrunService.setLabels(
       this.selectedTrainrun.getId(),
@@ -90,8 +90,8 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
   }
 
   onDeleteTrainrun() {
-    const dialogTitle = 'Löschen';
-    const dialogContent = 'Soll der gesamte Zuglauf definitiv gelöscht werden?';
+    const dialogTitle = "Löschen";
+    const dialogContent = "Soll der gesamte Zuglauf definitiv gelöscht werden?";
     const confirmationDialogParamter = new ConfirmationDialogParameter(
       dialogTitle,
       dialogContent,
@@ -114,15 +114,15 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
   }
 
   onLabelsFocusout() {
-    const keyboardEvent = new KeyboardEvent('keydown', {
-      code: 'Enter',
-      key: 'Enter',
+    const keyboardEvent = new KeyboardEvent("keydown", {
+      code: "Enter",
+      key: "Enter",
       charCode: 13,
       keyCode: 13,
       view: window,
       bubbles: true,
     });
-    document.getElementById('trainrunLabelsInput').dispatchEvent(keyboardEvent);
+    document.getElementById("trainrunLabelsInput").dispatchEvent(keyboardEvent);
     this.trainrunService.setLabels(
       this.selectedTrainrun.getId(),
       this.trainrunLabels,

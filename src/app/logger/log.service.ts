@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {LogPublisher} from './log.publishers';
-import {LogPublishersService} from './log.publishers.service';
+import {Injectable} from "@angular/core";
+import {LogPublisher} from "./log.publishers";
+import {LogPublishersService} from "./log.publishers.service";
 
 export enum LogLevel {
   All = 0,
@@ -13,7 +13,7 @@ export enum LogLevel {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class LogService {
   level: LogLevel = LogLevel.All;
@@ -82,37 +82,37 @@ export class LogService {
 export class LogEntry {
   // Public Properties
   entryDate: Date = new Date();
-  message = '';
+  message = "";
   level: LogLevel = LogLevel.Debug;
   extraInfo: any[] = [];
   logWithDate = true;
 
   buildLogString(): string {
-    let ret = '';
+    let ret = "";
 
     if (this.logWithDate) {
-      ret = new Date() + ' - ';
+      ret = new Date() + " - ";
     }
 
-    ret += 'Type: ' + LogLevel[this.level];
-    ret += ' - Message: ' + this.message;
+    ret += "Type: " + LogLevel[this.level];
+    ret += " - Message: " + this.message;
     if (this.extraInfo.length) {
-      ret += ' - Extra Info: ' + this.formatParams(this.extraInfo);
+      ret += " - Extra Info: " + this.formatParams(this.extraInfo);
     }
 
     return ret;
   }
 
   private formatParams(params: any[]): string {
-    let ret: string = params.join(',');
+    let ret: string = params.join(",");
 
     // Is there at least one object in the array?
-    if (params.some((p) => typeof p === 'object')) {
-      ret = '';
+    if (params.some((p) => typeof p === "object")) {
+      ret = "";
 
       // Build comma-delimited string
       for (const item of params) {
-        ret += JSON.stringify(item) + ',';
+        ret += JSON.stringify(item) + ",";
       }
     }
 

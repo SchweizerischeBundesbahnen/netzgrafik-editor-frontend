@@ -1,14 +1,14 @@
-import {TrainrunSection} from '../../../models/trainrunsection.model';
-import {StaticDomTags} from './static.dom.tags';
-import {Node} from '../../../models/node.model';
-import * as d3 from 'd3';
-import {Vec2D} from '../../../utils/vec2D';
-import {TrainrunSectionViewObject} from './trainrunSectionViewObject';
-import {NodeViewObject} from './nodeViewObject';
-import {Transition} from '../../../models/transition.model';
-import {TransitionViewObject} from './transitionViewObject';
-import {MathUtils} from '../../../utils/math';
-import {ShortestDistanceNode} from '../../../services/analytics/algorithms/shortest-distance-node';
+import {TrainrunSection} from "../../../models/trainrunsection.model";
+import {StaticDomTags} from "./static.dom.tags";
+import {Node} from "../../../models/node.model";
+import * as d3 from "d3";
+import {Vec2D} from "../../../utils/vec2D";
+import {TrainrunSectionViewObject} from "./trainrunSectionViewObject";
+import {NodeViewObject} from "./nodeViewObject";
+import {Transition} from "../../../models/transition.model";
+import {TransitionViewObject} from "./transitionViewObject";
+import {MathUtils} from "../../../utils/math";
+import {ShortestDistanceNode} from "../../../services/analytics/algorithms/shortest-distance-node";
 
 export class D3Utils {
   static isSpecialEditingEnabled = false;
@@ -33,14 +33,14 @@ export class D3Utils {
       return;
     }
     d3.selectAll(
-      StaticDomTags.EDGE_ROOT_CONTAINER_DOM_REF + '.' + StaticDomTags.TAG_MUTED,
+      StaticDomTags.EDGE_ROOT_CONTAINER_DOM_REF + "." + StaticDomTags.TAG_MUTED,
     ).lower();
     d3.selectAll(
-      StaticDomTags.EDGE_ROOT_CONTAINER_DOM_REF + '.' + StaticDomTags.TAG_HOVER,
+      StaticDomTags.EDGE_ROOT_CONTAINER_DOM_REF + "." + StaticDomTags.TAG_HOVER,
     ).raise();
     d3.selectAll(
       StaticDomTags.EDGE_ROOT_CONTAINER_DOM_REF +
-        '.' +
+        "." +
         StaticDomTags.TAG_SELECTED,
     ).raise();
   }
@@ -111,14 +111,14 @@ export class D3Utils {
       Vec2D.scale(Vec2D.normalize(Vec2D.sub(mousePosVec, startPos)), 8.0),
     );
     d3.selectAll(StaticDomTags.PREVIEW_LINE_DOM_REF).attr(
-      'd',
-      'M' +
+      "d",
+      "M" +
         fromPos.getX() +
-        ',' +
+        "," +
         fromPos.getY() +
-        'L' +
+        "L" +
         mousePosVec.getX() +
-        ',' +
+        "," +
         mousePosVec.getY(),
     );
   }
@@ -140,18 +140,18 @@ export class D3Utils {
       Vec2D.scale(Vec2D.normalize(Vec2D.sub(mousePosVec, endPos)), 8.0),
     );
     d3.selectAll(StaticDomTags.PREVIEW_LINE_DOM_REF).attr(
-      'd',
-      'M' +
+      "d",
+      "M" +
         fromPos.getX() +
-        ',' +
+        "," +
         fromPos.getY() +
-        'L' +
+        "L" +
         mousePosVec.getX() +
-        ',' +
+        "," +
         mousePosVec.getY() +
-        'L' +
+        "L" +
         toPos.getX() +
-        ',' +
+        "," +
         toPos.getY(),
     );
   }
@@ -170,14 +170,14 @@ export class D3Utils {
       Vec2D.scale(Vec2D.normalize(Vec2D.sub(startPos, mousePosVec)), 8.0),
     );
     d3.selectAll(StaticDomTags.PREVIEW_CONNECTION_LINE_DOM_REF).attr(
-      'd',
-      'M' +
+      "d",
+      "M" +
         fromPos.getX() +
-        ',' +
+        "," +
         fromPos.getY() +
-        'L' +
+        "L" +
         toPos.getX() +
-        ',' +
+        "," +
         toPos.getY(),
     );
   }
@@ -233,11 +233,11 @@ export class D3Utils {
   }
 
   static getPathAsSVGString(pathVec2D: Vec2D[]) {
-    let sep = 'M';
-    let svgPathString = '';
+    let sep = "M";
+    let svgPathString = "";
     pathVec2D.forEach((p) => {
-      svgPathString += sep + p.getX() + ',' + p.getY();
-      sep = 'L';
+      svgPathString += sep + p.getX() + "," + p.getY();
+      sep = "L";
     });
     return svgPathString;
   }
@@ -248,10 +248,10 @@ export class D3Utils {
     const controlPointEnd: Vec2D = pathVec2D[2];
     const end: Vec2D = pathVec2D[3];
 
-    let v = 'M ' + start.getX() + ' ' + start.getY();
-    v += 'C ' + controlPointStart.getX() + ' ' + controlPointStart.getY();
-    v += ', ' + controlPointEnd.getX() + ' ' + controlPointEnd.getY();
-    v += ', ' + end.getX() + ',' + end.getY();
+    let v = "M " + start.getX() + " " + start.getY();
+    v += "C " + controlPointStart.getX() + " " + controlPointStart.getY();
+    v += ", " + controlPointEnd.getX() + " " + controlPointEnd.getY();
+    v += ", " + end.getX() + "," + end.getY();
 
     return v;
   }
@@ -377,7 +377,7 @@ export class D3Utils {
     if (grayoutEdgeLinePinNode !== undefined) {
       d3.selectAll(
         StaticDomTags.EDGE_LINE_PIN_DOM_REF +
-          '.' +
+          "." +
           StaticDomTags.EDGE_IS_SOURCE,
       )
         .filter((d: TrainrunSectionViewObject) => {
@@ -393,7 +393,7 @@ export class D3Utils {
         .classed(StaticDomTags.EDGE_LINE_GRAYEDOUT, true);
       d3.selectAll(
         StaticDomTags.EDGE_LINE_PIN_DOM_REF +
-          '.' +
+          "." +
           StaticDomTags.EDGE_IS_TARGET,
       )
         .filter((d: TrainrunSectionViewObject) => {
@@ -450,7 +450,7 @@ export class D3Utils {
     if (grayoutEdgeLinePinNode !== undefined) {
       d3.selectAll(
         StaticDomTags.EDGE_LINE_PIN_DOM_REF +
-          '.' +
+          "." +
           StaticDomTags.EDGE_IS_SOURCE,
       )
         .filter((d: TrainrunSectionViewObject) => {
@@ -466,7 +466,7 @@ export class D3Utils {
         .classed(StaticDomTags.EDGE_LINE_GRAYEDOUT, false);
       d3.selectAll(
         StaticDomTags.EDGE_LINE_PIN_DOM_REF +
-          '.' +
+          "." +
           StaticDomTags.EDGE_IS_TARGET,
       )
         .filter((d: TrainrunSectionViewObject) => {
@@ -492,31 +492,31 @@ export class D3Utils {
     polygonPoints.push(new Vec2D(-0.5, 1));
     polygonPoints.push(new Vec2D(-1, 0));
 
-    let pointString = '';
+    let pointString = "";
     for (const p of polygonPoints) {
       const v = Vec2D.add(Vec2D.scale(p, scale), center);
-      pointString = pointString + ' ' + v.getX() + ',' + v.getY();
+      pointString = pointString + " " + v.getX() + "," + v.getY();
     }
     return pointString;
   }
 
   static enableSpecialEditing(isTopologyOrNodeEditing: boolean) {
-    const rootElement = d3.select('#graphContainer');
+    const rootElement = d3.select("#graphContainer");
 
     rootElement
-      .selectAll('path')
+      .selectAll("path")
       .classed(StaticDomTags.TAG_ENFORCE_DISABLE_ALL_POINTER_EVENTS, true);
     rootElement
-      .selectAll('rect')
+      .selectAll("rect")
       .classed(StaticDomTags.TAG_ENFORCE_DISABLE_ALL_POINTER_EVENTS, true);
     rootElement
-      .selectAll('circle')
+      .selectAll("circle")
       .classed(StaticDomTags.TAG_ENFORCE_DISABLE_ALL_POINTER_EVENTS, true);
     rootElement
-      .selectAll('line')
+      .selectAll("line")
       .classed(StaticDomTags.TAG_ENFORCE_DISABLE_ALL_POINTER_EVENTS, true);
     rootElement
-      .selectAll('text')
+      .selectAll("text")
       .classed(StaticDomTags.TAG_ENFORCE_DISABLE_ALL_POINTER_EVENTS, true);
 
     d3.selectAll(StaticDomTags.NODE_ROOT_DOM_REF).classed(
@@ -567,21 +567,21 @@ export class D3Utils {
     if (!D3Utils.isSpecialEditingEnabled) {
       return;
     }
-    const rootElement = d3.select('#graphContainer');
+    const rootElement = d3.select("#graphContainer");
     rootElement
-      .selectAll('path')
+      .selectAll("path")
       .classed(StaticDomTags.TAG_ENFORCE_DISABLE_ALL_POINTER_EVENTS, false);
     rootElement
-      .selectAll('rect')
+      .selectAll("rect")
       .classed(StaticDomTags.TAG_ENFORCE_DISABLE_ALL_POINTER_EVENTS, false);
     rootElement
-      .selectAll('circle')
+      .selectAll("circle")
       .classed(StaticDomTags.TAG_ENFORCE_DISABLE_ALL_POINTER_EVENTS, false);
     rootElement
-      .selectAll('line')
+      .selectAll("line")
       .classed(StaticDomTags.TAG_ENFORCE_DISABLE_ALL_POINTER_EVENTS, false);
     rootElement
-      .selectAll('text')
+      .selectAll("text")
       .classed(StaticDomTags.TAG_ENFORCE_DISABLE_ALL_POINTER_EVENTS, false);
 
     D3Utils.isSpecialEditingEnabled = false;
@@ -591,7 +591,7 @@ export class D3Utils {
     if (!D3Utils.isShortestDistanceRendererEnabled) {
       return;
     }
-    const rootElement = d3.select('#graphContainer');
+    const rootElement = d3.select("#graphContainer");
     rootElement
       .selectAll(StaticDomTags.NODE_ANALYTICSAREA_DOM_REF)
       .classed(StaticDomTags.TAG_ANALYTICS_LEVEL_0, false);
@@ -612,64 +612,64 @@ export class D3Utils {
       .classed(StaticDomTags.TAG_ANALYTICS_LEVEL_5, false);
 
     rootElement
-      .selectAll('text')
+      .selectAll("text")
       .classed(StaticDomTags.TAG_ENFORCE_DISABLE_ALL_POINTER_EVENTS, false);
     rootElement
-      .selectAll('rect')
+      .selectAll("rect")
       .classed(StaticDomTags.TAG_ENFORCE_DISABLE_ALL_POINTER_EVENTS, false);
     rootElement
-      .selectAll('path')
+      .selectAll("path")
       .classed(StaticDomTags.TAG_ENFORCE_DISABLE_ALL_POINTER_EVENTS, false);
     rootElement
-      .selectAll('circle')
+      .selectAll("circle")
       .classed(StaticDomTags.TAG_ENFORCE_DISABLE_ALL_POINTER_EVENTS, false);
 
     rootElement
-      .selectAll('text')
+      .selectAll("text")
       .classed(StaticDomTags.TAG_ANALYTICS_ENFORCE_DISABLE, false);
     rootElement
-      .selectAll('rect')
+      .selectAll("rect")
       .classed(StaticDomTags.TAG_ANALYTICS_ENFORCE_DISABLE, false);
     rootElement
-      .selectAll('path')
+      .selectAll("path")
       .classed(StaticDomTags.TAG_ANALYTICS_ENFORCE_DISABLE, false);
     rootElement
-      .selectAll('circle')
+      .selectAll("circle")
       .classed(StaticDomTags.TAG_ANALYTICS_ENFORCE_DISABLE, false);
 
     rootElement
-      .selectAll('text')
+      .selectAll("text")
       .classed(StaticDomTags.TAG_EVENT_DISABLED, false);
     rootElement
-      .selectAll('rect')
+      .selectAll("rect")
       .classed(StaticDomTags.TAG_EVENT_DISABLED, false);
     rootElement
-      .selectAll('path')
+      .selectAll("path")
       .classed(StaticDomTags.TAG_EVENT_DISABLED, false);
     rootElement
-      .selectAll('circle')
+      .selectAll("circle")
       .classed(StaticDomTags.TAG_EVENT_DISABLED, false);
 
     rootElement
-      .selectAll('text')
+      .selectAll("text")
       .classed(
         StaticDomTags.TAG_ANALYTICS_TRAINRUNSECTION_TEXT_CLICKABLE,
         false,
       );
     rootElement
-      .selectAll('text')
+      .selectAll("text")
       .classed(StaticDomTags.TAG_ANALYTICS_TRAINRUNSECTION_TEXT_MUTED, false);
-    d3.selectAll('text').classed(
+    d3.selectAll("text").classed(
       StaticDomTags.TAG_ANALYTICS_TRAINRUNSECTION_TEXT_FOCUSED,
       false,
     );
 
     rootElement
       .selectAll(StaticDomTags.NODE_ANALYTICSAREA_TEXT_LEFT_DOM_REF)
-      .text('');
+      .text("");
     rootElement
       .selectAll(StaticDomTags.NODE_ANALYTICSAREA_TEXT_RIGHT_DOM_REF)
-      .text('');
+      .text("");
 
     D3Utils.isShortestDistanceRendererEnabled = false;
   }
@@ -680,7 +680,7 @@ export class D3Utils {
   }
 
   static initShortestDistanceRenderer() {
-    const rootElement = d3.select('#graphContainer');
+    const rootElement = d3.select("#graphContainer");
     rootElement
       .selectAll(StaticDomTags.NODE_ANALYTICSAREA_DOM_REF)
       .classed(StaticDomTags.TAG_ANALYTICS_LEVEL_0, false);
@@ -701,56 +701,56 @@ export class D3Utils {
       .classed(StaticDomTags.TAG_ANALYTICS_LEVEL_5, false);
 
     rootElement
-      .selectAll('text')
+      .selectAll("text")
       .classed(StaticDomTags.TAG_EVENT_DISABLED, true);
     rootElement
-      .selectAll('rect')
+      .selectAll("rect")
       .classed(StaticDomTags.TAG_EVENT_DISABLED, true);
     rootElement
-      .selectAll('path')
+      .selectAll("path")
       .classed(StaticDomTags.TAG_EVENT_DISABLED, true);
     rootElement
-      .selectAll('path')
+      .selectAll("path")
       .classed(StaticDomTags.TAG_ENFORCE_DISABLE_ALL_POINTER_EVENTS, true);
     rootElement
-      .selectAll('circle')
+      .selectAll("circle")
       .classed(StaticDomTags.TAG_ENFORCE_DISABLE_ALL_POINTER_EVENTS, true);
 
     rootElement
-      .selectAll('text.edge_text')
+      .selectAll("text.edge_text")
       .classed(StaticDomTags.TAG_ANALYTICS_ENFORCE_DISABLE, true);
     rootElement
-      .selectAll('text.edge_text')
+      .selectAll("text.edge_text")
       .classed(StaticDomTags.TAG_EVENT_DISABLED, true);
 
-    d3.selectAll('text.edge_text.SourceDeparture').classed(
+    d3.selectAll("text.edge_text.SourceDeparture").classed(
       StaticDomTags.TAG_ANALYTICS_ENFORCE_DISABLE,
       false,
     );
-    d3.selectAll('text.edge_text.TargetDeparture').classed(
+    d3.selectAll("text.edge_text.TargetDeparture").classed(
       StaticDomTags.TAG_ANALYTICS_ENFORCE_DISABLE,
       false,
     );
 
-    d3.selectAll('text.edge_text.SourceDeparture').classed(
+    d3.selectAll("text.edge_text.SourceDeparture").classed(
       StaticDomTags.TAG_EVENT_DISABLED,
       false,
     );
-    d3.selectAll('text.edge_text.TargetDeparture').classed(
+    d3.selectAll("text.edge_text.TargetDeparture").classed(
       StaticDomTags.TAG_EVENT_DISABLED,
       false,
     );
 
-    d3.selectAll('text.edge_text.SourceDeparture').classed(
+    d3.selectAll("text.edge_text.SourceDeparture").classed(
       StaticDomTags.TAG_ANALYTICS_TRAINRUNSECTION_TEXT_CLICKABLE,
       true,
     );
-    d3.selectAll('text.edge_text.TargetDeparture').classed(
+    d3.selectAll("text.edge_text.TargetDeparture").classed(
       StaticDomTags.TAG_ANALYTICS_TRAINRUNSECTION_TEXT_CLICKABLE,
       true,
     );
 
-    d3.selectAll('text.edge_text').classed(
+    d3.selectAll("text.edge_text").classed(
       StaticDomTags.TAG_ANALYTICS_TRAINRUNSECTION_TEXT_FOCUSED,
       false,
     );
@@ -762,11 +762,11 @@ export class D3Utils {
 
     rootElement
       .selectAll(StaticDomTags.NODE_ANALYTICSAREA_TEXT_LEFT_DOM_REF)
-      .text('')
+      .text("")
       .raise();
     rootElement
       .selectAll(StaticDomTags.NODE_ANALYTICSAREA_TEXT_RIGHT_DOM_REF)
-      .text('')
+      .text("")
       .raise();
     rootElement.selectAll(StaticDomTags.NODE_ANALYTICSAREA_DOM_REF).raise();
   }
@@ -787,17 +787,17 @@ export class D3Utils {
     );
 
     if (finalShortestDistanceNodes.length > 0) {
-      d3.selectAll('text.edge_text.SourceDeparture').classed(
+      d3.selectAll("text.edge_text.SourceDeparture").classed(
         StaticDomTags.TAG_ANALYTICS_TRAINRUNSECTION_TEXT_MUTED,
         true,
       );
-      d3.selectAll('text.edge_text.TargetDeparture').classed(
+      d3.selectAll("text.edge_text.TargetDeparture").classed(
         StaticDomTags.TAG_ANALYTICS_TRAINRUNSECTION_TEXT_MUTED,
         true,
       );
     }
 
-    const rootElement = d3.select('#graphContainer');
+    const rootElement = d3.select("#graphContainer");
     finalShortestDistanceNodes.forEach((sdn: ShortestDistanceNode) => {
       let endNodeId = sdn.node.getId();
       sdn.path.reverse().forEach((ts: TrainrunSection) => {
@@ -909,7 +909,7 @@ export class D3Utils {
           ) {
             rootElement
               .selectAll(
-                'path.transition_line[' +
+                "path.transition_line[" +
                   StaticDomTags.TRANSITION_TRAINRUNSECTION_ID1 +
                   '="' +
                   srcId1 +
@@ -944,7 +944,7 @@ export class D3Utils {
           ) {
             rootElement
               .selectAll(
-                'path.transition_line[' +
+                "path.transition_line[" +
                   StaticDomTags.TRANSITION_TRAINRUNSECTION_ID1 +
                   '="' +
                   trgId1 +
@@ -964,10 +964,10 @@ export class D3Utils {
     });
 
     rootElement
-      .selectAll('rect.node_analyticsarea')
+      .selectAll("rect.node_analyticsarea")
       .classed(StaticDomTags.TAG_ANALYTICS_LEVEL_5, true);
-    rootElement.selectAll('text.node_title_analyticsarea_left').text('');
-    rootElement.selectAll('text.node_title_analyticsarea_right').text('');
+    rootElement.selectAll("text.node_title_analyticsarea_left").text("");
+    rootElement.selectAll("text.node_title_analyticsarea_right").text("");
 
     finalShortestDistanceNodes.forEach((sdn: ShortestDistanceNode) => {
       const level = Math.max(
@@ -986,7 +986,7 @@ export class D3Utils {
         .selectAll(
           'text.node_title_analyticsarea_left[id="' + sdn.node.getId() + '"]',
         )
-        .text('#' + level);
+        .text("#" + level);
 
       rootElement
         .selectAll(
@@ -997,7 +997,7 @@ export class D3Utils {
   }
 
   static formatTime(time: number, timeDisplayPrecision: number): string {
-    const prefix = time < 0 ? '-' : '';
+    const prefix = time < 0 ? "-" : "";
     if (time < 0) {
       time = -time;
     }
@@ -1006,9 +1006,9 @@ export class D3Utils {
     const minutes = roundedTime % 60;
     return (
       prefix +
-      (hours < 10 ? '0' + hours : hours) +
-      ':' +
-      (minutes < 10 ? '0' + minutes : minutes)
+      (hours < 10 ? "0" + hours : hours) +
+      ":" +
+      (minutes < 10 ? "0" + minutes : minutes)
     );
   }
 }

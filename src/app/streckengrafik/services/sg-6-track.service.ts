@@ -1,22 +1,22 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {SgSelectedTrainrun} from '../model/streckengrafik-model/sg-selected-trainrun';
-import {takeUntil} from 'rxjs/operators';
-import {TrackData, TrackSegments} from '../model/trackData';
-import {SgTrainrunSection} from '../model/streckengrafik-model/sg-trainrun-section';
-import {SgTrainrunItem} from '../model/streckengrafik-model/sg-trainrun-item';
-import {SgTrainrunNode} from '../model/streckengrafik-model/sg-trainrun-node';
-import {SgTrainrun} from '../model/streckengrafik-model/sg-trainrun';
-import {TrainrunBranchType} from '../model/enum/trainrun-branch-type-type';
-import {Sg5FilterService} from './sg-5-filter.service';
-import {DataService} from '../../services/data/data.service';
-import {TrainrunFrequency} from '../../data-structures/business.data.structures';
-import {NodeService} from '../../services/data/node.service';
-import {TrainrunSectionService} from '../../services/data/trainrunsection.service';
-import {TrainrunService} from '../../services/data/trainrun.service';
+import {Injectable, OnDestroy} from "@angular/core";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {SgSelectedTrainrun} from "../model/streckengrafik-model/sg-selected-trainrun";
+import {takeUntil} from "rxjs/operators";
+import {TrackData, TrackSegments} from "../model/trackData";
+import {SgTrainrunSection} from "../model/streckengrafik-model/sg-trainrun-section";
+import {SgTrainrunItem} from "../model/streckengrafik-model/sg-trainrun-item";
+import {SgTrainrunNode} from "../model/streckengrafik-model/sg-trainrun-node";
+import {SgTrainrun} from "../model/streckengrafik-model/sg-trainrun";
+import {TrainrunBranchType} from "../model/enum/trainrun-branch-type-type";
+import {Sg5FilterService} from "./sg-5-filter.service";
+import {DataService} from "../../services/data/data.service";
+import {TrainrunFrequency} from "../../data-structures/business.data.structures";
+import {NodeService} from "../../services/data/node.service";
+import {TrainrunSectionService} from "../../services/data/trainrunsection.service";
+import {TrainrunService} from "../../services/data/trainrun.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class Sg6TrackService implements OnDestroy {
   public separateMainTracks = false;
@@ -153,19 +153,19 @@ export class Sg6TrackService implements OnDestroy {
         : ps.departurePathNode.nodeId;
     let key1 =
       (ps.arrivalPathNode === undefined
-        ? 'undefined_' + separateForwardBackwardTracks
+        ? "undefined_" + separateForwardBackwardTracks
         : ps.arrivalPathNode.nodeShortName) +
-      '_' +
+      "_" +
       node1 +
-      '_' +
+      "_" +
       ps.index;
     let key2 =
       (ps.departurePathNode === undefined
-        ? 'undefined_' + separateForwardBackwardTracks
+        ? "undefined_" + separateForwardBackwardTracks
         : ps.departurePathNode.nodeShortName) +
-      '_' +
+      "_" +
       node2 +
-      '_' +
+      "_" +
       ps.index;
     if (node1 > node2) {
       const tmp = node1;
@@ -175,7 +175,7 @@ export class Sg6TrackService implements OnDestroy {
       key1 = key2;
       key2 = keyTmp;
     }
-    const sectionKey = key1 + '#' + key2;
+    const sectionKey = key1 + "#" + key2;
     return {key: sectionKey, node1: node1, node2: node2};
   }
 
@@ -322,7 +322,7 @@ export class Sg6TrackService implements OnDestroy {
   }
 
   private getNodeKeyAlignmentsNodeData(pn: SgTrainrunNode): string {
-    return '' + pn.getTrainrunNode().nodeId + '_' + pn.getTrainrunNode().index;
+    return "" + pn.getTrainrunNode().nodeId + "_" + pn.getTrainrunNode().index;
   }
 
   private getOrCreateTrackAlignmentsNodeData(
@@ -873,9 +873,9 @@ export class Sg6TrackService implements OnDestroy {
       } else {
         mainTrackIdx = 0;
       }
-      mainTrackIdxMap.set('' + pn.nodeId1 + '#' + pn.nodeId2, mainTrackIdx);
+      mainTrackIdxMap.set("" + pn.nodeId1 + "#" + pn.nodeId2, mainTrackIdx);
       if (mainTrackIdx === 0) {
-        mainTrackOffsetMap.set('' + pn.nodeId1 + '#' + pn.nodeId2, trackItr);
+        mainTrackOffsetMap.set("" + pn.nodeId1 + "#" + pn.nodeId2, trackItr);
       }
       pn.trackNbr = trackItr;
       pn.mainTrackIdx = mainTrackIdx;
@@ -924,11 +924,11 @@ export class Sg6TrackService implements OnDestroy {
           if (!sgTN.unusedForTurnaround) {
             const mtr =
               tracKInfo.mainTrackIdxMap.get(
-                '' + pn.nodeId1 + '#' + pn.nodeId2,
+                "" + pn.nodeId1 + "#" + pn.nodeId2,
               ) + 1;
             const tracksDirectionCenter = (mtr + 1) / 2;
             const offsetTrack = tracKInfo.mainTrackOffsetMap.get(
-              '' + pn.nodeId1 + '#' + pn.nodeId2,
+              "" + pn.nodeId1 + "#" + pn.nodeId2,
             );
             const curTrack =
               pn.mainTrackIdx % 2 === 0
@@ -1131,19 +1131,19 @@ export class Sg6TrackService implements OnDestroy {
     trainrunItems.forEach((trainrunItem) => {
       trainrunItem.sgTrainrunItems.forEach((pathItem) => {
         if (pathItem.isNode()) {
-          if (maxTrackMap.has('' + pathItem.getTrainrunNode().nodeId)) {
+          if (maxTrackMap.has("" + pathItem.getTrainrunNode().nodeId)) {
             const trackData = maxTrackMap.get(
-              '' + pathItem.getTrainrunNode().nodeId,
+              "" + pathItem.getTrainrunNode().nodeId,
             );
             if (trackData.track < pathItem.getTrainrunNode().trackData.track) {
               maxTrackMap.set(
-                '' + pathItem.getTrainrunNode().nodeId,
+                "" + pathItem.getTrainrunNode().nodeId,
                 pathItem.getTrainrunNode().trackData,
               );
             }
           } else {
             maxTrackMap.set(
-              '' + pathItem.getTrainrunNode().nodeId,
+              "" + pathItem.getTrainrunNode().nodeId,
               pathItem.getTrainrunNode().trackData,
             );
           }
@@ -1172,7 +1172,7 @@ export class Sg6TrackService implements OnDestroy {
               ps.trackData.sectionTrackSegments = convertedTrackSegments;
               maxTrackMap.set(
                 pathItem.getTrainrunSection().departureNodeId +
-                  ':' +
+                  ":" +
                   pathItem.getTrainrunSection().arrivalNodeId,
                 ps.trackData,
               );
@@ -1188,7 +1188,7 @@ export class Sg6TrackService implements OnDestroy {
     maxTrackMap.forEach((trackData, key) => {
       this.selectedTrainrun.paths.forEach((path) => {
         if (path.isNode()) {
-          if ('' + path.getPathNode().nodeId === key) {
+          if ("" + path.getPathNode().nodeId === key) {
             if (path.getPathNode().trackData.track !== trackData.track) {
               path.getPathNode().trackData = trackData;
             }
@@ -1197,7 +1197,7 @@ export class Sg6TrackService implements OnDestroy {
         if (path.isSection()) {
           if (
             path.getPathSection().arrivalNodeId +
-              ':' +
+              ":" +
               path.getPathSection().departureNodeId ===
             key
           ) {

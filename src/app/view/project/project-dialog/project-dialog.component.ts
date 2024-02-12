@@ -1,18 +1,18 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject} from "@angular/core";
 import {
   SBB_DIALOG_DATA,
   SbbDialog,
   SbbDialogRef,
-} from '@sbb-esta/angular/dialog';
-import {ProjectFormComponentModel} from './project-form/project-form.component';
-import {FormModel} from '../../../utils/form-model';
-import {Observable} from 'rxjs';
-import {filter} from 'rxjs/operators';
+} from "@sbb-esta/angular/dialog";
+import {ProjectFormComponentModel} from "./project-form/project-form.component";
+import {FormModel} from "../../../utils/form-model";
+import {Observable} from "rxjs";
+import {filter} from "rxjs/operators";
 
 @Component({
-  selector: 'sbb-project-dialog',
-  templateUrl: './project-dialog.component.html',
-  styleUrls: ['./project-dialog.component.scss'],
+  selector: "sbb-project-dialog",
+  templateUrl: "./project-dialog.component.html",
+  styleUrls: ["./project-dialog.component.scss"],
 })
 export class ProjectDialogComponent {
   readonly formmodel: FormModel<ProjectFormComponentModel>;
@@ -27,9 +27,9 @@ export class ProjectDialogComponent {
   ) {
     this.formmodel = new FormModel<ProjectFormComponentModel>(
       data ?? {
-        name: '',
-        description: '',
-        summary: '',
+        name: "",
+        description: "",
+        summary: "",
         writeUsers: [],
         readUsers: [],
       },
@@ -44,7 +44,7 @@ export class ProjectDialogComponent {
     return dialog
       .open(ProjectDialogComponent, initData ? {data: initData} : undefined)
       .afterClosed()
-      .pipe(filter((project) => typeof project === 'object'));
+      .pipe(filter((project) => typeof project === "object"));
   }
 
   onCreateClicked(): void {

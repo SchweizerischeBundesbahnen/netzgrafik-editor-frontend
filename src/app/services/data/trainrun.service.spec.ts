@@ -1,21 +1,21 @@
-import {DataService} from '../data/data.service';
-import {NodeService} from '../data/node.service';
-import {ResourceService} from '../data/resource.service';
-import {TrainrunService} from '../data/trainrun.service';
-import {TrainrunSectionService} from '../data/trainrunsection.service';
-import {StammdatenService} from '../data/stammdaten.service';
-import {NoteService} from '../data/note.service';
-import {Node} from '../../models/node.model';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {LogService} from '../../logger/log.service';
-import {LogPublishersService} from '../../logger/log.publishers.service';
-import {LabelGroupService} from '../data/labelgroup.service';
-import {LabelService} from '../data/label.serivce';
-import {NetzgrafikUnitTesting} from '../../../integration-testing/netzgrafik.unit.testing';
-import {FilterService} from '../ui/filter.service';
-import {NetzgrafikColoringService} from '../data/netzgrafikColoring.service';
+import {DataService} from "../data/data.service";
+import {NodeService} from "../data/node.service";
+import {ResourceService} from "../data/resource.service";
+import {TrainrunService} from "../data/trainrun.service";
+import {TrainrunSectionService} from "../data/trainrunsection.service";
+import {StammdatenService} from "../data/stammdaten.service";
+import {NoteService} from "../data/note.service";
+import {Node} from "../../models/node.model";
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {LogService} from "../../logger/log.service";
+import {LogPublishersService} from "../../logger/log.publishers.service";
+import {LabelGroupService} from "../data/labelgroup.service";
+import {LabelService} from "../data/label.serivce";
+import {NetzgrafikUnitTesting} from "../../../integration-testing/netzgrafik.unit.testing";
+import {FilterService} from "../ui/filter.service";
+import {NetzgrafikColoringService} from "../data/netzgrafikColoring.service";
 
-describe('TrainrunService', () => {
+describe("TrainrunService", () => {
   let dataService: DataService;
   let nodeService: NodeService;
   let resourceService: ResourceService;
@@ -79,7 +79,7 @@ describe('TrainrunService', () => {
     );
   });
 
-  it('trainrunService.updateTrainrunFrequency - 001', () => {
+  it("trainrunService.updateTrainrunFrequency - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -94,7 +94,7 @@ describe('TrainrunService', () => {
     expect(t.getTrainrunFrequency().frequency).toBe(30);
   });
 
-  it('trainrunService.updateTrainrunFrequency - 002', () => {
+  it("trainrunService.updateTrainrunFrequency - 002", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -109,7 +109,7 @@ describe('TrainrunService', () => {
     expect(t.getTrainrunFrequency().frequency).toBe(120);
   });
 
-  it('trainrunService.updateTrainrunFrequency - 003', () => {
+  it("trainrunService.updateTrainrunFrequency - 003", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -124,7 +124,7 @@ describe('TrainrunService', () => {
     expect(t.getTrainrunFrequency().frequency).toBe(120);
   });
 
-  it('trainrunService.updateTrainrunFrequency - 001', () => {
+  it("trainrunService.updateTrainrunFrequency - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -149,7 +149,7 @@ describe('TrainrunService', () => {
     expect(t.getFrequency()).toBe(15);
   });
 
-  it('trainrunService.updateTrainrunCategory - 001', () => {
+  it("trainrunService.updateTrainrunCategory - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -168,7 +168,7 @@ describe('TrainrunService', () => {
     expect(n2.getPortOfTrainrunSection(ts.getId()).getId()).toBe(3);
   });
 
-  it('trainrunService.updateTrainrunTitle - 001', () => {
+  it("trainrunService.updateTrainrunTitle - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -178,12 +178,12 @@ describe('TrainrunService', () => {
     const n2 = nodeService.getNodeFromId(ts.getTargetNodeId());
     expect(n1.getPortOfTrainrunSection(ts.getId()).getId()).toBe(2);
     expect(n2.getPortOfTrainrunSection(ts.getId()).getId()).toBe(3);
-    trainrunService.updateTrainrunTitle(t, 'Z');
+    trainrunService.updateTrainrunTitle(t, "Z");
     expect(n1.getPortOfTrainrunSection(ts.getId()).getId()).toBe(2);
     expect(n2.getPortOfTrainrunSection(ts.getId()).getId()).toBe(3);
   });
 
-  it('trainrunService.updateTrainrunTitle - 002', () => {
+  it("trainrunService.updateTrainrunTitle - 002", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -193,12 +193,12 @@ describe('TrainrunService', () => {
     const n2 = nodeService.getNodeFromId(ts.getTargetNodeId());
     expect(n1.getPortOfTrainrunSection(ts.getId()).getId()).toBe(2);
     expect(n2.getPortOfTrainrunSection(ts.getId()).getId()).toBe(3);
-    trainrunService.updateTrainrunTitle(t, '0');
+    trainrunService.updateTrainrunTitle(t, "0");
     expect(n1.getPortOfTrainrunSection(ts.getId()).getId()).toBe(2);
     expect(n2.getPortOfTrainrunSection(ts.getId()).getId()).toBe(3);
   });
 
-  it('trainrunService.updateTrainrunTimeCategory - 001', () => {
+  it("trainrunService.updateTrainrunTimeCategory - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -216,7 +216,7 @@ describe('TrainrunService', () => {
     expect(n2.getPortOfTrainrunSection(ts.getId()).getId()).toBe(3);
   });
 
-  it('trainrunService.duplicateTrainrun', () => {
+  it("trainrunService.duplicateTrainrun", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -238,7 +238,7 @@ describe('TrainrunService', () => {
     }
   });
 
-  it('trainrunService.setLabels', () => {
+  it("trainrunService.setLabels", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -246,7 +246,7 @@ describe('TrainrunService', () => {
     const t = ts.getTrainrun();
     const n1 = nodeService.getNodeFromId(ts.getSourceNodeId());
     const n2 = nodeService.getNodeFromId(ts.getTargetNodeId());
-    const labelsList = ['a', 'e', '25', '04', '78'];
+    const labelsList = ["a", "e", "25", "04", "78"];
     trainrunService.setLabels(t.getId(), labelsList);
     labelsList.forEach((label, index) => {
       expect(
@@ -255,7 +255,7 @@ describe('TrainrunService', () => {
     });
   });
 
-  it('getAllConnectedTrainruns - 001', () => {
+  it("getAllConnectedTrainruns - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -268,7 +268,7 @@ describe('TrainrunService', () => {
     expect(connectedTrainruns.length).toBe(0);
   });
 
-  it('getAllConnectedTrainruns - 002', () => {
+  it("getAllConnectedTrainruns - 002", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -281,7 +281,7 @@ describe('TrainrunService', () => {
     expect(connectedTrainruns.length).toBe(0);
   });
 
-  it('getAllConnectedTrainruns - 003', () => {
+  it("getAllConnectedTrainruns - 003", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -294,7 +294,7 @@ describe('TrainrunService', () => {
     expect(connectedTrainruns.length).toBe(0);
   });
 
-  it('getAllConnectedTrainruns - 004', () => {
+  it("getAllConnectedTrainruns - 004", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -310,7 +310,7 @@ describe('TrainrunService', () => {
     expect(connectedTrainruns.length).toBe(2);
   });
 
-  it('getAllConnectedTrainruns - 005', () => {
+  it("getAllConnectedTrainruns - 005", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );

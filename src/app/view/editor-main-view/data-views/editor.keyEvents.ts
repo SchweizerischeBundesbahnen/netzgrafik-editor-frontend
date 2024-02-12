@@ -1,27 +1,27 @@
-import * as d3 from 'd3';
-import {StaticDomTags} from './static.dom.tags';
-import {NodeService} from '../../../services/data/node.service';
-import {TrainrunService} from '../../../services/data/trainrun.service';
-import {TrainrunSectionService} from '../../../services/data/trainrunsection.service';
-import {SVGMouseController} from '../../util/svg.mouse.controller';
-import {LogService} from '../../../logger/log.service';
-import {NoteService} from '../../../services/data/note.service';
-import {RASTERING_BASIC_GRID_SIZE} from '../../rastering/definitions';
-import {EditorMode} from '../../editor-menu/editor-mode';
-import {Note} from '../../../models/note.model';
-import {Node} from '../../../models/node.model';
-import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
-import {UndoService} from '../../../services/data/undo.service';
-import {CopyService} from '../../../services/data/copy.service';
-import {Port} from '../../../models/port.model';
-import {FilterService} from '../../../services/ui/filter.service';
-import {Connection} from '../../../models/connection.model';
+import * as d3 from "d3";
+import {StaticDomTags} from "./static.dom.tags";
+import {NodeService} from "../../../services/data/node.service";
+import {TrainrunService} from "../../../services/data/trainrun.service";
+import {TrainrunSectionService} from "../../../services/data/trainrunsection.service";
+import {SVGMouseController} from "../../util/svg.mouse.controller";
+import {LogService} from "../../../logger/log.service";
+import {NoteService} from "../../../services/data/note.service";
+import {RASTERING_BASIC_GRID_SIZE} from "../../rastering/definitions";
+import {EditorMode} from "../../editor-menu/editor-mode";
+import {Note} from "../../../models/note.model";
+import {Node} from "../../../models/node.model";
+import {UiInteractionService} from "../../../services/ui/ui.interaction.service";
+import {UndoService} from "../../../services/data/undo.service";
+import {CopyService} from "../../../services/data/copy.service";
+import {Port} from "../../../models/port.model";
+import {FilterService} from "../../../services/ui/filter.service";
+import {Connection} from "../../../models/connection.model";
 import {
   PreviewLineMode,
   TrainrunSectionPreviewLineView,
-} from './trainrunsection.previewline.view';
-import {TrainrunSection} from '../../../models/trainrunsection.model';
-import {Trainrun} from '../../../models/trainrun.model';
+} from "./trainrunsection.previewline.view";
+import {TrainrunSection} from "../../../models/trainrunsection.model";
+import {Trainrun} from "../../../models/trainrun.model";
 
 export class EditorKeyEvents {
   private editorMode: EditorMode;
@@ -43,7 +43,7 @@ export class EditorKeyEvents {
   }
 
   deactivateMousekeyDownHandler() {
-    d3.select('body').on('keydown', () => {});
+    d3.select("body").on("keydown", () => {});
   }
 
   ignoreKeyEvent(event: KeyboardEvent): boolean {
@@ -53,7 +53,7 @@ export class EditorKeyEvents {
   activateMousekeyDownHandler(editorMode: EditorMode) {
     this.editorMode = editorMode;
 
-    d3.select('body').on('keydown', () => {
+    d3.select("body").on("keydown", () => {
       if (this.ignoreKeyEvent(d3.event)) {
         return;
       }
@@ -69,53 +69,53 @@ export class EditorKeyEvents {
       const keycode = d3.event.code;
       const ctrlKey = d3.event.ctrlKey;
       switch (keycode) {
-        case 'Delete':
+        case "Delete":
           this.onKeyPressedDelete();
           break;
-        case 'Insert':
+        case "Insert":
           this.onKeyPressedInsert();
           break;
-        case 'Escape':
+        case "Escape":
           if (this.onKeyPressedEscape()) {
             d3.event.preventDefault();
           }
           break;
-        case 'KeyA':
+        case "KeyA":
           if (ctrlKey) {
             if (this.onSelectAll()) {
               d3.event.preventDefault();
             }
           }
           break;
-        case 'KeyC':
+        case "KeyC":
           if (ctrlKey) {
             if (this.onCopyAllVisibleElementsToCopyCache()) {
               d3.event.preventDefault();
             }
           }
           break;
-        case 'KeyV':
+        case "KeyV":
           if (ctrlKey) {
             if (this.onInsertAllVisibleElementsFromCopyCache()) {
               d3.event.preventDefault();
             }
           }
           break;
-        case 'KeyZ':
+        case "KeyZ":
           if (ctrlKey) {
             if (this.onRevertLastChange()) {
               d3.event.preventDefault();
             }
           }
           break;
-        case 'KeyY':
+        case "KeyY":
           if (ctrlKey) {
             if (this.onRevertLastChange()) {
               d3.event.preventDefault();
             }
           }
           break;
-        case 'KeyD':
+        case "KeyD":
           if (ctrlKey) {
             this.onDuplicate();
             d3.event.preventDefault();
@@ -130,8 +130,8 @@ export class EditorKeyEvents {
   private getSelectedTrainSectionId(): number {
     let selectedTrainrunSectionId: number = undefined;
     d3.select(
-      StaticDomTags.EDGE_LINE_DOM_REF + '.' + StaticDomTags.TAG_SELECTED,
-    ).classed('KeyEventHandling', (tsvo) => {
+      StaticDomTags.EDGE_LINE_DOM_REF + "." + StaticDomTags.TAG_SELECTED,
+    ).classed("KeyEventHandling", (tsvo) => {
       if (tsvo === undefined) {
         const trainRun = this.trainrunService.getSelectedTrainrun();
         if (trainRun !== null) {
@@ -150,8 +150,8 @@ export class EditorKeyEvents {
   private getHoveredNoteId(): number {
     let noteHoveredId: number = undefined;
     d3.select(
-      StaticDomTags.NOTE_ROOT_DOM_REF + '.' + StaticDomTags.TAG_HOVER,
-    ).classed('KeyEventHandling', (tsvo) => {
+      StaticDomTags.NOTE_ROOT_DOM_REF + "." + StaticDomTags.TAG_HOVER,
+    ).classed("KeyEventHandling", (tsvo) => {
       noteHoveredId = tsvo.note.getId();
       return false;
     });
@@ -161,8 +161,8 @@ export class EditorKeyEvents {
   private getHoveredNodeId(): number {
     let hoveredNodeId: number = undefined;
     d3.select(
-      StaticDomTags.NODE_ROOT_DOM_REF + '.' + StaticDomTags.TAG_HOVER,
-    ).classed('KeyEventHandling', (nvo) => {
+      StaticDomTags.NODE_ROOT_DOM_REF + "." + StaticDomTags.TAG_HOVER,
+    ).classed("KeyEventHandling", (nvo) => {
       hoveredNodeId = nvo.node.getId();
       return false;
     });
@@ -288,7 +288,7 @@ export class EditorKeyEvents {
       const newTrainrun = this.trainrunService.duplicateTrainrun(
         t.getId(),
         false,
-        '',
+        "",
       );
       const newTrainrunSections =
         this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(

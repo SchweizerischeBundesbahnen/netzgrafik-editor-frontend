@@ -1,14 +1,14 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {NodeService} from '../data/node.service';
-import {TrainrunSectionService} from '../data/trainrunsection.service';
-import {TrainrunService} from '../data/trainrun.service';
-import {ShortestTravelTimeSearch} from './algorithms/shortest-travel-time-search';
-import {BehaviorSubject, Subject} from 'rxjs';
-import {ShortestDistanceNode} from './algorithms/shortest-distance-node';
-import {FilterService} from '../ui/filter.service';
+import {Injectable, OnDestroy} from "@angular/core";
+import {NodeService} from "../data/node.service";
+import {TrainrunSectionService} from "../data/trainrunsection.service";
+import {TrainrunService} from "../data/trainrun.service";
+import {ShortestTravelTimeSearch} from "./algorithms/shortest-travel-time-search";
+import {BehaviorSubject, Subject} from "rxjs";
+import {ShortestDistanceNode} from "./algorithms/shortest-distance-node";
+import {FilterService} from "../ui/filter.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AnalyticsService implements OnDestroy {
   findAllShortestDistanceNodesSubject = new BehaviorSubject<

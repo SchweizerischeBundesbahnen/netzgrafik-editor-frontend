@@ -1,20 +1,20 @@
-import {SgPathNode} from './sg-path-node';
-import {TrackData} from '../trackData';
-import {SgPathSection} from './sg-path-section';
-import {SgTrainrunSection} from './sg-trainrun-section';
-import {SgTrainrunNode} from './sg-trainrun-node';
-import {TrainrunItem} from '../trainrunItem';
-import {PathNode} from '../pathNode';
-import {SgTrainrun} from './sg-trainrun';
-import {PathSection} from '../pathSection';
-import {TrainrunBranchType} from '../enum/trainrun-branch-type-type';
+import {SgPathNode} from "./sg-path-node";
+import {TrackData} from "../trackData";
+import {SgPathSection} from "./sg-path-section";
+import {SgTrainrunSection} from "./sg-trainrun-section";
+import {SgTrainrunNode} from "./sg-trainrun-node";
+import {TrainrunItem} from "../trainrunItem";
+import {PathNode} from "../pathNode";
+import {SgTrainrun} from "./sg-trainrun";
+import {PathSection} from "../pathSection";
+import {TrainrunBranchType} from "../enum/trainrun-branch-type-type";
 
-describe('StreckengrafikModelTests', () => {
-  it('Streckengrafik-Model - Test - SgPathNode - 001', () => {
+describe("StreckengrafikModelTests", () => {
+  it("Streckengrafik-Model - Test - SgPathNode - 001", () => {
     const node: SgPathNode = new SgPathNode(
       0,
       0,
-      'TEST',
+      "TEST",
       10,
       20,
       0,
@@ -28,11 +28,11 @@ describe('StreckengrafikModelTests', () => {
     expect(node.travelTime()).toBe(1 / 60);
   });
 
-  it('Streckengrafik-Model - Test - SgPathNode - 002', () => {
+  it("Streckengrafik-Model - Test - SgPathNode - 002", () => {
     const node: SgPathNode = new SgPathNode(
       0,
       0,
-      'TEST',
+      "TEST",
       20,
       10,
       0,
@@ -47,7 +47,7 @@ describe('StreckengrafikModelTests', () => {
     expect(node.travelTime()).toBe(10);
   });
 
-  it('Streckengrafik-Model - Test - SgPathSection - 001', () => {
+  it("Streckengrafik-Model - Test - SgPathSection - 001", () => {
     const section: SgPathSection = new SgPathSection(
       0,
       0,
@@ -55,8 +55,8 @@ describe('StreckengrafikModelTests', () => {
       20,
       0,
       0,
-      'AA',
-      'BB',
+      "AA",
+      "BB",
       new TrackData(2),
       false,
     );
@@ -77,7 +77,7 @@ describe('StreckengrafikModelTests', () => {
     expect(section.calcZoomedXPath()).toBe(0);
   });
 
-  it('Streckengrafik-Model - Test - SgTrainrunSection  - 001', () => {
+  it("Streckengrafik-Model - Test - SgTrainrunSection  - 001", () => {
     const section: SgTrainrunSection = new SgTrainrunSection(
       0,
       0,
@@ -85,10 +85,10 @@ describe('StreckengrafikModelTests', () => {
       20,
       0,
       0,
-      'AA',
-      'BB',
-      'CC',
-      'DD',
+      "AA",
+      "BB",
+      "CC",
+      "DD",
       false,
       2,
       new TrackData(2),
@@ -104,11 +104,11 @@ describe('StreckengrafikModelTests', () => {
     section.changeOrientation();
   });
 
-  it('Streckengrafik-Model - Test - SgTrainrunNode   - 001', () => {
+  it("Streckengrafik-Model - Test - SgTrainrunNode   - 001", () => {
     const section: SgTrainrunNode = new SgTrainrunNode(
       0,
       0,
-      'AA',
+      "AA",
       20,
       0,
       0,
@@ -117,7 +117,7 @@ describe('StreckengrafikModelTests', () => {
       new SgPathNode(
         0,
         0,
-        'TEST',
+        "TEST",
         20,
         10,
         0,
@@ -145,16 +145,16 @@ describe('StreckengrafikModelTests', () => {
     expect(section.getMinimumHeadwayTime()).toBe(2);
   });
 
-  it('Streckengrafik-Model - Test - TrainrunItem  - 001', () => {
+  it("Streckengrafik-Model - Test - TrainrunItem  - 001", () => {
     const item0: TrainrunItem = new TrainrunItem(
       1,
       30,
       0,
       10,
       21,
-      'test',
-      'S',
-      'S',
+      "test",
+      "S",
+      "S",
       [],
     );
 
@@ -164,9 +164,9 @@ describe('StreckengrafikModelTests', () => {
       0,
       10,
       21,
-      'test',
-      'S',
-      'S',
+      "test",
+      "S",
+      "S",
       [],
     );
 
@@ -176,9 +176,9 @@ describe('StreckengrafikModelTests', () => {
       0,
       10,
       21,
-      'test',
-      'S',
-      'S',
+      "test",
+      "S",
+      "S",
       [],
     );
 
@@ -213,12 +213,12 @@ describe('StreckengrafikModelTests', () => {
     expect(TrainrunItem.equalTrainrunItems(a, a)).toBe(true);
   });
 
-  it('Streckengrafik-Model - Test - TrainrunItem  - 002', () => {
+  it("Streckengrafik-Model - Test - TrainrunItem  - 002", () => {
     const node0 = new PathNode(
       0,
       0,
       9,
-      'AA',
+      "AA",
       10,
       new TrackData(2),
       false,
@@ -229,7 +229,7 @@ describe('StreckengrafikModelTests', () => {
       0,
       0,
       9,
-      'BB',
+      "BB",
       10,
       new TrackData(2),
       false,
@@ -241,7 +241,7 @@ describe('StreckengrafikModelTests', () => {
       1,
       2,
       9,
-      'CC',
+      "CC",
       10,
       new TrackData(1),
       true,
@@ -255,9 +255,9 @@ describe('StreckengrafikModelTests', () => {
       0,
       10,
       21,
-      'test',
-      'S',
-      'S',
+      "test",
+      "S",
+      "S",
       [node0],
     );
 
@@ -267,9 +267,9 @@ describe('StreckengrafikModelTests', () => {
       0,
       10,
       21,
-      'test',
-      'S',
-      'S',
+      "test",
+      "S",
+      "S",
       [node0, node1],
     );
 
@@ -279,9 +279,9 @@ describe('StreckengrafikModelTests', () => {
       0,
       10,
       21,
-      'test',
-      'S',
-      'S',
+      "test",
+      "S",
+      "S",
       [node0, node1],
     );
 
@@ -291,9 +291,9 @@ describe('StreckengrafikModelTests', () => {
       0,
       10,
       21,
-      'test',
-      'S',
-      'S',
+      "test",
+      "S",
+      "S",
       item0.pathItems,
     );
 
@@ -303,9 +303,9 @@ describe('StreckengrafikModelTests', () => {
       0,
       10,
       21,
-      'test',
-      'S',
-      'S',
+      "test",
+      "S",
+      "S",
       [node2, node2],
     );
 
@@ -325,18 +325,18 @@ describe('StreckengrafikModelTests', () => {
     expect(pnC.getPathNode().nodeWidth()).toBe(60);
     expect(pn.isFilter()).toBe(false);
     expect(pn.travelTime()).toBe(1 / 60);
-    expect(pn.shortKey()).toBe('9');
+    expect(pn.shortKey()).toBe("9");
     expect(pn.zommedXPath(undefined)).toBe(0);
     expect(pn.xPathFix()).toBe(true);
     expect(pn.xPath()).toBe(0);
   });
 
-  it('Streckengrafik-Model - Test - TrainrunItem  - 003', () => {
+  it("Streckengrafik-Model - Test - TrainrunItem  - 003", () => {
     const node0 = new PathNode(
       0,
       0,
       9,
-      'AA',
+      "AA",
       10,
       new TrackData(2),
       false,
@@ -347,22 +347,22 @@ describe('StreckengrafikModelTests', () => {
     expect(node0.getPathSection()).toBe(undefined);
   });
 
-  it('SgTrainrun test', () => {
-    const s = new SgTrainrun(1, 60, 0, 12, 32, 'test', 'S', 'S', [], undefined);
+  it("SgTrainrun test", () => {
+    const s = new SgTrainrun(1, 60, 0, 12, 32, "test", "S", "S", [], undefined);
 
     expect(s.getId()).toBe(SgTrainrun.currentId - 1);
   });
 
-  it('Streckengrafik-Model - Test - TrainrunItem  - 004', () => {
+  it("Streckengrafik-Model - Test - TrainrunItem  - 004", () => {
     const item0: TrainrunItem = new TrainrunItem(
       1,
       30,
       0,
       10,
       21,
-      'test',
-      'S',
-      'S',
+      "test",
+      "S",
+      "S",
       [],
     );
 
@@ -372,16 +372,16 @@ describe('StreckengrafikModelTests', () => {
       0,
       10,
       21,
-      'test',
-      'S',
-      'S',
+      "test",
+      "S",
+      "S",
       item0.pathItems,
     );
 
     expect(item0.equal(item1)).toBe(true);
   });
 
-  it('Streckengrafik-Model - Test - TrainrunItem  - 005', () => {
+  it("Streckengrafik-Model - Test - TrainrunItem  - 005", () => {
     const s1: PathSection = new PathSection(
       0,
       0,
@@ -400,9 +400,9 @@ describe('StreckengrafikModelTests', () => {
       0,
       10,
       21,
-      'test',
-      'S',
-      'S',
+      "test",
+      "S",
+      "S",
       [s1],
     );
 
@@ -412,16 +412,16 @@ describe('StreckengrafikModelTests', () => {
       0,
       10,
       21,
-      'test',
-      'S',
-      'S',
+      "test",
+      "S",
+      "S",
       [s1],
     );
 
     expect(item0.equal(item1)).toBe(true);
   });
 
-  it('Streckengrafik-Model - Test - TrainrunItem  - 006', () => {
+  it("Streckengrafik-Model - Test - TrainrunItem  - 006", () => {
     const s1: PathSection = new PathSection(
       0,
       0,
@@ -452,9 +452,9 @@ describe('StreckengrafikModelTests', () => {
       0,
       10,
       21,
-      'test',
-      'S',
-      'S',
+      "test",
+      "S",
+      "S",
       [s1],
     );
 
@@ -464,16 +464,16 @@ describe('StreckengrafikModelTests', () => {
       0,
       10,
       21,
-      'test',
-      'S',
-      'S',
+      "test",
+      "S",
+      "S",
       [s2, s1],
     );
 
     expect(item0.equal(item1)).toBe(false);
   });
 
-  it('Streckengrafik-Model - Test - TrainrunItem  - 007', () => {
+  it("Streckengrafik-Model - Test - TrainrunItem  - 007", () => {
     const s1: PathSection = new PathSection(
       0,
       0,
@@ -504,9 +504,9 @@ describe('StreckengrafikModelTests', () => {
       0,
       10,
       21,
-      'test',
-      'S',
-      'S',
+      "test",
+      "S",
+      "S",
       [s1],
     );
 
@@ -516,16 +516,16 @@ describe('StreckengrafikModelTests', () => {
       0,
       10,
       21,
-      'test',
-      'S',
-      'S',
+      "test",
+      "S",
+      "S",
       [s2],
     );
 
     expect(item0.equal(item1)).toBe(true);
   });
 
-  it('Streckengrafik-Model - Test - TrainrunItem  - 008', () => {
+  it("Streckengrafik-Model - Test - TrainrunItem  - 008", () => {
     const s2: PathSection = new PathSection(
       0,
       0,
@@ -544,9 +544,9 @@ describe('StreckengrafikModelTests', () => {
       0,
       10,
       21,
-      'test',
-      'S',
-      'S',
+      "test",
+      "S",
+      "S",
       [],
     );
 
@@ -556,9 +556,9 @@ describe('StreckengrafikModelTests', () => {
       0,
       10,
       21,
-      'test',
-      'S',
-      'S',
+      "test",
+      "S",
+      "S",
       [s2],
     );
 
@@ -566,7 +566,7 @@ describe('StreckengrafikModelTests', () => {
     expect(item1.equal(item0)).toBe(false);
   });
 
-  it('SgTrainrunSection  test', () => {
+  it("SgTrainrunSection  test", () => {
     const s = new SgTrainrunSection(
       -1,
       0,
@@ -574,10 +574,10 @@ describe('StreckengrafikModelTests', () => {
       10,
       0,
       0,
-      '',
-      '',
-      '',
-      '',
+      "",
+      "",
+      "",
+      "",
       false,
       0,
       new TrackData(1),

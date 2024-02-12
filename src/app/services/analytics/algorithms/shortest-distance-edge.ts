@@ -1,5 +1,5 @@
-import {Node} from '../../../models/node.model';
-import {TrainrunSection} from '../../../models/trainrunsection.model';
+import {Node} from "../../../models/node.model";
+import {TrainrunSection} from "../../../models/trainrunsection.model";
 
 export class ShortestDistanceEdge {
   private readonly fullPath: TrainrunSection[];

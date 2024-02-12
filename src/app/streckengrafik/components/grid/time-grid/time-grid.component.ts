@@ -5,24 +5,24 @@ import {
   Input,
   OnDestroy,
   OnInit,
-} from '@angular/core';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {SliderChangeInfo} from '../../../model/util/sliderChangeInfo';
-import {ViewBoxChangeInfo} from '../../../model/util/viewBoxChangeInfo';
-import {TimeSliderService} from '../../../services/time-slider.service';
-import {ViewBoxService} from '../../../services/util/view-box.service';
+} from "@angular/core";
+import {Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
+import {SliderChangeInfo} from "../../../model/util/sliderChangeInfo";
+import {ViewBoxChangeInfo} from "../../../model/util/viewBoxChangeInfo";
+import {TimeSliderService} from "../../../services/time-slider.service";
+import {ViewBoxService} from "../../../services/util/view-box.service";
 import {
   UpdateCounterController,
   UpdateCounterHandler,
   UpdateCounterTriggerSerivce,
-} from '../../../services/util/update-counter.service';
+} from "../../../services/util/update-counter.service";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[sbb-time-grid]',
-  templateUrl: './time-grid.component.html',
-  styleUrls: ['./time-grid.component.scss'],
+  selector: "[sbb-time-grid]",
+  templateUrl: "./time-grid.component.html",
+  styleUrls: ["./time-grid.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimeGridComponent
@@ -91,12 +91,12 @@ export class TimeGridComponent
 
   getTimeGridClassTag(time: number): string {
     if (time % 60 === 0) {
-      return 'TimeGrid TimeFullHour';
+      return "TimeGrid TimeFullHour";
     }
     if (time % 30 === 0) {
-      return 'TimeGrid TimeHalfHour';
+      return "TimeGrid TimeHalfHour";
     }
-    return 'TimeGrid';
+    return "TimeGrid";
   }
 
   getScaleFactor(): number {

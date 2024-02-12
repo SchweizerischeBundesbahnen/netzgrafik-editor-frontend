@@ -5,7 +5,7 @@ export const downloadBlob = (blob: Blob, fileName: string) => {
     nav.msSaveBlob(blob, fileName);
   } else {
     const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     document.body.appendChild(a);
     a.href = url;
     a.download = fileName;

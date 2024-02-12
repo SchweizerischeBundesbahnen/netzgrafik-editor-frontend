@@ -1,15 +1,15 @@
-import {TrainrunSection} from './trainrunsection.model';
-import {Node} from './node.model';
-import {Trainrun} from './trainrun.model';
+import {TrainrunSection} from "./trainrunsection.model";
+import {Node} from "./node.model";
+import {Trainrun} from "./trainrun.model";
 import {
   PortAlignment,
   TimeLockDto,
-} from '../data-structures/technical.data.structures';
-import {Resource} from './resource.model';
-import {Connection} from './connection.model';
+} from "../data-structures/technical.data.structures";
+import {Resource} from "./resource.model";
+import {Connection} from "./connection.model";
 
-describe('TrainrunSection Model Test', () => {
-  it('setSourceAndTargetNodeReference', () => {
+describe("TrainrunSection Model Test", () => {
+  it("setSourceAndTargetNodeReference", () => {
     const ts = new TrainrunSection();
     const node1 = new Node();
     const node2 = new Node();
@@ -20,7 +20,7 @@ describe('TrainrunSection Model Test', () => {
     expect(ts.getTargetNode().getId()).toBe(node2.getId());
   });
 
-  it('setTrainrun', () => {
+  it("setTrainrun", () => {
     const ts = new TrainrunSection();
     const trainrun = new Trainrun();
     ts.setTrainrun(trainrun);
@@ -28,14 +28,14 @@ describe('TrainrunSection Model Test', () => {
     expect(ts.getTrainrun().getId()).toBe(trainrun.getId());
   });
 
-  it('setSourceDepartureDto', () => {
+  it("setSourceDepartureDto", () => {
     const timeLockDto: TimeLockDto = {
       time: 25,
       consecutiveTime: 125,
       lock: false,
       warning: {
-        title: 'test warning',
-        description: 'just for test',
+        title: "test warning",
+        description: "just for test",
       },
       timeFormatter: null,
     };
@@ -49,14 +49,14 @@ describe('TrainrunSection Model Test', () => {
     expect(ts.hasSourceDepartureWarning()).toBe(false);
   });
 
-  it('setSourceArrivalDto', () => {
+  it("setSourceArrivalDto", () => {
     const timeLockDto: TimeLockDto = {
       time: -25,
       consecutiveTime: -125,
       lock: true,
       warning: {
-        title: 'test warning',
-        description: 'just for test',
+        title: "test warning",
+        description: "just for test",
       },
       timeFormatter: null,
     };
@@ -70,14 +70,14 @@ describe('TrainrunSection Model Test', () => {
     expect(ts.hasSourceArrivalWarning()).toBe(false);
   });
 
-  it('setTargetDepartureDto', () => {
+  it("setTargetDepartureDto", () => {
     const timeLockDto: TimeLockDto = {
       time: 25,
       consecutiveTime: 125,
       lock: false,
       warning: {
-        title: 'test warning',
-        description: 'just for test',
+        title: "test warning",
+        description: "just for test",
       },
       timeFormatter: null,
     };
@@ -91,14 +91,14 @@ describe('TrainrunSection Model Test', () => {
     expect(ts.hasTargetDepartureWarning()).toBe(false);
   });
 
-  it('setTargetArrivalDto', () => {
+  it("setTargetArrivalDto", () => {
     const timeLockDto: TimeLockDto = {
       time: -25,
       consecutiveTime: -125,
       lock: true,
       warning: {
-        title: 'test warning',
-        description: 'just for test',
+        title: "test warning",
+        description: "just for test",
       },
       timeFormatter: null,
     };
@@ -112,14 +112,14 @@ describe('TrainrunSection Model Test', () => {
     expect(ts.hasTargetArrivalWarning()).toBe(false);
   });
 
-  it('setTravelTimeDto', () => {
+  it("setTravelTimeDto", () => {
     const timeLockDto: TimeLockDto = {
       time: -25,
       consecutiveTime: -125,
       lock: true,
       warning: {
-        title: 'test warning',
-        description: 'just for test',
+        title: "test warning",
+        description: "just for test",
       },
       timeFormatter: null,
     };
@@ -132,12 +132,12 @@ describe('TrainrunSection Model Test', () => {
     expect(ts.hasTravelTimeWarning()).toBe(false);
   });
 
-  it('set...Warning', () => {
+  it("set...Warning", () => {
     const ts = new TrainrunSection();
-    ts.setTargetDepartureWarning('A', 'B');
-    ts.setTargetArrivalWarning('C', 'D');
-    ts.setSourceDepartureWarning('E', 'F');
-    ts.setSourceArrivalWarning('G', 'H');
+    ts.setTargetDepartureWarning("A", "B");
+    ts.setTargetArrivalWarning("C", "D");
+    ts.setSourceDepartureWarning("E", "F");
+    ts.setSourceArrivalWarning("G", "H");
     ts.setTravelTimeWarning(undefined, null);
     expect(ts.hasTargetDepartureWarning()).toBe(true);
     expect(ts.hasTargetArrivalWarning()).toBe(true);
@@ -146,7 +146,7 @@ describe('TrainrunSection Model Test', () => {
     expect(ts.hasTravelTimeWarning()).toBe(true);
   });
 
-  it('check...default...lock', () => {
+  it("check...default...lock", () => {
     const ts = new TrainrunSection();
     expect(ts.getTargetDepartureLock()).toBe(false);
     expect(ts.getTargetArrivalLock()).toBe(false);
@@ -155,7 +155,7 @@ describe('TrainrunSection Model Test', () => {
     expect(ts.getTravelTimeLock()).toBe(true);
   });
 
-  it('set...lock', () => {
+  it("set...lock", () => {
     const ts = new TrainrunSection();
     ts.setTargetDepartureLock(false);
     ts.setTargetArrivalLock(false);
@@ -169,7 +169,7 @@ describe('TrainrunSection Model Test', () => {
     expect(ts.getTravelTimeLock()).toBe(false);
   });
 
-  it('set...lock - 1', () => {
+  it("set...lock - 1", () => {
     const ts = new TrainrunSection();
     ts.setTargetDepartureLock(false);
     ts.setTargetArrivalLock(false);
@@ -184,7 +184,7 @@ describe('TrainrunSection Model Test', () => {
     expect(ts.getTravelTimeLock()).toBe(false);
   });
 
-  it('set...lock - 2', () => {
+  it("set...lock - 2", () => {
     const ts = new TrainrunSection();
     ts.setTargetDepartureLock(false);
     ts.setTargetArrivalLock(false);
@@ -199,7 +199,7 @@ describe('TrainrunSection Model Test', () => {
     expect(ts.getTravelTimeLock()).toBe(false);
   });
 
-  it('set...lock - 3', () => {
+  it("set...lock - 3", () => {
     const ts = new TrainrunSection();
     ts.setTargetDepartureLock(false);
     ts.setTargetArrivalLock(false);
@@ -214,7 +214,7 @@ describe('TrainrunSection Model Test', () => {
     expect(ts.getTravelTimeLock()).toBe(false);
   });
 
-  it('set...lock - 4', () => {
+  it("set...lock - 4", () => {
     const ts = new TrainrunSection();
     ts.setTargetDepartureLock(false);
     ts.setTargetArrivalLock(false);
@@ -229,7 +229,7 @@ describe('TrainrunSection Model Test', () => {
     expect(ts.getTravelTimeLock()).toBe(false);
   });
 
-  it('set...lock - 5', () => {
+  it("set...lock - 5", () => {
     const ts = new TrainrunSection();
     ts.setTargetDepartureLock(false);
     ts.setTargetArrivalLock(false);
@@ -244,21 +244,21 @@ describe('TrainrunSection Model Test', () => {
     expect(ts.getTravelTimeLock()).toBe(true);
   });
 
-  it('select', () => {
+  it("select", () => {
     const ts = new TrainrunSection();
     expect(ts.selected()).toBe(false);
     ts.select();
     expect(ts.selected()).toBe(true);
   });
 
-  it('testTimeFormatter_001', () => {
+  it("testTimeFormatter_001", () => {
     const timeLockDto: TimeLockDto = {
       time: -25,
       consecutiveTime: -125,
       lock: true,
       warning: {
-        title: 'test warning',
-        description: 'just for test',
+        title: "test warning",
+        description: "just for test",
       },
       timeFormatter: {
         colorRef: null,
@@ -272,145 +272,145 @@ describe('TrainrunSection Model Test', () => {
     expect(ts.getTravelTimeFormattedDisplayText()).toBe(undefined);
   });
 
-  it('testTimeFormatter_002', () => {
+  it("testTimeFormatter_002", () => {
     const timeLockDto: TimeLockDto = {
       time: -25,
       consecutiveTime: -125,
       lock: true,
       warning: {
-        title: 'test warning',
-        description: 'just for test',
+        title: "test warning",
+        description: "just for test",
       },
       timeFormatter: {
         colorRef: null,
-        stylePattern: 'Adrian',
+        stylePattern: "Adrian",
         textWidth: 20,
         htmlStyle: undefined,
       },
     };
     const ts = new TrainrunSection();
     ts.setTravelTimeDto(timeLockDto);
-    expect(ts.getTravelTimeFormattedDisplayText()).toBe('Adrian');
+    expect(ts.getTravelTimeFormattedDisplayText()).toBe("Adrian");
   });
 
-  it('testTimeFormatter_003', () => {
+  it("testTimeFormatter_003", () => {
     const timeLockDto: TimeLockDto = {
       time: -25,
       consecutiveTime: -125,
       lock: true,
       warning: {
-        title: 'test warning',
-        description: 'just for test',
+        title: "test warning",
+        description: "just for test",
       },
       timeFormatter: {
         colorRef: null,
-        stylePattern: '{{time}}',
+        stylePattern: "{{time}}",
         textWidth: 20,
         htmlStyle: undefined,
       },
     };
     const ts = new TrainrunSection();
     ts.setTravelTimeDto(timeLockDto);
-    expect(ts.getTravelTimeFormattedDisplayText()).toBe('35');
+    expect(ts.getTravelTimeFormattedDisplayText()).toBe("35");
   });
 
-  it('testTimeFormatter_004', () => {
+  it("testTimeFormatter_004", () => {
     const timeLockDto: TimeLockDto = {
       time: -25,
       consecutiveTime: -125,
       lock: true,
       warning: {
-        title: 'test warning',
-        description: 'just for test',
+        title: "test warning",
+        description: "just for test",
       },
       timeFormatter: {
         colorRef: null,
-        stylePattern: '{{consecutiveTime}}',
+        stylePattern: "{{consecutiveTime}}",
         textWidth: 20,
         htmlStyle: undefined,
       },
     };
     const ts = new TrainrunSection();
     ts.setTravelTimeDto(timeLockDto);
-    expect(ts.getTravelTimeFormattedDisplayText()).toBe('-125');
+    expect(ts.getTravelTimeFormattedDisplayText()).toBe("-125");
   });
 
-  it('testTimeFormatter_005', () => {
+  it("testTimeFormatter_005", () => {
     const timeLockDto: TimeLockDto = {
       time: -25,
       consecutiveTime: -125,
       lock: true,
       warning: {
-        title: 'test warning',
-        description: 'just for test',
+        title: "test warning",
+        description: "just for test",
       },
       timeFormatter: {
         colorRef: null,
-        stylePattern: 'Negative? : {{consecutiveTime}}.format(HH:mm:ss)',
+        stylePattern: "Negative? : {{consecutiveTime}}.format(HH:mm:ss)",
         textWidth: 20,
         htmlStyle: undefined,
       },
     };
     const ts = new TrainrunSection();
     ts.setTravelTimeDto(timeLockDto);
-    expect(ts.getTravelTimeFormattedDisplayText()).toBe('Negative? : 21:55:00');
+    expect(ts.getTravelTimeFormattedDisplayText()).toBe("Negative? : 21:55:00");
   });
 
-  it('testTimeFormatter_006', () => {
+  it("testTimeFormatter_006", () => {
     const timeLockDto: TimeLockDto = {
       time: -25,
       consecutiveTime: 125,
       lock: true,
       warning: {
-        title: 'test warning',
-        description: 'just for test',
+        title: "test warning",
+        description: "just for test",
       },
       timeFormatter: {
         colorRef: null,
-        stylePattern: 'Positiv? : {{consecutiveTime}}.format(HH:mm:ss)',
+        stylePattern: "Positiv? : {{consecutiveTime}}.format(HH:mm:ss)",
         textWidth: 20,
         htmlStyle: undefined,
       },
     };
     const ts = new TrainrunSection();
     ts.setTravelTimeDto(timeLockDto);
-    expect(ts.getTravelTimeFormattedDisplayText()).toBe('Positiv? : 02:05:00');
+    expect(ts.getTravelTimeFormattedDisplayText()).toBe("Positiv? : 02:05:00");
   });
 
-  it('testTimeFormatter_007', () => {
+  it("testTimeFormatter_007", () => {
     const timeLockDto: TimeLockDto = {
       time: 25,
       consecutiveTime: 125,
       lock: true,
       warning: {
-        title: 'test warning',
-        description: 'just for test',
+        title: "test warning",
+        description: "just for test",
       },
       timeFormatter: {
         colorRef: null,
-        stylePattern: '{{time}} : {{consecutiveTime}}.format(HH:mm)',
+        stylePattern: "{{time}} : {{consecutiveTime}}.format(HH:mm)",
         textWidth: 20,
         htmlStyle: undefined,
       },
     };
     const ts = new TrainrunSection();
     ts.setTravelTimeDto(timeLockDto);
-    expect(ts.getTravelTimeFormattedDisplayText()).toBe('25 : 02:05');
+    expect(ts.getTravelTimeFormattedDisplayText()).toBe("25 : 02:05");
   });
 
-  it('testTimeFormatter_008', () => {
+  it("testTimeFormatter_008", () => {
     const timeLockDto: TimeLockDto = {
       time: 25.5,
       consecutiveTime: 125.5,
       lock: true,
       warning: {
-        title: 'test warning',
-        description: 'just for test',
+        title: "test warning",
+        description: "just for test",
       },
       timeFormatter: {
         colorRef: null,
         stylePattern:
-          'Start {{time}} : {{consecutiveTime}}.format(HH:mm) : {{consecutiveTime}}.format(HH:mm:ss) : {{consecutiveTime}} END',
+          "Start {{time}} : {{consecutiveTime}}.format(HH:mm) : {{consecutiveTime}}.format(HH:mm:ss) : {{consecutiveTime}} END",
         textWidth: 20,
         htmlStyle: undefined,
       },
@@ -418,23 +418,23 @@ describe('TrainrunSection Model Test', () => {
     const ts = new TrainrunSection();
     ts.setTravelTimeDto(timeLockDto);
     expect(ts.getTravelTimeFormattedDisplayText()).toBe(
-      'Start 25.5 : 02:05 : 02:05:30 : 125.5 END',
+      "Start 25.5 : 02:05 : 02:05:30 : 125.5 END",
     );
   });
 
-  it('testTimeFormatter_009', () => {
+  it("testTimeFormatter_009", () => {
     const timeLockDto: TimeLockDto = {
       time: 25.5,
       consecutiveTime: 125.5,
       lock: true,
       warning: {
-        title: 'test warning',
-        description: 'just for test',
+        title: "test warning",
+        description: "just for test",
       },
       timeFormatter: {
         colorRef: null,
         stylePattern:
-          'Start {{time}} : {{time}}.format(HH:mm) : {{time}}.format(HH:mm:ss) : {{consecutiveTime}} END',
+          "Start {{time}} : {{time}}.format(HH:mm) : {{time}}.format(HH:mm:ss) : {{consecutiveTime}} END",
         textWidth: 20,
         htmlStyle: undefined,
       },
@@ -442,11 +442,11 @@ describe('TrainrunSection Model Test', () => {
     const ts = new TrainrunSection();
     ts.setTravelTimeDto(timeLockDto);
     expect(ts.getTravelTimeFormattedDisplayText()).toBe(
-      'Start 25.5 : 00:25 : 00:25:30 : 125.5 END',
+      "Start 25.5 : 00:25 : 00:25:30 : 125.5 END",
     );
   });
 
-  it('Resource - id check', () => {
+  it("Resource - id check", () => {
     const nc1 = new Resource();
     const nc1Data = nc1.getDto();
     nc1Data.id = nc1Data.id + 10;
@@ -454,7 +454,7 @@ describe('TrainrunSection Model Test', () => {
     expect(new Resource().getId()).toBe(nc2.getId() + 1);
   });
 
-  it('Connection - select check', () => {
+  it("Connection - select check", () => {
     const nc1 = new Connection();
     expect(nc1.selected()).toBe(false);
     nc1.select();
@@ -463,21 +463,21 @@ describe('TrainrunSection Model Test', () => {
     expect(nc1.selected()).toBe(false);
   });
 
-  it('Connection - setWarning check 001', () => {
+  it("Connection - setWarning check 001", () => {
     const nc1 = new Connection();
     expect(nc1.hasWarning()).toBe(false);
-    nc1.setWarning('Title');
+    nc1.setWarning("Title");
     expect(nc1.hasWarning()).toBe(true);
   });
 
-  it('Connection - setWarning check 002', () => {
+  it("Connection - setWarning check 002", () => {
     const nc1 = new Connection();
     expect(nc1.hasWarning()).toBe(false);
-    nc1.setWarning('Title', 'MSG');
+    nc1.setWarning("Title", "MSG");
     expect(nc1.hasWarning()).toBe(true);
   });
 
-  it('getOppositeNode with trainrunsection - 001', () => {
+  it("getOppositeNode with trainrunsection - 001", () => {
     const node1 = new Node();
     const node2 = new Node();
     const node3 = new Node();
@@ -499,7 +499,7 @@ describe('TrainrunSection Model Test', () => {
     expect(opp6.getId()).toBe(node2.getId());
   });
 
-  it('getTransition with trainrunsection - 001', () => {
+  it("getTransition with trainrunsection - 001", () => {
     const tr = new Trainrun();
     const ts1 = new TrainrunSection();
     const node1 = new Node();
@@ -543,7 +543,7 @@ describe('TrainrunSection Model Test', () => {
     expect(t9).toBe(undefined);
   });
 
-  it('isEndNode with trainrunsection - 001', () => {
+  it("isEndNode with trainrunsection - 001", () => {
     const tr = new Trainrun();
     const ts1 = new TrainrunSection();
     const node1 = new Node();
@@ -579,7 +579,7 @@ describe('TrainrunSection Model Test', () => {
     expect(e6).toBe(true);
   });
 
-  it('getStartTrainrunSection with trainrunsection - 001', () => {
+  it("getStartTrainrunSection with trainrunsection - 001", () => {
     const tr = new Trainrun();
     const ts1 = new TrainrunSection();
     const node1 = new Node();

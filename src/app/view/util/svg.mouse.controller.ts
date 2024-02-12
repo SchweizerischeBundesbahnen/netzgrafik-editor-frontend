@@ -1,7 +1,7 @@
-import * as d3 from 'd3';
-import {Vec2D} from '../../utils/vec2D';
-import {StaticDomTags} from '../editor-main-view/data-views/static.dom.tags';
-import {ViewboxProperties} from '../../services/ui/ui.interaction.service';
+import * as d3 from "d3";
+import {Vec2D} from "../../utils/vec2D";
+import {StaticDomTags} from "../editor-main-view/data-views/static.dom.tags";
+import {ViewboxProperties} from "../../services/ui/ui.interaction.service";
 
 export interface SVGMouseControllerObserver {
   onEarlyReturnFromMousemove(): boolean;
@@ -40,20 +40,20 @@ export class SVGMouseController {
 
   init(viewboxProperties: ViewboxProperties) {
     this.viewboxProperties = viewboxProperties;
-    const element = d3.select('html').node();
+    const element = d3.select("html").node();
     const rectHtml = element.getBoundingClientRect();
     const height = rectHtml.height;
     const width = rectHtml.width;
 
     this.cachedSvgDrawingContextNode = null;
 
-    this.svgDrawingContext = d3.select('#' + this.svgName);
+    this.svgDrawingContext = d3.select("#" + this.svgName);
     this.svgDrawingContext
-      .attr('oncontextmenu', 'return false;')
-      .attr('x', rectHtml.x)
-      .attr('y', rectHtml.y)
-      .attr('height', height)
-      .attr('width', width);
+      .attr("oncontextmenu", "return false;")
+      .attr("x", rectHtml.x)
+      .attr("y", rectHtml.y)
+      .attr("height", height)
+      .attr("width", width);
 
     if (this.svgDrawingContext.node() === null) {
       return undefined;
@@ -76,8 +76,8 @@ export class SVGMouseController {
   }
 
   resize(width: number, height: number) {
-    this.svgDrawingContext.attr('width', width);
-    this.svgDrawingContext.attr('height', height);
+    this.svgDrawingContext.attr("width", width);
+    this.svgDrawingContext.attr("height", height);
     if (
       !(
         this.viewboxProperties.panZoomWidth > 0 &&
@@ -174,7 +174,7 @@ export class SVGMouseController {
   setViewbox() {
     this.viewboxProperties.currentViewBox = this.makeViewboxString();
     this.svgDrawingContext.attr(
-      'viewBox',
+      "viewBox",
       this.viewboxProperties.currentViewBox,
     );
     this.svgMouseControllerObserver.onViewboxChanged(this.viewboxProperties);
@@ -194,11 +194,11 @@ export class SVGMouseController {
 
   private registerCallbacks() {
     this.svgDrawingContext
-      .on('mousedown', () => this.onGraphContainerMousedown())
-      .on('mousemove', () => this.onGraphContainerMousemove())
-      .on('mouseup', () => this.onGraphContainerMouseup())
-      .on('dblclick', () => this.onDblclick())
-      .on('wheel', () => this.onWheel());
+      .on("mousedown", () => this.onGraphContainerMousedown())
+      .on("mousemove", () => this.onGraphContainerMousemove())
+      .on("mouseup", () => this.onGraphContainerMouseup())
+      .on("dblclick", () => this.onDblclick())
+      .on("wheel", () => this.onWheel());
   }
 
   private onGraphContainerMousedown() {
@@ -316,7 +316,7 @@ export class SVGMouseController {
 
   private onMouseDownZoom() {
     const d = d3.select(d3.event.srcElement);
-    if (d.attr('id') !== 'graphContainer') {
+    if (d.attr("id") !== "graphContainer") {
       return;
     }
     if (d3.event.buttons !== 2) {
@@ -346,7 +346,7 @@ export class SVGMouseController {
 
   private onDblclick() {
     const d = d3.select(d3.event.srcElement);
-    if (d.attr('id') !== 'graphContainer') {
+    if (d.attr("id") !== "graphContainer") {
       return;
     }
     const zoomCenter: Vec2D = new Vec2D(
@@ -416,11 +416,11 @@ export class SVGMouseController {
   private makeViewboxString(): string {
     return (
       this.viewboxProperties.panZoomLeft +
-      ' ' +
+      " " +
       this.viewboxProperties.panZoomTop +
-      ' ' +
+      " " +
       this.viewboxProperties.panZoomWidth +
-      ' ' +
+      " " +
       this.viewboxProperties.panZoomHeight
     );
   }

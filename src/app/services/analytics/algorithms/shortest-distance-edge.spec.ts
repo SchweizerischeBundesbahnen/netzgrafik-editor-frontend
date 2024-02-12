@@ -1,8 +1,8 @@
-import {Node} from '../../../models/node.model';
-import {ShortestDistanceEdge} from './shortest-distance-edge';
+import {Node} from "../../../models/node.model";
+import {ShortestDistanceEdge} from "./shortest-distance-edge";
 
-describe('ShortestDistanceEdge', () => {
-  it('getFromNode', () => {
+describe("ShortestDistanceEdge", () => {
+  it("getFromNode", () => {
     const node1 = new Node();
     const node2 = new Node();
     const edge: ShortestDistanceEdge = new ShortestDistanceEdge(
@@ -15,7 +15,7 @@ describe('ShortestDistanceEdge', () => {
     expect(edge.getFromNode().getId()).toBe(node1.getId());
   });
 
-  it('getToNode', () => {
+  it("getToNode", () => {
     const node1 = new Node();
     const node2 = new Node();
     const edge: ShortestDistanceEdge = new ShortestDistanceEdge(
@@ -28,7 +28,7 @@ describe('ShortestDistanceEdge', () => {
     expect(edge.getToNode().getId()).toBe(node2.getId());
   });
 
-  it('getArrivalTime', () => {
+  it("getArrivalTime", () => {
     const node1 = new Node();
     const node2 = new Node();
     const edge: ShortestDistanceEdge = new ShortestDistanceEdge(
@@ -41,7 +41,7 @@ describe('ShortestDistanceEdge', () => {
     expect(edge.getArrivalTime()).toBe(78);
   });
 
-  it('getFullDistance', () => {
+  it("getFullDistance", () => {
     const node1 = new Node();
     const node2 = new Node();
     const edge: ShortestDistanceEdge = new ShortestDistanceEdge(
@@ -54,7 +54,7 @@ describe('ShortestDistanceEdge', () => {
     expect(edge.getFullDistance()).toBe(59);
   });
 
-  it('getFromNodeDepartingTrainrunSection - case 1', () => {
+  it("getFromNodeDepartingTrainrunSection - case 1", () => {
     const node1 = new Node();
     const node2 = new Node();
     const edge: ShortestDistanceEdge = new ShortestDistanceEdge(
@@ -67,7 +67,7 @@ describe('ShortestDistanceEdge', () => {
     expect(edge.getFromNodeDepartingTrainrunSection()).toBe(undefined);
   });
 
-  it('getFromNodeDepartingTrainrunSection - case 2', () => {
+  it("getFromNodeDepartingTrainrunSection - case 2", () => {
     const node1 = new Node();
     const node2 = new Node();
     const edge: ShortestDistanceEdge = new ShortestDistanceEdge(

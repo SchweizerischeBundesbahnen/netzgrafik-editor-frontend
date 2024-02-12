@@ -1,12 +1,12 @@
-import {TrainrunSection} from '../../../models/trainrunsection.model';
-import {Node} from '../../../models/node.model';
-import {Port} from '../../../models/port.model';
-import {TrainrunSectionService} from '../../data/trainrunsection.service';
-import {NodeService} from '../../data/node.service';
-import {TrainrunService} from '../../data/trainrun.service';
-import {ShortestDistanceNode} from './shortest-distance-node';
-import {ShortestDistanceEdge} from './shortest-distance-edge';
-import {FilterService} from '../../ui/filter.service';
+import {TrainrunSection} from "../../../models/trainrunsection.model";
+import {Node} from "../../../models/node.model";
+import {Port} from "../../../models/port.model";
+import {TrainrunSectionService} from "../../data/trainrunsection.service";
+import {NodeService} from "../../data/node.service";
+import {TrainrunService} from "../../data/trainrun.service";
+import {ShortestDistanceNode} from "./shortest-distance-node";
+import {ShortestDistanceEdge} from "./shortest-distance-edge";
+import {FilterService} from "../../ui/filter.service";
 
 //
 // The shortest travel time search method is based on the Dijkstra Algorithm.
@@ -212,13 +212,13 @@ export class ShortestTravelTimeSearch {
     finalShortestDistanceNodes.forEach((snd: ShortestDistanceNode) => {
       console.log(
         snd.node.getBetriebspunktName(),
-        'Distanz/Kosten:',
+        "Distanz/Kosten:",
         snd.distance,
-        'Anzahl Umsteigen:',
+        "Anzahl Umsteigen:",
         snd.path
           .map((ts: TrainrunSection) => ts.getTrainrunId())
           .filter((v, i, a) => a.indexOf(v) === i).length - 1,
-        'Fahrplan:',
+        "Fahrplan:",
         this.printFinalInfoTimetable(snd),
       );
     });
@@ -229,41 +229,41 @@ export class ShortestTravelTimeSearch {
     const revTrainrunSections = Object.assign([], snd.path).reverse();
     let nodeID: number = snd.node.getId();
     let trainID: number;
-    pathArray.push(']');
+    pathArray.push("]");
     revTrainrunSections.forEach((ts: TrainrunSection) => {
       if (trainID !== ts.getTrainrunId()) {
         if (trainID !== undefined) {
-          pathArray.push('][');
+          pathArray.push("][");
         }
         pathArray.push(
-          '(' +
+          "(" +
             ts.getTrainrun().getCategoryShortName() +
             ts.getTrainrun().getTitle() +
-            ')',
+            ")",
         );
         trainID = ts.getTrainrunId();
       }
       if (ts.getSourceNodeId() !== nodeID) {
         pathArray.push(
           ts.getSourceNode().getBetriebspunktName() +
-            '-' +
+            "-" +
             ts.getTargetNode().getBetriebspunktName(),
         );
         nodeID = ts.getSourceNodeId();
       } else {
         pathArray.push(
           ts.getTargetNode().getBetriebspunktName() +
-            '-' +
+            "-" +
             ts.getSourceNode().getBetriebspunktName(),
         );
         nodeID = ts.getTargetNodeId();
       }
     });
-    pathArray.push('[');
+    pathArray.push("[");
 
     pathArray.reverse();
-    let retString = '';
-    pathArray.forEach((str) => (retString += str + ' '));
+    let retString = "";
+    pathArray.forEach((str) => (retString += str + " "));
     return retString;
   }
 

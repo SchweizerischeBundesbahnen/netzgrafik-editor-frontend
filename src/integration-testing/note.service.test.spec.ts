@@ -1,21 +1,21 @@
-import {NodeService} from '../app/services/data/node.service';
-import {TrainrunService} from '../app/services/data/trainrun.service';
-import {TrainrunSectionService} from '../app/services/data/trainrunsection.service';
-import {StammdatenService} from '../app/services/data/stammdaten.service';
-import {DataService} from '../app/services/data/data.service';
-import {ResourceService} from '../app/services/data/resource.service';
-import {LogService} from '../app/logger/log.service';
-import {LogPublishersService} from '../app/logger/log.publishers.service';
-import {NoteService} from '../app/services/data/note.service';
-import {LabelService} from '../app/services/data/label.serivce';
-import {LabelGroupService} from '../app/services/data/labelgroup.service';
-import {Note} from '../app/models/note.model';
-import {NetzgrafikUnitTesting} from './netzgrafik.unit.testing';
-import {FilterService} from '../app/services/ui/filter.service';
-import {Vec2D} from '../app/utils/vec2D';
-import {NetzgrafikColoringService} from '../app/services/data/netzgrafikColoring.service';
+import {NodeService} from "../app/services/data/node.service";
+import {TrainrunService} from "../app/services/data/trainrun.service";
+import {TrainrunSectionService} from "../app/services/data/trainrunsection.service";
+import {StammdatenService} from "../app/services/data/stammdaten.service";
+import {DataService} from "../app/services/data/data.service";
+import {ResourceService} from "../app/services/data/resource.service";
+import {LogService} from "../app/logger/log.service";
+import {LogPublishersService} from "../app/logger/log.publishers.service";
+import {NoteService} from "../app/services/data/note.service";
+import {LabelService} from "../app/services/data/label.serivce";
+import {LabelGroupService} from "../app/services/data/labelgroup.service";
+import {Note} from "../app/models/note.model";
+import {NetzgrafikUnitTesting} from "./netzgrafik.unit.testing";
+import {FilterService} from "../app/services/ui/filter.service";
+import {Vec2D} from "../app/utils/vec2D";
+import {NetzgrafikColoringService} from "../app/services/data/netzgrafikColoring.service";
 
-describe('NodeService Test', () => {
+describe("NodeService Test", () => {
   let notes: Note[] = null;
 
   let dataService: DataService = null;
@@ -76,7 +76,7 @@ describe('NodeService Test', () => {
     noteService.notes.subscribe((updateNotes) => (notes = updateNotes));
   });
 
-  it('check notes', () => {
+  it("check notes", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -85,7 +85,7 @@ describe('NodeService Test', () => {
     expect(note.getDto().id).toBe(3);
   });
 
-  it('getNoteFromId', () => {
+  it("getNoteFromId", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -94,7 +94,7 @@ describe('NodeService Test', () => {
     expect(noteService.getNoteFromId(null)).toBe(undefined);
   });
 
-  it('select', () => {
+  it("select", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -106,7 +106,7 @@ describe('NodeService Test', () => {
     expect(note.selected()).toBe(false);
   });
 
-  it('getWidth', () => {
+  it("getWidth", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -116,7 +116,7 @@ describe('NodeService Test', () => {
     expect(note.getWidth()).toBe(1978);
   });
 
-  it('getHeight', () => {
+  it("getHeight", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -126,7 +126,7 @@ describe('NodeService Test', () => {
     expect(note.getHeight()).toBe(-12);
   });
 
-  it('getPosition X / Y', () => {
+  it("getPosition X / Y", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -138,29 +138,29 @@ describe('NodeService Test', () => {
     expect(note.getPositionY()).toBe(2);
   });
 
-  it('getTitle', () => {
+  it("getTitle", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
     const note: Note = noteService.getNoteFromId(3);
-    expect(note.getTitle()).toBe('Frabcodierter Text');
-    note.setTitle('PFI');
-    expect(note.getTitle()).toBe('PFI');
+    expect(note.getTitle()).toBe("Frabcodierter Text");
+    note.setTitle("PFI");
+    expect(note.getTitle()).toBe("PFI");
   });
 
-  it('getText', () => {
+  it("getText", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
     const note: Note = noteService.getNoteFromId(3);
     expect(note.getText()).toBe(
-      '<p><em>Folgendes</em></p>spannend<p><strong>FETT</strong>',
+      "<p><em>Folgendes</em></p>spannend<p><strong>FETT</strong>",
     );
-    note.setText('PFI');
-    expect(note.getText()).toBe('PFI');
+    note.setText("PFI");
+    expect(note.getText()).toBe("PFI");
   });
 
-  it('deleteAllNotes', () => {
+  it("deleteAllNotes", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -171,7 +171,7 @@ describe('NodeService Test', () => {
     expect(notes.length).toBe(0);
   });
 
-  it('deleteAllNotes all non visible', () => {
+  it("deleteAllNotes all non visible", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -182,7 +182,7 @@ describe('NodeService Test', () => {
     expect(notes.length).toBe(1);
   });
 
-  it('deleteAllNotes all non visible with filter notes enabled', () => {
+  it("deleteAllNotes all non visible with filter notes enabled", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -194,13 +194,13 @@ describe('NodeService Test', () => {
     expect(notes.length).toBe(0);
   });
 
-  it('deleteAllNotes all non visible with filter notes enabled (2)', () => {
+  it("deleteAllNotes all non visible with filter notes enabled (2)", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
     noteService.unselectAllNotes();
-    const newNote = noteService.addNote(new Vec2D(100, 1000), 'Fun', 'nice');
-    noteService.setLabels(newNote.getId(), ['Spass']);
+    const newNote = noteService.addNote(new Vec2D(100, 1000), "Fun", "nice");
+    noteService.setLabels(newNote.getId(), ["Spass"]);
     expect(noteService.getNotes().length).toBe(2);
     expect(noteService.getNoteFromId(3).getId()).toBe(3);
     filterService.setFilterNoteLabels(newNote.getLabelIds());
@@ -208,13 +208,13 @@ describe('NodeService Test', () => {
     expect(noteService.getNotes().length).toBe(1);
   });
 
-  it('deleteAllNotes all non visible with filter notes enabled but no filtering hit', () => {
+  it("deleteAllNotes all non visible with filter notes enabled but no filtering hit", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
     noteService.unselectAllNotes();
-    const newNote = noteService.addNote(new Vec2D(100, 1000), 'Fun', 'nice');
-    noteService.setLabels(newNote.getId(), ['Spass']);
+    const newNote = noteService.addNote(new Vec2D(100, 1000), "Fun", "nice");
+    noteService.setLabels(newNote.getId(), ["Spass"]);
     const noteLabels = labelService.getTextLabelsFromIds(newNote.getLabelIds());
     expect(noteService.getNoteFromId(3).getId()).toBe(3);
     filterService.setFilterNoteLabels([0]);
@@ -223,64 +223,64 @@ describe('NodeService Test', () => {
     expect(noteService.getNoteFromId(3).getId()).toBe(3);
   });
 
-  it('addNote', () => {
+  it("addNote", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
-    const newNote = noteService.addNote(new Vec2D(10, 10), 'titel', 'text');
-    expect(noteService.getNoteFromId(newNote.getId()).getTitle()).toBe('titel');
+    const newNote = noteService.addNote(new Vec2D(10, 10), "titel", "text");
+    expect(noteService.getNoteFromId(newNote.getId()).getTitle()).toBe("titel");
   });
 
-  it('editNote', () => {
+  it("editNote", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
-    const newNote = noteService.addNote(new Vec2D(10, 10), 'titel', 'text');
+    const newNote = noteService.addNote(new Vec2D(10, 10), "titel", "text");
     noteService.editNote(
       newNote.getId(),
-      'ok',
-      '<p>:-)</p>text <p>next</p>',
+      "ok",
+      "<p>:-)</p>text <p>next</p>",
       0,
       -1,
     );
     noteService.editNote(
       newNote.getId(),
-      'ok',
-      '<p>:-)</p>text <p>next</p>',
+      "ok",
+      "<p>:-)</p>text <p>next</p>",
       -1,
       0,
     );
     noteService.editNote(
       newNote.getId(),
-      'ok',
-      '<p>:-)</p>text <p>next</p>',
+      "ok",
+      "<p>:-)</p>text <p>next</p>",
       -1,
       -1,
     );
-    expect(noteService.getNoteFromId(newNote.getId()).getTitle()).toBe('ok');
-    noteService.editNote(-1, 'ok2', '<p>:-)</p>text <p>next</p>', 200, 560);
+    expect(noteService.getNoteFromId(newNote.getId()).getTitle()).toBe("ok");
+    noteService.editNote(-1, "ok2", "<p>:-)</p>text <p>next</p>", 200, 560);
     noteService.editNote(
       undefined,
-      'ok2',
-      '<p>:-)</p>text <p>next</p>',
+      "ok2",
+      "<p>:-)</p>text <p>next</p>",
       200,
       560,
     );
     noteService.editNote(
       newNote.getId(),
-      'ok2',
-      '<p>:-)</p>text <p>next</p>',
+      "ok2",
+      "<p>:-)</p>text <p>next</p>",
       200,
       560,
     );
-    expect(noteService.getNoteFromId(newNote.getId()).getTitle()).toBe('ok2');
+    expect(noteService.getNoteFromId(newNote.getId()).getTitle()).toBe("ok2");
   });
 
-  it('moveNote', () => {
+  it("moveNote", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
-    const newNote = noteService.addNote(new Vec2D(10, 10), 'titel', 'text');
+    const newNote = noteService.addNote(new Vec2D(10, 10), "titel", "text");
     expect(noteService.getNoteFromId(newNote.getId()).getPositionX()).toBe(10);
     expect(noteService.getNoteFromId(newNote.getId()).getPositionY()).toBe(10);
 
@@ -297,7 +297,7 @@ describe('NodeService Test', () => {
     expect(noteService.getNoteFromId(newNote.getId()).getPositionY()).toBe(64);
   });
 
-  it('deleteNote', () => {
+  it("deleteNote", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -306,14 +306,14 @@ describe('NodeService Test', () => {
     expect(noteService.getNoteFromId(3)).toBe(undefined);
   });
 
-  it('getNoteFromId', () => {
+  it("getNoteFromId", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
     expect(noteService.getNoteFromId(3).getId()).toBe(3);
   });
 
-  it('select', () => {
+  it("select", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -324,7 +324,7 @@ describe('NodeService Test', () => {
     expect(noteService.isNoteSelected(3)).toBe(true);
   });
 
-  it('unselect', () => {
+  it("unselect", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -333,7 +333,7 @@ describe('NodeService Test', () => {
     expect(noteService.isNoteSelected(3)).toBe(false);
   });
 
-  it('selectNode', () => {
+  it("selectNode", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -352,7 +352,7 @@ describe('NodeService Test', () => {
     expect(noteService.isNoteSelected(3)).toBe(false);
   });
 
-  it('unselectNote', () => {
+  it("unselectNote", () => {
     noteService.unselectNote(null);
     noteService.unselectNote(undefined);
     noteService.unselectNote(notes.length);

@@ -1,24 +1,24 @@
-import {DataService} from '../data/data.service';
-import {NodeService} from '../data/node.service';
-import {ResourceService} from '../data/resource.service';
-import {TrainrunService} from '../data/trainrun.service';
-import {TrainrunSectionService} from '../data/trainrunsection.service';
-import {StammdatenService} from '../data/stammdaten.service';
-import {NoteService} from '../data/note.service';
-import {Node} from '../../models/node.model';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {LogService} from '../../logger/log.service';
-import {LogPublishersService} from '../../logger/log.publishers.service';
-import {LabelGroupService} from '../data/labelgroup.service';
-import {LabelService} from '../data/label.serivce';
-import {NetzgrafikUnitTesting} from '../../../integration-testing/netzgrafik.unit.testing';
-import {FilterService} from '../ui/filter.service';
-import {NetzgrafikColoringService} from '../data/netzgrafikColoring.service';
-import {TrainrunsectionHelper} from './trainrunsection.helper';
-import {TransitionValidator} from './transition.validator';
-import {Transition} from '../../models/transition.model';
+import {DataService} from "../data/data.service";
+import {NodeService} from "../data/node.service";
+import {ResourceService} from "../data/resource.service";
+import {TrainrunService} from "../data/trainrun.service";
+import {TrainrunSectionService} from "../data/trainrunsection.service";
+import {StammdatenService} from "../data/stammdaten.service";
+import {NoteService} from "../data/note.service";
+import {Node} from "../../models/node.model";
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {LogService} from "../../logger/log.service";
+import {LogPublishersService} from "../../logger/log.publishers.service";
+import {LabelGroupService} from "../data/labelgroup.service";
+import {LabelService} from "../data/label.serivce";
+import {NetzgrafikUnitTesting} from "../../../integration-testing/netzgrafik.unit.testing";
+import {FilterService} from "../ui/filter.service";
+import {NetzgrafikColoringService} from "../data/netzgrafikColoring.service";
+import {TrainrunsectionHelper} from "./trainrunsection.helper";
+import {TransitionValidator} from "./transition.validator";
+import {Transition} from "../../models/transition.model";
 
-describe('TransitionValidator', () => {
+describe("TransitionValidator", () => {
   let dataService: DataService;
   let nodeService: NodeService;
   let resourceService: ResourceService;
@@ -85,7 +85,7 @@ describe('TransitionValidator', () => {
     trainrunsectionHelper = new TrainrunsectionHelper(trainrunService);
   });
 
-  it('Test load data', () => {
+  it("Test load data", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -93,7 +93,7 @@ describe('TransitionValidator', () => {
     expect(trainrunSections.length).toBe(8);
   });
 
-  it('Validate Test - 001', () => {
+  it("Validate Test - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -169,7 +169,7 @@ describe('TransitionValidator', () => {
     );
   });
 
-  it('Validate Test - 002', () => {
+  it("Validate Test - 002", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -261,7 +261,7 @@ describe('TransitionValidator', () => {
     );
   });
 
-  it('Validate Test - 003', () => {
+  it("Validate Test - 003", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -353,7 +353,7 @@ describe('TransitionValidator', () => {
     );
   });
 
-  it('Validate Test - 004', () => {
+  it("Validate Test - 004", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -463,7 +463,7 @@ describe('TransitionValidator', () => {
     );
   });
 
-  it('Validate Test - 005', () => {
+  it("Validate Test - 005", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -573,7 +573,7 @@ describe('TransitionValidator', () => {
     );
   });
 
-  it('Validate Test - 006', () => {
+  it("Validate Test - 006", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );

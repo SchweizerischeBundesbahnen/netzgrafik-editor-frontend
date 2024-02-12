@@ -1,4 +1,4 @@
-import {ResourceDto} from '../data-structures/business.data.structures';
+import {ResourceDto} from "../data-structures/business.data.structures";
 
 export class Resource {
   private static currentId = 0;

@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {PageLayoutComponent} from './page-layout.component';
+import {ComponentFixture, TestBed} from "@angular/core/testing";
+import {PageLayoutComponent} from "./page-layout.component";
 
-describe('PageLayoutComponent', () => {
+describe("PageLayoutComponent", () => {
   let component: PageLayoutComponent;
   let fixture: ComponentFixture<PageLayoutComponent>;
 
@@ -17,7 +17,7 @@ describe('PageLayoutComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,25 +1,25 @@
-import {DataService} from '../data/data.service';
-import {NodeService} from '../data/node.service';
-import {ResourceService} from '../data/resource.service';
-import {TrainrunService} from '../data/trainrun.service';
-import {TrainrunSectionService} from '../data/trainrunsection.service';
-import {StammdatenService} from '../data/stammdaten.service';
-import {NoteService} from '../data/note.service';
-import {Node} from '../../models/node.model';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {LogService} from '../../logger/log.service';
-import {LogPublishersService} from '../../logger/log.publishers.service';
-import {LabelGroupService} from '../data/labelgroup.service';
-import {LabelService} from '../data/label.serivce';
-import {NetzgrafikUnitTesting} from '../../../integration-testing/netzgrafik.unit.testing';
-import {FilterService} from '../ui/filter.service';
-import {NetzgrafikColoringService} from '../data/netzgrafikColoring.service';
-import {UndoService} from '../data/undo.service';
-import {Vec2D} from '../../utils/vec2D';
-import {Note} from '../../models/note.model';
-import {LabelRef} from '../../data-structures/business.data.structures';
+import {DataService} from "../data/data.service";
+import {NodeService} from "../data/node.service";
+import {ResourceService} from "../data/resource.service";
+import {TrainrunService} from "../data/trainrun.service";
+import {TrainrunSectionService} from "../data/trainrunsection.service";
+import {StammdatenService} from "../data/stammdaten.service";
+import {NoteService} from "../data/note.service";
+import {Node} from "../../models/node.model";
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {LogService} from "../../logger/log.service";
+import {LogPublishersService} from "../../logger/log.publishers.service";
+import {LabelGroupService} from "../data/labelgroup.service";
+import {LabelService} from "../data/label.serivce";
+import {NetzgrafikUnitTesting} from "../../../integration-testing/netzgrafik.unit.testing";
+import {FilterService} from "../ui/filter.service";
+import {NetzgrafikColoringService} from "../data/netzgrafikColoring.service";
+import {UndoService} from "../data/undo.service";
+import {Vec2D} from "../../utils/vec2D";
+import {Note} from "../../models/note.model";
+import {LabelRef} from "../../data-structures/business.data.structures";
 
-describe('UndoService', () => {
+describe("UndoService", () => {
   let dataService: DataService;
   let nodeService: NodeService;
   let resourceService: ResourceService;
@@ -83,7 +83,7 @@ describe('UndoService', () => {
     );
   });
 
-  it('UndoService - 001', () => {
+  it("UndoService - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -107,7 +107,7 @@ describe('UndoService', () => {
     expect(loaded === undone).toBe(true);
   });
 
-  it('UndoService - 002', () => {
+  it("UndoService - 002", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -147,7 +147,7 @@ describe('UndoService', () => {
     expect(trainrunService.isAnyTrainrunSelected()).toBe(false);
   });
 
-  it('UndoService - 003', () => {
+  it("UndoService - 003", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -176,15 +176,15 @@ describe('UndoService', () => {
       trainrunSectionService.getTrainrunSectionFromId(0),
     );
 
-    let preNodesStr = '';
+    let preNodesStr = "";
     preChangedNodes.forEach((n) => {
       preNodesStr += n.getBetriebspunktName();
     });
-    let changedNodesStr = '';
+    let changedNodesStr = "";
     changedNodes.forEach((n) => {
       changedNodesStr += n.getBetriebspunktName();
     });
-    let postNodesStr = '';
+    let postNodesStr = "";
     postNodes.forEach((n) => {
       postNodesStr += n.getBetriebspunktName();
     });
@@ -194,7 +194,7 @@ describe('UndoService', () => {
     expect(postNodesStr === changedNodesStr).toBe(true);
   });
 
-  it('UndoService - 004', () => {
+  it("UndoService - 004", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -236,7 +236,7 @@ describe('UndoService', () => {
     );
   });
 
-  it('UndoService - 005', () => {
+  it("UndoService - 005", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -263,7 +263,7 @@ describe('UndoService', () => {
     expect(loaded === undone).toBe(true);
   });
 
-  it('UndoService - 006', () => {
+  it("UndoService - 006", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -290,7 +290,7 @@ describe('UndoService', () => {
     expect(loaded === undone).toBe(true);
   });
 
-  it('UndoService - 007', () => {
+  it("UndoService - 007", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -341,9 +341,9 @@ describe('UndoService', () => {
       }
     });
 
-    const label0 = labelService.getOrCreateLabel('test', LabelRef.Note);
-    const label1 = labelService.getOrCreateLabel('test1', LabelRef.Note);
-    const label2 = labelService.getOrCreateLabel('test2', LabelRef.Note);
+    const label0 = labelService.getOrCreateLabel("test", LabelRef.Note);
+    const label1 = labelService.getOrCreateLabel("test1", LabelRef.Note);
+    const label2 = labelService.getOrCreateLabel("test2", LabelRef.Note);
     expect(labelService.getLabelsFromLabelRef(LabelRef.Note).length).toBe(3);
     noteService.visibleNotesSetLabel(undefined);
     noteService.visibleNotesSetLabel(label0.getLabel());

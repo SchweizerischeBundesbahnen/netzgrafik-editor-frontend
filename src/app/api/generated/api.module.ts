@@ -1,10 +1,10 @@
-import {NgModule, ModuleWithProviders, SkipSelf, Optional} from '@angular/core';
-import {Configuration} from './configuration';
-import {HttpClient} from '@angular/common/http';
+import {NgModule, ModuleWithProviders, SkipSelf, Optional} from "@angular/core";
+import {Configuration} from "./configuration";
+import {HttpClient} from "@angular/common/http";
 
-import {ProjectControllerBackendService} from './api/projectController.service';
-import {VariantControllerBackendService} from './api/variantController.service';
-import {VersionControllerBackendService} from './api/versionController.service';
+import {ProjectControllerBackendService} from "./api/projectController.service";
+import {VariantControllerBackendService} from "./api/variantController.service";
+import {VersionControllerBackendService} from "./api/versionController.service";
 
 @NgModule({
   imports: [],
@@ -28,13 +28,13 @@ export class ApiModule {
   ) {
     if (parentModule) {
       throw new Error(
-        'ApiModule is already loaded. Import in your base AppModule only.',
+        "ApiModule is already loaded. Import in your base AppModule only.",
       );
     }
     if (!http) {
       throw new Error(
-        'You need to import the HttpClientModule in your AppModule! \n' +
-          'See also https://github.com/angular/angular/issues/20575',
+        "You need to import the HttpClientModule in your AppModule! \n" +
+          "See also https://github.com/angular/angular/issues/20575",
       );
     }
   }

@@ -11,7 +11,7 @@
  */
 /* tslint:disable:no-unused-variable member-ordering */
 
-import {Inject, Injectable, Optional} from '@angular/core';
+import {Inject, Injectable, Optional} from "@angular/core";
 import {
   HttpClient,
   HttpHeaders,
@@ -19,25 +19,25 @@ import {
   HttpResponse,
   HttpEvent,
   HttpParameterCodec,
-} from '@angular/common/http';
-import {CustomHttpParameterCodec} from '../encoder';
-import {Observable} from 'rxjs';
+} from "@angular/common/http";
+import {CustomHttpParameterCodec} from "../encoder";
+import {Observable} from "rxjs";
 
-import {ProjectCreateUpdateDto} from '../model/models';
-import {ProjectDto} from '../model/models';
-import {ProjectSummaryDto} from '../model/models';
+import {ProjectCreateUpdateDto} from "../model/models";
+import {ProjectDto} from "../model/models";
+import {ProjectSummaryDto} from "../model/models";
 
-import {BASE_PATH, COLLECTION_FORMATS} from '../variables';
-import {Configuration} from '../configuration';
-import {ProjectControllerBackendServiceInterface} from './projectController.serviceInterface';
+import {BASE_PATH, COLLECTION_FORMATS} from "../variables";
+import {Configuration} from "../configuration";
+import {ProjectControllerBackendServiceInterface} from "./projectController.serviceInterface";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class ProjectControllerBackendService
   implements ProjectControllerBackendServiceInterface
 {
-  protected basePath = 'http://localhost:8080';
+  protected basePath = "http://localhost:8080";
   public defaultHeaders = new HttpHeaders();
   public configuration = new Configuration();
   public encoder: HttpParameterCodec;
@@ -50,8 +50,8 @@ export class ProjectControllerBackendService
     if (configuration) {
       this.configuration = configuration;
     }
-    if (typeof this.configuration.basePath !== 'string') {
-      if (typeof basePath !== 'string') {
+    if (typeof this.configuration.basePath !== "string") {
+      if (typeof basePath !== "string") {
         basePath = this.basePath;
       }
       this.configuration.basePath = basePath;
@@ -64,7 +64,7 @@ export class ProjectControllerBackendService
     value: any,
     key?: string,
   ): HttpParams {
-    if (typeof value === 'object' && value instanceof Date === false) {
+    if (typeof value === "object" && value instanceof Date === false) {
       httpParams = this.addToHttpParamsRecursive(httpParams, value);
     } else {
       httpParams = this.addToHttpParamsRecursive(httpParams, value, key);
@@ -81,7 +81,7 @@ export class ProjectControllerBackendService
       return httpParams;
     }
 
-    if (typeof value === 'object') {
+    if (typeof value === "object") {
       if (Array.isArray(value)) {
         (value as any[]).forEach(
           (elem) =>
@@ -94,7 +94,7 @@ export class ProjectControllerBackendService
             (value as Date).toISOString().substr(0, 10),
           );
         } else {
-          throw Error('key may not be null if value is Date');
+          throw Error("key may not be null if value is Date");
         }
       } else {
         Object.keys(value).forEach(
@@ -109,7 +109,7 @@ export class ProjectControllerBackendService
     } else if (key != null) {
       httpParams = httpParams.append(key, value);
     } else {
-      throw Error('key may not be null if value is not object or array');
+      throw Error("key may not be null if value is not object or array");
     }
     return httpParams;
   }
@@ -121,31 +121,31 @@ export class ProjectControllerBackendService
    */
   public archiveProject(
     id: number,
-    observe?: 'body',
+    observe?: "body",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<any>;
   public archiveProject(
     id: number,
-    observe?: 'response',
+    observe?: "response",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpResponse<any>>;
   public archiveProject(
     id: number,
-    observe?: 'events',
+    observe?: "events",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpEvent<any>>;
   public archiveProject(
     id: number,
-    observe: any = 'body',
+    observe: any = "body",
     reportProgress: boolean = false,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<any> {
     if (id === null || id === undefined) {
       throw new Error(
-        'Required parameter id was null or undefined when calling archiveProject.',
+        "Required parameter id was null or undefined when calling archiveProject.",
       );
     }
 
@@ -153,9 +153,9 @@ export class ProjectControllerBackendService
 
     let credential: string | undefined;
     // authentication (OAuth) required
-    credential = this.configuration.lookupCredential('OAuth');
+    credential = this.configuration.lookupCredential("OAuth");
     if (credential) {
-      headers = headers.set('Authorization', 'Bearer ' + credential);
+      headers = headers.set("Authorization", "Bearer " + credential);
     }
 
     let httpHeaderAcceptSelected: string | undefined =
@@ -167,15 +167,15 @@ export class ProjectControllerBackendService
         this.configuration.selectHeaderAccept(httpHeaderAccepts);
     }
     if (httpHeaderAcceptSelected !== undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
+      headers = headers.set("Accept", httpHeaderAcceptSelected);
     }
 
-    let responseType: 'text' | 'json' = 'json';
+    let responseType: "text" | "json" = "json";
     if (
       httpHeaderAcceptSelected &&
-      httpHeaderAcceptSelected.startsWith('text')
+      httpHeaderAcceptSelected.startsWith("text")
     ) {
-      responseType = 'text';
+      responseType = "text";
     }
 
     return this.httpClient.put<any>(
@@ -198,34 +198,34 @@ export class ProjectControllerBackendService
    */
   public createProject(
     projectCreateUpdateDto: ProjectCreateUpdateDto,
-    observe?: 'body',
+    observe?: "body",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<number>;
   public createProject(
     projectCreateUpdateDto: ProjectCreateUpdateDto,
-    observe?: 'response',
+    observe?: "response",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<HttpResponse<number>>;
   public createProject(
     projectCreateUpdateDto: ProjectCreateUpdateDto,
-    observe?: 'events',
+    observe?: "events",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<HttpEvent<number>>;
   public createProject(
     projectCreateUpdateDto: ProjectCreateUpdateDto,
-    observe: any = 'body',
+    observe: any = "body",
     reportProgress: boolean = false,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<any> {
     if (
       projectCreateUpdateDto === null ||
       projectCreateUpdateDto === undefined
     ) {
       throw new Error(
-        'Required parameter projectCreateUpdateDto was null or undefined when calling createProject.',
+        "Required parameter projectCreateUpdateDto was null or undefined when calling createProject.",
       );
     }
 
@@ -233,37 +233,37 @@ export class ProjectControllerBackendService
 
     let credential: string | undefined;
     // authentication (OAuth) required
-    credential = this.configuration.lookupCredential('OAuth');
+    credential = this.configuration.lookupCredential("OAuth");
     if (credential) {
-      headers = headers.set('Authorization', 'Bearer ' + credential);
+      headers = headers.set("Authorization", "Bearer " + credential);
     }
 
     let httpHeaderAcceptSelected: string | undefined =
       options && options.httpHeaderAccept;
     if (httpHeaderAcceptSelected === undefined) {
       // to determine the Accept header
-      const httpHeaderAccepts: string[] = ['application/json'];
+      const httpHeaderAccepts: string[] = ["application/json"];
       httpHeaderAcceptSelected =
         this.configuration.selectHeaderAccept(httpHeaderAccepts);
     }
     if (httpHeaderAcceptSelected !== undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
+      headers = headers.set("Accept", httpHeaderAcceptSelected);
     }
 
     // to determine the Content-Type header
-    const consumes: string[] = ['application/json'];
+    const consumes: string[] = ["application/json"];
     const httpContentTypeSelected: string | undefined =
       this.configuration.selectHeaderContentType(consumes);
     if (httpContentTypeSelected !== undefined) {
-      headers = headers.set('Content-Type', httpContentTypeSelected);
+      headers = headers.set("Content-Type", httpContentTypeSelected);
     }
 
-    let responseType: 'text' | 'json' = 'json';
+    let responseType: "text" | "json" = "json";
     if (
       httpHeaderAcceptSelected &&
-      httpHeaderAcceptSelected.startsWith('text')
+      httpHeaderAcceptSelected.startsWith("text")
     ) {
-      responseType = 'text';
+      responseType = "text";
     }
 
     return this.httpClient.post<number>(
@@ -286,31 +286,31 @@ export class ProjectControllerBackendService
    */
   public deleteProject(
     projectId: number,
-    observe?: 'body',
+    observe?: "body",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<any>;
   public deleteProject(
     projectId: number,
-    observe?: 'response',
+    observe?: "response",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpResponse<any>>;
   public deleteProject(
     projectId: number,
-    observe?: 'events',
+    observe?: "events",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpEvent<any>>;
   public deleteProject(
     projectId: number,
-    observe: any = 'body',
+    observe: any = "body",
     reportProgress: boolean = false,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<any> {
     if (projectId === null || projectId === undefined) {
       throw new Error(
-        'Required parameter projectId was null or undefined when calling deleteProject.',
+        "Required parameter projectId was null or undefined when calling deleteProject.",
       );
     }
 
@@ -318,9 +318,9 @@ export class ProjectControllerBackendService
 
     let credential: string | undefined;
     // authentication (OAuth) required
-    credential = this.configuration.lookupCredential('OAuth');
+    credential = this.configuration.lookupCredential("OAuth");
     if (credential) {
-      headers = headers.set('Authorization', 'Bearer ' + credential);
+      headers = headers.set("Authorization", "Bearer " + credential);
     }
 
     let httpHeaderAcceptSelected: string | undefined =
@@ -332,15 +332,15 @@ export class ProjectControllerBackendService
         this.configuration.selectHeaderAccept(httpHeaderAccepts);
     }
     if (httpHeaderAcceptSelected !== undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
+      headers = headers.set("Accept", httpHeaderAcceptSelected);
     }
 
-    let responseType: 'text' | 'json' = 'json';
+    let responseType: "text" | "json" = "json";
     if (
       httpHeaderAcceptSelected &&
-      httpHeaderAcceptSelected.startsWith('text')
+      httpHeaderAcceptSelected.startsWith("text")
     ) {
-      responseType = 'text';
+      responseType = "text";
     }
 
     return this.httpClient.delete<any>(
@@ -360,52 +360,52 @@ export class ProjectControllerBackendService
    * @param reportProgress flag to report request and response progress.
    */
   public getAllProjects(
-    observe?: 'body',
+    observe?: "body",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<Array<ProjectSummaryDto>>;
   public getAllProjects(
-    observe?: 'response',
+    observe?: "response",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<HttpResponse<Array<ProjectSummaryDto>>>;
   public getAllProjects(
-    observe?: 'events',
+    observe?: "events",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<HttpEvent<Array<ProjectSummaryDto>>>;
   public getAllProjects(
-    observe: any = 'body',
+    observe: any = "body",
     reportProgress: boolean = false,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<any> {
     let headers = this.defaultHeaders;
 
     let credential: string | undefined;
     // authentication (OAuth) required
-    credential = this.configuration.lookupCredential('OAuth');
+    credential = this.configuration.lookupCredential("OAuth");
     if (credential) {
-      headers = headers.set('Authorization', 'Bearer ' + credential);
+      headers = headers.set("Authorization", "Bearer " + credential);
     }
 
     let httpHeaderAcceptSelected: string | undefined =
       options && options.httpHeaderAccept;
     if (httpHeaderAcceptSelected === undefined) {
       // to determine the Accept header
-      const httpHeaderAccepts: string[] = ['application/json'];
+      const httpHeaderAccepts: string[] = ["application/json"];
       httpHeaderAcceptSelected =
         this.configuration.selectHeaderAccept(httpHeaderAccepts);
     }
     if (httpHeaderAcceptSelected !== undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
+      headers = headers.set("Accept", httpHeaderAcceptSelected);
     }
 
-    let responseType: 'text' | 'json' = 'json';
+    let responseType: "text" | "json" = "json";
     if (
       httpHeaderAcceptSelected &&
-      httpHeaderAcceptSelected.startsWith('text')
+      httpHeaderAcceptSelected.startsWith("text")
     ) {
-      responseType = 'text';
+      responseType = "text";
     }
 
     return this.httpClient.get<Array<ProjectSummaryDto>>(
@@ -427,31 +427,31 @@ export class ProjectControllerBackendService
    */
   public getProject(
     projectId: number,
-    observe?: 'body',
+    observe?: "body",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<ProjectDto>;
   public getProject(
     projectId: number,
-    observe?: 'response',
+    observe?: "response",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<HttpResponse<ProjectDto>>;
   public getProject(
     projectId: number,
-    observe?: 'events',
+    observe?: "events",
     reportProgress?: boolean,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<HttpEvent<ProjectDto>>;
   public getProject(
     projectId: number,
-    observe: any = 'body',
+    observe: any = "body",
     reportProgress: boolean = false,
-    options?: {httpHeaderAccept?: 'application/json'},
+    options?: {httpHeaderAccept?: "application/json"},
   ): Observable<any> {
     if (projectId === null || projectId === undefined) {
       throw new Error(
-        'Required parameter projectId was null or undefined when calling getProject.',
+        "Required parameter projectId was null or undefined when calling getProject.",
       );
     }
 
@@ -459,29 +459,29 @@ export class ProjectControllerBackendService
 
     let credential: string | undefined;
     // authentication (OAuth) required
-    credential = this.configuration.lookupCredential('OAuth');
+    credential = this.configuration.lookupCredential("OAuth");
     if (credential) {
-      headers = headers.set('Authorization', 'Bearer ' + credential);
+      headers = headers.set("Authorization", "Bearer " + credential);
     }
 
     let httpHeaderAcceptSelected: string | undefined =
       options && options.httpHeaderAccept;
     if (httpHeaderAcceptSelected === undefined) {
       // to determine the Accept header
-      const httpHeaderAccepts: string[] = ['application/json'];
+      const httpHeaderAccepts: string[] = ["application/json"];
       httpHeaderAcceptSelected =
         this.configuration.selectHeaderAccept(httpHeaderAccepts);
     }
     if (httpHeaderAcceptSelected !== undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
+      headers = headers.set("Accept", httpHeaderAcceptSelected);
     }
 
-    let responseType: 'text' | 'json' = 'json';
+    let responseType: "text" | "json" = "json";
     if (
       httpHeaderAcceptSelected &&
-      httpHeaderAcceptSelected.startsWith('text')
+      httpHeaderAcceptSelected.startsWith("text")
     ) {
-      responseType = 'text';
+      responseType = "text";
     }
 
     return this.httpClient.get<ProjectDto>(
@@ -503,31 +503,31 @@ export class ProjectControllerBackendService
    */
   public unarchiveProject(
     id: number,
-    observe?: 'body',
+    observe?: "body",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<any>;
   public unarchiveProject(
     id: number,
-    observe?: 'response',
+    observe?: "response",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpResponse<any>>;
   public unarchiveProject(
     id: number,
-    observe?: 'events',
+    observe?: "events",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpEvent<any>>;
   public unarchiveProject(
     id: number,
-    observe: any = 'body',
+    observe: any = "body",
     reportProgress: boolean = false,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<any> {
     if (id === null || id === undefined) {
       throw new Error(
-        'Required parameter id was null or undefined when calling unarchiveProject.',
+        "Required parameter id was null or undefined when calling unarchiveProject.",
       );
     }
 
@@ -535,9 +535,9 @@ export class ProjectControllerBackendService
 
     let credential: string | undefined;
     // authentication (OAuth) required
-    credential = this.configuration.lookupCredential('OAuth');
+    credential = this.configuration.lookupCredential("OAuth");
     if (credential) {
-      headers = headers.set('Authorization', 'Bearer ' + credential);
+      headers = headers.set("Authorization", "Bearer " + credential);
     }
 
     let httpHeaderAcceptSelected: string | undefined =
@@ -549,15 +549,15 @@ export class ProjectControllerBackendService
         this.configuration.selectHeaderAccept(httpHeaderAccepts);
     }
     if (httpHeaderAcceptSelected !== undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
+      headers = headers.set("Accept", httpHeaderAcceptSelected);
     }
 
-    let responseType: 'text' | 'json' = 'json';
+    let responseType: "text" | "json" = "json";
     if (
       httpHeaderAcceptSelected &&
-      httpHeaderAcceptSelected.startsWith('text')
+      httpHeaderAcceptSelected.startsWith("text")
     ) {
-      responseType = 'text';
+      responseType = "text";
     }
 
     return this.httpClient.put<any>(
@@ -582,34 +582,34 @@ export class ProjectControllerBackendService
   public updateProject(
     id: number,
     projectCreateUpdateDto: ProjectCreateUpdateDto,
-    observe?: 'body',
+    observe?: "body",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<any>;
   public updateProject(
     id: number,
     projectCreateUpdateDto: ProjectCreateUpdateDto,
-    observe?: 'response',
+    observe?: "response",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpResponse<any>>;
   public updateProject(
     id: number,
     projectCreateUpdateDto: ProjectCreateUpdateDto,
-    observe?: 'events',
+    observe?: "events",
     reportProgress?: boolean,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpEvent<any>>;
   public updateProject(
     id: number,
     projectCreateUpdateDto: ProjectCreateUpdateDto,
-    observe: any = 'body',
+    observe: any = "body",
     reportProgress: boolean = false,
     options?: {httpHeaderAccept?: undefined},
   ): Observable<any> {
     if (id === null || id === undefined) {
       throw new Error(
-        'Required parameter id was null or undefined when calling updateProject.',
+        "Required parameter id was null or undefined when calling updateProject.",
       );
     }
     if (
@@ -617,7 +617,7 @@ export class ProjectControllerBackendService
       projectCreateUpdateDto === undefined
     ) {
       throw new Error(
-        'Required parameter projectCreateUpdateDto was null or undefined when calling updateProject.',
+        "Required parameter projectCreateUpdateDto was null or undefined when calling updateProject.",
       );
     }
 
@@ -625,9 +625,9 @@ export class ProjectControllerBackendService
 
     let credential: string | undefined;
     // authentication (OAuth) required
-    credential = this.configuration.lookupCredential('OAuth');
+    credential = this.configuration.lookupCredential("OAuth");
     if (credential) {
-      headers = headers.set('Authorization', 'Bearer ' + credential);
+      headers = headers.set("Authorization", "Bearer " + credential);
     }
 
     let httpHeaderAcceptSelected: string | undefined =
@@ -639,23 +639,23 @@ export class ProjectControllerBackendService
         this.configuration.selectHeaderAccept(httpHeaderAccepts);
     }
     if (httpHeaderAcceptSelected !== undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
+      headers = headers.set("Accept", httpHeaderAcceptSelected);
     }
 
     // to determine the Content-Type header
-    const consumes: string[] = ['application/json'];
+    const consumes: string[] = ["application/json"];
     const httpContentTypeSelected: string | undefined =
       this.configuration.selectHeaderContentType(consumes);
     if (httpContentTypeSelected !== undefined) {
-      headers = headers.set('Content-Type', httpContentTypeSelected);
+      headers = headers.set("Content-Type", httpContentTypeSelected);
     }
 
-    let responseType: 'text' | 'json' = 'json';
+    let responseType: "text" | "json" = "json";
     if (
       httpHeaderAcceptSelected &&
-      httpHeaderAcceptSelected.startsWith('text')
+      httpHeaderAcceptSelected.startsWith("text")
     ) {
-      responseType = 'text';
+      responseType = "text";
     }
 
     return this.httpClient.put<any>(

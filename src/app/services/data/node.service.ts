@@ -1,5 +1,5 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {Node} from '../../models/node.model';
+import {Injectable, OnDestroy} from "@angular/core";
+import {Node} from "../../models/node.model";
 import {
   LabelDto,
   LabelRef,
@@ -7,33 +7,33 @@ import {
   NodeDto,
   TrainrunCategory,
   TrainrunCategoryHaltezeit,
-} from '../../data-structures/business.data.structures';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {VisAVisPortPlacement} from '../util/node.port.placement';
-import {BehaviorSubject, Subject} from 'rxjs';
-import {TrainrunService} from './trainrun.service';
-import {TrainrunSectionService} from './trainrunsection.service';
-import {Trainrun} from '../../models/trainrun.model';
-import {Stammdaten} from '../../models/stammdaten.model';
-import {TransitionValidator} from '../util/transition.validator';
-import {DataService} from './data.service';
-import {Transition} from '../../models/transition.model';
-import {Connection} from '../../models/connection.model';
-import {ResourceService} from './resource.service';
-import {Resource} from '../../models/resource.model';
-import {LogService} from '../../logger/log.service';
-import {Port} from '../../models/port.model';
-import {takeUntil} from 'rxjs/operators';
-import {Vec2D} from '../../utils/vec2D';
-import {NODE_POSITION_BASIC_RASTER} from '../../view/rastering/definitions';
-import {MathUtils} from '../../utils/math';
-import {LabelService} from './label.serivce';
-import {FilterService} from '../ui/filter.service';
-import {ConnectionDto} from '../../data-structures/technical.data.structures';
-import {TrainrunsectionValidator} from '../util/trainrunsection.validator';
+} from "../../data-structures/business.data.structures";
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {VisAVisPortPlacement} from "../util/node.port.placement";
+import {BehaviorSubject, Subject} from "rxjs";
+import {TrainrunService} from "./trainrun.service";
+import {TrainrunSectionService} from "./trainrunsection.service";
+import {Trainrun} from "../../models/trainrun.model";
+import {Stammdaten} from "../../models/stammdaten.model";
+import {TransitionValidator} from "../util/transition.validator";
+import {DataService} from "./data.service";
+import {Transition} from "../../models/transition.model";
+import {Connection} from "../../models/connection.model";
+import {ResourceService} from "./resource.service";
+import {Resource} from "../../models/resource.model";
+import {LogService} from "../../logger/log.service";
+import {Port} from "../../models/port.model";
+import {takeUntil} from "rxjs/operators";
+import {Vec2D} from "../../utils/vec2D";
+import {NODE_POSITION_BASIC_RASTER} from "../../view/rastering/definitions";
+import {MathUtils} from "../../utils/math";
+import {LabelService} from "./label.serivce";
+import {FilterService} from "../ui/filter.service";
+import {ConnectionDto} from "../../data-structures/technical.data.structures";
+import {TrainrunsectionValidator} from "../util/trainrunsection.validator";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class NodeService implements OnDestroy {
   // Description of observable data service: https://coryrylan.com/blog/angular-observable-data-services
@@ -544,9 +544,9 @@ export class NodeService implements OnDestroy {
     }
 
     if (isForwardPathLocked && isBackwardPathLocked) {
-      const warningTitle = 'Durchfahrt geändert';
+      const warningTitle = "Durchfahrt geändert";
       const warningDescription =
-        'Zeiten können nicht angepasst werden, beidseitger Lock gefunden';
+        "Zeiten können nicht angepasst werden, beidseitger Lock gefunden";
       this.trainrunSectionService.setWarningOnNode(
         trainrunSections.trainrunSection1.getId(),
         node.getId(),
@@ -1036,7 +1036,7 @@ export class NodeService implements OnDestroy {
   setNodePropertiesFromStammdaten(stammdaten: Stammdaten[]) {
     stammdaten.forEach((stdDaten) => {
       if (stdDaten.getErstellen() !== undefined) {
-        if (stdDaten.getErstellen().trim().toLowerCase() === 'ja') {
+        if (stdDaten.getErstellen().trim().toLowerCase() === "ja") {
           if (
             this.nodesStore.nodes.find(
               (node) => node.getBetriebspunktName() === stdDaten.getBP(),
@@ -1055,7 +1055,7 @@ export class NodeService implements OnDestroy {
               labelIds.push(
                 this.labelService
                   .getOrCreateLabel(
-                    'Knoten aus CSV-Datei importiert',
+                    "Knoten aus CSV-Datei importiert",
                     LabelRef.Node,
                   )
                   .getId(),
@@ -1090,14 +1090,14 @@ export class NodeService implements OnDestroy {
         bpStammdaten.getRegions().forEach((region) => {
           labels.push(
             this.labelService
-              .getOrCreateLabel('Region: ' + region.trim(), LabelRef.Node)
+              .getOrCreateLabel("Region: " + region.trim(), LabelRef.Node)
               .getId(),
           );
         });
         bpStammdaten.getKategorien().forEach((kategorie) => {
           labels.push(
             this.labelService
-              .getOrCreateLabel('Kategorie: ' + kategorie.trim(), LabelRef.Node)
+              .getOrCreateLabel("Kategorie: " + kategorie.trim(), LabelRef.Node)
               .getId(),
           );
         });

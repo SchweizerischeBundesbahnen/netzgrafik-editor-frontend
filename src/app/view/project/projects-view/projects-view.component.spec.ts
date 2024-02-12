@@ -1,13 +1,13 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from "@angular/core/testing";
 
-import {ProjectsViewComponent} from './projects-view.component';
-import {of} from 'rxjs';
-import {ProjectsViewService} from './projects-view.service';
-import {SbbDialogModule} from '@sbb-esta/angular/dialog';
-import {ProjectControllerBackendService} from '../../../api/generated';
-import {NavigationService} from '../../../services/ui/navigation.service';
+import {ProjectsViewComponent} from "./projects-view.component";
+import {of} from "rxjs";
+import {ProjectsViewService} from "./projects-view.service";
+import {SbbDialogModule} from "@sbb-esta/angular/dialog";
+import {ProjectControllerBackendService} from "../../../api/generated";
+import {NavigationService} from "../../../services/ui/navigation.service";
 
-describe('ProjectsViewComponent', () => {
+describe("ProjectsViewComponent", () => {
   let component: ProjectsViewComponent;
   let fixture: ComponentFixture<ProjectsViewComponent>;
   let projectViewService: Partial<ProjectsViewService>;
@@ -46,7 +46,7 @@ describe('ProjectsViewComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

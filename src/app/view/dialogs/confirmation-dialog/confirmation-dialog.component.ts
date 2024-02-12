@@ -1,8 +1,8 @@
-import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
-import {SbbDialog, SbbDialogConfig} from '@sbb-esta/angular/dialog';
-import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
-import {Observable, Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {Component, OnDestroy, TemplateRef, ViewChild} from "@angular/core";
+import {SbbDialog, SbbDialogConfig} from "@sbb-esta/angular/dialog";
+import {UiInteractionService} from "../../../services/ui/ui.interaction.service";
+import {Observable, Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
 
 export class ConfirmationDialogParameter {
   public dialogTitle: string;
@@ -15,8 +15,8 @@ export class ConfirmationDialogParameter {
   constructor(
     dialogTitle: string,
     dialogContent: string,
-    dialogConfirmationButtonLabel = 'Ja',
-    dialogAbortButtonLabel = 'Nein',
+    dialogConfirmationButtonLabel = "Ja",
+    dialogAbortButtonLabel = "Nein",
   ) {
     this.dialogTitle = dialogTitle;
     this.dialogContent = dialogContent;
@@ -30,12 +30,12 @@ export class ConfirmationDialogParameter {
 }
 
 @Component({
-  selector: 'sbb-confirmation-dialog',
-  templateUrl: './confirmation-dialog.component.html',
-  styleUrls: ['./confirmation-dialog.component.scss'],
+  selector: "sbb-confirmation-dialog",
+  templateUrl: "./confirmation-dialog.component.html",
+  styleUrls: ["./confirmation-dialog.component.scss"],
 })
 export class ConfirmationDialogComponent implements OnDestroy {
-  @ViewChild('confirmationDialogTemplate', {static: true})
+  @ViewChild("confirmationDialogTemplate", {static: true})
   confirmationDialogTemplate: TemplateRef<any>;
 
   public dialogTitle: string;
@@ -65,13 +65,13 @@ export class ConfirmationDialogComponent implements OnDestroy {
     const dialogConfig = new SbbDialogConfig();
     const width = 500;
     const height = 220;
-    dialogConfig.width = width + 'px';
+    dialogConfig.width = width + "px";
     dialogConfig.minWidth = dialogConfig.width;
     dialogConfig.maxWidth = dialogConfig.width;
-    dialogConfig.height = height + 'px';
+    dialogConfig.height = height + "px";
     dialogConfig.minHeight = dialogConfig.height;
     dialogConfig.maxHeight = dialogConfig.height;
-    dialogConfig.panelClass = '';
+    dialogConfig.panelClass = "";
     return dialogConfig;
   }
 

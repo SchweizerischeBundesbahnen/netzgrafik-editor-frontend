@@ -1,12 +1,12 @@
-import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {Component} from "@angular/core";
+import {ActivatedRoute} from "@angular/router";
+import {Observable} from "rxjs";
+import {map} from "rxjs/operators";
 
 @Component({
-  selector: 'sbb-error-view',
-  templateUrl: './error-view.component.html',
-  styleUrls: ['./error-view.component.scss'],
+  selector: "sbb-error-view",
+  templateUrl: "./error-view.component.html",
+  styleUrls: ["./error-view.component.scss"],
 })
 export class ErrorViewComponent {
   constructor(private activatedRoute: ActivatedRoute) {}

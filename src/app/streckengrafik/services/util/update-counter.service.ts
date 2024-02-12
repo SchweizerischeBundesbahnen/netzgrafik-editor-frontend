@@ -1,4 +1,4 @@
-import {Directive, Injectable, OnDestroy} from '@angular/core';
+import {Directive, Injectable, OnDestroy} from "@angular/core";
 
 export interface UpdateCounterHandler {
   updateCounterCallback: () => void;
@@ -29,7 +29,7 @@ export class UpdateCounterController implements OnDestroy {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class UpdateCounterTriggerSerivce {
   private updateMap = new Map<UpdateCounterHandler, number>();

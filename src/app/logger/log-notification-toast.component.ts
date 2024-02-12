@@ -1,13 +1,13 @@
-import {Component} from '@angular/core';
-import {Observable, of} from 'rxjs';
-import {LogEntry, LogLevel, LogService} from './log.service';
-import {LogPublisher} from './log.publishers';
-import {SbbNotificationToast} from '@sbb-esta/angular/notification-toast';
+import {Component} from "@angular/core";
+import {Observable, of} from "rxjs";
+import {LogEntry, LogLevel, LogService} from "./log.service";
+import {LogPublisher} from "./log.publishers";
+import {SbbNotificationToast} from "@sbb-esta/angular/notification-toast";
 
 @Component({
-  selector: 'sbb-log-notification-toast',
-  templateUrl: './log-notification-toast.component.html',
-  styleUrls: ['./log-notification-toast.component.scss'],
+  selector: "sbb-log-notification-toast",
+  templateUrl: "./log-notification-toast.component.html",
+  styleUrls: ["./log-notification-toast.component.scss"],
 })
 export class LogNotificationToastComponent extends LogPublisher {
   duration = 3000;
@@ -25,29 +25,29 @@ export class LogNotificationToastComponent extends LogPublisher {
     if (entry.level === LogLevel.Info) {
       this._notification.open(msg, {
         duration: this.duration,
-        type: 'info',
-        verticalPosition: 'top',
+        type: "info",
+        verticalPosition: "top",
       });
     }
     if (entry.level === LogLevel.Warn) {
       this._notification.open(msg, {
         duration: this.duration,
-        type: 'warn',
-        verticalPosition: 'top',
+        type: "warn",
+        verticalPosition: "top",
       });
     }
     if (entry.level === LogLevel.Error) {
       this._notification.open(msg, {
         duration: this.duration,
-        type: 'error',
-        verticalPosition: 'top',
+        type: "error",
+        verticalPosition: "top",
       });
     }
     if (entry.level === LogLevel.Fatal) {
       this._notification.open(msg, {
         duration: this.duration,
-        type: 'error',
-        verticalPosition: 'top',
+        type: "error",
+        verticalPosition: "top",
       });
     }
     return of(true);

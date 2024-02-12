@@ -1,26 +1,26 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {Trainrun} from '../../models/trainrun.model';
-import {TrainrunItem} from '../model/trainrunItem';
-import {PathItem} from '../model/pathItem';
-import {GeneralViewFunctions} from '../../view/util/generalViewFunctions';
-import {PathNode} from '../model/pathNode';
-import {PathSection} from '../model/pathSection';
-import {Node} from '../../models/node.model';
-import {TrainrunIterator} from '../../services/util/trainrun.iterator';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {TrainrunService} from '../../services/data/trainrun.service';
-import {FilterService} from '../../services/ui/filter.service';
-import {takeUntil} from 'rxjs/operators';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {TrainrunSectionService} from '../../services/data/trainrunsection.service';
-import {TrackData} from '../model/trackData';
-import {UiInteractionService} from '../../services/ui/ui.interaction.service';
-import {EditorMode} from '../../view/editor-menu/editor-mode';
-import {TrainrunTemplatePathAlignmentType} from '../model/enum/trainrun-template-path-alignment-type';
-import {IsTrainrunSelectedService} from '../../services/data/is-trainrun-section.service';
+import {Injectable, OnDestroy} from "@angular/core";
+import {Trainrun} from "../../models/trainrun.model";
+import {TrainrunItem} from "../model/trainrunItem";
+import {PathItem} from "../model/pathItem";
+import {GeneralViewFunctions} from "../../view/util/generalViewFunctions";
+import {PathNode} from "../model/pathNode";
+import {PathSection} from "../model/pathSection";
+import {Node} from "../../models/node.model";
+import {TrainrunIterator} from "../../services/util/trainrun.iterator";
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {TrainrunService} from "../../services/data/trainrun.service";
+import {FilterService} from "../../services/ui/filter.service";
+import {takeUntil} from "rxjs/operators";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {TrainrunSectionService} from "../../services/data/trainrunsection.service";
+import {TrackData} from "../model/trackData";
+import {UiInteractionService} from "../../services/ui/ui.interaction.service";
+import {EditorMode} from "../../view/editor-menu/editor-mode";
+import {TrainrunTemplatePathAlignmentType} from "../model/enum/trainrun-template-path-alignment-type";
+import {IsTrainrunSelectedService} from "../../services/data/is-trainrun-section.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class Sg1LoadTrainrunItemService implements OnDestroy {
   private readonly trainrunItemSubject = new BehaviorSubject<TrainrunItem>(
@@ -611,7 +611,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
             trainrunItem.pathItems[swapIndF[index]].isPartOfTemplatePath !==
             TrainrunTemplatePathAlignmentType.SectionNotFound
           ) {
-            console.log('ERROR - sg-1-load-trainrun-item.service.ts');
+            console.log("ERROR - sg-1-load-trainrun-item.service.ts");
             return;
           }
         }
@@ -814,11 +814,11 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
 
   private addStartEnde(paths) {
     const returnPaths = [];
-    returnPaths.push('#St#');
+    returnPaths.push("#St#");
     paths.forEach((path) => {
       returnPaths.push(path);
     });
-    returnPaths.push('#En#');
+    returnPaths.push("#En#");
     return returnPaths;
   }
 
@@ -844,10 +844,10 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     const returnValues = [];
     for (let i = 0; i < paths.length; i++) {
       if (i + size <= paths.length) {
-        let nodeValues = '';
+        let nodeValues = "";
         for (let sizeIndex = 0; sizeIndex < size; sizeIndex++) {
-          if (nodeValues !== '') {
-            nodeValues = nodeValues + ':';
+          if (nodeValues !== "") {
+            nodeValues = nodeValues + ":";
           }
           nodeValues = nodeValues + paths[i + sizeIndex];
         }

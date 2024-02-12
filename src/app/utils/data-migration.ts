@@ -1,11 +1,11 @@
-import {Trainrun} from '../models/trainrun.model';
-import {Node} from '../models/node.model';
-import {NetzgrafikDefault} from '../sample-netzgrafik/netzgrafik.default';
+import {Trainrun} from "../models/trainrun.model";
+import {Node} from "../models/node.model";
+import {NetzgrafikDefault} from "../sample-netzgrafik/netzgrafik.default";
 import {
   NetzgrafikDto,
   TrainrunCategory,
-} from '../data-structures/business.data.structures';
-import {Note} from '../models/note.model';
+} from "../data-structures/business.data.structures";
+import {Note} from "../models/note.model";
 
 export class DataMigration {
   static getMinimalTurnaroundTime(): number {
@@ -13,10 +13,10 @@ export class DataMigration {
   }
 
   static getNodeHeadwayStop(cat: TrainrunCategory): number {
-    if (cat.shortName === 'G') {
+    if (cat.shortName === "G") {
       return 3;
     }
-    if (cat.shortName === 'GEX') {
+    if (cat.shortName === "GEX") {
       return 3;
     }
     return 2;

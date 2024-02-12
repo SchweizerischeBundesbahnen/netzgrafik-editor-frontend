@@ -1,11 +1,11 @@
-import {Component, Input} from '@angular/core';
-import {SlotAction} from '../../action-menu/action-menu/action-menu.component';
-import {Observable} from 'rxjs';
+import {Component, Input} from "@angular/core";
+import {SlotAction} from "../../action-menu/action-menu/action-menu.component";
+import {Observable} from "rxjs";
 
 @Component({
-  selector: 'sbb-slot',
-  templateUrl: './slot.component.html',
-  styleUrls: ['./slot.component.scss'],
+  selector: "sbb-slot",
+  templateUrl: "./slot.component.html",
+  styleUrls: ["./slot.component.scss"],
 })
 export class SlotComponent {
   @Input() title?: string;

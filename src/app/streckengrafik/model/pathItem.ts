@@ -1,7 +1,7 @@
-import {PathNode} from './pathNode';
-import {PathSection} from './pathSection';
-import {TrainrunBranchType} from './enum/trainrun-branch-type-type';
-import {TrainrunTemplatePathAlignmentType} from './enum/trainrun-template-path-alignment-type';
+import {PathNode} from "./pathNode";
+import {PathSection} from "./pathSection";
+import {TrainrunBranchType} from "./enum/trainrun-branch-type-type";
+import {TrainrunTemplatePathAlignmentType} from "./enum/trainrun-template-path-alignment-type";
 
 export interface PathItem {
   departureTime: number;

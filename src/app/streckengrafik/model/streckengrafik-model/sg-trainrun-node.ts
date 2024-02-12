@@ -1,8 +1,8 @@
-import {SgTrainrunItem} from './sg-trainrun-item';
-import {SgPathNode} from './sg-path-node';
-import {SgTrainrunSection} from './sg-trainrun-section';
-import {SgPathSection} from './sg-path-section';
-import {TrackData} from '../trackData';
+import {SgTrainrunItem} from "./sg-trainrun-item";
+import {SgPathNode} from "./sg-path-node";
+import {SgTrainrunSection} from "./sg-trainrun-section";
+import {SgPathSection} from "./sg-path-section";
+import {TrackData} from "../trackData";
 
 export class SgTrainrunNode implements SgTrainrunItem {
   static currentId = 0;

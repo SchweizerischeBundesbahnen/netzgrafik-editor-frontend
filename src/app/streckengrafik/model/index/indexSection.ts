@@ -1,5 +1,5 @@
-import {Index} from './index';
-import {IndexNode} from './indexNode';
+import {Index} from "./index";
+import {IndexNode} from "./indexNode";
 
 export class IndexSection implements Index {
   constructor(

@@ -1,5 +1,5 @@
-import {TrainrunSection} from '../../../models/trainrunsection.model';
-import {EditorView} from './editor.view';
+import {TrainrunSection} from "../../../models/trainrunsection.model";
+import {EditorView} from "./editor.view";
 
 export class TrainrunSectionViewObject {
   key: string;
@@ -46,100 +46,100 @@ export class TrainrunSectionViewObject {
         .sumTravelTime;
 
     let key =
-      '#' +
+      "#" +
       d.getId() +
-      '@' +
+      "@" +
       d.getTrainrun().getTitle() +
-      '_' +
+      "_" +
       d.getTrainrun().selected() +
-      '_' +
+      "_" +
       d.getNumberOfStops() +
-      '_' +
+      "_" +
       d.getTravelTime() +
-      '_' +
+      "_" +
       cumulativeTravelTime +
-      '_' +
+      "_" +
       editorView.getTimeDisplayPrecision() +
-      '_' +
+      "_" +
       d.getTargetDeparture() +
-      '_' +
+      "_" +
       d.getTargetArrival() +
-      '_' +
+      "_" +
       d.getSourceDeparture() +
-      '_' +
+      "_" +
       d.getTargetArrival() +
-      '_' +
+      "_" +
       d.getTargetDepartureConsecutiveTime() +
-      '_' +
+      "_" +
       d.getTargetArrivalConsecutiveTime() +
-      '_' +
+      "_" +
       d.getSourceDepartureConsecutiveTime() +
-      '_' +
+      "_" +
       d.getTargetArrivalConsecutiveTime() +
-      '_' +
+      "_" +
       d.getNumberOfStops() +
-      '_' +
+      "_" +
       d.getFrequency() +
-      '_' +
+      "_" +
       d.getFrequencyOffset() +
-      '_' +
+      "_" +
       d.getTrainrun().getTrainrunCategory().shortName +
-      '_' +
+      "_" +
       d.getTrainrun().getTrainrunFrequency().shortName +
-      '_' +
+      "_" +
       d.getTrainrun().getTrainrunTimeCategory().shortName +
-      '_' +
+      "_" +
       d.getTrainrun().getTrainrunCategory().id +
-      '_' +
+      "_" +
       d.getTrainrun().getTrainrunFrequency().id +
-      '_' +
+      "_" +
       d.getTrainrun().getTrainrunTimeCategory().id +
-      '_' +
+      "_" +
       d.getTrainrun().getTrainrunCategory().colorRef +
-      '_' +
+      "_" +
       d.getTrainrun().getTrainrunFrequency().linePatternRef +
-      '_' +
+      "_" +
       d.getTrainrun().getTrainrunTimeCategory().linePatternRef +
-      '_' +
+      "_" +
       d.getTrainrun().getTrainrunFrequency().frequency +
-      '_' +
+      "_" +
       d.getTrainrun().getTrainrunFrequency().offset +
-      '_' +
+      "_" +
       isNonStopAtSource +
-      '_' +
+      "_" +
       isNonStopAtTarget +
-      '_' +
+      "_" +
       isMuted +
-      '_' +
+      "_" +
       hiddenTagSource +
-      '_' +
+      "_" +
       hiddenTagTarget +
-      '_' +
+      "_" +
       hiddenTagTraveltime +
-      '_' +
+      "_" +
       hiddenTagTrainrunName +
-      '_' +
+      "_" +
       editorView.isTemporaryDisableFilteringOfItemsInViewEnabled() +
-      '_' +
+      "_" +
       editorView.isFilterShowNonStopTimeEnabled() +
-      '_' +
+      "_" +
       editorView.checkFilterNonStopNode(d.getSourceNode()) +
-      '_' +
+      "_" +
       editorView.checkFilterNonStopNode(d.getTargetNode()) +
-      '_' +
+      "_" +
       editorView.isJunctionNode(d.getSourceNode()) +
-      '_' +
+      "_" +
       editorView.isJunctionNode(d.getTargetNode()) +
-      '_' +
+      "_" +
       editorView.checkFilterNode(d.getSourceNode()) +
-      '_' +
+      "_" +
       editorView.checkFilterNode(d.getTargetNode());
 
     cumulativeTravelTimeData.forEach((data) => {
-      key += '_' + data.node.getId();
-      key += '_' + editorView.isJunctionNode(data.node);
-      key += '_' + editorView.checkFilterNonStopNode(data.node);
-      key += '_' + editorView.checkFilterNode(data.node);
+      key += "_" + data.node.getId();
+      key += "_" + editorView.isJunctionNode(data.node);
+      key += "_" + editorView.checkFilterNonStopNode(data.node);
+      key += "_" + editorView.checkFilterNode(data.node);
     });
 
     d.getPath().forEach((p) => {

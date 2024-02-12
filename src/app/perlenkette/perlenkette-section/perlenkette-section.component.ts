@@ -8,30 +8,30 @@ import {
   OnInit,
   Output,
   ViewChild,
-} from '@angular/core';
-import {PerlenketteSection} from '../model/perlenketteSection';
-import {PerlenketteTrainrun} from '../model/perlenketteTrainrun';
-import {TrainrunsectionHelper} from '../../services/util/trainrunsection.helper';
-import {TrainrunService} from '../../services/data/trainrun.service';
-import {TrainrunSectionService} from '../../services/data/trainrunsection.service';
-import {takeUntil} from 'rxjs/operators';
-import {UiInteractionService} from '../../services/ui/ui.interaction.service';
-import {Observable, Subject} from 'rxjs';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {TrainrunSectionTimesService} from '../../services/data/trainrun-section-times.service';
-import {TrainrunSectionsView} from '../../view/editor-main-view/data-views/trainrunsections.view';
-import {FilterService} from '../../services/ui/filter.service';
-import {Node} from '../../models/node.model';
-import {LoadPerlenketteService} from '../service/load-perlenkette.service';
-import {NodeService} from '../../services/data/node.service';
-import {EditorMode} from '../../view/editor-menu/editor-mode';
-import {Vec2D} from '../../utils/vec2D';
-import {PortAlignment} from '../../data-structures/technical.data.structures';
+} from "@angular/core";
+import {PerlenketteSection} from "../model/perlenketteSection";
+import {PerlenketteTrainrun} from "../model/perlenketteTrainrun";
+import {TrainrunsectionHelper} from "../../services/util/trainrunsection.helper";
+import {TrainrunService} from "../../services/data/trainrun.service";
+import {TrainrunSectionService} from "../../services/data/trainrunsection.service";
+import {takeUntil} from "rxjs/operators";
+import {UiInteractionService} from "../../services/ui/ui.interaction.service";
+import {Observable, Subject} from "rxjs";
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {TrainrunSectionTimesService} from "../../services/data/trainrun-section-times.service";
+import {TrainrunSectionsView} from "../../view/editor-main-view/data-views/trainrunsections.view";
+import {FilterService} from "../../services/ui/filter.service";
+import {Node} from "../../models/node.model";
+import {LoadPerlenketteService} from "../service/load-perlenkette.service";
+import {NodeService} from "../../services/data/node.service";
+import {EditorMode} from "../../view/editor-menu/editor-mode";
+import {Vec2D} from "../../utils/vec2D";
+import {PortAlignment} from "../../data-structures/technical.data.structures";
 import {
   TRAINRUN_SECTION_PORT_SPAN_HORIZONTAL,
   TRAINRUN_SECTION_PORT_SPAN_VERTICAL,
-} from '../../view/rastering/definitions';
-import {StaticDomTags} from '../../view/editor-main-view/data-views/static.dom.tags';
+} from "../../view/rastering/definitions";
+import {StaticDomTags} from "../../view/editor-main-view/data-views/static.dom.tags";
 
 export interface TopAndBottomTimeStructure {
   leftDepartureTime: number;
@@ -49,9 +49,9 @@ export interface LeftAndRightLockStructure {
 }
 
 @Component({
-  selector: 'sbb-perlenkette-section',
-  templateUrl: './perlenkette-section.component.html',
-  styleUrls: ['./perlenkette-section.component.scss'],
+  selector: "sbb-perlenkette-section",
+  templateUrl: "./perlenkette-section.component.html",
+  styleUrls: ["./perlenkette-section.component.scss"],
   providers: [TrainrunSectionTimesService],
 })
 export class PerlenketteSectionComponent
@@ -64,16 +64,16 @@ export class PerlenketteSectionComponent
   @Output() signalHeightChanged = new EventEmitter<number>();
   @Input() notificationIsBeingEdited: Observable<PerlenketteSection>;
 
-  @ViewChild('rightArrivalTime', {static: false})
+  @ViewChild("rightArrivalTime", {static: false})
   rightArrivalTimeElement: ElementRef;
-  @ViewChild('rightDepartureTime', {static: false})
+  @ViewChild("rightDepartureTime", {static: false})
   rightDepartureTimeElement: ElementRef;
-  @ViewChild('travelTime', {static: false}) travelTimeElement: ElementRef;
-  @ViewChild('leftDepartureTime', {static: false})
+  @ViewChild("travelTime", {static: false}) travelTimeElement: ElementRef;
+  @ViewChild("leftDepartureTime", {static: false})
   leftDepartureTimeElement: ElementRef;
-  @ViewChild('leftArrivalTime', {static: false})
+  @ViewChild("leftArrivalTime", {static: false})
   leftArrivalTimeElement: ElementRef;
-  @ViewChild('nbrOfStops', {static: false}) nbrOfStops: ElementRef;
+  @ViewChild("nbrOfStops", {static: false}) nbrOfStops: ElementRef;
 
   private static timeEditor = true;
 
@@ -169,22 +169,22 @@ export class PerlenketteSectionComponent
 
   isBeingEdited(): string {
     if (this.perlenketteSection.isBeingEdited === false) {
-      return 'Rendering';
+      return "Rendering";
     }
     if (PerlenketteSectionComponent.timeEditor) {
-      return 'TimeEditor';
+      return "TimeEditor";
     }
-    return 'StopsEditor';
+    return "StopsEditor";
   }
 
   getPathClassTag(): string {
     return (
-      'UI_DIALOG ' +
-      ' ColorRef_' +
+      "UI_DIALOG " +
+      " ColorRef_" +
       this.perlenketteTrainrun.colorRef +
-      ' Freq_' +
+      " Freq_" +
       this.perlenketteTrainrun.frequency +
-      ' LinePatternRef_' +
+      " LinePatternRef_" +
       this.perlenketteTrainrun.trainrunTimeCategory.linePatternRef
     );
   }
@@ -206,30 +206,30 @@ export class PerlenketteSectionComponent
       this.signalIsBeingEdited.next(this.perlenketteSection);
     }
 
-    if (fieldKey === 'rightArrivalTime') {
+    if (fieldKey === "rightArrivalTime") {
       PerlenketteSectionComponent.timeEditor = true;
       setTimeout(() => this.focusAndSelect(this.rightArrivalTimeElement), 100);
     }
-    if (fieldKey === 'rightDepartureTime') {
+    if (fieldKey === "rightDepartureTime") {
       PerlenketteSectionComponent.timeEditor = true;
       setTimeout(
         () => this.focusAndSelect(this.rightDepartureTimeElement),
         100,
       );
     }
-    if (fieldKey === 'travelTime') {
+    if (fieldKey === "travelTime") {
       PerlenketteSectionComponent.timeEditor = true;
       setTimeout(() => this.focusAndSelect(this.travelTimeElement), 100);
     }
-    if (fieldKey === 'leftDepartureTime') {
+    if (fieldKey === "leftDepartureTime") {
       PerlenketteSectionComponent.timeEditor = true;
       setTimeout(() => this.focusAndSelect(this.leftDepartureTimeElement), 100);
     }
-    if (fieldKey === 'leftArrivalTime') {
+    if (fieldKey === "leftArrivalTime") {
       PerlenketteSectionComponent.timeEditor = true;
       setTimeout(() => this.focusAndSelect(this.leftArrivalTimeElement), 100);
     }
-    if (fieldKey === 'stops') {
+    if (fieldKey === "stops") {
       PerlenketteSectionComponent.timeEditor = false;
       setTimeout(() => this.focusAndSelect(this.nbrOfStops), 100);
     }
@@ -259,25 +259,25 @@ export class PerlenketteSectionComponent
     const toId = this.perlenketteSection.toNode.getId();
     if (targetId === toId) {
       return (
-        ' ' +
+        " " +
         TrainrunSectionsView.getTrainrunSectionTimeElementOddOffsetTag(
           this.trainrunSection.getTargetDepartureConsecutiveTime(),
           this.trainrunSection.getTrainrun(),
         ) +
         (this.trainrunSection.hasTargetDepartureWarning()
-          ? ' ' + StaticDomTags.TAG_WARNING
-          : '')
+          ? " " + StaticDomTags.TAG_WARNING
+          : "")
       );
     }
     return (
-      ' ' +
+      " " +
       TrainrunSectionsView.getTrainrunSectionTimeElementOddOffsetTag(
         this.trainrunSection.getSourceDepartureConsecutiveTime(),
         this.trainrunSection.getTrainrun(),
       ) +
       (this.trainrunSection.hasSourceDepartureWarning()
-        ? ' ' + StaticDomTags.TAG_WARNING
-        : '')
+        ? " " + StaticDomTags.TAG_WARNING
+        : "")
     );
   }
 
@@ -303,25 +303,25 @@ export class PerlenketteSectionComponent
     const toId = this.perlenketteSection.toNode.getId();
     if (targetId === toId) {
       return (
-        ' ' +
+        " " +
         TrainrunSectionsView.getTrainrunSectionTimeElementOddOffsetTag(
           this.trainrunSection.getTargetArrivalConsecutiveTime(),
           this.trainrunSection.getTrainrun(),
         ) +
         (this.trainrunSection.hasTargetArrivalWarning()
-          ? ' ' + StaticDomTags.TAG_WARNING
-          : '')
+          ? " " + StaticDomTags.TAG_WARNING
+          : "")
       );
     }
     return (
-      ' ' +
+      " " +
       TrainrunSectionsView.getTrainrunSectionTimeElementOddOffsetTag(
         this.trainrunSection.getSourceArrivalConsecutiveTime(),
         this.trainrunSection.getTrainrun(),
       ) +
       (this.trainrunSection.hasSourceArrivalWarning()
-        ? ' ' + StaticDomTags.TAG_WARNING
-        : '')
+        ? " " + StaticDomTags.TAG_WARNING
+        : "")
     );
   }
 
@@ -398,25 +398,25 @@ export class PerlenketteSectionComponent
     const fromId = this.perlenketteSection.fromNode.getId();
     if (sourceId === fromId) {
       return (
-        ' ' +
+        " " +
         TrainrunSectionsView.getTrainrunSectionTimeElementOddOffsetTag(
           this.trainrunSection.getSourceDepartureConsecutiveTime(),
           this.trainrunSection.getTrainrun(),
         ) +
         (this.trainrunSection.hasSourceDepartureWarning()
-          ? ' ' + StaticDomTags.TAG_WARNING
-          : '')
+          ? " " + StaticDomTags.TAG_WARNING
+          : "")
       );
     }
     return (
-      ' ' +
+      " " +
       TrainrunSectionsView.getTrainrunSectionTimeElementOddOffsetTag(
         this.trainrunSection.getTargetDepartureConsecutiveTime(),
         this.trainrunSection.getTrainrun(),
       ) +
       (this.trainrunSection.hasTargetDepartureWarning()
-        ? ' ' + StaticDomTags.TAG_WARNING
-        : '')
+        ? " " + StaticDomTags.TAG_WARNING
+        : "")
     );
   }
 
@@ -442,25 +442,25 @@ export class PerlenketteSectionComponent
     const fromId = this.perlenketteSection.fromNode.getId();
     if (sourceId === fromId) {
       return (
-        ' ' +
+        " " +
         TrainrunSectionsView.getTrainrunSectionTimeElementOddOffsetTag(
           this.trainrunSection.getSourceArrivalConsecutiveTime(),
           this.trainrunSection.getTrainrun(),
         ) +
         (this.trainrunSection.hasSourceArrivalWarning()
-          ? ' ' + StaticDomTags.TAG_WARNING
-          : '')
+          ? " " + StaticDomTags.TAG_WARNING
+          : "")
       );
     }
     return (
-      ' ' +
+      " " +
       TrainrunSectionsView.getTrainrunSectionTimeElementOddOffsetTag(
         this.trainrunSection.getTargetArrivalConsecutiveTime(),
         this.trainrunSection.getTrainrun(),
       ) +
       (this.trainrunSection.hasTargetArrivalWarning()
-        ? ' ' + StaticDomTags.TAG_WARNING
-        : '')
+        ? " " + StaticDomTags.TAG_WARNING
+        : "")
     );
   }
 
@@ -514,25 +514,25 @@ export class PerlenketteSectionComponent
   }
 
   getNodeRightLockClassTag(): string {
-    let tag = 'NodeRightLock';
+    let tag = "NodeRightLock";
     if (!this.showArrivalAndDepartureTime()) {
-      tag += ' Center';
+      tag += " Center";
     }
     return tag;
   }
 
   getNodeLeftLockClassTag(): string {
-    let tag = 'NodeLeftLock';
+    let tag = "NodeLeftLock";
     if (!this.showArrivalAndDepartureTime()) {
-      tag += ' Center';
+      tag += " Center";
     }
     return tag;
   }
 
   getTravelTimeLockClassTag(): string {
-    let tag = 'TravelTimeLock';
+    let tag = "TravelTimeLock";
     if (!this.showTravelTime()) {
-      tag += ' Center';
+      tag += " Center";
     }
     return tag;
   }
@@ -574,7 +574,7 @@ export class PerlenketteSectionComponent
       )
     ) {
       return (
-        '' +
+        "" +
         this.trainrunSectionTimesService.getTimeStructure().travelTime +
         "' (" +
         this.trainrunSection.getTravelTime() +
@@ -582,7 +582,7 @@ export class PerlenketteSectionComponent
       );
     }
     return (
-      '' + this.trainrunSectionTimesService.getTimeStructure().travelTime + "'"
+      "" + this.trainrunSectionTimesService.getTimeStructure().travelTime + "'"
     );
   }
 
@@ -931,7 +931,7 @@ export class PerlenketteSectionComponent
   }
 
   clickStopElement(perlenketteSection: PerlenketteSection) {
-    this.handleSwitchSection('stops');
+    this.handleSwitchSection("stops");
   }
 
   onInputNbrStopsElementButtonMinus(event: MouseEvent) {

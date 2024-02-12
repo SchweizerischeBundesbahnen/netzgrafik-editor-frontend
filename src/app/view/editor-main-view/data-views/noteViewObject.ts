@@ -1,5 +1,5 @@
-import {Note} from '../../../models/note.model';
-import {EditorView} from './editor.view';
+import {Note} from "../../../models/note.model";
+import {EditorView} from "./editor.view";
 
 export class NoteViewObject {
   key: string;
@@ -13,27 +13,27 @@ export class NoteViewObject {
 
   static generateKey(editorView: EditorView, n: Note): string {
     return (
-      '#' +
+      "#" +
       n.getId() +
-      '@' +
+      "@" +
       n.getPositionX() +
-      '_' +
+      "_" +
       n.getPositionY() +
-      '_' +
+      "_" +
       n.getHeight() +
-      '_' +
+      "_" +
       n.getWidth() +
-      '_' +
+      "_" +
       n.getText() +
-      '_' +
+      "_" +
       n.getTitle() +
-      '_' +
+      "_" +
       n.selected() +
-      '_' +
+      "_" +
       editorView.getNoteLayerIndex(n.getId()) +
-      '_' +
+      "_" +
       editorView.isFilterNotesEnabled() +
-      '_' +
+      "_" +
       editorView.isTemporaryDisableFilteringOfItemsInViewEnabled()
     );
   }

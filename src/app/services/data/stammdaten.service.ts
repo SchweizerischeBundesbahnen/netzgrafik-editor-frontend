@@ -1,13 +1,13 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import {Stammdaten} from '../../models/stammdaten.model';
-import {HaltezeitFachCategories} from '../../data-structures/business.data.structures';
-import {Node} from '../../models/node.model';
-import {MathUtils} from '../../utils/math';
-import {Vec2D} from '../../utils/vec2D';
+import {Injectable} from "@angular/core";
+import {BehaviorSubject} from "rxjs";
+import {Stammdaten} from "../../models/stammdaten.model";
+import {HaltezeitFachCategories} from "../../data-structures/business.data.structures";
+import {Node} from "../../models/node.model";
+import {MathUtils} from "../../utils/math";
+import {Vec2D} from "../../utils/vec2D";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class StammdatenService {
   // Description of observable data service: https://coryrylan.com/blog/angular-observable-data-services
@@ -20,14 +20,14 @@ export class StammdatenService {
       return [];
     }
     const labels = inLabels.trim();
-    if (labels === '') {
+    if (labels === "") {
       return [];
     }
-    const splittedLabels = labels.split(',', 99999);
+    const splittedLabels = labels.split(",", 99999);
     const trimmed = [];
     splittedLabels.forEach((s) => {
       const t = s.trim();
-      if (t !== '') {
+      if (t !== "") {
         trimmed.push(t);
       }
     });
@@ -38,11 +38,11 @@ export class StammdatenService {
     if (timeAsString === undefined) {
       return 0;
     } else {
-      timeAsString = timeAsString.replace(' ', '');
-      if (timeAsString === '') {
+      timeAsString = timeAsString.replace(" ", "");
+      if (timeAsString === "") {
         return 0;
       } else {
-        return parseFloat(timeAsString.replace(',', '.'));
+        return parseFloat(timeAsString.replace(",", "."));
       }
     }
   }
@@ -100,8 +100,8 @@ export class StammdatenService {
       if (
         posX !== undefined &&
         posY !== undefined &&
-        posX !== '' &&
-        posY !== ''
+        posX !== "" &&
+        posY !== ""
       ) {
         position = new Vec2D(+posX, +posY);
       }

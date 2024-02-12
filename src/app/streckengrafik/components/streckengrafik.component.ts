@@ -9,29 +9,29 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
-} from '@angular/core';
-import {interval, Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {ViewBoxService} from '../services/util/view-box.service';
-import {ViewBoxChangeInfo} from '../model/util/viewBoxChangeInfo';
-import {ResizeChangeInfo} from '../model/util/resizeChangeInfo';
-import {ResizeService} from '../services/util/resize.service';
-import {SliderChangeInfo} from '../model/util/sliderChangeInfo';
-import {TimeSliderService} from '../services/time-slider.service';
-import {UpdateCounterTriggerSerivce} from '../services/util/update-counter.service';
-import {Sg4ToggleTrackOccupierService} from '../services/sg-4-toggle-track-occupier.service';
-import {StreckengrafikDisplayElementService} from '../services/util/streckengrafik-display-element.service';
-import {StreckengrafikDrawingContext} from '../model/util/streckengrafik.drawing.context';
+} from "@angular/core";
+import {interval, Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
+import {ViewBoxService} from "../services/util/view-box.service";
+import {ViewBoxChangeInfo} from "../model/util/viewBoxChangeInfo";
+import {ResizeChangeInfo} from "../model/util/resizeChangeInfo";
+import {ResizeService} from "../services/util/resize.service";
+import {SliderChangeInfo} from "../model/util/sliderChangeInfo";
+import {TimeSliderService} from "../services/time-slider.service";
+import {UpdateCounterTriggerSerivce} from "../services/util/update-counter.service";
+import {Sg4ToggleTrackOccupierService} from "../services/sg-4-toggle-track-occupier.service";
+import {StreckengrafikDisplayElementService} from "../services/util/streckengrafik-display-element.service";
+import {StreckengrafikDrawingContext} from "../model/util/streckengrafik.drawing.context";
 
 @Component({
-  selector: 'sbb-streckengrafik',
-  templateUrl: './streckengrafik.component.html',
-  styleUrls: ['./streckengrafik.component.scss'],
+  selector: "sbb-streckengrafik",
+  templateUrl: "./streckengrafik.component.html",
+  styleUrls: ["./streckengrafik.component.scss"],
 })
 export class StreckengrafikComponent
   implements OnInit, OnDestroy, AfterViewInit
 {
-  @ViewChild('svg') svgRef: ElementRef;
+  @ViewChild("svg") svgRef: ElementRef;
 
   viewBox: string;
   yZoom: number;
@@ -139,39 +139,39 @@ export class StreckengrafikComponent
 
   getRailTrackliderButtonText(): string {
     if (!this.streckengrafikDisplayElementService.isRailTrackSliderVisible()) {
-      return '\u{2610} Streckengleis';
+      return "\u{2610} Streckengleis";
     }
-    return '\u{2611} Streckengleis';
+    return "\u{2611} Streckengleis";
   }
 
   getHeadwayBandButtonText(): string {
     if (!this.streckengrafikDisplayElementService.isHeadwayBandVisible()) {
-      return '\u{2610} Zugfolgezeiten';
+      return "\u{2610} Zugfolgezeiten";
     }
-    return '\u{2611} Zugfolgezeiten';
+    return "\u{2611} Zugfolgezeiten";
   }
 
   getTimeButtonText(): string {
     if (
       this.streckengrafikDisplayElementService.isFilterStreckengrafikTimeNotFocusNorEnabled()
     ) {
-      return '\u{2610} Zeit';
+      return "\u{2610} Zeit";
     }
-    return '\u{2611} Zeit';
+    return "\u{2611} Zeit";
   }
 
   getNameButtonText(): string {
     if (
       this.streckengrafikDisplayElementService.isFilterStreckengrafikNameNotFocusNorEnabled()
     ) {
-      return '\u{2610} Name';
+      return "\u{2610} Name";
     }
-    return '\u{2611} Name';
+    return "\u{2611} Name";
   }
 
   getZoomButtonClassTag(tag: string, zoomFactor: number): string {
     if (zoomFactor === Math.round(this.yZoom * 1000) / 1000) {
-      return tag + ' ZoomEqual';
+      return tag + " ZoomEqual";
     }
     return tag;
   }
@@ -180,7 +180,7 @@ export class StreckengrafikComponent
     if (
       this.streckengrafikDisplayElementService.isFilterStreckengrafikNameNotFocusNorEnabled()
     ) {
-      return tag + ' StreckengrafikNameNotFocusNorEnabled';
+      return tag + " StreckengrafikNameNotFocusNorEnabled";
     }
     return tag;
   }
@@ -189,26 +189,26 @@ export class StreckengrafikComponent
     if (
       this.streckengrafikDisplayElementService.isFilterStreckengrafikTimeNotFocusNorEnabled()
     ) {
-      return tag + ' StreckengrafikTimeNotFocusNorEnabled';
+      return tag + " StreckengrafikTimeNotFocusNorEnabled";
     }
     return tag;
   }
 
   getHeadwayVisibleButtonClassTag(tag: string) {
     if (!this.streckengrafikDisplayElementService.isHeadwayBandVisible()) {
-      return tag + ' HeadwayBandVisible';
+      return tag + " HeadwayBandVisible";
     }
     return tag;
   }
 
   getRailTrackSliderVisibleButtonClassTag(tag: string) {
     if (!this.streckengrafikDisplayElementService.isRailTrackSliderVisible()) {
-      return tag + ' RailTrackSliderVisible';
+      return tag + " RailTrackSliderVisible";
     }
     return tag;
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener("window:resize", ["$event"])
   onResize(): void {
     this.updateContentSize();
   }
@@ -217,7 +217,7 @@ export class StreckengrafikComponent
     StreckengrafikDrawingContext.updateDrawingContainerData();
     const domRect: DOMRect =
       this.svgRef?.nativeElement?.getBoundingClientRect();
-    const doc = document.getElementById('main-streckengrafik-container');
+    const doc = document.getElementById("main-streckengrafik-container");
     if (doc !== null) {
       this.render(
         Math.min(doc.clientWidth - 100, domRect.width),
@@ -238,7 +238,7 @@ export class StreckengrafikComponent
     this.disabledDisplayTools = !this.disabledDisplayTools;
   }
 
-  @HostListener('wheel', ['$event'])
+  @HostListener("wheel", ["$event"])
   public onScroll(event: WheelEvent) {
     event.preventDefault();
     event.stopImmediatePropagation();
@@ -260,20 +260,20 @@ export class StreckengrafikComponent
   private renderViewBox() {
     if (this.pathAlignmentHorizontal) {
       this.viewBox =
-        '0 ' +
+        "0 " +
         this.sliderChangeInfo.move +
-        ' ' +
+        " " +
         this.viewBoxChangeInfo.width +
-        ' ' +
+        " " +
         this.viewBoxChangeInfo.height;
     } else {
       this.viewBox =
-        ' ' +
+        " " +
         this.sliderChangeInfo.move +
-        ' ' +
-        '0 ' +
+        " " +
+        "0 " +
         this.viewBoxChangeInfo.width +
-        ' ' +
+        " " +
         this.viewBoxChangeInfo.height;
     }
   }

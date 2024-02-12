@@ -2,7 +2,7 @@ import {
   HaltezeitFachCategories,
   LinePatternRefs,
   NetzgrafikDto,
-} from '../app/data-structures/business.data.structures';
+} from "../app/data-structures/business.data.structures";
 
 export class NetzgrafikUnitTestingTransition {
   static getUnitTestTransitionNetzgrafik(): NetzgrafikDto {
@@ -10,8 +10,8 @@ export class NetzgrafikUnitTestingTransition {
       nodes: [
         {
           id: 1,
-          betriebspunktName: 'OL',
-          fullName: 'Olten',
+          betriebspunktName: "OL",
+          fullName: "Olten",
           positionX: 864,
           positionY: 448,
           ports: [
@@ -111,8 +111,8 @@ export class NetzgrafikUnitTestingTransition {
         },
         {
           id: 4,
-          betriebspunktName: 'ZF',
-          fullName: 'Zofingen',
+          betriebspunktName: "ZF",
+          fullName: "Zofingen",
           positionX: 1440,
           positionY: 256,
           ports: [
@@ -163,8 +163,8 @@ export class NetzgrafikUnitTestingTransition {
         },
         {
           id: 5,
-          betriebspunktName: 'ZG',
-          fullName: 'Zug',
+          betriebspunktName: "ZG",
+          fullName: "Zug",
           positionX: 320,
           positionY: 288,
           ports: [
@@ -215,8 +215,8 @@ export class NetzgrafikUnitTestingTransition {
         },
         {
           id: 11,
-          betriebspunktName: 'BS',
-          fullName: 'Basel',
+          betriebspunktName: "BS",
+          fullName: "Basel",
           positionX: 864,
           positionY: 128,
           ports: [],
@@ -364,8 +364,8 @@ export class NetzgrafikUnitTestingTransition {
             consecutiveTime: 60,
             lock: false,
             warning: {
-              title: 'Source Arrival Warning',
-              description: 'Target arrival time cannot be reached',
+              title: "Source Arrival Warning",
+              description: "Target arrival time cannot be reached",
             },
             timeFormatter: null,
           },
@@ -464,8 +464,8 @@ export class NetzgrafikUnitTestingTransition {
             consecutiveTime: 71,
             lock: false,
             warning: {
-              title: 'Source Arrival Warning',
-              description: 'Target arrival time cannot be reached',
+              title: "Source Arrival Warning",
+              description: "Target arrival time cannot be reached",
             },
             timeFormatter: null,
           },
@@ -564,8 +564,8 @@ export class NetzgrafikUnitTestingTransition {
             consecutiveTime: 60,
             lock: false,
             warning: {
-              title: 'Source Arrival Warning',
-              description: 'Target arrival time cannot be reached',
+              title: "Source Arrival Warning",
+              description: "Target arrival time cannot be reached",
             },
             timeFormatter: null,
           },
@@ -664,8 +664,8 @@ export class NetzgrafikUnitTestingTransition {
             consecutiveTime: 61,
             lock: false,
             warning: {
-              title: 'Source Arrival Warning',
-              description: 'Target arrival time cannot be reached',
+              title: "Source Arrival Warning",
+              description: "Target arrival time cannot be reached",
             },
             timeFormatter: null,
           },
@@ -764,8 +764,8 @@ export class NetzgrafikUnitTestingTransition {
             consecutiveTime: 48,
             lock: false,
             warning: {
-              title: 'Source Arrival Warning',
-              description: 'Target arrival time cannot be reached',
+              title: "Source Arrival Warning",
+              description: "Target arrival time cannot be reached",
             },
             timeFormatter: null,
           },
@@ -864,8 +864,8 @@ export class NetzgrafikUnitTestingTransition {
             consecutiveTime: 48,
             lock: false,
             warning: {
-              title: 'Source Arrival Warning',
-              description: 'Target arrival time cannot be reached',
+              title: "Source Arrival Warning",
+              description: "Target arrival time cannot be reached",
             },
             timeFormatter: null,
           },
@@ -1040,7 +1040,7 @@ export class NetzgrafikUnitTestingTransition {
       trainruns: [
         {
           id: 6,
-          name: 'X',
+          name: "X",
           categoryId: 0,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
@@ -1048,7 +1048,7 @@ export class NetzgrafikUnitTestingTransition {
         },
         {
           id: 7,
-          name: 'X',
+          name: "X",
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
@@ -1056,7 +1056,7 @@ export class NetzgrafikUnitTestingTransition {
         },
         {
           id: 8,
-          name: 'X',
+          name: "X",
           categoryId: 3,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
@@ -1064,7 +1064,7 @@ export class NetzgrafikUnitTestingTransition {
         },
         {
           id: 10,
-          name: 'X',
+          name: "X",
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
@@ -1130,9 +1130,9 @@ export class NetzgrafikUnitTestingTransition {
           {
             id: 0,
             order: 0,
-            shortName: 'EC',
-            name: 'International',
-            colorRef: 'EC',
+            shortName: "EC",
+            name: "International",
+            colorRef: "EC",
             fachCategory: HaltezeitFachCategories.IPV,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
@@ -1142,9 +1142,9 @@ export class NetzgrafikUnitTestingTransition {
           {
             id: 1,
             order: 1,
-            shortName: 'IC',
-            name: 'InterCity',
-            colorRef: 'IC',
+            shortName: "IC",
+            name: "InterCity",
+            colorRef: "IC",
             fachCategory: HaltezeitFachCategories.A,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
@@ -1154,9 +1154,9 @@ export class NetzgrafikUnitTestingTransition {
           {
             id: 2,
             order: 2,
-            shortName: 'IR',
-            name: 'InterRegio',
-            colorRef: 'IR',
+            shortName: "IR",
+            name: "InterRegio",
+            colorRef: "IR",
             fachCategory: HaltezeitFachCategories.B,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
@@ -1166,9 +1166,9 @@ export class NetzgrafikUnitTestingTransition {
           {
             id: 3,
             order: 3,
-            shortName: 'RE',
-            name: 'RegioExpress',
-            colorRef: 'RE',
+            shortName: "RE",
+            name: "RegioExpress",
+            colorRef: "RE",
             fachCategory: HaltezeitFachCategories.C,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
@@ -1178,9 +1178,9 @@ export class NetzgrafikUnitTestingTransition {
           {
             id: 4,
             order: 4,
-            shortName: 'S',
-            name: 'RegioUndSBahnverkehr',
-            colorRef: 'S',
+            shortName: "S",
+            name: "RegioUndSBahnverkehr",
+            colorRef: "S",
             fachCategory: HaltezeitFachCategories.D,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 2,
@@ -1190,9 +1190,9 @@ export class NetzgrafikUnitTestingTransition {
           {
             id: 5,
             order: 5,
-            shortName: 'GEX',
-            name: 'GüterExpress',
-            colorRef: 'GEX',
+            shortName: "GEX",
+            name: "GüterExpress",
+            colorRef: "GEX",
             fachCategory: HaltezeitFachCategories.Uncategorized,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 3,
@@ -1202,9 +1202,9 @@ export class NetzgrafikUnitTestingTransition {
           {
             id: 6,
             order: 6,
-            shortName: 'G',
-            name: 'Güterverkehr',
-            colorRef: 'G',
+            shortName: "G",
+            name: "Güterverkehr",
+            colorRef: "G",
             fachCategory: HaltezeitFachCategories.Uncategorized,
             minimalTurnaroundTime: 4,
             nodeHeadwayStop: 3,
@@ -1218,8 +1218,8 @@ export class NetzgrafikUnitTestingTransition {
             order: 0,
             frequency: 15,
             offset: 0,
-            shortName: '15',
-            name: 'verkehrt viertelstündlich',
+            shortName: "15",
+            name: "verkehrt viertelstündlich",
             linePatternRef: LinePatternRefs.Freq15,
           },
           {
@@ -1227,8 +1227,8 @@ export class NetzgrafikUnitTestingTransition {
             order: 0,
             frequency: 20,
             offset: 0,
-            shortName: '20',
-            name: 'verkehrt im 20 Minuten Takt',
+            shortName: "20",
+            name: "verkehrt im 20 Minuten Takt",
             linePatternRef: LinePatternRefs.Freq20,
           },
           {
@@ -1236,8 +1236,8 @@ export class NetzgrafikUnitTestingTransition {
             order: 0,
             frequency: 30,
             offset: 0,
-            shortName: '30',
-            name: 'verkehrt halbstündlich',
+            shortName: "30",
+            name: "verkehrt halbstündlich",
             linePatternRef: LinePatternRefs.Freq30,
           },
           {
@@ -1245,8 +1245,8 @@ export class NetzgrafikUnitTestingTransition {
             order: 0,
             frequency: 60,
             offset: 0,
-            shortName: '60',
-            name: 'verkehrt stündlich',
+            shortName: "60",
+            name: "verkehrt stündlich",
             linePatternRef: LinePatternRefs.Freq60,
           },
           {
@@ -1254,8 +1254,8 @@ export class NetzgrafikUnitTestingTransition {
             order: 0,
             frequency: 120,
             offset: 0,
-            shortName: '120',
-            name: 'verkehrt zweistündlich',
+            shortName: "120",
+            name: "verkehrt zweistündlich",
             linePatternRef: LinePatternRefs.Freq120,
           },
         ],
@@ -1263,8 +1263,8 @@ export class NetzgrafikUnitTestingTransition {
           {
             id: 0,
             order: 0,
-            shortName: '7/24',
-            name: 'verkehrt uneingeschränkt',
+            shortName: "7/24",
+            name: "verkehrt uneingeschränkt",
             dayTimeInterval: [],
             weekday: [1, 2, 3, 4, 5, 6, 7],
             linePatternRef: LinePatternRefs.TimeCat7_24,
@@ -1272,8 +1272,8 @@ export class NetzgrafikUnitTestingTransition {
           {
             id: 1,
             order: 0,
-            shortName: 'HVZ',
-            name: 'verkehrt zur Hauptverkehrszeit',
+            shortName: "HVZ",
+            name: "verkehrt zur Hauptverkehrszeit",
             dayTimeInterval: [
               {from: 360, to: 420},
               {from: 960, to: 1140},
@@ -1284,8 +1284,8 @@ export class NetzgrafikUnitTestingTransition {
           {
             id: 2,
             order: 0,
-            shortName: 'zeitweise',
-            name: 'verkehrt zeitweise',
+            shortName: "zeitweise",
+            name: "verkehrt zeitweise",
             dayTimeInterval: [],
             weekday: [],
             linePatternRef: LinePatternRefs.TimeZeitweise,

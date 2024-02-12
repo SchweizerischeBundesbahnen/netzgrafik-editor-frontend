@@ -5,32 +5,32 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
-} from '@angular/core';
-import {SliderChangeInfo} from '../../../model/util/sliderChangeInfo';
-import {TimeSliderService} from '../../../services/time-slider.service';
-import {DrawingBackgroundMouseListenerService} from '../../../services/util/drawingBackgroundMouseListener.service';
-import {Subject} from 'rxjs';
-import {ViewBoxChangeInfo} from '../../../model/util/viewBoxChangeInfo';
-import {takeUntil} from 'rxjs/operators';
-import {ViewBoxService} from '../../../services/util/view-box.service';
-import {Vec2D} from '../../../../utils/vec2D';
-import {TimeFormatter} from '../../../model/util/timeFormatter';
+} from "@angular/core";
+import {SliderChangeInfo} from "../../../model/util/sliderChangeInfo";
+import {TimeSliderService} from "../../../services/time-slider.service";
+import {DrawingBackgroundMouseListenerService} from "../../../services/util/drawingBackgroundMouseListener.service";
+import {Subject} from "rxjs";
+import {ViewBoxChangeInfo} from "../../../model/util/viewBoxChangeInfo";
+import {takeUntil} from "rxjs/operators";
+import {ViewBoxService} from "../../../services/util/view-box.service";
+import {Vec2D} from "../../../../utils/vec2D";
+import {TimeFormatter} from "../../../model/util/timeFormatter";
 import {
   UpdateCounterController,
   UpdateCounterHandler,
   UpdateCounterTriggerSerivce,
-} from '../../../services/util/update-counter.service';
+} from "../../../services/util/update-counter.service";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[sbb-timeline]',
-  templateUrl: './timeline.component.html',
-  styleUrls: ['./timeline.component.scss'],
+  selector: "[sbb-timeline]",
+  templateUrl: "./timeline.component.html",
+  styleUrls: ["./timeline.component.scss"],
 })
 export class TimelineComponent
   implements OnInit, OnDestroy, UpdateCounterHandler
 {
-  @ViewChild('componentElement')
+  @ViewChild("componentElement")
   componentElementRef: ElementRef;
 
   @Input()
@@ -45,7 +45,7 @@ export class TimelineComponent
   private readonly destroyed$ = new Subject<void>();
   private updateCounterController: UpdateCounterController = undefined;
 
-  linePath = 'M 0 0 L 0 10000';
+  linePath = "M 0 0 L 0 10000";
 
   textPosition = new Vec2D(0.0, 0.0);
 
@@ -139,13 +139,13 @@ export class TimelineComponent
     if (!isNaN(timeLinePos)) {
       if (this.horizontal) {
         this.linePath =
-          'M ' + timeLinePos + ' 0 L ' + timeLinePos + ' ' + 1000000;
+          "M " + timeLinePos + " 0 L " + timeLinePos + " " + 1000000;
       } else {
         this.linePath =
-          'M 0 ' + timeLinePos + ' L ' + 1000000 + ' ' + timeLinePos;
+          "M 0 " + timeLinePos + " L " + 1000000 + " " + timeLinePos;
       }
     } else {
-      this.linePath = 'M 0 0 L 0 0';
+      this.linePath = "M 0 0 L 0 0";
     }
   }
 

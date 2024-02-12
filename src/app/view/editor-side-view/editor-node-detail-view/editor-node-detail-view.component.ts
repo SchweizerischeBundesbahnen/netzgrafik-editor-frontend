@@ -5,23 +5,23 @@ import {
   OnDestroy,
   OnInit,
   Output,
-} from '@angular/core';
-import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
-import {NodeService} from '../../../services/data/node.service';
+} from "@angular/core";
+import {UiInteractionService} from "../../../services/ui/ui.interaction.service";
+import {NodeService} from "../../../services/data/node.service";
 import {
   LabelRef,
   TrainrunCategoryHaltezeit,
-} from '../../../data-structures/business.data.structures';
-import {Node} from '../../../models/node.model';
-import {ConfirmationDialogParameter} from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
-import {ResourceService} from '../../../services/data/resource.service';
-import {Resource} from '../../../models/resource.model';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {LabelService} from '../../../services/data/label.serivce';
-import {LabelGroupService} from '../../../services/data/labelgroup.service';
-import {SbbChipEvent, SbbChipInputEvent} from '@sbb-esta/angular/chips';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+} from "../../../data-structures/business.data.structures";
+import {Node} from "../../../models/node.model";
+import {ConfirmationDialogParameter} from "../../dialogs/confirmation-dialog/confirmation-dialog.component";
+import {ResourceService} from "../../../services/data/resource.service";
+import {Resource} from "../../../models/resource.model";
+import {takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
+import {LabelService} from "../../../services/data/label.serivce";
+import {LabelGroupService} from "../../../services/data/labelgroup.service";
+import {SbbChipEvent, SbbChipInputEvent} from "@sbb-esta/angular/chips";
+import {COMMA, ENTER} from "@angular/cdk/keycodes";
 
 interface NodeProperties {
   nodeId: number;
@@ -35,9 +35,9 @@ interface NodeProperties {
 }
 
 @Component({
-  selector: 'sbb-editor-node-detail-view',
-  templateUrl: './editor-node-detail-view.component.html',
-  styleUrls: ['./editor-node-detail-view.component.scss'],
+  selector: "sbb-editor-node-detail-view",
+  templateUrl: "./editor-node-detail-view.component.html",
+  styleUrls: ["./editor-node-detail-view.component.scss"],
 })
 export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
   @Output()
@@ -45,8 +45,8 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
 
   nodeProperties: NodeProperties = {
     nodeId: 0,
-    nodeBetriebspunktName: '',
-    nodeBetriebspunktFullName: '',
+    nodeBetriebspunktName: "",
+    nodeBetriebspunktFullName: "",
     nodeConnectionTime: 0,
     nodeTrainrunCategoryHaltezeit: Node.getDefaultHaltezeit(),
     nodeResouceId: null,
@@ -112,7 +112,7 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
   }
 
   add(chipInputEvent: SbbChipInputEvent) {
-    const value = (chipInputEvent.value || '').trim();
+    const value = (chipInputEvent.value || "").trim();
     if (!value) {
       return;
     }
@@ -126,7 +126,7 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
 
   remove(chipEvent: SbbChipEvent) {
     const valueDelete = chipEvent.chip.value as string;
-    const value = (valueDelete || '').trim();
+    const value = (valueDelete || "").trim();
     if (!value) {
       return;
     }
@@ -140,15 +140,15 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
   }
 
   onLabelsFocusout() {
-    const keyboardEvent = new KeyboardEvent('keydown', {
-      code: 'Enter',
-      key: 'Enter',
+    const keyboardEvent = new KeyboardEvent("keydown", {
+      code: "Enter",
+      key: "Enter",
       charCode: 13,
       keyCode: 13,
       view: window,
       bubbles: true,
     });
-    document.getElementById('nodeLabelsInput').dispatchEvent(keyboardEvent);
+    document.getElementById("nodeLabelsInput").dispatchEvent(keyboardEvent);
     this.nodeService.changeLabels(
       this.nodeProperties.nodeId,
       this.nodeProperties.labels,
@@ -174,13 +174,13 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
 
   onDeleteNode() {
     const node = this.nodeService.getSelectedNode();
-    const dialogTitle = 'Löschen';
+    const dialogTitle = "Löschen";
     const dialogContent =
-      'Soll der Knoten ' +
+      "Soll der Knoten " +
       node.getBetriebspunktName() +
-      ' (' +
+      " (" +
       node.getFullName() +
-      ') definitiv gelöscht werden?';
+      ") definitiv gelöscht werden?";
     const confirmationDialogParamter = new ConfirmationDialogParameter(
       dialogTitle,
       dialogContent,

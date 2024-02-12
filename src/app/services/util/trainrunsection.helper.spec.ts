@@ -1,23 +1,23 @@
-import {DataService} from '../data/data.service';
-import {NodeService} from '../data/node.service';
-import {ResourceService} from '../data/resource.service';
-import {TrainrunService} from '../data/trainrun.service';
-import {TrainrunSectionService} from '../data/trainrunsection.service';
-import {StammdatenService} from '../data/stammdaten.service';
-import {NoteService} from '../data/note.service';
-import {Node} from '../../models/node.model';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {LogService} from '../../logger/log.service';
-import {LogPublishersService} from '../../logger/log.publishers.service';
-import {LabelGroupService} from '../data/labelgroup.service';
-import {LabelService} from '../data/label.serivce';
-import {NetzgrafikUnitTesting} from '../../../integration-testing/netzgrafik.unit.testing';
-import {FilterService} from '../ui/filter.service';
-import {NetzgrafikColoringService} from '../data/netzgrafikColoring.service';
-import {TrainrunsectionHelper} from './trainrunsection.helper';
-import {LeftAndRightTimeStructure} from '../../view/dialogs/trainrun-and-section-dialog/trainrunsection-tab/trainrun-section-tab.component';
+import {DataService} from "../data/data.service";
+import {NodeService} from "../data/node.service";
+import {ResourceService} from "../data/resource.service";
+import {TrainrunService} from "../data/trainrun.service";
+import {TrainrunSectionService} from "../data/trainrunsection.service";
+import {StammdatenService} from "../data/stammdaten.service";
+import {NoteService} from "../data/note.service";
+import {Node} from "../../models/node.model";
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {LogService} from "../../logger/log.service";
+import {LogPublishersService} from "../../logger/log.publishers.service";
+import {LabelGroupService} from "../data/labelgroup.service";
+import {LabelService} from "../data/label.serivce";
+import {NetzgrafikUnitTesting} from "../../../integration-testing/netzgrafik.unit.testing";
+import {FilterService} from "../ui/filter.service";
+import {NetzgrafikColoringService} from "../data/netzgrafikColoring.service";
+import {TrainrunsectionHelper} from "./trainrunsection.helper";
+import {LeftAndRightTimeStructure} from "../../view/dialogs/trainrun-and-section-dialog/trainrunsection-tab/trainrun-section-tab.component";
 
-describe('TrainrunsectionHelper', () => {
+describe("TrainrunsectionHelper", () => {
   let dataService: DataService;
   let nodeService: NodeService;
   let resourceService: ResourceService;
@@ -84,7 +84,7 @@ describe('TrainrunsectionHelper', () => {
     trainrunsectionHelper = new TrainrunsectionHelper(trainrunService);
   });
 
-  it('Test load data', () => {
+  it("Test load data", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -92,7 +92,7 @@ describe('TrainrunsectionHelper', () => {
     expect(trainrunSections.length).toBe(8);
   });
 
-  it('getDefaultTimeStructure', () => {
+  it("getDefaultTimeStructure", () => {
     const larts: LeftAndRightTimeStructure = {
       leftDepartureTime: 10,
       leftArrivalTime: 50,
@@ -108,27 +108,27 @@ describe('TrainrunsectionHelper', () => {
     expect(d.leftArrivalTime).toBe(larts.leftArrivalTime);
   });
 
-  it('getTravelTime -- 001', () => {
+  it("getTravelTime -- 001", () => {
     const tt = TrainrunsectionHelper.getTravelTime(10, 10, 1, 12, false);
     expect(tt).toBe(1);
   });
 
-  it('getTravelTime -- 002', () => {
+  it("getTravelTime -- 002", () => {
     const tt = TrainrunsectionHelper.getTravelTime(10, 10, 1, 12, true);
     expect(tt).toBe(12);
   });
 
-  it('getTravelTime -- 003', () => {
+  it("getTravelTime -- 003", () => {
     const tt = TrainrunsectionHelper.getTravelTime(10, 10, 1, 12, false);
     expect(tt).toBe(1);
   });
 
-  it('getTravelTime -- 004', () => {
+  it("getTravelTime -- 004", () => {
     const tt = TrainrunsectionHelper.getTravelTime(8, 10, 2, 12, false);
     expect(tt).toBe(1);
   });
 
-  it('getRightArrivalTime - 001', () => {
+  it("getRightArrivalTime - 001", () => {
     const larts: LeftAndRightTimeStructure = {
       leftDepartureTime: 10,
       leftArrivalTime: 50,
@@ -141,7 +141,7 @@ describe('TrainrunsectionHelper', () => {
     expect(a).toBe(10);
   });
 
-  it('getRightArrivalTime - 002', () => {
+  it("getRightArrivalTime - 002", () => {
     const larts: LeftAndRightTimeStructure = {
       leftDepartureTime: 10,
       leftArrivalTime: 50,
@@ -155,7 +155,7 @@ describe('TrainrunsectionHelper', () => {
     expect(a).toBe(10);
   });
 
-  it('getRightArrivalTime - 003', () => {
+  it("getRightArrivalTime - 003", () => {
     const larts: LeftAndRightTimeStructure = {
       leftDepartureTime: 10,
       leftArrivalTime: 50,
@@ -169,7 +169,7 @@ describe('TrainrunsectionHelper', () => {
     expect(a).toEqual(NaN);
   });
 
-  it('getRightDepartureTime - 001', () => {
+  it("getRightDepartureTime - 001", () => {
     const larts: LeftAndRightTimeStructure = {
       leftDepartureTime: 10,
       leftArrivalTime: 50,
@@ -182,7 +182,7 @@ describe('TrainrunsectionHelper', () => {
     expect(a).toBe(0);
   });
 
-  it('getRightDepartureTime - 002', () => {
+  it("getRightDepartureTime - 002", () => {
     const larts: LeftAndRightTimeStructure = {
       leftDepartureTime: 10,
       leftArrivalTime: 50,
@@ -196,7 +196,7 @@ describe('TrainrunsectionHelper', () => {
     expect(a).toBe(70);
   });
 
-  it('getRightDepartureTime - 003', () => {
+  it("getRightDepartureTime - 003", () => {
     const larts: LeftAndRightTimeStructure = {
       leftDepartureTime: 10,
       leftArrivalTime: 50,
@@ -210,7 +210,7 @@ describe('TrainrunsectionHelper', () => {
     expect(a).toEqual(NaN);
   });
 
-  it('getDefaultTimeStructure', () => {
+  it("getDefaultTimeStructure", () => {
     const larts: LeftAndRightTimeStructure = {
       leftDepartureTime: 10,
       leftArrivalTime: 50,
@@ -226,27 +226,27 @@ describe('TrainrunsectionHelper', () => {
     expect(d.leftArrivalTime).toBe(larts.leftArrivalTime);
   });
 
-  it('getTravelTime -- 001', () => {
+  it("getTravelTime -- 001", () => {
     const tt = TrainrunsectionHelper.getTravelTime(10, 10, 1, 12, false);
     expect(tt).toBe(1);
   });
 
-  it('getTravelTime -- 002', () => {
+  it("getTravelTime -- 002", () => {
     const tt = TrainrunsectionHelper.getTravelTime(10, 10, 1, 12, true);
     expect(tt).toBe(12);
   });
 
-  it('getTravelTime -- 003', () => {
+  it("getTravelTime -- 003", () => {
     const tt = TrainrunsectionHelper.getTravelTime(10, 10, 1, 12, false);
     expect(tt).toBe(1);
   });
 
-  it('getTravelTime -- 004', () => {
+  it("getTravelTime -- 004", () => {
     const tt = TrainrunsectionHelper.getTravelTime(8, 10, 2, 12, false);
     expect(tt).toBe(1);
   });
 
-  it('getRightArrivalTime - 001', () => {
+  it("getRightArrivalTime - 001", () => {
     const larts: LeftAndRightTimeStructure = {
       leftDepartureTime: 10,
       leftArrivalTime: 50,
@@ -259,7 +259,7 @@ describe('TrainrunsectionHelper', () => {
     expect(a).toBe(10);
   });
 
-  it('getRightArrivalTime - 002', () => {
+  it("getRightArrivalTime - 002", () => {
     const larts: LeftAndRightTimeStructure = {
       leftDepartureTime: 10,
       leftArrivalTime: 50,
@@ -273,7 +273,7 @@ describe('TrainrunsectionHelper', () => {
     expect(a).toBe(10);
   });
 
-  it('getRightArrivalTime - 003', () => {
+  it("getRightArrivalTime - 003", () => {
     const larts: LeftAndRightTimeStructure = {
       leftDepartureTime: 10,
       leftArrivalTime: 50,
@@ -287,7 +287,7 @@ describe('TrainrunsectionHelper', () => {
     expect(a).toEqual(NaN);
   });
 
-  it('getRightDepartureTime - 001', () => {
+  it("getRightDepartureTime - 001", () => {
     const larts: LeftAndRightTimeStructure = {
       leftDepartureTime: 10,
       leftArrivalTime: 50,
@@ -300,7 +300,7 @@ describe('TrainrunsectionHelper', () => {
     expect(a).toBe(0);
   });
 
-  it('getRightDepartureTime - 002', () => {
+  it("getRightDepartureTime - 002", () => {
     const larts: LeftAndRightTimeStructure = {
       leftDepartureTime: 10,
       leftArrivalTime: 50,
@@ -314,7 +314,7 @@ describe('TrainrunsectionHelper', () => {
     expect(a).toBe(70);
   });
 
-  it('getRightDepartureTime - 003', () => {
+  it("getRightDepartureTime - 003", () => {
     const larts: LeftAndRightTimeStructure = {
       leftDepartureTime: 10,
       leftArrivalTime: 50,
@@ -328,7 +328,7 @@ describe('TrainrunsectionHelper', () => {
     expect(a).toEqual(NaN);
   });
 
-  it('trainrunSectionService.getTrainrunSectionFromId', () => {
+  it("trainrunSectionService.getTrainrunSectionFromId", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -346,7 +346,7 @@ describe('TrainrunsectionHelper', () => {
     expect(d.travelTimeLock).toBe(true);
   });
 
-  it('getLeftBetriebspunkt - 001', () => {
+  it("getLeftBetriebspunkt - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -358,11 +358,11 @@ describe('TrainrunsectionHelper', () => {
       nodes.endNode1,
       nodes.endNode2,
     ]);
-    expect(d[0]).toBe('OL');
-    expect(d[1]).toBe('(Olten)');
+    expect(d[0]).toBe("OL");
+    expect(d[1]).toBe("(Olten)");
   });
 
-  it('getRightBetriebspunkt - 001', () => {
+  it("getRightBetriebspunkt - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -374,11 +374,11 @@ describe('TrainrunsectionHelper', () => {
       nodes.endNode1,
       nodes.endNode2,
     ]);
-    expect(d[0]).toBe('ZUE');
-    expect(d[1]).toBe('(Zuerich)');
+    expect(d[0]).toBe("ZUE");
+    expect(d[1]).toBe("(Zuerich)");
   });
 
-  it('getSourceLock - 001', () => {
+  it("getSourceLock - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -397,7 +397,7 @@ describe('TrainrunsectionHelper', () => {
     expect(d).toBe(false);
   });
 
-  it('getTargetLock - 001', () => {
+  it("getTargetLock - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );

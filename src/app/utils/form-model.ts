@@ -2,7 +2,7 @@ import {
   UntypedFormControl,
   UntypedFormGroup,
   ValidatorFn,
-} from '@angular/forms';
+} from "@angular/forms";
 
 export class FormModel<T> {
   private readonly keys: string[];
@@ -29,7 +29,7 @@ export class FormModel<T> {
     const control = this.controls[key as string];
 
     if (!control) {
-      const dummyControl = new UntypedFormControl('N/A', {});
+      const dummyControl = new UntypedFormControl("N/A", {});
       dummyControl.disable();
       return dummyControl;
     }

@@ -1,54 +1,54 @@
-import {Component} from '@angular/core';
-import {DataService} from '../../services/data/data.service';
-import {UiInteractionService} from '../../services/ui/ui.interaction.service';
-import {SbbRadioChange} from '@sbb-esta/angular/radio-button';
-import {ThemeBase} from '../themes/theme-base';
-import {ThemeRegistration} from '../themes/theme-registration';
-import {StreckengrafikRenderingType} from '../themes/streckengrafik-rendering-type';
+import {Component} from "@angular/core";
+import {DataService} from "../../services/data/data.service";
+import {UiInteractionService} from "../../services/ui/ui.interaction.service";
+import {SbbRadioChange} from "@sbb-esta/angular/radio-button";
+import {ThemeBase} from "../themes/theme-base";
+import {ThemeRegistration} from "../themes/theme-registration";
+import {StreckengrafikRenderingType} from "../themes/streckengrafik-rendering-type";
 
 @Component({
-  selector: 'sbb-editor-properties-view-component',
-  templateUrl: './editor-properties-view.component.html',
-  styleUrls: ['./editor-properties-view.component.scss'],
+  selector: "sbb-editor-properties-view-component",
+  templateUrl: "./editor-properties-view.component.html",
+  styleUrls: ["./editor-properties-view.component.scss"],
 })
 export class EditorPropertiesViewComponent {
-  static DEFAULT_DARK_BACKGROUNDCOLOR = '#050505';
-  static DEFAULT_BACKGROUNDCOLOR = '#f5f5f5';
-  static BACKGROUNDCOLOR_WHITE = '#ffffff';
+  static DEFAULT_DARK_BACKGROUNDCOLOR = "#050505";
+  static DEFAULT_BACKGROUNDCOLOR = "#f5f5f5";
+  static BACKGROUNDCOLOR_WHITE = "#ffffff";
 
   colorThemeOptions = [
     {
-      name: 'Standard Farbschema',
+      name: "Standard Farbschema",
       themeRegistration: ThemeRegistration.ThemeFach,
       isDark: false,
     },
     {
-      name: 'Spezielles Farbschema',
+      name: "Spezielles Farbschema",
       themeRegistration: ThemeRegistration.ThemeDefaultUx,
       isDark: false,
     },
     {
-      name: 'Graustufen Farbschema',
+      name: "Graustufen Farbschema",
       themeRegistration: ThemeRegistration.ThemeGray,
       isDark: false,
     },
     {
-      name: 'Optimiertes Farbschema zum Drucken/Exportieren',
+      name: "Optimiertes Farbschema zum Drucken/Exportieren",
       themeRegistration: ThemeRegistration.ThemeFachPrint,
       isDark: false,
     },
     {
-      name: 'Standard Farbschema (dunkel)',
+      name: "Standard Farbschema (dunkel)",
       themeRegistration: ThemeRegistration.ThemeFachDark,
       isDark: true,
     },
     {
-      name: 'Spezielles Farbschema (dunkel)',
+      name: "Spezielles Farbschema (dunkel)",
       themeRegistration: ThemeRegistration.ThemeDefaultUxDark,
       isDark: true,
     },
     {
-      name: 'Graustufen Farbschema (dunkel)',
+      name: "Graustufen Farbschema (dunkel)",
       themeRegistration: ThemeRegistration.ThemeGrayDark,
       isDark: true,
     },
@@ -57,12 +57,12 @@ export class EditorPropertiesViewComponent {
 
   streckengrafikRenderingTypeOptions = [
     {
-      name: 'fahrzeitskaliert',
+      name: "fahrzeitskaliert",
       streckengrafikRenderingType:
         StreckengrafikRenderingType.TimeScaledDistance,
     },
     {
-      name: 'gleichmässig',
+      name: "gleichmässig",
       streckengrafikRenderingType: StreckengrafikRenderingType.UniformDistance,
     },
   ];
@@ -171,7 +171,7 @@ export class EditorPropertiesViewComponent {
   }
 
   private getHexColor(colorStr): string {
-    const a = document.createElement('div');
+    const a = document.createElement("div");
     a.style.color = colorStr;
     const colors = window
       .getComputedStyle(document.body.appendChild(a))
@@ -181,7 +181,7 @@ export class EditorPropertiesViewComponent {
     if (colors.length >= 3) {
       // eslint-disable-next-line no-bitwise
       return (
-        '#' +
+        "#" +
         ((1 << 24) + (colors[0] << 16) + (colors[1] << 8) + colors[2])
           .toString(16)
           .substring(1)

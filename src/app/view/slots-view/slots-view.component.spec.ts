@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {SlotsViewComponent} from './slots-view.component';
+import {ComponentFixture, TestBed} from "@angular/core/testing";
+import {SlotsViewComponent} from "./slots-view.component";
 
-describe('SlotViewComponent', () => {
+describe("SlotViewComponent", () => {
   let component: SlotsViewComponent;
   let fixture: ComponentFixture<SlotsViewComponent>;
 
@@ -17,7 +17,7 @@ describe('SlotViewComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

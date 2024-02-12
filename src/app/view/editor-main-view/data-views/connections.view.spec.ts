@@ -1,26 +1,26 @@
-import {DataService} from '../../../services/data/data.service';
-import {NodeService} from '../../../services/data/node.service';
-import {ResourceService} from '../../../services/data/resource.service';
-import {TrainrunService} from '../../../services/data/trainrun.service';
-import {TrainrunSectionService} from '../../../services/data/trainrunsection.service';
-import {StammdatenService} from '../../../services/data/stammdaten.service';
-import {NoteService} from '../../../services/data/note.service';
-import {Node} from '../../../models/node.model';
-import {TrainrunSection} from '../../../models/trainrunsection.model';
-import {LabelGroupService} from '../../../services/data/labelgroup.service';
-import {LabelService} from '../../../services/data/label.serivce';
-import {NetzgrafikColoringService} from '../../../services/data/netzgrafikColoring.service';
-import {UndoService} from '../../../services/data/undo.service';
-import {CopyService} from '../../../services/data/copy.service';
-import {LogService} from '../../../logger/log.service';
-import {LogPublishersService} from '../../../logger/log.publishers.service';
-import {FilterService} from '../../../services/ui/filter.service';
-import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
-import {LoadPerlenketteService} from '../../../perlenkette/service/load-perlenkette.service';
-import {NetzgrafikUnitTesting} from '../../../../integration-testing/netzgrafik.unit.testing';
-import {ConnectionsView} from './connections.view';
+import {DataService} from "../../../services/data/data.service";
+import {NodeService} from "../../../services/data/node.service";
+import {ResourceService} from "../../../services/data/resource.service";
+import {TrainrunService} from "../../../services/data/trainrun.service";
+import {TrainrunSectionService} from "../../../services/data/trainrunsection.service";
+import {StammdatenService} from "../../../services/data/stammdaten.service";
+import {NoteService} from "../../../services/data/note.service";
+import {Node} from "../../../models/node.model";
+import {TrainrunSection} from "../../../models/trainrunsection.model";
+import {LabelGroupService} from "../../../services/data/labelgroup.service";
+import {LabelService} from "../../../services/data/label.serivce";
+import {NetzgrafikColoringService} from "../../../services/data/netzgrafikColoring.service";
+import {UndoService} from "../../../services/data/undo.service";
+import {CopyService} from "../../../services/data/copy.service";
+import {LogService} from "../../../logger/log.service";
+import {LogPublishersService} from "../../../logger/log.publishers.service";
+import {FilterService} from "../../../services/ui/filter.service";
+import {UiInteractionService} from "../../../services/ui/ui.interaction.service";
+import {LoadPerlenketteService} from "../../../perlenkette/service/load-perlenkette.service";
+import {NetzgrafikUnitTesting} from "../../../../integration-testing/netzgrafik.unit.testing";
+import {ConnectionsView} from "./connections.view";
 
-describe('Connections View', () => {
+describe("Connections View", () => {
   let dataService: DataService;
   let nodeService: NodeService;
   let resourceService: ResourceService;
@@ -123,7 +123,7 @@ describe('Connections View', () => {
     );
   });
 
-  it('ConnectionsView.displayConnectionPinPort1 - 001', () => {
+  it("ConnectionsView.displayConnectionPinPort1 - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -133,7 +133,7 @@ describe('Connections View', () => {
     expect(flag).toBe(false);
   });
 
-  it('ConnectionsView.displayConnectionPinPort1 - 002', () => {
+  it("ConnectionsView.displayConnectionPinPort1 - 002", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -144,7 +144,7 @@ describe('Connections View', () => {
     expect(flag).toBe(true);
   });
 
-  it('ConnectionsView.displayConnectionPinPort2 - 001', () => {
+  it("ConnectionsView.displayConnectionPinPort2 - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -154,7 +154,7 @@ describe('Connections View', () => {
     expect(flag).toBe(false);
   });
 
-  it('ConnectionsView.displayConnectionPinPort2 - 002', () => {
+  it("ConnectionsView.displayConnectionPinPort2 - 002", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -165,7 +165,7 @@ describe('Connections View', () => {
     expect(flag).toBe(true);
   });
 
-  it('ConnectionsView.displayConnection - 001', () => {
+  it("ConnectionsView.displayConnection - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -175,7 +175,7 @@ describe('Connections View', () => {
     expect(flag).toBe(false);
   });
 
-  it('ConnectionsView.displayConnection - 002', () => {
+  it("ConnectionsView.displayConnection - 002", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -186,7 +186,7 @@ describe('Connections View', () => {
     expect(flag).toBe(true);
   });
 
-  it('ConnectionsView.getSelectedTrainrunId - 001', () => {
+  it("ConnectionsView.getSelectedTrainrunId - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -196,7 +196,7 @@ describe('Connections View', () => {
     expect(flag).toBe(null);
   });
 
-  it('ConnectionsView.getSelectedTrainrunId - 002', () => {
+  it("ConnectionsView.getSelectedTrainrunId - 002", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -207,7 +207,7 @@ describe('Connections View', () => {
     expect(flag).toBe(4);
   });
 
-  it('ConnectionsView.getSelectedTrainrunId - 003', () => {
+  it("ConnectionsView.getSelectedTrainrunId - 003", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -218,7 +218,7 @@ describe('Connections View', () => {
     expect(flag).toBe(2);
   });
 
-  it('ConnectionsView.getTrainrunSectionPort1 - 001', () => {
+  it("ConnectionsView.getTrainrunSectionPort1 - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -228,7 +228,7 @@ describe('Connections View', () => {
     expect(ts.getId()).toBe(7);
   });
 
-  it('ConnectionsView.getTrainrunSectionPort2 - 001', () => {
+  it("ConnectionsView.getTrainrunSectionPort2 - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -238,7 +238,7 @@ describe('Connections View', () => {
     expect(ts.getId()).toBe(4);
   });
 
-  it('ConnectionsView.getTrainrunSectionPort2 - 001', () => {
+  it("ConnectionsView.getTrainrunSectionPort2 - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -250,7 +250,7 @@ describe('Connections View', () => {
     expect(pos.getY()).toBe(144);
   });
 
-  it('ConnectionsView.getTrainrunSectionPort2 - 002', () => {
+  it("ConnectionsView.getTrainrunSectionPort2 - 002", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );

@@ -1,6 +1,6 @@
-import {TransitionDto} from '../data-structures/technical.data.structures';
-import {Vec2D} from '../utils/vec2D';
-import {Trainrun} from './trainrun.model';
+import {TransitionDto} from "../data-structures/technical.data.structures";
+import {Vec2D} from "../utils/vec2D";
+import {Trainrun} from "./trainrun.model";
 
 export class Transition {
   private static currentId = 0;

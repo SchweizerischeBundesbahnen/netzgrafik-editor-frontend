@@ -1,27 +1,27 @@
-import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {SbbDialog} from '@sbb-esta/angular/dialog';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
+import {SbbDialog} from "@sbb-esta/angular/dialog";
 import {
   CdkDragDrop,
   CdkDropList,
   CdkDropListGroup,
-} from '@angular/cdk/drag-drop';
-import {NodeService} from '../../../services/data/node.service';
-import {TrainrunService} from '../../../services/data/trainrun.service';
-import {LabelService} from '../../../services/data/label.serivce';
-import {LabelGroupService} from '../../../services/data/labelgroup.service';
-import {FilterService} from '../../../services/ui/filter.service';
-import {LabelRef} from '../../../data-structures/business.data.structures';
-import {LabelGroup} from '../../../models/labelGroup.model';
-import {FilterableLabelDialogComponent} from '../../dialogs/filterable-labels-dialog/filterable-label-dialog.component';
-import {Label} from '../../../models/label.model';
-import {NoteService} from '../../../services/data/note.service';
+} from "@angular/cdk/drag-drop";
+import {NodeService} from "../../../services/data/node.service";
+import {TrainrunService} from "../../../services/data/trainrun.service";
+import {LabelService} from "../../../services/data/label.serivce";
+import {LabelGroupService} from "../../../services/data/labelgroup.service";
+import {FilterService} from "../../../services/ui/filter.service";
+import {LabelRef} from "../../../data-structures/business.data.structures";
+import {LabelGroup} from "../../../models/labelGroup.model";
+import {FilterableLabelDialogComponent} from "../../dialogs/filterable-labels-dialog/filterable-label-dialog.component";
+import {Label} from "../../../models/label.model";
+import {NoteService} from "../../../services/data/note.service";
 
 @Component({
-  selector: 'sbb-label-drop-list-component',
-  templateUrl: './label-drop-list.component.html',
-  styleUrls: ['./label-drop-list.component.scss'],
+  selector: "sbb-label-drop-list-component",
+  templateUrl: "./label-drop-list.component.html",
+  styleUrls: ["./label-drop-list.component.scss"],
 })
 export class LabelDropListComponent implements OnInit, OnDestroy {
   @Input() componentLabelRef: string;
@@ -72,10 +72,10 @@ export class LabelDropListComponent implements OnInit, OnDestroy {
   }
 
   translateComponentLabelRef(): LabelRef {
-    if (this.componentLabelRef === 'Trainrun') {
+    if (this.componentLabelRef === "Trainrun") {
       return LabelRef.Trainrun;
     }
-    if (this.componentLabelRef === 'Note') {
+    if (this.componentLabelRef === "Note") {
       return LabelRef.Note;
     }
     return LabelRef.Node;
@@ -94,10 +94,10 @@ export class LabelDropListComponent implements OnInit, OnDestroy {
       name: labelObject.getLabel(),
       dialogTitel:
         labelObject.getLabelRef() === LabelRef.Trainrun
-          ? 'Züge'
+          ? "Züge"
           : labelObject.getLabelRef() === LabelRef.Note
-            ? 'Kommentare'
-            : 'Knoten',
+            ? "Kommentare"
+            : "Knoten",
       saveLabelCallback: (refLabel, updatedLabel) =>
         this.labelService.updateLabel(labelObject.getId(), updatedLabel),
       deleteLabelCallback: (refLabel) => {

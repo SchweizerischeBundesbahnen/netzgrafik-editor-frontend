@@ -1,8 +1,8 @@
 import {
   ConnectionDto,
   WarningDto,
-} from '../data-structures/technical.data.structures';
-import {Vec2D} from '../utils/vec2D';
+} from "../data-structures/technical.data.structures";
+import {Vec2D} from "../utils/vec2D";
 
 export class Connection {
   private static currentId = 0;
@@ -65,7 +65,7 @@ export class Connection {
     return this.path;
   }
 
-  setWarning(warningTitle: string, warningDescription = '') {
+  setWarning(warningTitle: string, warningDescription = "") {
     this.warning = {
       title: warningTitle,
       description: warningDescription,

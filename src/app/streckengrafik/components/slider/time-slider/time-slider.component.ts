@@ -6,24 +6,24 @@ import {
   Input,
   OnDestroy,
   OnInit,
-} from '@angular/core';
-import {TimeSliderService} from '../../../services/time-slider.service';
-import {SliderChangeInfo} from '../../../model/util/sliderChangeInfo';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {ViewBoxChangeInfo} from '../../../model/util/viewBoxChangeInfo';
-import {ViewBoxService} from '../../../services/util/view-box.service';
-import {TimeFormatter} from '../../../model/util/timeFormatter';
+} from "@angular/core";
+import {TimeSliderService} from "../../../services/time-slider.service";
+import {SliderChangeInfo} from "../../../model/util/sliderChangeInfo";
+import {takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
+import {ViewBoxChangeInfo} from "../../../model/util/viewBoxChangeInfo";
+import {ViewBoxService} from "../../../services/util/view-box.service";
+import {TimeFormatter} from "../../../model/util/timeFormatter";
 import {
   UpdateCounterController,
   UpdateCounterHandler,
   UpdateCounterTriggerSerivce,
-} from '../../../services/util/update-counter.service';
+} from "../../../services/util/update-counter.service";
 
 @Component({
-  selector: 'sbb-time-slider',
-  templateUrl: './time-slider.component.html',
-  styleUrls: ['./time-slider.component.scss'],
+  selector: "sbb-time-slider",
+  templateUrl: "./time-slider.component.html",
+  styleUrls: ["./time-slider.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimeSliderComponent
@@ -134,7 +134,7 @@ export class TimeSliderComponent
     this.destroyed$.complete();
   }
 
-  @HostListener('wheel', ['$event'])
+  @HostListener("wheel", ["$event"])
   public onScroll(event: WheelEvent) {
     event.preventDefault();
     event.stopImmediatePropagation();
@@ -153,7 +153,7 @@ export class TimeSliderComponent
     }
   }
 
-  @HostListener('mousemove', ['$event'])
+  @HostListener("mousemove", ["$event"])
   public onMouseMove(event: MouseEvent) {
     event.preventDefault();
     event.stopImmediatePropagation();
@@ -172,7 +172,7 @@ export class TimeSliderComponent
     return;
   }
 
-  @HostListener('mouseup', ['$event'])
+  @HostListener("mouseup", ["$event"])
   public onMouseUp(event: MouseEvent) {
     if (this.lastMouseMoveButtons !== 0) {
       this.timeSliderService.stopHandleZoomPanning();
@@ -203,7 +203,7 @@ export class TimeSliderComponent
     if (this.disableText) {
       return time.sliderTimeLineLen;
     } else {
-      if (time.text !== '') {
+      if (time.text !== "") {
         return 34;
       }
     }
@@ -227,27 +227,27 @@ export class TimeSliderComponent
   }
 
   getTimeSliderTextClassTag(time: TimeDate): string {
-    const tag = 'TimeSliderComponent Text ' + this.getTimeGroupClassTag(time);
+    const tag = "TimeSliderComponent Text " + this.getTimeGroupClassTag(time);
     if (this.horizontal) {
-      return tag + ' Horizontal';
+      return tag + " Horizontal";
     }
     return tag;
   }
 
   getTimeSliderClassTag(time: TimeDate): string {
     return (
-      'TimeSliderComponent HorizontalLine ' + this.getTimeGroupClassTag(time)
+      "TimeSliderComponent HorizontalLine " + this.getTimeGroupClassTag(time)
     );
   }
 
   getTimeLineClassTag(): string {
-    return 'TimeSliderComponent TimeLine';
+    return "TimeSliderComponent TimeLine";
   }
 
   getTimeLineTextClassTag(): string {
-    const tag = 'TimeSliderComponent Text TimeLine';
+    const tag = "TimeSliderComponent Text TimeLine";
     if (this.horizontal) {
-      return tag + ' Horizontal';
+      return tag + " Horizontal";
     }
     return tag;
   }
@@ -276,20 +276,20 @@ export class TimeSliderComponent
   private render() {
     if (this.horizontal) {
       this.viewBox =
-        ' ' +
+        " " +
         this.sliderChangeInfo.move +
-        ' ' +
-        '0 ' +
+        " " +
+        "0 " +
         this.viewBoxChangeInfo.width +
-        ' ' +
+        " " +
         40;
     } else {
       this.viewBox =
-        '0 ' +
+        "0 " +
         this.sliderChangeInfo.move +
-        ' ' +
+        " " +
         40 +
-        ' ' +
+        " " +
         this.viewBoxChangeInfo.height;
     }
     this.delayedRender();
@@ -395,18 +395,18 @@ export class TimeSliderComponent
 
   private transformTimeGroupClassTag(time: number): string {
     if (time % 60 === 0) {
-      return 'Hour Full';
+      return "Hour Full";
     }
     if (time % 30 === 0) {
-      return 'Hour Half';
+      return "Hour Half";
     }
     if (time % 15 === 0) {
-      return 'Hour Quarter';
+      return "Hour Quarter";
     }
     if (time % 5 === 0) {
-      return 'Hour Five';
+      return "Hour Five";
     }
-    return '';
+    return "";
   }
 
   private createOrUpdateTimeData(
@@ -449,7 +449,7 @@ export class TimeSliderComponent
         const time = i * timeVisualResolution;
         const check = time % timeResolution === 0 && time % 15 === 0;
         timesTicks.push({
-          text: check ? 'FullHour' : '',
+          text: check ? "FullHour" : "",
           time: time,
           sliderTimeLineLen: this.transformSliderTimeToLineLen(time),
           timeGroupClassTag: this.transformTimeGroupClassTag(time),

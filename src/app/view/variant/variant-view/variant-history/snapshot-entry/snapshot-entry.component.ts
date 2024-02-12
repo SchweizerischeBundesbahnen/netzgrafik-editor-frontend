@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {HistoryEntryAction} from '../history-entry/history-entry.component';
-import {DownloadVersionModel, VersionId} from '../model';
+import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {HistoryEntryAction} from "../history-entry/history-entry.component";
+import {DownloadVersionModel, VersionId} from "../model";
 
 @Component({
-  selector: 'sbb-snapshot-entry',
-  templateUrl: './snapshot-entry.component.html',
-  styleUrls: ['./snapshot-entry.component.scss'],
+  selector: "sbb-snapshot-entry",
+  templateUrl: "./snapshot-entry.component.html",
+  styleUrls: ["./snapshot-entry.component.scss"],
 })
 export class SnapshotEntryComponent {
   @Input() model: SnapshotEntryModel;
@@ -18,8 +18,8 @@ export class SnapshotEntryComponent {
 
   get actions(): HistoryEntryAction[] {
     const download = {
-      name: 'Download',
-      icon: 'download-small',
+      name: "Download",
+      icon: "download-small",
       onClick: () =>
         this.download.emit({
           versionId: this.model.id,
@@ -33,22 +33,22 @@ export class SnapshotEntryComponent {
 
     return [
       {
-        name: 'Wiederherstellen',
-        icon: 'arrows-circle-small',
+        name: "Wiederherstellen",
+        icon: "arrows-circle-small",
         onClick: () => this.restore.next(this.model.id),
       },
       {
-        name: 'Als neue Variante',
-        icon: 'circle-plus-small',
+        name: "Als neue Variante",
+        icon: "circle-plus-small",
         onClick: () => this.saveAsNewVariant.emit(this.model.id),
       },
       download,
     ];
   }
 
-  getState(): 'conflict' | 'added' | undefined {
+  getState(): "conflict" | "added" | undefined {
     if (this.model.lastAdded) {
-      return 'added';
+      return "added";
     }
 
     return undefined;
@@ -56,7 +56,7 @@ export class SnapshotEntryComponent {
 
   getMessage(): string | undefined {
     if (this.model.lastAdded) {
-      return 'Erfolgreich gespeichert';
+      return "Erfolgreich gespeichert";
     }
 
     return undefined;

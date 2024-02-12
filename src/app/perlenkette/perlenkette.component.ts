@@ -7,30 +7,30 @@ import {
   Input,
   OnDestroy,
   ViewChild,
-} from '@angular/core';
-import {Subject} from 'rxjs';
-import {LoadPerlenketteService} from './service/load-perlenkette.service';
-import {PerlenketteTrainrun} from './model/perlenketteTrainrun';
-import {PerlenketteSection} from './model/perlenketteSection';
-import {FilterService} from '../services/ui/filter.service';
-import {UiInteractionService} from '../services/ui/ui.interaction.service';
-import {Vec2D} from '../utils/vec2D';
-import {PerlenketteItem} from './model/perlenketteItem';
-import {PerlenketteNode} from './model/perlenketteNode';
-import {EditorMode} from '../view/editor-menu/editor-mode';
-import {NodeService} from '../services/data/node.service';
-import {takeUntil} from 'rxjs/operators';
-import {PerlenketteConnection} from './model/perlenketteConnection';
+} from "@angular/core";
+import {Subject} from "rxjs";
+import {LoadPerlenketteService} from "./service/load-perlenkette.service";
+import {PerlenketteTrainrun} from "./model/perlenketteTrainrun";
+import {PerlenketteSection} from "./model/perlenketteSection";
+import {FilterService} from "../services/ui/filter.service";
+import {UiInteractionService} from "../services/ui/ui.interaction.service";
+import {Vec2D} from "../utils/vec2D";
+import {PerlenketteItem} from "./model/perlenketteItem";
+import {PerlenketteNode} from "./model/perlenketteNode";
+import {EditorMode} from "../view/editor-menu/editor-mode";
+import {NodeService} from "../services/data/node.service";
+import {takeUntil} from "rxjs/operators";
+import {PerlenketteConnection} from "./model/perlenketteConnection";
 
 @Component({
-  selector: 'sbb-perlenkette',
-  templateUrl: './perlenkette.component.html',
-  styleUrls: ['./perlenkette.component.scss'],
+  selector: "sbb-perlenkette",
+  templateUrl: "./perlenkette.component.html",
+  styleUrls: ["./perlenkette.component.scss"],
 })
 export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
   perlenketteTrainrun: PerlenketteTrainrun;
-  @ViewChild('svgPerlenkette') svgPerlenkette: ElementRef<SVGSVGElement>;
-  @ViewChild('drawingContainer') drawingContainer: ElementRef;
+  @ViewChild("svgPerlenkette") svgPerlenkette: ElementRef<SVGSVGElement>;
+  @ViewChild("drawingContainer") drawingContainer: ElementRef;
   @Input() sidebarElementHeight: number;
 
   private readonly destroyed$ = new Subject<void>();
@@ -119,10 +119,10 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
   ngAfterContentChecked() {
     this.contentWidth = Math.max(
       364,
-      document.getElementById('cd-layout-aside').clientWidth,
+      document.getElementById("cd-layout-aside").clientWidth,
     );
 
-    const mainContentElement = document.getElementById('cd-layout-content');
+    const mainContentElement = document.getElementById("cd-layout-content");
     this.contentHeight = mainContentElement.clientHeight;
     this.changeDetectorRef.detectChanges();
   }
@@ -134,11 +134,11 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
 
   getPerlenketteViewBox(): string {
     return (
-      '0 ' +
+      "0 " +
       this.svgPoint.getY() +
-      ' ' +
+      " " +
       this.contentWidth +
-      ' ' +
+      " " +
       this.contentHeight
     );
   }
@@ -151,12 +151,12 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
   }
 
   getSmallstationClassTag(pathItem: PerlenketteItem): string {
-    let ret = 'smallstation';
+    let ret = "smallstation";
     if (pathItem.isPerlenketteNode()) {
       const r = this.getClosestPerlenketteItem();
       if (r !== undefined) {
         if (r.nodeId === pathItem.getPerlenketteNode().nodeId) {
-          ret += ' closest';
+          ret += " closest";
         }
       }
     }
@@ -299,7 +299,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     }
   }
 
-  @HostListener('wheel', ['$event'])
+  @HostListener("wheel", ["$event"])
   public onScroll(event: WheelEvent) {
     event.preventDefault();
     event.stopImmediatePropagation();

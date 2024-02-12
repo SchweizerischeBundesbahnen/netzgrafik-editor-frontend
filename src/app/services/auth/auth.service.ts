@@ -1,12 +1,12 @@
-import {Location} from '@angular/common';
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {OAuthService} from 'angular-oauth2-oidc';
-import {first} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
+import {Location} from "@angular/common";
+import {Injectable} from "@angular/core";
+import {Router} from "@angular/router";
+import {OAuthService} from "angular-oauth2-oidc";
+import {first} from "rxjs/operators";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService {
   // Promise that resolves once the login has been successful.
@@ -44,10 +44,10 @@ export class AuthService {
       .then((v) => (v ? true : new Promise(() => {})));
     // Redirect the user to the url configured with state above or in a separate login call.
     this.oauthService.events
-      .pipe(first((e) => e.type === 'token_received'))
+      .pipe(first((e) => e.type === "token_received"))
       .subscribe(() => {
-        const state = decodeURIComponent(this.oauthService.state || '');
-        if (state && state !== '/') {
+        const state = decodeURIComponent(this.oauthService.state || "");
+        if (state && state !== "/") {
           this.router.navigate([state]);
         }
       });

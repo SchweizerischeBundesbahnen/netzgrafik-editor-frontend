@@ -1,39 +1,39 @@
-import {DataService} from '../../services/data/data.service';
-import {StammdatenService} from '../../services/data/stammdaten.service';
-import {NetzgrafikUnitTesting} from '../../../integration-testing/netzgrafik.unit.testing';
-import {NodeService} from '../../services/data/node.service';
-import {ResourceService} from '../../services/data/resource.service';
-import {TrainrunService} from '../../services/data/trainrun.service';
-import {TrainrunSectionService} from '../../services/data/trainrunsection.service';
-import {NoteService} from '../../services/data/note.service';
-import {Node} from '../../models/node.model';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {LogService} from '../../logger/log.service';
-import {LogPublishersService} from '../../logger/log.publishers.service';
-import {LabelGroupService} from '../../services/data/labelgroup.service';
-import {LabelService} from '../../services/data/label.serivce';
-import {FilterService} from '../../services/ui/filter.service';
-import {NetzgrafikColoringService} from '../../services/data/netzgrafikColoring.service';
-import {Sg6TrackService} from './sg-6-track.service';
-import {Sg5FilterService} from './sg-5-filter.service';
-import {Sg4ToggleTrackOccupierService} from './sg-4-toggle-track-occupier.service';
-import {Sg3TrainrunsService} from './sg-3-trainruns.service';
-import {UiInteractionService} from '../../services/ui/ui.interaction.service';
-import {LoadPerlenketteService} from '../../perlenkette/service/load-perlenkette.service';
-import {Sg2TrainrunPathService} from './sg-2-trainrun-path.service';
-import {Sg1LoadTrainrunItemService} from './sg-1-load-trainrun-item.service';
-import {SgStopService} from './sg-stop-.service';
-import {EditorMode} from '../../view/editor-menu/editor-mode';
-import {SgSelectedTrainrun} from '../model/streckengrafik-model/sg-selected-trainrun';
-import {SgTrainrun} from '../model/streckengrafik-model/sg-trainrun';
-import {SgTrainrunItem} from '../model/streckengrafik-model/sg-trainrun-item';
-import {SgPathNode} from '../model/streckengrafik-model/sg-path-node';
-import {PathSection} from '../model/pathSection';
-import {TrackData} from '../model/trackData';
-import {PathNode} from '../model/pathNode';
-import {IsTrainrunSelectedService} from '../../services/data/is-trainrun-section.service';
+import {DataService} from "../../services/data/data.service";
+import {StammdatenService} from "../../services/data/stammdaten.service";
+import {NetzgrafikUnitTesting} from "../../../integration-testing/netzgrafik.unit.testing";
+import {NodeService} from "../../services/data/node.service";
+import {ResourceService} from "../../services/data/resource.service";
+import {TrainrunService} from "../../services/data/trainrun.service";
+import {TrainrunSectionService} from "../../services/data/trainrunsection.service";
+import {NoteService} from "../../services/data/note.service";
+import {Node} from "../../models/node.model";
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {LogService} from "../../logger/log.service";
+import {LogPublishersService} from "../../logger/log.publishers.service";
+import {LabelGroupService} from "../../services/data/labelgroup.service";
+import {LabelService} from "../../services/data/label.serivce";
+import {FilterService} from "../../services/ui/filter.service";
+import {NetzgrafikColoringService} from "../../services/data/netzgrafikColoring.service";
+import {Sg6TrackService} from "./sg-6-track.service";
+import {Sg5FilterService} from "./sg-5-filter.service";
+import {Sg4ToggleTrackOccupierService} from "./sg-4-toggle-track-occupier.service";
+import {Sg3TrainrunsService} from "./sg-3-trainruns.service";
+import {UiInteractionService} from "../../services/ui/ui.interaction.service";
+import {LoadPerlenketteService} from "../../perlenkette/service/load-perlenkette.service";
+import {Sg2TrainrunPathService} from "./sg-2-trainrun-path.service";
+import {Sg1LoadTrainrunItemService} from "./sg-1-load-trainrun-item.service";
+import {SgStopService} from "./sg-stop-.service";
+import {EditorMode} from "../../view/editor-menu/editor-mode";
+import {SgSelectedTrainrun} from "../model/streckengrafik-model/sg-selected-trainrun";
+import {SgTrainrun} from "../model/streckengrafik-model/sg-trainrun";
+import {SgTrainrunItem} from "../model/streckengrafik-model/sg-trainrun-item";
+import {SgPathNode} from "../model/streckengrafik-model/sg-path-node";
+import {PathSection} from "../model/pathSection";
+import {TrackData} from "../model/trackData";
+import {PathNode} from "../model/pathNode";
+import {IsTrainrunSelectedService} from "../../services/data/is-trainrun-section.service";
 
-describe('StreckengrafikServicesTests', () => {
+describe("StreckengrafikServicesTests", () => {
   let dataService: DataService;
   let nodeService: NodeService;
   let resourceService: ResourceService;
@@ -159,7 +159,7 @@ describe('StreckengrafikServicesTests', () => {
     );
   });
 
-  it('Load test', () => {
+  it("Load test", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -174,7 +174,7 @@ describe('StreckengrafikServicesTests', () => {
     );
   });
 
-  it('Sg6TrackService Test (Trainrun ID: 1)', () => {
+  it("Sg6TrackService Test (Trainrun ID: 1)", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -189,16 +189,16 @@ describe('StreckengrafikServicesTests', () => {
         expect(sgSelectedTrainrun.frequencyOffset).toBe(0);
         expect(sgSelectedTrainrun.startTime).toBe(15);
         expect(sgSelectedTrainrun.endTime).toBe(35);
-        expect(sgSelectedTrainrun.title).toBe('1');
-        expect(sgSelectedTrainrun.categoryShortName).toBe('S');
-        expect(sgSelectedTrainrun.colorRef).toBe('S');
+        expect(sgSelectedTrainrun.title).toBe("1");
+        expect(sgSelectedTrainrun.categoryShortName).toBe("S");
+        expect(sgSelectedTrainrun.colorRef).toBe("S");
         expect(sgSelectedTrainrun.paths.length).toBe(3);
         expect(sgSelectedTrainrun.trainruns.length).toBe(5);
         expect(sgSelectedTrainrun.counter).toBe(1);
       });
   });
 
-  it('Sg6TrackService Node Track alignment test (Trainrun ID: 2)', () => {
+  it("Sg6TrackService Node Track alignment test (Trainrun ID: 2)", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -213,16 +213,16 @@ describe('StreckengrafikServicesTests', () => {
         expect(sgSelectedTrainrun.frequencyOffset).toBe(0);
         expect(sgSelectedTrainrun.startTime).toBe(0);
         expect(sgSelectedTrainrun.endTime).toBe(101);
-        expect(sgSelectedTrainrun.title).toBe('1234');
-        expect(sgSelectedTrainrun.categoryShortName).toBe('S');
-        expect(sgSelectedTrainrun.colorRef).toBe('S');
+        expect(sgSelectedTrainrun.title).toBe("1234");
+        expect(sgSelectedTrainrun.categoryShortName).toBe("S");
+        expect(sgSelectedTrainrun.colorRef).toBe("S");
         expect(sgSelectedTrainrun.paths.length).toBe(7);
         expect(sgSelectedTrainrun.trainruns.length).toBe(5);
         expect(sgSelectedTrainrun.counter).toBe(1);
       });
   });
 
-  it('Sg6TrackService General Track alignment test (Trainrun ID: 2)', () => {
+  it("Sg6TrackService General Track alignment test (Trainrun ID: 2)", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -233,7 +233,7 @@ describe('StreckengrafikServicesTests', () => {
       .getSgSelectedTrainrun()
       .subscribe((sgSelectedTrainrun: SgSelectedTrainrun) => {
         expect(sgSelectedTrainrun.trainrunId).toBe(2);
-        const pathBP: string[] = ['BN', '', 'OL', '', 'ZUE', '', 'SG'];
+        const pathBP: string[] = ["BN", "", "OL", "", "ZUE", "", "SG"];
         const pathTrack: number[] = [
           4,
           undefined,
@@ -304,7 +304,7 @@ describe('StreckengrafikServicesTests', () => {
       });
   });
 
-  it('Sg6TrackService Node Track alignment test (Trainrun ID: 2) - 001', () => {
+  it("Sg6TrackService Node Track alignment test (Trainrun ID: 2) - 001", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -350,7 +350,7 @@ describe('StreckengrafikServicesTests', () => {
       });
   });
 
-  it('Sg6TrackService Node Track alignment test (Trainrun ID: 2) - 002', () => {
+  it("Sg6TrackService Node Track alignment test (Trainrun ID: 2) - 002", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -396,7 +396,7 @@ describe('StreckengrafikServicesTests', () => {
       });
   });
 
-  it('Sg6TrackService Node Track alignment test (Trainrun ID: 2) - 003', () => {
+  it("Sg6TrackService Node Track alignment test (Trainrun ID: 2) - 003", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -428,7 +428,7 @@ describe('StreckengrafikServicesTests', () => {
       });
   });
 
-  it('streckengrafik - trainrunItem.ts', () => {
+  it("streckengrafik - trainrunItem.ts", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -457,8 +457,8 @@ describe('StreckengrafikServicesTests', () => {
         const section = item1.getTrainrunSection();
 
         const pathSection = item1.getPathSection();
-        expect(pathSection.departureNodeShortName).toBe('BN');
-        expect(pathSection.arrivalNodeShortName).toBe('OL');
+        expect(pathSection.departureNodeShortName).toBe("BN");
+        expect(pathSection.arrivalNodeShortName).toBe("OL");
 
         expect(section.getStartposition()).toBe(0);
         section.trackData.setTrackGrp(section.trackData.getTrackGrp());
@@ -493,13 +493,13 @@ describe('StreckengrafikServicesTests', () => {
       });
   });
 
-  it('streckengrafik - sg-stop-service.ts', () => {
+  it("streckengrafik - sg-stop-service.ts", () => {
     expect(sgStopService.isGO(0)).toBe(true);
     expect(sgStopService.isGO(undefined)).toBe(false);
     expect(sgStopService.isGO(-1)).toBe(false);
   });
 
-  it('streckengrafik - sg-4-toggle-track-occupier.service.ts', () => {
+  it("streckengrafik - sg-4-toggle-track-occupier.service.ts", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -517,7 +517,7 @@ describe('StreckengrafikServicesTests', () => {
     expect(sg4ToggleTrackOccupierService.allPathNodeClosed()).toBe(true);
   });
 
-  it('streckengrafik - PathSection', () => {
+  it("streckengrafik - PathSection", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -579,12 +579,12 @@ describe('StreckengrafikServicesTests', () => {
     );
 
     clonedPS1.backward = true;
-    expect(clonedPS1.getPathSection().shortKey()).toBe('2:1');
-    expect(clonedPS1.getPathSection().key()).toBe('2;1:1;1');
+    expect(clonedPS1.getPathSection().shortKey()).toBe("2:1");
+    expect(clonedPS1.getPathSection().key()).toBe("2;1:1;1");
 
     clonedPS1.backward = false;
-    expect(clonedPS1.getPathSection().shortKey()).toBe('1:2');
-    expect(clonedPS1.getPathSection().key()).toBe('1;1:2;1');
+    expect(clonedPS1.getPathSection().shortKey()).toBe("1:2");
+    expect(clonedPS1.getPathSection().key()).toBe("1;1:2;1");
 
     expect(clonedPS.getPathSection().xPath()).toBe(70);
     expect(clonedPS1.getPathSection().xPath()).toBe(70);

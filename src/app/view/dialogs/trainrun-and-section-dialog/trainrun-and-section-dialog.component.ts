@@ -1,22 +1,22 @@
-import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnDestroy, TemplateRef, ViewChild} from "@angular/core";
 import {
   SbbDialog,
   SbbDialogConfig,
   SbbDialogPosition,
-} from '@sbb-esta/angular/dialog';
-import {Vec2D} from '../../../utils/vec2D';
-import {Trainrun} from '../../../models/trainrun.model';
-import {TrainrunService} from '../../../services/data/trainrun.service';
-import {TrainrunSectionText} from '../../../data-structures/technical.data.structures';
-import {TrainrunSectionService} from '../../../services/data/trainrunsection.service';
-import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
-import {GeneralViewFunctions} from '../../util/generalViewFunctions';
-import {TrainrunsectionHelper} from '../../../services/util/trainrunsection.helper';
-import {Node} from '../../../models/node.model';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {DataService} from '../../../services/data/data.service';
-import {TrainrunFrequency} from '../../../data-structures/business.data.structures';
+} from "@sbb-esta/angular/dialog";
+import {Vec2D} from "../../../utils/vec2D";
+import {Trainrun} from "../../../models/trainrun.model";
+import {TrainrunService} from "../../../services/data/trainrun.service";
+import {TrainrunSectionText} from "../../../data-structures/technical.data.structures";
+import {TrainrunSectionService} from "../../../services/data/trainrunsection.service";
+import {UiInteractionService} from "../../../services/ui/ui.interaction.service";
+import {GeneralViewFunctions} from "../../util/generalViewFunctions";
+import {TrainrunsectionHelper} from "../../../services/util/trainrunsection.helper";
+import {Node} from "../../../models/node.model";
+import {Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
+import {DataService} from "../../../services/data/data.service";
+import {TrainrunFrequency} from "../../../data-structures/business.data.structures";
 
 export enum TrainrunDialogType {
   TRAINRUN_DIALOG,
@@ -58,12 +58,12 @@ export class TrainrunDialogParameter {
 }
 
 @Component({
-  selector: 'sbb-trainrun-and-section-dialog',
-  templateUrl: './trainrun-and-section-dialog.component.html',
-  styleUrls: ['./trainrun-and-section-dialog.component.scss'],
+  selector: "sbb-trainrun-and-section-dialog",
+  templateUrl: "./trainrun-and-section-dialog.component.html",
+  styleUrls: ["./trainrun-and-section-dialog.component.scss"],
 })
 export class TrainrunAndSectionDialogComponent implements OnDestroy {
-  @ViewChild('trainrunAndSectionEditorTabsViewTemplate', {static: true})
+  @ViewChild("trainrunAndSectionEditorTabsViewTemplate", {static: true})
   trainrunAndSectionEditorTabsViewTemplate: TemplateRef<any>;
 
   public selectedTrainrun: Trainrun;
@@ -107,7 +107,7 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
           parameter.nodesOrdered,
         );
         this.selectedTrainrunSectionName =
-          leftNode.getFullName() + ' — ' + rightNode.getFullName();
+          leftNode.getFullName() + " — " + rightNode.getFullName();
 
         this.openDialog(parameter);
       });
@@ -131,18 +131,18 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
       new Vec2D(width, height),
     );
     dialogConfig.position = {
-      top: topLeft.getY() + 'px',
-      left: topLeft.getX() + 'px',
+      top: topLeft.getY() + "px",
+      left: topLeft.getX() + "px",
     };
 
-    dialogConfig.width = width + 'px';
+    dialogConfig.width = width + "px";
     dialogConfig.minWidth = dialogConfig.width;
     dialogConfig.maxWidth = dialogConfig.width;
-    dialogConfig.height = height + 'px';
+    dialogConfig.height = height + "px";
     dialogConfig.minHeight = dialogConfig.height;
     dialogConfig.maxHeight = dialogConfig.height;
-    dialogConfig.panelClass = '';
-    dialogConfig.id = 'TrainrunTabViewDialogId';
+    dialogConfig.panelClass = "";
+    dialogConfig.id = "TrainrunTabViewDialogId";
     return dialogConfig;
   }
 
@@ -180,7 +180,7 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
   onMouseDown(event: MouseEvent) {
     if (event.buttons === 1) {
       const eventTarget = event.target as HTMLElement;
-      if (eventTarget.className === 'sbb-tab-labels') {
+      if (eventTarget.className === "sbb-tab-labels") {
         this.dialogMovementLastPosition = new Vec2D(
           event.screenX,
           event.screenY,
@@ -214,10 +214,10 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
 
   private convertDialogPos(dialogPos: SbbDialogPosition): SbbDialogPosition {
     return {
-      bottom: dialogPos.bottom + 'px',
-      left: dialogPos.left + 'px',
-      right: dialogPos.right + 'px',
-      top: dialogPos.top + 'px',
+      bottom: dialogPos.bottom + "px",
+      left: dialogPos.left + "px",
+      right: dialogPos.right + "px",
+      top: dialogPos.top + "px",
     };
   }
 }

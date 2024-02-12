@@ -1,26 +1,26 @@
-import {DataService} from '../data/data.service';
-import {NodeService} from '../data/node.service';
-import {ResourceService} from '../data/resource.service';
-import {TrainrunService} from '../data/trainrun.service';
-import {TrainrunSectionService} from '../data/trainrunsection.service';
-import {StammdatenService} from '../data/stammdaten.service';
-import {NoteService} from '../data/note.service';
-import {Node} from '../../models/node.model';
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {LogService} from '../../logger/log.service';
-import {LogPublishersService} from '../../logger/log.publishers.service';
-import {LabelGroupService} from '../data/labelgroup.service';
-import {LabelService} from '../data/label.serivce';
-import {FilterService} from '../ui/filter.service';
-import {NetzgrafikColoringService} from '../data/netzgrafikColoring.service';
-import {UndoService} from '../data/undo.service';
-import {CopyService} from './copy.service';
-import {UiInteractionService} from '../ui/ui.interaction.service';
-import {LoadPerlenketteService} from '../../perlenkette/service/load-perlenkette.service';
-import {NetzgrafikUnitTesting} from '../../../integration-testing/netzgrafik.unit.testing';
-import {EditorMode} from '../../view/editor-menu/editor-mode';
+import {DataService} from "../data/data.service";
+import {NodeService} from "../data/node.service";
+import {ResourceService} from "../data/resource.service";
+import {TrainrunService} from "../data/trainrun.service";
+import {TrainrunSectionService} from "../data/trainrunsection.service";
+import {StammdatenService} from "../data/stammdaten.service";
+import {NoteService} from "../data/note.service";
+import {Node} from "../../models/node.model";
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {LogService} from "../../logger/log.service";
+import {LogPublishersService} from "../../logger/log.publishers.service";
+import {LabelGroupService} from "../data/labelgroup.service";
+import {LabelService} from "../data/label.serivce";
+import {FilterService} from "../ui/filter.service";
+import {NetzgrafikColoringService} from "../data/netzgrafikColoring.service";
+import {UndoService} from "../data/undo.service";
+import {CopyService} from "./copy.service";
+import {UiInteractionService} from "../ui/ui.interaction.service";
+import {LoadPerlenketteService} from "../../perlenkette/service/load-perlenkette.service";
+import {NetzgrafikUnitTesting} from "../../../integration-testing/netzgrafik.unit.testing";
+import {EditorMode} from "../../view/editor-menu/editor-mode";
 
-describe('CopyService', () => {
+describe("CopyService", () => {
   let dataService: DataService;
   let nodeService: NodeService;
   let resourceService: ResourceService;
@@ -124,7 +124,7 @@ describe('CopyService', () => {
     copyService.resetLocalStorage();
   });
 
-  it('test loadNetzgrafikDto', () => {
+  it("test loadNetzgrafikDto", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -135,7 +135,7 @@ describe('CopyService', () => {
     expect(loadedNetzgrafik.freeFloatingTexts.length).toBe(1);
   });
 
-  it('General tests - 001 (complete netzgrafik)', () => {
+  it("General tests - 001 (complete netzgrafik)", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -163,7 +163,7 @@ describe('CopyService', () => {
     expect(noteService.getNotes().length).toBe(1);
   });
 
-  it('General tests - 002 (single trainrun)', () => {
+  it("General tests - 002 (single trainrun)", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -179,7 +179,7 @@ describe('CopyService', () => {
     expect(noteService.getNotes().length).toBe(0);
   });
 
-  it('General tests - 003 (filterMultiSelected)', () => {
+  it("General tests - 003 (filterMultiSelected)", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -196,7 +196,7 @@ describe('CopyService', () => {
     expect(noteService.getNotes().length).toBe(0);
   });
 
-  it('General tests - 004 (filterMultiSelected)', () => {
+  it("General tests - 004 (filterMultiSelected)", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -218,7 +218,7 @@ describe('CopyService', () => {
     expect(noteService.getNotes().length).toBe(1);
   });
 
-  it('General tests - 005 (trainrun filtering)', () => {
+  it("General tests - 005 (trainrun filtering)", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -244,7 +244,7 @@ describe('CopyService', () => {
     expect(copiedData.freeFloatingTexts.length).toBe(0);
   });
 
-  it('General tests - 006 (trainrun filtering)', () => {
+  it("General tests - 006 (trainrun filtering)", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );

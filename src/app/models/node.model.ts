@@ -2,26 +2,26 @@ import {
   HaltezeitFachCategories,
   NodeDto,
   TrainrunCategoryHaltezeit,
-} from '../data-structures/business.data.structures';
+} from "../data-structures/business.data.structures";
 import {
   NODE_MIN_HEIGHT,
   NODE_MIN_WIDTH,
   NODE_PIN_SPAN,
   NODE_TEXT_AREA_HEIGHT,
-} from '../view/rastering/definitions';
-import {Port} from './port.model';
-import {TrainrunSection} from './trainrunsection.model';
-import {Transition} from './transition.model';
-import {SimpleTrainrunSectionRouter} from '../services/util/trainrunsection.routing';
-import {Trainrun} from './trainrun.model';
+} from "../view/rastering/definitions";
+import {Port} from "./port.model";
+import {TrainrunSection} from "./trainrunsection.model";
+import {Transition} from "./transition.model";
+import {SimpleTrainrunSectionRouter} from "../services/util/trainrunsection.routing";
+import {Trainrun} from "./trainrun.model";
 import {
   PortAlignment,
   WarningDto,
-} from '../data-structures/technical.data.structures';
-import {Connection} from './connection.model';
-import {ConnectionValidator} from '../services/util/connection.validator';
-import {VisAVisPortPlacement} from '../services/util/node.port.placement';
-import {DataMigration} from '../utils/data-migration';
+} from "../data-structures/technical.data.structures";
+import {Connection} from "./connection.model";
+import {ConnectionValidator} from "../services/util/connection.validator";
+import {VisAVisPortPlacement} from "../services/util/node.port.placement";
+import {DataMigration} from "../utils/data-migration";
 
 export class Node {
   private static currentId = 0;
@@ -61,8 +61,8 @@ export class Node {
       labelIds,
     }: NodeDto = {
       id: Node.incrementId(),
-      betriebspunktName: 'NEW',
-      fullName: 'Neuer Knoten',
+      betriebspunktName: "NEW",
+      fullName: "Neuer Knoten",
       positionX: 0,
       positionY: 0,
       ports: [],
@@ -204,7 +204,7 @@ export class Node {
         // unfortunately we don't know how this could happen
         // the fix implemented here deletes these ports
         console.log(
-          'ERROR-fix: initializePortsWithReferencesToTrainrunSections',
+          "ERROR-fix: initializePortsWithReferencesToTrainrunSections",
           port,
           port.getTrainrunSectionId(),
           trainrunSection,

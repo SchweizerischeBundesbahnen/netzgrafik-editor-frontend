@@ -1,13 +1,13 @@
-import {Component, HostListener} from '@angular/core';
-import {DrawingBackgroundMouseListenerService} from '../../../services/util/drawingBackgroundMouseListener.service';
-import {TrainrunService} from '../../../../services/data/trainrun.service';
-import {Sg8RenderService} from '../../../services/sg-8-render.service';
-import {UpdateCounterTriggerSerivce} from '../../../services/util/update-counter.service';
+import {Component, HostListener} from "@angular/core";
+import {DrawingBackgroundMouseListenerService} from "../../../services/util/drawingBackgroundMouseListener.service";
+import {TrainrunService} from "../../../../services/data/trainrun.service";
+import {Sg8RenderService} from "../../../services/sg-8-render.service";
+import {UpdateCounterTriggerSerivce} from "../../../services/util/update-counter.service";
 
 @Component({
-  selector: 'sbb-drawing-background-mouse-listener',
-  templateUrl: './drawing-background-mouse-listener.component.html',
-  styleUrls: ['./drawing-background-mouse-listener.component.scss'],
+  selector: "sbb-drawing-background-mouse-listener",
+  templateUrl: "./drawing-background-mouse-listener.component.html",
+  styleUrls: ["./drawing-background-mouse-listener.component.scss"],
 })
 export class DrawingBackgroundMouseListenerComponent {
   private isMouseMovingButtonDown = false;
@@ -19,7 +19,7 @@ export class DrawingBackgroundMouseListenerComponent {
     private sg8RenderService: Sg8RenderService,
   ) {}
 
-  @HostListener('mouseup', ['$event'])
+  @HostListener("mouseup", ["$event"])
   public onMouseUp(event: MouseEvent) {
     if (this.isMouseMovingButtonDown) {
       this.isMouseMovingButtonDown = false;
@@ -33,7 +33,7 @@ export class DrawingBackgroundMouseListenerComponent {
     return;
   }
 
-  @HostListener('mousemove', ['$event'])
+  @HostListener("mousemove", ["$event"])
   public onMouseMove(event: MouseEvent) {
     event.preventDefault();
     event.stopImmediatePropagation();
@@ -46,7 +46,7 @@ export class DrawingBackgroundMouseListenerComponent {
     return;
   }
 
-  @HostListener('mouseenter', ['$event'])
+  @HostListener("mouseenter", ["$event"])
   public onMouseEnter(event: MouseEvent) {
     event.preventDefault();
     event.stopImmediatePropagation();
@@ -55,7 +55,7 @@ export class DrawingBackgroundMouseListenerComponent {
     return;
   }
 
-  @HostListener('mouseleave', ['$event'])
+  @HostListener("mouseleave", ["$event"])
   public onMouseLeave(event: MouseEvent) {
     event.preventDefault();
     event.stopImmediatePropagation();

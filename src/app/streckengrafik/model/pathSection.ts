@@ -1,8 +1,8 @@
-import {PathItem} from './pathItem';
-import {PathNode} from './pathNode';
-import {TrainrunBranchType} from './enum/trainrun-branch-type-type';
-import {TrackData} from './trackData';
-import {TrainrunTemplatePathAlignmentType} from './enum/trainrun-template-path-alignment-type';
+import {PathItem} from "./pathItem";
+import {PathNode} from "./pathNode";
+import {TrainrunBranchType} from "./enum/trainrun-branch-type-type";
+import {TrackData} from "./trackData";
+import {TrainrunTemplatePathAlignmentType} from "./enum/trainrun-template-path-alignment-type";
 
 export class PathSection implements PathItem {
   branchWith = 70;
@@ -45,9 +45,9 @@ export class PathSection implements PathItem {
 
   key(): string {
     if (this.backward) {
-      return this.arrivalPathNode.key() + ':' + this.departurePathNode.key();
+      return this.arrivalPathNode.key() + ":" + this.departurePathNode.key();
     }
-    return this.departurePathNode.key() + ':' + this.arrivalPathNode.key();
+    return this.departurePathNode.key() + ":" + this.arrivalPathNode.key();
   }
 
   shortKey(): string {
@@ -60,12 +60,12 @@ export class PathSection implements PathItem {
     if (this.backward) {
       return (
         this.arrivalPathNode.shortKey() +
-        ':' +
+        ":" +
         this.departurePathNode.shortKey()
       );
     }
     return (
-      this.departurePathNode.shortKey() + ':' + this.arrivalPathNode.shortKey()
+      this.departurePathNode.shortKey() + ":" + this.arrivalPathNode.shortKey()
     );
   }
 

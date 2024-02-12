@@ -1,5 +1,5 @@
-import {SgTrainrunItem} from './sg-trainrun-item';
-import {SgSelectedTrainrun} from './sg-selected-trainrun';
+import {SgTrainrunItem} from "./sg-trainrun-item";
+import {SgSelectedTrainrun} from "./sg-selected-trainrun";
 
 export class SgTrainrun {
   static currentId = 0;

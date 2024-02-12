@@ -1,18 +1,18 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {Sg1LoadTrainrunItemService} from './sg-1-load-trainrun-item.service';
-import {takeUntil} from 'rxjs/operators';
-import {SgSelectedTrainrun} from '../model/streckengrafik-model/sg-selected-trainrun';
-import {TrainrunItem} from '../model/trainrunItem';
-import {SgPath} from '../model/streckengrafik-model/sg-path';
-import {SgPathSection} from '../model/streckengrafik-model/sg-path-section';
-import {SgPathNode} from '../model/streckengrafik-model/sg-path-node';
-import {PathItem} from '../model/pathItem';
-import {TrackData} from '../model/trackData';
-import {SgStopService} from './sg-stop-.service';
+import {Injectable, OnDestroy} from "@angular/core";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {Sg1LoadTrainrunItemService} from "./sg-1-load-trainrun-item.service";
+import {takeUntil} from "rxjs/operators";
+import {SgSelectedTrainrun} from "../model/streckengrafik-model/sg-selected-trainrun";
+import {TrainrunItem} from "../model/trainrunItem";
+import {SgPath} from "../model/streckengrafik-model/sg-path";
+import {SgPathSection} from "../model/streckengrafik-model/sg-path-section";
+import {SgPathNode} from "../model/streckengrafik-model/sg-path-node";
+import {PathItem} from "../model/pathItem";
+import {TrackData} from "../model/trackData";
+import {SgStopService} from "./sg-stop-.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class Sg2TrainrunPathService implements OnDestroy {
   private readonly sgSelectedTrainrunSubject =

@@ -1,19 +1,19 @@
-import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
-import {Subject} from 'rxjs';
-import {ResizeChangeInfo} from '../../../model/util/resizeChangeInfo';
-import {ViewBoxChangeInfo} from '../../../model/util/viewBoxChangeInfo';
-import {ResizeService} from '../../../services/util/resize.service';
-import {ViewBoxService} from '../../../services/util/view-box.service';
-import {takeUntil} from 'rxjs/operators';
-import {SgSelectedTrainrun} from '../../../model/streckengrafik-model/sg-selected-trainrun';
-import {SgPath} from '../../../model/streckengrafik-model/sg-path';
-import {Sg4ToggleTrackOccupierService} from '../../../services/sg-4-toggle-track-occupier.service';
-import {Sg8RenderService} from '../../../services/sg-8-render.service';
+import {Component, Input, OnDestroy, ViewChild} from "@angular/core";
+import {Subject} from "rxjs";
+import {ResizeChangeInfo} from "../../../model/util/resizeChangeInfo";
+import {ViewBoxChangeInfo} from "../../../model/util/viewBoxChangeInfo";
+import {ResizeService} from "../../../services/util/resize.service";
+import {ViewBoxService} from "../../../services/util/view-box.service";
+import {takeUntil} from "rxjs/operators";
+import {SgSelectedTrainrun} from "../../../model/streckengrafik-model/sg-selected-trainrun";
+import {SgPath} from "../../../model/streckengrafik-model/sg-path";
+import {Sg4ToggleTrackOccupierService} from "../../../services/sg-4-toggle-track-occupier.service";
+import {Sg8RenderService} from "../../../services/sg-8-render.service";
 
 @Component({
-  selector: 'sbb-path-slider',
-  templateUrl: './path-slider.component.html',
-  styleUrls: ['./path-slider.component.scss'],
+  selector: "sbb-path-slider",
+  templateUrl: "./path-slider.component.html",
+  styleUrls: ["./path-slider.component.scss"],
 })
 export class PathSliderComponent implements OnDestroy {
   @Input()
@@ -22,7 +22,7 @@ export class PathSliderComponent implements OnDestroy {
   @Input()
   showRailTrackSlider = true;
 
-  @ViewChild('svg')
+  @ViewChild("svg")
   svgRef: any;
 
   viewBox: string;
@@ -90,34 +90,34 @@ export class PathSliderComponent implements OnDestroy {
 
   getHorizontalineClassTag(path: SgPath): string {
     if (path.isNode()) {
-      return 'Horizontaline PathNode';
+      return "Horizontaline PathNode";
     }
-    return 'Horizontaline';
+    return "Horizontaline";
   }
 
   getNodeTextClassTag(path: SgPath): string {
     if (this.isNodeLocatedAtEdge(path) === 1) {
-      return 'NodeShortNameText LeftNode';
+      return "NodeShortNameText LeftNode";
     }
     if (this.isNodeLocatedAtEdge(path) === 2) {
-      return 'NodeShortNameText RightNode';
+      return "NodeShortNameText RightNode";
     }
-    return 'NodeShortNameText';
+    return "NodeShortNameText";
   }
 
   pathSliderLine(path: SgPath) {
     if (path.isNode()) {
-      return 'M 0,40 L ' + this.nodeWidth(path) + ',40';
+      return "M 0,40 L " + this.nodeWidth(path) + ",40";
     }
-    return 'M 0,40 L ' + path.zoomedXPath() + ',40';
+    return "M 0,40 L " + path.zoomedXPath() + ",40";
   }
 
   pathSliderStartLine() {
-    return 'M ' + this.start + ',5 V 40';
+    return "M " + this.start + ",5 V 40";
   }
 
   pathSliderEndLine() {
-    return 'M ' + this.end + ',5 V 40';
+    return "M " + this.end + ",5 V 40";
   }
 
   isPathNode(path: SgPath) {
@@ -132,7 +132,7 @@ export class PathSliderComponent implements OnDestroy {
     if (path.isNode()) {
       return path.getPathNode().nodeShortName;
     }
-    return '';
+    return "";
   }
 
   isTrackOccupier(path: SgPath) {
@@ -184,16 +184,16 @@ export class PathSliderComponent implements OnDestroy {
     const pathSliderMove = 0;
     if (this.horizontal) {
       this.viewBox =
-        ' ' +
+        " " +
         pathSliderMove +
-        ' ' +
-        '0 ' +
+        " " +
+        "0 " +
         this.viewBoxChangeInfo.width +
-        ' ' +
+        " " +
         40;
     } else {
       this.viewBox =
-        '0 ' + pathSliderMove + ' ' + 40 + ' ' + this.viewBoxChangeInfo.height;
+        "0 " + pathSliderMove + " " + 40 + " " + this.viewBoxChangeInfo.height;
     }
   }
 

@@ -4,31 +4,31 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
-} from '@angular/core';
-import {LayoutMode} from '../column-layout/column-layout.component';
-import {EditorMainViewComponent} from '../editor-main-view/editor-main-view.component';
-import {DataService} from '../../services/data/data.service';
-import {UiInteractionService} from '../../services/ui/ui.interaction.service';
-import {takeUntil} from 'rxjs/operators';
-import {Subject, timer} from 'rxjs';
-import {MainViewMode} from './main-view-mode';
-import {NodeService} from '../../services/data/node.service';
+} from "@angular/core";
+import {LayoutMode} from "../column-layout/column-layout.component";
+import {EditorMainViewComponent} from "../editor-main-view/editor-main-view.component";
+import {DataService} from "../../services/data/data.service";
+import {UiInteractionService} from "../../services/ui/ui.interaction.service";
+import {takeUntil} from "rxjs/operators";
+import {Subject, timer} from "rxjs";
+import {MainViewMode} from "./main-view-mode";
+import {NodeService} from "../../services/data/node.service";
 
 export enum FilterWindowType {
-  VARIANT_INFO = 'variant-info',
-  EDITOR_FILTER = 'editor-filter',
-  PROPERTIES = 'properties',
-  EDIT_TOOLS = 'edit-tools',
-  TOOLS = 'tools',
+  VARIANT_INFO = "variant-info",
+  EDITOR_FILTER = "editor-filter",
+  PROPERTIES = "properties",
+  EDIT_TOOLS = "edit-tools",
+  TOOLS = "tools",
 }
 
 @Component({
-  selector: 'sbb-filter-main-side-view',
-  templateUrl: './filter-main-side-view.component.html',
-  styleUrls: ['./filter-main-side-view.component.scss'],
+  selector: "sbb-filter-main-side-view",
+  templateUrl: "./filter-main-side-view.component.html",
+  styleUrls: ["./filter-main-side-view.component.scss"],
 })
 export class FilterMainSideViewComponent implements OnInit, OnDestroy {
-  @ViewChild('editor')
+  @ViewChild("editor")
   editor: EditorMainViewComponent;
 
   mode = LayoutMode.MAIN_FULL;

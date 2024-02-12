@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {Injectable} from "@angular/core";
+import {BehaviorSubject, Observable} from "rxjs";
 
 export interface SliderChangeInfo {
   zoom: number;
@@ -7,7 +7,7 @@ export interface SliderChangeInfo {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class DrawingBackgroundMouseListenerService {
   private readonly mousemoveSubject = new BehaviorSubject<MouseEvent>(

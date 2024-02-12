@@ -1,63 +1,63 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Editor, Toolbar} from 'ngx-editor';
-import {FormModel} from '../../../../utils/form-model';
-import {NoteFormComponentModel} from '../note-form/note-form.component';
-import {HtmlEditorColor} from './html-editor-color';
-import {Subscription} from 'rxjs';
-import {getSelectionMarks, isMarkActive} from 'ngx-editor/helpers';
-import {StaticDomTags} from '../../../editor-main-view/data-views/static.dom.tags';
+import {Component, Input, OnDestroy, OnInit} from "@angular/core";
+import {Editor, Toolbar} from "ngx-editor";
+import {FormModel} from "../../../../utils/form-model";
+import {NoteFormComponentModel} from "../note-form/note-form.component";
+import {HtmlEditorColor} from "./html-editor-color";
+import {Subscription} from "rxjs";
+import {getSelectionMarks, isMarkActive} from "ngx-editor/helpers";
+import {StaticDomTags} from "../../../editor-main-view/data-views/static.dom.tags";
 
 @Component({
-  selector: 'sbb-html-editor',
-  templateUrl: './html-editor.component.html',
-  styleUrls: ['./html-editor.component.scss'],
+  selector: "sbb-html-editor",
+  templateUrl: "./html-editor.component.html",
+  styleUrls: ["./html-editor.component.scss"],
 })
 export class HtmlEditorComponent implements OnInit, OnDestroy {
   @Input() model!: FormModel<NoteFormComponentModel>;
 
   editor: Editor;
-  toolbar: Toolbar = [['bold', 'italic'], ['bullet_list'], ['link']];
+  toolbar: Toolbar = [["bold", "italic"], ["bullet_list"], ["link"]];
   colorPresets: HtmlEditorColor[] = [
     new HtmlEditorColor(
-      'Verwende die Frabe des Frabschemas für EC',
-      'EC',
-      'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_EC)',
+      "Verwende die Frabe des Frabschemas für EC",
+      "EC",
+      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_EC)",
     ),
     new HtmlEditorColor(
-      'Verwende die Frabe des Frabschemas für IC',
-      'IC',
-      'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_IC)',
+      "Verwende die Frabe des Frabschemas für IC",
+      "IC",
+      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_IC)",
     ),
     new HtmlEditorColor(
-      'Verwende die Frabe des Frabschemas für IR',
-      'IR',
-      'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_IR)',
+      "Verwende die Frabe des Frabschemas für IR",
+      "IR",
+      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR)",
     ),
     new HtmlEditorColor(
-      'Verwende die Frabe des Frabschemas für RE',
-      'RE',
-      'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_RE)',
+      "Verwende die Frabe des Frabschemas für RE",
+      "RE",
+      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_RE)",
     ),
     new HtmlEditorColor(
-      'Verwende die Frabe des Frabschemas für S',
-      'S',
-      'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_S)',
+      "Verwende die Frabe des Frabschemas für S",
+      "S",
+      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_S)",
     ),
     new HtmlEditorColor(
-      'Verwende die Frabe des Frabschemas für GEX',
-      'GEX',
-      'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_GEX)',
+      "Verwende die Frabe des Frabschemas für GEX",
+      "GEX",
+      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_GEX)",
     ),
     new HtmlEditorColor(
-      'Verwende die Frabe des Frabschemas für G',
-      'G',
-      'var(--' + StaticDomTags.PREFIX_COLOR_VARIABLE + '_G)',
+      "Verwende die Frabe des Frabschemas für G",
+      "G",
+      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_G)",
     ),
-    new HtmlEditorColor('grün', '', 'green'),
-    new HtmlEditorColor('blau', '', 'blue'),
-    new HtmlEditorColor('rosa', '', 'magenta'),
-    new HtmlEditorColor('rot', '', 'red'),
-    new HtmlEditorColor('Warnung', '!', 'var(--COLOR_Warning)'),
+    new HtmlEditorColor("grün", "", "green"),
+    new HtmlEditorColor("blau", "", "blue"),
+    new HtmlEditorColor("rosa", "", "magenta"),
+    new HtmlEditorColor("rot", "", "red"),
+    new HtmlEditorColor("Warnung", "!", "var(--COLOR_Warning)"),
   ];
 
   updateSubscription: Subscription;
@@ -77,7 +77,7 @@ export class HtmlEditorComponent implements OnInit, OnDestroy {
   }
 
   onKeydown(event) {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       this.onUpdate();
     }
   }
@@ -107,28 +107,28 @@ export class HtmlEditorComponent implements OnInit, OnDestroy {
   getColorStyle(color: HtmlEditorColor): string {
     if (color === undefined) {
       if (this.textBasedActiveColor.length > 0) {
-        return 'background: #e8f0fe;';
+        return "background: #e8f0fe;";
       }
-      return '';
+      return "";
     }
-    return 'background: ' + color.colorCode + ';';
+    return "background: " + color.colorCode + ";";
   }
 
   setClassedTag(color: HtmlEditorColor): string {
     if (color === undefined) {
       if (this.textBasedActiveColor.length > 0) {
-        return 'active';
+        return "active";
       }
-      return 'inactive';
+      return "inactive";
     }
     if (
       this.textBasedActiveColor.find(
         (col: string) => col === color.colorCode,
       ) !== undefined
     ) {
-      return 'active';
+      return "active";
     }
-    return 'inactive';
+    return "inactive";
   }
 
   onRemoveColor() {
@@ -146,13 +146,13 @@ export class HtmlEditorComponent implements OnInit, OnDestroy {
 
   private updateNote() {
     this.model.tryGetValid();
-    const newNoteTitle: string = this.model.getControl('noteTitle').value;
-    const newNoteText: string = this.model.getControl('noteText').value;
-    const newNoteHeight: string = this.model.getControl('noteHeight').value;
-    const newNoteWidth: string = this.model.getControl('noteWidth').value;
-    const saveNoteCallback = this.model.getControl('saveNoteCallback').value;
+    const newNoteTitle: string = this.model.getControl("noteTitle").value;
+    const newNoteText: string = this.model.getControl("noteText").value;
+    const newNoteHeight: string = this.model.getControl("noteHeight").value;
+    const newNoteWidth: string = this.model.getControl("noteWidth").value;
+    const saveNoteCallback = this.model.getControl("saveNoteCallback").value;
     saveNoteCallback(
-      this.model.getControl('id').value,
+      this.model.getControl("id").value,
       newNoteTitle,
       newNoteText,
       newNoteHeight,

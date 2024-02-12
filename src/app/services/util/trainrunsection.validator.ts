@@ -1,4 +1,4 @@
-import {TrainrunSection} from '../../models/trainrunsection.model';
+import {TrainrunSection} from "../../models/trainrunsection.model";
 
 export class TrainrunsectionValidator {
   static validateOneSection(trainrunSection: TrainrunSection) {
@@ -10,8 +10,8 @@ export class TrainrunsectionValidator {
       60;
     if (calculatedTargetArrivalTime !== trainrunSection.getTargetArrival()) {
       trainrunSection.setTargetArrivalWarning(
-        'Target Arrival Warning',
-        'Target arrival time cannot be reached',
+        "Target Arrival Warning",
+        "Target arrival time cannot be reached",
       );
     } else {
       trainrunSection.resetTargetArrivalWarning();
@@ -22,8 +22,8 @@ export class TrainrunsectionValidator {
       60;
     if (calculatedSourceArrivalTime !== trainrunSection.getSourceArrival()) {
       trainrunSection.setSourceArrivalWarning(
-        'Source Arrival Warning',
-        'Target arrival time cannot be reached',
+        "Source Arrival Warning",
+        "Target arrival time cannot be reached",
       );
     } else {
       trainrunSection.resetSourceArrivalWarning();
@@ -33,8 +33,8 @@ export class TrainrunsectionValidator {
   static validateTravelTime(trainrunSection: TrainrunSection) {
     if (trainrunSection.getTravelTime() < 1) {
       trainrunSection.setTravelTimeWarning(
-        'Travel Time Warning',
-        'Travel time must be greater-equal than 1',
+        "Travel Time Warning",
+        "Travel time must be greater-equal than 1",
       );
     } else {
       trainrunSection.resetTravelTimeWarning();

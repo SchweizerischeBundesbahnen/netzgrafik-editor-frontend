@@ -1,4 +1,4 @@
-import {HttpParameterCodec} from '@angular/common/http';
+import {HttpParameterCodec} from "@angular/common/http";
 
 export interface ConfigurationParameters {
   /**
@@ -58,9 +58,9 @@ export class Configuration {
     }
 
     // init default OAuth credential
-    if (!this.credentials['OAuth']) {
-      this.credentials['OAuth'] = () => {
-        return typeof this.accessToken === 'function'
+    if (!this.credentials["OAuth"]) {
+      this.credentials["OAuth"] = () => {
+        return typeof this.accessToken === "function"
           ? this.accessToken()
           : this.accessToken;
       };
@@ -117,18 +117,18 @@ export class Configuration {
    */
   public isJsonMime(mime: string): boolean {
     const jsonMime: RegExp = new RegExp(
-      '^(application/json|[^;/ \t]+/[^;/ \t]+[+]json)[ \t]*(;.*)?$',
-      'i',
+      "^(application/json|[^;/ \t]+/[^;/ \t]+[+]json)[ \t]*(;.*)?$",
+      "i",
     );
     return (
       mime !== null &&
       (jsonMime.test(mime) ||
-        mime.toLowerCase() === 'application/json-patch+json')
+        mime.toLowerCase() === "application/json-patch+json")
     );
   }
 
   public lookupCredential(key: string): string | undefined {
     const value = this.credentials[key];
-    return typeof value === 'function' ? value() : value;
+    return typeof value === "function" ? value() : value;
   }
 }

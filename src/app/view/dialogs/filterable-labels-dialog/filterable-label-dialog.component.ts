@@ -1,20 +1,20 @@
-import {Component, Inject, OnDestroy} from '@angular/core';
+import {Component, Inject, OnDestroy} from "@angular/core";
 import {
   SBB_DIALOG_DATA,
   SbbDialog,
   SbbDialogRef,
-} from '@sbb-esta/angular/dialog';
-import {FormModel} from '../../../utils/form-model';
-import {FilterableLabelsFormComponentModel} from './filterable-labels-form/filterable-label-form.component';
-import {Observable, Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {ConfirmationDialogParameter} from '../confirmation-dialog/confirmation-dialog.component';
-import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
+} from "@sbb-esta/angular/dialog";
+import {FormModel} from "../../../utils/form-model";
+import {FilterableLabelsFormComponentModel} from "./filterable-labels-form/filterable-label-form.component";
+import {Observable, Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
+import {ConfirmationDialogParameter} from "../confirmation-dialog/confirmation-dialog.component";
+import {UiInteractionService} from "../../../services/ui/ui.interaction.service";
 
 @Component({
-  selector: 'sbb-filterable-label-dialog',
-  templateUrl: './filterable-label-dialog.component.html',
-  styleUrls: ['./filterable-label-dialog.component.scss'],
+  selector: "sbb-filterable-label-dialog",
+  templateUrl: "./filterable-label-dialog.component.html",
+  styleUrls: ["./filterable-label-dialog.component.scss"],
 })
 export class FilterableLabelDialogComponent implements OnDestroy {
   readonly formmodel: FormModel<FilterableLabelsFormComponentModel>;
@@ -38,8 +38,8 @@ export class FilterableLabelDialogComponent implements OnDestroy {
 
     this.formmodel = new FormModel<FilterableLabelsFormComponentModel>(
       data ?? {
-        name: '',
-        dialogTitel: '',
+        name: "",
+        dialogTitel: "",
         saveLabelCallback: null,
         deleteLabelCallback: null,
         transferLabelCallback: null,
@@ -77,13 +77,13 @@ export class FilterableLabelDialogComponent implements OnDestroy {
   }
 
   onTransferClicked(): void {
-    const dialogTitle = 'Übernehmen';
+    const dialogTitle = "Übernehmen";
     const dialogContent =
       'Soll das Label "' +
       this.originalLabel +
       '" auf alle sichtbaren ' +
       this.dialogTitel +
-      ' übertragen werden?';
+      " übertragen werden?";
     const confirmationDialogParamter = new ConfirmationDialogParameter(
       dialogTitle,
       dialogContent,
@@ -99,13 +99,13 @@ export class FilterableLabelDialogComponent implements OnDestroy {
   }
 
   onDeleteClicked(): void {
-    const dialogTitle = 'Löschen';
+    const dialogTitle = "Löschen";
     const dialogContent =
       'Soll das Label "' +
       this.originalLabel +
       '" definitiv aus allen sichtbaren ' +
       this.dialogTitel +
-      ' gelöscht werden?';
+      " gelöscht werden?";
     const confirmationDialogParamter = new ConfirmationDialogParameter(
       dialogTitle,
       dialogContent,
@@ -122,7 +122,7 @@ export class FilterableLabelDialogComponent implements OnDestroy {
 
   private updateLabel() {
     this.formmodel.tryGetValid();
-    const labelValue: string = this.formmodel.getControl('name').value;
+    const labelValue: string = this.formmodel.getControl("name").value;
     this.saveLabelCallback(this.originalLabel, labelValue);
     this.originalLabel = labelValue;
   }

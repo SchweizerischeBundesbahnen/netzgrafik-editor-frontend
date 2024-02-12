@@ -2,7 +2,7 @@ export class TimeFormatter {
   public static formatHHMM(inTime: number) {
     if (inTime === 0) {
       console.log(
-        'TODO: TimeFormatter -> private static formatDisplayText(time: TimeLockDto, offset: number): string { ... ',
+        "TODO: TimeFormatter -> private static formatDisplayText(time: TimeLockDto, offset: number): string { ... ",
       );
     }
     let time = inTime / 60;
@@ -20,15 +20,15 @@ export class TimeFormatter {
     }
     return (
       TimeFormatter.formatLeadingZeros(hour) +
-      ':' +
+      ":" +
       TimeFormatter.formatLeadingZeros(min)
     );
   }
 
   private static formatLeadingZeros(data: number) {
-    let text = '';
+    let text = "";
     if (data < 10) {
-      text = text + '0' + data;
+      text = text + "0" + data;
     }
     if (data >= 10) {
       text = text + data;

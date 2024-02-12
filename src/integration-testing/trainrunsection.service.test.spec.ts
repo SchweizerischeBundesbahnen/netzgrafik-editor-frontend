@@ -1,26 +1,26 @@
-import {NodeService} from '../app/services/data/node.service';
-import {TrainrunService} from '../app/services/data/trainrun.service';
-import {TrainrunSectionService} from '../app/services/data/trainrunsection.service';
-import {StammdatenService} from '../app/services/data/stammdaten.service';
-import {DataService} from '../app/services/data/data.service';
-import {Node} from '../app/models/node.model';
-import {TrainrunSection} from '../app/models/trainrunsection.model';
+import {NodeService} from "../app/services/data/node.service";
+import {TrainrunService} from "../app/services/data/trainrun.service";
+import {TrainrunSectionService} from "../app/services/data/trainrunsection.service";
+import {StammdatenService} from "../app/services/data/stammdaten.service";
+import {DataService} from "../app/services/data/data.service";
+import {Node} from "../app/models/node.model";
+import {TrainrunSection} from "../app/models/trainrunsection.model";
 import {
   PortAlignment,
   TrainrunSectionText,
-} from '../app/data-structures/technical.data.structures';
-import {ResourceService} from '../app/services/data/resource.service';
-import {LogService} from '../app/logger/log.service';
-import {LogPublishersService} from '../app/logger/log.publishers.service';
-import {NetzgrafikUnitTesting} from './netzgrafik.unit.testing';
-import {NoteService} from '../app/services/data/note.service';
-import {LabelGroupService} from '../app/services/data/labelgroup.service';
-import {LabelService} from '../app/services/data/label.serivce';
-import {LinePatternRefs} from '../app/data-structures/business.data.structures';
-import {FilterService} from '../app/services/ui/filter.service';
-import {NetzgrafikColoringService} from '../app/services/data/netzgrafikColoring.service';
+} from "../app/data-structures/technical.data.structures";
+import {ResourceService} from "../app/services/data/resource.service";
+import {LogService} from "../app/logger/log.service";
+import {LogPublishersService} from "../app/logger/log.publishers.service";
+import {NetzgrafikUnitTesting} from "./netzgrafik.unit.testing";
+import {NoteService} from "../app/services/data/note.service";
+import {LabelGroupService} from "../app/services/data/labelgroup.service";
+import {LabelService} from "../app/services/data/label.serivce";
+import {LinePatternRefs} from "../app/data-structures/business.data.structures";
+import {FilterService} from "../app/services/ui/filter.service";
+import {NetzgrafikColoringService} from "../app/services/data/netzgrafikColoring.service";
 
-describe('TrainrunSection Service Test', () => {
+describe("TrainrunSection Service Test", () => {
   let nodes: Node[] = null;
   let trainrunSections: TrainrunSection[] = null;
 
@@ -85,7 +85,7 @@ describe('TrainrunSection Service Test', () => {
     );
   });
 
-  it('delete trainrunSection test', () => {
+  it("delete trainrunSection test", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -100,7 +100,7 @@ describe('TrainrunSection Service Test', () => {
     expect(node0.getPort(0)).toBe(undefined);
   });
 
-  it('add trainrunSection test', () => {
+  it("add trainrunSection test", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -136,7 +136,7 @@ describe('TrainrunSection Service Test', () => {
     expect(trainrunSection.getTravelTime()).toBe(10);
   });
 
-  it('delete all trainrunSections test', () => {
+  it("delete all trainrunSections test", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -152,7 +152,7 @@ describe('TrainrunSection Service Test', () => {
     expect(node0.getPort(0)).toBe(undefined);
   });
 
-  it('delete all non visible trainrunSections test', () => {
+  it("delete all non visible trainrunSections test", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -169,7 +169,7 @@ describe('TrainrunSection Service Test', () => {
     expect(node0.getPort(0).getId()).toBe(0);
   });
 
-  it('delete all non visible trainrunSections with trainrun category filtering active test', () => {
+  it("delete all non visible trainrunSections with trainrun category filtering active test", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -189,7 +189,7 @@ describe('TrainrunSection Service Test', () => {
     expect(node0.getPort(0).getId()).toBe(0);
   });
 
-  it('compute arrival and departure time test', () => {
+  it("compute arrival and departure time test", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -227,7 +227,7 @@ describe('TrainrunSection Service Test', () => {
     expect(computedTimes.nodeToArrivalTime).toBe(8);
   });
 
-  it('update trainrunSection time test', () => {
+  it("update trainrunSection time test", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -241,7 +241,7 @@ describe('TrainrunSection Service Test', () => {
     expect(trainrunSection.getTargetDeparture()).toBe(48);
   });
 
-  it('propagate time test', () => {
+  it("propagate time test", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -257,7 +257,7 @@ describe('TrainrunSection Service Test', () => {
     expect(trainrunSection.getTargetDeparture()).toBe(36);
   });
 
-  it('reconnect trainrunSection test', () => {
+  it("reconnect trainrunSection test", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -278,7 +278,7 @@ describe('TrainrunSection Service Test', () => {
     expect(node1.getPort(4).getPositionAlignment()).toBe(PortAlignment.Left);
   });
 
-  it('get all trainrunsections for trainrun test', () => {
+  it("get all trainrunsections for trainrun test", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -295,7 +295,7 @@ describe('TrainrunSection Service Test', () => {
     expect(trainrunSections1[0].getId()).toBe(2);
   });
 
-  it('delete trainrunsections with trainrun test', () => {
+  it("delete trainrunsections with trainrun test", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -308,7 +308,7 @@ describe('TrainrunSection Service Test', () => {
     expect(trainrunSections.length).toBe(5);
   });
 
-  it('check consecutive time', () => {
+  it("check consecutive time", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -339,7 +339,7 @@ describe('TrainrunSection Service Test', () => {
     expect(nextTrainrunSection.getTargetArrivalConsecutiveTime()).toBe(49);
   });
 
-  it('check consecutive time : travel time 60min overflow ', () => {
+  it("check consecutive time : travel time 60min overflow ", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -372,7 +372,7 @@ describe('TrainrunSection Service Test', () => {
     expect(nextTrainrunSection.getTargetArrivalConsecutiveTime()).toBe(169);
   });
 
-  it('path router check', () => {
+  it("path router check", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -422,7 +422,7 @@ describe('TrainrunSection Service Test', () => {
     expect(tsDto.id).toBe(ts.getId());
   });
 
-  it('trainrun check', () => {
+  it("trainrun check", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
@@ -431,10 +431,10 @@ describe('TrainrunSection Service Test', () => {
     const trainrun = ts.getTrainrun();
     const trainrunDto = trainrun.getDto();
     expect(trainrunDto.id).toBe(trainrun.getId());
-    expect(trainrun.getTimeCategoryShortName()).toBe('7/24');
-    expect(trainrun.getTitle()).toBe('1');
-    expect(trainrun.getCategoryColorRef()).toBe('IC');
-    trainrun.setTitle('qwertz');
-    expect(trainrun.getTitle()).toBe('qwertz');
+    expect(trainrun.getTimeCategoryShortName()).toBe("7/24");
+    expect(trainrun.getTitle()).toBe("1");
+    expect(trainrun.getCategoryColorRef()).toBe("IC");
+    trainrun.setTitle("qwertz");
+    expect(trainrun.getTitle()).toBe("qwertz");
   });
 });
