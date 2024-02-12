@@ -1,16 +1,17 @@
 # Contributors
 
-Many thanks to all contributors for their commitment and work, without which this project would not
-have been possible. Thank you for your current and future contribution!
+Many thanks to all contributors for their engagement and contribution, without which this project
+would not have been possible. Thank you for your current and future contribution!
 
 ## Special thanks to
 
-The (core) team consistently focused on an interactive planning tool with a minimum of complexity.
-This was only possible with a coherent UX design concept from the very first draft and its
-consistent implementation. However, the most important success factor in the implementation and
-improvement of the tool was and is an interdisciplinary, committed team. Many thanks to the
-outstanding, interdisciplinary, creative work of the individual team members. Such a complex project
-can only succeed with the help of good teamwork.
+It all It all started with the idea of creating an interactive planning tool with minimal complexity
+and maximum usability. To achieve this ambitious goal, a comprehensive UX design concept was
+developed and consistently implemented. However, even the best concept can only be successful when
+an interdisciplinary team contributes its entire knowledge to the conception, implementation, and
+continuous improvement. Therefore, special thanks go to the exceptional, interdisciplinary, and
+creative collaboration of all participants from the very beginning - from the idea to the finished
+product.
 
 ### Special thanks to the contributors of the first minute
 
