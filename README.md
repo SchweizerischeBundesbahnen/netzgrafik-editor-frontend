@@ -218,7 +218,7 @@ npm run generate:api
 Please consider the following information:
 
 - [DATA MODEL](./documentation/DATA_MODEL.md)
-- 
+
 - [CODING_STANDARDS.md](CODING_STANDARDS.md)
 - [CONTRIBUTING.md](CONTRIBUTING.md)
 
