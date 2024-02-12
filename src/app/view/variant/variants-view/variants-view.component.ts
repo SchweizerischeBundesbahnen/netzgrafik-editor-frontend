@@ -1,5 +1,5 @@
-import { Component, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {
   BehaviorSubject,
   combineLatest,
@@ -23,17 +23,17 @@ import {
   VariantControllerBackendService,
   VariantSummaryDto,
 } from '../../../api/generated';
-import { SbbDialog } from '@sbb-esta/angular/dialog';
-import { ProjectDialogComponent } from '../../project/project-dialog/project-dialog.component';
-import { NavigationParameters } from '../../../utils/navigation-parameters';
-import { NetzgrafikDefault } from '../../../sample-netzgrafik/netzgrafik.default';
-import { VariantDialogComponent } from '../variant-dialog/variant-dialog.component';
-import { ConfirmationDialogParameter } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
-import { UiInteractionService } from '../../../services/ui/ui.interaction.service';
-import { UntypedFormControl } from '@angular/forms';
-import { NavigationService } from '../../../services/ui/navigation.service';
-import { VersionControlService } from '../../../services/data/version-control.service';
-import { SlotAction } from '../../action-menu/action-menu/action-menu.component';
+import {SbbDialog} from '@sbb-esta/angular/dialog';
+import {ProjectDialogComponent} from '../../project/project-dialog/project-dialog.component';
+import {NavigationParameters} from '../../../utils/navigation-parameters';
+import {NetzgrafikDefault} from '../../../sample-netzgrafik/netzgrafik.default';
+import {VariantDialogComponent} from '../variant-dialog/variant-dialog.component';
+import {ConfirmationDialogParameter} from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
+import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
+import {UntypedFormControl} from '@angular/forms';
+import {NavigationService} from '../../../services/ui/navigation.service';
+import {VersionControlService} from '../../../services/data/version-control.service';
+import {SlotAction} from '../../action-menu/action-menu/action-menu.component';
 
 @Component({
   selector: 'sbb-variants-view',
@@ -220,7 +220,7 @@ export class VariantsViewComponent implements OnDestroy {
   }
 
   onAddVariantClicked(): void {
-    VariantDialogComponent.open(this.dialog, { name: '' })
+    VariantDialogComponent.open(this.dialog, {name: ''})
       .pipe(
         takeUntil(this.destroyed),
         mergeMap((model) => this.createVariant(this.project.id, model.name)),

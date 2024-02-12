@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Sg8RenderService } from '../../services/sg-8-render.service';
-import { SgTrainrun } from '../../model/streckengrafik-model/sg-trainrun';
+import {Component} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Sg8RenderService} from '../../services/sg-8-render.service';
+import {SgTrainrun} from '../../model/streckengrafik-model/sg-trainrun';
 import * as d3 from 'd3';
 
 @Component({

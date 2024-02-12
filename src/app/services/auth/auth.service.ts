@@ -1,9 +1,9 @@
-import { Location } from '@angular/common';
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { OAuthService } from 'angular-oauth2-oidc';
-import { first } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
+import {Location} from '@angular/common';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {OAuthService} from 'angular-oauth2-oidc';
+import {first} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class AuthService {
   // This only works for forceful logins.
   readonly initialized: Promise<unknown>;
 
-  get claims(): { email: string; name: string; roles: string[] } {
+  get claims(): {email: string; name: string; roles: string[]} {
     return this.oauthService.getIdentityClaims() as {
       email: string;
       name: string;
@@ -37,7 +37,7 @@ export class AuthService {
     // loadDiscoveryDocumentAndTryLogin and have a login functionality in the
     // template of the component injecting the AuthService which calls the login() method.
     this.initialized = this.oauthService
-      .loadDiscoveryDocumentAndLogin({ state: location.path() })
+      .loadDiscoveryDocumentAndLogin({state: location.path()})
       // If the user is not logged in, he will be forwarded to the identity provider
       // and this promise will not resolve. After being redirected from the identity
       // provider, the login promise will return true.

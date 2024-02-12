@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { VersionEntriesComponent } from './version-entries.component';
+import {VersionEntriesComponent} from './version-entries.component';
 
 describe('CompleteVersionEntriesComponent', () => {
   let component: VersionEntriesComponent;

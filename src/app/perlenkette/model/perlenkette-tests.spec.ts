@@ -1,5 +1,5 @@
-import { PerlenketteNode } from './perlenketteNode';
-import { PerlenketteSection } from './perlenketteSection';
+import {PerlenketteNode} from './perlenketteNode';
+import {PerlenketteSection} from './perlenketteSection';
 
 describe('PerlenketteModelTests', () => {
   it('Perlenkette-Model - Test - PerlenketteNode - 001', () => {

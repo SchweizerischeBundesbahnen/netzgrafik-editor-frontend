@@ -1,24 +1,24 @@
-import { NodeService } from '../app/services/data/node.service';
-import { TrainrunService } from '../app/services/data/trainrun.service';
-import { TrainrunSectionService } from '../app/services/data/trainrunsection.service';
-import { StammdatenService } from '../app/services/data/stammdaten.service';
-import { DataService } from '../app/services/data/data.service';
-import { Node } from '../app/models/node.model';
-import { TrainrunSection } from '../app/models/trainrunsection.model';
+import {NodeService} from '../app/services/data/node.service';
+import {TrainrunService} from '../app/services/data/trainrun.service';
+import {TrainrunSectionService} from '../app/services/data/trainrunsection.service';
+import {StammdatenService} from '../app/services/data/stammdaten.service';
+import {DataService} from '../app/services/data/data.service';
+import {Node} from '../app/models/node.model';
+import {TrainrunSection} from '../app/models/trainrunsection.model';
 import {
   PortAlignment,
   TrainrunSectionText,
 } from '../app/data-structures/technical.data.structures';
-import { ResourceService } from '../app/services/data/resource.service';
-import { LogService } from '../app/logger/log.service';
-import { LogPublishersService } from '../app/logger/log.publishers.service';
-import { NetzgrafikUnitTesting } from './netzgrafik.unit.testing';
-import { NoteService } from '../app/services/data/note.service';
-import { LabelGroupService } from '../app/services/data/labelgroup.service';
-import { LabelService } from '../app/services/data/label.serivce';
-import { LinePatternRefs } from '../app/data-structures/business.data.structures';
-import { FilterService } from '../app/services/ui/filter.service';
-import { NetzgrafikColoringService } from '../app/services/data/netzgrafikColoring.service';
+import {ResourceService} from '../app/services/data/resource.service';
+import {LogService} from '../app/logger/log.service';
+import {LogPublishersService} from '../app/logger/log.publishers.service';
+import {NetzgrafikUnitTesting} from './netzgrafik.unit.testing';
+import {NoteService} from '../app/services/data/note.service';
+import {LabelGroupService} from '../app/services/data/labelgroup.service';
+import {LabelService} from '../app/services/data/label.serivce';
+import {LinePatternRefs} from '../app/data-structures/business.data.structures';
+import {FilterService} from '../app/services/ui/filter.service';
+import {NetzgrafikColoringService} from '../app/services/data/netzgrafikColoring.service';
 
 describe('TrainrunSection Service Test', () => {
   let nodes: Node[] = null;

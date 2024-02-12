@@ -5,38 +5,38 @@ import {
   Input,
   OnDestroy,
 } from '@angular/core';
-import { SgTrainrun } from '../../model/streckengrafik-model/sg-trainrun';
-import { SgTrainrunItem } from '../../model/streckengrafik-model/sg-trainrun-item';
-import { TrainrunService } from '../../../services/data/trainrun.service';
-import { TrainDataService } from '../../services/train-data-service';
-import { TrainrunBranchType } from '../../model/enum/trainrun-branch-type-type';
-import { Vec2D } from '../../../utils/vec2D';
-import { takeUntil } from 'rxjs/operators';
-import { TimeSliderService } from '../../services/time-slider.service';
-import { Subject } from 'rxjs';
-import { TrainrunSectionText } from '../../../data-structures/technical.data.structures';
+import {SgTrainrun} from '../../model/streckengrafik-model/sg-trainrun';
+import {SgTrainrunItem} from '../../model/streckengrafik-model/sg-trainrun-item';
+import {TrainrunService} from '../../../services/data/trainrun.service';
+import {TrainDataService} from '../../services/train-data-service';
+import {TrainrunBranchType} from '../../model/enum/trainrun-branch-type-type';
+import {Vec2D} from '../../../utils/vec2D';
+import {takeUntil} from 'rxjs/operators';
+import {TimeSliderService} from '../../services/time-slider.service';
+import {Subject} from 'rxjs';
+import {TrainrunSectionText} from '../../../data-structures/technical.data.structures';
 import {
   TrainrunDialogParameter,
   TrainrunDialogType,
 } from '../../../view/dialogs/trainrun-and-section-dialog/trainrun-and-section-dialog.component';
-import { UiInteractionService } from '../../../services/ui/ui.interaction.service';
+import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
 import {
   InformSelectedTrainrunClick,
   TrainrunSectionService,
 } from '../../../services/data/trainrunsection.service';
-import { FilterService } from '../../../services/ui/filter.service';
+import {FilterService} from '../../../services/ui/filter.service';
 import {
   UpdateCounterController,
   UpdateCounterHandler,
   UpdateCounterTriggerSerivce,
 } from '../../services/util/update-counter.service';
-import { SliderChangeInfo } from '../../model/util/sliderChangeInfo';
-import { NodeService } from '../../../services/data/node.service';
-import { SgTrainrunSection } from '../../model/streckengrafik-model/sg-trainrun-section';
-import { StreckengrafikDisplayElementService } from '../../services/util/streckengrafik-display-element.service';
-import { ViewBoxChangeInfo } from '../../model/util/viewBoxChangeInfo';
-import { ViewBoxService } from '../../services/util/view-box.service';
-import { Sg4ToggleTrackOccupierService } from '../../services/sg-4-toggle-track-occupier.service';
+import {SliderChangeInfo} from '../../model/util/sliderChangeInfo';
+import {NodeService} from '../../../services/data/node.service';
+import {SgTrainrunSection} from '../../model/streckengrafik-model/sg-trainrun-section';
+import {StreckengrafikDisplayElementService} from '../../services/util/streckengrafik-display-element.service';
+import {ViewBoxChangeInfo} from '../../model/util/viewBoxChangeInfo';
+import {ViewBoxService} from '../../services/util/view-box.service';
+import {Sg4ToggleTrackOccupierService} from '../../services/sg-4-toggle-track-occupier.service';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector

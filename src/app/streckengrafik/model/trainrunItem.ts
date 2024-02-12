@@ -1,4 +1,4 @@
-import { PathItem } from './pathItem';
+import {PathItem} from './pathItem';
 
 export class TrainrunItem {
   constructor(

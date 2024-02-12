@@ -1,6 +1,6 @@
-import { PerlenketteItem } from './perlenketteItem';
-import { PerlenketteNode } from './perlenketteNode';
-import { Node } from '../../models/node.model';
+import {PerlenketteItem} from './perlenketteItem';
+import {PerlenketteNode} from './perlenketteNode';
+import {Node} from '../../models/node.model';
 
 export class PerlenketteSection implements PerlenketteItem {
   constructor(

@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
-import { DataService } from '../services/data/data.service';
-import { UiInteractionService } from '../services/ui/ui.interaction.service';
-import { map, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
-import { FilterWindowType } from '../view/filter-main-side-view/filter-main-side-view.component';
-import { VersionControlService } from '../services/data/version-control.service';
-import { NavigationParameters } from '../utils/navigation-parameters';
-import { FilterService } from '../services/ui/filter.service';
-import { DomSanitizer } from '@angular/platform-browser';
-import { EditorMode } from '../view/editor-menu/editor-mode';
-import { UndoService } from '../services/data/undo.service';
+import {Component} from '@angular/core';
+import {DataService} from '../services/data/data.service';
+import {UiInteractionService} from '../services/ui/ui.interaction.service';
+import {map, takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
+import {FilterWindowType} from '../view/filter-main-side-view/filter-main-side-view.component';
+import {VersionControlService} from '../services/data/version-control.service';
+import {NavigationParameters} from '../utils/navigation-parameters';
+import {FilterService} from '../services/ui/filter.service';
+import {DomSanitizer} from '@angular/platform-browser';
+import {EditorMode} from '../view/editor-menu/editor-mode';
+import {UndoService} from '../services/data/undo.service';
 
 export enum IconSidebarMode {
   VARIANTEN = 'varianten',

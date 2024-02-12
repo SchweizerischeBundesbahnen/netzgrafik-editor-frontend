@@ -1,19 +1,19 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { PerlenketteTrainrun } from '../model/perlenketteTrainrun';
-import { PerlenketteNode } from '../model/perlenketteNode';
-import { PerlenketteSection } from '../model/perlenketteSection';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { TrainrunService } from '../../services/data/trainrun.service';
-import { Trainrun } from '../../models/trainrun.model';
-import { GeneralViewFunctions } from '../../view/util/generalViewFunctions';
-import { PerlenketteItem } from '../model/perlenketteItem';
-import { TrainrunIterator } from '../../services/util/trainrun.iterator';
-import { ConnectionValidator } from '../../services/util/connection.validator';
-import { PerlenketteConnection } from '../model/perlenketteConnection';
-import { Node } from '../../models/node.model';
-import { TrainrunSectionService } from '../../services/data/trainrunsection.service';
-import { NodeService } from '../../services/data/node.service';
+import {Injectable, OnDestroy} from '@angular/core';
+import {PerlenketteTrainrun} from '../model/perlenketteTrainrun';
+import {PerlenketteNode} from '../model/perlenketteNode';
+import {PerlenketteSection} from '../model/perlenketteSection';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {TrainrunService} from '../../services/data/trainrun.service';
+import {Trainrun} from '../../models/trainrun.model';
+import {GeneralViewFunctions} from '../../view/util/generalViewFunctions';
+import {PerlenketteItem} from '../model/perlenketteItem';
+import {TrainrunIterator} from '../../services/util/trainrun.iterator';
+import {ConnectionValidator} from '../../services/util/connection.validator';
+import {PerlenketteConnection} from '../model/perlenketteConnection';
+import {Node} from '../../models/node.model';
+import {TrainrunSectionService} from '../../services/data/trainrunsection.service';
+import {NodeService} from '../../services/data/node.service';
 
 @Injectable({
   providedIn: 'root',

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { ResizeChangeInfo } from '../../model/util/resizeChangeInfo';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {ResizeChangeInfo} from '../../model/util/resizeChangeInfo';
 
 @Injectable({
   providedIn: 'root',

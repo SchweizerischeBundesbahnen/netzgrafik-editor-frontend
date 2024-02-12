@@ -1,4 +1,4 @@
-import { Directive, Injectable, OnDestroy } from '@angular/core';
+import {Directive, Injectable, OnDestroy} from '@angular/core';
 
 export interface UpdateCounterHandler {
   updateCounterCallback: () => void;

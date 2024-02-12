@@ -1,13 +1,13 @@
-import { Component, Inject } from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {
   SBB_DIALOG_DATA,
   SbbDialog,
   SbbDialogRef,
 } from '@sbb-esta/angular/dialog';
-import { FormModel } from '../../../utils/form-model';
-import { VariantFormComponentModel } from './variant-form/variant-form.component';
-import { Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import {FormModel} from '../../../utils/form-model';
+import {VariantFormComponentModel} from './variant-form/variant-form.component';
+import {Observable} from 'rxjs';
+import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'sbb-variant-dialog',
@@ -26,7 +26,7 @@ export class VariantDialogComponent {
     @Inject(SBB_DIALOG_DATA) data?: VariantFormComponentModel,
   ) {
     this.formmodel = new FormModel<VariantFormComponentModel>(
-      data ?? { name: '' },
+      data ?? {name: ''},
     );
     this.isNewVariant = !!!data;
   }
@@ -36,7 +36,7 @@ export class VariantDialogComponent {
     initData?: VariantFormComponentModel,
   ): Observable<VariantFormComponentModel> {
     return dialog
-      .open(VariantDialogComponent, initData ? { data: initData } : undefined)
+      .open(VariantDialogComponent, initData ? {data: initData} : undefined)
       .afterClosed()
       .pipe(filter((variant) => !!variant));
   }

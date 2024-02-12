@@ -1,14 +1,14 @@
-import { Component, Input, OnDestroy, ViewChild } from '@angular/core';
-import { Subject } from 'rxjs';
-import { ResizeChangeInfo } from '../../../model/util/resizeChangeInfo';
-import { ViewBoxChangeInfo } from '../../../model/util/viewBoxChangeInfo';
-import { ResizeService } from '../../../services/util/resize.service';
-import { ViewBoxService } from '../../../services/util/view-box.service';
-import { takeUntil } from 'rxjs/operators';
-import { SgSelectedTrainrun } from '../../../model/streckengrafik-model/sg-selected-trainrun';
-import { SgPath } from '../../../model/streckengrafik-model/sg-path';
-import { Sg4ToggleTrackOccupierService } from '../../../services/sg-4-toggle-track-occupier.service';
-import { Sg8RenderService } from '../../../services/sg-8-render.service';
+import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
+import {Subject} from 'rxjs';
+import {ResizeChangeInfo} from '../../../model/util/resizeChangeInfo';
+import {ViewBoxChangeInfo} from '../../../model/util/viewBoxChangeInfo';
+import {ResizeService} from '../../../services/util/resize.service';
+import {ViewBoxService} from '../../../services/util/view-box.service';
+import {takeUntil} from 'rxjs/operators';
+import {SgSelectedTrainrun} from '../../../model/streckengrafik-model/sg-selected-trainrun';
+import {SgPath} from '../../../model/streckengrafik-model/sg-path';
+import {Sg4ToggleTrackOccupierService} from '../../../services/sg-4-toggle-track-occupier.service';
+import {Sg8RenderService} from '../../../services/sg-8-render.service';
 
 @Component({
   selector: 'sbb-path-slider',

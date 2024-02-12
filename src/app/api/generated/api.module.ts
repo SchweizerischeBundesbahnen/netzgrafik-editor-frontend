@@ -1,15 +1,10 @@
-import {
-  NgModule,
-  ModuleWithProviders,
-  SkipSelf,
-  Optional,
-} from '@angular/core';
-import { Configuration } from './configuration';
-import { HttpClient } from '@angular/common/http';
+import {NgModule, ModuleWithProviders, SkipSelf, Optional} from '@angular/core';
+import {Configuration} from './configuration';
+import {HttpClient} from '@angular/common/http';
 
-import { ProjectControllerBackendService } from './api/projectController.service';
-import { VariantControllerBackendService } from './api/variantController.service';
-import { VersionControllerBackendService } from './api/versionController.service';
+import {ProjectControllerBackendService} from './api/projectController.service';
+import {VariantControllerBackendService} from './api/variantController.service';
+import {VersionControllerBackendService} from './api/versionController.service';
 
 @NgModule({
   imports: [],
@@ -23,7 +18,7 @@ export class ApiModule {
   ): ModuleWithProviders<ApiModule> {
     return {
       ngModule: ApiModule,
-      providers: [{ provide: Configuration, useFactory: configurationFactory }],
+      providers: [{provide: Configuration, useFactory: configurationFactory}],
     };
   }
 

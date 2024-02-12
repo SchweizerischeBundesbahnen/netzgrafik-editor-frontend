@@ -1,12 +1,12 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { SgTrainrun } from '../../model/streckengrafik-model/sg-trainrun';
-import { SgTrainrunItem } from '../../model/streckengrafik-model/sg-trainrun-item';
-import { TimeSliderService } from '../../services/time-slider.service';
-import { takeUntil } from 'rxjs/operators';
-import { SliderChangeInfo } from '../../model/util/sliderChangeInfo';
-import { Subject } from 'rxjs';
-import { ViewBoxChangeInfo } from '../../model/util/viewBoxChangeInfo';
-import { ViewBoxService } from '../../services/util/view-box.service';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {SgTrainrun} from '../../model/streckengrafik-model/sg-trainrun';
+import {SgTrainrunItem} from '../../model/streckengrafik-model/sg-trainrun-item';
+import {TimeSliderService} from '../../services/time-slider.service';
+import {takeUntil} from 'rxjs/operators';
+import {SliderChangeInfo} from '../../model/util/sliderChangeInfo';
+import {Subject} from 'rxjs';
+import {ViewBoxChangeInfo} from '../../model/util/viewBoxChangeInfo';
+import {ViewBoxService} from '../../services/util/view-box.service';
 import * as d3 from 'd3';
 import {
   UpdateCounterController,

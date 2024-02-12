@@ -4,7 +4,7 @@ import {
   LinePatternRefs,
   NetzgrafikDto,
 } from '../app/data-structures/business.data.structures';
-import { TrainrunSectionText } from '../app/data-structures/technical.data.structures';
+import {TrainrunSectionText} from '../app/data-structures/technical.data.structures';
 
 export class NetzgrafikUnitTesting {
   static getUnitTestNetzgrafik(): NetzgrafikDto {
@@ -36,11 +36,11 @@ export class NetzgrafikUnitTesting {
           perronkanten: 10,
           connectionTime: 5,
           trainrunCategoryHaltezeiten: {
-            [HaltezeitFachCategories.IPV]: { haltezeit: 2, no_halt: false },
-            [HaltezeitFachCategories.A]: { haltezeit: 2, no_halt: false },
-            [HaltezeitFachCategories.B]: { haltezeit: 2, no_halt: false },
-            [HaltezeitFachCategories.C]: { haltezeit: 1.5, no_halt: false },
-            [HaltezeitFachCategories.D]: { haltezeit: 1, no_halt: false },
+            [HaltezeitFachCategories.IPV]: {haltezeit: 2, no_halt: false},
+            [HaltezeitFachCategories.A]: {haltezeit: 2, no_halt: false},
+            [HaltezeitFachCategories.B]: {haltezeit: 2, no_halt: false},
+            [HaltezeitFachCategories.C]: {haltezeit: 1.5, no_halt: false},
+            [HaltezeitFachCategories.D]: {haltezeit: 1, no_halt: false},
             [HaltezeitFachCategories.Uncategorized]: {
               haltezeit: 0,
               no_halt: true,
@@ -107,11 +107,11 @@ export class NetzgrafikUnitTesting {
           perronkanten: 10,
           connectionTime: 5,
           trainrunCategoryHaltezeiten: {
-            [HaltezeitFachCategories.IPV]: { haltezeit: 2, no_halt: false },
-            [HaltezeitFachCategories.A]: { haltezeit: 2, no_halt: false },
-            [HaltezeitFachCategories.B]: { haltezeit: 2, no_halt: false },
-            [HaltezeitFachCategories.C]: { haltezeit: 1.5, no_halt: false },
-            [HaltezeitFachCategories.D]: { haltezeit: 1, no_halt: false },
+            [HaltezeitFachCategories.IPV]: {haltezeit: 2, no_halt: false},
+            [HaltezeitFachCategories.A]: {haltezeit: 2, no_halt: false},
+            [HaltezeitFachCategories.B]: {haltezeit: 2, no_halt: false},
+            [HaltezeitFachCategories.C]: {haltezeit: 1.5, no_halt: false},
+            [HaltezeitFachCategories.D]: {haltezeit: 1, no_halt: false},
             [HaltezeitFachCategories.Uncategorized]: {
               haltezeit: 0,
               no_halt: true,
@@ -189,11 +189,11 @@ export class NetzgrafikUnitTesting {
           perronkanten: 10,
           connectionTime: 5,
           trainrunCategoryHaltezeiten: {
-            [HaltezeitFachCategories.IPV]: { haltezeit: 2, no_halt: false },
-            [HaltezeitFachCategories.A]: { haltezeit: 2, no_halt: false },
-            [HaltezeitFachCategories.B]: { haltezeit: 2, no_halt: false },
-            [HaltezeitFachCategories.C]: { haltezeit: 1.5, no_halt: false },
-            [HaltezeitFachCategories.D]: { haltezeit: 1, no_halt: false },
+            [HaltezeitFachCategories.IPV]: {haltezeit: 2, no_halt: false},
+            [HaltezeitFachCategories.A]: {haltezeit: 2, no_halt: false},
+            [HaltezeitFachCategories.B]: {haltezeit: 2, no_halt: false},
+            [HaltezeitFachCategories.C]: {haltezeit: 1.5, no_halt: false},
+            [HaltezeitFachCategories.D]: {haltezeit: 1, no_halt: false},
             [HaltezeitFachCategories.Uncategorized]: {
               haltezeit: 0,
               no_halt: true,
@@ -223,11 +223,11 @@ export class NetzgrafikUnitTesting {
           perronkanten: 5,
           connectionTime: 3,
           trainrunCategoryHaltezeiten: {
-            [HaltezeitFachCategories.IPV]: { haltezeit: 2, no_halt: false },
-            [HaltezeitFachCategories.A]: { haltezeit: 2, no_halt: false },
-            [HaltezeitFachCategories.B]: { haltezeit: 2, no_halt: false },
-            [HaltezeitFachCategories.C]: { haltezeit: 1.5, no_halt: false },
-            [HaltezeitFachCategories.D]: { haltezeit: 1, no_halt: false },
+            [HaltezeitFachCategories.IPV]: {haltezeit: 2, no_halt: false},
+            [HaltezeitFachCategories.A]: {haltezeit: 2, no_halt: false},
+            [HaltezeitFachCategories.B]: {haltezeit: 2, no_halt: false},
+            [HaltezeitFachCategories.C]: {haltezeit: 1.5, no_halt: false},
+            [HaltezeitFachCategories.D]: {haltezeit: 1, no_halt: false},
             [HaltezeitFachCategories.Uncategorized]: {
               haltezeit: 0,
               no_halt: true,
@@ -263,11 +263,11 @@ export class NetzgrafikUnitTesting {
           perronkanten: 5,
           connectionTime: 4,
           trainrunCategoryHaltezeiten: {
-            [HaltezeitFachCategories.IPV]: { haltezeit: 2, no_halt: false },
-            [HaltezeitFachCategories.A]: { haltezeit: 2, no_halt: false },
-            [HaltezeitFachCategories.B]: { haltezeit: 2, no_halt: false },
-            [HaltezeitFachCategories.C]: { haltezeit: 1.5, no_halt: false },
-            [HaltezeitFachCategories.D]: { haltezeit: 1, no_halt: false },
+            [HaltezeitFachCategories.IPV]: {haltezeit: 2, no_halt: false},
+            [HaltezeitFachCategories.A]: {haltezeit: 2, no_halt: false},
+            [HaltezeitFachCategories.B]: {haltezeit: 2, no_halt: false},
+            [HaltezeitFachCategories.C]: {haltezeit: 1.5, no_halt: false},
+            [HaltezeitFachCategories.D]: {haltezeit: 1, no_halt: false},
             [HaltezeitFachCategories.Uncategorized]: {
               haltezeit: 0,
               no_halt: true,
@@ -327,12 +327,12 @@ export class NetzgrafikUnitTesting {
           path: {
             path: [],
             textPositions: {
-              [TrainrunSectionText.SourceArrival]: { x: 0, y: 0 },
-              [TrainrunSectionText.SourceDeparture]: { x: 0, y: 0 },
-              [TrainrunSectionText.TargetArrival]: { x: 0, y: 0 },
-              [TrainrunSectionText.TargetDeparture]: { x: 0, y: 0 },
-              [TrainrunSectionText.TrainrunSectionName]: { x: 0, y: 0 },
-              [TrainrunSectionText.TrainrunSectionTravelTime]: { x: 0, y: 0 },
+              [TrainrunSectionText.SourceArrival]: {x: 0, y: 0},
+              [TrainrunSectionText.SourceDeparture]: {x: 0, y: 0},
+              [TrainrunSectionText.TargetArrival]: {x: 0, y: 0},
+              [TrainrunSectionText.TargetDeparture]: {x: 0, y: 0},
+              [TrainrunSectionText.TrainrunSectionName]: {x: 0, y: 0},
+              [TrainrunSectionText.TrainrunSectionTravelTime]: {x: 0, y: 0},
               [TrainrunSectionText.TrainrunSectionNumberOfStops]: {
                 x: 0,
                 y: 0,
@@ -389,12 +389,12 @@ export class NetzgrafikUnitTesting {
           path: {
             path: [],
             textPositions: {
-              [TrainrunSectionText.SourceArrival]: { x: 0, y: 0 },
-              [TrainrunSectionText.SourceDeparture]: { x: 0, y: 0 },
-              [TrainrunSectionText.TargetArrival]: { x: 0, y: 0 },
-              [TrainrunSectionText.TargetDeparture]: { x: 0, y: 0 },
-              [TrainrunSectionText.TrainrunSectionName]: { x: 0, y: 0 },
-              [TrainrunSectionText.TrainrunSectionTravelTime]: { x: 0, y: 0 },
+              [TrainrunSectionText.SourceArrival]: {x: 0, y: 0},
+              [TrainrunSectionText.SourceDeparture]: {x: 0, y: 0},
+              [TrainrunSectionText.TargetArrival]: {x: 0, y: 0},
+              [TrainrunSectionText.TargetDeparture]: {x: 0, y: 0},
+              [TrainrunSectionText.TrainrunSectionName]: {x: 0, y: 0},
+              [TrainrunSectionText.TrainrunSectionTravelTime]: {x: 0, y: 0},
               [TrainrunSectionText.TrainrunSectionNumberOfStops]: {
                 x: 0,
                 y: 0,
@@ -451,12 +451,12 @@ export class NetzgrafikUnitTesting {
           path: {
             path: [],
             textPositions: {
-              [TrainrunSectionText.SourceArrival]: { x: 0, y: 0 },
-              [TrainrunSectionText.SourceDeparture]: { x: 0, y: 0 },
-              [TrainrunSectionText.TargetArrival]: { x: 0, y: 0 },
-              [TrainrunSectionText.TargetDeparture]: { x: 0, y: 0 },
-              [TrainrunSectionText.TrainrunSectionName]: { x: 0, y: 0 },
-              [TrainrunSectionText.TrainrunSectionTravelTime]: { x: 0, y: 0 },
+              [TrainrunSectionText.SourceArrival]: {x: 0, y: 0},
+              [TrainrunSectionText.SourceDeparture]: {x: 0, y: 0},
+              [TrainrunSectionText.TargetArrival]: {x: 0, y: 0},
+              [TrainrunSectionText.TargetDeparture]: {x: 0, y: 0},
+              [TrainrunSectionText.TrainrunSectionName]: {x: 0, y: 0},
+              [TrainrunSectionText.TrainrunSectionTravelTime]: {x: 0, y: 0},
               [TrainrunSectionText.TrainrunSectionNumberOfStops]: {
                 x: 0,
                 y: 0,
@@ -513,12 +513,12 @@ export class NetzgrafikUnitTesting {
           path: {
             path: [],
             textPositions: {
-              [TrainrunSectionText.SourceArrival]: { x: 0, y: 0 },
-              [TrainrunSectionText.SourceDeparture]: { x: 0, y: 0 },
-              [TrainrunSectionText.TargetArrival]: { x: 0, y: 0 },
-              [TrainrunSectionText.TargetDeparture]: { x: 0, y: 0 },
-              [TrainrunSectionText.TrainrunSectionName]: { x: 0, y: 0 },
-              [TrainrunSectionText.TrainrunSectionTravelTime]: { x: 0, y: 0 },
+              [TrainrunSectionText.SourceArrival]: {x: 0, y: 0},
+              [TrainrunSectionText.SourceDeparture]: {x: 0, y: 0},
+              [TrainrunSectionText.TargetArrival]: {x: 0, y: 0},
+              [TrainrunSectionText.TargetDeparture]: {x: 0, y: 0},
+              [TrainrunSectionText.TrainrunSectionName]: {x: 0, y: 0},
+              [TrainrunSectionText.TrainrunSectionTravelTime]: {x: 0, y: 0},
               [TrainrunSectionText.TrainrunSectionNumberOfStops]: {
                 x: 0,
                 y: 0,
@@ -575,12 +575,12 @@ export class NetzgrafikUnitTesting {
           path: {
             path: [],
             textPositions: {
-              [TrainrunSectionText.SourceArrival]: { x: 0, y: 0 },
-              [TrainrunSectionText.SourceDeparture]: { x: 0, y: 0 },
-              [TrainrunSectionText.TargetArrival]: { x: 0, y: 0 },
-              [TrainrunSectionText.TargetDeparture]: { x: 0, y: 0 },
-              [TrainrunSectionText.TrainrunSectionName]: { x: 0, y: 0 },
-              [TrainrunSectionText.TrainrunSectionTravelTime]: { x: 0, y: 0 },
+              [TrainrunSectionText.SourceArrival]: {x: 0, y: 0},
+              [TrainrunSectionText.SourceDeparture]: {x: 0, y: 0},
+              [TrainrunSectionText.TargetArrival]: {x: 0, y: 0},
+              [TrainrunSectionText.TargetDeparture]: {x: 0, y: 0},
+              [TrainrunSectionText.TrainrunSectionName]: {x: 0, y: 0},
+              [TrainrunSectionText.TrainrunSectionTravelTime]: {x: 0, y: 0},
               [TrainrunSectionText.TrainrunSectionNumberOfStops]: {
                 x: 0,
                 y: 0,
@@ -637,12 +637,12 @@ export class NetzgrafikUnitTesting {
           path: {
             path: [],
             textPositions: {
-              [TrainrunSectionText.SourceArrival]: { x: 0, y: 0 },
-              [TrainrunSectionText.SourceDeparture]: { x: 0, y: 0 },
-              [TrainrunSectionText.TargetArrival]: { x: 0, y: 0 },
-              [TrainrunSectionText.TargetDeparture]: { x: 0, y: 0 },
-              [TrainrunSectionText.TrainrunSectionName]: { x: 0, y: 0 },
-              [TrainrunSectionText.TrainrunSectionTravelTime]: { x: 0, y: 0 },
+              [TrainrunSectionText.SourceArrival]: {x: 0, y: 0},
+              [TrainrunSectionText.SourceDeparture]: {x: 0, y: 0},
+              [TrainrunSectionText.TargetArrival]: {x: 0, y: 0},
+              [TrainrunSectionText.TargetDeparture]: {x: 0, y: 0},
+              [TrainrunSectionText.TrainrunSectionName]: {x: 0, y: 0},
+              [TrainrunSectionText.TrainrunSectionTravelTime]: {x: 0, y: 0},
               [TrainrunSectionText.TrainrunSectionNumberOfStops]: {
                 x: 0,
                 y: 0,
@@ -699,12 +699,12 @@ export class NetzgrafikUnitTesting {
           path: {
             path: [],
             textPositions: {
-              [TrainrunSectionText.SourceArrival]: { x: 0, y: 0 },
-              [TrainrunSectionText.SourceDeparture]: { x: 0, y: 0 },
-              [TrainrunSectionText.TargetArrival]: { x: 0, y: 0 },
-              [TrainrunSectionText.TargetDeparture]: { x: 0, y: 0 },
-              [TrainrunSectionText.TrainrunSectionName]: { x: 0, y: 0 },
-              [TrainrunSectionText.TrainrunSectionTravelTime]: { x: 0, y: 0 },
+              [TrainrunSectionText.SourceArrival]: {x: 0, y: 0},
+              [TrainrunSectionText.SourceDeparture]: {x: 0, y: 0},
+              [TrainrunSectionText.TargetArrival]: {x: 0, y: 0},
+              [TrainrunSectionText.TargetDeparture]: {x: 0, y: 0},
+              [TrainrunSectionText.TrainrunSectionName]: {x: 0, y: 0},
+              [TrainrunSectionText.TrainrunSectionTravelTime]: {x: 0, y: 0},
               [TrainrunSectionText.TrainrunSectionNumberOfStops]: {
                 x: 0,
                 y: 0,
@@ -761,12 +761,12 @@ export class NetzgrafikUnitTesting {
           path: {
             path: [],
             textPositions: {
-              [TrainrunSectionText.SourceArrival]: { x: 0, y: 0 },
-              [TrainrunSectionText.SourceDeparture]: { x: 0, y: 0 },
-              [TrainrunSectionText.TargetArrival]: { x: 0, y: 0 },
-              [TrainrunSectionText.TargetDeparture]: { x: 0, y: 0 },
-              [TrainrunSectionText.TrainrunSectionName]: { x: 0, y: 0 },
-              [TrainrunSectionText.TrainrunSectionTravelTime]: { x: 0, y: 0 },
+              [TrainrunSectionText.SourceArrival]: {x: 0, y: 0},
+              [TrainrunSectionText.SourceDeparture]: {x: 0, y: 0},
+              [TrainrunSectionText.TargetArrival]: {x: 0, y: 0},
+              [TrainrunSectionText.TargetDeparture]: {x: 0, y: 0},
+              [TrainrunSectionText.TrainrunSectionName]: {x: 0, y: 0},
+              [TrainrunSectionText.TrainrunSectionTravelTime]: {x: 0, y: 0},
               [TrainrunSectionText.TrainrunSectionNumberOfStops]: {
                 x: 0,
                 y: 0,
@@ -969,8 +969,8 @@ export class NetzgrafikUnitTesting {
             shortName: 'HVZ',
             name: 'verkehrt zur Hauptverkehrszeit',
             dayTimeInterval: [
-              { from: 360, to: 420 },
-              { from: 960, to: 1140 },
+              {from: 360, to: 420},
+              {from: 960, to: 1140},
             ],
             weekday: [1, 2, 3, 4, 5, 6, 7],
             linePatternRef: LinePatternRefs.TimeCatHVZ,

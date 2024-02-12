@@ -18,7 +18,7 @@ export class LabelGroup {
     LogicalFilterOperator.OR;
 
   constructor(
-    { id, name, labelRef }: LabelGroupDto = {
+    {id, name, labelRef}: LabelGroupDto = {
       id: LabelGroup.incrementId(),
       name: LabelGroup.defaultGroupName,
       labelRef: LabelRef.Undefinded,

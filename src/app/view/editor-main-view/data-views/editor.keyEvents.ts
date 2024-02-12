@@ -1,27 +1,27 @@
 import * as d3 from 'd3';
-import { StaticDomTags } from './static.dom.tags';
-import { NodeService } from '../../../services/data/node.service';
-import { TrainrunService } from '../../../services/data/trainrun.service';
-import { TrainrunSectionService } from '../../../services/data/trainrunsection.service';
-import { SVGMouseController } from '../../util/svg.mouse.controller';
-import { LogService } from '../../../logger/log.service';
-import { NoteService } from '../../../services/data/note.service';
-import { RASTERING_BASIC_GRID_SIZE } from '../../rastering/definitions';
-import { EditorMode } from '../../editor-menu/editor-mode';
-import { Note } from '../../../models/note.model';
-import { Node } from '../../../models/node.model';
-import { UiInteractionService } from '../../../services/ui/ui.interaction.service';
-import { UndoService } from '../../../services/data/undo.service';
-import { CopyService } from '../../../services/data/copy.service';
-import { Port } from '../../../models/port.model';
-import { FilterService } from '../../../services/ui/filter.service';
-import { Connection } from '../../../models/connection.model';
+import {StaticDomTags} from './static.dom.tags';
+import {NodeService} from '../../../services/data/node.service';
+import {TrainrunService} from '../../../services/data/trainrun.service';
+import {TrainrunSectionService} from '../../../services/data/trainrunsection.service';
+import {SVGMouseController} from '../../util/svg.mouse.controller';
+import {LogService} from '../../../logger/log.service';
+import {NoteService} from '../../../services/data/note.service';
+import {RASTERING_BASIC_GRID_SIZE} from '../../rastering/definitions';
+import {EditorMode} from '../../editor-menu/editor-mode';
+import {Note} from '../../../models/note.model';
+import {Node} from '../../../models/node.model';
+import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
+import {UndoService} from '../../../services/data/undo.service';
+import {CopyService} from '../../../services/data/copy.service';
+import {Port} from '../../../models/port.model';
+import {FilterService} from '../../../services/ui/filter.service';
+import {Connection} from '../../../models/connection.model';
 import {
   PreviewLineMode,
   TrainrunSectionPreviewLineView,
 } from './trainrunsection.previewline.view';
-import { TrainrunSection } from '../../../models/trainrunsection.model';
-import { Trainrun } from '../../../models/trainrun.model';
+import {TrainrunSection} from '../../../models/trainrunsection.model';
+import {Trainrun} from '../../../models/trainrun.model';
 
 export class EditorKeyEvents {
   private editorMode: EditorMode;

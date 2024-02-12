@@ -1,7 +1,7 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { TrainrunService } from './trainrun.service';
+import {Injectable, OnDestroy} from '@angular/core';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {TrainrunService} from './trainrun.service';
 
 @Injectable({
   providedIn: 'root',

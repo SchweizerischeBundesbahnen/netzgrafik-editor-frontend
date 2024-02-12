@@ -1,6 +1,6 @@
-import { Connection } from '../../../models/connection.model';
-import { Node } from '../../../models/node.model';
-import { EditorView } from './editor.view';
+import {Connection} from '../../../models/connection.model';
+import {Node} from '../../../models/node.model';
+import {EditorView} from './editor.view';
 
 export class ConnectionsViewObject {
   key: string;

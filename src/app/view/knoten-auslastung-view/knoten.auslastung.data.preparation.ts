@@ -1,9 +1,9 @@
-import { Transition } from '../../models/transition.model';
-import { TrainrunSection } from '../../models/trainrunsection.model';
-import { Node } from '../../models/node.model';
-import { ResourceService } from '../../services/data/resource.service';
-import { TrainrunSectionService } from '../../services/data/trainrunsection.service';
-import { TrainrunService } from '../../services/data/trainrun.service';
+import {Transition} from '../../models/transition.model';
+import {TrainrunSection} from '../../models/trainrunsection.model';
+import {Node} from '../../models/node.model';
+import {ResourceService} from '../../services/data/resource.service';
+import {TrainrunSectionService} from '../../services/data/trainrunsection.service';
+import {TrainrunService} from '../../services/data/trainrun.service';
 
 export class KnotenAuslastungDataPreparation {
   static MAX_NR_MINUTES = 60;

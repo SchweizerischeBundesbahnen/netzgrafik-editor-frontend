@@ -7,13 +7,13 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { TimeSliderService } from '../../../services/time-slider.service';
-import { SliderChangeInfo } from '../../../model/util/sliderChangeInfo';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { ViewBoxChangeInfo } from '../../../model/util/viewBoxChangeInfo';
-import { ViewBoxService } from '../../../services/util/view-box.service';
-import { TimeFormatter } from '../../../model/util/timeFormatter';
+import {TimeSliderService} from '../../../services/time-slider.service';
+import {SliderChangeInfo} from '../../../model/util/sliderChangeInfo';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {ViewBoxChangeInfo} from '../../../model/util/viewBoxChangeInfo';
+import {ViewBoxService} from '../../../services/util/view-box.service';
+import {TimeFormatter} from '../../../model/util/timeFormatter';
 import {
   UpdateCounterController,
   UpdateCounterHandler,

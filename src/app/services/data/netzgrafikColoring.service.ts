@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
 import {
   NetzgrafikColorDto,
   TrainrunCategory,
 } from '../../data-structures/business.data.structures';
-import { StaticDomTags } from '../../view/editor-main-view/data-views/static.dom.tags';
-import { NetzgrafikColor } from '../../models/netzgrafikColor.model';
-import { LogService } from '../../logger/log.service';
-import { TrainrunSection } from '../../models/trainrunsection.model';
-import { ColorRefType } from '../../data-structures/technical.data.structures';
+import {StaticDomTags} from '../../view/editor-main-view/data-views/static.dom.tags';
+import {NetzgrafikColor} from '../../models/netzgrafikColor.model';
+import {LogService} from '../../logger/log.service';
+import {TrainrunSection} from '../../models/trainrunsection.model';
+import {ColorRefType} from '../../data-structures/technical.data.structures';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,7 @@ export class NetzgrafikColoringService {
   netzgrafikColorSubject = new BehaviorSubject<NetzgrafikColor[]>([]);
   readonly netzgrafikColorObservable =
     this.netzgrafikColorSubject.asObservable();
-  netzgrafikColorStore: { netzgrafikColors: NetzgrafikColor[] } = {
+  netzgrafikColorStore: {netzgrafikColors: NetzgrafikColor[]} = {
     netzgrafikColors: [],
   }; // store the data in memory
 

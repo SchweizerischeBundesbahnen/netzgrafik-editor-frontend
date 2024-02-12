@@ -1,11 +1,11 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { ViewBoxChangeInfo } from '../../model/util/viewBoxChangeInfo';
-import { TimeSliderService } from '../time-slider.service';
-import { ResizeService } from './resize.service';
-import { takeUntil } from 'rxjs/operators';
-import { SliderChangeInfo } from '../../model/util/sliderChangeInfo';
-import { ResizeChangeInfo } from '../../model/util/resizeChangeInfo';
+import {Injectable, OnDestroy} from '@angular/core';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {ViewBoxChangeInfo} from '../../model/util/viewBoxChangeInfo';
+import {TimeSliderService} from '../time-slider.service';
+import {ResizeService} from './resize.service';
+import {takeUntil} from 'rxjs/operators';
+import {SliderChangeInfo} from '../../model/util/sliderChangeInfo';
+import {ResizeChangeInfo} from '../../model/util/resizeChangeInfo';
 
 @Injectable({
   providedIn: 'root',

@@ -1,7 +1,7 @@
-import { SgTrainrunSection } from './sg-trainrun-section';
-import { SgTrainrunNode } from './sg-trainrun-node';
-import { SgPathNode } from './sg-path-node';
-import { SgPathSection } from './sg-path-section';
+import {SgTrainrunSection} from './sg-trainrun-section';
+import {SgTrainrunNode} from './sg-trainrun-node';
+import {SgPathNode} from './sg-path-node';
+import {SgPathSection} from './sg-path-section';
 
 export interface SgTrainrunItem {
   index: number;

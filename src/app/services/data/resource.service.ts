@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Resource } from '../../models/resource.model';
-import { ResourceDto } from '../../data-structures/business.data.structures';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {Resource} from '../../models/resource.model';
+import {ResourceDto} from '../../data-structures/business.data.structures';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,7 @@ export class ResourceService {
   // Description of observable data service: https://coryrylan.com/blog/angular-observable-data-services
   resourceSubject = new BehaviorSubject<Resource[]>([]);
   readonly resourceObservable = this.resourceSubject.asObservable();
-  resourceStore: { resources: Resource[] } = { resources: [] }; // store the data in memory
+  resourceStore: {resources: Resource[]} = {resources: []}; // store the data in memory
 
   setResourceData(resourceDto: ResourceDto[]) {
     this.resourceStore.resources = resourceDto.map(

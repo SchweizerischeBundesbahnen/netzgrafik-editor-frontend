@@ -5,14 +5,14 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { LayoutMode } from '../column-layout/column-layout.component';
-import { EditorMainViewComponent } from '../editor-main-view/editor-main-view.component';
-import { DataService } from '../../services/data/data.service';
-import { UiInteractionService } from '../../services/ui/ui.interaction.service';
-import { takeUntil } from 'rxjs/operators';
-import { Subject, timer } from 'rxjs';
-import { MainViewMode } from './main-view-mode';
-import { NodeService } from '../../services/data/node.service';
+import {LayoutMode} from '../column-layout/column-layout.component';
+import {EditorMainViewComponent} from '../editor-main-view/editor-main-view.component';
+import {DataService} from '../../services/data/data.service';
+import {UiInteractionService} from '../../services/ui/ui.interaction.service';
+import {takeUntil} from 'rxjs/operators';
+import {Subject, timer} from 'rxjs';
+import {MainViewMode} from './main-view-mode';
+import {NodeService} from '../../services/data/node.service';
 
 export enum FilterWindowType {
   VARIANT_INFO = 'variant-info',

@@ -1,20 +1,20 @@
-import { DataService } from '../data/data.service';
-import { NodeService } from '../data/node.service';
-import { ResourceService } from '../data/resource.service';
-import { TrainrunService } from '../data/trainrun.service';
-import { TrainrunSectionService } from '../data/trainrunsection.service';
-import { StammdatenService } from '../data/stammdaten.service';
-import { NoteService } from '../data/note.service';
-import { Node } from '../../models/node.model';
-import { TrainrunSection } from '../../models/trainrunsection.model';
-import { LogService } from '../../logger/log.service';
-import { LogPublishersService } from '../../logger/log.publishers.service';
-import { LabelGroupService } from '../data/labelgroup.service';
-import { LabelService } from '../data/label.serivce';
-import { NetzgrafikUnitTesting } from '../../../integration-testing/netzgrafik.unit.testing';
-import { FilterService } from '../ui/filter.service';
-import { NetzgrafikColoringService } from '../data/netzgrafikColoring.service';
-import { IsTrainrunSelectedService } from './is-trainrun-section.service';
+import {DataService} from '../data/data.service';
+import {NodeService} from '../data/node.service';
+import {ResourceService} from '../data/resource.service';
+import {TrainrunService} from '../data/trainrun.service';
+import {TrainrunSectionService} from '../data/trainrunsection.service';
+import {StammdatenService} from '../data/stammdaten.service';
+import {NoteService} from '../data/note.service';
+import {Node} from '../../models/node.model';
+import {TrainrunSection} from '../../models/trainrunsection.model';
+import {LogService} from '../../logger/log.service';
+import {LogPublishersService} from '../../logger/log.publishers.service';
+import {LabelGroupService} from '../data/labelgroup.service';
+import {LabelService} from '../data/label.serivce';
+import {NetzgrafikUnitTesting} from '../../../integration-testing/netzgrafik.unit.testing';
+import {FilterService} from '../ui/filter.service';
+import {NetzgrafikColoringService} from '../data/netzgrafikColoring.service';
+import {IsTrainrunSelectedService} from './is-trainrun-section.service';
 
 describe('IsTrainrunSelectedService', () => {
   let dataService: DataService;

@@ -1,4 +1,4 @@
-import { D3Utils } from '../../../view/editor-main-view/data-views/d3.utils';
+import {D3Utils} from '../../../view/editor-main-view/data-views/d3.utils';
 
 export class StreckengrafikDrawingContext {
   static oldRect: DOMRect = undefined;

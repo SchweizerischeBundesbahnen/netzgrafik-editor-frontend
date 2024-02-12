@@ -1,16 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { VariantHistoryComponent } from './variant-history.component';
-import { VersionControlService } from '../../../../services/data/version-control.service';
-import { of } from 'rxjs';
-import { PreviewService } from '../../../../services/data/preview.service';
-import { SbbDialogModule } from '@sbb-esta/angular/dialog';
-import { NavigationService } from '../../../../services/ui/navigation.service';
+import {VariantHistoryComponent} from './variant-history.component';
+import {VersionControlService} from '../../../../services/data/version-control.service';
+import {of} from 'rxjs';
+import {PreviewService} from '../../../../services/data/preview.service';
+import {SbbDialogModule} from '@sbb-esta/angular/dialog';
+import {NavigationService} from '../../../../services/ui/navigation.service';
 import {
   VariantControllerBackendService,
   VariantCreateDto,
 } from '../../../../api/generated';
-import { VersionControllerBackendService } from '../../../../api/generated';
+import {VersionControllerBackendService} from '../../../../api/generated';
 
 describe('VariantHistoryComponent', () => {
   let component: VariantHistoryComponent;
@@ -27,11 +27,11 @@ describe('VariantHistoryComponent', () => {
       declarations: [VariantHistoryComponent],
       imports: [SbbDialogModule],
       providers: [
-        { provide: VersionControlService, useValue: versionControlService },
-        { provide: PreviewService, useValue: {} },
-        { provide: NavigationService, useValue: {} },
-        { provide: VariantControllerBackendService, useValue: {} },
-        { provide: VersionControllerBackendService, useValue: {} },
+        {provide: VersionControlService, useValue: versionControlService},
+        {provide: PreviewService, useValue: {}},
+        {provide: NavigationService, useValue: {}},
+        {provide: VariantControllerBackendService, useValue: {}},
+        {provide: VersionControllerBackendService, useValue: {}},
       ],
     }).compileComponents();
   });

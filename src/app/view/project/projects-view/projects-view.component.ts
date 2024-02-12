@@ -1,19 +1,19 @@
-import { Component, OnDestroy } from '@angular/core';
-import { Observable, of, ReplaySubject, Subject } from 'rxjs';
-import { UntypedFormControl } from '@angular/forms';
-import { ProjectsViewService } from './projects-view.service';
-import { debounceTime, filter, mergeMap, takeUntil } from 'rxjs/operators';
-import { SbbDialog } from '@sbb-esta/angular/dialog';
-import { ProjectDialogComponent } from '../project-dialog/project-dialog.component';
+import {Component, OnDestroy} from '@angular/core';
+import {Observable, of, ReplaySubject, Subject} from 'rxjs';
+import {UntypedFormControl} from '@angular/forms';
+import {ProjectsViewService} from './projects-view.service';
+import {debounceTime, filter, mergeMap, takeUntil} from 'rxjs/operators';
+import {SbbDialog} from '@sbb-esta/angular/dialog';
+import {ProjectDialogComponent} from '../project-dialog/project-dialog.component';
 import {
   ProjectControllerBackendService,
   ProjectDto,
   ProjectSummaryDto,
 } from '../../../api/generated';
-import { ConfirmationDialogParameter } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
-import { UiInteractionService } from '../../../services/ui/ui.interaction.service';
-import { NavigationService } from '../../../services/ui/navigation.service';
-import { SlotAction } from '../../action-menu/action-menu/action-menu.component';
+import {ConfirmationDialogParameter} from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
+import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
+import {NavigationService} from '../../../services/ui/navigation.service';
+import {SlotAction} from '../../action-menu/action-menu/action-menu.component';
 
 @Component({
   selector: 'sbb-projects-view',

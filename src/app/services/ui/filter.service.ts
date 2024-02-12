@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {
   FilterDataDto,
   LabelRef,
@@ -6,21 +6,18 @@ import {
   TrainrunFrequency,
   TrainrunTimeCategory,
 } from '../../data-structures/business.data.structures';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { DataService } from '../data/data.service';
-import { Node } from '../../models/node.model';
-import { LabelService } from '../data/label.serivce';
-import { Label } from '../../models/label.model';
-import { LabelGroupService } from '../data/labelgroup.service';
-import {
-  LabelGroup,
-  LogicalFilterOperator,
-} from '../../models/labelGroup.model';
-import { Trainrun } from '../../models/trainrun.model';
-import { Port } from '../../models/port.model';
-import { TrainrunSection } from '../../models/trainrunsection.model';
-import { Note } from '../../models/note.model';
-import { FilterSetting } from '../../models/filterSettings.model';
+import {BehaviorSubject, Subject} from 'rxjs';
+import {DataService} from '../data/data.service';
+import {Node} from '../../models/node.model';
+import {LabelService} from '../data/label.serivce';
+import {Label} from '../../models/label.model';
+import {LabelGroupService} from '../data/labelgroup.service';
+import {LabelGroup, LogicalFilterOperator} from '../../models/labelGroup.model';
+import {Trainrun} from '../../models/trainrun.model';
+import {Port} from '../../models/port.model';
+import {TrainrunSection} from '../../models/trainrunsection.model';
+import {Note} from '../../models/note.model';
+import {FilterSetting} from '../../models/filterSettings.model';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +28,7 @@ export class FilterService implements OnDestroy {
 
   filterSettingSubject = new BehaviorSubject<FilterSetting[]>(null);
   readonly filterSetting = this.filterSettingSubject.asObservable();
-  filterSettingStore: { filterSettings: FilterSetting[] } = {
+  filterSettingStore: {filterSettings: FilterSetting[]} = {
     filterSettings: [],
   }; // store the data in memory
 

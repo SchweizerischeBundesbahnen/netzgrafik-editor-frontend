@@ -6,17 +6,17 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { ResizeChangeInfo } from '../../../model/util/resizeChangeInfo';
-import { ViewBoxChangeInfo } from '../../../model/util/viewBoxChangeInfo';
-import { ResizeService } from '../../../services/util/resize.service';
-import { ViewBoxService } from '../../../services/util/view-box.service';
-import { NodeService } from '../../../../services/data/node.service';
-import { takeUntil } from 'rxjs/operators';
-import { TrackData } from '../../../model/trackData';
-import { Sg7PathSliderService } from '../../../services/sg-7-path-slider.service';
-import { SgSelectedTrainrun } from '../../../model/streckengrafik-model/sg-selected-trainrun';
-import { SgPath } from '../../../model/streckengrafik-model/sg-path';
+import {Subject} from 'rxjs';
+import {ResizeChangeInfo} from '../../../model/util/resizeChangeInfo';
+import {ViewBoxChangeInfo} from '../../../model/util/viewBoxChangeInfo';
+import {ResizeService} from '../../../services/util/resize.service';
+import {ViewBoxService} from '../../../services/util/view-box.service';
+import {NodeService} from '../../../../services/data/node.service';
+import {takeUntil} from 'rxjs/operators';
+import {TrackData} from '../../../model/trackData';
+import {Sg7PathSliderService} from '../../../services/sg-7-path-slider.service';
+import {SgSelectedTrainrun} from '../../../model/streckengrafik-model/sg-selected-trainrun';
+import {SgPath} from '../../../model/streckengrafik-model/sg-path';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector

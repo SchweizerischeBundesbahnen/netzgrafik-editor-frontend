@@ -1,11 +1,11 @@
-import { Trainrun } from '../models/trainrun.model';
-import { Node } from '../models/node.model';
-import { NetzgrafikDefault } from '../sample-netzgrafik/netzgrafik.default';
+import {Trainrun} from '../models/trainrun.model';
+import {Node} from '../models/node.model';
+import {NetzgrafikDefault} from '../sample-netzgrafik/netzgrafik.default';
 import {
   NetzgrafikDto,
   TrainrunCategory,
 } from '../data-structures/business.data.structures';
-import { Note } from '../models/note.model';
+import {Note} from '../models/note.model';
 
 export class DataMigration {
   static getMinimalTurnaroundTime(): number {

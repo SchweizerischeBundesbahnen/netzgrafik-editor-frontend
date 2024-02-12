@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { LogConsole, LogPublisher } from './log.publishers';
+import {LogConsole, LogPublisher} from './log.publishers';
 
 @Injectable({
   providedIn: 'root',

@@ -9,27 +9,27 @@ import {
   TRAINRUN_SECTION_TEXT_AREA_WIDTH,
 } from '../../rastering/definitions';
 import * as d3 from 'd3';
-import { Vec2D } from '../../../utils/vec2D';
+import {Vec2D} from '../../../utils/vec2D';
 import {
   ColorRefType,
   PortAlignment,
   TrainrunSectionText,
 } from '../../../data-structures/technical.data.structures';
-import { StaticDomTags } from './static.dom.tags';
-import { TrainrunSection } from '../../../models/trainrunsection.model';
-import { EditorView } from './editor.view';
-import { D3Utils } from './d3.utils';
+import {StaticDomTags} from './static.dom.tags';
+import {TrainrunSection} from '../../../models/trainrunsection.model';
+import {EditorView} from './editor.view';
+import {D3Utils} from './d3.utils';
 import {
   DragIntermediateStopInfo,
   PreviewLineMode,
 } from './trainrunsection.previewline.view';
-import { MathUtils } from '../../../utils/math';
-import { Trainrun } from '../../../models/trainrun.model';
-import { TrainrunSectionViewObject } from './trainrunSectionViewObject';
-import { Node } from '../../../models/node.model';
-import { EditorMode } from '../../editor-menu/editor-mode';
-import { Transition } from '../../../models/transition.model';
-import { InformSelectedTrainrunClick } from '../../../services/data/trainrunsection.service';
+import {MathUtils} from '../../../utils/math';
+import {Trainrun} from '../../../models/trainrun.model';
+import {TrainrunSectionViewObject} from './trainrunSectionViewObject';
+import {Node} from '../../../models/node.model';
+import {EditorMode} from '../../editor-menu/editor-mode';
+import {Transition} from '../../../models/transition.model';
+import {InformSelectedTrainrunClick} from '../../../services/data/trainrunsection.service';
 
 export class TrainrunSectionsView {
   trainrunSectionGroup;

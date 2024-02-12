@@ -6,7 +6,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import {DOCUMENT} from '@angular/common';
 
 @Component({
   selector: 'sbb-preview-button',
@@ -17,7 +17,7 @@ export class PreviewButtonComponent {
   @Output()
   active = new EventEmitter<boolean>();
 
-  @ViewChild('previewButton', { read: ElementRef })
+  @ViewChild('previewButton', {read: ElementRef})
   previewButton: ElementRef;
 
   isActive = false;

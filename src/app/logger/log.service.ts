@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { LogPublisher } from './log.publishers';
-import { LogPublishersService } from './log.publishers.service';
+import {Injectable} from '@angular/core';
+import {LogPublisher} from './log.publishers';
+import {LogPublishersService} from './log.publishers.service';
 
 export enum LogLevel {
   All = 0,

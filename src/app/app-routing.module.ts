@@ -1,20 +1,20 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { NetzgrafikApplicationComponent } from './netzgrafik-application/netzgrafik-application.component';
-import { ProjectsViewComponent } from './view/project/projects-view/projects-view.component';
-import { VariantsViewComponent } from './view/variant/variants-view/variants-view.component';
-import { ErrorViewComponent } from './view/error-view/error-view.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {NetzgrafikApplicationComponent} from './netzgrafik-application/netzgrafik-application.component';
+import {ProjectsViewComponent} from './view/project/projects-view/projects-view.component';
+import {VariantsViewComponent} from './view/variant/variants-view/variants-view.component';
+import {ErrorViewComponent} from './view/error-view/error-view.component';
 
 // Use the AuthGuard in routes that should require a logged in user.
 // Do NOT use it for the root route. If the user should always be logged in,
 // see comment in the AppComponent constructor.
 const routes: Routes = [
-  { path: '', component: ProjectsViewComponent },
+  {path: '', component: ProjectsViewComponent},
   {
     path: 'projects',
     children: [
-      { path: '', component: ProjectsViewComponent },
-      { path: ':projectId', component: VariantsViewComponent },
+      {path: '', component: ProjectsViewComponent},
+      {path: ':projectId', component: VariantsViewComponent},
       {
         path: ':projectId/variants/:variantId',
         component: NetzgrafikApplicationComponent,
@@ -24,7 +24,7 @@ const routes: Routes = [
   {
     path: '404',
     component: ErrorViewComponent,
-    data: { error: 'Die gesuchte Seite wurde nicht gefunden.' },
+    data: {error: 'Die gesuchte Seite wurde nicht gefunden.'},
   },
   {
     path: '401',
@@ -36,7 +36,7 @@ const routes: Routes = [
   {
     path: '403',
     component: ErrorViewComponent,
-    data: { error: 'Sie sind nicht berechtigt diese Aktion durchzuführen.' },
+    data: {error: 'Sie sind nicht berechtigt diese Aktion durchzuführen.'},
   },
   {
     path: '409',
@@ -49,9 +49,9 @@ const routes: Routes = [
   {
     path: 'error',
     component: ErrorViewComponent,
-    data: { error: 'Es ist ein Fehler aufgetreten.' },
+    data: {error: 'Es ist ein Fehler aufgetreten.'},
   },
-  { path: '**', redirectTo: '/404' },
+  {path: '**', redirectTo: '/404'},
 ];
 
 @NgModule({

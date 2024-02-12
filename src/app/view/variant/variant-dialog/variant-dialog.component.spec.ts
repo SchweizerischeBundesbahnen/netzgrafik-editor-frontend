@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { VariantDialogComponent } from './variant-dialog.component';
-import { SBB_DIALOG_DATA, SbbDialogRef } from '@sbb-esta/angular/dialog';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {VariantDialogComponent} from './variant-dialog.component';
+import {SBB_DIALOG_DATA, SbbDialogRef} from '@sbb-esta/angular/dialog';
 
 describe('VariantDialogComponent', () => {
   let component: VariantDialogComponent;
@@ -10,8 +10,8 @@ describe('VariantDialogComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [VariantDialogComponent],
       providers: [
-        { provide: SbbDialogRef, useValue: {} },
-        { provide: SBB_DIALOG_DATA, useValue: {} },
+        {provide: SbbDialogRef, useValue: {}},
+        {provide: SBB_DIALOG_DATA, useValue: {}},
       ],
     }).compileComponents();
   });

@@ -1,12 +1,12 @@
-import { Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
-import { TrainrunSectionService } from '../../../services/data/trainrunsection.service';
-import { UiInteractionService } from '../../../services/ui/ui.interaction.service';
-import { SbbDialog, SbbDialogConfig } from '@sbb-esta/angular/dialog';
-import { SbbTableDataSource } from '@sbb-esta/angular/table';
-import { Stammdaten } from '../../../models/stammdaten.model';
-import { HaltezeitFachCategories } from '../../../data-structures/business.data.structures';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
+import {TrainrunSectionService} from '../../../services/data/trainrunsection.service';
+import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
+import {SbbDialog, SbbDialogConfig} from '@sbb-esta/angular/dialog';
+import {SbbTableDataSource} from '@sbb-esta/angular/table';
+import {Stammdaten} from '../../../models/stammdaten.model';
+import {HaltezeitFachCategories} from '../../../data-structures/business.data.structures';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'sbb-stammdaten-dialog',
@@ -14,7 +14,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./stammdaten-dialog.component.scss'],
 })
 export class StammdatenDialogComponent implements OnDestroy {
-  @ViewChild('stammdatenTemplate', { static: true })
+  @ViewChild('stammdatenTemplate', {static: true})
   stammdatenTemplate: TemplateRef<any>;
   public stammdaten = [];
   displayedColumns: string[] = [

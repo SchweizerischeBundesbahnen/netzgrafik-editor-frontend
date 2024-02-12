@@ -1,8 +1,8 @@
-import { PathItem } from './pathItem';
-import { PathSection } from './pathSection';
-import { TrainrunBranchType } from './enum/trainrun-branch-type-type';
-import { TrackData } from './trackData';
-import { TrainrunTemplatePathAlignmentType } from './enum/trainrun-template-path-alignment-type';
+import {PathItem} from './pathItem';
+import {PathSection} from './pathSection';
+import {TrainrunBranchType} from './enum/trainrun-branch-type-type';
+import {TrackData} from './trackData';
+import {TrainrunTemplatePathAlignmentType} from './enum/trainrun-template-path-alignment-type';
 
 export class PathNode implements PathItem {
   private width = 20;

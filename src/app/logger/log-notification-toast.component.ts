@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { LogEntry, LogLevel, LogService } from './log.service';
-import { LogPublisher } from './log.publishers';
-import { SbbNotificationToast } from '@sbb-esta/angular/notification-toast';
+import {Component} from '@angular/core';
+import {Observable, of} from 'rxjs';
+import {LogEntry, LogLevel, LogService} from './log.service';
+import {LogPublisher} from './log.publishers';
+import {SbbNotificationToast} from '@sbb-esta/angular/notification-toast';
 
 @Component({
   selector: 'sbb-log-notification-toast',

@@ -1,4 +1,4 @@
-import { Trainrun } from '../../models/trainrun.model';
+import {Trainrun} from '../../models/trainrun.model';
 import {
   LabelDto,
   LabelRef,
@@ -8,21 +8,21 @@ import {
   TrainrunFrequency,
   TrainrunTimeCategory,
 } from '../../data-structures/business.data.structures';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { NodeService } from './node.service';
-import { TrainrunSectionService } from './trainrunsection.service';
-import { DataService } from './data.service';
-import { Node } from '../../models/node.model';
-import { TrainrunSection } from '../../models/trainrunsection.model';
-import { GeneralViewFunctions } from '../../view/util/generalViewFunctions';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {NodeService} from './node.service';
+import {TrainrunSectionService} from './trainrunsection.service';
+import {DataService} from './data.service';
+import {Node} from '../../models/node.model';
+import {TrainrunSection} from '../../models/trainrunsection.model';
+import {GeneralViewFunctions} from '../../view/util/generalViewFunctions';
 import {
   NonStopTrainrunIterator,
   TrainrunIterator,
 } from '../util/trainrun.iterator';
-import { LogService } from '../../logger/log.service';
-import { LabelService } from './label.serivce';
-import { FilterService } from '../ui/filter.service';
+import {LogService} from '../../logger/log.service';
+import {LabelService} from './label.serivce';
+import {FilterService} from '../ui/filter.service';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +32,7 @@ export class TrainrunService {
   trainrunsSubject = new BehaviorSubject<Trainrun[]>([]);
   readonly trainruns = this.trainrunsSubject.asObservable();
 
-  trainrunsStore: { trainruns: Trainrun[] } = { trainruns: [] }; // store the data in memory
+  trainrunsStore: {trainruns: Trainrun[]} = {trainruns: []}; // store the data in memory
 
   private dataService: DataService = null;
   private nodeService: NodeService = null;
@@ -624,7 +624,7 @@ export class TrainrunService {
     const targetNode = trainrunSection.getTargetNode();
     const endNode1 = this.getEndNode(sourceNode, trainrunSection);
     const endNode2 = this.getEndNode(targetNode, trainrunSection);
-    return { endNode1, endNode2 };
+    return {endNode1, endNode2};
   }
 
   private createNewTrainrunFromDto(trainrun: TrainrunDto): Trainrun {

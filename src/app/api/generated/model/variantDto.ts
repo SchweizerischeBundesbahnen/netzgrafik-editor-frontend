@@ -9,7 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { VersionDto } from './versionDto';
+import {VersionDto} from './versionDto';
 
 export interface VariantDto {
   id: number;

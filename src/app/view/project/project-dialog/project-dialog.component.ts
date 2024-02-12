@@ -1,13 +1,13 @@
-import { Component, Inject } from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {
   SBB_DIALOG_DATA,
   SbbDialog,
   SbbDialogRef,
 } from '@sbb-esta/angular/dialog';
-import { ProjectFormComponentModel } from './project-form/project-form.component';
-import { FormModel } from '../../../utils/form-model';
-import { Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import {ProjectFormComponentModel} from './project-form/project-form.component';
+import {FormModel} from '../../../utils/form-model';
+import {Observable} from 'rxjs';
+import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'sbb-project-dialog',
@@ -42,7 +42,7 @@ export class ProjectDialogComponent {
     initData?: ProjectFormComponentModel,
   ): Observable<ProjectFormComponentModel> {
     return dialog
-      .open(ProjectDialogComponent, initData ? { data: initData } : undefined)
+      .open(ProjectDialogComponent, initData ? {data: initData} : undefined)
       .afterClosed()
       .pipe(filter((project) => typeof project === 'object'));
   }

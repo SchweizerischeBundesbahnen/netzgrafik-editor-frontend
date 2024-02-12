@@ -1,5 +1,5 @@
-import { Node } from '../../../models/node.model';
-import { ShortestDistanceEdge } from './shortest-distance-edge';
+import {Node} from '../../../models/node.model';
+import {ShortestDistanceEdge} from './shortest-distance-edge';
 
 describe('ShortestDistanceEdge', () => {
   it('getFromNode', () => {

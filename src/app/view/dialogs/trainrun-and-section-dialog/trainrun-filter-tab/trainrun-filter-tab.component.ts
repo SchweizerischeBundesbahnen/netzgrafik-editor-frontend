@@ -6,19 +6,19 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Trainrun } from '../../../../models/trainrun.model';
-import { TrainrunService } from '../../../../services/data/trainrun.service';
-import { TrainrunSectionService } from '../../../../services/data/trainrunsection.service';
-import { UiInteractionService } from '../../../../services/ui/ui.interaction.service';
-import { ConfirmationDialogParameter } from '../../confirmation-dialog/confirmation-dialog.component';
-import { DataService } from '../../../../services/data/data.service';
-import { LabelService } from '../../../../services/data/label.serivce';
-import { LabelRef } from '../../../../data-structures/business.data.structures';
-import { LabelGroupService } from '../../../../services/data/labelgroup.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { SbbChipEvent, SbbChipInputEvent } from '@sbb-esta/angular/chips';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import {Trainrun} from '../../../../models/trainrun.model';
+import {TrainrunService} from '../../../../services/data/trainrun.service';
+import {TrainrunSectionService} from '../../../../services/data/trainrunsection.service';
+import {UiInteractionService} from '../../../../services/ui/ui.interaction.service';
+import {ConfirmationDialogParameter} from '../../confirmation-dialog/confirmation-dialog.component';
+import {DataService} from '../../../../services/data/data.service';
+import {LabelService} from '../../../../services/data/label.serivce';
+import {LabelRef} from '../../../../data-structures/business.data.structures';
+import {LabelGroupService} from '../../../../services/data/labelgroup.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {SbbChipEvent, SbbChipInputEvent} from '@sbb-esta/angular/chips';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'sbb-trainrun-filter-tab',

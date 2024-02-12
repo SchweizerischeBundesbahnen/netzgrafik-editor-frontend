@@ -1,18 +1,18 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {
   VariantControllerBackendService,
   VariantDto,
   VersionControllerBackendService,
   VersionDto,
 } from '../../api/generated';
-import { filter, map, takeUntil } from 'rxjs/operators';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { DataService } from './data.service';
-import { NetzgrafikDto } from '../../data-structures/business.data.structures';
-import { AutoSaveService } from './auto-save.service';
-import { LogService } from '../../logger/log.service';
-import { VersionId } from '../../view/variant/variant-view/variant-history/model';
-import { UndoService } from './undo.service';
+import {filter, map, takeUntil} from 'rxjs/operators';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {DataService} from './data.service';
+import {NetzgrafikDto} from '../../data-structures/business.data.structures';
+import {AutoSaveService} from './auto-save.service';
+import {LogService} from '../../logger/log.service';
+import {VersionId} from '../../view/variant/variant-view/variant-history/model';
+import {UndoService} from './undo.service';
 
 @Injectable({
   providedIn: 'root',

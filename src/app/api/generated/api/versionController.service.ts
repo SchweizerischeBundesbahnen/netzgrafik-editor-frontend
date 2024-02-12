@@ -11,7 +11,7 @@
  */
 /* tslint:disable:no-unused-variable member-ordering */
 
-import { Inject, Injectable, Optional } from '@angular/core';
+import {Inject, Injectable, Optional} from '@angular/core';
 import {
   HttpClient,
   HttpHeaders,
@@ -20,16 +20,16 @@ import {
   HttpEvent,
   HttpParameterCodec,
 } from '@angular/common/http';
-import { CustomHttpParameterCodec } from '../encoder';
-import { Observable } from 'rxjs';
+import {CustomHttpParameterCodec} from '../encoder';
+import {Observable} from 'rxjs';
 
-import { VersionCreateReleaseDto } from '../model/models';
-import { VersionCreateSnapshotDto } from '../model/models';
-import { VersionDto } from '../model/models';
+import {VersionCreateReleaseDto} from '../model/models';
+import {VersionCreateSnapshotDto} from '../model/models';
+import {VersionDto} from '../model/models';
 
-import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
-import { Configuration } from '../configuration';
-import { VersionControllerBackendServiceInterface } from './versionController.serviceInterface';
+import {BASE_PATH, COLLECTION_FORMATS} from '../variables';
+import {Configuration} from '../configuration';
+import {VersionControllerBackendServiceInterface} from './versionController.serviceInterface';
 
 @Injectable({
   providedIn: 'root',
@@ -125,28 +125,28 @@ export class VersionControllerBackendService
     versionCreateReleaseDto: VersionCreateReleaseDto,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<number>;
   public createReleaseVersion(
     snapshotVersionId: number,
     versionCreateReleaseDto: VersionCreateReleaseDto,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpResponse<number>>;
   public createReleaseVersion(
     snapshotVersionId: number,
     versionCreateReleaseDto: VersionCreateReleaseDto,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpEvent<number>>;
   public createReleaseVersion(
     snapshotVersionId: number,
     versionCreateReleaseDto: VersionCreateReleaseDto,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<any> {
     if (snapshotVersionId === null || snapshotVersionId === undefined) {
       throw new Error(
@@ -223,28 +223,28 @@ export class VersionControllerBackendService
     versionCreateSnapshotDto: VersionCreateSnapshotDto,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<number>;
   public createSnapshotVersion(
     baseVersionId: number,
     versionCreateSnapshotDto: VersionCreateSnapshotDto,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpResponse<number>>;
   public createSnapshotVersion(
     baseVersionId: number,
     versionCreateSnapshotDto: VersionCreateSnapshotDto,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpEvent<number>>;
   public createSnapshotVersion(
     baseVersionId: number,
     versionCreateSnapshotDto: VersionCreateSnapshotDto,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<any> {
     if (baseVersionId === null || baseVersionId === undefined) {
       throw new Error(
@@ -319,25 +319,25 @@ export class VersionControllerBackendService
     versionId: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<VersionDto>;
   public getVersion(
     versionId: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpResponse<VersionDto>>;
   public getVersion(
     versionId: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpEvent<VersionDto>>;
   public getVersion(
     versionId: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<any> {
     if (versionId === null || versionId === undefined) {
       throw new Error(
@@ -395,25 +395,25 @@ export class VersionControllerBackendService
     versionId: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<object>;
   public getVersionModel(
     versionId: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpResponse<object>>;
   public getVersionModel(
     versionId: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpEvent<object>>;
   public getVersionModel(
     versionId: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<any> {
     if (versionId === null || versionId === undefined) {
       throw new Error(
@@ -471,25 +471,25 @@ export class VersionControllerBackendService
     versionId: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<number>;
   public restoreVersion(
     versionId: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpResponse<number>>;
   public restoreVersion(
     versionId: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpEvent<number>>;
   public restoreVersion(
     versionId: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<any> {
     if (versionId === null || versionId === undefined) {
       throw new Error(

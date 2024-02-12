@@ -1,6 +1,6 @@
-import { Vec2D } from '../../utils/vec2D';
-import { PortAlignment } from '../../data-structures/technical.data.structures';
-import { Node } from '../../models/node.model';
+import {Vec2D} from '../../utils/vec2D';
+import {PortAlignment} from '../../data-structures/technical.data.structures';
+import {Node} from '../../models/node.model';
 import {
   NODE_MIN_HEIGHT,
   NODE_MIN_WIDTH,

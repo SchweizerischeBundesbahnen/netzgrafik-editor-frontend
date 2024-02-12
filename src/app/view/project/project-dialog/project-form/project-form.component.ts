@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { UntypedFormControl, Validators } from '@angular/forms';
-import { FormModel } from '../../../../utils/form-model';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import {Component, Input, OnInit} from '@angular/core';
+import {UntypedFormControl, Validators} from '@angular/forms';
+import {FormModel} from '../../../../utils/form-model';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'sbb-project-form',
@@ -54,7 +54,7 @@ const userIdsValidator = (control: UntypedFormControl) => {
     return null;
   }
 
-  return { invalidUserIds: invalidIds.join(', ') };
+  return {invalidUserIds: invalidIds.join(', ')};
 };
 
 export interface ProjectFormComponentModel {

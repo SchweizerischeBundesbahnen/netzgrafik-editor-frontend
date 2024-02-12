@@ -1,14 +1,14 @@
-import { DataService } from '../services/data/data.service';
-import { TrainrunService } from '../services/data/trainrun.service';
-import { NodeService } from '../services/data/node.service';
-import { TrainrunSectionService } from '../services/data/trainrunsection.service';
-import { Trainrun } from '../models/trainrun.model';
-import { Node } from '../models/node.model';
-import { TrainrunSection } from '../models/trainrunsection.model';
-import { TrainrunIterator } from '../services/util/trainrun.iterator';
-import { TimeUtils } from './time';
-import { GeneralViewFunctions } from '../view/util/generalViewFunctions';
-import { TrainrunCategory } from '../data-structures/business.data.structures';
+import {DataService} from '../services/data/data.service';
+import {TrainrunService} from '../services/data/trainrun.service';
+import {NodeService} from '../services/data/node.service';
+import {TrainrunSectionService} from '../services/data/trainrunsection.service';
+import {Trainrun} from '../models/trainrun.model';
+import {Node} from '../models/node.model';
+import {TrainrunSection} from '../models/trainrunsection.model';
+import {TrainrunIterator} from '../services/util/trainrun.iterator';
+import {TimeUtils} from './time';
+import {GeneralViewFunctions} from '../view/util/generalViewFunctions';
+import {TrainrunCategory} from '../data-structures/business.data.structures';
 
 export class RailMLExporter {
   private;

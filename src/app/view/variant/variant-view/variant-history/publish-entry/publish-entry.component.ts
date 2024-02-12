@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { HistoryEntryAction } from '../history-entry/history-entry.component';
-import { UntypedFormControl } from '@angular/forms';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {HistoryEntryAction} from '../history-entry/history-entry.component';
+import {UntypedFormControl} from '@angular/forms';
 
 @Component({
   selector: 'sbb-publish-entry',

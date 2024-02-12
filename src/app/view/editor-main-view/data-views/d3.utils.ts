@@ -1,14 +1,14 @@
-import { TrainrunSection } from '../../../models/trainrunsection.model';
-import { StaticDomTags } from './static.dom.tags';
-import { Node } from '../../../models/node.model';
+import {TrainrunSection} from '../../../models/trainrunsection.model';
+import {StaticDomTags} from './static.dom.tags';
+import {Node} from '../../../models/node.model';
 import * as d3 from 'd3';
-import { Vec2D } from '../../../utils/vec2D';
-import { TrainrunSectionViewObject } from './trainrunSectionViewObject';
-import { NodeViewObject } from './nodeViewObject';
-import { Transition } from '../../../models/transition.model';
-import { TransitionViewObject } from './transitionViewObject';
-import { MathUtils } from '../../../utils/math';
-import { ShortestDistanceNode } from '../../../services/analytics/algorithms/shortest-distance-node';
+import {Vec2D} from '../../../utils/vec2D';
+import {TrainrunSectionViewObject} from './trainrunSectionViewObject';
+import {NodeViewObject} from './nodeViewObject';
+import {Transition} from '../../../models/transition.model';
+import {TransitionViewObject} from './transitionViewObject';
+import {MathUtils} from '../../../utils/math';
+import {ShortestDistanceNode} from '../../../services/analytics/algorithms/shortest-distance-node';
 
 export class D3Utils {
   static isSpecialEditingEnabled = false;

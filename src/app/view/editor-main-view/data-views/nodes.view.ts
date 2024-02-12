@@ -7,20 +7,20 @@ import {
   NODE_TEXT_LEFT_SPACING,
   TEXT_SIZE,
 } from '../../rastering/definitions';
-import { Node } from '../../../models/node.model';
-import { StaticDomTags } from './static.dom.tags';
-import { TrainrunSection } from '../../../models/trainrunsection.model';
-import { EditorView } from './editor.view';
+import {Node} from '../../../models/node.model';
+import {StaticDomTags} from './static.dom.tags';
+import {TrainrunSection} from '../../../models/trainrunsection.model';
+import {EditorView} from './editor.view';
 import {
   DragIntermediateStopInfo,
   DragTransitionInfo,
   PreviewLineMode,
 } from './trainrunsection.previewline.view';
-import { Vec2D } from '../../../utils/vec2D';
-import { D3Utils } from './d3.utils';
-import { NodeViewObject } from './nodeViewObject';
-import { ConnectionsView } from './connections.view';
-import { EditorMode } from '../../editor-menu/editor-mode';
+import {Vec2D} from '../../../utils/vec2D';
+import {D3Utils} from './d3.utils';
+import {NodeViewObject} from './nodeViewObject';
+import {ConnectionsView} from './connections.view';
+import {EditorMode} from '../../editor-menu/editor-mode';
 
 export class NodesView {
   dragPreviousMousePosition: Vec2D;

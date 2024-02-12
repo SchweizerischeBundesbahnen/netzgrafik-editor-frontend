@@ -7,22 +7,22 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core';
-import { TrainrunSectionService } from '../../../../services/data/trainrunsection.service';
-import { TrainrunSection } from '../../../../models/trainrunsection.model';
-import { TrainrunService } from '../../../../services/data/trainrun.service';
-import { TrainrunDialogParameter } from '../trainrun-and-section-dialog.component';
-import { DataService } from '../../../../services/data/data.service';
+import {TrainrunSectionService} from '../../../../services/data/trainrunsection.service';
+import {TrainrunSection} from '../../../../models/trainrunsection.model';
+import {TrainrunService} from '../../../../services/data/trainrun.service';
+import {TrainrunDialogParameter} from '../trainrun-and-section-dialog.component';
+import {DataService} from '../../../../services/data/data.service';
 import {
   LeftAndRightElement,
   TrainrunsectionHelper,
 } from '../../../../services/util/trainrunsection.helper';
-import { FilterService } from '../../../../services/ui/filter.service';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { LinePatternRefs } from '../../../../data-structures/business.data.structures';
-import { StaticDomTags } from '../../../editor-main-view/data-views/static.dom.tags';
-import { ColorRefType } from '../../../../data-structures/technical.data.structures';
-import { TrainrunSectionTimesService } from '../../../../services/data/trainrun-section-times.service';
+import {FilterService} from '../../../../services/ui/filter.service';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {LinePatternRefs} from '../../../../data-structures/business.data.structures';
+import {StaticDomTags} from '../../../editor-main-view/data-views/static.dom.tags';
+import {ColorRefType} from '../../../../data-structures/technical.data.structures';
+import {TrainrunSectionTimesService} from '../../../../services/data/trainrun-section-times.service';
 
 export interface LeftAndRightTimeStructure {
   leftDepartureTime: number;

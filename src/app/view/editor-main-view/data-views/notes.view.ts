@@ -1,18 +1,18 @@
 import * as d3 from 'd3';
-import { Note } from '../../../models/note.model';
-import { EditorView } from './editor.view';
-import { StaticDomTags } from './static.dom.tags';
-import { NodeViewObject } from './nodeViewObject';
-import { NoteViewObject } from './noteViewObject';
+import {Note} from '../../../models/note.model';
+import {EditorView} from './editor.view';
+import {StaticDomTags} from './static.dom.tags';
+import {NodeViewObject} from './nodeViewObject';
+import {NoteViewObject} from './noteViewObject';
 import {
   NODE_POSITION_BASIC_RASTER,
   NOTE_TEXT_AREA_HEIGHT,
   NOTE_TEXT_LEFT_SPACING,
   TEXT_SIZE,
 } from '../../rastering/definitions';
-import { Vec2D } from '../../../utils/vec2D';
-import { PreviewLineMode } from './trainrunsection.previewline.view';
-import { EditorMode } from '../../editor-menu/editor-mode';
+import {Vec2D} from '../../../utils/vec2D';
+import {PreviewLineMode} from './trainrunsection.previewline.view';
+import {EditorMode} from '../../editor-menu/editor-mode';
 
 // See -> https://www.npmjs.com/package/ngx-editor
 

@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
-import { Vec2D } from '../../utils/vec2D';
-import { StaticDomTags } from '../editor-main-view/data-views/static.dom.tags';
-import { ViewboxProperties } from '../../services/ui/ui.interaction.service';
+import {Vec2D} from '../../utils/vec2D';
+import {StaticDomTags} from '../editor-main-view/data-views/static.dom.tags';
+import {ViewboxProperties} from '../../services/ui/ui.interaction.service';
 
 export interface SVGMouseControllerObserver {
   onEarlyReturnFromMousemove(): boolean;

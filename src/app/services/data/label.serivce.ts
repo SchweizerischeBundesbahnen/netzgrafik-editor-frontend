@@ -1,12 +1,12 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { LogService } from '../../logger/log.service';
+import {Injectable, OnDestroy} from '@angular/core';
+import {BehaviorSubject, Subject} from 'rxjs';
+import {LogService} from '../../logger/log.service';
 import {
   LabelDto,
   LabelRef,
 } from '../../data-structures/business.data.structures';
-import { Label } from '../../models/label.model';
-import { LabelGroupService } from './labelgroup.service';
+import {Label} from '../../models/label.model';
+import {LabelGroupService} from './labelgroup.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,7 @@ import { LabelGroupService } from './labelgroup.service';
 export class LabelService implements OnDestroy {
   labelSubject = new BehaviorSubject<Label[]>([]);
   readonly labels = this.labelSubject.asObservable();
-  private labelStore: { labels: Label[] } = { labels: [] }; // store the data in memory
+  private labelStore: {labels: Label[]} = {labels: []}; // store the data in memory
 
   private destroyed = new Subject<void>();
 

@@ -1,8 +1,8 @@
 import * as d3 from 'd3';
-import { Vec2D } from '../../utils/vec2D';
-import { RASTERING_BASIC_GRID_SIZE } from '../rastering/definitions';
-import { Node } from '../../models/node.model';
-import { VisAVisPortPlacement } from '../../services/util/node.port.placement';
+import {Vec2D} from '../../utils/vec2D';
+import {RASTERING_BASIC_GRID_SIZE} from '../rastering/definitions';
+import {Node} from '../../models/node.model';
+import {VisAVisPortPlacement} from '../../services/util/node.port.placement';
 
 export class GeneralViewFunctions {
   static calcDialogTopLeftScreenCoordinate(

@@ -6,22 +6,22 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { TimeSliderService } from '../../services/time-slider.service';
-import { TrainDataService } from '../../services/train-data-service';
-import { TrainrunService } from '../../../services/data/trainrun.service';
-import { takeUntil } from 'rxjs/operators';
-import { SgTrainrun } from '../../model/streckengrafik-model/sg-trainrun';
-import { SgTrainrunItem } from '../../model/streckengrafik-model/sg-trainrun-item';
-import { Sg6TrackService } from '../../services/sg-6-track.service';
+import {Subject} from 'rxjs';
+import {TimeSliderService} from '../../services/time-slider.service';
+import {TrainDataService} from '../../services/train-data-service';
+import {TrainrunService} from '../../../services/data/trainrun.service';
+import {takeUntil} from 'rxjs/operators';
+import {SgTrainrun} from '../../model/streckengrafik-model/sg-trainrun';
+import {SgTrainrunItem} from '../../model/streckengrafik-model/sg-trainrun-item';
+import {Sg6TrackService} from '../../services/sg-6-track.service';
 import {
   InformSelectedTrainrunClick,
   TrainrunSectionService,
 } from '../../../services/data/trainrunsection.service';
-import { NodeService } from '../../../services/data/node.service';
-import { UiInteractionService } from '../../../services/ui/ui.interaction.service';
-import { StreckengrafikDisplayElementService } from '../../services/util/streckengrafik-display-element.service';
-import { SliderChangeInfo } from '../../model/util/sliderChangeInfo';
+import {NodeService} from '../../../services/data/node.service';
+import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
+import {StreckengrafikDisplayElementService} from '../../services/util/streckengrafik-display-element.service';
+import {SliderChangeInfo} from '../../model/util/sliderChangeInfo';
 import * as d3 from 'd3';
 
 @Component({

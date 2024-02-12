@@ -1,13 +1,13 @@
-import { ThemeDefaultUxDark } from '../../view/themes/theme-default-ux-dark';
-import { ThemeFach } from '../../view/themes/theme-fach';
-import { ThemeFachDark } from '../../view/themes/theme-fach-dark';
-import { ThemeDefaultUx } from '../../view/themes/theme-default-ux';
-import { ThemeFachPrint } from '../../view/themes/theme-fach-print';
-import { ThemeGray } from '../../view/themes/theme-gray';
-import { ThemeBase } from './theme-base';
-import { ThemeRegistration } from './theme-registration';
-import { NetzgrafikColor } from '../../models/netzgrafikColor.model';
-import { ThemeGrayDark } from './theme-gray-dark';
+import {ThemeDefaultUxDark} from '../../view/themes/theme-default-ux-dark';
+import {ThemeFach} from '../../view/themes/theme-fach';
+import {ThemeFachDark} from '../../view/themes/theme-fach-dark';
+import {ThemeDefaultUx} from '../../view/themes/theme-default-ux';
+import {ThemeFachPrint} from '../../view/themes/theme-fach-print';
+import {ThemeGray} from '../../view/themes/theme-gray';
+import {ThemeBase} from './theme-base';
+import {ThemeRegistration} from './theme-registration';
+import {NetzgrafikColor} from '../../models/netzgrafikColor.model';
+import {ThemeGrayDark} from './theme-gray-dark';
 
 describe('Theme Tests', () => {
   it('ThemeBase test - simple', () => {

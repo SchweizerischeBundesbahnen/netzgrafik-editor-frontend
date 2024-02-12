@@ -7,17 +7,17 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { DataService } from '../../../../services/data/data.service';
-import { LabelService } from '../../../../services/data/label.serivce';
-import { LabelRef } from '../../../../data-structures/business.data.structures';
-import { LabelGroupService } from '../../../../services/data/labelgroup.service';
-import { Subject } from 'rxjs';
-import { NoteService } from '../../../../services/data/note.service';
-import { takeUntil } from 'rxjs/operators';
-import { Note } from '../../../../models/note.model';
-import { NoteDialogParameter } from '../note-dialog.component';
-import { SbbChipEvent, SbbChipInputEvent } from '@sbb-esta/angular/chips';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import {DataService} from '../../../../services/data/data.service';
+import {LabelService} from '../../../../services/data/label.serivce';
+import {LabelRef} from '../../../../data-structures/business.data.structures';
+import {LabelGroupService} from '../../../../services/data/labelgroup.service';
+import {Subject} from 'rxjs';
+import {NoteService} from '../../../../services/data/note.service';
+import {takeUntil} from 'rxjs/operators';
+import {Note} from '../../../../models/note.model';
+import {NoteDialogParameter} from '../note-dialog.component';
+import {SbbChipEvent, SbbChipInputEvent} from '@sbb-esta/angular/chips';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'sbb-note-filter-tab',

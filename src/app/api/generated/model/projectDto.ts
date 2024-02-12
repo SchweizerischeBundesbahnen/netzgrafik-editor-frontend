@@ -9,7 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { VariantSummaryDto } from './variantSummaryDto';
+import {VariantSummaryDto} from './variantSummaryDto';
 
 export interface ProjectDto {
   id: number;

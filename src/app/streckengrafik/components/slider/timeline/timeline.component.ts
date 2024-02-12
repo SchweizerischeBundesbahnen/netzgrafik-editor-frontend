@@ -6,15 +6,15 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { SliderChangeInfo } from '../../../model/util/sliderChangeInfo';
-import { TimeSliderService } from '../../../services/time-slider.service';
-import { DrawingBackgroundMouseListenerService } from '../../../services/util/drawingBackgroundMouseListener.service';
-import { Subject } from 'rxjs';
-import { ViewBoxChangeInfo } from '../../../model/util/viewBoxChangeInfo';
-import { takeUntil } from 'rxjs/operators';
-import { ViewBoxService } from '../../../services/util/view-box.service';
-import { Vec2D } from '../../../../utils/vec2D';
-import { TimeFormatter } from '../../../model/util/timeFormatter';
+import {SliderChangeInfo} from '../../../model/util/sliderChangeInfo';
+import {TimeSliderService} from '../../../services/time-slider.service';
+import {DrawingBackgroundMouseListenerService} from '../../../services/util/drawingBackgroundMouseListener.service';
+import {Subject} from 'rxjs';
+import {ViewBoxChangeInfo} from '../../../model/util/viewBoxChangeInfo';
+import {takeUntil} from 'rxjs/operators';
+import {ViewBoxService} from '../../../services/util/view-box.service';
+import {Vec2D} from '../../../../utils/vec2D';
+import {TimeFormatter} from '../../../model/util/timeFormatter';
 import {
   UpdateCounterController,
   UpdateCounterHandler,

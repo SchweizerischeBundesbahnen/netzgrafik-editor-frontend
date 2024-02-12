@@ -2,7 +2,7 @@ import {
   ConnectionDto,
   WarningDto,
 } from '../data-structures/technical.data.structures';
-import { Vec2D } from '../utils/vec2D';
+import {Vec2D} from '../utils/vec2D';
 
 export class Connection {
   private static currentId = 0;
@@ -17,7 +17,7 @@ export class Connection {
   private isSelected = false;
 
   constructor(
-    { id, port1Id, port2Id }: ConnectionDto = {
+    {id, port1Id, port2Id}: ConnectionDto = {
       id: Connection.incrementId(),
       port1Id: 0,
       port2Id: 0,

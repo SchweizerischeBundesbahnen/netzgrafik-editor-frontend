@@ -2,8 +2,8 @@ import {
   SVGMouseController,
   SVGMouseControllerObserver,
 } from './svg.mouse.controller';
-import { Vec2D } from '../../utils/vec2D';
-import { ViewboxProperties } from '../../services/ui/ui.interaction.service';
+import {Vec2D} from '../../utils/vec2D';
+import {ViewboxProperties} from '../../services/ui/ui.interaction.service';
 
 class DummySVGMouseControllerObserver implements SVGMouseControllerObserver {
   onEarlyReturnFromMousemove(): boolean {

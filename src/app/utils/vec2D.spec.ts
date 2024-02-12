@@ -1,4 +1,4 @@
-import { Vec2D } from './vec2D';
+import {Vec2D} from './vec2D';
 
 describe('vec2D', () => {
   it('constructor', () => {

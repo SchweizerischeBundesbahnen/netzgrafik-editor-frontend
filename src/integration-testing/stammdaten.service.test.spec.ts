@@ -1,20 +1,20 @@
-import { parse, ParseResult } from 'papaparse';
-import { NodeService } from '../app/services/data/node.service';
-import { TrainrunService } from '../app/services/data/trainrun.service';
-import { TrainrunSectionService } from '../app/services/data/trainrunsection.service';
-import { StammdatenService } from '../app/services/data/stammdaten.service';
-import { DataService } from '../app/services/data/data.service';
-import { ResourceService } from '../app/services/data/resource.service';
-import { LogService } from '../app/logger/log.service';
-import { LogPublishersService } from '../app/logger/log.publishers.service';
-import { NoteService } from '../app/services/data/note.service';
-import { LabelService } from '../app/services/data/label.serivce';
-import { LabelGroupService } from '../app/services/data/labelgroup.service';
-import { Note } from '../app/models/note.model';
-import { NetzgrafikUnitTesting } from './netzgrafik.unit.testing';
-import { HaltezeitFachCategories } from '../app/data-structures/business.data.structures';
-import { FilterService } from '../app/services/ui/filter.service';
-import { NetzgrafikColoringService } from '../app/services/data/netzgrafikColoring.service';
+import {parse, ParseResult} from 'papaparse';
+import {NodeService} from '../app/services/data/node.service';
+import {TrainrunService} from '../app/services/data/trainrun.service';
+import {TrainrunSectionService} from '../app/services/data/trainrunsection.service';
+import {StammdatenService} from '../app/services/data/stammdaten.service';
+import {DataService} from '../app/services/data/data.service';
+import {ResourceService} from '../app/services/data/resource.service';
+import {LogService} from '../app/logger/log.service';
+import {LogPublishersService} from '../app/logger/log.publishers.service';
+import {NoteService} from '../app/services/data/note.service';
+import {LabelService} from '../app/services/data/label.serivce';
+import {LabelGroupService} from '../app/services/data/labelgroup.service';
+import {Note} from '../app/models/note.model';
+import {NetzgrafikUnitTesting} from './netzgrafik.unit.testing';
+import {HaltezeitFachCategories} from '../app/data-structures/business.data.structures';
+import {FilterService} from '../app/services/ui/filter.service';
+import {NetzgrafikColoringService} from '../app/services/data/netzgrafikColoring.service';
 
 describe('NodeService Test', () => {
   let notes: Note[] = null;
@@ -90,7 +90,7 @@ describe('NodeService Test', () => {
       'AA;Aarau;Mitte;2;2;2;2;0;;4;0.2;SBB;JA;-209.4991625;-427.021373\n' +
       'ABE;Aarberg;Mitte;4;;;;;;;;;;;\n';
 
-    const finalResult: ParseResult = parse(stammdatenCSV, { header: true });
+    const finalResult: ParseResult = parse(stammdatenCSV, {header: true});
     stammdatenService.setStammdaten(finalResult.data);
     const aa = stammdatenService.getBPStammdaten('AA');
     expect(aa.getRegions()[0]).toBe('Mitte');

@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { SgPath } from '../../../model/streckengrafik-model/sg-path';
-import { TrackSegments } from '../../../model/trackData';
+import {Component, Input} from '@angular/core';
+import {SgPath} from '../../../model/streckengrafik-model/sg-path';
+import {TrackSegments} from '../../../model/trackData';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector

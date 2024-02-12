@@ -1,6 +1,6 @@
-import { ThemeBase } from './theme-base';
-import { ThemeRegistration } from './theme-registration';
-import { StaticDomTags } from '../editor-main-view/data-views/static.dom.tags';
+import {ThemeBase} from './theme-base';
+import {ThemeRegistration} from './theme-registration';
+import {StaticDomTags} from '../editor-main-view/data-views/static.dom.tags';
 
 export class ThemeDefaultUx extends ThemeBase {
   constructor(

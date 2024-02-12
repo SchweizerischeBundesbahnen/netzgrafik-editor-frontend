@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SlotComponent } from './slot.component';
-import { SbbMenu } from '@sbb-esta/angular/menu';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {SlotComponent} from './slot.component';
+import {SbbMenu} from '@sbb-esta/angular/menu';
 
 describe('SlotComponent', () => {
   let component: SlotComponent;

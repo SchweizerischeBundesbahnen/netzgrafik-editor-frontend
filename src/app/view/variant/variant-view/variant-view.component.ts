@@ -1,12 +1,12 @@
-import { Component, OnDestroy } from '@angular/core';
-import { VersionControlService } from '../../../services/data/version-control.service';
-import { filter, mergeMap, takeUntil } from 'rxjs/operators';
-import { ConfirmationDialogParameter } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
-import { Subject } from 'rxjs';
-import { UiInteractionService } from '../../../services/ui/ui.interaction.service';
-import { VariantDialogComponent } from '../variant-dialog/variant-dialog.component';
-import { SbbDialog } from '@sbb-esta/angular/dialog';
-import { NavigationService } from '../../../services/ui/navigation.service';
+import {Component, OnDestroy} from '@angular/core';
+import {VersionControlService} from '../../../services/data/version-control.service';
+import {filter, mergeMap, takeUntil} from 'rxjs/operators';
+import {ConfirmationDialogParameter} from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
+import {Subject} from 'rxjs';
+import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
+import {VariantDialogComponent} from '../variant-dialog/variant-dialog.component';
+import {SbbDialog} from '@sbb-esta/angular/dialog';
+import {NavigationService} from '../../../services/ui/navigation.service';
 
 @Component({
   selector: 'sbb-variant-view',

@@ -1,16 +1,16 @@
 import * as d3 from 'd3';
-import { Node } from '../../../models/node.model';
-import { EditorView } from './editor.view';
-import { StaticDomTags } from './static.dom.tags';
-import { Transition } from '../../../models/transition.model';
-import { Trainrun } from '../../../models/trainrun.model';
-import { D3Utils } from './d3.utils';
+import {Node} from '../../../models/node.model';
+import {EditorView} from './editor.view';
+import {StaticDomTags} from './static.dom.tags';
+import {Transition} from '../../../models/transition.model';
+import {Trainrun} from '../../../models/trainrun.model';
+import {D3Utils} from './d3.utils';
 import {
   DragTransitionInfo,
   PreviewLineMode,
 } from './trainrunsection.previewline.view';
-import { Vec2D } from '../../../utils/vec2D';
-import { TransitionViewObject } from './transitionViewObject';
+import {Vec2D} from '../../../utils/vec2D';
+import {TransitionViewObject} from './transitionViewObject';
 
 export class TransitionsView {
   transitionsGroup;

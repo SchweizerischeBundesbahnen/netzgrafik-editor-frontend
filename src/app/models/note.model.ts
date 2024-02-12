@@ -1,5 +1,5 @@
-import { FreeFloatingTextDto } from '../data-structures/business.data.structures';
-import { DataMigration } from '../utils/data-migration';
+import {FreeFloatingTextDto} from '../data-structures/business.data.structures';
+import {DataMigration} from '../utils/data-migration';
 
 export class Note {
   public static DEFAULT_NOTE_WIDTH = 192;

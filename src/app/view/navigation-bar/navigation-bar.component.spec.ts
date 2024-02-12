@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NavigationBarComponent } from './navigation-bar.component';
+import {NavigationBarComponent} from './navigation-bar.component';
 import {
   ProjectControllerBackendService,
   VariantControllerBackendService,
 } from '../../api/generated';
-import { NavigationEnd, Router, RouterEvent } from '@angular/router';
-import { NavigationService } from '../../services/ui/navigation.service';
-import { NEVER } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {NavigationEnd, Router, RouterEvent} from '@angular/router';
+import {NavigationService} from '../../services/ui/navigation.service';
+import {NEVER} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 describe('NavigationBarComponent', () => {
   let component: NavigationBarComponent;
@@ -26,8 +26,8 @@ describe('NavigationBarComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [NavigationBarComponent],
       providers: [
-        { provide: Router, useValue: router },
-        { provide: NavigationService, useValue: {} },
+        {provide: Router, useValue: router},
+        {provide: NavigationService, useValue: {}},
         {
           provide: ProjectControllerBackendService,
           useValue: projectControllerBackendService,

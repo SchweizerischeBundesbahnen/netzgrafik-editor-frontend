@@ -1,9 +1,9 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { SgSelectedTrainrun } from '../model/streckengrafik-model/sg-selected-trainrun';
-import { Sg4ToggleTrackOccupierService } from './sg-4-toggle-track-occupier.service';
-import { takeUntil } from 'rxjs/operators';
-import { TrainrunBranchType } from '../model/enum/trainrun-branch-type-type';
+import {Injectable, OnDestroy} from '@angular/core';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {SgSelectedTrainrun} from '../model/streckengrafik-model/sg-selected-trainrun';
+import {Sg4ToggleTrackOccupierService} from './sg-4-toggle-track-occupier.service';
+import {takeUntil} from 'rxjs/operators';
+import {TrainrunBranchType} from '../model/enum/trainrun-branch-type-type';
 
 @Injectable({
   providedIn: 'root',

@@ -10,18 +10,18 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { interval, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { ViewBoxService } from '../services/util/view-box.service';
-import { ViewBoxChangeInfo } from '../model/util/viewBoxChangeInfo';
-import { ResizeChangeInfo } from '../model/util/resizeChangeInfo';
-import { ResizeService } from '../services/util/resize.service';
-import { SliderChangeInfo } from '../model/util/sliderChangeInfo';
-import { TimeSliderService } from '../services/time-slider.service';
-import { UpdateCounterTriggerSerivce } from '../services/util/update-counter.service';
-import { Sg4ToggleTrackOccupierService } from '../services/sg-4-toggle-track-occupier.service';
-import { StreckengrafikDisplayElementService } from '../services/util/streckengrafik-display-element.service';
-import { StreckengrafikDrawingContext } from '../model/util/streckengrafik.drawing.context';
+import {interval, Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {ViewBoxService} from '../services/util/view-box.service';
+import {ViewBoxChangeInfo} from '../model/util/viewBoxChangeInfo';
+import {ResizeChangeInfo} from '../model/util/resizeChangeInfo';
+import {ResizeService} from '../services/util/resize.service';
+import {SliderChangeInfo} from '../model/util/sliderChangeInfo';
+import {TimeSliderService} from '../services/time-slider.service';
+import {UpdateCounterTriggerSerivce} from '../services/util/update-counter.service';
+import {Sg4ToggleTrackOccupierService} from '../services/sg-4-toggle-track-occupier.service';
+import {StreckengrafikDisplayElementService} from '../services/util/streckengrafik-display-element.service';
+import {StreckengrafikDrawingContext} from '../model/util/streckengrafik.drawing.context';
 
 @Component({
   selector: 'sbb-streckengrafik',

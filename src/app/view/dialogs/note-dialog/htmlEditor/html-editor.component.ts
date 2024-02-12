@@ -1,11 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Editor, Toolbar } from 'ngx-editor';
-import { FormModel } from '../../../../utils/form-model';
-import { NoteFormComponentModel } from '../note-form/note-form.component';
-import { HtmlEditorColor } from './html-editor-color';
-import { Subscription } from 'rxjs';
-import { getSelectionMarks, isMarkActive } from 'ngx-editor/helpers';
-import { StaticDomTags } from '../../../editor-main-view/data-views/static.dom.tags';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Editor, Toolbar} from 'ngx-editor';
+import {FormModel} from '../../../../utils/form-model';
+import {NoteFormComponentModel} from '../note-form/note-form.component';
+import {HtmlEditorColor} from './html-editor-color';
+import {Subscription} from 'rxjs';
+import {getSelectionMarks, isMarkActive} from 'ngx-editor/helpers';
+import {StaticDomTags} from '../../../editor-main-view/data-views/static.dom.tags';
 
 @Component({
   selector: 'sbb-html-editor',
@@ -161,12 +161,12 @@ export class HtmlEditorComponent implements OnInit, OnDestroy {
   }
 
   private update = (view: any) => {
-    const { state } = view;
+    const {state} = view;
     this.textBasedActiveColor = this.getColorActive(state);
   };
 
   private getColorActive(state: any): string[] {
-    const { schema } = state;
+    const {schema} = state;
     const type = schema.marks.text_color;
     if (!type) {
       return [];

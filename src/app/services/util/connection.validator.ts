@@ -1,7 +1,7 @@
-import { Connection } from '../../models/connection.model';
-import { Node } from '../../models/node.model';
-import { Port } from '../../models/port.model';
-import { Transition } from '../../models/transition.model';
+import {Connection} from '../../models/connection.model';
+import {Node} from '../../models/node.model';
+import {Port} from '../../models/port.model';
+import {Transition} from '../../models/transition.model';
 
 export class ConnectionValidator {
   static validateConnection(connection: Connection, node: Node): boolean {

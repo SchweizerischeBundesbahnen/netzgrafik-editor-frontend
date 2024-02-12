@@ -1,12 +1,12 @@
-import { TrainrunSection } from './trainrunsection.model';
-import { Node } from './node.model';
-import { Trainrun } from './trainrun.model';
+import {TrainrunSection} from './trainrunsection.model';
+import {Node} from './node.model';
+import {Trainrun} from './trainrun.model';
 import {
   PortAlignment,
   TimeLockDto,
 } from '../data-structures/technical.data.structures';
-import { Resource } from './resource.model';
-import { Connection } from './connection.model';
+import {Resource} from './resource.model';
+import {Connection} from './connection.model';
 
 describe('TrainrunSection Model Test', () => {
   it('setSourceAndTargetNodeReference', () => {

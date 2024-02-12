@@ -5,11 +5,11 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { LogService } from '../logger/log.service';
-import { Injectable } from '@angular/core';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {Router} from '@angular/router';
+import {LogService} from '../logger/log.service';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {

@@ -1,5 +1,5 @@
-import { Node } from '../../../models/node.model';
-import { EditorView } from './editor.view';
+import {Node} from '../../../models/node.model';
+import {EditorView} from './editor.view';
 
 export class NodeViewObject {
   key: string;

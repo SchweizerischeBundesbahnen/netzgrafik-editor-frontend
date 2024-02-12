@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { FormModel } from '../../../../utils/form-model';
+import {Component, Input} from '@angular/core';
+import {FormModel} from '../../../../utils/form-model';
 
 @Component({
   selector: 'sbb-note-form',

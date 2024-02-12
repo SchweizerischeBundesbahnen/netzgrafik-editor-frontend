@@ -1,12 +1,7 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { DataService } from './data.service';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  map,
-} from 'rxjs/operators';
+import {Injectable, OnDestroy} from '@angular/core';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {DataService} from './data.service';
+import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',

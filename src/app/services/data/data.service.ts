@@ -1,25 +1,25 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {
   NetzgrafikDto,
   TrainrunCategory,
   TrainrunFrequency,
   TrainrunTimeCategory,
 } from '../../data-structures/business.data.structures';
-import { NetzgrafikDefault } from '../../sample-netzgrafik/netzgrafik.default';
-import { NodeService } from './node.service';
-import { TrainrunSectionService } from './trainrunsection.service';
-import { TrainrunService } from './trainrun.service';
-import { StammdatenService } from './stammdaten.service';
-import { Stammdaten } from '../../models/stammdaten.model';
-import { ResourceService } from './resource.service';
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { debounceTime, map, skip, takeUntil } from 'rxjs/operators';
-import { NoteService } from './note.service';
-import { LabelService } from './label.serivce';
-import { LabelGroupService } from './labelgroup.service';
-import { DataMigration } from '../../utils/data-migration';
-import { FilterService } from '../ui/filter.service';
-import { NetzgrafikColoringService } from './netzgrafikColoring.service';
+import {NetzgrafikDefault} from '../../sample-netzgrafik/netzgrafik.default';
+import {NodeService} from './node.service';
+import {TrainrunSectionService} from './trainrunsection.service';
+import {TrainrunService} from './trainrun.service';
+import {StammdatenService} from './stammdaten.service';
+import {Stammdaten} from '../../models/stammdaten.model';
+import {ResourceService} from './resource.service';
+import {BehaviorSubject, combineLatest, Observable, Subject} from 'rxjs';
+import {debounceTime, map, skip, takeUntil} from 'rxjs/operators';
+import {NoteService} from './note.service';
+import {LabelService} from './label.serivce';
+import {LabelGroupService} from './labelgroup.service';
+import {DataMigration} from '../../utils/data-migration';
+import {FilterService} from '../ui/filter.service';
+import {NetzgrafikColoringService} from './netzgrafikColoring.service';
 
 export class NetzgrafikLoadedInfo {
   constructor(
@@ -32,7 +32,7 @@ export class NetzgrafikLoadedInfo {
   providedIn: 'root',
 })
 export class DataService implements OnDestroy {
-  private netzgrafikDtoStore: { netzgrafikDto: NetzgrafikDto } = {
+  private netzgrafikDtoStore: {netzgrafikDto: NetzgrafikDto} = {
     netzgrafikDto: NetzgrafikDefault.getDefaultNetzgrafik(),
   };
 

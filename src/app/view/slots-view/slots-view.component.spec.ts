@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SlotsViewComponent } from './slots-view.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {SlotsViewComponent} from './slots-view.component';
 
 describe('SlotViewComponent', () => {
   let component: SlotsViewComponent;

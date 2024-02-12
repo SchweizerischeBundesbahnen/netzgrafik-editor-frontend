@@ -1,4 +1,4 @@
-import { Params } from '@angular/router';
+import {Params} from '@angular/router';
 
 export class NavigationParameters {
   constructor(private readonly params: Params) {}

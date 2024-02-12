@@ -1,11 +1,11 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { VersionControllerBackendService } from '../../api/generated';
-import { map, takeUntil } from 'rxjs/operators';
-import { DataService } from './data.service';
-import { NetzgrafikDto } from '../../data-structures/business.data.structures';
-import { AutoSaveService } from './auto-save.service';
-import { VersionControlService } from './version-control.service';
-import { Subject } from 'rxjs';
+import {Injectable, OnDestroy} from '@angular/core';
+import {VersionControllerBackendService} from '../../api/generated';
+import {map, takeUntil} from 'rxjs/operators';
+import {DataService} from './data.service';
+import {NetzgrafikDto} from '../../data-structures/business.data.structures';
+import {AutoSaveService} from './auto-save.service';
+import {VersionControlService} from './version-control.service';
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

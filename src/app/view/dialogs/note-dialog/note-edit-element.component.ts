@@ -6,11 +6,11 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormModel } from '../../../utils/form-model';
-import { NoteFormComponentModel } from './note-form/note-form.component';
-import { Subject } from 'rxjs';
-import { NoteDialogParameter } from './note-dialog.component';
-import { Note } from '../../../models/note.model';
+import {FormModel} from '../../../utils/form-model';
+import {NoteFormComponentModel} from './note-form/note-form.component';
+import {Subject} from 'rxjs';
+import {NoteDialogParameter} from './note-dialog.component';
+import {Note} from '../../../models/note.model';
 
 @Component({
   selector: 'sbb-note-edit-element',

@@ -7,7 +7,7 @@ import {
 export class FormModel<T> {
   private readonly keys: string[];
   private readonly form: UntypedFormGroup;
-  private readonly controls: { [key: string]: UntypedFormControl } = {};
+  private readonly controls: {[key: string]: UntypedFormControl} = {};
 
   private readonly validatorsByKey: Map<string, ValidatorFn[]> = new Map<
     string,
@@ -54,7 +54,7 @@ export class FormModel<T> {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
-      const object: { [key: string]: any } = {};
+      const object: {[key: string]: any} = {};
       this.keys.forEach((key) => (object[key] = this.controls[key].value));
 
       return object as T;

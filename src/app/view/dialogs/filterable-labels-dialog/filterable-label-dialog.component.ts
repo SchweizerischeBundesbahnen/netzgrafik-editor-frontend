@@ -1,15 +1,15 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
+import {Component, Inject, OnDestroy} from '@angular/core';
 import {
   SBB_DIALOG_DATA,
   SbbDialog,
   SbbDialogRef,
 } from '@sbb-esta/angular/dialog';
-import { FormModel } from '../../../utils/form-model';
-import { FilterableLabelsFormComponentModel } from './filterable-labels-form/filterable-label-form.component';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { ConfirmationDialogParameter } from '../confirmation-dialog/confirmation-dialog.component';
-import { UiInteractionService } from '../../../services/ui/ui.interaction.service';
+import {FormModel} from '../../../utils/form-model';
+import {FilterableLabelsFormComponentModel} from './filterable-labels-form/filterable-label-form.component';
+import {Observable, Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {ConfirmationDialogParameter} from '../confirmation-dialog/confirmation-dialog.component';
+import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
 
 @Component({
   selector: 'sbb-filterable-label-dialog',
@@ -67,7 +67,7 @@ export class FilterableLabelDialogComponent implements OnDestroy {
     initData: FilterableLabelsFormComponentModel,
   ): Observable<FilterableLabelsFormComponentModel> {
     return dialog
-      .open(FilterableLabelDialogComponent, { data: initData })
+      .open(FilterableLabelDialogComponent, {data: initData})
       .afterClosed();
   }
 

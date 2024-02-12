@@ -1,20 +1,17 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FilterService } from '../../services/ui/filter.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FilterService} from '../../services/ui/filter.service';
 import {
   TrainrunCategory,
   TrainrunFrequency,
   TrainrunTimeCategory,
 } from '../../data-structures/business.data.structures';
-import { DataService } from '../../services/data/data.service';
-import { UiInteractionService } from '../../services/ui/ui.interaction.service';
-import {
-  LabelGroup,
-  LogicalFilterOperator,
-} from '../../models/labelGroup.model';
-import { Subject } from 'rxjs';
-import { FilterSetting } from '../../models/filterSettings.model';
-import { takeUntil } from 'rxjs/operators';
-import { StaticDomTags } from '../editor-main-view/data-views/static.dom.tags';
+import {DataService} from '../../services/data/data.service';
+import {UiInteractionService} from '../../services/ui/ui.interaction.service';
+import {LabelGroup, LogicalFilterOperator} from '../../models/labelGroup.model';
+import {Subject} from 'rxjs';
+import {FilterSetting} from '../../models/filterSettings.model';
+import {takeUntil} from 'rxjs/operators';
+import {StaticDomTags} from '../editor-main-view/data-views/static.dom.tags';
 
 @Component({
   selector: 'sbb-editor-filter-view',

@@ -1,25 +1,25 @@
-import { parse, ParseResult } from 'papaparse';
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { RailMLExporter } from '../../utils/railMLExporter';
+import {parse, ParseResult} from 'papaparse';
+import {Component, ElementRef, ViewChild} from '@angular/core';
+import {RailMLExporter} from '../../utils/railMLExporter';
 import * as svg from 'save-svg-as-png';
-import { DataService } from '../../services/data/data.service';
-import { TrainrunService } from '../../services/data/trainrun.service';
-import { NodeService } from '../../services/data/node.service';
-import { FilterService } from '../../services/ui/filter.service';
-import { TrainrunSectionService } from '../../services/data/trainrunsection.service';
-import { UiInteractionService } from '../../services/ui/ui.interaction.service';
-import { StammdatenService } from '../../services/data/stammdaten.service';
-import { LogService } from '../../logger/log.service';
-import { VersionControlService } from '../../services/data/version-control.service';
+import {DataService} from '../../services/data/data.service';
+import {TrainrunService} from '../../services/data/trainrun.service';
+import {NodeService} from '../../services/data/node.service';
+import {FilterService} from '../../services/ui/filter.service';
+import {TrainrunSectionService} from '../../services/data/trainrunsection.service';
+import {UiInteractionService} from '../../services/ui/ui.interaction.service';
+import {StammdatenService} from '../../services/data/stammdaten.service';
+import {LogService} from '../../logger/log.service';
+import {VersionControlService} from '../../services/data/version-control.service';
 import {
   HaltezeitFachCategories,
   NetzgrafikDto,
   TrainrunCategoryHaltezeit,
 } from '../../data-structures/business.data.structures';
-import { downloadBlob } from '../util/download-utils';
-import { map } from 'rxjs/operators';
-import { LabelService } from '../../services/data/label.serivce';
-import { NetzgrafikColoringService } from '../../services/data/netzgrafikColoring.service';
+import {downloadBlob} from '../util/download-utils';
+import {map} from 'rxjs/operators';
+import {LabelService} from '../../services/data/label.serivce';
+import {NetzgrafikColoringService} from '../../services/data/netzgrafikColoring.service';
 
 @Component({
   selector: 'sbb-editor-tools-view-component',
@@ -27,9 +27,9 @@ import { NetzgrafikColoringService } from '../../services/data/netzgrafikColorin
   styleUrls: ['./editor-tools-view.component.scss'],
 })
 export class EditorToolsViewComponent {
-  @ViewChild('stammdatenFileInput', { static: false })
+  @ViewChild('stammdatenFileInput', {static: false})
   stammdatenFileInput: ElementRef;
-  @ViewChild('netgrafikJsonFileInput', { static: false })
+  @ViewChild('netgrafikJsonFileInput', {static: false})
   netgrafikJsonFileInput: ElementRef;
 
   public isDeletable$ = this.versionControlService.variant$.pipe(
@@ -85,7 +85,7 @@ export class EditorToolsViewComponent {
 
   onSave() {
     const data: NetzgrafikDto = this.dataService.getNetzgrafikDto();
-    const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify(data)], {type: 'application/json'});
     downloadBlob(blob, 'netzgrafik.json');
   }
 

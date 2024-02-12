@@ -9,15 +9,15 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { HttpHeaders } from '@angular/common/http';
+import {HttpHeaders} from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 
-import { VersionCreateReleaseDto } from '../model/models';
-import { VersionCreateSnapshotDto } from '../model/models';
-import { VersionDto } from '../model/models';
+import {VersionCreateReleaseDto} from '../model/models';
+import {VersionCreateSnapshotDto} from '../model/models';
+import {VersionDto} from '../model/models';
 
-import { Configuration } from '../configuration';
+import {Configuration} from '../configuration';
 
 export interface VersionControllerBackendServiceInterface {
   defaultHeaders: HttpHeaders;

@@ -2,8 +2,8 @@ import {
   PortAlignment,
   PortDto,
 } from '../data-structures/technical.data.structures';
-import { TrainrunSection } from './trainrunsection.model';
-import { Vec2D } from '../utils/vec2D';
+import {TrainrunSection} from './trainrunsection.model';
+import {Vec2D} from '../utils/vec2D';
 
 export class Port {
   private static currentId = 0;
@@ -16,7 +16,7 @@ export class Port {
   private trainrunSection: TrainrunSection = null;
 
   constructor(
-    { id, trainrunSectionId, positionIndex, positionAlignment }: PortDto = {
+    {id, trainrunSectionId, positionIndex, positionAlignment}: PortDto = {
       id: Port.incrementId(),
       positionIndex: 0,
       positionAlignment: PortAlignment.Top,

@@ -1,19 +1,19 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { SgSelectedTrainrun } from '../model/streckengrafik-model/sg-selected-trainrun';
-import { takeUntil } from 'rxjs/operators';
-import { TrackData, TrackSegments } from '../model/trackData';
-import { SgTrainrunSection } from '../model/streckengrafik-model/sg-trainrun-section';
-import { SgTrainrunItem } from '../model/streckengrafik-model/sg-trainrun-item';
-import { SgTrainrunNode } from '../model/streckengrafik-model/sg-trainrun-node';
-import { SgTrainrun } from '../model/streckengrafik-model/sg-trainrun';
-import { TrainrunBranchType } from '../model/enum/trainrun-branch-type-type';
-import { Sg5FilterService } from './sg-5-filter.service';
-import { DataService } from '../../services/data/data.service';
-import { TrainrunFrequency } from '../../data-structures/business.data.structures';
-import { NodeService } from '../../services/data/node.service';
-import { TrainrunSectionService } from '../../services/data/trainrunsection.service';
-import { TrainrunService } from '../../services/data/trainrun.service';
+import {Injectable, OnDestroy} from '@angular/core';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {SgSelectedTrainrun} from '../model/streckengrafik-model/sg-selected-trainrun';
+import {takeUntil} from 'rxjs/operators';
+import {TrackData, TrackSegments} from '../model/trackData';
+import {SgTrainrunSection} from '../model/streckengrafik-model/sg-trainrun-section';
+import {SgTrainrunItem} from '../model/streckengrafik-model/sg-trainrun-item';
+import {SgTrainrunNode} from '../model/streckengrafik-model/sg-trainrun-node';
+import {SgTrainrun} from '../model/streckengrafik-model/sg-trainrun';
+import {TrainrunBranchType} from '../model/enum/trainrun-branch-type-type';
+import {Sg5FilterService} from './sg-5-filter.service';
+import {DataService} from '../../services/data/data.service';
+import {TrainrunFrequency} from '../../data-structures/business.data.structures';
+import {NodeService} from '../../services/data/node.service';
+import {TrainrunSectionService} from '../../services/data/trainrunsection.service';
+import {TrainrunService} from '../../services/data/trainrun.service';
 
 @Injectable({
   providedIn: 'root',
@@ -132,7 +132,7 @@ export class Sg6TrackService implements OnDestroy {
               }
               sectionsOfInterest
                 .get(sectionKey)
-                .push({ item: trainrunItem, trainrun: ts });
+                .push({item: trainrunItem, trainrun: ts});
             }
           }
         }
@@ -176,7 +176,7 @@ export class Sg6TrackService implements OnDestroy {
       key2 = keyTmp;
     }
     const sectionKey = key1 + '#' + key2;
-    return { key: sectionKey, node1: node1, node2: node2 };
+    return {key: sectionKey, node1: node1, node2: node2};
   }
 
   private getDistanceGridResolutionInfo(sectionData: any[]) {

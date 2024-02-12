@@ -8,19 +8,19 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { LoadPerlenketteService } from './service/load-perlenkette.service';
-import { PerlenketteTrainrun } from './model/perlenketteTrainrun';
-import { PerlenketteSection } from './model/perlenketteSection';
-import { FilterService } from '../services/ui/filter.service';
-import { UiInteractionService } from '../services/ui/ui.interaction.service';
-import { Vec2D } from '../utils/vec2D';
-import { PerlenketteItem } from './model/perlenketteItem';
-import { PerlenketteNode } from './model/perlenketteNode';
-import { EditorMode } from '../view/editor-menu/editor-mode';
-import { NodeService } from '../services/data/node.service';
-import { takeUntil } from 'rxjs/operators';
-import { PerlenketteConnection } from './model/perlenketteConnection';
+import {Subject} from 'rxjs';
+import {LoadPerlenketteService} from './service/load-perlenkette.service';
+import {PerlenketteTrainrun} from './model/perlenketteTrainrun';
+import {PerlenketteSection} from './model/perlenketteSection';
+import {FilterService} from '../services/ui/filter.service';
+import {UiInteractionService} from '../services/ui/ui.interaction.service';
+import {Vec2D} from '../utils/vec2D';
+import {PerlenketteItem} from './model/perlenketteItem';
+import {PerlenketteNode} from './model/perlenketteNode';
+import {EditorMode} from '../view/editor-menu/editor-mode';
+import {NodeService} from '../services/data/node.service';
+import {takeUntil} from 'rxjs/operators';
+import {PerlenketteConnection} from './model/perlenketteConnection';
 
 @Component({
   selector: 'sbb-perlenkette',

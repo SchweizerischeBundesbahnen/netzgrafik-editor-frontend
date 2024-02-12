@@ -1,18 +1,18 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FilterService } from '../../../services/ui/filter.service';
-import { LabelRef } from '../../../data-structures/business.data.structures';
-import { DataService } from '../../../services/data/data.service';
-import { UiInteractionService } from '../../../services/ui/ui.interaction.service';
-import { LabelService } from '../../../services/data/label.serivce';
-import { Label } from '../../../models/label.model';
-import { takeUntil } from 'rxjs/operators';
-import { LabelGroupService } from '../../../services/data/labelgroup.service';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {FilterService} from '../../../services/ui/filter.service';
+import {LabelRef} from '../../../data-structures/business.data.structures';
+import {DataService} from '../../../services/data/data.service';
+import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
+import {LabelService} from '../../../services/data/label.serivce';
+import {Label} from '../../../models/label.model';
+import {takeUntil} from 'rxjs/operators';
+import {LabelGroupService} from '../../../services/data/labelgroup.service';
 import {
   LabelGroup,
   LogicalFilterOperator,
 } from '../../../models/labelGroup.model';
-import { Subject } from 'rxjs';
-import { StaticDomTags } from '../../editor-main-view/data-views/static.dom.tags';
+import {Subject} from 'rxjs';
+import {StaticDomTags} from '../../editor-main-view/data-views/static.dom.tags';
 
 @Component({
   selector: 'sbb-filterable-label-filter-view',

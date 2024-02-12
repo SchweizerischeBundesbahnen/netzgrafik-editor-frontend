@@ -1,5 +1,5 @@
-import { Transition } from '../../../models/transition.model';
-import { EditorView } from './editor.view';
+import {Transition} from '../../../models/transition.model';
+import {EditorView} from './editor.view';
 
 export class TransitionViewObject {
   key: string;

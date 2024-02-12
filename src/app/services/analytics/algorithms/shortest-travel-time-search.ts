@@ -1,12 +1,12 @@
-import { TrainrunSection } from '../../../models/trainrunsection.model';
-import { Node } from '../../../models/node.model';
-import { Port } from '../../../models/port.model';
-import { TrainrunSectionService } from '../../data/trainrunsection.service';
-import { NodeService } from '../../data/node.service';
-import { TrainrunService } from '../../data/trainrun.service';
-import { ShortestDistanceNode } from './shortest-distance-node';
-import { ShortestDistanceEdge } from './shortest-distance-edge';
-import { FilterService } from '../../ui/filter.service';
+import {TrainrunSection} from '../../../models/trainrunsection.model';
+import {Node} from '../../../models/node.model';
+import {Port} from '../../../models/port.model';
+import {TrainrunSectionService} from '../../data/trainrunsection.service';
+import {NodeService} from '../../data/node.service';
+import {TrainrunService} from '../../data/trainrun.service';
+import {ShortestDistanceNode} from './shortest-distance-node';
+import {ShortestDistanceEdge} from './shortest-distance-edge';
+import {FilterService} from '../../ui/filter.service';
 
 //
 // The shortest travel time search method is based on the Dijkstra Algorithm.

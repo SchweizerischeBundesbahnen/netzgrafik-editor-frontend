@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { HistoryEntryAction } from '../history-entry/history-entry.component';
-import { DownloadVersionModel, VersionId } from '../model';
-import { UserId } from '../version-entry-layout/version-entry-layout.component';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {HistoryEntryAction} from '../history-entry/history-entry.component';
+import {DownloadVersionModel, VersionId} from '../model';
+import {UserId} from '../version-entry-layout/version-entry-layout.component';
 
 @Component({
   selector: 'sbb-released-entry',

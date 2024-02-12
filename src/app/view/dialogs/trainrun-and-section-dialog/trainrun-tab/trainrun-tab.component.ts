@@ -1,25 +1,19 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  Output,
-} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {
   TrainrunCategory,
   TrainrunFrequency,
   TrainrunTimeCategory,
 } from '../../../../data-structures/business.data.structures';
-import { Trainrun } from '../../../../models/trainrun.model';
-import { TrainrunService } from '../../../../services/data/trainrun.service';
-import { TrainrunSectionService } from '../../../../services/data/trainrunsection.service';
-import { UiInteractionService } from '../../../../services/ui/ui.interaction.service';
-import { ConfirmationDialogParameter } from '../../confirmation-dialog/confirmation-dialog.component';
-import { DataService } from '../../../../services/data/data.service';
-import { StaticDomTags } from '../../../editor-main-view/data-views/static.dom.tags';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { TrainrunDialogParameter } from '../trainrun-and-section-dialog.component';
+import {Trainrun} from '../../../../models/trainrun.model';
+import {TrainrunService} from '../../../../services/data/trainrun.service';
+import {TrainrunSectionService} from '../../../../services/data/trainrunsection.service';
+import {UiInteractionService} from '../../../../services/ui/ui.interaction.service';
+import {ConfirmationDialogParameter} from '../../confirmation-dialog/confirmation-dialog.component';
+import {DataService} from '../../../../services/data/data.service';
+import {StaticDomTags} from '../../../editor-main-view/data-views/static.dom.tags';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {TrainrunDialogParameter} from '../trainrun-and-section-dialog.component';
 
 @Component({
   selector: 'sbb-trainrun-tab',

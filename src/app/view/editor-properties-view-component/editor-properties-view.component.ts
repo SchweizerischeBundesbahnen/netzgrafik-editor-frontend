@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { DataService } from '../../services/data/data.service';
-import { UiInteractionService } from '../../services/ui/ui.interaction.service';
-import { SbbRadioChange } from '@sbb-esta/angular/radio-button';
-import { ThemeBase } from '../themes/theme-base';
-import { ThemeRegistration } from '../themes/theme-registration';
-import { StreckengrafikRenderingType } from '../themes/streckengrafik-rendering-type';
+import {Component} from '@angular/core';
+import {DataService} from '../../services/data/data.service';
+import {UiInteractionService} from '../../services/ui/ui.interaction.service';
+import {SbbRadioChange} from '@sbb-esta/angular/radio-button';
+import {ThemeBase} from '../themes/theme-base';
+import {ThemeRegistration} from '../themes/theme-registration';
+import {StreckengrafikRenderingType} from '../themes/streckengrafik-rendering-type';
 
 @Component({
   selector: 'sbb-editor-properties-view-component',

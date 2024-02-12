@@ -1,4 +1,4 @@
-import { Node } from '../../models/node.model';
+import {Node} from '../../models/node.model';
 
 export class TransitionValidator {
   static validateTransition(node: Node, transitionId: number) {

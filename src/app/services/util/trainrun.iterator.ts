@@ -1,6 +1,6 @@
-import { Node } from '../../models/node.model';
-import { TrainrunSection } from '../../models/trainrunsection.model';
-import { LogService } from '../../logger/log.service';
+import {Node} from '../../models/node.model';
+import {TrainrunSection} from '../../models/trainrunsection.model';
+import {LogService} from '../../logger/log.service';
 
 export class TrainrunSectionNodePair {
   constructor(

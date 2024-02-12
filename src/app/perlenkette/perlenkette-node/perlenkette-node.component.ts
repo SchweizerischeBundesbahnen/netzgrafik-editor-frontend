@@ -1,18 +1,18 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PerlenketteNode } from '../model/perlenketteNode';
-import { NodeService } from '../../services/data/node.service';
-import { PerlenketteTrainrun } from '../model/perlenketteTrainrun';
-import { TrainrunService } from '../../services/data/trainrun.service';
-import { Transition } from '../../models/transition.model';
-import { D3Utils } from '../../view/editor-main-view/data-views/d3.utils';
-import { Vec2D } from '../../utils/vec2D';
-import { StaticDomTags } from '../../view/editor-main-view/data-views/static.dom.tags';
-import { PerlenketteSection } from '../model/perlenketteSection';
-import { FilterService } from '../../services/ui/filter.service';
-import { Trainrun } from '../../models/trainrun.model';
-import { PerlenketteConnection } from '../model/perlenketteConnection';
-import { PerlenketteItem } from '../model/perlenketteItem';
-import { UiInteractionService } from '../../services/ui/ui.interaction.service';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {PerlenketteNode} from '../model/perlenketteNode';
+import {NodeService} from '../../services/data/node.service';
+import {PerlenketteTrainrun} from '../model/perlenketteTrainrun';
+import {TrainrunService} from '../../services/data/trainrun.service';
+import {Transition} from '../../models/transition.model';
+import {D3Utils} from '../../view/editor-main-view/data-views/d3.utils';
+import {Vec2D} from '../../utils/vec2D';
+import {StaticDomTags} from '../../view/editor-main-view/data-views/static.dom.tags';
+import {PerlenketteSection} from '../model/perlenketteSection';
+import {FilterService} from '../../services/ui/filter.service';
+import {Trainrun} from '../../models/trainrun.model';
+import {PerlenketteConnection} from '../model/perlenketteConnection';
+import {PerlenketteItem} from '../model/perlenketteItem';
+import {UiInteractionService} from '../../services/ui/ui.interaction.service';
 
 @Component({
   selector: 'sbb-perlenkette-node',

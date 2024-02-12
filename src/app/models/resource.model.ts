@@ -1,4 +1,4 @@
-import { ResourceDto } from '../data-structures/business.data.structures';
+import {ResourceDto} from '../data-structures/business.data.structures';
 
 export class Resource {
   private static currentId = 0;
@@ -7,7 +7,7 @@ export class Resource {
   private capacity: number;
 
   constructor(
-    { id, capacity }: ResourceDto = {
+    {id, capacity}: ResourceDto = {
       id: Resource.incrementId(),
       capacity: 2,
     },

@@ -1,36 +1,36 @@
 import * as d3 from 'd3';
-import { NodesView } from './nodes.view';
-import { TrainrunSectionsView } from './trainrunsections.view';
-import { TrainrunSectionPreviewLineView } from './trainrunsection.previewline.view';
-import { StaticDomTags } from './static.dom.tags';
-import { TransitionsView } from './transitions.view';
-import { Vec2D } from '../../../utils/vec2D';
-import { EditorMainViewComponent } from '../editor-main-view.component';
+import {NodesView} from './nodes.view';
+import {TrainrunSectionsView} from './trainrunsections.view';
+import {TrainrunSectionPreviewLineView} from './trainrunsection.previewline.view';
+import {StaticDomTags} from './static.dom.tags';
+import {TransitionsView} from './transitions.view';
+import {Vec2D} from '../../../utils/vec2D';
+import {EditorMainViewComponent} from '../editor-main-view.component';
 import {
   UiInteractionService,
   ViewboxProperties,
 } from '../../../services/ui/ui.interaction.service';
-import { EditorMode } from '../../editor-menu/editor-mode';
-import { ConnectionsView } from './connections.view';
+import {EditorMode} from '../../editor-menu/editor-mode';
+import {ConnectionsView} from './connections.view';
 import {
   SVGMouseController,
   SVGMouseControllerObserver,
 } from '../../util/svg.mouse.controller';
-import { D3Utils } from './d3.utils';
-import { NotesView } from './notes.view';
-import { NodeService } from '../../../services/data/node.service';
-import { FilterService } from '../../../services/ui/filter.service';
-import { Node } from '../../../models/node.model';
-import { Note } from '../../../models/note.model';
-import { TrainrunSectionService } from '../../../services/data/trainrunsection.service';
-import { TrainrunService } from '../../../services/data/trainrun.service';
-import { LogService } from '../../../logger/log.service';
-import { NoteService } from '../../../services/data/note.service';
-import { EditorKeyEvents } from './editor.keyEvents';
-import { MultiSelectRenderer } from './multiSelectRenderer';
-import { UndoService } from '../../../services/data/undo.service';
-import { CopyService } from '../../../services/data/copy.service';
-import { StreckengrafikDrawingContext } from '../../../streckengrafik/model/util/streckengrafik.drawing.context';
+import {D3Utils} from './d3.utils';
+import {NotesView} from './notes.view';
+import {NodeService} from '../../../services/data/node.service';
+import {FilterService} from '../../../services/ui/filter.service';
+import {Node} from '../../../models/node.model';
+import {Note} from '../../../models/note.model';
+import {TrainrunSectionService} from '../../../services/data/trainrunsection.service';
+import {TrainrunService} from '../../../services/data/trainrun.service';
+import {LogService} from '../../../logger/log.service';
+import {NoteService} from '../../../services/data/note.service';
+import {EditorKeyEvents} from './editor.keyEvents';
+import {MultiSelectRenderer} from './multiSelectRenderer';
+import {UndoService} from '../../../services/data/undo.service';
+import {CopyService} from '../../../services/data/copy.service';
+import {StreckengrafikDrawingContext} from '../../../streckengrafik/model/util/streckengrafik.drawing.context';
 
 export class EditorView implements SVGMouseControllerObserver {
   static svgName = 'graphContainer';

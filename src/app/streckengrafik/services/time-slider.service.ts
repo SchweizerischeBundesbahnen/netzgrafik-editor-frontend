@@ -1,9 +1,9 @@
-import { Injectable, NgZone, OnDestroy } from '@angular/core';
-import { BehaviorSubject, interval, Observable, Subject, take } from 'rxjs';
-import { DrawingBackgroundMouseListenerService } from './util/drawingBackgroundMouseListener.service';
-import { SliderChangeInfo } from '../model/util/sliderChangeInfo';
-import { takeUntil } from 'rxjs/operators';
-import { UpdateCounterTriggerSerivce } from './util/update-counter.service';
+import {Injectable, NgZone, OnDestroy} from '@angular/core';
+import {BehaviorSubject, interval, Observable, Subject, take} from 'rxjs';
+import {DrawingBackgroundMouseListenerService} from './util/drawingBackgroundMouseListener.service';
+import {SliderChangeInfo} from '../model/util/sliderChangeInfo';
+import {takeUntil} from 'rxjs/operators';
+import {UpdateCounterTriggerSerivce} from './util/update-counter.service';
 
 @Injectable({
   providedIn: 'root',

@@ -2,10 +2,10 @@ import {
   LinePatternRefs,
   TrainrunSectionDto,
 } from '../data-structures/business.data.structures';
-import { Node } from './node.model';
-import { Trainrun } from './trainrun.model';
-import { Vec2D } from '../utils/vec2D';
-import { SimpleTrainrunSectionRouter } from '../services/util/trainrunsection.routing';
+import {Node} from './node.model';
+import {Trainrun} from './trainrun.model';
+import {Vec2D} from '../utils/vec2D';
+import {SimpleTrainrunSectionRouter} from '../services/util/trainrunsection.routing';
 import {
   ColorRefType,
   PathDto,
@@ -13,8 +13,8 @@ import {
   TrainrunSectionText,
   WarningDto,
 } from '../data-structures/technical.data.structures';
-import { TrainrunsectionValidator } from '../services/util/trainrunsection.validator';
-import { formatDate } from '@angular/common';
+import {TrainrunsectionValidator} from '../services/util/trainrunsection.validator';
+import {formatDate} from '@angular/common';
 
 export class TrainrunSection {
   private static currentId = 0;
@@ -111,13 +111,13 @@ export class TrainrunSection {
       path: {
         path: [],
         textPositions: {
-          [TrainrunSectionText.SourceArrival]: { x: 0, y: 0 },
-          [TrainrunSectionText.SourceDeparture]: { x: 0, y: 0 },
-          [TrainrunSectionText.TargetArrival]: { x: 0, y: 0 },
-          [TrainrunSectionText.TargetDeparture]: { x: 0, y: 0 },
-          [TrainrunSectionText.TrainrunSectionName]: { x: 0, y: 0 },
-          [TrainrunSectionText.TrainrunSectionTravelTime]: { x: 0, y: 0 },
-          [TrainrunSectionText.TrainrunSectionNumberOfStops]: { x: 0, y: 0 },
+          [TrainrunSectionText.SourceArrival]: {x: 0, y: 0},
+          [TrainrunSectionText.SourceDeparture]: {x: 0, y: 0},
+          [TrainrunSectionText.TargetArrival]: {x: 0, y: 0},
+          [TrainrunSectionText.TargetDeparture]: {x: 0, y: 0},
+          [TrainrunSectionText.TrainrunSectionName]: {x: 0, y: 0},
+          [TrainrunSectionText.TrainrunSectionTravelTime]: {x: 0, y: 0},
+          [TrainrunSectionText.TrainrunSectionNumberOfStops]: {x: 0, y: 0},
         },
       },
       warnings: null,

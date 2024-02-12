@@ -1,13 +1,13 @@
 import * as d3 from 'd3';
-import { Node } from '../../../models/node.model';
-import { EditorView } from './editor.view';
-import { StaticDomTags } from './static.dom.tags';
-import { D3Utils } from './d3.utils';
-import { Connection } from '../../../models/connection.model';
-import { TrainrunSection } from '../../../models/trainrunsection.model';
-import { DEFAULT_PIN_RADIUS } from '../../rastering/definitions';
-import { Vec2D } from '../../../utils/vec2D';
-import { ConnectionsViewObject } from './connectionViewObject';
+import {Node} from '../../../models/node.model';
+import {EditorView} from './editor.view';
+import {StaticDomTags} from './static.dom.tags';
+import {D3Utils} from './d3.utils';
+import {Connection} from '../../../models/connection.model';
+import {TrainrunSection} from '../../../models/trainrunsection.model';
+import {DEFAULT_PIN_RADIUS} from '../../rastering/definitions';
+import {Vec2D} from '../../../utils/vec2D';
+import {ConnectionsViewObject} from './connectionViewObject';
 
 export class ConnectionsView {
   connectionsGroup;

@@ -9,19 +9,19 @@ import {
   NODE_PIN_SPAN,
   NODE_TEXT_AREA_HEIGHT,
 } from '../view/rastering/definitions';
-import { Port } from './port.model';
-import { TrainrunSection } from './trainrunsection.model';
-import { Transition } from './transition.model';
-import { SimpleTrainrunSectionRouter } from '../services/util/trainrunsection.routing';
-import { Trainrun } from './trainrun.model';
+import {Port} from './port.model';
+import {TrainrunSection} from './trainrunsection.model';
+import {Transition} from './transition.model';
+import {SimpleTrainrunSectionRouter} from '../services/util/trainrunsection.routing';
+import {Trainrun} from './trainrun.model';
 import {
   PortAlignment,
   WarningDto,
 } from '../data-structures/technical.data.structures';
-import { Connection } from './connection.model';
-import { ConnectionValidator } from '../services/util/connection.validator';
-import { VisAVisPortPlacement } from '../services/util/node.port.placement';
-import { DataMigration } from '../utils/data-migration';
+import {Connection} from './connection.model';
+import {ConnectionValidator} from '../services/util/connection.validator';
+import {VisAVisPortPlacement} from '../services/util/node.port.placement';
+import {DataMigration} from '../utils/data-migration';
 
 export class Node {
   private static currentId = 0;
@@ -113,12 +113,12 @@ export class Node {
 
   static getDefaultHaltezeit(): TrainrunCategoryHaltezeit {
     return {
-      [HaltezeitFachCategories.IPV]: { haltezeit: 3, no_halt: false },
-      [HaltezeitFachCategories.A]: { haltezeit: 2, no_halt: false },
-      [HaltezeitFachCategories.B]: { haltezeit: 2, no_halt: false },
-      [HaltezeitFachCategories.C]: { haltezeit: 1, no_halt: false },
-      [HaltezeitFachCategories.D]: { haltezeit: 1, no_halt: false },
-      [HaltezeitFachCategories.Uncategorized]: { haltezeit: 0, no_halt: true },
+      [HaltezeitFachCategories.IPV]: {haltezeit: 3, no_halt: false},
+      [HaltezeitFachCategories.A]: {haltezeit: 2, no_halt: false},
+      [HaltezeitFachCategories.B]: {haltezeit: 2, no_halt: false},
+      [HaltezeitFachCategories.C]: {haltezeit: 1, no_halt: false},
+      [HaltezeitFachCategories.D]: {haltezeit: 1, no_halt: false},
+      [HaltezeitFachCategories.Uncategorized]: {haltezeit: 0, no_halt: true},
     };
   }
 

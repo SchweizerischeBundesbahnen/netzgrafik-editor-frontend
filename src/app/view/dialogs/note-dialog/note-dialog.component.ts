@@ -1,15 +1,15 @@
-import { Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
+import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
 import {
   SbbDialog,
   SbbDialogConfig,
   SbbDialogPosition,
 } from '@sbb-esta/angular/dialog';
-import { Vec2D } from '../../../utils/vec2D';
-import { UiInteractionService } from '../../../services/ui/ui.interaction.service';
-import { GeneralViewFunctions } from '../../util/generalViewFunctions';
-import { Subject } from 'rxjs';
-import { NoteFormComponentModel } from './note-form/note-form.component';
-import { takeUntil } from 'rxjs/operators';
+import {Vec2D} from '../../../utils/vec2D';
+import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
+import {GeneralViewFunctions} from '../../util/generalViewFunctions';
+import {Subject} from 'rxjs';
+import {NoteFormComponentModel} from './note-form/note-form.component';
+import {takeUntil} from 'rxjs/operators';
 
 export enum NoteDialogType {
   NOTE_DIALOG,
@@ -39,7 +39,7 @@ export class NoteDialogParameter {
   styleUrls: ['./note-dialog.component.scss'],
 })
 export class NoteDialogComponent implements OnDestroy {
-  @ViewChild('noteEditorTabsViewTemplate', { static: true })
+  @ViewChild('noteEditorTabsViewTemplate', {static: true})
   noteEditorTabsViewTemplate: TemplateRef<any>;
 
   public data = null;

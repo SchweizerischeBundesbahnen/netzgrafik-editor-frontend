@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Note } from '../../models/note.model';
-import { LogService } from '../../logger/log.service';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {Note} from '../../models/note.model';
+import {LogService} from '../../logger/log.service';
 import {
   FreeFloatingTextDto,
   LabelRef,
 } from '../../data-structures/business.data.structures';
-import { Vec2D } from '../../utils/vec2D';
-import { MathUtils } from '../../utils/math';
-import { NOTE_POSITION_BASIC_RASTER } from '../../view/rastering/definitions';
-import { LabelService } from './label.serivce';
-import { FilterService } from '../ui/filter.service';
+import {Vec2D} from '../../utils/vec2D';
+import {MathUtils} from '../../utils/math';
+import {NOTE_POSITION_BASIC_RASTER} from '../../view/rastering/definitions';
+import {LabelService} from './label.serivce';
+import {FilterService} from '../ui/filter.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,7 @@ import { FilterService } from '../ui/filter.service';
 export class NoteService {
   noteSubject = new BehaviorSubject<Note[]>([]);
   readonly notes = this.noteSubject.asObservable();
-  private notesStore: { notes: Note[] } = { notes: [] }; // store the data in memory
+  private notesStore: {notes: Note[]} = {notes: []}; // store the data in memory
 
   constructor(
     private logService: LogService,

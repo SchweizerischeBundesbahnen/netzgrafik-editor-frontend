@@ -1,5 +1,5 @@
-import { TrainrunSection } from '../../../models/trainrunsection.model';
-import { EditorView } from './editor.view';
+import {TrainrunSection} from '../../../models/trainrunsection.model';
+import {EditorView} from './editor.view';
 
 export class TrainrunSectionViewObject {
   key: string;

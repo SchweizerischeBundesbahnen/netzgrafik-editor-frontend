@@ -1,13 +1,13 @@
-import { StaticDomTags } from './static.dom.tags';
-import { Vec2D } from '../../../utils/vec2D';
+import {StaticDomTags} from './static.dom.tags';
+import {Vec2D} from '../../../utils/vec2D';
 import * as d3 from 'd3';
-import { D3Utils } from './d3.utils';
-import { Node } from '../../../models/node.model';
-import { TrainrunSection } from '../../../models/trainrunsection.model';
-import { Transition } from '../../../models/transition.model';
-import { SimpleTrainrunSectionRouter } from '../../../services/util/trainrunsection.routing';
-import { NodeService } from '../../../services/data/node.service';
-import { FilterService } from '../../../services/ui/filter.service';
+import {D3Utils} from './d3.utils';
+import {Node} from '../../../models/node.model';
+import {TrainrunSection} from '../../../models/trainrunsection.model';
+import {Transition} from '../../../models/transition.model';
+import {SimpleTrainrunSectionRouter} from '../../../services/util/trainrunsection.routing';
+import {NodeService} from '../../../services/data/node.service';
+import {FilterService} from '../../../services/ui/filter.service';
 
 export enum PreviewLineMode {
   NotDragging,

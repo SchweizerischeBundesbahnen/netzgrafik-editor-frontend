@@ -358,8 +358,8 @@ export class NetzgrafikDefault {
             shortName: 'HVZ',
             name: 'verkehrt zur Hauptverkehrszeit',
             dayTimeInterval: [
-              { from: 360, to: 420 },
-              { from: 960, to: 1140 },
+              {from: 360, to: 420},
+              {from: 960, to: 1140},
             ],
             weekday: [1, 2, 3, 4, 5, 6, 7],
             linePatternRef: LinePatternRefs.TimeCatHVZ,

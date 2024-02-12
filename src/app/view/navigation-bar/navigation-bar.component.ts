@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { NavigationService } from '../../services/ui/navigation.service';
+import {Component, OnInit} from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
+import {filter, map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {NavigationService} from '../../services/ui/navigation.service';
 import {
   ProjectControllerBackendService,
   VariantControllerBackendService,

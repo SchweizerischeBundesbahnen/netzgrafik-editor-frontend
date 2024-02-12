@@ -1,17 +1,17 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { VariantsViewComponent } from './variants-view.component';
-import { SbbDialogModule } from '@sbb-esta/angular/dialog';
+import {VariantsViewComponent} from './variants-view.component';
+import {SbbDialogModule} from '@sbb-esta/angular/dialog';
 import {
   ProjectControllerBackendService,
   ProjectDto,
   VariantControllerBackendService,
   VariantCreateDto,
 } from '../../../api/generated';
-import { of } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
-import { NavigationService } from '../../../services/ui/navigation.service';
-import { VersionControlService } from '../../../services/data/version-control.service';
+import {of} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
+import {NavigationService} from '../../../services/ui/navigation.service';
+import {VersionControlService} from '../../../services/data/version-control.service';
 
 describe('VariantsViewComponent', () => {
   let component: VariantsViewComponent;
@@ -57,8 +57,8 @@ describe('VariantsViewComponent', () => {
       declarations: [VariantsViewComponent],
       imports: [SbbDialogModule],
       providers: [
-        { provide: ActivatedRoute, useValue: activatedRoute },
-        { provide: NavigationService, useValue: {} },
+        {provide: ActivatedRoute, useValue: activatedRoute},
+        {provide: NavigationService, useValue: {}},
         {
           provide: ProjectControllerBackendService,
           useValue: projectControllerBackendService,
@@ -67,7 +67,7 @@ describe('VariantsViewComponent', () => {
           provide: VariantControllerBackendService,
           useValue: variantControllerBackendService,
         },
-        { provide: VersionControlService, useValue: versionControlService },
+        {provide: VersionControlService, useValue: versionControlService},
       ],
     }).compileComponents();
   });

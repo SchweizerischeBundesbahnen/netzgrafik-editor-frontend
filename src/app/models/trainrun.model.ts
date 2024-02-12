@@ -5,7 +5,7 @@ import {
   TrainrunFrequency,
   TrainrunTimeCategory,
 } from '../data-structures/business.data.structures';
-import { DataMigration } from '../utils/data-migration';
+import {DataMigration} from '../utils/data-migration';
 
 export class Trainrun {
   public static DEFAULT_TRAINRUN_NAME = 'X';

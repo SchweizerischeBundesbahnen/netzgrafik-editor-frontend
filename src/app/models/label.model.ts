@@ -1,7 +1,4 @@
-import {
-  LabelDto,
-  LabelRef,
-} from '../data-structures/business.data.structures';
+import {LabelDto, LabelRef} from '../data-structures/business.data.structures';
 
 export class Label {
   private static currentId = 0;
@@ -11,7 +8,7 @@ export class Label {
   private labelRef: LabelRef;
 
   constructor(
-    { id, label, labelGroupId, labelRef }: LabelDto = {
+    {id, label, labelGroupId, labelRef}: LabelDto = {
       id: Label.incrementId(),
       label: '',
       labelGroupId: 0,

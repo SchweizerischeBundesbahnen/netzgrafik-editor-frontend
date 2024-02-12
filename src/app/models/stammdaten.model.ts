@@ -1,5 +1,5 @@
-import { TrainrunCategoryHaltezeit } from '../data-structures/business.data.structures';
-import { Vec2D } from '../utils/vec2D';
+import {TrainrunCategoryHaltezeit} from '../data-structures/business.data.structures';
+import {Vec2D} from '../utils/vec2D';
 
 export class Stammdaten {
   private bp: string;

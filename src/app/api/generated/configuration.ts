@@ -1,10 +1,10 @@
-import { HttpParameterCodec } from '@angular/common/http';
+import {HttpParameterCodec} from '@angular/common/http';
 
 export interface ConfigurationParameters {
   /**
    *  @deprecated Since 5.0. Use credentials instead
    */
-  apiKeys?: { [key: string]: string };
+  apiKeys?: {[key: string]: string};
   username?: string;
   password?: string;
   /**
@@ -19,14 +19,14 @@ export interface ConfigurationParameters {
    * document. They should map to the value used for authentication
    * minus any standard prefixes such as 'Basic' or 'Bearer'.
    */
-  credentials?: { [key: string]: string | (() => string | undefined) };
+  credentials?: {[key: string]: string | (() => string | undefined)};
 }
 
 export class Configuration {
   /**
    *  @deprecated Since 5.0. Use credentials instead
    */
-  apiKeys?: { [key: string]: string };
+  apiKeys?: {[key: string]: string};
   username?: string;
   password?: string;
   /**
@@ -41,7 +41,7 @@ export class Configuration {
    * document. They should map to the value used for authentication
    * minus any standard prefixes such as 'Basic' or 'Bearer'.
    */
-  credentials: { [key: string]: string | (() => string | undefined) };
+  credentials: {[key: string]: string | (() => string | undefined)};
 
   constructor(configurationParameters: ConfigurationParameters = {}) {
     this.apiKeys = configurationParameters.apiKeys;

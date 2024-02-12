@@ -1,4 +1,4 @@
-import { Vec2D } from '../../utils/vec2D';
+import {Vec2D} from '../../utils/vec2D';
 import {
   BEZIER_CONTROL_POINT_FACTOR,
   BEZIER_CONTROL_SAME_ALIGNMENT_DIFFERENCE,
@@ -20,8 +20,8 @@ import {
   TrainrunSectionText,
   TrainrunSectionTextPositions,
 } from '../../data-structures/technical.data.structures';
-import { Node } from '../../models/node.model';
-import { Port } from '../../models/port.model';
+import {Node} from '../../models/node.model';
+import {Port} from '../../models/port.model';
 
 export class SimpleTrainrunSectionRouter {
   static isLineVertical(sourcePort: Port): boolean {

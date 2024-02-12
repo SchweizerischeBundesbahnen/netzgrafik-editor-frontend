@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Stammdaten } from '../../models/stammdaten.model';
-import { HaltezeitFachCategories } from '../../data-structures/business.data.structures';
-import { Node } from '../../models/node.model';
-import { MathUtils } from '../../utils/math';
-import { Vec2D } from '../../utils/vec2D';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {Stammdaten} from '../../models/stammdaten.model';
+import {HaltezeitFachCategories} from '../../data-structures/business.data.structures';
+import {Node} from '../../models/node.model';
+import {MathUtils} from '../../utils/math';
+import {Vec2D} from '../../utils/vec2D';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class StammdatenService {
   // Description of observable data service: https://coryrylan.com/blog/angular-observable-data-services
   stammdatenSubject = new BehaviorSubject<Stammdaten[]>([]);
   readonly stammdatenObservable = this.stammdatenSubject.asObservable();
-  stammdatenStore: { stammdaten: Stammdaten[] } = { stammdaten: [] }; // store the data in memory
+  stammdatenStore: {stammdaten: Stammdaten[]} = {stammdaten: []}; // store the data in memory
 
   static parseStringArray(inLabels: string): string[] {
     if (inLabels === undefined) {

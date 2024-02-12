@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import {Component, Input} from '@angular/core';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'sbb-action-menu',

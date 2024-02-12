@@ -1,5 +1,5 @@
-import { Note } from '../../../models/note.model';
-import { EditorView } from './editor.view';
+import {Note} from '../../../models/note.model';
+import {EditorView} from './editor.view';
 
 export class NoteViewObject {
   key: string;

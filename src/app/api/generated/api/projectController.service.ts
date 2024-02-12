@@ -11,7 +11,7 @@
  */
 /* tslint:disable:no-unused-variable member-ordering */
 
-import { Inject, Injectable, Optional } from '@angular/core';
+import {Inject, Injectable, Optional} from '@angular/core';
 import {
   HttpClient,
   HttpHeaders,
@@ -20,16 +20,16 @@ import {
   HttpEvent,
   HttpParameterCodec,
 } from '@angular/common/http';
-import { CustomHttpParameterCodec } from '../encoder';
-import { Observable } from 'rxjs';
+import {CustomHttpParameterCodec} from '../encoder';
+import {Observable} from 'rxjs';
 
-import { ProjectCreateUpdateDto } from '../model/models';
-import { ProjectDto } from '../model/models';
-import { ProjectSummaryDto } from '../model/models';
+import {ProjectCreateUpdateDto} from '../model/models';
+import {ProjectDto} from '../model/models';
+import {ProjectSummaryDto} from '../model/models';
 
-import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
-import { Configuration } from '../configuration';
-import { ProjectControllerBackendServiceInterface } from './projectController.serviceInterface';
+import {BASE_PATH, COLLECTION_FORMATS} from '../variables';
+import {Configuration} from '../configuration';
+import {ProjectControllerBackendServiceInterface} from './projectController.serviceInterface';
 
 @Injectable({
   providedIn: 'root',
@@ -123,25 +123,25 @@ export class ProjectControllerBackendService
     id: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<any>;
   public archiveProject(
     id: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpResponse<any>>;
   public archiveProject(
     id: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpEvent<any>>;
   public archiveProject(
     id: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<any> {
     if (id === null || id === undefined) {
       throw new Error(
@@ -200,25 +200,25 @@ export class ProjectControllerBackendService
     projectCreateUpdateDto: ProjectCreateUpdateDto,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<number>;
   public createProject(
     projectCreateUpdateDto: ProjectCreateUpdateDto,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpResponse<number>>;
   public createProject(
     projectCreateUpdateDto: ProjectCreateUpdateDto,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpEvent<number>>;
   public createProject(
     projectCreateUpdateDto: ProjectCreateUpdateDto,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<any> {
     if (
       projectCreateUpdateDto === null ||
@@ -288,25 +288,25 @@ export class ProjectControllerBackendService
     projectId: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<any>;
   public deleteProject(
     projectId: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpResponse<any>>;
   public deleteProject(
     projectId: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpEvent<any>>;
   public deleteProject(
     projectId: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<any> {
     if (projectId === null || projectId === undefined) {
       throw new Error(
@@ -362,22 +362,22 @@ export class ProjectControllerBackendService
   public getAllProjects(
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<Array<ProjectSummaryDto>>;
   public getAllProjects(
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpResponse<Array<ProjectSummaryDto>>>;
   public getAllProjects(
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpEvent<Array<ProjectSummaryDto>>>;
   public getAllProjects(
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<any> {
     let headers = this.defaultHeaders;
 
@@ -429,25 +429,25 @@ export class ProjectControllerBackendService
     projectId: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<ProjectDto>;
   public getProject(
     projectId: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpResponse<ProjectDto>>;
   public getProject(
     projectId: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpEvent<ProjectDto>>;
   public getProject(
     projectId: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<any> {
     if (projectId === null || projectId === undefined) {
       throw new Error(
@@ -505,25 +505,25 @@ export class ProjectControllerBackendService
     id: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<any>;
   public unarchiveProject(
     id: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpResponse<any>>;
   public unarchiveProject(
     id: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpEvent<any>>;
   public unarchiveProject(
     id: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<any> {
     if (id === null || id === undefined) {
       throw new Error(
@@ -584,28 +584,28 @@ export class ProjectControllerBackendService
     projectCreateUpdateDto: ProjectCreateUpdateDto,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<any>;
   public updateProject(
     id: number,
     projectCreateUpdateDto: ProjectCreateUpdateDto,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpResponse<any>>;
   public updateProject(
     id: number,
     projectCreateUpdateDto: ProjectCreateUpdateDto,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpEvent<any>>;
   public updateProject(
     id: number,
     projectCreateUpdateDto: ProjectCreateUpdateDto,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<any> {
     if (id === null || id === undefined) {
       throw new Error(

@@ -9,15 +9,15 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { HttpHeaders } from '@angular/common/http';
+import {HttpHeaders} from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 
-import { ProjectCreateUpdateDto } from '../model/models';
-import { ProjectDto } from '../model/models';
-import { ProjectSummaryDto } from '../model/models';
+import {ProjectCreateUpdateDto} from '../model/models';
+import {ProjectDto} from '../model/models';
+import {ProjectSummaryDto} from '../model/models';
 
-import { Configuration } from '../configuration';
+import {Configuration} from '../configuration';
 
 export interface ProjectControllerBackendServiceInterface {
   defaultHeaders: HttpHeaders;

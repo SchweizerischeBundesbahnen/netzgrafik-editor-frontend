@@ -11,7 +11,7 @@
  */
 /* tslint:disable:no-unused-variable member-ordering */
 
-import { Inject, Injectable, Optional } from '@angular/core';
+import {Inject, Injectable, Optional} from '@angular/core';
 import {
   HttpClient,
   HttpHeaders,
@@ -20,16 +20,16 @@ import {
   HttpEvent,
   HttpParameterCodec,
 } from '@angular/common/http';
-import { CustomHttpParameterCodec } from '../encoder';
-import { Observable } from 'rxjs';
+import {CustomHttpParameterCodec} from '../encoder';
+import {Observable} from 'rxjs';
 
-import { VariantCreateDto } from '../model/models';
-import { VariantCreateFromVersionDto } from '../model/models';
-import { VariantDto } from '../model/models';
+import {VariantCreateDto} from '../model/models';
+import {VariantCreateFromVersionDto} from '../model/models';
+import {VariantDto} from '../model/models';
 
-import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
-import { Configuration } from '../configuration';
-import { VariantControllerBackendServiceInterface } from './variantController.serviceInterface';
+import {BASE_PATH, COLLECTION_FORMATS} from '../variables';
+import {Configuration} from '../configuration';
+import {VariantControllerBackendServiceInterface} from './variantController.serviceInterface';
 
 @Injectable({
   providedIn: 'root',
@@ -123,25 +123,25 @@ export class VariantControllerBackendService
     variantId: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<any>;
   public archiveVariant(
     variantId: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpResponse<any>>;
   public archiveVariant(
     variantId: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpEvent<any>>;
   public archiveVariant(
     variantId: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<any> {
     if (variantId === null || variantId === undefined) {
       throw new Error(
@@ -202,28 +202,28 @@ export class VariantControllerBackendService
     variantCreateDto: VariantCreateDto,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<number>;
   public createVariant(
     projectId: number,
     variantCreateDto: VariantCreateDto,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpResponse<number>>;
   public createVariant(
     projectId: number,
     variantCreateDto: VariantCreateDto,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpEvent<number>>;
   public createVariant(
     projectId: number,
     variantCreateDto: VariantCreateDto,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<any> {
     if (projectId === null || projectId === undefined) {
       throw new Error(
@@ -297,28 +297,28 @@ export class VariantControllerBackendService
     variantCreateFromVersionDto: VariantCreateFromVersionDto,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<number>;
   public createVariantFromVersion(
     versionId: number,
     variantCreateFromVersionDto: VariantCreateFromVersionDto,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpResponse<number>>;
   public createVariantFromVersion(
     versionId: number,
     variantCreateFromVersionDto: VariantCreateFromVersionDto,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpEvent<number>>;
   public createVariantFromVersion(
     versionId: number,
     variantCreateFromVersionDto: VariantCreateFromVersionDto,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<any> {
     if (versionId === null || versionId === undefined) {
       throw new Error(
@@ -393,25 +393,25 @@ export class VariantControllerBackendService
     variantId: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<string>;
   public deleteVariant(
     variantId: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpResponse<string>>;
   public deleteVariant(
     variantId: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpEvent<string>>;
   public deleteVariant(
     variantId: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<any> {
     if (variantId === null || variantId === undefined) {
       throw new Error(
@@ -469,25 +469,25 @@ export class VariantControllerBackendService
     variantId: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<any>;
   public dropSnapshots(
     variantId: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpResponse<any>>;
   public dropSnapshots(
     variantId: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpEvent<any>>;
   public dropSnapshots(
     variantId: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<any> {
     if (variantId === null || variantId === undefined) {
       throw new Error(
@@ -545,25 +545,25 @@ export class VariantControllerBackendService
     variantId: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<VariantDto>;
   public getVariant(
     variantId: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpResponse<VariantDto>>;
   public getVariant(
     variantId: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<HttpEvent<VariantDto>>;
   public getVariant(
     variantId: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: 'application/json' },
+    options?: {httpHeaderAccept?: 'application/json'},
   ): Observable<any> {
     if (variantId === null || variantId === undefined) {
       throw new Error(
@@ -621,25 +621,25 @@ export class VariantControllerBackendService
     variantId: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<any>;
   public raiseSnapshotsToNewestReleaseVersion(
     variantId: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpResponse<any>>;
   public raiseSnapshotsToNewestReleaseVersion(
     variantId: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpEvent<any>>;
   public raiseSnapshotsToNewestReleaseVersion(
     variantId: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<any> {
     if (variantId === null || variantId === undefined) {
       throw new Error(
@@ -698,25 +698,25 @@ export class VariantControllerBackendService
     variantId: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<any>;
   public unarchiveVariant(
     variantId: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpResponse<any>>;
   public unarchiveVariant(
     variantId: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<HttpEvent<any>>;
   public unarchiveVariant(
     variantId: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: undefined },
+    options?: {httpHeaderAccept?: undefined},
   ): Observable<any> {
     if (variantId === null || variantId === undefined) {
       throw new Error(

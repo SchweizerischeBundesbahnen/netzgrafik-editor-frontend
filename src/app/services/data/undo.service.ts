@@ -1,12 +1,12 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
-import { DataService, NetzgrafikLoadedInfo } from './data.service';
-import { NetzgrafikDto } from '../../data-structures/business.data.structures';
-import { takeUntil } from 'rxjs/operators';
-import { NodeService } from './node.service';
-import { NoteService } from './note.service';
-import { TrainrunService } from './trainrun.service';
-import { FilterService } from '../ui/filter.service';
+import {Injectable, OnDestroy} from '@angular/core';
+import {Subject, Subscription} from 'rxjs';
+import {DataService, NetzgrafikLoadedInfo} from './data.service';
+import {NetzgrafikDto} from '../../data-structures/business.data.structures';
+import {takeUntil} from 'rxjs/operators';
+import {NodeService} from './node.service';
+import {NoteService} from './note.service';
+import {TrainrunService} from './trainrun.service';
+import {FilterService} from '../ui/filter.service';
 
 @Injectable({
   providedIn: 'root',

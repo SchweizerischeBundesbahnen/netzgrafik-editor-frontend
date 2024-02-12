@@ -1,6 +1,6 @@
-import { Node } from '../../models/node.model';
-import { GeneralViewFunctions } from './generalViewFunctions';
-import { Vec2D } from '../../utils/vec2D';
+import {Node} from '../../models/node.model';
+import {GeneralViewFunctions} from './generalViewFunctions';
+import {Vec2D} from '../../utils/vec2D';
 
 describe('general view functions', () => {
   it('calcDialogTopLeftScreenCoordinate', () => {

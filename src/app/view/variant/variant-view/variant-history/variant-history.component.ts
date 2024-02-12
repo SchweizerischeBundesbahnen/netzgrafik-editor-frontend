@@ -5,25 +5,25 @@ import {
   OnDestroy,
   SimpleChanges,
 } from '@angular/core';
-import { DownloadVersionModel, VersionId } from './model';
-import { VersionControlService } from '../../../../services/data/version-control.service';
+import {DownloadVersionModel, VersionId} from './model';
+import {VersionControlService} from '../../../../services/data/version-control.service';
 import {
   VariantDto,
   VersionControllerBackendService,
   VersionDto,
   VariantControllerBackendService,
 } from '../../../../api/generated';
-import { VersionEntries } from './version-entries/version-entries.component';
-import { Subject } from 'rxjs';
-import { mergeMap, takeUntil } from 'rxjs/operators';
-import { PreviewService } from '../../../../services/data/preview.service';
-import { UiInteractionService } from '../../../../services/ui/ui.interaction.service';
-import { ConfirmationDialogParameter } from '../../../dialogs/confirmation-dialog/confirmation-dialog.component';
-import { downloadBlob } from '../../../util/download-utils';
-import { VariantDialogComponent } from '../../variant-dialog/variant-dialog.component';
-import { SbbDialog } from '@sbb-esta/angular/dialog';
-import { NavigationService } from '../../../../services/ui/navigation.service';
-import { AutoSaveService } from '../../../../services/data/auto-save.service';
+import {VersionEntries} from './version-entries/version-entries.component';
+import {Subject} from 'rxjs';
+import {mergeMap, takeUntil} from 'rxjs/operators';
+import {PreviewService} from '../../../../services/data/preview.service';
+import {UiInteractionService} from '../../../../services/ui/ui.interaction.service';
+import {ConfirmationDialogParameter} from '../../../dialogs/confirmation-dialog/confirmation-dialog.component';
+import {downloadBlob} from '../../../util/download-utils';
+import {VariantDialogComponent} from '../../variant-dialog/variant-dialog.component';
+import {SbbDialog} from '@sbb-esta/angular/dialog';
+import {NavigationService} from '../../../../services/ui/navigation.service';
+import {AutoSaveService} from '../../../../services/data/auto-save.service';
 
 @Component({
   selector: 'sbb-variant-history',

@@ -1,5 +1,5 @@
-import { NetzgrafikColorDto } from '../data-structures/business.data.structures';
-import { ColorRefType } from '../data-structures/technical.data.structures';
+import {NetzgrafikColorDto} from '../data-structures/business.data.structures';
+import {ColorRefType} from '../data-structures/technical.data.structures';
 export class NetzgrafikColor {
   private static currentId = 0;
 

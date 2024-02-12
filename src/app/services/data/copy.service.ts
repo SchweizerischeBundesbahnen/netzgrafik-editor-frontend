@@ -1,5 +1,5 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { DataService } from './data.service';
+import {Injectable, OnDestroy} from '@angular/core';
+import {DataService} from './data.service';
 import {
   FreeFloatingTextDto,
   NetzgrafikDto,
@@ -7,22 +7,22 @@ import {
   TrainrunDto,
   TrainrunSectionDto,
 } from '../../data-structures/business.data.structures';
-import { Trainrun } from '../../models/trainrun.model';
-import { FilterService } from '../ui/filter.service';
-import { TrainrunSection } from '../../models/trainrunsection.model';
-import { TrainrunService } from './trainrun.service';
-import { TrainrunSectionService } from './trainrunsection.service';
-import { UndoService } from './undo.service';
-import { UiInteractionService } from '../ui/ui.interaction.service';
-import { EditorMode } from '../../view/editor-menu/editor-mode';
-import { NodeService } from './node.service';
-import { Node } from '../../models/node.model';
+import {Trainrun} from '../../models/trainrun.model';
+import {FilterService} from '../ui/filter.service';
+import {TrainrunSection} from '../../models/trainrunsection.model';
+import {TrainrunService} from './trainrun.service';
+import {TrainrunSectionService} from './trainrunsection.service';
+import {UndoService} from './undo.service';
+import {UiInteractionService} from '../ui/ui.interaction.service';
+import {EditorMode} from '../../view/editor-menu/editor-mode';
+import {NodeService} from './node.service';
+import {Node} from '../../models/node.model';
 import {
   ConnectionDto,
   PortDto,
 } from '../../data-structures/technical.data.structures';
-import { NoteService } from './note.service';
-import { Note } from '../../models/note.model';
+import {NoteService} from './note.service';
+import {Note} from '../../models/note.model';
 
 @Injectable({
   providedIn: 'root',

@@ -6,22 +6,22 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { UiInteractionService } from '../../../services/ui/ui.interaction.service';
-import { NodeService } from '../../../services/data/node.service';
+import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
+import {NodeService} from '../../../services/data/node.service';
 import {
   LabelRef,
   TrainrunCategoryHaltezeit,
 } from '../../../data-structures/business.data.structures';
-import { Node } from '../../../models/node.model';
-import { ConfirmationDialogParameter } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
-import { ResourceService } from '../../../services/data/resource.service';
-import { Resource } from '../../../models/resource.model';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { LabelService } from '../../../services/data/label.serivce';
-import { LabelGroupService } from '../../../services/data/labelgroup.service';
-import { SbbChipEvent, SbbChipInputEvent } from '@sbb-esta/angular/chips';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import {Node} from '../../../models/node.model';
+import {ConfirmationDialogParameter} from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
+import {ResourceService} from '../../../services/data/resource.service';
+import {Resource} from '../../../models/resource.model';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {LabelService} from '../../../services/data/label.serivce';
+import {LabelGroupService} from '../../../services/data/labelgroup.service';
+import {SbbChipEvent, SbbChipInputEvent} from '@sbb-esta/angular/chips';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 interface NodeProperties {
   nodeId: number;

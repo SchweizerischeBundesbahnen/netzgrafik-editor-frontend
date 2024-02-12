@@ -1,20 +1,20 @@
-import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
-import { DataService } from '../../services/data/data.service';
-import { UiInteractionService } from '../../services/ui/ui.interaction.service';
-import { ConfirmationDialogParameter } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
-import { NodeService } from '../../services/data/node.service';
-import { TrainrunSectionService } from '../../services/data/trainrunsection.service';
-import { EditorMode } from '../editor-menu/editor-mode';
-import { LogService } from '../../logger/log.service';
-import { FilterService } from '../../services/ui/filter.service';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { TrainrunService } from '../../services/data/trainrun.service';
-import { NoteService } from '../../services/data/note.service';
-import { LabelRef } from '../../data-structures/business.data.structures';
-import { LabelService } from '../../services/data/label.serivce';
-import { LabelGroupService } from '../../services/data/labelgroup.service';
-import { LabelGroup } from '../../models/labelGroup.model';
+import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
+import {DataService} from '../../services/data/data.service';
+import {UiInteractionService} from '../../services/ui/ui.interaction.service';
+import {ConfirmationDialogParameter} from '../dialogs/confirmation-dialog/confirmation-dialog.component';
+import {NodeService} from '../../services/data/node.service';
+import {TrainrunSectionService} from '../../services/data/trainrunsection.service';
+import {EditorMode} from '../editor-menu/editor-mode';
+import {LogService} from '../../logger/log.service';
+import {FilterService} from '../../services/ui/filter.service';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {TrainrunService} from '../../services/data/trainrun.service';
+import {NoteService} from '../../services/data/note.service';
+import {LabelRef} from '../../data-structures/business.data.structures';
+import {LabelService} from '../../services/data/label.serivce';
+import {LabelGroupService} from '../../services/data/labelgroup.service';
+import {LabelGroup} from '../../models/labelGroup.model';
 
 @Component({
   selector: 'sbb-editor-edit-tools-view-component',
@@ -22,9 +22,9 @@ import { LabelGroup } from '../../models/labelGroup.model';
   styleUrls: ['./editor-edit-tools-view.component.scss'],
 })
 export class EditorEditToolsViewComponent implements OnDestroy {
-  @ViewChild('netzgrafikMergeFileInput', { static: false })
+  @ViewChild('netzgrafikMergeFileInput', {static: false})
   netzgrafikMergeFileInput: ElementRef;
-  @ViewChild('netzgrafikMergeAsACopyFileInput', { static: false })
+  @ViewChild('netzgrafikMergeAsACopyFileInput', {static: false})
   netzgrafikMergeAsACopyFileInput: ElementRef;
 
   public editorMode: EditorMode = EditorMode.NetzgrafikEditing;

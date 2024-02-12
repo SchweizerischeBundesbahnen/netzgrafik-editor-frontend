@@ -1,24 +1,24 @@
-import { TrainrunSection } from '../../models/trainrunsection.model';
+import {TrainrunSection} from '../../models/trainrunsection.model';
 import {
   NodeDto,
   TrainrunCategoryHaltezeit,
   TrainrunSectionDto,
 } from '../../data-structures/business.data.structures';
-import { Node } from '../../models/node.model';
-import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { TrainrunService } from './trainrun.service';
-import { NodeService } from './node.service';
-import { TrainrunsectionValidator } from '../util/trainrunsection.validator';
-import { Trainrun } from '../../models/trainrun.model';
-import { MathUtils } from '../../utils/math';
-import { GeneralViewFunctions } from '../../view/util/generalViewFunctions';
-import { LeftAndRightTimeStructure } from '../../view/dialogs/trainrun-and-section-dialog/trainrunsection-tab/trainrun-section-tab.component';
-import { TrainrunsectionHelper } from '../util/trainrunsection.helper';
-import { LogService } from '../../logger/log.service';
-import { Transition } from '../../models/transition.model';
-import { takeUntil } from 'rxjs/operators';
-import { FilterService } from '../ui/filter.service';
+import {Node} from '../../models/node.model';
+import {Injectable, OnDestroy} from '@angular/core';
+import {BehaviorSubject, Subject} from 'rxjs';
+import {TrainrunService} from './trainrun.service';
+import {NodeService} from './node.service';
+import {TrainrunsectionValidator} from '../util/trainrunsection.validator';
+import {Trainrun} from '../../models/trainrun.model';
+import {MathUtils} from '../../utils/math';
+import {GeneralViewFunctions} from '../../view/util/generalViewFunctions';
+import {LeftAndRightTimeStructure} from '../../view/dialogs/trainrun-and-section-dialog/trainrunsection-tab/trainrun-section-tab.component';
+import {TrainrunsectionHelper} from '../util/trainrunsection.helper';
+import {LogService} from '../../logger/log.service';
+import {Transition} from '../../models/transition.model';
+import {takeUntil} from 'rxjs/operators';
+import {FilterService} from '../ui/filter.service';
 
 interface DepartureAndArrivalTimes {
   nodeFromDepartureTime: number;
@@ -39,7 +39,7 @@ export class TrainrunSectionService implements OnDestroy {
   // Description of observable data service: https://coryrylan.com/blog/angular-observable-data-services
   trainrunSectionsSubject = new BehaviorSubject<TrainrunSection[]>([]);
   readonly trainrunSections = this.trainrunSectionsSubject.asObservable();
-  trainrunSectionsStore: { trainrunSections: TrainrunSection[] } = {
+  trainrunSectionsStore: {trainrunSections: TrainrunSection[]} = {
     trainrunSections: [],
   }; // store the data in memory
 
@@ -561,7 +561,7 @@ export class TrainrunSectionService implements OnDestroy {
       existingTrainrunSectionId,
     );
 
-    const { nodeFrom, nodeToNew, nodeToOld } = this.getFromAndToNode(
+    const {nodeFrom, nodeToNew, nodeToOld} = this.getFromAndToNode(
       sourceNodeId,
       trainrunSection,
       targetNodeId,
@@ -1166,7 +1166,7 @@ export class TrainrunSectionService implements OnDestroy {
         trainrunSection.getSourceNodeId(),
       );
     }
-    return { nodeFrom, nodeToNew, nodeToOld };
+    return {nodeFrom, nodeToNew, nodeToOld};
   }
 
   private deleteTrainrunIfNotUsedAnymore(

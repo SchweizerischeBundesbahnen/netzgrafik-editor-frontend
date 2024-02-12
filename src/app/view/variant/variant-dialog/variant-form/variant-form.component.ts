@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormModel } from '../../../../utils/form-model';
-import { Validators } from '@angular/forms';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormModel} from '../../../../utils/form-model';
+import {Validators} from '@angular/forms';
 
 @Component({
   selector: 'sbb-variant-form',

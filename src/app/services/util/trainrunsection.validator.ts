@@ -1,4 +1,4 @@
-import { TrainrunSection } from '../../models/trainrunsection.model';
+import {TrainrunSection} from '../../models/trainrunsection.model';
 
 export class TrainrunsectionValidator {
   static validateOneSection(trainrunSection: TrainrunSection) {

@@ -1,7 +1,7 @@
-import { ThemeBase } from './theme-base';
-import { ThemeDefaultUx } from './theme-default-ux';
-import { ThemeRegistration } from './theme-registration';
-import { StaticDomTags } from '../editor-main-view/data-views/static.dom.tags';
+import {ThemeBase} from './theme-base';
+import {ThemeDefaultUx} from './theme-default-ux';
+import {ThemeRegistration} from './theme-registration';
+import {StaticDomTags} from '../editor-main-view/data-views/static.dom.tags';
 
 export class ThemeDefaultUxDark extends ThemeBase {
   constructor(

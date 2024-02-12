@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { HistoryEntryAction } from '../history-entry/history-entry.component';
-import { DownloadVersionModel, VersionId } from '../model';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {HistoryEntryAction} from '../history-entry/history-entry.component';
+import {DownloadVersionModel, VersionId} from '../model';
 
 @Component({
   selector: 'sbb-snapshot-entry',

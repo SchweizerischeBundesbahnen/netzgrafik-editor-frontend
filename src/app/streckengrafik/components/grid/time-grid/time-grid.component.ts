@@ -6,12 +6,12 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { SliderChangeInfo } from '../../../model/util/sliderChangeInfo';
-import { ViewBoxChangeInfo } from '../../../model/util/viewBoxChangeInfo';
-import { TimeSliderService } from '../../../services/time-slider.service';
-import { ViewBoxService } from '../../../services/util/view-box.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {SliderChangeInfo} from '../../../model/util/sliderChangeInfo';
+import {ViewBoxChangeInfo} from '../../../model/util/viewBoxChangeInfo';
+import {TimeSliderService} from '../../../services/time-slider.service';
+import {ViewBoxService} from '../../../services/util/view-box.service';
 import {
   UpdateCounterController,
   UpdateCounterHandler,

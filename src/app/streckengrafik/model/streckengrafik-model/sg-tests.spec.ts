@@ -1,13 +1,13 @@
-import { SgPathNode } from './sg-path-node';
-import { TrackData } from '../trackData';
-import { SgPathSection } from './sg-path-section';
-import { SgTrainrunSection } from './sg-trainrun-section';
-import { SgTrainrunNode } from './sg-trainrun-node';
-import { TrainrunItem } from '../trainrunItem';
-import { PathNode } from '../pathNode';
-import { SgTrainrun } from './sg-trainrun';
-import { PathSection } from '../pathSection';
-import { TrainrunBranchType } from '../enum/trainrun-branch-type-type';
+import {SgPathNode} from './sg-path-node';
+import {TrackData} from '../trackData';
+import {SgPathSection} from './sg-path-section';
+import {SgTrainrunSection} from './sg-trainrun-section';
+import {SgTrainrunNode} from './sg-trainrun-node';
+import {TrainrunItem} from '../trainrunItem';
+import {PathNode} from '../pathNode';
+import {SgTrainrun} from './sg-trainrun';
+import {PathSection} from '../pathSection';
+import {TrainrunBranchType} from '../enum/trainrun-branch-type-type';
 
 describe('StreckengrafikModelTests', () => {
   it('Streckengrafik-Model - Test - SgPathNode - 001', () => {

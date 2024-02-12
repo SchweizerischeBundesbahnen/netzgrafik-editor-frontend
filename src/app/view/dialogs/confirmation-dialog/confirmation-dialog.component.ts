@@ -1,8 +1,8 @@
-import { Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
-import { SbbDialog, SbbDialogConfig } from '@sbb-esta/angular/dialog';
-import { UiInteractionService } from '../../../services/ui/ui.interaction.service';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {Component, OnDestroy, TemplateRef, ViewChild} from '@angular/core';
+import {SbbDialog, SbbDialogConfig} from '@sbb-esta/angular/dialog';
+import {UiInteractionService} from '../../../services/ui/ui.interaction.service';
+import {Observable, Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 export class ConfirmationDialogParameter {
   public dialogTitle: string;
@@ -35,7 +35,7 @@ export class ConfirmationDialogParameter {
   styleUrls: ['./confirmation-dialog.component.scss'],
 })
 export class ConfirmationDialogComponent implements OnDestroy {
-  @ViewChild('confirmationDialogTemplate', { static: true })
+  @ViewChild('confirmationDialogTemplate', {static: true})
   confirmationDialogTemplate: TemplateRef<any>;
 
   public dialogTitle: string;
