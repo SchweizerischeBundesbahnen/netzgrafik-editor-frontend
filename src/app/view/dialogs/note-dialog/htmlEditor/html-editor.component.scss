@@ -1,5 +1,5 @@
-@use '@sbb-esta/angular' as sbb;
-@import '../../../rastering/definitions';
+@use "@sbb-esta/angular" as sbb;
+@import "../../../rastering/definitions";
 
 ::ng-deep .ngx-html-editor {
   border: 2px solid rgba(0, 0, 0, 0.2);
@@ -68,7 +68,7 @@
 }
 
 ::ng-deep button.ngx-html-editor-color.active {
-  opacity: 1.0;
+  opacity: 1;
 }
 
 ::ng-deep button.ngx-html-editor-color.active:hover {

@@ -1,5 +1,5 @@
-@import '../../rastering/definitions';
-@import 'trainrunsections.view.edgeline';
+@import "../../rastering/definitions";
+@import "trainrunsections.view.edgeline";
 
 /// TEXT fields
 ::ng-deep text.edge_text {
@@ -112,7 +112,6 @@
   ry: $NODE_ROUND_EDGE_SIZE;
 }
 
-
 ::ng-deep rect.edge_text_background.SourceArrival {
   stroke: $COLOR_BACKGROUND;
   fill: $COLOR_BACKGROUND;
@@ -132,7 +131,6 @@
   stroke: $COLOR_BACKGROUND;
   fill: $COLOR_BACKGROUND;
 }
-
 
 ::ng-deep rect.edge_text_background.Freq_120.SourceArrival {
   stroke: none;
@@ -193,7 +191,6 @@
   stroke: none;
   fill: none;
 }
-
 
 ::ng-deep rect.edge_text_background.TrainrunSectionName {
   stroke: $COLOR_BACKGROUND;
@@ -259,10 +256,10 @@
 }
 
 ::ng-deep text.edge_text.analytics_trainrunsection_text_muted:hover {
-  opacity: 1.0;
+  opacity: 1;
 }
 
 ::ng-deep text.edge_text.analytics_trainrunsection_text_focused {
-  opacity: 1.0;
+  opacity: 1;
   stroke-width: 0.5px;
 }

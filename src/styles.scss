@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'variables.scss';
+@import "variables.scss";
 
 .sbb-mt-s {
   margin-top: $gutterHeight !important;
@@ -186,7 +186,6 @@
 }
 
 @media print {
-
   sbb-root * {
     visibility: hidden;
   }
@@ -199,9 +198,7 @@
     visibility: visible;
   }
 
-  div.noprint *  {
+  div.noprint * {
     visibility: hidden;
   }
-
-
 }

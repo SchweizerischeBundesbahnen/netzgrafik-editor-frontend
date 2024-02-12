@@ -42,7 +42,7 @@ text.TrackOccupierShown {
 }
 
 line.VerticalNodeLine {
-  stroke: var(--NODE_TEXT_FOCUS);;
+  stroke: var(--NODE_TEXT_FOCUS);
   stroke-width: 0.5px;
   pointer-events: none;
   shape-rendering: crispEdges;

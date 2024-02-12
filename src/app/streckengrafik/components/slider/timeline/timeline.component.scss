@@ -1,10 +1,10 @@
 path.TimeLine {
   stroke: var(--COLOR_Default);
   opacity: 0.25;
-  stroke-width: 1.0px;
+  stroke-width: 1px;
   pointer-events: none;
   shape-rendering: crispEdges;
-  transform: translate(1.0px, 1.0px);
+  transform: translate(1px, 1px);
 }
 
 text {
@@ -16,6 +16,6 @@ text {
 }
 
 rect {
-  fill:  var(--COLOR_BACKGROUND);
+  fill: var(--COLOR_BACKGROUND);
   stroke: none;
 }

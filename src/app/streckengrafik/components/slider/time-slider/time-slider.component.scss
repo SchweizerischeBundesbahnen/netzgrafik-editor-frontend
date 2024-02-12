@@ -34,11 +34,9 @@
   fill: var(--NODE_TEXT_FOCUS);
 }
 
-
 .TimeSliderComponent.HorizontalLine {
   stroke: var(--NODE_TEXT_FOCUS);
   stroke-width: 0.25px;
-
 }
 
 .TimeSliderComponent.HorizontalLine.Hour.Five {
@@ -79,12 +77,12 @@
 }
 
 rect.TickLine {
-  stroke-width: 0.0px;
+  stroke-width: 0px;
   stroke: var(--NODE_TEXT_FOCUS);
 }
 
 rect.TickText {
-  stroke-width: 0.0px;
+  stroke-width: 0px;
   stroke: var(--NODE_TEXT_FOCUS);
 }
 

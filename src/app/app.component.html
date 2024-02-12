@@ -1,13 +1,23 @@
-<sbb-header-lean label="Netzgrafik-Editor" [subtitle]="'Version ' + version" class="sbb-header-fixed-columns noprint">
-
+<sbb-header-lean
+  label="Netzgrafik-Editor"
+  [subtitle]="'Version ' + version"
+  class="sbb-header-fixed-columns noprint"
+>
   <sbb-app-chooser-section label="Seitenmenu" class="noprint">
   </sbb-app-chooser-section>
-  <sbb-header-environment class="noprint">{{ environmentLabel }}</sbb-header-environment>
-  <sbb-usermenu class="noprint" [menu]="menu" *ngIf="authenticated | async" [userName]="email" [displayName]="userName">
+  <sbb-header-environment class="noprint">{{
+    environmentLabel
+  }}</sbb-header-environment>
+  <sbb-usermenu
+    class="noprint"
+    [menu]="menu"
+    *ngIf="authenticated | async"
+    [userName]="email"
+    [displayName]="userName"
+  >
     <sbb-icon svgIcon="user-small" *sbbIcon></sbb-icon>
   </sbb-usermenu>
   <sbb-menu #menu="sbbMenu">
-
     <button sbb-menu-item (click)="logout()">
       <sbb-icon svgIcon="exit-small" class="sbb-icon-fit"></sbb-icon>
       <span i18n>Logout</span>

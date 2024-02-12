@@ -1,4 +1,4 @@
-@import '../rastering/definitions';
+@import "../rastering/definitions";
 
 ::ng-deep path.KnotenAuslastungResourceGroup {
   stroke: none;
@@ -8,8 +8,6 @@
 ::ng-deep path.KnotenAuslastungDataGroup {
   cursor: pointer;
 }
-
-
 
 ::ng-deep text.KnotenAuslastungDataGroup {
   font-size: 10px;

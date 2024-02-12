@@ -5,8 +5,8 @@ $EDITOR_MENU_BIG_BUTTON_WIDTH: 120px;
 $INSIDE_OBJECT_HEIGHT: 57px;
 $BORDER_SIZE: 1px;
 
-$COLOR_FILTER_ACTIVE: #EB0000;
-$COLOR_TOPO_EDITOR_ACTIVE: #EB0000;
+$COLOR_FILTER_ACTIVE: #eb0000;
+$COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
 
 .editorMenuGripLayout {
   position: relative;
@@ -70,7 +70,6 @@ $COLOR_TOPO_EDITOR_ACTIVE: #EB0000;
   }
 }
 
-
 @-webkit-keyframes spin {
   0% {
     -webkit-transform: rotate(0deg);
@@ -88,7 +87,6 @@ $COLOR_TOPO_EDITOR_ACTIVE: #EB0000;
     transform: rotate(360deg);
   }
 }
-
 
 .ButtonSave {
   width: $EDITOR_MENU_BUTTON_SIZE;
@@ -249,7 +247,7 @@ $COLOR_TOPO_EDITOR_ACTIVE: #EB0000;
   border-left: $BORDER_SIZE;
   border-left-color: $COLOR_MUTED_SILVER;
   border-left-style: solid;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .ButtonTopologieEditor.NetzgrafikEditing {
@@ -292,7 +290,7 @@ $COLOR_TOPO_EDITOR_ACTIVE: #EB0000;
   border-left: $BORDER_SIZE;
   border-left-color: $COLOR_MUTED_SILVER;
   border-left-style: solid;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .ButtonNoteEditor.NetzgrafikEditing {
@@ -346,7 +344,7 @@ $COLOR_TOPO_EDITOR_ACTIVE: #EB0000;
   border-right: $BORDER_SIZE;
   border-right-color: $COLOR_MUTED_SILVER;
   border-right-style: solid;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .ButtonStreckengrafikEditor.NetzgrafikEditing {
@@ -388,7 +386,6 @@ $COLOR_TOPO_EDITOR_ACTIVE: #EB0000;
   background: lightgray;
 }
 
-
 .ButtonMultiNodeMoving {
   width: $EDITOR_MENU_BUTTON_SIZE;
   height: $INSIDE_OBJECT_HEIGHT;
@@ -402,7 +399,7 @@ $COLOR_TOPO_EDITOR_ACTIVE: #EB0000;
   border-left: $BORDER_SIZE;
   border-left-color: $COLOR_MUTED_SILVER;
   border-left-style: solid;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .ButtonMultiNodeMoving.NetzgrafikEditing {
@@ -519,6 +516,6 @@ path.ButtonMultiNodeMoving.disabled {
   pointer-events: none;
 }
 
-button:disabled{
+button:disabled {
   cursor: default;
 }

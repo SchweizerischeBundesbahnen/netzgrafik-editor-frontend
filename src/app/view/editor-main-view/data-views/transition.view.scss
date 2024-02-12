@@ -1,14 +1,14 @@
-@import '../../rastering/definitions';
+@import "../../rastering/definitions";
 
 ::ng-deep path.transition_line {
   fill: none;
-  stroke-width: 2.0px;
+  stroke-width: 2px;
   stroke: $NODE_DOCKABLE;
   pointer-events: none;
 }
 
 ::ng-deep path.transition_line.layer_0 {
-  stroke-width: 8.0px;
+  stroke-width: 8px;
   stroke-opacity: 0.001;
 }
 
@@ -27,73 +27,68 @@
   stroke: $NODE_DOCKABLE;
 }
 
-
 /// Coloring
 
 /// FREQ_120
 ::ng-deep path.transition_line.layer_0.Freq_120 {
-  stroke-dasharray: 8.0px;
-  stroke-width: 2.0px;
-  stroke-opacity: 1.0;
+  stroke-dasharray: 8px;
+  stroke-width: 2px;
+  stroke-opacity: 1;
 }
 
 /// FREQ_60
 ::ng-deep path.transition_line.layer_1.Freq_60 {
-  stroke-width: 2.0px;
+  stroke-width: 2px;
 }
 
 /// FREQ_30
 ::ng-deep path.transition_line.layer_2.Freq_30 {
-  stroke-width: 6.0px;
+  stroke-width: 6px;
 }
 
 ::ng-deep path.transition_line.layer_3.Freq_30 {
-  stroke-width: 2.0px;
+  stroke-width: 2px;
 }
-
 
 /// FREQ_20
 ::ng-deep path.transition_line.layer_1.Freq_20 {
-  stroke-width: 5.0px;
+  stroke-width: 5px;
 }
 
 ::ng-deep path.transition_line.layer_2.Freq_20 {
-  stroke-width: 3.0px;
-  stroke-opacity: 1.0;
+  stroke-width: 3px;
+  stroke-opacity: 1;
 }
 
 ::ng-deep path.transition_line.layer_3.Freq_20 {
-  stroke-width: 1.0px;
+  stroke-width: 1px;
 }
-
 
 /// FREQ_15
 ::ng-deep path.transition_line.layer_0.Freq_15 {
-  stroke-width: 7.0px;
-  stroke-opacity: 1.0;
+  stroke-width: 7px;
+  stroke-opacity: 1;
 }
 
 ::ng-deep path.transition_line.layer_1.Freq_15 {
-  stroke-width: 5.0px;
+  stroke-width: 5px;
 }
 
 ::ng-deep path.transition_line.layer_2.Freq_15 {
-  stroke-width: 3.0px;
+  stroke-width: 3px;
 }
 
 ::ng-deep path.transition_line.layer_3.Freq_15 {
-  stroke-width: 1.0px;
+  stroke-width: 1px;
 }
 
 ::ng-deep path.transition_line.layer_0.Freq_15.hover {
-  stroke-opacity: 1.0;
+  stroke-opacity: 1;
 }
-
 
 ::ng-deep path.transition_line.layer_0.Freq_15.selected {
-  stroke-opacity: 1.0;
+  stroke-opacity: 1;
 }
-
 
 ::ng-deep polygon.transition_pin {
   opacity: 0.01;
@@ -105,13 +100,13 @@
 ::ng-deep polygon.transition_pin.selected {
   rx: 3;
   ry: 3;
-  opacity: 1.0;
+  opacity: 1;
   stroke: $COLOR_Edit;
   pointer-events: auto;
 }
 
 ::ng-deep polygon.transition_pin.hover {
-  opacity: 1.0;
+  opacity: 1;
   stroke: $COLOR_Default;
   fill: $COLOR_Edit;
   pointer-events: auto;
@@ -124,7 +119,7 @@
 }
 
 ::ng-deep polygon.transition_pin.hover.nonstop {
-  fill-opacity: 1.0;
+  fill-opacity: 1;
   fill: $COLOR_Edit;
   pointer-events: auto;
 }
@@ -139,7 +134,7 @@
 }
 
 ::ng-deep path.transition_line.Freq_120 {
-  stroke-dasharray: 8.0px;
+  stroke-dasharray: 8px;
 }
 
 ::ng-deep path.transition_line.Freq_120.LinePatternRef_HVZ {

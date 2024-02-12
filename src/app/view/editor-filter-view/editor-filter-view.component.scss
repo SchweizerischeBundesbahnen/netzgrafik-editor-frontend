@@ -1,6 +1,6 @@
-@import '../../../variables';
-@import '../rastering/definitions';
-@import '../dialogs/trainrun-and-section-dialog/trainrun-tab/trainrun-tab.component';
+@import "../../../variables";
+@import "../rastering/definitions";
+@import "../dialogs/trainrun-and-section-dialog/trainrun-tab/trainrun-tab.component";
 
 ::ng-deep .TrainrunDialog.EditorToolButton {
   background: $COLOR_Default;
@@ -16,7 +16,6 @@
   color: $COLOR_Default;
   border: lightgrey;
 }
-
 
 ::ng-deep .SummaryTitle {
   margin-top: $interComponentSpacingSmall;
@@ -120,7 +119,6 @@
     min-width: 40px;
     max-width: 40px;
   }
-
 }
 
 ::ng-deep .FilterSettting:active {

@@ -1,68 +1,111 @@
 <h2 class="SummaryTitle">Einstellungen</h2>
 <sbb-accordion [multi]="true">
   <sbb-expansion-panel [expanded]="true">
-    <sbb-expansion-panel-header>
-      Farbschema
-    </sbb-expansion-panel-header>
+    <sbb-expansion-panel-header> Farbschema </sbb-expansion-panel-header>
     <sbb-label>Theme</sbb-label>
-    <br>
-    <sbb-radio-group [(ngModel)]="activeColorTheme.themeRegistration" class="sbb-radio-group-vertical">
-      <sbb-radio-button *ngFor="let option of colorThemeOptions" [value]="option.themeRegistration"
-                        (change)="onUpdateColorTheme($event)">
+    <br />
+    <sbb-radio-group
+      [(ngModel)]="activeColorTheme.themeRegistration"
+      class="sbb-radio-group-vertical"
+    >
+      <sbb-radio-button
+        *ngFor="let option of colorThemeOptions"
+        [value]="option.themeRegistration"
+        (change)="onUpdateColorTheme($event)"
+      >
         {{ option.name }}
       </sbb-radio-button>
     </sbb-radio-group>
 
-    <br>
+    <br />
     <ng-container *ngIf="!isActiveColorThemeDark()">
       <sbb-label>Hintergrundfarbe</sbb-label>
-      <br>
-      <input id="activeBackgroundColor" type="color" sbbInput
-             name="Hintergrundfarbe" style="width: 242px; min-height: 37px"
-             [(ngModel)]="activeBackgroundColor" (change)="colorPicked($event)"/>
+      <br />
+      <input
+        id="activeBackgroundColor"
+        type="color"
+        sbbInput
+        name="Hintergrundfarbe"
+        style="width: 242px; min-height: 37px"
+        [(ngModel)]="activeBackgroundColor"
+        (change)="colorPicked($event)"
+      />
       &nbsp;
-      <button sbb-secondary-button class="sbb-mt-m" [disabled]="isBackgroundColorWhite()"
-              title="Hintergrundfarbe auf 'weiss' setzten" (click)="setBackgroundColorToWhite()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fit=""
-             preserveAspectRatio="xMidYMid meet" focusable="false">
-          <polygon fill="white" stroke="#000" points="5.5 18.5 18.5 18.5 18.5 5.5 5.5 5.5"></polygon>
+      <button
+        sbb-secondary-button
+        class="sbb-mt-m"
+        [disabled]="isBackgroundColorWhite()"
+        title="Hintergrundfarbe auf 'weiss' setzten"
+        (click)="setBackgroundColorToWhite()"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fit=""
+          preserveAspectRatio="xMidYMid meet"
+          focusable="false"
+        >
+          <polygon
+            fill="white"
+            stroke="#000"
+            points="5.5 18.5 18.5 18.5 18.5 5.5 5.5 5.5"
+          ></polygon>
         </svg>
       </button>
       &nbsp;
-      <button sbb-secondary-button class="sbb-mt-m" [disabled]="isDefaultBackgroundColorActive()"
-              title="Hintergrundfarbe auf Standard zurücksetzen" (click)="onResetBackgroundColor()">
+      <button
+        sbb-secondary-button
+        class="sbb-mt-m"
+        [disabled]="isDefaultBackgroundColorActive()"
+        title="Hintergrundfarbe auf Standard zurücksetzen"
+        (click)="onResetBackgroundColor()"
+      >
         <sbb-icon svgIcon="trash-small"></sbb-icon>
       </button>
     </ng-container>
     <ng-container *ngIf="isActiveColorThemeDark()">
       <sbb-label>Hintergrundfarbe (dunkel)</sbb-label>
-      <br>
-      <input id="activeDarkBackgroundColor" type="color" sbbInput
-             name="Hintergrundfarbe" style="width: 242px; min-height: 37px"
-             [(ngModel)]="activeDarkBackgroundColor" (change)="colorPicked($event)"/>
+      <br />
+      <input
+        id="activeDarkBackgroundColor"
+        type="color"
+        sbbInput
+        name="Hintergrundfarbe"
+        style="width: 242px; min-height: 37px"
+        [(ngModel)]="activeDarkBackgroundColor"
+        (change)="colorPicked($event)"
+      />
       &nbsp;
-      <button sbb-secondary-button class="sbb-mt-m" [disabled]="isDefaultDarkBackgroundColorActive()"
-              title="Hintergrundfarbe auf Standard zurücksetzen" (click)="onResetDarkBackgroundColor()">
+      <button
+        sbb-secondary-button
+        class="sbb-mt-m"
+        [disabled]="isDefaultDarkBackgroundColorActive()"
+        title="Hintergrundfarbe auf Standard zurücksetzen"
+        (click)="onResetDarkBackgroundColor()"
+      >
         <sbb-icon svgIcon="trash-small"></sbb-icon>
       </button>
     </ng-container>
-    <br>
+    <br />
   </sbb-expansion-panel>
 
   <sbb-expansion-panel [expanded]="true">
-    <sbb-expansion-panel-header>
-      Streckengrafik
-    </sbb-expansion-panel-header>
+    <sbb-expansion-panel-header> Streckengrafik </sbb-expansion-panel-header>
     <sbb-label>Achsenskalierung (Distanz)</sbb-label>
-    <br>
-    <sbb-radio-group [(ngModel)]="activeStreckengrafikRenderingType" class="sbb-radio-group-vertical">
-      <sbb-radio-button *ngFor="let option of streckengrafikRenderingTypeOptions"
-                        [value]="option.streckengrafikRenderingType"
-                        (change)="onUpdateStreckengrafikRenderingType($event)">
+    <br />
+    <sbb-radio-group
+      [(ngModel)]="activeStreckengrafikRenderingType"
+      class="sbb-radio-group-vertical"
+    >
+      <sbb-radio-button
+        *ngFor="let option of streckengrafikRenderingTypeOptions"
+        [value]="option.streckengrafikRenderingType"
+        (change)="onUpdateStreckengrafikRenderingType($event)"
+      >
         {{ option.name }}
       </sbb-radio-button>
     </sbb-radio-group>
   </sbb-expansion-panel>
-
 </sbb-accordion>
-

@@ -1,14 +1,29 @@
 <sbb-icon-sidebar-container>
   <sbb-icon-sidebar [(expanded)]="expanded">
     <!--<a sbbIconSidebarItem label="Varianten" (click)="onVariantenClicked()" class="sbb-active">-->
-    <a sbbIconSidebarItem label="Varianten" [class]="getVariantsActivatedTag()"
-       (click)="onVariantenClicked()">
-      <sbb-icon *ngIf="getVariantIsWritable()" svgIcon="document-standard-small"></sbb-icon>
-      <sbb-icon *ngIf="!getVariantIsWritable()" svgIcon="folder-lock-small" style="color: #c60018;"></sbb-icon>
+    <a
+      sbbIconSidebarItem
+      label="Varianten"
+      [class]="getVariantsActivatedTag()"
+      (click)="onVariantenClicked()"
+    >
+      <sbb-icon
+        *ngIf="getVariantIsWritable()"
+        svgIcon="document-standard-small"
+      ></sbb-icon>
+      <sbb-icon
+        *ngIf="!getVariantIsWritable()"
+        svgIcon="folder-lock-small"
+        style="color: #c60018"
+      ></sbb-icon>
     </a>
-    <a sbbIconSidebarItem label="Filter" [class]="getFilterActivatedTag()"
-       [style]="getFilterStyle()"
-       (click)="onFilterClicked()">
+    <a
+      sbbIconSidebarItem
+      label="Filter"
+      [class]="getFilterActivatedTag()"
+      [style]="getFilterStyle()"
+      (click)="onFilterClicked()"
+    >
       <sbb-icon svgIcon="filter-small"></sbb-icon>
     </a>
     <!--
@@ -16,16 +31,28 @@
       <sbb-icon svgIcon="bulb-on-small"></sbb-icon>
     </a>
     -->
-    <a sbbIconSidebarItem label="Bearbeiten" [class]="getEditActivatedTag()"
-       (click)="onEditToolClicked()">
+    <a
+      sbbIconSidebarItem
+      label="Bearbeiten"
+      [class]="getEditActivatedTag()"
+      (click)="onEditToolClicked()"
+    >
       <sbb-icon svgIcon="pen-small"></sbb-icon>
     </a>
-    <a sbbIconSidebarItem label="Weitere Funktionen" [class]="getMoreFunctionActivatedTag()"
-       (click)="onToolsClicked()">
+    <a
+      sbbIconSidebarItem
+      label="Weitere Funktionen"
+      [class]="getMoreFunctionActivatedTag()"
+      (click)="onToolsClicked()"
+    >
       <sbb-icon svgIcon="nine-squares-small"></sbb-icon>
     </a>
-    <a sbbIconSidebarItem label="Einstellungen" [class]="getPropertiesActivatedTag()"
-       (click)="onPropertiesClicked()">
+    <a
+      sbbIconSidebarItem
+      label="Einstellungen"
+      [class]="getPropertiesActivatedTag()"
+      (click)="onPropertiesClicked()"
+    >
       <sbb-icon svgIcon="controls-small"></sbb-icon>
     </a>
   </sbb-icon-sidebar>

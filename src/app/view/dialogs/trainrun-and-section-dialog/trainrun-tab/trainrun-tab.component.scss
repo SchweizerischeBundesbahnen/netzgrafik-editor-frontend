@@ -1,11 +1,12 @@
-@import '../../../rastering/definitions';
-@import '../../../../../variables';
+@import "../../../rastering/definitions";
+@import "../../../../../variables";
 
 ::ng-deep .sbb-trainrun-chip-group {
   display: flex;
 }
 
-::ng-deep button.TrainrunDialog { // mimic the sbb-chip design (not yet available as stand-alone component)
+::ng-deep button.TrainrunDialog {
+  // mimic the sbb-chip design (not yet available as stand-alone component)
   margin-right: $buttonHeight;
   padding: 6px 6px;
   min-width: 56px;
@@ -32,7 +33,6 @@
   padding-left: 10px;
   color: $COLOR_Default;
 }
-
 
 ::ng-deep div.EditTrainrunDialogTabContent {
   border-style: none;
@@ -77,11 +77,10 @@
   max-height: 250px;
   padding-bottom: 0px;
 
-  .sbb-label{
+  .sbb-label {
     padding-top: 5px;
     padding-bottom: 3px;
   }
-
 }
 
 ::ng-deep div.EditTrainrunDialogTabContent.IntegratedComponent {

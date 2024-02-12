@@ -54,7 +54,7 @@ button.SimpleButton:hover {
 button.SimpleButton.TogglePathNode:hover {
   background: none;
   font-weight: bold;
-  transform: scale(1.0) translate(-6px, 3px);
+  transform: scale(1) translate(-6px, 3px);
 }
 
 button.SimpleButton:active {
@@ -169,12 +169,10 @@ button.SimpleButton.Empty {
   max-width: 20px;
 }
 
-
 div.main_1 {
   position: relative;
   left: 1px;
 }
-
 
 div.main_3 {
   position: relative;
@@ -251,7 +249,7 @@ div.main_1 {
   height: var(--STRECKENGRAFIK_MAIN_H);
   max-height: var(--STRECKENGRAFIK_MAIN_H);
   min-height: var(--STRECKENGRAFIK_MAIN_H);
-  left: 0.0px;
+  left: 0px;
   border-right: var(--NODE_TEXT_FOCUS) solid 0.125px;
 }
 
@@ -271,7 +269,7 @@ div.main_3 {
   height: var(--STRECKENGRAFIK_MAIN_H);
   max-height: var(--STRECKENGRAFIK_MAIN_H);
   min-height: var(--STRECKENGRAFIK_MAIN_H);
-  left: 0.0px;
+  left: 0px;
   border-left: var(--NODE_TEXT_FOCUS) solid 0.125px;
 }
 
@@ -283,7 +281,6 @@ div.main_4 {
   max-height: var(--STRECKENGRAFIK_MAIN_H);
   min-height: var(--STRECKENGRAFIK_MAIN_H);
 }
-
 
 div.footer_1 {
   width: 40px;
@@ -321,4 +318,3 @@ div.footer_4 {
   max-height: 40px;
   min-height: 40px;
 }
-
