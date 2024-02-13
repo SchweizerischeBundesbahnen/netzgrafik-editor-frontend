@@ -61,7 +61,6 @@ Regular-interval timetable
 
 ![Netzgrafik-Editor](./documentation/images/Overview_Editor_Screenshot_001.PNG)
 
-
 It offers various functions to enhance the efficiency and optimization of the logistics network.
 Some of the key features include:
 
@@ -90,7 +89,6 @@ Some of the key features include:
 - **Infrastructure Requirement Estimation:** Infrastructure requirements can be estimated based on
   the entered timetable representation,
   aiding in infrastructure planning and decision-making.
- 
 
 ## Origin and Open Source Collaboration
 
@@ -115,6 +113,10 @@ context, such as:
   integrated timetables for classes,
   exams, and other activities, facilitating efficient scheduling and minimizing conflicts.
 
+<details>
+<summary>more ...
+</summary>
+
 By extending the scope of its application beyond railways, the Netzgrafik-Editor has the potential
 to become a valuable tool in numerous sectors,
 providing comprehensive control, optimization, and synchronization of time-based planning.
@@ -136,6 +138,8 @@ The openness of the project encourages innovation, expertise from different sect
 improvements to optimize the
 planning processes.
 
+</details>
+
 ## User Manual
 
 The user manual can be found here [USERMANUAL.md](documentation/USERMANUAL.md)
@@ -144,7 +148,8 @@ The user manual can be found here [USERMANUAL.md](documentation/USERMANUAL.md)
 
 ### Development setup
 
-For a working local development setup, you also need to start the [backend](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-backend)!
+For a working local development setup, you also need to start
+the [backend](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-backend)!
 
 ```shell
 # clone project from https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend
@@ -154,7 +159,6 @@ git clone https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-fronte
 cd netzgrafik-editor-frontend
 
 ```
-
 
 ```shell
 # install all npm dependencies
@@ -184,7 +188,6 @@ docker compose up
 >
 > Login with username **user** and password **user**
 
-
 ### Testing
 
 ```
@@ -197,8 +200,11 @@ ng test --browsers Chrome
 
 ## Backend API code generation
 
-The backend API is specified using [OpenAPI](https://swagger.io/specification/) (see `api-docs.json`).
-Angular Services for the communication with the backend API are generated based on this specification using [openapi-generator](https://github.com/openapitools/openapi-generator) and added to the repo (see `src/app/api/generated`).
+The backend API is specified using [OpenAPI](https://swagger.io/specification/) (
+see `api-docs.json`).
+Angular Services for the communication with the backend API are generated based on this
+specification using [openapi-generator](https://github.com/openapitools/openapi-generator) and added
+to the repo (see `src/app/api/generated`).
 
 ### Update the API Version
 
@@ -206,6 +212,7 @@ In order to update the API Version start the local backend server.
 The new spec can then be downloaded at <http://localhost:8080/v3/api-docs/>.
 
 The new API Service files can be generated using the following command:
+
 ```shell
 npm run generate:api
 ```
@@ -218,7 +225,6 @@ Please consider the following information:
 
 - [CODING_STANDARDS.md](CODING_STANDARDS.md)
 - [CONTRIBUTING.md](CONTRIBUTING.md)
-
 
 and check the
 open [issues](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues)
