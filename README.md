@@ -222,6 +222,7 @@ Please consider the following information:
 - [CODING_STANDARDS.md](CODING_STANDARDS.md)
 - [CONTRIBUTING.md](CONTRIBUTING.md)
 
+
 and check the
 open [issues](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues)
 and [pull requests](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/pulls).
@@ -250,3 +251,10 @@ standards that you should follow when contributing to the project.
 
 To ensure that your project is a welcoming and inclusive environment for all contributors, you
 should establish a good [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+
+## Credits
+
+Many thanks to all contributors for their engagement and contribution, without which this project
+would not have been possible. Thank you for your current and future contribution!
+
+[CREDITS.md](CREDITS.md)
