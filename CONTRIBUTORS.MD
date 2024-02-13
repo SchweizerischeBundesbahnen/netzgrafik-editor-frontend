@@ -55,7 +55,7 @@ and to all users for their early continuous feedback.
 ---
 
 Executing this command will display the commit count and author name for each contributor, sorted by
-the number of commits.
+the number of commits. (Lists only authors since code base is on github / open source ).
 
 ```bash
 git shortlog --summary --numbered --all --no-merges
