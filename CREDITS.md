@@ -37,13 +37,13 @@ the road to productive application and/or making the code public.
 - Marc Simon
 - Ensar Memeti
 - Samuel Ueltschi
-- Simon Bühlmann
 
 <details>
-<summary>more</summary>
+<summary>more ... </summary>
 
 <br>
 
+- Simon Bühlmann
 - Erik Nygren
 - Christian Eichenberger
 - Sibylle Trenck
