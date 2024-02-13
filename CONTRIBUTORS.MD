@@ -13,17 +13,16 @@ of all participants from the very beginning - from the idea to the productive ap
 
 ### Special thanks to the contributors of the first minute
 
->
-> **Martin Sojka** ( Railway Network Developer / From the initial
-> idea to the product )
->
-> **Adrian Egli** ( Leading the development - From the initial idea to the product )
->
-> **Tim Schoch** (UX architecture and conception)
->
-> **Corelia Reichen** (Railway Network Developer - Conception)
->
-> **Christian Baumberger**
+**Martin Sojka** ( Railway Network Developer / From the initial
+idea to the product )
+
+**Adrian Egli** ( Leading the development - From the initial idea to the product )
+
+**Tim Schoch** (UX architecture and conception)
+
+**Corelia Reichen** (Railway Network Developer - Conception)
+
+**Christian Baumberger**
 
 ### Contributors
 
