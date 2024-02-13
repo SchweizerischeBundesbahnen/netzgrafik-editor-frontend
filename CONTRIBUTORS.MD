@@ -20,7 +20,7 @@ idea to the product )
 
 **Adrian Egli** ( Software development - From the initial idea to the product )
 
-**Tim Schoch** (UX architecture - Conception)
+**Tim Schoch** (UX architect - Conception)
 
 **Corelia Reichen** (Railway Network Developer - Conception)
 
