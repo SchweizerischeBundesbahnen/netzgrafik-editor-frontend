@@ -90,10 +90,7 @@ Some of the key features include:
 - **Infrastructure Requirement Estimation:** Infrastructure requirements can be estimated based on
   the entered timetable representation,
   aiding in infrastructure planning and decision-making.
-
-- **Rolling Stock Calculation:** The software calculates the required number of rolling stocks based
-  on the timetable,
-  supporting fleet sizing.
+ 
 
 ## Origin and Open Source Collaboration
 
