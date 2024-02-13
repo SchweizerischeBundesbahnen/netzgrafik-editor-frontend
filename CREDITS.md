@@ -39,6 +39,10 @@ the road to productive application and/or making the code public.
 - Samuel Ueltschi
 - Simon Bühlmann
 - Erik Nygren
+
+<details>
+<summary>more</summary>
+
 - Christian Eichenberger
 - Sibylle Trenck
 - Simona Manetsch
@@ -49,6 +53,8 @@ the road to productive application and/or making the code public.
 - Lukas Grossar
 - Christian Zosel
 - Lukas Spirig [angular.app.sbb.ch](https://angular.app.sbb.ch/)
+
+</details>
 
 and to all users for their early continuous feedback.
 
