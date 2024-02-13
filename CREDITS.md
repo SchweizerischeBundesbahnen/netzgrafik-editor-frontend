@@ -38,11 +38,12 @@ the road to productive application and/or making the code public.
 - Ensar Memeti
 - Samuel Ueltschi
 - Simon Bühlmann
-- Erik Nygren
 
 <details>
 <summary>more</summary>
 
+
+- Erik Nygren
 - Christian Eichenberger
 - Sibylle Trenck
 - Simona Manetsch
