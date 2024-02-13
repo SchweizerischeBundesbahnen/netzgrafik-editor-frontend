@@ -44,11 +44,11 @@ the road to productive application and/or making the code public.
 - Simona Manetsch
 - Dina Dändliker
 - Pauline Windey
-- [Lukas Spirig and team (angular.sbb.ch)](https://angular.app.sbb.ch/)
 - Mahalia Stephan
 - Peter Keller
 - Lukas Grossar
 - Christian Zosel
+- Lukas Spirig [angular.app.sbb.ch](https://angular.app.sbb.ch/)
 
 and to all users for their early continuous feedback.
 
