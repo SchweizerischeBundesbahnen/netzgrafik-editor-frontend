@@ -34,10 +34,10 @@ Every contribution is valuable, such as participation in brainstorming, UX tests
 user's perspective, or software development. The following people made a valuable contribution on
 the road to productive application and making the code public.
 
-- **Marc Simon**
-- **Ensar Memeti**
-- **Samuel Ueltschi**
-- **Simon Bühlmann**
+- Marc Simon
+- Ensar Memeti
+- Samuel Ueltschi
+- Simon Bühlmann
 - Erik Nygren
 - Christian Eichenberger
 - Sibylle Trenck
