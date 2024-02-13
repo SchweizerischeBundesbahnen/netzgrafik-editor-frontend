@@ -1,0 +1,91 @@
+@import "./../../../view/editor-properties-view-component/editor-properties-view.component.scss";
+@import "./../../../view/editor-filter-view/editor-filter-view.component.scss";
+@import "./../../../view/dialogs/trainrun-and-section-dialog/trainrun-tab/trainrun-tab.component.scss";
+@import "./../../rastering/definitions";
+
+.filterable-label-drop-container {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  margin: 0px 0px 0px 0px;
+  display: inline-block;
+  vertical-align: top;
+  flex-wrap: wrap;
+}
+
+.filterable-label-labelgroup-block {
+  display: block;
+  width: 100%;
+}
+
+.filterable-label-labelgroup-drop-list {
+  border: none;
+  fill: whitesmoke;
+  min-height: 60px;
+  width: 80%;
+  min-width: 80%;
+  max-width: 80%;
+  background: whitesmoke;
+  border-radius: 4px;
+  overflow: hidden;
+  float: left;
+  padding: 10px;
+  margin: 5px 0px 5px 0px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.filterable-label-labelgroup-single-element-drop-list {
+}
+
+.filterable-label-labelgroup-empty-drop-list {
+  height: 38px;
+  width: 373px;
+  background: $COLOR_Default;
+  border-radius: 16px;
+  opacity: 0.1;
+  border-style: dot-dash;
+}
+
+.filterable-label-labelgroup-delete {
+  float: right;
+  width: 44px;
+  padding: 10px 0px 10px 0px;
+  margin: 5px 0px 5px 0px;
+}
+
+.button.filterable-label-grp-delete-add-button-button {
+  border: none;
+  fill: white;
+  min-height: 44px;
+  max-width: 44px;
+  background: white;
+  border-radius: 4px;
+}
+
+.button.filterable-label-grp-delete-add-button-button:hover {
+  fill: whitesmoke;
+  background: whitesmoke;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.25;
+}
+
+.cdk-drag-animating {
+  transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drag-preview {
+  background-color: $COLOR_Focus !important;
+  box-sizing: border-box;
+  border-radius: 16px;
+  box-shadow:
+    0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+::ng-deep .sbb-expansion-panel-header-hide-toggle {
+  background: none;
+}

@@ -1,0 +1,194 @@
+@import "./../../view/rastering/definitions";
+
+.sectionEditingContainer {
+  margin-left: 45px;
+}
+
+svg {
+  display: block;
+  height: 192px;
+  overflow: visible;
+}
+
+.start_text {
+  text-anchor: start !important;
+  cursor: pointer;
+}
+
+.end_text {
+  text-anchor: end !important;
+  cursor: pointer;
+}
+
+svg text.edge_text:hover {
+  stroke: $COLOR_Edit;
+  fill: $COLOR_Edit;
+  stroke-width: 0.5px;
+}
+
+svg text.edge_text {
+  font-size: 16px;
+}
+
+.travelTime {
+  text-anchor: middle !important;
+}
+
+.TrainrunSectionNumberOfStops {
+  text-anchor: middle !important;
+}
+
+.editingContainer {
+  display: flex;
+
+  .mainGridLayout {
+    margin: 6px 0 !important;
+    height: 180px !important;
+    width: 224px !important;
+    min-width: 224px !important;
+    transform: none;
+
+    display: grid;
+    grid-gap: 0px;
+    grid-auto-rows: 12px;
+    grid-auto-columns: 32px;
+
+    .nodeBorderContainer {
+      display: grid;
+      grid-gap: 0;
+      grid-auto-rows: 12px;
+      grid-auto-columns: 32px;
+      border: 1px solid black;
+      background: white;
+    }
+
+    .nodeBorderContainerTopLeft {
+      grid-column: 1 / span 3;
+      grid-row: 1 / span 3;
+    }
+
+    .nodeBorderContainerTopRight {
+      grid-column: 5 / span 3;
+      grid-row: 2 / span 3;
+    }
+
+    .nodeBorderContainerCenter {
+      grid-column: 3 / span 3;
+      grid-row: 7 / span 3;
+    }
+
+    .nodeBorderContainerBottomLeft {
+      grid-column: 1 / span 3;
+      grid-row: 12 / span 3;
+    }
+
+    .nodeBorderContainerBottomRight {
+      grid-column: 5 / span 3;
+      grid-row: 13 / span 3;
+    }
+
+    .nodeBorderContainerCenterStops {
+      grid-column: 1 / span 3;
+      grid-row: 7 / span 3;
+    }
+
+    .nodeMinus {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .nodeTime {
+      grid-column: 2;
+      grid-row: 1;
+
+      ::ng-deep input {
+        padding: 0px;
+        width: 26px;
+        margin: 1px;
+        height: 32px;
+        -moz-appearance: textfield;
+      }
+    }
+
+    .nodePlus {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .stopEnterField {
+      grid-column: 2;
+      grid-row: 1;
+
+      ::ng-deep input {
+        padding: 0px;
+        width: 26px;
+        margin: 1px;
+        height: 32px;
+      }
+    }
+
+    .TravelTimeLock {
+      grid-column: 2;
+      grid-row: 7 / span 3;
+      background: whitesmoke;
+    }
+
+    .TravelTimeLock.Center {
+      grid-column: 4;
+      grid-row: 7 / span 3;
+      background: whitesmoke;
+      margin: 1px;
+    }
+
+    .NodeLeftLock {
+      grid-column: 4;
+      grid-row: 2 / span 3;
+      background: whitesmoke;
+      margin: 1px;
+    }
+
+    .NodeRightLock {
+      grid-column: 4;
+      grid-row: 13 / span 3;
+      background: whitesmoke;
+      margin: 1px;
+    }
+  }
+
+  .propagationButtonContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+}
+
+.PerlenketteFill5 {
+  fill: white;
+}
+
+.Rotation90 {
+  transform: rotate(90deg);
+}
+
+edge_line_stops {
+  cursor: pointer;
+}
+
+.PerlenketteStopElement {
+  cursor: pointer;
+}
+
+.PerlenketteStopElement:hover {
+  stroke: $COLOR_Edit;
+  stroke-width: 8px;
+}
+
+svg .OddFrequency {
+  font-style: italic;
+}
+
+g.edge.Lines:hover {
+  cursor: pointer;
+  opacity: 0.75;
+}

@@ -1,0 +1,13 @@
+<div sbbDialogTitle>
+  <ng-container *ngIf="isNewVariant">Variante erstellen</ng-container>
+  <ng-container *ngIf="!isNewVariant">Variante bearbeiten</ng-container>
+</div>
+<div sbbDialogContent>
+  <sbb-variant-form [model]="formmodel"></sbb-variant-form>
+</div>
+<div sbbDialogActions>
+  <button sbb-button cdkFocusInitial (click)="onCreateClicked()">
+    Speichern
+  </button>
+  <button sbb-secondary-button (click)="onCancelClicked()">Abbrechen</button>
+</div>

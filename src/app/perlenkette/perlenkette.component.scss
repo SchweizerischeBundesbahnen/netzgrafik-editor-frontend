@@ -1,0 +1,137 @@
+.title-container {
+  border-bottom: 1px solid var(--sbb-color-silver);
+  padding: 0 0px;
+  overflow: auto;
+  padding-top: 7px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.TitleArea {
+  margin: 10px 10px 0px 10px;
+  padding: 0 4px;
+}
+
+.sepdiv {
+  width: 100%;
+  height: 2px;
+  float: right;
+  border-bottom: 1px solid var(--sbb-color-silver);
+}
+
+.svg-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  .drawing-container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 0;
+  }
+}
+
+.alignleft {
+  float: left;
+}
+
+.alignright {
+  float: right;
+}
+
+button.SimpleButton {
+  min-width: 40px;
+  min-height: 28px;
+  max-width: 40px;
+  max-height: 28px;
+  position: relative;
+  left: 5px;
+  top: 5px;
+  background: none;
+  border: none;
+  color: black;
+  float: right;
+  padding-top: 7px;
+}
+
+button.SimpleButton.ZoomEqual {
+  font-weight: bold;
+}
+
+button.SimpleButton:hover {
+  background: none;
+  font-weight: bold;
+  transform: scale(1.25);
+}
+
+button.SimpleButton:active {
+  background: whitesmoke;
+}
+
+button.SimpleButton:disabled {
+  opacity: 0.5;
+  transform: scale(1);
+  background: white;
+}
+
+span.station {
+  cursor: pointer;
+  font-size: 22px;
+  background: none;
+  border: 5px solid white;
+  font-weight: lighter;
+  user-select: none;
+}
+
+span.arrow {
+  cursor: default;
+  pointer-events: none;
+  font-size: 22px;
+  background: none;
+  user-select: none;
+}
+
+span.trainname {
+  cursor: default;
+  pointer-events: none;
+  font-size: 22px;
+  background: none;
+  border: 5px solid white;
+  user-select: none;
+}
+
+span.smallstation {
+  cursor: pointer;
+  font-size: 12px;
+  background: none;
+  border: 3px solid white;
+  white-space: pre-wrap;
+  font-weight: lighter;
+  user-select: none;
+}
+
+span.smallstation:active {
+  background: whitesmoke;
+}
+
+span.smallstation.closest {
+  font-weight: bolder;
+}
+
+span.smallstation:hover {
+  color: var(--COLOR_Edit);
+}
+
+.trainRunEditor {
+  width: 100%;
+  overflow: auto;
+  padding: 0px;
+  min-height: 300px;
+}
+
+.highlight {
+  color: var(--COLOR_Edit);
+  stroke: var(--COLOR_Edit);
+}

@@ -1,0 +1,917 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "security": [
+    {
+      "OAuth": []
+    }
+  ],
+  "paths": {
+    "/v1/variants/{variantId}/unarchive": {
+      "put": {
+        "tags": [
+          "variant-controller"
+        ],
+        "operationId": "unarchiveVariant",
+        "parameters": [
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/variants/{variantId}/snapshots/asNewest": {
+      "put": {
+        "tags": [
+          "variant-controller"
+        ],
+        "operationId": "raiseSnapshotsToNewestReleaseVersion",
+        "parameters": [
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/variants/{variantId}/archive": {
+      "put": {
+        "tags": [
+          "variant-controller"
+        ],
+        "operationId": "archiveVariant",
+        "parameters": [
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/projects/{id}": {
+      "put": {
+        "tags": [
+          "project-controller"
+        ],
+        "operationId": "updateProject",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectCreateUpdateDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/projects/{id}/unarchive": {
+      "put": {
+        "tags": [
+          "project-controller"
+        ],
+        "operationId": "unarchiveProject",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/projects/{id}/archive": {
+      "put": {
+        "tags": [
+          "project-controller"
+        ],
+        "operationId": "archiveProject",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/versions/{versionId}/variant/new": {
+      "post": {
+        "tags": [
+          "variant-controller"
+        ],
+        "operationId": "createVariantFromVersion",
+        "parameters": [
+          {
+            "name": "versionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VariantCreateFromVersionDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/versions/{versionId}/restore": {
+      "post": {
+        "tags": [
+          "version-controller"
+        ],
+        "operationId": "restoreVersion",
+        "parameters": [
+          {
+            "name": "versionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/versions/{snapshotVersionId}/release": {
+      "post": {
+        "tags": [
+          "version-controller"
+        ],
+        "operationId": "createReleaseVersion",
+        "parameters": [
+          {
+            "name": "snapshotVersionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionCreateReleaseDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/versions/{baseVersionId}/snapshot": {
+      "post": {
+        "tags": [
+          "version-controller"
+        ],
+        "operationId": "createSnapshotVersion",
+        "parameters": [
+          {
+            "name": "baseVersionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VersionCreateSnapshotDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/projects": {
+      "get": {
+        "tags": [
+          "project-controller"
+        ],
+        "operationId": "getAllProjects",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectSummaryDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "project-controller"
+        ],
+        "operationId": "createProject",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectCreateUpdateDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/projects/{projectId}/variants": {
+      "post": {
+        "tags": [
+          "variant-controller"
+        ],
+        "operationId": "createVariant",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VariantCreateDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/versions/{versionId}": {
+      "get": {
+        "tags": [
+          "version-controller"
+        ],
+        "operationId": "getVersion",
+        "parameters": [
+          {
+            "name": "versionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/versions/{versionId}/model": {
+      "get": {
+        "tags": [
+          "version-controller"
+        ],
+        "operationId": "getVersionModel",
+        "parameters": [
+          {
+            "name": "versionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/variants/{variantId}": {
+      "get": {
+        "tags": [
+          "variant-controller"
+        ],
+        "operationId": "getVariant",
+        "parameters": [
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VariantDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "variant-controller"
+        ],
+        "operationId": "deleteVariant",
+        "parameters": [
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/projects/{projectId}": {
+      "get": {
+        "tags": [
+          "project-controller"
+        ],
+        "operationId": "getProject",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "project-controller"
+        ],
+        "operationId": "deleteProject",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/variants/{variantId}/snapshots": {
+      "delete": {
+        "tags": [
+          "variant-controller"
+        ],
+        "operationId": "dropSnapshots",
+        "parameters": [
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ProjectCreateUpdateDto": {
+        "required": [
+          "description",
+          "name",
+          "readUsers",
+          "summary",
+          "writeUsers"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "writeUsers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "readUsers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "VariantCreateFromVersionDto": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "VersionCreateReleaseDto": {
+        "required": [
+          "comment"
+        ],
+        "type": "object",
+        "properties": {
+          "comment": {
+            "type": "string"
+          }
+        }
+      },
+      "VersionCreateSnapshotDto": {
+        "required": [
+          "comment",
+          "model",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          }
+        }
+      },
+      "VariantCreateDto": {
+        "required": [
+          "initialModel",
+          "initialName"
+        ],
+        "type": "object",
+        "properties": {
+          "initialModel": {
+            "type": "string"
+          },
+          "initialName": {
+            "type": "string"
+          }
+        }
+      },
+      "VersionDto": {
+        "required": [
+          "comment",
+          "createdAt",
+          "createdBy",
+          "id",
+          "name",
+          "releaseVersion",
+          "snapshotVersion",
+          "variantId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "variantId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "releaseVersion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "snapshotVersion": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string"
+          }
+        }
+      },
+      "JsonNode": {
+        "type": "object"
+      },
+      "VariantDto": {
+        "required": [
+          "id",
+          "isArchived",
+          "isDeletable",
+          "isWritable",
+          "latestVersion",
+          "projectId",
+          "versions"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "projectId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "versions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionDto"
+            }
+          },
+          "latestVersion": {
+            "$ref": "#/components/schemas/VersionDto"
+          },
+          "isArchived": {
+            "type": "boolean"
+          },
+          "isWritable": {
+            "type": "boolean"
+          },
+          "isDeletable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ProjectSummaryDto": {
+        "required": [
+          "id",
+          "isArchived",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "isArchived": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ProjectDto": {
+        "required": [
+          "createdAt",
+          "createdBy",
+          "description",
+          "id",
+          "isArchived",
+          "isDeletable",
+          "isWritable",
+          "name",
+          "readUsers",
+          "summary",
+          "variants",
+          "writeUsers"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VariantSummaryDto"
+            }
+          },
+          "writeUsers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "readUsers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isArchived": {
+            "type": "boolean"
+          },
+          "isWritable": {
+            "type": "boolean"
+          },
+          "isDeletable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "VariantSummaryDto": {
+        "required": [
+          "id",
+          "isArchived",
+          "latestReleaseVersion",
+          "latestSnapshotVersion",
+          "projectId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "projectId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "isArchived": {
+            "type": "boolean"
+          },
+          "latestReleaseVersion": {
+            "$ref": "#/components/schemas/VersionDto"
+          },
+          "latestSnapshotVersion": {
+            "$ref": "#/components/schemas/VersionDto"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "OAuth": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "",
+            "tokenUrl": "",
+            "scopes": {
+              "fc44839c-e95f-4854-a52d-449867a9aa62/.default": "fc44839c-e95f-4854-a52d-449867a9aa62/.default"
+            }
+          }
+        }
+      }
+    }
+  }
+}

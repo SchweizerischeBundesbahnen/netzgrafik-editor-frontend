@@ -1,0 +1,31 @@
+path.edge_line {
+  fill: none;
+  stroke: var(--NODE_TEXT_FOCUS);
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+}
+
+path.edge_line.HoverArea {
+  opacity: 0.001;
+  stroke: var(--NODE_DOCKABLE); //var(--COLOR_BACKGROUND);
+}
+
+path.edge_line.Gleisbelegung {
+  stroke-width: 12px;
+  shape-rendering: crispEdges;
+}
+
+path.edge_line.Gleisbelegung.HeadwayReservation {
+  stroke-width: 12px;
+  shape-rendering: crispEdges;
+  opacity: 0.25;
+}
+
+path.edge_line.TransitLine.TrackOccupier {
+  stroke-dasharray: 1 1;
+}
+
+path.edge_line.TransitLine.isStreckenTrainrunSegment {
+  stroke-width: 3px;
+  stroke-opacity: 0.75;
+}

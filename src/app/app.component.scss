@@ -1,0 +1,64 @@
+:host {
+  display: block;
+}
+
+sbb-loading-indicator {
+  margin-top: 8rem;
+  margin-bottom: 3rem;
+}
+
+.login-message {
+  text-align: center;
+}
+
+@media (-webkit-device-pixel-ratio: 1.25) {
+  ::ng-deep sbb-icon-sidebar {
+    zoom: 0.8;
+  }
+
+  ::ng-deep div.cd-layout-panel.sbb-scrollbar {
+    zoom: 0.8;
+  }
+
+  ::ng-deep div.editorMenuGripLayout {
+    zoom: 0.8;
+  }
+
+  ::ng-deep #cd-layout-close-aside {
+    zoom: 0.8;
+  }
+
+  ::ng-deep #cd-layout-close-filter {
+    zoom: 0.8;
+  }
+
+  ::ng-deep sbb-streckengrafik {
+    zoom: 0.95;
+  }
+}
+
+@media (-webkit-device-pixel-ratio: 1.5) {
+  ::ng-deep sbb-icon-sidebar {
+    zoom: 0.66;
+  }
+
+  ::ng-deep div.cd-layout-panel.sbb-scrollbar {
+    zoom: 0.66;
+  }
+
+  ::ng-deep div.editorMenuGripLayout {
+    zoom: 0.66;
+  }
+
+  ::ng-deep #cd-layout-close-aside {
+    zoom: 0.66;
+  }
+
+  ::ng-deep #main-streckengrafik-container {
+    zoom: 0.66;
+  }
+
+  ::ng-deep sbb-streckengrafik {
+    zoom: 1.5;
+  }
+}

@@ -1,0 +1,255 @@
+@import "../../rastering/definitions";
+
+::ng-deep g.node {
+  stroke-width: 0.5px;
+  cursor: pointer;
+  fill: $NODE_COLOR;
+  stroke: $COLOR_Default;
+}
+
+::ng-deep rect.node_root {
+  stroke-width: 4px;
+  stroke: $COLOR_Default;
+  rx: $NODE_ROUND_EDGE_SIZE;
+}
+
+::ng-deep rect.node_root.hover {
+  stroke: $COLOR_Edit;
+  stroke-width: 6px;
+}
+
+::ng-deep rect.node_root.highlighted {
+  stroke: $COLOR_Edit;
+}
+
+::ng-deep rect.node_background {
+  stroke-width: 1px;
+  stroke: $NODE_COLOR_BACKGROUND;
+  fill: $NODE_COLOR_BACKGROUND;
+  rx: $NODE_ROUND_EDGE_SIZE;
+}
+
+::ng-deep rect.node_dockable {
+  stroke-width: 0px;
+  cursor: pointer;
+  fill: $NODE_DOCKABLE;
+  rx: $NODE_ROUND_EDGE_SIZE;
+}
+
+::ng-deep rect.node_dockable.hover {
+  fill: $NODE_DOCKABLE_HOVER;
+}
+
+::ng-deep rect.node_labelarea {
+  stroke-width: 0px;
+  stroke: $NODE_COLOR_BACKGROUND;
+  fill: $NODE_COLOR_BACKGROUND;
+  ry: $NODE_ROUND_EDGE_SIZE;
+}
+
+::ng-deep text.node_text {
+  stroke-width: 0.1px;
+  stroke: $NODE_TEXT_COLOR;
+  fill: $NODE_TEXT_FOCUS;
+  cursor: move;
+  font-size: $BP_LABEL_FONT_SIZE;
+}
+
+::ng-deep text.node_text.hover {
+  fill: $COLOR_Edit;
+}
+
+::ng-deep text.node_connection_time {
+  stroke-width: 0.1px;
+  stroke: $NODE_TEXT_COLOR;
+  fill: $NODE_TEXT_FOCUS;
+  text-anchor: end;
+  font-size: $BP_LABEL_FONT_SIZE;
+}
+
+::ng-deep text.node_connection_time:hover {
+  fill: $COLOR_Edit;
+}
+
+::ng-deep rect.node_hover_root {
+  fill: $NODE_COLOR_BACKGROUND;
+  stroke: none;
+  opacity: 0.01;
+}
+
+::ng-deep rect.node_labelarea.junction_only {
+  fill: $NODE_COLOR_BACKGROUND;
+  stroke: $NODE_COLOR_BACKGROUND;
+}
+
+::ng-deep rect.node_background.junction_only {
+  fill: $NODE_COLOR_BACKGROUND;
+  stroke: $NODE_COLOR_BACKGROUND;
+}
+
+::ng-deep rect.node_root.junction_only {
+  fill: $NODE_COLOR_BACKGROUND;
+  stroke: $COLOR_Default;
+  stroke-dasharray: 2px;
+}
+
+::ng-deep rect.node_root.junction_only.has_connections {
+  stroke: $COLOR_Warning;
+}
+
+::ng-deep rect.node_root.junction_only.hover {
+  stroke: $COLOR_Edit;
+  stroke-width: 6px;
+}
+
+::ng-deep rect.node_dockable.junction_only {
+  fill: $NODE_COLOR_BACKGROUND;
+  stroke: $NODE_COLOR_BACKGROUND;
+}
+
+::ng-deep rect.node_dockable.multi_selected {
+  fill: $COLOR_Edit;
+  stroke: $COLOR_Edit;
+  stroke-width: 6px;
+  opacity: 0.25;
+}
+
+::ng-deep rect.node_analyticsarea {
+  stroke: none;
+  opacity: 0;
+}
+
+::ng-deep text.node_title_analyticsarea_left {
+  stroke-width: 0.1px;
+  stroke: $NODE_TEXT_COLOR;
+  fill: $NODE_TEXT_FOCUS;
+  text-anchor: start;
+  font-size: $BP_LABEL_FONT_SIZE;
+}
+
+::ng-deep text.node_title_analyticsarea_right {
+  stroke-width: 0.1px;
+  stroke: $NODE_TEXT_COLOR;
+  fill: $NODE_TEXT_FOCUS;
+  text-anchor: end;
+  font-size: $BP_LABEL_FONT_SIZE;
+}
+
+::ng-deep rect.node_analyticsarea.analytics_level_0 {
+  fill: #1616b5;
+  opacity: 1;
+}
+
+::ng-deep rect.node_analyticsarea.analytics_level_1 {
+  fill: #0d770d;
+  opacity: 1;
+}
+
+::ng-deep rect.node_analyticsarea.analytics_level_2 {
+  fill: #ffff00;
+  opacity: 1;
+}
+
+::ng-deep rect.node_analyticsarea.analytics_level_3 {
+  fill: #ffa500;
+  opacity: 1;
+}
+
+::ng-deep rect.node_analyticsarea.analytics_level_4 {
+  fill: #ff0000;
+  opacity: 1;
+}
+
+::ng-deep rect.node_analyticsarea.analytics_level_5 {
+  fill: #ee82ee;
+  opacity: 1;
+}
+
+::ng-deep path.node_hover_drag_root {
+  opacity: 0.01;
+  stroke: None;
+  stroke-width: 1px;
+}
+
+::ng-deep path.node_hover_drag_root.muted {
+  opacity: 0.5;
+  fill: $COLOR_Edit;
+  cursor: move;
+}
+
+::ng-deep path.node_hover_drag_root.hover {
+  opacity: 1;
+  fill: $COLOR_Edit;
+  cursor: move;
+  stroke-width: 1;
+  stroke: $COLOR_Edit;
+}
+
+::ng-deep path.node_hover_drag_root.selected {
+  opacity: 1;
+  fill: $COLOR_Edit;
+  cursor: move;
+  stroke-width: 0.5;
+  stroke: $COLOR_Edit;
+}
+
+::ng-deep rect.node_hover_drag_root_background {
+  stroke: None;
+  fill: $COLOR_BACKGROUND;
+  opacity: 0.1;
+  cursor: move;
+}
+
+::ng-deep rect.node_hover_drag_root_background.selected {
+  stroke: $COLOR_BACKGROUND;
+  fill: $COLOR_BACKGROUND;
+  opacity: 0.01;
+  cursor: move;
+  stroke-width: 64px;
+  transform: translateX(-64px) translateY(-32px);
+}
+
+::ng-deep path.node_edit_button {
+  opacity: 0.01;
+  stroke: None;
+  stroke-width: 1px;
+}
+
+::ng-deep path.node_edit_button.muted {
+  fill: $COLOR_Edit;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+::ng-deep path.node_edit_button.hover {
+  opacity: 1;
+  fill: $COLOR_Edit;
+  cursor: pointer;
+  stroke-width: 1;
+  stroke: $COLOR_Edit;
+}
+
+::ng-deep path.node_edit_button.selected {
+  opacity: 1;
+  fill: $NODE_TEXT_FOCUS;
+  stroke: None;
+  stroke-width: 1px;
+  pointer-events: none;
+}
+
+::ng-deep rect.node_edit_button_background {
+  stroke: None;
+  fill: $COLOR_BACKGROUND;
+  opacity: 0.1;
+  cursor: pointer;
+}
+
+::ng-deep rect.node_edit_button_background.enforce_disable_all_pointer_events {
+  pointer-events: none;
+  opacity: 0;
+}
+
+::ng-deep path.node_edit_button.enforce_disable_all_pointer_events {
+  pointer-events: none;
+  opacity: 0;
+}

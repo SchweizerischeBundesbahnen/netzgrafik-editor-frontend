@@ -1,0 +1,22 @@
+line.TimeGrid {
+  stroke: var(--NODE_TEXT_FOCUS);
+  stroke-dasharray: 1 4;
+  stroke-width: 0.5px;
+  shape-rendering: auto;
+  pointer-events: none;
+  transform: translate(1px, 1px);
+}
+
+line.TimeGrid.TimeHalfHour {
+  stroke: var(--NODE_TEXT_FOCUS);
+  stroke-dasharray: 1 4;
+  transform: translate(1px, 1px);
+}
+
+line.TimeGrid.TimeFullHour {
+  stroke: var(--NODE_TEXT_FOCUS);
+  stroke-dasharray: 1 4;
+  stroke-width: 1px;
+  opacity: 0.25;
+  transform: translate(1px, 1px);
+}

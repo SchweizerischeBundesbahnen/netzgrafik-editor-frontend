@@ -1,0 +1,79 @@
+@import "../../../../variables";
+@import "../../rastering/definitions";
+@import "../../dialogs/trainrun-and-section-dialog/trainrun-tab/trainrun-tab.component";
+
+::ng-deep button.TrainrunDialog.FilterableLabel {
+  background-color: $COLOR_Default;
+  color: whitesmoke;
+  border: whitesmoke;
+  max-width: none;
+  min-height: 38px;
+  margin-bottom: 16px;
+}
+
+::ng-deep button.NetzgrafikButton.FilterableLabels {
+  min-width: 64px;
+}
+
+::ng-deep button.TrainrunDialog.FilterableLabel.selected {
+  background-color: whitesmoke;
+  color: $COLOR_Focus;
+  border: whitesmoke;
+}
+::ng-deep button.TrainrunDialog.FilterableLabel.LogicalOperator {
+  background-color: white;
+  color: $COLOR_Default;
+  margin: 4px;
+}
+
+::ng-deep button.TrainrunDialog.FilterableLabel.LogicalOperator:active {
+  background-color: whitesmoke;
+  color: $COLOR_Default;
+}
+
+.sbb-filter-chip-group-operator {
+  float: left;
+  min-height: 40px;
+  width: 50px;
+  padding: 4px;
+  margin: 1px 1px 1px 1px;
+  display: inline-block;
+}
+
+.sbb-filter-chip-group-labels {
+  display: inline-block;
+  border: none;
+  fill: white;
+  min-height: 40px;
+  width: 330px;
+  min-width: 330px;
+  max-width: 330px;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  float: right;
+  padding: 4px;
+  margin: 1px 1px 1px 1px;
+  flex-wrap: wrap;
+}
+
+.sbb-filter-chip-group-main {
+  min-height: 40px;
+  width: 400px;
+  min-width: 400px;
+  max-width: 400px;
+  display: inline-block;
+  line-height: 1px;
+}
+
+.sbb-filter-chip-new-group-main {
+  min-height: 8px;
+  height: 2px;
+  max-height: 8px;
+  width: 400px;
+  min-width: 400px;
+  max-width: 400px;
+  display: inline-block;
+  padding: 1px 1px 1px 1px;
+  margin: 1px 1px 1px 1px;
+}

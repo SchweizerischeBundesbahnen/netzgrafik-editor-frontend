@@ -1,0 +1,16 @@
+@import "../../rastering/definitions";
+
+::ng-deep path.preview_line {
+  stroke: $COLOR_Edit;
+  stroke-width: 6px;
+  pointer-events: none;
+  fill: none;
+}
+
+::ng-deep path.preview_connection_line {
+  stroke: $COLOR_Edit;
+  stroke-width: 4px;
+  stroke-dasharray: 4px;
+  pointer-events: none;
+  fill: none;
+}

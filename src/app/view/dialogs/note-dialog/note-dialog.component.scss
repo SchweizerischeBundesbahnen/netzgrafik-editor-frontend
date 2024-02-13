@@ -1,0 +1,75 @@
+@import "../../dialogs/trainrun-and-section-dialog/trainrunsection-tab/trainrun-section-tab.component.scss";
+::ng-deep #NoteEditorTabsViewId {
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+::ng-deep .MainNoteTabViewDialog {
+  position: relative;
+  padding-top: 4px; // optical alignment
+  border: 1px solid #000000;
+  min-height: 460px;
+  max-height: 460px;
+  background-color: white;
+
+  &:before,
+  &:after {
+    border: 16px solid transparent;
+    border-top-color: #000000;
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 0;
+    height: 0;
+  }
+
+  &:after {
+    margin-top: -0.75px;
+    border-top-color: #ffffff;
+  }
+
+  .NoteTabGrupe {
+    padding: 15px;
+  }
+
+  .sbb-tab-group-content {
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  .sbb-dialog-content {
+    padding-top: 0;
+  }
+
+  .sbb-dialog-actions {
+    padding-bottom: 0;
+  }
+
+  .sbb-tab-body {
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: 0;
+  }
+
+  .sbb-tab-labels::after {
+    cursor: move;
+  }
+
+  .closeDialog {
+    position: absolute;
+    align-self: end;
+    padding: 10px 15px;
+    z-index: 1001;
+  }
+}
+
+::ng-deep div.EditNoteDialogTabFooter {
+  border-style: none;
+  padding: 0 15px 0 0;
+  max-height: 48px;
+  min-height: 48px;
+}

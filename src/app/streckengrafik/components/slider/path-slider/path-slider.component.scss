@@ -1,0 +1,54 @@
+path {
+  stroke: var(--NODE_TEXT_FOCUS);
+}
+
+path.Horizontaline {
+  stroke-width: 1px;
+  fill: none;
+}
+
+path.Horizontaline.PathNode {
+  stroke: none;
+  fill: none;
+}
+
+text {
+  font: 14px sans-serif;
+  fill: var(--NODE_TEXT_FOCUS);
+}
+
+text.NodeShortNameText {
+  text-anchor: middle;
+  fill: var(--NODE_TEXT_FOCUS);
+  cursor: pointer;
+}
+
+text.NodeShortNameText.LeftNode {
+  text-anchor: start;
+  fill: var(--NODE_TEXT_FOCUS);
+  transform: translate(4px, 0px);
+}
+
+text.NodeShortNameText.RightNode {
+  text-anchor: end;
+  fill: var(--NODE_TEXT_FOCUS);
+  transform: translate(-4px, 0px);
+}
+
+text.TrackOccupierShown {
+  font-size: 15px;
+  text-anchor: middle;
+  cursor: pointer;
+}
+
+line.VerticalNodeLine {
+  stroke: var(--NODE_TEXT_FOCUS);
+  stroke-width: 0.5px;
+  pointer-events: none;
+  shape-rendering: crispEdges;
+}
+
+rect.TrackOccupierShown {
+  stroke: none;
+  fill: var(--NODE_DOCKABLE); //var(--COLOR_BACKGROUND);
+}

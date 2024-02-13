@@ -1,0 +1,204 @@
+/* You can add global styles to this file, and also import other style files */
+@import "variables.scss";
+
+.sbb-mt-s {
+  margin-top: $gutterHeight !important;
+}
+
+.sbb-mb-s {
+  margin-bottom: $gutterHeight !important;
+}
+
+.sbb-ml-s {
+  margin-left: $gutterHeight !important;
+}
+
+.sbb-mr-s {
+  margin-right: $gutterHeight !important;
+}
+
+.sbb-m-s {
+  @extend .sbb-mt-s;
+  @extend .sbb-mb-s;
+  @extend .sbb-ml-s;
+  @extend .sbb-mr-s;
+}
+
+.sbb-mt-m {
+  margin-top: $innerComponentSpacing !important;
+}
+
+.sbb-mb-m {
+  margin-bottom: $innerComponentSpacing !important;
+}
+
+.sbb-ml-m {
+  margin-left: $innerComponentSpacing !important;
+}
+
+.sbb-mr-m {
+  margin-right: $innerComponentSpacing !important;
+}
+
+.sbb-m-m {
+  @extend .sbb-mt-m;
+  @extend .sbb-mb-m;
+  @extend .sbb-ml-m;
+  @extend .sbb-mr-m;
+}
+
+.sbb-mt-l {
+  margin-top: $interComponentSpacingSmall !important;
+}
+
+.sbb-mb-l {
+  margin-bottom: $interComponentSpacingSmall !important;
+}
+
+.sbb-ml-l {
+  margin-left: $interComponentSpacingSmall !important;
+}
+
+.sbb-mr-l {
+  margin-right: $interComponentSpacingSmall !important;
+}
+
+.sbb-m-l {
+  @extend .sbb-mt-l;
+  @extend .sbb-mb-l;
+  @extend .sbb-ml-l;
+  @extend .sbb-mr-l;
+}
+
+.sbb-mt-xl {
+  margin-top: $interComponentSpacing !important;
+}
+
+.sbb-mb-xl {
+  margin-bottom: $interComponentSpacing !important;
+}
+
+.sbb-ml-xl {
+  margin-left: $interComponentSpacing !important;
+}
+
+.sbb-mr-xl {
+  margin-right: $interComponentSpacing !important;
+}
+
+.sbb-m-xl {
+  @extend .sbb-mt-xl;
+  @extend .sbb-mb-xl;
+  @extend .sbb-ml-xl;
+  @extend .sbb-mr-xl;
+}
+
+.sbb-pt-s {
+  padding-top: $gutterHeight !important;
+}
+
+.sbb-pb-s {
+  padding-bottom: $gutterHeight !important;
+}
+
+.sbb-pl-s {
+  padding-left: $gutterHeight !important;
+}
+
+.sbb-pr-s {
+  padding-right: $gutterHeight !important;
+}
+
+.sbb-p-s {
+  @extend .sbb-pt-s;
+  @extend .sbb-pb-s;
+  @extend .sbb-pl-s;
+  @extend .sbb-pr-s;
+}
+
+.sbb-pt-m {
+  padding-top: $innerComponentSpacing !important;
+}
+
+.sbb-pb-m {
+  padding-bottom: $innerComponentSpacing !important;
+}
+
+.sbb-pl-m {
+  padding-left: $innerComponentSpacing !important;
+}
+
+.sbb-pr-m {
+  padding-right: $innerComponentSpacing !important;
+}
+
+.sbb-p-m {
+  @extend .sbb-pt-m;
+  @extend .sbb-pb-m;
+  @extend .sbb-pl-m;
+  @extend .sbb-pr-m;
+}
+
+.sbb-pt-l {
+  padding-top: $interComponentSpacingSmall !important;
+}
+
+.sbb-pb-l {
+  padding-bottom: $interComponentSpacingSmall !important;
+}
+
+.sbb-pl-l {
+  padding-left: $interComponentSpacingSmall !important;
+}
+
+.sbb-pr-l {
+  padding-right: $interComponentSpacingSmall !important;
+}
+
+.sbb-p-l {
+  @extend .sbb-pt-l;
+  @extend .sbb-pb-l;
+  @extend .sbb-pl-l;
+  @extend .sbb-pr-l;
+}
+
+.sbb-pt-xl {
+  padding-top: $interComponentSpacing !important;
+}
+
+.sbb-pb-xl {
+  padding-bottom: $interComponentSpacing !important;
+}
+
+.sbb-pl-xl {
+  padding-left: $interComponentSpacing !important;
+}
+
+.sbb-pr-xl {
+  padding-right: $interComponentSpacing !important;
+}
+
+.sbb-p-xl {
+  @extend .sbb-pt-xl;
+  @extend .sbb-pb-xl;
+  @extend .sbb-pl-xl;
+  @extend .sbb-pr-xl;
+}
+
+@media print {
+  sbb-root * {
+    visibility: hidden;
+  }
+
+  svg.graphContainer * {
+    visibility: visible;
+  }
+
+  div.main-streckengrafik-container * {
+    visibility: visible;
+  }
+
+  div.noprint * {
+    visibility: hidden;
+  }
+}

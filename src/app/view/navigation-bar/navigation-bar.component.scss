@@ -1,0 +1,17 @@
+@use "@sbb-esta/angular" as sbb;
+
+div {
+  height: 30px;
+  margin-top: 54px;
+  margin-left: 1rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+hr {
+  margin-top: 0;
+  border: none;
+  height: 1px;
+  background-color: sbb.$sbbColorSilver;
+}

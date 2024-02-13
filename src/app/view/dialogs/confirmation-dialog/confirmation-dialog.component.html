@@ -1,0 +1,20 @@
+<ng-template #confirmationDialogTemplate>
+  <div>
+    <div sbbDialogTitle>
+      {{ dialogTitle }}
+    </div>
+    <div sbbDialogContent>
+      <div>
+        {{ dialogContent }}
+      </div>
+    </div>
+    <div sbbDialogActions>
+      <button sbb-button tabindex="0" [sbbDialogClose]="true">
+        {{ dialogConfirmationButtonLabel }}
+      </button>
+      <button sbb-secondary-button sbbDialogClose>
+        {{ dialogAbortButtonLabel }}
+      </button>
+    </div>
+  </div>
+</ng-template>

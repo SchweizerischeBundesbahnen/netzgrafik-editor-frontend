@@ -1,0 +1,41 @@
+line.PathGridLine {
+  stroke: var(--NODE_TEXT_FOCUS);
+  stroke-width: 1px;
+  stroke-opacity: 0.5;
+  shape-rendering: optimizeSpeed;
+  pointer-events: none;
+}
+
+line.PathGridLine.TrackOccupier {
+  stroke-width: 1px;
+  stroke-opacity: 0.5;
+}
+
+line.TrackGridLine {
+  stroke: var(--NODE_TEXT_FOCUS);
+  stroke-width: 1.25px;
+  stroke-opacity: 0.125;
+  shape-rendering: optimizeSpeed;
+}
+
+rect.TrackOccupierShown {
+  stroke: none;
+  fill: var(--NODE_DOCKABLE); //var(--COLOR_BACKGROUND);
+  pointer-events: none;
+}
+
+text.TrackGridLabelText {
+  fill: var(--NODE_TEXT_FOCUS);
+  font-size: 8px;
+  text-align: center;
+  text-anchor: middle;
+  transform: rotate(0deg);
+}
+
+text.TrackGridLabelText.TrackGroup_0 {
+  text-anchor: middle;
+}
+
+text.TrackGridLabelText.TrackGroup_1 {
+  text-anchor: middle;
+}

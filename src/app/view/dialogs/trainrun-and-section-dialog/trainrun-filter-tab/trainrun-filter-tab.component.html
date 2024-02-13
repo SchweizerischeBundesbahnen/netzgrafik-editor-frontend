@@ -1,0 +1,51 @@
+<div sbbDialogContent class="EditTrainrunFilterableLabelsDialogTabContent">
+  <sbb-form-field class="sbb-form-field-long" label="Labels">
+    <sbb-chip-list
+      aria-label="Labels"
+      [value]="trainrunLabels"
+      (focusout)="onLabelsFocusout()"
+    >
+      <sbb-chip
+        *ngFor="let element of trainrunLabels"
+        [value]="element"
+        (removed)="remove($event)"
+      >
+        {{ element }}
+      </sbb-chip>
+      <input
+        id="trainrunLabelsInput"
+        placeholder="New Label..."
+        sbbChipInput
+        cdkFocusInitial
+        [sbbChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (sbbChipInputTokenEnd)="add($event)"
+        [sbbAutocomplete]="trainrunLabelsAutoComplete"
+      />
+    </sbb-chip-list>
+    <sbb-autocomplete #trainrunLabelsAutoComplete="sbbAutocomplete">
+      <sbb-option
+        *ngFor="let option of trainrunLabelsAutoCompleteOptions"
+        [value]="option"
+        >{{ option }}</sbb-option
+      >
+    </sbb-autocomplete>
+  </sbb-form-field>
+</div>
+<div sbbDialogActions class="EditTrainrunDialogTabFooter">
+  <button
+    class="FunctionButton"
+    tabindex="-1"
+    (click)="onDuplicateTrainrun()"
+    title="Zuglauf duplizieren"
+  >
+    <sbb-icon svgIcon="plus-medium" aria-hidden="false"></sbb-icon>
+  </button>
+  <button
+    class="FunctionButton"
+    tabindex="-1"
+    (click)="onDeleteTrainrun()"
+    title="Zuglauf löschen"
+  >
+    <sbb-icon svgIcon="trash-medium" aria-hidden="false"></sbb-icon>
+  </button>
+</div>

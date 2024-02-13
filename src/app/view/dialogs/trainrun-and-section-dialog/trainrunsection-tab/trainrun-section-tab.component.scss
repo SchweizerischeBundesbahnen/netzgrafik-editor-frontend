@@ -1,0 +1,409 @@
+@import "../../../rastering/definitions";
+@import "../../../editor-main-view/data-views/trainrunsections.view.edgeline";
+
+::ng-deep .EditTrainrunSectionDialogHeaderSeparatorLeft {
+  width: 40px;
+  min-width: 40px;
+  max-width: 40px;
+  border: white;
+  border-style: solid;
+  border-width: thin;
+  border-bottom: darkgrey;
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+  transform: translate(-4px, -18px);
+}
+
+::ng-deep .EditTrainrunSectionDialogHeaderSeparatorRight {
+  width: 70px;
+  min-width: 70px;
+  max-width: 70px;
+  border: white;
+  border-style: solid;
+  border-width: thin;
+  border-bottom: darkgrey;
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+  transform: translate(4px, -18px);
+}
+
+::ng-deep .EditTrainrunSectionDialogHeaderLeft {
+  width: 160px;
+  min-width: 160px;
+  max-width: 160px;
+  padding: 1px;
+  text-align: center;
+  height: 40px;
+  font-family: "SBBWeb Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+::ng-deep .EditTrainrunSectionDialogHeaderCenter {
+  width: 110px;
+  min-width: 110px;
+  max-width: 110px;
+  padding: 1px;
+  height: 40px;
+  border: 0.1px solid white;
+}
+
+::ng-deep .EditTrainrunSectionDialogHeaderCenter.IsActive {
+  border: 0.1px solid black;
+}
+
+::ng-deep .EditTrainrunSectionDialogHeaderRight {
+  width: 160px;
+  min-width: 160px;
+  max-width: 160px;
+  padding: 1px;
+  text-align: center;
+  height: 40px;
+  font-family: "SBBWeb Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+::ng-deep input.NumberOfStopsInputElement {
+  background-color: white;
+  border: 0.1px solid lightgrey;
+  color: black;
+  border-radius: 0px;
+  width: 40px;
+  height: 28px;
+  text-align: center;
+}
+
+input.NumberOfStopsInputElement.show {
+  font-weight: bold;
+}
+
+input.NumberOfStopsInputElement:focus {
+  border: 0.1px solid white;
+}
+
+input.NumberOfStopsInputElement.IsActive {
+  border: 0.1px solid white;
+}
+
+::ng-deep .mainGridLayout {
+  margin: 0 0;
+  width: 550px;
+  height: 120px;
+  min-width: 550px;
+  min-height: 120px;
+  transform: translate(2px, 0px);
+}
+
+::ng-deep .mainGridLayout {
+  display: grid;
+  grid-gap: 0px;
+  grid-auto-rows: 38px;
+  grid-auto-columns: 32px;
+}
+
+::ng-deep .NodeLeftArrival {
+  grid-column: 1/5;
+  grid-row: 3;
+}
+
+::ng-deep div.NodeLeftArrival {
+  border: 1px solid black;
+}
+
+::ng-deep .NodeLeftArrivalMinus {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+::ng-deep .NodeLeftArrivalTime {
+  grid-column: 2 / span 2;
+  grid-row: 3;
+}
+
+::ng-deep .NodeLeftArrivalPlus {
+  grid-column: 4;
+  grid-row: 3;
+}
+
+::ng-deep .NodeLeftDeparture {
+  grid-column: 2/6;
+  grid-row: 1;
+}
+
+::ng-deep div.NodeLeftDeparture {
+  border: 1px solid black;
+}
+
+::ng-deep .NodeLeftDepartureMinus {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+::ng-deep .NodeLeftDepartureTime {
+  grid-column: 3 / span 2;
+  grid-row: 1;
+}
+
+::ng-deep .NodeLeftDeparturePlus {
+  grid-column: 5;
+  grid-row: 1;
+}
+
+::ng-deep .NodeLefttLock {
+  grid-column: 2/3;
+  grid-row: 2;
+  background: white;
+}
+
+::ng-deep .NodeRightArrival {
+  grid-column: 14/18;
+  grid-row: 1;
+}
+
+::ng-deep div.NodeRightArrival {
+  border: 1px solid black;
+}
+
+::ng-deep .NodeRightArrivalMinus {
+  grid-column: 14;
+  grid-row: 1;
+}
+
+::ng-deep .NodeRightArrivalTime {
+  grid-column: 15 / span 2;
+  grid-row: 1;
+}
+
+::ng-deep .NodeRightArrivalPlus {
+  grid-column: 17;
+  grid-row: 1;
+}
+
+::ng-deep .NodeRightLock {
+  grid-column: 14/15;
+  grid-row: 2;
+  background: white;
+}
+
+::ng-deep .NodeRightDeparture {
+  grid-column: 13/17;
+  grid-row: 3;
+}
+
+::ng-deep div.NodeRightDeparture {
+  border: 1px solid black;
+}
+
+::ng-deep .NodeRightDepartureMinus {
+  grid-column: 13;
+  grid-row: 3;
+}
+
+::ng-deep .NodeRightDepartureTime {
+  grid-column: 14 / span 2;
+  grid-row: 3;
+}
+
+::ng-deep .NodeRightDeparturePlus {
+  grid-column: 16;
+  grid-row: 3;
+}
+
+::ng-deep .TravelTime {
+  grid-column: 7/11;
+  grid-row: 2;
+}
+
+::ng-deep div.TravelTime {
+  border: 1px solid black;
+}
+
+::ng-deep .TravelTimeMinus {
+  grid-column: 7;
+  grid-row: 2;
+}
+
+::ng-deep .TravelTimeTime {
+  grid-column: 8 / span 2;
+  grid-row: 2;
+}
+
+::ng-deep .TravelTimePlus {
+  grid-column: 10;
+  grid-row: 2;
+}
+
+::ng-deep .TravelTimeLock {
+  grid-column: 11;
+  grid-row: 2;
+  background: white;
+}
+
+::ng-deep .TravelFreqLeft {
+  grid-column: 1/5;
+  grid-row: 2;
+}
+
+::ng-deep .TravelFreqRight {
+  grid-column: 12/15;
+  grid-row: 2;
+}
+
+::ng-deep .renderer {
+  shape-rendering: geometricPrecision;
+}
+
+::ng-deep input.InputElement {
+  padding: 6px;
+  width: 64px;
+  height: 32px;
+  border: 0px solid white;
+  text-align: center;
+  margin: 2px;
+  min-height: 30px;
+}
+
+::ng-deep input.InputElement:read-only {
+  color: lightgray;
+}
+
+::ng-deep input.InputTravelTimeElement {
+  padding: 6px;
+  width: 63px;
+  height: 30px;
+  border: 0px solid white;
+  text-align: center;
+  margin: 1px;
+}
+
+::ng-deep input.InputTravelTimeElement:read-only {
+  color: lightgray;
+}
+
+::ng-deep input.InputTravelTimeElementHighlighted {
+  padding: 6px;
+  width: 63px;
+  height: 30px;
+  border: 0px solid white;
+  text-align: center;
+  margin: 1px;
+  background: $COLOR_Edit;
+  color: white;
+}
+
+::ng-deep input.InputTravelTimeElementHighlighted:read-only {
+  color: lightgray;
+}
+
+::ng-deep .ButtonPlus {
+  width: 26px;
+  height: 30px;
+  border: 0px;
+  text-align: center;
+  padding-left: 1px;
+  padding-top: 1px;
+  margin: 3px;
+  background-color: white;
+  outline: none;
+  cursor: pointer;
+}
+
+::ng-deep .ButtonPlus:hover {
+  background-color: whitesmoke;
+}
+
+::ng-deep .ButtonMinus {
+  width: 26px;
+  height: 30px;
+  border: 0px;
+  text-align: center;
+  padding-right: 1px;
+  padding-top: 1px;
+  margin: 3px;
+  background-color: white;
+  outline: none;
+  cursor: pointer;
+}
+
+::ng-deep .ButtonMinus:hover {
+  background-color: whitesmoke;
+}
+
+::ng-deep .ButtonTravelTimeLock {
+  width: 31px;
+  height: 31px;
+}
+
+::ng-deep .ButtonLock {
+  width: 63px;
+  height: 31px;
+  text-align: center;
+}
+
+::ng-deep button.warning {
+  background-color: $COLOR_GRAYEDOUT;
+  border: $COLOR_GRAYEDOUT;
+  color: $COLOR_Warning;
+  text-align: center;
+  width: 350px;
+}
+
+::ng-deep input.NumberOfStopsInputButtonPlusMinus {
+  width: 32px;
+  height: 30px;
+  min-width: 30px;
+  max-width: 30px;
+  border: 0px;
+  text-align: center;
+  padding-left: 1px;
+  padding-top: 1px;
+  margin: 1px;
+  background-color: white;
+  outline: none;
+  cursor: pointer;
+}
+
+::ng-deep input.NumberOfStopsInputButtonPlusMinus:hover {
+  background-color: whitesmoke;
+}
+
+::ng-deep path.edgeLineTitle {
+  stroke: lightgray;
+  stroke-width: 1px;
+}
+
+::ng-deep text.InputNumberOfStopsButtonPlusMinus {
+  font-size: 18px;
+}
+
+::ng-deep svg.InputNumberOfStopsButtonPlusMinus:hover {
+  background-color: whitesmoke;
+}
+
+::ng-deep button.FunctionButton {
+  background-color: white;
+  border-style: hidden;
+  padding: 2px 0px 0px 0;
+  margin: 0;
+}
+
+::ng-deep button.FunctionButton:hover {
+  background-color: whitesmoke;
+}
+
+::ng-deep button.FunctionButton:active {
+  background-color: lightgray;
+}
+
+::ng-deep
+  div.sbb-dialog-content.sbb-scrollbar.EditTrainrunSectionDialogTabContent {
+  border-style: none;
+  min-height: 250px;
+  max-height: 250px;
+  padding-top: 30px;
+  padding-bottom: 0px;
+}
+
+::ng-deep div.EditTrainrunDialogTabFooter {
+  border-style: none;
+  padding: 0 15px 0 0;
+  max-height: 48px;
+  min-height: 48px;
+}

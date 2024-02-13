@@ -1,0 +1,80 @@
+<div sbbDialogContent [class]="getDialogContentClassTag()">
+  <sbb-form-field label="Name" class="sbb-form-field-long">
+    <input
+      id="trainrunTitleField"
+      type="text"
+      sbbInput
+      cdkFocusInitial
+      spellcheck="false"
+      size="67"
+      minlength="1"
+      autocomplete="off"
+      [(ngModel)]="trainrunTitle"
+      (change)="onTrainrunTitleChanged()"
+    />
+  </sbb-form-field>
+  <sbb-label>Kategorie</sbb-label>
+  <div class="sbb-trainrun-chip-group">
+    <button
+      [class]="getCategoryClassname(trainrunCategory)"
+      (click)="onCategoryChanged(trainrunCategory)"
+      mode="ghost"
+      [title]="trainrunCategory.name"
+      *ngFor="let trainrunCategory of dataService.getTrainrunCategories()"
+    >
+      {{ makeButtonLabel(trainrunCategory.shortName.toUpperCase()) }}
+    </button>
+  </div>
+  <div class="row">
+    <div class="column" style="float: left; width: auto">
+      <sbb-label>Takt</sbb-label>
+      <div class="sbb-trainrun-chip-group">
+        <button
+          [class]="getFrequencyClassname(trainrunFrequency)"
+          (click)="onFrequencyChanged(trainrunFrequency)"
+          mode="ghost"
+          [title]="trainrunFrequency.name"
+          *ngFor="let trainrunFrequency of dataService.getTrainrunFrequencies()"
+        >
+          {{ makeButtonLabel(trainrunFrequency.shortName) }}
+        </button>
+      </div>
+    </div>
+    <div class="column" style="float: left; width: 150px">
+      <sbb-label>Verkehrt</sbb-label>
+      <div class="sbb-trainrun-chip-group">
+        <button
+          [class]="getTimeCategoryClassname(trainrunTimeCategory)"
+          (click)="onTimeCategoryChanged(trainrunTimeCategory)"
+          mode="ghost"
+          [title]="trainrunTimeCategory.name"
+          *ngFor="
+            let trainrunTimeCategory of dataService.getTrainrunTimeCategories()
+          "
+        >
+          {{ makeButtonLabel(trainrunTimeCategory.shortName) }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-container *ngIf="toolbarVisible">
+  <div sbbDialogActions class="EditTrainrunDialogTabFooter">
+    <button
+      class="FunctionButton"
+      tabindex="-1"
+      (click)="onDuplicateTrainrun()"
+      title="Zuglauf duplizieren"
+    >
+      <sbb-icon svgIcon="plus-medium" aria-hidden="false"></sbb-icon>
+    </button>
+    <button
+      class="FunctionButton"
+      tabindex="-1"
+      (click)="onDeleteTrainrun()"
+      title="Zuglauf löschen"
+    >
+      <sbb-icon svgIcon="trash-medium" aria-hidden="false"></sbb-icon>
+    </button>
+  </div>
+</ng-container>

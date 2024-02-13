@@ -1,0 +1,39 @@
+<div class="ngx-html-editor">
+  <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+
+  <div class="ngx-html-editor-color-buttons">
+    <button
+      class="ngx-html-editor-color {{ setClassedTag(undefined) }}"
+      style="{{ getColorStyle(undefined) }}"
+      (click)="onRemoveColor()"
+      title="Frabe zurücksetzen"
+    >
+      <sbb-icon svgIcon="trash-small"></sbb-icon>
+    </button>
+    <ng-container *ngFor="let color of colorPresets">
+      <button
+        class="NgxEditor__Color ngx-html-editor-color {{
+          setClassedTag(color)
+        }}"
+        (click)="onColor(color)"
+        title="{{ getColorTitle(color) }}"
+        style="{{ getColorStyle(color) }}"
+        [ngClass]="{'NgxEditor__Color--Active': setActiveColor(color)}"
+      >
+        {{ getColorButtonText(color) }}
+      </button>
+    </ng-container>
+  </div>
+
+  <ngx-editor
+    cdkFocusInitial
+    [editor]="editor"
+    [formControl]="model.getControl('noteText')"
+    [placeholder]="'Kommentar hier eingeben...'"
+    (focusout)="onUpdate()"
+    (keydown)="onKeydown($event)"
+  ></ngx-editor>
+  <sbb-error *ngIf="model.getControl('noteText').errors?.required"
+    >Pflichtfeld</sbb-error
+  >
+</div>

@@ -1,0 +1,15 @@
+<sbb-history-entry
+  showLine="true"
+  [version]="model.releaseVersion + ''"
+  [actions]="actions"
+  (preview)="display.next($event ? model.id : null)"
+>
+  <sbb-version-entry-layout
+    [state]="getState()"
+    [message]="getMessage()"
+    [titleField]="getUserId()"
+    [dateField]="model.createdAt"
+    [commentField]="model.comment"
+  >
+  </sbb-version-entry-layout>
+</sbb-history-entry>

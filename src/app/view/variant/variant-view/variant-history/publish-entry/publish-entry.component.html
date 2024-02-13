@@ -1,0 +1,27 @@
+<sbb-history-entry
+  showLine="true"
+  [version]="'(' + model.nextReleaseVersion + ')'"
+  [actions]="actions"
+  class="publish-entry"
+>
+  <div class="controls-container">
+    <input
+      type="text"
+      sbbInput
+      placeholder="Kommentar"
+      [formControl]="comment"
+    />
+    <button
+      sbb-button
+      (click)="onPublishClicked()"
+      [disabled]="publishDisabled"
+      [title]="
+        publishDisabled
+          ? 'Lokale Änderungen müssen zuerst gespeichert werden'
+          : ''
+      "
+    >
+      Publizieren
+    </button>
+  </div>
+</sbb-history-entry>

@@ -1,0 +1,65 @@
+<sbb-page-layout *ngIf="projectSubject.asObservable() | async as proj">
+  <div class="header">
+    <h1>
+      {{ proj.name }}
+      <ng-container *ngIf="proj.isArchived"> (archiviert)</ng-container>
+    </h1>
+  </div>
+
+  <sbb-slots-view>
+    <sbb-slot title="Varianten">
+      <div class="actions">
+        <input
+          [formControl]="searchControl"
+          class="search"
+          type="text"
+          sbbInput
+          placeholder="Varianten suchen"
+        />
+      </div>
+      <div class="archive">
+        <sbb-checkbox [formControl]="showArchiveControl"
+          >Archiv anzeigen</sbb-checkbox
+        >
+      </div>
+      <sbb-card-grid>
+        <sbb-card
+          *ngIf="!showArchiveControl.value && proj.isWritable"
+          class="newVariant"
+          icon="plus-medium"
+          (iconClick)="onAddVariantClicked()"
+        >
+        </sbb-card>
+        <sbb-card
+          *ngFor="let variant of variants | async"
+          [title]="getTitleCurrentVersion(variant)"
+          [subtitle]="
+            getChangedAtCurrentVersion(variant) | date: 'dd.MM.yyyy HH:mm'
+          "
+          [route]="
+            navigationService.getRouteToEditor(variant.projectId, variant.id)
+          "
+          [actions]="getVariantDataActions(variant)"
+        >
+        </sbb-card>
+      </sbb-card-grid>
+    </sbb-slot>
+    <sbb-slot title="Projekt Beschreibung" [actions]="projectDataActions">
+      <div class="project-data">
+        <div style="height: 32px"></div>
+        <div style="font-weight: bold; vertical-align: bottom; height: 32px">
+          {{ proj.summary }}
+        </div>
+        <sbb-textarea
+          [(ngModel)]="proj.description"
+          disabled
+          style="background: white; border: white; padding: 0"
+        ></sbb-textarea>
+      </div>
+    </sbb-slot>
+  </sbb-slots-view>
+
+  <div style="min-height: 32px"></div>
+
+  <sbb-confirmation-dialog></sbb-confirmation-dialog>
+</sbb-page-layout>

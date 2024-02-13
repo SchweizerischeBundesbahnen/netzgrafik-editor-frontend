@@ -1,0 +1,143 @@
+@import "../../rastering/definitions";
+
+::ng-deep path.edge_line {
+  fill: none;
+}
+
+::ng-deep path.edge_line.layer_0 {
+  stroke-width: 32px;
+  stroke: $COLOR_BACKGROUND;
+  stroke-opacity: 0.001;
+}
+
+::ng-deep path.edge_line.layer_1 {
+  stroke-width: 0px;
+  stroke: $COLOR_BACKGROUND;
+}
+
+::ng-deep path.edge_line.layer_2 {
+  stroke-width: 0px;
+  stroke: $COLOR_BACKGROUND;
+}
+
+::ng-deep path.edge_line.layer_3 {
+  stroke-width: 0px;
+  stroke: $COLOR_BACKGROUND;
+}
+
+/// FREQ_120
+::ng-deep path.edge_line.layer_1.Freq_120 {
+  stroke-width: 2px;
+}
+
+/// FREQ_60
+::ng-deep path.edge_line.layer_1.Freq_60 {
+  stroke-width: 2px;
+}
+
+/// FREQ_30
+::ng-deep path.edge_line.layer_2.Freq_30 {
+  stroke-width: 6px;
+}
+
+::ng-deep path.edge_line.layer_3.Freq_30 {
+  stroke-width: 2px;
+}
+
+/// FREQ_20
+::ng-deep path.edge_line.layer_1.Freq_20 {
+  stroke-width: 5px;
+}
+
+::ng-deep path.edge_line.layer_2.Freq_20 {
+  stroke-width: 3px;
+}
+
+::ng-deep path.edge_line.layer_3.Freq_20 {
+  stroke-width: 1px;
+}
+
+/// FREQ_15
+::ng-deep path.edge_line.layer_0.Freq_15 {
+  stroke-width: 7px;
+  stroke-opacity: 1;
+}
+
+::ng-deep path.edge_line.layer_1.Freq_15 {
+  stroke-width: 5px;
+}
+
+::ng-deep path.edge_line.layer_2.Freq_15 {
+  stroke-width: 3px;
+}
+
+::ng-deep path.edge_line.layer_3.Freq_15 {
+  stroke-width: 1px;
+}
+
+::ng-deep path.edge_line.no_event {
+  pointer-events: none;
+}
+
+/// trainrun section stops
+::ng-deep circle.edge_line_stops {
+  r: $TRAINRUN_SECTION_STOP_RADIUS;
+  fill: $COLOR_BACKGROUND;
+  stroke-width: 1px;
+}
+
+::ng-deep path.edge_line_stop_arcs.hover {
+  fill: $COLOR_Edit;
+}
+
+::ng-deep path.edge_line_stop_arcs.hidden {
+  stroke-opacity: 0;
+}
+
+::ng-deep path.edge_line_stop_arcs.selected {
+  visibility: hidden;
+}
+
+/// FREQ_null -> new TimeCategory(HVZ, default)
+::ng-deep path.edge_line.LinePatternRef_HVZ {
+  stroke-dasharray: 16px 4px 2px 4px;
+}
+
+::ng-deep path.edge_line.LinePatternRef_ZEITWEISE {
+  stroke-dasharray: 8px 4px 2px 4px;
+}
+
+::ng-deep path.edge_line.Freq_120 {
+  stroke-dasharray: 8px;
+}
+
+::ng-deep path.edge_line.Freq_120.LinePatternRef_HVZ {
+  stroke-dasharray: 6px 1px 1px;
+}
+
+::ng-deep path.edge_line.Freq_120.LinePatternRef_ZEITWEISE {
+  stroke-dasharray: 4px 2px 2px;
+}
+
+::ng-deep circle.edge_line_stops.fill.selected.hover {
+  fill: white;
+  stroke: $COLOR_Edit;
+  r: $PIN_RADIUS_HOVER;
+  cursor: move;
+}
+
+::ng-deep circle.edge_line_stops.selected.hover {
+  fill: white;
+  stroke: $COLOR_Edit;
+  r: $PIN_RADIUS_HOVER;
+  cursor: move;
+}
+
+::ng-deep path.edge_line.layer_0.Freq_15.enforce_disable_all_pointer_events {
+  stroke-opacity: 0.25;
+}
+
+::ng-deep circle.edge_line_pin.selected.hidden {
+  r: 0px;
+  pointer-events: none;
+}

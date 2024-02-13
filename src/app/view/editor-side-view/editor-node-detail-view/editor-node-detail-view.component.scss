@@ -1,0 +1,63 @@
+::ng-deep .haltezeitRow {
+  height: 39px;
+}
+
+::ng-deep .SummaryTitle {
+  padding-left: 16px;
+}
+
+::ng-deep button.NetzgrafikButton {
+  border-radius: 10px;
+  border: 1px;
+  height: 32px;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  background-color: white;
+  border-color: darkgrey;
+  border-style: solid;
+  font-family: "SBBWeb Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+::ng-deep button.NetzgrafikButton:hover {
+  background-color: whitesmoke;
+}
+
+::ng-deep button.NetzgrafikButton:active {
+  background-color: lightgray;
+}
+
+::ng-deep button.NetzgrafikButton:disabled {
+  background-color: white;
+  color: lightgray;
+  border-color: whitesmoke;
+}
+
+.NodeDataTable {
+  td {
+    padding: 8px 16px;
+    border-bottom: 1px solid #e2e2e2;
+
+    &:first-of-type {
+      padding-left: 8px;
+    }
+
+    &.sbb-table-column-s {
+      max-width: 30px;
+
+      input {
+        max-width: 100%;
+      }
+    }
+
+    &.sbb-table-column-m {
+      max-width: 80px;
+
+      input {
+        max-width: 100%;
+      }
+    }
+  }
+}
