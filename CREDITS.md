@@ -62,3 +62,11 @@ git shortlog --summary --numbered --all --no-merges
 ```
 
 > Note: Lists only authors with at least one commit since code base is on github / open source.
+
+---
+
+And finally, special thanks goes to [Swiss Federal Railways (SBB CFF FFS)](https://www.sbb.ch) - it
+was only thanks to their commitment that this project could be realized. SBB CFF FFS is continuously
+driving forward the simplification of the planning process and digitalization. Thanks to SBB CFF
+FFS, the entire planning community can now benefit from the Netzgrafik-Editor as (business)
+open-source software.
