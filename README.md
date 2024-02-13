@@ -130,6 +130,8 @@ the editor constantly improves and,
 in the best case, establishes itself as a standard tool across different public transportation
 industries.
 
+</details>
+
 Community [participation and collaboration](CONTRIBUTING.md)
 in the development process is extremely important and desired to ensure that the editor gains
 diversity
@@ -138,7 +140,6 @@ The openness of the project encourages innovation, expertise from different sect
 improvements to optimize the
 planning processes.
 
-</details>
 
 ## User Manual
 
