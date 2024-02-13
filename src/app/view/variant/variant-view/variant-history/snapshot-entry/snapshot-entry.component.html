@@ -1,0 +1,13 @@
+<sbb-history-entry
+  [actions]="actions"
+  (preview)="display.next($event ? model.id : null)"
+>
+  <sbb-version-entry-layout
+    [state]="getState()"
+    [message]="getMessage()"
+    [titleField]="getTitle()"
+    [dateField]="model.createdAt"
+    [commentField]="model.comment"
+  >
+  </sbb-version-entry-layout>
+</sbb-history-entry>

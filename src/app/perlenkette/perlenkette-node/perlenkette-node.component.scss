@@ -1,0 +1,96 @@
+@import "./../../view/rastering/definitions";
+
+.node-container {
+  position: relative;
+
+  sbb-icon {
+    position: absolute;
+  }
+}
+
+.title_rect {
+  cursor: pointer;
+}
+
+.junction_only {
+  stroke-dasharray: 2px;
+  fill: none;
+}
+
+.main_rect {
+  stroke: $COLOR_Default;
+  fill: white;
+  stroke-width: 1px;
+}
+
+.title_rect {
+  fill: var(--UI_DIALOG_NODE_COLOR_BACKGROUND);
+}
+
+.main_rect.no_stop_has_connections {
+  stroke-width: 2px;
+  stroke: $COLOR_Warning;
+}
+
+.main_rect.junction_only.has_connections {
+  stroke-width: 2px;
+  stroke: $COLOR_Warning;
+}
+
+.non_stop_toogle {
+  fill: white;
+}
+
+.non_stop_toogle.nonstop {
+  fill-opacity: 0.01;
+}
+
+.non_stop_toogle:hover {
+  fill: $COLOR_Edit;
+  fill-opacity: 1;
+}
+
+text.edge_text.station {
+  font-size: 14px;
+  dominant-baseline: text-after-edge;
+}
+
+text.edge_text.start {
+  text-anchor: start;
+}
+
+text.edge_text.end {
+  text-anchor: end;
+}
+
+text.edge_text.middle {
+  text-anchor: middle;
+}
+
+path.SepConnectionLine {
+  stroke: $COLOR_Default;
+  stroke-width: 0.5px;
+}
+
+/*
+text.edge_text.station.TrainrunName {
+  font-weight: bold;
+}
+
+text.edge_text.station.RemainingTime {
+  font-size: 14px;
+}
+
+text.edge_text.station.RemainingTime {
+  font-size: 14px;
+}
+
+
+text.edge_text.station.FROM {
+  font-size: 14px;
+}
+*/
+
+text.edge_text.station.TO {
+  font-size: 14px;
+}

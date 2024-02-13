@@ -1,0 +1,16 @@
+<ng-container *ngIf="actions">
+  <button [sbbContextmenuTriggerFor]="menu"></button>
+  <sbb-menu #menu="sbbMenu">
+    <ng-template sbbMenuContent>
+      <button
+        *ngFor="let action of actions | async"
+        class="menu-item-button sbb-menu-item"
+        type="button"
+        (click)="onActionClicked(action)"
+      >
+        <sbb-icon svgIcon="{{ action.icon }}"></sbb-icon>
+        {{ action.name }}
+      </button>
+    </ng-template>
+  </sbb-menu>
+</ng-container>

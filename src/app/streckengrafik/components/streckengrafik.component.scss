@@ -1,0 +1,320 @@
+div.main-streckengrafik-container {
+  height: 90vh;
+  overflow: hidden;
+  padding-top: 8px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 4px;
+  display: grid;
+  grid-template-columns: 40px 1fr 40px 20px;
+  grid-template-rows: 40px 79vh 40px 40px; // grid-template-rows: 40px 40px 65vh 40px;
+  grid-gap: 0;
+  background: var(--COLOR_BACKGROUND);
+  width: 100%;
+}
+
+svg {
+  background: var(--NODE_DOCKABLE); //var(--COLOR_BACKGROUND);
+}
+
+button.SimpleButton {
+  min-width: 30px;
+  max-width: 30px;
+  min-height: 28px;
+  max-height: 28px;
+  position: relative;
+  left: 4px;
+  top: 5px;
+  background: var(--COLOR_BACKGROUND);
+  border: none;
+  color: var(--NODE_TEXT_FOCUS);
+}
+
+button.SimpleButton.TogglePathNode {
+  min-width: 16px;
+  min-height: 16px;
+  max-width: 16px;
+  max-height: 16px;
+  left: 2px;
+  top: 5px;
+  background: none;
+  transform: scale(0.8) translate(-6px, 6px);
+}
+
+button.SimpleButton.ZoomEqual {
+  font-weight: bold;
+}
+
+button.SimpleButton:hover {
+  background: var(--COLOR_BACKGROUND);
+  font-weight: bold;
+  transform: scale(1.25);
+}
+
+button.SimpleButton.TogglePathNode:hover {
+  background: none;
+  font-weight: bold;
+  transform: scale(1) translate(-6px, 3px);
+}
+
+button.SimpleButton:active {
+  background: var(--COLOR_BACKGROUND);
+}
+
+div.pathSlider {
+  background: var(--COLOR_BACKGROUND);
+}
+
+div.background {
+  background: var(--COLOR_BACKGROUND);
+}
+
+div.background.mainDrawingArea {
+  background: var(--COLOR_BACKGROUND);
+}
+
+svg.StreckengrafikMainSVG:active {
+  cursor: ns-resize;
+}
+
+button.SimpleButton.Name {
+  min-width: 65px;
+  max-width: 65px;
+  font-weight: bold;
+  text-align: start;
+  padding-left: 1px;
+  padding-right: 1px;
+  background: none;
+}
+
+button.SimpleButton.Time {
+  min-width: 70px;
+  max-width: 70px;
+  font-weight: bold;
+  text-align: start;
+  padding-right: 1px;
+  background: none;
+}
+
+button.SimpleButton.HeadwayBand {
+  min-width: 145px;
+  max-width: 145px;
+  font-weight: bold;
+  text-align: center;
+  padding-left: 1px;
+  padding-right: 1px;
+  background: none;
+}
+
+button.SimpleButton.RailTrackSlider {
+  min-width: 122px;
+  max-width: 122px;
+  font-weight: bold;
+  text-align: center;
+  padding-left: 1px;
+  padding-right: 1px;
+  background: none;
+}
+
+button.SimpleButton.Name:hover {
+  font-weight: bold;
+}
+
+button.SimpleButton.Time:hover {
+  font-weight: bold;
+}
+
+button.SimpleButton.HeadwayBand:hover {
+  font-weight: bold;
+}
+
+button.SimpleButton.RailTrackSlider:hover {
+  font-weight: bold;
+}
+
+button.SimpleButton.Name.StreckengrafikNameNotFocusNorEnabled {
+  font-weight: normal;
+}
+
+button.SimpleButton.Time.StreckengrafikTimeNotFocusNorEnabled {
+  font-weight: normal;
+}
+
+button.SimpleButton.HeadwayBand.HeadwayBandVisible {
+  font-weight: normal;
+}
+
+button.SimpleButton.RailTrackSlider.RailTrackSliderVisible {
+  font-weight: normal;
+}
+
+button.SimpleButton.Name.StreckengrafikNameNotFocusNorEnabled:active {
+  font-weight: bold;
+}
+
+button.SimpleButton.Time.StreckengrafikTimeNotFocusNorEnabled:active {
+  font-weight: bold;
+}
+
+button.SimpleButton.HeadwayBand.HeadwayBandVisible:active {
+  font-weight: bold;
+}
+
+button.SimpleButton.RailTrackSlider.RailTrackSliderVisible:active {
+  font-weight: bold;
+}
+
+button.SimpleButton.Empty {
+  min-width: 20px;
+  max-width: 20px;
+}
+
+div.main_1 {
+  position: relative;
+  left: 1px;
+}
+
+div.main_3 {
+  position: relative;
+  left: -1px;
+}
+
+/// fix print issue
+// STRECKENGRAFIK_MAIN_CONTENT_WIDTH: 950px
+// STRECKENGRAFIK_MAIN_CONTENT_HEIGHT: 620px
+// STRECKENGRAFIK_MAIN_W: 850px
+// STRECKENGRAFIK_MAIN_H: 500px
+
+div.main-streckengrafik-container {
+  width: var(--STRECKENGRAFIK_MAIN_CONTENT_WIDTH);
+  min-width: var(--STRECKENGRAFIK_MAIN_CONTENT_WIDTH);
+  max-width: var(--STRECKENGRAFIK_MAIN_CONTENT_WIDTH);
+  height: var(--STRECKENGRAFIK_MAIN_CONTENT_HEIGHT);
+  max-height: var(--STRECKENGRAFIK_MAIN_CONTENT_HEIGHT);
+  min-height: var(--STRECKENGRAFIK_MAIN_CONTENT_HEIGHT);
+
+  overflow: hidden;
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+
+  display: grid;
+  grid-template-columns: 40px var(--STRECKENGRAFIK_MAIN_W) 40px 20px;
+  grid-template-rows: 40px var(--STRECKENGRAFIK_MAIN_H) 40px 40px; // grid-template-rows: 40px 40px 65vh 40px;
+  grid-gap: 0;
+  background: var(--COLOR_BACKGROUND);
+}
+
+div.head_1 {
+  width: 40px;
+  min-width: 40px;
+  max-width: 40px;
+  height: 40px;
+  max-height: 40px;
+  min-height: 40px;
+  border-right: var(--NODE_TEXT_FOCUS) solid 0.125px;
+}
+
+div.head_2 {
+  width: var(--STRECKENGRAFIK_MAIN_W);
+  min-width: var(--STRECKENGRAFIK_MAIN_W);
+  max-width: var(--STRECKENGRAFIK_MAIN_W);
+  height: 40px;
+  max-height: 40px;
+  min-height: 40px;
+}
+
+div.head_3 {
+  width: 40px;
+  min-width: 40px;
+  max-width: 40px;
+  height: 40px;
+  max-height: 40px;
+  min-height: 40px;
+  border-left: var(--NODE_TEXT_FOCUS) solid 0.125px;
+}
+
+div.head_4 {
+  width: 20px;
+  min-width: 20px;
+  max-width: 20px;
+  height: 40px;
+  max-height: 40px;
+  min-height: 40px;
+}
+
+div.main_1 {
+  width: 40px;
+  min-width: 40px;
+  max-width: 40px;
+  height: var(--STRECKENGRAFIK_MAIN_H);
+  max-height: var(--STRECKENGRAFIK_MAIN_H);
+  min-height: var(--STRECKENGRAFIK_MAIN_H);
+  left: 0px;
+  border-right: var(--NODE_TEXT_FOCUS) solid 0.125px;
+}
+
+div.main_2 {
+  width: var(--STRECKENGRAFIK_MAIN_W);
+  min-width: var(--STRECKENGRAFIK_MAIN_W);
+  max-width: var(--STRECKENGRAFIK_MAIN_W);
+  height: var(--STRECKENGRAFIK_MAIN_H);
+  max-height: var(--STRECKENGRAFIK_MAIN_H);
+  min-height: var(--STRECKENGRAFIK_MAIN_H);
+}
+
+div.main_3 {
+  width: 40px;
+  min-width: 40px;
+  max-width: 40px;
+  height: var(--STRECKENGRAFIK_MAIN_H);
+  max-height: var(--STRECKENGRAFIK_MAIN_H);
+  min-height: var(--STRECKENGRAFIK_MAIN_H);
+  left: 0px;
+  border-left: var(--NODE_TEXT_FOCUS) solid 0.125px;
+}
+
+div.main_4 {
+  width: 20px;
+  min-width: 20px;
+  max-width: 20px;
+  height: var(--STRECKENGRAFIK_MAIN_H);
+  max-height: var(--STRECKENGRAFIK_MAIN_H);
+  min-height: var(--STRECKENGRAFIK_MAIN_H);
+}
+
+div.footer_1 {
+  width: 40px;
+  min-width: 40px;
+  max-width: 40px;
+  height: 40px;
+  max-height: 40px;
+  min-height: 40px;
+}
+
+div.footer_2 {
+  width: var(--STRECKENGRAFIK_MAIN_W);
+  min-width: var(--STRECKENGRAFIK_MAIN_W);
+  max-width: var(--STRECKENGRAFIK_MAIN_W);
+  height: 40px;
+  max-height: 40px;
+  min-height: 40px;
+  border-top: var(--NODE_TEXT_FOCUS) solid 1px;
+}
+
+div.footer_3 {
+  width: 40px;
+  min-width: 40px;
+  max-width: 40px;
+  height: 40px;
+  max-height: 40px;
+  min-height: 40px;
+}
+
+div.footer_4 {
+  width: 20px;
+  min-width: 20px;
+  max-width: 20px;
+  height: 40px;
+  max-height: 40px;
+  min-height: 40px;
+}

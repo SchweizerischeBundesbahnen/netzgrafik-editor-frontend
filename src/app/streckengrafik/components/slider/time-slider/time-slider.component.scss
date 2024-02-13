@@ -1,0 +1,108 @@
+.text {
+  font: 10px sans-serif;
+  fill: var(--NODE_TEXT_FOCUS);
+  stroke: none;
+}
+
+.TimeSliderComponent {
+  transform: translate(0px, 4px);
+}
+
+.TimeSliderComponent.Text.Horizontal {
+  transform: translate(-23px, 30px) rotate(-90deg);
+}
+
+.TimeSliderComponent.Text {
+  fill: var(--NODE_TEXT_FOCUS);
+  font-family: var(--sbb-font-roman);
+  font-size: 10px;
+}
+
+.TimeSliderComponent.Text.Hour.Five {
+  fill: var(--NODE_TEXT_FOCUS);
+}
+
+.TimeSliderComponent.Text.Hour.Quarter {
+  fill: var(--NODE_TEXT_FOCUS);
+}
+
+.TimeSliderComponent.Text.Hour.Half {
+  fill: var(--NODE_TEXT_FOCUS);
+}
+
+.TimeSliderComponent.Text.Hour.Full {
+  fill: var(--NODE_TEXT_FOCUS);
+}
+
+.TimeSliderComponent.HorizontalLine {
+  stroke: var(--NODE_TEXT_FOCUS);
+  stroke-width: 0.25px;
+}
+
+.TimeSliderComponent.HorizontalLine.Hour.Five {
+  stroke: var(--NODE_TEXT_FOCUS);
+  stroke-width: 0.66px;
+}
+
+.TimeSliderComponent.HorizontalLine.Hour.Quarter {
+  stroke: var(--NODE_TEXT_FOCUS);
+  stroke-opacity: 0.5;
+}
+
+.TimeSliderComponent.HorizontalLine.Hour.Half {
+  stroke: var(--NODE_TEXT_FOCUS);
+  stroke-opacity: 0.5;
+}
+
+.TimeSliderComponent.HorizontalLine.Hour.Full {
+  stroke: var(--NODE_TEXT_FOCUS);
+  stroke-opacity: 0.5;
+}
+
+.TimeSliderComponent.TimeLine {
+  stroke: var(--NODE_TEXT_FOCUS);
+  stroke-width: 0.5px;
+}
+
+.TimeSliderComponent.Text.TimeLine {
+  stroke: none;
+  stroke-width: 0.25px;
+  font-family: var(--sbb-font-roman);
+  font-size: 10px;
+  transform: translate(2.5px, 4px);
+}
+
+.TimeSliderComponent.Text.TimeLine.Horizontal {
+  transform: translate(-23px, 17px) rotate(-90deg);
+}
+
+rect.TickLine {
+  stroke-width: 0px;
+  stroke: var(--NODE_TEXT_FOCUS);
+}
+
+rect.TickText {
+  stroke-width: 0px;
+  stroke: var(--NODE_TEXT_FOCUS);
+}
+
+line.Slider {
+  stroke: var(--NODE_TEXT_FOCUS);
+}
+g.noprint {
+  display: block !important;
+}
+
+g.onlyprint {
+  display: none !important;
+}
+
+@media print {
+  g.noprint {
+    display: none !important;
+  }
+
+  g.onlyprint {
+    display: block !important;
+  }
+}

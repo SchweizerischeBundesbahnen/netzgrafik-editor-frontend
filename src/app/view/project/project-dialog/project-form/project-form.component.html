@@ -1,0 +1,88 @@
+<div class="content">
+  <sbb-form-field label="Name" class="sbb-form-field-long">
+    <input
+      type="text"
+      sbbInput
+      [formControl]="model.getControl('name')"
+      placeholder="Name"
+    />
+    <sbb-error *ngIf="model.getControl('name').errors?.required"
+      >Pflichtfeld</sbb-error
+    >
+  </sbb-form-field>
+  <sbb-form-field label="Zusammenfassung" class="sbb-form-field-long">
+    <input
+      type="text"
+      sbbInput
+      [formControl]="model.getControl('summary')"
+      placeholder="Zusammenfassung"
+    />
+  </sbb-form-field>
+  <sbb-form-field label="Beschreibung" class="sbb-form-field-long">
+    <sbb-textarea
+      [formControl]="model.getControl('description')"
+      [maxlength]="500"
+      placeholder="Beschrieb"
+    ></sbb-textarea>
+  </sbb-form-field>
+  <ng-template #userTooltip>
+    <sbb-tooltip>
+      Benutzer müssen mit ihrer U/E-Nummer angegeben werden (bsp. u123456
+      e654321). Eingabe pro Nummer jeweils mit 'Enter' bestätigen.
+      Kleinschreibung beachten!
+    </sbb-tooltip>
+  </ng-template>
+  <sbb-form-field class="sbb-form-field-long">
+    <sbb-label>
+      Benutzer mit Schreibzugriff
+      <ng-container *ngTemplateOutlet="userTooltip"></ng-container>
+    </sbb-label>
+    <sbb-chip-list
+      [formControl]="model.getControl('writeUsers')"
+      (focusout)="onLabelsFocusoutWrite()"
+    >
+      <sbb-chip
+        *ngFor="let element of model.getControl('writeUsers').value"
+        [value]="element"
+        >{{ element }}
+      </sbb-chip>
+      <input
+        id="userWriteInput"
+        placeholder="New Benutzer..."
+        sbbChipInput
+        [sbbChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      />
+    </sbb-chip-list>
+    <sbb-error *ngIf="model.getControl('writeUsers').errors?.invalidUserIds">
+      Ungültige Werte:
+      {{ model.getControl("writeUsers").errors?.invalidUserIds }}
+    </sbb-error>
+  </sbb-form-field>
+  <sbb-form-field class="sbb-form-field-long">
+    <sbb-label>
+      Benutzer mit Lesezugriff
+      <ng-container *ngTemplateOutlet="userTooltip"></ng-container>
+    </sbb-label>
+    <sbb-chip-list
+      [formControl]="model.getControl('readUsers')"
+      (focusout)="onLabelsFocusoutReade()"
+    >
+      <sbb-chip
+        *ngFor="let element of model.getControl('readUsers').value"
+        [value]="element"
+      >
+        {{ element }}
+      </sbb-chip>
+      <input
+        id="userReadeInput"
+        placeholder="New Benutzer..."
+        sbbChipInput
+        [sbbChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      />
+    </sbb-chip-list>
+    <sbb-error *ngIf="model.getControl('readUsers').errors?.invalidUserIds">
+      Ungültige Werte:
+      {{ model.getControl("readUsers").errors?.invalidUserIds }}
+    </sbb-error>
+  </sbb-form-field>
+</div>

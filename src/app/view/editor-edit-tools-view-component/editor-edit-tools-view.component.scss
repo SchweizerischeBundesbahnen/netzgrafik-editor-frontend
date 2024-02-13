@@ -1,0 +1,77 @@
+@import "./../../view/editor-properties-view-component/editor-properties-view.component.scss";
+@import "./../../view/editor-filter-view/editor-filter-view.component.scss";
+@import "./../../view/dialogs/trainrun-and-section-dialog/trainrun-tab/trainrun-tab.component.scss";
+@import "../rastering/definitions";
+
+::ng-deep .TrainrunDialog.EditorToolButton {
+  background: $COLOR_Default;
+  border: $COLOR_Default;
+  color: white;
+  max-width: none;
+  min-height: 38px;
+  margin-bottom: 16px;
+}
+
+::ng-deep .TrainrunDialog.EditorToolButton:active {
+  background: lightgrey;
+  color: $COLOR_Default;
+  border: lightgrey;
+}
+
+::ng-deep .filterable-label-drop-container {
+  width: 423px;
+  min-width: 423px;
+  max-width: 423px;
+  margin: 0px 0px 0px 0px;
+  display: inline-block;
+  vertical-align: top;
+  flex-wrap: wrap;
+}
+
+::ng-deep .filterable-label-labelgroup-block {
+  display: block;
+  width: 100%;
+}
+
+::ng-deep .filterable-label-labelgroup-drop-list {
+  border: none;
+  fill: whitesmoke;
+  min-height: 64px;
+  width: 373px;
+  min-width: 373px;
+  max-width: 373px;
+  background: whitesmoke;
+  border-radius: 4px;
+  overflow: hidden;
+  float: left;
+  padding: 10px;
+  margin: 5px 0px 5px 0px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+::ng-deep .filterable-label-labelgroup-delete {
+  float: right;
+  width: 44px;
+  padding: 10px 0px 10px 0px;
+  margin: 5px 0px 5px 0px;
+}
+
+::ng-deep button.filterable-label-grp-delete-add-button-button {
+  border: none;
+  fill: white;
+  min-height: 44px;
+  max-width: 44px;
+  background: white;
+  border-radius: 4px;
+}
+
+::ng-deep button.filterable-label-grp-delete-add-button-button:hover {
+  fill: whitesmoke;
+  background: whitesmoke;
+}
+
+::ng-deep .TrainrunDialog.EditorToolButton.disabled {
+  background: whitesmoke;
+  color: lightgray;
+}

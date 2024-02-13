@@ -1,0 +1,70 @@
+@import "../../rastering/definitions";
+
+::ng-deep path.connection_line {
+  fill: none;
+  stroke-width: 4px;
+}
+
+::ng-deep path.connection_line {
+  stroke: $CONNECTION_COLOR;
+  stroke-opacity: 0.6;
+}
+
+::ng-deep path.connection_line.warning {
+  stroke: $CONNECTION_COLOR_WARNING;
+}
+
+::ng-deep path.connection_line.selected {
+  stroke: $COLOR_Edit;
+  stroke-width: 5px;
+}
+
+::ng-deep path.connection_line.hover {
+  stroke: $CONNECTION_COLOR_HOVER;
+}
+
+::ng-deep path.connection_line.hover {
+  stroke-opacity: 1;
+}
+
+::ng-deep path.connection_line.selected {
+  stroke-opacity: 1;
+}
+
+::ng-deep path.connection_line.not_visible {
+  stroke-opacity: 0.2;
+}
+
+::ng-deep circle.connection_line_pin {
+  stroke: $COLOR_Default;
+  fill: $COLOR_Default;
+  opacity: 1;
+}
+
+::ng-deep circle.connection_line_pin.warning {
+  fill: $COLOR_Warning;
+}
+
+::ng-deep circle.connection_line_pin.selected {
+  fill: $COLOR_Edit;
+}
+
+::ng-deep circle.connection_line_pin.connection_pin_dragging {
+  stroke: $COLOR_Default;
+  fill: $COLOR_Edit;
+  r: $PIN_RADIUS_HOVER;
+  pointer-events: none;
+}
+
+::ng-deep circle.connection_line_pin.hover {
+  r: $PIN_RADIUS_HOVER;
+  fill: $COLOR_Edit;
+}
+
+::ng-deep path.connection_line.enforce_disable_all_pointer_events {
+  stroke-dasharray: 0 1;
+}
+
+::ng-deep circle.connection_line_pin.connection_ongoing_dragging {
+  pointer-events: none;
+}

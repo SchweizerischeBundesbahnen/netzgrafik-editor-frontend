@@ -1,0 +1,30 @@
+@import "../rastering/definitions";
+
+::ng-deep path.KnotenAuslastungResourceGroup {
+  stroke: none;
+  fill: whitesmoke;
+}
+
+::ng-deep path.KnotenAuslastungDataGroup {
+  cursor: pointer;
+}
+
+::ng-deep text.KnotenAuslastungDataGroup {
+  font-size: 10px;
+  cursor: pointer;
+}
+
+::ng-deep text.KnotenAuslastungNbrTrackGroup {
+  font-size: 12px;
+  font-weight: bold;
+  fill: gray;
+}
+
+::ng-deep text.KnotenAuslastungTimeGroup {
+  font-size: 12px;
+  fill: lightgray;
+}
+
+::ng-deep path.KnotenAuslastungResourceGroup.capacityLimitReached {
+  fill: #fff7eb;
+}

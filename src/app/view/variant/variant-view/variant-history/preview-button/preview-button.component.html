@@ -1,0 +1,9 @@
+<div
+  #previewButton
+  [class.preview-button]="true"
+  [class.active]="isActive"
+  (mousedown)="onMouseDown()"
+  (mouseup)="onMouseUp()"
+>
+  <sbb-icon svgIcon="eye-small"></sbb-icon>
+</div>

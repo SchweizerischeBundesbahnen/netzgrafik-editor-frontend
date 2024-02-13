@@ -1,0 +1,14 @@
+.entry {
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  padding: 0.2rem;
+  flex: 1;
+}
+
+.version-container {
+  min-width: 2rem;
+  text-align: center;
+}

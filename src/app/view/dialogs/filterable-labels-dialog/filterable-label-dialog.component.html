@@ -1,0 +1,38 @@
+<div sbbDialogTitle>
+  <ng-container
+    >Filterbare Labels für {{ dialogTitel }} bearbeiten</ng-container
+  >
+</div>
+<div sbbDialogContent sy>
+  <sbb-filterable-label-form [model]="formmodel"></sbb-filterable-label-form>
+</div>
+<div sbbDialogActions>
+  <button
+    class="FunctionButton"
+    tabindex="-1"
+    mode="icon"
+    (click)="onTransferClicked()"
+    title="auf alle sichtbaren übertragen"
+  >
+    <sbb-icon
+      svgIcon="arrow-change-horizontal-medium"
+      height="13px"
+      width="13px"
+      aria-hidden="false"
+    ></sbb-icon>
+  </button>
+  <button
+    class="FunctionButton"
+    tabindex="-1"
+    mode="icon"
+    (click)="onDeleteClicked()"
+    title="von allen sichtbaren löschen"
+  >
+    <sbb-icon
+      svgIcon="trash-medium"
+      height="13px"
+      width="13px"
+      aria-hidden="false"
+    ></sbb-icon>
+  </button>
+</div>

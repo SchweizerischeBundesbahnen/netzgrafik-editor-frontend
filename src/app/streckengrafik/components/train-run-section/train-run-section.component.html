@@ -1,0 +1,107 @@
+<ng-container *ngIf="scaledPath(); let scaledPath">
+  <ng-container *ngIf="!clipData">
+    <ng-container *ngIf="delayedRendering">
+      <svg:path
+        [class]="getClassTag('hoverarea')"
+        [attr.d]="sectionPath(scaledPath)"
+        (mouseup)="onEdgeLineClick($event)"
+      />
+
+      <ng-container *ngIf="showHeadwayBand()">
+        <svg:path
+          [class]="getClassTag('edge_line headway_band bandarea ')"
+          [attr.d]="sectionBandPath(scaledPath)"
+          (mouseup)="onEdgeLineClick($event)"
+        />
+      </ng-container>
+    </ng-container>
+
+    <svg:path
+      [class]="getClassTag('edge_line')"
+      [attr.d]="sectionPath(scaledPath)"
+      (mouseup)="onEdgeLineClick($event)"
+    />
+
+    <ng-container *ngIf="delayedRendering">
+      <ng-container *ngIf="showDeparture()">
+        <svg:g [attr.transform]="getDepartureTextTransformation(scaledPath)">
+          <svg:rect
+            [class]="getClassTag('edge_text DepartureTime')"
+            x="-10.5"
+            y="-9.5"
+            [attr.width]="getDepartureTextWidth()"
+            height="17"
+            (mouseup)="openTrainrunSectionDialogDeparture($event, trainrunItem)"
+          />
+
+          <svg:text
+            [class]="getDepartureClassTag('edge_text DepartureTime')"
+            x="0"
+            y="0"
+            [attr.style]="getDepartureTextStyle()"
+            (mouseup)="openTrainrunSectionDialogDeparture($event, trainrunItem)"
+          >
+            {{ getDepartureText() }}
+          </svg:text>
+        </svg:g>
+      </ng-container>
+
+      <ng-container *ngIf="showArrival()">
+        <svg:g [attr.transform]="getArrivalTextTransformation(scaledPath)">
+          <svg:rect
+            [class]="getClassTag('edge_text ArrivalTime')"
+            x="-10.5"
+            y="-9.5"
+            [attr.width]="getArrivalTextWidth()"
+            height="17"
+            (mouseup)="openTrainrunSectionDialogArrival($event, trainrunItem)"
+          />
+
+          <svg:text
+            [class]="getArrivalClassTag('edge_text ArrivalTime')"
+            x="0"
+            y="0"
+            [attr.style]="getArrivalTextStyle()"
+            (mouseup)="openTrainrunSectionDialogArrival($event, trainrunItem)"
+          >
+            {{ getArrivalText() }}
+          </svg:text>
+        </svg:g>
+      </ng-container>
+
+      <ng-container *ngIf="showText()">
+        <svg:g [attr.transform]="getTextTransform()">
+          <svg:g [attr.transform]="getTextLabelTransformation(scaledPath)">
+            <svg:rect
+              [class]="getClassTag('edge_text TextLabel')"
+              [attr.x]="-textWidth() / 2"
+              y="-8.5"
+              [attr.width]="textWidth()"
+              height="12"
+              (mouseup)="openTrainrunDialog($event, trainrunItem)"
+            />
+
+            <svg:text
+              [class]="getClassTag('edge_text TextLabel')"
+              x="0"
+              y="0"
+              (mouseup)="openTrainrunDialog($event, trainrunItem)"
+            >
+              {{ getText() }}
+            </svg:text>
+          </svg:g>
+        </svg:g>
+      </ng-container>
+
+      <ng-container *ngIf="showTrainRunSectionStops && hasStops()">
+        <svg:g
+          sbb-train-run-section-stops-component
+          [scaledPath]="scaledPath"
+          [trainrun]="trainrun"
+          [trainrunItem]="trainrunItem"
+          [freqOffset]="freqOffset"
+        ></svg:g>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</ng-container>

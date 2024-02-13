@@ -1,0 +1,32 @@
+@use "@sbb-esta/angular" as sbb;
+
+.versions-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+hr {
+  width: 100%;
+  background-color: sbb.$sbbColorCloud;
+  height: 1px;
+  border: none;
+}
+
+.show-more-entry {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  a {
+    cursor: pointer;
+
+    ::ng-deep {
+      sbb-icon {
+        svg {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

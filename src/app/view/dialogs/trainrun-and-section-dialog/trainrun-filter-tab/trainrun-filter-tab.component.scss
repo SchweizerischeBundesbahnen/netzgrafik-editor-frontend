@@ -1,0 +1,17 @@
+::ng-deep .sbb-trainrun-chip-group {
+  display: flex;
+}
+
+::ng-deep div.EditTrainrunFilterableLabelsDialogTabContent {
+  border-style: none;
+  min-height: 250px;
+  max-height: 250px;
+  padding-bottom: 0px;
+}
+
+::ng-deep div.EditTrainrunDialogTabFooter {
+  border-style: none;
+  padding: 0 15px 0 0;
+  max-height: 48px;
+  min-height: 48px;
+}

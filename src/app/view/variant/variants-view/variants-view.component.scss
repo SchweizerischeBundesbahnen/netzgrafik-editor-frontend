@@ -1,0 +1,25 @@
+.actions {
+  margin: 2rem 0;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  h1 {
+    flex: 1;
+    margin-top: 1rem;
+  }
+}
+
+.actions input.search {
+  width: 320px;
+  margin-right: 1rem;
+}
+
+.project-data {
+  width: 30rem;
+}
+
+.archive {
+  margin-bottom: 1rem;
+}

@@ -1,0 +1,20 @@
+<div *ngIf="title" [class.card]="true">
+  <div *ngIf="title" class="title">
+    {{ title }}
+    <div style="float: right">
+      <sbb-action-menu [actions]="actions"></sbb-action-menu>
+    </div>
+  </div>
+  <div *ngIf="subtitle" class="subtitle">
+    {{ subtitle }}
+  </div>
+  <a *ngIf="route" sbb-link [routerLink]="route"> öffnen </a>
+</div>
+<div
+  *ngIf="icon"
+  [class.card]="true"
+  [class.icon]="icon"
+  (click)="icon && iconClick.emit()"
+>
+  <sbb-icon *ngIf="icon" [svgIcon]="icon"></sbb-icon>
+</div>

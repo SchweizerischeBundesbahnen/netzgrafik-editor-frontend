@@ -1,0 +1,131 @@
+<div (click)="disableSectionView()">
+  <div class="TitleArea">
+    <div class="title-container">
+      <div>
+        <div
+          id="textbox"
+          (click)="trainrunNameClicked($event)"
+          [attr.style]="'width:' + (contentWidth - 72) + 'px;float: left;'"
+        >
+          <ng-container *ngIf="showTrainrunName()">
+            <p
+              class="alignleft trainname"
+              (click)="trainrunNameClicked($event)"
+            >
+              <span class="trainname"
+                >{{ perlenketteTrainrun.categoryShortName
+                }}{{ perlenketteTrainrun.title }}</span
+              >
+            </p>
+
+            <p class="alignright" (click)="trainrunNameClicked($event)">
+              <span class="station" (click)="trainrunNameClicked($event)">{{
+                perlenketteTrainrun.pathItems.at(0).getPerlenketteNode()
+                  .fullName
+              }}</span>
+              <span class="arrow">-</span>
+              <span class="station" (click)="trainrunNameClicked($event)">{{
+                perlenketteTrainrun.pathItems.at(-1).getPerlenketteNode()
+                  .fullName
+              }}</span>
+            </p>
+          </ng-container>
+
+          <ng-container *ngIf="!showTrainrunName()">
+            <p class="alignleft">
+              <span class="station" (click)="scrollFirst($event)">{{
+                perlenketteTrainrun.pathItems.at(0).getPerlenketteNode()
+                  .fullName
+              }}</span>
+              <span class="arrow">-</span>
+              <span class="station" (click)="scrollLast($event)">{{
+                perlenketteTrainrun.pathItems.at(-1).getPerlenketteNode()
+                  .fullName
+              }}</span>
+            </p>
+          </ng-container>
+        </div>
+        <ng-container *ngIf="showTrainrunEditor()">
+          <sbb-icon
+            svgIcon="chevron-up-medium"
+            (click)="trainrunNameClicked($event)"
+          ></sbb-icon>
+        </ng-container>
+        <ng-container *ngIf="!showTrainrunEditor()">
+          <sbb-icon
+            svgIcon="chevron-down-medium"
+            (click)="trainrunNameClicked($event)"
+          ></sbb-icon>
+        </ng-container>
+      </div>
+    </div>
+
+    <!--- Trainrun Editor --->
+    <ng-container *ngIf="showTrainrunEditor()">
+      <p class="trainRunEditor">
+        <sbb-trainrun-tab
+          class="TrainrunTabTrainrunEditor"
+          [toolbarVisible]="false"
+          [isIntegratedComponent]="true"
+        >
+        </sbb-trainrun-tab>
+      </p>
+      <div class="sepdiv"></div>
+    </ng-container>
+
+    <!--- Station List (navigation) --->
+    <ng-container *ngFor="let pathItem of perlenketteTrainrun.pathItems">
+      <div *ngIf="pathItem.isPerlenketteNode()">
+        <p class="alignleft" style="line-height: 10px">
+          <span
+            [class]="getSmallstationClassTag(pathItem)"
+            (click)="goto(pathItem)"
+            >{{ pathItem.getPerlenketteNode().shortName }}</span
+          >
+        </p>
+      </div>
+    </ng-container>
+
+    <div class="sepdiv"></div>
+  </div>
+
+  <div class="svg-container">
+    <svg
+      #svgPerlenkette
+      [attr.height]="contentHeight * 1.25"
+      [attr.width]="contentWidth"
+      (mousemove)="changeSvgMousePosition($event)"
+      [attr.viewBox]="getPerlenketteViewBox()"
+    >
+      <foreignObject
+        #svgForeignObject
+        [attr.height]="renderedElementsHeight + 64"
+        [attr.width]="contentWidth"
+      >
+        <div class="drawing-container" #drawingContainer>
+          <ng-container *ngFor="let pathItem of perlenketteTrainrun.pathItems">
+            <sbb-perlenkette-node
+              *ngIf="pathItem.isPerlenketteNode()"
+              [perlenketteTrainrun]="perlenketteTrainrun"
+              (signalIsBeingEdited)="signalIsBeingEdited($event)"
+              (signalHeightChanged)="signalHeightChanged($event, pathItem)"
+              [perlenketteNode]="pathItem.getPerlenketteNode()"
+            >
+            </sbb-perlenkette-node>
+            <sbb-perlenkette-section
+              *ngIf="pathItem.isPerlenketteSection()"
+              [perlenketteSection]="pathItem.getPerlenketteSection()"
+              [perlenketteTrainrun]="perlenketteTrainrun"
+              (signalIsBeingEdited)="signalIsBeingEdited($event)"
+              (signalHeightChanged)="signalHeightChanged($event, pathItem)"
+              [notificationIsBeingEdited]="
+                getSignalAllChildrenIsBeingEditedObservable()
+              "
+            >
+            </sbb-perlenkette-section>
+          </ng-container>
+        </div>
+      </foreignObject>
+    </svg>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+@use "@sbb-esta/angular" as sbb;
+.content {
+  padding: 0.2rem 1rem;
+}
+
+.info-fields {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  min-height: 2rem;
+}
+
+.info-field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 2rem;
+
+  > sbb-icon {
+    margin-right: 0.2rem;
+  }
+}
+
+.comment {
+  font-style: italic;
+}
+
+.title-field {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.date-field {
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.comment-field {
+  grid-column-start: 1;
+  grid-column-end: span 2;
+  grid-row: 2;
+}
+
+.in-conflict {
+  background-color: sbb.$sbbColorOrange;
+  color: white;
+  border-radius: 5px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  > hr {
+    height: 1px;
+    background-color: white;
+    border: none;
+  }
+}
+
+.new-added {
+  border-color: sbb.$sbbColorGreen;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  color: sbb.$sbbColorGreen;
+
+  > hr {
+    height: 1px;
+    background-color: sbb.$sbbColorGreen;
+    border: none;
+  }
+}

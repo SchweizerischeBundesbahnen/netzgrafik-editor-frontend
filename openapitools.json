@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+  "spaces": 2,
+  "generator-cli": {
+    "version": "5.1.0",
+    "generators": {
+      "LATEST": {
+        "disabled": false,
+        "generatorName": "typescript-angular",
+        "output": "src/app/api/generated",
+        "glob": "api-docs.json",
+        "additionalProperties": {
+          "ngVersion": "12.0.0",
+          "supportsES6": true,
+          "withInterfaces": true,
+          "stringEnums": true,
+          "enumPropertyNaming": "UPPERCASE",
+          "serviceSuffix": "BackendService"
+        }
+      }
+    }
+  }
+}

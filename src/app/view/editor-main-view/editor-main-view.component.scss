@@ -1,0 +1,47 @@
+@import "../rastering/definitions";
+@import "data-views/nodes.view";
+@import "data-views/trainrunsections.view";
+@import "data-views/trainrunsection.previewline.view";
+@import "data-views/multiSelectRenderer";
+@import "data-views/transition.view";
+@import "data-views/connections.view";
+@import "data-views/note.view";
+
+::ng-deep svg {
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+::ng-deep svg {
+  shape-rendering: geometricPrecision;
+}
+
+::ng-deep svg.ShowCellCursor {
+  cursor: cell;
+}
+
+::ng-deep .graphContainer {
+  background: $COLOR_BACKGROUND;
+}
+
+::ng-deep .enforce_disable_all_pointer_events {
+  pointer-events: none;
+  opacity: 0.25;
+}
+
+::ng-deep .rect.enforce_disable_all_pointer_events {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+::ng-deep .analyitcs_enforce_disable {
+  opacity: 0.25;
+}
+
+::ng-deep .text.analyitcs_enforce_disable {
+  opacity: 0.25;
+}
