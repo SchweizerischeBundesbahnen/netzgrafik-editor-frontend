@@ -13,6 +13,8 @@ of all participants from the very beginning - from the idea to the productive ap
 
 ### Special thanks to the contributors of the first minute
 
+---
+
 **Martin Sojka** ( Railway Network Developer / From the initial
 idea to the product )
 
@@ -23,6 +25,8 @@ idea to the product )
 **Corelia Reichen** (Railway Network Developer - Conception)
 
 **Christian Baumberger**
+
+---
 
 ### Contributors
 
