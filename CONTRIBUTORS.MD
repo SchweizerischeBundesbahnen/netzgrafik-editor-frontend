@@ -61,6 +61,4 @@ the number of commits.
 git shortlog --summary --numbered --all --no-merges
 ```
 
-> Note: Lists only authors with at 
-> least one commit since code base
-> is on github / open source.
+> Note: Lists only authors with at least one commit since code base is on github / open source.
