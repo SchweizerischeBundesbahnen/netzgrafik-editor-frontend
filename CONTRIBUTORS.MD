@@ -5,13 +5,13 @@ would not have been possible. Thank you for your current and future contribution
 
 ## Special thanks to
 
-It all started with the idea of creating an interactive planning tool with minimal complexity
-and maximum usability. To achieve this ambitious goal, a comprehensive UX design concept was
-developed and consistently implemented. However, even the best concept can only be successful when
-an interdisciplinary team contributes its entire knowledge to the conception, implementation, and
-continuous improvement. Therefore, special thanks go to the exceptional, interdisciplinary, and
-creative collaboration of all participants from the very beginning - from the idea to the finished
-product.
+It all started with the idea of creating an interactive planning tool with minimal complexity and
+maximum usability. To achieve this ambitious goal, a comprehensive UX design concept was developed
+and consistently implemented. However, even the best concept can only be successful when an
+interdisciplinary team is willing to contribute their entire knowledge to the conception,
+implementation, and continuous improvement and is willing to challenge each other. Therefore,
+special thanks should be dedicated to the exceptional, interdisciplinary, and creative collaboration
+of all participants from the very beginning - from the idea to the productive application.
 
 ### Special thanks to the contributors of the first minute
 
@@ -29,14 +29,14 @@ product.
 
 ### Contributors
 
-Every contribution is valuable, e.g. participation in brainstorming, UX tests, feedback from the
-user's perspective or software development - The following people made a valuable contribution on
-the road to open source
+Every contribution is valuable, such as participation in brainstorming, UX tests, feedback from the
+user's perspective, or software development. The following people made a valuable contribution on
+the road to productive application and making the code public.
 
 - Marc Simon
+- Ensar Memeti
 - Samuel Ueltschi
 - Simon Bühlmann
-- Ensar Memeti
 - Erik Nygren
 - Christian Eichenberger
 - Sibylle Trenck
