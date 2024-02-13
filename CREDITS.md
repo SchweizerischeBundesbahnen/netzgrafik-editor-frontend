@@ -42,6 +42,7 @@ the road to productive application and/or making the code public.
 <details>
 <summary>more</summary>
 
+<br>
 
 - Erik Nygren
 - Christian Eichenberger
