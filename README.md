@@ -8,11 +8,11 @@ Netzgrafik-Editor – designed to make better decisions.
 <br>
 
 >
-> **Flexible level of detail** - start with a rough sketch, continuously add more detail
+> **Flexible level of detail** - start with a rough sketch, continuously add more detail.
 >
 > Applicable across **different industries** - bus, train, plane.
 >
-> **Scales with your use-case** - from hobbyist timetabling to professional planning
+> **Scales with your use-case** - from hobbyist timetabling to professional planning.
 >
 > **Human-centric** - timetable planning is a very complex and creative process. Netzgrafik-Editor
 > supports the user by digitalizing the previously paper-driven process, while providing instant
