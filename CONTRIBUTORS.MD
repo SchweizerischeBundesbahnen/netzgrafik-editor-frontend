@@ -32,7 +32,7 @@ idea to the product )
 
 Every contribution is valuable, such as participation in brainstorming, UX tests, feedback from the
 user's perspective, or software development. The following people made a valuable contribution on
-the road to productive application and making the code public.
+the road to productive application and/or making the code public.
 
 - Marc Simon
 - Ensar Memeti
