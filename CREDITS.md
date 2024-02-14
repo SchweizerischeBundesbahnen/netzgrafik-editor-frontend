@@ -53,8 +53,8 @@ gantt
 
 
     section Software Developer
-    Samuel Ueltschi           :done, 2022-08-01, 2022-11-01
-    Simon Bühlmann           :done, 2022-08-01, 2022-11-01
+    Samuel Ueltschi           :done, 2021-08-01, 2022-11-01
+    Simon Bühlmann           :done, 2021-08-01, 2022-11-01
     Marc Simon           :done, 2022-09-01, 2023-08-01
     Enser Memeti          :done, 2023-08-01, 2024-01-01
     Lukas Grossar           :done, 2024-01-01, 2024-02-01
