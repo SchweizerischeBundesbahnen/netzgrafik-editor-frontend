@@ -30,6 +30,44 @@ idea to the product )
 
 ### Contributors
 
+```mermaid
+gantt
+    title Contributors
+    dateFormat  YYYY-MM-DD
+    section Adrian Egli
+    Software Developer - From the initial idea to the product           :2020-01-01, 2024-03-01
+    section Martin Sojka
+    Railway Network Developer - From the initial idea to the product :2020-04-01, 2024-03-01
+    section Corelia Reichen
+    Railway Network Developer           :2020-04-01, 2023-04-01
+    section Christian Baumberger
+    Software development - Conception          :2020-03-01, 2022-11-01
+    section Tim Schoch 
+    UX           :2020-03-01, 2020-12-01
+    section Erik Nygren 
+    Conception          :2020-01-01, 2021-03-01
+    section Christian Eichenberger 
+    Conception           :2020-01-01, 2021-03-01
+    section Sibylle Trenck 
+    UX           :2020-03-01, 2020-08-01
+    section Samuel Ueltschi 
+    Software Developer           :2022-09-01, 2022-11-01
+    section Simon Bühlmann 
+    Software Developer           :2022-09-01, 2022-11-01
+    section Marc Simon
+    Software Developer           :2022-09-01, 2023-08-01
+    section Enser Memeti
+    Software Developer           :2023-08-01, 2024-01-01
+    section Lukas Grossar
+    Software Developer           :2024-01-01, 2024-03-01
+    section Simona Manetsch
+    UX (Usability Testing)           :2022-11-01, 2023-01-01
+    section Dina Dändliker
+    UX (Usability Testing)           :2022-11-01, 2023-01-01
+
+```
+
+
 Every contribution is valuable, such as participation in brainstorming, UX tests, feedback from the
 user's perspective, or software development. The following people made a valuable contribution on
 the road to productive application and/or making the code public.
