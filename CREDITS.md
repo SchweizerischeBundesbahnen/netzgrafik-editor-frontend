@@ -58,6 +58,7 @@ gantt
     Marc Simon           :done, 2022-09-01, 2023-08-01
     Enser Memeti          :done, 2023-08-01, 2024-01-01
     Lukas Grossar           :done, 2024-01-01, 2024-02-01
+    Lukas Spirig           :done, 2024-01-15, 2024-02-01
 
     section UX (Usability Test)
     Dina Dändliker           :done, 2022-10-01, 2023-01-01
