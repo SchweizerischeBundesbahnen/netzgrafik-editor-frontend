@@ -38,33 +38,33 @@ gantt
     title Contributors
     dateFormat  YYYY-MM-DD
     section Core
-    Adrian Egli - Software development           :active 2020-01-15, 2024-03-01
-    Martin Sojka - Railway Network Developer (Business) :active  2020-04-01, 2024-03-01
+    Adrian Egli - Software development           :active, 2020-02-15, 2024-03-01
+    Martin Sojka - Railway Network Developer (Business) :active,  2020-04-01, 2024-03-01
     Corelia Reichen - Railway Network Developer (Business)           : 2020-04-01, 2023-04-01
-    Christian Baumberger - Software development           : 2020-02-01, 2022-11-01
+    Christian Baumberger - Software development           : 2020-04-01, 2022-11-01
     
-    section Conception
-    Erik Nygren           :done 2020-01-15, 2022-03-01
-    Christian Eichenberger            :done 2020-01-15, 2020-05-01
+    section Conception 
+    Erik Nygren           :done, 2020-02-15, 2022-03-01
+    Christian Eichenberger            :done, 2020-02-15, 2020-05-01
     section UX
-    Tim Schoch - Conception           :done 2020-04-01, 2020-12-01
-    Sibylle Trenck            :done 2020-03-01, 2020-06-01 
+    Tim Schoch - Conception           :done, 2020-04-01, 2020-12-01
+    Sibylle Trenck            :done, 2020-03-01, 2020-06-01 
 
 
     section Software Developer
-    Samuel Ueltschi           :done 2022-08-01, 2022-11-01
-    Simon Bühlmann           :done 2022-08-01, 2022-11-01
-    Marc Simon           :done 2022-09-01, 2023-08-01
-    Enser Memeti          :done 2023-08-01, 2024-01-01
-    Lukas Grossar           :done 2024-01-01, 2024-03-01
+    Samuel Ueltschi           :done, 2022-08-01, 2022-11-01
+    Simon Bühlmann           :done, 2022-08-01, 2022-11-01
+    Marc Simon           :done, 2022-09-01, 2023-08-01
+    Enser Memeti          :done, 2023-08-01, 2024-01-01
+    Lukas Grossar           :done, 2024-01-01, 2024-03-01
 
-    section UX (Usability Testing)
-    Dina Dändliker           :done 2022-10-01, 2023-01-01
-    Simona Manetsch          :done 2022-10-01, 2023-01-01  
+    section UX (Usability Test)
+    Dina Dändliker           :done, 2022-10-01, 2023-01-01
+    Simona Manetsch          :done, 2022-10-01, 2023-01-01  
 
     section OpenSource
-    Mahalia Stephan          :done 2023-10-01, 2024-03-01
-    Peter Keller             :done 2023-10-01, 2024-03-01
+    Mahalia Stephan          :done, 2023-10-01, 2024-03-01
+    Peter Keller             :done, 2023-10-01, 2024-03-01
 
 ```
 
