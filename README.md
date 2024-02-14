@@ -196,7 +196,7 @@ docker compose up
 npm run test
 
 # or run the test in the browser
-ng test --browsers Chrome
+npm run test -- --browsers Chrome
 ```
 
 ## Backend API code generation
