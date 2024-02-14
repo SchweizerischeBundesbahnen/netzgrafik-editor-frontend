@@ -38,10 +38,10 @@ gantt
     dateFormat  YYYY-MM-DD
     todayMarker stroke:#080,stroke-width:0px
     section Core
-    Adrian Egli - Computer Scientist --- From ideation to product          : 2020-02-15, 2024-02-01
-    Martin Sojka - Railway Network Developer --- From ideation to product :  2020-04-01, 2024-02-01
+    Adrian Egli - Computer Scientist       : 2020-02-15, 2024-02-01
+    Martin Sojka - Railway Network Developer   :  2020-04-01, 2024-02-01
     Corelia Reichen - Railway Network Developer          :, 2020-04-01, 2023-04-01
-    Christian Baumberger - Software development           :, 2020-04-01, 2022-11-01
+    Christian Baumberger - Software engineer           :, 2020-04-01, 2022-11-01
     
     section Ideation 
     Erik Nygren           :done, 2020-02-15, 2022-03-01
