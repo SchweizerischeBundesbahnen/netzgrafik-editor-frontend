@@ -29,6 +29,9 @@ idea to the product )
 ---
 
 ### Contributors
+Every contribution is valuable, such as participation in brainstorming, UX tests, feedback from the
+user's perspective, or software development. The following people made a valuable contribution on
+the road to productive application and/or making the code public.
 
 ```mermaid
 gantt
@@ -65,30 +68,9 @@ gantt
 
 ```
 
-
-Every contribution is valuable, such as participation in brainstorming, UX tests, feedback from the
-user's perspective, or software development. The following people made a valuable contribution on
-the road to productive application and/or making the code public.
-
-- Marc Simon
-- Ensar Memeti
-- Samuel Ueltschi
-
 <details>
 <summary>more ... </summary>
-
 <br>
-
-- Simon Bühlmann
-- Erik Nygren
-- Christian Eichenberger
-- Sibylle Trenck
-- Simona Manetsch
-- Dina Dändliker
-- Pauline Windey
-- Mahalia Stephan
-- Peter Keller
-- Lukas Grossar
 - Christian Zosel
 - Lukas Spirig [angular.app.sbb.ch](https://angular.app.sbb.ch/)
 
