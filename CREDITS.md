@@ -73,6 +73,7 @@ gantt
 <details>
 <summary>more ... </summary>
 <br>
+
 - Christian Zosel
 - Lukas Spirig [angular.app.sbb.ch](https://angular.app.sbb.ch/)
 
