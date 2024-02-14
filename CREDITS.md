@@ -15,16 +15,15 @@ of all participants from the very beginning - from the idea to the productive ap
 
 ---
 
-**Martin Sojka** ( Railway Network Developer - From the initial
-idea to the product )
+**Martin Sojka** (Railway Network Developer - From the initial idea to the product)
 
-**Adrian Egli** ( Software development - From the initial idea to the product )
+**Adrian Egli** (Software development - From the initial idea to the product)
 
 **Tim Schoch** (UX architect - Conception)
 
 **Corelia Reichen** (Railway Network Developer - Conception)
 
-**Christian Baumberger** ( Software development - Conception )
+**Christian Baumberger** (Software development - Conception)
 
 ---
 
