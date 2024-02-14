@@ -140,7 +140,6 @@ The openness of the project encourages innovation, expertise from different sect
 improvements to optimize the
 planning processes.
 
-
 ## User Manual
 
 The user manual can be found here [USERMANUAL.md](documentation/USERMANUAL.md)
@@ -237,17 +236,21 @@ This project is licensed under [Apache 2.0](LICENSE).
 
 ## Contributing
 
-This repository includes a [CONTRIBUTING.md](CONTRIBUTING.md) file that outlines how to contribute
-to the project, including how to submit bug reports, feature requests, and pull requests.
+Open-source projects thrive on collaboration and contributions from the community. All
+contributors are requested to read the [CONTRIBUTING.md](CONTRIBUTING.md) file as it outlines how to
+contribute to the project, including how to submit bug reports, feature requests, and pull requests.
+
+This repository includes a file that outlines
 
 ## Coding Standards
 
-This repository includes a [CODING_STANDARDS.md](CODING_STANDARDS.md) file that outlines the coding
-standards that you should follow when contributing to the project.
+All contributors are requested to read the [CODING_STANDARDS.md](CODING_STANDARDS.md) file that
+outlines the coding standards that you should follow when contributing to the project.
 
 ## Code of Conduct
 
-To ensure that the project is a welcoming and an inclusive environment for all contributors, you, it has established a good [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+To ensure that the project is a welcoming and an inclusive environment for all contributors, you, it
+has established a good [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ## Credits
 
