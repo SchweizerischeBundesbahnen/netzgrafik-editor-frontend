@@ -237,24 +237,17 @@ This project is licensed under [Apache 2.0](LICENSE).
 
 ## Contributing
 
-Open-source projects thrive on collaboration and contributions from the community. To encourage
-others to contribute to your project, you should provide clear guidelines on how to get involved.
-
 This repository includes a [CONTRIBUTING.md](CONTRIBUTING.md) file that outlines how to contribute
 to the project, including how to submit bug reports, feature requests, and pull requests.
 
 ## Coding Standards
-
-To maintain a high level of code quality and consistency across your project, you should establish
-coding standards that all contributors should follow.
 
 This repository includes a [CODING_STANDARDS.md](CODING_STANDARDS.md) file that outlines the coding
 standards that you should follow when contributing to the project.
 
 ## Code of Conduct
 
-To ensure that your project is a welcoming and inclusive environment for all contributors, you
-should establish a good [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+To ensure that the project is a welcoming and an inclusive environment for all contributors, you, it has established a good [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 ## Credits
 
