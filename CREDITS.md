@@ -36,7 +36,7 @@ the road to productive application and/or making the code public.
 gantt
     title Contributors
     dateFormat  YYYY-MM-DD
-    todayMarker off 
+    todayMarker stroke:#080,stroke-width:0px
     section Core
     Adrian Egli - Computer Scientist --- From ideation to product          : 2020-02-15, 2024-02-01
     Martin Sojka - Railway Network Developer --- From ideation to product :  2020-04-01, 2024-02-01
