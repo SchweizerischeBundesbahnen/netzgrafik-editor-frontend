@@ -240,7 +240,6 @@ Open-source projects thrive on collaboration and contributions from the communit
 contributors are requested to read the [CONTRIBUTING.md](CONTRIBUTING.md) file as it outlines how to
 contribute to the project, including how to submit bug reports, feature requests, and pull requests.
 
-This repository includes a file that outlines
 
 ## Coding Standards
 
