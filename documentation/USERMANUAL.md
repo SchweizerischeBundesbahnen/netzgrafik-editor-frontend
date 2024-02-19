@@ -174,6 +174,7 @@ to delete and press 'delete'.
 <a id="Nodes"></a>
 
 ## Nodes
+The nodes represent the specific locations, such as stations or stops, where a trainrun can have different actions or events associated with it. These nodes serve as key points in the trainrun's route, determining where it stops, passes through, or starts and ends ([see data model](DATA_MODEL.md)).
 
 For mor details have a look into [create and modifiy nodes](CREATE_NODES.md).
 
