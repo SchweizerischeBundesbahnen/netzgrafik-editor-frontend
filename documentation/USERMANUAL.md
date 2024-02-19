@@ -181,6 +181,10 @@ For mor details have a look into [create and modifiy nodes](CREATE_NODES.md).
 <a id="Trains"></a>
 
 ## Trainruns
+A trainrun consists out of one ore more trainrun sections. The trainrun section represents a specific segment or portion of a trainrun that connects two nodes. It encapsulates all the relevant information related to that particular section, including temporal details like departure and arrival times. Additionally, it also stores the journey time, which indicates the duration it takes for the train to run to move from one node to another.
+
+A trainrun has references to behaviour-related abstractions such as
+category (e.g. a regional train, an intercity train or a goods train), frequency (e.g. 1/4h, 1/2h or every hourand) time category (e.g. peak times or off-peak times or occasional), which define the behaviour of a trainrun ([see data model](DATA_MODEL.md)).
 
 For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
 
