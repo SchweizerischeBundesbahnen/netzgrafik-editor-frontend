@@ -57,8 +57,8 @@ Key Features
 <a id="CreateNewProjectVariant"></a>
 
 ## Project/Variant
-
-For mor details have a look into [create a new project](CREATE_PROJECT.md).
+The container in which the planning work takes place is a project. Projects have a name and can be described. User authorisations for writing and reading are assigned at project level. Variants can be created within the projects, each of which contains a Netzgrafik (network graphic). Variants can be compared within a project.
+For more details and to create your first Netzgrafik have a look into [create a new project](CREATE_PROJECT.md).
 
 <a id="BasicFunctions"></a>
 
