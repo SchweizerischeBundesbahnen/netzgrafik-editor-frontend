@@ -17,13 +17,13 @@ of all participants from the very beginning - from the idea to the productive ap
 
 **Martin Sojka** (Railway Network Developer - From the initial idea to the product)
 
-**Adrian Egli** (Computer Scientist - From the initial idea to the product)
+**[Adrian Egli](https://github.com/aiAdrian)** (Computer Scientist - From the initial idea to the product)
 
 **Corelia Reichen** (Railway Network Developer - Conception)
 
 **Tim Schoch** (UX architect - Conception)
 
-**Christian Baumberger** (Software engineer - Conception)
+**[Christian Baumberger](https://github.com/christianbaumberger)** (Software engineer - Conception)
 
 ---
 
@@ -68,9 +68,12 @@ gantt
         Mahalia Stephan          :done, 2023-06-01, 2024-02-01
         Peter Keller             :done, 2023-06-01, 2024-02-01
         
-    section Milesstones
-    TEST             :milestone, 2023-06-01, 2024-02-01
-    TEST             :milestone, 2023-06-01, 2024-02-01
+    section Milesstone
+    2.0.0             :milestone, 2023-12-20, 2023-12-20
+    1.1.0             :milestone, 2022-03-08, 2022-03-08
+    Backend 1.0.0             :milestone, 2021-09-20, 2021-09-20
+    Frontend 1.0.0             :milestone, 2020-10-21, 2020-10-21
+    1st commit             :milestone, 2020-05-13, 2020-05-13
 ```
 
 and to all users for their early continuous feedback.
