@@ -15,13 +15,13 @@ of all participants from the very beginning - from the idea to the productive ap
 
 ---
 
-**Martin Sojka** (Railway Network Developer - From the initial idea to the product)
+**[Martin Sojka](https://www.linkedin.com/in/martin-sojka-360229143)** (Railway Network Developer - From the initial idea to the product)
 
 **[Adrian Egli](https://github.com/aiAdrian)** (Computer Scientist - From the initial idea to the product)
 
-**Corelia Reichen** (Railway Network Developer - Conception)
+**[Corelia Reichen](https://www.linkedin.com/in/corelia-reichen-b4237227)** (Railway Network Developer - Conception)
 
-**Tim Schoch** (UX architect - Conception)
+**[Tim Schoch](https://timschoch.com/)** (UX architect - Conception)
 
 **[Christian Baumberger](https://github.com/christianbaumberger)** (Software engineer - Conception)
 
