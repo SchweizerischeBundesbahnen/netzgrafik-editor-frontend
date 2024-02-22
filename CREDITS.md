@@ -71,7 +71,7 @@ gantt
     section Milesstone
     2.0.0             :milestone, 2023-12-20, 2023-12-20
     1.1.0             :milestone, 2022-03-08, 2022-03-08
-    Backend 1.0.0             :milestone, 2021-09-20, 2021-09-20
+    Backend 1.0.0             :milestone, 2021-10-29, 2021-10-29
     Frontend 1.0.0             :milestone, 2020-10-21, 2020-10-21
     1st commit             :milestone, 2020-05-13, 2020-05-13
 ```
