@@ -39,41 +39,41 @@ gantt
     dateFormat  YYYY-MM-DD
     todayMarker stroke:#080,stroke-width:0px
     section Core
-        Adrian Egli - Computer Scientist --- From ideation to product          : 2020-02-15, 2024-02-01
-        Martin Sojka - Railway Network Developer --- From ideation to product :  2020-04-01, 2024-02-01
-        Corelia Reichen - Railway Network Developer          :, 2020-04-01, 2023-04-01
-        Christian Baumberger - Software development           :, 2020-04-01, 2022-11-01
+        Adrian Egli - Computer Scientist --- From ideation to product           : 2020-02-15, 2024-02-01
+        Martin Sojka - Railway Network Developer --- From ideation to product   :  2020-04-01, 2024-02-01
+        Corelia Reichen - Railway Network Developer                             :, 2020-04-01, 2023-04-01
+        Christian Baumberger - Software development                             :, 2020-04-01, 2022-11-01
     
     section Ideation 
-        Erik Nygren           :done, 2020-02-15, 2022-03-01
-        Christian Eichenberger            :done, 2020-02-15, 2020-05-01
+        Erik Nygren                                :done, 2020-02-15, 2022-03-01
+        Christian Eichenberger                     :done, 2020-02-15, 2020-05-01
     
     section UX 
         Tim Schoch - UX Design & Concept           :, 2020-04-01, 2020-12-01
-        Sibylle Trenck            :done, 2020-03-01, 2020-06-01 
+        Sibylle Trenck                             :done, 2020-03-01, 2020-06-01 
 
     section Software Developer
-        Samuel Ueltschi           :done, 2021-08-01, 2021-11-01
-        Simon Bühlmann           :done, 2021-08-01, 2021-11-01
-        Marc Simon           :, 2022-09-01, 2023-08-01
-        Enser Memeti          :, 2023-06-01, 2024-01-01
-        Lukas Grossar           :done, 2024-01-01, 2024-02-01
-        Lukas Spirig           :done, 2024-01-15, 2024-02-01
+        Samuel Ueltschi                            :done, 2021-08-01, 2021-11-01
+        Simon Bühlmann                             :done, 2021-08-01, 2021-11-01
+        Marc Simon                                 :, 2022-09-01, 2023-08-01
+        Enser Memeti                               :, 2023-06-01, 2024-01-01
+        Lukas Grossar                              :done, 2024-01-01, 2024-02-01
+        Lukas Spirig                               :done, 2024-01-15, 2024-02-01
 
     section UX (Usability Test)
-        Dina Dändliker           :done, 2022-10-01, 2023-01-01
-        Simona Manetsch          :done, 2022-10-01, 2023-01-01  
+        Dina Dändliker                             :done, 2022-10-01, 2023-01-01
+        Simona Manetsch                            :done, 2022-10-01, 2023-01-01  
     
     section OpenSource
-        Mahalia Stephan          :done, 2023-06-01, 2024-02-01
-        Peter Keller             :done, 2023-06-01, 2024-02-01
+        Mahalia Stephan                            :done, 2023-06-01, 2024-02-01
+        Peter Keller                               :done, 2023-06-01, 2024-02-01
         
     section Milesstone
-    2.0.0             :milestone, 2023-12-20, 2023-12-20
-    1.1.0             :milestone, 2022-03-08, 2022-03-08
-    Backend 1.0.0             :milestone, 2021-10-29, 2021-10-29
-    Frontend 1.0.0             :milestone, 2020-10-21, 2020-10-21
-    1st commit             :milestone, 2020-05-13, 2020-05-13
+        2.0.0                                      :milestone, 2023-12-20, 2023-12-20
+        1.1.0                                      :milestone, 2022-03-08, 2022-03-08
+        Backend 1.0.0                              :milestone, 2021-10-29, 2021-10-29
+        Frontend 1.0.0                             :milestone, 2020-10-21, 2020-10-21
+        1st commit                                 :milestone, 2020-05-13, 2020-05-13
 ```
 
 and to all users for their early continuous feedback.
