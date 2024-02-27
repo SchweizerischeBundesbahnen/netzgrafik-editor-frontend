@@ -20,7 +20,9 @@ import {SliderChangeInfo} from "../model/util/sliderChangeInfo";
 import {TimeSliderService} from "../services/time-slider.service";
 import {UpdateCounterTriggerSerivce} from "../services/util/update-counter.service";
 import {Sg4ToggleTrackOccupierService} from "../services/sg-4-toggle-track-occupier.service";
-import {StreckengrafikDisplayElementService} from "../services/util/streckengrafik-display-element.service";
+import {
+  StreckengrafikDisplayElementService
+} from "../services/util/streckengrafik-display-element.service";
 import {StreckengrafikDrawingContext} from "../model/util/streckengrafik.drawing.context";
 
 @Component({
@@ -29,8 +31,7 @@ import {StreckengrafikDrawingContext} from "../model/util/streckengrafik.drawing
   styleUrls: ["./streckengrafik.component.scss"],
 })
 export class StreckengrafikComponent
-  implements OnInit, OnDestroy, AfterViewInit
-{
+  implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild("svg") svgRef: ElementRef;
 
   viewBox: string;
@@ -48,6 +49,9 @@ export class StreckengrafikComponent
   private oldResizeChangeInfo: ResizeChangeInfo = new ResizeChangeInfo(-1, -1);
   private oldRect: DOMRect = undefined;
 
+  private doShowTrainruns = false;
+  private isLoading = true;
+
   constructor(
     private readonly timeSliderService: TimeSliderService,
     private readonly viewBoxService: ViewBoxService,
@@ -57,7 +61,8 @@ export class StreckengrafikComponent
     private resizeService: ResizeService,
     private streckengrafikDisplayElementService: StreckengrafikDisplayElementService,
     private ngZone: NgZone,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.oldRect = undefined;
@@ -79,17 +84,24 @@ export class StreckengrafikComponent
         this.yZoom = this.sliderChangeInfo.zoom;
         this.renderViewBox();
       });
+
+    this.doShowTrainruns = false;
   }
 
   ngAfterViewInit() {
     this.ngZone.runOutsideAngular(() => {
       this.triggeredOnResizeCheck();
     });
+    this.onResize();
   }
 
   ngOnDestroy(): void {
     this.destroyed$.next();
     this.destroyed$.complete();
+  }
+
+  getIsLoading(): boolean {
+    return !this.doShowTrainruns;//this.isLoading;
   }
 
   onResetButton() {
@@ -231,7 +243,18 @@ export class StreckengrafikComponent
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
         this.onResize();
+
+        // lazzy loading ...
+        if (!this.doShowTrainruns) {
+          this.doShowTrainruns = true;
+          this.cd.markForCheck();
+          this.cd.detectChanges();
+        }
       });
+  }
+
+  getShowTrainruns(): boolean {
+    return this.doShowTrainruns;
   }
 
   toggleDisplayTools() {

@@ -94,6 +94,7 @@ export class TrainRunSectionComponent
         this.yZoom = sliderChangeInfo.zoom;
         this.yMove = sliderChangeInfo.move;
         this.recalc = sliderChangeInfo.recalc;
+        this.cd.markForCheck();
         this.doDelayedRendering();
       });
 
@@ -103,6 +104,7 @@ export class TrainRunSectionComponent
       .subscribe((viewBoxChangeInfo) => {
         this.viewBoxChangeInfo = viewBoxChangeInfo;
         this.cd.markForCheck();
+        this.doDelayedRendering();
       });
 
     this.sg4ToggleTrackOccupierService
