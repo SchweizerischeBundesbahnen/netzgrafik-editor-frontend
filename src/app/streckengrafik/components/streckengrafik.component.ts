@@ -249,6 +249,7 @@ export class StreckengrafikComponent
           this.doShowTrainruns = true;
           this.cd.markForCheck();
           this.cd.detectChanges();
+          this.streckengrafikDisplayElementService.signalStreckengrafikLoaded();
         }
       });
   }
