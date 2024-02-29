@@ -1,6 +1,10 @@
 text.edge_text {
   font-family: var(--sbb-font-roman);
   font-size: 10px;
+  stroke: var(--NODE_DOCKABLE);
+  stroke-width: 0.5em;
+  paint-order:stroke;
+  stroke-linejoin:round
 }
 
 text.edge_text.DepartureTime {
@@ -27,6 +31,7 @@ path.hoverarea {
   stroke: var(--COLOR_BACKGROUND);
 }
 
+/*
 rect.edge_text {
   rx: 8px;
 }
@@ -45,6 +50,7 @@ rect.edge_text.TextLabel {
   stroke: none;
   fill: var(--NODE_DOCKABLE);
 }
+*/
 
 path.edge_line.bandarea {
   opacity: 0.1;

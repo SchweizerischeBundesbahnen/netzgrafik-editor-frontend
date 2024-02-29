@@ -60,6 +60,14 @@ export class TrainRunSectionStopsComponentComponent {
     return retTag;
   }
 
+  hasStopElements(): boolean {
+    if (!this.trainrunItem.isSection()) {
+      return false;
+    }
+    const ps = this.trainrunItem.getTrainrunSection();
+    return ps.numberOfStops > 0;
+  }
+
   getStopElements(): Vec2D[] {
     if (!this.trainrunItem.isSection()) {
       return [];

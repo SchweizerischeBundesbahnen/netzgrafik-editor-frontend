@@ -160,7 +160,7 @@ export class TrainRunItemComponent
     }
     return (fromPoint >= fromTime && fromPoint <= toTime) ||
       (toPoint >= fromTime && toPoint <= toTime) ||
-      (fromPoint <= fromTime && toPoint >= toPoint);
+      (fromPoint <= fromTime && toPoint >= toTime);
   }
 
   getId(trainrun: SgTrainrun, trainrunItem: SgTrainrunItem) {

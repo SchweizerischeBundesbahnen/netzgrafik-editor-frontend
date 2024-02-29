@@ -68,7 +68,7 @@ export class TrainRunSectionComponent
   recalc = true;
 
   delayedRendering = false;
-  private fullDetailRenderingUpdateCounter = 2;
+  private fullDetailRenderingUpdateCounter = 0;
   private readonly destroyed$ = new Subject<void>();
   private updateCounterController: UpdateCounterController = undefined;
   viewBoxChangeInfo: ViewBoxChangeInfo = new ViewBoxChangeInfo();
@@ -122,15 +122,6 @@ export class TrainRunSectionComponent
         this.cd.markForCheck();
       });
 
-    this.streckengrafikDisplayElementService
-      .getStreckengrafikLoadedSignal()
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(() => {
-        interval(10).pipe(take(1)).subscribe(() => {
-          this.updateCounterCallback(true);
-          this.cd.detectChanges();
-        });
-      });
   }
 
   ngOnDestroy(): void {
@@ -1009,7 +1000,7 @@ export class TrainRunSectionComponent
       this.updateCounterController.clear();
     }
     if (this.recalc) {
-      this.updateCounterCallback(false);
+      this.updateCounterCallback(true);
     } else {
       this.updateCounterController = new UpdateCounterController(
         this.fullDetailRenderingUpdateCounter,

@@ -10,12 +10,6 @@ export class StreckengrafikDisplayElementService {
   private readonly streckengrafikDisplayElement$ =
     this.streckengrafikDisplayElementSubject.asObservable();
 
-  private readonly streckengrafikLoaded =
-    new Subject<void>( );
-  private readonly streckengrafikLoadedElement$ =
-    this.streckengrafikLoaded.asObservable();
-
-
   private filterStreckengrafikTimeNotFocusNorSelected = false;
   private filterStreckengrafikNameNotFocusNorSelected = false;
   private showTimeSlider = true;
@@ -30,14 +24,6 @@ export class StreckengrafikDisplayElementService {
 
   getStreckengrafikDisplayElement(): Observable<string> {
     return this.streckengrafikDisplayElement$;
-  }
-
-  signalStreckengrafikLoaded(){
-    this.streckengrafikLoaded.next();
-  }
-
-  getStreckengrafikLoadedSignal() : Observable<void> {
-    return this.streckengrafikLoadedElement$;
   }
 
   isFilterStreckengrafikTimeNotFocusNorEnabled(): boolean {

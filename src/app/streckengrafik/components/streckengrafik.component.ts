@@ -249,7 +249,6 @@ export class StreckengrafikComponent
           this.doShowTrainruns = true;
           this.cd.markForCheck();
           this.cd.detectChanges();
-          this.streckengrafikDisplayElementService.signalStreckengrafikLoaded();
         }
       });
   }
@@ -282,8 +281,12 @@ export class StreckengrafikComponent
   }
 
   private renderViewBox() {
+    if (this.viewBoxChangeInfo.width === 0 && this.viewBoxChangeInfo.height === 0) {
+      return;
+    }
+    let viewBox = "";
     if (this.pathAlignmentHorizontal) {
-      this.viewBox =
+      viewBox =
         "0 " +
         this.sliderChangeInfo.move +
         " " +
@@ -291,7 +294,7 @@ export class StreckengrafikComponent
         " " +
         this.viewBoxChangeInfo.height;
     } else {
-      this.viewBox =
+      viewBox =
         " " +
         this.sliderChangeInfo.move +
         " " +
@@ -299,6 +302,10 @@ export class StreckengrafikComponent
         this.viewBoxChangeInfo.width +
         " " +
         this.viewBoxChangeInfo.height;
+    }
+
+    if (this.viewBox !== viewBox) {
+      this.viewBox = viewBox;
     }
   }
 
