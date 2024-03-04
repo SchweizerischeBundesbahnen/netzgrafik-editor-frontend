@@ -12,7 +12,7 @@
   <ng-container *ngIf="!isTrackOccupier()">
     <ng-container *ngIf="isStreckenTrainrunSegment()">
       <svg:path
-        [class]="getClassTag('edge_line TransitLine isStreckenTrainrunSegment')"
+        [class]="getClassTag('edge_line isStreckenTrainrunSegment')"
         [attr.d]="nodePath()"
       />
     </ng-container>

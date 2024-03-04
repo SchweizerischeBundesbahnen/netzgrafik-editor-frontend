@@ -90,10 +90,10 @@ export class TimeSliderComponent
           this.timesTicksIndices = [];
         }
         this.sliderChangeInfo = sliderChangeInfo;
-        this.render();
         if (changed) {
           this.cd.markForCheck();
         }
+        this.render();
       });
 
     this.viewBoxService
