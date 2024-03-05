@@ -192,3 +192,8 @@ g.edge.Lines:hover {
   cursor: pointer;
   opacity: 0.75;
 }
+
+button.FunctionButton.Rotation90.disabled {
+  pointer-events: none;
+  opacity: 0;
+}

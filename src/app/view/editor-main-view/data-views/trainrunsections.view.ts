@@ -1836,7 +1836,9 @@ export class TrainrunSectionsView {
       this.editorView.trainrunSectionPreviewLineView.getMode() ===
       PreviewLineMode.NotDragging
     ) {
-      D3Utils.hoverTrainrunSection(trainrunSection);
+      D3Utils.hoverTrainrunSection(trainrunSection,
+        this.editorView.getSelectedTrainrun() !== null,
+        domObj);
     }
   }
 

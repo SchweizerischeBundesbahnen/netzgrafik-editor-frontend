@@ -394,7 +394,7 @@ describe("TrainrunsectionHelper", () => {
       },
       ts,
     );
-    expect(d).toBe(false);
+    expect(d).toBe(true);
   });
 
   it("getTargetLock - 001", () => {
@@ -414,7 +414,7 @@ describe("TrainrunsectionHelper", () => {
       },
       ts,
     );
-    expect(d).toBe(false);
+    expect(d).toBe(true);
 
     const d1 = trainrunsectionHelper.getTargetLock(
       {
@@ -424,6 +424,6 @@ describe("TrainrunsectionHelper", () => {
       },
       ts,
     );
-    expect(d1).toBe(true);
+    expect(d1).toBe(false);
   });
 });

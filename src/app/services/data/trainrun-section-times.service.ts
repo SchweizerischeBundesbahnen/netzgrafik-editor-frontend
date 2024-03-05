@@ -424,17 +424,35 @@ export class TrainrunSectionTimesService {
   }
 
   updateTrainrunSectionTimeLock() {
+    const leftRight =
+      this.trainrunSectionHelper.getLeftRightSections(this.selectedTrainrunSection);
+
     this.trainrunSectionService.updateTrainrunSectionTimeLock(
-      this.selectedTrainrunSection.getId(),
+      leftRight.leftSection.getId(),
       this.trainrunSectionHelper.getSourceLock(
         this.lockStructure,
-        this.selectedTrainrunSection,
+        leftRight.leftSection,
       ),
       this.trainrunSectionHelper.getTargetLock(
         this.lockStructure,
-        this.selectedTrainrunSection,
+        leftRight.leftSection,
       ),
       this.lockStructure.travelTimeLock,
+      true
+    );
+
+    this.trainrunSectionService.updateTrainrunSectionTimeLock(
+      leftRight.rightSection.getId(),
+      this.trainrunSectionHelper.getSourceLock(
+        this.lockStructure,
+        leftRight.rightSection,
+      ),
+      this.trainrunSectionHelper.getTargetLock(
+        this.lockStructure,
+        leftRight.rightSection,
+      ),
+      undefined,
+      true
     );
   }
 

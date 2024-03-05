@@ -103,13 +103,15 @@
         [attr.width]="contentWidth"
       >
         <div class="drawing-container" #drawingContainer>
-          <ng-container *ngFor="let pathItem of perlenketteTrainrun.pathItems">
+          <ng-container *ngFor="let pathItem of perlenketteTrainrun.pathItems; index as idx">
             <sbb-perlenkette-node
               *ngIf="pathItem.isPerlenketteNode()"
               [perlenketteTrainrun]="perlenketteTrainrun"
               (signalIsBeingEdited)="signalIsBeingEdited($event)"
               (signalHeightChanged)="signalHeightChanged($event, pathItem)"
               [perlenketteNode]="pathItem.getPerlenketteNode()"
+              [isTopNode]="idx === 0"
+              [isBottomNode]="idx === perlenketteTrainrun.pathItems.length-1"
             >
             </sbb-perlenkette-node>
             <sbb-perlenkette-section
@@ -121,6 +123,8 @@
               [notificationIsBeingEdited]="
                 getSignalAllChildrenIsBeingEditedObservable()
               "
+              [isFirstSection]="idx === 1"
+              [isLastSection]="idx === perlenketteTrainrun.pathItems.length-2"
             >
             </sbb-perlenkette-section>
           </ng-container>
