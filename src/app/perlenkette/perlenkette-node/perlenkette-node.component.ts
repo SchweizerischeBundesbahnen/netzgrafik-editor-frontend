@@ -22,6 +22,8 @@ import {UiInteractionService} from "../../services/ui/ui.interaction.service";
 export class PerlenketteNodeComponent implements OnInit {
   @Input() perlenketteNode: PerlenketteNode;
   @Input() perlenketteTrainrun: PerlenketteTrainrun;
+  @Input() isTopNode = false;
+  @Input() isBottomNode = false;
   @Output() signalIsBeingEdited = new EventEmitter<PerlenketteSection>();
   @Output() signalHeightChanged = new EventEmitter<number>();
 
@@ -35,7 +37,8 @@ export class PerlenketteNodeComponent implements OnInit {
     public trainrunService: TrainrunService,
     readonly filterService: FilterService,
     readonly uiInteractionService: UiInteractionService,
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.isExpanded = true;
@@ -303,11 +306,8 @@ export class PerlenketteNodeComponent implements OnInit {
   toggleNonStop() {
     const node = this.nodeService.getNodeFromId(this.perlenketteNode.nodeId);
     const transition: Transition = this.perlenketteNode.transition;
-    if (transition !== undefined) {
-      this.nodeService.toggleNonStop(
-        this.perlenketteNode.nodeId,
-        transition.getId(),
-      );
+    if (transition !== undefined && node !== undefined) {
+      this.nodeService.toggleNonStop(node.getId(), transition.getId());
       this.trainrunService.trainrunsUpdated();
     }
   }
@@ -348,15 +348,15 @@ export class PerlenketteNodeComponent implements OnInit {
         item
           .getPerlenketteNode()
           .connections.forEach((connection: PerlenketteConnection) => {
-            const name = connection.categoryShortName + "" + connection.title;
-            maxTrainrunNameLen = Math.max(
-              3 + connection.terminalStationBackward.length,
-              Math.max(
-                3 + connection.terminalStation.length,
-                Math.max(name.length, maxTrainrunNameLen),
-              ),
-            );
-          });
+          const name = connection.categoryShortName + "" + connection.title;
+          maxTrainrunNameLen = Math.max(
+            3 + connection.terminalStationBackward.length,
+            Math.max(
+              3 + connection.terminalStation.length,
+              Math.max(name.length, maxTrainrunNameLen),
+            ),
+          );
+        });
       }
     });
 
