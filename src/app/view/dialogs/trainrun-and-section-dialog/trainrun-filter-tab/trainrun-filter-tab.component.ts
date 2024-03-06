@@ -52,6 +52,13 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.updateTrainrunLabelsAutoCompleteOptions();
       });
+
+    this.trainrunSectionService.trainrunSections
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(() => {
+        this.initializeWithCurrentSelectedTrainrun();
+      });
+
     this.updateTrainrunLabelsAutoCompleteOptions();
   }
 
