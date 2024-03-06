@@ -265,13 +265,20 @@ export class PerlenketteNodeComponent implements OnInit {
 
   getPathClassTag(connection: PerlenketteConnection = undefined): string {
     if (connection === undefined) {
-      return "UI_DIALOG " + this.getColoringClassTag();
+      const lineTag =
+        " Freq_" + this.perlenketteTrainrun.frequency +
+        " LinePatternRef_" + this.perlenketteTrainrun.trainrunTimeCategory.linePatternRef;
+      return "UI_DIALOG " + this.getColoringClassTag() + lineTag;
     }
+
     let selected_tag = "";
     if (connection.connection.selected()) {
       selected_tag = " " + StaticDomTags.TAG_SELECTED;
     }
-    return "UI_DIALOG " + selected_tag + this.getColoringClassTag(connection);
+    const lineTag =
+      " Freq_" + connection.frequency +
+      " LinePatternRef_" + connection.connectedTrainrun.getTimeCategoryLinePatternRef();
+    return "UI_DIALOG " + selected_tag + this.getColoringClassTag(connection) + lineTag;
   }
 
   getConnectedTrainEdgeLineTransform(
