@@ -21,10 +21,7 @@ import {UiInteractionService} from "../../services/ui/ui.interaction.service";
 import {Connection} from "../../models/connection.model";
 import {Transition} from "../../models/transition.model";
 import {FilterService} from "../../services/ui/filter.service";
-import {
-  TrainrunCategory,
-  TrainrunFrequency,
-} from "../../data-structures/business.data.structures";
+import {TrainrunCategory, TrainrunFrequency,} from "../../data-structures/business.data.structures";
 import {
   TrainrunDialogParameter,
   TrainrunDialogType,
@@ -33,16 +30,16 @@ import {TrainrunSectionText} from "../../data-structures/technical.data.structur
 import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
 import {NoteService} from "../../services/data/note.service";
-import {
-  NoteDialogParameter,
-  NoteDialogType,
-} from "../dialogs/note-dialog/note-dialog.component";
+import {NoteDialogParameter, NoteDialogType,} from "../dialogs/note-dialog/note-dialog.component";
 import {AnalyticsService} from "../../services/analytics/analytics.service";
 import {Note} from "../../models/note.model";
 import {LogService} from "../../logger/log.service";
 import {UndoService} from "../../services/data/undo.service";
 import {CopyService} from "../../services/data/copy.service";
-import {StreckengrafikDrawingContext} from "../../streckengrafik/model/util/streckengrafik.drawing.context";
+import {
+  StreckengrafikDrawingContext
+} from "../../streckengrafik/model/util/streckengrafik.drawing.context";
+import {TravelTimeCreationEstimatorType} from "../themes/editor-trainrun-traveltime-creator-type";
 
 @Component({
   selector: "sbb-editor-main-view",
@@ -222,6 +219,7 @@ export class EditorMainViewComponent implements AfterViewInit, OnDestroy {
         this.trainrunSectionService.createTrainrunSection(
           sourceNode.getId(),
           targetNode.getId(),
+          this.uiInteractionService.getActiveTravelTimeCreationEstimatorType() === TravelTimeCreationEstimatorType.RetrieveFromEdge
         );
         if (!isTrainrunSelected) {
           const parameter = new TrainrunDialogParameter(
