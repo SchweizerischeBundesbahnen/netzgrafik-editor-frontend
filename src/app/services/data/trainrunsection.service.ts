@@ -952,7 +952,11 @@ export class TrainrunSectionService implements OnDestroy {
     const trainrunSections =
       this.getAllTrainrunSectionsForTrainrun(trainrunIdToCopyFrom);
     trainrunSections.forEach((trainrunSection) => {
-      this.copyTrainrunSectionAndAddToNodes(trainrunSection, newTrainrunId);
+      const newSection = this.copyTrainrunSectionAndAddToNodes(trainrunSection, newTrainrunId);
+      if (trainrunSection.selected()) {
+        trainrunSection.unselect();
+        newSection.select();
+      }
     });
   }
 
