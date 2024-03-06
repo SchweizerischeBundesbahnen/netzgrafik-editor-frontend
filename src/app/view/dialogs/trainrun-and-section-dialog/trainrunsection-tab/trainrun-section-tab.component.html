@@ -36,7 +36,7 @@
                 max="99"
                 maxlength="2"
                 spellcheck="false"
-                pattern="^[0-9]*"
+                pattern="^[0-9.]*"
                 [(ngModel)]="numberOfStops"
                 (change)="onNumberOfStopsChanged()"
                 (mouseenter)="onMouseEnterNbrStopInput()"
@@ -161,7 +161,7 @@
               type="number"
               sbbInput
               spellcheck="false"
-              pattern="^[0-9]*"
+              pattern="^[0-9.]*"
               [(ngModel)]="
                 trainrunSectionTimesService.getTimeStructure().leftArrivalTime
               "
@@ -205,7 +205,7 @@
               type="number"
               sbbInput
               spellcheck="false"
-              pattern="^[0-9]*"
+              pattern="^[0-9.]*"
               [(ngModel)]="
                 trainrunSectionTimesService.getTimeStructure().leftDepartureTime
               "
@@ -248,7 +248,7 @@
               type="number"
               sbbInput
               spellcheck="false"
-              pattern="^[0-9]*"
+              pattern="^[0-9.]*"
               [(ngModel)]="
                 trainrunSectionTimesService.getTimeStructure().rightArrivalTime
               "
@@ -291,7 +291,7 @@
               type="number"
               sbbInput
               spellcheck="false"
-              pattern="^[0-9]*"
+              pattern="^[0-9.]*"
               [(ngModel)]="
                 trainrunSectionTimesService.getTimeStructure()
                   .rightDepartureTime
@@ -339,10 +339,10 @@
                     trainrunSectionTimesService.getHighlightTravelTimeElement()
                 }"
                 type="number"
-                min="1"
+                min="0.0001"
                 sbbInput
                 spellcheck="false"
-                pattern="^[0-9]*"
+                pattern="^[0-9.]*"
                 minlength="1"
                 [(ngModel)]="
                   trainrunSectionTimesService.getTimeStructure().travelTime

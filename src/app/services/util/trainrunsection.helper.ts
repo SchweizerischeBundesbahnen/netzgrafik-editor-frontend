@@ -20,7 +20,8 @@ export enum LeftAndRightElement {
 }
 
 export class TrainrunsectionHelper {
-  constructor(private trainrunService: TrainrunService) {}
+  constructor(private trainrunService: TrainrunService) {
+  }
 
   static getSymmetricTime(time: number) {
     return time === 0 ? 0 : 60 - time;
@@ -44,30 +45,36 @@ export class TrainrunsectionHelper {
     travelTimeFactor: number,
     trsTravelTime: number,
     isRightNodeNonStopTransit: boolean,
+    precision = 0
   ): number {
     if (isRightNodeNonStopTransit) {
-      return Math.max(MathUtils.round(trsTravelTime * travelTimeFactor, 0), 1);
+      return Math.max(MathUtils.round(trsTravelTime * travelTimeFactor, 0),
+        1.0 / Math.pow(10, precision));
     } else {
       return Math.max(
-        MathUtils.round(totalTravelTime - summedTravelTime, 0),
-        1,
+        MathUtils.round(totalTravelTime - summedTravelTime, precision),
+        1.0 / Math.pow(10, precision),
       );
     }
   }
 
-  static getRightArrivalTime(timeStructure: LeftAndRightTimeStructure): number {
+  static getRightArrivalTime(
+    timeStructure: LeftAndRightTimeStructure,
+    precision = 0
+  ): number {
     return MathUtils.round(
       (timeStructure.leftDepartureTime + (timeStructure.travelTime % 60)) % 60,
-      0,
+      precision,
     );
   }
 
   static getRightDepartureTime(
     timeStructure: LeftAndRightTimeStructure,
+    precision = 0
   ): number {
     return MathUtils.round(
       this.getSymmetricTime(timeStructure.rightArrivalTime),
-      0,
+      precision,
     );
   }
 
