@@ -5,9 +5,9 @@ import {SbbRadioChange} from "@sbb-esta/angular/radio-button";
 import {ThemeBase} from "../themes/theme-base";
 import {ThemeRegistration} from "../themes/theme-registration";
 import {
-  StreckengrafikRenderingType,
-  TravelTimeCreationEstimatorType
+  StreckengrafikRenderingType
 } from "../themes/streckengrafik-rendering-type";
+import {TravelTimeCreationEstimatorType} from "../themes/editor-trainrun-traveltime-creator-type";
 
 @Component({
   selector: "sbb-editor-properties-view-component",
