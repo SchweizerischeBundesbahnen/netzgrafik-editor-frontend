@@ -629,11 +629,41 @@ export class TrainrunSectionService implements OnDestroy {
     }
   }
 
-  createTrainrunSection(sourceNodeId: number, targetNodeId: number) {
+  retrieveTravelTime(sourceNodeId: number, targetNodeId: number, trainrun: Trainrun): number {
+    const foundTrainruns = this.getTrainrunSections().filter(
+      (ts) =>
+        (
+          (ts.getSourceNodeId() === sourceNodeId && ts.getTargetNodeId() === targetNodeId) ||
+          (ts.getSourceNodeId() === targetNodeId && ts.getTargetNodeId() === sourceNodeId)
+        )
+    );
+    if (foundTrainruns.length === 0) {
+      return 1;
+    }
+
+    const sameTrainCat = foundTrainruns.filter((ts) =>
+      ts.getTrainrun().getTrainrunCategory().id === trainrun.getTrainrunCategory().id
+    );
+    if (sameTrainCat.length === 0) {
+      return foundTrainruns.reduce((a, b) =>
+        a.getTravelTime() > b.getTravelTime() ? a : b).getTravelTime();
+    }
+
+    return sameTrainCat.reduce((a, b) =>
+      a.getTravelTime() > b.getTravelTime() ? a : b).getTravelTime();
+  }
+
+  createTrainrunSection(sourceNodeId: number, targetNodeId: number, retrieveTravelTimeFromEdge: boolean = false) {
     const trainrunSection: TrainrunSection = new TrainrunSection();
     trainrunSection.setTrainrun(
       this.trainrunService.getSelectedOrNewTrainrun(),
     );
+
+    if (retrieveTravelTimeFromEdge) {
+      trainrunSection.setTravelTime(
+        this.retrieveTravelTime(sourceNodeId, targetNodeId, trainrunSection.getTrainrun())
+      );
+    }
 
     const sourceNode = this.nodeService.getNodeFromId(sourceNodeId);
     const targetNode = this.nodeService.getNodeFromId(targetNodeId);
