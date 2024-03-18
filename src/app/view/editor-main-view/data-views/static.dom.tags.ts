@@ -10,6 +10,7 @@ export class StaticDomTags {
   static TAG_MUTED = "muted";
   static TAG_RELATED = "related";
   static TAG_HIDDEN = "hidden";
+  static TAG_CTRLKEY = "ctrlKey";
 
   static TAG_COLOR_REF = "ColorRef";
   static PREFIX_COLOR_VARIABLE = "COLOR_VARIABLE_ColorRef";
@@ -161,6 +162,8 @@ export class StaticDomTags {
   static EDGE_NODE_ID = "node_id";
   static EDGE_IS_SOURCE = "is_source";
   static EDGE_IS_TARGET = "is_target";
+  static EDGE_IS_END_NODE = "is_end_node";
+  static EDGE_IS_NOT_END_NODE = "is_not_end_node";
 
   static EDGE_LINE_SVG = "path";
   static EDGE_LINE_CLASS = "edge_line";

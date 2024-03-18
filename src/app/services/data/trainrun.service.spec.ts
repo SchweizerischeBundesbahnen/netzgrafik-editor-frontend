@@ -224,7 +224,7 @@ describe("TrainrunService", () => {
     const t = ts.getTrainrun();
     const n1 = nodeService.getNodeFromId(ts.getSourceNodeId());
     const n2 = nodeService.getNodeFromId(ts.getTargetNodeId());
-    const copied = trainrunService.duplicateTrainrun(t.getId());
+    const copied = trainrunService.duplicateTrainrunAndSections(t.getId());
     const ts1 = trainrunSectionService.getAllTrainrunSectionsForTrainrun(
       t.getId(),
     );

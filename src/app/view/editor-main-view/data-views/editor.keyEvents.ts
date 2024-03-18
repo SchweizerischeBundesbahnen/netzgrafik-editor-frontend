@@ -16,10 +16,7 @@ import {CopyService} from "../../../services/data/copy.service";
 import {Port} from "../../../models/port.model";
 import {FilterService} from "../../../services/ui/filter.service";
 import {Connection} from "../../../models/connection.model";
-import {
-  PreviewLineMode,
-  TrainrunSectionPreviewLineView,
-} from "./trainrunsection.previewline.view";
+import {PreviewLineMode, TrainrunSectionPreviewLineView,} from "./trainrunsection.previewline.view";
 import {TrainrunSection} from "../../../models/trainrunsection.model";
 import {Trainrun} from "../../../models/trainrun.model";
 
@@ -43,7 +40,8 @@ export class EditorKeyEvents {
   }
 
   deactivateMousekeyDownHandler() {
-    d3.select("body").on("keydown", () => {});
+    d3.select("body").on("keydown", () => {
+    });
   }
 
   ignoreKeyEvent(event: KeyboardEvent): boolean {
@@ -53,10 +51,19 @@ export class EditorKeyEvents {
   activateMousekeyDownHandler(editorMode: EditorMode) {
     this.editorMode = editorMode;
 
+    d3.select("body").on("keyup", () => {
+      if (this.ignoreKeyEvent(d3.event)) {
+        return;
+      }
+      this.forwardCtrlKeyInformation();
+    });
+
     d3.select("body").on("keydown", () => {
       if (this.ignoreKeyEvent(d3.event)) {
         return;
       }
+
+      this.forwardCtrlKeyInformation();
 
       if (
         this.trainrunSectionPreviewLineView.getMode() !==
@@ -124,6 +131,17 @@ export class EditorKeyEvents {
         default:
           break;
       }
+    });
+  }
+
+  private forwardCtrlKeyInformation() {
+    const obj1 = d3.selectAll(StaticDomTags.EDGE_LINE_PIN_DOM_REF);
+    obj1.each(function () {
+      d3.select(this).classed(StaticDomTags.TAG_CTRLKEY, d3.event.ctrlKey);
+    });
+    const obj2 = d3.selectAll(StaticDomTags.TRANSITION_BUTTON_DOM_REF);
+    obj2.each(function () {
+      d3.select(this).classed(StaticDomTags.TAG_CTRLKEY, d3.event.ctrlKey);
     });
   }
 
@@ -205,7 +223,7 @@ export class EditorKeyEvents {
   private doDuplicateTrainrun(): boolean {
     const selectedTrainrunSectionId = this.getSelectedTrainSectionId();
     if (selectedTrainrunSectionId !== undefined) {
-      this.trainrunService.duplicateTrainrun(selectedTrainrunSectionId);
+      this.trainrunService.duplicateTrainrunAndSections(selectedTrainrunSectionId);
       return true;
     }
     return false;
@@ -285,7 +303,7 @@ export class EditorKeyEvents {
     // >>> Pass 2.3 -- remove all duplicate trainrun sections that are not encapsulated by marked nodes
     const newTrainrunSectionToModify: TrainrunSection[] = [];
     collectedTrainrun.forEach((t: Trainrun) => {
-      const newTrainrun = this.trainrunService.duplicateTrainrun(
+      const newTrainrun = this.trainrunService.duplicateTrainrunAndSections(
         t.getId(),
         false,
         "",
@@ -459,7 +477,7 @@ export class EditorKeyEvents {
   private onSelectAll(): boolean {
     if (
       this.uiInteractionService.getEditorMode() ===
-        EditorMode.MultiNodeMoving ||
+      EditorMode.MultiNodeMoving ||
       this.uiInteractionService.getEditorMode() === EditorMode.NetzgrafikEditing
     ) {
       this.uiInteractionService.setEditorMode(EditorMode.MultiNodeMoving);

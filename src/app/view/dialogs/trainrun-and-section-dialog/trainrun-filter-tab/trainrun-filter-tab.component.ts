@@ -116,7 +116,7 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
   }
 
   onDuplicateTrainrun() {
-    this.trainrunService.duplicateTrainrun(this.selectedTrainrun.getId());
+    this.trainrunService.duplicateTrainrunAndSections(this.selectedTrainrun.getId());
     this.initializeWithCurrentSelectedTrainrun();
   }
 

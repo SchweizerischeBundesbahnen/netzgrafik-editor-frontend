@@ -81,3 +81,13 @@ To switch a train from a stop to a non-stop at a node, follow these steps:
   signifies trainrun transitions (stop/non-stop).
 
 [2024-01-25-Toogle_Stop_NonStop_trainrun_at_node.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/8a72350c-ed19-4395-8183-c33dfe824c5a)
+
+### Split / Combine two trainruns 
+
+To split a train into two separate ones, you first have to select the train. Then you navigate to the node where you like to split the trainrun. Inside the node
+the trainrun has to have a transition. Press CTRL and click with the mouse the "stop / non-stop toggle button". The trainrun gets split into two trains.
+
+To combine two trainruns, you have to select one of the two trains. Then you have to navigate to the node where the trainrun ends (or starts). Now you can draw
+the new transition similar to creating a connection - but you have to press CTRL key and it must be hold pressed as long you are drawing a new transition. 
+Once you finish drawing the new transition, the both trains will be combined to one single trainrun.
+Please have as well a look into [Create Connections](CREATE_CONNECTIONS.md). 
