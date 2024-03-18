@@ -377,6 +377,10 @@ export class TrainrunService {
     const iterator = this.getIterator(node, trainrunSection);
     while (iterator.hasNext()) {
       iterator.next();
+      const trans = iterator.current().node.getTransition(iterator.current().trainrunSection.getId());
+      if (trans){
+        trans.setTrainrun(newTrainrun);
+      }
       iterator.current().trainrunSection.setTrainrun(newTrainrun);
     }
 
