@@ -20,8 +20,8 @@ import {NonStopTrainrunIterator, TrainrunIterator,} from "../util/trainrun.itera
 import {LogService} from "../../logger/log.service";
 import {LabelService} from "./label.serivce";
 import {FilterService} from "../ui/filter.service";
-import {Transition} from '../../models/transition.model';
-import {Port} from '../../models/port.model';
+import {Transition} from "../../models/transition.model";
+import {Port} from "../../models/port.model";
 
 @Injectable({
   providedIn: "root",

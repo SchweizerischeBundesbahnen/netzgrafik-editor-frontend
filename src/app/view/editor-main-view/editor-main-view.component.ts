@@ -40,7 +40,7 @@ import {
   StreckengrafikDrawingContext
 } from "../../streckengrafik/model/util/streckengrafik.drawing.context";
 import {TravelTimeCreationEstimatorType} from "../themes/editor-trainrun-traveltime-creator-type";
-import {Port} from '../../models/port.model';
+import {Port} from "../../models/port.model";
 
 @Component({
   selector: "sbb-editor-main-view",
