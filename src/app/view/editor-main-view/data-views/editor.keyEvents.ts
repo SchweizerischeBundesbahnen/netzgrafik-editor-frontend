@@ -139,7 +139,7 @@ export class EditorKeyEvents {
     obj1.each(function () {
       d3.select(this).classed(StaticDomTags.TAG_CTRLKEY, d3.event.ctrlKey);
     });
-    const obj2 = d3.selectAll(StaticDomTags.TRANSITION_LINE_DOM_REF);
+    const obj2 = d3.selectAll(StaticDomTags.TRANSITION_BUTTON_DOM_REF);
     obj2.each(function () {
       d3.select(this).classed(StaticDomTags.TAG_CTRLKEY, d3.event.ctrlKey);
     });
