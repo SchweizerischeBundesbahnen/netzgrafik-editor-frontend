@@ -22,6 +22,7 @@ import {LabelService} from "./label.serivce";
 import {FilterService} from "../ui/filter.service";
 import {Transition} from "../../models/transition.model";
 import {Port} from "../../models/port.model";
+import {Connection} from "../../models/connection.model";
 
 @Injectable({
   providedIn: "root",
@@ -361,28 +362,38 @@ export class TrainrunService {
 
   splitTrainrunIntoTwoParts(t: Transition) {
     const trainrun2split = t.getTrainrun();
-    const port2 = t.getPortId2();
+    const portId1 = t.getPortId1();
+    const portId2 = t.getPortId2();
+
     const node = this.nodeService.getNodeFromTransition(t);
     node.removeTransitionFromId(t);
 
-    const port = node.getPort(port2);
-    const trainrunSection = port.getTrainrunSection();
+    const port1 = node.getPort(portId1);
+    const port2 = node.getPort(portId2);
+    const trainrunSection2 = port2.getTrainrunSection();
     const newTrainrun =
       this.duplicateTrainrun(
-        trainrunSection.getTrainrunId(),
+        trainrunSection2.getTrainrunId(),
         false,
         "-2");
 
-    trainrunSection.setTrainrun(newTrainrun);
-    const iterator = this.getIterator(node, trainrunSection);
+    trainrunSection2.setTrainrun(newTrainrun);
+    const iterator = this.getIterator(node, trainrunSection2);
     while (iterator.hasNext()) {
       iterator.next();
       const trans = iterator.current().node.getTransition(iterator.current().trainrunSection.getId());
-      if (trans){
+      if (trans) {
         trans.setTrainrun(newTrainrun);
       }
       iterator.current().trainrunSection.setTrainrun(newTrainrun);
     }
+
+    this.nodeService.checkAndFixMissingTransitions(
+      port1.getTrainrunSection().getSourceNodeId(),
+      port1.getTrainrunSection().getTargetNodeId(),
+      port1.getTrainrunSection().getId(),
+      false,
+    );
 
     trainrun2split.unselect();
     newTrainrun.select();
@@ -391,7 +402,6 @@ export class TrainrunService {
   }
 
   combineTwoTrainruns(node: Node, port1: Port, port2: Port) {
-    console.log(node, port1, port2);
     const trainrun1 = port1.getTrainrunSection().getTrainrun();
     const trainrun2 = port2.getTrainrunSection().getTrainrun();
     if (trainrun1.getId() === trainrun2.getId()) {
@@ -403,12 +413,25 @@ export class TrainrunService {
     while (iterator.hasNext()) {
       iterator.next();
       const trans = iterator.current().node.getTransition(iterator.current().trainrunSection.getId());
-      if (trans){
+      if (trans) {
         trans.setTrainrun(trainrun1);
       }
       iterator.current().trainrunSection.setTrainrun(trainrun1);
     }
-    node.addTransitionAndComputeRouting(port1, port2, trainrun1);
+
+    const trans1 = node.getTransitionFromPortId(port1.getId());
+    const trans2 = node.getTransitionFromPortId(port2.getId());
+    if (trans1 === undefined && trans2 === undefined) {
+      node.addTransitionAndComputeRouting(port1, port2, trainrun1);
+    }
+
+    const connections2delete = node.getConnections().filter((c: Connection) => {
+      return (c.getPortId1() === port1.getId() && c.getPortId2() === port2.getId()) ||
+        (c.getPortId1() === port2.getId() && c.getPortId2() === port1.getId());
+    });
+    connections2delete.forEach((c: Connection) => {
+      node.removeConnection(c.getId());
+    });
 
     trainrun1.unselect();
     trainrun2.unselect();
