@@ -179,7 +179,11 @@ export class TransitionsView {
       .classed(StaticDomTags.TRANSITION_IS_NONSTOP, (t: TransitionViewObject) =>
         t.transition.getIsNonStopTransit(),
       )
-      .on("mousemove", () => this.onTransitionMousemove())
+      .on("mousemove", (t: TransitionViewObject, i, a) =>
+        this.onTransitionMousemove(
+          a[i],
+        ),
+      )
       .on("mouseover", (t: TransitionViewObject, i, a) =>
         this.onTransitionMouseover(
           t.transition.getTrainrun(),
@@ -333,6 +337,10 @@ export class TransitionsView {
         port1.getTrainrunSection().getTrainrun().selected() ||
         port2.getTrainrunSection().getTrainrun().selected()
       ) {
+        if (d3.event.ctrlKey) {
+          this.editorView.splitTrainrunIntoTwoParts(transition);
+          return;
+        }
         this.editorView.toggleNonStop(node, transition);
       }
       return;
@@ -351,6 +359,7 @@ export class TransitionsView {
     transition: Transition,
   ) {
     d3.select(domObj).classed(StaticDomTags.TAG_HOVER, false);
+
     const node: Node = this.editorView.getNodeFromTransition(transition);
     this.editorView.nodesView.unhoverNodeDockable(node, null);
 
@@ -393,7 +402,7 @@ export class TransitionsView {
     this.editorView.trainrunSectionPreviewLineView.updatePreviewLine();
   }
 
-  onTransitionMousemove() {
+  onTransitionMousemove(domObj: any) {
     d3.event.stopPropagation();
   }
 

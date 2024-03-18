@@ -389,6 +389,9 @@ export class NodesView {
       .on("mouseover", (n: NodeViewObject) =>
         this.onNodeMouseover(n.node, null),
       )
+      .on("mousemove", (n: NodeViewObject) =>
+        this.onNodeMousemove(n.node, null),
+      )
       .on("mouseout", (n: NodeViewObject) => this.onNodeMouseout(n.node, null))
       .on("mousedown", (n: NodeViewObject) => this.onNodeMousedown(n.node))
       .on("mouseup", (n: NodeViewObject) => this.onNodeMouseup(n.node));
@@ -499,6 +502,10 @@ export class NodesView {
 
   onNodeMouseover(node: Node, domObj: any) {
     this.hoverNode(node, domObj);
+  }
+
+  onNodeMousemove(node: Node, domObj : any){
+    this.hoverPinsAsConnectionDropable(node);
   }
 
   onNodeLabelAreaMouseover(node: Node, domObj: any) {

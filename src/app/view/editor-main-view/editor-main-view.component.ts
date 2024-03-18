@@ -40,6 +40,7 @@ import {
   StreckengrafikDrawingContext
 } from "../../streckengrafik/model/util/streckengrafik.drawing.context";
 import {TravelTimeCreationEstimatorType} from "../themes/editor-trainrun-traveltime-creator-type";
+import {Port} from '../../models/port.model';
 
 @Component({
   selector: "sbb-editor-main-view",
@@ -383,6 +384,15 @@ export class EditorMainViewComponent implements AfterViewInit, OnDestroy {
     this.editorView.bindGetNodeFromTransition((t: Transition) =>
       this.nodeService.getNodeFromTransition(t),
     );
+
+    this.editorView.bindSplitTrainrunIntoTwoParts((t: Transition) => {
+      this.trainrunService.splitTrainrunIntoTwoParts(t);
+    });
+
+    this.editorView.bindCombineTwoTrainruns((n: Node, port1: Port, port2: Port) => {
+      this.trainrunService.combineTwoTrainruns(n, port1, port2);
+    });
+
 
     this.editorView.bindGetNodeFromConnection((c: Connection) =>
       this.nodeService.getNodeForConnection(c),

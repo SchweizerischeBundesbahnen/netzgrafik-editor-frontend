@@ -72,6 +72,8 @@ export class EditorView implements SVGMouseControllerObserver {
   getConnectedTrainrunIds = null;
   toggleNonStop = null;
   getNodeFromTransition = null;
+  splitTrainrunIntoTwoParts = null;
+  combineTwoTrainruns = null;
   getNodeFromConnection = null;
   isFilterTravelTimeEnabled = null;
   isFilterTrainrunNameEnabled = null;
@@ -245,6 +247,14 @@ export class EditorView implements SVGMouseControllerObserver {
 
   bindGetNodeFromTransition(callback) {
     this.getNodeFromTransition = callback;
+  }
+
+  bindSplitTrainrunIntoTwoParts(callback) {
+    this.splitTrainrunIntoTwoParts = callback;
+  }
+
+  bindCombineTwoTrainruns(callback) {
+    this.combineTwoTrainruns = callback;
   }
 
   bindGetNodeFromConnection(callback) {

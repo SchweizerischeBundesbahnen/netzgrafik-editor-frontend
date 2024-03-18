@@ -124,6 +124,10 @@
   pointer-events: auto;
 }
 
+::ng-deep polygon.transition_pin.ctrlKey {
+  cursor: no-drop;
+}
+
 /// FREQ_null -> new TimeCategory(HVZ, default)
 ::ng-deep path.transition_line.LinePatternRef_HVZ {
   stroke-dasharray: 16px 4px 2px 4px;

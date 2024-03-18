@@ -16,13 +16,12 @@ import {DataService} from "./data.service";
 import {Node} from "../../models/node.model";
 import {TrainrunSection} from "../../models/trainrunsection.model";
 import {GeneralViewFunctions} from "../../view/util/generalViewFunctions";
-import {
-  NonStopTrainrunIterator,
-  TrainrunIterator,
-} from "../util/trainrun.iterator";
+import {NonStopTrainrunIterator, TrainrunIterator,} from "../util/trainrun.iterator";
 import {LogService} from "../../logger/log.service";
 import {LabelService} from "./label.serivce";
 import {FilterService} from "../ui/filter.service";
+import {Transition} from '../../models/transition.model';
+import {Port} from '../../models/port.model';
 
 @Injectable({
   providedIn: "root",
@@ -32,7 +31,7 @@ export class TrainrunService {
   trainrunsSubject = new BehaviorSubject<Trainrun[]>([]);
   readonly trainruns = this.trainrunsSubject.asObservable();
 
-  trainrunsStore: {trainruns: Trainrun[]} = {trainruns: []}; // store the data in memory
+  trainrunsStore: { trainruns: Trainrun[] } = {trainruns: []}; // store the data in memory
 
   private dataService: DataService = null;
   private nodeService: NodeService = null;
@@ -42,7 +41,8 @@ export class TrainrunService {
     private logService: LogService,
     private labelService: LabelService,
     private filterService: FilterService,
-  ) {}
+  ) {
+  }
 
   setDataService(dataService: DataService) {
     this.dataService = dataService;
@@ -359,6 +359,66 @@ export class TrainrunService {
     return this.trainrunsStore.trainruns.map((trainrun) => trainrun.getDto());
   }
 
+  splitTrainrunIntoTwoParts(t: Transition) {
+    const trainrun2split = t.getTrainrun();
+    const port2 = t.getPortId2();
+    const node = this.nodeService.getNodeFromTransition(t);
+    node.removeTransitionFromId(t);
+
+    const port = node.getPort(port2);
+    const trainrunSection = port.getTrainrunSection();
+    const newTrainrun =
+      this.duplicateTrainrun(
+        trainrunSection.getTrainrunId(),
+        false,
+        "-2");
+
+    trainrunSection.setTrainrun(newTrainrun);
+    const iterator = this.getIterator(node, trainrunSection);
+    while (iterator.hasNext()) {
+      iterator.next();
+      iterator.current().trainrunSection.setTrainrun(newTrainrun);
+    }
+
+    trainrun2split.unselect();
+    newTrainrun.select();
+    this.nodeService.transitionsUpdated();
+    this.trainrunsUpdated();
+  }
+
+  combineTwoTrainruns(node: Node, port1: Port, port2: Port) {
+    console.log(node, port1, port2);
+    const trainrun1 = port1.getTrainrunSection().getTrainrun();
+    const trainrun2 = port2.getTrainrunSection().getTrainrun();
+    if (trainrun1.getId() === trainrun2.getId()) {
+      return;
+    }
+    const trainrunSection = port2.getTrainrunSection();
+    trainrunSection.setTrainrun(trainrun1);
+    const iterator = this.getIterator(node, trainrunSection);
+    while (iterator.hasNext()) {
+      iterator.next();
+      const trans = iterator.current().node.getTransition(iterator.current().trainrunSection.getId());
+      if (trans){
+        trans.setTrainrun(trainrun1);
+      }
+      iterator.current().trainrunSection.setTrainrun(trainrun1);
+    }
+    node.addTransitionAndComputeRouting(port1, port2, trainrun1);
+
+    trainrun1.unselect();
+    trainrun2.unselect();
+
+    this.deleteTrainrun(trainrun2);
+
+    trainrun1.select();
+    this.nodeService.reorderPortsOnNodesForTrainrun(trainrun1);
+    this.trainrunsUpdated();
+    this.nodeService.nodesUpdated();
+    this.nodeService.connectionsUpdated();
+    this.nodeService.transitionsUpdated();
+  }
+
   duplicateTrainrun(
     trainrunId: number,
     enforceUpdate = true,
@@ -372,8 +432,17 @@ export class TrainrunService {
     copiedtrainrun.setTitle(trainrun.getTitle() + postfix);
     copiedtrainrun.setLabelIds(trainrun.getLabelIds());
     this.trainrunsStore.trainruns.push(copiedtrainrun);
+    return copiedtrainrun;
+  }
+
+  duplicateTrainrunAndSections(
+    trainrunId: number,
+    enforceUpdate = true,
+    postfix = " COPY",
+  ): Trainrun {
+    const copiedtrainrun = this.duplicateTrainrun(trainrunId, enforceUpdate, postfix);
     this.trainrunSectionService.copyAllTrainrunSectionsForTrainrun(
-      trainrun.getId(),
+      trainrunId,
       copiedtrainrun.getId(),
     );
     this.setTrainrunAsSelected(copiedtrainrun.getId(), false);
