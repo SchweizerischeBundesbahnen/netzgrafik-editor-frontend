@@ -109,9 +109,9 @@ context, such as:
   flexibility and features to effectively visualize and plan their transportation systems,
   leading to improved efficiency and better services.
 
-- **Educations:** The editor's capabilities can be utilized in educational institutions to create
-  integrated timetables for classes,
-  exams, and other activities, facilitating efficient scheduling and minimizing conflicts.
+- **Educations:** The editor's capabilities can be utilized in educational institutions to demonstrate
+  how to create integrated timetables and what properties need to be considered during the planning
+  process in order to enable efficient scheduling
 
 <details>
 <summary>more ...
