@@ -15,6 +15,7 @@ export class D3Utils {
   static isShortestDistanceRendererEnabled = false;
 
   private static doFastRenderingUpdate = false;
+  private static isOnFront: any;
 
   static enableFastRenderingUpdate() {
     D3Utils.doFastRenderingUpdate = true;
@@ -32,20 +33,17 @@ export class D3Utils {
     if (D3Utils.doFastRenderingUpdate) {
       return;
     }
-    d3.selectAll(
-      StaticDomTags.EDGE_ROOT_CONTAINER_DOM_REF + "." + StaticDomTags.TAG_MUTED,
-    ).lower();
-    d3.selectAll(
-      StaticDomTags.EDGE_ROOT_CONTAINER_DOM_REF + "." + StaticDomTags.TAG_HOVER,
-    ).raise();
+    //d3.selectAll(
+    //  StaticDomTags.EDGE_ROOT_CONTAINER_DOM_REF + "." + StaticDomTags.TAG_HOVER,
+    //).raise();
     d3.selectAll(
       StaticDomTags.EDGE_ROOT_CONTAINER_DOM_REF +
-        "." +
-        StaticDomTags.TAG_SELECTED,
+      "." +
+      StaticDomTags.TAG_SELECTED,
     ).raise();
   }
 
-  static hoverTrainrunSection(trainrunSection: TrainrunSection) {
+  static hoverTrainrunSection(trainrunSection: TrainrunSection, bringToFront = true, domObj: any) {
     d3.selectAll(StaticDomTags.EDGE_LINE_DOM_REF)
       .filter(
         (d: TrainrunSectionViewObject) =>
@@ -71,7 +69,18 @@ export class D3Utils {
       )
       .classed(StaticDomTags.TAG_HOVER, true);
 
-    D3Utils.bringTrainrunSectionToFront();
+    if (bringToFront) {
+      if (D3Utils.isOnFront !== domObj) {
+        D3Utils.bringTrainrunSectionToFront();
+      }
+    } else {
+      if (domObj !== undefined) {
+        const attrId = d3.select(domObj).attr("id");
+        const objs = d3.selectAll(StaticDomTags.EDGE_ROOT_CONTAINER_DOM_REF + "[id='" + attrId + "']");
+        objs.raise();
+      }
+    }
+    D3Utils.isOnFront = domObj;
   }
 
   static unhoverTrainrunSection(trainrunSection: TrainrunSection) {

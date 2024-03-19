@@ -22,7 +22,9 @@ import {Subject} from "rxjs";
 import {LinePatternRefs} from "../../../../data-structures/business.data.structures";
 import {StaticDomTags} from "../../../editor-main-view/data-views/static.dom.tags";
 import {ColorRefType} from "../../../../data-structures/technical.data.structures";
-import {TrainrunSectionTimesService} from "../../../../services/data/trainrun-section-times.service";
+import {
+  TrainrunSectionTimesService
+} from "../../../../services/data/trainrun-section-times.service";
 
 export interface LeftAndRightTimeStructure {
   leftDepartureTime: number;
@@ -92,6 +94,13 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
       .subscribe(() => {
         this.resetOffsetAfterTrainrunChanged();
         this.updateAllValues();
+      });
+    this.trainrunSectionService.trainrunSections.pipe(takeUntil(this.destroyed))
+      .subscribe(() => {
+        if (this.selectedTrainrunSection !== this.trainrunSectionService.getSelectedTrainrunSection()) {
+          this.resetOffsetAfterTrainrunChanged();
+          this.updateAllValues();
+        }
       });
   }
 
@@ -301,7 +310,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     if (this.trainrunDialogParameter.offset < 0) {
       this.trainrunSectionTimesService.setOffset(
         Math.ceil(Math.abs(this.trainrunDialogParameter.offset) / 60) * 60 -
-          Math.abs(this.trainrunDialogParameter.offset),
+        Math.abs(this.trainrunDialogParameter.offset),
       );
     } else {
       this.trainrunSectionTimesService.setOffset(

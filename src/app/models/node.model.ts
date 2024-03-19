@@ -620,6 +620,13 @@ export class Node {
     );
   }
 
+  removeTransitionFromId(t: Transition) {
+    this.transitions = this.transitions.filter(
+      (transition) =>
+        transition.getId() !== t.getId()
+    );
+  }
+
   removeConnectionFromTrainrunSection(trainrunSection: TrainrunSection) {
     let portId = trainrunSection.getSourcePortId();
     if (this.getId() === trainrunSection.getTargetNodeId()) {

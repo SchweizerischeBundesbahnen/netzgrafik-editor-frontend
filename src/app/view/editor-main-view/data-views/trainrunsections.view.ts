@@ -19,10 +19,7 @@ import {StaticDomTags} from "./static.dom.tags";
 import {TrainrunSection} from "../../../models/trainrunsection.model";
 import {EditorView} from "./editor.view";
 import {D3Utils} from "./d3.utils";
-import {
-  DragIntermediateStopInfo,
-  PreviewLineMode,
-} from "./trainrunsection.previewline.view";
+import {DragIntermediateStopInfo, PreviewLineMode,} from "./trainrunsection.previewline.view";
 import {MathUtils} from "../../../utils/math";
 import {Trainrun} from "../../../models/trainrun.model";
 import {TrainrunSectionViewObject} from "./trainrunSectionViewObject";
@@ -34,7 +31,8 @@ import {InformSelectedTrainrunClick} from "../../../services/data/trainrunsectio
 export class TrainrunSectionsView {
   trainrunSectionGroup;
 
-  constructor(private editorView: EditorView) {}
+  constructor(private editorView: EditorView) {
+  }
 
   static translateAndRotateText(
     trainrunSection: TrainrunSection,
@@ -396,9 +394,9 @@ export class TrainrunSectionsView {
       " " +
       (colorRef === undefined
         ? StaticDomTags.makeClassTag(
-            StaticDomTags.TAG_COLOR_REF,
-            trainrunSection.getTrainrun().getCategoryColorRef(),
-          )
+          StaticDomTags.TAG_COLOR_REF,
+          trainrunSection.getTrainrun().getCategoryColorRef(),
+        )
         : colorRef);
     switch (textElement) {
       case TrainrunSectionText.SourceDeparture:
@@ -957,29 +955,28 @@ export class TrainrunSectionsView {
           !trainrunSection.getTrainrun().selected() &&
           TrainrunSectionsView.isBothSideNonStop(trainrunSection)
         );
-      case TrainrunSectionText.TrainrunSectionName:
-        {
-          if (!this.editorView.isFilterTrainrunNameEnabled()) {
-            return true;
-          }
-          const srcNode = TrainrunSectionsView.getNode(trainrunSection, true);
-          const trgNode = TrainrunSectionsView.getNode(trainrunSection, false);
-          if (
-            !this.editorView.checkFilterNonStopNode(srcNode) ||
-            !this.editorView.checkFilterNonStopNode(trgNode)
-          ) {
-            const transSrc = srcNode.getTransition(trainrunSection.getId());
-            const transTrg = trgNode.getTransition(trainrunSection.getId());
-            if (transSrc !== undefined && transTrg !== undefined) {
-              if (
-                transSrc.getIsNonStopTransit() &&
-                transTrg.getIsNonStopTransit()
-              ) {
-                return true;
-              }
+      case TrainrunSectionText.TrainrunSectionName: {
+        if (!this.editorView.isFilterTrainrunNameEnabled()) {
+          return true;
+        }
+        const srcNode = TrainrunSectionsView.getNode(trainrunSection, true);
+        const trgNode = TrainrunSectionsView.getNode(trainrunSection, false);
+        if (
+          !this.editorView.checkFilterNonStopNode(srcNode) ||
+          !this.editorView.checkFilterNonStopNode(trgNode)
+        ) {
+          const transSrc = srcNode.getTransition(trainrunSection.getId());
+          const transTrg = trgNode.getTransition(trainrunSection.getId());
+          if (transSrc !== undefined && transTrg !== undefined) {
+            if (
+              transSrc.getIsNonStopTransit() &&
+              transTrg.getIsNonStopTransit()
+            ) {
+              return true;
             }
           }
         }
+      }
         return false;
       default:
         return false;
@@ -1041,7 +1038,7 @@ export class TrainrunSectionsView {
             d.trainrunSection,
             lineTextElement,
           ) /
-            2,
+          2,
       )
       .attr(
         "y",
@@ -1261,6 +1258,31 @@ export class TrainrunSectionsView {
         atSource ? StaticDomTags.EDGE_IS_SOURCE : StaticDomTags.EDGE_IS_TARGET,
         true,
       )
+      .classed(
+        StaticDomTags.EDGE_IS_END_NODE,
+        (d: TrainrunSectionViewObject) => {
+          let node = d.trainrunSection.getTargetNode();
+          if (atSource) {
+            node = d.trainrunSection.getSourceNode();
+          }
+          const port = node.getPortOfTrainrunSection(d.trainrunSection.getId());
+          const trans = node.getTransitionFromPortId(port.getId());
+          return (trans === undefined);
+        }
+      )
+      .classed(
+        StaticDomTags.EDGE_IS_NOT_END_NODE,
+        (d: TrainrunSectionViewObject) => {
+          let node = d.trainrunSection.getTargetNode();
+          if (atSource) {
+            node = d.trainrunSection.getSourceNode();
+          }
+          const port = node.getPortOfTrainrunSection(d.trainrunSection.getId());
+          const trans = node.getTransitionFromPortId(port.getId());
+          return (trans !== undefined);
+        }
+      )
+
       .classed(StaticDomTags.TAG_MUTED, (d: TrainrunSectionViewObject) =>
         TrainrunSectionsView.isMuted(
           d.trainrunSection,
@@ -1469,14 +1491,14 @@ export class TrainrunSectionsView {
       .attr(
         "class",
         StaticDomTags.EDGE_LINE_TEXT_CLASS +
-          " " +
-          TrainrunSectionsView.createTrainrunSectionFrequencyClassAttribute(
-            trainrunSection,
-            selectedTrainrun,
-            connectedTrainIds,
-          ) +
-          " " +
-          TrainrunSectionText[TrainrunSectionText.TrainrunSectionNumberOfStops],
+        " " +
+        TrainrunSectionsView.createTrainrunSectionFrequencyClassAttribute(
+          trainrunSection,
+          selectedTrainrun,
+          connectedTrainIds,
+        ) +
+        " " +
+        TrainrunSectionText[TrainrunSectionText.TrainrunSectionNumberOfStops],
       )
       .attr(StaticDomTags.EDGE_ID, () => trainrunSection.getId())
       .attr(StaticDomTags.EDGE_LINE_LINE_ID, () =>
@@ -1836,7 +1858,9 @@ export class TrainrunSectionsView {
       this.editorView.trainrunSectionPreviewLineView.getMode() ===
       PreviewLineMode.NotDragging
     ) {
-      D3Utils.hoverTrainrunSection(trainrunSection);
+      D3Utils.hoverTrainrunSection(trainrunSection,
+        this.editorView.getSelectedTrainrun() !== null,
+        domObj);
     }
   }
 
@@ -1874,10 +1898,10 @@ export class TrainrunSectionsView {
     const obj = d3
       .selectAll(
         StaticDomTags.EDGE_LINE_PIN_DOM_REF +
-          "." +
-          (atSource
-            ? StaticDomTags.EDGE_IS_TARGET
-            : StaticDomTags.EDGE_IS_SOURCE),
+        "." +
+        (atSource
+          ? StaticDomTags.EDGE_IS_TARGET
+          : StaticDomTags.EDGE_IS_SOURCE),
       )
       .filter(
         (d: TrainrunSectionViewObject) =>
@@ -2522,6 +2546,15 @@ export class TrainrunSectionsView {
         trainrunSectionFrom.getTrainrunId() !== trainrunSection.getTrainrunId()
       ) {
         this.editorView.trainrunSectionPreviewLineView.stopPreviewLine();
+        if (d3.event.ctrlKey) {
+          const n: Node = endNode;
+          this.editorView.combineTwoTrainruns(
+            endNode,
+            n.getPortOfTrainrunSection(trainrunSectionFrom.getId()),
+            n.getPortOfTrainrunSection(trainrunSection.getId())
+          );
+          return;
+        }
         this.editorView.addConnectionToNode(
           endNode,
           trainrunSectionFrom,

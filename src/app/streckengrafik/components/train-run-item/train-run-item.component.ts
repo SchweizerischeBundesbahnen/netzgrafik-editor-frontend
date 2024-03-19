@@ -1,10 +1,10 @@
-import {Component, Input, OnDestroy, OnInit} from "@angular/core";
+import {ChangeDetectorRef, Component, Input, NgZone, OnDestroy, OnInit} from "@angular/core";
 import {SgTrainrun} from "../../model/streckengrafik-model/sg-trainrun";
 import {SgTrainrunItem} from "../../model/streckengrafik-model/sg-trainrun-item";
 import {TimeSliderService} from "../../services/time-slider.service";
 import {takeUntil} from "rxjs/operators";
 import {SliderChangeInfo} from "../../model/util/sliderChangeInfo";
-import {Subject} from "rxjs";
+import {interval, Subject} from "rxjs";
 import {ViewBoxChangeInfo} from "../../model/util/viewBoxChangeInfo";
 import {ViewBoxService} from "../../services/util/view-box.service";
 import * as d3 from "d3";
@@ -21,10 +21,15 @@ import {
   styleUrls: ["./train-run-item.component.scss"],
 })
 export class TrainRunItemComponent
-  implements OnInit, OnDestroy, UpdateCounterHandler
-{
+  implements OnInit, OnDestroy, UpdateCounterHandler {
   @Input()
   trainrun: SgTrainrun;
+
+  @Input()
+  horizontal = true;
+
+  @Input()
+  doShowTrainruns = false;
 
   public yZoom = 0;
   public yMove = 0;
@@ -38,13 +43,30 @@ export class TrainRunItemComponent
   private fullDetailRenderingUpdateCounter = 0;
   private updateCounterController: UpdateCounterController = undefined;
   private recalc: boolean;
+  private internalDoShowTrainruns = false;
 
   constructor(
     private readonly timeSliderService: TimeSliderService,
     private readonly viewBoxService: ViewBoxService,
     private readonly updateCounterTriggerSerivce: UpdateCounterTriggerSerivce,
+    private readonly cd: ChangeDetectorRef,
+    private readonly ngZone: NgZone,
   ) {
     // use ngOnInit because @Input this.trainrun is used
+    this.ngZone.runOutsideAngular(() => {
+      const stopLoop$ = new Subject<void>();
+      interval(50)
+        .pipe(takeUntil(stopLoop$))
+        .subscribe(() => {
+          if (!this.internalDoShowTrainruns) {
+            this.internalDoShowTrainruns = true;
+            this.cd.markForCheck();
+            this.cd.detectChanges();
+            stopLoop$.next();
+            stopLoop$.complete();
+          }
+        });
+    });
   }
 
   ngOnInit(): void {
@@ -71,6 +93,10 @@ export class TrainRunItemComponent
         this.viewBoxChangeInfo = viewBoxChangeInfo;
         this.doDelayedExtraBound();
       });
+
+    if (this.doShowTrainruns) {
+      this.internalDoShowTrainruns = true;
+    }
   }
 
   ngOnDestroy(): void {
@@ -88,6 +114,53 @@ export class TrainRunItemComponent
 
   public getTranslate(path: SgTrainrunItem): string {
     return "" + path.getStartposition();
+  }
+
+  isElementNotFrustumCulled(item: SgTrainrunItem, offset: number, yZoom: number): boolean {
+    if (!this.internalDoShowTrainruns) {
+      return false;
+    }
+    if (!this.horizontal) {
+      return true;
+    }
+    if (this.viewBoxChangeInfo.height === 0 && this.viewBoxChangeInfo.width) {
+      return false;
+    }
+    // extend view box for frustum culling (the 2 * yZoom extra space is just a heuristics - might
+    // thus must be more calculated based on pixel height !!!
+    const fromTime = this.viewBoxChangeInfo.y - 2 * yZoom;
+    const toTime = this.viewBoxChangeInfo.height + this.viewBoxChangeInfo.y + 2 * yZoom;
+    let fromPoint = 0;
+    let toPoint = 0;
+    if (item.isNode()) {
+      const node = item.getTrainrunNode();
+      fromPoint = (node.departureTime + offset) * yZoom;
+      toPoint = (node.arrivalTime + offset + node.minimumHeadwayTime) * yZoom;
+      if (node.isEndNode()) {
+        if (!item.getPathNode().trackOccupier) {
+          return false;
+        }
+        if (node.unusedForTurnaround) {
+          return false;
+        }
+        fromPoint -= 2 * this.trainrun.frequency * yZoom;
+        toPoint += 2 * this.trainrun.frequency * yZoom;
+      }
+      if (!item.getPathNode().trackOccupier) {
+        if (node.departureTime === node.arrivalTime) {
+          return false;
+        }
+      }
+
+    }
+    if (item.isSection()) {
+      const ts = item.getTrainrunSection();
+      fromPoint = (ts.departureTime + offset) * yZoom;
+      toPoint = (ts.arrivalTime + offset + ts.minimumHeadwayTime) * yZoom;
+    }
+    return (fromPoint >= fromTime && fromPoint <= toTime) ||
+      (toPoint >= fromTime && toPoint <= toTime) ||
+      (fromPoint <= fromTime && toPoint >= toTime);
   }
 
   getId(trainrun: SgTrainrun, trainrunItem: SgTrainrunItem) {

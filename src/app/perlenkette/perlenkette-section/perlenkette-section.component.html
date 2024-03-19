@@ -111,8 +111,8 @@
           (click)="switchSectionView($event, 'leftDepartureTime')"
         ></rect>
         <path
-          d="M12 4a2 2 0 0 0-2 2v3h4V6a2 2 0 0 0-2-2Zm3 5V6a3 3 0 0 0-6 0v3H6v11h12V9h-3Zm-2.5 4v4h-1v-4h1ZM7 19v-9h10v9H7Z"
-          [ngClass]="[getPathClassTag()]"
+          [attr.d]="getLockCloseSvgPath()"
+          [ngClass]="[getPathClassTag(true)]"
           class="edge_line"
           style="fill: white; stroke-width: 1px; cursor: pointer"
           (click)="switchSectionView($event, 'leftDepartureTime')"
@@ -120,7 +120,7 @@
       </g>
       <g
         transform="translate(125, 82)"
-        *ngIf="showTravelTime() && !lockStructure.travelTimeLock"
+        *ngIf="showTravelTime() && lockStructure.travelTimeLock"
       >
         <rect
           x="6"
@@ -131,8 +131,8 @@
           (click)="switchSectionView($event, 'travelTime')"
         ></rect>
         <path
-          d="M4 6a3 3 0 1 1 6 0v3h8v11H6V9h3V6a2 2 0 1 0-4 0H4Zm8.5 7v4h-1v-4h1ZM7 19v-9h10v9H7Z"
-          [ngClass]="[getPathClassTag()]"
+          [attr.d]="getLockCloseSvgPath()"
+          [ngClass]="[getPathClassTag(true)]"
           class="edge_line"
           style="fill: white; stroke-width: 1px; cursor: pointer"
           (click)="switchSectionView($event, 'travelTime')"
@@ -152,8 +152,8 @@
           (click)="switchSectionView($event, 'rightDepatureTime')"
         ></rect>
         <path
-          d="M12 4a2 2 0 0 0-2 2v3h4V6a2 2 0 0 0-2-2Zm3 5V6a3 3 0 0 0-6 0v3H6v11h12V9h-3Zm-2.5 4v4h-1v-4h1ZM7 19v-9h10v9H7Z"
-          [ngClass]="[getPathClassTag()]"
+          [attr.d]="getLockCloseSvgPath()"
+          [ngClass]="[getPathClassTag(true)]"
           class="edge_line"
           style="fill: white; stroke-width: 1px; cursor: pointer"
           (click)="switchSectionView($event, 'rightDepatureTime')"
@@ -573,6 +573,7 @@
         <foreignObject height="192px" width="45px">
           <div class="propagationButtonContainer">
             <button
+              [class]="isFirstSection===true ? 'disabled' : ''"
               class="FunctionButton Rotation90"
               tabindex="-1"
               mode="icon"
@@ -589,6 +590,7 @@
               </div>
             </button>
             <button
+              [class]="isLastSection===true ? 'disabled' : ''"
               class="FunctionButton Rotation90"
               tabindex="-1"
               mode="icon"

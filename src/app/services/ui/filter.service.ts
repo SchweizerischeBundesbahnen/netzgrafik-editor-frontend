@@ -28,9 +28,7 @@ export class FilterService implements OnDestroy {
 
   filterSettingSubject = new BehaviorSubject<FilterSetting[]>(null);
   readonly filterSetting = this.filterSettingSubject.asObservable();
-  filterSettingStore: {filterSettings: FilterSetting[]} = {
-    filterSettings: [],
-  }; // store the data in memory
+  filterSettingStore: { filterSettings: FilterSetting[] } = {filterSettings: []}; // store the data in memory
 
   private activeFilterSetting: FilterSetting = null;
   private destroyed = new Subject<void>();
@@ -223,7 +221,7 @@ export class FilterService implements OnDestroy {
   toggleTemporaryDisableFilteringOfItemsInView() {
     this.activeFilterSetting.isTemporaryDisableFilteringOfItemsInView =
       !this.activeFilterSetting.isTemporaryDisableFilteringOfItemsInView;
-    this.filterChanged();
+    this.filterChanged(false);
   }
 
   setFilterNodeLabels(labelIds: number[]) {
@@ -556,7 +554,10 @@ export class FilterService implements OnDestroy {
     this.filterChanged();
   }
 
-  filterChanged() {
+  filterChanged(enforceIsTemporaryDisableFilteringOfItemsInView = true) {
+    if (enforceIsTemporaryDisableFilteringOfItemsInView) {
+      this.activeFilterSetting.isTemporaryDisableFilteringOfItemsInView = false;
+    }
     this.filterSubject.next();
   }
 

@@ -16,13 +16,13 @@ import {DataService} from "./data.service";
 import {Node} from "../../models/node.model";
 import {TrainrunSection} from "../../models/trainrunsection.model";
 import {GeneralViewFunctions} from "../../view/util/generalViewFunctions";
-import {
-  NonStopTrainrunIterator,
-  TrainrunIterator,
-} from "../util/trainrun.iterator";
+import {NonStopTrainrunIterator, TrainrunIterator,} from "../util/trainrun.iterator";
 import {LogService} from "../../logger/log.service";
 import {LabelService} from "./label.serivce";
 import {FilterService} from "../ui/filter.service";
+import {Transition} from "../../models/transition.model";
+import {Port} from "../../models/port.model";
+import {Connection} from "../../models/connection.model";
 
 @Injectable({
   providedIn: "root",
@@ -32,7 +32,7 @@ export class TrainrunService {
   trainrunsSubject = new BehaviorSubject<Trainrun[]>([]);
   readonly trainruns = this.trainrunsSubject.asObservable();
 
-  trainrunsStore: {trainruns: Trainrun[]} = {trainruns: []}; // store the data in memory
+  trainrunsStore: { trainruns: Trainrun[] } = {trainruns: []}; // store the data in memory
 
   private dataService: DataService = null;
   private nodeService: NodeService = null;
@@ -42,7 +42,8 @@ export class TrainrunService {
     private logService: LogService,
     private labelService: LabelService,
     private filterService: FilterService,
-  ) {}
+  ) {
+  }
 
   setDataService(dataService: DataService) {
     this.dataService = dataService;
@@ -359,6 +360,101 @@ export class TrainrunService {
     return this.trainrunsStore.trainruns.map((trainrun) => trainrun.getDto());
   }
 
+  splitTrainrunIntoTwoParts(t: Transition) {
+    const trainrun2split = t.getTrainrun();
+    const portId1 = t.getPortId1();
+    const portId2 = t.getPortId2();
+
+    const node = this.nodeService.getNodeFromTransition(t);
+    node.removeTransitionFromId(t);
+
+    const port1 = node.getPort(portId1);
+    const port2 = node.getPort(portId2);
+    const trainrunSection2 = port2.getTrainrunSection();
+    const newTrainrun =
+      this.duplicateTrainrun(
+        trainrunSection2.getTrainrunId(),
+        false,
+        "-2");
+
+    trainrunSection2.setTrainrun(newTrainrun);
+    const iterator = this.getIterator(node, trainrunSection2);
+    while (iterator.hasNext()) {
+      iterator.next();
+      const trans = iterator.current().node.getTransition(iterator.current().trainrunSection.getId());
+      if (trans) {
+        trans.setTrainrun(newTrainrun);
+      }
+      iterator.current().trainrunSection.setTrainrun(newTrainrun);
+    }
+
+    this.nodeService.checkAndFixMissingTransitions(
+      port1.getTrainrunSection().getSourceNodeId(),
+      port1.getTrainrunSection().getTargetNodeId(),
+      port1.getTrainrunSection().getId(),
+      false,
+    );
+
+    trainrun2split.unselect();
+    newTrainrun.select();
+    this.nodeService.transitionsUpdated();
+    this.trainrunsUpdated();
+  }
+
+  combineTwoTrainruns(node: Node, port1: Port, port2: Port) {
+    const trainrun1 = port1.getTrainrunSection().getTrainrun();
+    const trainrun2 = port2.getTrainrunSection().getTrainrun();
+    if (trainrun1.getId() === trainrun2.getId()) {
+      return;
+    }
+
+    // update trainrun references (trainrunSections and transitions)
+    const trainrunSection = port2.getTrainrunSection();
+    trainrunSection.setTrainrun(trainrun1);
+    const iterator = this.getIterator(node, trainrunSection);
+    while (iterator.hasNext()) {
+      iterator.next();
+      const trans = iterator.current().node.getTransition(iterator.current().trainrunSection.getId());
+      if (trans) {
+        trans.setTrainrun(trainrun1);
+      }
+      iterator.current().trainrunSection.setTrainrun(trainrun1);
+    }
+
+    // update trainrun references (1st transition)
+    const trans1 = node.getTransitionFromPortId(port1.getId());
+    const trans2 = node.getTransitionFromPortId(port2.getId());
+    if (trans1 === undefined && trans2 === undefined) {
+      node.addTransitionAndComputeRouting(port1, port2, trainrun1);
+    }
+
+    // update trainrun references (connection)
+    const connections2delete = node.getConnections().filter((c: Connection) => {
+      return (c.getPortId1() === port1.getId() && c.getPortId2() === port2.getId()) ||
+        (c.getPortId1() === port2.getId() && c.getPortId2() === port1.getId());
+    });
+    connections2delete.forEach((c: Connection) => {
+      node.removeConnection(c.getId());
+    });
+
+    // unselect both trainruns
+    trainrun1.unselect();
+    trainrun2.unselect();
+
+    // remove empty trainrun
+    this.deleteTrainrun(trainrun2, false);
+
+    // select
+    trainrun1.select();
+    this.nodeService.reorderPortsOnNodesForTrainrun(trainrun1, false);
+
+    // update
+    this.trainrunsUpdated();
+    this.nodeService.nodesUpdated();
+    this.nodeService.connectionsUpdated();
+    this.nodeService.transitionsUpdated();
+  }
+
   duplicateTrainrun(
     trainrunId: number,
     enforceUpdate = true,
@@ -372,8 +468,17 @@ export class TrainrunService {
     copiedtrainrun.setTitle(trainrun.getTitle() + postfix);
     copiedtrainrun.setLabelIds(trainrun.getLabelIds());
     this.trainrunsStore.trainruns.push(copiedtrainrun);
+    return copiedtrainrun;
+  }
+
+  duplicateTrainrunAndSections(
+    trainrunId: number,
+    enforceUpdate = true,
+    postfix = " COPY",
+  ): Trainrun {
+    const copiedtrainrun = this.duplicateTrainrun(trainrunId, enforceUpdate, postfix);
     this.trainrunSectionService.copyAllTrainrunSectionsForTrainrun(
-      trainrun.getId(),
+      trainrunId,
       copiedtrainrun.getId(),
     );
     this.setTrainrunAsSelected(copiedtrainrun.getId(), false);

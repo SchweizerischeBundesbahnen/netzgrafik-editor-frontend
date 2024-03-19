@@ -61,10 +61,10 @@ export class TimeGridComponent
           this.timesTicksIndices = [];
         }
         this.sliderChangeInfo = sliderChangeInfo;
-        this.render();
         if (changed) {
           this.cd.markForCheck();
         }
+        this.render();
       });
 
     this.viewBoxService
@@ -77,10 +77,10 @@ export class TimeGridComponent
           this.viewBoxChangeInfo.x !== viewBoxChangeInfo.x ||
           this.viewBoxChangeInfo.y !== viewBoxChangeInfo.y;
         this.viewBoxChangeInfo = viewBoxChangeInfo;
-        this.render();
         if (changed) {
           this.cd.markForCheck();
         }
+        this.render();
       });
   }
 

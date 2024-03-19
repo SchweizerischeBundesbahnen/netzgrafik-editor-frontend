@@ -2,9 +2,13 @@ import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {EditorMode} from "../../view/editor-menu/editor-mode";
 import {Injectable, OnDestroy} from "@angular/core";
 import {Stammdaten} from "../../models/stammdaten.model";
-import {TrainrunDialogParameter} from "../../view/dialogs/trainrun-and-section-dialog/trainrun-and-section-dialog.component";
+import {
+  TrainrunDialogParameter
+} from "../../view/dialogs/trainrun-and-section-dialog/trainrun-and-section-dialog.component";
 import {ThemeBase} from "../../view/themes/theme-base";
-import {ConfirmationDialogParameter} from "../../view/dialogs/confirmation-dialog/confirmation-dialog.component";
+import {
+  ConfirmationDialogParameter
+} from "../../view/dialogs/confirmation-dialog/confirmation-dialog.component";
 import {FilterService} from "./filter.service";
 import {NodeService} from "../data/node.service";
 import {StammdatenService} from "../data/stammdaten.service";
@@ -25,12 +29,17 @@ import {ThemeFachPrint} from "../../view/themes/theme-fach-print";
 import {ThemeRegistration} from "../../view/themes/theme-registration";
 import {NoteService} from "../data/note.service";
 import {NoteDialogParameter} from "../../view/dialogs/note-dialog/note-dialog.component";
-import {StreckengrafikRenderingType} from "../../view/themes/streckengrafik-rendering-type";
+import {
+  StreckengrafikRenderingType
+} from "../../view/themes/streckengrafik-rendering-type";
 import {NetzgrafikColoringService} from "../data/netzgrafikColoring.service";
 import {MainViewMode} from "../../view/filter-main-side-view/main-view-mode";
 import {TrainrunService} from "../data/trainrun.service";
 import {Trainrun} from "../../models/trainrun.model";
 import {LoadPerlenketteService} from "../../perlenkette/service/load-perlenkette.service";
+import {
+  TravelTimeCreationEstimatorType
+} from "../../view/themes/editor-trainrun-traveltime-creator-type";
 
 export interface ViewboxProperties {
   currentViewBox: string;
@@ -108,9 +117,10 @@ export class UiInteractionService implements OnDestroy {
 
   private activeTheme: ThemeBase = null;
   private activeStreckengrafikRenderingType: StreckengrafikRenderingType = null;
+  private activeTravelTimeCreationEstimatorType: TravelTimeCreationEstimatorType = null;
   private editorMode: EditorMode = EditorMode.NetzgrafikEditing;
 
-  private windowViewboxPropertiesMap: {[key: string]: ViewboxProperties} = {};
+  private windowViewboxPropertiesMap: { [key: string]: ViewboxProperties } = {};
   private destroyed = new Subject<void>();
   private filterWindowType = null;
   private oldSelectedTrainrunId: number = null;
@@ -127,6 +137,7 @@ export class UiInteractionService implements OnDestroy {
   ) {
     this.activeTheme = null;
     this.activeStreckengrafikRenderingType = null;
+    this.activeTravelTimeCreationEstimatorType = null;
 
     this.filterService.filter.pipe(takeUntil(this.destroyed)).subscribe(() => {
       this.nodeService.nodesUpdated();
@@ -204,6 +215,10 @@ export class UiInteractionService implements OnDestroy {
       this.activeStreckengrafikRenderingType =
         StreckengrafikRenderingType.UniformDistance;
     }
+    if (this.activeTravelTimeCreationEstimatorType === null) {
+      this.activeTravelTimeCreationEstimatorType =
+        TravelTimeCreationEstimatorType.RetrieveFromEdge;
+    }
   }
 
   createTheme(
@@ -256,10 +271,29 @@ export class UiInteractionService implements OnDestroy {
   setActiveStreckengrafikRenderingType(
     streckengrafikRenderingType: StreckengrafikRenderingType,
   ) {
+    if (streckengrafikRenderingType === undefined) {
+      streckengrafikRenderingType = StreckengrafikRenderingType.UniformDistance;
+    }
+
     this.activeStreckengrafikRenderingType = streckengrafikRenderingType;
     this.saveUserSettingToLocalStorage();
     this.trainrunSectionService.trainrunSectionsUpdated();
   }
+
+  getActiveTravelTimeCreationEstimatorType(): TravelTimeCreationEstimatorType {
+    return this.activeTravelTimeCreationEstimatorType;
+  }
+
+  setActiveTravelTimeCreationEstimatorType(
+    activeTravelTimeCreationEstimatorType: TravelTimeCreationEstimatorType,
+  ) {
+    if (activeTravelTimeCreationEstimatorType === undefined) {
+      activeTravelTimeCreationEstimatorType = TravelTimeCreationEstimatorType.Fixed;
+    }
+    this.activeTravelTimeCreationEstimatorType = activeTravelTimeCreationEstimatorType;
+    this.saveUserSettingToLocalStorage();
+  }
+
 
   updateNodeStammdaten() {
     this.updateNodeStammdatenSubject.next();
@@ -390,6 +424,9 @@ export class UiInteractionService implements OnDestroy {
       this.setActiveStreckengrafikRenderingType(
         localStoredInfo.streckengrafikRenderingType,
       );
+      this.setActiveTravelTimeCreationEstimatorType(
+        localStoredInfo.travelTimeCreationEstimatorType,
+      );
     } catch (err) {
       console.error(err);
     }
@@ -403,6 +440,8 @@ export class UiInteractionService implements OnDestroy {
           activeTheme: this.getActiveTheme(),
           streckengrafikRenderingType:
             this.getActiveStreckengrafikRenderingType(),
+          travelTimeCreationEstimatorType:
+            this.getActiveTravelTimeCreationEstimatorType(),
         }),
       );
     } catch (err) {

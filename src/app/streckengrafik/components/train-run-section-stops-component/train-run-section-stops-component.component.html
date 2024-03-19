@@ -1,18 +1,20 @@
 <ng-container *ngIf="scaledPath">
-  <svg:g *ngFor="let stopElement of getStopElements()">
-    <svg:circle
-      [attr.cx]="stopElement.getX()"
-      [attr.cy]="stopElement.getY()"
-      r="1.5px"
-      [attr.class]="getClassTag('edge_line_stops')"
-    ></svg:circle>
-    <svg:text
-      *ngIf="checkIsCollapsedStops()"
-      [attr.class]="getClassTag('edge_text stops')"
-      [attr.x]="stopElement.getX() + 5"
-      [attr.y]="stopElement.getY() + 8"
-    >
-      {{ getNumberOfStops() }}
-    </svg:text>
-  </svg:g>
+  <ng-container *ngIf="hasStopElements()">
+    <svg:g *ngFor="let stopElement of getStopElements()">
+      <svg:circle
+        [attr.cx]="stopElement.getX()"
+        [attr.cy]="stopElement.getY()"
+        r="1.5px"
+        [attr.class]="getClassTag('edge_line_stops')"
+      ></svg:circle>
+      <svg:text
+        *ngIf="checkIsCollapsedStops()"
+        [attr.class]="getClassTag('edge_text stops')"
+        [attr.x]="stopElement.getX() + 5"
+        [attr.y]="stopElement.getY() + 8"
+      >
+        {{ getNumberOfStops() }}
+      </svg:text>
+    </svg:g>
+  </ng-container>
 </ng-container>

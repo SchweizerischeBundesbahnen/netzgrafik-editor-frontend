@@ -1,9 +1,9 @@
 <h2 class="SummaryTitle">Einstellungen</h2>
 <sbb-accordion [multi]="true">
   <sbb-expansion-panel [expanded]="true">
-    <sbb-expansion-panel-header> Farbschema </sbb-expansion-panel-header>
+    <sbb-expansion-panel-header> Farbschema</sbb-expansion-panel-header>
     <sbb-label>Theme</sbb-label>
-    <br />
+    <br/>
     <sbb-radio-group
       [(ngModel)]="activeColorTheme.themeRegistration"
       class="sbb-radio-group-vertical"
@@ -17,10 +17,10 @@
       </sbb-radio-button>
     </sbb-radio-group>
 
-    <br />
+    <br/>
     <ng-container *ngIf="!isActiveColorThemeDark()">
       <sbb-label>Hintergrundfarbe</sbb-label>
-      <br />
+      <br/>
       <input
         id="activeBackgroundColor"
         type="color"
@@ -67,7 +67,7 @@
     </ng-container>
     <ng-container *ngIf="isActiveColorThemeDark()">
       <sbb-label>Hintergrundfarbe (dunkel)</sbb-label>
-      <br />
+      <br/>
       <input
         id="activeDarkBackgroundColor"
         type="color"
@@ -88,13 +88,33 @@
         <sbb-icon svgIcon="trash-small"></sbb-icon>
       </button>
     </ng-container>
-    <br />
+    <br/>
+  </sbb-expansion-panel>
+
+
+  <sbb-expansion-panel [expanded]="true">
+    <sbb-expansion-panel-header> Editor</sbb-expansion-panel-header>
+    <sbb-label>Fahrzeitvoreinstellungs (Heuristik)</sbb-label>
+    <br/>
+    <sbb-radio-group
+      [(ngModel)]="activeTravelTimeCreationEstimatorType"
+      class="sbb-radio-group-vertical"
+    >
+      <sbb-radio-button
+        *ngFor="let option of travelTimeCreationEstimatorTypeOptions"
+        [value]="option.travelTimeCreationEstimatorType"
+        [title]="option.title"
+        (change)="onUpdateaTravelTimeCreationEstimatorType($event)"
+      >
+        {{ option.name }}
+      </sbb-radio-button>
+    </sbb-radio-group>
   </sbb-expansion-panel>
 
   <sbb-expansion-panel [expanded]="true">
-    <sbb-expansion-panel-header> Streckengrafik </sbb-expansion-panel-header>
+    <sbb-expansion-panel-header> Streckengrafik</sbb-expansion-panel-header>
     <sbb-label>Achsenskalierung (Distanz)</sbb-label>
-    <br />
+    <br/>
     <sbb-radio-group
       [(ngModel)]="activeStreckengrafikRenderingType"
       class="sbb-radio-group-vertical"
@@ -102,10 +122,12 @@
       <sbb-radio-button
         *ngFor="let option of streckengrafikRenderingTypeOptions"
         [value]="option.streckengrafikRenderingType"
+        [title]="option.title"
         (change)="onUpdateStreckengrafikRenderingType($event)"
       >
         {{ option.name }}
       </sbb-radio-button>
     </sbb-radio-group>
   </sbb-expansion-panel>
+
 </sbb-accordion>

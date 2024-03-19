@@ -4,7 +4,10 @@ import {UiInteractionService} from "../../services/ui/ui.interaction.service";
 import {SbbRadioChange} from "@sbb-esta/angular/radio-button";
 import {ThemeBase} from "../themes/theme-base";
 import {ThemeRegistration} from "../themes/theme-registration";
-import {StreckengrafikRenderingType} from "../themes/streckengrafik-rendering-type";
+import {
+  StreckengrafikRenderingType
+} from "../themes/streckengrafik-rendering-type";
+import {TravelTimeCreationEstimatorType} from "../themes/editor-trainrun-traveltime-creator-type";
 
 @Component({
   selector: "sbb-editor-properties-view-component",
@@ -58,15 +61,35 @@ export class EditorPropertiesViewComponent {
   streckengrafikRenderingTypeOptions = [
     {
       name: "fahrzeitskaliert",
-      streckengrafikRenderingType:
-        StreckengrafikRenderingType.TimeScaledDistance,
+      title: "Die Streckengrafikabschnitte werden fahrzeitskaliert dargestellt, " +
+        "d.h. es wird angenommen, dass der ausgewählte Zug mit konstanter " +
+        "Geschwindigkeit verkehrt.",
+      streckengrafikRenderingType: StreckengrafikRenderingType.TimeScaledDistance,
     },
     {
       name: "gleichmässig",
+      title: "Die Streckengrafikabschnitte werden gleichmässig skaliert dargestellt.",
       streckengrafikRenderingType: StreckengrafikRenderingType.UniformDistance,
     },
   ];
   activeStreckengrafikRenderingType: StreckengrafikRenderingType = null;
+
+
+  travelTimeCreationEstimatorTypeOptions = [
+    {
+      name: "Konstant 1min.",
+      title: "Übernimmt die Fahrzeit mit konstant 1min (Default).",
+      travelTimeCreationEstimatorType: TravelTimeCreationEstimatorType.Fixed,
+    },
+    {
+      name: "Abschnittsfahrzeit",
+      title: "Übernimmt die max. Fahrzeit auf dem selben Abschnitt aller Züge " +
+        "gleicher Kategorie, sonst max. Fahrzeit aller Züge, sonst 1 Min.",
+      travelTimeCreationEstimatorType: TravelTimeCreationEstimatorType.RetrieveFromEdge,
+    },
+  ];
+  activeTravelTimeCreationEstimatorType: TravelTimeCreationEstimatorType = null;
+
 
   activeDarkBackgroundColor =
     EditorPropertiesViewComponent.DEFAULT_DARK_BACKGROUNDCOLOR;
@@ -80,6 +103,9 @@ export class EditorPropertiesViewComponent {
     this.activeColorTheme = activeTheme;
     this.activeStreckengrafikRenderingType =
       this.uiInteractionService.getActiveStreckengrafikRenderingType();
+    this.activeTravelTimeCreationEstimatorType =
+      this.uiInteractionService.getActiveTravelTimeCreationEstimatorType();
+
     if (activeTheme.isDark) {
       this.activeDarkBackgroundColor = this.getHexColor(
         activeTheme.backgroundColor,
@@ -105,6 +131,11 @@ export class EditorPropertiesViewComponent {
 
   onUpdateStreckengrafikRenderingType(event: SbbRadioChange) {
     this.uiInteractionService.setActiveStreckengrafikRenderingType(event.value);
+  }
+
+
+  onUpdateaTravelTimeCreationEstimatorType(event: SbbRadioChange) {
+    this.uiInteractionService.setActiveTravelTimeCreationEstimatorType(event.value);
   }
 
   colorPicked(value) {

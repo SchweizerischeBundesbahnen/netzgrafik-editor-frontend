@@ -52,6 +52,13 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.updateTrainrunLabelsAutoCompleteOptions();
       });
+
+    this.trainrunSectionService.trainrunSections
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(() => {
+        this.initializeWithCurrentSelectedTrainrun();
+      });
+
     this.updateTrainrunLabelsAutoCompleteOptions();
   }
 
@@ -109,7 +116,7 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
   }
 
   onDuplicateTrainrun() {
-    this.trainrunService.duplicateTrainrun(this.selectedTrainrun.getId());
+    this.trainrunService.duplicateTrainrunAndSections(this.selectedTrainrun.getId());
     this.initializeWithCurrentSelectedTrainrun();
   }
 
