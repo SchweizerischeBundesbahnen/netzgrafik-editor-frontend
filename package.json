@@ -14,7 +14,7 @@
     "local-test": "ng test --watch --code-coverage"
   },
   "name": "netzgrafik-frontend",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "files": [
     "dist/*"
   ],
