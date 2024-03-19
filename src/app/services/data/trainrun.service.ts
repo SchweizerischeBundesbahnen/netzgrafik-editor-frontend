@@ -436,10 +436,10 @@ export class TrainrunService {
     trainrun1.unselect();
     trainrun2.unselect();
 
-    this.deleteTrainrun(trainrun2);
+    this.deleteTrainrun(trainrun2, false);
 
     trainrun1.select();
-    this.nodeService.reorderPortsOnNodesForTrainrun(trainrun1);
+    this.nodeService.reorderPortsOnNodesForTrainrun(trainrun1, false);
     this.trainrunsUpdated();
     this.nodeService.nodesUpdated();
     this.nodeService.connectionsUpdated();
