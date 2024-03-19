@@ -407,6 +407,8 @@ export class TrainrunService {
     if (trainrun1.getId() === trainrun2.getId()) {
       return;
     }
+
+    // update trainrun references (trainrunSections and transitions)
     const trainrunSection = port2.getTrainrunSection();
     trainrunSection.setTrainrun(trainrun1);
     const iterator = this.getIterator(node, trainrunSection);
@@ -419,12 +421,14 @@ export class TrainrunService {
       iterator.current().trainrunSection.setTrainrun(trainrun1);
     }
 
+    // update trainrun references (1st transition)
     const trans1 = node.getTransitionFromPortId(port1.getId());
     const trans2 = node.getTransitionFromPortId(port2.getId());
     if (trans1 === undefined && trans2 === undefined) {
       node.addTransitionAndComputeRouting(port1, port2, trainrun1);
     }
 
+    // update trainrun references (connection)
     const connections2delete = node.getConnections().filter((c: Connection) => {
       return (c.getPortId1() === port1.getId() && c.getPortId2() === port2.getId()) ||
         (c.getPortId1() === port2.getId() && c.getPortId2() === port1.getId());
@@ -433,13 +437,18 @@ export class TrainrunService {
       node.removeConnection(c.getId());
     });
 
+    // unselect both trainruns
     trainrun1.unselect();
     trainrun2.unselect();
 
+    // remove empty trainrun
     this.deleteTrainrun(trainrun2, false);
 
+    // select
     trainrun1.select();
     this.nodeService.reorderPortsOnNodesForTrainrun(trainrun1, false);
+
+    // update
     this.trainrunsUpdated();
     this.nodeService.nodesUpdated();
     this.nodeService.connectionsUpdated();
