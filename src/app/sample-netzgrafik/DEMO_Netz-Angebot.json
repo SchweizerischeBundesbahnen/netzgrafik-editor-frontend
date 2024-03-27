@@ -27025,49 +27025,56 @@
         "order": 0,
         "shortName": "EC",
         "name": "International",
-        "fachCategory": "HaltezeitIPV"
+        "fachCategory": "HaltezeitIPV",
+        "colorRef": "EC"
       },
       {
         "id": 1,
         "order": 1,
         "shortName": "IC",
         "name": "InterCity",
-        "fachCategory": "HaltezeitA"
+        "fachCategory": "HaltezeitA",
+        "colorRef": "IC"
       },
       {
         "id": 2,
         "order": 2,
         "shortName": "IR",
         "name": "InterRegio",
-        "fachCategory": "HaltezeitB"
+        "fachCategory": "HaltezeitB",
+        "colorRef": "IR"
       },
       {
         "id": 3,
         "order": 3,
         "shortName": "RE",
         "name": "RegioExpress",
-        "fachCategory": "HaltezeitC"
+        "fachCategory": "HaltezeitC",
+        "colorRef": "RE"
       },
       {
         "id": 4,
         "order": 4,
         "shortName": "S",
         "name": "RegioUndSBahnverkehr",
-        "fachCategory": "HaltezeitD"
+        "fachCategory": "HaltezeitD",
+        "colorRef": "s"
       },
       {
         "id": 5,
         "order": 5,
         "shortName": "GEX",
         "name": "GüterExpress",
-        "fachCategory": "HaltezeitUncategorized"
+        "fachCategory": "HaltezeitUncategorized",
+        "colorRef": "GEX"
       },
       {
         "id": 6,
         "order": 6,
         "shortName": "G",
         "name": "Güterverkehr",
-        "fachCategory": "HaltezeitUncategorized"
+        "fachCategory": "HaltezeitUncategorized",
+        "colorRef": "G"
       }
     ],
     "trainrunFrequencies": [
@@ -27076,51 +27083,98 @@
         "order": 0,
         "frequency": 15,
         "shortName": "15",
-        "name": "verkehrt viertelstündlich"
+        "name": "verkehrt viertelstündlich",
+        "linePatternRef": 15
       },
       {
         "id": 1,
         "order": 0,
         "frequency": 20,
         "shortName": "20",
-        "name": "verkehrt im 20 Minuten Takt"
+        "name": "verkehrt im 20 Minuten Takt",
+        "linePatternRef": 20
       },
       {
         "id": 2,
         "order": 0,
         "frequency": 30,
         "shortName": "30",
-        "name": "verkehrt halbstündlich"
+        "name": "verkehrt halbstündlich",
+        "linePatternRef": 30
       },
       {
         "id": 3,
         "order": 0,
         "frequency": 60,
         "shortName": "60",
-        "name": "verkehrt stündlich"
+        "name": "verkehrt stündlich",
+        "linePatternRef": 60
       },
       {
         "id": 4,
         "order": 0,
         "frequency": 120,
         "shortName": "120",
-        "name": "verkehrt zweistündlich"
+        "name": "verkehrt zweistündlich",
+        "linePatternRef": 120
+      }
+    ],
+    "trainrunTimeCategories": [
+      {
+        "id": 0,
+        "order": 0,
+        "shortName": "7/24",
+        "name": "verkehrt uneingeschränkt",
+        "dayTimeInterval": [],
+        "weekday": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "linePatternRef": "7/24"
       },
       {
-        "id": 5,
+        "id": 1,
         "order": 0,
-        "frequency": null,
         "shortName": "HVZ",
-        "name": "verkehrt zur Hauptverkehrszeit"
+        "name": "verkehrt zur Hauptverkehrszeit",
+        "dayTimeInterval": [
+          {
+            "from": 360,
+            "to": 420
+          },
+          {
+            "from": 960,
+            "to": 1140
+          }
+        ],
+        "weekday": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "linePatternRef": "HVZ"
       },
       {
-        "id": 6,
+        "id": 2,
         "order": 0,
-        "frequency": null,
         "shortName": "zeitweise",
-        "name": "verkehrt zeitweise"
+        "name": "verkehrt zeitweise",
+        "dayTimeInterval": [],
+        "weekday": [],
+        "linePatternRef": "zeitweise"
       }
     ]
   },
-  "freeFloatingTexts": []
+  "freeFloatingTexts": [],
+  "labels" : [],
+  "labelGroups" : []
 }
