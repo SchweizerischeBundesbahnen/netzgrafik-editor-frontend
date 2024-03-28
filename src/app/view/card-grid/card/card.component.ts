@@ -25,4 +25,17 @@ export class CardComponent {
 
   @Input()
   actions?: Observable<SlotAction[]>;
+
+  setLocation(newLocation: string | any[]) {
+    console.log('newLocation', newLocation, typeof newLocation);
+    if (typeof newLocation === "string") {
+      document.location.href = newLocation;
+      return;
+    }
+    document.location.href = newLocation.join('/');
+  }
+
+  stopPropagation(event$: MouseEvent) {
+    event$.stopPropagation();
+  }
 }
