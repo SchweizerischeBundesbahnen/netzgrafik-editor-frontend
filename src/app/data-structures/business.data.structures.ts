@@ -284,7 +284,7 @@ export interface FilterSettingDto {
   filterTravelTime: boolean; // flag for travel time filter (hide/show)
   filterTrainrunName: boolean; // flag for trainrun time filter (hide/show)
   filterConnections: boolean; // flag for connections filtering (hide/show)
-  filterShowNonStopTime: boolean; // flat for non-stop time filtering (hide/show)
+  filterShowNonStopTime: boolean; // flag for non-stop time filtering (hide/show)
   filterTrainrunCategory: TrainrunCategory[]; // list of category to filter out
   filterTrainrunFrequency: TrainrunFrequency[]; // list of frequency to filter out
   filterTrainrunTimeCategory: TrainrunTimeCategory[]; // list of time categroy to filter out
