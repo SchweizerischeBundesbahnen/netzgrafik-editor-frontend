@@ -40,6 +40,25 @@ To create a new train or adding new trainrun section to an existing trainrun, pr
 > **Note:** Importantly, you don't have to select a train route to create a new trainrun -
 > otherwise, you modify the selected trainrun
 
+
+##### Travel time estimator (Default)
+The application has a travel time pre-setting or heuristic implemented which
+allows for an automated determination of travel times when drawing a new section. 
+Currently, following different heuristics are available:
+
+- The **default method** (heuristic) assumes a constant travel time per section, with a default setting of 1 minute per section. 
+This means that regardless of the distance or other factors, each section has a fixed travel time of 1 minute. 
+This heuristic can be helpful as it generates obviously unusable travel times, prompting the user to address the travel time. The 
+1 minute is very clear that this time has to manually adapted. 
+
+- A more complex method (heuristic) can be set to **derive the travel time from existing ones**. The travel time heuristic 
+searches for other trains of the same category on the section. If there are other trains, the longest travel
+time is adopted for the newly inserted section. If not, the heuristic searches for other trains, regardless of their category. 
+If other trains are found, the maximum travel time is used; otherwise, the default is set to 1 minute.
+
+The heuristic can be adjusted under Settings - Editor - Travel Time Pre-setting (heuristic). 
+The setting is user-specific and is stored in the user's profile (browser).
+
 ### Rerouting trainrun sections
 
 To reroute a train, follow these steps:
