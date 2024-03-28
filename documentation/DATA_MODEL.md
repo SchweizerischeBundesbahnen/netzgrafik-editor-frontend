@@ -113,6 +113,12 @@ classDiagram
     }
 ```
 
+##### Data structure
+More specific information about the business and technical data can be referenced in the data 
+[structure definitions](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/tree/main/src/app/data-structures) 
+within the source code.
+
+
 ##### Ports alignment
 
 The key concept of network visualization is to obtain a clear and automated representation of
