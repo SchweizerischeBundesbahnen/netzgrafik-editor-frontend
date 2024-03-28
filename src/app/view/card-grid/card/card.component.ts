@@ -26,15 +26,22 @@ export class CardComponent {
   @Input()
   actions?: Observable<SlotAction[]>;
 
-  openLink() {
+  openLink(route: string | any[]) {
     const element: HTMLElement =
-      document.getElementById("cardComponentRouterLink") as HTMLElement;
-    if (element ){
+      document.getElementById(this.getCardComponentRouterLinkId(route)) as HTMLElement;
+    if (element) {
       element.click();
     }
   }
 
   stopPropagation(event$: MouseEvent) {
     event$.stopPropagation();
+  }
+
+  getCardComponentRouterLinkId(route: string | any[]): string {
+    if (typeof route === "string") {
+      return "CardComponentRouterLink_s_" + route;
+    }
+    return "CardComponentRouterLink_" + route.join("_");
   }
 }
