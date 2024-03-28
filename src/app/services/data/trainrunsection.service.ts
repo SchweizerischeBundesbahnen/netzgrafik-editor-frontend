@@ -187,7 +187,20 @@ export class TrainrunSectionService implements OnDestroy {
           arrivalDepartureTimes.nodeToArrivalTime,
         );
       }
+    } else {
+      // first or unconnected section - special case
+      const targetArrivalTime = MathUtils.round(
+        (trainrunSection.getSourceDeparture() + (trainrunSection.getTravelTime() % 60)) % 60,
+        1,
+      );
+      const targetDepartureTime = MathUtils.round(
+        TrainrunsectionHelper.getSymmetricTime(targetArrivalTime),
+        1,
+      );
+      trainrunSection.setTargetDeparture(targetDepartureTime);
+      trainrunSection.setTargetArrival(targetArrivalTime);
     }
+
     this.trainrunService.propagateConsecutiveTimesForTrainrun(
       trainrunSection.getId(),
     );
@@ -867,7 +880,7 @@ export class TrainrunSectionService implements OnDestroy {
   setTimeStructureToTrainrunSections(
     timeStructure: LeftAndRightTimeStructure,
     trainrunSection: TrainrunSection,
-    precision=0
+    precision = 0
   ) {
     const newTotalTravelTime = timeStructure.travelTime;
 
