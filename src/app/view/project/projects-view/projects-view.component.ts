@@ -62,6 +62,7 @@ export class ProjectsViewComponent implements OnDestroy {
       const ele = document.documentElement;
       ele.scrollTop = ele.scrollTop + event$.movementY;
     }
+    window.getSelection().removeAllRanges();
   }
 
   onAddProjectClicked(): void {

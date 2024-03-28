@@ -160,6 +160,7 @@ export class VariantsViewComponent implements OnDestroy {
       const ele = document.documentElement;
       ele.scrollTop = ele.scrollTop + event$.movementY;
     }
+    window.getSelection().removeAllRanges();
   }
 
   getVariantDataActions(variant: VariantSummaryDto): Observable<SlotAction[]> {
