@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from "@angular/core";
+import {Component, HostListener, OnDestroy} from "@angular/core";
 import {Observable, of, ReplaySubject, Subject} from "rxjs";
 import {UntypedFormControl} from "@angular/forms";
 import {ProjectsViewService} from "./projects-view.service";
@@ -10,7 +10,9 @@ import {
   ProjectDto,
   ProjectSummaryDto,
 } from "../../../api/generated";
-import {ConfirmationDialogParameter} from "../../dialogs/confirmation-dialog/confirmation-dialog.component";
+import {
+  ConfirmationDialogParameter
+} from "../../dialogs/confirmation-dialog/confirmation-dialog.component";
 import {UiInteractionService} from "../../../services/ui/ui.interaction.service";
 import {NavigationService} from "../../../services/ui/navigation.service";
 import {SlotAction} from "../../action-menu/action-menu/action-menu.component";
@@ -50,6 +52,16 @@ export class ProjectsViewComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.destroyed.next();
     this.destroyed.complete();
+  }
+
+  @HostListener("mousemove", ["$event"])
+  public onMouseMove(event$: MouseEvent) {
+    event$.stopPropagation();
+    event$.preventDefault();
+    if (event$.buttons === 1) {
+      const ele = document.documentElement;
+      ele.scrollTop = ele.scrollTop + event$.movementY;
+    }
   }
 
   onAddProjectClicked(): void {
