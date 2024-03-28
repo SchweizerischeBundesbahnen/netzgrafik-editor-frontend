@@ -26,12 +26,12 @@ export class CardComponent {
   @Input()
   actions?: Observable<SlotAction[]>;
 
-  setLocation(newLocation: string | any[]) {
-    if (typeof newLocation === "string") {
-      document.location.href = newLocation;
-      return;
+  openLink() {
+    const element: HTMLElement =
+      document.getElementById("cardComponentRouterLink") as HTMLElement;
+    if (element ){
+      element.click();
     }
-    document.location.href = newLocation.join("/");
   }
 
   stopPropagation(event$: MouseEvent) {
