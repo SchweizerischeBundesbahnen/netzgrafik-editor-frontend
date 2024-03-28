@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from "@angular/core";
+import {Component, HostListener, OnDestroy} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {
   BehaviorSubject,
@@ -115,8 +115,8 @@ export class VariantsViewComponent implements OnDestroy {
     b: VariantSummaryDto,
   ) {
     // prettier-ignore
-    if (a.latestSnapshotVersion && b.latestSnapshotVersion) {
-      if (a.latestSnapshotVersion.name === b.latestSnapshotVersion.name) return 0;
+    if(a.latestSnapshotVersion && b.latestSnapshotVersion) {
+      if(a.latestSnapshotVersion.name === b.latestSnapshotVersion.name) return 0;
       return [a.latestSnapshotVersion.name] > [b.latestSnapshotVersion.name] ? 1 : -1;
     }
     if (a.id === b.id) return 0;
@@ -150,6 +150,17 @@ export class VariantsViewComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.destroyed.next();
     this.destroyed.complete();
+  }
+
+  @HostListener("mousemove", ["$event"])
+  public onMouseMove(event$: MouseEvent) {
+    event$.stopPropagation();
+    event$.preventDefault();
+    if (event$.buttons === 1) {
+      const ele = document.documentElement;
+      ele.scrollTop = ele.scrollTop + event$.movementY;
+    }
+    window.getSelection().removeAllRanges();
   }
 
   getVariantDataActions(variant: VariantSummaryDto): Observable<SlotAction[]> {
@@ -280,7 +291,7 @@ export class VariantsViewComponent implements OnDestroy {
         new ConfirmationDialogParameter(
           "Projekt löschen",
           "Möchten Sie das Projekt und alle enthaltenen Varianten endgültig löschen? " +
-            "Diese Aktion kann nicht rückgängig gemacht werden.",
+          "Diese Aktion kann nicht rückgängig gemacht werden.",
         ),
       )
       .pipe(

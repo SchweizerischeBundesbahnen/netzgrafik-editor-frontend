@@ -1,7 +1,7 @@
-<div *ngIf="title" [class.card]="true">
+<div *ngIf="title" [class.card]="true" (click)="setLocation(route)">
   <div *ngIf="title" class="title">
     {{ title }}
-    <div style="float: right">
+    <div style="float: right" (click)="stopPropagation($event)">
       <sbb-action-menu [actions]="actions"></sbb-action-menu>
     </div>
   </div>
