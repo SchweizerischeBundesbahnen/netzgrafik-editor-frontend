@@ -1,4 +1,4 @@
-<div *ngIf="title" [class.card]="true" (click)="setLocation(route)">
+<div *ngIf="title" [class.card]="true" (click)="openLink()">
   <div *ngIf="title" class="title">
     {{ title }}
     <div style="float: right" (click)="stopPropagation($event)">
@@ -8,7 +8,7 @@
   <div *ngIf="subtitle" class="subtitle">
     {{ subtitle }}
   </div>
-  <a *ngIf="route" sbb-link [routerLink]="route"> öffnen </a>
+  <a id="cardComponentRouterLink" *ngIf="route" sbb-link [routerLink]="route"> öffnen </a>
 </div>
 <div
   *ngIf="icon"
