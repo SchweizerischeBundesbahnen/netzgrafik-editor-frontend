@@ -158,7 +158,7 @@ export class VariantsViewComponent implements OnDestroy {
     event$.preventDefault();
     if (event$.buttons === 1) {
       const ele = document.documentElement;
-      ele.scrollTop = ele.scrollTop + event$.movementY;
+      ele.scrollTop = ele.scrollTop - event$.movementY;
     }
     window.getSelection().removeAllRanges();
   }
