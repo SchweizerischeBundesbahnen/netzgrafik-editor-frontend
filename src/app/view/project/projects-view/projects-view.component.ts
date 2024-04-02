@@ -56,13 +56,15 @@ export class ProjectsViewComponent implements OnDestroy {
 
   @HostListener("mousemove", ["$event"])
   public onMouseMove(event$: MouseEvent) {
-    event$.stopPropagation();
-    event$.preventDefault();
     if (event$.buttons === 1) {
       const ele = document.documentElement;
       ele.scrollTop = ele.scrollTop - event$.movementY;
+      if (event$.movementY > 2){
+        event$.stopPropagation();
+        event$.preventDefault();
+        window.getSelection().removeAllRanges();
+      }
     }
-    window.getSelection().removeAllRanges();
   }
 
   onAddProjectClicked(): void {
