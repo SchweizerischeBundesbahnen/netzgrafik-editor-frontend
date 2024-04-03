@@ -242,36 +242,26 @@ export class LoadPerlenketteService implements OnDestroy {
           );
         }
 
+
         // calculate real connection time
         const arrivalTime = node.getArrivalTime(port1.getTrainrunSection());
-        const departureTime = node.getDepartureTime(port2.getTrainrunSection());
-        let remainingTime1 =
-          departureTime -
-          arrivalTime -
-          Math.ceil(
-            60 / port2.getTrainrunSection().getTrainrun().getFrequency(),
-          ) *
-            port2.getTrainrunSection().getTrainrun().getFrequency();
-        while (remainingTime1 < node.getConnectionTime()) {
-          remainingTime1 += port2
-            .getTrainrunSection()
-            .getTrainrun()
-            .getFrequency();
+        let departureTime = node.getDepartureTime(port2.getTrainrunSection());
+        if (departureTime < arrivalTime) {
+          departureTime += 60;
         }
-        let remainingTime2 =
-          departureTime -
-          arrivalTime -
-          Math.ceil(
-            60 / port1.getTrainrunSection().getTrainrun().getFrequency(),
-          ) *
-            port1.getTrainrunSection().getTrainrun().getFrequency();
-        while (remainingTime2 < node.getConnectionTime()) {
-          remainingTime2 += port1
-            .getTrainrunSection()
-            .getTrainrun()
-            .getFrequency();
+        let remainingTime = 24 * 3600;
+        for (let freqOff1 = 0; freqOff1 < 8; freqOff1 += 1) {
+          const freq1 = freqOff1 * port1.getTrainrunSection().getTrainrun().getFrequency();
+          for (let freqOff2 = 0; freqOff2 < 8; freqOff2 += 1) {
+            const freq2 = freqOff2 * port2.getTrainrunSection().getTrainrun().getFrequency();
+            const d = departureTime + freq2;
+            const a = arrivalTime + freq1;
+            const delta = d - a;
+            if (delta >= node.getConnectionTime()) {
+              remainingTime = Math.min(remainingTime, delta);
+            }
+          }
         }
-        const remainingTime = Math.min(remainingTime1, remainingTime2);
 
         const perlenketteConnection = new PerlenketteConnection(
           port2.getTrainrunSection().getTrainrun().getTitle(),
