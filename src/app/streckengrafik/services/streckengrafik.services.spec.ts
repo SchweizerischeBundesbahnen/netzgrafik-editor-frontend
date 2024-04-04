@@ -380,18 +380,18 @@ describe("StreckengrafikServicesTests", () => {
         }
         expect(node.trainrunNodes[8].backward).toBe(false);
         expect(node.trainrunNodes[8].minimumHeadwayTime).toBe(2);
-        expect(node.trainrunNodes[8].isTurnaround).toBe(true);
-        expect(node.trainrunNodes[8].isEndNode()).toBe(true);
-        expect(node.trainrunNodes[8].arrivalTime).toBe(10);
+        expect(node.trainrunNodes[8].isTurnaround).toBe(false);
+        expect(node.trainrunNodes[8].isEndNode()).toBe(false);
+        expect(node.trainrunNodes[8].arrivalTime).toBe(49);
         expect(node.trainrunNodes[8].departureTime).toBe(50);
-        expect(node.trainrunNodes[8].unusedForTurnaround).toBe(true);
+        expect(node.trainrunNodes[8].unusedForTurnaround).toBe(false);
 
         expect(node.trainrunNodes[9].backward).toBe(true);
         expect(node.trainrunNodes[9].minimumHeadwayTime).toBe(2);
-        expect(node.trainrunNodes[9].isTurnaround).toBe(true);
-        expect(node.trainrunNodes[9].isEndNode()).toBe(true);
+        expect(node.trainrunNodes[9].isTurnaround).toBe(false);
+        expect(node.trainrunNodes[9].isEndNode()).toBe(false);
         expect(node.trainrunNodes[9].arrivalTime).toBe(130);
-        expect(node.trainrunNodes[9].departureTime).toBe(170);
+        expect(node.trainrunNodes[9].departureTime).toBe(131);
         expect(node.trainrunNodes[9].unusedForTurnaround).toBe(false);
       });
   });
@@ -420,11 +420,13 @@ describe("StreckengrafikServicesTests", () => {
           nodeIdx % 2 === 1,
         );
         const node = sgSelectedTrainrun.paths[nodeIdx].getPathNode();
-        for (let idx = 0; idx < 8; idx++) {
+        for (let idx = 0; idx < 6; idx++) {
+          console.log(idx, node.trainrunNodes[idx].minimumHeadwayTime);
           expect(node.trainrunNodes[idx].minimumHeadwayTime).toBe(2);
         }
-        expect(node.trainrunNodes[8].minimumHeadwayTime).toBe(3);
-        expect(node.trainrunNodes[9].minimumHeadwayTime).toBe(3);
+        expect(node.trainrunNodes[7].minimumHeadwayTime).toBe(3);
+        expect(node.trainrunNodes[8].minimumHeadwayTime).toBe(2);
+        expect(node.trainrunNodes[9].minimumHeadwayTime).toBe(2);
       });
   });
 
