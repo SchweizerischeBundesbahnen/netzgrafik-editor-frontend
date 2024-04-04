@@ -100,7 +100,7 @@
 
       <g
         transform="translate(125, 8)"
-        *ngIf="showLeftDepartureTime()"
+        *ngIf="showLeftDepartureTime() && showLeftLock()"
       >
         <rect
           x="6"
@@ -123,7 +123,7 @@
                              (stationNumberArray.length > 5 ?
                                   'translate(155, 82)' : 'translate(142, 82)')
                              : 'translate(125, 82)'"
-        *ngIf="showTravelTime()"
+        *ngIf="showTravelTime() && showTravelTimeLock()"
       >
         <rect
           x="6"
@@ -144,7 +144,7 @@
 
       <g
         transform="translate(125, 152)"
-        *ngIf="showRightDepartureTime()"
+        *ngIf="showRightDepartureTime()  && showRightLock()"
       >
         <rect
           x="6"
