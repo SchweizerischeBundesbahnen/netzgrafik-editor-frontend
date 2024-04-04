@@ -254,8 +254,12 @@ export class LoadPerlenketteService implements OnDestroy {
           const freq1 = freqOff1 * port1.getTrainrunSection().getTrainrun().getFrequency();
           for (let freqOff2 = 0; freqOff2 < 8; freqOff2 += 1) {
             const freq2 = freqOff2 * port2.getTrainrunSection().getTrainrun().getFrequency();
-            const d = departureTime + freq2;
-            const a = arrivalTime + freq1;
+            const d = departureTime +
+              freq2 +
+              port2.getTrainrunSection().getTrainrun().getTrainrunFrequency().offset;
+            const a = arrivalTime +
+              freq1 +
+              port1.getTrainrunSection().getTrainrun().getTrainrunFrequency().offset;
             const delta = d - a;
             if (delta >= node.getConnectionTime()) {
               remainingTime = Math.min(remainingTime, delta);
