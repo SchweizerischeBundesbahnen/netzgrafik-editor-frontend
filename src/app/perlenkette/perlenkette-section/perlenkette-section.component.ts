@@ -201,6 +201,25 @@ export class PerlenketteSectionComponent
     this.handleSwitchSection(fieldKey);
   }
 
+
+  switchSectionViewToogleLock(event: MouseEvent, fieldKey: string) {
+    event.stopPropagation();
+
+    if (fieldKey === "leftDepartureTime") {
+      this.onButtonNodeLeftLock(event);
+      return;
+    }
+    if (fieldKey === "travelTime") {
+      this.onButtonTravelTimeLock(event);
+      return;
+    }
+    if (fieldKey === "rightDepatureTime") {
+      this.onButtonNodeRightLock(event);
+      return;
+    }
+
+  }
+
   handleSwitchSection(fieldKey: string) {
     this.perlenketteSection.isBeingEdited =
       !this.perlenketteSection.isBeingEdited;
@@ -1039,6 +1058,13 @@ export class PerlenketteSectionComponent
   getLockCloseSvgPath(): string {
     return "M12 4a2 2 0 0 0-2 2v3h4V6a2 2 0 0 0-2-2Zm3 5V6a3 3 0 0 0-6 0v3H6v11h12V9h-3Zm-2.5 " +
       "4v4h-1v-4h1ZM7 19v-9h10v9H7Z";
+  }
+
+  getLockSvgPath(isClosed: boolean) {
+    if (isClosed) {
+      return this.getLockCloseSvgPath();
+    }
+    return this.getLockOpenSvgPath();
   }
 
   private updateTrainrunSectionTime() {
