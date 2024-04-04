@@ -62,6 +62,8 @@ export class PerlenketteSectionComponent
   @Input() isFirstSection = false;
   @Input() isLastSection = false;
 
+  @Input() showAllLockStates = false;
+
   @Output() signalIsBeingEdited = new EventEmitter<PerlenketteSection>();
   @Output() signalHeightChanged = new EventEmitter<number>();
   @Input() notificationIsBeingEdited: Observable<PerlenketteSection>;
@@ -175,6 +177,27 @@ export class PerlenketteSectionComponent
       return "TimeEditor";
     }
     return "StopsEditor";
+  }
+
+  showTravelTimeLock(): boolean {
+    if (this.showAllLockStates) {
+      return true;
+    }
+    return this.lockStructure.travelTimeLock;
+  }
+
+  showLeftLock(): boolean {
+    if (this.showAllLockStates) {
+      return true;
+    }
+    return this.lockStructure.leftLock;
+  }
+
+  showRightLock(): boolean {
+    if (this.showAllLockStates) {
+      return true;
+    }
+    return this.lockStructure.rightLock;
   }
 
   getPathClassTag(noLinePatterns = false): string {
