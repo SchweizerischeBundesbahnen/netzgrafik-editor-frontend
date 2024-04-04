@@ -100,7 +100,7 @@
 
       <g
         transform="translate(125, 8)"
-        *ngIf="showLeftDepartureTime() && lockStructure.leftLock"
+        *ngIf="showLeftDepartureTime()"
       >
         <rect
           x="6"
@@ -108,19 +108,22 @@
           width="12"
           height="22"
           style="fill: white; cursor: pointer"
-          (click)="switchSectionView($event, 'leftDepartureTime')"
+          (click)="switchSectionViewToogleLock($event, 'leftDepartureTime')"
         ></rect>
         <path
-          [attr.d]="getLockCloseSvgPath()"
+          [attr.d]="getLockSvgPath(lockStructure.leftLock)"
           [ngClass]="[getPathClassTag(true)]"
           class="edge_line"
           style="fill: white; stroke-width: 1px; cursor: pointer"
-          (click)="switchSectionView($event, 'leftDepartureTime')"
+          (click)="switchSectionViewToogleLock($event, 'leftDepartureTime')"
         />
       </g>
       <g
-        transform="translate(125, 82)"
-        *ngIf="showTravelTime() && lockStructure.travelTimeLock"
+        [attr.transform]="stationNumberArray.length > 0 ?
+                             (stationNumberArray.length > 5 ?
+                                  'translate(155, 82)' : 'translate(142, 82)')
+                             : 'translate(125, 82)'"
+        *ngIf="showTravelTime()"
       >
         <rect
           x="6"
@@ -128,20 +131,20 @@
           width="12"
           height="22"
           style="fill: white; cursor: pointer"
-          (click)="switchSectionView($event, 'travelTime')"
+          (click)="switchSectionViewToogleLock($event, 'travelTime')"
         ></rect>
         <path
-          [attr.d]="getLockCloseSvgPath()"
+          [attr.d]="getLockSvgPath(lockStructure.travelTimeLock)"
           [ngClass]="[getPathClassTag(true)]"
           class="edge_line"
           style="fill: white; stroke-width: 1px; cursor: pointer"
-          (click)="switchSectionView($event, 'travelTime')"
+          (click)="switchSectionViewToogleLock($event, 'travelTime')"
         />
       </g>
 
       <g
         transform="translate(125, 152)"
-        *ngIf="showRightDepartureTime() && lockStructure.rightLock"
+        *ngIf="showRightDepartureTime()"
       >
         <rect
           x="6"
@@ -149,14 +152,14 @@
           width="12"
           height="22"
           style="fill: white; cursor: pointer"
-          (click)="switchSectionView($event, 'rightDepatureTime')"
+          (click)="switchSectionViewToogleLock($event, 'rightDepatureTime')"
         ></rect>
         <path
-          [attr.d]="getLockCloseSvgPath()"
+          [attr.d]="getLockSvgPath(lockStructure.rightLock)"
           [ngClass]="[getPathClassTag(true)]"
           class="edge_line"
           style="fill: white; stroke-width: 1px; cursor: pointer"
-          (click)="switchSectionView($event, 'rightDepatureTime')"
+          (click)="switchSectionViewToogleLock($event, 'rightDepatureTime')"
         />
       </g>
 
