@@ -8,8 +8,9 @@ and outlines more general ideas.
 
 ### Short-term goals on the roadmap:
 
-- Origin-Destination-Matrix: Develop a travel time matrix for different routes.
-- Check conformity of business rules for Import/export using RailML.
+- Origin-Destination-Matrix: Travel time matrix for different routes / visualisation & analytics.
+- Check conformity of business rules
+- Import/export using RailML.
 
 ### Long-term goals on the roadmap:
 
