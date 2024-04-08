@@ -24,6 +24,7 @@ Netzgrafik-Editor – designed to make better decisions.
 
 </details>
 
+
 ## Introduction
 
 The Netzgrafik-Editor is a powerful software that enables the creation, modification, and analysis
@@ -139,6 +140,9 @@ and functionality and meets the needs and challenges of different application do
 The openness of the project encourages innovation, expertise from different sectors and continuous
 improvements to optimize the
 planning processes.
+
+## Raodmap 
+Get an insight into the plan and future [Roadmap](ROADMAP.md).
 
 ## User Manual
 
