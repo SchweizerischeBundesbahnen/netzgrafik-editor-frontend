@@ -142,7 +142,7 @@ improvements to optimize the
 planning processes.
 
 ## Raodmap 
-Get an insight into the plan and future [Roadmap](ROADMAP.md).
+Get an insight into the plan and future [ROADMAP.md](ROADMAP.md).
 
 ## User Manual
 
