@@ -511,15 +511,20 @@ export class Sg6TrackService implements OnDestroy {
     if (item.backward && item.index !== minIndexEndNode) {
       // backward starting node (case 2)
       const backwardNode = item;
-      const forwardNode = trainrun.sgTrainrunItems
-        .find((el) => !el.backward && el.index === item.index)
-        .getTrainrunNode();
+      const forwardNodes = trainrun.sgTrainrunItems
+        .filter((el) => !el.backward && el.index === item.index);
+
+      const forwardNode = forwardNodes[0].getTrainrunNode();
       this.transformUmlaufNodePair(
         backwardNode,
         forwardNode,
         trainrun,
         minimumHeadwayTime,
       );
+      if (forwardNodes.length > 1){
+        backwardNode.unusedForTurnaround = true;
+        forwardNode.unusedForTurnaround = false;
+      }
     }
   }
 
@@ -1172,8 +1177,8 @@ export class Sg6TrackService implements OnDestroy {
               ps.trackData.sectionTrackSegments = convertedTrackSegments;
               maxTrackMap.set(
                 pathItem.getTrainrunSection().departureNodeId +
-                  ":" +
-                  pathItem.getTrainrunSection().arrivalNodeId,
+                ":" +
+                pathItem.getTrainrunSection().arrivalNodeId,
                 ps.trackData,
               );
             }
@@ -1197,8 +1202,8 @@ export class Sg6TrackService implements OnDestroy {
         if (path.isSection()) {
           if (
             path.getPathSection().arrivalNodeId +
-              ":" +
-              path.getPathSection().departureNodeId ===
+            ":" +
+            path.getPathSection().departureNodeId ===
             key
           ) {
             path.getPathSection().trackData = trackData;
@@ -1241,5 +1246,6 @@ class PathNodeNeighbour {
     public trackNbr: number,
     public mainTrackIdx: number,
     public pathNodes: SgTrainrunNode[],
-  ) {}
+  ) {
+  }
 }

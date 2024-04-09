@@ -545,7 +545,10 @@ export class TrainrunService {
         : bothEndNodes.endNode1;
     const arrivalTime = this.propagateConsecutiveTimes(
       startForwardNode,
-      startForwardNode.getStartTrainrunSection(trainrunSection.getTrainrunId()),
+      startForwardNode.getStartTrainrunSection(
+        trainrunSection.getTrainrunId(),
+        true
+      ),
       trainrunSection.getFrequencyOffset(),
     );
     // propagate Consecutive Times Backward
@@ -560,6 +563,7 @@ export class TrainrunService {
       startBackwardNode,
       startBackwardNode.getStartTrainrunSection(
         trainrunSection.getTrainrunId(),
+        false
       ),
       offset,
     );

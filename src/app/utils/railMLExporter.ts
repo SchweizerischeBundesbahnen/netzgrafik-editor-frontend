@@ -80,12 +80,14 @@ export class RailMLExporter {
     trainrun: Trainrun,
     startNode: Node,
     timeOffset: number,
+    returnForwardStartNode: boolean
   ): HTMLElement {
     const ocpsTT = doc.createElement("ocpsTT");
     let visitingNode = startNode;
     let prevVisitingNode = visitingNode;
     let trainrunSection: TrainrunSection = visitingNode.getStartTrainrunSection(
       trainrun.getId(),
+      returnForwardStartNode
     );
     if (trainrunSection === undefined) {
       return ocpsTT;
@@ -355,7 +357,7 @@ export class RailMLExporter {
           '"}',
       );
       trainPart1.append(
-        this.createOcpsTT(doc, trainrun, startNode, timeOffset),
+        this.createOcpsTT(doc, trainrun, startNode, timeOffset, true),
       );
       returns.push(trainPart1);
       forwardRollout += 2;
@@ -403,7 +405,7 @@ export class RailMLExporter {
           startNode.getBetriebspunktName() +
           '"}',
       );
-      trainPart2.append(this.createOcpsTT(doc, trainrun, endNode, timeOffset));
+      trainPart2.append(this.createOcpsTT(doc, trainrun, endNode, timeOffset, false));
       returns.push(trainPart2);
       backwardRollout += 2;
     });
