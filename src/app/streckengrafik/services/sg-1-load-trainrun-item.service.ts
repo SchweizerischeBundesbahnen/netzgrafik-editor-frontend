@@ -233,6 +233,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       this.forwardTrainrunSectionGroup = this.trainrunSectionGroup(
         trainrun.getId(),
         startForwardNode,
+        true
       );
     } else {
       if (
@@ -253,10 +254,12 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     const forwardTrainrunSectionGroup = this.trainrunSectionGroup(
       trainrun.getId(),
       startForwardNode,
+      true
     );
     const backwardTrainrunSectionGroup = this.trainrunSectionGroup(
       trainrun.getId(),
       startBackwardNode,
+      false
     );
 
     let forwardStartNode: PathNode = undefined;
@@ -737,10 +740,12 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     const forwardTrainrunSectionGroups = this.trainrunSectionGroup(
       trainrun.getId(),
       startForwardNode,
+      true
     );
     const backwardTrainrunSectionGroups = this.trainrunSectionGroup(
       trainrun.getId(),
       startBackwardNode,
+      false
     );
 
     const selectedPaths = this.betriebspunktNamePaths(
@@ -968,13 +973,15 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
   private trainrunSectionGroup(
     trainrunId: number,
     node: Node,
+    returnForwardStartNode : boolean
   ): TrainrunSectionGroup[] {
     const trainrunSectionGroups: TrainrunSectionGroup[] = [];
     let trainrunSection = undefined;
     let trainrunSectionGroup: TrainrunSectionGroup = undefined;
     let fromNode = node;
     let toNode = undefined;
-    const startTrainrunSection = node.getStartTrainrunSection(trainrunId);
+    const startTrainrunSection =
+      node.getStartTrainrunSection(trainrunId, returnForwardStartNode);
     if (startTrainrunSection === undefined) {
       return trainrunSectionGroups;
     }

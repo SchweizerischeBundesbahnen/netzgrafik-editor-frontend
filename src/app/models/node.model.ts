@@ -420,11 +420,14 @@ export class Node {
     );
   }
 
-  getStartTrainrunSection(trainrunId: number): TrainrunSection {
+  getStartTrainrunSection(trainrunId: number, returnForwardStartNode = true): TrainrunSection {
     const portsForTrainrun = this.ports.filter(
       (port) => port.getTrainrunSection().getTrainrunId() === trainrunId,
     );
-    const portWithNoTransition = portsForTrainrun.find(
+
+    // ports with no transition maximally two can be available - in common trainrun paths, there
+    // will be no or max one starting/ending port (node)
+    const portsWithNoTransition = portsForTrainrun.filter(
       (port) =>
         this.transitions.find(
           (transition) =>
@@ -432,10 +435,18 @@ export class Node {
             transition.getPortId2() === port.getId(),
         ) === undefined,
     );
-    if (portWithNoTransition === undefined) {
+    if (portsWithNoTransition === undefined || portsWithNoTransition.length === 0) {
       return undefined;
     }
-    return portWithNoTransition.getTrainrunSection();
+    // Does the system has one or more ports found (with no transitions -> Start/Ending Ports)?
+    // If no return first found otherwise check whether there is the forward (start node) of
+    // interest - or the backward (end node)
+    if (portsWithNoTransition.length === 1 || returnForwardStartNode ){
+      // forward
+      return portsWithNoTransition[0].getTrainrunSection();
+    }
+    // backward
+    return portsWithNoTransition[1].getTrainrunSection();
   }
 
   reorderAllPorts() {
