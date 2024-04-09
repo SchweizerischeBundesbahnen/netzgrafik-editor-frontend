@@ -116,14 +116,14 @@ export class EditorView implements SVGMouseControllerObserver {
 
   constructor(
     controller: EditorMainViewComponent,
-    private nodeSerivce: NodeService,
+    private nodeService: NodeService,
     private trainrunService: TrainrunService,
     private trainrunSectionService: TrainrunSectionService,
     private noteService: NoteService,
     private filterService: FilterService,
     private uiInteractionService: UiInteractionService,
     private undoService: UndoService,
-    private copySerivce: CopyService,
+    private copyService: CopyService,
     private logService: LogService,
   ) {
     this.controller = controller;
@@ -133,13 +133,13 @@ export class EditorView implements SVGMouseControllerObserver {
     this.connectionsView = new ConnectionsView(this);
     this.trainrunSectionsView = new TrainrunSectionsView(this);
     this.trainrunSectionPreviewLineView = new TrainrunSectionPreviewLineView(
-      nodeSerivce,
+      nodeService,
       filterService,
     );
     this.multiSelectRenderer = new MultiSelectRenderer();
     this.notesView = new NotesView(this);
     this.editorKeyEvents = new EditorKeyEvents(
-      nodeSerivce,
+      nodeService,
       trainrunService,
       trainrunSectionService,
       noteService,
@@ -147,7 +147,7 @@ export class EditorView implements SVGMouseControllerObserver {
       uiInteractionService,
       logService,
       undoService,
-      copySerivce,
+      copyService,
       this.svgMouseController,
       this.trainrunSectionPreviewLineView,
     );
@@ -442,36 +442,41 @@ export class EditorView implements SVGMouseControllerObserver {
     if (!this.isMultiSelectOn) {
       return;
     }
-    const allNodesOfInterest = this.nodeSerivce.getNodes().filter((n: Node) => {
-      this.nodeSerivce.unselectNode(n.getId(), false);
-      if (
-        topLeft.getX() < n.getPositionX() &&
-        n.getPositionX() + n.getNodeWidth() < bottomRight.getX()
-      ) {
+    
+    const allNodesOfInterest = this.nodeService.getNodes().filter((n: Node) => {
+      this.nodeService.unselectNode(n.getId(), false);
+      if (this.filterService.filterNode(n)) {
         if (
-          topLeft.getY() < n.getPositionY() &&
-          n.getPositionY() + n.getNodeHeight() < bottomRight.getY()
+          topLeft.getX() < n.getPositionX() &&
+          n.getPositionX() + n.getNodeWidth() < bottomRight.getX()
         ) {
-          return true;
+          if (
+            topLeft.getY() < n.getPositionY() &&
+            n.getPositionY() + n.getNodeHeight() < bottomRight.getY()
+          ) {
+            return true;
+          }
         }
       }
       return false;
     });
     allNodesOfInterest.forEach((n: Node) => {
-      this.nodeSerivce.selectNode(n.getId(), false);
+      this.nodeService.selectNode(n.getId(), false);
     });
 
     const allNotesOfInterest = this.noteService.getNotes().filter((n: Note) => {
       this.noteService.unselectNote(n.getId(), false);
-      if (
-        topLeft.getX() < n.getPositionX() &&
-        n.getPositionX() + n.getWidth() < bottomRight.getX()
-      ) {
+      if (this.filterService.filterNote(n)) {
         if (
-          topLeft.getY() < n.getPositionY() &&
-          n.getPositionY() + n.getHeight() < bottomRight.getY()
+          topLeft.getX() < n.getPositionX() &&
+          n.getPositionX() + n.getWidth() < bottomRight.getX()
         ) {
-          return true;
+          if (
+            topLeft.getY() < n.getPositionY() &&
+            n.getPositionY() + n.getHeight() < bottomRight.getY()
+          ) {
+            return true;
+          }
         }
       }
       return false;
@@ -480,7 +485,7 @@ export class EditorView implements SVGMouseControllerObserver {
       this.noteService.selectNote(n.getId(), false);
     });
 
-    this.nodeSerivce.nodesUpdated();
+    this.nodeService.nodesUpdated();
     this.noteService.notesUpdated();
     this.multiSelectRenderer.updateBox(topLeft, bottomRight);
   }
@@ -493,7 +498,7 @@ export class EditorView implements SVGMouseControllerObserver {
     this.multiSelectRenderer.undisplayBox();
 
     if (
-      this.nodeSerivce.getSelectedNode() === null &&
+      this.nodeService.getSelectedNode() === null &&
       this.noteService.getSelectedNote() === null
     ) {
       this.uiInteractionService.setEditorMode(EditorMode.NetzgrafikEditing);
@@ -517,7 +522,7 @@ export class EditorView implements SVGMouseControllerObserver {
       } else if (this.isAnyTrainSelected()) {
         this.unselectAllTrainruns();
       } else {
-        this.nodeSerivce.unselectAllNodes();
+        this.nodeService.unselectAllNodes();
         this.uiInteractionService.closeNodeStammdaten();
       }
       if (
