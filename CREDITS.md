@@ -69,6 +69,7 @@ gantt
         Peter Keller                               :done, 2023-06-01, 2024-02-01
         
     section Milesstone
+        Open Source                                :milestone, 2024-04-10, 2024-04-10
         2.0.0                                      :milestone, 2023-12-20, 2023-12-20
         1.1.0                                      :milestone, 2022-03-08, 2022-03-08
         Backend 1.0.0                              :milestone, 2021-10-29, 2021-10-29
