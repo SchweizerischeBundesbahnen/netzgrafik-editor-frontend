@@ -240,6 +240,15 @@ displaying the train's route as a vertical chain of nodes and trainrunsections.
 
 [2024-1-25_DeleteConnections-Perlenkette-Show_Connections.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/d272fc58-3f31-4427-aacf-cc3c50c03905)
 
+### Change the time locks
+The time can be locked so that no propagtion (automated update) will be done. Just click on the lock icon and the lock state switchs: On to off or vice-versa. 
+
+### Toggle all show all locks / or only closed (default) 
+In the Perlenkette view, you can click on the eye icon in the bottom left corner
+to display all locks. By default, only the locks that are closed are shown. This is 
+visually visible with the disabled eye icon. When you clock on the icon then the disable 
+eye icon switchs to the visible eye icon. Visble eye means all locks are visible. 
+
 ---
 <a id="Conclusion"></a>
 

@@ -1,4 +1,16 @@
 <div (click)="disableSectionView()">
+
+  <div>
+    <div [attr.style]="'pointer-events: none; margin: 0px; position: absolute; padding-left: '+(contentWidth-40)+'px; padding-top: '+(contentHeight-40)+'px;'">
+      <ng-container *ngIf="!getShowAllLockStates()">
+        <sbb-icon svgIcon="eye-disabled-small" style="pointer-events:auto;" (mouseup)="toggleShowAllLockStates()" title="Zeige nur geschlossene Schlösser"></sbb-icon>
+      </ng-container>
+      <ng-container *ngIf="getShowAllLockStates()">
+        <sbb-icon svgIcon="eye-small" style="pointer-events:auto;" (mouseup)="toggleShowAllLockStates()" title="Zeige alle Schlösser"></sbb-icon>
+      </ng-container>
+    </div>
+  </div>
+
   <div class="TitleArea">
     <div class="title-container">
       <div>
@@ -13,7 +25,7 @@
               (click)="trainrunNameClicked($event)"
             >
               <span class="trainname"
-                >{{ perlenketteTrainrun.categoryShortName
+              >{{ perlenketteTrainrun.categoryShortName
                 }}{{ perlenketteTrainrun.title }}</span
               >
             </p>
@@ -22,12 +34,12 @@
               <span class="station" (click)="trainrunNameClicked($event)">{{
                 perlenketteTrainrun.pathItems.at(0).getPerlenketteNode()
                   .fullName
-              }}</span>
+                }}</span>
               <span class="arrow">-</span>
               <span class="station" (click)="trainrunNameClicked($event)">{{
                 perlenketteTrainrun.pathItems.at(-1).getPerlenketteNode()
                   .fullName
-              }}</span>
+                }}</span>
             </p>
           </ng-container>
 
@@ -36,12 +48,12 @@
               <span class="station" (click)="scrollFirst($event)">{{
                 perlenketteTrainrun.pathItems.at(0).getPerlenketteNode()
                   .fullName
-              }}</span>
+                }}</span>
               <span class="arrow">-</span>
               <span class="station" (click)="scrollLast($event)">{{
                 perlenketteTrainrun.pathItems.at(-1).getPerlenketteNode()
                   .fullName
-              }}</span>
+                }}</span>
             </p>
           </ng-container>
         </div>
@@ -80,7 +92,7 @@
           <span
             [class]="getSmallstationClassTag(pathItem)"
             (click)="goto(pathItem)"
-            >{{ pathItem.getPerlenketteNode().shortName }}</span
+          >{{ pathItem.getPerlenketteNode().shortName }}</span
           >
         </p>
       </div>
@@ -120,6 +132,7 @@
               [perlenketteTrainrun]="perlenketteTrainrun"
               (signalIsBeingEdited)="signalIsBeingEdited($event)"
               (signalHeightChanged)="signalHeightChanged($event, pathItem)"
+              [showAllLockStates]="getShowAllLockStates()"
               [notificationIsBeingEdited]="
                 getSignalAllChildrenIsBeingEditedObservable()
               "
