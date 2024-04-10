@@ -38,13 +38,15 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     new Subject<PerlenketteSection>();
 
   public svgPoint: Vec2D;
-  public contentWidth = 1;
-  public contentHeight = 1;
+  public contentWidth = 460;
+  public contentHeight = 800;
   public renderedElementsHeight = 1;
   private perlenketteRenderingElementsHeight: [PerlenketteItem, number][];
 
   private trainrunEditorVisible = false;
   private selectedPerlenketteConnection: PerlenketteConnection = undefined;
+
+  private showAllLockStates = false;
 
   constructor(
     private readonly loadPerlenketteService: LoadPerlenketteService,
@@ -81,6 +83,14 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     this.trainrunEditorVisible = !this.trainrunEditorVisible;
   }
 
+  getShowAllLockStates(): boolean {
+    return this.showAllLockStates;
+  }
+
+  toggleShowAllLockStates() {
+    this.showAllLockStates = !this.showAllLockStates;
+  }
+
   private updatePerlenkette(perlenketteTrainrun: PerlenketteTrainrun) {
     let originalPathItems;
     if (this.perlenketteTrainrun) {
@@ -104,7 +114,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
           ) {
             if (
               pathItem.getPerlenketteSection().trainrunSectionId ===
-                originalPathItem.getPerlenketteSection().trainrunSectionId &&
+              originalPathItem.getPerlenketteSection().trainrunSectionId &&
               originalPathItem.getPerlenketteSection().isBeingEdited
             ) {
               pathItem.getPerlenketteSection().isBeingEdited =
@@ -118,12 +128,13 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
 
   ngAfterContentChecked() {
     this.contentWidth = Math.max(
-      364,
+      460,
       document.getElementById("cd-layout-aside").clientWidth,
     );
 
     const mainContentElement = document.getElementById("cd-layout-content");
     this.contentHeight = mainContentElement.clientHeight;
+
     this.changeDetectorRef.detectChanges();
   }
 
