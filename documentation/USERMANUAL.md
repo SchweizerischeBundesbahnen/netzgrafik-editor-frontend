@@ -246,8 +246,8 @@ The time can be locked so that no propagtion (automated update) will be done. Ju
 ### Toggle all show all locks / or only closed (default) 
 In the Perlenkette view, you can click on the eye icon in the bottom left corner
 to display all locks. By default, only the locks that are closed are shown. This is 
-visually visible with the disabled eye icon. When you clock on the icon then the disable 
-eye icon switchs to the visible eye icon. Visble eye means all locks are visible. 
+visually visible with the disabled eye icon. When you click on the icon then the disable 
+eye icon switchs to the visible eye icon - or vive-versa. Visble eye means all locks are visible.
 
 ---
 <a id="Conclusion"></a>
