@@ -49,11 +49,11 @@ export class Sg6TrackService implements OnDestroy {
         this.dataService
           .getNetzgrafikDto()
           .metadata.trainrunFrequencies.forEach((freq: TrainrunFrequency) => {
-            this.maxFrequency = Math.max(
-              (this.maxFrequency = 0),
-              freq.frequency,
-            );
-          });
+          this.maxFrequency = Math.max(
+            (this.maxFrequency = 0),
+            freq.frequency,
+          );
+        });
         this.selectedTrainrun = selectedTrainrun;
         this.render();
       });
@@ -496,15 +496,17 @@ export class Sg6TrackService implements OnDestroy {
     if (!item.backward && item.index === minIndexEndNode) {
       // forward starting node (case 1)
       const forwardNode = item;
-      const backwardNode = trainrun.sgTrainrunItems
-        .find((el) => el.backward && el.index === item.index)
-        .getTrainrunNode();
-      this.transformUmlaufNodePair(
-        forwardNode,
-        backwardNode,
-        trainrun,
-        minimumHeadwayTime,
-      );
+      const backwardNodes = trainrun.sgTrainrunItems
+        .filter((el) => el.backward && el.index === item.index);
+      if (backwardNodes.length > 0) {
+        const backwardNode = backwardNodes[backwardNodes.length - 1].getTrainrunNode();
+        this.transformUmlaufNodePair(
+          forwardNode,
+          backwardNode,
+          trainrun,
+          minimumHeadwayTime,
+        );
+      }
     }
 
     // case "right" end node -> backward -> forward
@@ -514,17 +516,19 @@ export class Sg6TrackService implements OnDestroy {
       const forwardNodes = trainrun.sgTrainrunItems
         .filter((el) => !el.backward && el.index === item.index);
 
-      const forwardNode = forwardNodes[0].getTrainrunNode();
-      this.transformUmlaufNodePair(
-        backwardNode,
-        forwardNode,
-        trainrun,
-        minimumHeadwayTime,
-      );
-      if (forwardNodes.length > 1){
-        backwardNode.unusedForTurnaround = true;
-        forwardNode.unusedForTurnaround = false;
-      }
+      if (forwardNodes.length > 0) {
+        const forwardNode = forwardNodes[0].getTrainrunNode();
+        this.transformUmlaufNodePair(
+          backwardNode,
+          forwardNode,
+          trainrun,
+          minimumHeadwayTime,
+        );
+        if (forwardNodes.length > 1) {
+          backwardNode.unusedForTurnaround = true;
+          forwardNode.unusedForTurnaround = false;
+        }
+      } // ensured at least one forward node found
     }
   }
 
