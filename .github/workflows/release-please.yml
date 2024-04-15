@@ -1,0 +1,44 @@
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  packages: write
+  pull-requests: write
+
+name: release-please
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      releases_created: ${{ steps.release.outputs.releases_created }}
+      version: ${{ steps.release.outputs.version }}
+    steps:
+      - uses: google-github-actions/release-please-action@v4
+        id: release
+        with:
+          release-type: node
+
+  release:
+    needs: release-please
+    if: needs.release-please.outputs.releases_created
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_REPO: ghcr.io/${{ github.repository }}
+      VERSION: ${{ needs.release-please.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
+      - name: Create container image
+        run: docker build -t $IMAGE_REPO:$VERSION -t $IMAGE_REPO:latest .
+        env:
+          DOCKER_BUILDKIT: 1
+      - name: 'Container: Publish image'
+        run: docker push $IMAGE_REPO:$VERSION
+      - name: 'Container: Publish image as latest'
+        run: docker push $IMAGE_REPO:latest
