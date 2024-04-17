@@ -12,7 +12,7 @@ jobs:
   preview-image:
     runs-on: ubuntu-latest
     env:
-      PACKAGE_NAME: netzgrafik-frontend-preview
+      PACKAGE_NAME: netzgrafik-editor-frontend-preview
       PR_TAG_PREFIX: pr
     steps:
       # Deletes all container images from closed pull requests
