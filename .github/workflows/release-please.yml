@@ -21,7 +21,7 @@ jobs:
         id: release
         with:
           release-type: node
-
+          
   release:
     needs: release-please
     if: needs.release-please.outputs.releases_created
@@ -30,6 +30,8 @@ jobs:
       IMAGE_REPO: ghcr.io/${{ github.repository }}
       # VERSION: ${{ needs.release-please.outputs.version }}
       VERSION: ${{ github.event.release.tag_name }}
+      run: |
+        echo "VERSION => $VERSION"
     steps:
       - uses: actions/checkout@v4
 
