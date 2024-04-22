@@ -99,5 +99,5 @@ jobs:
         if: env.PR_NUMBER != ''
         # This label is used for filtering deployments in ArgoCD
         run: gh issue edit "$NUMBER" --add-label "preview-available"
-        with:
+        env:
           NUMBER: ${{ env.PR_NUMBER }}
