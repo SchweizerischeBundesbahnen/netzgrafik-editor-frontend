@@ -22,7 +22,7 @@ jobs:
   release:
     needs: release-please
     # Only run action for tags starting with v, e.g. v2.5.0
-    if: if: startsWith(github.event.ref, 'refs/tags/v')
+    if: startsWith(github.event.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
       - name: Docker meta
