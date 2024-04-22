@@ -21,14 +21,13 @@ jobs:
         id: release
         with:
           release-type: node
-          
+
   release:
     needs: release-please
     if: needs.release-please.outputs.releases_created
     runs-on: ubuntu-latest
     env:
       IMAGE_REPO: ghcr.io/${{ github.repository }}
-      VERSION: ${{ needs.release-please.outputs.version }}
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -48,5 +47,5 @@ jobs:
         with:
           push: true
           tags: |
-            $IMAGE_REPO:$VERSION
-            $IMAGE_REPO:latest
+            ghcr.io/${{ github.repository }}:${{ needs.release-please.outputs.version }}
+            ghcr.io/${{ github.repository }}:latest
