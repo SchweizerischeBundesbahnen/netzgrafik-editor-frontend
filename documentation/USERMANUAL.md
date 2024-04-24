@@ -262,5 +262,5 @@ creation of comprehensive and visually appealing network representations.
 <a id="Links"></a>
 
 ## Links
-
+- [Netzgrafik-Editor data export/import (JSON)](DATA_MODEL_JSON.md)
 - [DATA MODEL](DATA_MODEL.md)
