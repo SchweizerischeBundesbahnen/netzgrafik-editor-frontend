@@ -131,9 +131,9 @@ More details about transitions
     
   ```json
   {
-    "id": 4,
-    "port1Id": 9,
-    "port2Id": 8,
+    "id": 0,
+    "port1Id": 0,
+    "port2Id": 1,
     "isNonStopTransit": true
   }
   ```
