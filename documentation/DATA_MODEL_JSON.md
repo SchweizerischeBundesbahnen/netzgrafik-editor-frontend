@@ -41,7 +41,7 @@ See also [DATA_MODEL.md : business orientated description](https://github.com/Sc
 
 ---
 
-### trainrunsections 
+### nodes 
 
 ```json
 "nodes": [
