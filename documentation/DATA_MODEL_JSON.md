@@ -57,13 +57,7 @@ See also [DATA_MODEL.md : business orientated description](https://github.com/Sc
       "trainrunSectionId": 4,
       "positionIndex": 0,
       "positionAlignment": 1
-    },
-    {
-      "id": 9,
-      "trainrunSectionId": 5,
-      "positionIndex": 0,
-      "positionAlignment": 2
-    }
+    }, 
     ],
     "transitions": [
       {
@@ -125,6 +119,50 @@ See also [DATA_MODEL.md : business orientated description](https://github.com/Sc
 - **warnings**: If the business logic needs to notify the user about issues, a warning can be used in JSON format : Warning
 - **labelIds**: Filterable labels assigned to the node are stored in this array of label identifiers : Arrey of integer 
 
+
+<details>
+<summary>
+More details about ports
+</summary>
+
+    
+  ```json
+  {
+    "id": 0,
+    "trainrunSectionId": 0,
+    "positionIndex": 0,
+    "positionAlignment": 1
+  }
+  ```
+
+  - **id**: Technical identifier (key), must be unique : numeric
+  - **trainrunSectionId**: Reference to the trainrunsection assigned to the port : numeric
+  - **positionIndex**: Position index within the port alignment sorting: numeric
+  - **positionAlignment**: [Position aligment](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL.md#ports-alignment) - reference [0, 1, 2, 3] : numeric 
+ 
+</details>
+
+<details>
+<summary>
+More details about transitions
+</summary>
+
+    
+  ```json
+  {
+    "id": 4,
+    "port1Id": 9,
+    "port2Id": 8,
+    "isNonStopTransit": true
+  }
+  ```
+
+  - **id**: Technical identifier (key), must be unique : numeric
+  - **port1Id**: Reference to the port from which the transition starts (port must be a member of the node) : numeric
+  - **port1Id**: Reference to the port to which the transition ends  (port must be a member of the node): numeric
+  - **isNonStopTransit**: If set to true the train will not stop at this node, otherwise (default) the trains stops : boolean
+ 
+</details>
 
 ---
 
