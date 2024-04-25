@@ -114,7 +114,7 @@ See also [DATA_MODEL.md : business orientated description](https://github.com/Sc
 - **resourceId**: Reference to the resourceId : numeric
 - **perronkanten** : The number of platform (Perron) within the node : numeric
 - **connectionTime** : The connection time in minute which the infrastructure requires to change the platform : numeric
-- **trainrunCategoryHaltezeiten** : The stop time if the trainrun of product [A, B, C, D or IPV] have to do per default : Array of HaltezeitUncategorized
+- **trainrunCategoryHaltezeiten** : The stop time if the trainrun of product [A, B, C, D or IPV] have to do per default : trainrunCategoryHaltezeiten
 - **symmetryAxis** : Deprecated : null
 - **warnings**: If the business logic needs to notify the user about issues, a warning can be used in JSON format : Warning
 - **labelIds**: Filterable labels assigned to the node are stored in this array of label identifiers : Arrey of integer 
@@ -163,6 +163,50 @@ More details about transitions
   - **isNonStopTransit**: If set to true the train will not stop at this node, otherwise (default) the trains stops : boolean
  
 </details>
+
+
+<details>
+<summary>
+More details about trainrunCategoryHaltezeiten
+</summary>
+
+    
+  ```json
+  "trainrunCategoryHaltezeiten": {
+    "HaltezeitA": {
+      "no_halt": false,
+      "haltezeit": 2
+    },
+    "HaltezeitB": {
+      "no_halt": false,
+      "haltezeit": 2
+    },
+    "HaltezeitC": {
+      "no_halt": false,
+      "haltezeit": 1
+    },
+    "HaltezeitD": {
+      "no_halt": false,
+      "haltezeit": 1
+    },
+    "HaltezeitIPV": {
+      "no_halt": false,
+      "haltezeit": 3
+    },
+    "HaltezeitUncategorized": {
+      "no_halt": true,
+      "haltezeit": 0
+    }
+  },
+  ```
+
+  - **id**: Technical identifier (key), must be unique : numeric
+  - **port1Id**: Reference to the port from which the transition starts (port must be a member of the node) : numeric
+  - **port1Id**: Reference to the port to which the transition ends  (port must be a member of the node): numeric
+  - **isNonStopTransit**: If set to true the train will not stop at this node, otherwise (default) the trains stops : boolean
+ 
+</details>
+    
 
 ---
 
