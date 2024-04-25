@@ -76,11 +76,11 @@ See also [DATA_MODEL.md : business orientated description](https://github.com/Sc
 - **sourcePortId**: Reference to the [node:port](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL.md#ports-alignment) : numeric
 - **targetNodeId**: Reference to the node : numeric 
 - **targetPortId**: Reference to the [node:port](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL.md#ports-alignment) : numeric 
-- **travelTime**: The travel time and lock information : TimeLock 
-- **sourceDeparture**: The departure time at source node in minute and lock information : TimeLock 
-- **sourceArrival**: The arrival time at source node in minute and lock information : TimeLock 
-- **targetDeparture**: The departure time at target node in minute and lock information : TimeLock 
-- **targetArrival**: The arrival time at source node in minute and lock information : TimeLock 
+- **travelTime**: The travel time and lock information : [TimeLock ](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#timelock) 
+- **sourceDeparture**: The departure time at source node in minute and lock information : [TimeLock ](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#timelock)
+- **sourceArrival**: The arrival time at source node in minute and lock information : [TimeLock ](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#timelock) 
+- **targetDeparture**: The departure time at target node in minute and lock information : [TimeLock ](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#timelock) 
+- **targetArrival**: The arrival time at source node in minute and lock information : [TimeLock ](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#timelock) 
 - **numberOfStops**: The number of intermediate stops: numeric 
 - **trainrunId**: Reference to the trainrunId : numeric
 - **resourceId**: Reference to the resourceId : numeric
