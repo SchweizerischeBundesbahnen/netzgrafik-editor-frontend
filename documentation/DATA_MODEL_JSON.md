@@ -63,6 +63,12 @@ See also [DATA_MODEL.md : business orientated description](https://github.com/Sc
         "trainrunSectionId": 1,
         "positionIndex": 0,
         "positionAlignment": 0
+      },
+      {
+        "id": 2,
+        "trainrunSectionId": 2,
+        "positionIndex": 1,
+        "positionAlignment": 0
       }, 
     ],
     "transitions": [
@@ -76,7 +82,7 @@ See also [DATA_MODEL.md : business orientated description](https://github.com/Sc
     "connections": [
       {
         "id": 0,
-        "port1Id": 0,
+        "port1Id": 2,
         "port2Id": 1, 
       }
     ],
