@@ -39,13 +39,98 @@ This is the basic data structure to represent the various elements in a JSON des
 
 See also [DATA_MODEL.md : business orientated description](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/documentation/JSON_DATA/documentation/DATA_MODEL.md#business-orientated-description)
 
+---
+
+### trainrunsections 
+
+```json
+"nodes": [
+  {
+    "id": 1,
+    "betriebspunktName": "OL",
+    "fullName": "Olten",
+    "positionX": 832,
+    "positionY": 32,
+    "ports": [
+    {
+      "id": 8,
+      "trainrunSectionId": 4,
+      "positionIndex": 0,
+      "positionAlignment": 1
+    },
+    {
+      "id": 9,
+      "trainrunSectionId": 5,
+      "positionIndex": 0,
+      "positionAlignment": 2
+    }
+    ],
+    "transitions": [
+      {
+        "id": 4,
+        "port1Id": 9,
+        "port2Id": 8,
+        "isNonStopTransit": true
+      }
+    ],
+    "connections": [],
+    "resourceId": 2,
+    "perronkanten": 10,
+    "connectionTime": 5,
+    "trainrunCategoryHaltezeiten": {
+      "HaltezeitA": {
+        "no_halt": false,
+        "haltezeit": 2
+      },
+      "HaltezeitB": {
+        "no_halt": false,
+        "haltezeit": 2
+      },
+      "HaltezeitC": {
+        "no_halt": false,
+        "haltezeit": 1
+      },
+      "HaltezeitD": {
+        "no_halt": false,
+        "haltezeit": 1
+      },
+      "HaltezeitIPV": {
+        "no_halt": false,
+        "haltezeit": 3
+      },
+      "HaltezeitUncategorized": {
+        "no_halt": true,
+        "haltezeit": 0
+      }
+    },
+    "symmetryAxis": null,
+    "warnings": null,
+    "labelIds": []
+  },
+]
+```
+- **id**: Technical identifier (key), must be unique : numeric
+- **betriebspunktName**: Operation control point (OCP) : string
+- **fullName**: The full name of the operation control point : string
+- **positionX**: The X position - where the node is placed in the editor (map / horizontal position) : integer
+- **positionY**: The Y position - where the node is placed in the editor (map / vertical position) : integer
+- **ports** : The ports assigned to the node. (See also [node:port](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL.md#ports-alignment) : Array of ports
+- **transitions** : The trainrun [transitions](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL.md) assigned to the node : Array of transitions
+- **connections** : The trainrun connections in the node : Array of connections
+- **resourceId**: Reference to the resourceId : numeric
+- **perronkanten** : The number of platform (Perron) within the node : numeric
+- **connectionTime** : The connection time in minute which the infrastructure requires to change the platform : numeric
+- **trainrunCategoryHaltezeiten** : The stop time if the trainrun of product [A, B, C, D or IPV] have to do per default : Array of HaltezeitUncategorized
+- **symmetryAxis** : Deprecated : null
+- **warnings**: If the business logic needs to notify the user about issues, a warning can be used in JSON format : Warning
+- **labelIds**: Filterable labels assigned to the node are stored in this array of label identifiers : Arrey of integer 
 
 
 ---
 
 ### trainrunsections 
-```json
 
+```json
 "trainrunSections": [
   {
     "id": 0,
