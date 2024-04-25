@@ -73,7 +73,13 @@ See also [DATA_MODEL.md : business orientated description](https://github.com/Sc
         "isNonStopTransit": true
       }
     ],
-    "connections": [],
+    "connections": [
+      {
+        "id": 0,
+        "port1Id": 0,
+        "port2Id": 1, 
+      }
+    ],
     "resourceId": 2,
     "perronkanten": 10,
     "connectionTime": 5,
