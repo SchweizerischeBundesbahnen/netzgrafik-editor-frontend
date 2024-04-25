@@ -52,18 +52,24 @@ See also [DATA_MODEL.md : business orientated description](https://github.com/Sc
     "positionX": 832,
     "positionY": 32,
     "ports": [
-    {
-      "id": 8,
-      "trainrunSectionId": 4,
-      "positionIndex": 0,
-      "positionAlignment": 1
-    }, 
+      {
+        "id": 0,
+        "trainrunSectionId": 0,
+        "positionIndex": 0,
+        "positionAlignment": 1
+      },
+      {
+        "id": 1,
+        "trainrunSectionId": 1,
+        "positionIndex": 0,
+        "positionAlignment": 0
+      }, 
     ],
     "transitions": [
       {
-        "id": 4,
-        "port1Id": 9,
-        "port2Id": 8,
+        "id": 0,
+        "port1Id": 1,
+        "port2Id": 0,
         "isNonStopTransit": true
       }
     ],
