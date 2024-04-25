@@ -71,32 +71,7 @@ See also [DATA_MODEL.md : business orientated description](https://github.com/Sc
     "resourceId": 2,
     "perronkanten": 10,
     "connectionTime": 5,
-    "trainrunCategoryHaltezeiten": {
-      "HaltezeitA": {
-        "no_halt": false,
-        "haltezeit": 2
-      },
-      "HaltezeitB": {
-        "no_halt": false,
-        "haltezeit": 2
-      },
-      "HaltezeitC": {
-        "no_halt": false,
-        "haltezeit": 1
-      },
-      "HaltezeitD": {
-        "no_halt": false,
-        "haltezeit": 1
-      },
-      "HaltezeitIPV": {
-        "no_halt": false,
-        "haltezeit": 3
-      },
-      "HaltezeitUncategorized": {
-        "no_halt": true,
-        "haltezeit": 0
-      }
-    },
+    "trainrunCategoryHaltezeiten": { },
     "symmetryAxis": null,
     "warnings": null,
     "labelIds": []
