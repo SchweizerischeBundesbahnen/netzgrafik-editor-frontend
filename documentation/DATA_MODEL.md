@@ -5,6 +5,8 @@ The data model consists of the following key elements: ***trainrun***, ***trainr
 
 ![Data model](./images/DataMoel_Sketch_KeyElement_001.jpg)
 
+---
+
 ### Business orientated description
 
 The nodes in the data model represent the specific locations, such as stations or stops, where a
@@ -34,6 +36,8 @@ By combining the nodes and trainrun sections in this data model, we can create a
 the trainrun network, mapping out the connections and relationships between the different stations
 and the time it takes to traverse between them. This enables us to analyze and visualize complex
 trainrun routes and schedules.
+
+---
 
 ### Technically orientated description
 
@@ -178,8 +182,10 @@ More details can be found in the source code:
 - [TrainrunSectionService.initializeTrainrunSectionRouting()](./../src/app/services/data/trainrunsection.service.ts#:~:text=initializeTrainrunSectionRouting()%20{)
 
 
+---
 
-
+### Links
+[Netzgrafik-Editor data export/import (JSON)](DATA_MODEL_JSON.md)
 
  
 
