@@ -305,6 +305,31 @@ More details about TimeLock
 
 ---
 
+### trainrun 
+
+```json
+  "trainruns": [
+    {
+      "id": 1,
+      "name": "X",
+      "categoryId": 1,
+      "frequencyId": 3,
+      "trainrunTimeCategoryId": 0,
+      "labelIds": []
+    }
+  ],
+```
+- **id**: Technical identifier (key), must be unique : numeric
+- **name**: The name of the trainrun : string
+- **categoryId**: Reference to the [trainrunCategories](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#metadata) : numeric
+- **frequencyId**: Reference to the [trainrunFrequencies](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#metadata) : numeric
+- **trainrunTimeCategoryId**: Reference to the [trainrunTimeCategories](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#metadata) : numeric 
+- **labelIds**: Filterable labels assigned to the node are stored in this array of label identifiers : Arrey of integer
+
+
+
+
+
 ### metadata 
 
 
