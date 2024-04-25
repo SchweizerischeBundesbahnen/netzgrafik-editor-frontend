@@ -39,13 +39,192 @@ This is the basic data structure to represent the various elements in a JSON des
 
 See also [DATA_MODEL.md : business orientated description](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/documentation/JSON_DATA/documentation/DATA_MODEL.md#business-orientated-description)
 
+---
 
+### nodes 
+
+```json
+"nodes": [
+  {
+    "id": 1,
+    "betriebspunktName": "OL",
+    "fullName": "Olten",
+    "positionX": 832,
+    "positionY": 32,
+    "ports": [
+      {
+        "id": 0,
+        "trainrunSectionId": 0,
+        "positionIndex": 0,
+        "positionAlignment": 1
+      },
+      {
+        "id": 1,
+        "trainrunSectionId": 1,
+        "positionIndex": 0,
+        "positionAlignment": 0
+      },
+      {
+        "id": 2,
+        "trainrunSectionId": 2,
+        "positionIndex": 1,
+        "positionAlignment": 0
+      }, 
+    ],
+    "transitions": [
+      {
+        "id": 0,
+        "port1Id": 1,
+        "port2Id": 0,
+        "isNonStopTransit": true
+      }
+    ],
+    "connections": [
+      {
+        "id": 0,
+        "port1Id": 2,
+        "port2Id": 1, 
+      }
+    ],
+    "resourceId": 2,
+    "perronkanten": 10,
+    "connectionTime": 5,
+    "trainrunCategoryHaltezeiten": { },
+    "symmetryAxis": null,
+    "warnings": null,
+    "labelIds": []
+  },
+]
+```
+- **id**: Technical identifier (key), must be unique : numeric
+- **betriebspunktName**: Operation control point (OCP) : string
+- **fullName**: The full name of the operation control point : string
+- **positionX**: The X position - where the node is placed in the editor (map / horizontal position) : numeric
+- **positionY**: The Y position - where the node is placed in the editor (map / vertical position) : numeric
+- **ports** : The ports assigned to the node. (See also [node:port](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL.md#ports-alignment) : Array of ports
+- **transitions** : The trainrun [transitions](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL.md) assigned to the node : Array of transitions
+- **connections** : The trainrun connections in the node : Array of connections
+- **resourceId**: Reference to the resourceId : numeric
+- **perronkanten** : The number of platform (Perron) within the node : numeric
+- **connectionTime** : The connection time in minute which the infrastructure requires to change the platform : numeric
+- **trainrunCategoryHaltezeiten** : The stop time if the trainrun of product [A, B, C, D or IPV] have to do per default : trainrunCategoryHaltezeiten
+- **symmetryAxis** : Deprecated : null
+- **warnings**: If the business logic needs to notify the user about issues, a warning can be used in JSON format : Warning
+- **labelIds**: Filterable labels assigned to the node are stored in this array of label identifiers : Arrey of numeric 
+
+
+<details>
+<summary>
+More details about ports
+</summary>
+
+    
+  ```json
+  {
+    "id": 0,
+    "trainrunSectionId": 0,
+    "positionIndex": 0,
+    "positionAlignment": 1
+  }
+  ```
+
+  - **id**: Technical identifier (key), must be unique : numeric
+  - **trainrunSectionId**: Reference to the trainrunsection assigned to the port : numeric
+  - **positionIndex**: Position index within the port alignment sorting: numeric
+  - **positionAlignment**: [Position aligment](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL.md#ports-alignment) - reference [0, 1, 2, 3] : numeric 
+ 
+</details>
+
+<details>
+<summary>
+More details about transitions
+</summary>
+
+    
+  ```json
+  {
+    "id": 0,
+    "port1Id": 0,
+    "port2Id": 1,
+    "isNonStopTransit": true
+  }
+  ```
+
+  - **id**: Technical identifier (key), must be unique : numeric
+  - **port1Id**: Reference to the port from which the transition starts (port must be a member of the node) : numeric
+  - **port2Id**: Reference to the port to which the transition ends  (port must be a member of the node): numeric
+  - **isNonStopTransit**: If set to true the train will not stop at this node, otherwise (default) the trains stops : boolean
+ 
+</details>
+
+<details>
+<summary>
+More details about connections
+</summary>
+
+    
+  ```json
+  {
+    "id": 0,
+    "port1Id": 0,
+    "port2Id": 1, 
+  }
+  ```
+
+  - **id**: Technical identifier (key), must be unique : numeric
+  - **port1Id**: Reference to the port from which train made a connection to another (port must be a member of the node) : numeric
+  - **port2Id**: Reference to the port to which train made the connection to  (port must be a member of the node): numeric 
+ 
+</details>
+
+<details>
+<summary>
+More details about trainrunCategoryHaltezeiten
+</summary>
+
+    
+  ```json
+  "trainrunCategoryHaltezeiten": {
+    "HaltezeitA": {
+      "no_halt": false,
+      "haltezeit": 2
+    },
+    "HaltezeitB": {
+      "no_halt": false,
+      "haltezeit": 2
+    },
+    "HaltezeitC": {
+      "no_halt": false,
+      "haltezeit": 1
+    },
+    "HaltezeitD": {
+      "no_halt": false,
+      "haltezeit": 1
+    },
+    "HaltezeitIPV": {
+      "no_halt": false,
+      "haltezeit": 3
+    },
+    "HaltezeitUncategorized": {
+      "no_halt": true,
+      "haltezeit": 0
+    }
+  },
+  ```
+
+  - **id**: Technical identifier (key), must be unique : numeric
+  - **port1Id**: Reference to the port from which the transition starts (port must be a member of the node) : numeric
+  - **port1Id**: Reference to the port to which the transition ends  (port must be a member of the node): numeric
+  - **isNonStopTransit**: If set to true the train will not stop at this node, otherwise (default) the trains stops : boolean
+ 
+</details>
+    
 
 ---
 
 ### trainrunsections 
-```json
 
+```json
 "trainrunSections": [
   {
     "id": 0,
@@ -76,11 +255,11 @@ See also [DATA_MODEL.md : business orientated description](https://github.com/Sc
 - **sourcePortId**: Reference to the [node:port](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL.md#ports-alignment) : numeric
 - **targetNodeId**: Reference to the node : numeric 
 - **targetPortId**: Reference to the [node:port](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL.md#ports-alignment) : numeric 
-- **travelTime**: The travel time and lock information : TimeLock 
-- **sourceDeparture**: The departure time at source node in minute and lock information : TimeLock 
-- **sourceArrival**: The arrival time at source node in minute and lock information : TimeLock 
-- **targetDeparture**: The departure time at target node in minute and lock information : TimeLock 
-- **targetArrival**: The arrival time at source node in minute and lock information : TimeLock 
+- **travelTime**: The travel time and lock information : [TimeLock ](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#timelock) 
+- **sourceDeparture**: The departure time at source node in minute and lock information : [TimeLock ](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#timelock)
+- **sourceArrival**: The arrival time at source node in minute and lock information : [TimeLock ](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#timelock) 
+- **targetDeparture**: The departure time at target node in minute and lock information : [TimeLock ](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#timelock) 
+- **targetArrival**: The arrival time at source node in minute and lock information : [TimeLock ](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#timelock) 
 - **numberOfStops**: The number of intermediate stops: numeric 
 - **trainrunId**: Reference to the trainrunId : numeric
 - **resourceId**: Reference to the resourceId : numeric
@@ -154,6 +333,31 @@ More details about TimeLock
   ```
 
 </details>
+
+---
+
+### trainrun 
+
+```json
+  "trainruns": [
+    {
+      "id": 1,
+      "name": "X",
+      "categoryId": 1,
+      "frequencyId": 3,
+      "trainrunTimeCategoryId": 0,
+      "labelIds": []
+    }
+  ],
+```
+- **id**: Technical identifier (key), must be unique : numeric
+- **name**: The name of the trainrun : string
+- **categoryId**: Reference to the [trainrunCategories](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#metadata) : numeric
+- **frequencyId**: Reference to the [trainrunFrequencies](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#metadata) : numeric
+- **trainrunTimeCategoryId**: Reference to the [trainrunTimeCategories](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#metadata) : numeric 
+- **labelIds**: Filterable labels assigned to the node are stored in this array of label identifiers : Arrey of integer
+
+
 
 ---
 
@@ -388,3 +592,34 @@ Define the dayTimeIntervalElement
 - **from** : interval starts at time (include), in minute : numeric
 - **to** : interval ends at time (include), in minute : numeric 
 </details>
+
+--- 
+### freeFloatingTexts
+
+```JSON
+"freeFloatingTexts": [
+  {
+    "id": 1,
+    "x": 1147,
+    "y": 267,
+    "width": 192,
+    "height": 64,
+    "title": "Titel",
+    "text": "Text",
+    "backgroundColor": "#ffffff",
+    "textColor": "#000000",
+    "labelIds": []
+  }
+],
+```
+- **id**: Technical identifier (key), must be unique : numeric
+- **x**: The X position - where the node is placed in the editor (map / horizontal position) : numeric
+- **y**: The Y position - where the node is placed in the editor (map / vertical position) : numeric
+- **width**: The width of the text box : numeric
+- **height**: The height of the text box : numeric  
+- **title**: The title of the node (freeFloatingTexts) : string
+- **text**: The text (description) of the node : string
+- **backgroundColor**: HTML color as HEX for the background: string
+- **textColor**: HTML color as HEX for the text: string
+- **labelIds**: Filterable labels assigned to the node are stored in this array of label identifiers : Arrey of integer
+
