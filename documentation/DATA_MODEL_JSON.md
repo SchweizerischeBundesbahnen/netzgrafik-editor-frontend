@@ -87,8 +87,8 @@ See also [DATA_MODEL.md : business orientated description](https://github.com/Sc
 - **id**: Technical identifier (key), must be unique : numeric
 - **betriebspunktName**: Operation control point (OCP) : string
 - **fullName**: The full name of the operation control point : string
-- **positionX**: The X position - where the node is placed in the editor (map / horizontal position) : integer
-- **positionY**: The Y position - where the node is placed in the editor (map / vertical position) : integer
+- **positionX**: The X position - where the node is placed in the editor (map / horizontal position) : numeric
+- **positionY**: The Y position - where the node is placed in the editor (map / vertical position) : numeric
 - **ports** : The ports assigned to the node. (See also [node:port](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL.md#ports-alignment) : Array of ports
 - **transitions** : The trainrun [transitions](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL.md) assigned to the node : Array of transitions
 - **connections** : The trainrun connections in the node : Array of connections
@@ -98,7 +98,7 @@ See also [DATA_MODEL.md : business orientated description](https://github.com/Sc
 - **trainrunCategoryHaltezeiten** : The stop time if the trainrun of product [A, B, C, D or IPV] have to do per default : trainrunCategoryHaltezeiten
 - **symmetryAxis** : Deprecated : null
 - **warnings**: If the business logic needs to notify the user about issues, a warning can be used in JSON format : Warning
-- **labelIds**: Filterable labels assigned to the node are stored in this array of label identifiers : Arrey of integer 
+- **labelIds**: Filterable labels assigned to the node are stored in this array of label identifiers : Arrey of numeric 
 
 
 <details>
@@ -561,3 +561,34 @@ Define the dayTimeIntervalElement
 - **from** : interval starts at time (include), in minute : numeric
 - **to** : interval ends at time (include), in minute : numeric 
 </details>
+
+--- 
+### freeFloatingTexts
+
+```JSON
+"freeFloatingTexts": [
+  {
+    "id": 1,
+    "x": 1147,
+    "y": 267,
+    "width": 192,
+    "height": 64,
+    "title": "Titel",
+    "text": "Text",
+    "backgroundColor": "#ffffff",
+    "textColor": "#000000",
+    "labelIds": []
+  }
+],
+```
+- **id**: Technical identifier (key), must be unique : numeric
+- **x**: The X position - where the node is placed in the editor (map / horizontal position) : numeric
+- **y**: The Y position - where the node is placed in the editor (map / vertical position) : numeric
+- **width**: The width of the text box : numeric
+- **height**: The height of the text box : numeric  
+- **title**: The title of the node (freeFloatingTexts) : string
+- **text**: The text (description) of the node : string
+- **backgroundColor**: HTML color as HEX for the background: string
+- **textColor**: HTML color as HEX for the text: string
+- **labelIds**: Filterable labels assigned to the node are stored in this array of label identifiers : Arrey of integer
+
