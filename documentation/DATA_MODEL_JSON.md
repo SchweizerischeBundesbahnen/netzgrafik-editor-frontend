@@ -140,11 +140,30 @@ More details about transitions
 
   - **id**: Technical identifier (key), must be unique : numeric
   - **port1Id**: Reference to the port from which the transition starts (port must be a member of the node) : numeric
-  - **port1Id**: Reference to the port to which the transition ends  (port must be a member of the node): numeric
+  - **port2Id**: Reference to the port to which the transition ends  (port must be a member of the node): numeric
   - **isNonStopTransit**: If set to true the train will not stop at this node, otherwise (default) the trains stops : boolean
  
 </details>
 
+<details>
+<summary>
+More details about connections
+</summary>
+
+    
+  ```json
+  {
+    "id": 0,
+    "port1Id": 0,
+    "port2Id": 1, 
+  }
+  ```
+
+  - **id**: Technical identifier (key), must be unique : numeric
+  - **port1Id**: Reference to the port from which train made a connection to another (port must be a member of the node) : numeric
+  - **port2Id**: Reference to the port to which train made the connection to  (port must be a member of the node): numeric 
+ 
+</details>
 
 <details>
 <summary>
