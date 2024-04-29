@@ -217,10 +217,9 @@ export class UiInteractionService implements OnDestroy {
   }
 
 
-  private checkIsElementPositionInViewport(pos: Vec2D, strSvgName: string, extraPixelsIn = 32): ViewportOut[] {
+  private checkIsElementPositionInViewport(pos: Vec2D, strSvgName: string, extraPixels = 64): ViewportOut[] {
 
     const vp = this.getViewboxProperties(strSvgName);
-    const extraPixels = extraPixelsIn / (vp.zoomFactor * 100);
     const x0 = Number(vp.panZoomLeft) - extraPixels;
     const y0 = Number(vp.panZoomTop) - extraPixels;
     const x1 = x0 + Number(vp.panZoomWidth) + 2.0 * extraPixels;
