@@ -40,6 +40,7 @@ import {LoadPerlenketteService} from "../../perlenkette/service/load-perlenkette
 import {
   TravelTimeCreationEstimatorType
 } from "../../view/themes/editor-trainrun-traveltime-creator-type";
+import {ViewportOut} from "../../view/editor-main-view/data-views/editor.view";
 
 export interface ViewboxProperties {
   currentViewBox: string;
@@ -125,6 +126,8 @@ export class UiInteractionService implements OnDestroy {
   private filterWindowType = null;
   private oldSelectedTrainrunId: number = null;
 
+  private doCheckIsInViewport = true;
+
   constructor(
     private filterService: FilterService,
     private nodeService: NodeService,
@@ -203,6 +206,66 @@ export class UiInteractionService implements OnDestroy {
 
   setViewboxProperties(key: string, viewboxProperties: ViewboxProperties) {
     this.windowViewboxPropertiesMap[key] = Object.assign({}, viewboxProperties);
+  }
+
+  onViewportChangeUpdateRendering(doCheckIsInViewport: boolean = true) {
+    this.doCheckIsInViewport = doCheckIsInViewport;
+    this.nodeService.nodesUpdated();
+    this.nodeService.connectionsUpdated();
+    this.nodeService.transitionsUpdated();
+    this.trainrunSectionService.trainrunSectionsUpdated();
+  }
+
+
+  private checkIsElementPositionInViewport(pos: Vec2D, strSvgName: string, extraPixelsIn = 32): ViewportOut {
+
+    const vp = this.getViewboxProperties(strSvgName);
+    const extraPixels = extraPixelsIn / (vp.zoomFactor * 100);
+    const x0 = Number(vp.panZoomLeft) - extraPixels;
+    const y0 = Number(vp.panZoomTop) - extraPixels;
+    const x1 = x0 + Number(vp.panZoomWidth) + 2.0 * extraPixels;
+    const y1 = y0 + Number(vp.panZoomHeight) + 2.0 * extraPixels;
+
+    if (pos.getX() < x0) {
+      return ViewportOut.LeftOutside;
+    }
+    if (pos.getX() > x1) {
+      return ViewportOut.RightOutside;
+    }
+    if (pos.getY() < y0) {
+      return ViewportOut.TopOutside;
+    }
+    if (pos.getY() > y1) {
+      return ViewportOut.BottomOutside;
+    }
+    return ViewportOut.ElmentIsInside;
+  }
+
+  checkIsPositionInViewport(positions: Vec2D[], strSvgName, extraPixelsIn = 32): boolean {
+    if (!this.doCheckIsInViewport) {
+      return true;
+    }
+    // check whether an element is inside the "Viewport", or the spanned object overlays the
+    // viewport box
+    const mappedPositions = positions.map((el: Vec2D) =>
+      this.checkIsElementPositionInViewport(el, strSvgName, extraPixelsIn));
+
+    if (mappedPositions.find(el => el === ViewportOut.ElmentIsInside) !== undefined) {
+      // check whether an element is inside the "Viewport"
+      return true;
+    }
+    if (mappedPositions.find(el => el === ViewportOut.LeftOutside) !== undefined) {
+      if (mappedPositions.find(el => el === ViewportOut.RightOutside) !== undefined) {
+        return true;
+      }
+    } else {
+      if (mappedPositions.find(el => el === ViewportOut.TopOutside) !== undefined) {
+        if (mappedPositions.find(el => el === ViewportOut.BottomOutside) !== undefined) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   loadActiveTheme() {

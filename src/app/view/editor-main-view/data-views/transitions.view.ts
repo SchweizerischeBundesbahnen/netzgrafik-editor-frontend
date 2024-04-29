@@ -242,7 +242,8 @@ export class TransitionsView {
     }
 
     const transitions = inputTransitions.filter((t) =>
-      this.filtertransitionToDisplay(t, t.getTrainrun()),
+      this.filtertransitionToDisplay(t, t.getTrainrun()) &&
+      this.editorView.checkIsPositionInViewport(t.getPath())
     );
     this.createTransitions(
       transitions,

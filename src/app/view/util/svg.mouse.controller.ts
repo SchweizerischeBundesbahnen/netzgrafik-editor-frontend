@@ -76,6 +76,8 @@ export class SVGMouseController {
   }
 
   resize(width: number, height: number) {
+    const oldW = this.svgDrawingContext.attr("width");
+    const oldH = this.svgDrawingContext.attr("height");
     this.svgDrawingContext.attr("width", width);
     this.svgDrawingContext.attr("height", height);
     if (
@@ -89,6 +91,13 @@ export class SVGMouseController {
       this.viewboxProperties.panZoomTop = 0;
       this.viewboxProperties.panZoomHeight = height;
       this.viewboxProperties.panZoomWidth = width;
+    } else {
+      const dW = width - oldW;
+      const dH = height - oldH;
+      this.viewboxProperties.panZoomLeft -= dW / 2;
+      this.viewboxProperties.panZoomTop -= dH / 2;
+      this.viewboxProperties.panZoomWidth += dW;
+      this.viewboxProperties.panZoomHeight += dH;
     }
     this.setViewbox();
     this.svgMouseControllerObserver.zoomFactorChanged(
