@@ -106,6 +106,12 @@ export class NodesView {
           ),
           new Vec2D(
             n.getPositionX() + n.getNodeWidth(),
+            n.getPositionY()),
+          new Vec2D(
+            n.getPositionX(),
+            n.getPositionY() + n.getNodeHeight()),
+          new Vec2D(
+            n.getPositionX() + n.getNodeWidth(),
             n.getPositionY() + n.getNodeHeight())
         ])
     );
