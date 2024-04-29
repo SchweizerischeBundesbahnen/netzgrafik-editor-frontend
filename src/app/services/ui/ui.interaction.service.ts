@@ -258,18 +258,25 @@ export class UiInteractionService implements OnDestroy {
       // check whether an element is inside the "Viewport"
       return true;
     }
-    if (mappedPositions.find(el => el.find( el2 => el2 === ViewportOut.LeftOutside) !== undefined) !== undefined) {
-      if (mappedPositions.find(el => el.find( el2 => el2 === ViewportOut.RightOutside) !== undefined) !== undefined) {
-        return true;
-      }
-    } else {
-      if (mappedPositions.find(el => el.find( el2 => el2 === ViewportOut.TopOutside) !== undefined) !== undefined) {
-        if (mappedPositions.find(el => el.find( el2 => el2 === ViewportOut.BottomOutside) !== undefined) !== undefined) {
-          return true;
-        }
-      }
+
+    const topOutside = mappedPositions.filter( el => el.find( el2 => el2 === ViewportOut.TopOutside) !== undefined);
+    if (topOutside.length === mappedPositions.length){
+      return false;
     }
-    return false;
+    const bottomOutside = mappedPositions.filter( el => el.find( el2 => el2 === ViewportOut.BottomOutside) !== undefined);
+    if (bottomOutside.length === mappedPositions.length){
+      return false;
+    }
+    const leftOutside = mappedPositions.filter( el => el.find( el2 => el2 === ViewportOut.LeftOutside) !== undefined);
+    if (leftOutside.length === mappedPositions.length){
+      return false;
+    }
+    const rightOutside = mappedPositions.filter( el => el.find( el2 => el2 === ViewportOut.RightOutside) !== undefined);
+    if (rightOutside.length === mappedPositions.length){
+      return false;
+    }
+
+    return true;
   }
 
   loadActiveTheme() {
