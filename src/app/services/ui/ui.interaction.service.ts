@@ -217,7 +217,7 @@ export class UiInteractionService implements OnDestroy {
   }
 
 
-  private checkIsElementPositionInViewport(pos: Vec2D, strSvgName: string, extraPixelsIn = 32): ViewportOut {
+  private checkIsElementPositionInViewport(pos: Vec2D, strSvgName: string, extraPixelsIn = 32): ViewportOut[] {
 
     const vp = this.getViewboxProperties(strSvgName);
     const extraPixels = extraPixelsIn / (vp.zoomFactor * 100);
@@ -226,19 +226,23 @@ export class UiInteractionService implements OnDestroy {
     const x1 = x0 + Number(vp.panZoomWidth) + 2.0 * extraPixels;
     const y1 = y0 + Number(vp.panZoomHeight) + 2.0 * extraPixels;
 
+    const retOut : ViewportOut[] = [];
     if (pos.getX() < x0) {
-      return ViewportOut.LeftOutside;
+      retOut.push( ViewportOut.LeftOutside);
     }
     if (pos.getX() > x1) {
-      return ViewportOut.RightOutside;
+      retOut.push( ViewportOut.RightOutside);
     }
     if (pos.getY() < y0) {
-      return ViewportOut.TopOutside;
+      retOut.push( ViewportOut.TopOutside);
     }
     if (pos.getY() > y1) {
-      return ViewportOut.BottomOutside;
+      retOut.push( ViewportOut.BottomOutside);
     }
-    return ViewportOut.ElmentIsInside;
+    if (retOut.length === 0 ) {
+      return [ViewportOut.ElmentIsInside];
+    }
+    return retOut;
   }
 
   checkIsPositionInViewport(positions: Vec2D[], strSvgName, extraPixelsIn = 32): boolean {
@@ -250,17 +254,17 @@ export class UiInteractionService implements OnDestroy {
     const mappedPositions = positions.map((el: Vec2D) =>
       this.checkIsElementPositionInViewport(el, strSvgName, extraPixelsIn));
 
-    if (mappedPositions.find(el => el === ViewportOut.ElmentIsInside) !== undefined) {
+    if (mappedPositions.find(el => el.find( el2 => el2 === ViewportOut.ElmentIsInside) !== undefined) !== undefined) {
       // check whether an element is inside the "Viewport"
       return true;
     }
-    if (mappedPositions.find(el => el === ViewportOut.LeftOutside) !== undefined) {
-      if (mappedPositions.find(el => el === ViewportOut.RightOutside) !== undefined) {
+    if (mappedPositions.find(el => el.find( el2 => el2 === ViewportOut.LeftOutside) !== undefined) !== undefined) {
+      if (mappedPositions.find(el => el.find( el2 => el2 === ViewportOut.RightOutside) !== undefined) !== undefined) {
         return true;
       }
     } else {
-      if (mappedPositions.find(el => el === ViewportOut.TopOutside) !== undefined) {
-        if (mappedPositions.find(el => el === ViewportOut.BottomOutside) !== undefined) {
+      if (mappedPositions.find(el => el.find( el2 => el2 === ViewportOut.TopOutside) !== undefined) !== undefined) {
+        if (mappedPositions.find(el => el.find( el2 => el2 === ViewportOut.BottomOutside) !== undefined) !== undefined) {
           return true;
         }
       }
