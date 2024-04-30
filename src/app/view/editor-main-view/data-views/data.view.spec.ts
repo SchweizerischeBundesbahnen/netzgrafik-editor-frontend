@@ -179,10 +179,10 @@ describe("Editor-DataView", () => {
     const node = nodeService.getNodeFromId(2);
 
     const cvo1 = new NodeViewObject(editorView, node, false);
-    expect(cvo1.key).toBe("#2@736_64_ZUE_6_5_96_124_false_2_false_true_false");
+    expect(cvo1.key).toBe("#2@736_64_ZUE_6_5_96_124_false_2_false_true_false_0");
 
     const cvo2 = new NodeViewObject(editorView, node, true);
-    expect(cvo2.key).toBe("#2@736_64_ZUE_6_5_96_124_false_2_true_true_false");
+    expect(cvo2.key).toBe("#2@736_64_ZUE_6_5_96_124_false_2_true_true_false_0");
   });
 
   it("NodeViewObject   - 001", () => {
@@ -213,7 +213,7 @@ describe("Editor-DataView", () => {
       false,
     );
     expect(cvo1.key).toBe(
-      "#3@1234_false_0_39_49_1_21_39_0_39_141_39_0_39_0_20_0_S_20_7/24_4_1_0_S_20_7/24_20_0_false_false_false_false_false_false_false_false_true_true_true_false_false_true_true_2_true_true_true_1_false_true_true_0_false_true_true(130,80)(194,80)(254,80)(318,80)",
+      "#3@1234_false_0_39_49_1_21_39_0_39_141_39_0_39_0_20_0_S_20_7/24_4_1_0_S_20_7/24_20_0_false_false_false_false_false_false_false_false_true_true_true_false_false_true_true_2_true_true_true_1_false_true_true_0_false_true_true(130,80)(194,80)(254,80)(318,80)_0",
     );
   });
 
