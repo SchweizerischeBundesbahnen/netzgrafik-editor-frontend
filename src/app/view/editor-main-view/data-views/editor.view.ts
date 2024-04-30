@@ -33,7 +33,7 @@ import {CopyService} from "../../../services/data/copy.service";
 import {StreckengrafikDrawingContext} from "../../../streckengrafik/model/util/streckengrafik.drawing.context";
 
 export enum ViewportOut {
-  ElmentIsInside,
+  ElementIsInside,
   LeftOutside,
   RightOutside,
   TopOutside,

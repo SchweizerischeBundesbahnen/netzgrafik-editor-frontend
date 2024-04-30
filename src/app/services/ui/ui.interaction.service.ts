@@ -240,7 +240,7 @@ export class UiInteractionService implements OnDestroy {
       retOut.push( ViewportOut.BottomOutside);
     }
     if (retOut.length === 0 ) {
-      return [ViewportOut.ElmentIsInside];
+      return [ViewportOut.ElementIsInside];
     }
     return retOut;
   }
@@ -254,7 +254,7 @@ export class UiInteractionService implements OnDestroy {
     const mappedPositions = positions.map((el: Vec2D) =>
       this.checkIsElementPositionInViewport(el, strSvgName, extraPixelsIn));
 
-    if (mappedPositions.find(el => el.find( el2 => el2 === ViewportOut.ElmentIsInside) !== undefined) !== undefined) {
+    if (mappedPositions.find(el => el.find( el2 => el2 === ViewportOut.ElementIsInside) !== undefined) !== undefined) {
       // check whether an element is inside the "Viewport"
       return true;
     }
