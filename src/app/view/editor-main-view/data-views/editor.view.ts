@@ -32,6 +32,14 @@ import {UndoService} from "../../../services/data/undo.service";
 import {CopyService} from "../../../services/data/copy.service";
 import {StreckengrafikDrawingContext} from "../../../streckengrafik/model/util/streckengrafik.drawing.context";
 
+export enum ViewportOut {
+  ElementIsInside,
+  LeftOutside,
+  RightOutside,
+  TopOutside,
+  BottomOutside,
+}
+
 export class EditorView implements SVGMouseControllerObserver {
   static svgName = "graphContainer";
   editorMode: EditorMode = EditorMode.NetzgrafikEditing;
@@ -442,7 +450,7 @@ export class EditorView implements SVGMouseControllerObserver {
     if (!this.isMultiSelectOn) {
       return;
     }
-    
+
     const allNodesOfInterest = this.nodeService.getNodes().filter((n: Node) => {
       this.nodeService.unselectNode(n.getId(), false);
       if (this.filterService.filterNode(n)) {
@@ -572,6 +580,7 @@ export class EditorView implements SVGMouseControllerObserver {
 
   zoomFactorChanged(newZoomFactor: number) {
     this.controller.zoomFactorChanged(newZoomFactor);
+    this.uiInteractionService.onViewportChangeUpdateRendering(true);
   }
 
   onViewboxChanged(viewboxProperties: ViewboxProperties) {
@@ -579,6 +588,14 @@ export class EditorView implements SVGMouseControllerObserver {
       EditorView.svgName,
       viewboxProperties,
     );
+    this.uiInteractionService.onViewportChangeUpdateRendering(true);
+  }
+
+  doCullCheckPositionsInViewport(positions: Vec2D[], extraPixelsIn = 32): boolean {
+    return this.uiInteractionService.cullCheckPositionsInViewport(
+      positions,
+      EditorView.svgName,
+      extraPixelsIn);
   }
 
   setEditorMode(mode: EditorMode) {

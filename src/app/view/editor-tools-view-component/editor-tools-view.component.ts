@@ -117,6 +117,8 @@ export class EditorToolsViewComponent {
   onExportNetzgrafikSVG() {
     // option 2: save svg as svg
     // https://www.npmjs.com/package/save-svg-as-png
+    this.uiInteractionService.onViewportChangeUpdateRendering(false);
+
     const containerInfo = this.getContainertoExport();
     svg
       .svgAsDataUri(
@@ -146,6 +148,8 @@ export class EditorToolsViewComponent {
   onExportNetzgrafikPNG() {
     // option 1: save svg as png
     // https://www.npmjs.com/package/save-svg-as-png
+    this.uiInteractionService.onViewportChangeUpdateRendering(false);
+
     const containerInfo = this.getContainertoExport();
     svg.saveSvgAsPng(
       containerInfo.documentToExport,
@@ -307,10 +311,12 @@ export class EditorToolsViewComponent {
       "main-streckengrafik-container",
     );
     let param = {};
-    console.log(htmlElementToExport);
+    console.log("Try -1- (main-streckengrafik-container): ", htmlElementToExport !== null);
 
     if (htmlElementToExport === null) {
       htmlElementToExport = document.getElementById("graphContainer");
+      console.log("Try -2- (graphContainer): ", htmlElementToExport !== null);
+
       const boundingBox = this.getNetzgrafikBoundingBox();
       param = {
         encoderOptions: 1.0,

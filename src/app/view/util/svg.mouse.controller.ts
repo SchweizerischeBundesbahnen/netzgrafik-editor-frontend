@@ -89,6 +89,10 @@ export class SVGMouseController {
       this.viewboxProperties.panZoomTop = 0;
       this.viewboxProperties.panZoomHeight = height;
       this.viewboxProperties.panZoomWidth = width;
+    } else {
+      this.viewboxProperties.origHeight = height;
+      this.viewboxProperties.origWidth = width;
+      this.updateZoomCenter(new Vec2D(0.5, 0.5));
     }
     this.setViewbox();
     this.svgMouseControllerObserver.zoomFactorChanged(

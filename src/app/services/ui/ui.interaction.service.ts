@@ -40,6 +40,7 @@ import {LoadPerlenketteService} from "../../perlenkette/service/load-perlenkette
 import {
   TravelTimeCreationEstimatorType
 } from "../../view/themes/editor-trainrun-traveltime-creator-type";
+import {ViewportOut} from "../../view/editor-main-view/data-views/editor.view";
 
 export interface ViewboxProperties {
   currentViewBox: string;
@@ -125,6 +126,8 @@ export class UiInteractionService implements OnDestroy {
   private filterWindowType = null;
   private oldSelectedTrainrunId: number = null;
 
+  private doCheckIsInViewport = true;
+
   constructor(
     private filterService: FilterService,
     private nodeService: NodeService,
@@ -203,6 +206,77 @@ export class UiInteractionService implements OnDestroy {
 
   setViewboxProperties(key: string, viewboxProperties: ViewboxProperties) {
     this.windowViewboxPropertiesMap[key] = Object.assign({}, viewboxProperties);
+  }
+
+  onViewportChangeUpdateRendering(doCheckIsInViewport: boolean = true) {
+    // The doCheckIsInViewport should only be set to false when the entire netzgrafik
+    // needs to be rendered, for example, when the entire graphic has to be exported
+    // as SVG or PNG.
+    this.doCheckIsInViewport = doCheckIsInViewport;
+    this.nodeService.nodesUpdated();
+    this.nodeService.connectionsUpdated();
+    this.nodeService.transitionsUpdated();
+    this.trainrunSectionService.trainrunSectionsUpdated();
+  }
+
+  private checkIsElementPositionInViewport(pos: Vec2D, strSvgName: string, extraPixels = 64): ViewportOut[] {
+    const vp = this.getViewboxProperties(strSvgName);
+    const x0 = Number(vp.panZoomLeft) - extraPixels;
+    const y0 = Number(vp.panZoomTop) - extraPixels;
+    const x1 = x0 + Number(vp.panZoomWidth) + 2.0 * extraPixels;
+    const y1 = y0 + Number(vp.panZoomHeight) + 2.0 * extraPixels;
+
+    const retOut : ViewportOut[] = [];
+    if (pos.getX() < x0) {
+      retOut.push( ViewportOut.LeftOutside);
+    }
+    if (pos.getX() > x1) {
+      retOut.push( ViewportOut.RightOutside);
+    }
+    if (pos.getY() < y0) {
+      retOut.push( ViewportOut.TopOutside);
+    }
+    if (pos.getY() > y1) {
+      retOut.push( ViewportOut.BottomOutside);
+    }
+    if (retOut.length === 0 ) {
+      return [ViewportOut.ElementIsInside];
+    }
+    return retOut;
+  }
+
+  cullCheckPositionsInViewport(positions: Vec2D[], strSvgName, extraPixelsIn = 32): boolean {
+    if (!this.doCheckIsInViewport) {
+      return true;
+    }
+    // check whether an element is inside the "Viewport", or the spanned object overlays the
+    // viewport box
+    const mappedPositions = positions.map((el: Vec2D) =>
+      this.checkIsElementPositionInViewport(el, strSvgName, extraPixelsIn));
+
+    if (mappedPositions.find(el => el.find( el2 => el2 === ViewportOut.ElementIsInside) !== undefined) !== undefined) {
+      // check whether an element is inside the "Viewport"
+      return true;
+    }
+
+    const topOutside = mappedPositions.filter( el => el.find( el2 => el2 === ViewportOut.TopOutside) !== undefined);
+    if (topOutside.length === mappedPositions.length){
+      return false;
+    }
+    const bottomOutside = mappedPositions.filter( el => el.find( el2 => el2 === ViewportOut.BottomOutside) !== undefined);
+    if (bottomOutside.length === mappedPositions.length){
+      return false;
+    }
+    const leftOutside = mappedPositions.filter( el => el.find( el2 => el2 === ViewportOut.LeftOutside) !== undefined);
+    if (leftOutside.length === mappedPositions.length){
+      return false;
+    }
+    const rightOutside = mappedPositions.filter( el => el.find( el2 => el2 === ViewportOut.RightOutside) !== undefined);
+    if (rightOutside.length === mappedPositions.length){
+      return false;
+    }
+
+    return true;
   }
 
   loadActiveTheme() {
