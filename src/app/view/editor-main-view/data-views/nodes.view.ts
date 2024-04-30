@@ -98,7 +98,7 @@ export class NodesView {
   displayNodes(inputNodes: Node[]) {
     const nodes = inputNodes.filter((n) =>
       this.filterNodesToDisplay(n) &&
-      this.editorView.checkIsPositionInViewport(
+      this.editorView.doCullCheckPositionsInViewport(
         [
           new Vec2D(
             n.getPositionX(),

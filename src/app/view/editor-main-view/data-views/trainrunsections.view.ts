@@ -1660,7 +1660,7 @@ export class TrainrunSectionsView {
     const filteredTrainrunSections = trainrunSections.filter(
       (trainrunSection: TrainrunSection) =>
         this.filterTrainrunSectionToDisplay(trainrunSection) &&
-        this.editorView.checkIsPositionInViewport(trainrunSection.getPath())
+        this.editorView.doCullCheckPositionsInViewport(trainrunSection.getPath())
     );
 
     const group = this.trainrunSectionGroup

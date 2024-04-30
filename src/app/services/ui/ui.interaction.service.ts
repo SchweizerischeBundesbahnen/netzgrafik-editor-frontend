@@ -209,6 +209,9 @@ export class UiInteractionService implements OnDestroy {
   }
 
   onViewportChangeUpdateRendering(doCheckIsInViewport: boolean = true) {
+    // The doCheckIsInViewport should only be set to false when the entire netzgrafik
+    // needs to be rendered, for example, when the entire graphic has to be exported
+    // as SVG or PNG.
     this.doCheckIsInViewport = doCheckIsInViewport;
     this.nodeService.nodesUpdated();
     this.nodeService.connectionsUpdated();
@@ -216,9 +219,7 @@ export class UiInteractionService implements OnDestroy {
     this.trainrunSectionService.trainrunSectionsUpdated();
   }
 
-
   private checkIsElementPositionInViewport(pos: Vec2D, strSvgName: string, extraPixels = 64): ViewportOut[] {
-
     const vp = this.getViewboxProperties(strSvgName);
     const x0 = Number(vp.panZoomLeft) - extraPixels;
     const y0 = Number(vp.panZoomTop) - extraPixels;
@@ -244,7 +245,7 @@ export class UiInteractionService implements OnDestroy {
     return retOut;
   }
 
-  checkIsPositionInViewport(positions: Vec2D[], strSvgName, extraPixelsIn = 32): boolean {
+  cullCheckPositionsInViewport(positions: Vec2D[], strSvgName, extraPixelsIn = 32): boolean {
     if (!this.doCheckIsInViewport) {
       return true;
     }

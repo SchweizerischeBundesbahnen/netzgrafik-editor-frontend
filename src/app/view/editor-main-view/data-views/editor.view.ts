@@ -591,8 +591,8 @@ export class EditorView implements SVGMouseControllerObserver {
     this.uiInteractionService.onViewportChangeUpdateRendering(true);
   }
 
-  checkIsPositionInViewport(positions: Vec2D[], extraPixelsIn = 32): boolean {
-    return this.uiInteractionService.checkIsPositionInViewport(
+  doCullCheckPositionsInViewport(positions: Vec2D[], extraPixelsIn = 32): boolean {
+    return this.uiInteractionService.cullCheckPositionsInViewport(
       positions,
       EditorView.svgName,
       extraPixelsIn);
