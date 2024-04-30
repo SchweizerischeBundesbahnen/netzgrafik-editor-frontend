@@ -76,8 +76,6 @@ export class SVGMouseController {
   }
 
   resize(width: number, height: number) {
-    const oldW = this.svgDrawingContext.attr("width");
-    const oldH = this.svgDrawingContext.attr("height");
     this.svgDrawingContext.attr("width", width);
     this.svgDrawingContext.attr("height", height);
     if (
