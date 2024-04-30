@@ -133,7 +133,9 @@ export class TrainrunSectionViewObject {
       "_" +
       editorView.checkFilterNode(d.getSourceNode()) +
       "_" +
-      editorView.checkFilterNode(d.getTargetNode());
+      editorView.checkFilterNode(d.getTargetNode()) +
+      "_" +
+      editorView.getLevelOfDetail();
 
     cumulativeTravelTimeData.forEach((data) => {
       key += "_" + data.node.getId();

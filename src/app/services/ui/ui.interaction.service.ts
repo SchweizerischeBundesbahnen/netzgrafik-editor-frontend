@@ -40,7 +40,6 @@ import {LoadPerlenketteService} from "../../perlenkette/service/load-perlenkette
 import {
   TravelTimeCreationEstimatorType
 } from "../../view/themes/editor-trainrun-traveltime-creator-type";
-import {ViewportOut} from "../../view/editor-main-view/data-views/editor.view";
 
 export interface ViewboxProperties {
   currentViewBox: string;
@@ -51,6 +50,22 @@ export interface ViewboxProperties {
   zoomFactor: number;
   origWidth: number;
   origHeight: number;
+}
+
+export enum ViewportOut {
+  ElementIsInside,
+  LeftOutside,
+  RightOutside,
+  TopOutside,
+  BottomOutside,
+}
+
+export enum LevelOfDetail {
+  FULL, // precise >= 50%
+  LEVEL3, // ..  30 - 40 %
+  LEVEL2, // ..  20 - 30 %
+  LEVEL1, // ... 10 - 20 %
+  LEVEL0, // approximated geometry <= 10%
 }
 
 @Injectable({
@@ -127,6 +142,7 @@ export class UiInteractionService implements OnDestroy {
   private oldSelectedTrainrunId: number = null;
 
   private doCheckIsInViewport = true;
+  private levelOfDetail: LevelOfDetail = LevelOfDetail.FULL;
 
   constructor(
     private filterService: FilterService,
@@ -179,6 +195,8 @@ export class UiInteractionService implements OnDestroy {
       .subscribe((type: FilterWindowType | null) => {
         this.filterWindowType = type;
       });
+
+    this.handleLevelOfDetail();
   }
 
   ngOnDestroy(): void {
@@ -206,6 +224,35 @@ export class UiInteractionService implements OnDestroy {
 
   setViewboxProperties(key: string, viewboxProperties: ViewboxProperties) {
     this.windowViewboxPropertiesMap[key] = Object.assign({}, viewboxProperties);
+  }
+
+  private handleLevelOfDetail() {
+    this.levelOfDetail = LevelOfDetail.FULL;
+
+    this.zoomFactorObservable
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((changedZoomFactor) => {
+        this.levelOfDetail = LevelOfDetail.FULL;
+        if (changedZoomFactor < 50) {
+          this.levelOfDetail = LevelOfDetail.LEVEL3;
+          if (changedZoomFactor < 40) {
+            this.levelOfDetail = LevelOfDetail.LEVEL2;
+            if (changedZoomFactor < 30) {
+              this.levelOfDetail = LevelOfDetail.LEVEL1;
+              if (changedZoomFactor < 20) {
+                this.levelOfDetail = LevelOfDetail.LEVEL0;
+              }
+            }
+          }
+        }
+      });
+  }
+
+  getLevelOfDetail(): LevelOfDetail {
+    if (!this.doCheckIsInViewport) {
+      return LevelOfDetail.FULL;
+    }
+    return this.levelOfDetail;
   }
 
   onViewportChangeUpdateRendering(doCheckIsInViewport: boolean = true) {
@@ -245,7 +292,7 @@ export class UiInteractionService implements OnDestroy {
     return retOut;
   }
 
-  cullCheckPositionsInViewport(positions: Vec2D[], strSvgName, extraPixelsIn = 32): boolean {
+  cullCheckPositionsInViewport(positions: Vec2D[], strSvgName : string, extraPixelsIn = 32): boolean {
     if (!this.doCheckIsInViewport) {
       return true;
     }

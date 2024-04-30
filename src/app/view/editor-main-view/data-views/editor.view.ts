@@ -32,14 +32,6 @@ import {UndoService} from "../../../services/data/undo.service";
 import {CopyService} from "../../../services/data/copy.service";
 import {StreckengrafikDrawingContext} from "../../../streckengrafik/model/util/streckengrafik.drawing.context";
 
-export enum ViewportOut {
-  ElementIsInside,
-  LeftOutside,
-  RightOutside,
-  TopOutside,
-  BottomOutside,
-}
-
 export class EditorView implements SVGMouseControllerObserver {
   static svgName = "graphContainer";
   editorMode: EditorMode = EditorMode.NetzgrafikEditing;
@@ -596,6 +588,10 @@ export class EditorView implements SVGMouseControllerObserver {
       positions,
       EditorView.svgName,
       extraPixelsIn);
+  }
+
+  getLevelOfDetail() {
+    return this.uiInteractionService.getLevelOfDetail();
   }
 
   setEditorMode(mode: EditorMode) {

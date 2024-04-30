@@ -27,6 +27,7 @@ import {Node} from "../../../models/node.model";
 import {EditorMode} from "../../editor-menu/editor-mode";
 import {Transition} from "../../../models/transition.model";
 import {InformSelectedTrainrunClick} from "../../../services/data/trainrunsection.service";
+import {LevelOfDetail} from "../../../services/ui/ui.interaction.service";
 
 export class TrainrunSectionsView {
   trainrunSectionGroup;
@@ -996,6 +997,10 @@ export class TrainrunSectionsView {
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
   ) {
+    if (this.skipElementLevelOfDetail(LevelOfDetail.FULL)) {
+      return;
+    }
+
     const atSource =
       lineTextElement === TrainrunSectionText.SourceArrival ||
       lineTextElement === TrainrunSectionText.SourceDeparture;
@@ -1316,6 +1321,10 @@ export class TrainrunSectionsView {
     textElement: TrainrunSectionText,
     enableEvents = true,
   ) {
+    if (this.skipElementLevelOfDetail(LevelOfDetail.LEVEL3)) {
+      return;
+    }
+
     const atSource =
       textElement === TrainrunSectionText.SourceArrival ||
       textElement === TrainrunSectionText.SourceDeparture;
@@ -1647,6 +1656,10 @@ export class TrainrunSectionsView {
       );
     });
     return viewTrainrunSectionDataObjects;
+  }
+
+  private skipElementLevelOfDetail(lod: LevelOfDetail): boolean {
+    return lod < this.editorView.getLevelOfDetail();
   }
 
   displayTrainrunSection(trainrunSections: TrainrunSection[]) {
