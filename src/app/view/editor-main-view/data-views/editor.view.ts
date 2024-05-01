@@ -7,6 +7,7 @@ import {TransitionsView} from "./transitions.view";
 import {Vec2D} from "../../../utils/vec2D";
 import {EditorMainViewComponent} from "../editor-main-view.component";
 import {
+  LevelOfDetail,
   UiInteractionService,
   ViewboxProperties,
 } from "../../../services/ui/ui.interaction.service";
@@ -592,6 +593,10 @@ export class EditorView implements SVGMouseControllerObserver {
 
   getLevelOfDetail() {
     return this.uiInteractionService.getLevelOfDetail();
+  }
+
+  skipElementLevelOfDetail(lod: LevelOfDetail): boolean {
+    return lod < this.getLevelOfDetail();
   }
 
   setEditorMode(mode: EditorMode) {

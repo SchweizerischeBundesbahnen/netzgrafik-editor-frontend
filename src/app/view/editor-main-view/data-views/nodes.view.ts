@@ -157,12 +157,8 @@ export class NodesView {
     group.exit().remove();
   }
 
-  private skipElementLevelOfDetail(lod: LevelOfDetail): boolean {
-    return lod < this.editorView.getLevelOfDetail();
-  }
-
   private makeNodeHoverRoot(groupEnter: any, lod: LevelOfDetail) {
-    if (this.skipElementLevelOfDetail(lod)) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
       return;
     }
 
@@ -189,7 +185,7 @@ export class NodesView {
   }
 
   private makeNodeRoot(groupEnter: any, lod: LevelOfDetail) {
-    if (this.skipElementLevelOfDetail(lod)) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
       return;
     }
 
@@ -216,7 +212,7 @@ export class NodesView {
   }
 
   private makeBackground(groupEnter: any, lod: LevelOfDetail) {
-    if (this.skipElementLevelOfDetail(lod)) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
       return;
     }
 
@@ -243,7 +239,7 @@ export class NodesView {
   }
 
   private makeLabelArea(groupEnter: any, lod: LevelOfDetail) {
-    if (this.skipElementLevelOfDetail(lod)) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
       return;
     }
 
@@ -275,7 +271,7 @@ export class NodesView {
   }
 
   private makeHoverDragBackground(groupEnter: any, lod: LevelOfDetail) {
-    if (this.skipElementLevelOfDetail(lod)) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
       return;
     }
 
@@ -306,7 +302,7 @@ export class NodesView {
   }
 
   private makeHoverDragRoot(groupEnter: any, lod: LevelOfDetail) {
-    if (this.skipElementLevelOfDetail(lod)) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
       return;
     }
 
@@ -345,7 +341,7 @@ export class NodesView {
   }
 
   private makeEditButtonBackground(groupEnter: any, lod: LevelOfDetail) {
-    if (this.skipElementLevelOfDetail(lod)) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
       return;
     }
 
@@ -376,7 +372,7 @@ export class NodesView {
   }
 
   private makeEditButton(groupEnter: any, lod: LevelOfDetail) {
-    if (this.skipElementLevelOfDetail(lod)) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
       return;
     }
 
@@ -416,7 +412,7 @@ export class NodesView {
   }
 
   private makeNodeDockable(groupEnter: any, lod: LevelOfDetail) {
-    if (this.skipElementLevelOfDetail(lod)) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
       return;
     }
 
@@ -456,7 +452,7 @@ export class NodesView {
   }
 
   private makeAnalyticsArea(groupEnter: any, lod: LevelOfDetail) {
-    if (this.skipElementLevelOfDetail(lod)) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
       return;
     }
 
@@ -494,7 +490,7 @@ export class NodesView {
   }
 
   private makeAnalyticsTextLeftArea(groupEnter: any, lod: LevelOfDetail) {
-    if (this.skipElementLevelOfDetail(lod)) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
       return;
     }
 
@@ -514,7 +510,7 @@ export class NodesView {
   }
 
   private makeAnalyticsTextRightArea(groupEnter: any, lod: LevelOfDetail) {
-    if (this.skipElementLevelOfDetail(lod)) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
       return;
     }
 
@@ -537,7 +533,7 @@ export class NodesView {
   }
 
   private makeLabelText(groupEnter: any, lod: LevelOfDetail) {
-    if (this.skipElementLevelOfDetail(lod)) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
       return;
     }
 
@@ -567,7 +563,7 @@ export class NodesView {
   }
 
   private makeLabelConnectionText(groupEnter: any, lod: LevelOfDetail) {
-    if (this.skipElementLevelOfDetail(lod)) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
       return;
     }
 

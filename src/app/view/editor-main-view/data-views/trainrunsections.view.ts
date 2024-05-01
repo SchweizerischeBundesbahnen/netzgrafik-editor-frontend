@@ -997,7 +997,7 @@ export class TrainrunSectionsView {
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
   ) {
-    if (this.skipElementLevelOfDetail(LevelOfDetail.FULL)) {
+    if (this.editorView.skipElementLevelOfDetail(LevelOfDetail.FULL)) {
       return;
     }
 
@@ -1321,7 +1321,7 @@ export class TrainrunSectionsView {
     textElement: TrainrunSectionText,
     enableEvents = true,
   ) {
-    if (this.skipElementLevelOfDetail(LevelOfDetail.LEVEL3)) {
+    if (this.editorView.skipElementLevelOfDetail(LevelOfDetail.LEVEL3)) {
       return;
     }
 
@@ -1656,10 +1656,6 @@ export class TrainrunSectionsView {
       );
     });
     return viewTrainrunSectionDataObjects;
-  }
-
-  private skipElementLevelOfDetail(lod: LevelOfDetail): boolean {
-    return lod < this.editorView.getLevelOfDetail();
   }
 
   displayTrainrunSection(trainrunSections: TrainrunSection[]) {
