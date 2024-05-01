@@ -135,7 +135,7 @@ export class NodesView {
       );
 
     // general node (design)
-    this.makeNodeHoverRoot(groupEnter, LevelOfDetail.FULL);
+    this.makeNodeHoverRoot(groupEnter, LevelOfDetail.LEVEL0);
     this.makeNodeRoot(groupEnter, LevelOfDetail.LEVEL0);
     this.makeBackground(groupEnter, LevelOfDetail.LEVEL2);
     this.makeLabelArea(groupEnter, LevelOfDetail.LEVEL1);
@@ -147,9 +147,9 @@ export class NodesView {
     // dockable
     this.makeNodeDockable(groupEnter, LevelOfDetail.LEVEL0);
     // analytics
-    this.makeAnalyticsArea(groupEnter, LevelOfDetail.FULL);
-    this.makeAnalyticsTextLeftArea(groupEnter, LevelOfDetail.LEVEL1);
-    this.makeAnalyticsTextRightArea(groupEnter, LevelOfDetail.LEVEL1);
+    this.makeAnalyticsArea(groupEnter, LevelOfDetail.LEVEL0);
+    this.makeAnalyticsTextLeftArea(groupEnter, LevelOfDetail.LEVEL2);
+    this.makeAnalyticsTextRightArea(groupEnter, LevelOfDetail.LEVEL2);
     // title / connection text
     this.makeLabelText(groupEnter, LevelOfDetail.LEVEL2);
     this.makeLabelConnectionText(groupEnter, LevelOfDetail.LEVEL2);
