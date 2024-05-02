@@ -1198,6 +1198,9 @@ export class TrainrunSectionsView {
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
   ) {
+    if (this.editorView.skipElementLevelOfDetail(LevelOfDetail.LEVEL2)) {
+      return;
+    }
     if (this.editorView.isTemporaryDisableFilteringOfItemsInViewEnabled()) {
       return;
     }
@@ -1613,6 +1616,10 @@ export class TrainrunSectionsView {
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
   ) {
+    if (this.editorView.skipElementLevelOfDetail(LevelOfDetail.LEVEL3)) {
+      return;
+    }
+
     groupEnter.each((t: TrainrunSectionViewObject, i, a) => {
       const grp = d3
         .select(a[i])
