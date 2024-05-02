@@ -8,6 +8,7 @@ import {TrainrunSection} from "../../../models/trainrunsection.model";
 import {DEFAULT_PIN_RADIUS} from "../../rastering/definitions";
 import {Vec2D} from "../../../utils/vec2D";
 import {ConnectionsViewObject} from "./connectionViewObject";
+import {LevelOfDetail} from "../../../services/ui/ui.interaction.service";
 
 export class ConnectionsView {
   connectionsGroup;
@@ -130,6 +131,10 @@ export class ConnectionsView {
   }
 
   createConnectionCurve(drawingGroup: d3.selector) {
+    if (this.editorView.skipElementLevelOfDetail(LevelOfDetail.LEVEL2)) {
+      return;
+    }
+
     drawingGroup
       .append(StaticDomTags.CONNECTION_LINE_SVG)
       .attr("class", StaticDomTags.CONNECTION_LINE_CLASS)
@@ -210,6 +215,9 @@ export class ConnectionsView {
   }
 
   createConnectionPins(drawingGroup: d3.selector) {
+    if (this.editorView.skipElementLevelOfDetail(LevelOfDetail.LEVEL3)) {
+      return;
+    }
     const selectedTrainrun = this.editorView.getSelectedTrainrun();
 
     drawingGroup.each((c: ConnectionsViewObject, i, a) => {

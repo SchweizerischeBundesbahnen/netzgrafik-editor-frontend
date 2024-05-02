@@ -136,7 +136,7 @@ export class NodesView {
 
     // general node (design)
     this.makeNodeHoverRoot(groupEnter, LevelOfDetail.LEVEL0);
-    this.makeNodeRoot(groupEnter, LevelOfDetail.LEVEL0);
+    this.makeNodeRoot(groupEnter, LevelOfDetail.LEVEL1);
     this.makeBackground(groupEnter, LevelOfDetail.LEVEL2);
     this.makeLabelArea(groupEnter, LevelOfDetail.LEVEL1);
     // buttons

@@ -1320,8 +1320,9 @@ export class TrainrunSectionsView {
     connectedTrainIds: any,
     textElement: TrainrunSectionText,
     enableEvents = true,
+    lod : LevelOfDetail = LevelOfDetail.LEVEL3
   ) {
-    if (this.editorView.skipElementLevelOfDetail(LevelOfDetail.LEVEL3)) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
       return;
     }
 
@@ -2427,6 +2428,8 @@ export class TrainrunSectionsView {
         selectedTrainrun,
         connectedTrainIds,
         TrainrunSectionText.TrainrunSectionName,
+        true,
+        LevelOfDetail.LEVEL2
       );
 
       this.createTrainrunsectionSemicircles(
