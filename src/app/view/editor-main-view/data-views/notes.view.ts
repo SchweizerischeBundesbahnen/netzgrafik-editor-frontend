@@ -13,6 +13,7 @@ import {
 import {Vec2D} from "../../../utils/vec2D";
 import {PreviewLineMode} from "./trainrunsection.previewline.view";
 import {EditorMode} from "../../editor-menu/editor-mode";
+import {LevelOfDetail} from "../../../services/ui/ui.interaction.service";
 
 // See -> https://www.npmjs.com/package/ngx-editor
 
@@ -48,18 +49,18 @@ export class NotesView {
       .split("<br>")
       .join(
         '<tspan x="' +
-          (NOTE_TEXT_LEFT_SPACING - 4) +
-          '" dy="' +
-          TEXT_SIZE +
-          '">&nbsp;</tspan>',
+        (NOTE_TEXT_LEFT_SPACING - 4) +
+        '" dy="' +
+        TEXT_SIZE +
+        '">&nbsp;</tspan>',
       )
       .split("<p>")
       .join(
         '<tspan x="' +
-          NOTE_TEXT_LEFT_SPACING +
-          '" dy="' +
-          1.5 * TEXT_SIZE +
-          '">',
+        NOTE_TEXT_LEFT_SPACING +
+        '" dy="' +
+        1.5 * TEXT_SIZE +
+        '">',
       )
       .split("</p>")
       .join("&nbsp;</tspan>")
@@ -82,10 +83,10 @@ export class NotesView {
   static extractTextBasedHeight(n: Note): number {
     return Math.max(
       n.getText().split("<br>").join("<p>").split("<p>", 9999).length *
-        1.5 *
-        TEXT_SIZE +
-        NOTE_TEXT_AREA_HEIGHT +
-        16,
+      1.5 *
+      TEXT_SIZE +
+      NOTE_TEXT_AREA_HEIGHT +
+      16,
       n.getHeight(),
     );
   }
@@ -155,6 +156,23 @@ export class NotesView {
           ")",
       );
 
+    this.makeNoteHoverRoot(groupEnter, LevelOfDetail.LEVEL0);
+    this.makeNoteRoot(groupEnter, LevelOfDetail.LEVEL0);
+    this.makeNoteTitleArea(groupEnter, LevelOfDetail.LEVEL0);
+    this.makeNoteTextArea(groupEnter, LevelOfDetail.LEVEL0);
+    this.makeNoteTitleAreaText(groupEnter, LevelOfDetail.LEVEL0);
+    this.makeNoteText(groupEnter, LevelOfDetail.LEVEL0);
+    this.makeNoteDragAreaBackground(groupEnter, LevelOfDetail.LEVEL0);
+    this.makeNoteDragArea(groupEnter, LevelOfDetail.LEVEL0);
+
+    group.exit().remove();
+  }
+
+  private makeNoteHoverRoot(groupEnter: any, lod: LevelOfDetail) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
+      return;
+    }
+
     groupEnter
       .append(StaticDomTags.NOTE_HOVER_ROOT_SVG)
       .attr("class", StaticDomTags.NOTE_HOVER_ROOT_CLASS)
@@ -174,6 +192,12 @@ export class NotesView {
       .on("mouseover", (n: NoteViewObject, i, a) =>
         this.onNoteMouseover(n.note, a[i]),
       );
+  }
+
+  private makeNoteRoot(groupEnter: any, lod: LevelOfDetail) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
+      return;
+    }
 
     groupEnter
       .append(StaticDomTags.NOTE_ROOT_SVG)
@@ -204,6 +228,12 @@ export class NotesView {
         this.onNoteMouseover(n.note, a[i]),
       );
 
+  }
+
+  private makeNoteTitleArea(groupEnter: any, lod: LevelOfDetail) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
+      return;
+    }
     groupEnter
       .append(StaticDomTags.NOTE_TITELAREA_SVG)
       .attr("class", StaticDomTags.NOTE_TITELAREA_CLASS)
@@ -228,7 +258,12 @@ export class NotesView {
       .on("mouseover", (n: NoteViewObject, i, a) =>
         this.onNoteMouseover(n.note, a[i]),
       );
+  }
 
+  private makeNoteTextArea(groupEnter: any, lod: LevelOfDetail) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
+      return;
+    }
     groupEnter
       .append(StaticDomTags.NOTE_TEXTAREA_SVG)
       .attr("class", StaticDomTags.NOTE_TEXTAREA_CLASS)
@@ -257,7 +292,12 @@ export class NotesView {
       .on("mouseover", (n: NoteViewObject, i, a) =>
         this.onNoteMouseover(n.note, a[i]),
       );
+  }
 
+  private makeNoteTitleAreaText(groupEnter: any, lod: LevelOfDetail) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
+      return;
+    }
     groupEnter
       .append(StaticDomTags.NOTE_TITELAREA_TEXT_SVG)
       .attr("class", StaticDomTags.NOTE_TITELAREA_TEXT_CLASS)
@@ -270,7 +310,12 @@ export class NotesView {
       .on("mouseover", (n: NoteViewObject, i, a) =>
         this.onNoteMouseover(n.note, a[i]),
       );
+  }
 
+  private makeNoteText(groupEnter: any, lod: LevelOfDetail) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
+      return;
+    }
     groupEnter
       .append(StaticDomTags.NOTE_TEXT_SVG)
       .attr("class", StaticDomTags.NOTE_TEXT_CLASS)
@@ -284,6 +329,12 @@ export class NotesView {
         this.onNoteMouseover(n.note, a[i]),
       );
 
+  }
+
+  private makeNoteDragAreaBackground(groupEnter: any, lod: LevelOfDetail) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
+      return;
+    }
     groupEnter
       .append(StaticDomTags.NOTE_HOVER_DRAG_AREA_BACKGROUND_SVG)
       .attr("class", StaticDomTags.NOTE_HOVER_DRAG_AREA_BACKGROUND_CLASS)
@@ -303,7 +354,12 @@ export class NotesView {
         this.onNoteMouseoverDragButton(n.note, a[i]),
       )
       .call(this.draggable);
+  }
 
+  private makeNoteDragArea(groupEnter: any, lod: LevelOfDetail) {
+    if (this.editorView.skipElementLevelOfDetail(lod)) {
+      return;
+    }
     groupEnter
       .append(StaticDomTags.NOTE_HOVER_DRAG_AREA_SVG)
       .attr("class", StaticDomTags.NOTE_HOVER_DRAG_AREA_CLASS)
@@ -314,11 +370,11 @@ export class NotesView {
       .attr(
         "d",
         "m11.855 2.398-.356-.36-.356.36-3.841 3.897.712.702L11 " +
-          "3.97V11H3.957l2.647-2.647-.707-.708-3.5 3.5-.354.354.354.354 3.5 " +
-          "3.5.707-.708-2.646-2.645H11v7.03l-2.995-3.027-.71.703 3.852 3.894.356.36.355-.36 " +
-          "3.842-3.898-.712-.701L12 19.032v-7.031h7.041l-2.645 2.645.708.708 " +
-          "3.5-3.5.353-.354-.353-.354-3.5-3.5-.707.708L19.043 11H12V3.967l2.997 " +
-          "3.029.711-.704-3.853-3.894Z",
+        "3.97V11H3.957l2.647-2.647-.707-.708-3.5 3.5-.354.354.354.354 3.5 " +
+        "3.5.707-.708-2.646-2.645H11v7.03l-2.995-3.027-.71.703 3.852 3.894.356.36.355-.36 " +
+        "3.842-3.898-.712-.701L12 19.032v-7.031h7.041l-2.645 2.645.708.708 " +
+        "3.5-3.5.353-.354-.353-.354-3.5-3.5-.707.708L19.043 11H12V3.967l2.997 " +
+        "3.029.711-.704-3.853-3.894Z",
       )
       .attr("transform", (n: NoteViewObject) => "translate(-45,-15),scale(1.0)")
       .on("mouseout", (n: NoteViewObject) =>
@@ -328,8 +384,6 @@ export class NotesView {
         this.onNoteMouseoverDragButton(n.note, a[i]),
       )
       .call(this.draggable);
-
-    group.exit().remove();
   }
 
   onNoteMousedown(note: Note) {
