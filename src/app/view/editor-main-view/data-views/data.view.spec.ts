@@ -168,7 +168,7 @@ describe("Editor-DataView", () => {
 
     const cvo = new ConnectionsViewObject(editorView, con, node, false, false);
     expect(cvo.key).toBe(
-      "#2@false_15_9_false_(832,144)_(774.4,144)_(793.6,144)_(736,144)_false_false_false(832,144)(774.4,144)(793.6,144)(736,144)_0",
+      "#2@false_15_9_false_(832,144)_(774.4,144)_(793.6,144)_(736,144)_false_false_false_0(832,144)(774.4,144)(793.6,144)(736,144)",
     );
   });
 
