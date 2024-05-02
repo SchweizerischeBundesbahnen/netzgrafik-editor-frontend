@@ -1227,6 +1227,9 @@ export class TrainrunSectionsView {
     connectedTrainIds: any,
     atSource: boolean,
   ) {
+    if (this.editorView.skipElementLevelOfDetail(LevelOfDetail.LEVEL2)) {
+      return;
+    }
     groupEnter
       .append(StaticDomTags.EDGE_LINE_PIN_SVG)
       .attr("class", StaticDomTags.EDGE_LINE_PIN_CLASS)
