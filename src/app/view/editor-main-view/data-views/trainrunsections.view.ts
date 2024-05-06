@@ -1607,10 +1607,6 @@ export class TrainrunSectionsView {
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
   ) {
-    if (this.editorView.skipElementLevelOfDetail(LevelOfDetail.LEVEL3)) {
-      return;
-    }
-
     groupEnter.each((t: TrainrunSectionViewObject, i, a) => {
       const grp = d3
         .select(a[i])
@@ -2416,13 +2412,17 @@ export class TrainrunSectionsView {
           selectedTrainrun,
           connectedTrainIds,
         );
+      }
 
-        this.createAllIntermediateStops( // LevelOfDetail.LEVEL2
+      if (this.editorView.getLevelOfDetail() === LevelOfDetail.FULL ||
+        this.editorView.getLevelOfDetail() === LevelOfDetail.LEVEL3) {
+        this.createAllIntermediateStops( // LevelOfDetail.LEVEL3
           groupLabels,
           selectedTrainrun,
           connectedTrainIds,
         );
       }
+
     }
   }
 
