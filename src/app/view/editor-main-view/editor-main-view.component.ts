@@ -41,6 +41,8 @@ import {
 } from "../../streckengrafik/model/util/streckengrafik.drawing.context";
 import {TravelTimeCreationEstimatorType} from "../themes/editor-trainrun-traveltime-creator-type";
 import {Port} from "../../models/port.model";
+import {LevelOfDetailService} from "../../services/ui/level.of.detail.service";
+import {ViewportCullService} from "../../services/ui/viewport.cull.service";
 
 @Component({
   selector: "sbb-editor-main-view",
@@ -72,6 +74,9 @@ export class EditorMainViewComponent implements AfterViewInit, OnDestroy {
     private undoSerivce: UndoService,
     private copyService: CopyService,
     private logService: LogService,
+    private viewportCullSerivce: ViewportCullService,
+    private levelOfDetailService: LevelOfDetailService,
+
   ) {
     this.editorView = new EditorView(
       this,
@@ -84,6 +89,8 @@ export class EditorMainViewComponent implements AfterViewInit, OnDestroy {
       undoSerivce,
       copyService,
       logService,
+      viewportCullSerivce,
+      levelOfDetailService
     );
     this.uiInteractionService.zoomInObservable
       .pipe(takeUntil(this.destroyed))

@@ -8,7 +8,7 @@ import {TrainrunSection} from "../../../models/trainrunsection.model";
 import {DEFAULT_PIN_RADIUS} from "../../rastering/definitions";
 import {Vec2D} from "../../../utils/vec2D";
 import {ConnectionsViewObject} from "./connectionViewObject";
-import {LevelOfDetail} from "../../../services/ui/ui.interaction.service";
+import {LevelOfDetail} from "../../../services/ui/level.of.detail.service";
 
 export class ConnectionsView {
   connectionsGroup;
@@ -131,9 +131,6 @@ export class ConnectionsView {
   }
 
   createConnectionCurve(drawingGroup: d3.selector) {
-    if (this.editorView.skipElementLevelOfDetail(LevelOfDetail.LEVEL2)) {
-      return;
-    }
 
     drawingGroup
       .append(StaticDomTags.CONNECTION_LINE_SVG)
@@ -215,9 +212,6 @@ export class ConnectionsView {
   }
 
   createConnectionPins(drawingGroup: d3.selector) {
-    if (this.editorView.skipElementLevelOfDetail(LevelOfDetail.LEVEL3)) {
-      return;
-    }
     const selectedTrainrun = this.editorView.getSelectedTrainrun();
 
     drawingGroup.each((c: ConnectionsViewObject, i, a) => {
@@ -318,16 +312,65 @@ export class ConnectionsView {
       );
 
     if (!this.editorView.isElementDragging()) {
-      this.createConnectionCurve(grpEnter);
-      this.createConnectionPins(grpEnter);
+      this.renderConnectionObject(grpEnter);
     }
     connectionsGroup.exit().remove();
 
     d3.selectAll(
       StaticDomTags.CONNECTION_ROOT_CONTAINER_DOM_REF +
-        "." +
-        StaticDomTags.TAG_SELECTED,
+      "." +
+      StaticDomTags.TAG_SELECTED,
     ).raise();
+  }
+
+  renderConnectionObject(groupEnter: any) {
+    switch (this.editorView.getLevelOfDetail()) {
+      case LevelOfDetail.LEVEL3: {
+        //statements;
+        this.makeConnectionLOD3(groupEnter);
+        break;
+      }
+      case LevelOfDetail.LEVEL2: {
+        //statements;
+        this.makeConnectionLOD2(groupEnter);
+        break;
+      }
+      case LevelOfDetail.LEVEL1: {
+        //statements;
+        this.makeConnectionLOD1(groupEnter);
+        break;
+      }
+      case LevelOfDetail.LEVEL0: {
+        //statements;
+        this.makeConnectionLOD0(groupEnter);
+        break;
+      }
+      default: {
+        //statements;
+        this.makeConnectionLODFull(groupEnter);
+      }
+    }
+  }
+
+  makeConnectionLODFull(groupEnter: any) {
+    this.createConnectionCurve(groupEnter);
+    this.createConnectionPins(groupEnter);
+  }
+
+  makeConnectionLOD3(groupEnter: any) {
+    this.createConnectionCurve(groupEnter);
+    this.createConnectionPins(groupEnter);
+  }
+
+  makeConnectionLOD2(groupEnter: any) {
+    this.createConnectionCurve(groupEnter);
+  }
+
+  makeConnectionLOD1(groupEnter: any) {
+    this.createConnectionCurve(groupEnter);
+  }
+
+  makeConnectionLOD0(groupEnter: any) {
   }
 
   onConnectionMouseup(connection: Connection, domObj: any, node: Node) {

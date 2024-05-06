@@ -13,7 +13,7 @@ import {
 import {Vec2D} from "../../../utils/vec2D";
 import {PreviewLineMode} from "./trainrunsection.previewline.view";
 import {EditorMode} from "../../editor-menu/editor-mode";
-import {LevelOfDetail} from "../../../services/ui/ui.interaction.service";
+import {LevelOfDetail} from "../../../services/ui/level.of.detail.service";
 
 // See -> https://www.npmjs.com/package/ngx-editor
 
@@ -156,22 +156,77 @@ export class NotesView {
           ")",
       );
 
-    this.makeNoteHoverRoot(groupEnter, LevelOfDetail.LEVEL0);
-    this.makeNoteRoot(groupEnter, LevelOfDetail.LEVEL0);
-    this.makeNoteTitleArea(groupEnter, LevelOfDetail.LEVEL0);
-    this.makeNoteTextArea(groupEnter, LevelOfDetail.LEVEL0);
-    this.makeNoteTitleAreaText(groupEnter, LevelOfDetail.LEVEL0);
-    this.makeNoteText(groupEnter, LevelOfDetail.LEVEL0);
-    this.makeNoteDragAreaBackground(groupEnter, LevelOfDetail.LEVEL0);
-    this.makeNoteDragArea(groupEnter, LevelOfDetail.LEVEL0);
+    this.renderNoteObject(groupEnter);
 
     group.exit().remove();
   }
 
-  private makeNoteHoverRoot(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
+  renderNoteObject(groupEnter: any) {
+    switch (this.editorView.getLevelOfDetail()) {
+      case LevelOfDetail.LEVEL3: {
+        //statements;
+        this.makeNoteLODLevel3(groupEnter);
+        break;
+      }
+      case LevelOfDetail.LEVEL2: {
+        //statements;
+        this.makeNoteLODLevel2(groupEnter);
+        break;
+      }
+      case LevelOfDetail.LEVEL1: {
+        //statements;
+        this.makeNoteLODLevel1(groupEnter);
+        break;
+      }
+      case LevelOfDetail.LEVEL0: {
+        //statements;
+        this.makeNoteLODLevel0(groupEnter);
+        break;
+      }
+      default: {
+        //statements;
+        this.makeNodeLODFull(groupEnter);
+      }
     }
+  }
+
+  makeNodeLODFull(groupEnter: any) {
+    this.makeNoteHoverRoot(groupEnter);
+    this.makeNoteRoot(groupEnter);
+    this.makeNoteTitleArea(groupEnter);
+    this.makeNoteTextArea(groupEnter);
+    this.makeNoteTitleAreaText(groupEnter);
+    this.makeNoteText(groupEnter);
+    this.makeNoteDragAreaBackground(groupEnter);
+    this.makeNoteDragArea(groupEnter);
+  }
+
+  makeNoteLODLevel3(groupEnter: any) {
+    this.makeNoteHoverRoot(groupEnter);
+    this.makeNoteRoot(groupEnter);
+    this.makeNoteTitleArea(groupEnter);
+    this.makeNoteTextArea(groupEnter);
+    this.makeNoteTitleAreaText(groupEnter);
+    this.makeNoteText(groupEnter);
+  }
+
+  makeNoteLODLevel2(groupEnter: any) {
+    this.makeNoteRoot(groupEnter);
+    this.makeNoteTitleAreaText(groupEnter);
+    this.makeNoteText(groupEnter);
+  }
+
+  makeNoteLODLevel1(groupEnter: any) {
+    this.makeNoteRoot(groupEnter);
+    this.makeNoteTitleAreaText(groupEnter);
+  }
+
+  makeNoteLODLevel0(groupEnter: any) {
+    this.makeNoteRoot(groupEnter);
+    this.makeNoteTitleAreaText(groupEnter);
+  }
+
+  private makeNoteHoverRoot(groupEnter: any) {
 
     groupEnter
       .append(StaticDomTags.NOTE_HOVER_ROOT_SVG)
@@ -194,10 +249,7 @@ export class NotesView {
       );
   }
 
-  private makeNoteRoot(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
+  private makeNoteRoot(groupEnter: any) {
 
     groupEnter
       .append(StaticDomTags.NOTE_ROOT_SVG)
@@ -230,10 +282,8 @@ export class NotesView {
 
   }
 
-  private makeNoteTitleArea(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
+  private makeNoteTitleArea(groupEnter: any) {
+
     groupEnter
       .append(StaticDomTags.NOTE_TITELAREA_SVG)
       .attr("class", StaticDomTags.NOTE_TITELAREA_CLASS)
@@ -260,10 +310,8 @@ export class NotesView {
       );
   }
 
-  private makeNoteTextArea(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
+  private makeNoteTextArea(groupEnter: any) {
+
     groupEnter
       .append(StaticDomTags.NOTE_TEXTAREA_SVG)
       .attr("class", StaticDomTags.NOTE_TEXTAREA_CLASS)
@@ -294,10 +342,8 @@ export class NotesView {
       );
   }
 
-  private makeNoteTitleAreaText(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
+  private makeNoteTitleAreaText(groupEnter: any) {
+
     groupEnter
       .append(StaticDomTags.NOTE_TITELAREA_TEXT_SVG)
       .attr("class", StaticDomTags.NOTE_TITELAREA_TEXT_CLASS)
@@ -312,10 +358,8 @@ export class NotesView {
       );
   }
 
-  private makeNoteText(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
+  private makeNoteText(groupEnter: any) {
+
     groupEnter
       .append(StaticDomTags.NOTE_TEXT_SVG)
       .attr("class", StaticDomTags.NOTE_TEXT_CLASS)
@@ -331,10 +375,8 @@ export class NotesView {
 
   }
 
-  private makeNoteDragAreaBackground(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
+  private makeNoteDragAreaBackground(groupEnter: any) {
+
     groupEnter
       .append(StaticDomTags.NOTE_HOVER_DRAG_AREA_BACKGROUND_SVG)
       .attr("class", StaticDomTags.NOTE_HOVER_DRAG_AREA_BACKGROUND_CLASS)
@@ -356,10 +398,8 @@ export class NotesView {
       .call(this.draggable);
   }
 
-  private makeNoteDragArea(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
+  private makeNoteDragArea(groupEnter: any) {
+
     groupEnter
       .append(StaticDomTags.NOTE_HOVER_DRAG_AREA_SVG)
       .attr("class", StaticDomTags.NOTE_HOVER_DRAG_AREA_CLASS)

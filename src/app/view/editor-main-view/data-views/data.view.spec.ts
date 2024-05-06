@@ -26,6 +26,8 @@ import {NoteViewObject} from "./noteViewObject";
 import {TrainrunSectionViewObject} from "./trainrunSectionViewObject";
 import {TransitionViewObject} from "./transitionViewObject";
 import {StaticDomTags} from "./static.dom.tags";
+import {LevelOfDetailService} from "../../../services/ui/level.of.detail.service";
+import {ViewportCullService} from "../../../services/ui/viewport.cull.service";
 
 describe("Editor-DataView", () => {
   let dataService: DataService;
@@ -130,6 +132,17 @@ describe("Editor-DataView", () => {
       undoService,
     );
 
+
+    const viewportCullSerivce = new ViewportCullService(
+      uiInteractionService,
+      nodeService,
+      noteService,
+      trainrunSectionService
+    );
+    const levelOfDetailService = new LevelOfDetailService(
+      uiInteractionService
+    );
+
     const controller = new EditorMainViewComponent(
       nodeService,
       trainrunSectionService,
@@ -141,7 +154,10 @@ describe("Editor-DataView", () => {
       undoService,
       copyService,
       logService,
+      viewportCullSerivce,
+      levelOfDetailService
     );
+
     new EditorView(
       controller,
       nodeService,
@@ -153,6 +169,8 @@ describe("Editor-DataView", () => {
       undoService,
       copyService,
       logService,
+      viewportCullSerivce,
+      levelOfDetailService
     );
 
     controller.bindViewToServices();
@@ -192,7 +210,7 @@ describe("Editor-DataView", () => {
     const note = noteService.getNoteFromId(3);
     const cvo1 = new NoteViewObject(editorView, note);
     expect(cvo1.key).toBe(
-      "#3@1312_160_64_192_<p><em>Folgendes</em></p>spannend<p><strong>FETT</strong>_Frabcodierter Text_false_0_false_false",
+      "#3@1312_160_64_192_<p><em>Folgendes</em></p>spannend<p><strong>FETT</strong>_Frabcodierter Text_false_0_false_false_0",
     );
   });
 

@@ -27,7 +27,7 @@ import {Node} from "../../../models/node.model";
 import {EditorMode} from "../../editor-menu/editor-mode";
 import {Transition} from "../../../models/transition.model";
 import {InformSelectedTrainrunClick} from "../../../services/data/trainrunsection.service";
-import {LevelOfDetail} from "../../../services/ui/ui.interaction.service";
+import {LevelOfDetail} from "../../../services/ui/level.of.detail.service";
 
 export class TrainrunSectionsView {
   trainrunSectionGroup;
@@ -997,9 +997,6 @@ export class TrainrunSectionsView {
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
   ) {
-    if (this.editorView.skipElementLevelOfDetail(LevelOfDetail.FULL)) {
-      return;
-    }
 
     const atSource =
       lineTextElement === TrainrunSectionText.SourceArrival ||
@@ -1198,9 +1195,6 @@ export class TrainrunSectionsView {
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
   ) {
-    if (this.editorView.skipElementLevelOfDetail(LevelOfDetail.LEVEL2)) {
-      return;
-    }
     if (this.editorView.isTemporaryDisableFilteringOfItemsInViewEnabled()) {
       return;
     }
@@ -1227,9 +1221,7 @@ export class TrainrunSectionsView {
     connectedTrainIds: any,
     atSource: boolean,
   ) {
-    if (this.editorView.skipElementLevelOfDetail(LevelOfDetail.LEVEL2)) {
-      return;
-    }
+
     groupEnter
       .append(StaticDomTags.EDGE_LINE_PIN_SVG)
       .attr("class", StaticDomTags.EDGE_LINE_PIN_CLASS)
@@ -1325,12 +1317,8 @@ export class TrainrunSectionsView {
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
     textElement: TrainrunSectionText,
-    enableEvents = true,
-    lod : LevelOfDetail = LevelOfDetail.LEVEL3
+    enableEvents = true
   ) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
 
     const atSource =
       textElement === TrainrunSectionText.SourceArrival ||
@@ -2209,34 +2197,12 @@ export class TrainrunSectionsView {
         ),
     );
 
-    this.createTrainrunSection(
+    this.make4LayerTrainrunSectionLines(
       groupLines,
-      StaticDomTags.EDGE_LINE_LAYER_0,
       selectedTrainrun,
       connectedTrainIds,
-      false,
-    );
-    this.createTrainrunSection(
-      groupLines,
-      StaticDomTags.EDGE_LINE_LAYER_1,
-      selectedTrainrun,
-      connectedTrainIds,
-      false,
-    );
-    this.createTrainrunSection(
-      groupLines,
-      StaticDomTags.EDGE_LINE_LAYER_2,
-      selectedTrainrun,
-      connectedTrainIds,
-      false,
-    );
-    this.createTrainrunSection(
-      groupLines,
-      StaticDomTags.EDGE_LINE_LAYER_3,
-      selectedTrainrun,
-      connectedTrainIds,
-      false,
-    );
+      inGroupLabels,
+      false);
 
     if (!this.editorView.isElementDragging()) {
       const groupLabels = inGroupLabels.filter(
@@ -2246,59 +2212,64 @@ export class TrainrunSectionsView {
           ),
       );
 
-      this.createTrainrunSectionTextBackgrounds(
-        groupLabels,
-        TrainrunSectionText.SourceArrival,
-        selectedTrainrun,
-        connectedTrainIds,
-      );
-      this.createTrainrunSectionTextBackgrounds(
-        groupLabels,
-        TrainrunSectionText.SourceDeparture,
-        selectedTrainrun,
-        connectedTrainIds,
-      );
-      this.createTrainrunSectionTextBackgrounds(
-        groupLabels,
-        TrainrunSectionText.TargetArrival,
-        selectedTrainrun,
-        connectedTrainIds,
-      );
-      this.createTrainrunSectionTextBackgrounds(
-        groupLabels,
-        TrainrunSectionText.TargetDeparture,
-        selectedTrainrun,
-        connectedTrainIds,
-      );
+      if (this.editorView.getLevelOfDetail() === LevelOfDetail.FULL) {
+        this.createTrainrunSectionTextBackgrounds( // LevelOfDetail.FULL
+          groupLabels,
+          TrainrunSectionText.SourceArrival,
+          selectedTrainrun,
+          connectedTrainIds,
+        );
+        this.createTrainrunSectionTextBackgrounds( // LevelOfDetail.FULL
+          groupLabels,
+          TrainrunSectionText.SourceDeparture,
+          selectedTrainrun,
+          connectedTrainIds,
+        );
+        this.createTrainrunSectionTextBackgrounds( // LevelOfDetail.FULL
+          groupLabels,
+          TrainrunSectionText.TargetArrival,
+          selectedTrainrun,
+          connectedTrainIds,
+        );
+        this.createTrainrunSectionTextBackgrounds( // LevelOfDetail.FULL
+          groupLabels,
+          TrainrunSectionText.TargetDeparture,
+          selectedTrainrun,
+          connectedTrainIds,
+        );
+      }
 
-      this.createTrainrunSectionElement(
-        groupLabels,
-        selectedTrainrun,
-        connectedTrainIds,
-        TrainrunSectionText.SourceArrival,
-        false,
-      );
-      this.createTrainrunSectionElement(
-        groupLabels,
-        selectedTrainrun,
-        connectedTrainIds,
-        TrainrunSectionText.SourceDeparture,
-        false,
-      );
-      this.createTrainrunSectionElement(
-        groupLabels,
-        selectedTrainrun,
-        connectedTrainIds,
-        TrainrunSectionText.TargetArrival,
-        false,
-      );
-      this.createTrainrunSectionElement(
-        groupLabels,
-        selectedTrainrun,
-        connectedTrainIds,
-        TrainrunSectionText.TargetDeparture,
-        false,
-      );
+      if (this.editorView.getLevelOfDetail() === LevelOfDetail.FULL ||
+        this.editorView.getLevelOfDetail() === LevelOfDetail.LEVEL3) {
+        this.createTrainrunSectionElement( // LevelOfDetail.LEVEL3
+          groupLabels,
+          selectedTrainrun,
+          connectedTrainIds,
+          TrainrunSectionText.SourceArrival,
+          false,
+        );
+        this.createTrainrunSectionElement( // LevelOfDetail.LEVEL3
+          groupLabels,
+          selectedTrainrun,
+          connectedTrainIds,
+          TrainrunSectionText.SourceDeparture,
+          false,
+        );
+        this.createTrainrunSectionElement( // LevelOfDetail.LEVEL3
+          groupLabels,
+          selectedTrainrun,
+          connectedTrainIds,
+          TrainrunSectionText.TargetArrival,
+          false,
+        );
+        this.createTrainrunSectionElement( // LevelOfDetail.LEVEL3
+          groupLabels,
+          selectedTrainrun,
+          connectedTrainIds,
+          TrainrunSectionText.TargetDeparture,
+          false,
+        );
+      }
 
       this.createTrainrunSectionGotoInfoElement(
         groupLabels,
@@ -2313,11 +2284,15 @@ export class TrainrunSectionsView {
         false,
       );
 
-      this.createTrainrunsectionSemicircles(
-        groupLabels,
-        selectedTrainrun,
-        connectedTrainIds,
-      );
+      if (this.editorView.getLevelOfDetail() === LevelOfDetail.FULL ||
+        this.editorView.getLevelOfDetail() === LevelOfDetail.LEVEL3 ||
+        this.editorView.getLevelOfDetail() === LevelOfDetail.LEVEL2) {
+        this.createTrainrunsectionSemicircles( // LevelOfDetail.LEVEL2
+          groupLabels,
+          selectedTrainrun,
+          connectedTrainIds,
+        );
+      }
     }
   }
 
@@ -2333,30 +2308,12 @@ export class TrainrunSectionsView {
       ),
     );
 
-    this.createTrainrunSection(
+    this.make4LayerTrainrunSectionLines(
       groupLines,
-      StaticDomTags.EDGE_LINE_LAYER_0,
       selectedTrainrun,
       connectedTrainIds,
-    );
-    this.createTrainrunSection(
-      groupLines,
-      StaticDomTags.EDGE_LINE_LAYER_1,
-      selectedTrainrun,
-      connectedTrainIds,
-    );
-    this.createTrainrunSection(
-      groupLines,
-      StaticDomTags.EDGE_LINE_LAYER_2,
-      selectedTrainrun,
-      connectedTrainIds,
-    );
-    this.createTrainrunSection(
-      groupLines,
-      StaticDomTags.EDGE_LINE_LAYER_3,
-      selectedTrainrun,
-      connectedTrainIds,
-    );
+      inGroupLabels,
+      true);
 
     if (!this.editorView.isElementDragging()) {
       const groupLabels = inGroupLabels.filter((d: TrainrunSectionViewObject) =>
@@ -2365,95 +2322,144 @@ export class TrainrunSectionsView {
         ),
       );
 
-      this.createPinOnTrainrunsection(
-        groupLabels,
-        selectedTrainrun,
-        connectedTrainIds,
-        true,
-      );
-      this.createPinOnTrainrunsection(
-        groupLabels,
-        selectedTrainrun,
-        connectedTrainIds,
-        false,
-      );
+      if (this.editorView.getLevelOfDetail() === LevelOfDetail.FULL ||
+        this.editorView.getLevelOfDetail() === LevelOfDetail.LEVEL3 ||
+        this.editorView.getLevelOfDetail() === LevelOfDetail.LEVEL2) {
+        this.createPinOnTrainrunsection( // LevelOfDetail.LEVEL2
+          groupLabels,
+          selectedTrainrun,
+          connectedTrainIds,
+          true,
+        );
+        this.createPinOnTrainrunsection( // LevelOfDetail.LEVEL2
+          groupLabels,
+          selectedTrainrun,
+          connectedTrainIds,
+          false,
+        );
+      }
 
-      this.createTrainrunSectionTextBackgrounds(
-        groupLabels,
-        TrainrunSectionText.SourceArrival,
-        selectedTrainrun,
-        connectedTrainIds,
-      );
-      this.createTrainrunSectionTextBackgrounds(
-        groupLabels,
-        TrainrunSectionText.SourceDeparture,
-        selectedTrainrun,
-        connectedTrainIds,
-      );
-      this.createTrainrunSectionTextBackgrounds(
-        groupLabels,
-        TrainrunSectionText.TargetArrival,
-        selectedTrainrun,
-        connectedTrainIds,
-      );
-      this.createTrainrunSectionTextBackgrounds(
-        groupLabels,
-        TrainrunSectionText.TargetDeparture,
-        selectedTrainrun,
-        connectedTrainIds,
-      );
+      if (this.editorView.getLevelOfDetail() === LevelOfDetail.FULL) {
+        this.createTrainrunSectionTextBackgrounds( // LevelOfDetail.FULL
+          groupLabels,
+          TrainrunSectionText.SourceArrival,
+          selectedTrainrun,
+          connectedTrainIds,
+        );
+        this.createTrainrunSectionTextBackgrounds( // LevelOfDetail.FULL
+          groupLabels,
+          TrainrunSectionText.SourceDeparture,
+          selectedTrainrun,
+          connectedTrainIds,
+        );
+        this.createTrainrunSectionTextBackgrounds( // LevelOfDetail.FULL
+          groupLabels,
+          TrainrunSectionText.TargetArrival,
+          selectedTrainrun,
+          connectedTrainIds,
+        );
+        this.createTrainrunSectionTextBackgrounds( // LevelOfDetail.FULL
+          groupLabels,
+          TrainrunSectionText.TargetDeparture,
+          selectedTrainrun,
+          connectedTrainIds,
+        );
+      }
 
-      this.createTrainrunSectionElement(
-        groupLabels,
-        selectedTrainrun,
-        connectedTrainIds,
-        TrainrunSectionText.SourceArrival,
-      );
-      this.createTrainrunSectionElement(
-        groupLabels,
-        selectedTrainrun,
-        connectedTrainIds,
-        TrainrunSectionText.SourceDeparture,
-      );
-      this.createTrainrunSectionElement(
-        groupLabels,
-        selectedTrainrun,
-        connectedTrainIds,
-        TrainrunSectionText.TargetArrival,
-      );
-      this.createTrainrunSectionElement(
-        groupLabels,
-        selectedTrainrun,
-        connectedTrainIds,
-        TrainrunSectionText.TargetDeparture,
-      );
-      this.createTrainrunSectionElement(
-        groupLabels,
-        selectedTrainrun,
-        connectedTrainIds,
-        TrainrunSectionText.TrainrunSectionTravelTime,
-      );
-      this.createTrainrunSectionElement(
-        groupLabels,
-        selectedTrainrun,
-        connectedTrainIds,
-        TrainrunSectionText.TrainrunSectionName,
-        true,
-        LevelOfDetail.LEVEL2
-      );
+      if (this.editorView.getLevelOfDetail() === LevelOfDetail.FULL ||
+        this.editorView.getLevelOfDetail() === LevelOfDetail.LEVEL3) {
+        this.createTrainrunSectionElement(  // LevelOfDetail.LEVEL3
+          groupLabels,
+          selectedTrainrun,
+          connectedTrainIds,
+          TrainrunSectionText.SourceArrival,
+        );
+        this.createTrainrunSectionElement( // LevelOfDetail.LEVEL3
+          groupLabels,
+          selectedTrainrun,
+          connectedTrainIds,
+          TrainrunSectionText.SourceDeparture,
+        );
+        this.createTrainrunSectionElement( // LevelOfDetail.LEVEL3
+          groupLabels,
+          selectedTrainrun,
+          connectedTrainIds,
+          TrainrunSectionText.TargetArrival,
+        );
+        this.createTrainrunSectionElement( // LevelOfDetail.LEVEL3
+          groupLabels,
+          selectedTrainrun,
+          connectedTrainIds,
+          TrainrunSectionText.TargetDeparture,
+        );
+        this.createTrainrunSectionElement( // LevelOfDetail.LEVEL3
+          groupLabels,
+          selectedTrainrun,
+          connectedTrainIds,
+          TrainrunSectionText.TrainrunSectionTravelTime,
+        );
+      }
 
-      this.createTrainrunsectionSemicircles(
-        groupLabels,
-        selectedTrainrun,
-        connectedTrainIds,
-      );
+      if (this.editorView.getLevelOfDetail() === LevelOfDetail.FULL ||
+        this.editorView.getLevelOfDetail() === LevelOfDetail.LEVEL3 ||
+        this.editorView.getLevelOfDetail() === LevelOfDetail.LEVEL2) {
+        this.createTrainrunSectionElement( // LevelOfDetail.LEVEL2
+          groupLabels,
+          selectedTrainrun,
+          connectedTrainIds,
+          TrainrunSectionText.TrainrunSectionName,
+          true
+        );
 
-      this.createAllIntermediateStops(
-        groupLabels,
-        selectedTrainrun,
-        connectedTrainIds,
-      );
+        this.createTrainrunsectionSemicircles( // LevelOfDetail.LEVEL2
+          groupLabels,
+          selectedTrainrun,
+          connectedTrainIds,
+        );
+
+        this.createAllIntermediateStops( // LevelOfDetail.LEVEL2
+          groupLabels,
+          selectedTrainrun,
+          connectedTrainIds,
+        );
+      }
     }
+  }
+
+
+  make4LayerTrainrunSectionLines(groupLines: any,
+                                 selectedTrainrun: Trainrun,
+                                 connectedTrainIds: any[],
+                                 inGroupLabels,
+                                 enableEvents: boolean) {
+    this.createTrainrunSection(
+      groupLines,
+      StaticDomTags.EDGE_LINE_LAYER_0,
+      selectedTrainrun,
+      connectedTrainIds,
+      enableEvents,
+    );
+    this.createTrainrunSection(
+      groupLines,
+      StaticDomTags.EDGE_LINE_LAYER_1,
+      selectedTrainrun,
+      connectedTrainIds,
+      enableEvents,
+    );
+    this.createTrainrunSection(
+      groupLines,
+      StaticDomTags.EDGE_LINE_LAYER_2,
+      selectedTrainrun,
+      connectedTrainIds,
+      enableEvents,
+    );
+    this.createTrainrunSection(
+      groupLines,
+      StaticDomTags.EDGE_LINE_LAYER_3,
+      selectedTrainrun,
+      connectedTrainIds,
+      enableEvents,
+    );
   }
 
   private createSingleStopElement(

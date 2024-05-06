@@ -21,12 +21,13 @@ import {D3Utils} from "./d3.utils";
 import {NodeViewObject} from "./nodeViewObject";
 import {ConnectionsView} from "./connections.view";
 import {EditorMode} from "../../editor-menu/editor-mode";
-import {LevelOfDetail} from "../../../services/ui/ui.interaction.service";
+import {LevelOfDetail} from "../../../services/ui/level.of.detail.service";
 
 export class NodesView {
   dragPreviousMousePosition: Vec2D;
   nodeGroup;
   draggable: any;
+  private LevelOfDetails: LevelOfDetail;
 
   constructor(private editorView: EditorView) {
     this.draggable = d3
@@ -134,34 +135,120 @@ export class NodesView {
           ")",
       );
 
-    // general node (design)
-    this.makeNodeHoverRoot(groupEnter, LevelOfDetail.LEVEL0);
-    this.makeNodeRoot(groupEnter, LevelOfDetail.LEVEL1);
-    this.makeBackground(groupEnter, LevelOfDetail.LEVEL2);
-    this.makeLabelArea(groupEnter, LevelOfDetail.LEVEL1);
-    // buttons
-    this.makeHoverDragBackground(groupEnter, LevelOfDetail.LEVEL3);
-    this.makeHoverDragRoot(groupEnter, LevelOfDetail.LEVEL3);
-    this.makeEditButtonBackground(groupEnter, LevelOfDetail.LEVEL3);
-    this.makeEditButton(groupEnter, LevelOfDetail.LEVEL3);
-    // dockable
-    this.makeNodeDockable(groupEnter, LevelOfDetail.LEVEL0);
-    // analytics
-    this.makeAnalyticsArea(groupEnter, LevelOfDetail.LEVEL0);
-    this.makeAnalyticsTextLeftArea(groupEnter, LevelOfDetail.LEVEL2);
-    this.makeAnalyticsTextRightArea(groupEnter, LevelOfDetail.LEVEL2);
-    // title / connection text
-    this.makeLabelText(groupEnter, LevelOfDetail.LEVEL2);
-    this.makeLabelConnectionText(groupEnter, LevelOfDetail.LEVEL2);
+    this.renderNodeObject(groupEnter);
 
     group.exit().remove();
   }
 
-  private makeNodeHoverRoot(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
+  renderNodeObject( groupEnter: any) {
+    switch(this.editorView.getLevelOfDetail()) {
+      case LevelOfDetail.LEVEL3: {
+        //statements;
+        this.makeNodeLODLevel3(groupEnter);
+        break;
+      }
+      case LevelOfDetail.LEVEL2: {
+        //statements;
+        this.makeNodeLODLevel2(groupEnter);
+        break;
+      }
+      case LevelOfDetail.LEVEL1: {
+        //statements;
+        this.makeNodeLODLevel1(groupEnter);
+        break;
+      }
+      case LevelOfDetail.LEVEL0: {
+        //statements;
+        this.makeNodeLODLevel0(groupEnter);
+        break;
+      }
+      default: {
+        //statements;
+        this.makeNodeLODFull(groupEnter);
+      }
     }
+  }
 
+  makeNodeLODFull( groupEnter: any ) {
+    // general node (design) : all visible
+    this.makeNodeHoverRoot(groupEnter);
+    this.makeNodeRoot(groupEnter);
+    this.makeBackground(groupEnter);
+    this.makeLabelArea(groupEnter);
+    // buttons : visible
+    this.makeHoverDragBackground(groupEnter);
+    this.makeHoverDragRoot(groupEnter);
+    this.makeEditButtonBackground(groupEnter);
+    this.makeEditButton(groupEnter);
+    // dockable : visible
+    this.makeNodeDockable(groupEnter);
+    // analytics : visible
+    this.makeAnalyticsArea(groupEnter);
+    this.makeAnalyticsTextLeftArea(groupEnter);
+    this.makeAnalyticsTextRightArea(groupEnter);
+    // title / connection text : visible
+    this.makeLabelText(groupEnter);
+    this.makeLabelConnectionText(groupEnter);
+  }
+
+  makeNodeLODLevel3( groupEnter: any) {
+    // general node (design) : all visible
+    this.makeNodeHoverRoot(groupEnter);
+    this.makeNodeRoot(groupEnter);
+    this.makeBackground(groupEnter);
+    this.makeLabelArea(groupEnter);
+    // buttons : hidden
+    // dockable : visible
+    this.makeNodeDockable(groupEnter);
+    // analytics : visible
+    this.makeAnalyticsArea(groupEnter);
+    this.makeAnalyticsTextLeftArea(groupEnter);
+    this.makeAnalyticsTextRightArea(groupEnter);
+    // title / connection text : visible
+    this.makeLabelText(groupEnter);
+    this.makeLabelConnectionText(groupEnter);
+  }
+
+  makeNodeLODLevel2( groupEnter: any  ) {
+    // general node (design) : all visible
+    this.makeNodeHoverRoot(groupEnter);
+    this.makeNodeRoot(groupEnter);
+    this.makeBackground(groupEnter);
+    this.makeLabelArea(groupEnter);
+    // buttons : hidden
+    // dockable : visible
+    this.makeNodeDockable(groupEnter);
+    // analytics : visible
+    this.makeAnalyticsArea(groupEnter);
+    // title / connection text : visible
+    this.makeLabelText(groupEnter);
+    this.makeLabelConnectionText(groupEnter);
+  }
+
+  makeNodeLODLevel1( groupEnter:any  ) {
+    // general node (design) : all visible
+    this.makeNodeHoverRoot(groupEnter);
+    this.makeBackground(groupEnter);
+    // buttons : hidden
+    // dockable : visible
+    this.makeNodeDockable(groupEnter);
+    // analytics : visible
+    this.makeAnalyticsArea(groupEnter);
+    // title / connection text : visible
+    this.makeLabelText(groupEnter);
+  }
+
+  makeNodeLODLevel0( groupEnter:any  ) {
+    // general node (design) : all visible
+    this.makeNodeHoverRoot(groupEnter);
+    // buttons : hidden
+    // dockable : visible
+    this.makeNodeDockable(groupEnter);
+    // analytics : visible
+    this.makeAnalyticsArea(groupEnter);
+  }
+
+  private makeNodeHoverRoot(groupEnter: any) {
     groupEnter
       .append(StaticDomTags.NODE_HOVER_ROOT_SVG)
       .attr("class", StaticDomTags.NODE_HOVER_ROOT_CLASS)
@@ -184,11 +271,7 @@ export class NodesView {
       .on("dblclick", (n: NodeViewObject) => this.onNodeDetailsClicked(n.node));
   }
 
-  private makeNodeRoot(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
-
+  private makeNodeRoot(groupEnter: any) {
     groupEnter
       .append(StaticDomTags.NODE_ROOT_SVG)
       .attr("class", StaticDomTags.NODE_ROOT_CLASS)
@@ -211,10 +294,7 @@ export class NodesView {
       .on("dblclick", (n: NodeViewObject) => this.onNodeDetailsClicked(n.node));
   }
 
-  private makeBackground(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
+  private makeBackground(groupEnter: any) {
 
     groupEnter
       .append(StaticDomTags.NODE_BACKGROUND_SVG)
@@ -238,10 +318,7 @@ export class NodesView {
       .on("dblclick", (n: NodeViewObject) => this.onNodeDetailsClicked(n.node));
   }
 
-  private makeLabelArea(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
+  private makeLabelArea(groupEnter: any) {
 
     groupEnter
       .append(StaticDomTags.NODE_LABELAREA_SVG)
@@ -270,10 +347,7 @@ export class NodesView {
       .on("dblclick", (n: NodeViewObject) => this.onNodeDetailsClicked(n.node));
   }
 
-  private makeHoverDragBackground(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
+  private makeHoverDragBackground(groupEnter: any) {
 
     groupEnter
       .append(StaticDomTags.NODE_HOVER_DRAG_AREA_BACKGROUND_SVG)
@@ -301,10 +375,7 @@ export class NodesView {
       .on("dblclick", (n: NodeViewObject) => this.onNodeDblClick(n.node));
   }
 
-  private makeHoverDragRoot(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
+  private makeHoverDragRoot(groupEnter: any) {
 
     groupEnter
       .append(StaticDomTags.NODE_HOVER_DRAG_AREA_SVG)
@@ -316,11 +387,11 @@ export class NodesView {
       .attr(
         "d",
         "m11.855 2.398-.356-.36-.356.36-3.841 3.897.712.702L11 " +
-          "3.97V11H3.957l2.647-2.647-.707-.708-3.5 3.5-.354.354.354.354 3.5 " +
-          "3.5.707-.708-2.646-2.645H11v7.03l-2.995-3.027-.71.703 3.852 3.894.356.36.355-.36 " +
-          "3.842-3.898-.712-.701L12 19.032v-7.031h7.041l-2.645 2.645.708.708 " +
-          "3.5-3.5.353-.354-.353-.354-3.5-3.5-.707.708L19.043 11H12V3.967l2.997 " +
-          "3.029.711-.704-3.853-3.894Z",
+        "3.97V11H3.957l2.647-2.647-.707-.708-3.5 3.5-.354.354.354.354 3.5 " +
+        "3.5.707-.708-2.646-2.645H11v7.03l-2.995-3.027-.71.703 3.852 3.894.356.36.355-.36 " +
+        "3.842-3.898-.712-.701L12 19.032v-7.031h7.041l-2.645 2.645.708.708 " +
+        "3.5-3.5.353-.354-.353-.354-3.5-3.5-.707.708L19.043 11H12V3.967l2.997 " +
+        "3.029.711-.704-3.853-3.894Z",
       )
       .attr(
         "transform",
@@ -340,10 +411,7 @@ export class NodesView {
       .on("dblclick", (n: NodeViewObject) => this.onNodeDblClick(n.node));
   }
 
-  private makeEditButtonBackground(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
+  private makeEditButtonBackground(groupEnter: any) {
 
     groupEnter
       .append(StaticDomTags.NODE_EDIT_AREA_BACKGROUND_SVG)
@@ -371,10 +439,7 @@ export class NodesView {
       .on("mouseup", (n: NodeViewObject) => this.onNodeMouseup(n.node));
   }
 
-  private makeEditButton(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
+  private makeEditButton(groupEnter: any) {
 
     groupEnter
       .append(StaticDomTags.NODE_EDIT_AREA_SVG)
@@ -386,11 +451,11 @@ export class NodesView {
       .attr(
         "d",
         "m25.853 6.71-.354-.352-.353.353-3.435 3.435-.353.354.353.353 " +
-          "3.435 3.435.355.355.353-.355 3.435-3.449.353-.354-.354-.353-3.435-3.421Zm-" +
-          "3.081 3.79 2.729-2.729 2.727 2.717-2.729 2.739-2.727-2.727Zm-2.918 2.212-." +
-          "354-.354-.354.354-11.25 11.25-.146.146V28.25h4.142l.147-.146 11.25-11.252." +
-          "353-.353-.354-.354-3.434-3.433ZM8.75 24.522l10.75-10.75 2.728 2.727-10.75 " +
-          "10.751H8.75v-2.728Z",
+        "3.435 3.435.355.355.353-.355 3.435-3.449.353-.354-.354-.353-3.435-3.421Zm-" +
+        "3.081 3.79 2.729-2.729 2.727 2.717-2.729 2.739-2.727-2.727Zm-2.918 2.212-." +
+        "354-.354-.354.354-11.25 11.25-.146.146V28.25h4.142l.147-.146 11.25-11.252." +
+        "353-.353-.354-.354-3.434-3.433ZM8.75 24.522l10.75-10.75 2.728 2.727-10.75 " +
+        "10.751H8.75v-2.728Z",
       )
       .attr(
         "transform",
@@ -411,10 +476,7 @@ export class NodesView {
       .on("mouseup", (n: NodeViewObject) => this.onNodeMouseup(n.node));
   }
 
-  private makeNodeDockable(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
+  private makeNodeDockable(groupEnter: any ) {
 
     groupEnter
       .append(StaticDomTags.NODE_DOCKABLE_SVG)
@@ -451,10 +513,7 @@ export class NodesView {
       .on("dblclick", (n: NodeViewObject) => this.onNodeDetailsClicked(n.node));
   }
 
-  private makeAnalyticsArea(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
+  private makeAnalyticsArea(groupEnter: any) {
 
     groupEnter
       .append(StaticDomTags.NODE_ANALYTICSAREA_SVG)
@@ -489,10 +548,7 @@ export class NodesView {
       .on("mouseup", (n: NodeViewObject) => this.onNodeMouseup(n.node));
   }
 
-  private makeAnalyticsTextLeftArea(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
+  private makeAnalyticsTextLeftArea(groupEnter: any) {
 
     groupEnter
       .append(StaticDomTags.NODE_ANALYTICSAREA_TEXT_LEFT_SVG)
@@ -509,11 +565,7 @@ export class NodesView {
       .attr(StaticDomTags.NODE_ID, (n: NodeViewObject) => n.node.getId());
   }
 
-  private makeAnalyticsTextRightArea(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
-
+  private makeAnalyticsTextRightArea(groupEnter: any) {
     groupEnter
       .append(StaticDomTags.NODE_ANALYTICSAREA_TEXT_RIGHT_SVG)
       .attr("class", StaticDomTags.NODE_ANALYTICSAREA_TEXT_RIGHT_CLASS)
@@ -532,10 +584,7 @@ export class NodesView {
       .attr(StaticDomTags.NODE_ID, (n: NodeViewObject) => n.node.getId());
   }
 
-  private makeLabelText(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
+  private makeLabelText(groupEnter: any) {
 
     groupEnter
       .append(StaticDomTags.NODE_LABELAREA_TEXT_SVG)
@@ -562,10 +611,7 @@ export class NodesView {
       .on("dblclick", (n: NodeViewObject) => this.onNodeDblClick(n.node));
   }
 
-  private makeLabelConnectionText(groupEnter: any, lod: LevelOfDetail) {
-    if (this.editorView.skipElementLevelOfDetail(lod)) {
-      return;
-    }
+  private makeLabelConnectionText(groupEnter: any) {
 
     groupEnter
       .append(StaticDomTags.NODE_CONNECTIONTIME_TEXT_SVG)
@@ -618,7 +664,7 @@ export class NodesView {
     this.hoverNode(node, domObj);
   }
 
-  onNodeMousemove(node: Node, domObj : any){
+  onNodeMousemove(node: Node, domObj: any) {
     this.hoverPinsAsConnectionDropable(node);
   }
 
@@ -821,9 +867,9 @@ export class NodesView {
     if (existingTrainrunSection === null) {
       const sourceObj = d3.select(
         StaticDomTags.NODE_DOCKABLE_DOM_REF +
-          '[id="' +
-          startNode.getId() +
-          '"]',
+        '[id="' +
+        startNode.getId() +
+        '"]',
       );
       const sourceRect: DOMRect = sourceObj.node().getBoundingClientRect();
       const sourcePos = new Vec2D(
@@ -883,13 +929,13 @@ export class NodesView {
     if (
       !(
         dragTransitionInfo.trainrunSection1.getSourceNodeId() !==
-          endNode.getId() &&
+        endNode.getId() &&
         dragTransitionInfo.trainrunSection1.getTargetNodeId() !==
-          endNode.getId() &&
+        endNode.getId() &&
         dragTransitionInfo.trainrunSection2.getSourceNodeId() !==
-          endNode.getId() &&
+        endNode.getId() &&
         dragTransitionInfo.trainrunSection2.getTargetNodeId() !==
-          endNode.getId()
+        endNode.getId()
       )
     ) {
       this.editorView.trainrunSectionPreviewLineView.stopPreviewLine();
