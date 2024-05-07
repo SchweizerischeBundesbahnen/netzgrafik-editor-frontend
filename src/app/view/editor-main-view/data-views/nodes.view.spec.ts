@@ -21,6 +21,8 @@ import {NetzgrafikUnitTesting} from "../../../../integration-testing/netzgrafik.
 import {EditorMainViewComponent} from "../editor-main-view.component";
 import {EditorView} from "./editor.view";
 import {NodesView} from "./nodes.view";
+import {LevelOfDetailService} from "../../../services/ui/level.of.detail.service";
+import {ViewportCullService} from "../../../services/ui/viewport.cull.service";
 
 describe("Nodes-View", () => {
   let dataService: DataService;
@@ -125,6 +127,16 @@ describe("Nodes-View", () => {
       undoService,
     );
 
+    const levelOfDetailService = new LevelOfDetailService(
+      uiInteractionService
+    );
+    const viewportCullSerivce = new ViewportCullService(
+      uiInteractionService,
+      nodeService,
+      noteService,
+      trainrunSectionService
+    );
+
     const controller = new EditorMainViewComponent(
       nodeService,
       trainrunSectionService,
@@ -136,7 +148,10 @@ describe("Nodes-View", () => {
       undoService,
       copyService,
       logService,
+      viewportCullSerivce,
+      levelOfDetailService
     );
+
     new EditorView(
       controller,
       nodeService,
@@ -148,6 +163,8 @@ describe("Nodes-View", () => {
       undoService,
       copyService,
       logService,
+      viewportCullSerivce,
+      levelOfDetailService,
     );
     controller.bindViewToServices();
     editorView = controller.editorView;

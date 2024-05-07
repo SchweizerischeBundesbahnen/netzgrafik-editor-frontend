@@ -43,7 +43,9 @@ export class NodeViewObject {
       "_" +
       editorView.isJunctionNode(n) +
       "_" +
-      editorView.isTemporaryDisableFilteringOfItemsInViewEnabled()
+      editorView.isTemporaryDisableFilteringOfItemsInViewEnabled() +
+      "_" +
+      editorView.getLevelOfDetail()
     );
   }
 }

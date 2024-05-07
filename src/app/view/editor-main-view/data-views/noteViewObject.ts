@@ -34,7 +34,9 @@ export class NoteViewObject {
       "_" +
       editorView.isFilterNotesEnabled() +
       "_" +
-      editorView.isTemporaryDisableFilteringOfItemsInViewEnabled()
+      editorView.isTemporaryDisableFilteringOfItemsInViewEnabled() +
+      "_" +
+      editorView.getLevelOfDetail()
     );
   }
 }

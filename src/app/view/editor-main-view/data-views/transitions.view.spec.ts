@@ -21,6 +21,8 @@ import {EditorView} from "./editor.view";
 import {EditorMainViewComponent} from "../editor-main-view.component";
 import {NetzgrafikUnitTesting} from "../../../../integration-testing/netzgrafik.unit.testing";
 import {TransitionsView} from "./transitions.view";
+import {LevelOfDetailService} from "../../../services/ui/level.of.detail.service";
+import {ViewportCullService} from "../../../services/ui/viewport.cull.service";
 
 describe("Transitions-View", () => {
   let dataService: DataService;
@@ -125,6 +127,16 @@ describe("Transitions-View", () => {
       undoService,
     );
 
+    const levelOfDetailService = new LevelOfDetailService(
+      uiInteractionService
+    );
+    const viewportCullSerivce = new ViewportCullService(
+      uiInteractionService,
+      nodeService,
+      noteService,
+      trainrunSectionService
+    );
+
     const controller = new EditorMainViewComponent(
       nodeService,
       trainrunSectionService,
@@ -136,7 +148,11 @@ describe("Transitions-View", () => {
       undoService,
       copyService,
       logService,
+      viewportCullSerivce,
+      levelOfDetailService
     );
+
+
     new EditorView(
       controller,
       nodeService,
@@ -148,7 +164,10 @@ describe("Transitions-View", () => {
       undoService,
       copyService,
       logService,
+      viewportCullSerivce,
+      levelOfDetailService
     );
+
     controller.bindViewToServices();
     editorView = controller.editorView;
   });

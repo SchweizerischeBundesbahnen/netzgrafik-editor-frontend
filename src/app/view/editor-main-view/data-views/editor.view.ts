@@ -31,14 +31,8 @@ import {MultiSelectRenderer} from "./multiSelectRenderer";
 import {UndoService} from "../../../services/data/undo.service";
 import {CopyService} from "../../../services/data/copy.service";
 import {StreckengrafikDrawingContext} from "../../../streckengrafik/model/util/streckengrafik.drawing.context";
-
-export enum ViewportOut {
-  ElementIsInside,
-  LeftOutside,
-  RightOutside,
-  TopOutside,
-  BottomOutside,
-}
+import {LevelOfDetail, LevelOfDetailService} from "../../../services/ui/level.of.detail.service";
+import {ViewportCullService} from "../../../services/ui/viewport.cull.service";
 
 export class EditorView implements SVGMouseControllerObserver {
   static svgName = "graphContainer";
@@ -133,6 +127,8 @@ export class EditorView implements SVGMouseControllerObserver {
     private undoService: UndoService,
     private copyService: CopyService,
     private logService: LogService,
+    private viewportCullService: ViewportCullService,
+    private levelOfDetailService: LevelOfDetailService
   ) {
     this.controller = controller;
     this.svgMouseController = new SVGMouseController(EditorView.svgName, this);
@@ -580,7 +576,7 @@ export class EditorView implements SVGMouseControllerObserver {
 
   zoomFactorChanged(newZoomFactor: number) {
     this.controller.zoomFactorChanged(newZoomFactor);
-    this.uiInteractionService.onViewportChangeUpdateRendering(true);
+    this.viewportCullService.onViewportChangeUpdateRendering(true);
   }
 
   onViewboxChanged(viewboxProperties: ViewboxProperties) {
@@ -588,15 +584,24 @@ export class EditorView implements SVGMouseControllerObserver {
       EditorView.svgName,
       viewboxProperties,
     );
-    this.uiInteractionService.onViewportChangeUpdateRendering(true);
+    this.viewportCullService.onViewportChangeUpdateRendering(true);
   }
 
   doCullCheckPositionsInViewport(positions: Vec2D[], extraPixelsIn = 32): boolean {
-    return this.uiInteractionService.cullCheckPositionsInViewport(
+    return this.viewportCullService.cullCheckPositionsInViewport(
       positions,
       EditorView.svgName,
       extraPixelsIn);
   }
+
+  getLevelOfDetail() {
+    return this.levelOfDetailService.getLevelOfDetail();
+  }
+
+  skipElementLevelOfDetail(lod: LevelOfDetail): boolean {
+    return lod < this.getLevelOfDetail();
+  }
+
 
   setEditorMode(mode: EditorMode) {
     if (
@@ -662,7 +667,7 @@ export class EditorView implements SVGMouseControllerObserver {
       }
       D3Utils.enableSpecialEditing(
         this.editorMode === EditorMode.TopologyEditing ||
-          this.editorMode === EditorMode.NoteEditing,
+        this.editorMode === EditorMode.NoteEditing,
       );
     }
   }

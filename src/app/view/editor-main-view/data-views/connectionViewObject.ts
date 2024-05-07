@@ -50,7 +50,9 @@ export class ConnectionsViewObject {
       "_" +
       displayConnectionPin2 +
       "_" +
-      editorView.isTemporaryDisableFilteringOfItemsInViewEnabled();
+      editorView.isTemporaryDisableFilteringOfItemsInViewEnabled() +
+      "_" +
+      editorView.getLevelOfDetail();
 
     connection.getPath().forEach((p) => {
       key += p.toString();

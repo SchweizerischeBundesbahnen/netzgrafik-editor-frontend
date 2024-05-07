@@ -20,6 +20,8 @@ import {downloadBlob} from "../util/download-utils";
 import {map} from "rxjs/operators";
 import {LabelService} from "../../services/data/label.serivce";
 import {NetzgrafikColoringService} from "../../services/data/netzgrafikColoring.service";
+import {ViewportCullService} from "../../services/ui/viewport.cull.service";
+import {LevelOfDetailService} from "../../services/ui/level.of.detail.service";
 
 @Component({
   selector: "sbb-editor-tools-view-component",
@@ -51,7 +53,10 @@ export class EditorToolsViewComponent {
     private logger: LogService,
     private versionControlService: VersionControlService,
     private netzgrafikColoringService: NetzgrafikColoringService,
-  ) {}
+    private viewportCullService: ViewportCullService,
+    private levelOfDetailService: LevelOfDetailService,
+  ) {
+  }
 
   onLoadButton() {
     this.netgrafikJsonFileInput.nativeElement.click();
@@ -100,9 +105,7 @@ export class EditorToolsViewComponent {
       this.trainrunSectionService,
     );
 
-    const bb = new Blob([railMLExporter.createRailML()], {
-      type: "text/plain",
-    });
+    const bb = new Blob([railMLExporter.createRailML()], {type: "text/plain"});
 
     pom.setAttribute("href", window.URL.createObjectURL(bb));
     pom.setAttribute("download", filename);
@@ -117,7 +120,8 @@ export class EditorToolsViewComponent {
   onExportNetzgrafikSVG() {
     // option 2: save svg as svg
     // https://www.npmjs.com/package/save-svg-as-png
-    this.uiInteractionService.onViewportChangeUpdateRendering(false);
+    this.levelOfDetailService.disableLevelOfDetailRendering();
+    this.viewportCullService.onViewportChangeUpdateRendering(false);
 
     const containerInfo = this.getContainertoExport();
     svg
@@ -137,6 +141,7 @@ export class EditorToolsViewComponent {
           "style",
           containerInfo.documentSavedStyle,
         );
+        this.levelOfDetailService.enableLevelOfDetailRendering();
       });
   }
 
@@ -148,7 +153,8 @@ export class EditorToolsViewComponent {
   onExportNetzgrafikPNG() {
     // option 1: save svg as png
     // https://www.npmjs.com/package/save-svg-as-png
-    this.uiInteractionService.onViewportChangeUpdateRendering(false);
+    this.levelOfDetailService.disableLevelOfDetailRendering();
+    this.viewportCullService.onViewportChangeUpdateRendering(false);
 
     const containerInfo = this.getContainertoExport();
     svg.saveSvgAsPng(
@@ -157,6 +163,7 @@ export class EditorToolsViewComponent {
       containerInfo.exportParameter,
     );
     //containerInfo.documentToExport.setAttribute('style', containerInfo.documentSavedStyle);
+    this.levelOfDetailService.enableLevelOfDetailRendering();
   }
 
   onLoadStammdatenButton() {
@@ -251,38 +258,38 @@ export class EditorToolsViewComponent {
       row.push(regions.map((reg) => "" + reg).join(comma));
       row.push(
         "" +
-          (trainrunCategoryHaltezeit[HaltezeitFachCategories.IPV].no_halt
-            ? 0
-            : trainrunCategoryHaltezeit[HaltezeitFachCategories.IPV].haltezeit -
-              zaz),
+        (trainrunCategoryHaltezeit[HaltezeitFachCategories.IPV].no_halt
+          ? 0
+          : trainrunCategoryHaltezeit[HaltezeitFachCategories.IPV].haltezeit -
+          zaz),
       );
       row.push(
         "" +
-          (trainrunCategoryHaltezeit[HaltezeitFachCategories.A].no_halt
-            ? 0
-            : trainrunCategoryHaltezeit[HaltezeitFachCategories.A].haltezeit -
-              zaz),
+        (trainrunCategoryHaltezeit[HaltezeitFachCategories.A].no_halt
+          ? 0
+          : trainrunCategoryHaltezeit[HaltezeitFachCategories.A].haltezeit -
+          zaz),
       );
       row.push(
         "" +
-          (trainrunCategoryHaltezeit[HaltezeitFachCategories.B].no_halt
-            ? 0
-            : trainrunCategoryHaltezeit[HaltezeitFachCategories.B].haltezeit -
-              zaz),
+        (trainrunCategoryHaltezeit[HaltezeitFachCategories.B].no_halt
+          ? 0
+          : trainrunCategoryHaltezeit[HaltezeitFachCategories.B].haltezeit -
+          zaz),
       );
       row.push(
         "" +
-          (trainrunCategoryHaltezeit[HaltezeitFachCategories.C].no_halt
-            ? 0
-            : trainrunCategoryHaltezeit[HaltezeitFachCategories.C].haltezeit -
-              zaz),
+        (trainrunCategoryHaltezeit[HaltezeitFachCategories.C].no_halt
+          ? 0
+          : trainrunCategoryHaltezeit[HaltezeitFachCategories.C].haltezeit -
+          zaz),
       );
       row.push(
         "" +
-          (trainrunCategoryHaltezeit[HaltezeitFachCategories.D].no_halt
-            ? 0
-            : trainrunCategoryHaltezeit[HaltezeitFachCategories.D].haltezeit -
-              zaz),
+        (trainrunCategoryHaltezeit[HaltezeitFachCategories.D].no_halt
+          ? 0
+          : trainrunCategoryHaltezeit[HaltezeitFachCategories.D].haltezeit -
+          zaz),
       );
       row.push("" + zaz);
       row.push("" + nodeElement.getConnectionTime());
@@ -326,7 +333,7 @@ export class EditorToolsViewComponent {
         width: boundingBox.maxCoordX - boundingBox.minCoordX + 64,
         height: boundingBox.maxCoordY - boundingBox.minCoordY + 64,
         backgroundColor:
-          this.uiInteractionService.getActiveTheme().backgroundColor,
+        this.uiInteractionService.getActiveTheme().backgroundColor,
       };
     } else {
       param = {
@@ -337,7 +344,7 @@ export class EditorToolsViewComponent {
         width: htmlElementToExport.offsetWidth,
         height: htmlElementToExport.offsetHeight,
         backgroundColor:
-          this.uiInteractionService.getActiveTheme().backgroundColor,
+        this.uiInteractionService.getActiveTheme().backgroundColor,
       };
     }
     const oldStyle = htmlElementToExport.getAttribute("style");
@@ -390,12 +397,7 @@ export class EditorToolsViewComponent {
           ? n.getPositionY() + n.getNodeHeight()
           : Math.max(maxY, n.getPositionY() + n.getNodeHeight());
     });
-    return {
-      minCoordX: minX,
-      minCoordY: minY,
-      maxCoordX: maxX,
-      maxCoordY: maxY,
-    };
+    return {minCoordX: minX, minCoordY: minY, maxCoordX: maxX, maxCoordY: maxY};
   }
 
   private convertToZuglaufCSV(): string {

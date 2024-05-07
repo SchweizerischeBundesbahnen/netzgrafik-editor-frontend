@@ -26,6 +26,8 @@ import {NoteViewObject} from "./noteViewObject";
 import {TrainrunSectionViewObject} from "./trainrunSectionViewObject";
 import {TransitionViewObject} from "./transitionViewObject";
 import {StaticDomTags} from "./static.dom.tags";
+import {LevelOfDetailService} from "../../../services/ui/level.of.detail.service";
+import {ViewportCullService} from "../../../services/ui/viewport.cull.service";
 
 describe("Editor-DataView", () => {
   let dataService: DataService;
@@ -130,6 +132,17 @@ describe("Editor-DataView", () => {
       undoService,
     );
 
+
+    const viewportCullSerivce = new ViewportCullService(
+      uiInteractionService,
+      nodeService,
+      noteService,
+      trainrunSectionService
+    );
+    const levelOfDetailService = new LevelOfDetailService(
+      uiInteractionService
+    );
+
     const controller = new EditorMainViewComponent(
       nodeService,
       trainrunSectionService,
@@ -141,7 +154,10 @@ describe("Editor-DataView", () => {
       undoService,
       copyService,
       logService,
+      viewportCullSerivce,
+      levelOfDetailService
     );
+
     new EditorView(
       controller,
       nodeService,
@@ -153,6 +169,8 @@ describe("Editor-DataView", () => {
       undoService,
       copyService,
       logService,
+      viewportCullSerivce,
+      levelOfDetailService
     );
 
     controller.bindViewToServices();
@@ -168,7 +186,7 @@ describe("Editor-DataView", () => {
 
     const cvo = new ConnectionsViewObject(editorView, con, node, false, false);
     expect(cvo.key).toBe(
-      "#2@false_15_9_false_(832,144)_(774.4,144)_(793.6,144)_(736,144)_false_false_false(832,144)(774.4,144)(793.6,144)(736,144)",
+      "#2@false_15_9_false_(832,144)_(774.4,144)_(793.6,144)_(736,144)_false_false_false_0(832,144)(774.4,144)(793.6,144)(736,144)",
     );
   });
 
@@ -179,10 +197,10 @@ describe("Editor-DataView", () => {
     const node = nodeService.getNodeFromId(2);
 
     const cvo1 = new NodeViewObject(editorView, node, false);
-    expect(cvo1.key).toBe("#2@736_64_ZUE_6_5_96_124_false_2_false_true_false");
+    expect(cvo1.key).toBe("#2@736_64_ZUE_6_5_96_124_false_2_false_true_false_0");
 
     const cvo2 = new NodeViewObject(editorView, node, true);
-    expect(cvo2.key).toBe("#2@736_64_ZUE_6_5_96_124_false_2_true_true_false");
+    expect(cvo2.key).toBe("#2@736_64_ZUE_6_5_96_124_false_2_true_true_false_0");
   });
 
   it("NodeViewObject   - 001", () => {
@@ -192,7 +210,7 @@ describe("Editor-DataView", () => {
     const note = noteService.getNoteFromId(3);
     const cvo1 = new NoteViewObject(editorView, note);
     expect(cvo1.key).toBe(
-      "#3@1312_160_64_192_<p><em>Folgendes</em></p>spannend<p><strong>FETT</strong>_Frabcodierter Text_false_0_false_false",
+      "#3@1312_160_64_192_<p><em>Folgendes</em></p>spannend<p><strong>FETT</strong>_Frabcodierter Text_false_0_false_false_0",
     );
   });
 
@@ -213,7 +231,7 @@ describe("Editor-DataView", () => {
       false,
     );
     expect(cvo1.key).toBe(
-      "#3@1234_false_0_39_49_1_21_39_0_39_141_39_0_39_0_20_0_S_20_7/24_4_1_0_S_20_7/24_20_0_false_false_false_false_false_false_false_false_true_true_true_false_false_true_true_2_true_true_true_1_false_true_true_0_false_true_true(130,80)(194,80)(254,80)(318,80)",
+      "#3@1234_false_0_39_49_1_21_39_0_39_141_39_0_39_0_20_0_S_20_7/24_4_1_0_S_20_7/24_20_0_false_false_false_false_false_false_false_false_true_true_true_false_false_true_true_0_2_true_true_true_1_false_true_true_0_false_true_true(130,80)(194,80)(254,80)(318,80)",
     );
   });
 

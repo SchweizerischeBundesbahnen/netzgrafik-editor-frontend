@@ -22,6 +22,8 @@ import {EditorView} from "./editor.view";
 import {D3Utils} from "./d3.utils";
 import {NetzgrafikUnitTesting} from "../../../../integration-testing/netzgrafik.unit.testing";
 import {Vec2D} from "../../../utils/vec2D";
+import {LevelOfDetailService} from "../../../services/ui/level.of.detail.service";
+import {ViewportCullService} from "../../../services/ui/viewport.cull.service";
 
 describe("3d.Utils.tests", () => {
   let dataService: DataService;
@@ -126,6 +128,16 @@ describe("3d.Utils.tests", () => {
       undoService,
     );
 
+    const levelOfDetailService = new LevelOfDetailService(
+      uiInteractionService
+    );
+    const viewportCullSerivce = new ViewportCullService(
+      uiInteractionService,
+      nodeService,
+      noteService,
+      trainrunSectionService
+    );
+
     const controller = new EditorMainViewComponent(
       nodeService,
       trainrunSectionService,
@@ -137,7 +149,10 @@ describe("3d.Utils.tests", () => {
       undoService,
       copyService,
       logService,
+      viewportCullSerivce,
+      levelOfDetailService
     );
+
     new EditorView(
       controller,
       nodeService,
@@ -149,6 +164,8 @@ describe("3d.Utils.tests", () => {
       undoService,
       copyService,
       logService,
+      viewportCullSerivce,
+      levelOfDetailService
     );
     controller.bindViewToServices();
     editorView = controller.editorView;
