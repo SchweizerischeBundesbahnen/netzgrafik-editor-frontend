@@ -140,8 +140,8 @@ export class NodesView {
     group.exit().remove();
   }
 
-  renderNodeObject( groupEnter: any) {
-    switch(this.editorView.getLevelOfDetail()) {
+  renderNodeObject(groupEnter: any) {
+    switch (this.editorView.getLevelOfDetail()) {
       case LevelOfDetail.LEVEL3: {
         //statements;
         this.makeNodeLODLevel3(groupEnter);
@@ -169,82 +169,58 @@ export class NodesView {
     }
   }
 
-  makeNodeLODFull( groupEnter: any ) {
-    // general node (design) : all visible
+  makeNodeLODFull(groupEnter: any) {
     this.makeNodeHoverRoot(groupEnter);
     this.makeNodeRoot(groupEnter);
     this.makeBackground(groupEnter);
     this.makeLabelArea(groupEnter);
-    // buttons : visible
     this.makeHoverDragBackground(groupEnter);
     this.makeHoverDragRoot(groupEnter);
     this.makeEditButtonBackground(groupEnter);
     this.makeEditButton(groupEnter);
-    // dockable : visible
     this.makeNodeDockable(groupEnter);
-    // analytics : visible
     this.makeAnalyticsArea(groupEnter);
     this.makeAnalyticsTextLeftArea(groupEnter);
     this.makeAnalyticsTextRightArea(groupEnter);
-    // title / connection text : visible
     this.makeLabelText(groupEnter);
     this.makeLabelConnectionText(groupEnter);
   }
 
-  makeNodeLODLevel3( groupEnter: any) {
-    // general node (design) : all visible
+  makeNodeLODLevel3(groupEnter: any) {
     this.makeNodeHoverRoot(groupEnter);
     this.makeNodeRoot(groupEnter);
     this.makeBackground(groupEnter);
     this.makeLabelArea(groupEnter);
-    // buttons : hidden
-    // dockable : visible
     this.makeNodeDockable(groupEnter);
-    // analytics : visible
     this.makeAnalyticsArea(groupEnter);
     this.makeAnalyticsTextLeftArea(groupEnter);
     this.makeAnalyticsTextRightArea(groupEnter);
-    // title / connection text : visible
     this.makeLabelText(groupEnter);
     this.makeLabelConnectionText(groupEnter);
   }
 
-  makeNodeLODLevel2( groupEnter: any  ) {
-    // general node (design) : all visible
+  makeNodeLODLevel2(groupEnter: any) {
     this.makeNodeHoverRoot(groupEnter);
     this.makeNodeRoot(groupEnter);
     this.makeBackground(groupEnter);
     this.makeLabelArea(groupEnter);
-    // buttons : hidden
-    // dockable : visible
     this.makeNodeDockable(groupEnter);
-    // analytics : visible
     this.makeAnalyticsArea(groupEnter);
-    // title / connection text : visible
     this.makeLabelText(groupEnter);
     this.makeLabelConnectionText(groupEnter);
   }
 
-  makeNodeLODLevel1( groupEnter:any  ) {
-    // general node (design) : all visible
+  makeNodeLODLevel1(groupEnter: any) {
     this.makeNodeHoverRoot(groupEnter);
     this.makeBackground(groupEnter);
-    // buttons : hidden
-    // dockable : visible
     this.makeNodeDockable(groupEnter);
-    // analytics : visible
     this.makeAnalyticsArea(groupEnter);
-    // title / connection text : visible
     this.makeLabelText(groupEnter);
   }
 
-  makeNodeLODLevel0( groupEnter:any  ) {
-    // general node (design) : all visible
+  makeNodeLODLevel0(groupEnter: any) {
     this.makeNodeHoverRoot(groupEnter);
-    // buttons : hidden
-    // dockable : visible
     this.makeNodeDockable(groupEnter);
-    // analytics : visible
     this.makeAnalyticsArea(groupEnter);
   }
 
@@ -476,7 +452,7 @@ export class NodesView {
       .on("mouseup", (n: NodeViewObject) => this.onNodeMouseup(n.node));
   }
 
-  private makeNodeDockable(groupEnter: any ) {
+  private makeNodeDockable(groupEnter: any) {
 
     groupEnter
       .append(StaticDomTags.NODE_DOCKABLE_SVG)
