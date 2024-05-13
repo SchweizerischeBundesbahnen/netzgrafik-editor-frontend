@@ -429,65 +429,52 @@ export class EditorToolsViewComponent {
       .forEach((trainrun) => {
         let startBetriebspunktName = "";
         let endBetriebspunktName = "";
-        let travelTimeFoewart = 0;
-        let travelTimeBackward = 0;
-        let waitingTimeOnStartStation = 0;
-        let waitingTimeOnEndStation = 0;
-        let foewartHoldtime = 0;
-        let backwardHoldtime = 0;
-        let startNodeDeparture = undefined;
-        let endNodeArrival = undefined;
-        let endNodeDeparture = undefined;
-        let startNodeArrival = undefined;
-        this.trainrunSectionService
-          .getAllTrainrunSectionsForTrainrun(trainrun.getId())
-          .filter((trainrunSection) =>
-            this.filterService.filterTrainrunsection(trainrunSection),
-          )
-          .forEach((trainrunSection, index) => {
-            if (index === 0) {
-              startBetriebspunktName = trainrunSection
-                .getSourceNode()
-                .getBetriebspunktName();
-              startNodeArrival = trainrunSection.getSourceArrival();
-              startNodeDeparture = trainrunSection.getSourceDeparture();
-              waitingTimeOnStartStation = this.calcWaitingTime(
-                trainrunSection.getSourceArrival(),
-                trainrunSection.getSourceDeparture(),
-              );
-            }
 
-            if (endNodeArrival) {
-              foewartHoldtime =
-                foewartHoldtime +
-                this.calcWaitingTime(
-                  endNodeArrival,
-                  trainrunSection.getSourceDeparture(),
-                );
-            }
+        // Retrieve start -> end with:
+        // start {startNode, startTrainrunSection}
+        // end {iterator.current.node, iterator.current.trainrunSection}
+        const startNode = this.trainrunService.getStartNodeWithTrainrunId(trainrun.getId());
+        const startTrainrunSection = startNode.getStartTrainrunSection(trainrun.getId());
+        const iterator = this.trainrunService.getIterator(startNode, startTrainrunSection);
+        while (iterator.hasNext()) {
+          iterator.next();
+        }
 
-            if (endNodeDeparture) {
-              backwardHoldtime =
-                backwardHoldtime +
-                this.calcWaitingTime(
-                  trainrunSection.getSourceArrival(),
-                  endNodeDeparture,
-                );
-            }
-            endNodeArrival = trainrunSection.getTargetArrival();
-            endNodeDeparture = trainrunSection.getTargetDeparture();
-            endBetriebspunktName = trainrunSection
-              .getTargetNode()
-              .getBetriebspunktName();
-            travelTimeFoewart =
-              travelTimeFoewart + trainrunSection.getTravelTime();
-            travelTimeBackward =
-              travelTimeBackward + trainrunSection.getTravelTime();
-            waitingTimeOnEndStation = this.calcWaitingTime(
-              trainrunSection.getTargetArrival(),
-              trainrunSection.getTargetDeparture(),
-            );
-          });
+        startBetriebspunktName = startNode.getBetriebspunktName();
+        endBetriebspunktName = iterator.current().node.getBetriebspunktName();
+        const departureTimeAtStart = startTrainrunSection.getSourceNodeId() === startNode.getId() ?
+          startTrainrunSection.getSourceDepartureConsecutiveTime() :
+          startTrainrunSection.getTargetDepartureConsecutiveTime();
+        const arrivalTimeAtEnd = iterator.current().trainrunSection.getSourceNodeId() === iterator.current().node.getId() ?
+          iterator.current().trainrunSection.getSourceArrivalConsecutiveTime() :
+          iterator.current().trainrunSection.getTargetArrivalConsecutiveTime();
+        const travelTime = arrivalTimeAtEnd - departureTimeAtStart;
+
+        const startNodeDeparture = startTrainrunSection.getSourceNodeId() === startNode.getId() ?
+          startTrainrunSection.getSourceDeparture() :
+          startTrainrunSection.getTargetDeparture();
+        const endNodeArrival = iterator.current().trainrunSection.getSourceNodeId() === iterator.current().node.getId() ?
+          iterator.current().trainrunSection.getSourceArrival() :
+          iterator.current().trainrunSection.getTargetArrival();
+
+        const endNodeDeparture = iterator.current().trainrunSection.getSourceNodeId() === iterator.current().node.getId() ?
+          iterator.current().trainrunSection.getSourceDeparture() :
+          iterator.current().trainrunSection.getTargetDeparture();
+        const startNodeArrival = startTrainrunSection.getSourceNodeId() === startNode.getId() ?
+          startTrainrunSection.getSourceArrival() :
+          startTrainrunSection.getTargetArrival();
+
+
+        let waitingTimeOnStartStation = startNodeDeparture - startNodeArrival;
+        while (waitingTimeOnStartStation < 0) {
+          waitingTimeOnStartStation += trainrun.getFrequency();
+        }
+
+
+        let waitingTimeOnEndStation = endNodeDeparture - endNodeArrival;
+        while (waitingTimeOnEndStation < 0) {
+          waitingTimeOnEndStation += trainrun.getFrequency();
+        }
 
         if (trainrun.getFrequency() < 60) {
           waitingTimeOnEndStation =
@@ -496,26 +483,24 @@ export class EditorToolsViewComponent {
             waitingTimeOnStartStation % trainrun.getFrequency();
         }
 
-        travelTimeFoewart = travelTimeFoewart + foewartHoldtime;
-        travelTimeBackward = travelTimeBackward + backwardHoldtime;
         const timeOfCirculation =
-          travelTimeFoewart +
+          travelTime +
           waitingTimeOnEndStation +
-          travelTimeBackward +
+          travelTime +
           waitingTimeOnStartStation;
         const row: string[] = [];
         row.push(trainrun.getTrainrunCategory().shortName);
         row.push(trainrun.getTitle());
         row.push(startBetriebspunktName);
         row.push(endBetriebspunktName);
-        row.push(trainrun.getTrainrunTimeCategory().shortName);
-        row.push(trainrun.getTrainrunFrequency().shortName);
+        row.push("Verkehrt: " + trainrun.getTrainrunTimeCategory().shortName);
+        row.push("" + trainrun.getTrainrunFrequency().shortName);
         row.push("" + startNodeDeparture);
-        row.push("" + travelTimeFoewart);
+        row.push("" + travelTime);
         row.push("" + endNodeArrival);
         row.push("" + waitingTimeOnEndStation);
         row.push("" + endNodeDeparture);
-        row.push("" + travelTimeBackward);
+        row.push("" + travelTime);
         row.push("" + startNodeArrival);
         row.push("" + waitingTimeOnStartStation);
         row.push("" + timeOfCirculation);
