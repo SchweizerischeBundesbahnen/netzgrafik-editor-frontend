@@ -517,11 +517,4 @@ export class EditorToolsViewComponent {
       });
     return contentData.join("\n");
   }
-
-  private calcWaitingTime(arrival: number, departure: number) {
-    if (arrival > departure) {
-      return 60 - arrival + departure;
-    }
-    return departure - arrival;
-  }
 }
