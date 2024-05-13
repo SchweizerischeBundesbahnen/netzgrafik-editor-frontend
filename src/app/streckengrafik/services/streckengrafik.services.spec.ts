@@ -430,7 +430,7 @@ describe("StreckengrafikServicesTests", () => {
       });
   });
 
-  it("streckengrafik - trainrunItem.ts", () => {
+  it("streckengrafik - trainrunItem.ts (track segment check)", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
