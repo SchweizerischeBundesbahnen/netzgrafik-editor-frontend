@@ -281,7 +281,7 @@ export class Sg6TrackService implements OnDestroy {
             // the bands of "headway" - Nachbelegung (free the occupied resource just after this "band"
             for (
               let bandOffset = 0;
-              bandOffset <= timeRes * headwayTime;
+              bandOffset < timeRes * headwayTime;
               bandOffset++
             ) {
               // compute the indices to get the matrix cell's where to fill in the information
@@ -290,7 +290,7 @@ export class Sg6TrackService implements OnDestroy {
                 : distCellIdx;
               let timeCellIdx =
                 (item.departureTime % this.maxFrequency) +
-                (travelTime * distCellIdx) / (nDistanceCells - 1) +
+                (travelTime * distCellIdx) / (nDistanceCells - 0.5) +
                 freqLoop;
               timeCellIdx = bandOffset + Math.round(timeRes * timeCellIdx);
 
