@@ -474,12 +474,12 @@ describe("StreckengrafikServicesTests", () => {
         expect(section.getPathNode()).toBe(undefined);
 
         const trackSegments = section.trackData.sectionTrackSegments;
-        expect(trackSegments.length).toBe(12);
+        expect(trackSegments.length).toBe(13);
         const trackSegDataTracks: number[] = [
-          4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+          4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
         ];
         const trackSegDataMinTracks: number[] = [
-          4, 3, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1,
+          4, 3, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2
         ];
         for (let idx = 0; idx < trackSegments.length; idx++) {
           expect(trackSegments[idx].nbrTracks).toBe(trackSegDataTracks[idx]);
@@ -489,7 +489,7 @@ describe("StreckengrafikServicesTests", () => {
         }
         expect(trackSegments[0].startPos).toBe(0);
         expect(trackSegments[1].startPos).toBe(trackSegments[0].endPos);
-        expect(trackSegments[11].endPos).toBe(1);
+        expect(trackSegments[12].endPos).toBe(1);
 
         expect(node.trackOccupier).toBe(true);
       });
