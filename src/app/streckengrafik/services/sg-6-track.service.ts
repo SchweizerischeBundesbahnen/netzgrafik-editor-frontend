@@ -230,8 +230,8 @@ export class Sg6TrackService implements OnDestroy {
 
   private extractSectionTracks(
     sectionsOfInterest: Map<string, any[]>,
-    distRes = 4, // Res 15s
-    timeRes = 4, // Res 15s
+    distRes = 15, // Res 4s
+    timeRes = 15, // Res 4s
   ) {
     const sectionsTracks = new Map<string, number[]>();
     for (const keyNodeId of sectionsOfInterest.keys()) {
@@ -281,7 +281,7 @@ export class Sg6TrackService implements OnDestroy {
             // the bands of "headway" - Nachbelegung (free the occupied resource just after this "band"
             for (
               let bandOffset = 0;
-              bandOffset < timeRes * headwayTime;
+              bandOffset <= timeRes * headwayTime;
               bandOffset++
             ) {
               // compute the indices to get the matrix cell's where to fill in the information
