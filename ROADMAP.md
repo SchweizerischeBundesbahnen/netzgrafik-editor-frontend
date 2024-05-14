@@ -11,7 +11,8 @@ and outlines more general ideas.
 - Origin-Destination-Matrix: Travel time matrix for different routes / visualisation & analytics.
 - Check conformity of business rules
 - Comparision of variants
-- Import/export using RailML.
+- Import/export using RailML
+- Merge differenz variants.
 
 ### Long-term goals on the roadmap:
 
