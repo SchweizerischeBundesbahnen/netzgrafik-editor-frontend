@@ -12,7 +12,7 @@ and outlines more general ideas.
 - Check conformity of business rules
 - Comparision of variants
 - Import/export using RailML
-- Merge different variants.
+- Merge different variants: [more Info](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Merge_Netzgrafik.md).
 
 ### Long-term goals on the roadmap:
 
