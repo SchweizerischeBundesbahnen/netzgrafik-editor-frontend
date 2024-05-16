@@ -9,7 +9,7 @@
   - [Nodes](#Nodes)
   - [Trainruns](#Trainruns)
   - [Connections](#Connections)
-  - [Merge two independent Netzgrafik](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_TRAINRUN.md#merge-two-independent-netzgrafik) 
+  - [Split / Combine two trainruns and Merge Netzgrafiks](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Split_Combine_Trainruns.md)
 - [Filters](#Filter)
 - [Graphic timetable (Streckengrafik)](#Streckengrafik)
 - [Perlenkette](#Perlenkette)
