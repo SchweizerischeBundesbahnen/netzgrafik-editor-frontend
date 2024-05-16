@@ -8,8 +8,9 @@
 - Creating/Editing Netzgrafik
   - [Nodes](#Nodes)
   - [Trainruns](#Trainruns)
+  - [Trainruns: Split/Combine](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Split_Combine_Trainruns.md)
+  - [Netzgrafik: Merge](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Split_Combine_Trainruns.md)
   - [Connections](#Connections)
-  - [Split / Combine two trainruns and Merge Netzgrafiks](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Split_Combine_Trainruns.md)
 - [Filters](#Filter)
 - [Graphic timetable (Streckengrafik)](#Streckengrafik)
 - [Perlenkette](#Perlenkette)
