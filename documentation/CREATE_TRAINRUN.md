@@ -106,7 +106,7 @@ To switch a train from a stop to a non-stop at a node, follow these steps:
 #### Split two trainruns 
 
 To split a train into two separate ones, you first have to select the train. Then you navigate to the node where you like to split the trainrun. Inside the node
-the trainrun has to have a transition. Press CTRL and click with the mouse the "stop / non-stop toggle button". The trainrun gets split into two trains.
+the trainrun has to have a transition. Press **CTRL key** and click with the mouse the "stop / non-stop toggle button". The trainrun gets split into two trains.
 
 [chrome-capture-2024-3-27.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/10423646/8acabf0e-fdb1-445b-af40-1ec4b6875c0c)
 
@@ -123,7 +123,7 @@ Please have as well a look into [Create Connections](CREATE_CONNECTIONS.md).
 
 #### Merge two indepandant Netzgrafik
 
-To merge two Netzgrafik, you can use the split/combine technique. For example, if you have a Netzgrafik for the eastern part of Switzerland and one for the western part, you can merge the western into the eastern part by using copy-paste and trainrun combine techniques. First, copy the western part (all trains that need to be integrated into the eastern part). Then, insert the copied trainruns and nodes into the eastern part. After inserting, the resulting Netzgrafik will have all trainruns included, but the eastern and western parts of the trainruns are not yet combined. The eastern and western trainrun parts are still independent trainruns. Now, use the combine method to connect the trai runs. Once all trainruns are combined, the resulting Netzgrafik will be the merged one.
+To merge two Netzgrafik, you can use the split/combine technique. For example, if you have a Netzgrafik for the eastern part of Switzerland and one for the western part, you can merge the western into the eastern part by using copy-paste and trainrun combine techniques. First, copy the western part (all trains that need to be integrated into the eastern part). Then, insert the copied trainruns and nodes into the eastern part. After inserting, the resulting Netzgrafik will have all trainruns included, but the eastern and western parts of the trainruns are not yet combined. The eastern and western trainrun parts are still independent trainruns. Now, use the combine method to connect the trainruns. Once all trainruns are combined, the resulting Netzgrafik will be the merged one.
 
 To merge two independent Netzgrafik, you can follow these steps:
 
