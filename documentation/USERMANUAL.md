@@ -102,7 +102,6 @@ For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.m
 - [Split / Combine two trainruns](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_TRAINRUN.md#split--combine-two-trainruns)
 - [Merge two indepandant Netzgrafik](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_TRAINRUN.md#merge-two-indepandant-netzgrafik) 
 
----
 <a id="Connections"></a>
 
 ## Connections
