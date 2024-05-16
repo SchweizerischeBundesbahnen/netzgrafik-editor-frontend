@@ -3,19 +3,19 @@
 #### Table Of Contents
 
 - [Introduction](#Introduction)
-- Data Organization in the Netzgrafik-Editor:
+- **Data Organization in the Netzgrafik-Editor**
   - [Project/Variant](#CreateNewProjectVariant)
-- Creating/Editing Netzgrafik
+- **Creating/Editing Netzgrafik**
   - [Nodes](#Nodes)
   - [Trainruns](#Trainruns)
   - [Connections](#Connections)
   - [Split/Combine two trainruns](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Split_Combine_Trainruns.md)
   - [Merge Netzgrafik](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Merge_Netzgrafik.md)
 - [Filters](#Filter)
-- Data projection / views
+- **Data projection / views**
   - [Graphic timetable (Streckengrafik)](#Streckengrafik)
   - [Perlenkette](#Perlenkette)
-- Advanced User Interaction
+- **Advanced User Interaction**
   - [Advanced editing short-cuts](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/AdvancedEditingShortcuts.md) 
 - [Conclusion](#Conclusion)
 
