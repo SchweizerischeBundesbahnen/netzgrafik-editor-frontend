@@ -1,6 +1,6 @@
 # Netzgrafik-Editor User Documentation
 
-#### Table Of Contents
+## Table Of Contents
 
 - **General**
   - [Introduction](#Introduction)
