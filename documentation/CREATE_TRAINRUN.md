@@ -101,6 +101,8 @@ To switch a train from a stop to a non-stop at a node, follow these steps:
 
 [2024-01-25-Toogle_Stop_NonStop_trainrun_at_node.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/8a72350c-ed19-4395-8183-c33dfe824c5a)
 
-### Split / Combine two trainruns 
+### Split / Combine two trainruns and merge Netzgrafiks
+
+For mor details have a look into [split / combine two trainruns and merge Netzgrafiks](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Split_Combine_Trainruns.md)
 
 
