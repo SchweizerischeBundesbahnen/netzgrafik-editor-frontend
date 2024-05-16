@@ -156,7 +156,7 @@ displaying the train's route as a vertical chain of nodes and trainrunsections.
 ### Change the time locks
 The time can be locked so that no propagtion (automated update) will be done. Just click on the lock icon and the lock state switchs: On to off or vice-versa. 
 
-### Toggle all show all locks / or only closed (default) 
+### Toggle: show all locks / or only closed (default) 
 In the Perlenkette view, you can click on the eye icon in the bottom left corner
 to display all locks. By default, only the locks that are closed are shown. This is 
 visually visible with the disabled eye icon. When you click on the icon then the disable 
