@@ -18,8 +18,7 @@
   - [Graphic timetable (Streckengrafik)](#Streckengrafik)
   - [Perlenkette](#Perlenkette)  
 - **Advanced User Interaction**
-  - [Advanced editing short-cuts](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/AdvancedEditingShortcuts.md)
-    
+  - [Advanced editing short-cuts](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/AdvancedEditingShortcuts.md) 
 - [Conclusion](#Conclusion)
 
 Additional information can be found under the provided [links](#Links).
