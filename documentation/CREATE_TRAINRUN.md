@@ -115,7 +115,7 @@ the trainrun has to have a transition. Press **CTRL key** and click with the mou
 
 To combine two trainruns, you have to select one of the two trains. Then you have to navigate to the node where the trainrun ends (or starts). Now you can draw
 the new transition similar to creating a connection - but you have to press **CTRL key** and it must be hold pressed as long you are drawing a new transition. 
-Once you finish drawing the new transition, the both trains will be combined to one single trainrun.
+Once you finish drawing the new transition, both trains will be combined to one single trainrun.
 Please have as well a look into [Create Connections](CREATE_CONNECTIONS.md). 
 
 [chrome-capture-2024-3-27 (1).webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/10423646/526408d6-0d22-4cf7-ada7-9f45442aab8e)
@@ -132,7 +132,7 @@ To merge two independent Netzgrafik, you can follow these steps:
 - (Optional) Create a new variant.
 - Copy the necessary elements from one Netzgrafik and paste them into the other Netzgrafik.
 - As long as complete trainruns are copied, i.e. including all trainrun sections from start to destination, there is no need to merge trainruns. If the Netzgrafiks to be merged consists of regions (or partial corridors) 
-  or just trainrun sections that actually represent partial trainrun , these must be merged manually using the Combine function at the nodes where the parts of the trainrun meet.
+  or just trainrun sections that actually represent partial trainrun, these must be merged manually using the Combine function at the nodes where the parts of the trainrun meet.
  
 By following these steps, you can successfully merge two independent Netzgrafik.
 
