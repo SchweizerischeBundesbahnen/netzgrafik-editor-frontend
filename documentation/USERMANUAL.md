@@ -4,10 +4,12 @@
 
 - [Introduction](#Introduction)
 - [Project/Variant](#CreateNewProjectVariant)
-- [Advanced editing short-cuts](#BasicFunctions)
-- [Nodes](#Nodes)
-- [Trainruns](#Trainruns)
-- [Connections](#Connections)
+- [Advanced editing short-cuts](#BasicFunctions) 
+- Creating/Editing Netzgrafik
+  - [Nodes](#Nodes)
+  - [Trainruns](#Trainruns)
+  - [Connections](#Connections)
+  - [Merge two indepandant Netzgrafik](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_TRAINRUN.md#merge-two-indepandant-netzgrafik) 
 - [Filters](#Filter)
 - [Graphic timetable (Streckengrafik)](#Streckengrafik)
 - [Perlenkette](#Perlenkette)
@@ -187,6 +189,9 @@ A trainrun has references to behaviour-related abstractions such as
 category (e.g. a regional train, an intercity train or a goods train), frequency (e.g. 1/4h, 1/2h or every hourand) time category (e.g. peak times or off-peak times or occasional), which define the behaviour of a trainrun ([see data model](DATA_MODEL.md)).
 
 For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
+
+- [Split / Combine two trainruns](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_TRAINRUN.md#split--combine-two-trainruns)
+- [Merge two indepandant Netzgrafik](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_TRAINRUN.md#merge-two-indepandant-netzgrafik) 
 
 ---
 <a id="Connections"></a>
