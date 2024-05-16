@@ -4,8 +4,8 @@
 
 - [Introduction](#Introduction)
 - [Project/Variant](#CreateNewProjectVariant)
-- [Advanced editing short-cuts](#BasicFunctions)
-- Editing
+- [Advanced editing short-cuts](#BasicFunctions) 
+- Creating/Editing Netzgrafik
   - [Nodes](#Nodes)
   - [Trainruns](#Trainruns)
   - [Connections](#Connections)
