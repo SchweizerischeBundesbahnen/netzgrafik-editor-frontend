@@ -1,6 +1,5 @@
 import {parse, ParseResult} from "papaparse";
 import {Component, ElementRef, ViewChild} from "@angular/core";
-import {RailMLExporter} from "../../utils/railMLExporter";
 import * as svg from "save-svg-as-png";
 import {DataService} from "../../services/data/data.service";
 import {TrainrunService} from "../../services/data/trainrun.service";
@@ -92,29 +91,6 @@ export class EditorToolsViewComponent {
     const data: NetzgrafikDto = this.dataService.getNetzgrafikDto();
     const blob = new Blob([JSON.stringify(data)], {type: "application/json"});
     downloadBlob(blob, "netzgrafik.json");
-  }
-
-  onExportRailML() {
-    const filename = "file.xml";
-
-    const pom = document.createElement("a");
-    const railMLExporter = new RailMLExporter(
-      this.dataService,
-      this.nodeService,
-      this.trainrunService,
-      this.trainrunSectionService,
-    );
-
-    const bb = new Blob([railMLExporter.createRailML()], {type: "text/plain"});
-
-    pom.setAttribute("href", window.URL.createObjectURL(bb));
-    pom.setAttribute("download", filename);
-
-    pom.dataset.downloadurl = ["text/plain", pom.download, pom.href].join(":");
-    pom.draggable = true;
-    pom.classList.add("dragout");
-
-    pom.click();
   }
 
   onExportNetzgrafikSVG() {
