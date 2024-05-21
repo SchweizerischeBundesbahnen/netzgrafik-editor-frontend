@@ -489,12 +489,12 @@ export class EditorToolsViewComponent {
           travelTime +
           waitingTimeOnStartStation;
         const row: string[] = [];
-        row.push(trainrun.getTrainrunCategory().shortName);
-        row.push(trainrun.getTitle());
-        row.push(startBetriebspunktName);
-        row.push(endBetriebspunktName);
-        row.push("Verkehrt: " + trainrun.getTrainrunTimeCategory().shortName);
-        row.push("" + trainrun.getTrainrunFrequency().shortName);
+        row.push(trainrun.getTrainrunCategory().shortName.trim());
+        row.push(trainrun.getTitle().trim());
+        row.push(startBetriebspunktName.trim());
+        row.push(endBetriebspunktName.trim());
+        row.push("Verkehrt: " + trainrun.getTrainrunTimeCategory().shortName.trim());
+        row.push("" + trainrun.getTrainrunFrequency().shortName.trim());
         row.push("" + startNodeDeparture);
         row.push("" + travelTime);
         row.push("" + endNodeArrival);
@@ -507,8 +507,13 @@ export class EditorToolsViewComponent {
         row.push(
           trainrun
             .getLabelIds()
-            .map((labelID) =>
-              this.labelService.getLabelFromId(labelID).getLabel(),
+            .map((labelID) => {
+                const label = this.labelService.getLabelFromId(labelID);
+                if (label) {
+                  return label.getLabel().trim();
+                }
+                return "";
+              }
             )
             .join(comma),
         );
