@@ -10,8 +10,7 @@ and outlines more general ideas.
 
 - Origin-Destination-Matrix: Travel time matrix for different routes / visualisation & analytics.
 - Check conformity of business rules
-- Comparision of variants
-- Import/export using RailML
+- Comparision of variants 
 - Merge different variants: [more Info](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Merge_Netzgrafik.md).
 
 ### Long-term goals on the roadmap:
