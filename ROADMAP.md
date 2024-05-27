@@ -8,7 +8,7 @@ and outlines more general ideas.
 
 ### Short-term goals on the roadmap:
 
-- Origin-Destination-Matrix: Travel time matrix for different routes / visualisation & analytics.
+- Origin-Destination-Matrix: Travel time matrix for different routes / visualisation & analytics. (https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/126)
 - Check conformity of business rules
 - Comparision of variants 
 - Merge different variants: [more Info](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Merge_Netzgrafik.md).
