@@ -30,7 +30,9 @@
     </button>
   </sbb-menu>
 </sbb-header-lean>
-<sbb-navigation-bar class="noprint"></sbb-navigation-bar>
+<ng-container *ngIf="!disableBackend">
+  <sbb-navigation-bar class="noprint"></sbb-navigation-bar>
+</ng-container>
 <router-outlet *ngIf="authenticated | async; else loading"></router-outlet>
 <ng-template #loading>
   <ng-container *ngIf="!disableBackend">
