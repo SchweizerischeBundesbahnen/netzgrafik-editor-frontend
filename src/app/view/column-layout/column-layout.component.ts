@@ -7,6 +7,7 @@ import {
   Input,
   Output,
 } from "@angular/core";
+import {environment} from '../../../environments/environment';
 
 /**
  * Different layout modes. Generally the layout contains (up to) 3 columns that are distributed over a 4 columen layout:
@@ -68,6 +69,13 @@ export class ColumnLayoutComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.newView = false;
+  }
+
+  getLayoutContentStyle(): string {
+    if (environment.disableBackend) {
+      return "height: 100%;";
+    }
+    return "";
   }
 
   hideAside() {
