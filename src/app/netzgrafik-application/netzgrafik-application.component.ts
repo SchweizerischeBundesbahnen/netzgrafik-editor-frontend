@@ -59,6 +59,13 @@ export class NetzgrafikApplicationComponent {
       });
   }
 
+  getSidebarContainerStyle(): string {
+    if (this.disableBackend) {
+      return "top: 53px;";
+    }
+    return "top: 85px;";
+  }
+
   getVariantIsWritable(): boolean {
     if (this.versionControlService.variant === null) {
       return true;
