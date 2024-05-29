@@ -11,6 +11,7 @@ div.main-streckengrafik-container {
   grid-gap: 0;
   background: var(--COLOR_BACKGROUND);
   width: 100%;
+  user-select: none;
 }
 
 svg {
