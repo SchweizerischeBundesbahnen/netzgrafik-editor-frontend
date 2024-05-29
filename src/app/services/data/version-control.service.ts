@@ -1,4 +1,4 @@
-import {Injectable, OnDestroy} from "@angular/core";
+import {HostListener, Injectable, OnDestroy} from "@angular/core";
 import {
   VariantControllerBackendService,
   VariantDto,
@@ -69,11 +69,16 @@ export class VersionControlService implements OnDestroy {
       });
   }
 
-  loadNetzgrafikDTO(netzgrafik : NetzgrafikDto) {
+  loadNetzgrafikDTO(netzgrafik: NetzgrafikDto) {
     this.dataService.loadNetzgrafikDto(netzgrafik);
     this.autoSaveService.reset();
-    this.undoService.reset(this.undoService.getCurrentVariantId()+1);
+    this.undoService.reset(this.undoService.getCurrentVariantId() + 1);
   }
+
+  @HostListener('window:message', ['$event']) onPostMessage(event) {
+    console.log('Message received', event);
+  }
+
 
   reload(loadModel = false): void {
     this.load(this.variant.id, loadModel);
