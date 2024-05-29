@@ -12,6 +12,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {EditorMode} from "../view/editor-menu/editor-mode";
 import {UndoService} from "../services/data/undo.service";
 import {NetzgrafikDefault} from "../sample-netzgrafik/netzgrafik.default";
+import {environment} from "../../environments/environment";
 
 export enum IconSidebarMode {
   VARIANTEN = "varianten",
@@ -28,6 +29,8 @@ export enum IconSidebarMode {
 export class NetzgrafikApplicationComponent {
   mode = IconSidebarMode.NONE;
   expanded = false;
+
+  private disableBackend = environment.disableBackend;
 
   private readonly destroyed = new Subject<void>();
 

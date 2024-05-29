@@ -1,22 +1,24 @@
 <sbb-icon-sidebar-container>
   <sbb-icon-sidebar [(expanded)]="expanded">
     <!--<a sbbIconSidebarItem label="Varianten" (click)="onVariantenClicked()" class="sbb-active">-->
-    <a
-      sbbIconSidebarItem
-      label="Varianten"
-      [class]="getVariantsActivatedTag()"
-      (click)="onVariantenClicked()"
-    >
-      <sbb-icon
-        *ngIf="getVariantIsWritable()"
-        svgIcon="document-standard-small"
-      ></sbb-icon>
-      <sbb-icon
-        *ngIf="!getVariantIsWritable()"
-        svgIcon="folder-lock-small"
-        style="color: #c60018"
-      ></sbb-icon>
-    </a>
+    <ng-container *ngif="!disableBackend">
+      <a
+        sbbIconSidebarItem
+        label="Varianten"
+        [class]="getVariantsActivatedTag()"
+        (click)="onVariantenClicked()"
+      >
+        <sbb-icon
+          *ngIf="getVariantIsWritable()"
+          svgIcon="document-standard-small"
+        ></sbb-icon>
+        <sbb-icon
+          *ngIf="!getVariantIsWritable()"
+          svgIcon="folder-lock-small"
+          style="color: #c60018"
+        ></sbb-icon>
+      </a>
+    </ng-container>
     <a
       sbbIconSidebarItem
       label="Filter"
