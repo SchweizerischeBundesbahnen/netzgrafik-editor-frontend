@@ -14,14 +14,21 @@ export class AppComponent {
   version = packageJson.version;
   environmentLabel = environment.label;
   authenticated: Promise<unknown>;
+  disableBackend = environment.disableBackend;
 
   projectInMenu: Observable<ProjectDto | null>;
 
   get userName() {
+    if (this.disableBackend) {
+      return undefined;
+    }
     return this.authService.claims?.name;
   }
 
   get email() {
+    if (this.disableBackend) {
+      return undefined;
+    }
     return this.authService.claims?.email;
   }
 
@@ -30,6 +37,9 @@ export class AppComponent {
   }
 
   logout() {
+    if (this.disableBackend) {
+      return;
+    }
     this.authService.logOut();
   }
 }

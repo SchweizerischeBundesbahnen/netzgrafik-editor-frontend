@@ -5,4 +5,5 @@ export interface Environment {
   label: string;
   backendUrl: string;
   authConfig: AuthConfig;
+  disableBackend: boolean;
 }

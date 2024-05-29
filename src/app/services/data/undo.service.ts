@@ -128,4 +128,8 @@ export class UndoService implements OnDestroy {
     }
     this.currentVariantId = variantId;
   }
+
+  public getCurrentVariantId():number{
+    return this.currentVariantId;
+  }
 }

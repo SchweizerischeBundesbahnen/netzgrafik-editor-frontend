@@ -33,6 +33,12 @@
 <sbb-navigation-bar class="noprint"></sbb-navigation-bar>
 <router-outlet *ngIf="authenticated | async; else loading"></router-outlet>
 <ng-template #loading>
-  <sbb-loading-indicator mode="big"></sbb-loading-indicator>
-  <div class="login-message">Sie werden angemeldet...</div>
+  <ng-container *ngIf="!disableBackend">
+    <sbb-loading-indicator mode="big"></sbb-loading-indicator>
+    <div class="login-message">Sie werden angemeldet...</div>
+  </ng-container>
+  <ng-container *ngIf="disableBackend">
+    <sbb-netzgrafik-editor></sbb-netzgrafik-editor>
+  </ng-container>
 </ng-template>
+
