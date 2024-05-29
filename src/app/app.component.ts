@@ -33,7 +33,9 @@ export class AppComponent {
   }
 
   constructor(private authService: AuthService) {
-    this.authenticated = authService.initialized;
+    if (!this.disableBackend) {
+      this.authenticated = authService.initialized;
+    }
   }
 
   logout() {
