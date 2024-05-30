@@ -448,6 +448,9 @@ export class TrainrunService {
     trainrun1.select();
     this.nodeService.reorderPortsOnNodesForTrainrun(trainrun1, false);
 
+    // Update the cumulative times for the combined trainrun
+    this.propagateConsecutiveTimesForTrainrun(port1.getTrainrunSection().getId());
+
     // update
     this.trainrunsUpdated();
     this.nodeService.nodesUpdated();
