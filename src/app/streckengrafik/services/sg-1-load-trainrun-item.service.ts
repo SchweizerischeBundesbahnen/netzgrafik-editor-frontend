@@ -141,7 +141,10 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     }
 
     const nodes = this.nodeService.getNodes().filter((n: Node) => n.selected());
-    this.makePathBasedOnMulitSelectedNodes(nodes);
+    if (nodes.length > 1) {
+      this.makePathBasedOnMulitSelectedNodes(nodes);
+    }
+
 
     if (this.cachedTrainrunItems !== undefined) {
       this.trainrunItemSubject.next(this.cachedTrainrunItems);
