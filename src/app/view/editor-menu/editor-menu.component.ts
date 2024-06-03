@@ -22,6 +22,7 @@ import {SbbNotificationToast} from "@sbb-esta/angular/notification-toast";
 import {TimeSliderService} from "../../streckengrafik/services/time-slider.service";
 import {SliderChangeInfo} from "../../streckengrafik/model/util/sliderChangeInfo";
 import {IsTrainrunSelectedService} from "../../services/data/is-trainrun-section.service";
+import {Node} from '../../models/node.model';
 
 @Component({
   selector: "sbb-editor-menu",
@@ -264,7 +265,8 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
 
   isNotStreckengrafikAllowed(): boolean {
     if (this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving) {
-      return this.nodeService.getSelectedNode() === null;
+      const nodes = this.nodeService.getNodes().filter((n: Node) => n.selected());
+      return nodes.length < 2;
     }
     return this.trainrunService.getSelectedTrainrun() === null;
   }
