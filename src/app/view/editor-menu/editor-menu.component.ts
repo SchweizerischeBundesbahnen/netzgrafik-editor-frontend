@@ -22,7 +22,7 @@ import {SbbNotificationToast} from "@sbb-esta/angular/notification-toast";
 import {TimeSliderService} from "../../streckengrafik/services/time-slider.service";
 import {SliderChangeInfo} from "../../streckengrafik/model/util/sliderChangeInfo";
 import {IsTrainrunSelectedService} from "../../services/data/is-trainrun-section.service";
-import {Node} from '../../models/node.model';
+import {Node} from "../../models/node.model";
 
 @Component({
   selector: "sbb-editor-menu",
