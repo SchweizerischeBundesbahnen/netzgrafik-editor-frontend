@@ -217,10 +217,23 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
 
   onStreckengrafik() {
     const editorMode = this.uiInteractionService.getEditorMode();
-    if (editorMode !== EditorMode.NetzgrafikEditing) {
+    if (editorMode !== EditorMode.NetzgrafikEditing && editorMode !== EditorMode.MultiNodeMoving) {
+      // enforce unselect all nodes
+      this.nodeService.unselectAllNodes();
       this.uiInteractionService.showNetzgrafik();
       this.uiInteractionService.setEditorMode(EditorMode.NetzgrafikEditing);
     } else {
+      // editor mode is MultiNodeMoving and has at least one node selected
+      if (editorMode === EditorMode.MultiNodeMoving) {
+        if (this.nodeService.getSelectedNode() !== null) {
+          const trainruns = this.trainrunService.getTrainruns();
+          if (trainruns.length > 0) {
+            // select 1st trainrun
+            this.trainrunIdSelected = trainruns[0].getId();
+            this.trainrunService.setTrainrunAsSelected(this.trainrunIdSelected);
+          }
+        }
+      }
       if (this.trainrunIdSelected) {
         this.isTrainrunSelectedService.setTrainrunIdSelectedByClick(
           this.trainrunIdSelected,
@@ -232,7 +245,7 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
         return;
       }
       this._notification.open(
-        "Streckengrafik kann nicht angezeigt werden, da keine Zugfahrt ausgewählt wurde.",
+        "Streckengrafik kann nicht angezeigt werden, da keine Zugfahrt oder keine Knoten ausgewählt wurden.",
         {
           type: "error",
           verticalPosition: "top",

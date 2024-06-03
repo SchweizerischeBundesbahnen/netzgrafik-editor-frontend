@@ -129,6 +129,7 @@ describe("StreckengrafikServicesTests", () => {
 
     isTrainrunSelectedService = new IsTrainrunSelectedService(trainrunService);
     sg1LoadTrainrunItemService = new Sg1LoadTrainrunItemService(
+      nodeService,
       trainrunService,
       trainrunSectionService,
       filterService,

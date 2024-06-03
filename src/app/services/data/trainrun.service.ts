@@ -204,9 +204,11 @@ export class TrainrunService {
     }
   }
 
-  unselectAllTrainruns() {
+  unselectAllTrainruns(enforceUpdate = true) {
     this.trainrunsStore.trainruns.forEach((trainrun) => trainrun.unselect());
-    this.trainrunsUpdated();
+    if (enforceUpdate) {
+      this.trainrunsUpdated();
+    }
   }
 
   isAnyTrainrunSelected(): boolean {
