@@ -263,6 +263,9 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
   }
 
   isNotStreckengrafikAllowed(): boolean {
+    if (this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving) {
+      return this.nodeService.getSelectedNode() === null;
+    }
     return this.trainrunService.getSelectedTrainrun() === null;
   }
 
