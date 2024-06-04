@@ -239,9 +239,15 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
           if (p.end) {
             if (p.path.length > corridor.length) {
               corridor = Object.assign([], p.path);
+              if (corridor.length === sortedNode.length){
+                return;
+              }
             }
           }
         });
+        if (corridor.length === sortedNode.length){
+          return;
+        }
       });
     }
 
