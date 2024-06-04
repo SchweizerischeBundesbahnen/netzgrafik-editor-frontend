@@ -172,46 +172,80 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       []
     );
 
-
+    // create a new graph object
     const graph = new MultiSelectNodeGraph(this.nodeService);
     const edgeList = [];
-    // sort from left top - down (1st draft)
-    const sortedNode = nodes.sort((n1, n2) => {
-      if (n1.getPositionX() === n2.getPositionX()) {
-        return n1.getPositionY() - n2.getPositionY();
-      }
-      return n1.getPositionX() - n2.getPositionX();
-    });
 
-    sortedNode.forEach((node1) => {
-      sortedNode.forEach((node2) => {
-        const n1 = node1.getId();
-        const n2 = node2.getId();
+    // retrieve edges
+    nodes.forEach((node1) => {
+      nodes.forEach((node2) => {
+        const n1 = node1.getId() < node2.getId() ? node1.getId() : node2.getId();
+        const n2 = node1.getId() < node2.getId() ? node2.getId() : node1.getId();
         const ts12 = this.trainrunSectionService.getTrainrunSections().find((ts: TrainrunSection) =>
-          (ts.getSourceNodeId() === n1 && ts.getTargetNodeId() === n2) ||
-          (ts.getSourceNodeId() === n2 && ts.getTargetNodeId() === n1)
+          (ts.getSourceNodeId() === n1 && ts.getTargetNodeId() === n2)
         );
         if (ts12 !== undefined) {
-          edgeList.push([n1, n2]);
-          edgeList.push([n2, n1]);
-        }
-      });
-    });
-    graph.createAdjList(edgeList);
-
-    let longestPath = [];
-    sortedNode.forEach((n1) => {
-      sortedNode.forEach((n2) => {
-        const p = graph.getPath(n1.getId(), n2.getId());
-        if (p.end) {
-          if (p.path.length > longestPath.length) {
-            longestPath = Object.assign([], p.path);
+          if (edgeList.find((a) => (a[0] === n1 && a[1] === n2)) === undefined) {
+            edgeList.push([n1, n2]);
+          }
+        } else {
+          const ts21 = this.trainrunSectionService.getTrainrunSections().find((ts: TrainrunSection) =>
+            (ts.getSourceNodeId() === n2 && ts.getTargetNodeId() === n1)
+          );
+          if (ts21 !== undefined) {
+            if (edgeList.find((a) => (a[0] === n2 && a[1] === n1)) === undefined) {
+              edgeList.push([n2, n1]);
+            }
           }
         }
       });
     });
-    console.log("longestPath", longestPath, "nodes", nodes);
-    longestPath.forEach((n, idx, nodArray) => {
+
+    // insert all edges (graph)
+    graph.createAdjList(edgeList);
+
+    // get all starting ending nodes (degree == 1)
+    const singlePath = graph.getStartEndingVertices();
+
+    // build corridor
+    let corridor = [];
+    if (singlePath.length === 2) {
+      // Case 1: The graph is connected path like graph
+      const n1 = nodes.find(n => n.getId() === singlePath[0]);
+      const n2 = nodes.find(n => n.getId() === singlePath[1]);
+      const startEndNodes = [n1, n2];
+      const sortedStartEndNodes = startEndNodes.sort((n1, n2) => {
+        if (n1.getPositionX() === n2.getPositionX()) {
+          return n1.getPositionY() - n2.getPositionY();
+        }
+        return n1.getPositionX() - n2.getPositionX();
+      });
+      const p = graph.getPath(sortedStartEndNodes[0].getId(), sortedStartEndNodes[1].getId());
+      corridor = Object.assign([], p.path);
+    } else {
+      // Case 2: any other structures - retrieve longest path
+      // sort from left top - down (1st draft)
+      const sortedNode = nodes.sort((n1, n2) => {
+        if (n1.getPositionX() === n2.getPositionX()) {
+          return n1.getPositionY() - n2.getPositionY();
+        }
+        return n1.getPositionX() - n2.getPositionX();
+      });
+
+      corridor = [];
+      sortedNode.forEach((n1) => {
+        sortedNode.forEach((n2) => {
+          const p = graph.getPath(n1.getId(), n2.getId());
+          if (p.end) {
+            if (p.path.length > corridor.length) {
+              corridor = Object.assign([], p.path);
+            }
+          }
+        });
+      });
+    }
+
+    corridor.forEach((n, idx, nodArray) => {
       if (idx > 0) {
         this.makePathElement(nodArray[idx - 1].getId(), nodArray[idx].getId());
       }

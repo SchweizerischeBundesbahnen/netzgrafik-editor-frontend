@@ -28,11 +28,24 @@ export class MultiSelectNodeGraph {
     });
   }
 
+  nodeDegree(v): number {
+    return this.adjList.get(v).length;
+  }
+
+  getStartEndingVertices() {
+    const startPathVertices = [];
+    for (const node of this.adjList.keys()) {
+      if (this.nodeDegree(node) === 1) {
+        startPathVertices.push(node);
+      }
+    }
+    return startPathVertices;
+  }
+
   getPath(start, end, visited = {}, retPath = []) {
     retPath.push(this.nodeService.getNodeFromId(start));
     // base condition
     if (start === end) {
-      console.log(start, end, visited, retPath);
       return {path: retPath, end: true};
     }
 
