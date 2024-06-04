@@ -47,6 +47,8 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
   private readonly destroyed$ = new Subject<void>();
   private forwardTrainrunSectionGroup: TrainrunSectionGroup[];
 
+  private doInit = true;
+
   constructor(
     private readonly nodeService: NodeService,
     private readonly trainrunService: TrainrunService,
@@ -106,10 +108,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
   }
 
   private render() {
-    if (
-      this.uiInteractionService.getEditorMode() !==
-      EditorMode.StreckengrafikEditing
-    ) {
+    if (this.uiInteractionService.getEditorMode() !== EditorMode.StreckengrafikEditing) {
       return;
     }
 
@@ -129,7 +128,27 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       return;
     }
 
+    if (!this.uiInteractionService.isMultiSelectedNodesCorridorEnabled() || this.doInit) {
+      // if 1st time called rendering, prepare data
+      this.doInit = false;
 
+      // use the selected trainrun as template (corridor)
+      this.createCorridorFromSelectedTrainrun();
+    }
+
+    if (this.uiInteractionService.isMultiSelectedNodesCorridorEnabled()) {
+      // use the selected nodes as template (corridor)
+      this.createCorridorFromSelectedNodes();
+    }
+
+    if (this.cachedTrainrunItems !== undefined) {
+      // inform all listeners that the trainrunItem (cached or loaded has changed)
+      this.trainrunItemSubject.next(this.cachedTrainrunItems);
+      this.trainrunItemsSubject.next(this.loadTrainrunItems(this.cachedTrainrunItems));
+    }
+  }
+
+  private createCorridorFromSelectedTrainrun() {
     const selectedTrainrun: Trainrun = this.getSelectedTrainrun();
     if (selectedTrainrun) {
       if (selectedTrainrun.selected()) {
@@ -139,27 +158,16 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
         );
       }
     }
-
-    if (this.uiInteractionService.isUseMulipleNodesInStreckengrafik()) {
-      const nodes = this.nodeService.getNodes().filter((n: Node) => n.selected());
-      if (nodes.length > 1) {
-        this.makePathBasedOnMulitSelectedNodes(nodes);
-      }
-    }
-
-    if (this.cachedTrainrunItems !== undefined) {
-      this.trainrunItemSubject.next(this.cachedTrainrunItems);
-      this.trainrunItemsSubject.next(
-        this.loadTrainrunItems(this.cachedTrainrunItems),
-      );
-    }
   }
 
-  private makePathBasedOnMulitSelectedNodes(nodes: Node[]) {
-    if (nodes.length === 0) {
+  private createCorridorFromSelectedNodes() {
+    // check whether there are selected nodes to process
+    const nodes = this.nodeService.getNodes().filter((n: Node) => n.selected());
+    if (nodes.length < 2) {
       return;
     }
 
+    // create temporary cached trainrun item object (emulate a trainrun)
     this.cachedTrainrunItems = new TrainrunItem(
       undefined,
       60,
@@ -172,57 +180,21 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       []
     );
 
-    // create a new graph object from nodes
-    const graph =
-      new MultiSelectNodeGraph(this.nodeService, this.trainrunSectionService);
+    // create a new graph object
+    const graph = new MultiSelectNodeGraph(
+      this.nodeService,
+      this.trainrunSectionService);
+
+    // create graph from nodes (Netzgrafik data)
     graph.convertNetzgrafikSubNodesToGraph(nodes);
 
     // get all starting ending nodes (degree == 1)
-    const singlePath = graph.getStartEndingVertices();
+    const endStartingVertices = graph.getStartEndingVertices();
 
     // build corridor
-    let corridor = [];
-    if (singlePath.length === 2) {
-      // Case 1: The graph is connected path like graph
-      const n1 = nodes.find(n => n.getId() === singlePath[0]);
-      const n2 = nodes.find(n => n.getId() === singlePath[1]);
-      const startEndNodes = [n1, n2];
-      const sortedStartEndNodes = startEndNodes.sort((n1, n2) => {
-        if (n1.getPositionX() === n2.getPositionX()) {
-          return n1.getPositionY() - n2.getPositionY();
-        }
-        return n1.getPositionX() - n2.getPositionX();
-      });
-      const p = graph.getPath(sortedStartEndNodes[0].getId(), sortedStartEndNodes[1].getId());
-      corridor = Object.assign([], p.path);
-    } else {
-      // Case 2: any other structures - retrieve longest path
-      // sort from left top - down (1st draft)
-      const sortedNode = nodes.sort((n1, n2) => {
-        if (n1.getPositionX() === n2.getPositionX()) {
-          return n1.getPositionY() - n2.getPositionY();
-        }
-        return n1.getPositionX() - n2.getPositionX();
-      });
-
-      corridor = [];
-      sortedNode.forEach((n1) => {
-        sortedNode.forEach((n2) => {
-          const p = graph.getPath(n1.getId(), n2.getId());
-          if (p.end) {
-            if (p.path.length > corridor.length) {
-              corridor = Object.assign([], p.path);
-              if (corridor.length === sortedNode.length){
-                return;
-              }
-            }
-          }
-        });
-        if (corridor.length === sortedNode.length){
-          return;
-        }
-      });
-    }
+    const corridor = endStartingVertices.length === 2 ?
+      this.createSimplePathFromStartToEndingNodes(graph, nodes, endStartingVertices) :
+      this.createLongestPathFromNodes(graph, nodes);
 
     // convert corridor to path elements
     corridor.forEach((n, idx, nodArray) => {
@@ -234,6 +206,52 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     // clean up
     this.trainrunService.unselectAllTrainruns(false);
     this.nodeService.unselectAllNodes(false);
+  }
+
+  private createLongestPathFromNodes(graph: MultiSelectNodeGraph,
+                                     nodes: Node[]) {
+    // sort from left top - down (1st draft)
+    const sortedNode = nodes.sort((n1, n2) => {
+      if (n1.getPositionX() === n2.getPositionX()) {
+        return n1.getPositionY() - n2.getPositionY();
+      }
+      return n1.getPositionX() - n2.getPositionX();
+    });
+
+    let corridor = [];
+    sortedNode.forEach((n1) => {
+      sortedNode.forEach((n2) => {
+        const p = graph.getPath(n1.getId(), n2.getId());
+        if (p.end) {
+          if (p.path.length > corridor.length) {
+            corridor = Object.assign([], p.path);
+            if (corridor.length === sortedNode.length) {
+              return;
+            }
+          }
+        }
+      });
+      if (corridor.length === sortedNode.length) {
+        return;
+      }
+    });
+    return corridor;
+  }
+
+  private createSimplePathFromStartToEndingNodes(graph: MultiSelectNodeGraph,
+                                                 nodes: Node[],
+                                                 endStartingVertices: number[]): number[] {
+    const n1 = nodes.find(n => n.getId() === endStartingVertices[0]);
+    const n2 = nodes.find(n => n.getId() === endStartingVertices[1]);
+    const startEndNodes = [n1, n2];
+    const sortedStartEndNodes = startEndNodes.sort((n1, n2) => {
+      if (n1.getPositionX() === n2.getPositionX()) {
+        return n1.getPositionY() - n2.getPositionY();
+      }
+      return n1.getPositionX() - n2.getPositionX();
+    });
+    const p = graph.getPath(sortedStartEndNodes[0].getId(), sortedStartEndNodes[1].getId());
+    return Object.assign([], p.path);
   }
 
   private makePathElement(nodeId1: number, nodeId2: number) {
