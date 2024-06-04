@@ -8,7 +8,7 @@ A corridor is required for the graphic timetable (Streckengrafik). The corridor 
 There are two ways to determine this corridor: Firstly, a train can be selected, and its route forms the corridor. Alternatively, the corridor can be determined by selecting several nodes using the multiple selection tool.
 
 
-#### Use selected trainrun as corridor (distance/path)
+#### Use a trainrun's route (path) as corridor (distance/path)
 
 To generate the graphic timetable user must follow this steps:
 
