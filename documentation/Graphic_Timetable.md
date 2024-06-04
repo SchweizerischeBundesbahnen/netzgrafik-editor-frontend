@@ -15,7 +15,7 @@ To generate the graphic timetable user must follow this steps:
 
 [2024-01-25-Project_Along_Trainrun_Streckengrafik.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/212abe60-6cba-4ac9-96b9-93e923022b75)
 
-### Use user defined corridor (distance/path)
+#### Use user defined corridor (distance/path)
 The following describes how the user can define a custom corridor so that the graphical timetable is displayed along this path:
 
 - Select at least two nodes using the multi-node selection tool.
