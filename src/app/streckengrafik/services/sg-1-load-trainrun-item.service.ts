@@ -172,51 +172,66 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       []
     );
 
+    // create a new graph object from nodes
+    const graph =
+      new MultiSelectNodeGraph(this.nodeService, this.trainrunSectionService);
+    graph.convertNetzgrafikSubNodesToGraph(nodes);
 
-    const graph = new MultiSelectNodeGraph(this.nodeService);
-    const edgeList = [];
-    // sort from left top - down (1st draft)
-    const sortedNode = nodes.sort((n1, n2) => {
-      if (n1.getPositionX() === n2.getPositionX()) {
-        return n1.getPositionY() - n2.getPositionY();
-      }
-      return n1.getPositionX() - n2.getPositionX();
-    });
+    // get all starting ending nodes (degree == 1)
+    const singlePath = graph.getStartEndingVertices();
 
-    sortedNode.forEach((node1) => {
-      sortedNode.forEach((node2) => {
-        const n1 = node1.getId();
-        const n2 = node2.getId();
-        const ts12 = this.trainrunSectionService.getTrainrunSections().find((ts: TrainrunSection) =>
-          (ts.getSourceNodeId() === n1 && ts.getTargetNodeId() === n2) ||
-          (ts.getSourceNodeId() === n2 && ts.getTargetNodeId() === n1)
-        );
-        if (ts12 !== undefined) {
-          edgeList.push([n1, n2]);
-          edgeList.push([n2, n1]);
+    // build corridor
+    let corridor = [];
+    if (singlePath.length === 2) {
+      // Case 1: The graph is connected path like graph
+      const n1 = nodes.find(n => n.getId() === singlePath[0]);
+      const n2 = nodes.find(n => n.getId() === singlePath[1]);
+      const startEndNodes = [n1, n2];
+      const sortedStartEndNodes = startEndNodes.sort((n1, n2) => {
+        if (n1.getPositionX() === n2.getPositionX()) {
+          return n1.getPositionY() - n2.getPositionY();
         }
+        return n1.getPositionX() - n2.getPositionX();
       });
-    });
-    graph.createAdjList(edgeList);
+      const p = graph.getPath(sortedStartEndNodes[0].getId(), sortedStartEndNodes[1].getId());
+      corridor = Object.assign([], p.path);
+    } else {
+      // Case 2: any other structures - retrieve longest path
+      // sort from left top - down (1st draft)
+      const sortedNode = nodes.sort((n1, n2) => {
+        if (n1.getPositionX() === n2.getPositionX()) {
+          return n1.getPositionY() - n2.getPositionY();
+        }
+        return n1.getPositionX() - n2.getPositionX();
+      });
 
-    let longestPath = [];
-    sortedNode.forEach((n1) => {
-      sortedNode.forEach((n2) => {
-        const p = graph.getPath(n1.getId(), n2.getId());
-        if (p.end) {
-          if (p.path.length > longestPath.length) {
-            longestPath = Object.assign([], p.path);
+      corridor = [];
+      sortedNode.forEach((n1) => {
+        sortedNode.forEach((n2) => {
+          const p = graph.getPath(n1.getId(), n2.getId());
+          if (p.end) {
+            if (p.path.length > corridor.length) {
+              corridor = Object.assign([], p.path);
+              if (corridor.length === sortedNode.length){
+                return;
+              }
+            }
           }
+        });
+        if (corridor.length === sortedNode.length){
+          return;
         }
       });
-    });
-    console.log("longestPath", longestPath, "nodes", nodes);
-    longestPath.forEach((n, idx, nodArray) => {
+    }
+
+    // convert corridor to path elements
+    corridor.forEach((n, idx, nodArray) => {
       if (idx > 0) {
         this.makePathElement(nodArray[idx - 1].getId(), nodArray[idx].getId());
       }
     });
 
+    // clean up
     this.trainrunService.unselectAllTrainruns(false);
     this.nodeService.unselectAllNodes(false);
   }
