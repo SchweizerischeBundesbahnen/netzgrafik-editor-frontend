@@ -1,10 +1,14 @@
 import {NodeService} from "../services/data/node.service";
+import {TrainrunSectionService} from "../services/data/trainrunsection.service";
+import {TrainrunSection} from "../models/trainrunsection.model";
+import {Node} from "../models/node.model";
 
 export class MultiSelectNodeGraph {
 
   private adjList = new Map();
 
-  constructor(readonly nodeService: NodeService) {
+  constructor(readonly nodeService: NodeService,
+              readonly trainrunSectionService : TrainrunSectionService) {
     this.adjList = new Map();
   }
 
@@ -63,5 +67,38 @@ export class MultiSelectNodeGraph {
       }
     }
     return {path: retPath, end: false};
+  }
+
+
+  convertNetzgrafikSubNodesToGraph(nodes : Node[]){
+    const edgeList = [];
+
+    // retrieve edges
+    nodes.forEach((node1) => {
+      nodes.forEach((node2) => {
+        const n1 = node1.getId() < node2.getId() ? node1.getId() : node2.getId();
+        const n2 = node1.getId() < node2.getId() ? node2.getId() : node1.getId();
+        const ts12 = this.trainrunSectionService.getTrainrunSections().find((ts: TrainrunSection) =>
+          (ts.getSourceNodeId() === n1 && ts.getTargetNodeId() === n2)
+        );
+        if (ts12 !== undefined) {
+          if (edgeList.find((a) => (a[0] === n1 && a[1] === n2)) === undefined) {
+            edgeList.push([n1, n2]);
+          }
+        } else {
+          const ts21 = this.trainrunSectionService.getTrainrunSections().find((ts: TrainrunSection) =>
+            (ts.getSourceNodeId() === n2 && ts.getTargetNodeId() === n1)
+          );
+          if (ts21 !== undefined) {
+            if (edgeList.find((a) => (a[0] === n2 && a[1] === n1)) === undefined) {
+              edgeList.push([n2, n1]);
+            }
+          }
+        }
+      });
+    });
+
+    // insert all edges (graph)
+    this.createAdjList(edgeList);
   }
 }
