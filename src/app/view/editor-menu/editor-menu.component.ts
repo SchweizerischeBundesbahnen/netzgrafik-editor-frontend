@@ -218,6 +218,7 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
 
   onStreckengrafik() {
     const editorMode = this.uiInteractionService.getEditorMode();
+    this.uiInteractionService.setUseMulipleNodesInStreckengrafik(false);
     if (editorMode !== EditorMode.NetzgrafikEditing && editorMode !== EditorMode.MultiNodeMoving) {
       // enforce unselect all nodes
       this.nodeService.unselectAllNodes();
@@ -226,7 +227,8 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
     } else {
       // editor mode is MultiNodeMoving and has at least one node selected
       if (editorMode === EditorMode.MultiNodeMoving) {
-        if (this.nodeService.getSelectedNode() !== null) {
+        if (!this.isNotStreckengrafikAllowed()) {
+          this.uiInteractionService.setUseMulipleNodesInStreckengrafik(true);
           const trainruns = this.trainrunService.getTrainruns();
           if (trainruns.length > 0) {
             // select 1st trainrun

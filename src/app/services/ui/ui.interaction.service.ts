@@ -117,6 +117,7 @@ export class UiInteractionService implements OnDestroy {
   private activeStreckengrafikRenderingType: StreckengrafikRenderingType = null;
   private activeTravelTimeCreationEstimatorType: TravelTimeCreationEstimatorType = null;
   private editorMode: EditorMode = EditorMode.NetzgrafikEditing;
+  private useMulipleNodesInStreckengrafik = false;
 
   private windowViewboxPropertiesMap: { [key: string]: ViewboxProperties } = {};
   private destroyed = new Subject<void>();
@@ -393,6 +394,14 @@ export class UiInteractionService implements OnDestroy {
 
   getEditorMode(): EditorMode {
     return this.editorMode;
+  }
+
+  setUseMulipleNodesInStreckengrafik(flag : boolean){
+    this.useMulipleNodesInStreckengrafik = flag;
+  }
+
+  isUseMulipleNodesInStreckengrafik(){
+    return this.useMulipleNodesInStreckengrafik;
   }
 
   private setActiveTheme(theme: ThemeBase) {

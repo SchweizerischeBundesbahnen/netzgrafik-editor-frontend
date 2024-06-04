@@ -140,11 +140,12 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       }
     }
 
-    const nodes = this.nodeService.getNodes().filter((n: Node) => n.selected());
-    if (nodes.length > 1) {
-      this.makePathBasedOnMulitSelectedNodes(nodes);
+    if (this.uiInteractionService.isUseMulipleNodesInStreckengrafik()) {
+      const nodes = this.nodeService.getNodes().filter((n: Node) => n.selected());
+      if (nodes.length > 1) {
+        this.makePathBasedOnMulitSelectedNodes(nodes);
+      }
     }
-
 
     if (this.cachedTrainrunItems !== undefined) {
       this.trainrunItemSubject.next(this.cachedTrainrunItems);
