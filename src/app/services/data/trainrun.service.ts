@@ -204,9 +204,11 @@ export class TrainrunService {
     }
   }
 
-  unselectAllTrainruns() {
+  unselectAllTrainruns(enforceUpdate = true) {
     this.trainrunsStore.trainruns.forEach((trainrun) => trainrun.unselect());
-    this.trainrunsUpdated();
+    if (enforceUpdate) {
+      this.trainrunsUpdated();
+    }
   }
 
   isAnyTrainrunSelected(): boolean {
@@ -447,6 +449,9 @@ export class TrainrunService {
     // select
     trainrun1.select();
     this.nodeService.reorderPortsOnNodesForTrainrun(trainrun1, false);
+
+    // Update the cumulative times for the combined trainrun
+    this.propagateConsecutiveTimesForTrainrun(port1.getTrainrunSection().getId());
 
     // update
     this.trainrunsUpdated();

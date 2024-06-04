@@ -16,8 +16,14 @@ import {TrainrunSectionService} from "../../services/data/trainrunsection.servic
 import {TrackData} from "../model/trackData";
 import {UiInteractionService} from "../../services/ui/ui.interaction.service";
 import {EditorMode} from "../../view/editor-menu/editor-mode";
-import {TrainrunTemplatePathAlignmentType} from "../model/enum/trainrun-template-path-alignment-type";
+import {
+  TrainrunTemplatePathAlignmentType
+} from "../model/enum/trainrun-template-path-alignment-type";
 import {IsTrainrunSelectedService} from "../../services/data/is-trainrun-section.service";
+import {NodeService} from "../../services/data/node.service";
+import {TrainrunBranchType} from "../model/enum/trainrun-branch-type-type";
+import {MultiSelectNodeGraph} from "../../utils/multi-select-node-graph";
+
 
 @Injectable({
   providedIn: "root",
@@ -42,6 +48,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
   private forwardTrainrunSectionGroup: TrainrunSectionGroup[];
 
   constructor(
+    private readonly nodeService: NodeService,
     private readonly trainrunService: TrainrunService,
     private readonly trainrunSectionService: TrainrunSectionService,
     private readonly filterService: FilterService,
@@ -122,6 +129,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       return;
     }
 
+
     const selectedTrainrun: Trainrun = this.getSelectedTrainrun();
     if (selectedTrainrun) {
       if (selectedTrainrun.selected()) {
@@ -132,12 +140,140 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       }
     }
 
+    const nodes = this.nodeService.getNodes().filter((n: Node) => n.selected());
+    if (nodes.length > 1) {
+      this.makePathBasedOnMulitSelectedNodes(nodes);
+    }
+
+
     if (this.cachedTrainrunItems !== undefined) {
       this.trainrunItemSubject.next(this.cachedTrainrunItems);
       this.trainrunItemsSubject.next(
         this.loadTrainrunItems(this.cachedTrainrunItems),
       );
     }
+  }
+
+  private makePathBasedOnMulitSelectedNodes(nodes: Node[]) {
+    if (nodes.length === 0) {
+      return;
+    }
+
+    this.cachedTrainrunItems = new TrainrunItem(
+      undefined,
+      60,
+      0,
+      0,
+      1,
+      undefined,
+      undefined,
+      undefined,
+      []
+    );
+
+
+    const graph = new MultiSelectNodeGraph(this.nodeService);
+    const edgeList = [];
+    // sort from left top - down (1st draft)
+    const sortedNode = nodes.sort((n1, n2) => {
+      if (n1.getPositionX() === n2.getPositionX()) {
+        return n1.getPositionY() - n2.getPositionY();
+      }
+      return n1.getPositionX() - n2.getPositionX();
+    });
+
+    sortedNode.forEach((node1) => {
+      sortedNode.forEach((node2) => {
+        const n1 = node1.getId();
+        const n2 = node2.getId();
+        const ts12 = this.trainrunSectionService.getTrainrunSections().find((ts: TrainrunSection) =>
+          (ts.getSourceNodeId() === n1 && ts.getTargetNodeId() === n2) ||
+          (ts.getSourceNodeId() === n2 && ts.getTargetNodeId() === n1)
+        );
+        if (ts12 !== undefined) {
+          edgeList.push([n1, n2]);
+          edgeList.push([n2, n1]);
+        }
+      });
+    });
+    graph.createAdjList(edgeList);
+
+    let longestPath = [];
+    sortedNode.forEach((n1) => {
+      sortedNode.forEach((n2) => {
+        const p = graph.getPath(n1.getId(), n2.getId());
+        if (p.end) {
+          if (p.path.length > longestPath.length) {
+            longestPath = Object.assign([], p.path);
+          }
+        }
+      });
+    });
+    console.log("longestPath", longestPath, "nodes", nodes);
+    longestPath.forEach((n, idx, nodArray) => {
+      if (idx > 0) {
+        this.makePathElement(nodArray[idx - 1].getId(), nodArray[idx].getId());
+      }
+    });
+
+    this.trainrunService.unselectAllTrainruns(false);
+    this.nodeService.unselectAllNodes(false);
+  }
+
+  private makePathElement(nodeId1: number, nodeId2: number) {
+
+    const n1 = new PathNode(
+      undefined,
+      undefined,
+      nodeId1,
+      undefined,
+      0,
+      undefined,
+      false
+    );
+    const n2 = new PathNode(
+      undefined,
+      undefined,
+      nodeId2,
+      undefined,
+      1,
+      undefined,
+      false
+    );
+    const node1 = this.nodeService.getNodeFromId(n1.nodeId);
+    n1.nodeShortName = node1.getBetriebspunktName();
+    const node2 = this.nodeService.getNodeFromId(n2.nodeId);
+    n2.nodeShortName = node2.getBetriebspunktName();
+
+    let ts12 = this.trainrunSectionService.getTrainrunSections().find((ts: TrainrunSection) =>
+      (ts.getSourceNodeId() === n1.nodeId && ts.getTargetNodeId() === n2.nodeId) ||
+      (ts.getSourceNodeId() === n2.nodeId && ts.getTargetNodeId() === n1.nodeId)
+    );
+    if (ts12 === undefined) {
+      ts12 = new TrainrunSection();
+      ts12.setSourceNode(node1);
+      ts12.setTargetNode(node2);
+      ts12.setTravelTime(1);
+    }
+    const s12 = new PathSection(
+      ts12.getId(),
+      0,
+      1,
+      0,
+      undefined,
+      false,//(ts12.getSourceNodeId() === n2.nodeId && ts12.getTargetNodeId() === n1.nodeId),
+      undefined,
+      undefined,
+      TrainrunBranchType.Trainrun,
+      n1,
+      n2,
+    );
+    if (this.cachedTrainrunItems.pathItems.length === 0) {
+      this.cachedTrainrunItems.pathItems.push(n1);
+    }
+    this.cachedTrainrunItems.pathItems.push(s12);
+    this.cachedTrainrunItems.pathItems.push(n2);
+
   }
 
   private getTurnaroundStartNodeForward(
@@ -463,7 +599,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     );
   }
 
-  private loadTrainrunItems(
+  public loadTrainrunItems(
     templateTrainrunItem: TrainrunItem,
   ): TrainrunItem[] {
     const trainrunItems: TrainrunItem[] = [];
@@ -497,11 +633,11 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     templateTrainrunItem: TrainrunItem,
   ) {
     /**** Adrian Egli (adrian.egli@sbb.ch)
-    TODO - This sortTrainrunItemAndRotateAlongTemplatePath is might just a hot fix for special case if there is a trainrun running from
-    [ A - B - C - B - D | A - B - B - C | .... or ... ] -> passes two times same node
-    There is sill an issue in the CODE - if the trainrun passes the second time a node, the in-/out
-    branching edge will not all be rendered!
-    */
+     TODO - This sortTrainrunItemAndRotateAlongTemplatePath is might just a hot fix for special case if there is a trainrun running from
+     [ A - B - C - B - D | A - B - B - C | .... or ... ] -> passes two times same node
+     There is sill an issue in the CODE - if the trainrun passes the second time a node, the in-/out
+     branching edge will not all be rendered!
+     */
 
     /*
     console.log('================================================================================================================');
@@ -678,9 +814,9 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
             const tempSection = tempItem.getPathSection();
             return (
               section.departurePathNode.nodeId ===
-                tempSection.departurePathNode.nodeId &&
+              tempSection.departurePathNode.nodeId &&
               section.arrivalPathNode.nodeId ===
-                tempSection.arrivalPathNode.nodeId
+              tempSection.arrivalPathNode.nodeId
             );
           },
         );
@@ -698,9 +834,9 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
               const tempSection = tempItem.getPathSection();
               return (
                 section.arrivalPathNode.nodeId ===
-                  tempSection.departurePathNode.nodeId &&
+                tempSection.departurePathNode.nodeId &&
                 section.departurePathNode.nodeId ===
-                  tempSection.arrivalPathNode.nodeId
+                tempSection.arrivalPathNode.nodeId
               );
             },
           );
@@ -973,7 +1109,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
   private trainrunSectionGroup(
     trainrunId: number,
     node: Node,
-    returnForwardStartNode : boolean
+    returnForwardStartNode: boolean
   ): TrainrunSectionGroup[] {
     const trainrunSectionGroups: TrainrunSectionGroup[] = [];
     let trainrunSection = undefined;
@@ -1035,7 +1171,8 @@ class TrainrunSectionGroup {
     public fromTrainrunSectionWithNodes: TrainrunSectionWithNodes,
     public trainrunSectionWithNodes: TrainrunSectionWithNodes,
     public toTrainrunSectionWithNodes: TrainrunSectionWithNodes,
-  ) {}
+  ) {
+  }
 }
 
 class TrainrunSectionWithNodes {
@@ -1043,5 +1180,6 @@ class TrainrunSectionWithNodes {
     public fromNode: Node,
     public trainrunSection: TrainrunSection,
     public toNode: Node,
-  ) {}
+  ) {
+  }
 }
