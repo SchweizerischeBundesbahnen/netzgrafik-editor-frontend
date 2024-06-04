@@ -28,14 +28,14 @@ export class MultiSelectNodeGraph {
     });
   }
 
-  nodeDegree(v): number {
+  vertexDegree(v): number {
     return this.adjList.get(v).length;
   }
 
   getStartEndingVertices() {
     const startPathVertices = [];
     for (const node of this.adjList.keys()) {
-      if (this.nodeDegree(node) === 1) {
+      if (this.vertexDegree(node) === 1) {
         startPathVertices.push(node);
       }
     }
