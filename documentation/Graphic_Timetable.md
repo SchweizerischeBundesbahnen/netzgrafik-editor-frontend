@@ -13,8 +13,7 @@ There are two ways to determine this corridor: Firstly, a train can be selected,
 To generate the graphic timetable user must follow this steps:
 
 - To display the graphical timetable, a train must be selected. The selected trainrun defines the
-  corridor along which the graphical representation will be created. Thus select a train and then
-  click on the "Graphical Timetable" icon in the menu bar at the bottom.
+  corridor. Thus select a train and then click on the "Graphical Timetable" icon in the menu bar at the bottom.
 - The graphical timetable view will open.
 
 [2024-01-25-Project_Along_Trainrun_Streckengrafik.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/212abe60-6cba-4ac9-96b9-93e923022b75)
