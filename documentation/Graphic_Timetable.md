@@ -3,6 +3,10 @@
 ![Overview_Streckengrafik_Screenshot_002](./images/Overview_Streckengrafik_Screenshot_002.png)
 
 ### Show graphic timetable (Streckengrafik)
+A corridor is required for the graphic timetable (Streckengrafik). The corridor determines the distance axis in the time-distance diagram (graphic timetable).
+
+There are two ways to determine this corridor: Firstly, a train can be selected, and its route forms the corridor. Alternatively, the corridor can be determined by selecting several nodes using the multiple selection tool.
+
 
 #### Use selected trainrun as corridor (distance/path)
 
