@@ -2,8 +2,6 @@
 
 ![Overview_Streckengrafik_Screenshot_002](./images/Overview_Streckengrafik_Screenshot_002.png)
 
-### Explanation
-
 The graphic timetable (Streckengraphik) is a ***distance-time diagram***. This diagram is a
 representation which shows the relationship between the distance travelled and the time taken. The
 diagram shows the course of train journeys along a route corridor.
