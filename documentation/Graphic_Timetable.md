@@ -4,6 +4,8 @@
 
 ### Show graphic timetable (Streckengrafik)
 
+#### Use selected trainrun as corridor (distance/path)
+
 To generate the graphic timetable user must follow this steps:
 
 - To display the graphical timetable, a train must be selected. The selected trainrun defines the
@@ -13,7 +15,17 @@ To generate the graphic timetable user must follow this steps:
 
 [2024-01-25-Project_Along_Trainrun_Streckengrafik.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/212abe60-6cba-4ac9-96b9-93e923022b75)
 
-#### Explanation
+### Use user defined corridor (distance/path)
+The following describes how the user can define a custom corridor so that the graphical timetable is displayed along this path:
+
+- Select at least two nodes using the multi-node selection tool.
+- Switch to the Streckengrafik (graphical timetable) view within the Editor.
+- The Streckengrafik will automatically project along the user-defined corridor, providing a visual representation of the timetable data along the selected nodes.
+
+[MultiNodeSelection-Graphical-Timetable-Corridor-2024-6-4.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/10423646/2002c9ce-fb05-4dab-b9ad-7bf36bc96c48)
+
+
+### Explanation
 
 The graphic timetable (Streckengraphik) is a ***distance-time diagram***. This diagram is a
 representation which shows the relationship between the distance travelled and the time taken. The
