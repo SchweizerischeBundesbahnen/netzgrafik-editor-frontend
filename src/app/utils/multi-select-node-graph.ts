@@ -104,6 +104,14 @@ export class MultiSelectNodeGraph {
 
     // insert all edges (graph)
     this.createAdjList(edgeList);
-    return edgeList;
+    const ret = [];
+    edgeList.forEach((e) => {
+      ret.push({
+        from: e[0],
+        to: e[1],
+        meanTravelTime: e[2]
+      });
+    });
+    return ret;
   }
 }

@@ -200,9 +200,9 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     corridor.forEach((n, idx, nodArray) => {
       if (idx > 0) {
         const e = edgeLists.find(e =>
-          (e[0] === nodArray[idx - 1].getId() && e[1] === nodArray[idx].getId()) ||
-          (e[1] === nodArray[idx - 1].getId() && e[0] === nodArray[idx].getId()));
-        const meanTravelTime = e === undefined ? 1 : e[2];
+          (e.from === nodArray[idx - 1].getId() && e.to === nodArray[idx].getId()) ||
+          (e.to === nodArray[idx - 1].getId() && e.from === nodArray[idx].getId()));
+        const meanTravelTime = e === undefined ? 1 : e.meanTravelTime;
         this.makePathElement(nodArray[idx - 1].getId(), nodArray[idx].getId(), meanTravelTime);
       }
     });
