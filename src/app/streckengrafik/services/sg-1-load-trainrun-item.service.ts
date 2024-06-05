@@ -186,7 +186,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       this.trainrunSectionService);
 
     // create graph from nodes (Netzgrafik data)
-    graph.convertNetzgrafikSubNodesToGraph(nodes);
+    const edgeLists = graph.convertNetzgrafikSubNodesToGraph(nodes);
 
     // get all starting ending nodes (degree == 1)
     const endStartingVertices = graph.getStartEndingVertices();
@@ -199,7 +199,11 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     // convert corridor to path elements
     corridor.forEach((n, idx, nodArray) => {
       if (idx > 0) {
-        this.makePathElement(nodArray[idx - 1].getId(), nodArray[idx].getId());
+        const e = edgeLists.find(e =>
+          (e.from === nodArray[idx - 1].getId() && e.to === nodArray[idx].getId()) ||
+          (e.to === nodArray[idx - 1].getId() && e.from === nodArray[idx].getId()));
+        const meanTravelTime = e === undefined ? 1 : e.meanTravelTime;
+        this.makePathElement(nodArray[idx - 1].getId(), nodArray[idx].getId(), meanTravelTime);
       }
     });
 
@@ -254,11 +258,11 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     return Object.assign([], p.path);
   }
 
-  private makePathElement(nodeId1: number, nodeId2: number) {
+  private makePathElement(nodeId1: number, nodeId2: number, travelTime: number) {
 
     const n1 = new PathNode(
-      undefined,
-      undefined,
+      0,
+      0,
       nodeId1,
       undefined,
       0,
@@ -266,8 +270,8 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       false
     );
     const n2 = new PathNode(
-      undefined,
-      undefined,
+      travelTime,
+      travelTime,
       nodeId2,
       undefined,
       1,
@@ -287,12 +291,12 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       ts12 = new TrainrunSection();
       ts12.setSourceNode(node1);
       ts12.setTargetNode(node2);
-      ts12.setTravelTime(1);
+      ts12.setTravelTime(travelTime);
     }
     const s12 = new PathSection(
       ts12.getId(),
       0,
-      1,
+      travelTime,
       0,
       undefined,
       false,//(ts12.getSourceNodeId() === n2.nodeId && ts12.getTargetNodeId() === n1.nodeId),

@@ -8,7 +8,7 @@ export class MultiSelectNodeGraph {
   private adjList = new Map();
 
   constructor(readonly nodeService: NodeService,
-              readonly trainrunSectionService : TrainrunSectionService) {
+              readonly trainrunSectionService: TrainrunSectionService) {
     this.adjList = new Map();
   }
 
@@ -70,7 +70,7 @@ export class MultiSelectNodeGraph {
   }
 
 
-  convertNetzgrafikSubNodesToGraph(nodes : Node[]){
+  convertNetzgrafikSubNodesToGraph(nodes: Node[]): any[] {
     const edgeList = [];
 
     // retrieve edges
@@ -78,20 +78,24 @@ export class MultiSelectNodeGraph {
       nodes.forEach((node2) => {
         const n1 = node1.getId() < node2.getId() ? node1.getId() : node2.getId();
         const n2 = node1.getId() < node2.getId() ? node2.getId() : node1.getId();
-        const ts12 = this.trainrunSectionService.getTrainrunSections().find((ts: TrainrunSection) =>
+        const ts12 = this.trainrunSectionService.getTrainrunSections().filter((ts: TrainrunSection) =>
           (ts.getSourceNodeId() === n1 && ts.getTargetNodeId() === n2)
         );
-        if (ts12 !== undefined) {
+        if (ts12.length > 0) {
+          const meanTravelTime =
+            ts12.reduce((sum, obj) => sum + obj.getTravelTime(), 0) / ts12.length;
           if (edgeList.find((a) => (a[0] === n1 && a[1] === n2)) === undefined) {
-            edgeList.push([n1, n2]);
+            edgeList.push([n1, n2, meanTravelTime]);
           }
         } else {
-          const ts21 = this.trainrunSectionService.getTrainrunSections().find((ts: TrainrunSection) =>
+          const ts21 = this.trainrunSectionService.getTrainrunSections().filter((ts: TrainrunSection) =>
             (ts.getSourceNodeId() === n2 && ts.getTargetNodeId() === n1)
           );
-          if (ts21 !== undefined) {
+          if (ts21.length > 0) {
+            const meanTravelTime =
+              ts21.reduce((sum, obj) => sum + obj.getTravelTime(), 0) / ts21.length;
             if (edgeList.find((a) => (a[0] === n2 && a[1] === n1)) === undefined) {
-              edgeList.push([n2, n1]);
+              edgeList.push([n2, n1, meanTravelTime]);
             }
           }
         }
@@ -100,5 +104,14 @@ export class MultiSelectNodeGraph {
 
     // insert all edges (graph)
     this.createAdjList(edgeList);
+    const ret = [];
+    edgeList.forEach((e) => {
+      ret.push({
+        from: e[0],
+        to: e[1],
+        meanTravelTime: e[2]
+      });
+    });
+    return ret;
   }
 }
