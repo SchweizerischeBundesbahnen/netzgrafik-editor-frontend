@@ -440,16 +440,21 @@ export class EditorToolsViewComponent {
           startTrainrunSection.getSourceArrival() :
           startTrainrunSection.getTargetArrival();
 
-
         let waitingTimeOnStartStation = startNodeDeparture - startNodeArrival;
-        while (waitingTimeOnStartStation < 0) {
-          waitingTimeOnStartStation += trainrun.getFrequency();
-        }
-
-
         let waitingTimeOnEndStation = endNodeDeparture - endNodeArrival;
-        while (waitingTimeOnEndStation < 0) {
-          waitingTimeOnEndStation += trainrun.getFrequency();
+
+        if (trainrun.getFrequency() > 60) {
+          // special case - if the freq is bigger than 60min (1h) - then just mirror
+          waitingTimeOnStartStation = 2.0 * (trainrun.getFrequency() / 2.0 - startNodeArrival);
+          waitingTimeOnEndStation = 2.0 * (trainrun.getFrequency() / 2.0 - endNodeArrival);
+        } else {
+          // find next freq (departing)
+          while (waitingTimeOnStartStation < 0) {
+            waitingTimeOnStartStation += trainrun.getFrequency();
+          }
+          while (waitingTimeOnEndStation < 0) {
+            waitingTimeOnEndStation += trainrun.getFrequency();
+          }
         }
 
         if (trainrun.getFrequency() < 60) {
