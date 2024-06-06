@@ -114,6 +114,7 @@ describe("StreckengrafikServicesTests", () => {
       trainrunService,
       trainrunSectionService,
       nodeService,
+      filterService
     );
 
     uiInteractionService = new UiInteractionService(

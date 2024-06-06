@@ -14,6 +14,7 @@ import {PerlenketteConnection} from "../model/perlenketteConnection";
 import {Node} from "../../models/node.model";
 import {TrainrunSectionService} from "../../services/data/trainrunsection.service";
 import {NodeService} from "../../services/data/node.service";
+import {FilterService} from "../../services/ui/filter.service";
 
 @Injectable({
   providedIn: "root",
@@ -32,6 +33,7 @@ export class LoadPerlenketteService implements OnDestroy {
     private trainrunService: TrainrunService,
     private trainrunSectionService: TrainrunSectionService,
     private nodeService: NodeService,
+    private filterService: FilterService,
   ) {
     this.trainrunService.trainruns
       .pipe(takeUntil(this.destroyed$))
@@ -189,6 +191,11 @@ export class LoadPerlenketteService implements OnDestroy {
           const tmpPort1 = port1;
           port1 = port2;
           port2 = tmpPort1;
+        }
+
+        // filter connection
+        if (!this.filterService.filterTrainrun(port2.getTrainrunSection().getTrainrun())) {
+          return;
         }
 
         let terminalStation;

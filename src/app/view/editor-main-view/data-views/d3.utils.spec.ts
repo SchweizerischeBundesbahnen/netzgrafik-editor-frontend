@@ -96,6 +96,7 @@ describe("3d.Utils.tests", () => {
       trainrunService,
       trainrunSectionService,
       nodeService,
+      filterService
     );
 
     uiInteractionService = new UiInteractionService(

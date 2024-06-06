@@ -95,6 +95,7 @@ describe("Nodes-View", () => {
       trainrunService,
       trainrunSectionService,
       nodeService,
+      filterService
     );
 
     uiInteractionService = new UiInteractionService(

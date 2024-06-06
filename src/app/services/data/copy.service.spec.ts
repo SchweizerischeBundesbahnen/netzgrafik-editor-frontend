@@ -90,6 +90,7 @@ describe("CopyService", () => {
       trainrunService,
       trainrunSectionService,
       nodeService,
+      filterService
     );
 
     uiInteractionService = new UiInteractionService(
