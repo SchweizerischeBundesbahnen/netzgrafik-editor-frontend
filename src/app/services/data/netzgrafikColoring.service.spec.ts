@@ -89,6 +89,7 @@ describe("NetzgraphikColoringSerivce", () => {
       trainrunService,
       trainrunSectionService,
       nodeService,
+      filterService
     );
 
     uiInteractionService = new UiInteractionService(

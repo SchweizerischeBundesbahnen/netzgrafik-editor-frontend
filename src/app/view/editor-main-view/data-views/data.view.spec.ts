@@ -100,6 +100,7 @@ describe("Editor-DataView", () => {
       trainrunService,
       trainrunSectionService,
       nodeService,
+      filterService
     );
 
     uiInteractionService = new UiInteractionService(
