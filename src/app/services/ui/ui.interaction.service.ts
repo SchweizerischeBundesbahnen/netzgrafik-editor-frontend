@@ -185,19 +185,22 @@ export class UiInteractionService implements OnDestroy {
   getViewboxProperties(key: string): ViewboxProperties {
     const viewboxProperties = this.windowViewboxPropertiesMap[key];
     if (viewboxProperties === undefined) {
-      return {
-        currentViewBox: null,
-        panZoomTop: 0,
-        panZoomLeft: 0,
-        panZoomWidth: 0,
-        panZoomHeight: 0,
-        zoomFactor: 100,
-        origWidth: 0,
-        origHeight: 0,
-      };
+      return this.getDefaultViewProperties();
     }
-
     return viewboxProperties;
+  }
+
+  getDefaultViewProperties() {
+    return {
+      currentViewBox: null,
+      panZoomTop: 0,
+      panZoomLeft: 0,
+      panZoomWidth: 0,
+      panZoomHeight: 0,
+      zoomFactor: 100,
+      origWidth: 0,
+      origHeight: 0,
+    };
   }
 
   setViewboxProperties(key: string, viewboxProperties: ViewboxProperties) {
