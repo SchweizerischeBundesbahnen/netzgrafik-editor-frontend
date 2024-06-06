@@ -411,7 +411,7 @@ export class EditorView implements SVGMouseControllerObserver {
 
   initView() {
     this.rootContainer = this.svgMouseController.init(
-      this.uiInteractionService.getDefaultViewProperties(),
+      this.uiInteractionService.getViewboxProperties(EditorView.svgName),
     );
     this.notesView.setGroup(this.rootContainer.append(StaticDomTags.GROUP_SVG));
     this.nodesView.setGroup(this.rootContainer.append(StaticDomTags.GROUP_SVG));
