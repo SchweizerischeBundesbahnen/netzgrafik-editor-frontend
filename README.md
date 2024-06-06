@@ -5,8 +5,8 @@
 Netzgrafik-Editor – designed to make better decisions.
 </summary>
  
-
-The vision is to accelerate the planning and sizing of transport systems by creating an intuitive and powerful platform that uses smart projections and analyses. This will enable timetable variations or service options to be created, compared, and optimized very easily, with maximum support for the human planner during their creative process. The goal is to ensure that decisions can be made based on data-driven insights, to guarantee a smooth mobility for the future that is fast, efficient, and goal-oriented.
+<br>
+The product vision is to accelerate the planning and sizing of transport systems by creating an intuitive and powerful platform that uses smart projections and analyses. This will enable timetable variations or service options to be created, compared, and optimized very easily, with maximum support for the human planner during their creative process. The goal is to ensure that decisions can be made based on data-driven insights, to guarantee a smooth mobility for the future that is fast, efficient, and goal-oriented.
 <br><br>
 >
 > **Flexible level of detail** - start with a rough sketch, continuously add more detail.
