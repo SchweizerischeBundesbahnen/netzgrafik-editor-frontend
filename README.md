@@ -143,7 +143,7 @@ The openness of the project encourages innovation, expertise from different sect
 improvements to optimize the
 planning processes.
 
-## Raodmap 
+## Roadmap 
 Get an insight into the plan and future [ROADMAP.md](ROADMAP.md).
 
 ## User Manual
