@@ -101,6 +101,7 @@ import {TrainRunSectionStopsComponentComponent} from "./streckengrafik/component
 import {PathGridComponent} from "./streckengrafik/components/grid/path-grid/path-grid.component";
 import {TrainRunNodeComponent} from "./streckengrafik/components/train-run-node/trainrun-node.component";
 import {ActionMenuComponent} from "./view/action-menu/action-menu/action-menu.component";
+import {I18nModule} from "./core/i18n/i18n.module";
 
 @NgModule({
   declarations: [
@@ -235,6 +236,8 @@ import {ActionMenuComponent} from "./view/action-menu/action-menu/action-menu.co
   providers: [
     ... environment.backendUrl ? [{provide: BASE_PATH, useValue: environment.backendUrl}] : [],
     {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
+    I18nModule.setLocale(),
+    I18nModule.setLocaleId()
   ],
 })
 

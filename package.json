@@ -11,9 +11,9 @@
     "test": "ng test -c ci",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "t9n": "ng run netzgrafik-frontend:t9n",
     "generate:api": "openapi-generator-cli generate",
-    "local-test": "ng test --watch --code-coverage"
+    "local-test": "ng test --watch --code-coverage",
+    "extract-i18n": "ng extract-i18n"
   },
   "name": "netzgrafik-frontend",
   "version": "2.6.0",
@@ -39,9 +39,9 @@
     "@sbb-esta/angular": "^17.5.1",
     "angular-oauth2-oidc": "^15.0.1",
     "angular-server-side-configuration": "^17.0.2",
-    "angular-t9n": "^17.0.0",
     "d3": "^5.16.0",
     "dom-to-svg": "^0.12.2",
+    "extract-i18n": "^1.0.0",
     "jspdf-yworks": "^2.1.1",
     "ngx-editor": "^15.0.1",
     "papaparse": "^5.3.0",
