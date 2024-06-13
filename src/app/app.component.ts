@@ -12,6 +12,9 @@ import {ProjectDto} from "./api/generated";
 })
 export class AppComponent {
   version = packageJson.version;
+  userGuide = $localize`:@@app.user-guide:User Guide`;
+  locale = localStorage.getItem("locale");
+  
   environmentLabel = environment.label;
   authenticated: Promise<unknown>;
 
@@ -31,5 +34,13 @@ export class AppComponent {
 
   logout() {
     this.authService.logOut();
+  }
+
+  changeLocale(locale: string) {
+    // Store the user's preferred locale in localStorage
+    localStorage.setItem("locale", locale);
+
+    // Reload the page to apply the new locale
+    location.reload();
   }
 }

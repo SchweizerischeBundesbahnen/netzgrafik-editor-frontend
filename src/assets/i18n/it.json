@@ -1,0 +1,20 @@
+{
+  "app.user-guide": "User Guide IT",
+  "app.user-manual": "User Manual IT",
+  "app.logout": "Logout",
+  "app.login-message": "Sie werden angemeldet...",
+  "sbbBreadcrumbExpand": "Show entire path",
+  "sbbDialogCloseDialog": "Close dialog",
+  "sbbFileSelectorUploadFile": "Upload file",
+  "sbbFileSelectorRemoveFile": "Remove file",
+  "sbbHeaderMenuBack": "Back",
+  "sbbHeaderOpenMenu": "Open Menu",
+  "sbbHeaderCloseMenu": "Close Menu",
+  "sbbSidebarCollapse": "Collapse",
+  "sbbSidebarExpand": "Expand",
+  "sbbSidebarCloseSidebar": "Close Sidebar",
+  "sbbSidebarOpenSidebar": "Open Sidebar",
+  "sbbTextareaCounterText": "{$PH} characters remaining",
+  "sbbUsermenuLogin": "Login",
+  "sbbUsermenuOpenPanel": "Logged in as {$PH}. Click or press enter to open user menu."
+}
