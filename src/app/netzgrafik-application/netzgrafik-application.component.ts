@@ -29,6 +29,13 @@ export class NetzgrafikApplicationComponent {
   mode = IconSidebarMode.NONE;
   expanded = false;
 
+  variants = $localize`:@@app.netzgrafik-application.variants:Varianten`;
+  filter = $localize`:@@app.netzgrafik-application.filter:Filter`;
+  analytics = $localize`:@@app.netzgrafik-application.analytics:Analytics`;
+  edit = $localize`:@@app.netzgrafik-application.edit:Bearbeiten`;
+  moreFunctions = $localize`:@@app.netzgrafik-application.more-functions:Weitere Funktionen`;
+  properties = $localize`:@@app.netzgrafik-application.properties:Einstellungen`;
+
   private readonly destroyed = new Subject<void>();
 
   constructor(

@@ -11,8 +11,9 @@ import {ProjectDto} from "./api/generated";
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-  version = packageJson.version;
+  version = $localize`:@@app.version:Version` + " " + packageJson.version;
   userGuide = $localize`:@@app.user-guide:User Guide`;
+
   locale = localStorage.getItem("locale");
   
   environmentLabel = environment.label;
