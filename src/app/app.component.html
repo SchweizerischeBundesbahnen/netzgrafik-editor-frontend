@@ -1,6 +1,6 @@
 <sbb-header-lean
   label="Netzgrafik-Editor"
-  [subtitle]="'Version ' + version"
+  [subtitle]="version"
   class="sbb-header-fixed-columns noprint"
 >
   <sbb-app-chooser-section [label]="userGuide" class="noprint">
@@ -44,7 +44,7 @@
 <ng-template #loading>
   <ng-container *ngIf="!disableBackend">
     <sbb-loading-indicator mode="big"></sbb-loading-indicator>
-    <div class="login-message" i18n="@@app.login-message">Sie werden angemeldet...</div>
+    <div class="login-message" i18n="@@app.login-message">You are getting logged in...</div>
   </ng-container>
   <ng-container *ngIf="disableBackend">
     <sbb-netzgrafik-editor></sbb-netzgrafik-editor>

@@ -18,8 +18,9 @@ import {Operation} from "./models/operation.model";
 export class AppComponent {
   readonly disableBackend = environment.disableBackend;
 
-  version = packageJson.version;
+  version = $localize`:@@app.version:Version` + " " + packageJson.version;
   userGuide = $localize`:@@app.user-guide:User Guide`;
+
   locale = localStorage.getItem("locale");
   
   environmentLabel = environment.label;
