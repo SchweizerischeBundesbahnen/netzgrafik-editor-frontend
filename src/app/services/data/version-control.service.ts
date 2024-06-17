@@ -13,6 +13,7 @@ import {AutoSaveService} from "./auto-save.service";
 import {LogService} from "../../logger/log.service";
 import {VersionId} from "../../view/variant/variant-view/variant-history/model";
 import {UndoService} from "./undo.service";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: "root",
@@ -34,7 +35,8 @@ export class VersionControlService implements OnDestroy {
     private readonly undoService: UndoService,
     private readonly logService: LogService,
   ) {
-    autoSaveService.autosaveTrigger$
+    if (!environment.disableBackend) {
+      autoSaveService.autosaveTrigger$
       .pipe(
         takeUntil(this.destroyed),
         filter(() => this.variant.isWritable),
@@ -43,6 +45,7 @@ export class VersionControlService implements OnDestroy {
         logService.debug("auto saving changes");
         this.createSnapshot();
       });
+    }
   }
 
   get variant(): VariantDto {
