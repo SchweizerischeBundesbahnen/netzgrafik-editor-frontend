@@ -11,10 +11,11 @@ import {ProjectDto} from "./api/generated";
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
+  readonly disableBackend = environment.disableBackend;
+
   version = packageJson.version;
   environmentLabel = environment.label;
   authenticated: Promise<unknown>;
-  disableBackend = environment.disableBackend;
 
   projectInMenu: Observable<ProjectDto | null>;
 
@@ -39,9 +40,8 @@ export class AppComponent {
   }
 
   logout() {
-    if (this.disableBackend) {
-      return;
+    if (!this.disableBackend) {
+      this.authService.logOut();
     }
-    this.authService.logOut();
   }
 }

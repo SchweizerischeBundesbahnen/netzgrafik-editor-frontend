@@ -30,7 +30,7 @@ export class NetzgrafikApplicationComponent {
   mode = IconSidebarMode.NONE;
   expanded = false;
 
-  private disableBackend = environment.disableBackend;
+  readonly disableBackend = environment.disableBackend;
 
   private readonly destroyed = new Subject<void>();
 
