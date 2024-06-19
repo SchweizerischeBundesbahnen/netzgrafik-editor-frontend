@@ -451,6 +451,8 @@ export class TrainrunService {
       const trans = node.addTransitionAndComputeRouting(port1, port2, trainrun1);
       if (arrivalTimeAtNode === departTimeAtNode+frequencyOffset) {
         trans.setIsNonStopTransit(true);
+      } else {
+        trans.setIsNonStopTransit(false);
       }
     }
 
