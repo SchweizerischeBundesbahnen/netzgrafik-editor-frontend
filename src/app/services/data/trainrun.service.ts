@@ -426,8 +426,8 @@ export class TrainrunService {
         port2.getTrainrunSection().getSourceDeparture();
 
     let frequencyOffset = 0;
-    while (arrivalTimeAtNode > departTimeAtNode + frequencyOffset) {
-      frequencyOffset += port1.getTrainrunSection().getFrequency();
+    while ( 60 + arrivalTimeAtNode > departTimeAtNode + frequencyOffset) {
+      frequencyOffset += port2.getTrainrunSection().getFrequency();
     }
 
     // update trainrun references (trainrunSections and transitions)
