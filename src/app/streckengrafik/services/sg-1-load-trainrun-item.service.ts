@@ -642,7 +642,6 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
   ): TrainrunItem[] {
     const trainrunItems: TrainrunItem[] = [];
     if (this.trainruns) {
-      let selectedTrainrunItem: TrainrunItem = undefined;
       this.trainruns.forEach((trainrun: Trainrun) => {
         if (this.filterService.filterTrainrun(trainrun)) {
           const trainrunItem = this.loadTrainrunItem(trainrun, false);
@@ -651,16 +650,9 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
             trainrunItem,
             templateTrainrunItem,
           );
-          if (trainrun.selected()) {
-            selectedTrainrunItem = trainrunItem;
-          } else {
-            trainrunItems.push(trainrunItem);
-          }
+          trainrunItems.push(trainrunItem);
         }
       });
-      if (selectedTrainrunItem) {
-        trainrunItems.push(selectedTrainrunItem);
-      }
     }
     return trainrunItems;
   }
