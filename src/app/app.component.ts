@@ -1,9 +1,13 @@
-import {Component} from "@angular/core";
+import {Component, Input, Output} from "@angular/core";
 import {AuthService} from "./services/auth/auth.service";
+import {TrainrunService} from "./services/data/trainrun.service";
+import {TrainrunSectionService} from "./services/data/trainrunsection.service";
+import {DataService} from "./services/data/data.service";
 import {environment} from "../environments/environment";
 import packageJson from "../../package.json";
 import {Observable} from "rxjs";
 import {ProjectDto} from "./api/generated";
+import {NetzgrafikDto} from "./data-structures/business.data.structures";
 
 @Component({
   selector: "sbb-root",
@@ -33,7 +37,20 @@ export class AppComponent {
     return this.authService.claims?.email;
   }
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private trainrunService: TrainrunService, private trainrunSectionService: TrainrunSectionService, private dataService: DataService) {
+
+    /*trainrunService.trainruns.subscribe((value) => {
+      console.log('trainrunService', value);
+    });
+
+    trainrunSectionService.trainrunSections.subscribe((value) => {
+      console.log('trainrunSectionService', value);
+    });*/
+
+    /*trainrunSectionService.trainrunSectionCreated.subscribe((trainrunSection) => {
+      console.log('trainrunSectionCreated', trainrunSection);
+    });*/
+
     if (!this.disableBackend) {
       this.authenticated = authService.initialized;
     }
@@ -44,4 +61,15 @@ export class AppComponent {
       this.authService.logOut();
     }
   }
+
+  @Input()
+  get dto() {
+    return this.dataService.getNetzgrafikDto();
+  }
+  set dto(dto: NetzgrafikDto) {
+    this.dataService.loadNetzgrafikDto(dto);
+  }
+
+  @Output()
+  trainrunSectionOperation = this.trainrunSectionService.trainrunSectionOperation;
 }

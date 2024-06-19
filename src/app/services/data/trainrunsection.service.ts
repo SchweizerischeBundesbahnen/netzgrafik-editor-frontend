@@ -5,7 +5,7 @@ import {
   TrainrunSectionDto,
 } from "../../data-structures/business.data.structures";
 import {Node} from "../../models/node.model";
-import {Injectable, OnDestroy} from "@angular/core";
+import {Injectable, OnDestroy, EventEmitter} from "@angular/core";
 import {BehaviorSubject, Subject} from "rxjs";
 import {TrainrunService} from "./trainrun.service";
 import {NodeService} from "./node.service";
@@ -35,6 +35,11 @@ export interface InformSelectedTrainrunClick {
   open: boolean;
 }
 
+export class TrainrunSectionOperation {
+  type: 'create' | 'update' | 'delete';
+  trainrunSection: TrainrunSection;
+}
+
 @Injectable({
   providedIn: "root",
 })
@@ -45,6 +50,8 @@ export class TrainrunSectionService implements OnDestroy {
   trainrunSectionsStore: { trainrunSections: TrainrunSection[] } = {
     trainrunSections: [],
   }; // store the data in memory
+
+  trainrunSectionOperation = new EventEmitter<TrainrunSectionOperation>();
 
   informSelectedTrainrunClickSubject =
     new BehaviorSubject<InformSelectedTrainrunClick>({
@@ -698,6 +705,11 @@ export class TrainrunSectionService implements OnDestroy {
     this.propagateTimesForNewTrainrunSection(trainrunSection);
     //this.trainrunSectionsUpdated();
     this.trainrunService.trainrunsUpdated();
+
+    this.trainrunSectionOperation.emit({
+      type: 'create',
+      trainrunSection: trainrunSection,
+    });
   }
 
   reconnectTrainrunSection(
