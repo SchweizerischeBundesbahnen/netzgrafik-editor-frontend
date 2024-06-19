@@ -314,9 +314,7 @@ describe("TrainrunService", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
-    dataService.loadNetzgrafikDto(
-      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
-    );
+
     const ts: TrainrunSection =
       trainrunSectionService.getTrainrunSectionFromId(6);
     const n: Node = nodeService.getNodeFromId(ts.getTargetNodeId());
@@ -327,4 +325,38 @@ describe("TrainrunService", () => {
     expect(connectedTrainruns.find((e) => e === 0)).toBe(undefined);
     expect(connectedTrainruns.length).toBe(1);
   });
+
+  it("combineTwoTrainruns - 001", () => {
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
+
+    const ts0: TrainrunSection =
+      trainrunSectionService.getTrainrunSectionFromId(0);
+    const ts1: TrainrunSection =
+      trainrunSectionService.getTrainrunSectionFromId(1);
+    const n: Node = nodeService.getNodeFromId(1);
+
+    const trainrunSections1 =
+      trainrunSectionService.getAllTrainrunSectionsForTrainrun(0);
+    expect(trainrunSections1.length).toBe(2);
+
+    trainrunService.splitTrainrunIntoTwoParts(n.getTransition(0));
+
+    const trainrunSections2 =
+      trainrunSectionService.getAllTrainrunSectionsForTrainrun(ts0.getTrainrunId());
+    expect(trainrunSections2.length).toBe(1);
+    const trainrunSections3 =
+      trainrunSectionService.getAllTrainrunSectionsForTrainrun(ts1.getTrainrunId());
+    expect(trainrunSections3.length).toBe(1);
+
+    trainrunService.combineTwoTrainruns(n,
+      n.getPortOfTrainrunSection(0),
+      n.getPortOfTrainrunSection(1));
+
+    const trainrunSections4 =
+      trainrunSectionService.getAllTrainrunSectionsForTrainrun(ts1.getTrainrunId());
+    expect(trainrunSections4.length).toBe(2);
+  });
+
 });

@@ -608,4 +608,28 @@ describe("TrainrunSection Model Test", () => {
     expect(ts002).toBe(undefined);
     expect(ts003).toBe(undefined);
   });
+
+  it("check...shiftAllTimes", () => {
+    const ts = new TrainrunSection();
+    ts.setSourceDeparture(59);
+    ts.setTargetArrival(9);
+    ts.setTargetDeparture(51);
+    ts.setSourceArrival(1);
+    ts.setTravelTime(10);
+    ts.shiftAllTimes(0);
+    expect(ts.getSourceDeparture()).toBe(59);
+    expect(ts.getTargetArrival()).toBe(9);
+    expect(ts.getTargetDeparture()).toBe(51);
+    expect(ts.getSourceArrival()).toBe(1);
+    expect(ts.getTravelTime()).toBe(10);
+
+    ts.shiftAllTimes(10);
+    expect(ts.getSourceDeparture()).toBe(9);
+    expect(ts.getTargetArrival()).toBe(19);
+    expect(ts.getTargetDeparture()).toBe(1);
+    expect(ts.getSourceArrival()).toBe(11);
+    expect(ts.getTravelTime()).toBe(10);
+  });
+
+
 });

@@ -222,6 +222,18 @@ export class TrainrunSection {
     return formattedText;
   }
 
+  shiftAllTimes(translateMinutes: number) {
+    this.sourceArrival.time += translateMinutes;
+    this.targetArrival.time += translateMinutes;
+    this.sourceDeparture.time += translateMinutes;
+    this.targetDeparture.time += translateMinutes;
+
+    this.sourceArrival.time = this.sourceArrival.time % 60;
+    this.targetArrival.time = this.targetArrival.time % 60;
+    this.sourceDeparture.time = this.sourceDeparture.time % 60;
+    this.targetDeparture.time = this.targetDeparture.time % 60;
+  }
+
   setSourceAndTargetNodeReference(sourceNode: Node, targetNode: Node) {
     this.setSourceNode(sourceNode);
     this.setTargetNode(targetNode);

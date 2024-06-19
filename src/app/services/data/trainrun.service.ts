@@ -410,6 +410,26 @@ export class TrainrunService {
       return;
     }
 
+    // Only the frequency position of the main train should influence the frequency position
+    // of the merged train, i.e. if, for example, both trains run every 30 minutes, one is in
+    // cycle position 0 and the second is in frequency position 30, e.g. 02 or 32, then the second
+    // should be shifted by 30 minutes (1 frequency ) so that both are in the same cycle position,
+    // i.e. 02.
+    const arrivalTimeAtNode =
+      node.getId() !== port1.getTrainrunSection().getSourceNodeId() ?
+        port1.getTrainrunSection().getTargetArrival() :
+        port1.getTrainrunSection().getSourceArrival();
+
+    const departTimeAtNode =
+      node.getId() !== port2.getTrainrunSection().getSourceNodeId() ?
+        port2.getTrainrunSection().getTargetDeparture() :
+        port2.getTrainrunSection().getSourceDeparture();
+
+    let frequencyOffset = 0;
+    while (arrivalTimeAtNode > departTimeAtNode + frequencyOffset) {
+      frequencyOffset += port1.getTrainrunSection().getFrequency();
+    }
+
     // update trainrun references (trainrunSections and transitions)
     const trainrunSection = port2.getTrainrunSection();
     trainrunSection.setTrainrun(trainrun1);
@@ -421,13 +441,17 @@ export class TrainrunService {
         trans.setTrainrun(trainrun1);
       }
       iterator.current().trainrunSection.setTrainrun(trainrun1);
+      iterator.current().trainrunSection.shiftAllTimes(frequencyOffset);
     }
 
     // update trainrun references (1st transition)
     const trans1 = node.getTransitionFromPortId(port1.getId());
     const trans2 = node.getTransitionFromPortId(port2.getId());
     if (trans1 === undefined && trans2 === undefined) {
-      node.addTransitionAndComputeRouting(port1, port2, trainrun1);
+      const trans = node.addTransitionAndComputeRouting(port1, port2, trainrun1);
+      if (arrivalTimeAtNode === departTimeAtNode+frequencyOffset) {
+        trans.setIsNonStopTransit(true);
+      }
     }
 
     // update trainrun references (connection)
