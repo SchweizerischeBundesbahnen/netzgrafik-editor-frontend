@@ -222,16 +222,24 @@ export class TrainrunSection {
     return formattedText;
   }
 
-  shiftAllTimes(translateMinutes: number) {
-    this.sourceArrival.time += translateMinutes;
-    this.targetArrival.time += translateMinutes;
+  shiftAllTimes(translateMinutes: number, mirrorSourceDeparture : boolean) {
     this.sourceDeparture.time += translateMinutes;
+    this.targetArrival.time += translateMinutes;
+    this.sourceArrival.time += translateMinutes;
     this.targetDeparture.time += translateMinutes;
 
-    this.sourceArrival.time = this.sourceArrival.time % 60;
-    this.targetArrival.time = this.targetArrival.time % 60;
     this.sourceDeparture.time = this.sourceDeparture.time % 60;
+    this.targetArrival.time = this.targetArrival.time % 60;
+    this.sourceArrival.time = this.sourceArrival.time % 60;
     this.targetDeparture.time = this.targetDeparture.time % 60;
+
+    if (mirrorSourceDeparture) {
+      this.sourceArrival.time = (120 - this.sourceDeparture.time) % 60;
+      this.targetDeparture.time = (120 - this.targetArrival.time) % 60;
+    } else {
+      this.sourceDeparture.time = (120 - this.sourceArrival.time) % 60;
+      this.targetArrival.time = (120 - this.targetDeparture.time) % 60;
+    }
   }
 
   setSourceAndTargetNodeReference(sourceNode: Node, targetNode: Node) {

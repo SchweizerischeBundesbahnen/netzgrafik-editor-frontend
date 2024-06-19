@@ -616,16 +616,16 @@ describe("TrainrunSection Model Test", () => {
     ts.setTargetDeparture(51);
     ts.setSourceArrival(1);
     ts.setTravelTime(10);
-    ts.shiftAllTimes(0);
+    ts.shiftAllTimes(0, true);
     expect(ts.getSourceDeparture()).toBe(59);
     expect(ts.getTargetArrival()).toBe(9);
     expect(ts.getTargetDeparture()).toBe(51);
     expect(ts.getSourceArrival()).toBe(1);
     expect(ts.getTravelTime()).toBe(10);
 
-    ts.shiftAllTimes(10);
-    expect(ts.getSourceDeparture()).toBe(9);
-    expect(ts.getTargetArrival()).toBe(19);
+    ts.shiftAllTimes(10, false);
+    expect(ts.getSourceDeparture()).toBe(49);
+    expect(ts.getTargetArrival()).toBe(59);
     expect(ts.getTargetDeparture()).toBe(1);
     expect(ts.getSourceArrival()).toBe(11);
     expect(ts.getTravelTime()).toBe(10);

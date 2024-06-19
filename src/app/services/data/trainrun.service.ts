@@ -427,7 +427,7 @@ export class TrainrunService {
 
     let frequencyOffset = 0;
     while ( 60 + arrivalTimeAtNode > departTimeAtNode + frequencyOffset) {
-      frequencyOffset += port2.getTrainrunSection().getFrequency();
+      frequencyOffset += port1.getTrainrunSection().getFrequency();
     }
 
     // update trainrun references (trainrunSections and transitions)
@@ -441,7 +441,9 @@ export class TrainrunService {
         trans.setTrainrun(trainrun1);
       }
       iterator.current().trainrunSection.setTrainrun(trainrun1);
-      iterator.current().trainrunSection.shiftAllTimes(frequencyOffset);
+      iterator.current().trainrunSection.shiftAllTimes(
+        frequencyOffset,
+        node.getId() === port2.getTrainrunSection().getSourceNodeId());
     }
 
     // update trainrun references (1st transition)
@@ -449,7 +451,7 @@ export class TrainrunService {
     const trans2 = node.getTransitionFromPortId(port2.getId());
     if (trans1 === undefined && trans2 === undefined) {
       const trans = node.addTransitionAndComputeRouting(port1, port2, trainrun1);
-      if (arrivalTimeAtNode === departTimeAtNode+frequencyOffset) {
+      if (60 + arrivalTimeAtNode === departTimeAtNode+frequencyOffset) {
         trans.setIsNonStopTransit(true);
       } else {
         trans.setIsNonStopTransit(false);
