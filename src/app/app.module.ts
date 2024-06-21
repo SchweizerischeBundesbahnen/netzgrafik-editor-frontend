@@ -1,4 +1,4 @@
-import {NgModule, Injector} from "@angular/core";
+import {NgModule, Injector, ApplicationRef} from "@angular/core";
 import {NgxEditorModule} from "ngx-editor";
 import {BrowserModule} from "@angular/platform-browser";
 import {createCustomElement} from "@angular/elements";
@@ -231,17 +231,21 @@ import {ActionMenuComponent} from "./view/action-menu/action-menu/action-menu.co
     SbbBreadcrumbModule,
     SbbAutocompleteModule,
   ],
-  //bootstrap: [AppComponent],
   providers: [
     {provide: BASE_PATH, useValue: environment.backendUrl},
     {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
   ],
 })
+
 export class AppModule {
   constructor(private injector: Injector) {}
 
-  ngDoBootstrap() {
-    const element = createCustomElement(AppComponent, { injector: this.injector });
-    customElements.define("sbb-root", element);
+  ngDoBootstrap(appRef: ApplicationRef) {
+    if (environment.customElement) {
+      const element = createCustomElement(AppComponent, { injector: this.injector });
+      customElements.define("sbb-root", element);
+    } else {
+      appRef.bootstrap(AppComponent);
+    }
   }
 }

@@ -8,6 +8,7 @@ if (environment.production) {
 }
 
 environment.disableBackend = true;
+environment.customElement = true;
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)

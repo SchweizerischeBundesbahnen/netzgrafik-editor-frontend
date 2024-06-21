@@ -23,7 +23,8 @@ export const environment: Environment = {
   label: "local",
   backendUrl: "http://localhost:8080",
   authConfig,
-  disableBackend: false
+  disableBackend: false,
+  customElement: false,
 };
 
 /*

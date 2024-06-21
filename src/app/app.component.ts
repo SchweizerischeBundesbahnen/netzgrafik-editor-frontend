@@ -37,19 +37,7 @@ export class AppComponent {
     return this.authService.claims?.email;
   }
 
-  constructor(private authService: AuthService, private trainrunService: TrainrunService, private trainrunSectionService: TrainrunSectionService, private dataService: DataService) {
-
-    /*trainrunService.trainruns.subscribe((value) => {
-      console.log('trainrunService', value);
-    });
-
-    trainrunSectionService.trainrunSections.subscribe((value) => {
-      console.log('trainrunSectionService', value);
-    });*/
-
-    /*trainrunSectionService.trainrunSectionCreated.subscribe((trainrunSection) => {
-      console.log('trainrunSectionCreated', trainrunSection);
-    });*/
+  constructor(private authService: AuthService, private dataService: DataService, private trainrunService: TrainrunService, private trainrunSectionService: TrainrunSectionService) {
 
     if (!this.disableBackend) {
       this.authenticated = authService.initialized;
@@ -63,13 +51,16 @@ export class AppComponent {
   }
 
   @Input()
-  get dto() {
+  get netzgrafikDto() {
     return this.dataService.getNetzgrafikDto();
   }
-  set dto(dto: NetzgrafikDto) {
-    this.dataService.loadNetzgrafikDto(dto);
+  set netzgrafikDto(netzgrafikDto: NetzgrafikDto) {
+    this.dataService.loadNetzgrafikDto(netzgrafikDto);
   }
 
   @Output()
-  trainrunSectionOperation = this.trainrunSectionService.trainrunSectionOperation;
+  trainrunOperation = this.trainrunService.operation;
+
+  @Output()
+  trainrunSectionOperation = this.trainrunSectionService.operation;
 }

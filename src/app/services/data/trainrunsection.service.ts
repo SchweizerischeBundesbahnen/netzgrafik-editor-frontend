@@ -22,6 +22,7 @@ import {Transition} from "../../models/transition.model";
 import {takeUntil} from "rxjs/operators";
 import {FilterService} from "../ui/filter.service";
 import {TrainrunSectionNodePair} from "../util/trainrun.iterator";
+import {CreateTrainrunOperation, Operation, UpdateTrainrunSectionsOperation} from "../../models/operation.model";
 
 interface DepartureAndArrivalTimes {
   nodeFromDepartureTime: number;
@@ -35,11 +36,6 @@ export interface InformSelectedTrainrunClick {
   open: boolean;
 }
 
-export class TrainrunSectionOperation {
-  type: 'create' | 'update' | 'delete';
-  trainrunSection: TrainrunSection;
-}
-
 @Injectable({
   providedIn: "root",
 })
@@ -51,7 +47,7 @@ export class TrainrunSectionService implements OnDestroy {
     trainrunSections: [],
   }; // store the data in memory
 
-  trainrunSectionOperation = new EventEmitter<TrainrunSectionOperation>();
+  readonly operation = new EventEmitter<Operation>();
 
   informSelectedTrainrunClickSubject =
     new BehaviorSubject<InformSelectedTrainrunClick>({
@@ -675,6 +671,8 @@ export class TrainrunSectionService implements OnDestroy {
 
   createTrainrunSection(sourceNodeId: number, targetNodeId: number, retrieveTravelTimeFromEdge: boolean = false) {
     const trainrunSection: TrainrunSection = new TrainrunSection();
+    const initialTrainrunsLength = this.trainrunService.trainrunsStore.trainruns.length;
+
     trainrunSection.setTrainrun(
       this.trainrunService.getSelectedOrNewTrainrun(),
     );
@@ -689,11 +687,6 @@ export class TrainrunSectionService implements OnDestroy {
     const targetNode = this.nodeService.getNodeFromId(targetNodeId);
     trainrunSection.setSourceAndTargetNodeReference(sourceNode, targetNode);
     this.trainrunSectionsStore.trainrunSections.push(trainrunSection);
-    this.logger.log(
-      "create new trainrunSection between nodes",
-      sourceNode.getBetriebspunktName(),
-      targetNode.getBetriebspunktName(),
-    );
 
     this.handleNodeAndTrainrunSectionDetails(
       sourceNode,
@@ -706,10 +699,11 @@ export class TrainrunSectionService implements OnDestroy {
     //this.trainrunSectionsUpdated();
     this.trainrunService.trainrunsUpdated();
 
-    this.trainrunSectionOperation.emit({
-      type: 'create',
-      trainrunSection: trainrunSection,
-    });
+    if (initialTrainrunsLength != this.trainrunService.trainrunsStore.trainruns.length) {
+      this.operation.emit(new CreateTrainrunOperation(trainrunSection));
+    } else {
+      this.operation.emit(new UpdateTrainrunSectionsOperation(this.getAllTrainrunSectionsForTrainrun(trainrunSection.getTrainrunId())));
+    }
   }
 
   reconnectTrainrunSection(

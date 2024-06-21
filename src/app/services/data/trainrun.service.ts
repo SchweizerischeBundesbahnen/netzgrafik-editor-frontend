@@ -8,7 +8,7 @@ import {
   TrainrunFrequency,
   TrainrunTimeCategory,
 } from "../../data-structures/business.data.structures";
-import {Injectable} from "@angular/core";
+import {EventEmitter, Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs";
 import {NodeService} from "./node.service";
 import {TrainrunSectionService} from "./trainrunsection.service";
@@ -23,6 +23,7 @@ import {FilterService} from "../ui/filter.service";
 import {Transition} from "../../models/transition.model";
 import {Port} from "../../models/port.model";
 import {Connection} from "../../models/connection.model";
+import {DeleteTrainrunOperation, Operation} from "../../models/operation.model";
 
 @Injectable({
   providedIn: "root",
@@ -33,6 +34,8 @@ export class TrainrunService {
   readonly trainruns = this.trainrunsSubject.asObservable();
 
   trainrunsStore: { trainruns: Trainrun[] } = {trainruns: []}; // store the data in memory
+
+  readonly operation = new EventEmitter<Operation>();
 
   private dataService: DataService = null;
   private nodeService: NodeService = null;
@@ -180,6 +183,7 @@ export class TrainrunService {
     if (enforceUpdate) {
       this.trainrunsUpdated();
     }
+    this.operation.emit(new DeleteTrainrunOperation(trainrun));
   }
 
   getSelectedTrainrun(): Trainrun {
