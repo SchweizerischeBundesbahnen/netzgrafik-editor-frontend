@@ -66,7 +66,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           registry-url: 'https://registry.npmjs.org'
-      - run: npm version --no-git-tag-version "0.0.0+$GITHUB_SHA"
+      - run: npm version --no-git-tag-version "0.0.0-snapshot.$GITHUB_SHA"
       - run: npm pkg delete dependencies optionalDependencies devDependencies
       - run: npm publish --provenance --access public --tag snapshot
         env:
