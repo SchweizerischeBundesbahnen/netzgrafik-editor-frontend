@@ -43,7 +43,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'npm'
       - run: npm clean-install
-      - run: npm run build
+      - run: npm run build:standalone
       - name: Store build artifacts
         uses: actions/upload-artifact@v4
         with:
