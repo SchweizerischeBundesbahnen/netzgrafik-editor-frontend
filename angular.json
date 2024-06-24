@@ -107,6 +107,14 @@
             },
             "es5": {
               "tsConfig": "tsconfig.app.es5.json"
+},
+            "standalone": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.standalone.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": ""
@@ -125,6 +133,9 @@
             },
             "es5": {
               "buildTarget": "netzgrafik-frontend:build:es5"
+            },
+            "standalone": {
+              "buildTarget": "netzgrafik-frontend:build:standalone"
             }
           }
         },

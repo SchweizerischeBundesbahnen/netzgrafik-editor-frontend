@@ -7,9 +7,6 @@ if (environment.production) {
   enableProdMode();
 }
 
-environment.disableBackend = true;
-environment.customElement = true;
-
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
   .catch((err) => console.error(err));
