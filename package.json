@@ -13,8 +13,12 @@
     "generate:api": "openapi-generator-cli generate",
     "local-test": "ng test --watch --code-coverage"
   },
-  "name": "netzgrafik-frontend",
+  "name": "@osrd-project/netzgrafik-frontend",
   "version": "2.5.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/osrd-project/netzgrafik-editor-frontend.git"
+  },
   "files": [
     "dist/*"
   ],
