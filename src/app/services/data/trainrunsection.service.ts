@@ -699,7 +699,7 @@ export class TrainrunSectionService implements OnDestroy {
     //this.trainrunSectionsUpdated();
     this.trainrunService.trainrunsUpdated();
 
-    if (initialTrainrunsLength != this.trainrunService.trainrunsStore.trainruns.length) {
+    if (initialTrainrunsLength !== this.trainrunService.trainrunsStore.trainruns.length) {
       this.operation.emit(new CreateTrainrunOperation(trainrunSection));
     } else {
       this.operation.emit(new UpdateTrainrunSectionsOperation(this.getAllTrainrunSectionsForTrainrun(trainrunSection.getTrainrunId())));

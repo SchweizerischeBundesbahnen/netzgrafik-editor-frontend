@@ -8,7 +8,7 @@ enum OperationType {
 }
 
 export abstract class Operation{
-    type: String;
+    type: string;
 }
 
 export class CreateTrainrunOperation extends Operation {

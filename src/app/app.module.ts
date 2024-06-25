@@ -1,4 +1,4 @@
-import {NgModule, Injector, ApplicationRef} from "@angular/core";
+import {NgModule, Injector, ApplicationRef, DoBootstrap} from "@angular/core";
 import {NgxEditorModule} from "ngx-editor";
 import {BrowserModule} from "@angular/platform-browser";
 import {createCustomElement} from "@angular/elements";
@@ -237,12 +237,12 @@ import {ActionMenuComponent} from "./view/action-menu/action-menu/action-menu.co
   ],
 })
 
-export class AppModule {
+export class AppModule implements DoBootstrap {
   constructor(private injector: Injector) {}
 
   ngDoBootstrap(appRef: ApplicationRef) {
     if (environment.customElement) {
-      const element = createCustomElement(AppComponent, { injector: this.injector });
+      const element = createCustomElement(AppComponent, {injector: this.injector});
       customElements.define("sbb-root", element);
     } else {
       appRef.bootstrap(AppComponent);
