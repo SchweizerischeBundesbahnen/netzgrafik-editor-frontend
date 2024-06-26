@@ -4,7 +4,7 @@ export interface Environment {
   production: boolean;
   label: string;
   backendUrl: string;
-  authConfig: AuthConfig;
+  authConfig?: AuthConfig;
   disableBackend: boolean;
   customElement: boolean;
 }
