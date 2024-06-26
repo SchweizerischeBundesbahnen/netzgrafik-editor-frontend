@@ -231,6 +231,7 @@ import {ActionMenuComponent} from "./view/action-menu/action-menu/action-menu.co
     SbbBreadcrumbModule,
     SbbAutocompleteModule,
   ],
+  bootstrap: environment.customElement ? [] : [AppComponent],
   providers: [
     {provide: BASE_PATH, useValue: environment.backendUrl},
     {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
@@ -244,8 +245,6 @@ export class AppModule implements DoBootstrap {
     if (environment.customElement) {
       const element = createCustomElement(AppComponent, {injector: this.injector});
       customElements.define("sbb-root", element);
-    } else {
-      appRef.bootstrap(AppComponent);
     }
   }
 }
