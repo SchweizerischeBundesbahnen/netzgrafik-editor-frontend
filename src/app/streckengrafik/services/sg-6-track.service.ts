@@ -274,7 +274,7 @@ export class Sg6TrackService implements OnDestroy {
         for (let distCellIdx = 0; distCellIdx < nDistanceCells; distCellIdx++) {
           // unroll frequency to get the trains - generated out of the "template" train
           for (
-            let freqLoop = 0;
+            let freqLoop = -this.maxFrequency;
             freqLoop <= this.maxFrequency;
             freqLoop = freqLoop + d.trainrun.frequency
           ) {
