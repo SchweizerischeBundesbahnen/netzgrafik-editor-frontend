@@ -203,7 +203,7 @@ import {ActionMenuComponent} from "./view/action-menu/action-menu/action-menu.co
         // and you send a request to these, the access token is appended.
         // Documentation:
         // https://manfredsteyer.github.io/angular-oauth2-oidc/docs/additional-documentation/working-with-httpinterceptors.html
-        allowedUrls: [environment.backendUrl],
+        allowedUrls: environment.backendUrl ? [environment.backendUrl] : [],
         sendAccessToken: true,
       },
     }),
@@ -232,7 +232,7 @@ import {ActionMenuComponent} from "./view/action-menu/action-menu/action-menu.co
   ],
   bootstrap: [AppComponent],
   providers: [
-    {provide: BASE_PATH, useValue: environment.backendUrl},
+    ... environment.backendUrl ? [{provide: BASE_PATH, useValue: environment.backendUrl}] : [],
     {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
   ],
 })

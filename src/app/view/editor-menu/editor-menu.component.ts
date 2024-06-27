@@ -23,6 +23,7 @@ import {TimeSliderService} from "../../streckengrafik/services/time-slider.servi
 import {SliderChangeInfo} from "../../streckengrafik/model/util/sliderChangeInfo";
 import {IsTrainrunSelectedService} from "../../services/data/is-trainrun-section.service";
 import {Node} from "../../models/node.model";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: "sbb-editor-menu",
@@ -30,6 +31,8 @@ import {Node} from "../../models/node.model";
   styleUrls: ["./editor-menu.component.scss"],
 })
 export class EditorMenuComponent implements OnInit, OnDestroy {
+  readonly disableBackend = environment.disableBackend;
+
   public zoomFactor = 100;
   public streckengrafikZoomFactor = 0;
 
