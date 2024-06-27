@@ -6,4 +6,5 @@ export interface Environment {
   backendUrl?: string;
   authConfig?: AuthConfig;
   disableBackend: boolean;
+  customElement: boolean;
 }

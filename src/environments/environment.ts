@@ -24,6 +24,7 @@ export const environment: Environment = {
   backendUrl: "http://localhost:8080",
   authConfig,
   disableBackend: false,
+  customElement: false,
 };
 
 /*
