@@ -12,6 +12,8 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {EditorMode} from "../view/editor-menu/editor-mode";
 import {UndoService} from "../services/data/undo.service";
 import {EditorView} from "../view/editor-main-view/data-views/editor.view";
+import {NetzgrafikDefault} from "../sample-netzgrafik/netzgrafik.default";
+import {environment} from "../../environments/environment";
 
 export enum IconSidebarMode {
   VARIANTEN = "varianten",
@@ -28,6 +30,8 @@ export enum IconSidebarMode {
 export class NetzgrafikApplicationComponent {
   mode = IconSidebarMode.NONE;
   expanded = false;
+
+  readonly disableBackend = environment.disableBackend;
 
   private readonly destroyed = new Subject<void>();
 
@@ -48,11 +52,22 @@ export class NetzgrafikApplicationComponent {
       .subscribe((params) => {
         uiInteractionService.setEditorMode(EditorMode.NetzgrafikEditing);
         uiInteractionService.showNetzgrafik();
-        versionControlService.load(params.getVariantId(), true);
+        try {
+          versionControlService.load(params.getVariantId(), true);
+        } catch (e) {
+          versionControlService.loadNetzgrafikDTO(NetzgrafikDefault.getDefaultNetzgrafik());
+        }
         uiInteractionService.setViewboxProperties(
           EditorView.svgName,
           uiInteractionService.getDefaultViewProperties());
       });
+  }
+
+  getSidebarContainerStyle(): string {
+    if (this.disableBackend) {
+      return "top: 53px;";
+    }
+    return "top: 85px;";
   }
 
   getVariantIsWritable(): boolean {

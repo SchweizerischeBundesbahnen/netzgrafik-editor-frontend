@@ -2,6 +2,7 @@
   id="cd-layout-content"
   [ngClass]="['mode-' + mode]"
   [class.new-view]="newView"
+  [attr.style]="getLayoutContentStyle()"
 >
   <div
     id="cd-layout-filter"

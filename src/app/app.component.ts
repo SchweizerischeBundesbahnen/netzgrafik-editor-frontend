@@ -11,6 +11,8 @@ import {ProjectDto} from "./api/generated";
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
+  readonly disableBackend = environment.disableBackend;
+
   version = packageJson.version;
   environmentLabel = environment.label;
   authenticated: Promise<unknown>;
@@ -18,18 +20,28 @@ export class AppComponent {
   projectInMenu: Observable<ProjectDto | null>;
 
   get userName() {
+    if (this.disableBackend) {
+      return undefined;
+    }
     return this.authService.claims?.name;
   }
 
   get email() {
+    if (this.disableBackend) {
+      return undefined;
+    }
     return this.authService.claims?.email;
   }
 
   constructor(private authService: AuthService) {
-    this.authenticated = authService.initialized;
+    if (!this.disableBackend) {
+      this.authenticated = authService.initialized;
+    }
   }
 
   logout() {
-    this.authService.logOut();
+    if (!this.disableBackend) {
+      this.authService.logOut();
+    }
   }
 }
