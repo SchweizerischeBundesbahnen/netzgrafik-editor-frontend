@@ -78,11 +78,6 @@ export class VersionControlService implements OnDestroy {
     this.undoService.reset(this.undoService.getCurrentVariantId() + 1);
   }
 
-  @HostListener('window:message', ['$event']) onPostMessage(event) {
-    console.log('Message received', event);
-  }
-
-
   reload(loadModel = false): void {
     this.load(this.variant.id, loadModel);
   }
