@@ -241,7 +241,7 @@ import {ActionMenuComponent} from "./view/action-menu/action-menu/action-menu.co
 export class AppModule implements DoBootstrap {
   constructor(private injector: Injector) {}
 
-  ngDoBootstrap(appRef: ApplicationRef) {
+  ngDoBootstrap() {
     if (environment.customElement) {
       const element = createCustomElement(AppComponent, {injector: this.injector});
       customElements.define("sbb-root", element);
