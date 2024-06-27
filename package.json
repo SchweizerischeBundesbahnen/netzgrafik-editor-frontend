@@ -17,6 +17,10 @@
   },
   "name": "netzgrafik-frontend",
   "version": "2.5.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend.git"
+  },
   "files": [
     "dist/*"
   ],
