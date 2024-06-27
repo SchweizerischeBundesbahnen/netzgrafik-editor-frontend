@@ -30,7 +30,7 @@ export class AuthService {
     private router: Router,
     location: Location,
   ) {
-    if (!environment.disableBackend) {
+    if (environment.disableBackend) return;
       this.oauthService.configure(environment.authConfig);
       this.oauthService.setupAutomaticSilentRefresh();
       // If the user should not be forcefully logged in (e.g. if you have pages, which can be
@@ -52,7 +52,6 @@ export class AuthService {
             this.router.navigate([state]);
           }
         });
-    }
   }
 
   logOut() {
