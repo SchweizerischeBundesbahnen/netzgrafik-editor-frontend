@@ -1,13 +1,14 @@
 import {TrainrunSection} from "../../models/trainrunsection.model";
+import {MathUtils} from "../../utils/math";
 
 export class TrainrunsectionValidator {
   static validateOneSection(trainrunSection: TrainrunSection) {
     trainrunSection.resetSourceDepartureWarning();
     trainrunSection.resetTargetDepartureWarning();
 
-    const calculatedTargetArrivalTime =
+    const calculatedTargetArrivalTime = MathUtils.fixMachineEpsilonProblem(
       (trainrunSection.getSourceDeparture() + trainrunSection.getTravelTime()) %
-      60;
+      60);
     if (calculatedTargetArrivalTime !== trainrunSection.getTargetArrival()) {
       trainrunSection.setTargetArrivalWarning(
         "Target Arrival Warning",
@@ -17,9 +18,9 @@ export class TrainrunsectionValidator {
       trainrunSection.resetTargetArrivalWarning();
     }
 
-    const calculatedSourceArrivalTime =
+    const calculatedSourceArrivalTime = MathUtils.fixMachineEpsilonProblem(
       (trainrunSection.getTargetDeparture() + trainrunSection.getTravelTime()) %
-      60;
+      60);
     if (calculatedSourceArrivalTime !== trainrunSection.getSourceArrival()) {
       trainrunSection.setSourceArrivalWarning(
         "Source Arrival Warning",
