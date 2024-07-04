@@ -443,7 +443,10 @@ export class Sg6TrackService implements OnDestroy {
       // special case - when the turnaround time is too small - enforce a second train ond a
       // second track
       // tag / mark for further processing
-      forwardNode.unrollOnlyEvenFrequencyOffsets = 0;
+      let estimateFreqOffset =
+        (backwardNode.departureTime - forwardNode.arrivalTime) / trainrun.frequency;
+      estimateFreqOffset = Math.floor(estimateFreqOffset);
+      forwardNode.unrollOnlyEvenFrequencyOffsets = estimateFreqOffset % 2;
       backwardNode.unrollOnlyEvenFrequencyOffsets = 1;
       forwardNode.maxUnrollOnlyEvenFrequencyOffsets = 1;
       backwardNode.maxUnrollOnlyEvenFrequencyOffsets = 1;
