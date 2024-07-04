@@ -149,6 +149,26 @@ export class TrainrunSection {
     }
   }
 
+  private static fixMachineEpsilonProblem(time : number){
+    // The problem in this project is that the modulo (%) operator is frequently used, especially
+    // for times. This can lead to machine precision issues, as only powers of 2 can be handled by
+    // the modulo operator. The solution could be to replace the modulo operator with other
+    // appropriate mathematical operations to avoid machine precision problems and ensure
+    // accurate handling of times.
+    // To avoid replacing the modulo operators throughout the entire project, we have opted for
+    // this global correction, which is certainly not perfect but cost-effective. If any issues
+    // arise, we will need to modify this solution. Currently, it resolves all identified problems,
+    // eliminating the need to manually implement and replace modulo operators in the entire code.
+    // This would also be the case for future adjustments, which would increase code complexity.
+    // More info:
+    // https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/168.
+
+    // time is mostly in minute
+    // 60 => seconds
+    // 100 => 1/100 second => 60*100 = 60000
+    return Math.round(time * 60000)/60000;
+  }
+
   private static incrementId(): number {
     return ++TrainrunSection.currentId;
   }
@@ -240,6 +260,16 @@ export class TrainrunSection {
       this.sourceDeparture.time = (120 - this.sourceArrival.time) % 60;
       this.targetArrival.time = (120 - this.targetDeparture.time) % 60;
     }
+
+    // ensure no machine epsilon issue gets stored
+    this.sourceDeparture.time =
+      TrainrunSection.fixMachineEpsilonProblem(this.sourceDeparture.time);
+    this.targetArrival.time =
+      TrainrunSection.fixMachineEpsilonProblem(this.targetArrival.time);
+    this.sourceArrival.time =
+      TrainrunSection.fixMachineEpsilonProblem(this.sourceArrival.time);
+    this.targetDeparture.time =
+      TrainrunSection.fixMachineEpsilonProblem(this.targetDeparture.time);
   }
 
   setSourceAndTargetNodeReference(sourceNode: Node, targetNode: Node) {
@@ -257,18 +287,22 @@ export class TrainrunSection {
   }
 
   setTargetArrivalDto(targetArrivalDto: TimeLockDto) {
+    targetArrivalDto.time = TrainrunSection.fixMachineEpsilonProblem(targetArrivalDto.time);
     this.targetArrival = targetArrivalDto;
   }
 
   setSourceDepartureDto(sourceDepartureDto: TimeLockDto) {
+    sourceDepartureDto.time =TrainrunSection.fixMachineEpsilonProblem(sourceDepartureDto.time);
     this.sourceDeparture = sourceDepartureDto;
   }
 
   setTargetDepartureDto(targetDepartureDto: TimeLockDto) {
+    targetDepartureDto.time = TrainrunSection.fixMachineEpsilonProblem(targetDepartureDto.time);
     this.targetDeparture = targetDepartureDto;
   }
 
   setTravelTimeDto(travelTimeDto: TimeLockDto) {
+    travelTimeDto.time = TrainrunSection.fixMachineEpsilonProblem(travelTimeDto.time);
     this.travelTime = travelTimeDto;
   }
 
@@ -401,27 +435,27 @@ export class TrainrunSection {
   }
 
   setTravelTime(time: number) {
-    this.travelTime.time = time;
+    this.travelTime.time = TrainrunSection.fixMachineEpsilonProblem(time);
     TrainrunsectionValidator.validateTravelTime(this);
   }
 
   setSourceDeparture(time: number) {
-    this.sourceDeparture.time = time;
+    this.sourceDeparture.time = TrainrunSection.fixMachineEpsilonProblem(time);
     TrainrunsectionValidator.validateOneSection(this);
   }
 
   setSourceArrival(time: number) {
-    this.sourceArrival.time = time;
+    this.sourceArrival.time = TrainrunSection.fixMachineEpsilonProblem(time);
     TrainrunsectionValidator.validateOneSection(this);
   }
 
   setTargetDeparture(time: number) {
-    this.targetDeparture.time = time;
+    this.targetDeparture.time = TrainrunSection.fixMachineEpsilonProblem(time);
     TrainrunsectionValidator.validateOneSection(this);
   }
 
   setTargetArrival(time: number) {
-    this.targetArrival.time = time;
+    this.targetArrival.time = TrainrunSection.fixMachineEpsilonProblem(time);
     TrainrunsectionValidator.validateOneSection(this);
   }
 
