@@ -32,6 +32,7 @@ import {
   TRAINRUN_SECTION_PORT_SPAN_VERTICAL,
 } from "../../view/rastering/definitions";
 import {StaticDomTags} from "../../view/editor-main-view/data-views/static.dom.tags";
+import {MathUtils} from "../../utils/math";
 
 export interface TopAndBottomTimeStructure {
   leftDepartureTime: number;
@@ -293,9 +294,9 @@ export class PerlenketteSectionComponent
     const targetId = this.trainrunSection.getTargetNodeId();
     const toId = this.perlenketteSection.toNode.getId();
     if (targetId === toId) {
-      return this.trainrunSection.getTargetDeparture();
+      return this.roundTime(this.trainrunSection.getTargetDeparture());
     }
-    return this.trainrunSection.getSourceDeparture();
+    return this.roundTime(this.trainrunSection.getSourceDeparture());
   }
 
   getRightDepartureTimeClassTag(): string {
@@ -337,9 +338,9 @@ export class PerlenketteSectionComponent
     const targetId = this.trainrunSection.getTargetNodeId();
     const toId = this.perlenketteSection.toNode.getId();
     if (targetId === toId) {
-      return this.trainrunSection.getTargetArrival();
+      return this.roundTime(this.trainrunSection.getTargetArrival());
     }
-    return this.trainrunSection.getSourceArrival();
+    return this.roundTime(this.trainrunSection.getSourceArrival());
   }
 
   getRightArrivalTimeClassTag(): string {
@@ -432,9 +433,9 @@ export class PerlenketteSectionComponent
     const sourceId = this.trainrunSection.getSourceNodeId();
     const fromId = this.perlenketteSection.fromNode.getId();
     if (sourceId === fromId) {
-      return this.trainrunSection.getSourceDeparture();
+      return this.roundTime(this.trainrunSection.getSourceDeparture());
     }
-    return this.trainrunSection.getTargetDeparture();
+    return this.roundTime(this.trainrunSection.getTargetDeparture());
   }
 
   getLeftDepartureTimeClassTag(): string {
@@ -476,9 +477,9 @@ export class PerlenketteSectionComponent
     const sourceId = this.trainrunSection.getSourceNodeId();
     const fromId = this.perlenketteSection.fromNode.getId();
     if (sourceId === fromId) {
-      return this.trainrunSection.getSourceArrival();
+      return this.roundTime(this.trainrunSection.getSourceArrival());
     }
-    return this.trainrunSection.getTargetArrival();
+    return this.roundTime(this.trainrunSection.getTargetArrival());
   }
 
   getLeftArrivalTimeClassTag(): string {
@@ -619,14 +620,14 @@ export class PerlenketteSectionComponent
     ) {
       return (
         "" +
-        this.trainrunSectionTimesService.getTimeStructure().travelTime +
+        this.roundTime(this.trainrunSectionTimesService.getTimeStructure().travelTime) +
         "' (" +
-        this.trainrunSection.getTravelTime() +
+        this.roundTime(this.trainrunSection.getTravelTime()) +
         "')"
       );
     }
     return (
-      "" + this.trainrunSectionTimesService.getTimeStructure().travelTime + "'"
+      "" + this.roundTime(this.trainrunSectionTimesService.getTimeStructure().travelTime) + "'"
     );
   }
 
@@ -917,6 +918,10 @@ export class PerlenketteSectionComponent
   onInputTravelTimeChanged() {
     this.updateTravelTimeChanged();
     this.updateTrainrunSectionTime();
+  }
+
+  roundTime(time: number) {
+    return MathUtils.round(time, this.filterService.getTimeDisplayPrecision());
   }
 
   /* Lock */
