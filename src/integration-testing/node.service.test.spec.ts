@@ -358,6 +358,108 @@ describe("NodeService Test", () => {
     expect(trainrunSection4.getNumberOfStops()).toBe(1);
   });
 
+  it("undock transition time lock test (-1-)", () => {
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTestingTransition.getUnitTestTransitionNetzgrafik(),
+    );
+    expect(nodes.length).toBe(4);
+    expect(trainrunSections.length).toBe(8);
+
+    const nodeOL = nodeService.getNodeFromId(1);
+    const transition1 = nodeOL.getTransitionFromId(1);
+
+    expect(transition1.getDto().id).toBe(1);
+    const port1 = nodeOL.getPort(transition1.getPortId1());
+    const port2 = nodeOL.getPort(transition1.getPortId2());
+    const ts1 = port1.getTrainrunSection();
+    const ts2 = port2.getTrainrunSection();
+    ts1.setSourceDepartureLock(true);
+    ts1.setSourceArrivalLock(true);
+    ts2.setTargetDepartureLock(true);
+    ts2.setTargetArrivalLock(true);
+    nodeService.undockTransition(1, 1);
+    const updatedTrainrunSection = ts1;
+    expect(updatedTrainrunSection.getSourceArrivalLock()).toBe(true);
+    expect(updatedTrainrunSection.getTargetArrivalLock()).toBe(true);
+  });
+
+  it("undock transition time lock test (-2-)", () => {
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTestingTransition.getUnitTestTransitionNetzgrafik(),
+    );
+    expect(nodes.length).toBe(4);
+    expect(trainrunSections.length).toBe(8);
+
+    const nodeOL = nodeService.getNodeFromId(1);
+    const transition1 = nodeOL.getTransitionFromId(1);
+
+    expect(transition1.getDto().id).toBe(1);
+    const port1 = nodeOL.getPort(transition1.getPortId1());
+    const port2 = nodeOL.getPort(transition1.getPortId2());
+    const ts1 = port1.getTrainrunSection();
+    const ts2 = port2.getTrainrunSection();
+    ts1.setSourceDepartureLock(false);
+    ts1.setSourceArrivalLock(false);
+    ts2.setTargetDepartureLock(true);
+    ts2.setTargetArrivalLock(true);
+
+    nodeService.undockTransition(1, 1);
+    const updatedTrainrunSection = ts1;
+    expect(updatedTrainrunSection.getSourceDepartureLock()).toBe(false);
+    expect(updatedTrainrunSection.getTargetDepartureLock()).toBe(true);
+  });
+
+  it("undock transition time lock test (-3-)", () => {
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTestingTransition.getUnitTestTransitionNetzgrafik(),
+    );
+    expect(nodes.length).toBe(4);
+    expect(trainrunSections.length).toBe(8);
+
+    const nodeOL = nodeService.getNodeFromId(1);
+    const transition1 = nodeOL.getTransitionFromId(1);
+
+    expect(transition1.getDto().id).toBe(1);
+    const port1 = nodeOL.getPort(transition1.getPortId1());
+    const port2 = nodeOL.getPort(transition1.getPortId2());
+    const ts1 = port1.getTrainrunSection();
+    const ts2 = port2.getTrainrunSection();
+    ts1.setSourceDepartureLock(true);
+    ts1.setSourceArrivalLock(true);
+    ts2.setTargetDepartureLock(false);
+    ts2.setTargetArrivalLock(false);
+    nodeService.undockTransition(1, 1);
+    const updatedTrainrunSection = ts1;
+    expect(updatedTrainrunSection.getSourceDepartureLock()).toBe(true);
+    expect(updatedTrainrunSection.getTargetDepartureLock()).toBe(false);
+  });
+
+  it("undock transition time lock test (-4-)", () => {
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTestingTransition.getUnitTestTransitionNetzgrafik(),
+    );
+    expect(nodes.length).toBe(4);
+    expect(trainrunSections.length).toBe(8);
+
+    const nodeOL = nodeService.getNodeFromId(1);
+    const transition1 = nodeOL.getTransitionFromId(1);
+
+    expect(transition1.getDto().id).toBe(1);
+    const port1 = nodeOL.getPort(transition1.getPortId1());
+    const port2 = nodeOL.getPort(transition1.getPortId2());
+    const ts1 = port1.getTrainrunSection();
+    const ts2 = port2.getTrainrunSection();
+    ts1.setSourceDepartureLock(false);
+    ts1.setSourceArrivalLock(false);
+    ts2.setTargetDepartureLock(false);
+    ts2.setTargetArrivalLock(false);
+
+    nodeService.undockTransition(1, 1);
+    const updatedTrainrunSection = ts1;
+    expect(updatedTrainrunSection.getSourceDepartureLock()).toBe(false);
+    expect(updatedTrainrunSection.getTargetDepartureLock()).toBe(false);
+  });
+
   it("undock transition - redock Intermediate stop test <1>", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTestingTransition.getUnitTestTransitionNetzgrafik(),

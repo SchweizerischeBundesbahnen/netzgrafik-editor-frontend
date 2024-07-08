@@ -5,7 +5,7 @@ import {
   TrainrunSectionDto,
 } from "../../data-structures/business.data.structures";
 import {Node} from "../../models/node.model";
-import {Injectable, OnDestroy} from "@angular/core";
+import {Injectable, OnDestroy, EventEmitter} from "@angular/core";
 import {BehaviorSubject, Subject} from "rxjs";
 import {TrainrunService} from "./trainrun.service";
 import {NodeService} from "./node.service";
@@ -22,6 +22,7 @@ import {Transition} from "../../models/transition.model";
 import {takeUntil} from "rxjs/operators";
 import {FilterService} from "../ui/filter.service";
 import {TrainrunSectionNodePair} from "../util/trainrun.iterator";
+import {CreateTrainrunOperation, Operation, UpdateTrainrunSectionsOperation} from "../../models/operation.model";
 
 interface DepartureAndArrivalTimes {
   nodeFromDepartureTime: number;
@@ -45,6 +46,8 @@ export class TrainrunSectionService implements OnDestroy {
   trainrunSectionsStore: { trainrunSections: TrainrunSection[] } = {
     trainrunSections: [],
   }; // store the data in memory
+
+  readonly operation = new EventEmitter<Operation>();
 
   informSelectedTrainrunClickSubject =
     new BehaviorSubject<InformSelectedTrainrunClick>({
@@ -668,6 +671,8 @@ export class TrainrunSectionService implements OnDestroy {
 
   createTrainrunSection(sourceNodeId: number, targetNodeId: number, retrieveTravelTimeFromEdge: boolean = false) {
     const trainrunSection: TrainrunSection = new TrainrunSection();
+    const initialTrainrunsLength = this.trainrunService.trainrunsStore.trainruns.length;
+
     trainrunSection.setTrainrun(
       this.trainrunService.getSelectedOrNewTrainrun(),
     );
@@ -698,6 +703,12 @@ export class TrainrunSectionService implements OnDestroy {
     this.propagateTimesForNewTrainrunSection(trainrunSection);
     //this.trainrunSectionsUpdated();
     this.trainrunService.trainrunsUpdated();
+
+    if (initialTrainrunsLength !== this.trainrunService.trainrunsStore.trainruns.length) {
+      this.operation.emit(new CreateTrainrunOperation(trainrunSection));
+    } else {
+      this.operation.emit(new UpdateTrainrunSectionsOperation(this.getAllTrainrunSectionsForTrainrun(trainrunSection.getTrainrunId())));
+    }
   }
 
   reconnectTrainrunSection(

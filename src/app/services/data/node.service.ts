@@ -388,6 +388,10 @@ export class NodeService implements OnDestroy {
     const port2 = node.getPort(transition.getPortId2());
     const trainrunSection1 = port1.getTrainrunSection();
     const trainrunSection2 = port2.getTrainrunSection();
+    const timeLock1 = trainrunSection1.getSourceNodeId() !== node.getId() ?
+      trainrunSection1.getSourceDepartureLock() : trainrunSection1.getTargetDepartureLock();
+    const timeLock2 = trainrunSection2.getSourceNodeId() !== node.getId() ?
+      trainrunSection2.getSourceDepartureLock() : trainrunSection2.getTargetDepartureLock();
 
     const oppNodeTrainrunSection1 = node.getOppositeNode(trainrunSection1);
     const oppNodeTrainrunSection2 = node.getOppositeNode(trainrunSection2);
@@ -414,6 +418,11 @@ export class NodeService implements OnDestroy {
       trainrunSection2.getId(),
       false,
     );
+
+    // temporary store the source/target node information for updating the locks
+    const isTargetNodeEqToNodeId = trainrunSection1.getTargetNodeId() === node.getId();
+
+    // compute the new reconnected trainrun sections (create / fusion)
     this.trainrunSectionService.reconnectTrainrunSection(
       trainrunSection1.getTargetNodeId() === node.getId()
         ? trainrunSection1.getSourceNodeId()
@@ -426,22 +435,46 @@ export class NodeService implements OnDestroy {
       trainrunSection1.getSourceNodeId(),
       false,
     );
+
+    // update the arrival and departure times
     node.setArrivalTime(trainrunSection1, trainrunSection2.getTargetArrival());
     node.setDepartureTime(
       trainrunSection1,
       trainrunSection2.getTargetDeparture(),
     );
 
+    // update the travel time
     const travelTime =
       trainrunSection1.getTravelTime() +
       trainrunSection2.getTravelTime() +
       transitionTravelTime;
     trainrunSection1.setTravelTime(travelTime);
+
+    // update the number of stops
     trainrunSection1.setNumberOfStops(
       trainrunSection2.getNumberOfStops() +
         trainrunSection1.getNumberOfStops() +
         (isNonStop ? 0 : 1),
     );
+
+    // update the time Locks
+    if (isTargetNodeEqToNodeId) {
+      this.trainrunSectionService.updateTrainrunSectionTimeLock(
+        trainrunSection1.getId(),
+        timeLock1,
+        timeLock2,
+        trainrunSection1.getTravelTimeLock(),
+        enforceUpdate
+      );
+    } else {
+      this.trainrunSectionService.updateTrainrunSectionTimeLock(
+        trainrunSection1.getId(),
+        timeLock2,
+        timeLock1,
+        trainrunSection1.getTravelTimeLock(),
+        enforceUpdate
+      );
+    }
 
     const transitionNew1 = oppNodeTrainrunSection1.getTransition(
       trainrunSection1.getId(),
