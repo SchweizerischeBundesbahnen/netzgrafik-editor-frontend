@@ -459,11 +459,21 @@ export class NodeService implements OnDestroy {
 
     // update the time Locks
     if (isTargetNodeEqToNodeId) {
-      trainrunSection1.setSourceArrivalLock(timeLock1);
-      trainrunSection1.setTargetArrivalLock(timeLock2);
+      this.trainrunSectionService.updateTrainrunSectionTimeLock(
+        trainrunSection1.getId(),
+        timeLock1,
+        timeLock2,
+        trainrunSection1.getTravelTimeLock(),
+        enforceUpdate
+      );
     } else {
-      trainrunSection1.setSourceArrivalLock(timeLock2);
-      trainrunSection1.setTargetArrivalLock(timeLock1);
+      this.trainrunSectionService.updateTrainrunSectionTimeLock(
+        trainrunSection1.getId(),
+        timeLock2,
+        timeLock1,
+        trainrunSection1.getTravelTimeLock(),
+        enforceUpdate
+      );
     }
 
     const transitionNew1 = oppNodeTrainrunSection1.getTransition(
