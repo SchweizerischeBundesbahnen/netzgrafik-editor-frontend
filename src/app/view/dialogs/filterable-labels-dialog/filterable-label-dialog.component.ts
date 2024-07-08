@@ -10,6 +10,7 @@ import {Observable, Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
 import {ConfirmationDialogParameter} from "../confirmation-dialog/confirmation-dialog.component";
 import {UiInteractionService} from "../../../services/ui/ui.interaction.service";
+import { read } from "fs";
 
 @Component({
   selector: "sbb-filterable-label-dialog",
@@ -17,14 +18,18 @@ import {UiInteractionService} from "../../../services/ui/ui.interaction.service"
   styleUrls: ["./filterable-label-dialog.component.scss"],
 })
 export class FilterableLabelDialogComponent implements OnDestroy {
-  readonly formmodel: FormModel<FilterableLabelsFormComponentModel>;
-  public dialogTitel: string;
+  readonly formModel: FormModel<FilterableLabelsFormComponentModel>;
+  private dialogTitle: string = "";
   private destroyed = new Subject<void>();
   private deleteLabelCallback = null;
   private transferLabelCallback = null;
   private saveLabelCallback = null;
   private originalLabel: string;
   private currentDialog = null;
+
+  readonly tEditFilterableLabels = $localize`:@@app.view.dialogs.filterable-labels-dialog.filterable-label-dialog-component.edit-filterable-labels:Edit filterable labels for ${this.dialogTitle}`;
+  readonly tTransferToAllVisible = $localize`:@@app.view.dialogs.filterable-labels-dialog.filterable-label-dialog-component.transfer-to-all-visible:transfer to all visible`;
+  readonly tDeleteFromAllVisible = $localize`:@@app.view.dialogs.filterable-labels-dialog.filterable-label-dialog-component.delete-from-all-visible:delete from all visible`;
 
   constructor(
     private uiInteractionService: UiInteractionService,
@@ -36,10 +41,10 @@ export class FilterableLabelDialogComponent implements OnDestroy {
   ) {
     data.updateLabelCallback = () => this.updateLabel();
 
-    this.formmodel = new FormModel<FilterableLabelsFormComponentModel>(
+    this.formModel = new FormModel<FilterableLabelsFormComponentModel>(
       data ?? {
         name: "",
-        dialogTitel: "",
+        dialogTitle: "",
         saveLabelCallback: null,
         deleteLabelCallback: null,
         transferLabelCallback: null,
@@ -47,7 +52,7 @@ export class FilterableLabelDialogComponent implements OnDestroy {
       },
     );
 
-    this.dialogTitel = data.dialogTitel;
+    this.dialogTitle = data.dialogTitle;
     this.originalLabel = data.name;
     this.deleteLabelCallback = data.deleteLabelCallback;
     this.saveLabelCallback = data.saveLabelCallback;
@@ -77,13 +82,8 @@ export class FilterableLabelDialogComponent implements OnDestroy {
   }
 
   onTransferClicked(): void {
-    const dialogTitle = "Übernehmen";
-    const dialogContent =
-      'Soll das Label "' +
-      this.originalLabel +
-      '" auf alle sichtbaren ' +
-      this.dialogTitel +
-      " übertragen werden?";
+    const dialogTitle = $localize`:@@app.view.dialogs.filterable-labels-dialog.filterable-label-dialog-component.transfer.title:Übernehmen`;
+    const dialogContent = $localize`:@@app.view.dialogs.filterable-labels-dialog.filterable-label-dialog-component.transfer.content:Soll das Label ${this.originalLabel} auf alle sichtbaren ${dialogTitle} übertragen werden?`;
     const confirmationDialogParamter = new ConfirmationDialogParameter(
       dialogTitle,
       dialogContent,
@@ -99,13 +99,8 @@ export class FilterableLabelDialogComponent implements OnDestroy {
   }
 
   onDeleteClicked(): void {
-    const dialogTitle = "Löschen";
-    const dialogContent =
-      'Soll das Label "' +
-      this.originalLabel +
-      '" definitiv aus allen sichtbaren ' +
-      this.dialogTitel +
-      " gelöscht werden?";
+    const dialogTitle = $localize`:@@app.view.dialogs.filterable-labels-dialog.filterable-label-dialog-component.delete.title:Löschen`;
+    const dialogContent = $localize`:@@app.view.dialogs.filterable-labels-dialog.filterable-label-dialog-component.delete.content:Soll das Label ${this.originalLabel} definitiv aus allen sichtbaren ${dialogTitle} gelöscht werden?`;
     const confirmationDialogParamter = new ConfirmationDialogParameter(
       dialogTitle,
       dialogContent,
@@ -121,8 +116,8 @@ export class FilterableLabelDialogComponent implements OnDestroy {
   }
 
   private updateLabel() {
-    this.formmodel.tryGetValid();
-    const labelValue: string = this.formmodel.getControl("name").value;
+    this.formModel.tryGetValid();
+    const labelValue: string = this.formModel.getControl("name").value;
     this.saveLabelCallback(this.originalLabel, labelValue);
     this.originalLabel = labelValue;
   }

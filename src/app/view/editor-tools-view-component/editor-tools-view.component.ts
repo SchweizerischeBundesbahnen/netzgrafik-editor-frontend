@@ -40,6 +40,27 @@ export class EditorToolsViewComponent {
     map((v) => v?.isWritable),
   );
 
+  readonly tMoreFunctions = $localize`:@@app.view.editor-side-view.editor-tools-view-component.more-functions:More functions`;
+  readonly tExport = $localize`:@@app.view.editor-side-view.editor-tools-view-component.export:Export`;
+  readonly tExportNetzgrafikAsSVG = $localize`:@@app.view.editor-side-view.editor-tools-view-component.export-netzgrafik-as-svg:Export netzgrafik as SVG`;
+  readonly tExportAsSVG = $localize`:@@app.view.editor-side-view.editor-tools-view-component.export-as-svg:Export as SVG`;
+  readonly tExportNetzgrafikAsPNG = $localize`:@@app.view.editor-side-view.editor-tools-view-component.export-netzgrafik-as-png:Export netzgrafik as PNG`;
+  readonly tExportAsPNG = $localize`:@@app.view.editor-side-view.editor-tools-view-component.export-as-png:Export as PNG`;
+  readonly tPrintNetzgrafik = $localize`:@@app.view.editor-side-view.editor-tools-view-component.print-netzgrafik:Print netzgrafik`;
+  readonly tPrint = $localize`:@@app.view.editor-side-view.editor-tools-view-component.print:Print`;
+  readonly tNetzgrafik = $localize`:@@app.view.editor-side-view.editor-tools-view-component.netzgrafik:netzgrafik`;
+  readonly tExportNetzgrafik = $localize`:@@app.view.editor-side-view.editor-tools-view-component.export-netzgrafik:Export netzgrafik`;
+  readonly tExportNetzgrafikAsJSON = $localize`:@@app.view.editor-side-view.editor-tools-view-component.export-netzgrafik-as-json:Export netzgrafik as JSON`;
+  readonly tImportNetzgrafik = $localize`:@@app.view.editor-side-view.editor-tools-view-component.import-netzgrafik:Import netzgrafik`;
+  readonly tImportNetzgrafikAsJSON = $localize`:@@app.view.editor-side-view.editor-tools-view-component.import-netzgrafik-as-json:Import netzgrafik as JSON`;
+  readonly tExportTrainruns = $localize`:@@app.view.editor-side-view.editor-tools-view-component.export-trainruns:Export trainruns`;
+  readonly tExportTrainrunsAsCSV = $localize`:@@app.view.editor-side-view.editor-tools-view-component.export-trainruns-as-csv:Export trainruns as CSV`;
+  readonly tExportTrainrunsAsCSVExcel = $localize`:@@app.view.editor-side-view.editor-tools-view-component.export-trainruns-as-csv-excel:In Excel: Data -> From Text/CSV -> Import ... filename`;
+  readonly tMainData = $localize`:@@app.view.editor-side-view.editor-tools-view-component.main-data:Main data`;
+  readonly tImportMainData = $localize`:@@app.view.editor-side-view.editor-tools-view-component.import-main-data:Import main data`;
+  readonly tHelpCSVData = $localize`:@@app.view.editor-side-view.editor-tools-view-component.help-csv-data:Help: CSV - Data`;
+  readonly tExportMainData = $localize`:@@app.view.editor-side-view.editor-tools-view-component.export-main-data:Export main data`;
+
   constructor(
     private dataService: DataService,
     private trainrunService: TrainrunService,

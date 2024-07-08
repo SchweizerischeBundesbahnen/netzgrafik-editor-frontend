@@ -15,49 +15,53 @@ import {StaticDomTags} from "../../../editor-main-view/data-views/static.dom.tag
 export class HtmlEditorComponent implements OnInit, OnDestroy {
   @Input() model!: FormModel<NoteFormComponentModel>;
 
+  readonly tResetColor = $localize`:@@app.view.dialogs.note-dialog.html-editor.reset-color:Reset color`
+  readonly tEditorPlaceholder = $localize`:@@app.view.dialogs.note-dialog.html-editor.editor-placeholder:Enter comment here...`
+  readonly tMandatoryField = $localize`:@@app.view.dialogs.note-dialog.html-editor.mandatory-field:Mandatory field`;
+
   editor: Editor;
   toolbar: Toolbar = [["bold", "italic"], ["bullet_list"], ["link"]];
   colorPresets: HtmlEditorColor[] = [
     new HtmlEditorColor(
-      "Verwende die Frabe des Frabschemas für EC",
+      $localize`:@@app.view.dialogs.note-dialog.html-editor.color-presets.ec.title:Use color of the color scheme for EC`,
       "EC",
       "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_EC_" + StaticDomTags.TAG_FOCUS.toUpperCase() + ")",
     ),
     new HtmlEditorColor(
-      "Verwende die Frabe des Frabschemas für IC",
+      $localize`:@@app.view.dialogs.note-dialog.html-editor.color-presets.ic.title:Use color of the color scheme for IC`,
       "IC",
       "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_IC_" + StaticDomTags.TAG_FOCUS.toUpperCase() + ")",
     ),
     new HtmlEditorColor(
-      "Verwende die Frabe des Frabschemas für IR",
+      $localize`:@@app.view.dialogs.note-dialog.html-editor.color-presets.ir.title:Use color of the color scheme for IR`,
       "IR",
       "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR_" + StaticDomTags.TAG_FOCUS.toUpperCase() + ")",
     ),
     new HtmlEditorColor(
-      "Verwende die Frabe des Frabschemas für RE",
+      $localize`:@@app.view.dialogs.note-dialog.html-editor.color-presets.re.title:Use color of the color scheme for RE`,
       "RE",
       "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_RE_" + StaticDomTags.TAG_FOCUS.toUpperCase() + ")",
     ),
     new HtmlEditorColor(
-      "Verwende die Frabe des Frabschemas für S",
+      $localize`:@@app.view.dialogs.note-dialog.html-editor.color-presets.s.title:Use color of the color scheme for S`,
       "S",
       "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_S_" + StaticDomTags.TAG_FOCUS.toUpperCase() + ")",
     ),
     new HtmlEditorColor(
-      "Verwende die Frabe des Frabschemas für GEX",
+      $localize`:@@app.view.dialogs.note-dialog.html-editor.color-presets.gex.title:Use color of the color scheme for GEX`,
       "GEX",
       "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_GEX_" + StaticDomTags.TAG_FOCUS.toUpperCase() + ")",
     ),
     new HtmlEditorColor(
-      "Verwende die Frabe des Frabschemas für G",
+      $localize`:@@app.view.dialogs.note-dialog.html-editor.color-presets.g.title:Use color of the color scheme for G`,
       "G",
       "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_G_" + StaticDomTags.TAG_FOCUS.toUpperCase() + ")",
     ),
-    new HtmlEditorColor("grün", "", "green"),
-    new HtmlEditorColor("blau", "", "blue"),
-    new HtmlEditorColor("rosa", "", "magenta"),
-    new HtmlEditorColor("rot", "", "red"),
-    new HtmlEditorColor("Warnung", "!", "var(--COLOR_Warning)"),
+    new HtmlEditorColor($localize`:@@app.view.dialogs.note-dialog.html-editor.color-presets.green.title:green`, "", "green"),
+    new HtmlEditorColor($localize`:@@app.view.dialogs.note-dialog.html-editor.color-presets.blue.title:blue`, "", "blue"),
+    new HtmlEditorColor($localize`:@@app.view.dialogs.note-dialog.html-editor.color-presets.magenta.title:magenta`, "", "magenta"),
+    new HtmlEditorColor($localize`:@@app.view.dialogs.note-dialog.html-editor.color-presets.red.title:red`, "", "red"),
+    new HtmlEditorColor($localize`:@@app.view.dialogs.note-dialog.html-editor.color-presets.warning.title:warning color`, "!", "var(--COLOR_Warning)"),
   ];
 
   updateSubscription: Subscription;

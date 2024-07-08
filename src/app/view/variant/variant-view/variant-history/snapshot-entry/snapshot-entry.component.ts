@@ -18,7 +18,7 @@ export class SnapshotEntryComponent {
 
   get actions(): HistoryEntryAction[] {
     const download = {
-      name: "Download",
+      name: $localize`:@@app.view.variant.variant-view.variant-history.snapshot-entry.download:Download`,
       icon: "download-small",
       onClick: () =>
         this.download.emit({
@@ -33,12 +33,12 @@ export class SnapshotEntryComponent {
 
     return [
       {
-        name: "Wiederherstellen",
+        name: $localize`:@@app.view.variant.variant-view.variant-history.snapshot-entry.restore:Restore`,
         icon: "arrows-circle-small",
         onClick: () => this.restore.next(this.model.id),
       },
       {
-        name: "Als neue Variante",
+        name: $localize`:@@app.view.variant.variant-view.variant-history.snapshot-entry.as-new-variant:As new variant`,
         icon: "circle-plus-small",
         onClick: () => this.saveAsNewVariant.emit(this.model.id),
       },
@@ -56,14 +56,14 @@ export class SnapshotEntryComponent {
 
   getMessage(): string | undefined {
     if (this.model.lastAdded) {
-      return "Erfolgreich gespeichert";
+      return $localize`:@@app.view.variant.variant-view.variant-history.snapshot-entry.successfully-published:Successfully published`;
     }
 
     return undefined;
   }
 
   getTitle(): string {
-    return `Änderung ${this.model.snapshotVersion}`;
+    return $localize`:@@app.view.variant.variant-view.variant-history.snapshot-entry.change-snapshot-version:Change ${this.model.snapshotVersion}`;
   }
 }
 

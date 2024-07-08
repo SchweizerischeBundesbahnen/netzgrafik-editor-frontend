@@ -8,7 +8,7 @@
   <div *ngIf="subtitle" class="subtitle">
     {{ subtitle }}
   </div>
-  <a [attr.id]="getCardComponentRouterLinkId(route)" *ngIf="route" sbb-link [routerLink]="route"> öffnen </a>
+  <a [attr.id]="getCardComponentRouterLinkId(route)" *ngIf="route" sbb-link [routerLink]="route"> {{ tOpen }} </a>
 </div>
 <div
   *ngIf="icon"

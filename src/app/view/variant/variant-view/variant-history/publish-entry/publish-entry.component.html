@@ -8,20 +8,16 @@
     <input
       type="text"
       sbbInput
-      placeholder="Kommentar"
+      [placeholder]="tComment"
       [formControl]="comment"
     />
     <button
       sbb-button
       (click)="onPublishClicked()"
       [disabled]="publishDisabled"
-      [title]="
-        publishDisabled
-          ? 'Lokale Änderungen müssen zuerst gespeichert werden'
-          : ''
-      "
+      [title]="tPublishDisabledTitle"
     >
-      Publizieren
+      {{ tPublish }}
     </button>
   </div>
 </sbb-history-entry>

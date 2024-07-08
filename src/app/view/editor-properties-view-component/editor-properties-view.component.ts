@@ -19,6 +19,19 @@ export class EditorPropertiesViewComponent {
   static DEFAULT_BACKGROUNDCOLOR = "#f5f5f5";
   static BACKGROUNDCOLOR_WHITE = "#ffffff";
 
+  readonly tSettings = $localize`:@@app.view.editor-properties-view-component.settings:Settings`;
+  readonly tColorScheme = $localize`:@@app.view.editor-properties-view-component.color-scheme:Color scheme`;
+  readonly tTheme = $localize`:@@app.view.editor-properties-view-component.theme:Theme`;
+  readonly tBackgroundColor = $localize`:@@app.view.editor-properties-view-component.background-color:Background color`;
+  readonly tSetColorToWhite = $localize`:@@app.view.editor-properties-view-component.set-color-to-white:Set color to 'white'`;
+  readonly tResetBackgroundColorToDefault = $localize`:@@app.view.editor-properties-view-component.reset-background-color-to-default:Reset background color to default`;
+  readonly tBackgroundColorBlack = $localize`:@@app.view.editor-properties-view-component.background-color-black:Background color (black)`;
+  readonly tEditor = $localize`:@@app.view.editor-properties-view-component.editor:Editor`;
+  readonly tTravelTimePresettingDefault = $localize`:@@app.view.editor-properties-view-component.travel-time-presetting-default:Travel time presetting (heuristics)`;
+  readonly tStreckengrafik = $localize`:@@app.view.editor-properties-view-component.streckengrafik:Streckengrafik`;
+  readonly tAxisScalingDistance = $localize`:@@app.view.editor-properties-view-component.axis-scaling-distance:Axis scaling (distance)`;
+
+
   colorThemeOptions = [
     {
       name: "Standard Farbschema",

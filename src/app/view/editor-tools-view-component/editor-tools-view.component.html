@@ -1,49 +1,49 @@
-<h2 class="SummaryTitle">Weitere Funktionen</h2>
+<h2 class="SummaryTitle">{{ tMoreFunctions }}</h2>
 <sbb-accordion [multi]="true">
   <sbb-expansion-panel [expanded]="true">
-    <sbb-expansion-panel-header> Exportieren </sbb-expansion-panel-header>
+    <sbb-expansion-panel-header>{{ tExport }}</sbb-expansion-panel-header>
     <button
       class="TrainrunDialog EditorToolButton"
       (click)="onExportNetzgrafikSVG()"
-      title="Netzgrafik als svg exportieren"
+      [title]="tExportNetzgrafikAsSVG"
     >
       <sbb-icon svgIcon="picture-small"></sbb-icon>
     </button>
-    Exportieren als SVG
+    {{ tExportAsSVG }}
     <br />
     <button
       class="TrainrunDialog EditorToolButton"
       (click)="onExportNetzgrafikPNG()"
-      title="Netzgrafik als png exportieren"
+      [title]="tExportNetzgrafikAsPNG"
     >
       <sbb-icon svgIcon="camera-small"></sbb-icon>
     </button>
-    Exportieren als PNG
+    {{ tExportAsPNG }}
     <br />
     <button
       class="TrainrunDialog EditorToolButton"
       (click)="onPrintNetzgrafik()"
-      title="Netzgrafik drucken"
+      [title]="tPrintNetzgrafik"
     >
       <sbb-icon svgIcon="printer-small"></sbb-icon>
     </button>
-    Drucken
+    {{ tPrint }}
   </sbb-expansion-panel>
 
   <sbb-expansion-panel [expanded]="false">
-    <sbb-expansion-panel-header> Netzgrafik </sbb-expansion-panel-header>
+    <sbb-expansion-panel-header>{{ tNetzgrafik }}</sbb-expansion-panel-header>
     <button
       class="TrainrunDialog EditorToolButton"
       (click)="onSave()"
-      title="Netzgrafik exportieren"
+      [title]="tExportNetzgrafik"
     >
       <sbb-icon svgIcon="download-small" aria-hidden="false"></sbb-icon>
     </button>
-    Netzgrafik als JSON exportieren
+    {{ tExportNetzgrafikAsJSON }}
     <br />
     <button
       (click)="onLoadButton()"
-      title="Netzgrafik importieren"
+      [title]="tImportNetzgrafik"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="upload-small"></sbb-icon>
@@ -55,35 +55,35 @@
       accept=".json"
       (change)="onLoad($event)"
     />
-    Netzgrafik aus JSON importieren
+    {{ tImportNetzgrafikAsJSON }}
     <br />
     <button
       (click)="onExportZuglauf()"
-      title="Zuglauf exportieren"
+      [title]="tExportTrainruns"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="download-large-data-small"></sbb-icon>
     </button>
-    Zuglauf als .csv exportieren
+    {{ tExportTrainrunsAsCSV }}
     <sbb-tooltip
-      >In Exel : Daten -> Aus Text/CSV -> Filename ... importieren.</sbb-tooltip
+      >{{ tExportTrainrunsAsCSVExcel }}</sbb-tooltip
     >
   </sbb-expansion-panel>
   <sbb-expansion-panel [expanded]="false">
-    <sbb-expansion-panel-header> Stammdaten </sbb-expansion-panel-header>
+    <sbb-expansion-panel-header>{{ tMainData }}</sbb-expansion-panel-header>
     <button
       (click)="onLoadStammdatenButton()"
-      title="Stammdaten importieren"
+      [title]="tImportMainData"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="document-plus-small"></sbb-icon>
     </button>
-    Stammdaten importieren
+    {{ tImportMainData }}
     <a
       href="https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_NODES.md#import-nodes-from-a-semicolon-seperate-value-file-csv"
       class="sbb-link link-reset"
       target="_blank"
-      >Hilfe: CSV - Datei</a
+      >{{ tHelpCSVData }}</a
     >
     <input
       hidden
@@ -95,11 +95,11 @@
     <br />
     <button
       (click)="onExportStammdaten()"
-      title="Stammdaten exportieren"
+      [title]="tExportMainData"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="download-large-data-small"></sbb-icon>
     </button>
-    Stammdaten exportieren
+    {{ tExportMainData }}
   </sbb-expansion-panel>
 </sbb-accordion>

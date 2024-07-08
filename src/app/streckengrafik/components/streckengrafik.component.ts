@@ -52,6 +52,18 @@ export class StreckengrafikComponent
   private doShowTrainruns = false;
   private isLoading = true;
 
+  readonly tReset = $localize`:@@app.streckengrafik.components.reset:Reset`;
+  readonly tCloseAllPathNodes = $localize`:@@app.streckengrafik.components.close-all-path-nodes:Close all path nodes`;
+  readonly tOpenAllPathNodes = $localize`:@@app.streckengrafik.components.open-all-path-nodes:Open all path nodes`;
+  readonly tShowAdvancedDisplayFunctions = $localize`:@@app.streckengrafik.components.show-advanced-display-functions:Show advanced display functions`;
+  readonly tShowOrHideTimeForNonSelectedTrains = $localize`:@@app.streckengrafik.components.show-or-hide-time-for-non-selected-trains:Show/hide time for non-selected trainruns`;
+  readonly tShowOrHideTimeForNonSelectedTrainsAttribute = $localize`:@@app.streckengrafik.components.show-or-hide:Enable/disable ${this.getTimeButtonText()}`;
+  readonly tShowOrHideNameForNonSelectedTrains = $localize`:@@app.streckengrafik.components.show-or-hide-name-for-non-selected-trains:Show/hide train names for unselected trainruns`;
+  readonly tShowOrHideNameForNonSelectedTrainsAttribute = $localize`:@@app.streckengrafik.components.show-or-hide:Enable/disable ${this.getNameButtonText()}`;
+  readonly tShowOrHideHeadwayBandAttribute = $localize`:@@app.streckengrafik.components.show-or-hide:Enable/disable ${this.getHeadwayBandButtonText()}`;
+  readonly tShowOrHideRailTrackSliderAttribute = $localize`:@@app.streckengrafik.components.show-or-hide:Enable/disable ${this.getRailTrackSliderButtonText()}`;
+  readonly tHideAdvancedDisplayFunctions = $localize`:@@app.streckengrafik.components.hide-advanced-display-functions:Hide advanced display functions`;
+
   constructor(
     private readonly timeSliderService: TimeSliderService,
     private readonly viewBoxService: ViewBoxService,
@@ -149,36 +161,40 @@ export class StreckengrafikComponent
     return this.streckengrafikDisplayElementService.isRailTrackSliderVisible();
   }
 
-  getRailTrackliderButtonText(): string {
+  getRailTrackSliderButtonText(): string {
+    const tRailTrackSlider = $localize`:@@app.streckengrafik.components.rail-track-slider:Rail track slider`
     if (!this.streckengrafikDisplayElementService.isRailTrackSliderVisible()) {
-      return "\u{2610} Streckengleis";
+      return `\u{2610} ${tRailTrackSlider}`;
     }
-    return "\u{2611} Streckengleis";
+    return `\u{2611} ${tRailTrackSlider}`;
   }
 
   getHeadwayBandButtonText(): string {
+    const tHeadwayBand = $localize`:@@app.streckengrafik.components.headway-band:Headway band`
     if (!this.streckengrafikDisplayElementService.isHeadwayBandVisible()) {
-      return "\u{2610} Zugfolgezeiten";
+      return `\u{2610} ${tHeadwayBand}`;
     }
-    return "\u{2611} Zugfolgezeiten";
+    return `\u{2611} ${tHeadwayBand}`;
   }
 
   getTimeButtonText(): string {
+    const tTime = $localize`:@@app.streckengrafik.components.time:Time`
     if (
       this.streckengrafikDisplayElementService.isFilterStreckengrafikTimeNotFocusNorEnabled()
     ) {
-      return "\u{2610} Zeit";
+      return `\u{2610} ${tTime}`;
     }
-    return "\u{2611} Zeit";
+    return `\u{2611} ${tTime}`;
   }
 
   getNameButtonText(): string {
+    const tName = $localize`:@@app.streckengrafik.components.name:Name`
     if (
       this.streckengrafikDisplayElementService.isFilterStreckengrafikNameNotFocusNorEnabled()
     ) {
-      return "\u{2610} Name";
+      return `\u{2610} ${tName}`;
     }
-    return "\u{2611} Name";
+    return `\u{2611} ${tName}`;
   }
 
   getZoomButtonClassTag(tag: string, zoomFactor: number): string {

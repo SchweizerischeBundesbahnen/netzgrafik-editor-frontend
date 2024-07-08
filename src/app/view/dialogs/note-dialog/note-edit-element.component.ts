@@ -24,13 +24,15 @@ export class NoteEditElementComponent implements OnInit, OnDestroy {
   @Output()
   noteDeleted = new EventEmitter<void>();
 
-  formmodel: FormModel<NoteFormComponentModel>;
+  formModel: FormModel<NoteFormComponentModel>;
   private destroyed = new Subject<void>();
   private deleteNoteCallback = null;
   private saveNoteCallback = null;
 
+  readonly tDeleteNote = $localize`:@@app.view.dialogs.note-dialog.delete-note:Delete note`;
+
   ngOnInit(): void {
-    this.formmodel = new FormModel<NoteFormComponentModel>(
+    this.formModel = new FormModel<NoteFormComponentModel>(
       this.noteDialogParameter.noteFormComponentModel ?? {
         id: 0,
         noteTitle: "",
@@ -62,11 +64,11 @@ export class NoteEditElementComponent implements OnInit, OnDestroy {
   }
 
   private updateNote() {
-    this.formmodel.tryGetValid();
-    const newNoteTitle: string = this.formmodel.getControl("noteTitle").value;
-    const newNoteText: string = this.formmodel.getControl("noteText").value;
-    const newNoteHeight: string = this.formmodel.getControl("noteHeight").value;
-    const newNoteWidth: string = this.formmodel.getControl("noteWidth").value;
+    this.formModel.tryGetValid();
+    const newNoteTitle: string = this.formModel.getControl("noteTitle").value;
+    const newNoteText: string = this.formModel.getControl("noteText").value;
+    const newNoteHeight: string = this.formModel.getControl("noteHeight").value;
+    const newNoteWidth: string = this.formModel.getControl("noteWidth").value;
     this.saveNoteCallback(
       this.noteDialogParameter.noteFormComponentModel.id,
       newNoteTitle,

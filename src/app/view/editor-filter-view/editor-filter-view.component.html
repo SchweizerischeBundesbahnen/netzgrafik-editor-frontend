@@ -1,17 +1,17 @@
-<h2 class="SummaryTitle">Filter</h2>
+<h2 class="SummaryTitle">{{ tFilter }}</h2>
 
 <sbb-accordion [multi]="true">
   <sbb-expansion-panel [expanded]="true">
     <sbb-expansion-panel-header>
       <ng-container *ngIf="isTrainrunFilteringActive()">
-        Allgemein
+        {{ tGeneral }}
       </ng-container>
       <ng-container *ngIf="!isTrainrunFilteringActive()">
-        <label style="color: red">Allgemein</label>
+        <label style="color: red">{{ tGeneral }}</label>
       </ng-container>
     </sbb-expansion-panel-header>
 
-    <sbb-label>Kategorie</sbb-label>
+    <sbb-label>{{ tCategory }}</sbb-label>
     <div class="sbb-trainrun-chip-group">
       <button
         [class]="getCategoryClassname(trainrunCategory)"
@@ -24,7 +24,7 @@
       </button>
     </div>
 
-    <sbb-label class="sbb-mt-m">Takt</sbb-label>
+    <sbb-label class="sbb-mt-m">{{ tFrequency }}</sbb-label>
     <div class="sbb-trainrun-chip-group">
       <button
         [class]="getFrequencyClassname(trainrunFrequency)"
@@ -37,7 +37,7 @@
       </button>
     </div>
 
-    <sbb-label class="sbb-mt-m">Verkehrt</sbb-label>
+    <sbb-label class="sbb-mt-m">{{ tTimeCategory }}</sbb-label>
     <div class="sbb-trainrun-chip-group">
       <button
         [class]="getTimeCategoryClassname(trainrunTimeCategory)"
@@ -56,20 +56,20 @@
       sbb-secondary-button
       class="sbb-mt-m"
       [disabled]="isTrainrunFilteringActive()"
-      title="Alle Züge anzeigen"
+      [title]="tDisplayAllTrainruns"
       (click)="onResetTrainrunFilter()"
     >
-      Zugfilter zurücksetzen
+      {{ tResetTrainrunFilter }}
     </button>
   </sbb-expansion-panel>
 
   <sbb-expansion-panel [expanded]="hasFilteringTrainrunLabels">
     <sbb-expansion-panel-header>
       <ng-container *ngIf="!isFilteringTrainrunLabels()">
-        Filterbare Labels: Züge
+        {{ tFilterableLabelsTrainruns }}
       </ng-container>
       <ng-container *ngIf="isFilteringTrainrunLabels()">
-        <label style="color: red">Filterbare Labels: Züge</label>
+        <label style="color: red">{{ tFilterableLabelsTrainruns }}</label>
       </ng-container>
     </sbb-expansion-panel-header>
 
@@ -81,10 +81,10 @@
   <sbb-expansion-panel [expanded]="hasFilteringNodeLabels">
     <sbb-expansion-panel-header>
       <ng-container *ngIf="!isFilteringNodeLabels()">
-        Filterbare Labels: Knoten
+        {{ tFilterableLabelsNodes }}
       </ng-container>
       <ng-container *ngIf="isFilteringNodeLabels()">
-        <label style="color: red"> Filterbare Labels: Knoten</label>
+        <label style="color: red">{{ tFilterableLabelsNodes }}</label>
       </ng-container>
     </sbb-expansion-panel-header>
 
@@ -96,10 +96,10 @@
   <sbb-expansion-panel [expanded]="hasFilteringNoteLabels">
     <sbb-expansion-panel-header>
       <ng-container *ngIf="!isFilteringNoteLabels()">
-        Filterbare Labels: Kommentare
+        {{ tFilterableLabelsNotes }}
       </ng-container>
       <ng-container *ngIf="isFilteringNoteLabels()">
-        <label style="color: red"> Filterbare Labels: Kommentare</label>
+        <label style="color: red">{{ tFilterableLabelsNotes }}</label>
       </ng-container>
     </sbb-expansion-panel-header>
 
@@ -110,15 +110,15 @@
 
   <sbb-expansion-panel [expanded]="false">
     <sbb-expansion-panel-header>
-      <ng-container *ngIf="isDisplayFilteringActive()"> Anzeigen </ng-container>
+      <ng-container *ngIf="isDisplayFilteringActive()">{{ tDisplay }}</ng-container>
       <ng-container *ngIf="!isDisplayFilteringActive()">
-        <label style="color: red">Anzeigen</label>
+        <label style="color: red">{{ tDisplay }}</label>
       </ng-container>
     </sbb-expansion-panel-header>
 
-    <sbb-label>Zeiten</sbb-label>
+    <sbb-label>{{ tTimes }}</sbb-label>
     <div class="sbb-mt-m">
-      <sbb-form-field label="Anzahl Nachkommastellenanzeigen">
+      <sbb-form-field [label]="tDecimalDisplayed">
         <input
           sbbInput
           type="number"
@@ -132,56 +132,56 @@
       <sbb-checkbox
         [(ngModel)]="filterArrivalDepartureTime"
         (change)="filterArrivalDepartureTimeChanged()"
-        >Abfahrt- und Ankuftszeiten anzeigen
+        >{{ tDisplayArrivalDepartureTimes }}
       </sbb-checkbox>
       <sbb-checkbox
         [(ngModel)]="filterShowNonStopTime"
         (change)="filterShowNonStopTimeChanged()"
       >
-        Abfahrt- und Ankuftszeiten für Durchfahrten anzeigen
+        {{ tDisplayArrivalDepartureTimesForConnections }}
       </sbb-checkbox>
       <sbb-checkbox
         [(ngModel)]="filterTravelTime"
         (change)="filterTravelTimeChanged()"
-        >Fahrzeiten anzeigen
+        >{{ tDisplayTravelTimes }}
       </sbb-checkbox>
       <sbb-checkbox
         [(ngModel)]="filterTrainrunName"
         (change)="filterTrainrunNameChanged()"
-        >Zugname anzeigen
+        >{{ tDisplayTrainrunName }}
       </sbb-checkbox>
     </div>
 
     <br />
-    <sbb-label>Anschlüsse</sbb-label>
+    <sbb-label>{{ tConnections }}</sbb-label>
     <div class="sbb-checkbox-group-vertical">
       <sbb-checkbox
         [(ngModel)]="filterConnections"
         (change)="filterConnectionsChanged()"
-        >Anschlüsse anzeigen
+        >{{ tDisplayConnections }}
       </sbb-checkbox>
     </div>
 
     <br />
-    <sbb-label>Knoten</sbb-label>
+    <sbb-label>{{ tNodes }}</sbb-label>
     <div class="sbb-checkbox-group-vertical">
       <sbb-checkbox
         [(ngModel)]="filterAllEmptyNodes"
         (change)="filterAllEmptyNodesChanged()"
-        >Knoten ohne (angezeigte) Züge anzeigen
+        >{{ tDisplayNodesWithoutVisibleTrainruns }}
       </sbb-checkbox>
       <sbb-checkbox
         [(ngModel)]="filterAllNonStopNodes"
         (change)="filterAllNonStopNodesChanged()"
-        >Knoten mit nur durchfahrenden Züge anzeigen
+        >{{ tDisplayNodesWithOnlyStoppingTrainruns }}
       </sbb-checkbox>
     </div>
 
     <br />
-    <sbb-label>Kommentare</sbb-label>
+    <sbb-label>{{ tNotes }}</sbb-label>
     <div class="sbb-checkbox-group-vertical">
       <sbb-checkbox [(ngModel)]="filterNotes" (change)="filterNotesChanged()"
-        >Kommentare anzeigen
+        >{{ tDisplayNotes }}
       </sbb-checkbox>
     </div>
 
@@ -189,16 +189,16 @@
       sbb-secondary-button
       class="sbb-mt-m"
       [disabled]="isDisplayFilteringActive()"
-      title="Anzeigefilter zurücksetzen"
+      [title]="tResetDisplayFilter"
       (click)="onResetDisplayFilter()"
     >
-      Anzeigefilter zurücksetzen
+      {{ tResetDisplayFilter }}
     </button>
   </sbb-expansion-panel>
 
   <sbb-expansion-panel [expanded]="false">
     <sbb-expansion-panel-header>
-      Gespeicherte Filter
+      {{ tSavedFilters }}
     </sbb-expansion-panel-header>
     <div class="sbb-filtersetting-chip-group">
       <ng-container
@@ -288,7 +288,7 @@
         [class]="getFilterSettingAddButtonClassname()"
         (click)="onSaveAsNewFilterSetting()"
         mode="ghost"
-        title="Filter speichern und als Filtereinstellungen hinzufügen"
+        [title]="tSaveFilters"
       >
         <sbb-icon
           svgIcon="circle-plus-medium"
@@ -304,9 +304,9 @@
     sbb-secondary-button
     class="sbb-mt-m"
     [disabled]="!this.filterService.isAnyFilterActive()"
-    title="Alle Anzeigefilter zurücksetzen"
+    [title]="tResetAllDisplayFilters"
     (click)="onResetAllFilter()"
   >
-    Alle Anzeigefilter zurücksetzen
+    {{ tResetAllDisplayFilters }}
   </button>
 </div>

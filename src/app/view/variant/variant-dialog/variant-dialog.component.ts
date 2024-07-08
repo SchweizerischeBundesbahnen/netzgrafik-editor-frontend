@@ -15,8 +15,13 @@ import {filter} from "rxjs/operators";
   styleUrls: ["./variant-dialog.component.scss"],
 })
 export class VariantDialogComponent {
-  readonly formmodel: FormModel<VariantFormComponentModel>;
+  readonly formModel: FormModel<VariantFormComponentModel>;
   readonly isNewVariant: boolean;
+
+  readonly tCreateVariant = $localize`:@@app.view.variant.variant-dialog.create-variant:Create variant`
+  readonly tEditVariant = $localize`:@@app.view.variant.variant-dialog.edit-variant:Edit variant`
+  readonly tSave = $localize`:@@app.view.variant.variant-dialog.save:Save`
+  readonly tCancel = $localize`:@@app.view.variant.variant-dialog.cancel:Cancel`
 
   constructor(
     public readonly dialogRef: SbbDialogRef<
@@ -25,7 +30,7 @@ export class VariantDialogComponent {
     >,
     @Inject(SBB_DIALOG_DATA) data?: VariantFormComponentModel,
   ) {
-    this.formmodel = new FormModel<VariantFormComponentModel>(
+    this.formModel = new FormModel<VariantFormComponentModel>(
       data ?? {name: ""},
     );
     this.isNewVariant = !!!data;
@@ -42,7 +47,7 @@ export class VariantDialogComponent {
   }
 
   onCreateClicked(): void {
-    const formdata = this.formmodel.tryGetValid();
+    const formdata = this.formModel.tryGetValid();
 
     if (formdata) {
       this.dialogRef.close(formdata);

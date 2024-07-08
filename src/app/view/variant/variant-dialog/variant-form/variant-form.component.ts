@@ -10,6 +10,9 @@ import {Validators} from "@angular/forms";
 export class VariantFormComponent implements OnInit {
   @Input() model!: FormModel<VariantFormComponentModel>;
 
+  readonly tName = $localize`:@@app.view.variant.variant-dialog.variant-form.name:Name`
+  readonly tMandatoryField = $localize`:@@app.view.variant.variant-dialog.variant-form.mandatory-field:Mandatory field`
+
   ngOnInit(): void {
     this.model.registerValidator("name", Validators.required);
   }

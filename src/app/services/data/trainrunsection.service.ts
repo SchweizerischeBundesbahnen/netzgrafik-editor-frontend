@@ -1123,24 +1123,12 @@ export class TrainrunSectionService implements OnDestroy {
       origTravelTime ||
       travelTimeIssue
     ) {
-      const description =
-        "Zwischenhalteumwandlung führte bei der Vergabe der Zeiten zu inkonsistenzen!";
-      trainrunSection1.setTargetArrivalWarning(
-        "Zwischenhalteumwandlung",
-        description,
-      );
-      trainrunSection1.setTargetDepartureWarning(
-        "Zwischenhalteumwandlung",
-        description,
-      );
-      trainrunSection2.setSourceArrivalWarning(
-        "Zwischenhalteumwandlung",
-        description,
-      );
-      trainrunSection2.setSourceDepartureWarning(
-        "Zwischenhalteumwandlung",
-        description,
-      );
+      const title = $localize`:@@app.services.data.trainrunsection.intermediate-stop-replacement.title:Intermediate stop replacement`;
+      const description = $localize`:@@app.services.data.trainrunsection.intermediate-stop-replacement.description:Intermediate stop replacement led to inconsistencies in the allocation of times!`;
+      trainrunSection1.setTargetArrivalWarning(title, description);
+      trainrunSection1.setTargetDepartureWarning(title, description);
+      trainrunSection2.setSourceArrivalWarning(title, description);
+      trainrunSection2.setSourceDepartureWarning(title, description);
     }
 
     const transitionNew1 = node1.getTransition(trainrunSection1.getId());

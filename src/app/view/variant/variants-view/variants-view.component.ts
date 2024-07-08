@@ -47,6 +47,12 @@ export class VariantsViewComponent implements OnDestroy {
   showArchiveControl = new UntypedFormControl(false);
   searchQuery = new BehaviorSubject("");
 
+  readonly tArchived = $localize`:@@app.view.variant.variants-view.archived:(archived)`;
+  readonly tVariants = $localize`:@@app.view.variant.variants-view.variants:Variants`;
+  readonly tSearchVariants = $localize`:@@app.view.variant.variants-view.search-variants:Search variants`;
+  readonly tShowArchive = $localize`:@@app.view.variant.variants-view.show-archive:Show archive`;
+  readonly tProjectDescription = $localize`:@@app.view.variant.variants-view.project-description:Project description`;
+
   readonly variants = combineLatest([
     this.projectSubject,
     this.searchQuery,
@@ -79,12 +85,12 @@ export class VariantsViewComponent implements OnDestroy {
         if (project.isWritable) {
           return [
             {
-              name: "Projekt bearbeiten",
+              name: $localize`:@@app.view.variant.variants-view.edit-project:Edit project`,
               icon: "pen-small",
               action: () => this.onEditProjectClicked(),
             },
             {
-              name: "Projekt archivieren",
+              name: $localize`:@@app.view.variant.variants-view.archive-project:Archive project`,
               icon: "archive-box-small",
               action: () => this.onArchiveProjectClicked(),
             },
@@ -92,12 +98,12 @@ export class VariantsViewComponent implements OnDestroy {
         } else if (project.isDeletable && project.isArchived) {
           return [
             {
-              name: "Archivierung rückgängig machen",
+              name: $localize`:@@app.view.variant.variants-view.undo-archiving:Undo archiving`,
               icon: "arrow-circle-eye-small",
               action: () => this.onUnarchiveProjectClicked(),
             },
             {
-              name: "Projekt löschen",
+              name: $localize`:@@app.view.variant.variants-view.delete-project:Delete project`,
               icon: "trash-small",
               action: () => this.onDeleteProjectClicked(),
             },
@@ -169,7 +175,7 @@ export class VariantsViewComponent implements OnDestroy {
     if (variant.isArchived) {
       return of([
         {
-          name: "Archivierung rückgängig machen",
+          name: $localize`:@@app.view.variant.variants-view.undo-archiving:Undo archiving`,
           icon: "arrow-circle-eye-small",
           action: () => this.onUnarchiveVariantClicked(variant),
         },
@@ -177,7 +183,7 @@ export class VariantsViewComponent implements OnDestroy {
     }
     return of([
       {
-        name: "Archivieren",
+        name: $localize`:@@app.view.variant.variants-view.archive:Archive`,
         icon: "archive-box-small",
         action: () => this.onArchiveVariantClicked(variant),
       },
@@ -188,8 +194,8 @@ export class VariantsViewComponent implements OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          "Variante archivieren",
-          "Möchten Sie die Variante jetzt archivieren?",
+          $localize`:@@app.view.variant.variants-view.archive-variant.title:Archive variant`,
+          $localize`:@@app.view.variant.variants-view.archive-variant.content:Would you like to archive the variant now?`,
         ),
       )
       .pipe(
@@ -211,8 +217,8 @@ export class VariantsViewComponent implements OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          "Archivierung rückgängig machen",
-          "Möchten Sie die Archivierung der Variante rückgängig machen?",
+          $localize`:@@app.view.variant.variants-view.undo-archiving-variant.title:Undo archiving`,
+          $localize`:@@app.view.variant.variants-view.undo-archiving-variant.content:Would you like to undo the archiving of the variant?`,
         ),
       )
       .pipe(
@@ -257,8 +263,8 @@ export class VariantsViewComponent implements OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          "Projekt archivieren",
-          "Möchten Sie das Projekt jetzt archivieren?",
+          $localize`:@@app.view.variant.variants-view.archive-project.title:Archive project`,
+          $localize`:@@app.view.variant.variants-view.archive-project.content:Would you like to archive the project now?`,
         ),
       )
       .pipe(
@@ -274,8 +280,8 @@ export class VariantsViewComponent implements OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          "Archivierung rückgängig machen",
-          "Möchten Sie die Archivierung des Projekts rückgängig machen?",
+          $localize`:@@app.view.variant.variants-view.undo-archiving-project.title:Archive variant`,
+          $localize`:@@app.view.variant.variants-view.undo-archiving-project.content:Would you like to undo the archiving of the project?`,
         ),
       )
       .pipe(
@@ -291,9 +297,8 @@ export class VariantsViewComponent implements OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          "Projekt löschen",
-          "Möchten Sie das Projekt und alle enthaltenen Varianten endgültig löschen? " +
-          "Diese Aktion kann nicht rückgängig gemacht werden.",
+          $localize`:@@app.view.variant.variants-view.delete-project.title:Delete projekt`,
+          $localize`:@@app.view.variant.variants-view.delete-project.content:Do you want to permanently delete the project and all the variants it contains? This action cannot be undone.`,
         ),
       )
       .pipe(
@@ -305,7 +310,7 @@ export class VariantsViewComponent implements OnDestroy {
   }
 
   getTitleCurrentVersion(variant: VariantSummaryDto): string {
-    const archivedSuffix = variant.isArchived ? " (archiviert)" : "";
+    const archivedSuffix = variant.isArchived ? " " + this.tArchived : "";
 
     if (variant.latestSnapshotVersion) {
       return variant.latestSnapshotVersion.name + "*" + archivedSuffix;
@@ -315,7 +320,7 @@ export class VariantsViewComponent implements OnDestroy {
       return variant.latestReleaseVersion.name + archivedSuffix;
     }
 
-    throw new Error("Unexpected data: No snapshot and no released version.");
+    throw new Error($localize`:@@app.view.variant.variants-view.error-unexpected-data:Unexpected data: No snapshot and no released version.`);
   }
 
   getChangedAtCurrentVersion(variant: VariantSummaryDto): Date {
@@ -327,7 +332,7 @@ export class VariantsViewComponent implements OnDestroy {
       return new Date(variant.latestReleaseVersion.createdAt);
     }
 
-    throw new Error("Unexpected data: No snapshot and no released version.");
+    throw new Error($localize`:@@app.view.variant.variants-view.error-unexpected-data:Unexpected data: No snapshot and no released version.`);
   }
 
   private updateProject(project: ProjectDto): void {

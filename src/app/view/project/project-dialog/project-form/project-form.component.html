@@ -1,28 +1,28 @@
 <div class="content">
-  <sbb-form-field label="Name" class="sbb-form-field-long">
+  <sbb-form-field [label]="tName" class="sbb-form-field-long">
     <input
       type="text"
       sbbInput
       [formControl]="model.getControl('name')"
-      placeholder="Name"
+      [placeholder]="tName"
     />
     <sbb-error *ngIf="model.getControl('name').errors?.required"
-      >Pflichtfeld</sbb-error
+      >{{ tMandatoryField }}</sbb-error
     >
   </sbb-form-field>
-  <sbb-form-field label="Zusammenfassung" class="sbb-form-field-long">
+  <sbb-form-field [label]="tSummary" class="sbb-form-field-long">
     <input
       type="text"
       sbbInput
       [formControl]="model.getControl('summary')"
-      placeholder="Zusammenfassung"
+      [placeholder]="tSummary"
     />
   </sbb-form-field>
-  <sbb-form-field label="Beschreibung" class="sbb-form-field-long">
+  <sbb-form-field [label]="tDescription" class="sbb-form-field-long">
     <sbb-textarea
       [formControl]="model.getControl('description')"
       [maxlength]="500"
-      placeholder="Beschrieb"
+      [placeholder]="tDescription"
     ></sbb-textarea>
   </sbb-form-field>
   <ng-template #userTooltip>
@@ -32,7 +32,7 @@
   </ng-template>
   <sbb-form-field class="sbb-form-field-long">
     <sbb-label>
-      Benutzer mit Schreibzugriff
+      {{ tUserWithWriteAccess }}
       <ng-container *ngTemplateOutlet="userTooltip"></ng-container>
     </sbb-label>
     <sbb-chip-list
@@ -46,7 +46,7 @@
       </sbb-chip>
       <input
         id="userWriteInput"
-        placeholder="New Benutzer..."
+        [placeholder]="tNewUserPlaceholder"
         sbbChipInput
         [sbbChipInputSeparatorKeyCodes]="separatorKeysCodes"
       />
@@ -58,7 +58,7 @@
   </sbb-form-field>
   <sbb-form-field class="sbb-form-field-long">
     <sbb-label>
-      Benutzer mit Lesezugriff
+      {{ tUserWithReadAccess }}
       <ng-container *ngTemplateOutlet="userTooltip"></ng-container>
     </sbb-label>
     <sbb-chip-list
@@ -73,7 +73,7 @@
       </sbb-chip>
       <input
         id="userReadeInput"
-        placeholder="New Benutzer..."
+        [placeholder]="tNewUserPlaceholder"
         sbbChipInput
         [sbbChipInputSeparatorKeyCodes]="separatorKeysCodes"
       />

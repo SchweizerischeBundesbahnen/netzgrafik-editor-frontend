@@ -23,7 +23,7 @@ export class NavigationBarComponent implements OnInit {
         {
           name: this.projectsBackendService
             .getProject(params[0].asNumber())
-            .pipe(map((project) => `Projekt «${project.name}»`)),
+            .pipe(map((project) => $localize`:@@app.view.navigation-bar.project-name:Project «${project.name}»`)),
           route: this.navigationService.getRouteToVariants(
             params[0].asNumber(),
           ),
@@ -39,8 +39,8 @@ export class NavigationBarComponent implements OnInit {
             .pipe(
               map((project) =>
                 project.isArchived === false
-                  ? `Projekt «${project.name}»`
-                  : `Projekt «${project.name}» (archiviert)`,
+                  ? $localize`:@@app.view.navigation-bar.project-name:Project «${project.name}»`
+                  : $localize`:@@app.view.navigation-bar.project-name-archived:Project «${project.name}» (archived)`,
               ),
             ),
           route: this.navigationService.getRouteToVariants(
@@ -53,8 +53,8 @@ export class NavigationBarComponent implements OnInit {
             .pipe(
               map((variant) =>
                 variant.isArchived === false
-                  ? `Variante «${variant.latestVersion.name}»`
-                  : `Variante «${variant.latestVersion.name}» (archiviert)`,
+                  ? $localize`:@@app.view.navigation-bar.variant-name:Variant «${variant.latestVersion.name}»`
+                  : $localize`:@@app.view.navigation-bar.variant-name-archived:Variant «${variant.latestVersion.name}» (archived)`,
               ),
             ),
           route: this.navigationService.getRouteToEditor(

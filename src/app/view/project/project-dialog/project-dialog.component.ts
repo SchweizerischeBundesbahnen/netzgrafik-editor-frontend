@@ -15,8 +15,14 @@ import {filter} from "rxjs/operators";
   styleUrls: ["./project-dialog.component.scss"],
 })
 export class ProjectDialogComponent {
-  readonly formmodel: FormModel<ProjectFormComponentModel>;
+  readonly formModel: FormModel<ProjectFormComponentModel>;
   readonly isNewProject: boolean;
+
+  readonly tCreateProject = $localize`:@@app.view.project.project-dialog.create-project:Create project`;
+  readonly tEditProject = $localize`:@@app.view.project.project-dialog.edit-project:Edit project`;
+  readonly tCreate = $localize`:@@app.view.project.project-dialog.create:Create`;
+  readonly tSave = $localize`:@@app.view.project.project-dialog.save:Save`;
+  readonly tCancel = $localize`:@@app.view.project.project-dialog.cancel:Cancel`;
 
   constructor(
     public readonly dialogRef: SbbDialogRef<
@@ -25,7 +31,7 @@ export class ProjectDialogComponent {
     >,
     @Inject(SBB_DIALOG_DATA) data?: ProjectFormComponentModel,
   ) {
-    this.formmodel = new FormModel<ProjectFormComponentModel>(
+    this.formModel = new FormModel<ProjectFormComponentModel>(
       data ?? {
         name: "",
         description: "",
@@ -48,10 +54,10 @@ export class ProjectDialogComponent {
   }
 
   onCreateClicked(): void {
-    const formdata = this.formmodel.tryGetValid();
+    const formData = this.formModel.tryGetValid();
 
-    if (formdata) {
-      this.dialogRef.close(formdata);
+    if (formData) {
+      this.dialogRef.close(formData);
     }
   }
 

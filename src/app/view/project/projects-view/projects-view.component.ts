@@ -31,6 +31,11 @@ export class ProjectsViewComponent implements OnDestroy {
 
   private destroyed = new Subject<void>();
 
+  readonly tProjects = $localize`:@@app.view.project.projects-view.projects:Projects`;
+  readonly tSearchProject = $localize`:@@app.view.project.projects-view.search-project:Search project`;
+  readonly tShowArchive = $localize`:@@app.view.project.projects-view.show-archive:Show archive`;
+  readonly tArchived = $localize`:@@app.view.project.projects-view.archived:(archived)`;
+
   constructor(
     public projectService: ProjectsViewService,
     private readonly projectControllerBackendService: ProjectControllerBackendService,
@@ -103,8 +108,8 @@ export class ProjectsViewComponent implements OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          "Projekt archivieren",
-          "Möchten Sie das Projekt jetzt archivieren?",
+          $localize`:@@app.view.project.projects-view.archive-project.title:Archive project`,
+          $localize`:@@app.view.project.projects-view.archive-project.content:Would you like to archive the project now?`,
         ),
       )
       .pipe(
@@ -124,8 +129,8 @@ export class ProjectsViewComponent implements OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          "Archivierung rückgängig machen",
-          "Möchten Sie die Archivierung des Projekts rückgängig machen?",
+          $localize`:@@app.view.project.projects-view.undo-archiving-project.title:Undo archiving`,
+          $localize`:@@app.view.project.projects-view.undo-archiving-project.content:Would you like to undo the archiving the project now?`,
         ),
       )
       .pipe(
@@ -147,7 +152,7 @@ export class ProjectsViewComponent implements OnDestroy {
     if (project.isArchived) {
       return of([
         {
-          name: "Archivierung rückgängig machen",
+          name: $localize`:@@app.view.project.projects-view.undo-archiving:Undo archiving`,
           icon: "arrow-circle-eye-small",
           action: () => this.onUnarchiveProjectClicked(project),
         },
@@ -155,12 +160,12 @@ export class ProjectsViewComponent implements OnDestroy {
     }
     return of([
       {
-        name: "Bearbeiten",
+        name: $localize`:@@app.view.project.projects-view.edit:Edit`,
         icon: "pen-small",
         action: () => this.onEditProjectClicked(project),
       },
       {
-        name: "Archivieren",
+        name: $localize`:@@app.view.project.projects-view.archive:Archive`,
         icon: "archive-box-small",
         action: () => this.onArchiveProjectClicked(project),
       },

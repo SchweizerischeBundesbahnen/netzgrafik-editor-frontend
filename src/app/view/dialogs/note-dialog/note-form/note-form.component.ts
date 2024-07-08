@@ -9,6 +9,8 @@ import {FormModel} from "../../../../utils/form-model";
 export class NoteFormComponent {
   @Input() model!: FormModel<NoteFormComponentModel>;
 
+  readonly tTitle = $localize`:@@app.view.dialogs.note-dialog.note-form.title:Title`;
+
   onKeydown(event) {
     if (event.key === "Enter") {
       this.onUpdate();

@@ -21,7 +21,7 @@ export class ReleasedEntryComponent {
 
   get actions(): HistoryEntryAction[] {
     const download = {
-      name: "Download",
+      name: $localize`:@@app.view.variant.variant-view.variant-history.released-entry.download:Download`,
       icon: "download-small",
       onClick: () =>
         this.download.next({
@@ -37,12 +37,12 @@ export class ReleasedEntryComponent {
     if (this.model.conflict) {
       return [
         {
-          name: "Änderungen Verwerfen",
+          name: $localize`:@@app.view.variant.variant-view.variant-history.released-entry.discard-changes:Discard changes`,
           icon: "trash-small",
           onClick: () => this.dropChanges.emit(),
         },
         {
-          name: "Konflikt ignorieren",
+          name: $localize`:@@app.view.variant.variant-view.variant-history.released-entry.ignore-conflict:Ignore conflict`,
           icon: "tick-small",
           onClick: () => this.ignoreConflict.emit(),
         },
@@ -52,12 +52,12 @@ export class ReleasedEntryComponent {
 
     return [
       {
-        name: "Wiederherstellen",
+        name: $localize`:@@app.view.variant.variant-view.variant-history.released-entry.restore:Restore`,
         icon: "arrows-circle-small",
         onClick: () => this.restore.next(this.model.id),
       },
       {
-        name: "Als neue Variante",
+        name: $localize`:@@app.view.variant.variant-view.variant-history.released-entry.as-new-variant:As new variant`,
         icon: "circle-plus-small",
         onClick: () => this.saveAsNewVariant.emit(this.model.id),
       },
@@ -78,10 +78,10 @@ export class ReleasedEntryComponent {
 
   getMessage(): string | undefined {
     if (this.model.conflict) {
-      return "Version bereits vorhanden";
+      return $localize`:@@app.view.variant.variant-view.variant-history.released-entry.version-already-available:Version already available`;
     }
     if (this.model.lastAdded) {
-      return "Erfolgreich publiziert";
+      return $localize`:@@app.view.variant.variant-view.variant-history.released-entry.successfully-published:Successfully published`;
     }
 
     return undefined;

@@ -1,13 +1,13 @@
 <div sbbDialogTitle>
-  <ng-container *ngIf="isNewVariant">Variante erstellen</ng-container>
-  <ng-container *ngIf="!isNewVariant">Variante bearbeiten</ng-container>
+  <ng-container *ngIf="isNewVariant">{{ tCreateVariant }}</ng-container>
+  <ng-container *ngIf="!isNewVariant">{{ tEditVariant }}</ng-container>
 </div>
 <div sbbDialogContent>
-  <sbb-variant-form [model]="formmodel"></sbb-variant-form>
+  <sbb-variant-form [model]="formModel"></sbb-variant-form>
 </div>
 <div sbbDialogActions>
   <button sbb-button cdkFocusInitial (click)="onCreateClicked()">
-    Speichern
+    {{ tSave }}
   </button>
-  <button sbb-secondary-button (click)="onCancelClicked()">Abbrechen</button>
+  <button sbb-secondary-button (click)="onCancelClicked()">{{ tCancel }}</button>
 </div>

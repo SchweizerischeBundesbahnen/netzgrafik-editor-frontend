@@ -16,6 +16,11 @@ import {NavigationService} from "../../../services/ui/navigation.service";
 export class VariantViewComponent implements OnDestroy {
   private readonly destroyed = new Subject<void>();
 
+  readonly tArchived = $localize`:@@app.view.variant.variant-view.archived:(archived)`;
+  readonly tEditVariant = $localize`:@@app.view.variant.variant-view.edit-variant:Edit variant`;
+  readonly tDeleteVariant = $localize`:@@app.view.variant.variant-view.delete-variant:Delete variant`;
+  readonly tVersions = $localize`:@@app.view.variant.variant-view.versions:Versions`;
+
   constructor(
     readonly versionControlService: VersionControlService,
     private readonly dialog: SbbDialog,
@@ -43,9 +48,8 @@ export class VariantViewComponent implements OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          "Variante löschen",
-          "Möchten Sie die Variante und alle enthaltenen Versionen endgültig löschen? " +
-            "Diese Aktion kann nicht rückgängig gemacht werden.",
+          $localize`:@@app.view.variant.variant-view.delete-variant.title:Delete variant`,
+          $localize`:@@app.view.variant.variant-view.delete-variant.content:Do you want to permanently delete the variant and all versions it contains? This action cannot be undone.`,
         ),
       )
       .pipe(

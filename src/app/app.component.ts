@@ -18,8 +18,11 @@ import {Operation} from "./models/operation.model";
 export class AppComponent {
   readonly disableBackend = environment.disableBackend;
 
-  version = $localize`:@@app.version:Version` + " " + packageJson.version;
-  userGuide = $localize`:@@app.user-guide:User Guide`;
+  readonly tVersion = $localize`:@@app.version:Version` + " " + packageJson.version;
+  readonly tUserGuide = $localize`:@@app.user-guide:User guide`;
+  readonly tUserManual = $localize`:@@app.user-manual:User manual`;
+  readonly tLogout = $localize`:@@app.logout:Logout`;
+  readonly tLoginMessage = $localize`:@@app.login:You are getting logged in...`;
 
   locale = localStorage.getItem("locale");
   

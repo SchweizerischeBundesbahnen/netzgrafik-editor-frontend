@@ -1,8 +1,8 @@
-<h2 class="SummaryTitle">Einstellungen</h2>
+<h2 class="SummaryTitle">{{ tSettings }}</h2>
 <sbb-accordion [multi]="true">
   <sbb-expansion-panel [expanded]="true">
-    <sbb-expansion-panel-header> Farbschema</sbb-expansion-panel-header>
-    <sbb-label>Theme</sbb-label>
+    <sbb-expansion-panel-header>{{ tColorScheme }}</sbb-expansion-panel-header>
+    <sbb-label>{{ tTheme }}</sbb-label>
     <br/>
     <sbb-radio-group
       [(ngModel)]="activeColorTheme.themeRegistration"
@@ -19,12 +19,12 @@
 
     <br/>
     <ng-container *ngIf="!isActiveColorThemeDark()">
-      <sbb-label>Hintergrundfarbe</sbb-label>
+      <sbb-label>{{ tBackgroundColor }}</sbb-label>
       <input
         id="activeBackgroundColor"
         type="color"
         sbbInput
-        name="Hintergrundfarbe"
+        [name]="tBackgroundColor"
         style="width: 242px; min-height: 37px; vertical-align: middle;"
         [(ngModel)]="activeBackgroundColor"
         (change)="colorPicked($event)"
@@ -34,7 +34,7 @@
         sbb-secondary-button
         style="vertical-align: middle;"
         [disabled]="isBackgroundColorWhite()"
-        title="Hintergrundfarbe auf 'weiss' setzten"
+        [title]="tSetColorToWhite"
         (click)="setBackgroundColorToWhite()"
       >
         <svg
@@ -58,20 +58,20 @@
         sbb-secondary-button
         [disabled]="isDefaultBackgroundColorActive()"
         style="vertical-align: middle;"
-        title="Hintergrundfarbe auf Standard zurücksetzen"
+        [title]="tResetBackgroundColorToDefault"
         (click)="onResetBackgroundColor()"
       >
         <sbb-icon svgIcon="trash-small"></sbb-icon>
       </button>
     </ng-container>
     <ng-container *ngIf="isActiveColorThemeDark()">
-      <sbb-label>Hintergrundfarbe (dunkel)</sbb-label>
+      <sbb-label>{{ tBackgroundColorBlack }}</sbb-label>
       <br/>
       <input
         id="activeDarkBackgroundColor"
         type="color"
         sbbInput
-        name="Hintergrundfarbe"
+        [name]="tBackgroundColor"
         style="width: 242px; min-height: 37px; vertical-align: middle;"
         [(ngModel)]="activeDarkBackgroundColor"
         (change)="colorPicked($event)"
@@ -80,7 +80,7 @@
       <button
         sbb-secondary-button
         [disabled]="isDefaultDarkBackgroundColorActive()"
-        title="Hintergrundfarbe auf Standard zurücksetzen"
+        [title]="tResetBackgroundColorToDefault"
         style="vertical-align: middle;"
         (click)="onResetDarkBackgroundColor()"
       >
@@ -102,8 +102,8 @@
 
 
   <sbb-expansion-panel [expanded]="true">
-    <sbb-expansion-panel-header> Editor</sbb-expansion-panel-header>
-    <sbb-label>Fahrzeitvoreinstellungs (Heuristik)</sbb-label>
+    <sbb-expansion-panel-header>{{ tEditor }}</sbb-expansion-panel-header>
+    <sbb-label>{{ tTravelTimePresettingDefault }}</sbb-label>
     <br/>
     <sbb-radio-group
       [(ngModel)]="activeTravelTimeCreationEstimatorType"
@@ -121,8 +121,8 @@
   </sbb-expansion-panel>
 
   <sbb-expansion-panel [expanded]="true">
-    <sbb-expansion-panel-header> Streckengrafik</sbb-expansion-panel-header>
-    <sbb-label>Achsenskalierung (Distanz)</sbb-label>
+    <sbb-expansion-panel-header>{{ tStreckengrafik }}</sbb-expansion-panel-header>
+    <sbb-label>{{ tAxisScalingDistance }}</sbb-label>
     <br/>
     <sbb-radio-group
       [(ngModel)]="activeStreckengrafikRenderingType"

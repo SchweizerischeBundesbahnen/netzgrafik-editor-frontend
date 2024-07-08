@@ -13,6 +13,16 @@ export class ProjectFormComponent implements OnInit {
 
   readonly separatorKeysCodes = [ENTER, COMMA];
 
+  readonly tName = $localize`:@@app.view.project.project-dialog.project-form.name:Name`
+  readonly tMandatoryField = $localize`:@@app.view.project.project-dialog.project-form.mandatory-field:Mandatory field`
+  readonly tSummary = $localize`:@@app.view.project.project-dialog.project-form.summary:Summary`
+  readonly tDescription = $localize`:@@app.view.project.project-dialog.project-form.description:Description`
+  readonly tTooltip = $localize`:@@app.view.project.project-dialog.project-form.tooltip:Users must be entered with their U/E number (e.g. u123456e654321). Confirm the entry for each number with 'Enter'. Note lower case!`
+  readonly tUserWithWriteAccess = $localize`:@@app.view.project.project-dialog.project-form.user-with-write-access:User with write access`
+  readonly tNewUserPlaceholder = $localize`:@@app.view.project.project-dialog.project-form.new-user-placeholder:New user...`
+  readonly tInvalidValues = $localize`:@@app.view.project.project-dialog.project-form.invalid-values:Invalid values`
+  readonly tUserWithReadAccess = $localize`:@@app.view.project.project-dialog.project-form.user-with-read-access:User with read access`
+
   ngOnInit(): void {
     this.model.registerValidator("name", Validators.required);
     this.model.registerValidator("writeUsers", userIdsAsEmailValidator);

@@ -9,19 +9,18 @@
     <sbb-icon
       class="closeDialog"
       svgIcon="cross-small"
-      aria-label="Clode Dialogr"
       aria-hidden="false"
       (click)="closeDialog()"
     ></sbb-icon>
     <div class="NoteTabGrupe">
       <sbb-tab-group>
-        <sbb-tab label="Kommentar" id="note-tab">
+        <sbb-tab [label]="tNoteTab" id="note-tab">
           <sbb-note-edit-element
             [noteDialogParameter]="data"
             (noteDeleted)="closeDialog()"
           ></sbb-note-edit-element>
         </sbb-tab>
-        <sbb-tab label="Filterbare Labels" id="note-filterable-labels-tab">
+        <sbb-tab [label]="tFilterableLabelsTab" id="note-filterable-labels-tab">
           <sbb-note-filter-tab
             [noteDialogParameter]="data"
             (noteDeleted)="closeDialog()"

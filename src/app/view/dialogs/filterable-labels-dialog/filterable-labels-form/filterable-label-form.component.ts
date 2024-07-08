@@ -8,6 +8,8 @@ import {Validators} from "@angular/forms";
   styleUrls: ["./filterable-label-form.component.scss"],
 })
 export class FilterableLabelFormComponent implements OnInit {
+  readonly tMandatoryField = $localize`:@@app.view.dialogs.filterable-labels-dialog.filterable-labels-form.mandatory-field:Mandatory field`;
+
   @Input() model!: FormModel<FilterableLabelsFormComponentModel>;
 
   ngOnInit(): void {
@@ -31,7 +33,7 @@ export class FilterableLabelFormComponent implements OnInit {
 
 export interface FilterableLabelsFormComponentModel {
   name: string;
-  dialogTitel: string;
+  dialogTitle: string;
   saveLabelCallback;
   deleteLabelCallback;
   transferLabelCallback;

@@ -129,7 +129,7 @@ export class FilterService implements OnDestroy {
     const fs = this.activeFilterSetting.copy();
     this.filterSettingStore.filterSettings.push(fs);
     this.activateFilterSetting(fs.getId());
-    this.setActiveFilterSettingName("Neuer Filter", fs.getId());
+    this.setActiveFilterSettingName("Neuer Filter", fs.getId()); // trad ?
     this.filterSettingUpdated();
     return fs;
   }

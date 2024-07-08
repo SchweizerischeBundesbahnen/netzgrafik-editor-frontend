@@ -577,9 +577,8 @@ export class NodeService implements OnDestroy {
     }
 
     if (isForwardPathLocked && isBackwardPathLocked) {
-      const warningTitle = "Durchfahrt geändert";
-      const warningDescription =
-        "Zeiten können nicht angepasst werden, beidseitger Lock gefunden";
+      const warningTitle = $localize`:@@app.services.data.node.transit-modified.title:Transition changed`;
+      const warningDescription = $localize`:@@app.services.data.node.transit-modified.description:Times cannot be adjusted, lock found on both sides`;
       this.trainrunSectionService.setWarningOnNode(
         trainrunSections.trainrunSection1.getId(),
         node.getId(),
@@ -1069,7 +1068,7 @@ export class NodeService implements OnDestroy {
   setNodePropertiesFromStammdaten(stammdaten: Stammdaten[]) {
     stammdaten.forEach((stdDaten) => {
       if (stdDaten.getErstellen() !== undefined) {
-        if (stdDaten.getErstellen().trim().toLowerCase() === "ja") {
+        if (stdDaten.getErstellen().trim().toLowerCase() === "ja") { // trad ?
           if (
             this.nodesStore.nodes.find(
               (node) => node.getBetriebspunktName() === stdDaten.getBP(),
@@ -1088,7 +1087,7 @@ export class NodeService implements OnDestroy {
               labelIds.push(
                 this.labelService
                   .getOrCreateLabel(
-                    "Knoten aus CSV-Datei importiert",
+                    "Knoten aus CSV-Datei importiert", // trad ?
                     LabelRef.Node,
                   )
                   .getId(),
@@ -1123,14 +1122,14 @@ export class NodeService implements OnDestroy {
         bpStammdaten.getRegions().forEach((region) => {
           labels.push(
             this.labelService
-              .getOrCreateLabel("Region: " + region.trim(), LabelRef.Node)
+              .getOrCreateLabel("Region: " + region.trim(), LabelRef.Node) // trad ?
               .getId(),
           );
         });
         bpStammdaten.getKategorien().forEach((kategorie) => {
           labels.push(
             this.labelService
-              .getOrCreateLabel("Kategorie: " + kategorie.trim(), LabelRef.Node)
+              .getOrCreateLabel("Kategorie: " + kategorie.trim(), LabelRef.Node) // trad ?
               .getId(),
           );
         });

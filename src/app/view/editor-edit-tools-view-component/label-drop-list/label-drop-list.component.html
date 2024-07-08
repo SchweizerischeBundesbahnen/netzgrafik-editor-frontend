@@ -1,6 +1,6 @@
 <div *ngIf="hasNoFilterableLabels()">
   <sbb-label class="sbb-mt-m"
-    >&nbsp;&nbsp;&nbsp;&nbsp;Keine Labels vorhanden.</sbb-label
+    >&nbsp;&nbsp;&nbsp;&nbsp;{{ tNoLabelsAvailable }} </sbb-label
   >
 </div>
 <div *ngIf="!hasNoFilterableLabels()">
@@ -68,7 +68,7 @@
             <button
               class="filterable-label-grp-delete-add-button-button"
               (click)="onRemoveLabelGroup(labelGrp.getId())"
-              title="Gruppe löschen"
+              [title]="tDeleteGroup"
             >
               <sbb-icon
                 class="LabelAddGroupButton"
@@ -83,7 +83,7 @@
             <button
               class="filterable-label-grp-delete-add-button-button"
               (click)="onCreateNewLabelGroup(labelGrp.getId())"
-              title="Neue Gruppe hinzufügen"
+              [title]="tAddNewGroup"
             >
               <sbb-icon
                 class="LabelAddGroupButton"

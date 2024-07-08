@@ -24,6 +24,12 @@ export class FilterableLabelFilterComponent implements OnInit, OnDestroy {
   public filterableLabelGroups: LabelGroup[];
   private destroyed = new Subject<void>();
 
+  readonly tNoLabelsAvailable = $localize`:@@app.view.editor-filter-view.filterable-label-filter.no-labels-available:No labels available`;
+  readonly tOr = $localize`:@@app.view.editor-filter-view.filterable-label-filter.or:Or`;
+  readonly tAnd = $localize`:@@app.view.editor-filter-view.filterable-label-filter.and:And`;
+  readonly tShowAll = $localize`:@@app.view.editor-filter-view.filterable-label-filter.show-all:Show all`;
+  readonly tResetFilter = $localize`:@@app.view.editor-filter-view.filterable-label-filter.reset-filter:Reset filter`;
+
   constructor(
     public dataService: DataService,
     public uiInteractionService: UiInteractionService,
@@ -165,9 +171,9 @@ export class FilterableLabelFilterComponent implements OnInit, OnDestroy {
         (filterLabel) => filterLabel === labelObject.getId(),
       ) !== undefined
     ) {
-      return labelObject.getLabel() + ": einblenden";
+      return labelObject.getLabel() + ": " + $localize`:@@app.view.editor-filter-view.filterable-label-filter.show:show`;
     }
-    return labelObject.getLabel() + ": ausblenden";
+    return labelObject.getLabel() + ": " + $localize`:@@app.view.editor-filter-view.filterable-label-filter.hide:hide`;
   }
 
   isFilteringLabels(): boolean {

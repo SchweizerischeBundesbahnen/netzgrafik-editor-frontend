@@ -47,6 +47,23 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
 
   private trainrunIdSelected: number;
 
+  readonly tSaveChanges = $localize`:@@app.view.editor-menu.save-changes:Save changes`;
+  readonly tChangesSaved = $localize`:@@app.view.editor-menu.changes-saved:Changes saved`;
+  readonly tReadMode = $localize`:@@app.view.editor-menu.read-mode:Read mode`;
+  readonly tShowHideFilter = $localize`:@@app.view.editor-menu.show-hide-filter:Show/Hide filter`;
+  readonly tZoomOut = $localize`:@@app.view.editor-menu.zoom-out:Zoom out`;
+  readonly tZoomIn = $localize`:@@app.view.editor-menu.zoom-in:Zoom in`;
+  readonly tTopologyEditorDisabled = $localize`:@@app.view.editor-menu.topology-editor-disabled:Topology editor disabled`;
+  readonly tTopologyEditorEnabled = $localize`:@@app.view.editor-menu.topology-editor-enalbed:Topology editor enabled`;
+  readonly tMultipleSelectionToolDisabled = $localize`:@@app.view.editor-menu.multiple-selection-tool-disabled:Multiple selection tool is disabled`;
+  readonly tMultipleSelectionToolEnabled = $localize`:@@app.view.editor-menu.multiple-selection-tool-enabled:Multiple selection tool is enabled`;
+  readonly tNoteEditorDisabled = $localize`:@@app.view.editor-menu.note-editor-disabled:Note editor disabled`;
+  readonly tNoteEditorEnabled = $localize`:@@app.view.editor-menu.note-editor-enabled:Note editor enabled`;
+  readonly tAnalyticsDisabled = $localize`:@@app.view.editor-menu.analytics-disabled:Analytics disabled`;
+  readonly tAnalyticsEnabled = $localize`:@@app.view.editor-menu.analytics-enabled:Analytics enabled`;
+  readonly tDisplayStreckengrafik = $localize`:@@app.view.editor-menu.display-streckengrafik:Display Streckengrafik`;
+  readonly tCloseStreckengrafik = $localize`:@@app.view.editor-menu.close-streckengrafik:Close Streckengrafik`;
+
   constructor(
     private dataService: DataService,
     private trainrunService: TrainrunService,

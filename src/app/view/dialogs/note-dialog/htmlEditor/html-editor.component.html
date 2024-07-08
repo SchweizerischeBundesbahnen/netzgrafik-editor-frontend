@@ -4,9 +4,9 @@
   <div class="ngx-html-editor-color-buttons">
     <button
       class="ngx-html-editor-color trash {{ setClassedTag(undefined) }}"
-      style="{{ getColorStyle(undefined) }}"
+      [style]="getColorStyle(undefined)"
       (click)="onRemoveColor()"
-      title="Frabe zurücksetzen"
+      [title]="tResetColor"
     >
       <sbb-icon svgIcon="trash-small"></sbb-icon>
     </button>
@@ -16,8 +16,8 @@
           setClassedTag(color)
         }}"
         (click)="onColor(color)"
-        title="{{ getColorTitle(color) }}"
-        style="{{ getColorStyle(color) }}"
+        [title]="getColorTitle(color)"
+        [style]="getColorStyle(color)"
         [ngClass]="{'NgxEditor__Color--Active': setActiveColor(color)}"
       >
         {{ getColorButtonText(color) }}
@@ -29,11 +29,11 @@
     cdkFocusInitial
     [editor]="editor"
     [formControl]="model.getControl('noteText')"
-    [placeholder]="'Kommentar hier eingeben...'"
+    [placeholder]="tEditorPlaceholder"
     (focusout)="onUpdate()"
     (keydown)="onKeydown($event)"
   ></ngx-editor>
   <sbb-error *ngIf="model.getControl('noteText').errors?.required"
-    >Pflichtfeld</sbb-error
+    >{{ tMandatoryField }}</sbb-error
   >
 </div>

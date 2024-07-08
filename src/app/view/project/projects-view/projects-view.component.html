@@ -1,5 +1,5 @@
 <sbb-page-layout>
-  <h1>Projekte</h1>
+  <h1>{{ tProjects }}</h1>
 
   <div class="actions">
     <input
@@ -7,11 +7,11 @@
       class="search"
       type="text"
       sbbInput
-      placeholder="Projekt suchen"
+      [placeholder]="tSearchProject"
     />
     <div>
       <sbb-checkbox [formControl]="showArchiveControl"
-        >Archiv anzeigen</sbb-checkbox
+        >{{ tShowArchive }}</sbb-checkbox
       >
     </div>
   </div>
@@ -24,7 +24,7 @@
     ></sbb-card>
     <sbb-card
       *ngFor="let project of projectService.filteredProjects | async"
-      [title]="project.name + (project.isArchived ? ' (archiviert)' : '')"
+      [title]="project.name + (project.isArchived ? ' ' + tArchived : '')"
       [route]="['/projects', project.id]"
       [actions]="getProjectDataActions(project)"
     >

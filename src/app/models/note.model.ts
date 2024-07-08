@@ -6,8 +6,8 @@ export class Note {
   public static DEFAULT_NOTE_HEIGHT = 64;
   public static DEFAULT_NOTE_POSITION_X = 0;
   public static DEFAULT_NOTE_POSITION_Y = 0;
-  public static DEFAULT_NOTE_TITLE = "Kommentar Titel";
-  public static DEFAULT_NOTE_TEXT = "Kommentar Text";
+  public static DEFAULT_NOTE_TITLE = $localize`:@@app.models.note.title-default:Note title`;
+  public static DEFAULT_NOTE_TEXT = $localize`:@@app.models.note.text-default:Note text`;
   public static DEFAULT_NOTE_BACKGROUND_COLOR = "#ffffff";
   public static DEFAULT_NOTE_TEXT_COLOR = "#000000";
 

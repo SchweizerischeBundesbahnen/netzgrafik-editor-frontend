@@ -33,12 +33,12 @@ export class NetzgrafikApplicationComponent {
 
   readonly disableBackend = environment.disableBackend;
 
-  variants = $localize`:@@app.netzgrafik-application.variants:Varianten`;
-  filter = $localize`:@@app.netzgrafik-application.filter:Filter`;
-  analytics = $localize`:@@app.netzgrafik-application.analytics:Analytics`;
-  edit = $localize`:@@app.netzgrafik-application.edit:Bearbeiten`;
-  moreFunctions = $localize`:@@app.netzgrafik-application.more-functions:Weitere Funktionen`;
-  properties = $localize`:@@app.netzgrafik-application.properties:Einstellungen`;
+  readonly variants = $localize`:@@app.netzgrafik-application.variants:Variants`;
+  readonly filter = $localize`:@@app.netzgrafik-application.filter:Filter`;
+  readonly analytics = $localize`:@@app.netzgrafik-application.analytics:Analytics`;
+  readonly edit = $localize`:@@app.netzgrafik-application.edit:Edit`;
+  readonly moreFunctions = $localize`:@@app.netzgrafik-application.more-functions:More functions`;
+  readonly properties = $localize`:@@app.netzgrafik-application.properties:Properties`;
 
   private readonly destroyed = new Subject<void>();
 
