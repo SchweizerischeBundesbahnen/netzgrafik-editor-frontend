@@ -7,7 +7,6 @@
     <a href="https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/USERMANUAL.md"
       class="nav-element"
       target="_blank"
-      i18n="@@app.user-manual"
     >
       {{ tUserManual }}
     </a>
@@ -33,7 +32,7 @@
   <sbb-menu #menu="sbbMenu">
     <button sbb-menu-item (click)="logout()">
       <sbb-icon svgIcon="exit-small" class="sbb-icon-fit"></sbb-icon>
-      <span i18n>Logout</span>
+      <span>{{ tLogout }}</span>
     </button>
   </sbb-menu>
 </sbb-header-lean>
@@ -44,7 +43,7 @@
 <ng-template #loading>
   <ng-container *ngIf="!disableBackend">
     <sbb-loading-indicator mode="big"></sbb-loading-indicator>
-    <div class="login-message">Sie werden angemeldet...</div>
+    <div class="login-message">{{ tLoginMessage }}</div>
   </ng-container>
   <ng-container *ngIf="disableBackend">
     <sbb-netzgrafik-editor></sbb-netzgrafik-editor>
