@@ -7,12 +7,13 @@ import {loadTranslations} from "@angular/localize";
 })
 class I18n {
   locale = "en";
+  readonly allowedLocales = ["en", "fr", "de", "it"];
 
   async setLocale() {
     const userLocale = localStorage.getItem("locale");
 
     // If the user has a preferred language stored in localStorage, use it.
-    if (userLocale) {
+    if (userLocale && this.allowedLocales.includes(userLocale)) {
       this.locale = userLocale;
     } else {
       localStorage.setItem("locale", this.locale);

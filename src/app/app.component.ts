@@ -61,10 +61,7 @@ export class AppComponent {
   }
 
   changeLocale(locale: string) {
-    // Store the user's preferred locale in localStorage
     localStorage.setItem("locale", locale);
-
-    // Reload the page to apply the new locale
     location.reload();
   }
 
