@@ -3,7 +3,7 @@
     <!--<a sbbIconSidebarItem label="Varianten" (click)="onVariantenClicked()" class="sbb-active">-->
     <a *ngIf="!disableBackend"
       sbbIconSidebarItem
-      [label]="variants"
+      [label]="tVariants"
       [class]="getVariantsActivatedTag()"
       (click)="onVariantenClicked()"
     >
@@ -19,7 +19,7 @@
     </a>
     <a
       sbbIconSidebarItem
-      [label]="filter"
+      [label]="tFilter"
       [class]="getFilterActivatedTag()"
       [style]="getFilterStyle()"
       (click)="onFilterClicked()"
@@ -27,13 +27,13 @@
       <sbb-icon svgIcon="filter-small"></sbb-icon>
     </a>
     <!--
-    <a sbbIconSidebarItem [label]="analytics" (click)="onAnalyticsClicked()">
+    <a sbbIconSidebarItem [label]="tAnalytics" (click)="onAnalyticsClicked()">
       <sbb-icon svgIcon="bulb-on-small"></sbb-icon>
     </a>
     -->
     <a
       sbbIconSidebarItem
-      [label]="edit"
+      [label]="tEdit"
       [class]="getEditActivatedTag()"
       (click)="onEditToolClicked()"
     >
@@ -41,7 +41,7 @@
     </a>
     <a
       sbbIconSidebarItem
-      [label]="moreFunctions"
+      [label]="tMoreFunctions"
       [class]="getMoreFunctionActivatedTag()"
       (click)="onToolsClicked()"
     >
@@ -49,7 +49,7 @@
     </a>
     <a
       sbbIconSidebarItem
-      [label]="properties"
+      [label]="tProperties"
       [class]="getPropertiesActivatedTag()"
       (click)="onPropertiesClicked()"
     >
