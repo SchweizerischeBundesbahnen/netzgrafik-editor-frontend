@@ -36,10 +36,6 @@ export class LabelDropListComponent implements OnInit, OnDestroy {
   public sourceIndex: number;
   private destroyed = new Subject<void>();
 
-  readonly tNoLabelsAvailable = $localize`:@@app.view.editor-edit-tools-view-component.label-drop-list.no-labels-available:No labels available`;
-  readonly tDeleteGroup = $localize`:@@app.view.editor-edit-tools-view-component.label-drop-list.delete-group:Delete group`;
-  readonly tAddNewGroup = $localize`:@@app.view.editor-edit-tools-view-component.label-drop-list.add-new-group:Add new group`;
-
   constructor(
     private nodeService: NodeService,
     private trainrunService: TrainrunService,

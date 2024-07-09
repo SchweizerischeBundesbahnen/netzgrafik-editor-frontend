@@ -43,28 +43,6 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
   @Output()
   public nodeDeleted = new EventEmitter<void>();
 
-  readonly tMainData = $localize`:@@app.view.editor-side-view.editor-node-detail-view.main-data:Main data`;
-  readonly tOperationalPoint = $localize`:@@app.view.editor-side-view.editor-node-detail-view.operational-point:Operational point`;
-  readonly tName = $localize`:@@app.view.editor-side-view.editor-node-detail-view.name:Name`;
-  readonly tConnectionTime = $localize`:@@app.view.editor-side-view.editor-node-detail-view.connection-time:Connection time`;
-  readonly tOccupancy = $localize`:@@app.view.editor-side-view.editor-node-detail-view.occupancy:Occupancy`;
-  readonly tCapacity = $localize`:@@app.view.editor-side-view.editor-node-detail-view.capacity:Capacity`;
-  readonly tFilterableLabels = $localize`:@@app.view.editor-side-view.editor-node-detail-view.filterable-labels:Filterable labels`; 
-  readonly tLabels = $localize`:@@app.view.editor-side-view.editor-node-detail-view.labels:Labels`;
-  readonly tNewLabelPlaceholder = $localize`:@@app.view.editor-side-view.editor-node-detail-view.new-label-placeholder:New label...`;
-  readonly tStoppingTimes = $localize`:@@app.view.editor-side-view.editor-node-detail-view.stopping-times:Stopping times`;
-  readonly tStoppingTimePerProduct = $localize`:@@app.view.editor-side-view.editor-node-detail-view.stopping-time-per-product:Stopping time per product`;
-  readonly tNoStop = $localize`:@@app.view.editor-side-view.editor-node-detail-view.no-stop:No stop`;
-  readonly tIPV = $localize`:@@app.view.editor-side-view.editor-node-detail-view.ipv:IPV`;
-  readonly tA = $localize`:@@app.view.editor-side-view.editor-node-detail-view.a:A`;
-  readonly tB = $localize`:@@app.view.editor-side-view.editor-node-detail-view.b:B`;
-  readonly tC = $localize`:@@app.view.editor-side-view.editor-node-detail-view.c:C`;
-  readonly tD = $localize`:@@app.view.editor-side-view.editor-node-detail-view.d:D`;
-  readonly tLinks = $localize`:@@app.view.editor-side-view.editor-node-detail-view.links:Links`;
-  readonly tPlatformInformation = $localize`:@@app.view.editor-side-view.editor-node-detail-view.platform-information:Platform information`;
-  readonly tPlatformLength = $localize`:@@app.view.editor-side-view.editor-node-detail-view.platform-length:Platform length`;
-  readonly tDeleteNote = $localize`:@@app.view.editor-side-view.editor-node-detail-view.delete-node:Delete node`;
-
   nodeProperties: NodeProperties = {
     nodeId: 0,
     nodeBetriebspunktName: "",
@@ -196,16 +174,9 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
 
   onDeleteNode() {
     const node = this.nodeService.getSelectedNode();
-    const dialogTitle = "Löschen";
-    const dialogContent =
-      "Soll der Knoten " +
-      node.getBetriebspunktName() +
-      " (" +
-      node.getFullName() +
-      ") definitiv gelöscht werden?";
     const confirmationDialogParamter = new ConfirmationDialogParameter(
-      dialogTitle,
-      dialogContent,
+      $localize`:@@app.view.editor-side-view.editor-node-detail-view.delete:Delete`,
+      $localize`:@@app.view.editor-side-view.editor-node-detail-view.deleteNodeDialog:Should the node ${node.getBetriebspunktName()}:operationalPointShortName: (${node.getFullName()}:operationalPointName:) be definitely deleted?`
     );
     this.uiInteractionService
       .showConfirmationDiagramDialog(confirmationDialogParamter)

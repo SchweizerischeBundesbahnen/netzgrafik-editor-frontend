@@ -48,9 +48,6 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
 
   private showAllLockStates = false;
 
-  readonly tShowOnlyClosedLocks = $localize`:@@app.perlenkette.show-only-closed-locks:Show only closed locks`;
-  readonly tShowAllLocks = $localize`:@@app.perlenkette.show-all-locks:Show all locks`;
-
   constructor(
     private readonly loadPerlenketteService: LoadPerlenketteService,
     readonly filterService: FilterService,

@@ -63,7 +63,7 @@ export class SnapshotEntryComponent {
   }
 
   getTitle(): string {
-    return $localize`:@@app.view.variant.variant-view.variant-history.snapshot-entry.change-snapshot-version:Change ${this.model.snapshotVersion}`;
+    return $localize`:@@app.view.variant.variant-view.variant-history.snapshot-entry.change-snapshot-version:Change ${this.model.snapshotVersion}:snapshotVersion:`;
   }
 }
 

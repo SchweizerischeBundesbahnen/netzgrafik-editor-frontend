@@ -1,27 +1,27 @@
-<h2 class="SummaryTitle">{{ tEdit }}</h2>
+<h2 class="SummaryTitle">{{ 'app.view.editor-edit-tools-view-component.edit' | translate }}</h2>
 <sbb-accordion [multi]="false">
   <sbb-expansion-panel
     [expanded]="false"
     [hideToggle]="false"
     [disabled]="false"
   >
-    <sbb-expansion-panel-header>{{ tFilterableLabels }}</sbb-expansion-panel-header>
+    <sbb-expansion-panel-header>{{ 'app.view.editor-edit-tools-view-component.filterable-labels' | translate }}</sbb-expansion-panel-header>
     <sbb-accordion [multi]="false">
       <sbb-expansion-panel [expanded]="true">
-        <sbb-expansion-panel-header>{{ tTrainruns }}</sbb-expansion-panel-header>
+        <sbb-expansion-panel-header>{{ 'app.view.editor-edit-tools-view-component.trainruns' | translate }}</sbb-expansion-panel-header>
         <sbb-label-drop-list-component
           [componentLabelRef]="'Trainrun'"
         ></sbb-label-drop-list-component>
       </sbb-expansion-panel>
       <sbb-expansion-panel [expanded]="false">
-        <sbb-expansion-panel-header>{{ tNodes }}</sbb-expansion-panel-header>
+        <sbb-expansion-panel-header>{{ 'app.view.editor-edit-tools-view-component.nodes' | translate }}</sbb-expansion-panel-header>
         <sbb-label-drop-list-component
           [componentLabelRef]="'Node'"
         ></sbb-label-drop-list-component>
       </sbb-expansion-panel>
 
       <sbb-expansion-panel [expanded]="false">
-        <sbb-expansion-panel-header>{{ tNotes }}</sbb-expansion-panel-header>
+        <sbb-expansion-panel-header>{{ 'app.view.editor-edit-tools-view-component.notes' | translate }}</sbb-expansion-panel-header>
         <sbb-label-drop-list-component
           [componentLabelRef]="'Note'"
         ></sbb-label-drop-list-component>
@@ -30,7 +30,7 @@
   </sbb-expansion-panel>
 
   <sbb-expansion-panel [expanded]="true">
-    <sbb-expansion-panel-header>{{ tDeleteNetzgrafikTitle }}</sbb-expansion-panel-header>
+    <sbb-expansion-panel-header>{{ 'app.view.editor-edit-tools-view-component.delete-netzgrafik-title' | translate }}</sbb-expansion-panel-header>
 
     <ng-container
       *ngIf="
@@ -39,61 +39,61 @@
       "
     >
       <br />
-      <sbb-label>{{ tNonVisibleElements }}</sbb-label>
+      <sbb-label>{{ 'app.view.editor-edit-tools-view-component.non-visible-elements' | translate }}</sbb-label>
       <br />
       <button
         (click)="onClearAllFiltered()"
-        [title]="tDeleteAllNonVisibleElementsTooltip"
+        [title]="'app.view.editor-edit-tools-view-component.delete-all-non-visible-elements-tooltip' | translate"
         class="TrainrunDialog EditorToolButton"
       >
         <sbb-icon svgIcon="bucket-foam-broom-small"></sbb-icon>
       </button>
-      {{ tDeleteAllNonVisibleElements }}
+      {{ 'app.view.editor-edit-tools-view-component.delete-all-non-visible-elements' | translate }}
       <br />
     </ng-container>
     <br />
-    <sbb-label>{{ tVisibleElements }}</sbb-label>
+    <sbb-label>{{ 'app.view.editor-edit-tools-view-component.visible-elements' | translate }}</sbb-label>
     <br />
     <button
       (click)="onClearAllTrainruns()"
-      [title]="tDeleteAllVisibleTrainrunsTooltip"
+      [title]="'app.view.editor-edit-tools-view-component.delete-all-visible-trainruns-tooltip' | translate"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="trash-small"></sbb-icon>
     </button>
-    {{ tDeleteAllVisibleTrainruns }}
+    {{ 'app.view.editor-edit-tools-view-component.delete-all-visible-trainruns' | translate }}
     <br />
     <button
       (click)="onClearAllNotes()"
-      [title]="tDeleteAllVisibleNotesTooltip"
+      [title]="'app.view.editor-edit-tools-view-component.delete-all-visible-notes-tooltip' | translate"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="trash-small"></sbb-icon>
     </button>
-    {{ tDeleteAllVisibleNotes }}
+    {{ 'app.view.editor-edit-tools-view-component.delete-all-visible-notes' | translate }}
     <br />
     <button
       (click)="onClear()"
-      [title]="tDeleteAllVisibleElementsTooltip"
+      [title]="'app.view.editor-edit-tools-view-component.delete-all-visible-elements-tooltip' | translate"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="trash-small"></sbb-icon>
     </button>
-    {{ tDeleteAllVisibleElements }}
+    {{ 'app.view.editor-edit-tools-view-component.delete-all-visible-elements' | translate }}
   </sbb-expansion-panel>
   <sbb-expansion-panel [expanded]="false">
     <sbb-expansion-panel-header>
-      {{ tMergeNetzgrafikTitle }}
+      {{ 'app.view.editor-edit-tools-view-component.merge-netzgrafik-title' | translate }}
     </sbb-expansion-panel-header>
     <br />
     <button
       (click)="onLoadNetzgrafikToInsertCopieButton()"
-      [title]="tAddNetzgrafikAsCopyTooltip"
+      [title]="'app.view.editor-edit-tools-view-component.add-netzgrafik-as-copy-tooltip' | translate"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="hierarchy-small"></sbb-icon>
     </button>
-    {{ tAddNetzgrafikAsCopy }}
+    {{ 'app.view.editor-edit-tools-view-component.add-netzgrafik-as-copy' | translate }}
     <input
       hidden
       #netzgrafikMergeAsACopyFileInput
@@ -105,12 +105,12 @@
     <br />
     <button
       (click)="onLoadNetzgrafikToMergeButton()"
-      [title]="tMergeNetzgrafikTooltip"
+      [title]="'app.view.editor-edit-tools-view-component.merge-netzgrafik-tooltip' | translate"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="hierarchy-small"></sbb-icon>
     </button>
-    {{ tMergeNetzgrafik }}
+    {{ 'app.view.editor-edit-tools-view-component.merge-netzgrafik' | translate }}
     <input
       hidden
       #netzgrafikMergeFileInput

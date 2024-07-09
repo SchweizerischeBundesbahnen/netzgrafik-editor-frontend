@@ -34,21 +34,6 @@ export class StammdatenDialogComponent implements OnDestroy {
   dataSource: SbbTableDataSource<any>;
   private destroyed = new Subject<void>();
 
-  readonly tMainData = $localize`:@@app.view.dialogs.stammdaten-dialog.main-data:Main data`;
-  readonly tBetriebspunkt = $localize`:@@app.view.dialogs.stammdaten-dialog.betriebspunkt:Operational point`;
-  readonly tIPVStopTime = $localize`:@@app.view.dialogs.stammdaten-dialog.ipv-stop-time:IPV stop time`;
-  readonly tAStopTime = $localize`:@@app.view.dialogs.stammdaten-dialog.a-stop-time:A stop time`;
-  readonly tBStopTime = $localize`:@@app.view.dialogs.stammdaten-dialog.b-stop-time:B stop time`;
-  readonly tCStopTime = $localize`:@@app.view.dialogs.stammdaten-dialog.c-stop-time:C stop time`;
-  readonly tDStopTime = $localize`:@@app.view.dialogs.stammdaten-dialog.d-stop-time:D stop time`;
-  readonly tZAZ = $localize`:@@app.view.dialogs.stammdaten-dialog.zaz:ZAZ`;
-  readonly tConnectionTime = $localize`:@@app.view.dialogs.stammdaten-dialog.connection-time:Connection time`;
-  readonly tRegion = $localize`:@@app.view.dialogs.stammdaten-dialog.region:Region`;
-  readonly tCategory = $localize`:@@app.view.dialogs.stammdaten-dialog.category:Category`;
-  readonly tFilterableLabels = $localize`:@@app.view.dialogs.stammdaten-dialog.filterable-labels:Filterable labels`;
-  readonly tPosition = $localize`:@@app.view.dialogs.stammdaten-dialog.position:Position`;
-  readonly tClose = $localize`:@@app.view.dialogs.stammdaten-dialog.close:Close`;
-
   constructor(
     public dialog: SbbDialog,
     private trainrunSectionService: TrainrunSectionService,

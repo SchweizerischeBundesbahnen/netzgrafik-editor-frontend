@@ -8,8 +8,6 @@ import {Observable} from "rxjs";
   styleUrls: ["./card.component.scss"],
 })
 export class CardComponent {
-  readonly tOpen = $localize`:@@app.view.card-grid.card.open:Open`;
-
   @Input()
   title?: string;
 

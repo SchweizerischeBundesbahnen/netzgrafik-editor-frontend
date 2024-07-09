@@ -6,7 +6,7 @@
       class="ngx-html-editor-color trash {{ setClassedTag(undefined) }}"
       [style]="getColorStyle(undefined)"
       (click)="onRemoveColor()"
-      [title]="tResetColor"
+      [title]="'app.view.dialogs.note-dialog.html-editor.reset-color' | translate"
     >
       <sbb-icon svgIcon="trash-small"></sbb-icon>
     </button>
@@ -29,11 +29,11 @@
     cdkFocusInitial
     [editor]="editor"
     [formControl]="model.getControl('noteText')"
-    [placeholder]="tEditorPlaceholder"
+    [placeholder]="'app.view.dialogs.note-dialog.html-editor.editor-placeholder' | translate"
     (focusout)="onUpdate()"
     (keydown)="onKeydown($event)"
   ></ngx-editor>
   <sbb-error *ngIf="model.getControl('noteText').errors?.required"
-    >{{ tMandatoryField }}</sbb-error
+    >{{ 'app.view.dialogs.note-dialog.html-editor.mandatory-field' | translate }}</sbb-error
   >
 </div>

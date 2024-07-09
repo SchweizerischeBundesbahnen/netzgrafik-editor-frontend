@@ -15,10 +15,6 @@ import {StaticDomTags} from "../../../editor-main-view/data-views/static.dom.tag
 export class HtmlEditorComponent implements OnInit, OnDestroy {
   @Input() model!: FormModel<NoteFormComponentModel>;
 
-  readonly tResetColor = $localize`:@@app.view.dialogs.note-dialog.html-editor.reset-color:Reset color`
-  readonly tEditorPlaceholder = $localize`:@@app.view.dialogs.note-dialog.html-editor.editor-placeholder:Enter comment here...`
-  readonly tMandatoryField = $localize`:@@app.view.dialogs.note-dialog.html-editor.mandatory-field:Mandatory field`;
-
   editor: Editor;
   toolbar: Toolbar = [["bold", "italic"], ["bullet_list"], ["link"]];
   colorPresets: HtmlEditorColor[] = [

@@ -57,9 +57,6 @@ export class NoteDialogComponent implements OnDestroy {
   private dialogPos = null;
   private dialogMovementLastPosition: Vec2D = undefined;
 
-  readonly tNoteTab = $localize`:@@app.view.dialogs.note-dialog.note-tab:Note`;
-  readonly tFilterableLabelsTab = $localize`:@@app.view.dialogs.note-dialog.filterable-labels-tab:Filterable labels`;
-
   constructor(
     public dialog: SbbDialog,
     private uiInteractionService: UiInteractionService,

@@ -1,347 +1,626 @@
 {
-  "app-routing.module.path.404": "Die gesuchte Seite wurde nicht gefunden.",
-  "app-routing.module.path.401": "Sie sind nicht autorisiert, bitte laden Sie die Seite neu.",
-  "app-routing.module.path.403": "Sie sind nicht berechtigt diese Aktion durchzuführen.",
-  "app-routing.module.path.409": "Es gab einen Konflikt bei der Ausführung Ihrer Aktion, bitte versuchen Sie es erneut.",
-  "app-routing.module.path.error": "Es ist ein Fehler aufgetreten.",
-  "app.version": "Version",
-  "app.user-guide": "User Guide",
-  "app.user-manual": "User Manual",
-  "app.logout": "Logout",
-  "app.login": "Sie werden angemeldet...",
-  "app.logger.title": "Titel",
-  "app.models.node.betriebspunkt-name-default": "NEW",
-  "app.models.node.full-name-default": "New node",
-  "app.models.note.title-default": "Note title",
-  "app.models.note.text-default": "Note text",
-  "app.netzgrafik-application.variants": "Varianten",
-  "app.netzgrafik-application.filter": "Filter",
-  "app.netzgrafik-application.analytics": "Analytics",
-  "app.netzgrafik-application.edit": "Bearbeiten",
-  "app.netzgrafik-application.more-functions": "Weitere Funktionen",
-  "app.netzgrafik-application.properties": "Einstellungen",
-  "app.perlenkette.perlenkette-node.0-warning-connection": "Kein fehlerhafter Anschluss",
-  "app.perlenkette.perlenkette-node.1-warning-connection": "1 fehlerhafter Anschluss",
-  "app.perlenkette.perlenkette-node.n-warning-connections": "{$PH} fehlerhafte Anschlüsse",
-  "app.perlenkette.perlenkette-node.0-fitting-connection": "Kein passender Anschluss",
-  "app.perlenkette.perlenkette-node.1-fitting-connection": "1 passender Anschluss",
-  "app.perlenkette.perlenkette-node.n-fitting-connections": "{$PH} passende Anschlüsse",
-  "app.perlenkette.show-only-closed-locks": "Zeige nur geschlossene Schlösser",
-  "app.perlenkette.show-all-locks": "Zeige alle Schlösser",
-  "app.services.data.node.transit-modified.title": "Durchfahrt geändert",
-  "app.services.data.node.transit-modified.description": "Zeiten können nicht angepasst werden, beidseitger Lock gefunden",
-  "app.models.note.default-title": "Note title",
-  "app.models.note.default-text": "Note text",
-  "app.services.data.trainrunsection.intermediate-stop-replacement.title": "Zwischenhalteumwandlung",
-  "app.services.data.trainrunsection.intermediate-stop-replacement.description": "Zwischenhalteumwandlung führte bei der Vergabe der Zeiten zu inkonsistenzen!",
-  "app.services.util.connection-validator.connection-marked-for-transit.title": "Anschluss auf Durchfahrt gezeichnet!",
-  "app.services.util.connection-validator.connection-marked-for-transit.description": "Anschluss auf Durchfahrt gezeichnet!",
-  "app.services.util.trainrun-iteration.error.infinity-loop": "Iterator hat eine Unendlichkeitsschleife entdeckt. Die Iteration wurde vorzeitig abgebrochen!",
-  "app.services.util.trainrunsection-validator.target-arrival-not-reacheable.title": "Ziel Ankunft Warnung",
-  "app.services.util.trainrunsection-validator.target-arrival-not-reacheable.description": "Zielankunftszeit kann nicht erreicht werden",
-  "app.services.util.trainrunsection-validator.source-arrival-not-reacheable.title": "Quelle Ankunft Warnung",
-  "app.services.util.trainrunsection-validator.source-arrival-not-reacheable.description": "Quellankunftszeit kann nicht erreicht werden",
-  "app.services.util.trainrunsection-validator.travel-time-less-than-1.title": "Reisezeit weniger als 1",
-  "app.services.util.trainrunsection-validator.travel-time-less-than-1.description": "Die Reisezeit muss größer oder gleich 1 sein.",
-  "app.services.util.transition-validator.source-arrival-not-reacheable.title": "Quelle Ankunft Warnung",
-  "app.services.util.transition-validator.source-arrival-not-reacheable.description": "Quellankunftszeit kann nicht erreicht werden",
-  "app.services.util.transition-validator.source-departure-not-reacheable.title": "Quelle Abfahrt Warnung",
-  "app.services.util.transition-validator.source-departure-not-reacheable.description": "Quellabfahrtszeit kann nicht erreicht werden",
-  "app.services.util.transition-validator.target-arrival-not-reacheable.title": "Ziel Ankunft Warnung",
-  "app.services.util.transition-validator.target-arrival-not-reacheable.description": "Zielankunftszeit kann nicht erreicht werden",
-  "app.services.util.transition-validator.target-departure-not-reacheable.title": "Ziel Abfahrt Warnung",
-  "app.services.util.transition-validator.target-departure-not-reacheable.description": "Zielabfahrtszeit kann nicht erreicht werden",
-  "app.streckengrafik.components.reset": "Zurücksetzen",
-  "app.streckengrafik.components.close-all-path-nodes": "Schliesse alle Gleisbeleger",
-  "app.streckengrafik.components.open-all-path-nodes": "Öffne alle Gleisbeleger",
-  "app.streckengrafik.components.show-advanced-display-functions": "Erweiterte Darstellungsfunktionen einblenden",
-  "app.streckengrafik.components.show-or-hide-time-for-non-selected-trains": "Zeit ein-/ausblenden für nicht selektierte Züge",
-  "app.streckengrafik.components.show-or-hide": "{$PH} ein-/ausblenden",
-  "app.streckengrafik.components.show-or-hide-name-for-non-selected-trainruns": "Zugnamen ein-/ausblenden für nicht selektierte Züge",
-  "app.streckengrafik.components.hide-advanced-display-functions": "Erweiterte Darstellungsfunktionen ausblenden",
-  "app.streckengrafik.components.rail-track-slider": "Streckengleis",
-  "app.streckengrafik.components.headway-band": "Zugfolgezeiten",
-  "app.streckengrafik.components.time": "Zeit",
-  "app.streckengrafik.components.name": "Name",
-  "app.utils.navigation-parameters.no-project-id": "Keine Projekt-ID vorhanden",
-  "app.utils.navigation-parameters.no-variant-id": "Keine Variante-ID vorhanden",
-  "app.utils.navigation-parameters.no-version-id": "Keine Version-ID vorhanden",
-  "app.view.card-grid.card.open": "Öffnen",
-  "app.view.dialogs.confirmation-dialog.confirmation-default": "Ja",
-  "app.view.dialogs.confirmation-dialog.abort-default": "Nein",
-  "app.view.dialogs.filterable-labels-dialog.filterable-label-dialog-component.edit-filterable-labels": "Filterbare Labels für {$PH} bearbeiten",
-  "app.view.dialogs.filterable-labels-dialog.filterable-label-dialog-component.transfer-to-all-visible": "auf alle sichtbaren übertragen",
-  "app.view.dialogs.filterable-labels-dialog.filterable-label-dialog-component.delete-from-all-visible": "aus allen sichtbaren löschen",
-  "app.view.dialogs.filterable-labels-dialog.filterable-label-dialog-component.transfer.title": "Übernehmen",
-  "app.view.dialogs.filterable-labels-dialog.filterable-label-dialog-component.transfer.content": "Soll das Label {$PH} auf alle sichtbaren {$PH_1} übertragen werden?",
-  "app.view.dialogs.filterable-labels-dialog.filterable-label-dialog-component.delete.title": "Löschen",
-  "app.view.dialogs.filterable-labels-dialog.filterable-label-dialog-component.delete.content": "Soll das Label {$PH} definitiv aus allen sichtbaren {$PH_1} gelöscht werden?",
-  "app.view.dialogs.filterable-labels-dialog.filterable-labels-form.mandatory-field": "Mandatory field",
-  "app.view.dialogs.note-dialog.html-editor.reset-color": "Farbe zurücksetzen",
-  "app.view.dialogs.note-dialog.html-editor.editor-placeholder": "Kommentar hier eingeben...",
-  "app.view.dialogs.note-dialog.html-editor.mandatory-field": "Pflichtfeld",
-  "app.view.dialogs.note-dialog.html-editor.color-presets.ec.title": "Verwende die Frabe des Frabschemas für EC",
-  "app.view.dialogs.note-dialog.html-editor.color-presets.ic.title": "Verwende die Frabe des Frabschemas für IC",
-  "app.view.dialogs.note-dialog.html-editor.color-presets.ir.title": "Verwende die Frabe des Frabschemas für IR",
-  "app.view.dialogs.note-dialog.html-editor.color-presets.re.title": "Verwende die Frabe des Frabschemas für RE",
-  "app.view.dialogs.note-dialog.html-editor.color-presets.s.title": "Verwende die Frabe des Frabschemas für S",
-  "app.view.dialogs.note-dialog.html-editor.color-presets.gex.title": "Verwende die Frabe des Frabschemas für GEX",
-  "app.view.dialogs.note-dialog.html-editor.color-presets.g.title": "Verwende die Frabe des Frabschemas für G",
-  "app.view.dialogs.note-dialog.html-editor.color-presets.green.title": "green",
-  "app.view.dialogs.note-dialog.html-editor.color-presets.blue.title": "blue",
-  "app.view.dialogs.note-dialog.html-editor.color-presets.magenta.title": "magenta",
-  "app.view.dialogs.note-dialog.html-editor.color-presets.red.title": "red",
-  "app.view.dialogs.note-dialog.html-editor.color-presets.warning.title": "warning color",
-  "app.view.dialogs.note-dialog.note-tab": "Kommentar",
-  "app.view.dialogs.note-dialog.filterable-labels-tab": "Filterbare Labels",
-  "app.view.dialogs.note-dialog.delete-note": "Kommentar löschen",
-  "app.view.dialogs.note-dialog.note-filter-tab.labels": "Labels",
-  "app.view.dialogs.note-dialog.note-filter-tab.label-placeholder": "New label...",
-  "app.view.dialogs.note-dialog.note-form.title": "Title",
-  "app.view.dialogs.stammdaten-dialog.main-data": "Stammdaten",
-  "app.view.dialogs.stammdaten-dialog.betriebspunkt": "Betriebspunkt",
-  "app.view.dialogs.stammdaten-dialog.ipv-stop-time": "Haltezeit IPV",
-  "app.view.dialogs.stammdaten-dialog.a-stop-time": "Haltezeit A",
-  "app.view.dialogs.stammdaten-dialog.b-stop-time": "Haltezeit B",
-  "app.view.dialogs.stammdaten-dialog.c-stop-time": "Haltezeit C",
-  "app.view.dialogs.stammdaten-dialog.d-stop-time": "Haltezeit D",
-  "app.view.dialogs.stammdaten-dialog.zaz": "ZAZ",
-  "app.view.dialogs.stammdaten-dialog.connection-time": "Connection Time",
-  "app.view.dialogs.stammdaten-dialog.region": "Region",
-  "app.view.dialogs.stammdaten-dialog.category": "Kategorie",
-  "app.view.dialogs.stammdaten-dialog.filterable-labels": "Filterbare Labels",
-  "app.view.dialogs.stammdaten-dialog.position": "Position",
-  "app.view.dialogs.stammdaten-dialog.close": "Schliessen",
-  "app.view.editor-edit-tools-view-component.edit": "Bearbeiten",
-  "app.view.editor-edit-tools-view-component.filterable-labels": "Filterbare labels",
-  "app.view.editor-edit-tools-view-component.trainruns": "Zugfahrten",
-  "app.view.editor-edit-tools-view-component.nodes": "Knoten",
-  "app.view.editor-edit-tools-view-component.notes": "Kommentare",
-  "app.view.editor-edit-tools-view-component.delete-netzgrafik-title": "Netzgrafik - Löschen",
-  "app.view.editor-edit-tools-view-component.non-visible-elements": "Nicht sichtbare Elemente",
-  "app.view.editor-edit-tools-view-component.delete-all-non-visible-elements-tooltip": "Alle nicht sichtbare Elemente, wie Knoten, Zugfahrten und Kommentare löschen",
-  "app.view.editor-edit-tools-view-component.delete-all-non-visible-elements": "Alle nicht sichtbare Elemente löschen",
-  "app.view.editor-edit-tools-view-component.visible-elements": "Sichtbare Elemente",
-  "app.view.editor-edit-tools-view-component.delete-all-visible-trainruns-tooltip": "Alle sichtbare Zugfahrten löschen",
-  "app.view.editor-edit-tools-view-component.delete-all-visible-trainruns": "Alle sichtbare Zugfahrten löschen",
-  "app.view.editor-edit-tools-view-component.delete-all-visible-notes-tooltip": "Alle sichtbare Kommentare löschen",
-  "app.view.editor-edit-tools-view-component.delete-all-visible-notes": "Alle sichtbare Kommentare löschen",
-  "app.view.editor-edit-tools-view-component.delete-all-visible-elements-tooltip": "Alle sichtbare Elemente, wie Knoten, Zugfahrten und Kommentare löschen",
-  "app.view.editor-edit-tools-view-component.delete-all-visible-elements": "Alle sichtbare Elemente löschen",
-  "app.view.editor-edit-tools-view-component.merge-netzgrafik-title": "Netzgrafik - Zusammenführen",
-  "app.view.editor-edit-tools-view-component.add-netzgrafik-as-copy-tooltip": "Netzgrafik als Kopie hinzufügen (Zugfahrtenn, Knoten, Kommentare)",
-  "app.view.editor-edit-tools-view-component.add-netzgrafik-as-copy": "Netzgrafik als Kopie hinzufügen",
-  "app.view.editor-edit-tools-view-component.merge-netzgrafik-tooltip": "Netzgrafik durch Zusammenführen mergen (Zugfahrtenn, Knoten, Kommentare)",
-  "app.view.editor-edit-tools-view-component.merge-netzgrafik": "Netzgrafik durch Zusammenführen mergen",
-  "app.view.editor-edit-tools-view-component.delete": "Löschen",
-  "app.view.editor-edit-tools-view-component.on-clear-delete-all-non-visible-elements": "Sollen alle nicht sichtbare Elemente aus der Netzgrafik definitiv gelöscht werden?",
-  "app.view.editor-edit-tools-view-component.on-clear-delete-all-visible-elements": "Sollen alle sichtbare Elemente aus der Netzgrafik definitiv gelöscht werden?",
-  "app.view.editor-edit-tools-view-component.on-clear-delete-all-visible-trainruns": "Sollen alle sichtbare Zugfahrten aus der Netzgrafik definitiv gelöscht werden?",
-  "app.view.editor-edit-tools-view-component.on-clear-delete-all-visible-notes": "Sollen alle sichtbare Kommentare aus der Netzgrafik definitiv gelöscht werden?",
-  "app.view.editor-edit-tools-view-component.label-drop-list.no-labels-available": "Keine Labels vorhanden",
-  "app.view.editor-edit-tools-view-component.label-drop-list.delete-group": "Gruppe löschen",
-  "app.view.editor-edit-tools-view-component.label-drop-list.add-new-group": "Neue Gruppe hinzufügen",
-  "app.view.editor-edit-tools-view-component.label-drop-list.trainruns": "Zugfahrten",
-  "app.view.editor-edit-tools-view-component.label-drop-list.notes": "Kommentare",
-  "app.view.editor-edit-tools-view-component.label-drop-list.nodes": "Knoten",
-  "app.view.editor-filter-view.filter": "Filter",
-  "app.view.editor-filter-view.general": "Allgemein",
-  "app.view.editor-filter-view.category": "Kategorie",
-  "app.view.editor-filter-view.frequency": "Takt",
-  "app.view.editor-filter-view.time-category": "Verkehrt",
-  "app.view.editor-filter-view.display-all-trainruns": "Alle Zugfahrten anzeigen",
-  "app.view.editor-filter-view.reset-trainrun-filter": "Zugfilter zurücksetzen",
-  "app.view.editor-filter-view.filterable-labels-trainruns": "Filterbare Labels: Zugfahrten",
-  "app.view.editor-filter-view.filterable-labels-nodes": "Filterbare Labels: Knoten",
-  "app.view.editor-filter-view.filterable-labels-notes": "Filterbare Labels: Kommentare",
-  "app.view.editor-filter-view.display": "Anzeigen",
-  "app.view.editor-filter-view.times": "Zeiten",
-  "app.view.editor-filter-view.decimal-displayed": "Anzahl Nachkommastellenanzeigen",
-  "app.view.editor-filter-view.display-arrival-departure-times": "Abfahrt- und Ankuftszeiten anzeigen",
-  "app.view.editor-filter-view.display-arrival-departure-times-for-connections": "Abfahrt- und Ankuftszeiten für Durchfahrten anzeigen",
-  "app.view.editor-filter-view.display-travel-times": "Fahrzeiten anzeigen",
-  "app.view.editor-filter-view.display-trainrun-name": "Zugname anzeigen",
-  "app.view.editor-filter-view.connection": "Anschlüsse",
-  "app.view.editor-filter-view.display-connections": "Anschlüsse anzeigen",
-  "app.view.editor-filter-view.nodes": "Knoten",
-  "app.view.editor-filter-view.display-nodes-without-visible-trainruns": "Knoten ohne (angezeigte) Zugfahrten anzeigen",
-  "app.view.editor-filter-view.display-nodes-with-only-stopping-trainruns": "Knoten mit nur durchfahrenden Zugfahrten anzeigen",
-  "app.view.editor-filter-view.notes": "Kommentare",
-  "app.view.editor-filter-view.display-notes": "Kommentare anzeigen",
-  "app.view.editor-filter-view.reset-display-filter": "Anzeigefilter zurücksetzen",
-  "app.view.editor-filter-view.saved-filters": "Gespeicherte Filter",
-  "app.view.editor-filter-view.save-filters": "Filter speichern und als Filtereinstellungen hinzufügen",
-  "app.view.editor-filter-view.reset-all-display-filters": "Alle Anzeigefilter zurücksetzen",
-  "app.view.editor-filter-view.load-filter": "{$PH_1} laden",
-  "app.view.editor-filter-view.reload-filter": "{$PH_1} neu laden",
-  "app.view.editor-filter-view.show-trainrun-category": "{$PH_1} einblenden",
-  "app.view.editor-filter-view.hide-trainrun-category": "{$PH_1} ausblenden",
-  "app.view.editor-filter-view.hide-trainrun-time-category": "{$PH_1} ausblenden",
-  "app.view.editor-filter-view.show-trainrun-frequency": "{$PH_1} einblenden",
-  "app.view.editor-filter-view.hide-trainrun-frequency": "{$PH_1} ausblenden",
-  "app.view.editor-filter-view.filterable-label-filter.no-labels-available": "Keine Labels vorhanden",
-  "app.view.editor-filter-view.filterable-label-filter.or": "Oder",
-  "app.view.editor-filter-view.filterable-label-filter.and": "Und",
-  "app.view.editor-filter-view.filterable-label-filter.show-all": "Alles anzeigen",
-  "app.view.editor-filter-view.filterable-label-filter.reset-filter": "Filter zurücksetzen",
-  "app.view.editor-filter-view.filterable-label-filter.show": "einblenden",
-  "app.view.editor-filter-view.filterable-label-filter.hode": "ausblenden",
-  "app.view.editor-menu.save-changes": "Speichere Änderungen",
-  "app.view.editor-menu.changes-saved": "Änderungen gespeichert",
-  "app.view.editor-menu.read-mode": "Lese-Modus",
-  "app.view.editor-menu.show-hide-filter": "Filter ein-/ausblenden",
-  "app.view.editor-menu.zoom-out": "Herauszoomer",
-  "app.view.editor-menu.zoom-in": "Hereinzoomen",
-  "app.view.editor-menu.topology-editor-disabled": "Topologie Editor deaktiviert",
-  "app.view.editor-menu.topology-editor-enalbed": "Topologie Editor aktiviert",
-  "app.view.editor-menu.multiple-selection-tool-disabled": "Mehrfachauswahlstool ist deaktiviert",
-  "app.view.editor-menu.multiple-selection-tool-enabled": "Mehrfachauswahlstool ist aktiviert",
-  "app.view.editor-menu.note-editor-disabled": "Note Editor deaktiviert",
-  "app.view.editor-menu.note-editor-enabled": "Note Editor aktiviert",
-  "app.view.editor-menu.analytics-disabled": "Analytics deaktiviert",
-  "app.view.editor-menu.analytics-enabled": "Analytics aktiviert",
-  "app.view.editor-menu.display-streckengrafik": "Streckengrafik anzeigen",
-  "app.view.editor-menu.close-streckengrafik": "Streckengrafik schliessen",
-  "app.view.editor-properties-view-component.settings": "Einstellungen",
-  "app.view.editor-properties-view-component.color-scheme": "Farbschema",
-  "app.view.editor-properties-view-component.theme": "Theme",
-  "app.view.editor-properties-view-component.background-color": "Hintergrundfarbe",
-  "app.view.editor-properties-view-component.set-color-to-white": "Hintergrundfarbe auf 'weiss' setzten",
-  "app.view.editor-properties-view-component.reset-background-color-to-default": "Hintergrundfarbe auf Standard zurücksetzen",
-  "app.view.editor-properties-view-component.background-color-black": "Hintergrundfarbe (dunkel)",
-  "app.view.editor-properties-view-component.editor": "Editor",
-  "app.view.editor-properties-view-component.travel-time-presetting-default": "Fahrzeitvoreinstellungs (Heuristik)",
-  "app.view.editor-properties-view-component.streckengrafik": "Streckengrafik",
-  "app.view.editor-properties-view-component.axis-scaling-distance": "Achsenskalierung (Distanz)",
-  "app.view.editor-side-view.editor-node-detail-view.main-data": "Stammdaten",
-  "app.view.editor-side-view.editor-node-detail-view.operational-point": "Betriebspunkt",
-  "app.view.editor-side-view.editor-node-detail-view.name": "Name",
-  "app.view.editor-side-view.editor-node-detail-view.connection-time": "Anschlusszeit",
-  "app.view.editor-side-view.editor-node-detail-view.occupancy": "Auslastung",
-  "app.view.editor-side-view.editor-node-detail-view.capacity": "Kapazität",
-  "app.view.editor-side-view.editor-node-detail-view.filterable-labels": "Filterbare Labels",
-  "app.view.editor-side-view.editor-node-detail-view.labels": "Labels",
-  "app.view.editor-side-view.editor-node-detail-view.new-label-placeholder": "Neues Label...",
-  "app.view.editor-side-view.editor-node-detail-view.stopping-times": "Haltezeiten",
-  "app.view.editor-side-view.editor-node-detail-view.stopping-time-per-product": "Haltezeit pro Produkt",
-  "app.view.editor-side-view.editor-node-detail-view.no-stop": "Kein Halt",
-  "app.view.editor-side-view.editor-node-detail-view.ipv": "IPV",
-  "app.view.editor-side-view.editor-node-detail-view.a": "A",
-  "app.view.editor-side-view.editor-node-detail-view.b": "B",
-  "app.view.editor-side-view.editor-node-detail-view.c": "C",
-  "app.view.editor-side-view.editor-node-detail-view.d": "D",
-  "app.view.editor-side-view.editor-node-detail-view.links": "Links",
-  "app.view.editor-side-view.editor-node-detail-view.platform-information": "Perron Informationen",
-  "app.view.editor-side-view.editor-node-detail-view.platform-length": "Perron-Länge",
-  "app.view.editor-side-view.editor-node-detail-view.delete-node": "Knoten löschen",
-  "app.view.editor-side-view.editor-tools-view-component.more-functions": "Weitere Funktionen",
-  "app.view.editor-side-view.editor-tools-view-component.export": "Exportieren",
-  "app.view.editor-side-view.editor-tools-view-component.export-netzgrafik-as-svg": "Exportieren Netzgrafik als SVG",
-  "app.view.editor-side-view.editor-tools-view-component.export-as-svg": "Exportieren als SVG",
-  "app.view.editor-side-view.editor-tools-view-component.export-netzgrafik-as-png": "Exportieren Netzgrafik als PNG",
-  "app.view.editor-side-view.editor-tools-view-component.export-as-png": "Exportieren als PNG",
-  "app.view.editor-side-view.editor-tools-view-component.print-netzgrafik": "Netzgrafik drucken",
-  "app.view.editor-side-view.editor-tools-view-component.print": "Drucken",
-  "app.view.editor-side-view.editor-tools-view-component.netzgrafik": "Netzgrafik",
-  "app.view.editor-side-view.editor-tools-view-component.export-netzgrafik": "Netzgrafik exportieren",
-  "app.view.editor-side-view.editor-tools-view-component.export-netzgrafik-as-json": "Netzgrafik als JSON exportieren",
-  "app.view.editor-side-view.editor-tools-view-component.import-netzgrafik": "Netzgrafik importieren",
-  "app.view.editor-side-view.editor-tools-view-component.import-netzgrafik-as-json": "Netzgrafik aus JSON importieren",
-  "app.view.editor-side-view.editor-tools-view-component.export-trainruns": "Zugfahrten exportieren",
-  "app.view.editor-side-view.editor-tools-view-component.export-trainruns-as-csv": "Netzgrafik aus JSON importieren",
-  "app.view.editor-side-view.editor-tools-view-component.export-trainruns-as-csv-excel": "In Excel: Daten -> Aus Text/CSV -> Filename ... importieren",
-  "app.view.editor-side-view.editor-tools-view-component.main-data": "Stammdaten",
-  "app.view.editor-side-view.editor-tools-view-component.import-main-data": "Stammdaten importieren",
-  "app.view.editor-side-view.editor-tools-view-component.help-csv-data": "Hilfe: CSV - Datei",
-  "app.view.editor-side-view.editor-tools-view-component.export-main-data": "Stammdaten exportieren",
-  "app.view.error-view.error": "Fehler",
-  "app.view.navigation-bar.project-name": "Projekt «{$PH_1}»",
-  "app.view.navigation-bar.project-name-archived": "Projekt «{$PH_1}» (archiviert)",
-  "app.view.navigation-bar.variant-name": "Variante «{$PH_1}»",
-  "app.view.navigation-bar.variant-name-archived": "Variante «{$PH_1}» (archiviert)",
-  "app.view.project.project-dialog.create-project": "Projekt erstellen",
-  "app.view.project.project-dialog.edit-project": "Projekt bearbeiten",
-  "app.view.project.project-dialog.create": "Erstellen",
-  "app.view.project.project-dialog.save": "Speichern",
-  "app.view.project.project-dialog.cancel": "Abbrechen",
-  "app.view.project.project-dialog.project-form.name": "Name",
-  "app.view.project.project-dialog.project-form.mandatory": "Pflichtfeld",
-  "app.view.project.project-dialog.project-form.summary": "Zusammenfassung",
-  "app.view.project.project-dialog.project-form.description": "Beschreibung",
-  "app.view.project.project-dialog.project-form.tooltip": "Benutzer müssen mit ihrer U/E-Nummer angegeben werden (bsp. u123456e654321). Eingabe pro Nummer jeweils mit 'Enter' bestätigen. Kleinschreibung beachten!",
-  "app.view.project.project-dialog.project-form.user-with-write-access": "Benutzer mit Schreibzugriff",
-  "app.view.project.project-dialog.project-form.new-user-placeholder": "New Benutzer...",
-  "app.view.project.project-dialog.project-form.invalid-values": "Ungültige Werte",
-  "app.view.project.project-dialog.project-form.user-with-read-access": "Benutzer mit Lesezugriff",
-  "app.view.project.projects-view.projects": "Projekte",
-  "app.view.project.projects-view.search-project": "Projekt suchen",
-  "app.view.project.projects-view.show-archive": "Archiv anzeigen",
-  "app.view.project.projects-view.archived": "(archiviert)",
-  "app.view.project.projects-view.archive-project.title": "Projekt archivieren",
-  "app.view.project.projects-view.archive-project.content": "Möchten Sie das Projekt jetzt archivieren?",
-  "app.view.project.projects-view.undo-archiving-project.title": "Archivierung rückgängig machen",
-  "app.view.project.projects-view.undo-archiving-project.content": "Möchten Sie die Archivierung des Projekts rückgängig machen?",
-  "app.view.project.projects-view.undo-archiving": "Archivierung rückgängig machen",
-  "app.view.project.projects-view.edit": "Bearbeiten",
-  "app.view.project.projects-view.archive": "Archivieren",
-  "app.view.variant.variant-dialog.create-variant": "Variante erstellen",
-  "app.view.variant.variant-dialog.edit-variant": "Variante bearbeiten",
-  "app.view.variant.variant-dialog.save": "Speichern",
-  "app.view.variant.variant-dialog.cancel": "Abbrechen",
-  "app.view.variant.variant-dialog.variant-form.name": "Name",
-  "app.view.variant.variant-dialog.variant-form.mandatory": "Pflichtfeld",
-  "app.view.variant.variant-view.variant-history.publish-entry.comment": "Kommentar",
-  "app.view.variant.variant-view.variant-history.publish-entry.publish": "Publizieren",
-  "app.view.variant.variant-view.variant-history.publish-entry.local-changes": "Lokale Änderungen müssen zuerst gespeichert werden",
-  "app.view.variant.variant-view.variant-history.publish-entry.discard-changes": "Änderungen Verwerfen",
-  "app.view.variant.variant-view.variant-history.released-entry.download": "Herunterladen",
-  "app.view.variant.variant-view.variant-history.released-entry.discard-changes": "Änderungen Verwerfen",
-  "app.view.variant.variant-view.variant-history.released-entry.ignore-conflict": "Konflikt ignorieren",
-  "app.view.variant.variant-view.variant-history.released-entry.restore": "Wiederherstellen",
-  "app.view.variant.variant-view.variant-history.released-entry.as-new-variant": "Als neue Variante",
-  "app.view.variant.variant-view.variant-history.released-entry.version-already-available": "Version bereits vorhanden",
-  "app.view.variant.variant-view.variant-history.released-entry.successfully-published": "Erfolgreich publiziert",
-  "app.view.variant.variant-view.variant-history.snapshot-entry.download": "Herunterladen",
-  "app.view.variant.variant-view.variant-history.snapshot-entry.restore": "Wiederherstellen",
-  "app.view.variant.variant-view.variant-history.snapshot-entry.as-new-variant": "Als neue Variante",
-  "app.view.variant.variant-view.variant-history.snapshot-entry.successfully-published": "Erfolgreich publiziert",
-  "app.view.variant.variant-view.variant-history.snapshot-entry.change-snapshot-version": "Änderung {$PH_1}",
-  "app.view.variant.variant-view.variant-history.new-version-published.title": "Neue Version publizieren",
-  "app.view.variant.variant-view.variant-history.new-version-published.content": "Möchten Sie Ihre persönlichen Änderungen als neue Version publizieren?",
-  "app.view.variant.variant-view.variant-history.discard-changes.title": "Änderungen verwerfen",
-  "app.view.variant.variant-view.variant-history.discard-changes.content": "Möchten Sie Ihre persönlichen Änderungen unwiderruflich verwerfen?",
-  "app.view.variant.variant-view.variant-history.restore-version.title": "Version wiederherstellen",
-  "app.view.variant.variant-view.variant-history.restore-version.content": "Möchten Sie den Stand dieser Version wiederherstellen?",
-  "app.view.variant.variant-view.variant-history.ignore-conflict.title": "Konflikt ignorieren",
-  "app.view.variant.variant-view.variant-history.ignore-conflict.content": "Möchten Sie, dass der aktuelle Stand auf der höchsten publizierten Version aufbaut?",
-  "app.view.variant.variant-view.archived": "(archiviert)",
-  "app.view.variant.variant-view.edit-variant": "Variante bearbeiten",
-  "app.view.variant.variant-view.delete-variant": "Variante löschen",
-  "app.view.variant.variant-view.versions": "Versionen",
-  "app.view.variant.variant-view.delete-variant.title": "Variante löschen",
-  "app.view.variant.variant-view.delete-variant.content": "Möchten Sie die Variante und alle enthaltenen Versionen endgültig löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
-  "app.view.variant.variants-view.archived": "(archiviert)",
-  "app.view.variant.variants-view.variants": "Varianten",
-  "app.view.variant.variants-view.search-variants": "Varianten suchen",
-  "app.view.variant.variants-view.show-archive": "Archiv anzeigen",
-  "app.view.variant.variants-view.project-description": "Projekt Beschreibung",
-  "app.view.variant.variants-view.edit-project": "Projekt bearbeiten",
-  "app.view.variant.variants-view.archive-project": "Projekt archivieren",
-  "app.view.variant.variants-view.undo-archiving": "Archivierung rückgängig machen",
-  "app.view.variant.variants-view.delete-project": "Projekt löschen",
-  "app.view.variant.variants-view.archive": "Archivieren",
-  "app.view.variant.variants-view.archive-variant.title": "Variante archivieren",
-  "app.view.variant.variants-view.archive-variant.content": "Möchten Sie die Variante jetzt archivieren?",
-  "app.view.variant.variants-view.undo-archiving-variant.title": "Archivierung rückgängig machen",
-  "app.view.variant.variants-view.undo-archiving-variant.content": "Möchten Sie die Archivierung der Variante rückgängig machen?",
-  "app.view.variant.variants-view.archive-project.title": "Projekt archivieren",
-  "app.view.variant.variants-view.archive-project.content": "Möchten Sie das Projekt jetzt archivieren?",
-  "app.view.variant.variants-view.undo-archiving-project.title": "Archivierung rückgängig machen",
-  "app.view.variant.variants-view.undo-archiving-project.content": "Möchten Sie die Archivierung des Projekts rückgängig machen?",
-  "app.view.variant.variants-view.delete-project.title": "Projekt löschen",
-  "app.view.variant.variants-view.delete-project.content": "Möchten Sie das Projekt und alle enthaltenen Varianten endgültig löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
-  "app.view.variant.variants-view.error-unexpected-data": "Unerwartete Daten: Kein Snapshot und keine freigegebene Version.",
-  "sbbBreadcrumbExpand": "Show entire path",
+  "app-routing": {
+    "module": {
+      "path": {
+        "404": "Die gesuchte Seite wurde nicht gefunden.",
+        "401": "Sie sind nicht autorisiert, bitte laden Sie die Seite neu.",
+        "403": "Sie sind nicht berechtigt diese Aktion durchzuführen.",
+        "409": "Es gab einen Konflikt bei der Ausführung Ihrer Aktion, bitte versuchen Sie es erneut.",
+        "error": "Es ist ein Fehler aufgetreten."
+      }
+    }
+  },
+  "app": {
+    "version": "Version {$version}",
+    "user-guide": "Benutzeranleitung",
+    "user-manual": "Benutzerhandbuch",
+    "logout": "Logout",
+    "login": "Sie werden angemeldet...",
+    "logger": {
+      "title": "Titel"
+    },
+    "models": {
+      "node": {
+        "shortNameDefault": "NEW",
+        "full-name-default": "Neuer Knoten"
+      },
+      "note": {
+        "title-default": "Notiztitel",
+        "text-default": "Notiztext",
+        "default-title": "Notiztitel",
+        "default-text": "Notiztext"
+      }
+    },
+    "netzgrafik-application": {
+      "variants": "Varianten",
+      "filter": "Filter",
+      "analytics": "Analytics",
+      "edit": "Bearbeiten",
+      "more-functions": "Weitere Funktionen",
+      "settings": "Einstellungen"
+    },
+    "perlenkette": {
+      "perlenkette-node": {
+        "0-warning-connection": "Kein fehlerhafter Anschluss",
+        "1-warning-connection": "1 fehlerhafter Anschluss",
+        "n-warning-connections": "{$number} fehlerhafte Anschlüsse",
+        "0-fitting-connection": "Kein passender Anschluss",
+        "1-fitting-connection": "1 passender Anschluss",
+        "n-fitting-connections": "{$number} passende Anschlüsse"
+      },
+      "show-only-closed-locks": "Zeige nur geschlossene Schlösser",
+      "show-all-locks": "Zeige alle Schlösser"
+    },
+    "services": {
+      "data": {
+        "node": {
+          "transit-modified": {
+            "title": "Durchfahrt geändert",
+            "description": "Zeiten können nicht angepasst werden, beidseitger Lock gefunden"
+          }
+        },
+        "trainrunsection": {
+          "intermediate-stop-replacement": {
+            "title": "Zwischenhalteumwandlung",
+            "description": "Zwischenhalteumwandlung führte bei der Vergabe der Zeiten zu inkonsistenzen!"
+          }
+        }
+      },
+      "util": {
+        "connection-validator": {
+          "connection-marked-for-transit": {
+            "title": "Anschluss auf Durchfahrt gezeichnet!",
+            "description": "Anschluss auf Durchfahrt gezeichnet!"
+          }
+        },
+        "trainrun-iteration": {
+          "error": {
+            "infinity-loop": "Iterator hat eine Unendlichkeitsschleife entdeckt. Die Iteration wurde vorzeitig abgebrochen!"
+          }
+        },
+        "trainrunsection-validator": {
+          "target-arrival-not-reacheable": {
+            "title": "Ziel Ankunft Warnung",
+            "description": "Zielankunftszeit kann nicht erreicht werden"
+          },
+          "source-arrival-not-reacheable": {
+            "title": "Quelle Ankunft Warnung",
+            "description": "Quellankunftszeit kann nicht erreicht werden"
+          },
+          "travel-time-less-than-1": {
+            "title": "Reisezeit weniger als 1",
+            "description": "Die Reisezeit muss größer oder gleich 1 sein."
+          }
+        },
+        "transition-validator": {
+          "source-arrival-not-reacheable": {
+            "title": "Quelle Ankunft Warnung",
+            "description": "Quellankunftszeit kann nicht erreicht werden"
+          },
+          "source-departure-not-reacheable": {
+            "title": "Quelle Abfahrt Warnung",
+            "description": "Quellabfahrtszeit kann nicht erreicht werden"
+          },
+          "target-arrival-not-reacheable": {
+            "title": "Ziel Ankunft Warnung",
+            "description": "Zielankunftszeit kann nicht erreicht werden"
+          },
+          "target-departure-not-reacheable": {
+            "title": "Ziel Abfahrt Warnung",
+            "description": "Zielabfahrtszeit kann nicht erreicht werden"
+          }
+        }
+      }
+    },
+    "streckengrafik": {
+      "components": {
+        "reset": "Zurücksetzen",
+        "close-all-path-nodes": "Schliesse alle Gleisbeleger",
+        "open-all-path-nodes": "Öffne alle Gleisbeleger",
+        "show-advanced-display-functions": "Erweiterte Darstellungsfunktionen einblenden",
+        "show-or-hide-time-for-non-selected-trainruns": "Zeit ein-/ausblenden für nicht selektierte Züge",
+        "show-or-hide": "{$component} ein-/ausblenden",
+        "show-or-hide-name-for-non-selected-trainruns": "Zugnamen ein-/ausblenden für nicht selektierte Züge",
+        "hide-advanced-display-functions": "Erweiterte Darstellungsfunktionen ausblenden",
+        "rail-track-slider": "Streckengleis",
+        "headway-band": "Zugfolgezeiten",
+        "time": "Zeit",
+        "name": "Name"
+      }
+    },
+    "utils": {
+      "navigation-parameters": {
+        "no-project-id": "Keine Projekt-ID vorhanden",
+        "no-variant-id": "Keine Variante-ID vorhanden",
+        "no-version-id": "Keine Version-ID vorhanden"
+      }
+    },
+    "view": {
+      "card-grid": {
+        "card": {
+          "open": "Öffnen"
+        }
+      },
+      "dialogs": {
+        "confirmation-dialog": {
+          "confirmation-default": "Ja",
+          "abort-default": "Nein"
+        },
+        "filterable-labels-dialog": {
+          "filterable-label-dialog-component": {
+            "edit-filterable-labels": "Filterbare Labels für {$element} bearbeiten",
+            "transfer-to-all-visible": "auf alle sichtbaren übertragen",
+            "delete-from-all-visible": "aus allen sichtbaren löschen",
+            "transfer": {
+              "title": "Übernehmen",
+              "content": "Soll das Label {$label} auf alle sichtbaren {$element} übertragen werden?"
+            },
+            "delete": {
+              "title": "Löschen",
+              "content": "Soll das Label {$label} definitiv aus allen sichtbaren {$element} gelöscht werden?"
+            }
+          },
+          "filterable-labels-form": {
+            "mandatory-field": "Pflichtfeld"
+          }
+        },
+        "note-dialog": {
+          "html-editor": {
+            "reset-color": "Farbe zurücksetzen",
+            "editor-placeholder": "Kommentar hier eingeben...",
+            "mandatory-field": "Pflichtfeld",
+            "color-presets": {
+              "ec": {
+                "title": "Verwende die Frabe des Frabschemas für EC"
+              },
+              "ic": {
+                "title": "Verwende die Frabe des Frabschemas für IC"
+              },
+              "ir": {
+                "title": "Verwende die Frabe des Frabschemas für IR"
+              },
+              "re": {
+                "title": "Verwende die Frabe des Frabschemas für RE"
+              },
+              "s": {
+                "title": "Verwende die Frabe des Frabschemas für S"
+              },
+              "gex": {
+                "title": "Verwende die Frabe des Frabschemas für GEX"
+              },
+              "g": {
+                "title": "Verwende die Frabe des Frabschemas für G"
+              },
+              "green": {
+                "title": "green"
+              },
+              "blue": {
+                "title": "blue"
+              },
+              "magenta": {
+                "title": "magenta"
+              },
+              "red": {
+                "title": "red"
+              },
+              "warning": {
+                "title": "Warnfarbe"
+              }
+            }
+          },
+          "note-tab": "Kommentar",
+          "filterable-labels-tab": "Filterbare Labels",
+          "delete-note": "Kommentar löschen",
+          "note-filter-tab": {
+            "labels": "Labels",
+            "label-placeholder": "Neues Label..."
+          },
+          "note-form": {
+            "title": "Title",
+            "name": "Name"
+          }
+        },
+        "stammdaten-dialog": {
+          "main-data": "Stammdaten",
+          "operationalPoint": "Betriebspunkt",
+          "ipv-stop-time": "Haltezeit IPV",
+          "a-stop-time": "Haltezeit A",
+          "b-stop-time": "Haltezeit B",
+          "c-stop-time": "Haltezeit C",
+          "d-stop-time": "Haltezeit D",
+          "zaz": "ZAZ",
+          "connection-time": "Anschlusszeit",
+          "region": "Region",
+          "category": "Kategorie",
+          "filterable-labels": "Filterbare Labels",
+          "position": "Position",
+          "close": "Schliessen"
+        },
+        "trainrun-and-section-dialog" : {
+          "filterableLabels": "Filterbare Labels",
+          "trainrun-filter-tab": {
+            "labels": "Labels",
+            "newLabels" : "Neues Label...",
+            "trainrunDuplicate": "Zuglauf duplizieren",
+            "trainrunDelete": "Zuglauf löschen",
+            "delete": "Löschen",
+            "deleteConfirmationQuestion": "Soll der gesamte Zuglauf definitiv gelöscht werden?"
+          },
+          "trainrun-tab": {
+            "tabName": "Name",
+            "category": "Kategorie",
+            "frequency": "Takt",
+            "verkehrt": "verkehrt",
+            "trainrunDuplicate": "Zuglauf duplizieren",
+            "trainrunDelete": "Zuglauf löschen",
+            "delete": "Löschen",
+            "deleteConfirmationQuestion": "Soll der gesamte Zuglauf definitiv gelöscht werden?"
+          },
+          "trainrun-section-tab": {
+            "warningTwoLocks": "Warnung: Zu viele Zeiten sind gelockt!",
+            "propagateTimesToLeft": "Zeiten nach links propagieren",
+            "propagateTimesToRight": "Zeiten nach rechts propagieren"
+          }
+        }
+      },
+      "editor-edit-tools-view-component": {
+        "edit": "Bearbeiten",
+        "filterable-labels": "Filterbare labels",
+        "trainruns": "Zugfahrten",
+        "nodes": "Knoten",
+        "notes": "Kommentare",
+        "delete-netzgrafik-title": "Netzgrafik - Löschen",
+        "non-visible-elements": "Nicht sichtbare Elemente",
+        "delete-all-non-visible-elements-tooltip": "Alle nicht sichtbare Elemente, wie Knoten, Zugfahrten und Kommentare löschen",
+        "delete-all-non-visible-elements": "Alle nicht sichtbare Elemente löschen",
+        "visible-elements": "Sichtbare Elemente",
+        "delete-all-visible-trainruns-tooltip": "Alle sichtbare Zugfahrten löschen",
+        "delete-all-visible-trainruns": "Alle sichtbare Zugfahrten löschen",
+        "delete-all-visible-notes-tooltip": "Alle sichtbare Kommentare löschen",
+        "delete-all-visible-notes": "Alle sichtbare Kommentare löschen",
+        "delete-all-visible-elements-tooltip": "Alle sichtbare Elemente, wie Knoten, Zugfahrten und Kommentare löschen",
+        "delete-all-visible-elements": "Alle sichtbare Elemente löschen",
+        "merge-netzgrafik-title": "Netzgrafik - Zusammenführen",
+        "add-netzgrafik-as-copy-tooltip": "Netzgrafik als Kopie hinzufügen (Zugfahrtenn, Knoten, Kommentare)",
+        "add-netzgrafik-as-copy": "Netzgrafik als Kopie hinzufügen",
+        "merge-netzgrafik-tooltip": "Netzgrafik durch Zusammenführen mergen (Zugfahrtenn, Knoten, Kommentare)",
+        "merge-netzgrafik": "Netzgrafik durch Zusammenführen mergen",
+        "delete": "Löschen",
+        "on-clear-delete-all-non-visible-elements": "Sollen alle nicht sichtbare Elemente aus der Netzgrafik definitiv gelöscht werden?",
+        "on-clear-delete-all-visible-elements": "Sollen alle sichtbare Elemente aus der Netzgrafik definitiv gelöscht werden?",
+        "on-clear-delete-all-visible-trainruns": "Sollen alle sichtbare Zugfahrten aus der Netzgrafik definitiv gelöscht werden?",
+        "on-clear-delete-all-visible-notes": "Sollen alle sichtbare Kommentare aus der Netzgrafik definitiv gelöscht werden?",
+        "label-drop-list": {
+          "no-labels-available": "Keine Labels vorhanden",
+          "delete-group": "Gruppe löschen",
+          "add-new-group": "Neue Gruppe hinzufügen",
+          "trainruns": "Zugfahrten",
+          "notes": "Kommentare",
+          "nodes": "Knoten"
+        }
+      },
+      "editor-filter-view": {
+        "filter": "Filter",
+        "general": "Allgemein",
+        "category": "Kategorie",
+        "frequency": "Takt",
+        "time-category": "Verkehrt",
+        "display-all-trainruns": "Alle Zugfahrten anzeigen",
+        "reset-trainrun-filter": "Zugfilter zurücksetzen",
+        "filterable-labels-trainruns": "Filterbare Labels: Zugfahrten",
+        "filterable-labels-nodes": "Filterbare Labels: Knoten",
+        "filterable-labels-notes": "Filterbare Labels: Kommentare",
+        "display": "Anzeigen",
+        "times": "Zeiten",
+        "decimal-displayed": "Anzahl Nachkommastellenanzeigen",
+        "display-arrival-departure-times": "Abfahrt- und Ankuftszeiten anzeigen",
+        "display-arrival-departure-times-for-connections": "Abfahrt- und Ankuftszeiten für Durchfahrten anzeigen",
+        "display-travel-times": "Fahrzeiten anzeigen",
+        "display-trainrun-name": "Zugname anzeigen",
+        "connections": "Anschlüsse",
+        "display-connections": "Anschlüsse anzeigen",
+        "nodes": "Knoten",
+        "display-nodes-without-visible-trainruns": "Knoten ohne (angezeigte) Zugfahrten anzeigen",
+        "display-nodes-with-only-stopping-trainruns": "Knoten mit nur durchfahrenden Zugfahrten anzeigen",
+        "notes": "Kommentare",
+        "display-notes": "Kommentare anzeigen",
+        "reset-display-filter": "Anzeigefilter zurücksetzen",
+        "saved-filters": "Gespeicherte Filter",
+        "save-filters": "Filter speichern und als Filtereinstellungen hinzufügen",
+        "reset-all-display-filters": "Alle Anzeigefilter zurücksetzen",
+        "load-filter": "{$filter} laden",
+        "reload-filter": "{$filter} neu laden",
+        "show-trainrun-category": "{$trainrunCategory} einblenden",
+        "hide-trainrun-category": "{$trainrunCategory} ausblenden",
+        "show-trainrun-time-category": "{$trainrunTimeCategory} einblenden",
+        "hide-trainrun-time-category": "{$trainrunTimeCategory} ausblenden",
+        "show-trainrun-frequency": "{$trainrunFrequency} einblenden",
+        "hide-trainrun-frequency": "{$trainrunFrequency} ausblenden",
+        "filterable-label-filter": {
+          "no-labels-available": "Keine Labels vorhanden",
+          "or": "Oder",
+          "and": "Und",
+          "show-all": "Alles anzeigen",
+          "reset-filter": "Filter zurücksetzen",
+          "show": "einblenden",
+          "hode": "ausblenden"
+        }
+      },
+      "editor-menu": {
+        "save-changes": "Speichere Änderungen",
+        "changes-saved": "Änderungen gespeichert",
+        "read-mode": "Lese-Modus",
+        "show-hide-filter": "Filter ein-/ausblenden",
+        "zoom-out": "Herauszoomer",
+        "zoom-in": "Hereinzoomen",
+        "topology-editor-disabled": "Topologie Editor deaktiviert",
+        "topology-editor-enabled": "Topologie Editor aktiviert",
+        "multiple-selection-tool-disabled": "Mehrfachauswahlstool ist deaktiviert",
+        "multiple-selection-tool-enabled": "Mehrfachauswahlstool ist aktiviert",
+        "note-editor-disabled": "Notiz Editor deaktiviert",
+        "note-editor-enabled": "Notiz Editor aktiviert",
+        "analytics-disabled": "Analytics deaktiviert",
+        "analytics-enabled": "Analytics aktiviert",
+        "displayGraphicTimetable": "Streckengrafik anzeigen",
+        "closeGraphicTimetable": "Streckengrafik schliessen",
+        "errorGraphicTimetable": "Streckengrafik kann nicht angezeigt werden, da keine Zugfahrt oder keine Knoten ausgewählt wurden."
+      },
+      "editor-properties-view-component": {
+        "settings": "Einstellungen",
+        "color-scheme": "Farbschema",
+        "theme": "Theme",
+        "background-color": "Hintergrundfarbe",
+        "set-color-to-white": "Hintergrundfarbe auf 'weiss' setzten",
+        "reset-background-color-to-default": "Hintergrundfarbe auf Standard zurücksetzen",
+        "background-color-black": "Hintergrundfarbe (dunkel)",
+        "editor": "Editor",
+        "travel-time-presetting-default": "Fahrzeitvoreinstellungs (Heuristik)",
+        "graphicTimetable": "Streckengrafik",
+        "axis-scaling-distance": "Achsenskalierung (Distanz)",
+        "standardColorTheme": "Standard Farbschema",
+        "specialColorTheme": "Spezielles Farbschema",
+        "grayscaleColorTheme": "Graustufen Farbschema",
+        "optimizedPrintColorTheme": "Optimiertes Farbschema zum Drucken/Exportieren",
+        "standardDarkColorTheme": "Standard Farbschema (dunkel)",
+        "specialDarkColorTheme": "Spezielles Farbschema (dunkel)",
+        "grayscaleDarkColorTheme": "Graustufen Farbschema (dunkel)",
+        "timeScaledDistance": "fahrzeitskaliert",
+        "timeScaledDistanceTooltip": "Die Streckengrafikabschnitte werden fahrzeitskaliert dargestellt, d.h. es wird angenommen, dass der ausgewählte Zug mit konstanter Geschwindigkeit verkehrt.",
+        "uniformDistance": "gleichmässig",
+        "uniformDistanceTooltip": "Die Streckengrafikabschnitte werden gleichmässig skaliert dargestellt.",
+        "fixed": "Konstant 1min.",
+        "fixedTooltip": "Übernimmt die Fahrzeit mit konstant 1min (Default).",
+        "retrieveFromEdge": "Abschnittsfahrzeit",
+        "retrieveFromEdgeTooltip": "Übernimmt die max. Fahrzeit auf dem selben Abschnitt aller Züge gleicher Kategorie, sonst max. Fahrzeit aller Züge, sonst 1 Min."
+      },
+      "editor-side-view": {
+        "editor-node-detail-view": {
+          "main-data": "Stammdaten",
+          "operational-point": "Betriebspunkt",
+          "name": "Name",
+          "connection-time": "Anschlusszeit",
+          "occupancy": "Auslastung",
+          "capacity": "Kapazität",
+          "filterable-labels": "Filterbare Labels",
+          "labels": "Labels",
+          "new-label-placeholder": "Neues Label...",
+          "stopping-times": "Haltezeiten",
+          "stopping-time-per-product": "Haltezeit pro Produkt",
+          "no-stop": "Kein Halt",
+          "ipv": "IPV",
+          "a": "A",
+          "b": "B",
+          "c": "C",
+          "d": "D",
+          "links": "Links",
+          "platform-information": "Perron Informationen",
+          "platform-length": "Perron-Länge",
+          "delete-node": "Knoten löschen",
+          "delete": "Löschen",
+          "deleteNodeDialog": "Soll der Knoten {$operationalPointShortName} ({$operationalPointName}) definitiv gelöscht werden?"
+        },
+        "editor-tools-view-component": {
+          "more-functions": "Weitere Funktionen",
+          "export": "Exportieren",
+          "export-netzgrafik-as-svg": "Exportieren Netzgrafik als SVG",
+          "export-as-svg": "Exportieren als SVG",
+          "export-netzgrafik-as-png": "Exportieren Netzgrafik als PNG",
+          "export-as-png": "Exportieren als PNG",
+          "print-netzgrafik": "Netzgrafik drucken",
+          "print": "Drucken",
+          "netzgrafik": "Netzgrafik",
+          "export-netzgrafik": "Netzgrafik exportieren",
+          "export-netzgrafik-as-json": "Netzgrafik als JSON exportieren",
+          "import-netzgrafik": "Netzgrafik importieren",
+          "import-netzgrafik-as-json": "Netzgrafik aus JSON importieren",
+          "export-trainruns": "Zugfahrten exportieren",
+          "export-trainruns-as-csv": "Netzgrafik aus JSON importieren",
+          "export-trainruns-as-csv-excel": "In Excel: Daten -> Aus Text/CSV -> Filename ... importieren",
+          "main-data": "Stammdaten",
+          "import-main-data": "Stammdaten importieren",
+          "help-csv-data": "Hilfe: CSV - Datei",
+          "export-main-data": "Stammdaten exportieren",
+          "bp": "BP",
+          "station": "Bahnhof",
+          "category": "Kategorie",
+          "region": "Region",
+          "passengerConnectionTimeIPV": "Fahrgastwechselzeit_IPV",
+          "passengerConnectionTimeA": "Fahrgastwechselzeit_A",
+          "passengerConnectionTimeB": "Fahrgastwechselzeit_B",
+          "passengerConnectionTimeC": "Fahrgastwechselzeit_C",
+          "passengerConnectionTimeD": "Fahrgastwechselzeit_D",
+          "ZAZ": "ZAZ",
+          "transferTime": "Umsteigezeit",
+          "labels": "Labels",
+          "X": "X",
+          "Y": "Y",
+          "create": "Erstellen",
+          "yes": "JA",
+          "netzgrafikFile": "netzgrafik",
+          "mainDataFile": "stammdaten",
+          "trainrunFile": "zuglauf",
+          "trainCategory": "Zugkategorie",
+          "trainName": "Zugname",
+          "startStation": "Startbahnhof",
+          "destinationStation": "Zielbahnhof",
+          "trafficPeriod": "Verkehrsperiode",
+          "frequence": "Takt",
+          "departureMinuteAtStart": "Abfahrtsminute am Start Knoten",
+          "travelTimeStartDestination": "Fahrzeit Start-Ziel",
+          "arrivalMinuteAtDestination": "Ankuntsminute am Ziel Knoten",
+          "turnaroundTimeDestination": "Wendezeit Zielbahnhof",
+          "departureMinuteDeparture": "Abfahrtsminute am  Ziel Knoten",
+          "travelTimeDestinationStart": "Fahrzeit Ziel-Start",
+          "arrivalMinuteAtStart": "Ankuntsminute am Start Knoten",
+          "turnaroundTimeStart": "Wendezeit Startbahnhof",
+          "turnaroundTime": "Umlaufzeit",
+          "trainrunTimeCategory": "Verkehrt"
+        }
+      },
+      "error-view": {
+        "error": "Fehler"
+      },
+      "navigation-bar": {
+        "project-name": "Projekt «{$name}»",
+        "project-name-archived": "Projekt «{$name}» (archiviert)",
+        "variant-name": "Variante «{$name}»",
+        "variant-name-archived": "Variante «{$name}» (archiviert)"
+      },
+      "project": {
+        "project-dialog": {
+          "create-project": "Projekt erstellen",
+          "edit-project": "Projekt bearbeiten",
+          "create": "Erstellen",
+          "save": "Speichern",
+          "cancel": "Abbrechen",
+          "project-form": {
+            "name": "Name",
+            "mandatory": "Pflichtfeld",
+            "summary": "Zusammenfassung",
+            "description": "Beschreibung",
+            "tooltip": "Benutzer müssen mit ihrer U/E-Nummer angegeben werden (bsp. u123456e654321). Eingabe pro Nummer jeweils mit 'Enter' bestätigen. Kleinschreibung beachten!",
+            "user-with-write-access": "Benutzer mit Schreibzugriff",
+            "new-user-placeholder": "Neuer Benutzer...",
+            "invalid-values": "Ungültige Werte",
+            "user-with-read-access": "Benutzer mit Lesezugriff"
+          }
+        },
+        "projects-view": {
+          "projects": "Projekte",
+          "search-project": "Projekt suchen",
+          "show-archive": "Archiv anzeigen",
+          "archived": "(archiviert)",
+          "archive-project": {
+            "title": "Projekt archivieren",
+            "content": "Möchten Sie das Projekt jetzt archivieren?"
+          },
+          "undo-archiving-project": {
+            "title": "Archivierung rückgängig machen",
+            "content": "Möchten Sie die Archivierung des Projekts rückgängig machen?"
+          },
+          "undo-archiving": "Archivierung rückgängig machen",
+          "edit": "Bearbeiten",
+          "archive": "Archivieren"
+        }
+      },
+      "variant": {
+        "variant-dialog": {
+          "create-variant": "Variante erstellen",
+          "edit-variant": "Variante bearbeiten",
+          "save": "Speichern",
+          "cancel": "Abbrechen",
+          "variant-form": {
+            "name": "Name",
+            "mandatory": "Pflichtfeld"
+          }
+        },
+        "variant-view": {
+          "variant-history": {
+            "publish-entry": {
+              "comment": "Kommentar",
+              "publish": "Publizieren",
+              "local-changes": "Lokale Änderungen müssen zuerst gespeichert werden",
+              "discard-changes": "Änderungen Verwerfen"
+            },
+            "released-entry": {
+              "download": "Herunterladen",
+              "discard-changes": "Änderungen Verwerfen",
+              "ignore-conflict": "Konflikt ignorieren",
+              "restore": "Wiederherstellen",
+              "as-new-variant": "Als neue Variante",
+              "version-already-available": "Version bereits vorhanden",
+              "successfully-published": "Erfolgreich publiziert"
+            },
+            "snapshot-entry": {
+              "download": "Herunterladen",
+              "restore": "Wiederherstellen",
+              "as-new-variant": "Als neue Variante",
+              "successfully-published": "Erfolgreich publiziert",
+              "change-snapshot-version": "Änderung {$snapshotVersion}"
+            },
+            "new-version-published": {
+              "title": "Neue Version publizieren",
+              "content": "Möchten Sie Ihre persönlichen Änderungen als neue Version publizieren?"
+            },
+            "discard-changes": {
+              "title": "Änderungen verwerfen",
+              "content": "Möchten Sie Ihre persönlichen Änderungen unwiderruflich verwerfen?"
+            },
+            "restore-version": {
+              "title": "Version wiederherstellen",
+              "content": "Möchten Sie den Stand dieser Version wiederherstellen?"
+            },
+            "ignore-conflict": {
+              "title": "Konflikt ignorieren",
+              "content": "Möchten Sie, dass der aktuelle Stand auf der höchsten publizierten Version aufbaut?"
+            }
+          },
+          "archived": "(archiviert)",
+          "edit-variant": "Variante bearbeiten",
+          "delete-variant": {
+            "_value": "Variante löschen",
+            "title": "Variante löschen",
+            "content": "Möchten Sie die Variante und alle enthaltenen Versionen endgültig löschen? Diese Aktion kann nicht rückgängig gemacht werden."
+          },
+          "versions": "Versionen"
+        },
+        "variants-view": {
+          "archived": "(archiviert)",
+          "variants": "Varianten",
+          "search-variants": "Varianten suchen",
+          "show-archive": "Archiv anzeigen",
+          "project-description": "Projekt Beschreibung",
+          "edit-project": "Projekt bearbeiten",
+          "archive-project": {
+            "_value": "Projekt archivieren",
+            "title": "Projekt archivieren",
+            "content": "Möchten Sie das Projekt jetzt archivieren?"
+          },
+          "undo-archiving": "Archivierung rückgängig machen",
+          "delete-project": {
+            "_value": "Projekt löschen",
+            "title": "Projekt löschen",
+            "content": "Möchten Sie das Projekt und alle enthaltenen Varianten endgültig löschen? Diese Aktion kann nicht rückgängig gemacht werden."
+          },
+          "archive": "Archivieren",
+          "archive-variant": {
+            "title": "Variante archivieren",
+            "content": "Möchten Sie die Variante jetzt archivieren?"
+          },
+          "undo-archiving-variant": {
+            "title": "Archivierung rückgängig machen",
+            "content": "Möchten Sie die Archivierung der Variante rückgängig machen?"
+          },
+          "undo-archiving-project": {
+            "title": "Archivierung rückgängig machen",
+            "content": "Möchten Sie die Archivierung des Projekts rückgängig machen?"
+          },
+          "error-unexpected-data": "Unerwartete Daten: Kein Snapshot und keine freigegebene Version."
+        }
+      }
+    }
+  },
+  "sbbBreadcrumbExpand": "Gesamten Pfad anzeigen",
   "sbbDialogCloseDialog": "Dialog schließen",
   "sbbFileSelectorUploadFile": "Datei hochladen",
   "sbbFileSelectorRemoveFile": "Datei löschen",
@@ -352,7 +631,7 @@
   "sbbSidebarExpand": "Erweitern",
   "sbbSidebarCloseSidebar": "Sidebar schließen",
   "sbbSidebarOpenSidebar": "Sidebar öffnen",
-  "sbbTextareaCounterText": "{$PH} verbleibende Zeichen",
+  "sbbTextareaCounterText": "{$number} verbleibende Zeichen",
   "sbbUsermenuLogin": "Login",
-  "sbbUsermenuOpenPanel": "Eingeloggt als {$PH}. Klicken Sie auf oder drücken Sie die Eingabetaste, um das Benutzermenü zu öffnen."
+  "sbbUsermenuOpenPanel": "Eingeloggt als {$name}. Klicken Sie auf oder drücken Sie die Eingabetaste, um das Benutzermenü zu öffnen."
 }

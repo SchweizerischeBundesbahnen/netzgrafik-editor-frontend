@@ -19,52 +19,39 @@ export class EditorPropertiesViewComponent {
   static DEFAULT_BACKGROUNDCOLOR = "#f5f5f5";
   static BACKGROUNDCOLOR_WHITE = "#ffffff";
 
-  readonly tSettings = $localize`:@@app.view.editor-properties-view-component.settings:Settings`;
-  readonly tColorScheme = $localize`:@@app.view.editor-properties-view-component.color-scheme:Color scheme`;
-  readonly tTheme = $localize`:@@app.view.editor-properties-view-component.theme:Theme`;
-  readonly tBackgroundColor = $localize`:@@app.view.editor-properties-view-component.background-color:Background color`;
-  readonly tSetColorToWhite = $localize`:@@app.view.editor-properties-view-component.set-color-to-white:Set color to 'white'`;
-  readonly tResetBackgroundColorToDefault = $localize`:@@app.view.editor-properties-view-component.reset-background-color-to-default:Reset background color to default`;
-  readonly tBackgroundColorBlack = $localize`:@@app.view.editor-properties-view-component.background-color-black:Background color (black)`;
-  readonly tEditor = $localize`:@@app.view.editor-properties-view-component.editor:Editor`;
-  readonly tTravelTimePresettingDefault = $localize`:@@app.view.editor-properties-view-component.travel-time-presetting-default:Travel time presetting (heuristics)`;
-  readonly tStreckengrafik = $localize`:@@app.view.editor-properties-view-component.streckengrafik:Streckengrafik`;
-  readonly tAxisScalingDistance = $localize`:@@app.view.editor-properties-view-component.axis-scaling-distance:Axis scaling (distance)`;
-
-
   colorThemeOptions = [
     {
-      name: "Standard Farbschema",
+      name: $localize`:@@app.view.editor-properties-view-component.standardColorTheme:Standard color theme`,
       themeRegistration: ThemeRegistration.ThemeFach,
       isDark: false,
     },
     {
-      name: "Spezielles Farbschema",
+      name: $localize`:@@app.view.editor-properties-view-component.specialColorTheme:Special color theme`,
       themeRegistration: ThemeRegistration.ThemeDefaultUx,
       isDark: false,
     },
     {
-      name: "Graustufen Farbschema",
+      name: $localize`:@@app.view.editor-properties-view-component.grayscaleColorTheme:Grayscale color theme`,
       themeRegistration: ThemeRegistration.ThemeGray,
       isDark: false,
     },
     {
-      name: "Optimiertes Farbschema zum Drucken/Exportieren",
+      name: $localize`:@@app.view.editor-properties-view-component.optimizedPrintColorTheme:Optimized color theme for printing/exporting`,
       themeRegistration: ThemeRegistration.ThemeFachPrint,
       isDark: false,
     },
     {
-      name: "Standard Farbschema (dunkel)",
+      name: $localize`:@@app.view.editor-properties-view-component.standardDarkColorTheme:Standard color theme (dark)`,
       themeRegistration: ThemeRegistration.ThemeFachDark,
       isDark: true,
     },
     {
-      name: "Spezielles Farbschema (dunkel)",
+      name: $localize`:@@app.view.editor-properties-view-component.specialDarkColorTheme:Special color theme (dark)`,
       themeRegistration: ThemeRegistration.ThemeDefaultUxDark,
       isDark: true,
     },
     {
-      name: "Graustufen Farbschema (dunkel)",
+      name: $localize`:@@app.view.editor-properties-view-component.grayscaleDarkColorTheme:Grayscale color theme (dark)`,
       themeRegistration: ThemeRegistration.ThemeGrayDark,
       isDark: true,
     },
@@ -73,36 +60,31 @@ export class EditorPropertiesViewComponent {
 
   streckengrafikRenderingTypeOptions = [
     {
-      name: "fahrzeitskaliert",
-      title: "Die Streckengrafikabschnitte werden fahrzeitskaliert dargestellt, " +
-        "d.h. es wird angenommen, dass der ausgewählte Zug mit konstanter " +
-        "Geschwindigkeit verkehrt.",
+      name: $localize`:@@app.view.editor-properties-view-component.timeScaledDistance:travel time scaled`,
+      title: $localize`:@@app.view.editor-properties-view-component.timeScaledDistanceTooltip:The route graphic sections are displayed with travel time scaling, i.e. it is assumed that the selected train travels at a constant speed.`,
       streckengrafikRenderingType: StreckengrafikRenderingType.TimeScaledDistance,
     },
     {
-      name: "gleichmässig",
-      title: "Die Streckengrafikabschnitte werden gleichmässig skaliert dargestellt.",
+      name: $localize`:@@app.view.editor-properties-view-component.uniformDistance:uniform`,
+      title: $localize`:@@app.view.editor-properties-view-component.uniformDistanceTooltip:The route graphic sections are uniformly displayed.`,
       streckengrafikRenderingType: StreckengrafikRenderingType.UniformDistance,
     },
   ];
   activeStreckengrafikRenderingType: StreckengrafikRenderingType = null;
 
-
   travelTimeCreationEstimatorTypeOptions = [
     {
-      name: "Konstant 1min.",
-      title: "Übernimmt die Fahrzeit mit konstant 1min (Default).",
+      name: $localize`:@@app.view.editor-properties-view-component.fixed:Constant 1min`,
+      title: $localize`:@@app.view.editor-properties-view-component.fixedTooltip:Adopts the travel time with a constant 1min (default).`,
       travelTimeCreationEstimatorType: TravelTimeCreationEstimatorType.Fixed,
     },
     {
-      name: "Abschnittsfahrzeit",
-      title: "Übernimmt die max. Fahrzeit auf dem selben Abschnitt aller Züge " +
-        "gleicher Kategorie, sonst max. Fahrzeit aller Züge, sonst 1 Min.",
+      name: $localize`:@@app.view.editor-properties-view-component.retrieveFromEdge:Section travel time`,
+      title: $localize`:@@app.view.editor-properties-view-component.retrieveFromEdgeTooltip:Takes over the max. travel time on the same section of all trains of the same category, otherwise max. travel time of all trains, otherwise 1 min.`,
       travelTimeCreationEstimatorType: TravelTimeCreationEstimatorType.RetrieveFromEdge,
     },
   ];
   activeTravelTimeCreationEstimatorType: TravelTimeCreationEstimatorType = null;
-
 
   activeDarkBackgroundColor =
     EditorPropertiesViewComponent.DEFAULT_DARK_BACKGROUNDCOLOR;

@@ -18,12 +18,6 @@ export class ProjectDialogComponent {
   readonly formModel: FormModel<ProjectFormComponentModel>;
   readonly isNewProject: boolean;
 
-  readonly tCreateProject = $localize`:@@app.view.project.project-dialog.create-project:Create project`;
-  readonly tEditProject = $localize`:@@app.view.project.project-dialog.edit-project:Edit project`;
-  readonly tCreate = $localize`:@@app.view.project.project-dialog.create:Create`;
-  readonly tSave = $localize`:@@app.view.project.project-dialog.save:Save`;
-  readonly tCancel = $localize`:@@app.view.project.project-dialog.cancel:Cancel`;
-
   constructor(
     public readonly dialogRef: SbbDialogRef<
       ProjectDialogComponent,

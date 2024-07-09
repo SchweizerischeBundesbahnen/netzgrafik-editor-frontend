@@ -57,7 +57,7 @@ export class PerlenketteNodeComponent implements OnInit {
     if (amountOfWarningConnections === 1) {
       return $localize`:@@app.perlenkette.perlenkette-node.1-warning-connection:1 incorrect connection`;
     }
-    return $localize`:@@app.perlenkette.perlenkette-node.n-warning-connections:${amountOfWarningConnections} incorrect connections`;
+    return $localize`:@@app.perlenkette.perlenkette-node.n-warning-connections:${amountOfWarningConnections}:number: incorrect connections`;
   }
 
   getFittingConnections(): string {
@@ -72,7 +72,7 @@ export class PerlenketteNodeComponent implements OnInit {
     if (amountOfFittingConnections === 1) {
       return $localize`:@@app.perlenkette.perlenkette-node.1-fitting-connection:1 fitting connection`;
     }
-    return $localize`:@@app.perlenkette.perlenkette-node.n-fitting-connections:${amountOfFittingConnections} fitting connections`;
+    return $localize`:@@app.perlenkette.perlenkette-node.n-fitting-connections:${amountOfFittingConnections}:number: fitting connections`;
   }
 
   expandConnections() {

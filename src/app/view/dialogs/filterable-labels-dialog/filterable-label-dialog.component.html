@@ -1,7 +1,7 @@
 <div sbbDialogTitle>
-  <ng-container
-    >{{ tEditFilterableLabels }}</ng-container
-  >
+  <ng-container>
+    {{ 'app.view.dialogs.filterable-labels-dialog.filterable-label-dialog-component.edit-filterable-labels' | translate:{ 'element': this.dialogTitle} }}
+  </ng-container>
 </div>
 <div sbbDialogContent sy>
   <sbb-filterable-label-form [model]="formModel"></sbb-filterable-label-form>
@@ -12,7 +12,7 @@
     tabindex="-1"
     mode="icon"
     (click)="onTransferClicked()"
-    [title]="tTransferToAllVisible"
+    [title]="'app.view.dialogs.filterable-labels-dialog.filterable-label-dialog-component.transfer-to-all-visible' | translate"
   >
     <sbb-icon
       svgIcon="arrow-change-horizontal-medium"
@@ -26,7 +26,7 @@
     tabindex="-1"
     mode="icon"
     (click)="onDeleteClicked()"
-    [title]="tDeleteFromAllVisible"
+    [title]="'app.view.dialogs.filterable-labels-dialog.filterable-label-dialog-component.delete-from-all-visible' | translate"
   >
     <sbb-icon
       svgIcon="trash-medium"

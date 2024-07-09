@@ -1,49 +1,49 @@
-<h2 class="SummaryTitle">{{ tMoreFunctions }}</h2>
+<h2 class="SummaryTitle">{{ 'app.view.editor-side-view.editor-tools-view-component.more-functions' | translate }}</h2>
 <sbb-accordion [multi]="true">
   <sbb-expansion-panel [expanded]="true">
-    <sbb-expansion-panel-header>{{ tExport }}</sbb-expansion-panel-header>
+    <sbb-expansion-panel-header>{{ 'app.view.editor-side-view.editor-tools-view-component.export' | translate }}</sbb-expansion-panel-header>
     <button
       class="TrainrunDialog EditorToolButton"
       (click)="onExportNetzgrafikSVG()"
-      [title]="tExportNetzgrafikAsSVG"
+      [title]="'app.view.editor-side-view.editor-tools-view-component.export-netzgrafik-as-svg' | translate"
     >
       <sbb-icon svgIcon="picture-small"></sbb-icon>
     </button>
-    {{ tExportAsSVG }}
+    {{ 'app.view.editor-side-view.editor-tools-view-component.export-as-svg' | translate }}
     <br />
     <button
       class="TrainrunDialog EditorToolButton"
       (click)="onExportNetzgrafikPNG()"
-      [title]="tExportNetzgrafikAsPNG"
+      [title]="'app.view.editor-side-view.editor-tools-view-component.export-netzgrafik-as-png' | translate"
     >
       <sbb-icon svgIcon="camera-small"></sbb-icon>
     </button>
-    {{ tExportAsPNG }}
+    {{ 'app.view.editor-side-view.editor-tools-view-component.export-as-png' | translate }}
     <br />
     <button
       class="TrainrunDialog EditorToolButton"
       (click)="onPrintNetzgrafik()"
-      [title]="tPrintNetzgrafik"
+      [title]="'app.view.editor-side-view.editor-tools-view-component.print-netzgrafik' | translate"
     >
       <sbb-icon svgIcon="printer-small"></sbb-icon>
     </button>
-    {{ tPrint }}
+    {{ 'app.view.editor-side-view.editor-tools-view-component.print' | translate }}
   </sbb-expansion-panel>
 
   <sbb-expansion-panel [expanded]="false">
-    <sbb-expansion-panel-header>{{ tNetzgrafik }}</sbb-expansion-panel-header>
+    <sbb-expansion-panel-header>{{ 'app.view.editor-side-view.editor-tools-view-component.netzgrafik' | translate }}</sbb-expansion-panel-header>
     <button
       class="TrainrunDialog EditorToolButton"
       (click)="onSave()"
-      [title]="tExportNetzgrafik"
+      [title]="'app.view.editor-side-view.editor-tools-view-component.export-netzgrafik' | translate"
     >
       <sbb-icon svgIcon="download-small" aria-hidden="false"></sbb-icon>
     </button>
-    {{ tExportNetzgrafikAsJSON }}
+    {{ 'app.view.editor-side-view.editor-tools-view-component.export-netzgrafik-as-json' | translate }}
     <br />
     <button
       (click)="onLoadButton()"
-      [title]="tImportNetzgrafik"
+      [title]="'app.view.editor-side-view.editor-tools-view-component.import-netzgrafik' | translate"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="upload-small"></sbb-icon>
@@ -55,35 +55,35 @@
       accept=".json"
       (change)="onLoad($event)"
     />
-    {{ tImportNetzgrafikAsJSON }}
+    {{ 'app.view.editor-side-view.editor-tools-view-component.import-netzgrafik-as-json' | translate }}
     <br />
     <button
       (click)="onExportZuglauf()"
-      [title]="tExportTrainruns"
+      [title]="'app.view.editor-side-view.editor-tools-view-component.export-trainruns' | translate"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="download-large-data-small"></sbb-icon>
     </button>
-    {{ tExportTrainrunsAsCSV }}
+    {{ 'app.view.editor-side-view.editor-tools-view-component.export-trainruns-as-csv' | translate }}
     <sbb-tooltip
-      >{{ tExportTrainrunsAsCSVExcel }}</sbb-tooltip
+      >{{ 'app.view.editor-side-view.editor-tools-view-component.export-trainruns-as-csv-excel' | translate }}</sbb-tooltip
     >
   </sbb-expansion-panel>
   <sbb-expansion-panel [expanded]="false">
-    <sbb-expansion-panel-header>{{ tMainData }}</sbb-expansion-panel-header>
+    <sbb-expansion-panel-header>{{ 'app.view.editor-side-view.editor-tools-view-component.main-data' | translate }}</sbb-expansion-panel-header>
     <button
       (click)="onLoadStammdatenButton()"
-      [title]="tImportMainData"
+      [title]="'app.view.editor-side-view.editor-tools-view-component.import-main-data' | translate"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="document-plus-small"></sbb-icon>
     </button>
-    {{ tImportMainData }}
+    {{ 'app.view.editor-side-view.editor-tools-view-component.import-main-data' | translate }}
     <a
       href="https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_NODES.md#import-nodes-from-a-semicolon-seperate-value-file-csv"
       class="sbb-link link-reset"
       target="_blank"
-      >{{ tHelpCSVData }}</a
+      >{{ 'app.view.editor-side-view.editor-tools-view-component.help-csv-data' | translate }}</a
     >
     <input
       hidden
@@ -95,11 +95,11 @@
     <br />
     <button
       (click)="onExportStammdaten()"
-      [title]="tExportMainData"
+      [title]="'app.view.editor-side-view.editor-tools-view-component.export-main-data' | translate"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="download-large-data-small"></sbb-icon>
     </button>
-    {{ tExportMainData }}
+    {{ 'app.view.editor-side-view.editor-tools-view-component.export-main-data' | translate }}
   </sbb-expansion-panel>
 </sbb-accordion>

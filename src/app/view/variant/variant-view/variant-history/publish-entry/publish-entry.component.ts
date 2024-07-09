@@ -16,10 +16,6 @@ export class PublishEntryComponent {
 
   comment = new UntypedFormControl("");
 
-  readonly tComment = $localize`:@@app.view.variant.variant-view.variant-history.publish-entry.comment:Comment`;
-  readonly tPublish = $localize`:@@app.view.variant.variant-view.variant-history.publish-entry.publish:Publish`;
-  readonly tPublishDisabledTitle = this.publishDisabled ? $localize`:@@app.view.variant.variant-view.variant-history.publish-entry.local-changes:Local changes must be saved first` : "";
-
   get actions(): HistoryEntryAction[] {
     return [
       {

@@ -31,11 +31,6 @@ export class ProjectsViewComponent implements OnDestroy {
 
   private destroyed = new Subject<void>();
 
-  readonly tProjects = $localize`:@@app.view.project.projects-view.projects:Projects`;
-  readonly tSearchProject = $localize`:@@app.view.project.projects-view.search-project:Search project`;
-  readonly tShowArchive = $localize`:@@app.view.project.projects-view.show-archive:Show archive`;
-  readonly tArchived = $localize`:@@app.view.project.projects-view.archived:(archived)`;
-
   constructor(
     public projectService: ProjectsViewService,
     private readonly projectControllerBackendService: ProjectControllerBackendService,

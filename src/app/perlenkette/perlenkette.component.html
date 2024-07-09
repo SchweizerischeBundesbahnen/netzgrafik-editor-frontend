@@ -3,10 +3,10 @@
   <div>
     <div [attr.style]="'pointer-events: none; margin: 0px; position: absolute; padding-left: '+(contentWidth-55)+'px; padding-top: '+(contentHeight-40)+'px;'">
       <ng-container *ngIf="!getShowAllLockStates()">
-        <sbb-icon class="ToggleAllEyesButton" svgIcon="eye-disabled-small" style="pointer-events:auto;" (mouseup)="toggleShowAllLockStates()" [title]="tShowOnlyClosedLocks"></sbb-icon>
+        <sbb-icon class="ToggleAllEyesButton" svgIcon="eye-disabled-small" style="pointer-events:auto;" (mouseup)="toggleShowAllLockStates()" [title]="'app.perlenkette.show-only-closed-locks' | translate"></sbb-icon>
       </ng-container>
       <ng-container *ngIf="getShowAllLockStates()">
-        <sbb-icon class="ToggleAllEyesButton" svgIcon="eye-small" style="pointer-events:auto;" (mouseup)="toggleShowAllLockStates()" [title]="tShowAllLocks"></sbb-icon>
+        <sbb-icon class="ToggleAllEyesButton" svgIcon="eye-small" style="pointer-events:auto;" (mouseup)="toggleShowAllLockStates()" [title]="'app.perlenkette.show-all-locks' | translate"></sbb-icon>
       </ng-container>
     </div>
   </div>

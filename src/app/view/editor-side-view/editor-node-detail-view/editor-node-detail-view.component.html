@@ -5,22 +5,22 @@
 </h2>
 <sbb-accordion [multi]="true">
   <sbb-expansion-panel [expanded]="true">
-    <sbb-expansion-panel-header>{{ tMainData }}</sbb-expansion-panel-header>
-    <sbb-form-field [label]="tOperationalPoint" class="sbb-form-field-long">
+    <sbb-expansion-panel-header>{{ 'app.view.editor-side-view.editor-node-detail-view.main-data' | translate }}</sbb-expansion-panel-header>
+    <sbb-form-field [label]="'app.view.editor-side-view.editor-node-detail-view.operational-point' | translate" class="sbb-form-field-long">
       <input
         sbbInput
         [ngModel]="nodeProperties.nodeBetriebspunktName"
         (keyup)="onBetriebspunktNameChanged($event)"
       />
     </sbb-form-field>
-    <sbb-form-field [label]="tName" class="sbb-form-field-long">
+    <sbb-form-field [label]="'app.view.editor-side-view.editor-node-detail-view.name' | translate" class="sbb-form-field-long">
       <input
         sbbInput
         [ngModel]="nodeProperties.nodeBetriebspunktFullName"
         (keyup)="onFullNameChanged($event)"
       />
     </sbb-form-field>
-    <sbb-form-field [label]="tConnectionTime" class="sbb-form-field-long">
+    <sbb-form-field [label]="'app.view.editor-side-view.editor-node-detail-view.connection-time' | translate" class="sbb-form-field-long">
       <input
         sbbInput
         type="number"
@@ -32,11 +32,11 @@
   </sbb-expansion-panel>
 
   <sbb-expansion-panel [expanded]="true">
-    <sbb-expansion-panel-header>{{ tOccupancy }}</sbb-expansion-panel-header>
+    <sbb-expansion-panel-header>{{ 'app.view.editor-side-view.editor-node-detail-view.occupancy' | translate }}</sbb-expansion-panel-header>
     <div class="sbb-mt-m">
       <sbb-knoten-auslastung-view></sbb-knoten-auslastung-view>
     </div>
-    <sbb-form-field [label]="tCapacity" class="sbb-form-field-long">
+    <sbb-form-field [label]="'app.view.editor-side-view.editor-node-detail-view.capacity' | translate" class="sbb-form-field-long">
       <input
         sbbInput
         type="number"
@@ -50,8 +50,8 @@
   </sbb-expansion-panel>
 
   <sbb-expansion-panel [expanded]="false">
-    <sbb-expansion-panel-header>{{ tFilterableLabels }}</sbb-expansion-panel-header>
-    <sbb-form-field [label]="tLabels" class="sbb-form-field-long">
+    <sbb-expansion-panel-header>{{ 'app.view.editor-side-view.editor-node-detail-view.filterable-labels' | translate }}</sbb-expansion-panel-header>
+    <sbb-form-field [label]="'app.view.editor-side-view.editor-node-detail-view.labels' | translate" class="sbb-form-field-long">
       <sbb-chip-list
         [value]="nodeProperties.labels"
         (focusout)="onLabelsFocusout()"
@@ -65,7 +65,7 @@
         </sbb-chip>
         <input
           id="nodeLabelsInput"
-          [placeholder]="tNewLabelPlaceholder"
+          [placeholder]="'app.view.editor-side-view.editor-node-detail-view.new-label-placeholder' | translate"
           sbbChipInput
           [sbbChipInputSeparatorKeyCodes]="separatorKeysCodes"
           (sbbChipInputTokenEnd)="add($event)"
@@ -83,15 +83,15 @@
   </sbb-expansion-panel>
 
   <sbb-expansion-panel [expanded]="false">
-    <sbb-expansion-panel-header> {{ tStoppingTimes }} </sbb-expansion-panel-header>
+    <sbb-expansion-panel-header> {{ 'app.view.editor-side-view.editor-node-detail-view.stopping-times' | translate }} </sbb-expansion-panel-header>
 
-    <sbb-label class="sbb-mt-m">{{ tStoppingTimePerProduct }}</sbb-label>
+    <sbb-label class="sbb-mt-m">{{ 'app.view.editor-side-view.editor-node-detail-view.stopping-time-per-product' | translate }}</sbb-label>
 
     <!-- TIM: this should be done with sbb table component, but I don't know how
       (or better, use flexbox for each line and make it a two column area below a certain breakpoint)-->
     <table class="NodeDataTable">
       <tr>
-        <td class="sbb-table-column-s">{{ tIPV }}</td>
+        <td class="sbb-table-column-s">{{ 'app.view.editor-side-view.editor-node-detail-view.ipv' | translate }}</td>
         <td class="sbb-table-column-m">
           <div
             *ngIf="
@@ -123,12 +123,12 @@
                 .no_halt
             "
             (change)="haltezeitIPVNoHaltChanged()"
-            >{{ tNoStop }}
+            >{{ 'app.view.editor-side-view.editor-node-detail-view.no-stop' | translate }}
           </sbb-checkbox>
         </td>
       </tr>
       <tr>
-        <td>{{ tA }}</td>
+        <td>{{ 'app.view.editor-side-view.editor-node-detail-view.a' | translate }}</td>
         <td class="sbb-table-column-m">
           <div
             *ngIf="
@@ -159,12 +159,12 @@
               nodeProperties.nodeTrainrunCategoryHaltezeit['HaltezeitA'].no_halt
             "
             (change)="haltezeitANoHaltChanged()"
-            >{{ tNoStop }}
+            >{{ 'app.view.editor-side-view.editor-node-detail-view.no-stop' | translate }}
           </sbb-checkbox>
         </td>
       </tr>
       <tr>
-        <td>{{ tB }}</td>
+        <td>{{ 'app.view.editor-side-view.editor-node-detail-view.b' | translate }}</td>
         <td class="sbb-table-column-m">
           <div
             *ngIf="
@@ -195,12 +195,12 @@
               nodeProperties.nodeTrainrunCategoryHaltezeit['HaltezeitB'].no_halt
             "
             (change)="haltezeitBNoHaltChanged()"
-            >{{ tNoStop }}
+            >{{ 'app.view.editor-side-view.editor-node-detail-view.no-stop' | translate }}
           </sbb-checkbox>
         </td>
       </tr>
       <tr>
-        <td>{{ tC }}</td>
+        <td>{{ 'app.view.editor-side-view.editor-node-detail-view.c' | translate }}</td>
         <td class="sbb-table-column-m">
           <div
             *ngIf="
@@ -231,12 +231,12 @@
               nodeProperties.nodeTrainrunCategoryHaltezeit['HaltezeitC'].no_halt
             "
             (change)="haltezeitCNoHaltChanged()"
-            >{{ tNoStop }}
+            >{{ 'app.view.editor-side-view.editor-node-detail-view.no-stop' | translate }}
           </sbb-checkbox>
         </td>
       </tr>
       <tr>
-        <td>{{ tD }}</td>
+        <td>{{ 'app.view.editor-side-view.editor-node-detail-view.d' | translate }}</td>
         <td class="sbb-table-column-m">
           <div
             *ngIf="
@@ -267,14 +267,14 @@
               nodeProperties.nodeTrainrunCategoryHaltezeit['HaltezeitD'].no_halt
             "
             (change)="haltezeitDNoHaltChanged()"
-            >{{ tNoStop }}
+            >{{ 'app.view.editor-side-view.editor-node-detail-view.no-stop' | translate }}
           </sbb-checkbox>
         </td>
       </tr>
     </table>
   </sbb-expansion-panel>
   <sbb-expansion-panel [expanded]="false">
-    <sbb-expansion-panel-header>{{ tLinks }}</sbb-expansion-panel-header>
+    <sbb-expansion-panel-header>{{ 'app.view.editor-side-view.editor-node-detail-view.links' | translate }}</sbb-expansion-panel-header>
     <ul>
       <li>
         <a
@@ -284,7 +284,7 @@
             nodeProperties.nodeBetriebspunktName
           }}"
         >
-          {{ tPlatformInformation }}
+          {{ 'app.view.editor-side-view.editor-node-detail-view.platform-information' | translate }}
         </a>
       </li>
       <li>
@@ -295,7 +295,7 @@
             nodeProperties.nodeBetriebspunktName
           }}&sort=-p_lange"
         >
-          {{ tPlatformLength }}
+          {{ 'app.view.editor-side-view.editor-node-detail-view.platform-length' | translate }}
         </a>
       </li>
     </ul>
@@ -306,6 +306,6 @@
     class="sbb-mt-m sbb-ml-m"
     (click)="onDeleteNode()"
   >
-    {{ tDeleteNote }}
+    {{ 'app.view.editor-side-view.editor-node-detail-view.delete-node' | translate }}
   </button>
 </sbb-accordion>

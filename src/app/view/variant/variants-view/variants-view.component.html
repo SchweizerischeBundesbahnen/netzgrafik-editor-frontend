@@ -2,24 +2,24 @@
   <div class="header">
     <h1>
       {{ proj.name }}
-      <ng-container *ngIf="proj.isArchived">{{ ' ' + tArchived }}</ng-container>
+      <ng-container *ngIf="proj.isArchived">{{ ' ' + 'app.view.variant.variants-view.archived' | translate }}</ng-container>
     </h1>
   </div>
 
   <sbb-slots-view>
-    <sbb-slot [title]="tVariants">
+    <sbb-slot [title]="'app.view.variant.variants-view.variants' | translate">
       <div class="actions">
         <input
           [formControl]="searchControl"
           class="search"
           type="text"
           sbbInput
-          [placeholder]="tSearchVariants"
+          [placeholder]="'app.view.variant.variants-view.search-variants' | translate"
         />
       </div>
       <div class="archive">
         <sbb-checkbox [formControl]="showArchiveControl"
-          >{{ tShowArchive }}</sbb-checkbox
+          >{{ 'app.view.variant.variants-view.show-archive' | translate }}</sbb-checkbox
         >
       </div>
       <sbb-card-grid>
@@ -44,7 +44,7 @@
         </sbb-card>
       </sbb-card-grid>
     </sbb-slot>
-    <sbb-slot [title]="tProjectDescription" [actions]="projectDataActions">
+    <sbb-slot [title]="'app.view.variant.variants-view.project-description' | translate" [actions]="projectDataActions">
       <div class="project-data">
         <div style="height: 32px"></div>
         <div style="font-weight: bold; vertical-align: bottom; height: 32px">

@@ -8,7 +8,7 @@
           <div class="noprint">
             <button type="button"
                     class="SimpleButton"
-                    [title]="tReset"
+                    [title]="'app.streckengrafik.components.reset' | translate"
                     (click)="onResetButton()">
               <sbb-icon svgIcon="kom:arrow-circle-reset-small"></sbb-icon>
             </button>
@@ -25,7 +25,7 @@
               <button type="button"
                       height="16px" width="16px"
                       class="SimpleButton TogglePathNode"
-                      [title]="tCloseAllPathNodes"
+                      [title]="'app.streckengrafik.components.close-all-path-nodes' | translate"
                       (click)="collapseAllPathNodes()">
                 <sbb-icon svgIcon="kom:double-chevron-small-left-medium"
                           height="16px" width="16px"
@@ -36,7 +36,7 @@
               <button type="button"
                       height="16px" width="16px"
                       class="SimpleButton TogglePathNode"
-                      [title]="tOpenAllPathNodes"
+                      [title]="'app.streckengrafik.components.open-all-path-nodes' | translate"
                       (click)="expandAllPathNodes()">
                 <sbb-icon svgIcon="kom:adouble-chevron-small-right-medium"
                           height="16px" width="16px"
@@ -142,7 +142,7 @@
 
           <ng-container *ngIf="disabledDisplayTools">
             <button type="button" class="SimpleButton Empty" (click)="toggleDisplayTools()"
-                    [title]="tShowAdvancedDisplayFunctions">
+                    [title]="'app.streckengrafik.components.show-advanced-display-functions' | translate">
               &#8942;
             </button>
           </ng-container>
@@ -151,37 +151,37 @@
             <br>
             <button type="button"
                     [class]="getStreckengrafikTimeNotFocusNorEnabledButtonClassTag('SimpleButton Time')"
-                    [title]="tShowOrHideTimeForNonSelectedTrains"
+                    [title]="'app.streckengrafik.components.show-or-hide-time-for-non-selected-trainruns' | translate"
                     (click)="toggleStreckengrafikTimeNotFocusNorEnabledButton()"
-                    [attr.title]="tShowOrHideTimeForNonSelectedTrainsAttribute">
+                    [attr.title]="'app.streckengrafik.components.show-or-hide' | translate:{ 'component': getTimeButtonText() }">
               {{getTimeButtonText()}}
             </button>
 
             <button type="button"
                     [class]="getStreckengrafikNameNotFocusNorEnabledButtonClassTag('SimpleButton Name')"
-                    [title]="tShowOrHideNameForNonSelectedTrains"
+                    [title]="'app.streckengrafik.components.show-or-hide-name-for-non-selected-trains' | translate"
                     (click)="toggleStreckengrafikNameNotFocusNorEnabledButton()"
-                    [attr.title]="tShowOrHideNameForNonSelectedTrainsAttribute">
+                    [attr.title]="'app.streckengrafik.components.show-or-hide' | translate:{ 'component': getNameButtonText() }">
               {{getNameButtonText()}}
             </button>
 
             <button type="button"
                     [class]="getHeadwayVisibleButtonClassTag('SimpleButton HeadwayBand')"
                     (click)="toggleHeadwayBandVisbility()"
-                    [attr.title]="tShowOrHideHeadwayBandAttribute">
+                    [attr.title]="'app.streckengrafik.components.show-or-hide' | translate:{ 'component': getHeadwayBandButtonText() }">
               {{getHeadwayBandButtonText()}}
             </button>
 
             <button type="button"
                     [class]="getRailTrackSliderVisibleButtonClassTag('SimpleButton RailTrackSlider')"
                     (click)="toggleRailTrackSliderVisbility()"
-                    [attr.title]="tShowOrHideRailTrackSliderAttribute">
+                    [attr.title]="'app.streckengrafik.components.show-or-hide' | translate:{ 'component': getRailTrackSliderButtonText() }">
               {{getRailTrackSliderButtonText()}}
             </button>
 
             <button type="button" class="SimpleButton Empty" style='background: none;'
                     (click)="toggleDisplayTools()"
-                    [title]="tHideAdvancedDisplayFunctions">
+                    [title]="'app.streckengrafik.components.hide-advanced-display-functions' | translate">
               &#x2715;
             </button>
           </ng-container>

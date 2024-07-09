@@ -29,8 +29,6 @@ export class NoteEditElementComponent implements OnInit, OnDestroy {
   private deleteNoteCallback = null;
   private saveNoteCallback = null;
 
-  readonly tDeleteNote = $localize`:@@app.view.dialogs.note-dialog.delete-note:Delete note`;
-
   ngOnInit(): void {
     this.formModel = new FormModel<NoteFormComponentModel>(
       this.noteDialogParameter.noteFormComponentModel ?? {

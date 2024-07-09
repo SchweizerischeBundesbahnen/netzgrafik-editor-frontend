@@ -38,35 +38,6 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
 
   private destroyed = new Subject<void>();
 
-  readonly tFilter = $localize`:@@app.view.editor-filter-view.filter:Filter`;
-  readonly tGeneral = $localize`:@@app.view.editor-filter-view.general:General`;
-  readonly tCategory = $localize`:@@app.view.editor-filter-view.category:Category`;
-  readonly tFrequency = $localize`:@@app.view.editor-filter-view.frequency:Frequence`;
-  readonly tTimeCategory = $localize`:@@app.view.editor-filter-view.time-category:Time category`;
-  readonly tDisplayAllTrainruns = $localize`:@@app.view.editor-filter-view.display-all-trainruns:Display all trainruns`;
-  readonly tResetTrainrunFilter = $localize`:@@app.view.editor-filter-view.reset-trainrun-filter:Reset trainrun filter`;
-  readonly tFilterableLabelsTrainruns = $localize`:@@app.view.editor-filter-view.filterable-labels-trainruns:Filterable labels: Trainruns`;
-  readonly tFilterableLabelsNodes = $localize`:@@app.view.editor-filter-view.filterable-labels-nodes:Filterable labels: Nodes`;
-  readonly tFilterableLabelsNotes = $localize`:@@app.view.editor-filter-view.filterable-labels-notes:Filterable labels: Notes`;
-  readonly tDisplay = $localize`:@@app.view.editor-filter-view.display:Display`;
-  readonly tTimes = $localize`:@@app.view.editor-filter-view.times:Times`;
-  readonly tDecimalDisplayed = $localize`:@@app.view.editor-filter-view.decimal-displayed:Number of decimal place displayed`;
-  readonly tDisplayArrivalDepartureTimes = $localize`:@@app.view.editor-filter-view.display-arrival-departure-times:Display departure and arrival times`;
-  readonly tDisplayArrivalDepartureTimesForConnections = $localize`:@@app.view.editor-filter-view.display-arrival-departure-times-for-connections:Display departure and arrival times for connections`;
-  readonly tDisplayTravelTimes = $localize`:@@app.view.editor-filter-view.display-travel-times:Display travel times`;
-  readonly tDisplayTrainrunName = $localize`:@@app.view.editor-filter-view.display-trainrun-name:Display trainrun name`;
-  readonly tConnections = $localize`:@@app.view.editor-filter-view.connection:Connections`;
-  readonly tDisplayConnections = $localize`:@@app.view.editor-filter-view.display-connections:Display connections`;
-  readonly tNodes = $localize`:@@app.view.editor-filter-view.nodes:Nodes`;
-  readonly tDisplayNodesWithoutVisibleTrainruns = $localize`:@@app.view.editor-filter-view.display-nodes-without-visible-trainruns:Display nodes without (visible) trainruns`;
-  readonly tDisplayNodesWithOnlyStoppingTrainruns = $localize`:@@app.view.editor-filter-view.display-nodes-with-only-stopping-trainruns:Display nodes with only stopping trainruns`;
-  readonly tNotes = $localize`:@@app.view.editor-filter-view.notes:Notes`;
-  readonly tDisplayNotes = $localize`:@@app.view.editor-filter-view.display-notes:Display notes`;
-  readonly tResetDisplayFilter = $localize`:@@app.view.editor-filter-view.reset-display-filter:Reset display filter`;
-  readonly tSavedFilters = $localize`:@@app.view.editor-filter-view.saved-filters:Saved filters`;
-  readonly tSaveFilters = $localize`:@@app.view.editor-filter-view.save-filters:Save filters and add them as filter settings`;
-  readonly tResetAllDisplayFilters = $localize`:@@app.view.editor-filter-view.reset-all-display-filters:Reset all display filters`;
-
   constructor(
     public dataService: DataService,
     public uiInteractionService: UiInteractionService,
@@ -329,18 +300,18 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
 
   getCategoryTooltip(trainrunCategory: TrainrunCategory): string {
     if (!this.filterService.isFilterTrainrunCategoryEnabled(trainrunCategory)) {
-      return $localize`:@@app.view.editor-filter-view.show-trainrun-category:Show ${trainrunCategory.name}`;
+      return $localize`:@@app.view.editor-filter-view.show-trainrun-category:Show ${trainrunCategory.name}:trainrunCategory:`;
     }
-    return $localize`:@@app.view.editor-filter-view.hide-trainrun-category:Hide ${trainrunCategory.name}`;
+    return $localize`:@@app.view.editor-filter-view.hide-trainrun-category:Hide ${trainrunCategory.name}:trainrunCategory:`;
   }
 
   getTimeCategoryTooltip(trainrunTimeCategory: TrainrunTimeCategory): string {
     /*
     if (!this.filterService.isFilterTrainrunCategoryEnabled(trainrunTimeCategory)) {
-      return $localize`:@@app.view.editor-filter-view.show-trainrun-time-category:Show ${trainrunTimeCategory.name}/${trainrunTimeCategory.name} einblenden`;
+      return $localize`:@@app.view.editor-filter-view.show-trainrun-time-category:Show ${trainrunTimeCategory.name}:trainrunTimeCategory:`;
     }
     */
-    return $localize`:@@app.view.editor-filter-view.hide-trainrun-time-category:Hide ${trainrunTimeCategory.name}`;
+    return $localize`:@@app.view.editor-filter-view.hide-trainrun-time-category:Hide ${trainrunTimeCategory.name}:trainrunTimeCategory:`;
   }
 
   makeCategoryButtonLabel(trainrunCategory: TrainrunCategory): string {
@@ -409,9 +380,9 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     if (
       !this.filterService.isFilterTrainrunFrequencyEnabled(trainrunFrequency)
     ) {
-      return trainrunFrequency.name + " " + $localize`:@@app.view.editor-filter-view.show-trainrun-frequency:Show ${trainrunFrequency.name}`;
+      return trainrunFrequency.name + " " + $localize`:@@app.view.editor-filter-view.show-trainrun-frequency:Show ${trainrunFrequency.name}:trainrunFrequency:`;
     }
-    return trainrunFrequency.name + " " + $localize`:@@app.view.editor-filter-view.hide-trainrun-frequency:Hide ${trainrunFrequency.name}`;
+    return trainrunFrequency.name + " " + $localize`:@@app.view.editor-filter-view.hide-trainrun-frequency:Hide ${trainrunFrequency.name}:trainrunFrequency:`;
   }
 
   makeFrequencyButtonLabel(trainrunFrequency: TrainrunFrequency): string {

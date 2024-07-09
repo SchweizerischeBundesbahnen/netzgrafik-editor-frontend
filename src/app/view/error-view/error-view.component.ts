@@ -9,8 +9,6 @@ import {map} from "rxjs/operators";
   styleUrls: ["./error-view.component.scss"],
 })
 export class ErrorViewComponent {
-  readonly tError = $localize`:@@app.view.error-view.error:Error`;
-
   constructor(private activatedRoute: ActivatedRoute) {}
 
   get error(): Observable<string> {

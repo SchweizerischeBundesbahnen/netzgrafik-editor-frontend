@@ -1,6 +1,6 @@
 <div sbbDialogTitle>
-  <ng-container *ngIf="isNewProject">{{ tCreateProject }}</ng-container>
-  <ng-container *ngIf="!isNewProject">{{ tEditProject }}</ng-container>
+  <ng-container *ngIf="isNewProject">{{ 'app.view.project.project-dialog.create-project' | translate }}</ng-container>
+  <ng-container *ngIf="!isNewProject">{{ 'app.view.project.project-dialog.edit-project' | translate }}</ng-container>
 </div>
 <div sbbDialogContent>
   <sbb-project-form [model]="formModel"></sbb-project-form>
@@ -12,7 +12,7 @@
     cdkFocusInitial
     (click)="onCreateClicked()"
   >
-    {{ tCreate }}
+    {{ 'app.view.project.project-dialog.create' | translate }}
   </button>
   <button
     *ngIf="!isNewProject"
@@ -20,7 +20,7 @@
     cdkFocusInitial
     (click)="onCreateClicked()"
   >
-    {{ tSave }}
+    {{ 'app.view.project.project-dialog.save' | translate }}
   </button>
-  <button sbb-secondary-button (click)="onCancelClicked()">{{ tCancel }}</button>
+  <button sbb-secondary-button (click)="onCancelClicked()">{{ 'app.view.project.project-dialog.cancel' | translate }}</button>
 </div>

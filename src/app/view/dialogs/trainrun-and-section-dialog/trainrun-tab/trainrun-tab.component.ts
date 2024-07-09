@@ -161,8 +161,8 @@ export class TrainrunTabComponent implements OnDestroy {
   }
 
   onDeleteTrainrun() {
-    const dialogTitle = "Löschen";
-    const dialogContent = "Soll der gesamte Zuglauf definitiv gelöscht werden?";
+    const dialogTitle = $localize`:@@app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.delete:Delete`;
+    const dialogContent = $localize`:@@app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.deleteConfirmationQuestion:Should the entire train route be definitively deleted?`;
     const confirmationDialogParamter = new ConfirmationDialogParameter(
       dialogTitle,
       dialogContent,

@@ -34,10 +34,6 @@ export class NoteFilterTabComponent implements OnInit, OnDestroy {
   readonly separatorKeysCodes = [ENTER, COMMA];
   private destroyed = new Subject<void>();
 
-  readonly tLabels = $localize`:@@app.view.dialogs.note-dialog.note-filter-tab.labels:Labels`;
-  readonly tLabelPlaceholder = $localize`:@@app.view.dialogs.note-dialog.note-filter-tab.label-placeholder:New label...`;
-  readonly tDeleteNote = $localize`:@@app.view.dialogs.note-dialog.delete-note:Delete note`;
-
   constructor(
     public dataService: DataService,
     private noteService: NoteService,

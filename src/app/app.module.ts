@@ -1,4 +1,4 @@
-import {NgModule, Injector, ApplicationRef, DoBootstrap} from "@angular/core";
+import {NgModule, Injector, DoBootstrap} from "@angular/core";
 import {NgxEditorModule} from "ngx-editor";
 import {BrowserModule} from "@angular/platform-browser";
 import {createCustomElement} from "@angular/elements";
@@ -231,13 +231,12 @@ import {I18nModule} from "./core/i18n/i18n.module";
     SbbTooltipModule,
     SbbBreadcrumbModule,
     SbbAutocompleteModule,
+    I18nModule,
   ],
   bootstrap: environment.customElement ? [] : [AppComponent],
   providers: [
     ... environment.backendUrl ? [{provide: BASE_PATH, useValue: environment.backendUrl}] : [],
     {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
-    I18nModule.setLocale(),
-    I18nModule.setLocaleId()
   ],
 })
 

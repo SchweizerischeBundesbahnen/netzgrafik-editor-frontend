@@ -14,13 +14,13 @@
     ></sbb-icon>
     <div class="NoteTabGrupe">
       <sbb-tab-group>
-        <sbb-tab [label]="tNoteTab" id="note-tab">
+        <sbb-tab [label]="'app.view.dialogs.note-dialog.note-tab' | translate" id="note-tab">
           <sbb-note-edit-element
             [noteDialogParameter]="data"
             (noteDeleted)="closeDialog()"
           ></sbb-note-edit-element>
         </sbb-tab>
-        <sbb-tab [label]="tFilterableLabelsTab" id="note-filterable-labels-tab">
+        <sbb-tab [label]="'app.view.dialogs.note-dialog.filterable-labels-tab' | translate" id="note-filterable-labels-tab">
           <sbb-note-filter-tab
             [noteDialogParameter]="data"
             (noteDeleted)="closeDialog()"

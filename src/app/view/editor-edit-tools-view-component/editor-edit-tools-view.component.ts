@@ -32,29 +32,6 @@ export class EditorEditToolsViewComponent implements OnDestroy {
   public trainrunLabelGroups: LabelGroup[];
   private destroyed = new Subject<void>();
 
-  readonly tEdit = $localize`:@@app.view.editor-edit-tools-view-component.edit:Edit`;
-  readonly tFilterableLabels = $localize`:@@app.view.editor-edit-tools-view-component.filterable-labels:Filterable labels`;
-  readonly tTrainruns = $localize`:@@app.view.editor-edit-tools-view-component.trainruns:Trainruns`;
-  readonly tNodes = $localize`:@@app.view.editor-edit-tools-view-component.nodes:Nodes`;
-  readonly tNotes = $localize`:@@app.view.editor-edit-tools-view-component.notes:Notes`;
-  readonly tDeleteNetzgrafikTitle = $localize`:@@app.view.editor-edit-tools-view-component.delete-netzgrafik-title:Netzgrafik - Delete`;
-  readonly tNonVisibleElements = $localize`:@@app.view.editor-edit-tools-view-component.non-visible-elements:Non visible elements`;
-  readonly tDeleteAllNonVisibleElementsTooltip = $localize`:@@app.view.editor-edit-tools-view-component.delete-all-non-visible-elements-tooltip:Delete all non-visible elements, such as nodes, trainruns and notes`;
-  readonly tDeleteAllNonVisibleElements = $localize`:@@app.view.editor-edit-tools-view-component.delete-all-non-visible-elements:Delete all non-visible elements`;
-  readonly tVisibleElements = $localize`:@@app.view.editor-edit-tools-view-component.visible-elements:Visible elements`;
-  readonly tDeleteAllVisibleTrainrunsTooltip = $localize`:@@app.view.editor-edit-tools-view-component.delete-all-visible-trainruns-tooltip:Delete all visible trainruns`;
-  readonly tDeleteAllVisibleTrainruns = $localize`:@@app.view.editor-edit-tools-view-component.delete-all-visible-trainruns:Delete all visible trainruns`;
-  readonly tDeleteAllVisibleNotesTooltip = $localize`:@@app.view.editor-edit-tools-view-component.delete-all-visible-notes-tooltip:Delete all visible notes`;
-  readonly tDeleteAllVisibleNotes = $localize`:@@app.view.editor-edit-tools-view-component.delete-all-visible-notes:Delete all visible notes`;
-  readonly tDeleteAllVisibleElementsTooltip = $localize`:@@app.view.editor-edit-tools-view-component.delete-all-visible-elements-tooltip:Delete all visible elements, such as nodes, trainruns and notes`;
-  readonly tDeleteAllVisibleElements = $localize`:@@app.view.editor-edit-tools-view-component.delete-all-visible-elements:Delete all visible elements`;
-  readonly tMergeNetzgrafikTitle = $localize`:@@app.view.editor-edit-tools-view-component.merge-netzgrafik-title:Netzgrafik - Merge`;
-  readonly tAddNetzgrafikAsCopyTooltip = $localize`:@@app.view.editor-edit-tools-view-component.add-netzgrafik-as-copy-tooltip:Add netzgrafik as a copy (trainruns, nodes, notes)`;
-  readonly tAddNetzgrafikAsCopy = $localize`:@@app.view.editor-edit-tools-view-component.add-netzgrafik-as-copy:Add netzgrafik as a copy`;
-  readonly tMergeNetzgrafikTooltip = $localize`:@@app.view.editor-edit-tools-view-component.merge-netzgrafik-tooltip:Merge netzgrafik (trainruns, nodes, notes)`;
-  readonly tMergeNetzgrafik = $localize`:@@app.view.editor-edit-tools-view-component.merge-netzgrafik:Merge netzgrafik`;
-  private readonly tDelete = $localize`:@@app.view.editor-edit-tools-view-component.delete:Delete`;
-
   constructor(
     private dataService: DataService,
     private nodeService: NodeService,
@@ -97,12 +74,9 @@ export class EditorEditToolsViewComponent implements OnDestroy {
   }
 
   onClearAllFiltered() {
-    const dialogTitle = this.tDelete;
-    const dialogContent =
-      $localize`:@@app.view.editor-edit-tools-view-component.on-clear-delete-all-non-visible-elements:Should all non-visible elements be permanently deleted from the netzgrafik?`;
     const confirmationDialogParamter = new ConfirmationDialogParameter(
-      dialogTitle,
-      dialogContent,
+      $localize`:@@app.view.editor-edit-tools-view-component.delete:Delete`,
+      $localize`:@@app.view.editor-edit-tools-view-component.on-clear-delete-all-non-visible-elements:Should all non-visible elements be permanently deleted from the netzgrafik?`,
     );
     this.uiInteractionService
       .showConfirmationDiagramDialog(confirmationDialogParamter)
@@ -116,12 +90,9 @@ export class EditorEditToolsViewComponent implements OnDestroy {
   }
 
   onClear() {
-    const dialogTitle = this.tDelete;
-    const dialogContent =
-      $localize`:@@app.view.editor-edit-tools-view-component.on-clear-delete-all-visible-elements:Should all visible elements be permanently deleted from the netzgrafik?`;
     const confirmationDialogParamter = new ConfirmationDialogParameter(
-      dialogTitle,
-      dialogContent,
+      $localize`:@@app.view.editor-edit-tools-view-component.delete:Delete`,
+      $localize`:@@app.view.editor-edit-tools-view-component.on-clear-delete-all-visible-elements:Should all visible elements be permanently deleted from the netzgrafik?`,
     );
     this.uiInteractionService
       .showConfirmationDiagramDialog(confirmationDialogParamter)
@@ -135,11 +106,9 @@ export class EditorEditToolsViewComponent implements OnDestroy {
   }
 
   onClearAllTrainruns() {
-    const dialogTitle = this.tDelete;
-    const dialogContent = $localize`:@@app.view.editor-edit-tools-view-component.on-clear-delete-all-visible-trainruns:Should all visible trainruns be permanently deleted from the netzgrafik?`;
     const confirmationDialogParamter = new ConfirmationDialogParameter(
-      dialogTitle,
-      dialogContent,
+      $localize`:@@app.view.editor-edit-tools-view-component.delete:Delete`,
+      $localize`:@@app.view.editor-edit-tools-view-component.on-clear-delete-all-visible-trainruns:Should all visible trainruns be permanently deleted from the netzgrafik?`,
     );
     this.uiInteractionService
       .showConfirmationDiagramDialog(confirmationDialogParamter)
@@ -151,11 +120,9 @@ export class EditorEditToolsViewComponent implements OnDestroy {
   }
 
   onClearAllNotes() {
-    const dialogTitle = this.tDelete;
-    const dialogContent = $localize`:@@app.view.editor-edit-tools-view-component.on-clear-delete-all-visible-notes:Should all visible notes be permanently deleted from the netzgrafik?`;
     const confirmationDialogParamter = new ConfirmationDialogParameter(
-      dialogTitle,
-      dialogContent,
+      $localize`:@@app.view.editor-edit-tools-view-component.delete:Delete`,
+      $localize`:@@app.view.editor-edit-tools-view-component.on-clear-delete-all-visible-notes:Should all visible notes be permanently deleted from the netzgrafik?`,
     );
     this.uiInteractionService
       .showConfirmationDiagramDialog(confirmationDialogParamter)

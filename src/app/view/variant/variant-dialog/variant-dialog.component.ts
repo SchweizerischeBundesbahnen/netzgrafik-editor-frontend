@@ -18,11 +18,6 @@ export class VariantDialogComponent {
   readonly formModel: FormModel<VariantFormComponentModel>;
   readonly isNewVariant: boolean;
 
-  readonly tCreateVariant = $localize`:@@app.view.variant.variant-dialog.create-variant:Create variant`
-  readonly tEditVariant = $localize`:@@app.view.variant.variant-dialog.edit-variant:Edit variant`
-  readonly tSave = $localize`:@@app.view.variant.variant-dialog.save:Save`
-  readonly tCancel = $localize`:@@app.view.variant.variant-dialog.cancel:Cancel`
-
   constructor(
     public readonly dialogRef: SbbDialogRef<
       VariantDialogComponent,

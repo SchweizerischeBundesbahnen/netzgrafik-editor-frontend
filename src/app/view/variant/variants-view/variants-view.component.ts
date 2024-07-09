@@ -47,12 +47,6 @@ export class VariantsViewComponent implements OnDestroy {
   showArchiveControl = new UntypedFormControl(false);
   searchQuery = new BehaviorSubject("");
 
-  readonly tArchived = $localize`:@@app.view.variant.variants-view.archived:(archived)`;
-  readonly tVariants = $localize`:@@app.view.variant.variants-view.variants:Variants`;
-  readonly tSearchVariants = $localize`:@@app.view.variant.variants-view.search-variants:Search variants`;
-  readonly tShowArchive = $localize`:@@app.view.variant.variants-view.show-archive:Show archive`;
-  readonly tProjectDescription = $localize`:@@app.view.variant.variants-view.project-description:Project description`;
-
   readonly variants = combineLatest([
     this.projectSubject,
     this.searchQuery,
@@ -310,7 +304,7 @@ export class VariantsViewComponent implements OnDestroy {
   }
 
   getTitleCurrentVersion(variant: VariantSummaryDto): string {
-    const archivedSuffix = variant.isArchived ? " " + this.tArchived : "";
+    const archivedSuffix = variant.isArchived ? " " + $localize`:@@app.view.variant.variants-view.archived:(archived)` : "";
 
     if (variant.latestSnapshotVersion) {
       return variant.latestSnapshotVersion.name + "*" + archivedSuffix;

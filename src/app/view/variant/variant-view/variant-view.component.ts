@@ -16,11 +16,6 @@ import {NavigationService} from "../../../services/ui/navigation.service";
 export class VariantViewComponent implements OnDestroy {
   private readonly destroyed = new Subject<void>();
 
-  readonly tArchived = $localize`:@@app.view.variant.variant-view.archived:(archived)`;
-  readonly tEditVariant = $localize`:@@app.view.variant.variant-view.edit-variant:Edit variant`;
-  readonly tDeleteVariant = $localize`:@@app.view.variant.variant-view.delete-variant:Delete variant`;
-  readonly tVersions = $localize`:@@app.view.variant.variant-view.versions:Versions`;
-
   constructor(
     readonly versionControlService: VersionControlService,
     private readonly dialog: SbbDialog,
