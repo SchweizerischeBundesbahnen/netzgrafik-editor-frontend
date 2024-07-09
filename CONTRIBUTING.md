@@ -3,6 +3,8 @@
 We appreciate all kinds of contributions. The following is a set of guidelines for contributing to this repository on GitHub. 
 These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
 
+By submitting a contribution to this repository you agree that you do this under the [license](LICENSE) of the repository and certify that you have all the rights to do so.
+
 #### Table Of Contents
 
 [Code of Conduct](#code-of-conduct)
