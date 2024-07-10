@@ -5,7 +5,7 @@ import {
   TrainrunSectionDto,
 } from "../../data-structures/business.data.structures";
 import {Node} from "../../models/node.model";
-import {Injectable, OnDestroy, EventEmitter} from "@angular/core";
+import {EventEmitter, Injectable, OnDestroy} from "@angular/core";
 import {BehaviorSubject, Subject} from "rxjs";
 import {TrainrunService} from "./trainrun.service";
 import {NodeService} from "./node.service";
@@ -22,7 +22,11 @@ import {Transition} from "../../models/transition.model";
 import {takeUntil} from "rxjs/operators";
 import {FilterService} from "../ui/filter.service";
 import {TrainrunSectionNodePair} from "../util/trainrun.iterator";
-import {CreateTrainrunOperation, Operation, UpdateTrainrunSectionsOperation} from "../../models/operation.model";
+import {
+  CreateTrainrunOperation,
+  Operation,
+  UpdateTrainrunSectionsOperation
+} from "../../models/operation.model";
 
 interface DepartureAndArrivalTimes {
   nodeFromDepartureTime: number;
@@ -78,6 +82,7 @@ export class TrainrunSectionService implements OnDestroy {
     trainrunSection: TrainrunSection,
     nonStop: boolean,
     halteZeiten: TrainrunCategoryHaltezeit,
+    precision: number = 1
   ): DepartureAndArrivalTimes {
     let haltezeit =
       halteZeiten[
@@ -86,19 +91,19 @@ export class TrainrunSectionService implements OnDestroy {
     haltezeit = nonStop ? 0 : haltezeit;
     const fromDepartureTime = MathUtils.round(
       (nodeArrival + haltezeit) % 60,
-      1,
+      precision,
     );
     const fromArrivalTime = MathUtils.round(
       TrainrunsectionHelper.getSymmetricTime(fromDepartureTime),
-      1,
+      precision,
     );
     const toArrivalTime = MathUtils.round(
       (fromDepartureTime + (trainrunSection.getTravelTime() % 60)) % 60,
-      1,
+      precision,
     );
     const toDepartureTime = MathUtils.round(
       TrainrunsectionHelper.getSymmetricTime(toArrivalTime),
-      1,
+      precision,
     );
 
     return {
@@ -161,6 +166,7 @@ export class TrainrunSectionService implements OnDestroy {
           trainrunSection,
           false,
           halteZeit,
+          this.filterService.getTimeDisplayPrecision()
         );
 
       if (trainrunSection.getSourceNodeId() === nodeFrom.getId()) {
@@ -194,11 +200,11 @@ export class TrainrunSectionService implements OnDestroy {
       // first or unconnected section - special case
       const targetArrivalTime = MathUtils.round(
         (trainrunSection.getSourceDeparture() + (trainrunSection.getTravelTime() % 60)) % 60,
-        1,
+        this.filterService.getTimeDisplayPrecision(),
       );
       const targetDepartureTime = MathUtils.round(
         TrainrunsectionHelper.getSymmetricTime(targetArrivalTime),
-        1,
+        this.filterService.getTimeDisplayPrecision(),
       );
       trainrunSection.setTargetDeparture(targetDepartureTime);
       trainrunSection.setTargetArrival(targetArrivalTime);
@@ -434,11 +440,11 @@ export class TrainrunSectionService implements OnDestroy {
     // ----------------------------------------------------------------------------------
     const depTimeAtSource = MathUtils.round(
       (arrivalTimeAtSource + halteZeit) % 60,
-      1,
+      this.filterService.getTimeDisplayPrecision(),
     );
     const arrTimeAtSource = MathUtils.round(
       TrainrunsectionHelper.getSymmetricTime(depTimeAtSource),
-      1,
+      this.filterService.getTimeDisplayPrecision(),
     );
     pair.trainrunSection.setSourceDeparture(depTimeAtSource);
     pair.trainrunSection.setSourceArrival(arrTimeAtSource);
@@ -450,11 +456,11 @@ export class TrainrunSectionService implements OnDestroy {
       // Target is not locked -> update the Target Arrival Time
       const arrTimeAtTarget = MathUtils.round(
         (depTimeAtSource + pair.trainrunSection.getTravelTime()) % 60,
-        1,
+        this.filterService.getTimeDisplayPrecision(),
       );
       const depTimeAtTarget = MathUtils.round(
         TrainrunsectionHelper.getSymmetricTime(arrTimeAtTarget),
-        1,
+        this.filterService.getTimeDisplayPrecision(),
       );
       pair.trainrunSection.setTargetArrival(arrTimeAtTarget);
       pair.trainrunSection.setTargetDeparture(depTimeAtTarget);
@@ -508,11 +514,11 @@ export class TrainrunSectionService implements OnDestroy {
     // ----------------------------------------------------------------------------------
     const depTimeAtTarget = MathUtils.round(
       (arrivalTimeAtTarget + halteZeit) % 60,
-      1,
+      this.filterService.getTimeDisplayPrecision(),
     );
     const arrTimeAtTarget = MathUtils.round(
       TrainrunsectionHelper.getSymmetricTime(depTimeAtTarget),
-      1,
+      this.filterService.getTimeDisplayPrecision(),
     );
     pair.trainrunSection.setTargetDeparture(depTimeAtTarget);
     pair.trainrunSection.setTargetArrival(arrTimeAtTarget);
@@ -524,11 +530,11 @@ export class TrainrunSectionService implements OnDestroy {
       // Target is not locked -> update the Target Arrival Time
       const arrTimeAtSource = MathUtils.round(
         (depTimeAtTarget + pair.trainrunSection.getTravelTime()) % 60,
-        1,
+        this.filterService.getTimeDisplayPrecision(),
       );
       const depTimeAtSource = MathUtils.round(
         TrainrunsectionHelper.getSymmetricTime(arrTimeAtSource),
-        1,
+        this.filterService.getTimeDisplayPrecision(),
       );
       pair.trainrunSection.setSourceArrival(arrTimeAtSource);
       pair.trainrunSection.setSourceDeparture(depTimeAtSource);
@@ -579,6 +585,7 @@ export class TrainrunSectionService implements OnDestroy {
           pair.trainrunSection,
           isNonStop,
           halteZeit,
+          this.filterService.getTimeDisplayPrecision()
         );
 
       if (

@@ -48,7 +48,7 @@ export class TrainrunsectionHelper {
     precision = 0
   ): number {
     if (isRightNodeNonStopTransit) {
-      return Math.max(MathUtils.round(trsTravelTime * travelTimeFactor, 0),
+      return Math.max(MathUtils.round(trsTravelTime * travelTimeFactor, precision),
         1.0 / Math.pow(10, precision));
     } else {
       return Math.max(
@@ -64,7 +64,7 @@ export class TrainrunsectionHelper {
   ): number {
     return MathUtils.round(
       (timeStructure.leftDepartureTime + (timeStructure.travelTime % 60)) % 60,
-      precision,
+      precision
     );
   }
 
@@ -74,7 +74,7 @@ export class TrainrunsectionHelper {
   ): number {
     return MathUtils.round(
       this.getSymmetricTime(timeStructure.rightArrivalTime),
-      precision,
+      precision
     );
   }
 
