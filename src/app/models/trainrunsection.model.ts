@@ -15,7 +15,6 @@ import {
 } from "../data-structures/technical.data.structures";
 import {TrainrunsectionValidator} from "../services/util/trainrunsection.validator";
 import {formatDate} from "@angular/common";
-import {MathUtils} from "../utils/math";
 
 export class TrainrunSection {
   private static currentId = 0;
@@ -241,16 +240,6 @@ export class TrainrunSection {
       this.sourceDeparture.time = (120 - this.sourceArrival.time) % 60;
       this.targetArrival.time = (120 - this.targetDeparture.time) % 60;
     }
-
-    // ensure no machine epsilon issue gets stored
-    this.sourceDeparture.time =
-      MathUtils.fixMachineEpsilonProblem(this.sourceDeparture.time);
-    this.targetArrival.time =
-      MathUtils.fixMachineEpsilonProblem(this.targetArrival.time);
-    this.sourceArrival.time =
-      MathUtils.fixMachineEpsilonProblem(this.sourceArrival.time);
-    this.targetDeparture.time =
-      MathUtils.fixMachineEpsilonProblem(this.targetDeparture.time);
   }
 
   setSourceAndTargetNodeReference(sourceNode: Node, targetNode: Node) {
@@ -268,22 +257,18 @@ export class TrainrunSection {
   }
 
   setTargetArrivalDto(targetArrivalDto: TimeLockDto) {
-    targetArrivalDto.time = MathUtils.fixMachineEpsilonProblem(targetArrivalDto.time);
     this.targetArrival = targetArrivalDto;
   }
 
   setSourceDepartureDto(sourceDepartureDto: TimeLockDto) {
-    sourceDepartureDto.time = MathUtils.fixMachineEpsilonProblem(sourceDepartureDto.time);
     this.sourceDeparture = sourceDepartureDto;
   }
 
   setTargetDepartureDto(targetDepartureDto: TimeLockDto) {
-    targetDepartureDto.time = MathUtils.fixMachineEpsilonProblem(targetDepartureDto.time);
     this.targetDeparture = targetDepartureDto;
   }
 
   setTravelTimeDto(travelTimeDto: TimeLockDto) {
-    travelTimeDto.time = MathUtils.fixMachineEpsilonProblem(travelTimeDto.time);
     this.travelTime = travelTimeDto;
   }
 
@@ -416,27 +401,27 @@ export class TrainrunSection {
   }
 
   setTravelTime(time: number) {
-    this.travelTime.time = MathUtils.fixMachineEpsilonProblem(time);
+    this.travelTime.time = time;
     TrainrunsectionValidator.validateTravelTime(this);
   }
 
   setSourceDeparture(time: number) {
-    this.sourceDeparture.time = MathUtils.fixMachineEpsilonProblem(time);
+    this.sourceDeparture.time = time;
     TrainrunsectionValidator.validateOneSection(this);
   }
 
   setSourceArrival(time: number) {
-    this.sourceArrival.time = MathUtils.fixMachineEpsilonProblem(time);
+    this.sourceArrival.time = time;
     TrainrunsectionValidator.validateOneSection(this);
   }
 
   setTargetDeparture(time: number) {
-    this.targetDeparture.time = MathUtils.fixMachineEpsilonProblem(time);
+    this.targetDeparture.time = time;
     TrainrunsectionValidator.validateOneSection(this);
   }
 
   setTargetArrival(time: number) {
-    this.targetArrival.time = MathUtils.fixMachineEpsilonProblem(time);
+    this.targetArrival.time = time;
     TrainrunsectionValidator.validateOneSection(this);
   }
 
