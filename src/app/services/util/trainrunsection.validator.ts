@@ -6,10 +6,11 @@ export class TrainrunsectionValidator {
     trainrunSection.resetSourceDepartureWarning();
     trainrunSection.resetTargetDepartureWarning();
 
-    const calculatedTargetArrivalTime = MathUtils.fixMachineEpsilonProblem(
+    const calculatedTargetArrivalTime =
       (trainrunSection.getSourceDeparture() + trainrunSection.getTravelTime()) %
-      60);
-    if (calculatedTargetArrivalTime !== trainrunSection.getTargetArrival()) {
+      60;
+    if (Math.abs(calculatedTargetArrivalTime - trainrunSection.getTargetArrival())
+       > 1 / 60) {
       trainrunSection.setTargetArrivalWarning(
         "Target Arrival Warning",
         "Target arrival time cannot be reached",
@@ -18,10 +19,11 @@ export class TrainrunsectionValidator {
       trainrunSection.resetTargetArrivalWarning();
     }
 
-    const calculatedSourceArrivalTime = MathUtils.fixMachineEpsilonProblem(
+    const calculatedSourceArrivalTime =
       (trainrunSection.getTargetDeparture() + trainrunSection.getTravelTime()) %
-      60);
-    if (calculatedSourceArrivalTime !== trainrunSection.getSourceArrival()) {
+      60;
+    if (Math.abs(calculatedSourceArrivalTime - trainrunSection.getSourceArrival())
+       > 1 / 60) {
       trainrunSection.setSourceArrivalWarning(
         "Source Arrival Warning",
         "Target arrival time cannot be reached",
