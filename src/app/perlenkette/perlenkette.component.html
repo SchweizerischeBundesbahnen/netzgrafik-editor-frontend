@@ -1,7 +1,7 @@
 <div (click)="disableSectionView()">
 
   <div>
-    <div [attr.style]="'pointer-events: none; margin: 0px; position: absolute; padding-left: '+(contentWidth-40)+'px; padding-top: '+(contentHeight-40)+'px;'">
+    <div [attr.style]="'pointer-events: none; margin: 0px; position: absolute; padding-left: '+(contentWidth-55)+'px; padding-top: '+(contentHeight-40)+'px;'">
       <ng-container *ngIf="!getShowAllLockStates()">
         <sbb-icon svgIcon="eye-disabled-small" style="pointer-events:auto;" (mouseup)="toggleShowAllLockStates()" title="Zeige nur geschlossene Schlösser"></sbb-icon>
       </ng-container>

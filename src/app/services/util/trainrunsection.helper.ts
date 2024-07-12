@@ -8,6 +8,7 @@ import {
 import {MathUtils} from "../../utils/math";
 import {TrainrunSectionText} from "../../data-structures/technical.data.structures";
 import {TrainrunService} from "../data/trainrun.service";
+import {TrainrunSectionService} from "../data/trainrunsection.service";
 
 export enum LeftAndRightElement {
   LeftDeparture,
@@ -45,10 +46,10 @@ export class TrainrunsectionHelper {
     travelTimeFactor: number,
     trsTravelTime: number,
     isRightNodeNonStopTransit: boolean,
-    precision = 0
+    precision = TrainrunSectionService.TIME_PRECISION
   ): number {
     if (isRightNodeNonStopTransit) {
-      return Math.max(MathUtils.round(trsTravelTime * travelTimeFactor, 0),
+      return Math.max(MathUtils.round(trsTravelTime * travelTimeFactor, precision),
         1.0 / Math.pow(10, precision));
     } else {
       return Math.max(
@@ -60,21 +61,21 @@ export class TrainrunsectionHelper {
 
   static getRightArrivalTime(
     timeStructure: LeftAndRightTimeStructure,
-    precision = 0
+    precision = TrainrunSectionService.TIME_PRECISION
   ): number {
     return MathUtils.round(
       (timeStructure.leftDepartureTime + (timeStructure.travelTime % 60)) % 60,
-      precision,
+      precision
     );
   }
 
   static getRightDepartureTime(
     timeStructure: LeftAndRightTimeStructure,
-    precision = 0
+    precision = TrainrunSectionService.TIME_PRECISION
   ): number {
     return MathUtils.round(
       this.getSymmetricTime(timeStructure.rightArrivalTime),
-      precision,
+      precision
     );
   }
 

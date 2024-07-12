@@ -1,4 +1,5 @@
 import {TrainrunSection} from "../../models/trainrunsection.model";
+import {MathUtils} from "../../utils/math";
 
 export class TrainrunsectionValidator {
   static validateOneSection(trainrunSection: TrainrunSection) {
@@ -8,7 +9,8 @@ export class TrainrunsectionValidator {
     const calculatedTargetArrivalTime =
       (trainrunSection.getSourceDeparture() + trainrunSection.getTravelTime()) %
       60;
-    if (calculatedTargetArrivalTime !== trainrunSection.getTargetArrival()) {
+    if (Math.abs(calculatedTargetArrivalTime - trainrunSection.getTargetArrival())
+       > 1 / 60) {
       trainrunSection.setTargetArrivalWarning(
         "Target Arrival Warning",
         "Target arrival time cannot be reached",
@@ -20,7 +22,8 @@ export class TrainrunsectionValidator {
     const calculatedSourceArrivalTime =
       (trainrunSection.getTargetDeparture() + trainrunSection.getTravelTime()) %
       60;
-    if (calculatedSourceArrivalTime !== trainrunSection.getSourceArrival()) {
+    if (Math.abs(calculatedSourceArrivalTime - trainrunSection.getSourceArrival())
+       > 1 / 60) {
       trainrunSection.setSourceArrivalWarning(
         "Source Arrival Warning",
         "Target arrival time cannot be reached",
