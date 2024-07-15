@@ -253,6 +253,9 @@ export class TrainrunSectionPreviewLineView {
         false,
       );
     }
+    if (this.existingTrainrunSection !== null){
+      D3Utils.removeGrayout(this.existingTrainrunSection);
+    }
     if (this.startNode !== null) {
       D3Utils.unhighlightNode(this.startNode);
     }
