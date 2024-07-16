@@ -5,8 +5,8 @@ $EDITOR_MENU_BIG_BUTTON_WIDTH: 120px;
 $INSIDE_OBJECT_HEIGHT: 57px;
 $BORDER_SIZE: 1px;
 
-$COLOR_FILTER_ACTIVE: #eb0000;
-$COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
+$COLOR_FILTER_ACTIVE: rgb(236, 0, 0);
+$COLOR_TOPO_EDITOR_ACTIVE: rgb(236, 0, 0);
 
 .editorMenuGripLayout {
   position: relative;
@@ -34,7 +34,6 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
   height: 100%;
   padding: 0 8px 0 8px;
   margin: 0;
-  background-color: white;
   outline: none;
   border: none;
   border-left: $BORDER_SIZE solid $COLOR_MUTED_SILVER;
@@ -97,17 +96,16 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
   font-size: 25px;
   padding: 8px 0 0 0;
   margin: 0;
-  background-color: white;
   outline: none;
   border: none;
 }
 
 .ButtonSave:hover {
-  background-color: whitesmoke;
+  border-bottom: 3px solid  var(--sbb-primary-alternative-button-background-color-hover);
 }
 
 .ButtonSave:active {
-  background-color: lightgray;
+  border-bottom: 3px solid  var(--sbb-primary-alternative-button-background-color-default);
 }
 
 .ButtonLoad > input {
@@ -123,17 +121,16 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
   font-size: 25px;
   padding: 8px 0 0 0;
   margin: 0;
-  background-color: white;
   outline: none;
   border: none;
 }
 
 .ButtonLoad:hover {
-  background-color: whitesmoke;
+  border-bottom: 3px solid  var(--sbb-primary-alternative-button-background-color-hover);
 }
 
 .ButtonLoad:active {
-  background-color: lightgray;
+  border-bottom: 3px solid  var(--sbb-primary-alternative-button-background-color-default);
 }
 
 .ButtonFilter {
@@ -145,7 +142,6 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
   font-size: 25px;
   padding: 8px 0 0 0;
   margin: 0;
-  background-color: white;
   outline: none;
   border-top-style: none;
   border-right: $BORDER_SIZE solid $COLOR_MUTED_SILVER;
@@ -155,11 +151,11 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
 }
 
 .ButtonFilter:hover {
-  background-color: whitesmoke;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
 }
 
 .ButtonFilter:active {
-  background-color: lightgray;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-default);
 }
 
 .ButtonFilter.ButtonFilterActive {
@@ -167,12 +163,12 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
 }
 
 .ButtonFilter.ButtonFilterActive:hover {
-  background-color: whitesmoke;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
   color: $COLOR_FILTER_ACTIVE;
 }
 
 .ButtonFilter.ButtonFilterActive:active {
-  background-color: lightgray;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-default);
   color: $COLOR_FILTER_ACTIVE;
 }
 
@@ -185,18 +181,17 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
   font-size: 25px;
   padding: 0 0 0 0;
   margin: 0;
-  background-color: white;
   outline: none;
   border: none;
   cursor: pointer;
 }
 
 .ButtonZoomIn:hover {
-  background-color: whitesmoke;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
 }
 
 .ButtonZoomIn:active {
-  background-color: lightgray;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-default);
 }
 
 .ButtonZoomOut {
@@ -208,18 +203,17 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
   font-size: 25px;
   padding: 0 0 0 0;
   margin: 0;
-  background-color: white;
   outline: none;
   border: none;
   cursor: pointer;
 }
 
 .ButtonZoomOut:hover {
-  background-color: whitesmoke;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
 }
 
 .ButtonZoomOut:active {
-  background-color: lightgray;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-default);
 }
 
 .ZoomValue {
@@ -227,7 +221,6 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
   height: $INSIDE_OBJECT_HEIGHT;
   padding: 16px 6px 6px 0px;
   margin: 0;
-  background-color: white;
   outline: none;
   border: none;
   text-align: center;
@@ -241,7 +234,6 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
   max-width: $EDITOR_MENU_BUTTON_SIZE;
   padding: 8px 0 0 0;
   margin: 0;
-  background-color: white;
   outline: none;
   border: none;
   border-left: $BORDER_SIZE;
@@ -251,29 +243,27 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
 }
 
 .ButtonTopologieEditor.NetzgrafikEditing {
-  background-color: white;
 }
 
 .ButtonTopologieEditor.NetzgrafikEditing:active {
-  background-color: lightgray;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-default);
 }
 
 .ButtonTopologieEditor.NetzgrafikEditing:hover {
-  background-color: whitesmoke;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
 }
 
 .ButtonTopologieEditor.TopologyEditing {
-  background-color: white;
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
 .ButtonTopologieEditor.TopologyEditing:active {
-  background-color: lightgray;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-default);
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
 .ButtonTopologieEditor.TopologyEditing:hover {
-  background-color: whitesmoke;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
@@ -284,7 +274,6 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
   max-width: $EDITOR_MENU_BUTTON_SIZE;
   padding: 8px 0 0 0;
   margin: 0;
-  background-color: white;
   outline: none;
   border: none;
   border-left: $BORDER_SIZE;
@@ -294,29 +283,26 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
 }
 
 .ButtonNoteEditor.NetzgrafikEditing {
-  background-color: white;
 }
 
 .ButtonNoteEditor.NetzgrafikEditing:active {
-  background-color: lightgray;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-default);
 }
 
 .ButtonNoteEditor.NetzgrafikEditing:hover {
-  background-color: whitesmoke;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
 }
 
 .ButtonNoteEditor.NoteEditing {
-  background-color: white;
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
 .ButtonNoteEditor.NoteEditing:active {
-  background-color: lightgray;
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
 .ButtonNoteEditor.NoteEditing:hover {
-  background-color: whitesmoke;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
@@ -335,7 +321,6 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
   max-width: $EDITOR_MENU_BUTTON_SIZE;
   padding: 8px 0 0 0;
   margin: 0;
-  background-color: white;
   outline: none;
   border: none;
   border-left: $BORDER_SIZE;
@@ -348,42 +333,38 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
 }
 
 .ButtonStreckengrafikEditor.NetzgrafikEditing {
-  background-color: white;
 }
 
 .ButtonStreckengrafikEditor.NetzgrafikEditing:active {
-  background-color: lightgray;
+  background-color: var(--sbb-primary-alternative-button-background-color-default);
 }
 
 .ButtonStreckengrafikEditor.NetzgrafikEditing:hover {
-  background-color: whitesmoke;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
 }
 
 .ButtonStreckengrafikEditor.StreckengrafikEditing {
-  background-color: white;
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
 .ButtonStreckengrafikEditor.StreckengrafikEditing:active {
-  background-color: lightgray;
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
 .ButtonStreckengrafikEditor.StreckengrafikEditing:hover {
-  background-color: whitesmoke;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
 .NodeContextMenu {
-  background: white;
 }
 
 .NodeContextMenu:hover {
-  background: whitesmoke;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
 }
 
 .NodeContextMenu:active {
-  background: lightgray;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-default);
 }
 
 .ButtonMultiNodeMoving {
@@ -393,7 +374,6 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
   max-width: $EDITOR_MENU_BUTTON_SIZE;
   padding: 8px 0 0 0;
   margin: 0;
-  background-color: white;
   outline: none;
   border: none;
   border-left: $BORDER_SIZE;
@@ -403,35 +383,37 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
 }
 
 .ButtonMultiNodeMoving.NetzgrafikEditing {
-  background-color: white;
 }
 
 .ButtonMultiNodeMoving.NetzgrafikEditing:active {
-  background-color: lightgray;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-default);
 }
 
 .ButtonMultiNodeMoving.NetzgrafikEditing:hover {
-  background-color: whitesmoke;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
 }
 
 .ButtonMultiNodeMoving.MultiNodeMoving {
-  background-color: white;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-default);
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
 .ButtonMultiNodeMoving.MultiNodeMoving:active {
-  background-color: lightgray;
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
 .ButtonMultiNodeMoving.MultiNodeMoving:hover {
-  background-color: whitesmoke;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
-path.ButtonMultiNodeMoving.disabled {
-  fill: #a9a9a9;
+path.ButtonMultiNodeMoving {
+  fill: currentColor;
 }
+
+path.ButtonMultiNodeMoving.disabled {
+}
+
 
 .ButtonAnalytics {
   width: $EDITOR_MENU_BUTTON_SIZE;
@@ -440,7 +422,6 @@ path.ButtonMultiNodeMoving.disabled {
   max-width: $EDITOR_MENU_BUTTON_SIZE;
   padding: 8px 0 0 0;
   margin: 0;
-  background-color: white;
   outline: none;
   border: none;
   border-left: $BORDER_SIZE;
@@ -450,66 +431,63 @@ path.ButtonMultiNodeMoving.disabled {
 }
 
 .ButtonAnalytics {
-  background-color: white;
 }
 
 .ButtonAnalytics:active {
-  background-color: lightgray;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-default);
 }
 
 .ButtonAnalytics:hover {
-  background-color: whitesmoke;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
 }
 
 .ButtonAnalytics.ButtonAnalyticsActive {
-  background-color: white;
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
 .ButtonAnalytics.ButtonAnalyticsActive:active {
-  background-color: lightgray;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-default);
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
 .ButtonAnalytics.ButtonAnalyticsActive:hover {
-  background-color: whitesmoke;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
 .isStreckengrafikEditing {
-  color: darkgray;
 }
 
 .ButtonTopologieEditor.NetzgrafikEditing.isStreckengrafikEditing:hover {
-  background: white;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
 }
 
 .ButtonTopologieEditor.TopologyEditing.isStreckengrafikEditing:hover {
-  background: white;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
 }
 
 .ButtonNoteEditor.NetzgrafikEditing.isStreckengrafikEditing:hover {
-  background: white;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
 }
 
 .ButtonMultiNodeMoving.NetzgrafikEditing.isStreckengrafikEditing:hover {
-  background: white;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
 }
 
 .ButtonAnalytics.isStreckengrafikEditing:hover {
-  background: white;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
 }
 
 .ButtonNoteEditor.NoteEditing.isStreckengrafikEditing:hover {
-  background: white;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
 }
 
 .isNotStreckengrafikAllowed {
-  color: darkgray;
+  fill-opacity: 0.35;
 }
 
 .ButtonStreckengrafikEditor.NetzgrafikEditing.isNotStreckengrafikAllowed:hover {
-  background: white;
+  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-hover);
 }
 
 .sbb-icon {
@@ -518,4 +496,16 @@ path.ButtonMultiNodeMoving.disabled {
 
 button:disabled {
   cursor: default;
+}
+
+button {
+  background: var(--sbb-header-lean-background-color);
+}
+
+div.LabelNetzgrafik{
+  background: var(--sbb-header-lean-background-color);
+}
+
+div.NodeZoomValue{
+  background: var(--sbb-header-lean-background-color);
 }

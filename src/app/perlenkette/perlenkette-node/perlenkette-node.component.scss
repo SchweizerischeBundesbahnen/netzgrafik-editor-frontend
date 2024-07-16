@@ -19,12 +19,12 @@
 
 .main_rect {
   stroke: $COLOR_Default;
-  fill: white;
+  fill: var(--NODE_DOCKABLE);
   stroke-width: 1px;
 }
 
 .title_rect {
-  fill: var(--UI_DIALOG_NODE_COLOR_BACKGROUND);
+  fill: var(--NODE_COLOR_BACKGROUND);
 }
 
 .main_rect.no_stop_has_connections {
@@ -38,7 +38,7 @@
 }
 
 .non_stop_toogle {
-  fill: white;
+  fill: var(--NODE_DOCKABLE);
 }
 
 .non_stop_toogle.nonstop {
@@ -65,6 +65,10 @@ text.edge_text.end {
 
 text.edge_text.middle {
   text-anchor: middle;
+}
+
+text.edge_text.station.layer0 {
+  stroke: var(--NODE_DOCKABLE)
 }
 
 path.SepConnectionLine {

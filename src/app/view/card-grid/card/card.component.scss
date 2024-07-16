@@ -2,7 +2,7 @@
 
 .card {
   border-radius: 4px;
-  background: sbb.$sbbColorCloud;
+  background: var(--sbb-header-lean-border-bottom-color);
   padding: 24px;
   min-width: 320px;
   min-height: 128px;
@@ -24,5 +24,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: sbb.$sbbColorMilk;
+  background: var(--sbb-menu-item-background-color-hover);
 }

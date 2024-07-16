@@ -399,7 +399,7 @@ export class UiInteractionService implements OnDestroy {
     return this.editorMode;
   }
 
-  disableMultiSelectedNodesCorridor(){
+  disableMultiSelectedNodesCorridor() {
     this.isMultiSelectedNodesCorridor = false;
   }
 
@@ -407,7 +407,7 @@ export class UiInteractionService implements OnDestroy {
     this.isMultiSelectedNodesCorridor = true;
   }
 
-  isMultiSelectedNodesCorridorEnabled(){
+  isMultiSelectedNodesCorridorEnabled() {
     return this.isMultiSelectedNodesCorridor;
   }
 
@@ -415,6 +415,8 @@ export class UiInteractionService implements OnDestroy {
     this.activeTheme = theme;
     this.netzgrafikColoringService.setDarkMode(this.activeTheme.isDark);
     this.saveUserSettingToLocalStorage();
+    const el = document.getElementById("NetzgrafikRootHtml");
+    el.className = "sbb-lean" + (this.activeTheme.isDark ? " sbb-dark" : " sbb-light");
   }
 
   private loadUserSettingFromLocalStorage() {

@@ -1,12 +1,9 @@
 ::ng-deep a.SideBarMainIcon {
-  background: whitesmoke;
 }
 
 ::ng-deep a.SideBarMainIcon:hover {
-  background: white;
 }
 
 a.SideBarMainIcon.sbb-active {
   pointer-events: all;
-  background: whitesmoke;
 }

@@ -40,7 +40,7 @@
   width: 373px;
   min-width: 373px;
   max-width: 373px;
-  background: whitesmoke;
+  background: var(--sbb-header-lean-border-bottom-color);
   border-radius: 4px;
   overflow: hidden;
   float: left;
@@ -62,16 +62,16 @@
   fill: white;
   min-height: 44px;
   max-width: 44px;
-  background: white;
+  background: var(--sbb-expansion-panel-background-color-open);
   border-radius: 4px;
 }
 
 ::ng-deep button.filterable-label-grp-delete-add-button-button:hover {
   fill: whitesmoke;
-  background: whitesmoke;
+  background: var(--sbb-expansion-panel-background-color);
 }
 
 ::ng-deep .TrainrunDialog.EditorToolButton.disabled {
-  background: whitesmoke;
+  background: var(--sbb-expansion-panel-background-color);
   color: lightgray;
 }
