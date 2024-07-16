@@ -9,6 +9,7 @@ import {Observable, merge} from "rxjs";
 import {ProjectDto} from "./api/generated";
 import {NetzgrafikDto} from "./data-structures/business.data.structures";
 import {Operation} from "./models/operation.model";
+import {UiInteractionService} from "./services/ui/ui.interaction.service";
 
 @Component({
   selector: "sbb-root",
@@ -38,10 +39,17 @@ export class AppComponent {
     return this.authService.claims?.email;
   }
 
-  constructor(private authService: AuthService, private dataService: DataService, private trainrunService: TrainrunService, private trainrunSectionService: TrainrunSectionService) {
+  constructor(private authService: AuthService,
+              private uiInteractionService: UiInteractionService,
+              private dataService: DataService,
+              private trainrunService: TrainrunService,
+              private trainrunSectionService: TrainrunSectionService) {
     if (!this.disableBackend) {
       this.authenticated = authService.initialized;
     }
+    const activeTheme  = uiInteractionService.getActiveTheme();
+    const el = document.getElementById("NetzgrafikRootHtml");
+    el.className = "sbb-lean" + (activeTheme.isDark ? " sbb-dark" : " sbb-light");
   }
 
   logout() {
