@@ -305,7 +305,7 @@ input.NumberOfStopsInputElement.IsActive {
 }
 
 ::ng-deep .ButtonPlus:hover {
-  background-color: var(--sbb-background-color);
+  background-color: $COLOR_MUTED_SILVER;
 }
 
 ::ng-deep .ButtonMinus {
@@ -322,7 +322,7 @@ input.NumberOfStopsInputElement.IsActive {
 }
 
 ::ng-deep .ButtonMinus:hover {
-  background-color: var(--sbb-background-color);
+  background-color: $COLOR_MUTED_SILVER;
 }
 
 ::ng-deep .ButtonTravelTimeLock {
@@ -360,7 +360,7 @@ input.NumberOfStopsInputElement.IsActive {
 }
 
 ::ng-deep input.NumberOfStopsInputButtonPlusMinus:hover {
-  background-color: var(--sbb-background-color);
+  background-color: $COLOR_MUTED_SILVER;
 }
 
 ::ng-deep path.edgeLineTitle {
@@ -373,7 +373,7 @@ input.NumberOfStopsInputElement.IsActive {
 }
 
 ::ng-deep svg.InputNumberOfStopsButtonPlusMinus:hover {
-  background-color: var(--sbb-background-color);
+  background-color: $COLOR_MUTED_SILVER;
 }
 
 ::ng-deep button.FunctionButton {
@@ -384,7 +384,7 @@ input.NumberOfStopsInputElement.IsActive {
 }
 
 ::ng-deep button.FunctionButton:hover {
-  color: var(--sbb-header-lean-border-bottom-color);
+  background-color: $COLOR_MUTED_SILVER;
 }
 
 ::ng-deep button.FunctionButton:active {
@@ -392,7 +392,7 @@ input.NumberOfStopsInputElement.IsActive {
 }
 
 ::ng-deep
-  div.sbb-dialog-content.sbb-scrollbar.EditTrainrunSectionDialogTabContent {
+div.sbb-dialog-content.sbb-scrollbar.EditTrainrunSectionDialogTabContent {
   border-style: none;
   min-height: 250px;
   max-height: 250px;

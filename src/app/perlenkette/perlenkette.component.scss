@@ -126,3 +126,8 @@ span.smallstation:hover {
   color: var(--COLOR_Edit);
   stroke: var(--COLOR_Edit);
 }
+
+.ToggleAllEyesButton:hover {
+  stroke: var(--COLOR_Edit);
+  stroke-width: .5px;
+}
