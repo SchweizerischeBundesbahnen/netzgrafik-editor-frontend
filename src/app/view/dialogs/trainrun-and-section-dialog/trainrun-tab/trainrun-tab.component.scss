@@ -29,7 +29,7 @@
   background-color: $COLOR_BACKGROUND;
 
 
-  opacity: 0.35;
+  opacity: var(--Button_TrainrunDialog_opacity);
 
   &.FilterableLabel {
     opacity: 1.0;

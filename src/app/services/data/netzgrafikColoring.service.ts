@@ -304,6 +304,11 @@ export class NetzgrafikColoringService {
   setDarkMode(darkMode) {
     this.isDarkMode = darkMode;
     this.generateColors();
+
+    document.documentElement.style.setProperty(
+      "--Button_TrainrunDialog_opacity",
+      this.isDarkMode ? "0.2" : "0.6",
+    );
   }
 
   generateColors() {
