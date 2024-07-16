@@ -47,9 +47,7 @@ export class AppComponent {
     if (!this.disableBackend) {
       this.authenticated = authService.initialized;
     }
-    const activeTheme  = uiInteractionService.getActiveTheme();
-    const el = document.getElementById("NetzgrafikRootHtml");
-    el.className = "sbb-lean" + (activeTheme.isDark ? " sbb-dark" : " sbb-light");
+    this.uiInteractionService.updateLightDark();
   }
 
   logout() {

@@ -135,6 +135,7 @@ export class UiInteractionService implements OnDestroy {
     private loadPerlenketteService: LoadPerlenketteService,
   ) {
     this.activeTheme = null;
+    this.loadActiveTheme();
     this.activeStreckengrafikRenderingType = null;
     this.activeTravelTimeCreationEstimatorType = null;
 
@@ -415,8 +416,14 @@ export class UiInteractionService implements OnDestroy {
     this.activeTheme = theme;
     this.netzgrafikColoringService.setDarkMode(this.activeTheme.isDark);
     this.saveUserSettingToLocalStorage();
+    this.updateLightDark();
+  }
+
+  updateLightDark() {
     const el = document.getElementById("NetzgrafikRootHtml");
-    el.className = "sbb-lean" + (this.activeTheme.isDark ? " sbb-dark" : " sbb-light");
+    if (el){
+      el.className = "sbb-lean" + (this.getActiveTheme().isDark ? " sbb-dark" : " sbb-light");
+    }
   }
 
   private loadUserSettingFromLocalStorage() {
