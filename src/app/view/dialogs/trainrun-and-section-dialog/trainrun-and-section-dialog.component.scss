@@ -8,7 +8,7 @@
 ::ng-deep .MainTrainrunTabViewDialog {
   position: relative;
   padding-top: 4px; // optical alignment
-  border: 1px solid var(--sbb-header-lean-border-bottom-color);
+  border: 1px solid var(--sbb-menu-item-label);
   min-height: 385px;
   max-height: 385px;
   background-color: var(--sbb-header-lean-background-color);
@@ -16,7 +16,7 @@
   &:before,
   &:after {
     border: 16px solid transparent;
-    border-top-color: var(--sbb-header-lean-border-bottom-color);
+    border-top-color: var(--sbb-menu-item-label);
     content: "";
     position: absolute;
     top: 100%;

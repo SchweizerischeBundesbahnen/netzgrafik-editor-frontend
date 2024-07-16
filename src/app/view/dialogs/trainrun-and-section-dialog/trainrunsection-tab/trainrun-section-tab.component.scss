@@ -8,7 +8,7 @@
   border: var(--sbb-header-lean-background-color);
   border-style: solid;
   border-width: thin;
-  border-bottom: var(--sbb-header-lean-border-bottom-color);
+  border-bottom: var(--sbb-menu-item-label);
   border-bottom-style: solid;
   border-bottom-width: thin;
   transform: translate(-4px, -18px);
@@ -21,7 +21,7 @@
   border: var(--sbb-header-lean-background-color);
   border-style: solid;
   border-width: thin;
-  border-bottom: var(--sbb-header-lean-border-bottom-color);
+  border-bottom: var(--sbb-menu-item-label);
   border-bottom-style: solid;
   border-bottom-width: thin;
   transform: translate(4px, -18px);
@@ -47,7 +47,7 @@
 }
 
 ::ng-deep .EditTrainrunSectionDialogHeaderCenter.IsActive {
-  border: 0.1px solid var(--sbb-header-lean-border-bottom-color);
+  border: 0.1px solid var(--sbb-menu-item-label);
 }
 
 ::ng-deep .EditTrainrunSectionDialogHeaderRight {
@@ -62,7 +62,7 @@
 
 ::ng-deep input.NumberOfStopsInputElement {
   background-color: var(--sbb-background-color);
-  border: 0.1px solid var(--sbb-header-lean-border-bottom-color);
+  border: 0.1px solid var(--sbb-menu-item-label);
   border-radius: 0px;
   width: 40px;
   height: 28px;
@@ -103,7 +103,7 @@ input.NumberOfStopsInputElement.IsActive {
 }
 
 ::ng-deep div.NodeLeftArrival {
-  border: 1px solid var(--sbb-header-lean-border-bottom-color);
+  border: 1px solid var(--sbb-menu-item-label);
 }
 
 ::ng-deep .NodeLeftArrivalMinus {
@@ -127,7 +127,7 @@ input.NumberOfStopsInputElement.IsActive {
 }
 
 ::ng-deep div.NodeLeftDeparture {
-  border: 1px solid var(--sbb-header-lean-border-bottom-color);
+  border: 1px solid var(--sbb-menu-item-label);
 }
 
 ::ng-deep .NodeLeftDepartureMinus {
@@ -157,7 +157,7 @@ input.NumberOfStopsInputElement.IsActive {
 }
 
 ::ng-deep div.NodeRightArrival {
-  border: 1px solid var(--sbb-header-lean-border-bottom-color);
+  border: 1px solid var(--sbb-menu-item-label);
 }
 
 ::ng-deep .NodeRightArrivalMinus {
@@ -187,7 +187,7 @@ input.NumberOfStopsInputElement.IsActive {
 }
 
 ::ng-deep div.NodeRightDeparture {
-  border: 1px solid var(--sbb-header-lean-border-bottom-color);
+  border: 1px solid var(--sbb-menu-item-label);
 }
 
 ::ng-deep .NodeRightDepartureMinus {
@@ -211,7 +211,7 @@ input.NumberOfStopsInputElement.IsActive {
 }
 
 ::ng-deep div.TravelTime {
-  border: 1px solid var(--sbb-header-lean-border-bottom-color);
+  border: 1px solid var(--sbb-menu-item-label);
 }
 
 ::ng-deep .TravelTimeMinus {
@@ -388,7 +388,7 @@ input.NumberOfStopsInputElement.IsActive {
 }
 
 ::ng-deep button.FunctionButton:active {
-  background-color: var(--sbb-header-lean-border-bottom-color);
+  background-color: var(--sbb-menu-item-label);
 }
 
 ::ng-deep
