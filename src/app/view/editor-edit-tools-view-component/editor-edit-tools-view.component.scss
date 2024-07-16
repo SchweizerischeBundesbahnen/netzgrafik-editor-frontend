@@ -57,6 +57,10 @@
   margin: 5px 0px 5px 0px;
 }
 
+::ng-deep .sbb-icon.LabelAddGroupButton:hover {
+  background-color: $COLOR_MUTED_SILVER;
+}
+
 ::ng-deep button.filterable-label-grp-delete-add-button-button {
   border: none;
   fill: white;
