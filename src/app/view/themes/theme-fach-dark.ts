@@ -36,17 +36,17 @@ export class ThemeFachDark extends ThemeBase {
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_NORMAL_MUTED: #000000",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_NORMAL_RELATED: #767676",
 
-      StaticDomTags.PREFIX_COLOR_VARIABLE + "_EC: #f09f9f",
+      StaticDomTags.PREFIX_COLOR_VARIABLE + "_EC: #f06f6f",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_EC_FOCUS: #ffdfdc",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_EC_MUTED: #724040",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_EC_RELATED: #ef6950",
 
-      StaticDomTags.PREFIX_COLOR_VARIABLE + "_IC: #f09f9f",
+      StaticDomTags.PREFIX_COLOR_VARIABLE + "_IC: #f06f6f",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_IC_FOCUS: #ffdfdc",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_IC_MUTED: #724040",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_IC_RELATED: #ef6950",
 
-      StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR: #f09f9f",
+      StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR: #f06f6f",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR_FOCUS: #ffdfdc",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR_MUTED: #724040",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR_RELATED: #ef6950",

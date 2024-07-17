@@ -48,7 +48,7 @@ export class ThemeDefaultUxDark extends ThemeBase {
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_IC_MUTED: #715878",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_IC_RELATED: #B38BBD",
 
-      StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR: #DAA4C4",
+      StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR: #cb83ae",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR_FOCUS: #F0DBE8",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR_MUTED: #7e5e71",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR_RELATED: #DAA4C4",
