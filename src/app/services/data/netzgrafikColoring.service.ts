@@ -584,21 +584,21 @@ export class NetzgrafikColoringService {
     );
 
     // TODO - Knotenauslastung refactoring will impact this part
-    NetzgrafikColoringService.generateUIColors(
+    NetzgrafikColoringService.generateColors(
       sheetKnotenauslastung,
       colorRef,
       "stroke",
       StaticDomTags.KNOTENAUSLASTUNG_DATA_GROUP_PATH,
       verbose,
     );
-    NetzgrafikColoringService.generateUIColors(
+    NetzgrafikColoringService.generateColors(
       sheetKnotenauslastung,
       colorRef,
       "fill",
       StaticDomTags.KNOTENAUSLASTUNG_DATA_GROUP_PATH,
       verbose,
     );
-    NetzgrafikColoringService.generateUIColors(
+    NetzgrafikColoringService.generateColors(
       sheetKnotenauslastung,
       colorRef,
       "fill",
