@@ -2,7 +2,7 @@
 
 ::ng-deep path.KnotenAuslastungResourceGroup {
   stroke: none;
-  fill: whitesmoke;
+  fill: var(--sbb-header-lean-border-bottom-color);
 }
 
 ::ng-deep path.KnotenAuslastungDataGroup {
@@ -17,14 +17,15 @@
 ::ng-deep text.KnotenAuslastungNbrTrackGroup {
   font-size: 12px;
   font-weight: bold;
-  fill: gray;
+  fill: var(--NODE_TEXT_FOCUS);
 }
 
 ::ng-deep text.KnotenAuslastungTimeGroup {
   font-size: 12px;
-  fill: lightgray;
+  fill: var(--NODE_TEXT_FOCUS);
 }
 
 ::ng-deep path.KnotenAuslastungResourceGroup.capacityLimitReached {
-  fill: #fff7eb;
+  fill: var(--sbb-header-lean-border-bottom-color);
+  opacity: 0.5;
 }
