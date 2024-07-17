@@ -9,7 +9,6 @@ import {Observable, merge} from "rxjs";
 import {ProjectDto} from "./api/generated";
 import {NetzgrafikDto} from "./data-structures/business.data.structures";
 import {Operation} from "./models/operation.model";
-import {UiInteractionService} from "./services/ui/ui.interaction.service";
 
 @Component({
   selector: "sbb-root",
@@ -40,7 +39,6 @@ export class AppComponent {
   }
 
   constructor(private authService: AuthService,
-              private uiInteractionService: UiInteractionService,
               private dataService: DataService,
               private trainrunService: TrainrunService,
               private trainrunSectionService: TrainrunSectionService) {
