@@ -70,27 +70,31 @@
 }
 
 ::ng-deep button.Frequency {
-  color: black;
-  background-color: whitesmoke;
+  color: white;
+  background-color: $COLOR_Default;
   border-color: transparent;
+  opacity: 0.2;
 }
 
 ::ng-deep button.Frequency.selected {
   color: white;
   background-color: $COLOR_Default;
   border-color: transparent;
+  opacity: 1.0;
 }
 
 ::ng-deep button.TimeCategory {
-  color: black;
-  background-color: whitesmoke;
+  color: white;
+  background-color: $COLOR_Default;
   border-color: transparent;
+  opacity: 0.2;
 }
 
 ::ng-deep button.TimeCategory.selected {
   color: white;
   background-color: $COLOR_Default;
   border-color: transparent;
+  opacity: 1.0;
 }
 
 ::ng-deep div.EditTrainrunDialogTabContent {
