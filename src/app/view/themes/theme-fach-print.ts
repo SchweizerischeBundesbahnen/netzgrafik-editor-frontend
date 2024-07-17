@@ -5,7 +5,7 @@ import {StaticDomTags} from "../editor-main-view/data-views/static.dom.tags";
 
 export class ThemeFachPrint extends ThemeBase {
   constructor(
-    backgroundColor = "white",
+    backgroundColor = "whitesmoke",
     backgroundStreckengraphikColor = "white",
   ) {
     super(
