@@ -66,6 +66,8 @@ $close-size: $close-padding * 2 + $defaultIconSize;
     top: $interComponentSpacingSmall;
     border-radius: 50%; // assure scrollbar is only hidden by actual (half-)circle
 
+    transform: scale(0.95);
+
     z-index: 3;
     background: var(--sbb-color-background);
     fill: $colorBlack20;
@@ -128,6 +130,8 @@ $close-size: $close-padding * 2 + $defaultIconSize;
     top: $interComponentSpacingSmall;
     background: var(--sbb-color-background);
     border-radius: 50%; // assure scrollbar is only hidden by actual (half-)circle
+
+    transform: scale(0.95);
 
     z-index: 3;
     fill: $colorBlack20;
