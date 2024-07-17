@@ -8,15 +8,15 @@
 ::ng-deep .MainNoteTabViewDialog {
   position: relative;
   padding-top: 4px; // optical alignment
-  border: 1px solid #000000;
+  border: 1px solid var(--sbb-menu-item-label);
   min-height: 460px;
   max-height: 460px;
-  background-color: white;
+  background-color: var(--sbb-header-lean-background-color);
 
   &:before,
   &:after {
     border: 16px solid transparent;
-    border-top-color: #000000;
+    border-top-color: var(--sbb-menu-item-label);
     content: "";
     position: absolute;
     top: 100%;
@@ -27,7 +27,7 @@
 
   &:after {
     margin-top: -0.75px;
-    border-top-color: #ffffff;
+    border-top-color: var(--sbb-header-lean-background-color);
   }
 
   .NoteTabGrupe {
