@@ -36,19 +36,19 @@ export class NetzgrafikColoringService {
     [
       "path.edge_line.layer_3.Freq_30." +
         StaticDomTags.TAG_UI_DIALOG +
-        " {  stroke: var(--sbb-header-lean-background-color);; }",
+        " {  stroke: var(--sbb-header-lean-background-color); }",
       "path.edge_line.layer_2.Freq_20." +
         StaticDomTags.TAG_UI_DIALOG +
-        " {  stroke: var(--sbb-header-lean-background-color);; }",
+        " {  stroke: var(--sbb-header-lean-background-color); }",
       "path.edge_line.layer_1.Freq_15." +
         StaticDomTags.TAG_UI_DIALOG +
-        " {  stroke: var(--sbb-header-lean-background-color);; }",
+        " {  stroke: var(--sbb-header-lean-background-color); }",
       "path.edge_line.layer_3.Freq_15." +
         StaticDomTags.TAG_UI_DIALOG +
-        " {  stroke: var(--sbb-header-lean-background-color);; }",
+        " {  stroke: var(--sbb-header-lean-background-color); }",
       "path.edge_line.layer_3.Freq_15." +
         StaticDomTags.TAG_UI_DIALOG +
-        " {  stroke: var(--sbb-header-lean-background-color);; }",
+        " {  stroke: var(--sbb-header-lean-background-color); }",
     ].forEach((rule) => {
       sheet.insertRule(rule, sheet.cssRules.length);
       if (verbose) {
