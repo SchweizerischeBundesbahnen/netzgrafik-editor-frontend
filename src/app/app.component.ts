@@ -57,6 +57,7 @@ export class AppComponent {
   get netzgrafikDto() {
     return this.dataService.getNetzgrafikDto();
   }
+
   set netzgrafikDto(netzgrafikDto: NetzgrafikDto) {
     this.dataService.loadNetzgrafikDto(netzgrafikDto);
   }
