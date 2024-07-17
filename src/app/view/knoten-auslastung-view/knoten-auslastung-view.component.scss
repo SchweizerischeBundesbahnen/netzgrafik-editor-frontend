@@ -3,6 +3,7 @@
 ::ng-deep path.KnotenAuslastungResourceGroup {
   stroke: none;
   fill: var(--sbb-header-lean-border-bottom-color);
+  opacity: 0.25;
 }
 
 ::ng-deep path.KnotenAuslastungDataGroup {
