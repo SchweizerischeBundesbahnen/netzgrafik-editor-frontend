@@ -47,7 +47,6 @@ export class AppComponent {
     if (!this.disableBackend) {
       this.authenticated = authService.initialized;
     }
-    this.uiInteractionService.updateLightDark();
   }
 
   logout() {
