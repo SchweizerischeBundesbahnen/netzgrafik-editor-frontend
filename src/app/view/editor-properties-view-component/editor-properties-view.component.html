@@ -91,6 +91,16 @@
       </button>
     </ng-container>
     <br/>
+    <ng-container *ngIf="isLocalStoredColorTheme()">
+      <button
+        sbb-secondary-button
+        class="sbb-mt-m"
+        title="Verwenden Sie das Standard-Browser-Farbtheme."
+        (click)="resetLocalStoredColorData()"
+      >
+        Standard-Browser-Farbtheme
+      </button>
+    </ng-container>
   </sbb-expansion-panel>
 
 

@@ -201,6 +201,15 @@ export class EditorPropertiesViewComponent {
     );
   }
 
+  isLocalStoredColorTheme() {
+    return this.uiInteractionService.isLocalStoredColorTheme();
+  }
+
+  resetLocalStoredColorData() {
+    this.uiInteractionService.resetLocalStoredColorData();
+    this.activeColorTheme = this.uiInteractionService.getActiveTheme();
+  }
+
   private getHexColor(colorStr): string {
     const a = document.createElement("div");
     a.style.color = colorStr;

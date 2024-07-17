@@ -217,6 +217,24 @@ export class UiInteractionService implements OnDestroy {
     this.windowViewboxPropertiesMap[key] = Object.assign({}, viewboxProperties);
   }
 
+  isLocalStoredColorTheme() {
+    const serializedState = localStorage.getItem("UiInteractionService");
+    if (
+      serializedState === null ||
+      serializedState === undefined ||
+      serializedState === "undefined"
+    ) {
+      return false;
+    }
+    return true;
+  }
+
+  resetLocalStoredColorData() {
+    localStorage.removeItem("UiInteractionService");
+    this.activeTheme = null;
+    this.loadActiveTheme();
+  }
+
   loadActiveTheme() {
     this.loadUserSettingFromLocalStorage();
     if (this.activeTheme === null) {
