@@ -6,8 +6,8 @@ import {StaticDomTags} from "../editor-main-view/data-views/static.dom.tags";
 
 export class ThemeGrayDark extends ThemeBase {
   constructor(
-    backgroundColor = "whitesmoke",
-    backgroundStreckengraphikColor = "white",
+    backgroundColor = "var(--sbb-header-lean-background-color)",
+    backgroundStreckengraphikColor = "var(--sbb-header-lean-background-color)",
   ) {
     super(
       ThemeRegistration.ThemeGrayDark,

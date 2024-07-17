@@ -5,8 +5,8 @@ import {StaticDomTags} from "../editor-main-view/data-views/static.dom.tags";
 
 export class ThemeDefaultUxDark extends ThemeBase {
   constructor(
-    backgroundColor = "whitesmoke",
-    backgroundStreckengraphikColor = "white",
+    backgroundColor = "var(--sbb-header-lean-background-color)",
+    backgroundStreckengraphikColor = "var(--sbb-header-lean-background-color)",
   ) {
     super(
       ThemeRegistration.ThemeDefaultUxDark,
