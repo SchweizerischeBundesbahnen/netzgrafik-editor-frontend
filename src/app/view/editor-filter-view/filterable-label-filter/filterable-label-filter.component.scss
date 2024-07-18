@@ -4,7 +4,7 @@
 
 ::ng-deep button.TrainrunDialog.FilterableLabel {
   background-color: $COLOR_Default;
-  color: whitesmoke;
+  color: white;
   border: whitesmoke;
   max-width: none;
   min-height: 38px;
@@ -16,10 +16,9 @@
 }
 
 ::ng-deep button.TrainrunDialog.FilterableLabel.selected {
-  background-color: $COLOR_Default;
-  opacity: 0.5;
-  color: $COLOR_MUTED_SILVER;
-  border: 1px solid $COLOR_MUTED_SILVER;
+  background-color: var(--NODE_COLOR_BACKGROUND);
+  color: var(--NODE_TEXT_FOCUS);
+  border: 1px solid var(--NODE_COLOR_BACKGROUND);
 }
 
 ::ng-deep button.TrainrunDialog.FilterableLabel.LogicalOperator {
