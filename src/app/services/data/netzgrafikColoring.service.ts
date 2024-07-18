@@ -98,7 +98,7 @@ export class NetzgrafikColoringService {
       {
         tag: StaticDomTags.TAG_SELECTED,
         color:
-          "NODE_DOCKABLE",
+          "sbb-color-white",
         backgroundColor:
           StaticDomTags.PREFIX_COLOR_VARIABLE +
           "_" +
