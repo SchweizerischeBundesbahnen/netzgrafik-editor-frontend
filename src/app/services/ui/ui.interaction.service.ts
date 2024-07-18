@@ -471,7 +471,6 @@ export class UiInteractionService implements OnDestroy {
         return;
       }
       const localStoredInfo = JSON.parse(serializedState);
-      console.log(localStoredInfo);
       const activeTheme = localStoredInfo.activeTheme;
       this.createTheme(
         activeTheme.themeRegistration,
