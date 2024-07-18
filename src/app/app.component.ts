@@ -38,7 +38,10 @@ export class AppComponent {
     return this.authService.claims?.email;
   }
 
-  constructor(private authService: AuthService, private dataService: DataService, private trainrunService: TrainrunService, private trainrunSectionService: TrainrunSectionService) {
+  constructor(private authService: AuthService,
+              private dataService: DataService,
+              private trainrunService: TrainrunService,
+              private trainrunSectionService: TrainrunSectionService) {
     if (!this.disableBackend) {
       this.authenticated = authService.initialized;
     }
@@ -54,6 +57,7 @@ export class AppComponent {
   get netzgrafikDto() {
     return this.dataService.getNetzgrafikDto();
   }
+
   set netzgrafikDto(netzgrafikDto: NetzgrafikDto) {
     this.dataService.loadNetzgrafikDto(netzgrafikDto);
   }

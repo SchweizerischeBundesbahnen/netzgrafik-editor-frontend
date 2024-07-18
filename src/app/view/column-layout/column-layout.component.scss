@@ -45,10 +45,8 @@ $close-size: $close-padding * 2 + $defaultIconSize;
     position: relative; // absolute positioned children should be relative to column
     width: column-width(1);
     @include transitionLong(width, opacity, margin-left);
-    background-color: white;
 
     &#cd-layout-main {
-      background: transparent;
     }
   }
 
@@ -68,8 +66,10 @@ $close-size: $close-padding * 2 + $defaultIconSize;
     top: $interComponentSpacingSmall;
     border-radius: 50%; // assure scrollbar is only hidden by actual (half-)circle
 
+    transform: scale(0.95);
+
     z-index: 3;
-    background-color: white;
+    background: var(--sbb-color-background);
     fill: $colorBlack20;
     padding: $close-padding;
     margin-left: -(calc($close-size/2));
@@ -128,10 +128,12 @@ $close-size: $close-padding * 2 + $defaultIconSize;
     box-sizing: border-box;
     position: absolute;
     top: $interComponentSpacingSmall;
+    background: var(--sbb-color-background);
     border-radius: 50%; // assure scrollbar is only hidden by actual (half-)circle
 
+    transform: scale(0.95);
+
     z-index: 3;
-    background-color: white;
     fill: $colorBlack20;
     padding: $close-padding;
     margin-right: -(calc($close-size/2));

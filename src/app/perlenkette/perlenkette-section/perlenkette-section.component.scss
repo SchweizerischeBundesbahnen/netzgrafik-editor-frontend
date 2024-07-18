@@ -58,8 +58,8 @@ svg text.edge_text {
       grid-gap: 0;
       grid-auto-rows: 12px;
       grid-auto-columns: 32px;
-      border: 1px solid black;
-      background: white;
+      border: 1px solid var(--sbb-header-lean-border-bottom-color);
+      background: var(--sbb-header-lean-background-color);
     }
 
     .nodeBorderContainerTopLeft {
@@ -130,27 +130,27 @@ svg text.edge_text {
     .TravelTimeLock {
       grid-column: 2;
       grid-row: 7 / span 3;
-      background: whitesmoke;
+      background: var(--COLOR_GRAYEDOUT);
     }
 
     .TravelTimeLock.Center {
       grid-column: 4;
       grid-row: 7 / span 3;
-      background: whitesmoke;
+      background: var(--COLOR_GRAYEDOUT);
       margin: 1px;
     }
 
     .NodeLeftLock {
       grid-column: 4;
       grid-row: 2 / span 3;
-      background: whitesmoke;
+      background: var(--COLOR_GRAYEDOUT);
       margin: 1px;
     }
 
     .NodeRightLock {
       grid-column: 4;
       grid-row: 13 / span 3;
-      background: whitesmoke;
+      background: var(--COLOR_GRAYEDOUT);
       margin: 1px;
     }
   }
@@ -164,7 +164,6 @@ svg text.edge_text {
 }
 
 .PerlenketteFill5 {
-  fill: white;
 }
 
 .Rotation90 {

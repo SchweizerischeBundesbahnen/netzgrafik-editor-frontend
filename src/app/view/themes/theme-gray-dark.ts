@@ -6,8 +6,8 @@ import {StaticDomTags} from "../editor-main-view/data-views/static.dom.tags";
 
 export class ThemeGrayDark extends ThemeBase {
   constructor(
-    backgroundColor = "whitesmoke",
-    backgroundStreckengraphikColor = "white",
+    backgroundColor = "var(--sbb-header-lean-background-color)",
+    backgroundStreckengraphikColor = "var(--sbb-header-lean-background-color)",
   ) {
     super(
       ThemeRegistration.ThemeGrayDark,
@@ -21,7 +21,7 @@ export class ThemeGrayDark extends ThemeBase {
 
   static getThemeGrayDarkColors(): string[] {
     const normal = 40;
-    const focus = 100;
+    const focus = 0;
     const muted = 0;
     const related = 20;
 
@@ -42,7 +42,7 @@ export class ThemeGrayDark extends ThemeBase {
         d3.scaleLinear().domain([0, 100]).range(["#666666", "#FFFFFF"])(normal),
       StaticDomTags.PREFIX_COLOR_VARIABLE +
         "_NORMAL_FOCUS: " +
-        d3.scaleLinear().domain([0, 100]).range(["#dddddd", "#FFFFFF"])(focus),
+        d3.scaleLinear().domain([0, 100]).range(["#666666", "#FFFFFF"])(focus),
       StaticDomTags.PREFIX_COLOR_VARIABLE +
         "_NORMAL_MUTED: " +
         d3.scaleLinear().domain([0, 100]).range(["#333333", "#FFFFFF"])(muted),
@@ -57,7 +57,7 @@ export class ThemeGrayDark extends ThemeBase {
         d3.scaleLinear().domain([0, 100]).range(["#cccccc", "#FFFFFF"])(normal),
       StaticDomTags.PREFIX_COLOR_VARIABLE +
         "_EC_FOCUS: " +
-        d3.scaleLinear().domain([0, 100]).range(["#dddddd", "#FFFFFF"])(focus),
+        d3.scaleLinear().domain([0, 100]).range(["#cccccc", "#FFFFFF"])(focus),
       StaticDomTags.PREFIX_COLOR_VARIABLE +
         "_EC_MUTED: " +
         d3.scaleLinear().domain([0, 100]).range(["#333333", "#FFFFFF"])(muted),
@@ -72,7 +72,7 @@ export class ThemeGrayDark extends ThemeBase {
         d3.scaleLinear().domain([0, 100]).range(["#cccccc", "#FFFFFF"])(normal),
       StaticDomTags.PREFIX_COLOR_VARIABLE +
         "_IC_FOCUS: " +
-        d3.scaleLinear().domain([0, 100]).range(["#dddddd", "#FFFFFF"])(focus),
+        d3.scaleLinear().domain([0, 100]).range(["#cccccc", "#FFFFFF"])(focus),
       StaticDomTags.PREFIX_COLOR_VARIABLE +
         "_IC_MUTED: " +
         d3.scaleLinear().domain([0, 100]).range(["#333333", "#FFFFFF"])(muted),
@@ -87,7 +87,7 @@ export class ThemeGrayDark extends ThemeBase {
         d3.scaleLinear().domain([0, 100]).range(["#cccccc", "#FFFFFF"])(normal),
       StaticDomTags.PREFIX_COLOR_VARIABLE +
         "_IR_FOCUS: " +
-        d3.scaleLinear().domain([0, 100]).range(["#dddddd", "#FFFFFF"])(focus),
+        d3.scaleLinear().domain([0, 100]).range(["#cccccc", "#FFFFFF"])(focus),
       StaticDomTags.PREFIX_COLOR_VARIABLE +
         "_IR_MUTED: " +
         d3.scaleLinear().domain([0, 100]).range(["#333333", "#FFFFFF"])(muted),
@@ -132,7 +132,7 @@ export class ThemeGrayDark extends ThemeBase {
         d3.scaleLinear().domain([0, 100]).range(["#888888", "#FFFFFF"])(normal),
       StaticDomTags.PREFIX_COLOR_VARIABLE +
         "_GEX_FOCUS: " +
-        d3.scaleLinear().domain([0, 100]).range(["#999999", "#FFFFFF"])(focus),
+        d3.scaleLinear().domain([0, 100]).range(["#888888", "#FFFFFF"])(focus),
       StaticDomTags.PREFIX_COLOR_VARIABLE +
         "_GEX_MUTED: " +
         d3.scaleLinear().domain([0, 100]).range(["#333333", "#FFFFFF"])(muted),
@@ -147,7 +147,7 @@ export class ThemeGrayDark extends ThemeBase {
         d3.scaleLinear().domain([0, 100]).range(["#666666", "#FFFFFF"])(normal),
       StaticDomTags.PREFIX_COLOR_VARIABLE +
         "_G_FOCUS: " +
-        d3.scaleLinear().domain([0, 100]).range(["#777777", "#FFFFFF"])(focus),
+        d3.scaleLinear().domain([0, 100]).range(["#666666", "#FFFFFF"])(focus),
       StaticDomTags.PREFIX_COLOR_VARIABLE +
         "_G_MUTED:" +
         d3.scaleLinear().domain([0, 100]).range(["#333333", "#FFFFFF"])(muted),

@@ -25,7 +25,7 @@
   width: 80%;
   min-width: 80%;
   max-width: 80%;
-  background: whitesmoke;
+  background: var(--sbb-header-lean-border-bottom-color);
   border-radius: 4px;
   overflow: hidden;
   float: left;
@@ -59,13 +59,13 @@
   fill: white;
   min-height: 44px;
   max-width: 44px;
-  background: white;
+  background: var(--sbb-header-lean-background-color);
   border-radius: 4px;
 }
 
 .button.filterable-label-grp-delete-add-button-button:hover {
   fill: whitesmoke;
-  background: whitesmoke;
+  background: var(--sbb-expansion-panel-background-color);
 }
 
 .cdk-drag-placeholder {

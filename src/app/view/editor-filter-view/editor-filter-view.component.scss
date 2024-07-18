@@ -3,18 +3,12 @@
 @import "../dialogs/trainrun-and-section-dialog/trainrun-tab/trainrun-tab.component";
 
 ::ng-deep .TrainrunDialog.EditorToolButton {
-  background: $COLOR_Default;
-  border: $COLOR_Default;
-  color: white;
   max-width: none;
   min-height: 38px;
   margin-bottom: 16px;
 }
 
 ::ng-deep .TrainrunDialog.EditorToolButton:active {
-  background: lightgrey;
-  color: $COLOR_Default;
-  border: lightgrey;
 }
 
 ::ng-deep .SummaryTitle {
@@ -27,29 +21,21 @@
   border-radius: 10px;
   border: 1px;
   height: 32px;
-  color: black;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
-  background-color: white;
-  border-color: darkgrey;
   border-style: solid;
   font-family: "SBBWeb Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 ::ng-deep button.NetzgrafikButton:hover {
-  background-color: whitesmoke;
 }
 
 ::ng-deep button.NetzgrafikButton:active {
-  background-color: lightgray;
 }
 
 ::ng-deep button.NetzgrafikButton:disabled {
-  background-color: white;
-  color: lightgray;
-  border-color: whitesmoke;
 }
 
 ::ng-deep .sbb-expansion-panel-body h4:first-child {
@@ -98,33 +84,20 @@
   cursor: pointer;
   border: 1px solid transparent;
   border-radius: 16px;
-  background-color: whitesmoke;
 
   &.selected {
-    color: white;
-    background-color: $COLOR_Default;
-    border-color: white;
   }
 
   &.add_button {
-    background: whitesmoke;
-    color: black;
-    border: white;
   }
 
   &.function {
-    background: white;
-    color: black;
-    border: white;
     min-width: 40px;
     max-width: 40px;
   }
 }
 
 ::ng-deep .FilterSettting:active {
-  background: $COLOR_Default;
-  color: white;
-  border: lightgrey;
 }
 
 .sbb-filtersetting-chip-group {

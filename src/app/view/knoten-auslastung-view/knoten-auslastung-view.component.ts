@@ -66,7 +66,7 @@ export class KnotenAuslastungViewComponent implements AfterViewInit, OnDestroy {
         trainrunSection.getFrequencyLinePatternRef(),
       ) +
       StaticDomTags.makeClassTag(
-        StaticDomTags.TAG_UI_DIALOG + "_" + StaticDomTags.TAG_COLOR_REF,
+        StaticDomTags.TAG_COLOR_REF,
         trainrunSection.getTrainrun().getCategoryColorRef(),
       );
 
@@ -77,14 +77,12 @@ export class KnotenAuslastungViewComponent implements AfterViewInit, OnDestroy {
       classAttribute += " " + StaticDomTags.TAG_SELECTED;
     }
     if (
-      !KnotenAuslastungViewComponent.isMuted(
+      KnotenAuslastungViewComponent.isMuted(
         trainrunSection,
         selectedTrainrun,
         connectedTrainIds,
       )
     ) {
-      classAttribute += " " + StaticDomTags.TAG_FOCUS;
-    } else {
       classAttribute += " " + StaticDomTags.TAG_MUTED;
     }
     return classAttribute;
@@ -296,9 +294,9 @@ export class KnotenAuslastungViewComponent implements AfterViewInit, OnDestroy {
           "" +
           Math.round(
             (100 * d) /
-              this.resourceService
-                .getResource(selectedNode.getResourceId())
-                .getCapacity(),
+            this.resourceService
+              .getResource(selectedNode.getResourceId())
+              .getCapacity(),
           ) +
           "%",
       );

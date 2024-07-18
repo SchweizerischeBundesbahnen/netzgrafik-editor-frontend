@@ -20,7 +20,6 @@
     <br/>
     <ng-container *ngIf="!isActiveColorThemeDark()">
       <sbb-label>Hintergrundfarbe</sbb-label>
-      <br/>
       <input
         id="activeBackgroundColor"
         type="color"
@@ -34,6 +33,7 @@
       <button
         sbb-secondary-button
         class="sbb-mt-m"
+        style="transform: translate(0px, -6px);"
         [disabled]="isBackgroundColorWhite()"
         title="Hintergrundfarbe auf 'weiss' setzten"
         (click)="setBackgroundColorToWhite()"
@@ -59,6 +59,7 @@
         sbb-secondary-button
         class="sbb-mt-m"
         [disabled]="isDefaultBackgroundColorActive()"
+        style="transform: translate(0px, -6px);"
         title="Hintergrundfarbe auf Standard zurücksetzen"
         (click)="onResetBackgroundColor()"
       >
@@ -83,12 +84,23 @@
         class="sbb-mt-m"
         [disabled]="isDefaultDarkBackgroundColorActive()"
         title="Hintergrundfarbe auf Standard zurücksetzen"
+        style="transform: translate(0px, -6px);"
         (click)="onResetDarkBackgroundColor()"
       >
         <sbb-icon svgIcon="trash-small"></sbb-icon>
       </button>
     </ng-container>
     <br/>
+    <ng-container *ngIf="isLocalStoredColorTheme()">
+      <button
+        sbb-secondary-button
+        class="sbb-mt-m"
+        title="Verwenden Sie das Standard-Browser-Farbtheme."
+        (click)="resetLocalStoredColorData()"
+      >
+        Standard-Browser-Farbtheme
+      </button>
+    </ng-container>
   </sbb-expansion-panel>
 
 

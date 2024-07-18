@@ -1,6 +1,14 @@
 @import "../../../rastering/definitions";
 @import "../../../../../variables";
 
+::ng-deep .sbb-tab-body-wrapper {
+  background: var(--sbb-header-lean-background-color);
+}
+
+::ng-deep div.sbb-tab-label {
+  background: var(--sbb-header-lean-background-color);
+}
+
 ::ng-deep .sbb-trainrun-chip-group {
   display: flex;
 }
@@ -20,10 +28,24 @@
   border-radius: 16px;
   background-color: $COLOR_BACKGROUND;
 
+
+  opacity: var(--Button_TrainrunDialog_opacity);
+
+  &.FilterableLabel {
+    opacity: 1.0;
+  }
+
+  &.EditorToolButton {
+    opacity: 1.0;
+    border: none;
+  }
+
   &.selected {
     color: $COLOR_Focus;
     background-color: white;
     border-color: $COLOR_Focus;
+
+    opacity: 1.0;
   }
 }
 
@@ -48,27 +70,31 @@
 }
 
 ::ng-deep button.Frequency {
-  color: black;
-  background-color: whitesmoke;
+  color: var(--NODE_TEXT_FOCUS);
+  background-color: var(--NODE_COLOR_BACKGROUND);
   border-color: transparent;
+  opacity: 1.0;
 }
 
 ::ng-deep button.Frequency.selected {
   color: white;
   background-color: $COLOR_Default;
   border-color: transparent;
+  opacity: 1.0;
 }
 
 ::ng-deep button.TimeCategory {
-  color: black;
-  background-color: whitesmoke;
+  color: var(--NODE_TEXT_FOCUS);
+  background-color: var(--NODE_COLOR_BACKGROUND);
   border-color: transparent;
+  opacity: 1.0;
 }
 
 ::ng-deep button.TimeCategory.selected {
   color: white;
   background-color: $COLOR_Default;
   border-color: transparent;
+  opacity: 1.0;
 }
 
 ::ng-deep div.EditTrainrunDialogTabContent {
@@ -87,3 +113,5 @@
   padding: 0px;
   min-height: 270px;
 }
+
+

@@ -135,6 +135,16 @@ export class UiInteractionService implements OnDestroy {
     private loadPerlenketteService: LoadPerlenketteService,
   ) {
     this.activeTheme = null;
+    this.loadActiveTheme();
+
+    // listen for browser setting update
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", event => {
+        this.activeTheme = null;
+        this.loadActiveTheme();
+      });
+
     this.activeStreckengrafikRenderingType = null;
     this.activeTravelTimeCreationEstimatorType = null;
 
@@ -207,10 +217,33 @@ export class UiInteractionService implements OnDestroy {
     this.windowViewboxPropertiesMap[key] = Object.assign({}, viewboxProperties);
   }
 
+  isLocalStoredColorTheme() {
+    const serializedState = localStorage.getItem("UiInteractionService");
+    if (
+      serializedState === null ||
+      serializedState === undefined ||
+      serializedState === "undefined"
+    ) {
+      return false;
+    }
+    return true;
+  }
+
+  resetLocalStoredColorData() {
+    localStorage.removeItem("UiInteractionService");
+    this.activeTheme = null;
+    this.loadActiveTheme();
+  }
+
   loadActiveTheme() {
     this.loadUserSettingFromLocalStorage();
     if (this.activeTheme === null) {
-      this.activeTheme = new ThemeFach();
+      // detect at initialization
+      if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        this.setActiveTheme(new ThemeFachDark(), false);
+      } else {
+        this.setActiveTheme(new ThemeFach(), false);
+      }
       this.netzgrafikColoringService.setDarkMode(this.activeTheme.isDark);
     }
     if (this.activeStreckengrafikRenderingType === null) {
@@ -399,7 +432,7 @@ export class UiInteractionService implements OnDestroy {
     return this.editorMode;
   }
 
-  disableMultiSelectedNodesCorridor(){
+  disableMultiSelectedNodesCorridor() {
     this.isMultiSelectedNodesCorridor = false;
   }
 
@@ -407,14 +440,24 @@ export class UiInteractionService implements OnDestroy {
     this.isMultiSelectedNodesCorridor = true;
   }
 
-  isMultiSelectedNodesCorridorEnabled(){
+  isMultiSelectedNodesCorridorEnabled() {
     return this.isMultiSelectedNodesCorridor;
   }
 
-  private setActiveTheme(theme: ThemeBase) {
+  private setActiveTheme(theme: ThemeBase, updateLocalStorage = true) {
     this.activeTheme = theme;
     this.netzgrafikColoringService.setDarkMode(this.activeTheme.isDark);
-    this.saveUserSettingToLocalStorage();
+    if (updateLocalStorage) {
+      this.saveUserSettingToLocalStorage();
+    }
+    this.updateLightDark();
+  }
+
+  updateLightDark() {
+    const el = document.getElementById("NetzgrafikRootHtml");
+    if (el) {
+      el.className = "sbb-lean" + (this.getActiveTheme().isDark ? " sbb-dark" : " sbb-light");
+    }
   }
 
   private loadUserSettingFromLocalStorage() {
@@ -428,7 +471,6 @@ export class UiInteractionService implements OnDestroy {
         return;
       }
       const localStoredInfo = JSON.parse(serializedState);
-      console.log(localStoredInfo);
       const activeTheme = localStoredInfo.activeTheme;
       this.createTheme(
         activeTheme.themeRegistration,

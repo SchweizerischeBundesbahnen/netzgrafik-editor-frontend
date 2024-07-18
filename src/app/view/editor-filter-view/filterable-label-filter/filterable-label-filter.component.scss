@@ -4,7 +4,7 @@
 
 ::ng-deep button.TrainrunDialog.FilterableLabel {
   background-color: $COLOR_Default;
-  color: whitesmoke;
+  color: white;
   border: whitesmoke;
   max-width: none;
   min-height: 38px;
@@ -16,18 +16,19 @@
 }
 
 ::ng-deep button.TrainrunDialog.FilterableLabel.selected {
-  background-color: whitesmoke;
-  color: $COLOR_Focus;
-  border: whitesmoke;
+  background-color: var(--NODE_COLOR_BACKGROUND);
+  color: var(--NODE_TEXT_FOCUS);
+  border: 1px solid var(--NODE_COLOR_BACKGROUND);
 }
+
 ::ng-deep button.TrainrunDialog.FilterableLabel.LogicalOperator {
-  background-color: white;
+  background-color: var(--sbb-expansion-panel-background-color-open);
   color: $COLOR_Default;
   margin: 4px;
 }
 
 ::ng-deep button.TrainrunDialog.FilterableLabel.LogicalOperator:active {
-  background-color: whitesmoke;
+  background-color: var(--COLOR_GRAYEDOUT);
   color: $COLOR_Default;
 }
 
@@ -48,7 +49,7 @@
   width: 330px;
   min-width: 330px;
   max-width: 330px;
-  background: white;
+  background: var(--sbb-expansion-panel-background-color-open);
   border-radius: 4px;
   overflow: hidden;
   float: right;

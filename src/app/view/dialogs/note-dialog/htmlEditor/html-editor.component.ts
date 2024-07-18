@@ -107,11 +107,15 @@ export class HtmlEditorComponent implements OnInit, OnDestroy {
   getColorStyle(color: HtmlEditorColor): string {
     if (color === undefined) {
       if (this.textBasedActiveColor.length > 0) {
-        return "background: #e8f0fe;";
+        return "background: var(--sbb-header-lean-background-color);" +
+          "color: var(--NODE_TEXT_FOCUS); " +
+          "transform: translate(2px, 2px);";
       }
-      return "";
+      return "background: var(--sbb-header-lean-background-color); " +
+        "transform: translate(2px, 2px);" +
+        "opacity: 0.25";
     }
-    return "background: " + color.colorCode + ";";
+    return "background: " + color.colorCode + "; color: var(--NODE_TEXT_FOCUS);";
   }
 
   setClassedTag(color: HtmlEditorColor): string {

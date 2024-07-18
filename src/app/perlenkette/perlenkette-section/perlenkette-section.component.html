@@ -107,14 +107,14 @@
           y="1"
           width="12"
           height="22"
-          style="fill: white; cursor: pointer"
+          style="cursor: pointer; fill: var(--sbb-header-lean-background-color);"
           (click)="switchSectionViewToogleLock($event, 'leftDepartureTime')"
         ></rect>
         <path
           [attr.d]="getLockSvgPath(lockStructure.leftLock)"
           [ngClass]="[getPathClassTag(true)]"
           class="edge_line"
-          style="fill: white; stroke-width: 1px; cursor: pointer"
+          style="stroke-width: 1px; cursor: pointer"
           (click)="switchSectionViewToogleLock($event, 'leftDepartureTime')"
         />
       </g>
@@ -130,14 +130,14 @@
           y="1"
           width="12"
           height="22"
-          style="fill: white; cursor: pointer"
+          style="cursor: pointer; fill: var(--sbb-header-lean-background-color);"
           (click)="switchSectionViewToogleLock($event, 'travelTime')"
         ></rect>
         <path
           [attr.d]="getLockSvgPath(lockStructure.travelTimeLock)"
           [ngClass]="[getPathClassTag(true)]"
           class="edge_line"
-          style="fill: white; stroke-width: 1px; cursor: pointer"
+          style="stroke-width: 1px; cursor: pointer"
           (click)="switchSectionViewToogleLock($event, 'travelTime')"
         />
       </g>
@@ -151,14 +151,14 @@
           y="1"
           width="12"
           height="22"
-          style="fill: white; cursor: pointer"
+          style="cursor: pointer; fill: var(--sbb-header-lean-background-color);"
           (click)="switchSectionViewToogleLock($event, 'rightDepatureTime')"
         ></rect>
         <path
           [attr.d]="getLockSvgPath(lockStructure.rightLock)"
           [ngClass]="[getPathClassTag(true)]"
           class="edge_line"
-          style="fill: white; stroke-width: 1px; cursor: pointer"
+          style="stroke-width: 1px; cursor: pointer"
           (click)="switchSectionViewToogleLock($event, 'rightDepatureTime')"
         />
       </g>
