@@ -87,7 +87,7 @@ export class NetzgrafikColoringService {
       {
         tag: "",
         color:
-          "sbb-header-lean-background-color",
+          "NODE_TEXT_FOCUS",
         backgroundColor:
           StaticDomTags.PREFIX_COLOR_VARIABLE +
           "_" +
@@ -98,11 +98,13 @@ export class NetzgrafikColoringService {
       {
         tag: StaticDomTags.TAG_SELECTED,
         color:
-          "sbb-header-lean-background-color",
+          "NODE_DOCKABLE",
         backgroundColor:
           StaticDomTags.PREFIX_COLOR_VARIABLE +
           "_" +
-          colorRef,
+          colorRef +
+          "_" +
+          StaticDomTags.TAG_FOCUS.toUpperCase(),
       },
     ].forEach((d) => {
       const rule =

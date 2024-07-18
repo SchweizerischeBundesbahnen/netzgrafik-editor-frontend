@@ -32,42 +32,42 @@ export class ThemeFachDark extends ThemeBase {
       "CONNECTION_COLOR_WARNING: #959595",
 
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_NORMAL: #767676",
-      StaticDomTags.PREFIX_COLOR_VARIABLE + "_NORMAL_FOCUS: #DCDCDC",
+      StaticDomTags.PREFIX_COLOR_VARIABLE + "_NORMAL_FOCUS: #9c9a9a",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_NORMAL_MUTED: #000000",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_NORMAL_RELATED: #767676",
 
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_EC: #f06f6f",
-      StaticDomTags.PREFIX_COLOR_VARIABLE + "_EC_FOCUS: #ffdfdc",
+      StaticDomTags.PREFIX_COLOR_VARIABLE + "_EC_FOCUS: #ff3b3b",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_EC_MUTED: #724040",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_EC_RELATED: #ef6950",
 
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_IC: #f06f6f",
-      StaticDomTags.PREFIX_COLOR_VARIABLE + "_IC_FOCUS: #ffdfdc",
+      StaticDomTags.PREFIX_COLOR_VARIABLE + "_IC_FOCUS: #ff3b3b",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_IC_MUTED: #724040",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_IC_RELATED: #ef6950",
 
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR: #f06f6f",
-      StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR_FOCUS: #ffdfdc",
+      StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR_FOCUS: #ff3b3b",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR_MUTED: #724040",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR_RELATED: #ef6950",
 
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_RE: #71d573",
-      StaticDomTags.PREFIX_COLOR_VARIABLE + "_RE_FOCUS: #c4e5c4",
+      StaticDomTags.PREFIX_COLOR_VARIABLE + "_RE_FOCUS: #4fb351",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_RE_MUTED: #2e582f",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_RE_RELATED: #9ed267",
 
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_S: #9d9d9d",
-      StaticDomTags.PREFIX_COLOR_VARIABLE + "_S_FOCUS: #e4e4e4",
+      StaticDomTags.PREFIX_COLOR_VARIABLE + "_S_FOCUS: #666363",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_S_MUTED: #3a3a3a",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_S_RELATED: #797979",
 
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_GEX: #b197cb",
-      StaticDomTags.PREFIX_COLOR_VARIABLE + "_GEX_FOCUS: #e9dae8",
+      StaticDomTags.PREFIX_COLOR_VARIABLE + "_GEX_FOCUS: #b186db",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_GEX_MUTED: #473c51",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_GEX_RELATED: #b197cb",
 
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_G: #6888c9",
-      StaticDomTags.PREFIX_COLOR_VARIABLE + "_G_FOCUS: #a6c3cd",
+      StaticDomTags.PREFIX_COLOR_VARIABLE + "_G_FOCUS: #4d79d1",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_G_MUTED: #384869",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_G_RELATED: #6888c9",
 

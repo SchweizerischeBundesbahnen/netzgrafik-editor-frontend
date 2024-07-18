@@ -70,10 +70,10 @@
 }
 
 ::ng-deep button.Frequency {
-  color: white;
-  background-color: $COLOR_Default;
+  color: var(--NODE_TEXT_FOCUS);
+  background-color: var(--NODE_COLOR_BACKGROUND);;
   border-color: transparent;
-  opacity: 0.2;
+  opacity: 1.0;
 }
 
 ::ng-deep button.Frequency.selected {
@@ -84,10 +84,10 @@
 }
 
 ::ng-deep button.TimeCategory {
-  color: white;
-  background-color: $COLOR_Default;
+  color: var(--NODE_TEXT_FOCUS);;
+  background-color: var(--NODE_COLOR_BACKGROUND);
   border-color: transparent;
-  opacity: 0.2;
+  opacity: 1.0;
 }
 
 ::ng-deep button.TimeCategory.selected {
