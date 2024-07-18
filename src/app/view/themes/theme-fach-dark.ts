@@ -52,22 +52,22 @@ export class ThemeFachDark extends ThemeBase {
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR_RELATED: #ef6950",
 
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_RE: #71d573",
-      StaticDomTags.PREFIX_COLOR_VARIABLE + "_RE_FOCUS: #4fb351",
+      StaticDomTags.PREFIX_COLOR_VARIABLE + "_RE_FOCUS: #3fa341",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_RE_MUTED: #2e582f",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_RE_RELATED: #9ed267",
 
-      StaticDomTags.PREFIX_COLOR_VARIABLE + "_S: #9d9d9d",
-      StaticDomTags.PREFIX_COLOR_VARIABLE + "_S_FOCUS: #666363",
+      StaticDomTags.PREFIX_COLOR_VARIABLE + "_S: #7d7d7d",
+      StaticDomTags.PREFIX_COLOR_VARIABLE + "_S_FOCUS: #565353",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_S_MUTED: #3a3a3a",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_S_RELATED: #797979",
 
-      StaticDomTags.PREFIX_COLOR_VARIABLE + "_GEX: #b197cb",
-      StaticDomTags.PREFIX_COLOR_VARIABLE + "_GEX_FOCUS: #b186db",
+      StaticDomTags.PREFIX_COLOR_VARIABLE + "_GEX: #B77FEF",
+      StaticDomTags.PREFIX_COLOR_VARIABLE + "_GEX_FOCUS: #782FBF",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_GEX_MUTED: #473c51",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_GEX_RELATED: #b197cb",
 
-      StaticDomTags.PREFIX_COLOR_VARIABLE + "_G: #6888c9",
-      StaticDomTags.PREFIX_COLOR_VARIABLE + "_G_FOCUS: #4d79d1",
+      StaticDomTags.PREFIX_COLOR_VARIABLE + "_G: #4545ff",
+      StaticDomTags.PREFIX_COLOR_VARIABLE + "_G_FOCUS: #0000d0",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_G_MUTED: #384869",
       StaticDomTags.PREFIX_COLOR_VARIABLE + "_G_RELATED: #6888c9",
 

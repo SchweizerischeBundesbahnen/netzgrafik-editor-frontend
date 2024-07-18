@@ -62,7 +62,7 @@
 }
 
 ::ng-deep button.ngx-html-editor-color {
-  opacity: 0.5;
+  opacity: 0.66;
 }
 
 ::ng-deep button.ngx-html-editor-color:hover {
@@ -75,4 +75,10 @@
 
 ::ng-deep button.ngx-html-editor-color.active:hover {
   opacity: 0.85;
+}
+
+::ng-deep button.trash {
+  background: var(--sbb-header-lean-background-color);
+  color: var(--NODE_TEXT_FOCUS);
+  transform: translate(2px, 2px);
 }

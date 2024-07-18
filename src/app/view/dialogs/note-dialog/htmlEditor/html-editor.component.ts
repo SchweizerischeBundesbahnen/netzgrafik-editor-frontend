@@ -21,37 +21,37 @@ export class HtmlEditorComponent implements OnInit, OnDestroy {
     new HtmlEditorColor(
       "Verwende die Frabe des Frabschemas für EC",
       "EC",
-      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_EC)",
+      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_EC_" + StaticDomTags.TAG_FOCUS.toUpperCase() + ")",
     ),
     new HtmlEditorColor(
       "Verwende die Frabe des Frabschemas für IC",
       "IC",
-      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_IC)",
+      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_IC_" + StaticDomTags.TAG_FOCUS.toUpperCase() + ")",
     ),
     new HtmlEditorColor(
       "Verwende die Frabe des Frabschemas für IR",
       "IR",
-      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR)",
+      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_IR_" + StaticDomTags.TAG_FOCUS.toUpperCase() + ")",
     ),
     new HtmlEditorColor(
       "Verwende die Frabe des Frabschemas für RE",
       "RE",
-      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_RE)",
+      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_RE_" + StaticDomTags.TAG_FOCUS.toUpperCase() + ")",
     ),
     new HtmlEditorColor(
       "Verwende die Frabe des Frabschemas für S",
       "S",
-      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_S)",
+      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_S_" + StaticDomTags.TAG_FOCUS.toUpperCase() + ")",
     ),
     new HtmlEditorColor(
       "Verwende die Frabe des Frabschemas für GEX",
       "GEX",
-      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_GEX)",
+      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_GEX_" + StaticDomTags.TAG_FOCUS.toUpperCase() + ")",
     ),
     new HtmlEditorColor(
       "Verwende die Frabe des Frabschemas für G",
       "G",
-      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_G)",
+      "var(--" + StaticDomTags.PREFIX_COLOR_VARIABLE + "_G_" + StaticDomTags.TAG_FOCUS.toUpperCase() + ")",
     ),
     new HtmlEditorColor("grün", "", "green"),
     new HtmlEditorColor("blau", "", "blue"),
@@ -107,15 +107,11 @@ export class HtmlEditorComponent implements OnInit, OnDestroy {
   getColorStyle(color: HtmlEditorColor): string {
     if (color === undefined) {
       if (this.textBasedActiveColor.length > 0) {
-        return "background: var(--sbb-header-lean-background-color);" +
-          "color: var(--NODE_TEXT_FOCUS); " +
-          "transform: translate(2px, 2px);";
+        return "opactiy: 1.0";
       }
-      return "background: var(--sbb-header-lean-background-color); " +
-        "transform: translate(2px, 2px);" +
-        "opacity: 0.25";
+      return "opacity: 0.25";
     }
-    return "background: " + color.colorCode + "; color: var(--NODE_TEXT_FOCUS);";
+    return "background: " + color.colorCode + "; color: var(--sbb-color-white);";
   }
 
   setClassedTag(color: HtmlEditorColor): string {
