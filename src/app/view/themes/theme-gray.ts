@@ -20,7 +20,7 @@ export class ThemeGray extends ThemeBase {
 
   static getThemeGrayColors(): string[] {
     const normal = 30;
-    const focus = 100;
+    const focus = 20;
     const muted = 0;
     const related = 30;
 
