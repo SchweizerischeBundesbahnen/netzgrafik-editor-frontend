@@ -7,6 +7,14 @@ text.edge_text {
   stroke-linejoin:round
 }
 
+text.edge_text.selected.Streckengrafik {
+  stroke: var(--NODE_DOCKABLE);
+}
+
+text.edge_text.Streckengrafik {
+  stroke: var(--NODE_DOCKABLE);
+}
+
 text.edge_text.DepartureTime {
   text-anchor: middle;
 }

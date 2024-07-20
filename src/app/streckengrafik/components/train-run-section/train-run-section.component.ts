@@ -158,6 +158,7 @@ export class TrainRunSectionComponent
         this.trainrunItem.getTrainrunSection().trainrunBranchType
         ];
 
+    retTag += " Streckengrafik ";
     return retTag;
   }
 
