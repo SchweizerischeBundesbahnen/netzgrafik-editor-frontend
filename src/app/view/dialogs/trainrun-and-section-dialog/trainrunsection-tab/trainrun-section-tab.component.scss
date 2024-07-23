@@ -337,8 +337,8 @@ input.NumberOfStopsInputElement.IsActive {
 }
 
 ::ng-deep button.warning {
-  background-color: $COLOR_GRAYEDOUT;
-  border: $COLOR_GRAYEDOUT;
+  background-color: var(--sbb-header-lean-background-color);;
+  border: none;
   color: $COLOR_Warning;
   text-align: center;
   width: 350px;
