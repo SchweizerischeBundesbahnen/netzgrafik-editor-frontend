@@ -49,11 +49,11 @@ const userIdsValidator = (control: UntypedFormControl) => {
     return null;
   }
   const userIds: string[] = control.value;
-  const invalidIds = userIds.filter((id) => !id.match(/^(u|ue|e)\d+$/));
+  const invalidIds = userIds.filter((id) =>
+    !id.match(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/));
   if (invalidIds.length === 0) {
     return null;
   }
-
   return {invalidUserIds: invalidIds.join(", ")};
 };
 
