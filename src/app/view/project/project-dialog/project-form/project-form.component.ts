@@ -50,7 +50,7 @@ const userIdsValidator = (control: UntypedFormControl) => {
   }
   const userIds: string[] = control.value;
   const invalidIds = userIds.filter((id) =>
-    !id.match(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/));
+    !id.match(/^([a-z0-9_\\.-]+)@([\da-z\\.-]+)\.([a-z\\.]{2,6})$/));
   if (invalidIds.length === 0) {
     return null;
   }
