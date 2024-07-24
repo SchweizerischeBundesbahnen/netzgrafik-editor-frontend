@@ -37,12 +37,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize": [
-              "en",
-              "de",
-              "it",
-              "fr"
-            ],
             "outputPath": "dist/netzgrafik-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
