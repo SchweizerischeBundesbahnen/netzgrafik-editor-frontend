@@ -37,6 +37,7 @@ describe("ProjectFormComponent", () => {
 
   it("validEMailExamples test", () => {
     const validEMailExamples = [
+      "franz@nix.com",
       "adrian@example.com",
       "muster.hans@example.test.zurich",
       "name.vorname.vorname2@mail.domain.ch",
@@ -45,7 +46,9 @@ describe("ProjectFormComponent", () => {
       "1234@x.org",
       "x@1234.org",
       "1234@1234.org",
-      "123a4@1234.org"];
+      "123a4@1234.org",
+      "123a4@1234abc123zsd.a123sb.org"
+    ];
 
     validEMailExamples.forEach((e) => {
       const test = new UntypedFormControl();
@@ -57,7 +60,15 @@ describe("ProjectFormComponent", () => {
   it("invalidEMailExamples test", () => {
     const invalidEMailExamples = [
       "u123456",
+      "Franz@nix.com",
       "name.vorname.vorname2#mail.domain.ch",
+      "Adrian@ai.org",
+      "aDrian@ai.org",
+      "ADRIAN@AI.ORG",
+      "adrian@AI.ORG",
+      "adrian@ai.ORG",
+      "adrian@AI.org",
+      "adrian@ai.orG",
       ""];
     invalidEMailExamples.forEach((e) => {
       const test = new UntypedFormControl();
