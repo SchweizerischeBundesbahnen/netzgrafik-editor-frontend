@@ -66,6 +66,9 @@
           }
         }
       },
+      "ui": {
+        "newFilter": "Neuer Filter"
+      },
       "util": {
         "connection-validator": {
           "connection-marked-for-transit": {
