@@ -6,7 +6,7 @@ import {
   userIdsAsEmailValidator,
 } from "./project-form.component";
 import {FormModel} from "../../../../utils/form-model";
-import {UntypedFormControl} from '@angular/forms';
+import {UntypedFormControl} from "@angular/forms";
 
 describe("ProjectFormComponent", () => {
   let component: ProjectFormComponent;
