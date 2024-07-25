@@ -122,7 +122,7 @@
         "show-or-hide": "Enable/disable {$component}",
         "show-or-hide-name-for-non-selected-trainruns": "Show/hide trainrun names for unselected trainruns",
         "hide-advanced-display-functions": "Hide advanced display functions",
-        "rail-track-slider": "Rail track slider",
+        "mainTracks": "Main tracks",
         "headway-band": "Headway band",
         "time": "Time",
         "name": "Name"
