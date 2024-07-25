@@ -6,6 +6,7 @@ import {ProjectsViewService} from "./projects-view.service";
 import {SbbDialogModule} from "@sbb-esta/angular/dialog";
 import {ProjectControllerBackendService} from "../../../api/generated";
 import {NavigationService} from "../../../services/ui/navigation.service";
+import {I18nModule} from "../../../core/i18n/i18n.module";
 
 describe("ProjectsViewComponent", () => {
   let component: ProjectsViewComponent;
@@ -20,7 +21,7 @@ describe("ProjectsViewComponent", () => {
 
     await TestBed.configureTestingModule({
       declarations: [ProjectsViewComponent],
-      imports: [SbbDialogModule],
+      imports: [SbbDialogModule, I18nModule],
       providers: [
         {provide: ProjectsViewService, useValue: projectViewService},
         {
