@@ -44,11 +44,12 @@ export class ProjectFormComponent implements OnInit {
   }
 }
 
-const userIdsAsEmailValidator = (control: UntypedFormControl) => {
+export const userIdsAsEmailValidator = (control: UntypedFormControl) => {
   if (!control) {
     return null;
   }
   const userIds: string[] = control.value;
+  // email adresse validator: regex to match emails using the expression
   const invalidEmailPattern = userIds.filter((id) =>
     !id.match(/^([a-z0-9_\\.-]+)@([\da-z\\.-]+)\.([a-z\\.]{2,6})$/));
   if (invalidEmailPattern.length === 0) {
