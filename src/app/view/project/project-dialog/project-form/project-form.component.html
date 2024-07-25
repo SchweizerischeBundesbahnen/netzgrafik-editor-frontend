@@ -52,9 +52,9 @@
         [sbbChipInputSeparatorKeyCodes]="separatorKeysCodes"
       />
     </sbb-chip-list>
-    <sbb-error *ngIf="model.getControl('writeUsers').errors?.invalidUserIds">
-      Ungültige Werte:
-      {{ model.getControl("writeUsers").errors?.invalidUserIds }}
+    <sbb-error *ngIf="model.getControl('writeUsers').errors?.invalidUserIdAsEmails">
+      Ungültige Werte (keine E-Mail Adresse):
+      {{ model.getControl("writeUsers").errors?.invalidUserIdAsEmails }}
     </sbb-error>
   </sbb-form-field>
   <sbb-form-field class="sbb-form-field-long">
@@ -79,9 +79,9 @@
         [sbbChipInputSeparatorKeyCodes]="separatorKeysCodes"
       />
     </sbb-chip-list>
-    <sbb-error *ngIf="model.getControl('readUsers').errors?.invalidUserIds">
-      Ungültige Werte:
-      {{ model.getControl("readUsers").errors?.invalidUserIds }}
+    <sbb-error *ngIf="model.getControl('readUsers').errors?.invalidUserIdAsEmails">
+      Ungültige Werte (keine E-Mail Adresse):
+      {{ model.getControl("readUsers").errors?.invalidUserIdAsEmails }}
     </sbb-error>
   </sbb-form-field>
 </div>

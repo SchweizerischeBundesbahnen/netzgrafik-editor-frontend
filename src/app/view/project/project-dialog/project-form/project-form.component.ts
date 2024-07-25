@@ -15,8 +15,8 @@ export class ProjectFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.model.registerValidator("name", Validators.required);
-    this.model.registerValidator("writeUsers", userIdsValidator);
-    this.model.registerValidator("readUsers", userIdsValidator);
+    this.model.registerValidator("writeUsers", userIdsAsEmailValidator);
+    this.model.registerValidator("readUsers", userIdsAsEmailValidator);
   }
 
   onLabelsFocusoutWrite() {
@@ -44,17 +44,17 @@ export class ProjectFormComponent implements OnInit {
   }
 }
 
-const userIdsValidator = (control: UntypedFormControl) => {
+const userIdsAsEmailValidator = (control: UntypedFormControl) => {
   if (!control) {
     return null;
   }
   const userIds: string[] = control.value;
-  const invalidIds = userIds.filter((id) =>
+  const invalidEmailPattern = userIds.filter((id) =>
     !id.match(/^([a-z0-9_\\.-]+)@([\da-z\\.-]+)\.([a-z\\.]{2,6})$/));
-  if (invalidIds.length === 0) {
+  if (invalidEmailPattern.length === 0) {
     return null;
   }
-  return {invalidUserIds: invalidIds.join(", ")};
+  return {invalidUserIdAsEmails: invalidEmailPattern.join(", ")};
 };
 
 export interface ProjectFormComponentModel {
