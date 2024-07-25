@@ -162,7 +162,7 @@ export class EditorToolsViewComponent {
   }
 
   onExportStammdaten() {
-    const filename = $localize`:@@app.view.editor-side-view.editor-tools-view-component.mainDataFile:mainData` + ".csv";
+    const filename = $localize`:@@app.view.editor-side-view.editor-tools-view-component.baseDataFile:baseData` + ".csv";
     const csvData = this.convertToStammdatenCSV();
     this.onExport(filename, csvData);
   }
@@ -221,7 +221,7 @@ export class EditorToolsViewComponent {
         nodeElement.getBetriebspunktName(),
       );
       const zaz = stammdaten !== null ? stammdaten.getZAZ() : 0;
-      const erstellen = stammdaten !== null ? stammdaten.getErstellen() : $localize`:@@app.view.editor-side-view.editor-tools-view-component.yes:YES`;
+      const erstellen = stammdaten !== null ? stammdaten.getErstellen() : "JA";
       const kategorien = stammdaten !== null ? stammdaten.getKategorien() : [];
       const regions = stammdaten !== null ? stammdaten.getRegions() : [];
 
@@ -472,7 +472,7 @@ export class EditorToolsViewComponent {
         row.push(trainrun.getTitle().trim());
         row.push(startBetriebspunktName.trim());
         row.push(endBetriebspunktName.trim());
-        row.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.trainrunTimeCategory:Trainrun time category` + ": " + trainrun.getTrainrunTimeCategory().shortName.trim());
+        row.push("Verkehrt: " + trainrun.getTrainrunTimeCategory().shortName.trim());
         row.push("" + trainrun.getTrainrunFrequency().shortName.trim());
         row.push("" + startNodeDeparture);
         row.push("" + travelTime);

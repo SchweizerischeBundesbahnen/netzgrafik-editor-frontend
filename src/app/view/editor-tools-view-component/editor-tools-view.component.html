@@ -70,15 +70,15 @@
     >
   </sbb-expansion-panel>
   <sbb-expansion-panel [expanded]="false">
-    <sbb-expansion-panel-header>{{ 'app.view.editor-side-view.editor-tools-view-component.main-data' | translate }}</sbb-expansion-panel-header>
+    <sbb-expansion-panel-header>{{ 'app.view.editor-side-view.editor-tools-view-component.base-data' | translate }}</sbb-expansion-panel-header>
     <button
       (click)="onLoadStammdatenButton()"
-      [title]="'app.view.editor-side-view.editor-tools-view-component.import-main-data' | translate"
+      [title]="'app.view.editor-side-view.editor-tools-view-component.import-base-data' | translate"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="document-plus-small"></sbb-icon>
     </button>
-    {{ 'app.view.editor-side-view.editor-tools-view-component.import-main-data' | translate }}
+    {{ 'app.view.editor-side-view.editor-tools-view-component.import-base-data' | translate }}
     <a
       href="https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_NODES.md#import-nodes-from-a-semicolon-seperate-value-file-csv"
       class="sbb-link link-reset"
@@ -95,11 +95,11 @@
     <br />
     <button
       (click)="onExportStammdaten()"
-      [title]="'app.view.editor-side-view.editor-tools-view-component.export-main-data' | translate"
+      [title]="'app.view.editor-side-view.editor-tools-view-component.export-base-data' | translate"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="download-large-data-small"></sbb-icon>
     </button>
-    {{ 'app.view.editor-side-view.editor-tools-view-component.export-main-data' | translate }}
+    {{ 'app.view.editor-side-view.editor-tools-view-component.export-base-data' | translate }}
   </sbb-expansion-panel>
 </sbb-accordion>

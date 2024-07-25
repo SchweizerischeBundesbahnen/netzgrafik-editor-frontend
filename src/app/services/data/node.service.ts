@@ -1068,7 +1068,7 @@ export class NodeService implements OnDestroy {
   setNodePropertiesFromStammdaten(stammdaten: Stammdaten[]) {
     stammdaten.forEach((stdDaten) => {
       if (stdDaten.getErstellen() !== undefined) {
-        if (stdDaten.getErstellen().trim().toLowerCase() === "ja") { // trad ?
+        if (stdDaten.getErstellen().trim().toLowerCase() === "ja") {
           if (
             this.nodesStore.nodes.find(
               (node) => node.getBetriebspunktName() === stdDaten.getBP(),
@@ -1087,7 +1087,7 @@ export class NodeService implements OnDestroy {
               labelIds.push(
                 this.labelService
                   .getOrCreateLabel(
-                    "Knoten aus CSV-Datei importiert", // trad ?
+                    "Knoten aus CSV-Datei importiert",
                     LabelRef.Node,
                   )
                   .getId(),
@@ -1122,14 +1122,14 @@ export class NodeService implements OnDestroy {
         bpStammdaten.getRegions().forEach((region) => {
           labels.push(
             this.labelService
-              .getOrCreateLabel("Region: " + region.trim(), LabelRef.Node) // trad ?
+              .getOrCreateLabel("Region: " + region.trim(), LabelRef.Node)
               .getId(),
           );
         });
         bpStammdaten.getKategorien().forEach((kategorie) => {
           labels.push(
             this.labelService
-              .getOrCreateLabel("Kategorie: " + kategorie.trim(), LabelRef.Node) // trad ?
+              .getOrCreateLabel("Kategorie: " + kategorie.trim(), LabelRef.Node)
               .getId(),
           );
         });

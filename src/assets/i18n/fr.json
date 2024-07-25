@@ -224,7 +224,7 @@
           }
         },
         "stammdaten-dialog": {
-          "main-data": "Main data",
+          "base-data": "Base data",
           "operationalPoint": "Operational point",
           "ipv-stop-time": "IPV stop time",
           "a-stop-time": "A stop time",
@@ -398,7 +398,7 @@
       },
       "editor-side-view": {
         "editor-node-detail-view": {
-          "main-data": "Main data",
+          "base-data": "Base data",
           "operational-point": "Operational point",
           "name": "Name",
           "connection-time": "Connection time",
@@ -439,10 +439,10 @@
           "export-trainruns": "Export trainruns",
           "export-trainruns-as-csv": "Export trainruns as CSV",
           "export-trainruns-as-csv-excel": "In Excel: Data -> From Text/CSV -> Import ... filename",
-          "main-data": "Main data",
-          "import-main-data": "Import main data",
+          "base-data": "Base data",
+          "import-base-data": "Import base data",
           "help-csv-data": "Help: CSV - Data",
-          "export-main-data": "Export main data",
+          "export-base-data": "Export base data",
           "bp": "BP",
           "station": "Station",
           "category": "Category",
@@ -460,7 +460,7 @@
           "create": "Create",
           "yes": "YES",
           "netzgrafikFile": "networkGraphic",
-          "mainDataFile": "mainData",
+          "baseDataFile": "baseData",
           "trainrunFile": "trainrun",
           "trainCategory": "Train category",
           "trainName": "Train name",
