@@ -38,6 +38,7 @@ describe("ProjectFormComponent", () => {
   it("validEMailExamples test", () => {
     const validEMailExamples = [
       "adrian@example.com",
+      "muster.hans@example.test.zurich",
       "name.vorname.vorname2@mail.domain.ch",
       "fun@data.cloud",
       "adrian@ai.org",
