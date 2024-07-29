@@ -73,8 +73,10 @@ describe("ProjectFormComponent", () => {
       "adrian@AI.ORG",
       "adrian@ai.ORG",
       "adrian@AI.org",
-      "adrian@ai.orG",
-      ""];
+      "a",
+      "u",
+      "ue",
+      "e"];
     invalidEMailExamples.forEach((e) => {
       const test = new UntypedFormControl();
       test.setValue([e]);
