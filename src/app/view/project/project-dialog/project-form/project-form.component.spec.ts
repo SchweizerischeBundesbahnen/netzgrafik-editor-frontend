@@ -47,7 +47,11 @@ describe("ProjectFormComponent", () => {
       "x@1234.org",
       "1234@1234.org",
       "123a4@1234.org",
-      "123a4@1234abc123zsd.a123sb.org"
+      "123a4@1234abc123zsd.a123sb.org",
+      "u123456",
+      "ue123456",
+      "e123456",
+      "u000000"
     ];
 
     validEMailExamples.forEach((e) => {
@@ -59,7 +63,8 @@ describe("ProjectFormComponent", () => {
 
   it("invalidEMailExamples test", () => {
     const invalidEMailExamples = [
-      "u123456",
+      "u12345z",
+      "U123456",
       "Franz@nix.com",
       "name.vorname.vorname2#mail.domain.ch",
       "Adrian@ai.org",
