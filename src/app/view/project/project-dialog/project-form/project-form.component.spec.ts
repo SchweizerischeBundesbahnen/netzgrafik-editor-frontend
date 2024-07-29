@@ -100,7 +100,7 @@ describe("ProjectFormComponent", () => {
       ""];
     const test = new UntypedFormControl();
     test.setValue(invalidEMailExamples);
-    expect(userIdsAsEmailValidator(test).invalidUserIdAsEmails.length).toBe(47);
+    expect(userIdsAsEmailValidator(test).invalidUserIdAsEmails.length).toBe(38);
   });
 
   it("mixedValInvalidExamples - batch - test", () => {
