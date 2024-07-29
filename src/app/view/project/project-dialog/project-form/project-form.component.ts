@@ -51,7 +51,7 @@ export const userIdsAsEmailValidator = (control: UntypedFormControl) => {
   const userIds: string[] = control.value;
   // email adresse validator: regex to match emails using the expression
   const invalidEmailPattern = userIds.filter((id) =>
-    !id.match(/^([a-z0-9_\\.-]+)@([\da-z\\.-]+)\.([a-z\\.]{2,6})$/));
+    !id.match(/^([a-z0-9_\\.-]+)@([\da-z\\.-]+)\.([a-z\\.]{2,6})|(u|ue|e)\d+$/));
   if (invalidEmailPattern.length === 0) {
     return null;
   }
