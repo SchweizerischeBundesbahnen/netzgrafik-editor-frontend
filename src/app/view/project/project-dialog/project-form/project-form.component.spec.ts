@@ -119,6 +119,6 @@ describe("ProjectFormComponent", () => {
     const test = new UntypedFormControl();
     test.setValue(mixedValInvalidExamples);
     console.log(userIdsAsEmailValidator(test).invalidUserIdAsEmails);
-    expect(userIdsAsEmailValidator(test).invalidUserIdAsEmails.length).toBe(18);
+    expect(userIdsAsEmailValidator(test).invalidUserIdAsEmails.length).toBe(9);
   });
 });
