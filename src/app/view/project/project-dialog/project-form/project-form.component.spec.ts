@@ -73,6 +73,7 @@ describe("ProjectFormComponent", () => {
       "adrian@AI.ORG",
       "adrian@ai.ORG",
       "adrian@AI.org",
+      "adrian@AI.orG",
       "a",
       "u",
       "ue",
