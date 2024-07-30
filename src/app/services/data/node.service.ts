@@ -1,4 +1,4 @@
-import {Injectable, OnDestroy} from "@angular/core";
+import {EventEmitter, Injectable, OnDestroy} from "@angular/core";
 import {Node} from "../../models/node.model";
 import {
   LabelDto,
@@ -31,6 +31,7 @@ import {LabelService} from "./label.serivce";
 import {FilterService} from "../ui/filter.service";
 import {ConnectionDto} from "../../data-structures/technical.data.structures";
 import {TrainrunsectionValidator} from "../util/trainrunsection.validator";
+import {CreateNodeOperation, DeleteNodeOperation, DeleteNodesOperation, Operation} from "../../models/operation.model";
 
 @Injectable({
   providedIn: "root",
@@ -44,6 +45,8 @@ export class NodeService implements OnDestroy {
   readonly transitions = this.transitionsSubject.asObservable();
   connectionsSubject = new BehaviorSubject<Connection[]>([]);
   readonly connections = this.connectionsSubject.asObservable();
+
+  readonly operation = new EventEmitter<Operation>();
 
   private dataService: DataService = null;
   private destroyed = new Subject<void>();
@@ -272,6 +275,7 @@ export class NodeService implements OnDestroy {
     if (enforceUpdate) {
       this.nodesUpdated();
     }
+    this.operation.emit(new CreateNodeOperation(node));
     return node;
   }
 
@@ -286,6 +290,7 @@ export class NodeService implements OnDestroy {
     if (enforceUpdate) {
       this.nodesUpdated();
     }
+    this.operation.emit(new DeleteNodeOperation(node));
   }
 
   deleteAllVisibleNodes() {
@@ -301,6 +306,7 @@ export class NodeService implements OnDestroy {
       }
     });
     this.nodesUpdated();
+    // this.operation.emit(new DeleteNodesOperation(nodes));
   }
 
   deleteAllNonVisibleNodes() {
@@ -324,6 +330,7 @@ export class NodeService implements OnDestroy {
       }
     });
     this.nodesUpdated();
+    // this.operation.emit(new DeleteNodesOperation(nodes));
   }
 
   moveSelectedNodes(

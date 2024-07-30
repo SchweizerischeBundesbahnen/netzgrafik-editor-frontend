@@ -1,3 +1,5 @@
+import {Label} from "./label.model";
+import {Node} from "./node.model";
 import {Trainrun} from "./trainrun.model";
 import {TrainrunSection} from "./trainrunsection.model";
 
@@ -39,5 +41,68 @@ export class DeleteTrainrunOperation extends Operation {
   constructor(trainrun: Trainrun) {
     super(OperationType.delete);
     this.trainrun = trainrun;
+  }
+}
+
+export class CreateLabelOperation extends Operation {
+  readonly label: Label;
+
+  constructor(label: Label) {
+    super(OperationType.create);
+    this.label = label;
+  }
+}
+
+export class UpdateLabelOperation extends Operation {
+  readonly label: Label;
+
+  constructor(label: Label) {
+    super(OperationType.update);
+    this.label = label;
+  }
+}
+
+export class DeleteLabelOperation extends Operation {
+  readonly label: Label;
+
+  constructor(label: Label) {
+    super(OperationType.delete);
+    this.label = label;
+  }
+}
+
+export class CreateNodeOperation extends Operation {
+  readonly node: Node;
+
+  constructor(node: Node) {
+    super(OperationType.create);
+    this.node = node;
+  }
+}
+
+export class UpdateNodeOperation extends Operation {
+  readonly node: Node;
+
+  constructor(node: Node) {
+    super(OperationType.update);
+    this.node = node;
+  }
+}
+
+export class DeleteNodeOperation extends Operation {
+  readonly node: Node;
+
+  constructor(node: Node) {
+    super(OperationType.delete);
+    this.node = node;
+  }
+}
+
+export class DeleteNodesOperation extends Operation {
+  readonly nodes: Node[];
+
+  constructor(nodes: Node[]) {
+    super(OperationType.delete);
+    this.nodes = nodes;
   }
 }
