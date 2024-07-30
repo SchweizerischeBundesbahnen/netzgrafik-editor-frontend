@@ -53,7 +53,7 @@
       />
     </sbb-chip-list>
     <sbb-error *ngIf="model.getControl('writeUsers').errors?.invalidUserIdAsEmails">
-      Ungültige Werte (keine E-Mail Adresse):
+      Ungültige Werte (keine E-Mail Adresse - alles Kleinbuchstaben):
       {{ model.getControl("writeUsers").errors?.invalidUserIdAsEmails }}
     </sbb-error>
   </sbb-form-field>
@@ -80,7 +80,7 @@
       />
     </sbb-chip-list>
     <sbb-error *ngIf="model.getControl('readUsers').errors?.invalidUserIdAsEmails">
-      Ungültige Werte (keine E-Mail Adresse):
+      Ungültige Werte (keine E-Mail Adresse - alles Kleinbuchstaben):
       {{ model.getControl("readUsers").errors?.invalidUserIdAsEmails }}
     </sbb-error>
   </sbb-form-field>
