@@ -501,10 +501,10 @@
             "mandatory": "Pflichtfeld",
             "summary": "Zusammenfassung",
             "description": "Beschreibung",
-            "tooltip": "Benutzer müssen mit ihrer U/E-Nummer angegeben werden (bsp. u123456e654321). Eingabe pro Nummer jeweils mit 'Enter' bestätigen. Kleinschreibung beachten!",
+            "tooltip": "Benutzer müssen mit ihrer E-Mail angegeben werden. Eingabe pro E-Mail jeweils mit 'Enter' bestätigen.",
             "user-with-write-access": "Benutzer mit Schreibzugriff",
             "new-user-placeholder": "Neuer Benutzer...",
-            "invalid-values": "Ungültige Werte",
+            "invalid-values": "Ungültige Werte (keine E-Mail Adresse)",
             "user-with-read-access": "Benutzer mit Lesezugriff"
           }
         },

@@ -501,10 +501,10 @@
             "mandatory-field": "Mandatory field",
             "summary": "Summary",
             "description": "Description",
-            "tooltip": "Users must be entered with their U/E number (e.g. u123456e654321). Confirm the entry for each number with 'Enter'. Note lower case!",
+            "tooltip": "Users must be entered with their e-mail address. Confirm the entry for each e-mail with 'Enter'.",
             "user-with-write-access": "User with write access",
             "new-user-placeholder": "New user...",
-            "invalid-values": "Invalid values",
+            "invalid-values": "Invalid values (no e-mail address)",
             "user-with-read-access": "User with read access"
           }
         },
