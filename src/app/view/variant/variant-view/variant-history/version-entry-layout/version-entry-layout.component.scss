@@ -4,6 +4,7 @@
 }
 
 .info-fields {
+  grid-template-columns: 50% 50%;
   display: grid;
   min-height: 2rem;
 }
