@@ -25,15 +25,14 @@
         type="color"
         sbbInput
         name="Hintergrundfarbe"
-        style="width: 242px; min-height: 37px"
+        style="width: 242px; min-height: 37px; vertical-align: middle;"
         [(ngModel)]="activeBackgroundColor"
         (change)="colorPicked($event)"
       />
       &nbsp;
       <button
         sbb-secondary-button
-        class="sbb-mt-m"
-        style="transform: translate(0px, -6px);"
+        style="vertical-align: middle;"
         [disabled]="isBackgroundColorWhite()"
         title="Hintergrundfarbe auf 'weiss' setzten"
         (click)="setBackgroundColorToWhite()"
@@ -57,9 +56,8 @@
       &nbsp;
       <button
         sbb-secondary-button
-        class="sbb-mt-m"
         [disabled]="isDefaultBackgroundColorActive()"
-        style="transform: translate(0px, -6px);"
+        style="vertical-align: middle;"
         title="Hintergrundfarbe auf Standard zurücksetzen"
         (click)="onResetBackgroundColor()"
       >
@@ -74,17 +72,16 @@
         type="color"
         sbbInput
         name="Hintergrundfarbe"
-        style="width: 242px; min-height: 37px"
+        style="width: 242px; min-height: 37px; vertical-align: middle;"
         [(ngModel)]="activeDarkBackgroundColor"
         (change)="colorPicked($event)"
       />
       &nbsp;
       <button
         sbb-secondary-button
-        class="sbb-mt-m"
         [disabled]="isDefaultDarkBackgroundColorActive()"
         title="Hintergrundfarbe auf Standard zurücksetzen"
-        style="transform: translate(0px, -6px);"
+        style="vertical-align: middle;"
         (click)="onResetDarkBackgroundColor()"
       >
         <sbb-icon svgIcon="trash-small"></sbb-icon>

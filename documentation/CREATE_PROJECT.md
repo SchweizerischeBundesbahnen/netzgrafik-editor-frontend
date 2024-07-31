@@ -17,6 +17,24 @@ description. Now you have created a first project that can contain multiple vari
 
 [29-01-2024-001-Create_new_project.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/4e34d3a2-5291-4193-ac88-5e522f6223f7)
 
+#### Share a project
+Users can share their projects with other employees and assign different access rights. There are two options: 
+- write access
+- read access.
+
+#### With write access, 
+... the employee with whom the project is shared can edit the project, make changes to it, or delete it, including creating, deleting, and archiving variants.
+  
+
+#### With read access, 
+... the employee can only view and read the project, but cannot make any changes to it (cannot save).
+
+The choice between write access and read access depends on the desired level of collaboration and contribution from the employees to the project.
+
+#### Example
+![image](https://github.com/user-attachments/assets/cc925325-1925-4256-a654-3216c13412d5)
+
+
 ### Create a new Variant within a project
 
 To create a new variant of a project, simply click on the "+" symbol and enter a name. As soon as
