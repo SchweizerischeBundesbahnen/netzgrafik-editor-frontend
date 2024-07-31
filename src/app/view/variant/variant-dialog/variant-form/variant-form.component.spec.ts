@@ -4,6 +4,7 @@ import {
   VariantFormComponentModel,
 } from "./variant-form.component";
 import {FormModel} from "../../../../utils/form-model";
+import {I18nModule} from "../../../../core/i18n/i18n.module";
 
 describe("VariantFormComponent", () => {
   let component: VariantFormComponent;
@@ -11,6 +12,7 @@ describe("VariantFormComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports:[I18nModule],
       declarations: [VariantFormComponent],
     }).compileComponents();
   });

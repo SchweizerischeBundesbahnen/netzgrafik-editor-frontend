@@ -17,10 +17,10 @@ import {Operation} from "./models/operation.model";
 })
 export class AppComponent {
   readonly disableBackend = environment.disableBackend;
-
-  version = packageJson.version;
-  environmentLabel = environment.label;
-  authenticated: Promise<unknown>;
+  readonly version = packageJson.version;
+  readonly locale = localStorage.getItem("locale");
+  readonly environmentLabel = environment.label;
+  readonly authenticated: Promise<unknown>;
 
   projectInMenu: Observable<ProjectDto | null>;
 
@@ -51,6 +51,11 @@ export class AppComponent {
     if (!this.disableBackend) {
       this.authService.logOut();
     }
+  }
+
+  changeLocale(locale: string) {
+    localStorage.setItem("locale", locale);
+    location.reload();
   }
 
   @Input()

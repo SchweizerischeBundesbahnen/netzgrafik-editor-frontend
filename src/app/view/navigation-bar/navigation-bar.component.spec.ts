@@ -9,6 +9,7 @@ import {NavigationEnd, Router, RouterEvent} from "@angular/router";
 import {NavigationService} from "../../services/ui/navigation.service";
 import {NEVER} from "rxjs";
 import {map} from "rxjs/operators";
+import {I18nModule} from "../../core/i18n/i18n.module";
 
 describe("NavigationBarComponent", () => {
   let component: NavigationBarComponent;
@@ -25,6 +26,7 @@ describe("NavigationBarComponent", () => {
 
     await TestBed.configureTestingModule({
       declarations: [NavigationBarComponent],
+      imports: [I18nModule],
       providers: [
         {provide: Router, useValue: router},
         {provide: NavigationService, useValue: {}},

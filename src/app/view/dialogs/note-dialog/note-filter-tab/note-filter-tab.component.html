@@ -1,7 +1,6 @@
 <div sbbDialogContent class="EditNoteFilterableLabelsDialogTabContent">
-  <sbb-form-field class="sbb-form-field-long" label="Labels">
+  <sbb-form-field class="sbb-form-field-long" [label]="'app.view.dialogs.note-dialog.note-filter-tab.labels' | translate">
     <sbb-chip-list
-      aria-label="Labels"
       [value]="noteLabels"
       (focusout)="onLabelsFocusout()"
     >
@@ -14,7 +13,7 @@
       </sbb-chip>
       <input
         id="noteLabelsInput"
-        placeholder="New Label..."
+        [placeholder]="'app.view.dialogs.note-dialog.note-filter-tab.label-placeholder' | translate"
         sbbChipInput
         cdkFocusInitial
         [sbbChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -35,7 +34,7 @@
   <button
     class="FunctionButton"
     tabindex="-1"
-    title="Kommentar löschen"
+    [title]="'app.view.dialogs.note-dialog.delete-note' | translate"
     (click)="onDeleteNote()"
   >
     <sbb-icon svgIcon="trash-medium" aria-hidden="false"></sbb-icon>

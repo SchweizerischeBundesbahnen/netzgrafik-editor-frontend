@@ -1,4 +1,4 @@
-<sbb-form-field label="Titel" class="sbb-form-field-long">
+<sbb-form-field [label]="'app.view.dialogs.note-dialog.note-form.title' | translate" class="sbb-form-field-long">
   <input
     type="text"
     sbbInput
@@ -6,6 +6,6 @@
     [formControl]="model.getControl('noteTitle')"
     (focusout)="onUpdate()"
     (keydown)="onKeydown($event)"
-    placeholder="Name"
+    [placeholder]="'app.view.dialogs.note-dialog.note-form.name' | translate"
   />
 </sbb-form-field>

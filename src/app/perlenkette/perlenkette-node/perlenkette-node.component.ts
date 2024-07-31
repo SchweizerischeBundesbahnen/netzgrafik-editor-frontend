@@ -52,12 +52,12 @@ export class PerlenketteNodeComponent implements OnInit {
         mockConnection.connectionWarning && amountOfWarningConnections++,
     );
     if (amountOfWarningConnections === 0) {
-      return "Kein fehlerhafter Anschluss";
+      return $localize`:@@app.perlenkette.perlenkette-node.0-warning-connection:No incorrect connection`;
     }
     if (amountOfWarningConnections === 1) {
-      return "1 fehlerhafter Anschluss";
+      return $localize`:@@app.perlenkette.perlenkette-node.1-warning-connection:1 incorrect connection`;
     }
-    return amountOfWarningConnections + " fehlerhafte Anschlüsse";
+    return $localize`:@@app.perlenkette.perlenkette-node.n-warning-connections:${amountOfWarningConnections}:number: incorrect connections`;
   }
 
   getFittingConnections(): string {
@@ -67,12 +67,12 @@ export class PerlenketteNodeComponent implements OnInit {
         !mockConnection.connectionWarning && amountOfFittingConnections++,
     );
     if (amountOfFittingConnections === 0) {
-      return "Kein passender Anschluss";
+      return $localize`:@@app.perlenkette.perlenkette-node.0-fitting-connection:No fitting connection`;
     }
     if (amountOfFittingConnections === 1) {
-      return "1 passender Anschluss";
+      return $localize`:@@app.perlenkette.perlenkette-node.1-fitting-connection:1 fitting connection`;
     }
-    return amountOfFittingConnections + " passende Anschlüsse";
+    return $localize`:@@app.perlenkette.perlenkette-node.n-fitting-connections:${amountOfFittingConnections}:number: fitting connections`;
   }
 
   expandConnections() {

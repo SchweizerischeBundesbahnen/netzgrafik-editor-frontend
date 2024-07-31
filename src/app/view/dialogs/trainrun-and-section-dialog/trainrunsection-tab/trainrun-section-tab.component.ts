@@ -71,10 +71,10 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   public categoryColorRef: ColorRefType;
   public timeCategoryShortName: string;
   public timeCategoryLinePattern: LinePatternRefs;
-  public warningTwoLocks = "Warnung: Zu viele Zeiten sind gelockt!";
 
   private trainrunSectionHelper: TrainrunsectionHelper;
   private destroyed = new Subject<void>();
+
 
   constructor(
     private dataService: DataService,
@@ -84,6 +84,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     private changeDetection: ChangeDetectorRef,
     public trainrunSectionTimesService: TrainrunSectionTimesService,
   ) {
+
     this.trainrunSectionHelper = new TrainrunsectionHelper(
       this.trainrunService,
     );

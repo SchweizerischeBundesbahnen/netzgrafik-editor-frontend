@@ -19,7 +19,7 @@ export class PublishEntryComponent {
   get actions(): HistoryEntryAction[] {
     return [
       {
-        name: "Änderungen Verwerfen",
+        name: $localize`:@@app.view.variant.variant-view.variant-history.publish-entry.discard-changes:Discard changes`,
         icon: "trash-small",
         onClick: () => this.dropChangedClicked.next(),
       },

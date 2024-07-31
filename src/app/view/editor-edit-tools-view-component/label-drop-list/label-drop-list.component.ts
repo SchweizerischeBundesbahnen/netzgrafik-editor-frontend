@@ -92,12 +92,12 @@ export class LabelDropListComponent implements OnInit, OnDestroy {
     const labelObject = this.labelService.getLabelFromId(labelId);
     const callbackObject = {
       name: labelObject.getLabel(),
-      dialogTitel:
+      dialogTitle:
         labelObject.getLabelRef() === LabelRef.Trainrun
-          ? "Züge"
+          ? $localize`:@@app.view.editor-edit-tools-view-component.label-drop-list.trainruns:Trainruns`
           : labelObject.getLabelRef() === LabelRef.Note
-            ? "Kommentare"
-            : "Knoten",
+            ? $localize`:@@app.view.editor-edit-tools-view-component.label-drop-list.notes:Notes`
+            : $localize`:@@app.view.editor-edit-tools-view-component.label-drop-list.nodes:Nodes`,
       saveLabelCallback: (refLabel, updatedLabel) =>
         this.labelService.updateLabel(labelObject.getId(), updatedLabel),
       deleteLabelCallback: (refLabel) => {

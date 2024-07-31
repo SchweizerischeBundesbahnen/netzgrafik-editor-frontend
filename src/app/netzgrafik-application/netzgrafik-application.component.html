@@ -3,7 +3,7 @@
     <!--<a sbbIconSidebarItem label="Varianten" (click)="onVariantenClicked()" class="sbb-active">-->
     <a *ngIf="!disableBackend"
       sbbIconSidebarItem
-      label="Varianten"
+      [label]="'app.netzgrafik-application.variants' | translate"
       [class]="getVariantsActivatedTag()"
       (click)="onVariantenClicked()"
     >
@@ -19,7 +19,7 @@
     </a>
     <a
       sbbIconSidebarItem
-      label="Filter"
+      [label]="'app.netzgrafik-application.filter' | translate"
       [class]="getFilterActivatedTag()"
       [style]="getFilterStyle()"
       (click)="onFilterClicked()"
@@ -27,13 +27,13 @@
       <sbb-icon svgIcon="filter-small"></sbb-icon>
     </a>
     <!--
-    <a sbbIconSidebarItem label="Analytics" (click)="onAnalyticsClicked()">
+    <a sbbIconSidebarItem [label]="'app.netzgrafik-application.analytics' | translate" (click)="onAnalyticsClicked()">
       <sbb-icon svgIcon="bulb-on-small"></sbb-icon>
     </a>
     -->
     <a
       sbbIconSidebarItem
-      label="Bearbeiten"
+      [label]="'app.netzgrafik-application.edit' | translate"
       [class]="getEditActivatedTag()"
       (click)="onEditToolClicked()"
     >
@@ -41,7 +41,7 @@
     </a>
     <a
       sbbIconSidebarItem
-      label="Weitere Funktionen"
+      [label]="'app.netzgrafik-application.more-functions' | translate"
       [class]="getMoreFunctionActivatedTag()"
       (click)="onToolsClicked()"
     >
@@ -49,7 +49,7 @@
     </a>
     <a
       sbbIconSidebarItem
-      label="Einstellungen"
+      [label]="'app.netzgrafik-application.settings' | translate"
       [class]="getPropertiesActivatedTag()"
       (click)="onPropertiesClicked()"
     >

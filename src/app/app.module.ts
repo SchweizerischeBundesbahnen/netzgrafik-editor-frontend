@@ -1,4 +1,4 @@
-import {NgModule, Injector, ApplicationRef, DoBootstrap} from "@angular/core";
+import {NgModule, Injector, DoBootstrap} from "@angular/core";
 import {NgxEditorModule} from "ngx-editor";
 import {BrowserModule} from "@angular/platform-browser";
 import {createCustomElement} from "@angular/elements";
@@ -101,6 +101,7 @@ import {TrainRunSectionStopsComponentComponent} from "./streckengrafik/component
 import {PathGridComponent} from "./streckengrafik/components/grid/path-grid/path-grid.component";
 import {TrainRunNodeComponent} from "./streckengrafik/components/train-run-node/trainrun-node.component";
 import {ActionMenuComponent} from "./view/action-menu/action-menu/action-menu.component";
+import {I18nModule} from "./core/i18n/i18n.module";
 
 @NgModule({
   declarations: [
@@ -230,6 +231,7 @@ import {ActionMenuComponent} from "./view/action-menu/action-menu/action-menu.co
     SbbTooltipModule,
     SbbBreadcrumbModule,
     SbbAutocompleteModule,
+    I18nModule,
   ],
   bootstrap: environment.customElement ? [] : [AppComponent],
   providers: [

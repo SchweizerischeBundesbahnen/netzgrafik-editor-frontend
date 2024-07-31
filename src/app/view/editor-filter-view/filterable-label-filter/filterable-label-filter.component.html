@@ -1,5 +1,5 @@
 <div *ngIf="hasNoFilterableLabels()">
-  <sbb-label class="sbb-mt-m">Keine Labels vorhanden.</sbb-label>
+  <sbb-label class="sbb-mt-m">{{ 'app.view.editor-filter-view.filterable-label-filter.no-labels-available' | translate }}</sbb-label>
 </div>
 <ng-container *ngIf="!hasNoFilterableLabels()">
   <div class="sbb-filter-chip-group-main">
@@ -11,7 +11,7 @@
             class="TrainrunDialog FilterableLabel LogicalOperator"
             (click)="enableLogicalFilterOperatorAnd(nodeLabelGrp)"
           >
-            Oder
+            {{ 'app.view.editor-filter-view.filterable-label-filter.or' | translate }}
           </button>
         </ng-container>
         <ng-container *ngIf="!isFilterFunctionOrEnabled(nodeLabelGrp)">
@@ -19,7 +19,7 @@
             class="TrainrunDialog FilterableLabel LogicalOperator"
             (click)="enableLogicalFilterOperatorOr(nodeLabelGrp)"
           >
-            Und
+            {{ 'app.view.editor-filter-view.filterable-label-filter.and' | translate }}
           </button>
         </ng-container>
       </div>
@@ -46,9 +46,9 @@
     sbb-secondary-button
     class="sbb-mt-m"
     [disabled]="isFilteringLabels()"
-    title="Alles anzeigen"
+    [title]="'app.view.editor-filter-view.filterable-label-filter.show-all' | translate"
     (click)="OnResetFilterableLabels()"
   >
-    Filter zurücksetzen
+    {{ 'app.view.editor-filter-view.filterable-label-filter.reset-filter' | translate }}
   </button>
 </div>

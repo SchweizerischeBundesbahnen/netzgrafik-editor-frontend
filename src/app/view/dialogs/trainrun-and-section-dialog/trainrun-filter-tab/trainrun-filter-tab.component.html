@@ -1,7 +1,6 @@
 <div sbbDialogContent class="EditTrainrunFilterableLabelsDialogTabContent">
-  <sbb-form-field class="sbb-form-field-long" label="Labels">
+  <sbb-form-field class="sbb-form-field-long" [label]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-filter-tab.labels' | translate">
     <sbb-chip-list
-      aria-label="Labels"
       [value]="trainrunLabels"
       (focusout)="onLabelsFocusout()"
     >
@@ -14,7 +13,7 @@
       </sbb-chip>
       <input
         id="trainrunLabelsInput"
-        placeholder="New Label..."
+        [placeholder]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-filter-tab.newLabels' | translate"
         sbbChipInput
         cdkFocusInitial
         [sbbChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -36,7 +35,7 @@
     class="FunctionButton"
     tabindex="-1"
     (click)="onDuplicateTrainrun()"
-    title="Zuglauf duplizieren"
+    [title]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDuplicate' | translate"
   >
     <sbb-icon svgIcon="plus-medium" aria-hidden="false"></sbb-icon>
   </button>
@@ -44,7 +43,7 @@
     class="FunctionButton"
     tabindex="-1"
     (click)="onDeleteTrainrun()"
-    title="Zuglauf löschen"
+    [title]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDelete' | translate"
   >
     <sbb-icon svgIcon="trash-medium" aria-hidden="false"></sbb-icon>
   </button>

@@ -56,7 +56,7 @@ export class NoteService {
     });
   }
 
-  addNote(position: Vec2D, title = "Titel", text = "Text"): Note {
+  addNote(position: Vec2D, title = $localize`:@@app.models.note.default-title:Note title`, text = $localize`:@@app.models.note.default-text:Note text`): Note {
     const newNote = new Note();
     newNote.setPosition(position.getX(), position.getY());
     newNote.setTitle(title);

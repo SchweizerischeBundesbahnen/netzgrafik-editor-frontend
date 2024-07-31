@@ -473,7 +473,7 @@
     *ngIf="trainrunSectionTimesService.getShowWarningTwoLocks() === true"
     disabled
   >
-    {{ warningTwoLocks }}
+    {{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-section-tab.warningTwoLocks' | translate }}
   </button>
   <button
     class="FunctionButton"
@@ -482,7 +482,7 @@
     (click)="
       trainrunSectionTimesService.onPropagateTimeLeft(selectedTrainrunSection)
     "
-    title="Zeiten nach links propagieren"
+    [title]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-section-tab.propagateTimesToLeft' | translate"
   >
     <sbb-icon
       svgIcon="arrow-long-left-medium"
@@ -498,7 +498,7 @@
     (click)="
       trainrunSectionTimesService.onPropagateTimeRight(selectedTrainrunSection)
     "
-    title="Zeiten nach rechts propagieren"
+    [title]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-section-tab.propagateTimesToRight' | translate"
   >
     <sbb-icon
       svgIcon="arrow-long-right-medium"

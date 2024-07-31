@@ -6,6 +6,7 @@ import {
   userIdsAsEmailValidator,
 } from "./project-form.component";
 import {FormModel} from "../../../../utils/form-model";
+import {I18nModule} from "../../../../core/i18n/i18n.module";
 import {UntypedFormControl} from "@angular/forms";
 
 describe("ProjectFormComponent", () => {
@@ -15,6 +16,7 @@ describe("ProjectFormComponent", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ProjectFormComponent],
+      imports: [I18nModule],
     }).compileComponents();
   });
 

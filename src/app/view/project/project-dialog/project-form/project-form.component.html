@@ -1,38 +1,38 @@
 <div class="content">
-  <sbb-form-field label="Name" class="sbb-form-field-long">
+  <sbb-form-field [label]="'app.view.project.project-dialog.project-form.name' | translate" class="sbb-form-field-long">
     <input
       type="text"
       sbbInput
       [formControl]="model.getControl('name')"
-      placeholder="Name"
+      [placeholder]="'app.view.project.project-dialog.project-form.name' | translate"
     />
     <sbb-error *ngIf="model.getControl('name').errors?.required"
-      >Pflichtfeld</sbb-error
+      >{{ 'app.view.project.project-dialog.project-form.mandatory-field' | translate }}</sbb-error
     >
   </sbb-form-field>
-  <sbb-form-field label="Zusammenfassung" class="sbb-form-field-long">
+  <sbb-form-field [label]="'app.view.project.project-dialog.project-form.summary' | translate" class="sbb-form-field-long">
     <input
       type="text"
       sbbInput
       [formControl]="model.getControl('summary')"
-      placeholder="Zusammenfassung"
+      [placeholder]="'app.view.project.project-dialog.project-form.summary' | translate"
     />
   </sbb-form-field>
-  <sbb-form-field label="Beschreibung" class="sbb-form-field-long">
+  <sbb-form-field [label]="'app.view.project.project-dialog.project-form.description' | translate" class="sbb-form-field-long">
     <sbb-textarea
       [formControl]="model.getControl('description')"
       [maxlength]="500"
-      placeholder="Beschrieb"
+      [placeholder]="'app.view.project.project-dialog.project-form.description' | translate"
     ></sbb-textarea>
   </sbb-form-field>
   <ng-template #userTooltip>
     <sbb-tooltip>
-      Benutzer müssen mit ihrer E-Mail angegeben werden. Eingabe pro E-Mail jeweils mit 'Enter' bestätigen.
+      {{ 'app.view.project.project-dialog.project-form.tooltip' | translate }}
     </sbb-tooltip>
   </ng-template>
   <sbb-form-field class="sbb-form-field-long">
     <sbb-label>
-      Benutzer mit Schreibzugriff
+      {{ 'app.view.project.project-dialog.project-form.user-with-write-access' | translate }}
       <ng-container *ngTemplateOutlet="userTooltip"></ng-container>
     </sbb-label>
     <sbb-chip-list
@@ -46,19 +46,19 @@
       </sbb-chip>
       <input
         id="userWriteInput"
-        placeholder="New Benutzer..."
+        [placeholder]="'app.view.project.project-dialog.project-form.new-user-placeholder' | translate"
         sbbChipInput
         [sbbChipInputSeparatorKeyCodes]="separatorKeysCodes"
       />
     </sbb-chip-list>
     <sbb-error *ngIf="model.getControl('writeUsers').errors?.invalidUserIdAsEmails">
-      Ungültige Werte (keine E-Mail Adresse):
+      {{ 'app.view.project.project-dialog.project-form.invalid-values' | translate }}:
       {{ model.getControl("writeUsers").errors?.invalidUserIdAsEmails }}
     </sbb-error>
   </sbb-form-field>
   <sbb-form-field class="sbb-form-field-long">
     <sbb-label>
-      Benutzer mit Lesezugriff
+      {{ 'app.view.project.project-dialog.project-form.user-with-read-access' | translate }}
       <ng-container *ngTemplateOutlet="userTooltip"></ng-container>
     </sbb-label>
     <sbb-chip-list
@@ -73,13 +73,13 @@
       </sbb-chip>
       <input
         id="userReadeInput"
-        placeholder="New Benutzer..."
+        [placeholder]="'app.view.project.project-dialog.project-form.new-user-placeholder' | translate"
         sbbChipInput
         [sbbChipInputSeparatorKeyCodes]="separatorKeysCodes"
       />
     </sbb-chip-list>
     <sbb-error *ngIf="model.getControl('readUsers').errors?.invalidUserIdAsEmails">
-      Ungültige Werte (keine E-Mail Adresse):
+      {{ 'app.view.project.project-dialog.project-form.invalid-values' | translate }}:
       {{ model.getControl("readUsers").errors?.invalidUserIdAsEmails }}
     </sbb-error>
   </sbb-form-field>

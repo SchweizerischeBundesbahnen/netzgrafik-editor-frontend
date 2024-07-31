@@ -577,9 +577,8 @@ export class NodeService implements OnDestroy {
     }
 
     if (isForwardPathLocked && isBackwardPathLocked) {
-      const warningTitle = "Durchfahrt geändert";
-      const warningDescription =
-        "Zeiten können nicht angepasst werden, beidseitger Lock gefunden";
+      const warningTitle = $localize`:@@app.services.data.node.transit-modified.title:Transition changed`;
+      const warningDescription = $localize`:@@app.services.data.node.transit-modified.description:Times cannot be adjusted, lock found on both sides`;
       this.trainrunSectionService.setWarningOnNode(
         trainrunSections.trainrunSection1.getId(),
         node.getId(),

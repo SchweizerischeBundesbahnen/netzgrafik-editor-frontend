@@ -12,8 +12,8 @@ export class TrainrunsectionValidator {
     if (Math.abs(calculatedTargetArrivalTime - trainrunSection.getTargetArrival())
        > 1 / 60) {
       trainrunSection.setTargetArrivalWarning(
-        "Target Arrival Warning",
-        "Target arrival time cannot be reached",
+        $localize`:@@app.services.util.trainrunsection-validator.target-arrival-not-reacheable.title:Target Arrival Warning`,
+        $localize`:@@app.services.util.trainrunsection-validator.target-arrival-not-reacheable.description:Target arrival time cannot be reached`,
       );
     } else {
       trainrunSection.resetTargetArrivalWarning();
@@ -25,8 +25,8 @@ export class TrainrunsectionValidator {
     if (Math.abs(calculatedSourceArrivalTime - trainrunSection.getSourceArrival())
        > 1 / 60) {
       trainrunSection.setSourceArrivalWarning(
-        "Source Arrival Warning",
-        "Target arrival time cannot be reached",
+        $localize`:@@app.services.util.trainrunsection-validator.source-arrival-not-reacheable.title:Source Arrival Warning`,
+        $localize`:@@app.services.util.trainrunsection-validator.source-arrival-not-reacheable.description:Source arrival time cannot be reached`,
       );
     } else {
       trainrunSection.resetSourceArrivalWarning();
@@ -36,8 +36,8 @@ export class TrainrunsectionValidator {
   static validateTravelTime(trainrunSection: TrainrunSection) {
     if (trainrunSection.getTravelTime() < 1) {
       trainrunSection.setTravelTimeWarning(
-        "Travel Time Warning",
-        "Travel time must be greater-equal than 1",
+        $localize`:@@app.services.util.trainrunsection-validator.travel-time-less-than-1.title:Travel Time less than 1`,
+        $localize`:@@app.services.util.trainrunsection-validator.travel-time-less-than-1.description:Travel time must be greater than or equal to 1`,
       );
     } else {
       trainrunSection.resetTravelTimeWarning();

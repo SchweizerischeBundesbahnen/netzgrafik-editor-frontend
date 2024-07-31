@@ -1,5 +1,5 @@
 <sbb-page-layout>
-  <h1>Projekte</h1>
+  <h1>{{ 'app.view.project.projects-view.projects' | translate }}</h1>
 
   <div class="actions">
     <input
@@ -7,11 +7,11 @@
       class="search"
       type="text"
       sbbInput
-      placeholder="Projekt suchen"
+      [placeholder]="'app.view.project.projects-view.search-project' | translate"
     />
     <div>
       <sbb-checkbox [formControl]="showArchiveControl"
-        >Archiv anzeigen</sbb-checkbox
+        >{{ 'app.view.project.projects-view.show-archive' | translate }}</sbb-checkbox
       >
     </div>
   </div>
@@ -24,7 +24,7 @@
     ></sbb-card>
     <sbb-card
       *ngFor="let project of projectService.filteredProjects | async"
-      [title]="project.name + (project.isArchived ? ' (archiviert)' : '')"
+      [title]="project.name + (project.isArchived ? ' ' + ('app.view.project.projects-view.archived' | translate) : '')"
       [route]="['/projects', project.id]"
       [actions]="getProjectDataActions(project)"
     >

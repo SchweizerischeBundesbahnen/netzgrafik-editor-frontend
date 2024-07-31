@@ -31,7 +31,7 @@ export class FilterableLabelFormComponent implements OnInit {
 
 export interface FilterableLabelsFormComponentModel {
   name: string;
-  dialogTitel: string;
+  dialogTitle: string;
   saveLabelCallback;
   deleteLabelCallback;
   transferLabelCallback;

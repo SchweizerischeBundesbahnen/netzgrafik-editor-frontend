@@ -174,16 +174,9 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
 
   onDeleteNode() {
     const node = this.nodeService.getSelectedNode();
-    const dialogTitle = "Löschen";
-    const dialogContent =
-      "Soll der Knoten " +
-      node.getBetriebspunktName() +
-      " (" +
-      node.getFullName() +
-      ") definitiv gelöscht werden?";
     const confirmationDialogParamter = new ConfirmationDialogParameter(
-      dialogTitle,
-      dialogContent,
+      $localize`:@@app.view.editor-side-view.editor-node-detail-view.delete:Delete`,
+      $localize`:@@app.view.editor-side-view.editor-node-detail-view.deleteNodeDialog:Should the node ${node.getBetriebspunktName()}:operationalPointShortName: (${node.getFullName()}:operationalPointName:) be definitely deleted?`
     );
     this.uiInteractionService
       .showConfirmationDiagramDialog(confirmationDialogParamter)

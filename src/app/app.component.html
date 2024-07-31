@@ -1,15 +1,25 @@
 <sbb-header-lean
   label="Netzgrafik-Editor"
-  [subtitle]="'Version ' + version"
+  [subtitle]="'app.version' | translate:{ 'version': version }"
   class="sbb-header-fixed-columns noprint"
 >
-  <sbb-app-chooser-section label="Benutzerhandbuch" class="noprint">
+  <sbb-app-chooser-section [label]="'app.user-guide' | translate" class="noprint">
     <a href="https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/USERMANUAL.md"
       class="nav-element"
       target="_blank"
     >
-      User Manuel
+      {{ 'app.user-manual' | translate }}
     </a>
+    <sbb-select
+    (selectionChange)="changeLocale($event.value)"
+    [value]="locale"
+    class="language-selector"
+    >
+      <sbb-option value="en">🇬🇧 English</sbb-option>
+      <sbb-option value="de">🇩🇪 Deutsch</sbb-option>
+      <!-- <sbb-option value="fr">🇫🇷 Français</sbb-option> -->
+      <!-- <sbb-option value="it">🇮🇹 Italiano</sbb-option> -->
+    </sbb-select>
   </sbb-app-chooser-section>
   <sbb-header-environment class="noprint">{{
     environmentLabel
@@ -26,7 +36,7 @@
   <sbb-menu #menu="sbbMenu">
     <button sbb-menu-item (click)="logout()">
       <sbb-icon svgIcon="exit-small" class="sbb-icon-fit"></sbb-icon>
-      <span i18n>Logout</span>
+      <span>{{ 'app.logout' | translate }}</span>
     </button>
   </sbb-menu>
 </sbb-header-lean>
@@ -37,7 +47,7 @@
 <ng-template #loading>
   <ng-container *ngIf="!disableBackend">
     <sbb-loading-indicator mode="big"></sbb-loading-indicator>
-    <div class="login-message">Sie werden angemeldet...</div>
+    <div class="login-message">{{ 'app.login' | translate }}</div>
   </ng-container>
   <ng-container *ngIf="disableBackend">
     <sbb-netzgrafik-editor></sbb-netzgrafik-editor>

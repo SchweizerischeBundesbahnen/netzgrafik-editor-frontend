@@ -15,7 +15,7 @@ import {filter} from "rxjs/operators";
   styleUrls: ["./variant-dialog.component.scss"],
 })
 export class VariantDialogComponent {
-  readonly formmodel: FormModel<VariantFormComponentModel>;
+  readonly formModel: FormModel<VariantFormComponentModel>;
   readonly isNewVariant: boolean;
 
   constructor(
@@ -25,7 +25,7 @@ export class VariantDialogComponent {
     >,
     @Inject(SBB_DIALOG_DATA) data?: VariantFormComponentModel,
   ) {
-    this.formmodel = new FormModel<VariantFormComponentModel>(
+    this.formModel = new FormModel<VariantFormComponentModel>(
       data ?? {name: ""},
     );
     this.isNewVariant = !!!data;
@@ -42,7 +42,7 @@ export class VariantDialogComponent {
   }
 
   onCreateClicked(): void {
-    const formdata = this.formmodel.tryGetValid();
+    const formdata = this.formModel.tryGetValid();
 
     if (formdata) {
       this.dialogRef.close(formdata);

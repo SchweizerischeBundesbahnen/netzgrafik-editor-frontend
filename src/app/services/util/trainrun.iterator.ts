@@ -58,7 +58,7 @@ export class TrainrunIterator {
       this.pointerElement = new TrainrunSectionNodePair(undefined, undefined);
       // log the issue
       this.logService.error(
-        "Iterator has detected an infinity loop. The iteration terminated early!",
+        $localize`:@@app.services.util.trainrun-iteration.error.infinity-loop:Iterator has detected an infinity loop. The iteration terminated early!`,
         new Error().stack,
       );
       return this.currentElement;

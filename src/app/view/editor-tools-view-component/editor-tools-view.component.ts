@@ -90,7 +90,7 @@ export class EditorToolsViewComponent {
   onSave() {
     const data: NetzgrafikDto = this.dataService.getNetzgrafikDto();
     const blob = new Blob([JSON.stringify(data)], {type: "application/json"});
-    downloadBlob(blob, "netzgrafik.json");
+    downloadBlob(blob, $localize`:@@app.view.editor-side-view.editor-tools-view-component.netzgrafikFile:netzgrafik` + ".json");
   }
 
   onExportNetzgrafikSVG() {
@@ -109,7 +109,7 @@ export class EditorToolsViewComponent {
         const a = document.createElement("a");
         document.body.appendChild(a);
         a.href = uri;
-        a.download = "netzgrafik.svg";
+        a.download = $localize`:@@app.view.editor-side-view.editor-tools-view-component.netzgrafikFile:netzgrafik` + ".svg";
         a.click();
         URL.revokeObjectURL(a.href);
         a.remove();
@@ -135,7 +135,7 @@ export class EditorToolsViewComponent {
     const containerInfo = this.getContainertoExport();
     svg.saveSvgAsPng(
       containerInfo.documentToExport,
-      "netzgrafik.png",
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.netzgrafikFile:netzgrafik` + ".png",
       containerInfo.exportParameter,
     );
     //containerInfo.documentToExport.setAttribute('style', containerInfo.documentSavedStyle);
@@ -162,13 +162,13 @@ export class EditorToolsViewComponent {
   }
 
   onExportStammdaten() {
-    const filename = "stammdaten.csv";
+    const filename = $localize`:@@app.view.editor-side-view.editor-tools-view-component.baseDataFile:baseData` + ".csv";
     const csvData = this.convertToStammdatenCSV();
     this.onExport(filename, csvData);
   }
 
   onExportZuglauf() {
-    const filename = "zuglauf.csv";
+    const filename = $localize`:@@app.view.editor-side-view.editor-tools-view-component.trainrunFile:trainrun` + ".csv";
     const csvData = this.convertToZuglaufCSV();
     this.onExport(filename, csvData);
   }
@@ -198,21 +198,19 @@ export class EditorToolsViewComponent {
     const comma = ",";
 
     const headers: string[] = [];
-    headers.push("BP");
-    headers.push("Bahnhof");
-    headers.push("Kategorie");
-    headers.push("Region");
-    headers.push("Fahrgastwechselzeit_IPV");
-    headers.push("Fahrgastwechselzeit_A");
-    headers.push("Fahrgastwechselzeit_B");
-    headers.push("Fahrgastwechselzeit_C");
-    headers.push("Fahrgastwechselzeit_D");
-    headers.push("ZAZ");
-    headers.push("Umsteigezeit");
-    headers.push("Labels");
-    headers.push("X");
-    headers.push("Y");
-    headers.push("Erstellen");
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.bp:BP`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.station:Station`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.category:category`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.passengerConnectionTimeA:Passenger_connection_time_A`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.passengerConnectionTimeB:Passenger_connection_time_B`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.passengerConnectionTimeC:Passenger_connection_time_C`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.passengerConnectionTimeD:Passenger_connection_time_D`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.ZAZ:ZAZ`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.transferTime:Transfer_time`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.labels:Labels`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.X:X`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.Y:Y`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.create:Create`);
 
     const contentData: string[] = [];
     contentData.push(headers.join(separator));
@@ -381,22 +379,22 @@ export class EditorToolsViewComponent {
     const comma = ",";
     const contentData: string[] = [];
     const headers: string[] = [];
-    headers.push("Zugkategorie");
-    headers.push("Zugname");
-    headers.push("Startbahnhof");
-    headers.push("Zielbahnhof");
-    headers.push("Verkehrsperiode");
-    headers.push("Takt");
-    headers.push("Abfahrtsminute am Start Knoten)");
-    headers.push("Fahrzeit Start-Ziel");
-    headers.push("Ankuntsminute am Ziel Knoten)");
-    headers.push("Wendezeit Zielbahnhof");
-    headers.push("Abfahrtsminute am  Ziel Knoten");
-    headers.push("Fahrzeit Ziel-Start");
-    headers.push("Ankuntsminute am Start Knoten");
-    headers.push("Wendezeit Startbahnhof");
-    headers.push("Umlaufzeit");
-    headers.push("Labels");
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.trainCategory:Train category`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.trainName:Train name`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.startStation:Start station`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.destinationStation:Destination station`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.trafficPeriod:Traffic period`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.frequence:Frequence`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.departureMinuteAtStart:Minute of departure at start node`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.travelTimeStartDestination:Travel time start-destination`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.arrivalMinuteAtDestination:Arrival minute at destination node`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.turnaroundTimeDestination:Turnaround time at destination station`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.departureMinuteDeparture:Departure minute at destination node`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.travelTimeDestinationStart:Travel time destination-start`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.arrivalMinuteAtStart:Arrival minute at start node`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.turnaroundTimeStart:Turnaround time at start station`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.turnaroundTime:Turnaround time`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.labels:Labels`);
 
     contentData.push(headers.join(separator));
     this.trainrunService

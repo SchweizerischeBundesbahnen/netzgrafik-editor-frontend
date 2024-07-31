@@ -1,5 +1,5 @@
 <div sbbDialogContent [class]="getDialogContentClassTag()">
-  <sbb-form-field label="Name" class="sbb-form-field-long">
+  <sbb-form-field [label]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.tabName' | translate" class="sbb-form-field-long">
     <input
       id="trainrunTitleField"
       type="text"
@@ -13,7 +13,7 @@
       (change)="onTrainrunTitleChanged()"
     />
   </sbb-form-field>
-  <sbb-label>Kategorie</sbb-label>
+  <sbb-label>{{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.category' | translate }}</sbb-label>
   <div class="sbb-trainrun-chip-group">
     <button
       [class]="getCategoryClassname(trainrunCategory)"
@@ -27,7 +27,7 @@
   </div>
   <div class="row">
     <div class="column" style="float: left; width: auto">
-      <sbb-label>Takt</sbb-label>
+      <sbb-label>{{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.frequency' | translate }}</sbb-label>
       <div class="sbb-trainrun-chip-group">
         <button
           [class]="getFrequencyClassname(trainrunFrequency)"
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="column" style="float: left; width: 150px">
-      <sbb-label>Verkehrt</sbb-label>
+      <sbb-label>{{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.verkehrt' | translate }}</sbb-label>
       <div class="sbb-trainrun-chip-group">
         <button
           [class]="getTimeCategoryClassname(trainrunTimeCategory)"
@@ -64,7 +64,7 @@
       class="FunctionButton"
       tabindex="-1"
       (click)="onDuplicateTrainrun()"
-      title="Zuglauf duplizieren"
+      [title]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDuplicate' | translate "
     >
       <sbb-icon svgIcon="plus-medium" aria-hidden="false"></sbb-icon>
     </button>
@@ -72,7 +72,7 @@
       class="FunctionButton"
       tabindex="-1"
       (click)="onDeleteTrainrun()"
-      title="Zuglauf löschen"
+      [title]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDelete' | translate"
     >
       <sbb-icon svgIcon="trash-medium" aria-hidden="false"></sbb-icon>
     </button>

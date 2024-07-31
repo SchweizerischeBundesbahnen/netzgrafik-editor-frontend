@@ -1,9 +1,9 @@
 <div sbbDialogContent class="EditNoteFilterableLabelsDialogTabContent">
   <ng-container>
-    <sbb-note-form [model]="formmodel"></sbb-note-form>
+    <sbb-note-form [model]="formModel"></sbb-note-form>
   </ng-container>
   <div class="EditNoteFilterableLabelsDialogTabContent">
-    <sbb-html-editor [model]="formmodel"></sbb-html-editor>
+    <sbb-html-editor [model]="formModel"></sbb-html-editor>
   </div>
 </div>
 <div sbbDialogActions class="EditNoteDialogTabFooter">
@@ -11,7 +11,7 @@
     class="FunctionButton"
     tabindex="-1"
     mode="icon"
-    title="Kommentar löschen"
+    [title]="'app.view.dialogs.note-dialog.delete-note' | translate"
     (click)="onDeleteNote()"
   >
     <sbb-icon

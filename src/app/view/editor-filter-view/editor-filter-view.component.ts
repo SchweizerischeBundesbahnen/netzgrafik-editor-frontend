@@ -152,9 +152,9 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
 
   getFilterSettingTooltip(filterSetting: FilterSetting): string {
     if (!this.filterService.isFilterSettingEnabled(filterSetting.getId())) {
-      return filterSetting.name + " laden";
+      return $localize`:@@app.view.editor-filter-view.load-filter:Load ${filterSetting.name}`;
     }
-    return filterSetting.name + " neu laden";
+    return $localize`:@@app.view.editor-filter-view.reload-filter:Reload ${filterSetting.name}`;
   }
 
   isTrainrunFilteringActive(): boolean {
@@ -300,18 +300,18 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
 
   getCategoryTooltip(trainrunCategory: TrainrunCategory): string {
     if (!this.filterService.isFilterTrainrunCategoryEnabled(trainrunCategory)) {
-      return trainrunCategory.name + " einblenden";
+      return $localize`:@@app.view.editor-filter-view.show-trainrun-category:Show ${trainrunCategory.name}:trainrunCategory:`;
     }
-    return trainrunCategory.name + " ausblenden";
+    return $localize`:@@app.view.editor-filter-view.hide-trainrun-category:Hide ${trainrunCategory.name}:trainrunCategory:`;
   }
 
   getTimeCategoryTooltip(trainrunTimeCategory: TrainrunTimeCategory): string {
     /*
     if (!this.filterService.isFilterTrainrunCategoryEnabled(trainrunTimeCategory)) {
-      return trainrunTimeCategory.name + ' einblenden';
+      return $localize`:@@app.view.editor-filter-view.show-trainrun-time-category:Show ${trainrunTimeCategory.name}:trainrunTimeCategory:`;
     }
     */
-    return trainrunTimeCategory.name + " ausblenden";
+    return $localize`:@@app.view.editor-filter-view.hide-trainrun-time-category:Hide ${trainrunTimeCategory.name}:trainrunTimeCategory:`;
   }
 
   makeCategoryButtonLabel(trainrunCategory: TrainrunCategory): string {
@@ -380,9 +380,9 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     if (
       !this.filterService.isFilterTrainrunFrequencyEnabled(trainrunFrequency)
     ) {
-      return trainrunFrequency.name + " einblenden";
+      return trainrunFrequency.name + " " + $localize`:@@app.view.editor-filter-view.show-trainrun-frequency:Show ${trainrunFrequency.name}:trainrunFrequency:`;
     }
-    return trainrunFrequency.name + " ausblenden";
+    return trainrunFrequency.name + " " + $localize`:@@app.view.editor-filter-view.hide-trainrun-frequency:Hide ${trainrunFrequency.name}:trainrunFrequency:`;
   }
 
   makeFrequencyButtonLabel(trainrunFrequency: TrainrunFrequency): string {

@@ -4,26 +4,6 @@
   "newProjectRoot": "projects",
   "projects": {
     "netzgrafik-frontend": {
-      "i18n": {
-        "locales": {
-          "de": {
-            "translation": "src/i18n/messages.de-CH.xlf",
-            "baseHref": "/de/"
-          },
-          "fr": {
-            "translation": "src/i18n/messages.fr-CH.xlf",
-            "baseHref": "/fr/"
-          },
-          "it": {
-            "translation": "src/i18n/messages.it-CH.xlf",
-            "baseHref": "/it/"
-          }
-        },
-        "sourceLocale": {
-          "code": "en",
-          "baseHref": "/en/"
-        }
-      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -65,7 +45,6 @@
           },
           "configurations": {
             "production": {
-              "localize": true,
               "outputPath": "dist",
               "fileReplacements": [
                 {
@@ -137,8 +116,9 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "format": "xlf",
-            "outputPath": "src/i18n",
+            "format": "json",
+            "outputPath": "src/assets/i18n/",
+            "outFile": "locale.json",
             "buildTarget": "netzgrafik-frontend:build"
           }
         },
@@ -212,14 +192,6 @@
             "production": {
               "buildTarget": "netzgrafik-frontend:build:production"
             }
-          }
-        },
-        "t9n": {
-          "builder": "angular-t9n:t9n",
-          "options": {
-            "translationFile": "src/i18n/messages.xlf",
-            "targetTranslationPath": "src/i18n",
-            "includeContextInTarget": false
           }
         }
       }

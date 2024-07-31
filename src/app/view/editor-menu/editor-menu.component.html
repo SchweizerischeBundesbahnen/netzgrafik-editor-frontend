@@ -7,16 +7,16 @@
       <div class="LabelNetzgrafikVarianteSaveStatus">
         <ng-container *ngIf="isWritable$ | async; else readonly">
           <ng-container *ngIf="modified$ | async; else saved">
-            <span>Speichere Änderungen</span>
+            <span>{{ 'app.view.editor-menu.save-changes' | translate }}</span>
             <sbb-icon svgIcon="arrows-circle-small" class="spinning"></sbb-icon>
           </ng-container>
           <ng-template #saved>
-            <span>Änderungen gespeichert</span>
+            <span>{{ 'app.view.editor-menu.changes-saved' | translate }}</span>
             <sbb-icon svgIcon="circle-tick-small"></sbb-icon>
           </ng-template>
         </ng-container>
         <ng-template #readonly>
-          <span>Lese-Modus</span>
+          <span>{{ 'app.view.editor-menu.read-mode' | translate }}</span>
           <sbb-icon svgIcon="binoculars-small"></sbb-icon>
         </ng-template>
       </div>
@@ -34,7 +34,7 @@
         mode="icon"
         class="ButtonFilter"
         (click)="onFilter()"
-        title="Filter ein-/ausblenden"
+        [title]="'app.view.editor-menu.show-hide-filter' | translate"
       >
         <sbb-icon
           svgIcon="filter-medium"
@@ -54,7 +54,7 @@
         mode="icon"
         class="ButtonFilter"
         (click)="onFilter()"
-        title="Filter ein-/ausblenden"
+        [title]="'app.view.editor-menu.show-hide-filter' | translate"
       >
         <sbb-icon
           svgIcon="filter-x-medium"
@@ -75,7 +75,7 @@
         mode="icon"
         class="ButtonFilter ButtonFilterActive"
         (click)="onFilter()"
-        title="Filter ein-/ausblenden"
+        [title]="'app.view.editor-menu.show-hide-filter' | translate"
       >
         <sbb-icon
           svgIcon="filter-medium"
@@ -95,7 +95,7 @@
         mode="icon"
         class="ButtonFilter ButtonFilterActive"
         (click)="onFilter()"
-        title="Filter ein-/ausblenden"
+        [title]="'app.view.editor-menu.show-hide-filter' | translate"
       >
         <sbb-icon
           svgIcon="filter-x-medium"
@@ -112,7 +112,7 @@
       mode="ghost"
       class="ButtonZoomOut"
       (click)="onZoomOut()"
-      title="Herauszoomen"
+      [title]="'app.view.editor-menu.zoom-out' | translate"
     >
       -
     </button>
@@ -125,7 +125,7 @@
       mode="ghost"
       class="ButtonZoomIn"
       (click)="onZoomIn()"
-      title="Hereinzoomen"
+      [title]="'app.view.editor-menu.zoom-in' | translate"
     >
       +
     </button>
@@ -144,7 +144,7 @@
         "
         [disabled]="isStreckengrafikEditing() || isAnalytics()"
         (click)="onTopologieEditor()"
-        title="Topologie Editor deaktiviert"
+        [title]="'app.view.editor-menu.topology-editor-disabled' | translate"
       >
         <sbb-icon
           svgIcon="network-medium"
@@ -163,7 +163,7 @@
         "
         [disabled]="isStreckengrafikEditing() || isAnalytics()"
         (click)="onTopologieEditor()"
-        title="Topologie Editor aktiviert"
+        [title]="'app.view.editor-menu.topology-editor-enabled' | translate"
       >
         <sbb-icon
           svgIcon="network-medium"
@@ -188,7 +188,7 @@
         "
         [disabled]="isStreckengrafikEditing() || isAnalytics()"
         (click)="onMultiNodeMoving()"
-        title="Mehrfachauswahlstool ist deaktiviert"
+        [title]="'app.view.editor-menu.multiple-selection-tool-disabled' | translate"
       >
         <svg
           viewBox="0 0 1024 1024"
@@ -213,7 +213,7 @@
         "
         [disabled]="isStreckengrafikEditing() || isAnalytics()"
         (click)="onMultiNodeMoving()"
-        title="Mehrfachauswahlstool ist aktiviert"
+        [title]="'app.view.editor-menu.multiple-selection-tool-enabled' | translate"
       >
         <svg
           viewBox="0 0 1024 1024"
@@ -244,7 +244,7 @@
         "
         [disabled]="isStreckengrafikEditing() || isAnalytics()"
         (click)="onNoteEditor()"
-        title="Note Editor deaktiviert"
+        [title]="'app.view.editor-menu.note-editor-disabled' | translate"
       >
         <sbb-icon
           svgIcon="speech-bubble-medium"
@@ -263,7 +263,7 @@
         "
         [disabled]="isStreckengrafikEditing() || isAnalytics()"
         (click)="onNoteEditor()"
-        title="Note Editor aktiviert"
+        [title]="'app.view.editor-menu.note-editor-enabled' | translate"
       >
         <sbb-icon
           svgIcon="speech-bubble-medium"
@@ -286,7 +286,7 @@
         [class.isStreckengrafikEditing]="isStreckengrafikEditing()"
         [disabled]="isStreckengrafikEditing()"
         (click)="onAnalyticsShortestPathVisualisation()"
-        title="Analytics: deaktiviert"
+        [title]="'app.view.editor-menu.analytics-disabled' | translate"
       >
         <sbb-icon
           svgIcon="train-station-medium"
@@ -303,7 +303,7 @@
         [class.isStreckengrafikEditing]="isStreckengrafikEditing()"
         [disabled]="isStreckengrafikEditing()"
         (click)="onAnalyticsShortestPathVisualisation()"
-        title="Analytics: aktiviert"
+        [title]="'app.view.editor-menu.analytics-enabled' | translate"
       >
         <sbb-icon
           svgIcon="train-station-medium"
@@ -323,7 +323,7 @@
         (click)="onStreckengrafik()"
         [class.isNotStreckengrafikAllowed]="isNotStreckengrafikAllowed()"
         [disabled]="isNotStreckengrafikAllowed()"
-        title="Streckengrafik anzeigen"
+        [title]="'app.view.editor-menu.displayGraphicTimetable' | translate"
       >
         <sbb-icon
           svgIcon="chart-line-medium"
@@ -338,7 +338,7 @@
         mode="icon"
         class="ButtonStreckengrafikEditor StreckengrafikEditing"
         (click)="onStreckengrafik()"
-        title="Streckengrafik schliessen"
+        [title]="'app.view.editor-menu.closeGraphicTimetable' | translate"
       >
         <sbb-icon
           svgIcon="chart-line-medium"

@@ -43,9 +43,8 @@ export class VariantViewComponent implements OnDestroy {
     this.uiInteractionService
       .showConfirmationDiagramDialog(
         new ConfirmationDialogParameter(
-          "Variante löschen",
-          "Möchten Sie die Variante und alle enthaltenen Versionen endgültig löschen? " +
-            "Diese Aktion kann nicht rückgängig gemacht werden.",
+          $localize`:@@app.view.variant.variant-view.delete-variant.title:Delete variant`,
+          $localize`:@@app.view.variant.variant-view.delete-variant.content:Do you want to permanently delete the variant and all versions it contains? This action cannot be undone.`,
         ),
       )
       .pipe(

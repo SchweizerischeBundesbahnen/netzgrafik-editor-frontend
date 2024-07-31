@@ -251,7 +251,7 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
         return;
       }
       this._notification.open(
-        "Streckengrafik kann nicht angezeigt werden, da keine Zugfahrt oder keine Knoten ausgewählt wurden.",
+        $localize`:@@app.view.editor-menu.errorGraphicTimetable:Graphic timetable cannot be displayed because no trainrun or no nodes have been selected.`,
         {
           type: "error",
           verticalPosition: "top",

@@ -149,36 +149,36 @@ export class StreckengrafikComponent
     return this.streckengrafikDisplayElementService.isRailTrackSliderVisible();
   }
 
-  getRailTrackliderButtonText(): string {
+  getRailTrackSliderButtonText(): string {
     if (!this.streckengrafikDisplayElementService.isRailTrackSliderVisible()) {
-      return "\u{2610} Streckengleis";
+      return `\u{2610} ${$localize`:@@app.streckengrafik.components.rail-track-slider:Rail track slider`}`;
     }
-    return "\u{2611} Streckengleis";
+    return `\u{2611} ${$localize`:@@app.streckengrafik.components.rail-track-slider:Rail track slider`}`;
   }
 
   getHeadwayBandButtonText(): string {
     if (!this.streckengrafikDisplayElementService.isHeadwayBandVisible()) {
-      return "\u{2610} Zugfolgezeiten";
+      return `\u{2610} ${$localize`:@@app.streckengrafik.components.headway-band:Headway band`}`;
     }
-    return "\u{2611} Zugfolgezeiten";
+    return `\u{2611} ${$localize`:@@app.streckengrafik.components.headway-band:Headway band`}`;
   }
 
   getTimeButtonText(): string {
     if (
       this.streckengrafikDisplayElementService.isFilterStreckengrafikTimeNotFocusNorEnabled()
     ) {
-      return "\u{2610} Zeit";
+      return `\u{2610} ${$localize`:@@app.streckengrafik.components.time:Time`}`;
     }
-    return "\u{2611} Zeit";
+    return `\u{2611} ${$localize`:@@app.streckengrafik.components.time:Time`}`;
   }
 
   getNameButtonText(): string {
     if (
       this.streckengrafikDisplayElementService.isFilterStreckengrafikNameNotFocusNorEnabled()
     ) {
-      return "\u{2610} Name";
+      return `\u{2610} ${$localize`:@@app.streckengrafik.components.name:Name`}`;
     }
-    return "\u{2611} Name";
+    return `\u{2611} ${$localize`:@@app.streckengrafik.components.name:Name`}`;
   }
 
   getZoomButtonClassTag(tag: string, zoomFactor: number): string {

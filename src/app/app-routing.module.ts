@@ -24,32 +24,32 @@ const routes: Routes = [
   {
     path: "404",
     component: ErrorViewComponent,
-    data: {error: "Die gesuchte Seite wurde nicht gefunden."},
+    data: {error: $localize`:@@app-routing.module.path.404:The page you were looking for was not found.`},
   },
   {
     path: "401",
     component: ErrorViewComponent,
     data: {
-      error: "Sie sind nicht autorisiert, bitte laden Sie die Seite neu.",
+      error: $localize`:@@app-routing.module.path.401:You are not authorized, please reload the page.`,
     },
   },
   {
     path: "403",
     component: ErrorViewComponent,
-    data: {error: "Sie sind nicht berechtigt diese Aktion durchzuführen."},
+    data: {error: $localize`:@@app-routing.module.path.403:You are not authorized to perform this action.`},
   },
   {
     path: "409",
     component: ErrorViewComponent,
     data: {
       error:
-        "Es gab einen Konflikt bei der Ausführung Ihrer Aktion, bitte versuchen Sie es erneut.",
+        $localize`:@@app-routing.module.path.409:There was a conflict while executing your action, please try again.`,
     },
   },
   {
     path: "error",
     component: ErrorViewComponent,
-    data: {error: "Es ist ein Fehler aufgetreten."},
+    data: {error: $localize`:@@app-routing.module.path.error:An error has occurred.`},
   },
   {path: "**", redirectTo: "/404"},
 ];

@@ -10,7 +10,7 @@
       placeholder="Name"
     />
     <sbb-error *ngIf="model.getControl('name').errors?.required"
-      >Pflichtfeld</sbb-error
+      >{{ 'app.view.dialogs.filterable-labels-dialog.filterable-labels-form.mandatory-field' | translate }}</sbb-error
     >
   </sbb-form-field>
 </div>

@@ -74,12 +74,9 @@ export class EditorEditToolsViewComponent implements OnDestroy {
   }
 
   onClearAllFiltered() {
-    const dialogTitle = "Löschen";
-    const dialogContent =
-      "Sollen alle nicht sichtbare Elemene aus der Netzgrafik definitiv gelöscht werden?";
     const confirmationDialogParamter = new ConfirmationDialogParameter(
-      dialogTitle,
-      dialogContent,
+      $localize`:@@app.view.editor-edit-tools-view-component.delete:Delete`,
+      $localize`:@@app.view.editor-edit-tools-view-component.on-clear-delete-all-non-visible-elements:Should all non-visible elements be permanently deleted from the netzgrafik?`,
     );
     this.uiInteractionService
       .showConfirmationDiagramDialog(confirmationDialogParamter)
@@ -93,12 +90,9 @@ export class EditorEditToolsViewComponent implements OnDestroy {
   }
 
   onClear() {
-    const dialogTitle = "Löschen";
-    const dialogContent =
-      "Sollen alle sichtbare Elemene aus der Netzgrafik definitiv gelöscht werden?";
     const confirmationDialogParamter = new ConfirmationDialogParameter(
-      dialogTitle,
-      dialogContent,
+      $localize`:@@app.view.editor-edit-tools-view-component.delete:Delete`,
+      $localize`:@@app.view.editor-edit-tools-view-component.on-clear-delete-all-visible-elements:Should all visible elements be permanently deleted from the netzgrafik?`,
     );
     this.uiInteractionService
       .showConfirmationDiagramDialog(confirmationDialogParamter)
@@ -112,12 +106,9 @@ export class EditorEditToolsViewComponent implements OnDestroy {
   }
 
   onClearAllTrainruns() {
-    const dialogTitle = "Löschen";
-    const dialogContent =
-      "Sollen alle sichtbare Züge definitiv gelöscht werden?";
     const confirmationDialogParamter = new ConfirmationDialogParameter(
-      dialogTitle,
-      dialogContent,
+      $localize`:@@app.view.editor-edit-tools-view-component.delete:Delete`,
+      $localize`:@@app.view.editor-edit-tools-view-component.on-clear-delete-all-visible-trainruns:Should all visible trainruns be permanently deleted from the netzgrafik?`,
     );
     this.uiInteractionService
       .showConfirmationDiagramDialog(confirmationDialogParamter)
@@ -129,12 +120,9 @@ export class EditorEditToolsViewComponent implements OnDestroy {
   }
 
   onClearAllNotes() {
-    const dialogTitle = "Löschen";
-    const dialogContent =
-      "Sollen alle sichtbare Kommentare definitiv gelöscht werden?";
     const confirmationDialogParamter = new ConfirmationDialogParameter(
-      dialogTitle,
-      dialogContent,
+      $localize`:@@app.view.editor-edit-tools-view-component.delete:Delete`,
+      $localize`:@@app.view.editor-edit-tools-view-component.on-clear-delete-all-visible-notes:Should all visible notes be permanently deleted from the netzgrafik?`,
     );
     this.uiInteractionService
       .showConfirmationDiagramDialog(confirmationDialogParamter)

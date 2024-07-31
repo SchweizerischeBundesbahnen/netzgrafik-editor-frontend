@@ -165,9 +165,9 @@ export class FilterableLabelFilterComponent implements OnInit, OnDestroy {
         (filterLabel) => filterLabel === labelObject.getId(),
       ) !== undefined
     ) {
-      return labelObject.getLabel() + ": einblenden";
+      return labelObject.getLabel() + ": " + $localize`:@@app.view.editor-filter-view.filterable-label-filter.show:show`;
     }
-    return labelObject.getLabel() + ": ausblenden";
+    return labelObject.getLabel() + ": " + $localize`:@@app.view.editor-filter-view.filterable-label-filter.hide:hide`;
   }
 
   isFilteringLabels(): boolean {

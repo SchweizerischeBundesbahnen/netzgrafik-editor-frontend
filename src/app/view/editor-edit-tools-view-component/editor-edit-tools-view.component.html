@@ -1,27 +1,27 @@
-<h2 class="SummaryTitle">Bearbeiten</h2>
+<h2 class="SummaryTitle">{{ 'app.view.editor-edit-tools-view-component.edit' | translate }}</h2>
 <sbb-accordion [multi]="false">
   <sbb-expansion-panel
     [expanded]="false"
     [hideToggle]="false"
     [disabled]="false"
   >
-    <sbb-expansion-panel-header> Filterbare Labels </sbb-expansion-panel-header>
+    <sbb-expansion-panel-header>{{ 'app.view.editor-edit-tools-view-component.filterable-labels' | translate }}</sbb-expansion-panel-header>
     <sbb-accordion [multi]="false">
       <sbb-expansion-panel [expanded]="true">
-        <sbb-expansion-panel-header> Züge </sbb-expansion-panel-header>
+        <sbb-expansion-panel-header>{{ 'app.view.editor-edit-tools-view-component.trainruns' | translate }}</sbb-expansion-panel-header>
         <sbb-label-drop-list-component
           [componentLabelRef]="'Trainrun'"
         ></sbb-label-drop-list-component>
       </sbb-expansion-panel>
       <sbb-expansion-panel [expanded]="false">
-        <sbb-expansion-panel-header> Knoten </sbb-expansion-panel-header>
+        <sbb-expansion-panel-header>{{ 'app.view.editor-edit-tools-view-component.nodes' | translate }}</sbb-expansion-panel-header>
         <sbb-label-drop-list-component
           [componentLabelRef]="'Node'"
         ></sbb-label-drop-list-component>
       </sbb-expansion-panel>
 
       <sbb-expansion-panel [expanded]="false">
-        <sbb-expansion-panel-header> Kommentare </sbb-expansion-panel-header>
+        <sbb-expansion-panel-header>{{ 'app.view.editor-edit-tools-view-component.notes' | translate }}</sbb-expansion-panel-header>
         <sbb-label-drop-list-component
           [componentLabelRef]="'Note'"
         ></sbb-label-drop-list-component>
@@ -30,9 +30,7 @@
   </sbb-expansion-panel>
 
   <sbb-expansion-panel [expanded]="true">
-    <sbb-expansion-panel-header>
-      Netzgrafik - Löschen
-    </sbb-expansion-panel-header>
+    <sbb-expansion-panel-header>{{ 'app.view.editor-edit-tools-view-component.delete-netzgrafik-title' | translate }}</sbb-expansion-panel-header>
 
     <ng-container
       *ngIf="
@@ -41,61 +39,61 @@
       "
     >
       <br />
-      <sbb-label>Nicht sichtbare Elemente</sbb-label>
+      <sbb-label>{{ 'app.view.editor-edit-tools-view-component.non-visible-elements' | translate }}</sbb-label>
       <br />
       <button
         (click)="onClearAllFiltered()"
-        title="Alle nicht sichtbare Elemente, wie Knoten, Züge und Kommentare löschen"
+        [title]="'app.view.editor-edit-tools-view-component.delete-all-non-visible-elements-tooltip' | translate"
         class="TrainrunDialog EditorToolButton"
       >
         <sbb-icon svgIcon="bucket-foam-broom-small"></sbb-icon>
       </button>
-      Alle nicht sichtbare Elemente löschen
+      {{ 'app.view.editor-edit-tools-view-component.delete-all-non-visible-elements' | translate }}
       <br />
     </ng-container>
     <br />
-    <sbb-label>Sichtbare Elemente</sbb-label>
+    <sbb-label>{{ 'app.view.editor-edit-tools-view-component.visible-elements' | translate }}</sbb-label>
     <br />
     <button
       (click)="onClearAllTrainruns()"
-      title="Alle sichtbare Züge aus Netzgrafik löschen"
+      [title]="'app.view.editor-edit-tools-view-component.delete-all-visible-trainruns-tooltip' | translate"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="trash-small"></sbb-icon>
     </button>
-    Alle sichtbare Züge löschen
+    {{ 'app.view.editor-edit-tools-view-component.delete-all-visible-trainruns' | translate }}
     <br />
     <button
       (click)="onClearAllNotes()"
-      title="Alle sichtbare Kommentare aus Netzgrafik löschen"
+      [title]="'app.view.editor-edit-tools-view-component.delete-all-visible-notes-tooltip' | translate"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="trash-small"></sbb-icon>
     </button>
-    Alle sichtbare Kommentare löschen
+    {{ 'app.view.editor-edit-tools-view-component.delete-all-visible-notes' | translate }}
     <br />
     <button
       (click)="onClear()"
-      title="Alle sichtbare Elemente, wie Knoten, Züge und Kommentare löschen"
+      [title]="'app.view.editor-edit-tools-view-component.delete-all-visible-elements-tooltip' | translate"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="trash-small"></sbb-icon>
     </button>
-    Alle sichtbare Elemente löschen
+    {{ 'app.view.editor-edit-tools-view-component.delete-all-visible-elements' | translate }}
   </sbb-expansion-panel>
   <sbb-expansion-panel [expanded]="false">
     <sbb-expansion-panel-header>
-      Netzgrafik - Zusammenführen
+      {{ 'app.view.editor-edit-tools-view-component.merge-netzgrafik-title' | translate }}
     </sbb-expansion-panel-header>
     <br />
     <button
       (click)="onLoadNetzgrafikToInsertCopieButton()"
-      title="Alle Zugfahrten aus Netzgrafik als Kopie hinzufügen"
+      [title]="'app.view.editor-edit-tools-view-component.add-netzgrafik-as-copy-tooltip' | translate"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="hierarchy-small"></sbb-icon>
     </button>
-    Züge als Kopie einfügen
+    {{ 'app.view.editor-edit-tools-view-component.add-netzgrafik-as-copy' | translate }}
     <input
       hidden
       #netzgrafikMergeAsACopyFileInput
@@ -107,12 +105,12 @@
     <br />
     <button
       (click)="onLoadNetzgrafikToMergeButton()"
-      title="Alle Zugfahrten aus Netzgrafik mittels zusammenführen mergen"
+      [title]="'app.view.editor-edit-tools-view-component.merge-netzgrafik-tooltip' | translate"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="hierarchy-small"></sbb-icon>
     </button>
-    Züge durch Zusammenführen einfügen
+    {{ 'app.view.editor-edit-tools-view-component.merge-netzgrafik' | translate }}
     <input
       hidden
       #netzgrafikMergeFileInput

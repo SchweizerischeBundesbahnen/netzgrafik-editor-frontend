@@ -15,8 +15,8 @@ export class ConfirmationDialogParameter {
   constructor(
     dialogTitle: string,
     dialogContent: string,
-    dialogConfirmationButtonLabel = "Ja",
-    dialogAbortButtonLabel = "Nein",
+    dialogConfirmationButtonLabel = $localize`:@@app.view.dialogs.confirmation-dialog.confirmation-default:Yes`,
+    dialogAbortButtonLabel = $localize`:@@app.view.dialogs.confirmation-dialog.abort-default:No`,
   ) {
     this.dialogTitle = dialogTitle;
     this.dialogContent = dialogContent;
