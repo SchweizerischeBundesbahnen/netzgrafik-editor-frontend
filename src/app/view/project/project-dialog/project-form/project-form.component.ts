@@ -31,7 +31,7 @@ export class ProjectFormComponent implements OnInit {
     document.getElementById("userWriteInput").dispatchEvent(keyboardEvent);
   }
 
-  onLabelsFocusoutReade() {
+  onLabelsFocusoutRead() {
     const keyboardEvent = new KeyboardEvent("keydown", {
       code: "Enter",
       key: "Enter",
@@ -52,7 +52,7 @@ export const userIdsAsEmailValidator = (control: UntypedFormControl) => {
   // email adresse validator: regex to match emails using the expression
   const invalidEmailPattern = userIds.filter((id) => {
     const retVal =
-      id.match(/^([a-z0-9_\\.-]+)@([\da-z\\.-]+)\.([a-z\\.]{2,6})|(u|ue|e)\d+$/);
+      id.match(/^([a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*)|(u|ue|e)\d+$/);
     if (retVal === null) {
       return true;
     }

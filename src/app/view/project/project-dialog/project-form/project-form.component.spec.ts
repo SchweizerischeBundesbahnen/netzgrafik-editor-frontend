@@ -65,15 +65,7 @@ describe("ProjectFormComponent", () => {
     const invalidEMailExamples = [
       "u12345z",
       "U123456",
-      "Franz@nix.com",
       "name.vorname.vorname2#mail.domain.ch",
-      "Adrian@ai.org",
-      "aDrian@ai.org",
-      "ADRIAN@AI.ORG",
-      "adrian@AI.ORG",
-      "adrian@ai.ORG",
-      "adrian@AI.org",
-      "adrian@AI.orG",
       "a",
       "u",
       "ue",
@@ -94,7 +86,15 @@ describe("ProjectFormComponent", () => {
       "1234@x.org",
       "x@1234.org",
       "1234@1234.org",
-      "123a4@1234.org"];
+      "123a4@1234.org",
+      "Franz@nix.com",
+      "Adrian@ai.org",
+      "aDrian@ai.org",
+      "ADRIAN@AI.ORG",
+      "adrian@AI.ORG",
+      "adrian@ai.ORG",
+      "adrian@AI.org",
+      "adrian@AI.orG"];
 
     const test = new UntypedFormControl();
     test.setValue(validEMailExamples);
