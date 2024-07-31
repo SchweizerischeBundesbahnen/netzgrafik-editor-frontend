@@ -27,9 +27,7 @@
   </sbb-form-field>
   <ng-template #userTooltip>
     <sbb-tooltip>
-      Benutzer müssen mit ihrer U/E-Nummer angegeben werden (bsp. u123456
-      e654321). Eingabe pro Nummer jeweils mit 'Enter' bestätigen.
-      Kleinschreibung beachten!
+      Benutzer müssen mit ihrer E-Mail angegeben werden. Eingabe pro E-Mail jeweils mit 'Enter' bestätigen.
     </sbb-tooltip>
   </ng-template>
   <sbb-form-field class="sbb-form-field-long">
@@ -53,9 +51,9 @@
         [sbbChipInputSeparatorKeyCodes]="separatorKeysCodes"
       />
     </sbb-chip-list>
-    <sbb-error *ngIf="model.getControl('writeUsers').errors?.invalidUserIds">
-      Ungültige Werte:
-      {{ model.getControl("writeUsers").errors?.invalidUserIds }}
+    <sbb-error *ngIf="model.getControl('writeUsers').errors?.invalidUserIdAsEmails">
+      Ungültige Werte (keine E-Mail Adresse):
+      {{ model.getControl("writeUsers").errors?.invalidUserIdAsEmails }}
     </sbb-error>
   </sbb-form-field>
   <sbb-form-field class="sbb-form-field-long">
@@ -65,7 +63,7 @@
     </sbb-label>
     <sbb-chip-list
       [formControl]="model.getControl('readUsers')"
-      (focusout)="onLabelsFocusoutReade()"
+      (focusout)="onLabelsFocusoutRead()"
     >
       <sbb-chip
         *ngFor="let element of model.getControl('readUsers').value"
@@ -80,9 +78,9 @@
         [sbbChipInputSeparatorKeyCodes]="separatorKeysCodes"
       />
     </sbb-chip-list>
-    <sbb-error *ngIf="model.getControl('readUsers').errors?.invalidUserIds">
-      Ungültige Werte:
-      {{ model.getControl("readUsers").errors?.invalidUserIds }}
+    <sbb-error *ngIf="model.getControl('readUsers').errors?.invalidUserIdAsEmails">
+      Ungültige Werte (keine E-Mail Adresse):
+      {{ model.getControl("readUsers").errors?.invalidUserIdAsEmails }}
     </sbb-error>
   </sbb-form-field>
 </div>

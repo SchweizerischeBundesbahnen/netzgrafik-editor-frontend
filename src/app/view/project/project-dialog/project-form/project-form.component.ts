@@ -15,8 +15,8 @@ export class ProjectFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.model.registerValidator("name", Validators.required);
-    this.model.registerValidator("writeUsers", userIdsValidator);
-    this.model.registerValidator("readUsers", userIdsValidator);
+    this.model.registerValidator("writeUsers", userIdsAsEmailValidator);
+    this.model.registerValidator("readUsers", userIdsAsEmailValidator);
   }
 
   onLabelsFocusoutWrite() {
@@ -31,7 +31,7 @@ export class ProjectFormComponent implements OnInit {
     document.getElementById("userWriteInput").dispatchEvent(keyboardEvent);
   }
 
-  onLabelsFocusoutReade() {
+  onLabelsFocusoutRead() {
     const keyboardEvent = new KeyboardEvent("keydown", {
       code: "Enter",
       key: "Enter",
@@ -44,17 +44,25 @@ export class ProjectFormComponent implements OnInit {
   }
 }
 
-const userIdsValidator = (control: UntypedFormControl) => {
+export const userIdsAsEmailValidator = (control: UntypedFormControl) => {
   if (!control) {
     return null;
   }
   const userIds: string[] = control.value;
-  const invalidIds = userIds.filter((id) => !id.match(/^(u|ue|e)\d+$/));
-  if (invalidIds.length === 0) {
+  // email adresse validator: regex to match emails using the expression
+  const invalidEmailPattern = userIds.filter((id) => {
+    const retVal =
+      id.match(/^([a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*)|(u|ue|e)\d+$/);
+    if (retVal === null) {
+      return true;
+    }
+    return retVal[0] !== id;
+  });
+
+  if (invalidEmailPattern.length === 0) {
     return null;
   }
-
-  return {invalidUserIds: invalidIds.join(", ")};
+  return {invalidUserIdAsEmails: invalidEmailPattern.join(", ")};
 };
 
 export interface ProjectFormComponentModel {
