@@ -48,6 +48,10 @@
         "1-fitting-connection": "1 fitting connection",
         "n-fitting-connections": "{$number} fitting connections"
       },
+      "perlenkette-section": {
+        "propagate-times-upwards": "Propagate times upwards",
+        "propagate-times-downwards": "Propagate times downwards"
+      },
       "show-only-closed-locks": "Show only closed locks",
       "show-all-locks": "Show all locks"
     },

@@ -581,7 +581,7 @@
               tabindex="-1"
               mode="icon"
               (click)="onPropagateTimeLeft($event)"
-              title="Zeiten nach oben propagieren"
+              [title]="'app.perlenkette.perlenkette-section.propagate-times-upwards' | translate"
             >
               <div>
                 <sbb-icon
@@ -598,7 +598,7 @@
               tabindex="-1"
               mode="icon"
               (click)="onPropagateTimeRight($event)"
-              title="Zeiten nach unten propagieren"
+              [title]="'app.perlenkette.perlenkette-section.propagate-times-backwards' | translate"
             >
               <div>
                 <sbb-icon

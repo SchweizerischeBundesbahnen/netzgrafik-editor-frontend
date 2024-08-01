@@ -48,6 +48,10 @@
         "1-fitting-connection": "1 passender Anschluss",
         "n-fitting-connections": "{$number} passende Anschlüsse"
       },
+      "perlenkette-section": {
+        "propagate-times-upwards": "Zeiten nach oben propagieren",
+        "propagate-times-downwards": "Zeiten nach unten propagieren"
+      },
       "show-only-closed-locks": "Zeige nur geschlossene Schlösser",
       "show-all-locks": "Zeige alle Schlösser"
     },
