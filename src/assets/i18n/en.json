@@ -638,7 +638,7 @@
   "sbbSidebarExpand": "Expand",
   "sbbSidebarCloseSidebar": "Close Sidebar",
   "sbbSidebarOpenSidebar": "Open Sidebar",
-  "sbbTextareaCounterText": "{$number} characters remaining",
+  "sbbTextareaCounterText": "{$PH} characters remaining",
   "sbbUsermenuLogin": "Login",
-  "sbbUsermenuOpenPanel": "Logged in as {$name}. Click or press enter to open user menu."
+  "sbbUsermenuOpenPanel": "Logged in as {$PH}. Click or press enter to open user menu."
 }
