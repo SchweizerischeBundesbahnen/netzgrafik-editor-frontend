@@ -381,6 +381,8 @@
         "reset-background-color-to-default": "Reset background color to default",
         "background-color-black": "Background color (black)",
         "editor": "Editor",
+        "useDefaultBrowserColorTheme": "Use the default browser color theme.",
+        "defaultBrowserColorTheme": "Default browser color theme",
         "travel-time-presetting-default": "Travel time presetting (heuristics)",
         "graphicTimetable": "Graphic timetable",
         "axis-scaling-distance": "Axis scaling (distance)",
