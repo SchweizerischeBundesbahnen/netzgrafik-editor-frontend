@@ -178,46 +178,25 @@ export class TrainrunSection {
     if (!time?.timeFormatter?.stylePattern) {
       return undefined;
     }
-    const stylePattern = time.timeFormatter.stylePattern;
-    let formattedText = "";
-    const consecutiveTimePatternHHMMSS = "{{consecutiveTime}}.format(HH:mm:ss)";
-    const consecutiveTimePatternHHMM = "{{consecutiveTime}}.format(HH:mm)";
-    const consecutiveTimePattern = "{{consecutiveTime}}";
-    const timePatternHHMMSS = "{{time}}.format(HH:mm:ss)";
-    const timePatternHHMM = "{{time}}.format(HH:mm)";
-    const timePattern = "{{time}}";
 
     const consecutiveTimeDate = new Date(null);
     consecutiveTimeDate.setSeconds((time.consecutiveTime + offset) * 60);
     const timeDate = new Date(null);
     timeDate.setSeconds(((time.time + offset + 24 * 60) % 60) * 60);
 
-    formattedText = stylePattern;
-    formattedText = formattedText.replace(
-      consecutiveTimePatternHHMMSS,
-      formatDate(consecutiveTimeDate.toISOString(), "HH:mm:ss", "en-US", "UTC"),
-    );
-    formattedText = formattedText.replace(
-      consecutiveTimePatternHHMM,
-      formatDate(consecutiveTimeDate.toISOString(), "HH:mm", "en-US", "UTC"),
-    );
-    formattedText = formattedText.replace(
-      consecutiveTimePattern,
-      "" + time.consecutiveTime,
-    );
+    const patterns = {
+      "{{consecutiveTime}}.format(HH:mm:ss)": formatDate(consecutiveTimeDate.toISOString(), "HH:mm:ss", "en-US", "UTC"),
+      "{{consecutiveTime}}.format(HH:mm)": formatDate(consecutiveTimeDate.toISOString(), "HH:mm", "en-US", "UTC"),
+      "{{consecutiveTime}}": "" + time.consecutiveTime,
+      "{{time}}.format(HH:mm:ss)": formatDate(timeDate.toISOString(), "HH:mm:ss", "en-US", "UTC"),
+      "{{time}}.format(HH:mm)": formatDate(timeDate.toISOString(), "HH:mm", "en-US", "UTC"),
+      "{{time}}": "" + ((time.time + offset + 24 * 60) % 60),
+    };
 
-    formattedText = formattedText.replace(
-      timePatternHHMMSS,
-      formatDate(timeDate.toISOString(), "HH:mm:ss", "en-US", "UTC"),
-    );
-    formattedText = formattedText.replace(
-      timePatternHHMM,
-      formatDate(timeDate.toISOString(), "HH:mm", "en-US", "UTC"),
-    );
-    formattedText = formattedText.replace(
-      timePattern,
-      "" + ((time.time + offset + 24 * 60) % 60),
-    );
+    let formattedText = time.timeFormatter.stylePattern;
+    for (const pattern in patterns) {
+      formattedText = formattedText.replace(pattern, patterns[pattern]);
+    }
 
     return formattedText;
   }
