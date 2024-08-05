@@ -1,7 +1,6 @@
 import {NgModule, Injector, DoBootstrap} from "@angular/core";
 import {NgxEditorModule} from "ngx-editor";
 import {BrowserModule} from "@angular/platform-browser";
-import {createCustomElement} from "@angular/elements";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {OAuthModule} from "angular-oauth2-oidc";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -245,8 +244,9 @@ export class AppModule implements DoBootstrap {
 
   ngDoBootstrap() {
     if (environment.customElement) {
-      const element = createCustomElement(AppComponent, {injector: this.injector});
-      customElements.define("sbb-root", element);
+      //const element = createCustomElement(AppComponent, {injector: this.injector});
+      //customElements.define("sbb-root", element);
+      console.log("environment.customElement not supported");
     }
   }
 }
