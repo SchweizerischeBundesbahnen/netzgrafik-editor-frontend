@@ -34,7 +34,19 @@ export class AppComponent {
       locale: "de",
       label: "🇩🇪 Deutsch",
       order: 2
+    },
+    /*
+    {
+      locale: "fr",
+      label: "🇫🇷 Français",
+      order: 3
+    },
+    {
+      locale: "it",
+      label: "🇮🇹 Italiano",
+      order: 4
     }
+    */
   ];
 
   get userName() {
