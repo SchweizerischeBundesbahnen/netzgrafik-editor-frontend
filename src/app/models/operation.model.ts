@@ -1,108 +1,95 @@
-import {Label} from "./label.model";
-import {Node} from "./node.model";
-import {Trainrun} from "./trainrun.model";
-import {TrainrunSection} from "./trainrunsection.model";
+import { Node } from "./node.model";
+import { Trainrun } from "./trainrun.model";
+import { TrainrunSection } from "./trainrunsection.model";
 
 enum OperationType {
   create = "create",
   update = "update",
-  delete = "delete"
+  delete = "delete",
 }
 
-export abstract class Operation {
+abstract class Operation<T> {
   readonly type: OperationType;
+  readonly payload: T;
+  readonly param: any;
 
-  constructor(type: OperationType) {
+  constructor(type: OperationType, payload: T, param: any) {
     this.type = type;
+    this.payload = payload;
+    this.param = param;
   }
 }
 
-export class CreateTrainrunOperation extends Operation {
-  readonly trainrunSection: TrainrunSection;
-
-  constructor(trainrunSection: TrainrunSection) {
-    super(OperationType.create);
-    this.trainrunSection = trainrunSection;
+class CreateTrainrunOperation extends Operation<Trainrun> {
+  constructor(trainrun: Trainrun, param: any = null) {
+    super(OperationType.create, trainrun, param);
   }
 }
 
-export class UpdateTrainrunSectionsOperation extends Operation {
-  readonly trainrunSections: TrainrunSection[];
-
-  constructor(trainrunSections: TrainrunSection[]) {
-    super(OperationType.update);
-    this.trainrunSections = trainrunSections;
+class UpdateTrainrunOperation extends Operation<Trainrun> {
+  constructor(trainrun: Trainrun, param: any = null) {
+    super(OperationType.update, trainrun, param);
   }
 }
 
-export class DeleteTrainrunOperation extends Operation {
-  readonly trainrun: Trainrun;
-
-  constructor(trainrun: Trainrun) {
-    super(OperationType.delete);
-    this.trainrun = trainrun;
+class DeleteTrainrunOperation extends Operation<Trainrun> {
+  constructor(trainrun: Trainrun, param: any = null) {
+    super(OperationType.delete, trainrun, param);
   }
 }
 
-export class CreateLabelOperation extends Operation {
-  readonly label: Label;
-
-  constructor(label: Label) {
-    super(OperationType.create);
-    this.label = label;
+class CreateTrainrunSectionOperation extends Operation<TrainrunSection> {
+  constructor(trainrunSection: TrainrunSection, param: any = null) {
+    super(OperationType.create, trainrunSection, param);
   }
 }
 
-export class UpdateLabelOperation extends Operation {
-  readonly label: Label;
-
-  constructor(label: Label) {
-    super(OperationType.update);
-    this.label = label;
+class UpdateTrainrunSectionOperation extends Operation<TrainrunSection> {
+  constructor(trainrunSection: TrainrunSection, param: any = null) {
+    super(OperationType.update, trainrunSection, param);
   }
 }
 
-export class DeleteLabelOperation extends Operation {
-  readonly label: Label;
-
-  constructor(label: Label) {
-    super(OperationType.delete);
-    this.label = label;
+class UpdateTrainrunSectionsOperation extends Operation<TrainrunSection[]> {
+  constructor(trainrunSections: TrainrunSection[], param: any = null) {
+    super(OperationType.update, trainrunSections, param);
   }
 }
 
-export class CreateNodeOperation extends Operation {
-  readonly node: Node;
-
-  constructor(node: Node) {
-    super(OperationType.create);
-    this.node = node;
+class CreateNodeOperation extends Operation<Node> {
+  constructor(node: Node, param: any = null) {
+    super(OperationType.create, node, param);
   }
 }
 
-export class UpdateNodeOperation extends Operation {
-  readonly node: Node;
-
-  constructor(node: Node) {
-    super(OperationType.update);
-    this.node = node;
+class UpdateNodeOperation extends Operation<Node> {
+  constructor(node: Node, param: any = null) {
+    super(OperationType.update, node, param);
   }
 }
 
-export class DeleteNodeOperation extends Operation {
-  readonly node: Node;
-
-  constructor(node: Node) {
-    super(OperationType.delete);
-    this.node = node;
+class DeleteNodeOperation extends Operation<Node> {
+  constructor(node: Node, param: any = null) {
+    super(OperationType.delete, node, param);
   }
 }
 
-export class DeleteNodesOperation extends Operation {
-  readonly nodes: Node[];
-
-  constructor(nodes: Node[]) {
-    super(OperationType.delete);
-    this.nodes = nodes;
+class DeleteNodesOperation extends Operation<Node[]> {
+  constructor(nodes: Node[], param: any = null) {
+    super(OperationType.delete, nodes, param);
   }
 }
+
+export {
+  Operation,
+  CreateTrainrunOperation,
+  UpdateTrainrunOperation,
+  DeleteTrainrunOperation,
+  CreateTrainrunSectionOperation,
+  UpdateTrainrunSectionOperation,
+  UpdateTrainrunSectionsOperation,
+  CreateNodeOperation,
+  UpdateNodeOperation,
+  DeleteNodeOperation,
+  DeleteNodesOperation,
+};
