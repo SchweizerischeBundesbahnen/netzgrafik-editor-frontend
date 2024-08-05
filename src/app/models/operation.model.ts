@@ -1,6 +1,6 @@
-import { Node } from "./node.model";
-import { Trainrun } from "./trainrun.model";
-import { TrainrunSection } from "./trainrunsection.model";
+import {Node} from "./node.model";
+import {Trainrun} from "./trainrun.model";
+import {TrainrunSection} from "./trainrunsection.model";
 
 enum OperationType {
   create = "create",
