@@ -247,7 +247,6 @@ export class AppModule implements DoBootstrap {
     if (environment.customElement) {
       const element = createCustomElement(AppComponent, {injector: this.injector});
       customElements.define("sbb-root", element);
-      console.log("environment.customElement not supported");
     }
   }
 }
