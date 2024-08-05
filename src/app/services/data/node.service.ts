@@ -31,7 +31,7 @@ import {LabelService} from "./label.serivce";
 import {FilterService} from "../ui/filter.service";
 import {ConnectionDto} from "../../data-structures/technical.data.structures";
 import {TrainrunsectionValidator} from "../util/trainrunsection.validator";
-import {CreateNodeOperation, DeleteNodeOperation, DeleteNodesOperation, Operation} from "../../models/operation.model";
+import {CreateNodeOperation, DeleteNodeOperation, DeleteNodesOperation, Operation, UpdateNodeOperation, UpdateTrainrunSectionsOperation} from "../../models/operation.model";
 
 @Injectable({
   providedIn: "root",
@@ -46,7 +46,7 @@ export class NodeService implements OnDestroy {
   connectionsSubject = new BehaviorSubject<Connection[]>([]);
   readonly connections = this.connectionsSubject.asObservable();
 
-  readonly operation = new EventEmitter<Operation>();
+  readonly operation = new EventEmitter<Operation<any>>();
 
   private dataService: DataService = null;
   private destroyed = new Subject<void>();
@@ -306,7 +306,6 @@ export class NodeService implements OnDestroy {
       }
     });
     this.nodesUpdated();
-    // this.operation.emit(new DeleteNodesOperation(nodes));
   }
 
   deleteAllNonVisibleNodes() {
@@ -330,7 +329,6 @@ export class NodeService implements OnDestroy {
       }
     });
     this.nodesUpdated();
-    // this.operation.emit(new DeleteNodesOperation(nodes));
   }
 
   moveSelectedNodes(
@@ -603,6 +601,7 @@ export class NodeService implements OnDestroy {
     TransitionValidator.validateTransition(node, transitionId);
     this.transitionsUpdated();
     this.nodesUpdated();
+    this.operation.emit(new UpdateTrainrunSectionsOperation([trainrunSections.trainrunSection1, trainrunSections.trainrunSection2]));
   }
 
   checkExistsNoCycleTrainrunAfterFreePortsConnecting(
@@ -968,23 +967,19 @@ export class NodeService implements OnDestroy {
       node.setConnectionTime(stammdaten.getConnectionTime());
     }
     this.nodesUpdated();
+    this.operation.emit(new UpdateNodeOperation(node));
   }
 
   changeNodeFullName(nodeId: number, name: string) {
     this.getNodeFromId(nodeId).setFullName(name);
     this.nodesUpdated();
+    this.operation.emit(new UpdateNodeOperation(this.getNodeFromId(nodeId)));
   }
 
   changeConnectionTime(nodeId: number, connectionTime: number) {
     this.getNodeFromId(nodeId).setConnectionTime(connectionTime);
     this.nodesUpdated();
-  }
-
-  changeLabelsIfNotEqualsLength(nodeId: number, labels: string[]) {
-    const labelIds = this.getNodeFromId(nodeId).getLabelIds();
-    if (labelIds.length !== labels.length) {
-      this.changeLabels(nodeId, labels);
-    }
+    this.operation.emit(new UpdateNodeOperation(this.getNodeFromId(nodeId)));
   }
 
   changeLabels(nodeId: number, labels: string[]) {
@@ -1002,6 +997,9 @@ export class NodeService implements OnDestroy {
     this.filterService.clearDeletetFilterNodeLabels(deletedLabelIds);
     node.setLabelIds(labelIds);
     this.nodesUpdated();
+    if (uniqueLabels.length === labels.length) {
+      this.operation.emit(new UpdateNodeOperation(node, uniqueLabels));
+    }
   }
 
   visibleNodesDeleteLabel(labelRef: string) {
@@ -1286,6 +1284,7 @@ export class NodeService implements OnDestroy {
         );
       });
       node.reorderAllPorts();
+      this.operation.emit(new UpdateNodeOperation(node));
     }
     node.updateTransitionsRouting();
     node.updateConnectionsRouting();
