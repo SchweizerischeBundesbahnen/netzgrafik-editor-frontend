@@ -30,9 +30,10 @@
       class="language-selector"
       (click)="$event.stopPropagation()"
     >
-      <ng-container *ngFor="let loc of allLocals">
-      <sbb-option [value]="loc.locale">{{loc.label}}</sbb-option>
-      </ng-container>
+      <sbb-option value="en">🇬🇧 English</sbb-option>
+      <sbb-option value="de">🇩🇪 Deutsch</sbb-option>
+      <!-- <sbb-option value="fr">🇫🇷 Français</sbb-option> -->
+      <!-- <sbb-option value="it">🇮🇹 Italiano</sbb-option> -->
     </sbb-select>
     <hr>
     <button sbb-menu-item (click)="logout()">

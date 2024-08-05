@@ -24,31 +24,6 @@ export class AppComponent {
 
   projectInMenu: Observable<ProjectDto | null>;
 
-  allLocals = [
-    {
-      locale: "en",
-      label: "🇬🇧 English",
-      order: 1
-    },
-    {
-      locale: "de",
-      label: "🇩🇪 Deutsch",
-      order: 2
-    },
-    /*
-    {
-      locale: "fr",
-      label: "🇫🇷 Français",
-      order: 3
-    },
-    {
-      locale: "it",
-      label: "🇮🇹 Italiano",
-      order: 4
-    }
-    */
-  ];
-
   get userName() {
     if (this.disableBackend) {
       return undefined;
@@ -70,7 +45,6 @@ export class AppComponent {
     if (!this.disableBackend) {
       this.authenticated = authService.initialized;
     }
-    this.sortAllLocales();
   }
 
   logout() {
@@ -85,7 +59,6 @@ export class AppComponent {
     }
     localStorage.setItem("locale", locale);
     location.reload();
-    this.sortAllLocales();
   }
 
   getCurrentLocale(): string {
@@ -103,11 +76,4 @@ export class AppComponent {
 
   @Output()
   operation: Observable<Operation> = merge(this.trainrunService.operation, this.trainrunSectionService.operation);
-
-  private sortAllLocales() {
-    this.allLocals.sort((a, b) => a.order - b.order);
-    const f = this.allLocals.find(a => a.locale === this.locale);
-    this.allLocals = this.allLocals.filter(a => a.locale !== this.locale);
-    this.allLocals.unshift(f);
-  }
 }
