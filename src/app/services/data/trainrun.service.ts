@@ -529,17 +529,17 @@ export class TrainrunService {
 
   setLabels(trainrunId: number, labels: string[]) {
     const trainrun = this.getTrainrunFromId(trainrunId);
-    const labelIds: number[] = [];
-    labels.forEach((label) => {
-      labelIds.push(
-        this.labelService.getOrCreateLabel(label, LabelRef.Trainrun).getId(),
-      );
-    });
-    const deletetLabelIds = this.labelService.clearLabel(
+
+    // ensure uniqueness of input labels
+    const uniqueLabels = Array.from(new Set(labels));
+    const labelIds = uniqueLabels.map(label =>
+      this.labelService.getOrCreateLabel(label, LabelRef.Trainrun).getId()
+    );
+    const deletedLabelIds = this.labelService.clearLabel(
       this.findClearedLabel(trainrun, labelIds),
       this.makeLabelIDCounterMap(this.getTrainruns()),
     );
-    this.filterService.clearDeletetFilterTrainrunLabels(deletetLabelIds);
+    this.filterService.clearDeletetFilterTrainrunLabels(deletedLabelIds);
     trainrun.setLabelIds(labelIds);
     this.trainrunsUpdated();
   }
