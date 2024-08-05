@@ -22,6 +22,7 @@ import {LabelService} from "../../../services/data/label.serivce";
 import {LabelGroupService} from "../../../services/data/labelgroup.service";
 import {SbbChipEvent, SbbChipInputEvent} from "@sbb-esta/angular/chips";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
+import {environment} from "../../../../environments/environment";
 
 interface NodeProperties {
   nodeId: number;
@@ -56,6 +57,8 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
 
   readonly separatorKeysCodes = [ENTER, COMMA];
   nodeLabelsAutoCompleteOptions: string[] = [];
+
+  readonly disableBackend = environment.disableBackend;
 
   private destroyed = new Subject<void>();
 
