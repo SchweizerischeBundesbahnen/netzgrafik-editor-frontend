@@ -11,9 +11,9 @@
       {{ 'app.user-manual' | translate }}
     </a>
     <sbb-select
-    (selectionChange)="changeLocale($event.value)"
-    [value]="locale"
-    class="language-selector"
+      (selectionChange)="changeLocale($event.value)"
+      [value]="locale"
+      class="language-selector"
     >
       <sbb-option value="en">🇬🇧 English</sbb-option>
       <sbb-option value="de">🇩🇪 Deutsch</sbb-option>
@@ -34,6 +34,19 @@
     <sbb-icon svgIcon="user-small" *sbbIcon></sbb-icon>
   </sbb-usermenu>
   <sbb-menu #menu="sbbMenu">
+    <sbb-select
+      (selectionChange)="changeLocale($event.value)"
+      [value]="locale"
+      class="language-selector language-selector-menu"
+      (click)="$event.stopPropagation()"
+      (keydown)="$event.stopPropagation()"
+    >
+      <sbb-option value="en">🇬🇧 English</sbb-option>
+      <sbb-option value="de">🇩🇪 Deutsch</sbb-option>
+      <!-- <sbb-option value="fr">🇫🇷 Français</sbb-option> -->
+      <!-- <sbb-option value="it">🇮🇹 Italiano</sbb-option> -->
+    </sbb-select>
+    <hr>
     <button sbb-menu-item (click)="logout()">
       <sbb-icon svgIcon="exit-small" class="sbb-icon-fit"></sbb-icon>
       <span>{{ 'app.logout' | translate }}</span>

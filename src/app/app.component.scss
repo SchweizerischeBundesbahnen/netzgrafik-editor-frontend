@@ -75,3 +75,8 @@ input[type=number]::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.sbb-select.language-selector-menu {
+  transform: translate(10px, 1px);
+  width: 95%;
+}
