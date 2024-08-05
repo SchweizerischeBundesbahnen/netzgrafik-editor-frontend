@@ -10,6 +10,16 @@
     >
       {{ 'app.user-manual' | translate }}
     </a>
+    <sbb-select
+      (selectionChange)="changeLocale($event.value)"
+      [value]="locale"
+      class="language-selector"
+    >
+      <sbb-option value="en">🇬🇧 English</sbb-option>
+      <sbb-option value="de">🇩🇪 Deutsch</sbb-option>
+      <!-- <sbb-option value="fr">🇫🇷 Français</sbb-option> -->
+      <!-- <sbb-option value="it">🇮🇹 Italiano</sbb-option> -->
+    </sbb-select>
   </sbb-app-chooser-section>
   <sbb-header-environment class="noprint">{{
     environmentLabel
@@ -27,7 +37,7 @@
     <sbb-select
       (selectionChange)="changeLocale($event.value)"
       [value]="locale"
-      class="language-selector"
+      class="language-selector language-selector-menu"
       (click)="$event.stopPropagation()"
       (keydown)="$event.stopPropagation()"
     >
