@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.7.1] Manually edited version number (preparation automatic release building)
+## 2.7.1 Manually edited version number (preparation automatic release building)
 
 
 ### Bug Fixes
