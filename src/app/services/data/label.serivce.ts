@@ -7,7 +7,6 @@ import {
 } from "../../data-structures/business.data.structures";
 import {Label} from "../../models/label.model";
 import {LabelGroupService} from "./labelgroup.service";
-import {CreateLabelOperation, Operation} from "../../models/operation.model";
 
 @Injectable({
   providedIn: "root",
@@ -16,8 +15,6 @@ export class LabelService implements OnDestroy {
   labelSubject = new BehaviorSubject<Label[]>([]);
   readonly labels = this.labelSubject.asObservable();
   private labelStore: {labels: Label[]} = {labels: []}; // store the data in memory
-
-  readonly operation = new EventEmitter<Operation>();
 
   private destroyed = new Subject<void>();
 
@@ -157,8 +154,6 @@ export class LabelService implements OnDestroy {
     );
     this.labelStore.labels.push(newLabel);
     this.labelUpdated();
-    this.operation.emit(new CreateLabelOperation(newLabel));
-    // console.log(this.labelGroupService.getLabelGroup(newLabel.getLabelGroupId()));
     return newLabel;
   }
 }

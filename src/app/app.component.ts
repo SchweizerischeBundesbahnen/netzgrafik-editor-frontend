@@ -45,7 +45,7 @@ export class AppComponent {
               private trainrunService: TrainrunService,
               private trainrunSectionService: TrainrunSectionService,
               private nodeService: NodeService,
-              private labelService: LabelService) {
+            ) {
     if (!this.disableBackend) {
       this.authenticated = authService.initialized;
     }
@@ -72,10 +72,9 @@ export class AppComponent {
   }
 
   @Output()
-  operation: Observable<Operation> = merge(
+  operation: Observable<Operation<any>> = merge(
     this.trainrunService.operation,
     this.trainrunSectionService.operation,
     this.nodeService.operation,
-    this.labelService.operation,
   );
 }
