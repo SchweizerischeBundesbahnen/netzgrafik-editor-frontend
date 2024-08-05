@@ -92,10 +92,10 @@
       <button
         sbb-secondary-button
         class="sbb-mt-m"
-        title="Verwenden Sie das Standard-Browser-Farbtheme."
+        [title]="'app.view.editor-properties-view-component.useDefaultBrowserColorTheme' | translate"
         (click)="resetLocalStoredColorData()"
       >
-        Standard-Browser-Farbtheme
+        {{ 'app.view.editor-properties-view-component.defaultBrowserColorTheme' | translate }}
       </button>
     </ng-container>
   </sbb-expansion-panel>

@@ -48,6 +48,10 @@
         "1-fitting-connection": "1 fitting connection",
         "n-fitting-connections": "{$number} fitting connections"
       },
+      "perlenkette-section": {
+        "propagate-times-upwards": "Propagate times upwards",
+        "propagate-times-downwards": "Propagate times downwards"
+      },
       "show-only-closed-locks": "Show only closed locks",
       "show-all-locks": "Show all locks"
     },
@@ -377,6 +381,8 @@
         "reset-background-color-to-default": "Reset background color to default",
         "background-color-black": "Background color (black)",
         "editor": "Editor",
+        "useDefaultBrowserColorTheme": "Use the default browser color theme.",
+        "defaultBrowserColorTheme": "Default browser color theme",
         "travel-time-presetting-default": "Travel time presetting (heuristics)",
         "graphicTimetable": "Graphic timetable",
         "axis-scaling-distance": "Axis scaling (distance)",
@@ -634,7 +640,7 @@
   "sbbSidebarExpand": "Expand",
   "sbbSidebarCloseSidebar": "Close Sidebar",
   "sbbSidebarOpenSidebar": "Open Sidebar",
-  "sbbTextareaCounterText": "{$number} characters remaining",
+  "sbbTextareaCounterText": "{$PH} characters remaining",
   "sbbUsermenuLogin": "Login",
-  "sbbUsermenuOpenPanel": "Logged in as {$name}. Click or press enter to open user menu."
+  "sbbUsermenuOpenPanel": "Logged in as {$PH}. Click or press enter to open user menu."
 }
