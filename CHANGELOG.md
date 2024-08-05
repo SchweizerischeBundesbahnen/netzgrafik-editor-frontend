@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.6.2](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/v2.6.1...v2.6.2) (2024-07-31)
+## [2.7.1] Manually edited version number (preparation automatic release building)
 
 
 ### Bug Fixes
