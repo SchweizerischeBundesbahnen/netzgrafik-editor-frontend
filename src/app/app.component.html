@@ -29,6 +29,7 @@
       [value]="locale"
       class="language-selector"
       (click)="$event.stopPropagation()"
+      (keydown)="$event.stopPropagation()"
     >
       <sbb-option value="en">🇬🇧 English</sbb-option>
       <sbb-option value="de">🇩🇪 Deutsch</sbb-option>
