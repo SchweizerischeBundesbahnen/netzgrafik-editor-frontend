@@ -61,10 +61,6 @@ export class AppComponent {
     location.reload();
   }
 
-  getCurrentLocale(): string {
-    return this.locale;
-  }
-
   @Input()
   get netzgrafikDto() {
     return this.dataService.getNetzgrafikDto();
