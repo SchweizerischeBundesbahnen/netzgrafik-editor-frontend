@@ -143,6 +143,7 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
 
   private initializeWithCurrentSelectedTrainrun() {
     this.selectedTrainrun = this.trainrunService.getSelectedTrainrun();
+    if (this.selectedTrainrun === null) return;
     this.trainrunLabels = this.labelService.getTextLabelsFromIds(
       this.selectedTrainrun.getLabelIds(),
     );
