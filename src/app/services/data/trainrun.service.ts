@@ -23,7 +23,7 @@ import {FilterService} from "../ui/filter.service";
 import {Transition} from "../../models/transition.model";
 import {Port} from "../../models/port.model";
 import {Connection} from "../../models/connection.model";
-import {DeleteTrainrunOperation, Operation} from "../../models/operation.model";
+import {CreateTrainrunOperation, DeleteTrainrunOperation, Operation, UpdateTrainrunOperation} from "../../models/operation.model";
 
 @Injectable({
   providedIn: "root",
@@ -35,7 +35,7 @@ export class TrainrunService {
 
   trainrunsStore: { trainruns: Trainrun[] } = {trainruns: []}; // store the data in memory
 
-  readonly operation = new EventEmitter<Operation>();
+  readonly operation = new EventEmitter<Operation<any>>();
 
   private dataService: DataService = null;
   private nodeService: NodeService = null;
@@ -246,6 +246,7 @@ export class TrainrunService {
           targetArrival,
           (60 - targetArrival) % 60,
           ts.getTravelTime(),
+          false, // disable event emission since UpdateTrainrunOperation is emitted below
         );
       });
 
@@ -254,6 +255,7 @@ export class TrainrunService {
     this.trainrunSectionService.trainrunSectionsUpdated();
 
     this.trainrunsUpdated();
+    this.operation.emit(new UpdateTrainrunOperation(trainrun));
     return freqOffset;
   }
 
@@ -261,6 +263,7 @@ export class TrainrunService {
     this.getTrainrunFromId(trainrun.getId()).setTrainrunCategory(category);
     this.nodeService.reorderPortsOnNodesForTrainrun(trainrun);
     this.trainrunsUpdated();
+    this.operation.emit(new UpdateTrainrunOperation(trainrun));
   }
 
   updateTrainrunTimeCategory(
@@ -272,12 +275,14 @@ export class TrainrunService {
     );
     this.nodeService.reorderPortsOnNodesForTrainrun(trainrun);
     this.trainrunsUpdated();
+    this.operation.emit(new UpdateTrainrunOperation(trainrun));
   }
 
   updateTrainrunTitle(trainrun: Trainrun, title: string) {
     this.getTrainrunFromId(trainrun.getId()).setTitle(title);
     this.nodeService.reorderPortsOnNodesForTrainrun(trainrun);
     this.trainrunsUpdated();
+    this.operation.emit(new UpdateTrainrunOperation(trainrun));
   }
 
   getTrainruns(): Trainrun[] {
@@ -505,6 +510,7 @@ export class TrainrunService {
     copiedtrainrun.setTitle(trainrun.getTitle() + postfix);
     copiedtrainrun.setLabelIds(trainrun.getLabelIds());
     this.trainrunsStore.trainruns.push(copiedtrainrun);
+    this.operation.emit(new CreateTrainrunOperation(copiedtrainrun));
     return copiedtrainrun;
   }
 
@@ -542,6 +548,9 @@ export class TrainrunService {
     this.filterService.clearDeletetFilterTrainrunLabels(deletedLabelIds);
     trainrun.setLabelIds(labelIds);
     this.trainrunsUpdated();
+    if (uniqueLabels.length === labels.length) {
+      this.operation.emit(new UpdateTrainrunOperation(trainrun, uniqueLabels));
+    }
   }
 
   trainrunsUpdated() {
