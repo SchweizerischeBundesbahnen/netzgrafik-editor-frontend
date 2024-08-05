@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.7.1 Manually edited version number (preparation automatic release building)
+
+
+### Bug Fixes
+
+* align theme color picker with buttons ([#198](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/198)) ([e3a8798](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/e3a87989ea28a04a4a0bb9cee825825bb1b97d7b))
+
 ## [2.6.0](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/v2.5.0...v2.6.0) (2024-07-22)
 
 
