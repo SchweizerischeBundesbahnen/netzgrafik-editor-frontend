@@ -54,9 +54,6 @@ export class AppComponent {
   }
 
   changeLocale(locale: string) {
-    if (locale === this.locale) {
-      return;
-    }
     localStorage.setItem("locale", locale);
     location.reload();
   }
