@@ -157,7 +157,6 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
 
   // set labels only if any of it has changed
   private checkAndSetLabels() {
-    console.log(this.trainrunLabels);
     if (
       this.trainrunLabels.length !== this.initialTrainrunLabels.length ||
       !this.trainrunLabels.every((label, index) => label === this.initialTrainrunLabels[index])
