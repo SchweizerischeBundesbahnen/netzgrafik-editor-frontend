@@ -31,7 +31,7 @@ import {LabelService} from "./label.serivce";
 import {FilterService} from "../ui/filter.service";
 import {ConnectionDto} from "../../data-structures/technical.data.structures";
 import {TrainrunsectionValidator} from "../util/trainrunsection.validator";
-import {CreateNodeOperation, DeleteNodeOperation, DeleteNodesOperation, Operation, UpdateNodeOperation, UpdateTrainrunSectionsOperation} from "../../models/operation.model";
+import {CreateNodeOperation, DeleteNodeOperation, Operation, UpdateNodeOperation, UpdateTrainrunOperation} from "../../models/operation.model";
 
 @Injectable({
   providedIn: "root",
@@ -601,7 +601,7 @@ export class NodeService implements OnDestroy {
     TransitionValidator.validateTransition(node, transitionId);
     this.transitionsUpdated();
     this.nodesUpdated();
-    this.operation.emit(new UpdateTrainrunSectionsOperation([trainrunSections.trainrunSection1, trainrunSections.trainrunSection2]));
+    this.operation.emit(new UpdateTrainrunOperation(trainrunSections.trainrunSection1.getTrainrun()));
   }
 
   checkExistsNoCycleTrainrunAfterFreePortsConnecting(

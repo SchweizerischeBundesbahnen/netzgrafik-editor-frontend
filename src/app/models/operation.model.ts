@@ -1,6 +1,5 @@
 import {Node} from "./node.model";
 import {Trainrun} from "./trainrun.model";
-import {TrainrunSection} from "./trainrunsection.model";
 
 enum OperationType {
   create = "create",
@@ -10,24 +9,18 @@ enum OperationType {
 
 enum OperationObjectType {
   trainrun = "trainrun",
-  trainrunSection = "trainrunSection",
-  trainrunSections = "trainrunSections",
   node = "node",
-  nodes = "nodes",
 };
 
 abstract class Operation<T> {
   readonly type: OperationType;
   readonly objectType: OperationObjectType;
-
   readonly object: T;
-  readonly param: any;
 
   constructor(type: OperationType, objectType: OperationObjectType, object: T) {
     this.type = type;
     this.objectType = objectType;
     this.object = object;
-    console.log(this);
   }
 }
 
@@ -49,24 +42,6 @@ class DeleteTrainrunOperation extends Operation<Trainrun> {
   }
 }
 
-class CreateTrainrunSectionOperation extends Operation<TrainrunSection> {
-  constructor(trainrunSection: TrainrunSection) {
-    super(OperationType.create, OperationObjectType.trainrunSection, trainrunSection);
-  }
-}
-
-class UpdateTrainrunSectionOperation extends Operation<TrainrunSection> {
-  constructor(trainrunSection: TrainrunSection) {
-    super(OperationType.update, OperationObjectType.trainrunSection, trainrunSection);
-  }
-}
-
-class UpdateTrainrunSectionsOperation extends Operation<TrainrunSection[]> {
-  constructor(trainrunSections: TrainrunSection[]) {
-    super(OperationType.update, OperationObjectType.trainrunSections, trainrunSections);
-  }
-}
-
 class CreateNodeOperation extends Operation<Node> {
   constructor(node: Node) {
     super(OperationType.create, OperationObjectType.node, node);
@@ -85,22 +60,12 @@ class DeleteNodeOperation extends Operation<Node> {
   }
 }
 
-class DeleteNodesOperation extends Operation<Node[]> {
-  constructor(nodes: Node[]) {
-    super(OperationType.delete, OperationObjectType.nodes, nodes);
-  }
-}
-
 export {
   Operation,
   CreateTrainrunOperation,
   UpdateTrainrunOperation,
   DeleteTrainrunOperation,
-  CreateTrainrunSectionOperation,
-  UpdateTrainrunSectionOperation,
-  UpdateTrainrunSectionsOperation,
   CreateNodeOperation,
   UpdateNodeOperation,
   DeleteNodeOperation,
-  DeleteNodesOperation,
 };

@@ -23,10 +23,9 @@ import {takeUntil} from "rxjs/operators";
 import {FilterService} from "../ui/filter.service";
 import {TrainrunSectionNodePair} from "../util/trainrun.iterator";
 import {
-  CreateTrainrunSectionOperation,
+  CreateTrainrunOperation,
   Operation,
-  UpdateTrainrunSectionOperation,
-  UpdateTrainrunSectionsOperation
+  UpdateTrainrunOperation,
 } from "../../models/operation.model";
 
 interface DepartureAndArrivalTimes {
@@ -333,7 +332,7 @@ export class TrainrunSectionService implements OnDestroy {
     const trainrunSection = this.getTrainrunSectionFromId(trs.getId());
     trainrunSection.setNumberOfStops(numberOfStops);
     this.trainrunSectionsUpdated();
-    this.operation.emit(new UpdateTrainrunSectionOperation(trainrunSection));
+    this.operation.emit(new UpdateTrainrunOperation(trainrunSection.getTrainrun()));
   }
 
   updateTrainrunSectionTime(
@@ -358,7 +357,7 @@ export class TrainrunSectionService implements OnDestroy {
     this.nodeService.validateConnections(trainrunSection.getSourceNode());
     this.nodeService.validateConnections(trainrunSection.getTargetNode());
     if (emit) {
-      this.operation.emit(new UpdateTrainrunSectionOperation(trainrunSection));
+      this.operation.emit(new UpdateTrainrunOperation(trainrunSection.getTrainrun()));
     }
   }
 
@@ -720,9 +719,9 @@ export class TrainrunSectionService implements OnDestroy {
     this.trainrunService.trainrunsUpdated();
 
     if (initialTrainrunsLength !== this.trainrunService.trainrunsStore.trainruns.length) {
-      this.operation.emit(new CreateTrainrunSectionOperation(trainrunSection));
+      this.operation.emit(new CreateTrainrunOperation(trainrunSection.getTrainrun()));
     } else {
-      this.operation.emit(new UpdateTrainrunSectionsOperation(this.getAllTrainrunSectionsForTrainrun(trainrunSection.getTrainrunId())));
+      this.operation.emit(new UpdateTrainrunOperation(trainrunSection.getTrainrun()));
     }
   }
 
@@ -812,7 +811,7 @@ export class TrainrunSectionService implements OnDestroy {
       this.nodeService.transitionsUpdated();
       this.trainrunSectionsUpdated();
     }
-    this.operation.emit(new UpdateTrainrunSectionsOperation(this.getTrainrunSections()));
+    this.operation.emit(new UpdateTrainrunOperation(trainrunSection.getTrainrun()));
   }
 
   deleteListOfTrainrunSections(trainrunSections: TrainrunSection[]) {
@@ -869,7 +868,7 @@ export class TrainrunSectionService implements OnDestroy {
       this.trainrunSectionsUpdated();
     }
     if (this.getTrainrunSections().length) {
-      this.operation.emit(new UpdateTrainrunSectionsOperation(this.getTrainrunSections()));
+      this.operation.emit(new UpdateTrainrunOperation(trainrunSection.getTrainrun()));
     }
   }
 
