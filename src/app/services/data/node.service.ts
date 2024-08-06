@@ -31,7 +31,7 @@ import {LabelService} from "./label.serivce";
 import {FilterService} from "../ui/filter.service";
 import {ConnectionDto} from "../../data-structures/technical.data.structures";
 import {TrainrunsectionValidator} from "../util/trainrunsection.validator";
-import {CreateNodeOperation, DeleteNodeOperation, Operation, UpdateNodeOperation, UpdateTrainrunOperation} from "../../models/operation.model";
+import {NodeOperation, Operation, OperationType, TrainrunOperation} from "../../models/operation.model";
 
 @Injectable({
   providedIn: "root",
@@ -275,7 +275,7 @@ export class NodeService implements OnDestroy {
     if (enforceUpdate) {
       this.nodesUpdated();
     }
-    this.operation.emit(new CreateNodeOperation(node));
+    this.operation.emit(new NodeOperation(OperationType.create, node));
     return node;
   }
 
@@ -290,7 +290,7 @@ export class NodeService implements OnDestroy {
     if (enforceUpdate) {
       this.nodesUpdated();
     }
-    this.operation.emit(new DeleteNodeOperation(node));
+    this.operation.emit(new NodeOperation(OperationType.delete, node));
   }
 
   deleteAllVisibleNodes() {
@@ -601,7 +601,7 @@ export class NodeService implements OnDestroy {
     TransitionValidator.validateTransition(node, transitionId);
     this.transitionsUpdated();
     this.nodesUpdated();
-    this.operation.emit(new UpdateTrainrunOperation(trainrunSections.trainrunSection1.getTrainrun()));
+    this.operation.emit(new TrainrunOperation(OperationType.update, trainrunSections.trainrunSection1.getTrainrun()));
   }
 
   checkExistsNoCycleTrainrunAfterFreePortsConnecting(
@@ -967,19 +967,19 @@ export class NodeService implements OnDestroy {
       node.setConnectionTime(stammdaten.getConnectionTime());
     }
     this.nodesUpdated();
-    this.operation.emit(new UpdateNodeOperation(node));
+    this.operation.emit(new NodeOperation(OperationType.update, node));
   }
 
   changeNodeFullName(nodeId: number, name: string) {
     this.getNodeFromId(nodeId).setFullName(name);
     this.nodesUpdated();
-    this.operation.emit(new UpdateNodeOperation(this.getNodeFromId(nodeId)));
+    this.operation.emit(new NodeOperation(OperationType.update, this.getNodeFromId(nodeId)));
   }
 
   changeConnectionTime(nodeId: number, connectionTime: number) {
     this.getNodeFromId(nodeId).setConnectionTime(connectionTime);
     this.nodesUpdated();
-    this.operation.emit(new UpdateNodeOperation(this.getNodeFromId(nodeId)));
+    this.operation.emit(new NodeOperation(OperationType.update, this.getNodeFromId(nodeId)));
   }
 
   changeLabels(nodeId: number, labels: string[]) {
@@ -998,7 +998,7 @@ export class NodeService implements OnDestroy {
     node.setLabelIds(labelIds);
     this.nodesUpdated();
     if (uniqueLabels.length === labels.length) {
-      this.operation.emit(new UpdateNodeOperation(node));
+      this.operation.emit(new NodeOperation(OperationType.update, node));
     }
   }
 
@@ -1284,7 +1284,7 @@ export class NodeService implements OnDestroy {
         );
       });
       node.reorderAllPorts();
-      this.operation.emit(new UpdateNodeOperation(node));
+      this.operation.emit(new NodeOperation(OperationType.update, node));
     }
     node.updateTransitionsRouting();
     node.updateConnectionsRouting();

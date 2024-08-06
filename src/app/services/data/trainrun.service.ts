@@ -23,7 +23,7 @@ import {FilterService} from "../ui/filter.service";
 import {Transition} from "../../models/transition.model";
 import {Port} from "../../models/port.model";
 import {Connection} from "../../models/connection.model";
-import {CreateTrainrunOperation, DeleteTrainrunOperation, Operation, UpdateTrainrunOperation} from "../../models/operation.model";
+import {Operation, OperationType, TrainrunOperation} from "../../models/operation.model";
 
 @Injectable({
   providedIn: "root",
@@ -183,7 +183,7 @@ export class TrainrunService {
     if (enforceUpdate) {
       this.trainrunsUpdated();
     }
-    this.operation.emit(new DeleteTrainrunOperation(trainrun));
+    this.operation.emit(new TrainrunOperation(OperationType.delete, trainrun));
   }
 
   getSelectedTrainrun(): Trainrun {
@@ -255,7 +255,7 @@ export class TrainrunService {
     this.trainrunSectionService.trainrunSectionsUpdated();
 
     this.trainrunsUpdated();
-    this.operation.emit(new UpdateTrainrunOperation(trainrun));
+    this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
     return freqOffset;
   }
 
@@ -263,7 +263,7 @@ export class TrainrunService {
     this.getTrainrunFromId(trainrun.getId()).setTrainrunCategory(category);
     this.nodeService.reorderPortsOnNodesForTrainrun(trainrun);
     this.trainrunsUpdated();
-    this.operation.emit(new UpdateTrainrunOperation(trainrun));
+    this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
   }
 
   updateTrainrunTimeCategory(
@@ -275,14 +275,14 @@ export class TrainrunService {
     );
     this.nodeService.reorderPortsOnNodesForTrainrun(trainrun);
     this.trainrunsUpdated();
-    this.operation.emit(new UpdateTrainrunOperation(trainrun));
+    this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
   }
 
   updateTrainrunTitle(trainrun: Trainrun, title: string) {
     this.getTrainrunFromId(trainrun.getId()).setTitle(title);
     this.nodeService.reorderPortsOnNodesForTrainrun(trainrun);
     this.trainrunsUpdated();
-    this.operation.emit(new UpdateTrainrunOperation(trainrun));
+    this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
   }
 
   getTrainruns(): Trainrun[] {
@@ -510,7 +510,7 @@ export class TrainrunService {
     copiedtrainrun.setTitle(trainrun.getTitle() + postfix);
     copiedtrainrun.setLabelIds(trainrun.getLabelIds());
     this.trainrunsStore.trainruns.push(copiedtrainrun);
-    this.operation.emit(new CreateTrainrunOperation(copiedtrainrun));
+    this.operation.emit(new TrainrunOperation(OperationType.create, copiedtrainrun));
     return copiedtrainrun;
   }
 
@@ -549,7 +549,7 @@ export class TrainrunService {
     trainrun.setLabelIds(labelIds);
     this.trainrunsUpdated();
     if (uniqueLabels.length === labels.length) {
-      this.operation.emit(new UpdateTrainrunOperation(trainrun));
+      this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
     }
   }
 

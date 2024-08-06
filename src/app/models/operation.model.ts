@@ -24,48 +24,21 @@ abstract class Operation<T> {
   }
 }
 
-class CreateTrainrunOperation extends Operation<Trainrun> {
-  constructor(trainrun: Trainrun) {
-    super(OperationType.create, OperationObjectType.trainrun, trainrun);
+class TrainrunOperation extends Operation<Trainrun> {
+  constructor(operationType: OperationType, trainrun: Trainrun) {
+    super(operationType, OperationObjectType.trainrun, trainrun);
   }
 }
 
-class UpdateTrainrunOperation extends Operation<Trainrun> {
-  constructor(trainrun: Trainrun) {
-    super(OperationType.update, OperationObjectType.trainrun, trainrun);
-  }
-}
-
-class DeleteTrainrunOperation extends Operation<Trainrun> {
-  constructor(trainrun: Trainrun) {
-    super(OperationType.delete, OperationObjectType.trainrun, trainrun);
-  }
-}
-
-class CreateNodeOperation extends Operation<Node> {
-  constructor(node: Node) {
-    super(OperationType.create, OperationObjectType.node, node);
-  }
-}
-
-class UpdateNodeOperation extends Operation<Node> {
-  constructor(node: Node) {
-    super(OperationType.update, OperationObjectType.node, node);
-  }
-}
-
-class DeleteNodeOperation extends Operation<Node> {
-  constructor(node: Node) {
-    super(OperationType.delete, OperationObjectType.node, node);
+class NodeOperation extends Operation<Node> {
+  constructor(operationType: OperationType, node: Node) {
+    super(operationType, OperationObjectType.node, node);
   }
 }
 
 export {
+  OperationType,
   Operation,
-  CreateTrainrunOperation,
-  UpdateTrainrunOperation,
-  DeleteTrainrunOperation,
-  CreateNodeOperation,
-  UpdateNodeOperation,
-  DeleteNodeOperation,
+  TrainrunOperation,
+  NodeOperation,
 };
