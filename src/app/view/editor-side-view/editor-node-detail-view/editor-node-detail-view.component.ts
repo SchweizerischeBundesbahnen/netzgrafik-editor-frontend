@@ -54,10 +54,13 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
     labels: [],
   };
 
+  private initialNodeLabels: string[];
+
   readonly separatorKeysCodes = [ENTER, COMMA];
   nodeLabelsAutoCompleteOptions: string[] = [];
 
   private destroyed = new Subject<void>();
+  private isLabelBeingEdited = false;
 
   constructor(
     private uiInteractionService: UiInteractionService,
@@ -117,10 +120,9 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
       return;
     }
     this.nodeProperties.labels.push(value);
-    this.nodeService.changeLabels(
-      this.nodeProperties.nodeId,
-      this.nodeProperties.labels,
-    );
+    this.isLabelBeingEdited = true;
+    this.checkAndSetLabels();
+    this.isLabelBeingEdited = false;
     chipInputEvent.chipInput!.clear();
   }
 
@@ -133,13 +135,14 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
     this.nodeProperties.labels = this.nodeProperties.labels.filter(
       (labels) => labels !== valueDelete,
     );
-    this.nodeService.changeLabels(
-      this.nodeProperties.nodeId,
-      this.nodeProperties.labels,
-    );
+    this.isLabelBeingEdited = true;
+    this.checkAndSetLabels();
+    this.isLabelBeingEdited = false;
   }
 
   onLabelsFocusout() {
+    if (this.isLabelBeingEdited) return;
+
     const keyboardEvent = new KeyboardEvent("keydown", {
       code: "Enter",
       key: "Enter",
@@ -149,10 +152,7 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
       bubbles: true,
     });
     document.getElementById("nodeLabelsInput").dispatchEvent(keyboardEvent);
-    this.nodeService.changeLabels(
-      this.nodeProperties.nodeId,
-      this.nodeProperties.labels,
-    );
+    this.checkAndSetLabels();
   }
 
   onCapacityChanged() {
@@ -261,6 +261,21 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
           selectedNode.getLabelIds(),
         ),
       };
+      this.initialNodeLabels = [...this.nodeProperties.labels]; // initialize labels
+    }
+  }
+
+  // set labels only if any of it has changed
+  private checkAndSetLabels() {
+    if (
+      this.nodeProperties.labels.length !== this.initialNodeLabels.length ||
+      !this.nodeProperties.labels.every((label, index) => label === this.initialNodeLabels[index])
+    ) {
+      this.nodeService.changeLabels(
+        this.nodeProperties.nodeId,
+        this.nodeProperties.labels
+      );
+      this.initialNodeLabels = [...this.nodeProperties.labels];
     }
   }
 }

@@ -30,9 +30,11 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
 
   public selectedTrainrun: Trainrun;
   public trainrunLabels: string[];
+  private initialTrainrunLabels: string[];
   trainrunLabelsAutoCompleteOptions: string[] = [];
   readonly separatorKeysCodes = [ENTER, COMMA];
   private destroyed = new Subject<void>();
+  private isLabelBeingEdited = false;
 
   constructor(
     public dataService: DataService,
@@ -76,10 +78,9 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
     this.trainrunLabels = this.trainrunLabels.filter(
       (labels) => labels !== valueDelete,
     );
-    this.trainrunService.setLabels(
-      this.selectedTrainrun.getId(),
-      this.trainrunLabels,
-    );
+    this.isLabelBeingEdited = true;
+    this.checkAndSetLabels();
+    this.isLabelBeingEdited = false;
   }
 
   add(inputEvent: SbbChipInputEvent): void {
@@ -87,12 +88,10 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
     if (!value) {
       return;
     }
-    console.log("add", value);
     this.trainrunLabels.push(value);
-    this.trainrunService.setLabels(
-      this.selectedTrainrun.getId(),
-      this.trainrunLabels,
-    );
+    this.isLabelBeingEdited = true;
+    this.checkAndSetLabels();
+    this.isLabelBeingEdited = false;
     inputEvent.chipInput!.clear();
   }
 
@@ -121,6 +120,8 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
   }
 
   onLabelsFocusout() {
+    if (this.isLabelBeingEdited) return;
+
     const keyboardEvent = new KeyboardEvent("keydown", {
       code: "Enter",
       key: "Enter",
@@ -130,10 +131,7 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
       bubbles: true,
     });
     document.getElementById("trainrunLabelsInput").dispatchEvent(keyboardEvent);
-    this.trainrunService.setLabels(
-      this.selectedTrainrun.getId(),
-      this.trainrunLabels,
-    );
+    this.checkAndSetLabels();
   }
 
   getAutoCompleteLabels(): string[] {
@@ -145,13 +143,29 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
 
   private initializeWithCurrentSelectedTrainrun() {
     this.selectedTrainrun = this.trainrunService.getSelectedTrainrun();
+    if (this.selectedTrainrun === null) return;
     this.trainrunLabels = this.labelService.getTextLabelsFromIds(
       this.selectedTrainrun.getLabelIds(),
     );
+    this.initialTrainrunLabels = [...this.trainrunLabels]; // initialize labels
   }
 
   private updateTrainrunLabelsAutoCompleteOptions() {
     this.trainrunLabelsAutoCompleteOptions = this.getAutoCompleteLabels();
     this.cd.detectChanges();
+  }
+
+  // set labels only if any of it has changed
+  private checkAndSetLabels() {
+    if (
+      this.trainrunLabels.length !== this.initialTrainrunLabels.length ||
+      !this.trainrunLabels.every((label, index) => label === this.initialTrainrunLabels[index])
+    ) {
+      this.trainrunService.setLabels(
+        this.selectedTrainrun.getId(),
+        this.trainrunLabels
+      );
+      this.initialTrainrunLabels = [...this.trainrunLabels];
+    }
   }
 }

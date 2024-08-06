@@ -982,17 +982,17 @@ export class NodeService implements OnDestroy {
 
   changeLabels(nodeId: number, labels: string[]) {
     const node = this.getNodeFromId(nodeId);
-    const labelIds: number[] = [];
-    labels.forEach((label) => {
-      labelIds.push(
-        this.labelService.getOrCreateLabel(label, LabelRef.Node).getId(),
-      );
-    });
-    const deletetLabelIds = this.labelService.clearLabel(
+
+    // ensure uniqueness of input labels
+    const uniqueLabels = Array.from(new Set(labels));
+    const labelIds = uniqueLabels.map(label =>
+      this.labelService.getOrCreateLabel(label, LabelRef.Node).getId()
+    );
+    const deletedLabelIds = this.labelService.clearLabel(
       this.findClearedLabel(node, labelIds),
       this.makeLabelIDCounterMap(this.getNodes()),
     );
-    this.filterService.clearDeletetFilterNodeLabels(deletetLabelIds);
+    this.filterService.clearDeletetFilterNodeLabels(deletedLabelIds);
     node.setLabelIds(labelIds);
     this.nodesUpdated();
   }
