@@ -23,7 +23,7 @@ abstract class Operation {
 }
 
 class TrainrunOperation extends Operation {
-  readonly trainrun: Trainrun ;
+  readonly trainrun: Trainrun;
 
   constructor(operationType: OperationType, trainrun: Trainrun) {
     super(operationType, OperationObjectType.trainrun);

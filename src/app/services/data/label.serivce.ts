@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, OnDestroy} from "@angular/core";
+import {Injectable, OnDestroy} from "@angular/core";
 import {BehaviorSubject, Subject} from "rxjs";
 import {LogService} from "../../logger/log.service";
 import {
