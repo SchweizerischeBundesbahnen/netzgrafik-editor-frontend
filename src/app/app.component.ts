@@ -72,7 +72,7 @@ export class AppComponent {
   }
 
   @Output()
-  operation: Observable<Operation<any>> = merge(
+  operation: Observable<Operation> = merge(
     this.trainrunService.operation,
     this.trainrunSectionService.operation,
     this.nodeService.operation,

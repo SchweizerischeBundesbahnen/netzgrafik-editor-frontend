@@ -51,7 +51,7 @@ export class TrainrunSectionService implements OnDestroy {
     trainrunSections: [],
   }; // store the data in memory
 
-  readonly operation = new EventEmitter<Operation<any>>();
+  readonly operation = new EventEmitter<Operation>();
 
   informSelectedTrainrunClickSubject =
     new BehaviorSubject<InformSelectedTrainrunClick>({

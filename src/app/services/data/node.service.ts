@@ -46,7 +46,7 @@ export class NodeService implements OnDestroy {
   connectionsSubject = new BehaviorSubject<Connection[]>([]);
   readonly connections = this.connectionsSubject.asObservable();
 
-  readonly operation = new EventEmitter<Operation<any>>();
+  readonly operation = new EventEmitter<Operation>();
 
   private dataService: DataService = null;
   private destroyed = new Subject<void>();

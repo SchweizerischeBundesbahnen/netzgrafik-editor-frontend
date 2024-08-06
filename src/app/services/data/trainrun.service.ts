@@ -35,7 +35,7 @@ export class TrainrunService {
 
   trainrunsStore: { trainruns: Trainrun[] } = {trainruns: []}; // store the data in memory
 
-  readonly operation = new EventEmitter<Operation<any>>();
+  readonly operation = new EventEmitter<Operation>();
 
   private dataService: DataService = null;
   private nodeService: NodeService = null;
