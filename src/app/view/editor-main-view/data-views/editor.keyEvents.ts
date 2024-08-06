@@ -540,8 +540,6 @@ export class EditorKeyEvents {
           if (n.selected()) {
             selectedNodeDeleted = true;
           }
-          // not ideal to call deleteNote() for each instead of deleting a batch of node
-          // -> emit n times event DeleteNodeOperation
           this.nodeSerivce.deleteNode(n.getId(), false);
         }
       }
@@ -557,8 +555,6 @@ export class EditorKeyEvents {
     this.nodeSerivce.getNodes().forEach((n: Node) => {
       if (n.selected()) {
         selectedNodeDeleted = true;
-        // not ideal to call deleteNote() for each instead of deleting a batch of node
-        // -> emit n times event DeleteNodeOperation
         this.nodeSerivce.deleteNode(n.getId(), false);
       }
     });
