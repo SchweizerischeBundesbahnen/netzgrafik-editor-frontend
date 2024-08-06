@@ -15,24 +15,28 @@ enum OperationObjectType {
 abstract class Operation {
   readonly type: OperationType;
   readonly objectType: OperationObjectType;
-  readonly object: Trainrun | Node;
 
-  constructor(type: OperationType, objectType: OperationObjectType, object: Trainrun | Node) {
+  constructor(type: OperationType, objectType: OperationObjectType) {
     this.type = type;
     this.objectType = objectType;
-    this.object = object;
   }
 }
 
 class TrainrunOperation extends Operation {
+  readonly trainrun: Trainrun ;
+
   constructor(operationType: OperationType, trainrun: Trainrun) {
-    super(operationType, OperationObjectType.trainrun, trainrun);
+    super(operationType, OperationObjectType.trainrun);
+    this.trainrun = trainrun;
   }
 }
 
 class NodeOperation extends Operation {
+  readonly node: Node;
+
   constructor(operationType: OperationType, node: Node) {
-    super(operationType, OperationObjectType.node, node);
+    super(operationType, OperationObjectType.node);
+    this.node = node;
   }
 }
 
