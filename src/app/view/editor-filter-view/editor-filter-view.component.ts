@@ -12,6 +12,7 @@ import {Subject} from "rxjs";
 import {FilterSetting} from "../../models/filterSettings.model";
 import {takeUntil} from "rxjs/operators";
 import {StaticDomTags} from "../editor-main-view/data-views/static.dom.tags";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: "sbb-editor-filter-view",
@@ -35,6 +36,8 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
 
   activeFilterName: string;
   activeEditFilterSettingId: number;
+
+  readonly disableBackend = environment.disableBackend;
 
   private destroyed = new Subject<void>();
 

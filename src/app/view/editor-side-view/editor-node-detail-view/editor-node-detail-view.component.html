@@ -273,7 +273,7 @@
       </tr>
     </table>
   </sbb-expansion-panel>
-  <sbb-expansion-panel [expanded]="false">
+  <sbb-expansion-panel [expanded]="false" *ngIf="!disableBackend">
     <sbb-expansion-panel-header>{{ 'app.view.editor-side-view.editor-node-detail-view.links' | translate }}</sbb-expansion-panel-header>
     <ul>
       <li>

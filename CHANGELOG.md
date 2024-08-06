@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.7.2](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.2...netzgrafik-frontend-v2.7.2) (2024-08-06)
+
+
+### Bug Fixes
+
+* disable notes in filter sidebar in standalone mode ([#211](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/211)) ([df335ef](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/df335ef9aede8c47064655f3dbcc5723c2a89f1a))
+
+## [2.7.2](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.2...netzgrafik-frontend-v2.7.2) (2024-08-06)
+
+
+### Bug Fixes
+
+* disable notes in filter sidebar in standalone mode ([#211](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/211)) ([df335ef](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/df335ef9aede8c47064655f3dbcc5723c2a89f1a))
+
 ## 2.7.2 (2024-08-06)
 
 
