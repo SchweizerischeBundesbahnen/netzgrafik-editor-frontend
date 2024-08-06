@@ -263,3 +263,8 @@ Many thanks to all contributors for their engagement and contribution, without w
 would not have been possible. Thank you for your current and future contribution!
 
 [CREDITS.md](CREDITS.md)
+
+## Continuous Integration
+
+This repository uses [release-please](https://github.com/googleapis/release-please) for CHANGELOG generation, the creation of GitHub releases, and version bumps for your projects.
+See [CI.md](CONTRIBUTING.md) for details.
