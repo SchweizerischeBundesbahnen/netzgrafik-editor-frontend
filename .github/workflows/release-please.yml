@@ -17,4 +17,5 @@ jobs:
         id: release
         with:
           release-type: node
+          manifest-file: .release-please-manifest.json
           
