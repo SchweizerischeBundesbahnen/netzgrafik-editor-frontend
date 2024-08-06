@@ -998,7 +998,7 @@ export class NodeService implements OnDestroy {
     node.setLabelIds(labelIds);
     this.nodesUpdated();
     if (uniqueLabels.length === labels.length) {
-      this.operation.emit(new UpdateNodeOperation(node, uniqueLabels));
+      this.operation.emit(new UpdateNodeOperation(node));
     }
   }
 

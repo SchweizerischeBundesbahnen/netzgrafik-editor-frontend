@@ -8,75 +8,86 @@ enum OperationType {
   delete = "delete",
 }
 
+enum OperationObjectType {
+  trainrun = "trainrun",
+  trainrunSection = "trainrunSection",
+  trainrunSections = "trainrunSections",
+  node = "node",
+  nodes = "nodes",
+};
+
 abstract class Operation<T> {
   readonly type: OperationType;
-  readonly payload: T;
+  readonly objectType: OperationObjectType;
+
+  readonly object: T;
   readonly param: any;
 
-  constructor(type: OperationType, payload: T, param: any) {
+  constructor(type: OperationType, objectType: OperationObjectType, object: T) {
     this.type = type;
-    this.payload = payload;
-    this.param = param;
+    this.objectType = objectType;
+    this.object = object;
+    console.log(this);
   }
 }
 
 class CreateTrainrunOperation extends Operation<Trainrun> {
-  constructor(trainrun: Trainrun, param: any = null) {
-    super(OperationType.create, trainrun, param);
+  constructor(trainrun: Trainrun) {
+    super(OperationType.create, OperationObjectType.trainrun, trainrun);
   }
 }
 
 class UpdateTrainrunOperation extends Operation<Trainrun> {
-  constructor(trainrun: Trainrun, param: any = null) {
-    super(OperationType.update, trainrun, param);
+  constructor(trainrun: Trainrun) {
+    super(OperationType.update, OperationObjectType.trainrun, trainrun);
   }
 }
 
 class DeleteTrainrunOperation extends Operation<Trainrun> {
-  constructor(trainrun: Trainrun, param: any = null) {
-    super(OperationType.delete, trainrun, param);
+  constructor(trainrun: Trainrun) {
+    super(OperationType.delete, OperationObjectType.trainrun, trainrun);
   }
 }
 
 class CreateTrainrunSectionOperation extends Operation<TrainrunSection> {
-  constructor(trainrunSection: TrainrunSection, param: any = null) {
-    super(OperationType.create, trainrunSection, param);
+  constructor(trainrunSection: TrainrunSection) {
+    super(OperationType.create, OperationObjectType.trainrunSection, trainrunSection);
   }
 }
 
 class UpdateTrainrunSectionOperation extends Operation<TrainrunSection> {
-  constructor(trainrunSection: TrainrunSection, param: any = null) {
-    super(OperationType.update, trainrunSection, param);
+  constructor(trainrunSection: TrainrunSection) {
+    super(OperationType.update, OperationObjectType.trainrunSection, trainrunSection);
   }
 }
 
 class UpdateTrainrunSectionsOperation extends Operation<TrainrunSection[]> {
-  constructor(trainrunSections: TrainrunSection[], param: any = null) {
-    super(OperationType.update, trainrunSections, param);
+  constructor(trainrunSections: TrainrunSection[]) {
+    super(OperationType.update, OperationObjectType.trainrunSections, trainrunSections);
   }
 }
 
 class CreateNodeOperation extends Operation<Node> {
-  constructor(node: Node, param: any = null) {
-    super(OperationType.create, node, param);
+  constructor(node: Node) {
+    super(OperationType.create, OperationObjectType.node, node);
   }
 }
 
 class UpdateNodeOperation extends Operation<Node> {
-  constructor(node: Node, param: any = null) {
-    super(OperationType.update, node, param);
+  constructor(node: Node) {
+    super(OperationType.update, OperationObjectType.node, node);
   }
 }
 
 class DeleteNodeOperation extends Operation<Node> {
-  constructor(node: Node, param: any = null) {
-    super(OperationType.delete, node, param);
+  constructor(node: Node) {
+    super(OperationType.delete, OperationObjectType.node, node);
   }
 }
 
 class DeleteNodesOperation extends Operation<Node[]> {
-  constructor(nodes: Node[], param: any = null) {
-    super(OperationType.delete, nodes, param);
+  constructor(nodes: Node[]) {
+    super(OperationType.delete, OperationObjectType.nodes, nodes);
   }
 }
 

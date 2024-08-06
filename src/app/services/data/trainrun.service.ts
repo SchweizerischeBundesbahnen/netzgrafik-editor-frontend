@@ -549,7 +549,7 @@ export class TrainrunService {
     trainrun.setLabelIds(labelIds);
     this.trainrunsUpdated();
     if (uniqueLabels.length === labels.length) {
-      this.operation.emit(new UpdateTrainrunOperation(trainrun, uniqueLabels));
+      this.operation.emit(new UpdateTrainrunOperation(trainrun));
     }
   }
 
