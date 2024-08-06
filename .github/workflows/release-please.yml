@@ -1,3 +1,7 @@
+# This action automates the creation of releases and changelogs for the project. 
+# 
+# https://github.com/marketplace/actions/release-please-action
+# 
 on:
   push:
     branches:
