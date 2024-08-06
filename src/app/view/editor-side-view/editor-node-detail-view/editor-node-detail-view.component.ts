@@ -265,17 +265,17 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
     }
   }
 
-    // set labels only if any of it has changed
-    private checkAndSetLabels() {
-      if (
-        this.nodeProperties.labels.length !== this.initialNodeLabels.length ||
-        !this.nodeProperties.labels.every((label, index) => label === this.initialNodeLabels[index])
-      ) {
-        this.nodeService.changeLabels(
-          this.nodeProperties.nodeId,
-          this.nodeProperties.labels
-        );
-        this.initialNodeLabels = [...this.nodeProperties.labels];
-      }
+  // set labels only if any of it has changed
+  private checkAndSetLabels() {
+    if (
+      this.nodeProperties.labels.length !== this.initialNodeLabels.length ||
+      !this.nodeProperties.labels.every((label, index) => label === this.initialNodeLabels[index])
+    ) {
+      this.nodeService.changeLabels(
+        this.nodeProperties.nodeId,
+        this.nodeProperties.labels
+      );
+      this.initialNodeLabels = [...this.nodeProperties.labels];
     }
+  }
 }

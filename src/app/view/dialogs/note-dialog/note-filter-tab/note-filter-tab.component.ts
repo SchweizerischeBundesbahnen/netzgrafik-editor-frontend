@@ -30,9 +30,11 @@ export class NoteFilterTabComponent implements OnInit, OnDestroy {
 
   public note: Note;
   public noteLabels: string[];
+  private initialNoteLabels: string[];
   noteLabelsAutoCompleteOptions: string[] = [];
   readonly separatorKeysCodes = [ENTER, COMMA];
   private destroyed = new Subject<void>();
+  private isLabelBeingEdited = false;
 
   constructor(
     public dataService: DataService,
@@ -46,6 +48,11 @@ export class NoteFilterTabComponent implements OnInit, OnDestroy {
     this.initializeWithCurrentNote();
     this.noteService.notes.pipe(takeUntil(this.destroyed)).subscribe(() => {
       this.updateNoteLabelsAutoCompleteOptions();
+    });
+    this.noteService.notes
+    .pipe(takeUntil(this.destroyed))
+    .subscribe(() => {
+      this.initializeWithCurrentNote();
     });
     this.updateNoteLabelsAutoCompleteOptions();
   }
@@ -64,7 +71,9 @@ export class NoteFilterTabComponent implements OnInit, OnDestroy {
     this.noteLabels = this.noteLabels.filter(
       (labels) => labels !== valueDelete,
     );
-    this.noteService.setLabels(this.note.getId(), this.noteLabels);
+    this.isLabelBeingEdited = true;
+    this.checkAndSetLabels();
+    this.isLabelBeingEdited = false;
   }
 
   add(chipInputEvent: SbbChipInputEvent): void {
@@ -73,11 +82,15 @@ export class NoteFilterTabComponent implements OnInit, OnDestroy {
       return;
     }
     this.noteLabels.push(value);
-    this.noteService.setLabels(this.note.getId(), this.noteLabels);
+    this.isLabelBeingEdited = true;
+    this.checkAndSetLabels();
+    this.isLabelBeingEdited = false;
     chipInputEvent.chipInput!.clear();
   }
 
   onLabelsFocusout() {
+    if (this.isLabelBeingEdited) return;
+
     const keyboardEvent = new KeyboardEvent("keydown", {
       code: "Enter",
       key: "Enter",
@@ -87,6 +100,7 @@ export class NoteFilterTabComponent implements OnInit, OnDestroy {
       bubbles: true,
     });
     document.getElementById("noteLabelsInput").dispatchEvent(keyboardEvent);
+    this.checkAndSetLabels();
   }
 
   onDeleteNote(): void {
@@ -104,16 +118,32 @@ export class NoteFilterTabComponent implements OnInit, OnDestroy {
   }
 
   private initializeWithCurrentNote() {
+    if (this.note === null) return;
     this.note = this.noteService.getNoteFromId(
       this.noteDialogParameter.noteFormComponentModel.id,
     );
     this.noteLabels = this.labelService.getTextLabelsFromIds(
       this.note.getLabelIds(),
     );
+    this.initialNoteLabels = [...this.noteLabels]; // initialize labels
   }
 
   private updateNoteLabelsAutoCompleteOptions() {
     this.noteLabelsAutoCompleteOptions = this.getAutoCompleteLabels();
     this.cd.detectChanges();
+  }
+
+  // set labels only if any of it has changed
+  private checkAndSetLabels() {
+    if (
+      this.noteLabels.length !== this.initialNoteLabels.length ||
+      !this.noteLabels.every((label, index) => label === this.initialNoteLabels[index])
+    ) {
+      this.noteService.setLabels(
+        this.note.getId(),
+        this.noteLabels
+      );
+      this.initialNoteLabels = [...this.noteLabels];
+    }
   }
 }

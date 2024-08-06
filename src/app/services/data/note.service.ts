@@ -188,17 +188,17 @@ export class NoteService {
 
   setLabels(noteId: number, labels: string[]) {
     const note = this.getNoteFromId(noteId);
-    const labelIds: number[] = [];
-    labels.forEach((label) => {
-      labelIds.push(
-        this.labelService.getOrCreateLabel(label, LabelRef.Note).getId(),
-      );
-    });
-    const deletetLabelIds = this.labelService.clearLabel(
+
+    // ensure uniqueness of input labels
+    const uniqueLabels = Array.from(new Set(labels));
+    const labelIds = uniqueLabels.map(label =>
+      this.labelService.getOrCreateLabel(label, LabelRef.Note).getId()
+    );
+    const deletedLabelIds = this.labelService.clearLabel(
       this.findClearedLabel(note, labelIds),
       this.makeLabelIDCounterMap(this.getNotes()),
     );
-    this.filterService.clearDeletetFilterNoteLabels(deletetLabelIds);
+    this.filterService.clearDeletetFilterNoteLabels(deletedLabelIds);
     note.setLabelIds(labelIds);
     this.notesUpdated();
   }
