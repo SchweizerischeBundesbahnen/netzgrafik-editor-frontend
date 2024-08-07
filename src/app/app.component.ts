@@ -9,6 +9,8 @@ import {Observable, merge} from "rxjs";
 import {ProjectDto} from "./api/generated";
 import {NetzgrafikDto} from "./data-structures/business.data.structures";
 import {Operation} from "./models/operation.model";
+import {LabelService} from "./services/data/label.serivce";
+import {NodeService} from "./services/data/node.service";
 
 @Component({
   selector: "sbb-root",
@@ -41,7 +43,9 @@ export class AppComponent {
   constructor(private authService: AuthService,
               private dataService: DataService,
               private trainrunService: TrainrunService,
-              private trainrunSectionService: TrainrunSectionService) {
+              private trainrunSectionService: TrainrunSectionService,
+              private nodeService: NodeService,
+            ) {
     if (!this.disableBackend) {
       this.authenticated = authService.initialized;
     }
@@ -68,5 +72,9 @@ export class AppComponent {
   }
 
   @Output()
-  operation: Observable<Operation> = merge(this.trainrunService.operation, this.trainrunSectionService.operation);
+  operation: Observable<Operation> = merge(
+    this.trainrunService.operation,
+    this.trainrunSectionService.operation,
+    this.nodeService.operation,
+  );
 }

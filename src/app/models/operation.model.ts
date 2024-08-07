@@ -1,43 +1,48 @@
+import {Node} from "./node.model";
 import {Trainrun} from "./trainrun.model";
-import {TrainrunSection} from "./trainrunsection.model";
 
 enum OperationType {
   create = "create",
   update = "update",
-  delete = "delete"
+  delete = "delete",
 }
 
-export abstract class Operation {
+enum OperationObjectType {
+  trainrun = "trainrun",
+  node = "node",
+};
+
+abstract class Operation {
   readonly type: OperationType;
+  readonly objectType: OperationObjectType;
 
-  constructor(type: OperationType) {
+  constructor(type: OperationType, objectType: OperationObjectType) {
     this.type = type;
+    this.objectType = objectType;
   }
 }
 
-export class CreateTrainrunOperation extends Operation {
-  readonly trainrunSection: TrainrunSection;
-
-  constructor(trainrunSection: TrainrunSection) {
-    super(OperationType.create);
-    this.trainrunSection = trainrunSection;
-  }
-}
-
-export class UpdateTrainrunSectionsOperation extends Operation {
-  readonly trainrunSections: TrainrunSection[];
-
-  constructor(trainrunSections: TrainrunSection[]) {
-    super(OperationType.update);
-    this.trainrunSections = trainrunSections;
-  }
-}
-
-export class DeleteTrainrunOperation extends Operation {
+class TrainrunOperation extends Operation {
   readonly trainrun: Trainrun;
 
-  constructor(trainrun: Trainrun) {
-    super(OperationType.delete);
+  constructor(operationType: OperationType, trainrun: Trainrun) {
+    super(operationType, OperationObjectType.trainrun);
     this.trainrun = trainrun;
   }
 }
+
+class NodeOperation extends Operation {
+  readonly node: Node;
+
+  constructor(operationType: OperationType, node: Node) {
+    super(operationType, OperationObjectType.node);
+    this.node = node;
+  }
+}
+
+export {
+  OperationType,
+  Operation,
+  TrainrunOperation,
+  NodeOperation,
+};
