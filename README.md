@@ -267,4 +267,4 @@ would not have been possible. Thank you for your current and future contribution
 ## Continuous Integration
 
 This repository uses [release-please](https://github.com/googleapis/release-please) for CHANGELOG generation, the creation of GitHub releases, and version bumps for your projects.
-See [CI.md](CONTRIBUTING.md) for details.
+See [CI.md](CI.md) for details.
