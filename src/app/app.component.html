@@ -21,7 +21,7 @@
       <!-- <sbb-option value="it">🇮🇹 Italiano</sbb-option> -->
     </sbb-select>
   </sbb-app-chooser-section>
-  <sbb-header-environment class="noprint">{{
+  <sbb-header-environment class="noprint" *ngIf="environmentLabel">{{
     environmentLabel
   }}</sbb-header-environment>
   <sbb-usermenu
