@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.4](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/v2.7.3...v2.7.4) (2024-08-08)
+
+
+### Bug Fixes
+
+* disable environment header in standalone mode ([#230](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/230)) ([e25887e](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/e25887eb11ab36ce84756e92344bc63cdeb9b1a4))
+
 ## [2.7.3](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/v2.7.2...v2.7.3) (2024-08-06)
 
 
