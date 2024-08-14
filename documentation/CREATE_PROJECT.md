@@ -49,7 +49,7 @@ created a new variant in the project, the editor will open automatically.
 
 The editor opens the newly created Netzgrafik. The new Netzgrafik contains some initially created
 nodes from which users can draw trainruns with their sections. In most projects these nodes are not
-required. If so press (ctrl+a) to select all elements of the current Netzgrafik and press 'delete'
+required. If so press `ctrl`+`a` to select all elements of the current Netzgrafik and press `delete`
 to remove them.
 
 [29-01-2024-003-clear_variant_data.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/47c7a9e5-5c4a-4159-a7fa-141347dae264)
