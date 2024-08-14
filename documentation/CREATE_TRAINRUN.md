@@ -12,7 +12,7 @@ With the help of the left mouse button and keyboard you can create or modify any
 
 When a new trainrun gets created the system opens a dialog window where you can enter all
 information about the new created trainrun, such a trainrun category and name. Then click outside
-the window or press 'ESC' to close the dialog window.
+the window or press `ESC` to close the dialog window.
 
 > - If you like to (re)open the dialog windows just click on the trainrun name in the editor or
     click any number (time). The dialog window is displayed again with the clicked data input field
@@ -28,9 +28,9 @@ For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.m
 
 To create a new train or adding new trainrun section to an existing trainrun, proceed as follows:
 
-- Move with the mouse pointer to the (inner) node: Press the left mouse button on the inner node
+- Move with the mouse pointer to the (inner) node: Press the `left mouse button` on the inner node
   from which you want to start the trainrun section.
-- Hold pressed the left mouse button and drag the line to the other node. The line displays visually
+- Hold pressed the `left mouse button` and drag the line to the other node. The line displays visually
   the trainrun section you want to create.
 - Configure the train route: Give the new train an appropriate name and specify the necessary
   details, such as train number or other relevant information.
@@ -87,7 +87,7 @@ To delete a trainrun section, process as follows:
 - Click the trainrun to modify (select the trainrun)
 - Move with the mouse pointer to one of the two pins (cricle) where the trainrun section is aligned
   to the node
-- Press left mouse button and drag the pin (trainrun section). Instead of reassign to another or
+- Press `left mouse button` and drag the pin (trainrun section). Instead of reassign to another or
   same node, just release it outside the node
 
 ### Toggle stop / non-stop at node (trainrun transition)
