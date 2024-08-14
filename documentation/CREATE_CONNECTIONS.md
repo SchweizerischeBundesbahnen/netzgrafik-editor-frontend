@@ -30,7 +30,7 @@ can see all the connections for a selected train. To delete a connection, follow
 
 - In the Perlenkette, locate the connections for the selected train that you want to delete.
 - Click on the connections to mark them. (Clicking again removes the marking.)
-- Once the connections are marked, press the "Delete" key ('delete') to delete all the marked
+- Once the connections are marked, press `Delete` to delete all the marked
   connections.
 
 [2024-1-25_DeleteConnections_Perlenkette_select_delete-002.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/7307f446-fc05-41c3-8c1c-a18d04a7dea2)
