@@ -10,7 +10,7 @@ To merge two independent Netzgrafik, you can follow these steps:
 - (Optional) Create a new variant.
 - Copy the necessary elements from one Netzgrafik and paste them into the other Netzgrafik.
 - As long as complete trainruns are copied, i.e. including all trainrun sections from start to destination, there is no need to merge trainruns. If the Netzgrafiks to be merged consists of regions (or partial corridors) 
-  or just trainrun sections that actually represent partial trainrun, these must be merged manually using the Combine function at the nodes where the parts of the trainrun meet.
+  or just trainrun sections that actually represent partial trainrun, these must be merged manually using the [combine function](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Split_Combine_Trainruns.md#combine-two-trainruns) at the nodes where the parts of the trainrun meet.
  
 By following these steps, you can successfully merge two independent Netzgrafik.
 
