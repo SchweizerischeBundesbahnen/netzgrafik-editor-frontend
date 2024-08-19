@@ -79,6 +79,7 @@ export class EditorToolsViewComponent {
         this.uiInteractionService.closePerlenkette();
         this.nodeService.unselectAllNodes();
         this.dataService.loadNetzgrafikDto(netzgrafikDto);
+        this.uiInteractionService.viewportCenteringOnNodesBoundingBox();
       }
     };
     reader.readAsText(file);
@@ -298,7 +299,7 @@ export class EditorToolsViewComponent {
       htmlElementToExport = document.getElementById("graphContainer");
       console.log("Try -2- (graphContainer): ", htmlElementToExport !== null);
 
-      const boundingBox = this.getNetzgrafikBoundingBox();
+      const boundingBox = this.nodeService.getNetzgrafikBoundingBox();
       param = {
         encoderOptions: 1.0,
         scale: 2.0,
@@ -346,32 +347,6 @@ export class EditorToolsViewComponent {
       exportParameter: param,
       documentSavedStyle: oldStyle,
     };
-  }
-
-  private getNetzgrafikBoundingBox() {
-    let minX;
-    let maxX;
-    let minY;
-    let maxY;
-    this.nodeService.nodesStore.nodes.forEach((n) => {
-      minX =
-        minX === undefined
-          ? n.getPositionX()
-          : Math.min(minX, n.getPositionX());
-      maxX =
-        maxX === undefined
-          ? n.getPositionX() + n.getNodeWidth()
-          : Math.max(maxX, n.getPositionX() + n.getNodeWidth());
-      minY =
-        minY === undefined
-          ? n.getPositionY()
-          : Math.min(minY, n.getPositionY());
-      maxY =
-        maxY === undefined
-          ? n.getPositionY() + n.getNodeHeight()
-          : Math.max(maxY, n.getPositionY() + n.getNodeHeight());
-    });
-    return {minCoordX: minX, minCoordY: minY, maxCoordX: maxX, maxCoordY: maxY};
   }
 
   private convertToZuglaufCSV(): string {

@@ -1243,6 +1243,32 @@ export class NodeService implements OnDestroy {
     return nodeLabels;
   }
 
+  getNetzgrafikBoundingBox() {
+    let minX;
+    let maxX;
+    let minY;
+    let maxY;
+    this.nodesStore.nodes.forEach((n) => {
+      minX =
+        minX === undefined
+          ? n.getPositionX()
+          : Math.min(minX, n.getPositionX());
+      maxX =
+        maxX === undefined
+          ? n.getPositionX() + n.getNodeWidth()
+          : Math.max(maxX, n.getPositionX() + n.getNodeWidth());
+      minY =
+        minY === undefined
+          ? n.getPositionY()
+          : Math.min(minY, n.getPositionY());
+      maxY =
+        maxY === undefined
+          ? n.getPositionY() + n.getNodeHeight()
+          : Math.max(maxY, n.getPositionY() + n.getNodeHeight());
+    });
+    return {minCoordX: minX, minCoordY: minY, maxCoordX: maxX, maxCoordY: maxY};
+  }
+
   private deleteNodeWithoutUpdate(nodeId: number) {
     const node = this.getNodeFromId(nodeId);
     const connectedTrainrunSections = node.getConnectedTrainrunSections();

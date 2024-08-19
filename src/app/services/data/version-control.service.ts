@@ -1,4 +1,4 @@
-import {HostListener, Injectable, OnDestroy} from "@angular/core";
+import {Injectable, OnDestroy} from "@angular/core";
 import {
   VariantControllerBackendService,
   VariantDto,
@@ -27,6 +27,9 @@ export class VersionControlService implements OnDestroy {
 
   private readonly destroyed = new Subject<void>();
 
+  private previousVariantDto: VariantDto = undefined;
+  private variantChanged = false;
+
   constructor(
     private readonly variantsBackendService: VariantControllerBackendService,
     private readonly versionsBackendService: VersionControllerBackendService,
@@ -37,14 +40,14 @@ export class VersionControlService implements OnDestroy {
   ) {
     if (!environment.disableBackend) {
       autoSaveService.autosaveTrigger$
-      .pipe(
-        takeUntil(this.destroyed),
-        filter(() => this.variant.isWritable),
-      )
-      .subscribe(() => {
-        logService.debug("auto saving changes");
-        this.createSnapshot();
-      });
+        .pipe(
+          takeUntil(this.destroyed),
+          filter(() => this.variant.isWritable),
+        )
+        .subscribe(() => {
+          logService.debug("auto saving changes");
+          this.createSnapshot();
+        });
     }
   }
 
@@ -62,6 +65,7 @@ export class VersionControlService implements OnDestroy {
       .getVariant(variantId)
       .pipe(takeUntil(this.destroyed))
       .subscribe((variant) => {
+        this.updateVarianteChangedInfo(variant);
         this.variantSubject.next(variant);
         if (loadModel) {
           this.loadModel(variant.latestVersion);
@@ -177,5 +181,25 @@ export class VersionControlService implements OnDestroy {
     return this.variantsBackendService
       .deleteVariant(this.variant.id)
       .pipe(map(() => null));
+  }
+
+  getAndClearVarianteChangedSignal(): boolean {
+    const retVal = this.variantChanged;
+    this.variantChanged = false;
+    return retVal;
+  }
+
+  private updateVarianteChangedInfo(variant: VariantDto) {
+    if (variant === null) {
+      return;
+    }
+    if (this.previousVariantDto === undefined) {
+      this.previousVariantDto = variant;
+      this.variantChanged = true;
+      return;
+    }
+    this.variantChanged = this.previousVariantDto.projectId !== variant.projectId &&
+      this.previousVariantDto.id !== variant.id;
+    this.previousVariantDto = variant;
   }
 }
