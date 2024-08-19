@@ -70,3 +70,22 @@
     border: none;
   }
 }
+
+
+.user-id {
+  width: 140px;             /* Set the desired width */
+  overflow: auto;         /* Hide overflowing content */
+  text-overflow: ellipsis;  /* Display ellipsis (...) for overflow */
+  white-space: nowrap;      /* Prevent text from wrapping */
+  user-select: text;        /* Allow text selection */
+}
+
+.user-id {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+}
+
+.user-id {::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}}
