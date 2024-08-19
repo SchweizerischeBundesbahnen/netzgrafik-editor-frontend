@@ -1,8 +1,8 @@
 <sbb-page-layout *ngIf="projectSubject.asObservable() | async as proj">
   <div class="header">
     <h1>
-      {{ proj.name }}
-      <ng-container *ngIf="proj.isArchived">{{ ' ' + 'app.view.variant.variants-view.archived' | translate }}</ng-container>
+      {{ proj.name + ' '}}
+      <ng-container *ngIf="proj.isArchived">{{ 'app.view.variant.variants-view.archived' | translate }}</ng-container>
     </h1>
   </div>
 
