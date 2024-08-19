@@ -156,7 +156,8 @@ describe("Editor-DataView", () => {
       copyService,
       logService,
       viewportCullSerivce,
-      levelOfDetailService
+      levelOfDetailService,
+      undefined
     );
 
     new EditorView(

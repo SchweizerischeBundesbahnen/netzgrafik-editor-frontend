@@ -596,7 +596,7 @@ export class EditorMainViewComponent implements AfterViewInit, OnDestroy {
   }
 
   private handleVariantChanged() {
-    if (this.versionControlService.getAndClearVarianteChangedSignal()) {
+    if (this.versionControlService?.getAndClearVarianteChangedSignal()) {
       this.uiInteractionService.viewportCenteringOnNodesBoundingBox();
     }
   }

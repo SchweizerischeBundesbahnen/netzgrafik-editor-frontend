@@ -24,6 +24,7 @@ import {NetzgrafikUnitTesting} from "../../../../integration-testing/netzgrafik.
 import {Vec2D} from "../../../utils/vec2D";
 import {LevelOfDetailService} from "../../../services/ui/level.of.detail.service";
 import {ViewportCullService} from "../../../services/ui/viewport.cull.service";
+import {VersionControlService} from '../../../services/data/version-control.service';
 
 describe("3d.Utils.tests", () => {
   let dataService: DataService;
@@ -151,7 +152,8 @@ describe("3d.Utils.tests", () => {
       copyService,
       logService,
       viewportCullSerivce,
-      levelOfDetailService
+      levelOfDetailService,
+      undefined
     );
 
     new EditorView(
