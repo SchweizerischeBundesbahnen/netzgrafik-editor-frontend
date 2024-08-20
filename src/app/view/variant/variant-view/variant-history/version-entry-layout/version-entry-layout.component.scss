@@ -73,19 +73,19 @@
 
 
 .user-id {
-  width: 140px;             /* Set the desired width */
-  overflow: auto;         /* Hide overflowing content */
-  text-overflow: ellipsis;  /* Display ellipsis (...) for overflow */
-  white-space: nowrap;      /* Prevent text from wrapping */
-  user-select: text;        /* Allow text selection */
+  width: 140px;
+  overflow: auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  user-select: text;
 }
 
 .user-id {
-  -ms-overflow-style: none; /* for Internet Explorer, Edge */
-  scrollbar-width: none; /* for Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   overflow-y: scroll;
 }
 
 .user-id {::-webkit-scrollbar {
-  display: none; /* for Chrome, Safari, and Opera */
+  display: none;
 }}
