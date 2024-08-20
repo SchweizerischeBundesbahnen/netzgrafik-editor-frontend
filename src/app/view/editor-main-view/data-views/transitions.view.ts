@@ -151,6 +151,9 @@ export class TransitionsView {
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
   ) {
+    if (!this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()){
+      return;
+    }
     grpEnter
       .append(StaticDomTags.TRANSITION_BUTTON_SVG)
       .attr(
@@ -327,11 +330,6 @@ export class TransitionsView {
 
   onTransitionMouseup(trainrun: Trainrun, domObj: any, transition: Transition) {
     d3.event.stopPropagation();
-
-    if ( !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable() ){
-      return;
-    }
-
     const node: Node = this.editorView.getNodeFromTransition(transition);
     if (
       this.editorView.trainrunSectionPreviewLineView.getMode() ===
