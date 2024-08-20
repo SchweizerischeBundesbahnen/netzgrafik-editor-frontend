@@ -168,6 +168,9 @@ export class SVGMouseController {
   }
 
   moveNetzgrafikEditorViewFocalPoint(center: Vec2D) {
+    if (this.viewboxProperties === undefined) {
+      return;
+    }
     this.viewboxProperties.panZoomLeft =
       center.getX() - this.viewboxProperties.panZoomWidth / 2.0;
     this.viewboxProperties.panZoomTop =
@@ -365,9 +368,9 @@ export class SVGMouseController {
   private updateZoomCenter(zoomCenter: Vec2D) {
     const oldZoomCenter = new Vec2D(
       this.viewboxProperties.panZoomLeft +
-        zoomCenter.getX() * this.viewboxProperties.panZoomWidth,
+      zoomCenter.getX() * this.viewboxProperties.panZoomWidth,
       this.viewboxProperties.panZoomTop +
-        zoomCenter.getY() * this.viewboxProperties.panZoomHeight,
+      zoomCenter.getY() * this.viewboxProperties.panZoomHeight,
     );
 
     const zoomFactor = 100.0 / this.viewboxProperties.zoomFactor;
@@ -386,9 +389,9 @@ export class SVGMouseController {
 
     const newZoomCenter = new Vec2D(
       this.viewboxProperties.panZoomLeft +
-        zoomCenter.getX() * this.viewboxProperties.panZoomWidth,
+      zoomCenter.getX() * this.viewboxProperties.panZoomWidth,
       this.viewboxProperties.panZoomTop +
-        zoomCenter.getY() * this.viewboxProperties.panZoomHeight,
+      zoomCenter.getY() * this.viewboxProperties.panZoomHeight,
     );
 
     this.viewboxProperties.panZoomLeft -=

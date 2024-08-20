@@ -43,6 +43,7 @@ import {TravelTimeCreationEstimatorType} from "../themes/editor-trainrun-travelt
 import {Port} from "../../models/port.model";
 import {LevelOfDetailService} from "../../services/ui/level.of.detail.service";
 import {ViewportCullService} from "../../services/ui/viewport.cull.service";
+import {VersionControlService} from "../../services/data/version-control.service";
 
 @Component({
   selector: "sbb-editor-main-view",
@@ -76,7 +77,7 @@ export class EditorMainViewComponent implements AfterViewInit, OnDestroy {
     private logService: LogService,
     private viewportCullSerivce: ViewportCullService,
     private levelOfDetailService: LevelOfDetailService,
-
+    private versionControlService: VersionControlService,
   ) {
     this.editorView = new EditorView(
       this,
@@ -594,6 +595,12 @@ export class EditorMainViewComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  private handleVariantChanged() {
+    if (this.versionControlService?.getAndClearVarianteChangedSignal()) {
+      this.uiInteractionService.viewportCenteringOnNodesBoundingBox();
+    }
+  }
+
   private subscribeViewToServices() {
     this.nodeService.nodes
       .pipe(takeUntil(this.destroyed))
@@ -630,6 +637,12 @@ export class EditorMainViewComponent implements AfterViewInit, OnDestroy {
       .subscribe((updatedNotes) => {
         this.editorView.notesView.displayNotes(updatedNotes);
         this.editorView.postDisplayRendering();
+      });
+
+    this.nodeService.nodes
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(() => {
+        this.handleVariantChanged();
       });
   }
 }

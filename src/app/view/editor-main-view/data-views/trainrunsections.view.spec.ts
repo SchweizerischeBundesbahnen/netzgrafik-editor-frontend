@@ -155,7 +155,8 @@ describe("TrainrunSection-View", () => {
       copyService,
       logService,
       viewportCullSerivce,
-      levelOfDetailService
+      levelOfDetailService,
+      undefined
     );
 
     new EditorView(
