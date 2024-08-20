@@ -150,7 +150,8 @@ describe("Transitions-View", () => {
       copyService,
       logService,
       viewportCullSerivce,
-      levelOfDetailService
+      levelOfDetailService,
+      undefined
     );
 
 

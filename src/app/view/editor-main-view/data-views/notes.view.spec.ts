@@ -150,7 +150,8 @@ describe("Notes-View", () => {
       copyService,
       logService,
       viewportCullSerivce,
-      levelOfDetailService
+      levelOfDetailService,
+      undefined
     );
 
     new EditorView(

@@ -151,7 +151,8 @@ describe("3d.Utils.tests", () => {
       copyService,
       logService,
       viewportCullSerivce,
-      levelOfDetailService
+      levelOfDetailService,
+      undefined
     );
 
     new EditorView(

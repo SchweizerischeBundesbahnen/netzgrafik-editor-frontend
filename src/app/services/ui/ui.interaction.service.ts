@@ -355,6 +355,14 @@ export class UiInteractionService implements OnDestroy {
     this.moveNetzgrafikEditorViewFocalPointSubject.next(center);
   }
 
+  viewportCenteringOnNodesBoundingBox() {
+    const bb = this.nodeService.getNetzgrafikBoundingBox();
+    const center = new Vec2D(
+      (bb.minCoordX + bb.maxCoordX) / 2.0,
+      (bb.minCoordY + bb.maxCoordY) / 2.0
+    );
+    this.moveNetzgrafikEditorFocalViewPoint(center);
+  }
   showOrCloseFilter(type: FilterWindowType) {
     if (this.isFilterWindowType(type)) {
       this.closeFilter();
