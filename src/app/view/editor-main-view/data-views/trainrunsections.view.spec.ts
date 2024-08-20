@@ -171,7 +171,8 @@ describe("TrainrunSection-View", () => {
       copyService,
       logService,
       viewportCullSerivce,
-      levelOfDetailService
+      levelOfDetailService,
+      undefined
     );
 
     controller.bindViewToServices();

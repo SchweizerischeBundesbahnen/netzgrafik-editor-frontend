@@ -167,7 +167,8 @@ describe("3d.Utils.tests", () => {
       copyService,
       logService,
       viewportCullSerivce,
-      levelOfDetailService
+      levelOfDetailService,
+      undefined
     );
     controller.bindViewToServices();
     editorView = controller.editorView;

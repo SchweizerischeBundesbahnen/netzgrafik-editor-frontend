@@ -8,6 +8,7 @@ import {Transition} from "../../../models/transition.model";
 import {SimpleTrainrunSectionRouter} from "../../../services/util/trainrunsection.routing";
 import {NodeService} from "../../../services/data/node.service";
 import {FilterService} from "../../../services/ui/filter.service";
+import {VersionControlService} from "../../../services/data/version-control.service";
 
 export enum PreviewLineMode {
   NotDragging,
@@ -55,6 +56,7 @@ export class TrainrunSectionPreviewLineView {
   constructor(
     private nodeService: NodeService,
     private filterService: FilterService,
+    private versionControlService : VersionControlService
   ) {}
 
   static setGroup(nodeGroup: d3.Selector) {
@@ -67,6 +69,13 @@ export class TrainrunSectionPreviewLineView {
     nodeGroup
       .append(StaticDomTags.PREVIEW_CONNECTION_LINE_ROOT_SVG)
       .attr("class", StaticDomTags.PREVIEW_CONNECTION_LINE_ROOT_CLASS);
+  }
+
+  getVariantIsWritable() : boolean {
+    if ( !this.versionControlService?.getVariantIsWritable()){
+      return false;
+    }
+    return true;
   }
 
   getMode(): PreviewLineMode {
@@ -93,6 +102,9 @@ export class TrainrunSectionPreviewLineView {
     dragIntermediateStopInfo: DragIntermediateStopInfo,
     startPosition: Vec2D,
   ) {
+    if ( !this.versionControlService?.getVariantIsWritable()){
+      return;
+    }
     this.mode = PreviewLineMode.DragIntermediateStop;
     this.dragIntermediateStopInfo = dragIntermediateStopInfo;
     this.startIntermediatePos = startPosition;
@@ -105,6 +117,9 @@ export class TrainrunSectionPreviewLineView {
     dragTransition: DragTransitionInfo,
     startPosition: Vec2D,
   ) {
+    if ( !this.versionControlService?.getVariantIsWritable()){
+      return;
+    }
     this.filterService.switchOffTemporaryEmptyAndNonStopFiltering();
     this.mode = PreviewLineMode.DragTransition;
     this.dragTransitionInfo = dragTransition;
@@ -143,6 +158,9 @@ export class TrainrunSectionPreviewLineView {
   }
 
   startPreviewLine(nodeId: number) {
+    if ( !this.versionControlService?.getVariantIsWritable()){
+      return;
+    }
     this.mode = PreviewLineMode.DragNewTrainrunSection;
     const mousePosition = d3.mouse(
       d3.select(StaticDomTags.PREVIEW_LINE_ROOT_DOM_REF).node(),
@@ -153,6 +171,9 @@ export class TrainrunSectionPreviewLineView {
   }
 
   startPreviewLineAtPosition(startNode: Node, startPosition: Vec2D) {
+    if ( !this.versionControlService?.getVariantIsWritable()){
+      return;
+    }
     this.mode = PreviewLineMode.DragExistingTrainrunSection;
     this.startNode = startNode;
     this.startPos = startPosition;

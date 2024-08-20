@@ -33,6 +33,7 @@ import {CopyService} from "../../../services/data/copy.service";
 import {StreckengrafikDrawingContext} from "../../../streckengrafik/model/util/streckengrafik.drawing.context";
 import {LevelOfDetail, LevelOfDetailService} from "../../../services/ui/level.of.detail.service";
 import {ViewportCullService} from "../../../services/ui/viewport.cull.service";
+import {VersionControlService} from "../../../services/data/version-control.service";
 
 export class EditorView implements SVGMouseControllerObserver {
   static svgName = "graphContainer";
@@ -128,7 +129,8 @@ export class EditorView implements SVGMouseControllerObserver {
     private copyService: CopyService,
     private logService: LogService,
     private viewportCullService: ViewportCullService,
-    private levelOfDetailService: LevelOfDetailService
+    private levelOfDetailService: LevelOfDetailService,
+    private versionControlService : VersionControlService
   ) {
     this.controller = controller;
     this.svgMouseController = new SVGMouseController(EditorView.svgName, this);
@@ -139,6 +141,7 @@ export class EditorView implements SVGMouseControllerObserver {
     this.trainrunSectionPreviewLineView = new TrainrunSectionPreviewLineView(
       nodeService,
       filterService,
+      versionControlService
     );
     this.multiSelectRenderer = new MultiSelectRenderer();
     this.notesView = new NotesView(this);

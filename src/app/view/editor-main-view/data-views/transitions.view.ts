@@ -327,6 +327,11 @@ export class TransitionsView {
 
   onTransitionMouseup(trainrun: Trainrun, domObj: any, transition: Transition) {
     d3.event.stopPropagation();
+
+    if ( !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable() ){
+      return;
+    }
+
     const node: Node = this.editorView.getNodeFromTransition(transition);
     if (
       this.editorView.trainrunSectionPreviewLineView.getMode() ===

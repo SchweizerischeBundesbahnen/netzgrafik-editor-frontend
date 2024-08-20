@@ -77,6 +77,7 @@ export class StaticDomTags {
   static NODE_TAG_REQ_FOR_DRAGGING = "req_for_dragging";
   static NODE_TAG_JUNCTION_ONLY = "junction_only";
   static NODE_HAS_CONNECTIONS = "has_connections";
+  static NODE_READONLY = "readonly";
 
   static NODE_HOVER_ROOT_SVG = "rect";
   static NODE_HOVER_ROOT_CLASS = "node_hover_root";

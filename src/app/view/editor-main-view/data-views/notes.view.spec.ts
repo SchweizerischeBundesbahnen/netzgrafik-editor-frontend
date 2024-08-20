@@ -166,7 +166,8 @@ describe("Notes-View", () => {
       copyService,
       logService,
       viewportCullSerivce,
-      levelOfDetailService
+      levelOfDetailService,
+      undefined
     );
     controller.bindViewToServices();
     editorView = controller.editorView;

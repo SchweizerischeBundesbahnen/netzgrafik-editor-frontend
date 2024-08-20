@@ -352,7 +352,9 @@ export class NodesView {
   }
 
   private makeHoverDragRoot(groupEnter: any) {
-
+    if ( !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable() ){
+      return;
+    }
     groupEnter
       .append(StaticDomTags.NODE_HOVER_DRAG_AREA_SVG)
       .attr("class", StaticDomTags.NODE_HOVER_DRAG_AREA_CLASS)
@@ -561,9 +563,9 @@ export class NodesView {
   }
 
   private makeLabelText(groupEnter: any) {
-
-    groupEnter
-      .append(StaticDomTags.NODE_LABELAREA_TEXT_SVG)
+    const added = groupEnter
+      .append(StaticDomTags.NODE_LABELAREA_TEXT_SVG);
+    added
       .attr("class", StaticDomTags.NODE_LABELAREA_TEXT_CLASS)
       .attr(StaticDomTags.NODE_ID, (n: NodeViewObject) => n.node.getId())
       .attr("x", NODE_TEXT_LEFT_SPACING)
@@ -576,6 +578,16 @@ export class NodesView {
         StaticDomTags.NODE_HAS_CONNECTIONS,
         (n: NodeViewObject) => n.node.getConnections().length > 0,
       )
+      .classed(
+        StaticDomTags.NODE_READONLY,
+        !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()
+      );
+
+    if ( !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable() ){
+      return;
+    }
+
+    added
       .call(this.draggable)
       .on("mouseover", (n: NodeViewObject, i, a) =>
         this.onNodeLabelAreaMouseover(n.node, a[i]),

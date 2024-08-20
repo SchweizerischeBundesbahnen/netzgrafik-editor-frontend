@@ -167,6 +167,7 @@ describe("Nodes-View", () => {
       logService,
       viewportCullSerivce,
       levelOfDetailService,
+      undefined
     );
     controller.bindViewToServices();
     editorView = controller.editorView;
