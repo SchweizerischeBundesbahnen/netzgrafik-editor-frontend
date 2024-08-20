@@ -23,6 +23,7 @@ import {LabelGroupService} from "../../../services/data/labelgroup.service";
 import {SbbChipEvent, SbbChipInputEvent} from "@sbb-esta/angular/chips";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {environment} from "../../../../environments/environment";
+import {VersionControlService} from "../../../services/data/version-control.service";
 
 interface NodeProperties {
   nodeId: number;
@@ -71,6 +72,7 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
     private nodeService: NodeService,
     private labelService: LabelService,
     private labelGroupService: LabelGroupService,
+    public versionControlService : VersionControlService,
     private cd: ChangeDetectorRef,
   ) {}
 
