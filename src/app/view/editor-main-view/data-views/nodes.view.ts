@@ -324,9 +324,10 @@ export class NodesView {
   }
 
   private makeHoverDragBackground(groupEnter: any) {
-
-    groupEnter
-      .append(StaticDomTags.NODE_HOVER_DRAG_AREA_BACKGROUND_SVG)
+    const added=
+      groupEnter
+        .append(StaticDomTags.NODE_HOVER_DRAG_AREA_BACKGROUND_SVG);
+    added
       .attr("class", StaticDomTags.NODE_HOVER_DRAG_AREA_BACKGROUND_CLASS)
       .classed(StaticDomTags.TAG_SELECTED, (n: NodeViewObject) =>
         n.node.selected(),
@@ -340,7 +341,17 @@ export class NodesView {
         "y",
         (n: NodeViewObject) => n.node.getNodeHeight() - NODE_TEXT_AREA_HEIGHT,
       )
-      .call(this.draggable)
+      .classed(
+        StaticDomTags.NODE_READONLY,
+        !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()
+      );
+
+    if ( this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable() ){
+      added
+        .call(this.draggable);
+    }
+
+    added
       .on("mouseover", (n: NodeViewObject, i, a) =>
         this.onNodeMouseoverDragButton(n.node, a[i]),
       )

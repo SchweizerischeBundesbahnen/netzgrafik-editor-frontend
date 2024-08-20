@@ -59,6 +59,10 @@
   cursor: default;
 }
 
+::ng-deep rect.node_hover_drag_root_background.readonly {
+  cursor: default;
+}
+
 ::ng-deep text.node_text.hover {
   fill: $COLOR_Edit;
 }
