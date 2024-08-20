@@ -49,18 +49,18 @@ created a new variant in the project, the editor will open automatically.
 
 The editor opens the newly created Netzgrafik. The new Netzgrafik contains some initially created
 nodes from which users can draw trainruns with their sections. In most projects these nodes are not
-required. If so press `ctrl`+`a` to select all elements of the current Netzgrafik and press `delete`
+required. If so, press `ctrl`+`a` to select all elements of the current Netzgrafik and press `delete`
 to remove them.
 
 [29-01-2024-003-clear_variant_data.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/47c7a9e5-5c4a-4159-a7fa-141347dae264)
 
 #### Create/import nodes
 
-For mor details have a look into [create and modifiy nodes](CREATE_NODES.md).
+For more details have a look into [create and modifiy nodes](CREATE_NODES.md).
 
 #### Create trainruns
 
-For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
+For more details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
 
 ## Basic Concept: Project / Variants
 
@@ -176,7 +176,7 @@ prevent projects or variants from being accidentally deleted.
 
 > If a project is deleted, all of its variants will also be deleted.
 
-### Visiblity of versions
+### Visibility of versions
 
 It is important to understand that the projects and variants are available to all users with read
 or write access. The snapshot versions are only visible to the respective editing user and are no

@@ -1,4 +1,4 @@
-## Conncetions
+## Connections
 
 ![Editing_Connections](./images/Editing_Connections.png)
 
