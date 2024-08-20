@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.7.7](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.6...netzgrafik-frontend-v2.7.7) (2024-08-20)
+
+### Bug Fixes
+* Long email addresses cause incorrect formatting of the left sidebar change history ([#243](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/243)) ([dd0fda5](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/dd0fda51f8ada14e340ae6e821e153aeac42ad7a))
+* Viewport Not Centering on Bounding Box When Reloading/Opening Netzgrafik ([#244](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/244)) ([9e5e2fd](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/9e5e2fdf85ff2c8eec9a568c2af656744f0d69af))
+* Translation is not working for variant when archived ([#249](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/249)) ([e313580](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/e3135804cf93a47a35162ab82554507d9e8b3403))
+* The menubar has a visual "thick" separator in between variant/project name and the filter symbol ([#252](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/252)) ([3496d0a](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/3496d0a2dcb7b960d14c49e15abcfd2034f65d99))
+
 ## [2.7.6](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.5...netzgrafik-frontend-v2.7.6) (2024-08-19)
 
 
