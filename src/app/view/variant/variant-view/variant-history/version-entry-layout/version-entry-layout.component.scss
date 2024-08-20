@@ -20,8 +20,8 @@
   }
 }
 
-.comment {
-  font-style: italic;
+.comment-field {
+  cursor: pointer;
 }
 
 .title-field {
@@ -41,6 +41,7 @@
   grid-column-start: 1;
   grid-column-end: span 2;
   grid-row: 2;
+  margin-right: 0px;
 }
 
 .in-conflict {
@@ -74,18 +75,9 @@
 
 .user-id {
   width: 140px;
-  overflow: auto;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  user-select: text;
+  user-select: none;
+  cursor: pointer;
 }
-
-.user-id {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  overflow-y: scroll;
-}
-
-.user-id {::-webkit-scrollbar {
-  display: none;
-}}

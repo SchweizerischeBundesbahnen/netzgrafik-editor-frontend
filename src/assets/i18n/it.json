@@ -560,6 +560,9 @@
               "version-already-available": "Version already available",
               "successfully-published": "Successfully published"
             },
+            "version-entry-layout": {
+              "user-id-copied": "Copied to clipboard: {$msg}"
+            },
             "snapshot-entry": {
               "download": "Download",
               "restore": "Restore",
