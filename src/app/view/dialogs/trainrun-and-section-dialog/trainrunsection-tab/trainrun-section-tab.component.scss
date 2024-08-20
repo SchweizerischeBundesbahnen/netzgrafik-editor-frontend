@@ -406,3 +406,13 @@ div.sbb-dialog-content.sbb-scrollbar.EditTrainrunSectionDialogTabContent {
   max-height: 48px;
   min-height: 48px;
 }
+
+
+::ng-deep div.EditTrainrunSectionDialogTabContent.readonly {
+  pointer-events: none;
+}
+
+::ng-deep div.EditTrainrunDialogTabFooter.readonly {
+  pointer-events: none;
+  opacity: 0.5;
+}

@@ -510,3 +510,11 @@ div.LabelNetzgrafik{
 div.NodeZoomValue{
   background: var(--sbb-header-lean-background-color);
 }
+
+button.ButtonTopologieEditor.readonly {
+  fill-opacity: 0.35;
+}
+
+button.ButtonNoteEditor.readonly {
+  fill-opacity: 0.35;
+}

@@ -86,6 +86,13 @@ export class VersionControlService implements OnDestroy {
     this.load(this.variant.id, loadModel);
   }
 
+  getVariantIsWritable(): boolean {
+    if (this.variant === null) {
+      return true;
+    }
+    return this.variant.isWritable;
+  }
+
   createSnapshot(newName?: string): void {
     const name = newName || this.variant.latestVersion.name;
     this.versionsBackendService

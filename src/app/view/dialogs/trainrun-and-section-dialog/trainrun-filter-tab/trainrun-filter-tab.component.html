@@ -1,4 +1,4 @@
-<div sbbDialogContent class="EditTrainrunFilterableLabelsDialogTabContent">
+<div sbbDialogContent [class]="getContentClassTag()">
   <sbb-form-field class="sbb-form-field-long" [label]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-filter-tab.labels' | translate">
     <sbb-chip-list
       [value]="trainrunLabels"
@@ -30,7 +30,7 @@
     </sbb-autocomplete>
   </sbb-form-field>
 </div>
-<div sbbDialogActions class="EditTrainrunDialogTabFooter">
+<div sbbDialogActions [class]="getContentFooterClassTag()">
   <button
     class="FunctionButton"
     tabindex="-1"

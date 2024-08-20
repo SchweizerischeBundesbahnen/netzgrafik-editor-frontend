@@ -19,6 +19,7 @@ import {Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
 import {SbbChipEvent, SbbChipInputEvent} from "@sbb-esta/angular/chips";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
+import {VersionControlService} from "../../../../services/data/version-control.service";
 
 @Component({
   selector: "sbb-trainrun-filter-tab",
@@ -43,6 +44,7 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
     private labelService: LabelService,
     private labelGroupService: LabelGroupService,
     private uiInteractionService: UiInteractionService,
+    private versionControlService: VersionControlService,
     private cd: ChangeDetectorRef,
   ) {
     this.initializeWithCurrentSelectedTrainrun();
@@ -68,6 +70,23 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
     this.destroyed.next();
     this.destroyed.complete();
   }
+
+  getContentClassTag() : string {
+    const retVal = "EditTrainrunFilterableLabelsDialogTabContent";
+    if (this.versionControlService.getVariantIsWritable()){
+      return retVal;
+    }
+    return retVal + " readonly";
+  }
+
+  getContentFooterClassTag(): string {
+    const retVal: string = "EditTrainrunDialogTabFooter";
+    if (this.versionControlService.getVariantIsWritable()) {
+      return retVal;
+    }
+    return retVal + " readonly";
+  }
+
 
   remove(chipEvent: SbbChipEvent): void {
     const valueDelete = chipEvent.chip.value as string;

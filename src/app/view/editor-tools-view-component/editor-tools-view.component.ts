@@ -194,6 +194,11 @@ export class EditorToolsViewComponent {
     window.URL.revokeObjectURL(url);
   }
 
+
+  getVariantIsWritable() {
+    return this.versionControlService.getVariantIsWritable();
+  }
+
   private convertToStammdatenCSV(): string {
     const separator = ";";
     const comma = ",";

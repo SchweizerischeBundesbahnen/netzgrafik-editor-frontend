@@ -142,7 +142,8 @@
         [class.isStreckengrafikEditing]="
           isStreckengrafikEditing() || isAnalytics()
         "
-        [disabled]="isStreckengrafikEditing() || isAnalytics()"
+        [class.readonly]="!getVariantIsWritable()"
+        [disabled]="isStreckengrafikEditing() || isAnalytics() || !getVariantIsWritable()"
         (click)="onTopologieEditor()"
         [title]="'app.view.editor-menu.topology-editor-disabled' | translate"
       >
@@ -242,7 +243,8 @@
         [class.isStreckengrafikEditing]="
           isStreckengrafikEditing() || isAnalytics()
         "
-        [disabled]="isStreckengrafikEditing() || isAnalytics()"
+        [class.readonly]="!getVariantIsWritable()"
+        [disabled]="isStreckengrafikEditing() || isAnalytics() || !getVariantIsWritable()"
         (click)="onNoteEditor()"
         [title]="'app.view.editor-menu.note-editor-disabled' | translate"
       >

@@ -115,3 +115,11 @@
 }
 
 
+::ng-deep div.EditTrainrunDialogTabContent.readonly {
+  pointer-events: none;
+}
+
+::ng-deep div.EditTrainrunDialogTabFooter.readonly {
+  pointer-events: none;
+  opacity: 0.5;
+}

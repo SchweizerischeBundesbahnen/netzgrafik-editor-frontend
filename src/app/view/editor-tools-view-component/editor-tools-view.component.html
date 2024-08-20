@@ -45,6 +45,8 @@
       (click)="onLoadButton()"
       [title]="'app.view.editor-side-view.editor-tools-view-component.import-netzgrafik' | translate"
       class="TrainrunDialog EditorToolButton"
+      [disabled]="!getVariantIsWritable()"
+      [class.readonly]="!getVariantIsWritable()"
     >
       <sbb-icon svgIcon="upload-small"></sbb-icon>
     </button>
@@ -54,6 +56,8 @@
       type="file"
       accept=".json"
       (change)="onLoad($event)"
+      [disabled]="!getVariantIsWritable()"
+      [class.readonly]="!getVariantIsWritable()"
     />
     {{ 'app.view.editor-side-view.editor-tools-view-component.import-netzgrafik-as-json' | translate }}
     <br />
@@ -75,6 +79,8 @@
       (click)="onLoadStammdatenButton()"
       [title]="'app.view.editor-side-view.editor-tools-view-component.import-base-data' | translate"
       class="TrainrunDialog EditorToolButton"
+      [disabled]="!getVariantIsWritable()"
+      [class.readonly]="!getVariantIsWritable()"
     >
       <sbb-icon svgIcon="document-plus-small"></sbb-icon>
     </button>

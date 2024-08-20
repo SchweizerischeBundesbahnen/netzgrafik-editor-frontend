@@ -21,3 +21,8 @@
 .link-reset {
   vertical-align: initial;
 }
+
+button.TrainrunDialog.EditorToolButton.readonly {
+  opacity: 0.25;
+  pointer-events: none;
+}

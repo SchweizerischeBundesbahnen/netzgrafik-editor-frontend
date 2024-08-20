@@ -16,6 +16,7 @@ import {LabelService} from "../../services/data/label.serivce";
 import {LabelGroupService} from "../../services/data/labelgroup.service";
 import {LabelGroup} from "../../models/labelGroup.model";
 import {environment} from "../../../environments/environment";
+import {VersionControlService} from "../../services/data/version-control.service";
 
 @Component({
   selector: "sbb-editor-edit-tools-view-component",
@@ -46,6 +47,7 @@ export class EditorEditToolsViewComponent implements OnDestroy {
     private logger: LogService,
     public filterService: FilterService,
     private uiInteractionService: UiInteractionService,
+    private versionControlService : VersionControlService
   ) {
     this.nodeLabelGroups = this.labelGroupService.getLabelGroupsFromLabelRef(
       LabelRef.Node,
@@ -74,6 +76,10 @@ export class EditorEditToolsViewComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.destroyed.next();
     this.destroyed.complete();
+  }
+
+  getVariantIsWritable() {
+    return this.versionControlService.getVariantIsWritable();
   }
 
   onClearAllFiltered() {

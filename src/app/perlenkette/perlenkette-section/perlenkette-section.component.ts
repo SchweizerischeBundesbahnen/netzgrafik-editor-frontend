@@ -33,6 +33,7 @@ import {
 } from "../../view/rastering/definitions";
 import {StaticDomTags} from "../../view/editor-main-view/data-views/static.dom.tags";
 import {MathUtils} from "../../utils/math";
+import {VersionControlService} from "../../services/data/version-control.service";
 
 export interface TopAndBottomTimeStructure {
   leftDepartureTime: number;
@@ -105,6 +106,7 @@ export class PerlenketteSectionComponent
     public trainrunSectionTimesService: TrainrunSectionTimesService,
     readonly filterService: FilterService,
     private loadPerlenketteService: LoadPerlenketteService,
+    private versionControlService : VersionControlService
   ) {
     this.trainrunSectionHelper = new TrainrunsectionHelper(
       this.trainrunService,
@@ -168,6 +170,10 @@ export class PerlenketteSectionComponent
   ngOnDestroy() {
     this.destroyed$.next();
     this.destroyed$.complete();
+  }
+
+  getVariantIsWritable() : boolean {
+    return this.versionControlService.getVariantIsWritable();
   }
 
   isBeingEdited(): string {

@@ -14,6 +14,7 @@ import {StaticDomTags} from "../../../editor-main-view/data-views/static.dom.tag
 import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
 import {TrainrunDialogParameter} from "../trainrun-and-section-dialog.component";
+import {VersionControlService} from "../../../../services/data/version-control.service";
 
 @Component({
   selector: "sbb-trainrun-tab",
@@ -39,6 +40,7 @@ export class TrainrunTabComponent implements OnDestroy {
     private trainrunService: TrainrunService,
     private trainrunSectionService: TrainrunSectionService,
     private uiInteractionService: UiInteractionService,
+    private versionControlService: VersionControlService,
   ) {
     this.initializeWithCurrentSelectedTrainrun();
     this.trainrunService.trainruns
@@ -53,12 +55,22 @@ export class TrainrunTabComponent implements OnDestroy {
     this.destroyed.complete();
   }
 
-  getDialogContentClassTag(): string {
+  getContentClassTag(): string {
+    const readonlyTag: string = this.versionControlService.getVariantIsWritable() ? " " : " readonly";
     if (this.isIntegratedComponent) {
-      return "EditTrainrunDialogTabContent IntegratedComponent";
+      return "EditTrainrunDialogTabContent IntegratedComponent" + readonlyTag;
     }
-    return "EditTrainrunDialogTabContent";
+    return "EditTrainrunDialogTabContent" + readonlyTag;
   }
+
+  getContentFooterClassTag(): string {
+    const retVal: string = "EditTrainrunDialogTabFooter";
+    if (this.versionControlService.getVariantIsWritable()) {
+      return retVal;
+    }
+    return retVal + " readonly";
+  }
+
 
   getFrequencyClassname(trainrunFrequency: TrainrunFrequency): string {
     if (trainrunFrequency.id === this.selectedFrequency.id) {

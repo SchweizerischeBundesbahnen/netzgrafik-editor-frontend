@@ -15,3 +15,11 @@
   max-height: 48px;
   min-height: 48px;
 }
+
+::ng-deep div.EditTrainrunFilterableLabelsDialogTabContent.readonly {
+  pointer-events: none;
+}
+
+::ng-deep div.EditTrainrunDialogTabFooter.readonly {
+  pointer-events: none;
+}

@@ -71,10 +71,7 @@ export class NetzgrafikApplicationComponent {
   }
 
   getVariantIsWritable(): boolean {
-    if (this.versionControlService.variant === null) {
-      return true;
-    }
-    return this.versionControlService.variant.isWritable;
+    return this.versionControlService.getVariantIsWritable();
   }
 
   onVariantenClicked() {

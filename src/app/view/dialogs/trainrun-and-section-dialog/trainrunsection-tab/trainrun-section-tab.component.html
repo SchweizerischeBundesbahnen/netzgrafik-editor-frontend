@@ -1,4 +1,4 @@
-<div sbbDialogContent class="EditTrainrunSectionDialogTabContent">
+<div sbbDialogContent [class]="getContentClassTag()">
   <table>
     <tr>
       <td>
@@ -467,7 +467,7 @@
     </tr>
   </table>
 </div>
-<div sbbDialogActions class="EditTrainrunDialogTabFooter">
+<div sbbDialogActions [class]="getContentFooterClassTag()">
   <button
     class="warning"
     *ngIf="trainrunSectionTimesService.getShowWarningTwoLocks() === true"
