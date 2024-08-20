@@ -40,26 +40,25 @@
       <sbb-icon svgIcon="download-small" aria-hidden="false"></sbb-icon>
     </button>
     {{ 'app.view.editor-side-view.editor-tools-view-component.export-netzgrafik-as-json' | translate }}
-    <br />
-    <button
-      (click)="onLoadButton()"
-      [title]="'app.view.editor-side-view.editor-tools-view-component.import-netzgrafik' | translate"
-      class="TrainrunDialog EditorToolButton"
-      [disabled]="!getVariantIsWritable()"
-      [class.readonly]="!getVariantIsWritable()"
-    >
-      <sbb-icon svgIcon="upload-small"></sbb-icon>
-    </button>
-    <input
-      hidden
-      #netgrafikJsonFileInput
-      type="file"
-      accept=".json"
-      (change)="onLoad($event)"
-      [disabled]="!getVariantIsWritable()"
-      [class.readonly]="!getVariantIsWritable()"
-    />
-    {{ 'app.view.editor-side-view.editor-tools-view-component.import-netzgrafik-as-json' | translate }}
+    <ng-container *ngIf="getVariantIsWritable()">
+      <br />
+      <button
+        (click)="onLoadButton()"
+        [title]="'app.view.editor-side-view.editor-tools-view-component.import-netzgrafik' | translate"
+        class="TrainrunDialog EditorToolButton"
+      >
+        <sbb-icon svgIcon="upload-small"></sbb-icon>
+      </button>
+      <input
+        hidden
+        #netgrafikJsonFileInput
+        type="file"
+        accept=".json"
+        (change)="onLoad($event)"
+      />
+      {{ 'app.view.editor-side-view.editor-tools-view-component.import-netzgrafik-as-json' | translate }}
+    </ng-container>
+
     <br />
     <button
       (click)="onExportZuglauf()"
@@ -75,30 +74,30 @@
   </sbb-expansion-panel>
   <sbb-expansion-panel [expanded]="false">
     <sbb-expansion-panel-header>{{ 'app.view.editor-side-view.editor-tools-view-component.base-data' | translate }}</sbb-expansion-panel-header>
-    <button
-      (click)="onLoadStammdatenButton()"
-      [title]="'app.view.editor-side-view.editor-tools-view-component.import-base-data' | translate"
-      class="TrainrunDialog EditorToolButton"
-      [disabled]="!getVariantIsWritable()"
-      [class.readonly]="!getVariantIsWritable()"
-    >
-      <sbb-icon svgIcon="document-plus-small"></sbb-icon>
-    </button>
-    {{ 'app.view.editor-side-view.editor-tools-view-component.import-base-data' | translate }}
-    <a
-      href="https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_NODES.md#import-nodes-from-a-semicolon-seperate-value-file-csv"
-      class="sbb-link link-reset"
-      target="_blank"
-      >{{ 'app.view.editor-side-view.editor-tools-view-component.help-csv-data' | translate }}</a
-    >
-    <input
-      hidden
-      #stammdatenFileInput
-      type="file"
-      accept=".csv"
-      (change)="onLoadStammdaten($event)"
-    />
-    <br />
+    <ng-container *ngIf="getVariantIsWritable()">
+      <button
+        (click)="onLoadStammdatenButton()"
+        [title]="'app.view.editor-side-view.editor-tools-view-component.import-base-data' | translate"
+        class="TrainrunDialog EditorToolButton"
+      >
+        <sbb-icon svgIcon="document-plus-small"></sbb-icon>
+      </button>
+      {{ 'app.view.editor-side-view.editor-tools-view-component.import-base-data' | translate }}
+      <a
+        href="https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_NODES.md#import-nodes-from-a-semicolon-seperate-value-file-csv"
+        class="sbb-link link-reset"
+        target="_blank"
+        >{{ 'app.view.editor-side-view.editor-tools-view-component.help-csv-data' | translate }}</a
+      >
+      <input
+        hidden
+        #stammdatenFileInput
+        type="file"
+        accept=".csv"
+        (change)="onLoadStammdaten($event)"
+      />
+      <br />
+    </ng-container>
     <button
       (click)="onExportStammdaten()"
       [title]="'app.view.editor-side-view.editor-tools-view-component.export-base-data' | translate"
