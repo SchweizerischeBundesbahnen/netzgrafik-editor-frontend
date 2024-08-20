@@ -20,8 +20,8 @@
   }
 }
 
-.comment {
-  font-style: italic;
+.comment-field {
+  cursor: pointer;
 }
 
 .title-field {
@@ -41,6 +41,7 @@
   grid-column-start: 1;
   grid-column-end: span 2;
   grid-row: 2;
+  margin-right: 0;
 }
 
 .in-conflict {
@@ -69,4 +70,14 @@
     background-color: sbb.$sbbColorGreen;
     border: none;
   }
+}
+
+
+.user-id {
+  width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
 }

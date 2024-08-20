@@ -8,7 +8,10 @@
     <div class="info-field title-field" *ngIf="getTitle(); let title">
       {{ title }}
     </div>
-    <div class="info-field title-field" *ngIf="getUserId(); let userId">
+    <div class="info-field title-field user-id"
+         *ngIf="getUserId(); let userId"
+         [attr.title]="getUserId()"
+          (click)="copyUserId()">
       {{ userId }}
     </div>
     <div class="info-field date-field">
@@ -19,7 +22,9 @@
     <div
       class="info-field comment-field"
       *ngIf="commentField && commentField !== ''"
+      (click)="copyComment()"
     >
+      <br>
       «{{ commentField }}»
     </div>
   </div>

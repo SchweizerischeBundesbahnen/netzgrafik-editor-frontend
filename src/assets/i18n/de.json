@@ -560,6 +560,9 @@
               "version-already-available": "Version bereits vorhanden",
               "successfully-published": "Erfolgreich publiziert"
             },
+            "version-entry-layout": {
+              "user-id-copied": "In die Zwischenablage kopiert: {$msg}"
+            },
             "snapshot-entry": {
               "download": "Herunterladen",
               "restore": "Wiederherstellen",
