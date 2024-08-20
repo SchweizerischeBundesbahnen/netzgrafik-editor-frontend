@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.7](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.6...netzgrafik-frontend-v2.7.7) (2024-08-20)
+
+
+### Miscellaneous Chores
+
+* release 2.7.7 ([8c4749b](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/8c4749bfec063b01aa3f48db58f6f5e539f114ea))
+
 ## [2.7.6](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.5...netzgrafik-frontend-v2.7.6) (2024-08-19)
 
 
