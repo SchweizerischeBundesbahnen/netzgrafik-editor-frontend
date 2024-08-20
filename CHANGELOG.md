@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.6](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.5...netzgrafik-frontend-v2.7.6) (2024-08-19)
+
+
+### Bug Fixes
+
+* use change event instead of keyup for node name change ([#248](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/248)) ([1e1177b](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/1e1177b3f382f10e36deb8f9080b6c58522a43bc))
+
 ## [2.7.5](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.4...netzgrafik-frontend-v2.7.5) (2024-08-08)
 
 

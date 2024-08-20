@@ -10,14 +10,14 @@
       <input
         sbbInput
         [ngModel]="nodeProperties.nodeBetriebspunktName"
-        (keyup)="onBetriebspunktNameChanged($event)"
+        (change)="onBetriebspunktNameChanged($event)"
       />
     </sbb-form-field>
     <sbb-form-field [label]="'app.view.editor-side-view.editor-node-detail-view.name' | translate" class="sbb-form-field-long">
       <input
         sbbInput
         [ngModel]="nodeProperties.nodeBetriebspunktFullName"
-        (keyup)="onFullNameChanged($event)"
+        (change)="onFullNameChanged($event)"
       />
     </sbb-form-field>
     <sbb-form-field [label]="'app.view.editor-side-view.editor-node-detail-view.connection-time' | translate" class="sbb-form-field-long">

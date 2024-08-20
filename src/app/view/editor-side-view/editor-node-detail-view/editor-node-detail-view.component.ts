@@ -98,7 +98,6 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
       this.nodeProperties.nodeId,
       event.target.value,
     );
-    this.nodeProperties.nodeBetriebspunktName = event.target.value;
     this.uiInteractionService.updateNodeStammdaten();
   }
 
@@ -107,7 +106,6 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
       this.nodeProperties.nodeId,
       event.target.value,
     );
-    this.nodeProperties.nodeBetriebspunktFullName = event.target.value;
   }
 
   onConnectionTimeChanged() {
