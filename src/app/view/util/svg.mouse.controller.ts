@@ -169,7 +169,6 @@ export class SVGMouseController {
 
   moveNetzgrafikEditorViewFocalPoint(center: Vec2D) {
     if (this.viewboxProperties === undefined) {
-      console.log("moveNetzgrafikEditorViewFocalPoint", null);
       return;
     }
     this.viewboxProperties.panZoomLeft =
