@@ -178,7 +178,7 @@
             "mandatory-field": "Pflichtfeld",
             "color-presets": {
               "ec": {
-                "title": "Verwende die Frabe des Frabschemas für EC"
+                "title": "Verwende die Farbe des Farbschemas für EC"
               },
               "ic": {
                 "title": "Verwende die Frabe des Frabschemas für IC"
