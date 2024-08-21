@@ -71,7 +71,7 @@
         }
       },
       "ui": {
-        "newFilter": "New filer"
+        "newFilter": "New filter"
       },
       "util": {
         "connection-validator": {
