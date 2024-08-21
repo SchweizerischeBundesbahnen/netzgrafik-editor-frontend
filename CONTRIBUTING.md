@@ -137,6 +137,19 @@ This project uses [Conventional Commits](https://www.conventionalcommits.org/) t
 As an example, please refer to: https://github.com/sbb-design-systems/sbb-angular 
 
 <a id="your-first-code-contribution"></a>
+
+### How should I write my commits?
+
+The project is using [Release please](https://github.com/googleapis/release-please?tab=readme-ov-file#how-should-i-write-my-commits)
+
+The most important prefixes you should have in mind are:
+
+* `fix:` which represents bug fixes, and correlates to a [SemVer](https://semver.org/)
+  patch.
+* `feat:` which represents a new feature, and correlates to a SemVer minor.
+* `feat!:`,  or `fix!:`, `refactor!:`, etc., which represent a breaking change
+  (indicated by the `!`) and will result in a SemVer major.
+  
 ## Your First Code Contribution
 
 Unsure where to begin contributing to Atom? You can start by looking through these `beginner` and `help-wanted` issues:
