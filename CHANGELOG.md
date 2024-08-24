@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.8](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.7...netzgrafik-frontend-v2.7.8) (2024-08-24)
+
+
+### Bug Fixes
+
+* doc: Update CREATE_FILTERS.md, spelling ([#258](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/258)) ([e0eb559](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/e0eb5592b3e0a9cd25f74ffacfe411b4f73d1369))
+
 ## [2.7.7](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.6...netzgrafik-frontend-v2.7.7) (2024-08-20)
 
 ### Bug Fixes
