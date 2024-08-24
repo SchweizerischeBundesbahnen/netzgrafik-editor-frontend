@@ -12,7 +12,7 @@ Whenever you need to create a new node. You should follow these steps:
 
 [29-01-2024-005-create_nodes.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/8ba6957c-de8e-467c-b7ae-c71b451d014e)
 
-### Import nodes from a semicolon-seperate-value file (CSV)
+### Import nodes from a semicolon-separate-value file (CSV)
 
 Nodes can be imported using a predefined **semicolon-separated file** (CSV). This allows
 creating very quickly the required nodes and the defaults used for planning. In addition to node
@@ -28,7 +28,7 @@ so that the layout comes directly from the import.
 |                  |                      BP                      |                     Bahnhof                      |   Kategorie    |    Region     |              Fahrgastwechselzeit_IPV               |               Fahrgastwechselzeit_A                |               Fahrgastwechselzeit_B                |               Fahrgastwechselzeit_C                |               Fahrgastwechselzeit_D                |      ZAZ      |           Umsteigezeit           |              Labels              |         X         |          Y          |                            Erstellen                            |
 |:----------------:|:--------------------------------------------:|:------------------------------------------------:|:--------------:|:-------------:|:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|:-------------:|:--------------------------------:|:--------------------------------:|:-----------------:|:-------------------:|:---------------------------------------------------------------:|
 |     Datatype     |                    string                    |                      string                      |     string     |   nummeric    |                      nummeric                      |                      nummeric                      |                      nummeric                      |                      nummeric                      |                      nummeric                      |   nummeric    |             nummeric             |             nummeric             |     nummeric      |      nummeric       |                          'JA' or empty                          |
-|   Description    |                      id                      |                    full name                     | category label | region number | if <= 0 -> non stop, otherwise > default stop time | if <= 0 -> non stop, otherwise > default stop time | if <= 0 -> non stop, otherwise > default stop time | if <= 0 -> non stop, otherwise > default stop time | if <= 0 -> non stop, otherwise > default stop time | no implemened | min. connectiontime - Default: 2 | comma separated filerable labels | vertical position | horizontal position | if 'JA' missing nodes gets created, otherwise just updated (ID) |
+|   Description    |                      id                      |                    full name                     | category label | region number | if <= 0 -> non stop, otherwise > default stop time | if <= 0 -> non stop, otherwise > default stop time | if <= 0 -> non stop, otherwise > default stop time | if <= 0 -> non stop, otherwise > default stop time | if <= 0 -> non stop, otherwise > default stop time | no implemened | min. connectiontime - Default: 2 | comma separated filterable labels | vertical position | horizontal position | if 'JA' missing nodes gets created, otherwise just updated (ID) |
 | More information | this is a unique identifier <br/>(non-empty) | full name of the station (node) <br/>(non-empty) | empty allowed  | empty allowed |                   empty allowed                    |                   empty allowed                    |                   empty allowed                    |                   empty allowed                    |                   empty allowed                    | empty allowed |          empty allowed           |          empty allowed           |   empty allowed   |    empty allowed    |                          empty allowed                          |
 
 **category label:** If the node gets created or updated the category labels gets added as filterable
@@ -92,7 +92,7 @@ If you want to move a node process as follows:
 ##### Single trainrun
 
 This example shows how a trainrun is aligned to a node. The outgoing/incoming edge (trainrun
-sections) depends on the node position to where the trainrun section is algined to.
+sections) depends on the node position to where the trainrun section is aligned to.
 
 [29-01-2024-006-move-nodes-reroute_trainrun.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/9ffb18c9-3f47-4bec-b7da-6368037b6a5f)
 
@@ -100,7 +100,7 @@ sections) depends on the node position to where the trainrun section is algined 
 
 ##### Multiple trainruns outgoing/ingoing ports order (positions)
 
-The outgoing/incoming edge alginment depends strongly on the position of the node.
+The outgoing/incoming edge alignment depends strongly on the position of the node.
 
 If two or more trainrun have at least one identical node (start/end does not matter), the
 trainrun are sorted according to the position of the branching node - from top to bottom or
