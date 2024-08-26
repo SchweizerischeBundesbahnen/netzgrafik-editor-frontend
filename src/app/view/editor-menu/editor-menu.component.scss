@@ -87,52 +87,6 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
   }
 }
 
-.ButtonSave {
-  width: $EDITOR_MENU_BUTTON_SIZE;
-  height: $INSIDE_OBJECT_HEIGHT;
-  min-width: $EDITOR_MENU_BUTTON_SIZE;
-  max-width: $EDITOR_MENU_BUTTON_SIZE;
-  text-align: center;
-  font-size: 25px;
-  padding: 8px 0 0 0;
-  margin: 0;
-  outline: none;
-  border: none;
-}
-
-.ButtonSave:hover {
-  border-bottom: 3px solid  var(--sbb-primary-alternative-button-background-color-hover);
-}
-
-.ButtonSave:active {
-  border-bottom: 3px solid  var(--sbb-primary-alternative-button-background-color-default);
-}
-
-.ButtonLoad > input {
-  display: none;
-}
-
-.ButtonLoad {
-  width: $EDITOR_MENU_BUTTON_SIZE;
-  height: $INSIDE_OBJECT_HEIGHT;
-  min-width: $EDITOR_MENU_BUTTON_SIZE;
-  max-width: $EDITOR_MENU_BUTTON_SIZE;
-  text-align: center;
-  font-size: 25px;
-  padding: 8px 0 0 0;
-  margin: 0;
-  outline: none;
-  border: none;
-}
-
-.ButtonLoad:hover {
-  border-bottom: 3px solid  var(--sbb-primary-alternative-button-background-color-hover);
-}
-
-.ButtonLoad:active {
-  border-bottom: 3px solid  var(--sbb-primary-alternative-button-background-color-default);
-}
-
 .ButtonFilter {
   width: $EDITOR_MENU_BUTTON_SIZE;
   height: $INSIDE_OBJECT_HEIGHT;
