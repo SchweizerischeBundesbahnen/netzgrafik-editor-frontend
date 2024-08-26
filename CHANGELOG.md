@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.9](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.8...netzgrafik-frontend-v2.7.9) (2024-08-26)
+
+
+### Bug Fixes
+
+* doc: CREATE_NODES.md, spelling ([#264](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/264)) ([30cf1d7](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/30cf1d73dda29cb153fd04354c2ec1bb912b1758))
+
 ## [2.7.8](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.7...netzgrafik-frontend-v2.7.8) (2024-08-24)
 
 
