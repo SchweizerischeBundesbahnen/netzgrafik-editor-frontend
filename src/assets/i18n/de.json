@@ -178,25 +178,25 @@
             "mandatory-field": "Pflichtfeld",
             "color-presets": {
               "ec": {
-                "title": "Verwende die Frabe des Frabschemas für EC"
+                "title": "Verwende die Farbe des Farbschemas für EC"
               },
               "ic": {
-                "title": "Verwende die Frabe des Frabschemas für IC"
+                "title": "Verwende die Farbe des Farbschemas für IC"
               },
               "ir": {
-                "title": "Verwende die Frabe des Frabschemas für IR"
+                "title": "Verwende die Farbe des Farbschemas für IR"
               },
               "re": {
-                "title": "Verwende die Frabe des Frabschemas für RE"
+                "title": "Verwende die Farbe des Farbschemas für RE"
               },
               "s": {
-                "title": "Verwende die Frabe des Frabschemas für S"
+                "title": "Verwende die Farbe des Farbschemas für S"
               },
               "gex": {
-                "title": "Verwende die Frabe des Frabschemas für GEX"
+                "title": "Verwende die Farbe des Farbschemas für GEX"
               },
               "g": {
-                "title": "Verwende die Frabe des Frabschemas für G"
+                "title": "Verwende die Farbe des Farbschemas für G"
               },
               "green": {
                 "title": "green"

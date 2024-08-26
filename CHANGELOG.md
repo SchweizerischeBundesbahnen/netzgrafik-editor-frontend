@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.7.10](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.9...netzgrafik-frontend-v2.7.10) (2024-08-26)
+
+
+### Bug Fixes
+
+* Update de.json, en.jason, spelling ([#259](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/259)) ([a166d83](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/a166d83a4689864410715949da01df04524e3d26))
+
+## [2.7.9](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.8...netzgrafik-frontend-v2.7.9) (2024-08-26)
+
+
+### Bug Fixes
+
+* doc: CREATE_NODES.md, spelling ([#264](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/264)) ([30cf1d7](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/30cf1d73dda29cb153fd04354c2ec1bb912b1758))
+
+## [2.7.8](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.7...netzgrafik-frontend-v2.7.8) (2024-08-24)
+
+
+### Bug Fixes
+
+* doc: Update CREATE_FILTERS.md, spelling ([#258](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/258)) ([e0eb559](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/e0eb5592b3e0a9cd25f74ffacfe411b4f73d1369))
+
 ## [2.7.7](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.6...netzgrafik-frontend-v2.7.7) (2024-08-20)
 
 ### Bug Fixes
