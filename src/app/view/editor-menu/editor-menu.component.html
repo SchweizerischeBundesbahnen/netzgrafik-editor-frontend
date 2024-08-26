@@ -142,7 +142,7 @@
         [class.isStreckengrafikEditing]="
           isStreckengrafikEditing() || isAnalytics()
         "
-        [class.readonly]="!getVariantIsWritable()"
+        [class.readonly]="isStreckengrafikEditing() || isAnalytics() || !getVariantIsWritable()"
         [disabled]="isStreckengrafikEditing() || isAnalytics() || !getVariantIsWritable()"
         (click)="onTopologieEditor()"
         [title]="'app.view.editor-menu.topology-editor-disabled' | translate"

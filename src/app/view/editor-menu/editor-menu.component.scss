@@ -208,6 +208,7 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
 }
 
 .ButtonTopologieEditor.TopologyEditing {
+  border-bottom: 3px solid $COLOR_TOPO_EDITOR_ACTIVE;
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
@@ -248,6 +249,7 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
 }
 
 .ButtonNoteEditor.NoteEditing {
+  border-bottom: 3px solid $COLOR_TOPO_EDITOR_ACTIVE;
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
@@ -298,6 +300,7 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
 }
 
 .ButtonStreckengrafikEditor.StreckengrafikEditing {
+  border-bottom: 3px solid $COLOR_TOPO_EDITOR_ACTIVE;
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
@@ -348,7 +351,7 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
 }
 
 .ButtonMultiNodeMoving.MultiNodeMoving {
-  border-bottom: 3px solid var(--sbb-primary-alternative-button-background-color-default);
+  border-bottom: 3px solid $COLOR_TOPO_EDITOR_ACTIVE;
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
@@ -364,10 +367,6 @@ $COLOR_TOPO_EDITOR_ACTIVE: #eb0000;
 path.ButtonMultiNodeMoving {
   fill: currentColor;
 }
-
-path.ButtonMultiNodeMoving.disabled {
-}
-
 
 .ButtonAnalytics {
   width: $EDITOR_MENU_BUTTON_SIZE;
@@ -396,6 +395,7 @@ path.ButtonMultiNodeMoving.disabled {
 }
 
 .ButtonAnalytics.ButtonAnalyticsActive {
+  border-bottom: 3px solid $COLOR_TOPO_EDITOR_ACTIVE;
   color: $COLOR_TOPO_EDITOR_ACTIVE;
 }
 
@@ -471,4 +471,47 @@ button.ButtonTopologieEditor.readonly {
 
 button.ButtonNoteEditor.readonly {
   fill-opacity: 0.35;
+}
+
+button.ButtonTopologieEditor.readonly:hover {
+  border-bottom: 0 solid var(--sbb-header-lean-background-color);
+}
+
+button.ButtonNoteEditor.readonly:hover {
+  border-bottom: 0 solid var(--sbb-header-lean-background-color);
+}
+
+.ButtonTopologieEditor.NetzgrafikEditing.isStreckengrafikEditing.readonly {
+  border-bottom: 0 solid var(--sbb-header-lean-background-color);
+}
+
+.ButtonStreckengrafikEditor.NetzgrafikEditing.isNotStreckengrafikAllowed:hover {
+  border-bottom: 0 solid var(--sbb-header-lean-background-color);
+}
+
+.ButtonMultiNodeMoving.NetzgrafikEditing.isStreckengrafikEditing {
+  fill-opacity: 0.35;
+  border-bottom: 0 solid var(--sbb-header-lean-background-color);
+}
+
+.ButtonNoteEditor.NetzgrafikEditing.isStreckengrafikEditing {
+  fill-opacity: 0.35;
+  border-bottom: 0 solid var(--sbb-header-lean-background-color);
+}
+
+.ButtonMultiNodeMoving.NetzgrafikEditing.isStreckengrafikEditing:hover {
+  border-bottom: 0 solid var(--sbb-header-lean-background-color);
+}
+
+.ButtonNoteEditor.NetzgrafikEditing.isStreckengrafikEditing:hover {
+  border-bottom: 0 solid var(--sbb-header-lean-background-color);
+}
+
+.ButtonAnalytics.isStreckengrafikEditing {
+  fill-opacity: 0.35;
+  border-bottom: 0 solid var(--sbb-header-lean-background-color);
+}
+
+.ButtonAnalytics.isStreckengrafikEditing:hover {
+  border-bottom: 0 solid var(--sbb-header-lean-background-color);
 }
