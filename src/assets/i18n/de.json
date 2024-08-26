@@ -590,7 +590,6 @@
           "archived": "(archiviert)",
           "edit-variant": "Variante bearbeiten",
           "delete-variant": {
-            "_value": "Variante löschen",
             "title": "Variante löschen",
             "content": "Möchten Sie die Variante und alle enthaltenen Versionen endgültig löschen? Diese Aktion kann nicht rückgängig gemacht werden."
           },
@@ -604,13 +603,11 @@
           "project-description": "Projekt Beschreibung",
           "edit-project": "Projekt bearbeiten",
           "archive-project": {
-            "_value": "Projekt archivieren",
             "title": "Projekt archivieren",
             "content": "Möchten Sie das Projekt jetzt archivieren?"
           },
           "undo-archiving": "Archivierung rückgängig machen",
           "delete-project": {
-            "_value": "Projekt löschen",
             "title": "Projekt löschen",
             "content": "Möchten Sie das Projekt und alle enthaltenen Varianten endgültig löschen? Diese Aktion kann nicht rückgängig gemacht werden."
           },
