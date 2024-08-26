@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.10](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.9...netzgrafik-frontend-v2.7.10) (2024-08-26)
+
+
+### Bug Fixes
+
+* Update de.json, en.jason, spelling ([#259](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/259)) ([a166d83](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/a166d83a4689864410715949da01df04524e3d26))
+
 ## [2.7.9](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.8...netzgrafik-frontend-v2.7.9) (2024-08-26)
 
 
