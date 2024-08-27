@@ -11,18 +11,18 @@ With the help of the left mouse button and keyboard you can create or modify any
   the trainrun category and name.
 
 When a new trainrun gets created the system opens a dialog window where you can enter all
-information about the new created trainrun, such a trainrun category and name. Then click outside
+information about the newly created trainrun, such as trainrun category and name. Then click outside
 the window or press `ESC` to close the dialog window.
 
 > - If you like to (re)open the dialog windows just click on the trainrun name in the editor or
     click any number (time). The dialog window is displayed again with the clicked data input field
     in focus.
-> - If you click on the trainrun - its gets selected and you can modify it.
+> - If you click on the trainrun - it gets selected and you can modify it.
 > - Click for a second time the Perlenkette gets opened.
 
 [29-01-2024-005-start-creating_trainrun.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/bc23f079-3aa6-4725-af6f-da4a53627ca3)
 
-For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
+For more details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
 
 #### Create new trainrun section - step by step
 
@@ -49,7 +49,7 @@ Currently, following different heuristics are available:
 - The **default method** (heuristic) assumes a constant travel time per section, with a default setting of 1 minute per section. 
 This means that regardless of the distance or other factors, each section has a fixed travel time of 1 minute. 
 This heuristic can be helpful as it generates obviously unusable travel times, prompting the user to address the travel time. The 
-1 minute is very clear that this time has to manually adapted. 
+1 minute is very clear that this time has to be manually adapted. 
 
 - A more complex method (heuristic) can be set to **derive the travel time from existing ones**. The travel time heuristic 
 searches for other trains of the same category on the section. If there are other trains, the longest travel
@@ -74,7 +74,7 @@ To reroute a train, follow these steps:
   node to reroute them.
   > If you drag the hexagon button outside the node it generates an intermediate stop if there was a
   stopping transition or it just removed the non-stop transition. For both cases it reroutes the
-  trainrun by removing the node alginment where the hexagon/transition was.
+  trainrun by removing the node alignment where the hexagon/transition was.
 
 [2024-1-25-Rerouting_extend_remove_trainrunsections-001.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/d697594c-57a8-4159-b44f-8a9f804f297f)
 
@@ -103,6 +103,6 @@ To switch a train from a stop to a non-stop at a node, follow these steps:
 
 ### Split / Combine two trainruns and merge Netzgrafik
 
-For mor details have a look into 
+For more details have a look into 
 - [Split/Combine two trainruns](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Split_Combine_Trainruns.md)
 - [Merge Netzgrafik](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Merge_Netzgrafik.md)
