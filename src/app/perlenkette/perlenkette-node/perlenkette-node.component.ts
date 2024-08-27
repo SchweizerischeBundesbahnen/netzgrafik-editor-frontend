@@ -349,7 +349,7 @@ export class PerlenketteNodeComponent implements OnInit {
     );
   }
 
-  disapleSectionView(event: MouseEvent) {
+  disableSectionView(event: MouseEvent) {
     this.signalIsBeingEdited.next(undefined);
     event.stopPropagation();
   }
