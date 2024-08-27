@@ -166,6 +166,10 @@ export class VariantsViewComponent implements OnDestroy {
   }
 
   getVariantDataActions(variant: VariantSummaryDto): Observable<SlotAction[]> {
+    if (this.project.isArchived) {
+      return undefined;
+    }
+
     if (variant.isArchived) {
       return of([
         {
