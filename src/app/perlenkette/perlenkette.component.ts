@@ -21,6 +21,7 @@ import {EditorMode} from "../view/editor-menu/editor-mode";
 import {NodeService} from "../services/data/node.service";
 import {takeUntil} from "rxjs/operators";
 import {PerlenketteConnection} from "./model/perlenketteConnection";
+import {VersionControlService} from "../services/data/version-control.service";
 
 @Component({
   selector: "sbb-perlenkette",
@@ -53,6 +54,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     readonly filterService: FilterService,
     private readonly uiInteractionService: UiInteractionService,
     private readonly nodeService: NodeService,
+    private versionControlService : VersionControlService,
     private changeDetectorRef: ChangeDetectorRef,
   ) {
     this.selectedPerlenketteConnection = undefined;
@@ -227,8 +229,14 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     return this.signalAllChildrenIsBeingEditedSubject.asObservable();
   }
 
+  getVariantIsWritable() : boolean {
+    return this.versionControlService.getVariantIsWritable();
+  }
+
   disableSectionView() {
-    this.signalIsBeingEdited(undefined);
+    if (!this.getVariantIsWritable()) {
+      this.signalIsBeingEdited(undefined);
+    }
   }
 
   scrollFirst(event: MouseEvent) {

@@ -222,7 +222,9 @@ export class PerlenketteSectionComponent
   }
 
   disableSectionView(event: MouseEvent) {
-    this.signalIsBeingEdited.next(this.perlenketteSection);
+    if (!this.getVariantIsWritable()) {
+      this.signalIsBeingEdited.next(this.perlenketteSection);
+    }
     event.stopPropagation();
   }
 
