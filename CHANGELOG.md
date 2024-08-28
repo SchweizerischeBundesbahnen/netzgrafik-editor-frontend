@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.11](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.10...netzgrafik-frontend-v2.7.11) (2024-08-28)
+
+
+### Bug Fixes
+
+* doc: CREATE_TRAINRUN.md, spelling, grammar ([#267](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/267)) ([a9e1747](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/a9e1747f7b9dcdb4c5cee2a3e52be7426b526ad4))
+
 ## [2.7.10](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.9...netzgrafik-frontend-v2.7.10) (2024-08-26)
 
 
