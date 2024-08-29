@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.13](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.12...netzgrafik-frontend-v2.7.13) (2024-08-29)
+
+
+### Bug Fixes
+
+* Bug archived read only mode variants are editable even tho not persisted ([#257](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/257)) ([9472a89](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/9472a89c445e3473877e7fe80add5f5e3cc37863))
+
 ## [2.7.12](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.11...netzgrafik-frontend-v2.7.12) (2024-08-29)
 
 
