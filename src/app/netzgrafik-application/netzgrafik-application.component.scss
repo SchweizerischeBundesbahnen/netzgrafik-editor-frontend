@@ -7,3 +7,11 @@
 a.SideBarMainIcon.sbb-active {
   pointer-events: all;
 }
+
+.sbb-icon-sidebar-container {
+  top: 85px;
+}
+
+.sbb-icon-sidebar-container.disableBackend {
+  top: 53px;
+}
