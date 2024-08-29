@@ -13,6 +13,7 @@ import {Trainrun} from "../../models/trainrun.model";
 import {PerlenketteConnection} from "../model/perlenketteConnection";
 import {PerlenketteItem} from "../model/perlenketteItem";
 import {UiInteractionService} from "../../services/ui/ui.interaction.service";
+import {VersionControlService} from "../../services/data/version-control.service";
 
 @Component({
   selector: "sbb-perlenkette-node",
@@ -37,12 +38,17 @@ export class PerlenketteNodeComponent implements OnInit {
     public trainrunService: TrainrunService,
     readonly filterService: FilterService,
     readonly uiInteractionService: UiInteractionService,
+    readonly versionControlService : VersionControlService,
   ) {
   }
 
   ngOnInit() {
     this.isExpanded = true;
     this.calculateHeightConnectionSurplus();
+  }
+
+  getVariantIsWritable() : boolean {
+    return this.versionControlService.getVariantIsWritable();
   }
 
   getConnectionIssue(): string {
@@ -343,8 +349,10 @@ export class PerlenketteNodeComponent implements OnInit {
     );
   }
 
-  disapleSectionView(event: MouseEvent) {
-    this.signalIsBeingEdited.next(undefined);
+  disableSectionView(event: MouseEvent) {
+    if (!this.getVariantIsWritable()) {
+      this.signalIsBeingEdited.next(undefined);
+    }
     event.stopPropagation();
   }
 

@@ -151,6 +151,9 @@ export class TransitionsView {
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
   ) {
+    if (!this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()){
+      return;
+    }
     grpEnter
       .append(StaticDomTags.TRANSITION_BUTTON_SVG)
       .attr(

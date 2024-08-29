@@ -590,7 +590,6 @@
           "archived": "(archived)",
           "edit-variant": "Edit variant",
           "delete-variant": {
-            "_value": "Delete variant",
             "title": "Delete variant",
             "content": "Do you want to permanently delete the variant and all versions it contains? This action cannot be undone."
           },
@@ -604,13 +603,11 @@
           "project-description": "Project description",
           "edit-project": "Edit project",
           "archive-project": {
-            "_value": "Archive project",
             "title": "Archive project",
             "content": "Would you like to archive the project now?"
           },
           "undo-archiving": "Undo archiving",
           "delete-project": {
-            "_value": "Delete project",
             "title": "Delete projekt",
             "content": "Do you want to permanently delete the project and all the variants it contains? This action cannot be undone."
           },

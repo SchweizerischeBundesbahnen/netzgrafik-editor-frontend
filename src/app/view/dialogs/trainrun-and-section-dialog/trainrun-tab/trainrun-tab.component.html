@@ -1,4 +1,4 @@
-<div sbbDialogContent [class]="getDialogContentClassTag()">
+<div sbbDialogContent [class]="getContentClassTag()">
   <sbb-form-field [label]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.tabName' | translate" class="sbb-form-field-long">
     <input
       id="trainrunTitleField"
@@ -59,7 +59,7 @@
   </div>
 </div>
 <ng-container *ngIf="toolbarVisible">
-  <div sbbDialogActions class="EditTrainrunDialogTabFooter">
+  <div sbbDialogActions [class]="getContentFooterClassTag()">
     <button
       class="FunctionButton"
       tabindex="-1"

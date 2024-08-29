@@ -33,6 +33,7 @@ import {
 } from "../../view/rastering/definitions";
 import {StaticDomTags} from "../../view/editor-main-view/data-views/static.dom.tags";
 import {MathUtils} from "../../utils/math";
+import {VersionControlService} from "../../services/data/version-control.service";
 
 export interface TopAndBottomTimeStructure {
   leftDepartureTime: number;
@@ -105,6 +106,7 @@ export class PerlenketteSectionComponent
     public trainrunSectionTimesService: TrainrunSectionTimesService,
     readonly filterService: FilterService,
     private loadPerlenketteService: LoadPerlenketteService,
+    private versionControlService : VersionControlService
   ) {
     this.trainrunSectionHelper = new TrainrunsectionHelper(
       this.trainrunService,
@@ -170,6 +172,10 @@ export class PerlenketteSectionComponent
     this.destroyed$.complete();
   }
 
+  getVariantIsWritable() : boolean {
+    return this.versionControlService.getVariantIsWritable();
+  }
+
   isBeingEdited(): string {
     if (this.perlenketteSection.isBeingEdited === false) {
       return "Rendering";
@@ -216,7 +222,9 @@ export class PerlenketteSectionComponent
   }
 
   disableSectionView(event: MouseEvent) {
-    this.signalIsBeingEdited.next(this.perlenketteSection);
+    if (!this.getVariantIsWritable()) {
+      this.signalIsBeingEdited.next(this.perlenketteSection);
+    }
     event.stopPropagation();
   }
 

@@ -227,9 +227,9 @@ export class NotesView {
   }
 
   private makeNoteHoverRoot(groupEnter: any) {
-
-    groupEnter
-      .append(StaticDomTags.NOTE_HOVER_ROOT_SVG)
+    const added = groupEnter
+      .append(StaticDomTags.NOTE_HOVER_ROOT_SVG);
+    added
       .attr("class", StaticDomTags.NOTE_HOVER_ROOT_CLASS)
       .attr(StaticDomTags.NOTE_ID, (n: NoteViewObject) => n.note.getId())
       .attr(
@@ -241,7 +241,13 @@ export class NotesView {
         (n: NoteViewObject) => NotesView.extractTextBasedHeight(n.note) + 48,
       )
       .attr("x", -24)
-      .attr("y", -24)
+      .attr("y", -24);
+
+    if ( !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable() ){
+      return;
+    }
+
+    added
       .call(this.draggable)
       .on("mouseout", (n: NoteViewObject) => this.onNoteMouseout(n.note, null))
       .on("mouseover", (n: NoteViewObject, i, a) =>
@@ -377,8 +383,10 @@ export class NotesView {
 
   private makeNoteDragAreaBackground(groupEnter: any) {
 
-    groupEnter
-      .append(StaticDomTags.NOTE_HOVER_DRAG_AREA_BACKGROUND_SVG)
+    const added = groupEnter
+      .append(StaticDomTags.NOTE_HOVER_DRAG_AREA_BACKGROUND_SVG);
+
+    added
       .attr("class", StaticDomTags.NOTE_HOVER_DRAG_AREA_BACKGROUND_CLASS)
       .classed(StaticDomTags.TAG_SELECTED, (n: NoteViewObject) =>
         n.note.selected(),
@@ -388,7 +396,13 @@ export class NotesView {
       .attr("width", 28)
       .attr("height", 28)
       .attr("x", 0)
-      .attr("y", 0)
+      .attr("y", 0);
+
+    if ( !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable() ){
+      return;
+    }
+
+    added
       .on("mouseout", (n: NoteViewObject) =>
         this.onNoteMouseoutDragButton(n.note, null),
       )
@@ -399,7 +413,9 @@ export class NotesView {
   }
 
   private makeNoteDragArea(groupEnter: any) {
-
+    if ( !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable() ){
+      return;
+    }
     groupEnter
       .append(StaticDomTags.NOTE_HOVER_DRAG_AREA_SVG)
       .attr("class", StaticDomTags.NOTE_HOVER_DRAG_AREA_CLASS)
@@ -427,6 +443,11 @@ export class NotesView {
   }
 
   onNoteMousedown(note: Note) {
+    if ( !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable() ){
+      d3.event.stopPropagation();
+      return;
+    }
+
     if (this.editorView.editorMode === EditorMode.MultiNodeMoving) {
       const multiSelected = this.editorView.isNoteSelected(note.getId());
       if (multiSelected) {
@@ -439,6 +460,11 @@ export class NotesView {
   }
 
   onNoteMouseup(note: Note, domObj: any) {
+    if ( !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable() ){
+      d3.event.stopPropagation();
+      return;
+    }
+
     const rect: DOMRect = d3.select(domObj).node().getBoundingClientRect();
     const clickPosition = new Vec2D(
       rect.x + rect.width / 2,

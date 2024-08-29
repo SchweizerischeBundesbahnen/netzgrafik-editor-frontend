@@ -100,6 +100,10 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
     this.destroyed.complete();
   }
 
+  getVariantIsWritable() : boolean {
+    return this.versionControlService.getVariantIsWritable();
+  }
+
   onZoomIn() {
     if (
       this.uiInteractionService.getEditorMode() ===

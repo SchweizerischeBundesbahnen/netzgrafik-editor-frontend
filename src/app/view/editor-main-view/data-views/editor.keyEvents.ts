@@ -193,16 +193,26 @@ export class EditorKeyEvents {
   }
 
   private onInsertAllVisibleElementsFromCopyCache(): boolean {
+    if ( !this.trainrunSectionPreviewLineView.getVariantIsWritable() ) {
+      return true;
+    }
     this.copyService.insertCopiedNetzgrafik();
     return false;
   }
 
   private onRevertLastChange(): boolean {
+    if ( !this.trainrunSectionPreviewLineView.getVariantIsWritable() ) {
+      return true;
+    }
     this.undoService.undo();
     return true;
   }
 
   private onDuplicate(): boolean {
+    if ( !this.trainrunSectionPreviewLineView.getVariantIsWritable() ) {
+      return true;
+    }
+
     if (this.doDuplicateTrainrun()) {
       return true;
     }
@@ -490,6 +500,10 @@ export class EditorKeyEvents {
   }
 
   private onKeyPressedInsert(): boolean {
+    if ( !this.trainrunSectionPreviewLineView.getVariantIsWritable() ) {
+      return true;
+    }
+
     if (this.onDuplicate()) {
       return true;
     }
@@ -573,6 +587,9 @@ export class EditorKeyEvents {
   }
 
   private onKeyPressedDelete(): boolean {
+    if ( !this.trainrunSectionPreviewLineView.getVariantIsWritable() ) {
+      return true;
+    }
     const selectedTrainrunSectionId = this.getSelectedTrainSectionId();
 
     const connections = this.nodeSerivce.getAllSelectedConnections();

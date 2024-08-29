@@ -25,6 +25,7 @@ import {ColorRefType} from "../../../../data-structures/technical.data.structure
 import {
   TrainrunSectionTimesService
 } from "../../../../services/data/trainrun-section-times.service";
+import {VersionControlService} from "../../../../services/data/version-control.service";
 
 export interface LeftAndRightTimeStructure {
   leftDepartureTime: number;
@@ -83,6 +84,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     private trainrunSectionService: TrainrunSectionService,
     private changeDetection: ChangeDetectorRef,
     public trainrunSectionTimesService: TrainrunSectionTimesService,
+    private versionControlService: VersionControlService,
   ) {
 
     this.trainrunSectionHelper = new TrainrunsectionHelper(
@@ -178,6 +180,22 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
 
     this.updateAllValues();
     this.changeDetection.detectChanges();
+  }
+
+  getContentClassTag() : string {
+    const retVal: string = "EditTrainrunSectionDialogTabContent";
+    if (this.versionControlService.getVariantIsWritable()){
+      return retVal;
+    }
+    return retVal + " readonly";
+  }
+
+  getContentFooterClassTag() : string {
+    const retVal: string = "EditTrainrunDialogTabFooter";
+    if (this.versionControlService.getVariantIsWritable()){
+      return retVal;
+    }
+    return retVal + " readonly";
   }
 
   setFocusToUIElement(focusElement: LeftAndRightElement) {

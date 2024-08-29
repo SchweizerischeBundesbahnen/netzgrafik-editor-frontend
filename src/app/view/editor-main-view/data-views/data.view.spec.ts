@@ -172,7 +172,8 @@ describe("Editor-DataView", () => {
       copyService,
       logService,
       viewportCullSerivce,
-      levelOfDetailService
+      levelOfDetailService,
+      undefined
     );
 
     controller.bindViewToServices();

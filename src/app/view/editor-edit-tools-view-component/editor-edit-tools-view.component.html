@@ -3,7 +3,7 @@
   <sbb-expansion-panel
     [expanded]="false"
     [hideToggle]="false"
-    [disabled]="false"
+    [disabled]="!getVariantIsWritable()"
   >
     <sbb-expansion-panel-header>{{ 'app.view.editor-edit-tools-view-component.filterable-labels' | translate }}</sbb-expansion-panel-header>
     <sbb-accordion [multi]="false">
@@ -29,7 +29,9 @@
     </sbb-accordion>
   </sbb-expansion-panel>
 
-  <sbb-expansion-panel [expanded]="true">
+  <sbb-expansion-panel
+    [expanded]="getVariantIsWritable()"
+    [disabled]="!getVariantIsWritable()">
     <sbb-expansion-panel-header>{{ 'app.view.editor-edit-tools-view-component.delete-netzgrafik-title' | translate }}</sbb-expansion-panel-header>
 
     <ng-container
@@ -81,7 +83,9 @@
     </button>
     {{ 'app.view.editor-edit-tools-view-component.delete-all-visible-elements' | translate }}
   </sbb-expansion-panel>
-  <sbb-expansion-panel [expanded]="false">
+  <sbb-expansion-panel
+    [expanded]="false"
+    [disabled]="!getVariantIsWritable()">
     <sbb-expansion-panel-header>
       {{ 'app.view.editor-edit-tools-view-component.merge-netzgrafik-title' | translate }}
     </sbb-expansion-panel-header>

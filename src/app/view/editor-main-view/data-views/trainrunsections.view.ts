@@ -1221,7 +1221,9 @@ export class TrainrunSectionsView {
     connectedTrainIds: any,
     atSource: boolean,
   ) {
-
+    if (!this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()){
+      return;
+    }
     groupEnter
       .append(StaticDomTags.EDGE_LINE_PIN_SVG)
       .attr("class", StaticDomTags.EDGE_LINE_PIN_CLASS)

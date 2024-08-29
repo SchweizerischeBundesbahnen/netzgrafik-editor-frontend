@@ -6,21 +6,30 @@
 <sbb-accordion [multi]="true">
   <sbb-expansion-panel [expanded]="true">
     <sbb-expansion-panel-header>{{ 'app.view.editor-side-view.editor-node-detail-view.base-data' | translate }}</sbb-expansion-panel-header>
-    <sbb-form-field [label]="'app.view.editor-side-view.editor-node-detail-view.operational-point' | translate" class="sbb-form-field-long">
+    <sbb-form-field [label]="'app.view.editor-side-view.editor-node-detail-view.operational-point' | translate"
+                    class="sbb-form-field-long"
+                    [class.readonly]="!versionControlService.getVariantIsWritable()"
+    >
       <input
         sbbInput
         [ngModel]="nodeProperties.nodeBetriebspunktName"
         (change)="onBetriebspunktNameChanged($event)"
       />
     </sbb-form-field>
-    <sbb-form-field [label]="'app.view.editor-side-view.editor-node-detail-view.name' | translate" class="sbb-form-field-long">
+    <sbb-form-field [label]="'app.view.editor-side-view.editor-node-detail-view.name' | translate"
+                    class="sbb-form-field-long"
+                    [class.readonly]="!versionControlService.getVariantIsWritable()"
+    >
       <input
         sbbInput
         [ngModel]="nodeProperties.nodeBetriebspunktFullName"
         (change)="onFullNameChanged($event)"
       />
     </sbb-form-field>
-    <sbb-form-field [label]="'app.view.editor-side-view.editor-node-detail-view.connection-time' | translate" class="sbb-form-field-long">
+    <sbb-form-field [label]="'app.view.editor-side-view.editor-node-detail-view.connection-time' | translate"
+                    class="sbb-form-field-long"
+                    [class.readonly]="!versionControlService.getVariantIsWritable()"
+    >
       <input
         sbbInput
         type="number"
@@ -36,7 +45,10 @@
     <div class="sbb-mt-m">
       <sbb-knoten-auslastung-view></sbb-knoten-auslastung-view>
     </div>
-    <sbb-form-field [label]="'app.view.editor-side-view.editor-node-detail-view.capacity' | translate" class="sbb-form-field-long">
+    <sbb-form-field [label]="'app.view.editor-side-view.editor-node-detail-view.capacity' | translate"
+                    class="sbb-form-field-long"
+                    [class.readonly]="!versionControlService.getVariantIsWritable()"
+    >
       <input
         sbbInput
         type="number"
@@ -51,7 +63,10 @@
 
   <sbb-expansion-panel [expanded]="false">
     <sbb-expansion-panel-header>{{ 'app.view.editor-side-view.editor-node-detail-view.filterable-labels' | translate }}</sbb-expansion-panel-header>
-    <sbb-form-field [label]="'app.view.editor-side-view.editor-node-detail-view.labels' | translate" class="sbb-form-field-long">
+    <sbb-form-field [label]="'app.view.editor-side-view.editor-node-detail-view.labels' | translate"
+                    class="sbb-form-field-long"
+                    [class.readonly]="!versionControlService.getVariantIsWritable()"
+    >
       <sbb-chip-list
         [value]="nodeProperties.labels"
         (focusout)="onLabelsFocusout()"
@@ -89,7 +104,9 @@
 
     <!-- TIM: this should be done with sbb table component, but I don't know how
       (or better, use flexbox for each line and make it a two column area below a certain breakpoint)-->
-    <table class="NodeDataTable">
+    <table class="NodeDataTable"
+           [class.readonly]="!versionControlService.getVariantIsWritable()"
+    >
       <tr>
         <td class="sbb-table-column-s">{{ 'app.view.editor-side-view.editor-node-detail-view.ipv' | translate }}</td>
         <td class="sbb-table-column-m">
@@ -300,12 +317,14 @@
       </li>
     </ul>
   </sbb-expansion-panel>
-  <button
-    sbb-secondary-button
-    svgIcon="trash-small"
-    class="sbb-mt-m sbb-ml-m"
-    (click)="onDeleteNode()"
-  >
-    {{ 'app.view.editor-side-view.editor-node-detail-view.delete-node' | translate }}
-  </button>
+  <ng-container *ngIf="versionControlService.getVariantIsWritable()">
+    <button
+      sbb-secondary-button
+      svgIcon="trash-small"
+      class="sbb-mt-m sbb-ml-m"
+      (click)="onDeleteNode()"
+    >
+      {{ 'app.view.editor-side-view.editor-node-detail-view.delete-node' | translate }}
+    </button>
+  </ng-container>
 </sbb-accordion>

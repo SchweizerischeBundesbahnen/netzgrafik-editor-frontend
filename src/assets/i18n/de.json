@@ -272,7 +272,7 @@
       },
       "editor-edit-tools-view-component": {
         "edit": "Bearbeiten",
-        "filterable-labels": "Filterbare labels",
+        "filterable-labels": "Filterbare Labels",
         "trainruns": "Zugfahrten",
         "nodes": "Knoten",
         "notes": "Kommentare",
@@ -443,7 +443,7 @@
           "import-netzgrafik": "Netzgrafik importieren",
           "import-netzgrafik-as-json": "Netzgrafik aus JSON importieren",
           "export-trainruns": "Zugfahrten exportieren",
-          "export-trainruns-as-csv": "Netzgrafik aus JSON importieren",
+          "export-trainruns-as-csv": "Zugfahrten als CSV exportieren",
           "export-trainruns-as-csv-excel": "In Excel: Daten -> Aus Text/CSV -> Filename ... importieren",
           "base-data": "Stammdaten",
           "import-base-data": "Stammdaten importieren",
@@ -590,7 +590,6 @@
           "archived": "(archiviert)",
           "edit-variant": "Variante bearbeiten",
           "delete-variant": {
-            "_value": "Variante löschen",
             "title": "Variante löschen",
             "content": "Möchten Sie die Variante und alle enthaltenen Versionen endgültig löschen? Diese Aktion kann nicht rückgängig gemacht werden."
           },
@@ -604,13 +603,11 @@
           "project-description": "Projekt Beschreibung",
           "edit-project": "Projekt bearbeiten",
           "archive-project": {
-            "_value": "Projekt archivieren",
             "title": "Projekt archivieren",
             "content": "Möchten Sie das Projekt jetzt archivieren?"
           },
           "undo-archiving": "Archivierung rückgängig machen",
           "delete-project": {
-            "_value": "Projekt löschen",
             "title": "Projekt löschen",
             "content": "Möchten Sie das Projekt und alle enthaltenen Varianten endgültig löschen? Diese Aktion kann nicht rückgängig gemacht werden."
           },

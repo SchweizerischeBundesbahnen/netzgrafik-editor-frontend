@@ -13,6 +13,7 @@ import {FilterSetting} from "../../models/filterSettings.model";
 import {takeUntil} from "rxjs/operators";
 import {StaticDomTags} from "../editor-main-view/data-views/static.dom.tags";
 import {environment} from "../../../environments/environment";
+import {VersionControlService} from "../../services/data/version-control.service";
 
 @Component({
   selector: "sbb-editor-filter-view",
@@ -45,6 +46,7 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     public dataService: DataService,
     public uiInteractionService: UiInteractionService,
     public filterService: FilterService,
+    public versionControlService : VersionControlService,
   ) {
     this.activeFilterName = undefined;
     this.activeEditFilterSettingId = undefined;

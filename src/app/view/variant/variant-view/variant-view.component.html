@@ -20,11 +20,11 @@
         sbb-menu-item
         mode="icon"
         (click)="onDeleteVariant()"
-        [title]="'app.view.variant.variant-view.delete-variant' | translate"
+        [title]="'app.view.variant.variant-view.delete-variant.title' | translate"
         *ngIf="versionControlService.variant.isDeletable"
       >
         <sbb-icon svgIcon="trash-small"></sbb-icon>
-        {{ 'app.view.variant.variant-view.delete-variant' | translate }}
+        {{ 'app.view.variant.variant-view.delete-variant.title' | translate }}
       </button>
     </sbb-menu>
   </div>

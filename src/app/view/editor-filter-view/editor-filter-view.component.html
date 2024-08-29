@@ -198,107 +198,109 @@
     </button>
   </sbb-expansion-panel>
 
-  <sbb-expansion-panel [expanded]="false">
-    <sbb-expansion-panel-header>
-      {{ 'app.view.editor-filter-view.saved-filters' | translate }}
-    </sbb-expansion-panel-header>
-    <div class="sbb-filtersetting-chip-group">
-      <ng-container
-        *ngFor="let filterSetting of filterService.getFilterSettings()"
-      >
-        <ng-container *ngIf="!isActiveEditFilterSetting(filterSetting)">
-          <button
-            [class]="getFilterSettingClassname(filterSetting)"
-            (click)="onFilterSettingChanged(filterSetting)"
-            mode="ghost"
-            [title]="getFilterSettingTooltip(filterSetting)"
-          >
-            {{ makeFilterSettingButtonLabel(filterSetting) | translate }}
-          </button>
+  <ng-container *ngIf="versionControlService.getVariantIsWritable()">
+    <sbb-expansion-panel [expanded]="false">
+      <sbb-expansion-panel-header>
+        {{ 'app.view.editor-filter-view.saved-filters' | translate }}
+      </sbb-expansion-panel-header>
+      <div class="sbb-filtersetting-chip-group">
+        <ng-container
+          *ngFor="let filterSetting of filterService.getFilterSettings()"
+        >
+          <ng-container *ngIf="!isActiveEditFilterSetting(filterSetting)">
+            <button
+              [class]="getFilterSettingClassname(filterSetting)"
+              (click)="onFilterSettingChanged(filterSetting)"
+              mode="ghost"
+              [title]="getFilterSettingTooltip(filterSetting)"
+            >
+              {{ makeFilterSettingButtonLabel(filterSetting) | translate }}
+            </button>
 
-          <button
-            [class]="getFilterSettingClassname(filterSetting, true)"
-            (click)="onEditFilterSetting(filterSetting)"
-            [disabled]="!checkIsFilterSettingActive(filterSetting)"
-          >
-            <ng-container *ngIf="checkIsFilterSettingActive(filterSetting)">
+            <button
+              [class]="getFilterSettingClassname(filterSetting, true)"
+              (click)="onEditFilterSetting(filterSetting)"
+              [disabled]="!checkIsFilterSettingActive(filterSetting)"
+            >
+              <ng-container *ngIf="checkIsFilterSettingActive(filterSetting)">
+                <sbb-icon
+                  svgIcon="pen-medium"
+                  height="13px"
+                  width="13px"
+                  aria-hidden="false"
+                  style="transform: translate(-4px, 2px);"
+                >
+                </sbb-icon>
+              </ng-container>
+              <ng-container *ngIf="!checkIsFilterSettingActive(filterSetting)">
+                <sbb-icon
+                  svgIcon="pen-medium"
+                  style="color: lightgray"
+                  height="13px"
+                  width="13px"
+                  aria-hidden="false"
+                  style="transform: translate(-4px, 2px);"
+                >
+                </sbb-icon>
+              </ng-container>
+            </button>
+          </ng-container>
+
+          <ng-container *ngIf="isActiveEditFilterSetting(filterSetting)">
+            <input
+              tabindex="-1"
+              id="ActiveFilterNameElement"
+              type="text"
+              maxlength="128"
+              spellcheck="false"
+              [(ngModel)]="activeFilterName"
+            />
+
+            <button
+              [class]="getFilterSettingClassname(filterSetting, true)"
+              (click)="onEditFilterSettingSave(filterSetting)"
+            >
               <sbb-icon
-                svgIcon="pen-medium"
+                svgIcon="circle-tick-medium"
                 height="13px"
                 width="13px"
                 aria-hidden="false"
                 style="transform: translate(-4px, 2px);"
-              >
-              </sbb-icon>
-            </ng-container>
-            <ng-container *ngIf="!checkIsFilterSettingActive(filterSetting)">
-              <sbb-icon
-                svgIcon="pen-medium"
-                style="color: lightgray"
-                height="13px"
-                width="13px"
-                aria-hidden="false"
-                style="transform: translate(-4px, 2px);"
-              >
-              </sbb-icon>
-            </ng-container>
-          </button>
-        </ng-container>
 
-        <ng-container *ngIf="isActiveEditFilterSetting(filterSetting)">
-          <input
-            tabindex="-1"
-            id="ActiveFilterNameElement"
-            type="text"
-            maxlength="128"
-            spellcheck="false"
-            [(ngModel)]="activeFilterName"
-          />
+              >
+              </sbb-icon>
+            </button>
+          </ng-container>
 
           <button
             [class]="getFilterSettingClassname(filterSetting, true)"
-            (click)="onEditFilterSettingSave(filterSetting)"
+            (click)="onDeleteFilterSetting(filterSetting)"
           >
             <sbb-icon
-              svgIcon="circle-tick-medium"
+              svgIcon="trash-medium"
               height="13px"
               width="13px"
               aria-hidden="false"
               style="transform: translate(-4px, 2px);"
-
             >
             </sbb-icon>
           </button>
+          <br />
         </ng-container>
-
         <button
-          [class]="getFilterSettingClassname(filterSetting, true)"
-          (click)="onDeleteFilterSetting(filterSetting)"
+          [class]="getFilterSettingAddButtonClassname()"
+          (click)="onSaveAsNewFilterSetting()"
+          mode="ghost"
+          [title]="'app.view.editor-filter-view.save-filters' | translate"
         >
           <sbb-icon
-            svgIcon="trash-medium"
-            height="13px"
-            width="13px"
-            aria-hidden="false"
-            style="transform: translate(-4px, 2px);"
-          >
-          </sbb-icon>
+            svgIcon="circle-plus-medium"
+            style="margin-top: 3px; transform: translate(-4px, 2px);"
+          ></sbb-icon>
         </button>
-        <br />
-      </ng-container>
-      <button
-        [class]="getFilterSettingAddButtonClassname()"
-        (click)="onSaveAsNewFilterSetting()"
-        mode="ghost"
-        [title]="'app.view.editor-filter-view.save-filters' | translate"
-      >
-        <sbb-icon
-          svgIcon="circle-plus-medium"
-          style="margin-top: 3px; transform: translate(-4px, 2px);"
-        ></sbb-icon>
-      </button>
-    </div>
-  </sbb-expansion-panel>
+      </div>
+    </sbb-expansion-panel>
+  </ng-container>
 </sbb-accordion>
 
 <div style="transform: translate(24px, 10px)">

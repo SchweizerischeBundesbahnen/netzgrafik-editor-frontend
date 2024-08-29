@@ -1,6 +1,7 @@
 <div
   [class.sectionEditingContainer]="isBeingEdited() === 'TimeEditor'"
   (click)="disableSectionView($event)"
+  [class.readonly]="!getVariantIsWritable()"
 >
   <!--- START - RENDER SVG --->
   <svg

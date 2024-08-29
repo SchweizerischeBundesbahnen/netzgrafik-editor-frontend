@@ -9,6 +9,10 @@
   }
 }
 
+.readonly {
+  pointer-events: none;
+}
+
 .title_rect {
   cursor: pointer;
 }

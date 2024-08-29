@@ -91,7 +91,8 @@ export class EditorMainViewComponent implements AfterViewInit, OnDestroy {
       copyService,
       logService,
       viewportCullSerivce,
-      levelOfDetailService
+      levelOfDetailService,
+      versionControlService
     );
     this.uiInteractionService.zoomInObservable
       .pipe(takeUntil(this.destroyed))
