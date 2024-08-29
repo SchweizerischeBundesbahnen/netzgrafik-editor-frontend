@@ -1,4 +1,4 @@
-<sbb-icon-sidebar-container [attr.style]="getSidebarContainerStyle()">
+<sbb-icon-sidebar-container [class]="getSidebarClassTag()">
   <sbb-icon-sidebar [(expanded)]="expanded" >
     <!--<a sbbIconSidebarItem label="Varianten" (click)="onVariantenClicked()" class="sbb-active">-->
     <a *ngIf="!disableBackend"

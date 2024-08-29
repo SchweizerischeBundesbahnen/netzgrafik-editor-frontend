@@ -63,11 +63,11 @@ export class NetzgrafikApplicationComponent {
       });
   }
 
-  getSidebarContainerStyle(): string {
+  getSidebarClassTag(): string {
     if (this.disableBackend) {
-      return "top: 53px;";
+      return "disableBackend";
     }
-    return "top: 85px;";
+    return "";
   }
 
   getVariantIsWritable(): boolean {
