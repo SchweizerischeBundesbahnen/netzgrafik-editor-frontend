@@ -150,7 +150,7 @@ Get an insight into the plan and future [ROADMAP.md](ROADMAP.md).
 The user manual can be found here [USERMANUAL.md](documentation/USERMANUAL.md)
 
 ## Online Demo
-[nge.flatland.cloud](nge.flatland.cloud)
+[nge.flatland.cloud](https://nge.flatland.cloud)
 
 ## Getting-Started
 
