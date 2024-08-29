@@ -32,7 +32,7 @@ understandable representation of data, which facilitates manual editing.
 - **metadata**: Stores metadata information such as colors, train categories, etc.
 - **freeFloatingTexts**: Contains any freely placed texts in the Netzgrafik, notes.
 - **labels**: Represents labels associated with nodes or trainruns.
-- **labelGroups**: Groups labels together for easier management and to classify the labels into trainrun labels, node labels and note labes,.
+- **labelGroups**: Groups labels together for easier management and to classify the labels into trainrun labels, node labels and note labels,.
 - **filterData**: Contains data related to filtering the Netzgrafik.
 
 This is the basic data structure to represent the various elements in a JSON description. You can populate each element with the specific data relevant to your scenario.
@@ -110,7 +110,7 @@ See also [DATA_MODEL.md : business orientated description](https://github.com/Sc
 - **trainrunCategoryHaltezeiten** : The stop time if the trainrun of product [A, B, C, D or IPV] have to do per default : trainrunCategoryHaltezeiten
 - **symmetryAxis** : Deprecated : null
 - **warnings**: If the business logic needs to notify the user about issues, a warning can be used in JSON format : Warning
-- **labelIds**: Filterable labels assigned to the node are stored in this array of label identifiers : Arrey of numeric 
+- **labelIds**: Filterable labels assigned to the node are stored in this array of label identifiers : Array of numeric 
 
 
 <details>
@@ -355,7 +355,7 @@ More details about TimeLock
 - **categoryId**: Reference to the [trainrunCategories](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#metadata) : numeric
 - **frequencyId**: Reference to the [trainrunFrequencies](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#metadata) : numeric
 - **trainrunTimeCategoryId**: Reference to the [trainrunTimeCategories](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#metadata) : numeric 
-- **labelIds**: Filterable labels assigned to the node are stored in this array of label identifiers : Arrey of integer
+- **labelIds**: Filterable labels assigned to the node are stored in this array of label identifiers : Array of integer
 
 
 
@@ -621,5 +621,5 @@ Define the dayTimeIntervalElement
 - **text**: The text (description) of the node : string
 - **backgroundColor**: HTML color as HEX for the background: string
 - **textColor**: HTML color as HEX for the text: string
-- **labelIds**: Filterable labels assigned to the node are stored in this array of label identifiers : Arrey of integer
+- **labelIds**: Filterable labels assigned to the node are stored in this array of label identifiers : Array of integer
 
