@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.12](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.11...netzgrafik-frontend-v2.7.12) (2024-08-29)
+
+
+### Bug Fixes
+
+* Technical - replace hard coded style with common browser css styling &lt;sbb-icon-sidebar-container&gt; ([#273](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/273)) ([b505d03](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/b505d03f4296809fe5e53c7ad216ca006bb234cc))
+
 ## [2.7.11](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.10...netzgrafik-frontend-v2.7.11) (2024-08-28)
 
 
