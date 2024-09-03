@@ -385,9 +385,9 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     if (
       !this.filterService.isFilterTrainrunFrequencyEnabled(trainrunFrequency)
     ) {
-      return $localize`:@@app.view.editor-filter-view.show-trainrun-frequency:Show ${trainrunFrequency.name}:trainrunFrequency`;
+      return $localize`:@@app.view.editor-filter-view.show-trainrun-frequency:Show ${trainrunFrequency.name}:trainrunFrequency:`;
     }
-    return $localize`:@@app.view.editor-filter-view.hide-trainrun-frequency:Hide ${trainrunFrequency.name}:trainrunFrequency`;
+    return $localize`:@@app.view.editor-filter-view.hide-trainrun-frequency:Hide ${trainrunFrequency.name}:trainrunFrequency:`;
   }
 
   makeFrequencyButtonLabel(trainrunFrequency: TrainrunFrequency): string {
