@@ -1231,6 +1231,14 @@ export class NodeService implements OnDestroy {
     return Object.assign({}, this.nodesStore).nodes;
   }
 
+  getVisibleNodes(): Node[] {
+    return this.getNodes().filter((n) => this.filterService.filterNode(n));
+  }
+
+  getSelectedNodes(): Node[] {
+    return this.getNodes().filter((n) => n.selected());
+  }
+
   getAllNodeLabels(): string[] {
     let nodeLabels = [];
     this.getNodes().forEach((n) =>

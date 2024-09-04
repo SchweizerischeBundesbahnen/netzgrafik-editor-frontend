@@ -174,6 +174,12 @@ export class EditorToolsViewComponent {
     this.onExport(filename, csvData);
   }
 
+  onExportOriginDestination() {
+    const filename = $localize`:@@app.view.editor-side-view.editor-tools-view-component.originDestinationFile:originDestination` + ".csv";
+    const csvData = this.convertToOriginDestinationCSV();
+    this.onExport(filename, csvData);
+  }
+
   onExport(filename: string, csvData: string) {
     const blob = new Blob([csvData], {
       type: "text/csv",
@@ -199,8 +205,18 @@ export class EditorToolsViewComponent {
     return this.versionControlService.getVariantIsWritable();
   }
 
-  private convertToStammdatenCSV(): string {
+  private buildCSVString(headers: string[], rows: string[][]): string{
     const separator = ";";
+
+    const contentData: string[] = [];
+    contentData.push(headers.join(separator));
+    rows.forEach((row) => {
+      contentData.push(row.join(separator));
+    });
+    return contentData.join("\n");
+  }
+
+  private convertToStammdatenCSV(): string {
     const comma = ",";
 
     const headers: string[] = [];
@@ -218,8 +234,7 @@ export class EditorToolsViewComponent {
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.Y:Y`);
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.create:Create`);
 
-    const contentData: string[] = [];
-    contentData.push(headers.join(separator));
+    const rows: string[][] = [];
     this.nodeService.getNodes().forEach((nodeElement) => {
       const trainrunCategoryHaltezeit: TrainrunCategoryHaltezeit =
         nodeElement.getTrainrunCategoryHaltezeit();
@@ -288,9 +303,9 @@ export class EditorToolsViewComponent {
       row.push("" + nodeElement.getPositionX());
       row.push("" + nodeElement.getPositionY());
       row.push(erstellen);
-      contentData.push(row.join(separator));
+      rows.push(row);
     });
-    return contentData.join("\n");
+    return this.buildCSVString(headers, rows);
   }
 
   private getContainertoExport() {
@@ -355,9 +370,7 @@ export class EditorToolsViewComponent {
   }
 
   private convertToZuglaufCSV(): string {
-    const separator = ";";
     const comma = ",";
-    const contentData: string[] = [];
     const headers: string[] = [];
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.trainCategory:Train category`);
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.trainName:Train name`);
@@ -376,7 +389,7 @@ export class EditorToolsViewComponent {
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.turnaroundTime:Turnaround time`);
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.labels:Labels`);
 
-    contentData.push(headers.join(separator));
+    const rows: string[][] = [];
     this.trainrunService
       .getTrainruns()
       .filter((trainrun) => this.filterService.filterTrainrun(trainrun))
@@ -477,8 +490,30 @@ export class EditorToolsViewComponent {
             .join(comma),
         );
 
-        contentData.push(row.join(separator));
+        rows.push(row);
       });
-    return contentData.join("\n");
+    return this.buildCSVString(headers, rows);
+  }
+
+  private convertToOriginDestinationCSV(): string {
+    const headers: string[] = [];
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.origin:Origin`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.destination:Destination`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.travelTime:Travel time`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.connections:Connections`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.totalCost:Total cost`);
+
+    const selectedNodes = this.nodeService.getSelectedNodes();
+    const nodes = selectedNodes.length > 0 ? selectedNodes : this.nodeService.getVisibleNodes();
+
+    // TODO: implement the actual shortest path algorithm.
+    const rows = [];
+    nodes.forEach((origin) => {
+      nodes.forEach((destination) => {
+        const row = [origin.getFullName(), destination.getFullName(), "-1", "-1", "-1"];
+        rows.push(row);
+    });});
+
+    return this.buildCSVString(headers, rows);
   }
 }
