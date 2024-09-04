@@ -125,9 +125,9 @@
         "close-all-path-nodes": "Fermer tous les noeuds du chemin",
         "open-all-path-nodes": "Ouvrir tous les noeuds du chemin",
         "show-advanced-display-functions": "Afficher les fonctionnalités d'affichage avancées",
-        "show-or-hide-time-for-non-selected-trainruns": "Afficher/masquer le temps des lignes de train non sélectionnés",
+        "show-or-hide-time-for-non-selected-trainruns": "Afficher/masquer le temps des lignes de train non sélectionnées",
         "show-or-hide": "Activer/Désactiver {$component}",
-        "show-or-hide-name-for-non-selected-trainruns": "Afficher/masquer le nom des lignes de train non sélectionnés",
+        "show-or-hide-name-for-non-selected-trainruns": "Afficher/masquer le nom des lignes de train non sélectionnées",
         "hide-advanced-display-functions": "Masquer les fonctionnalités d'affichage avancées",
         "headway-band": "Espacement",
         "time": "Temps",
@@ -306,7 +306,7 @@
         }
       },
       "editor-filter-view": {
-        "filter": "Filtrer",
+        "filter": "Filtre",
         "general": "Général",
         "category": "Catégorie",
         "frequency": "Fréquence",
@@ -408,7 +408,7 @@
           "name": "Nom",
           "connection-time": "Temps de correspondance",
           "occupancy": "Occupation",
-          "capacity": "Capactié",
+          "capacity": "Capacité",
           "filterable-labels": "Labels filtrables",
           "labels": "Labels",
           "new-label-placeholder": "Nouveau label...",
@@ -608,7 +608,7 @@
           "search-variants": "Rechercher des variantes",
           "show-archive": "Afficher les archives",
           "project-description": "Description du projet",
-          "edit-project": "Editet le projet",
+          "edit-project": "Editer le projet",
           "archive-project": {
             "title": "Archiver un projet",
             "content": "Voulez-vous archiver le projet maintenant ?"
