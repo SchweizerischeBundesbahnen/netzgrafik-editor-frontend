@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.7.14](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.13...netzgrafik-frontend-v2.7.14) (2024-09-16)
+
+
+### Bug Fixes
+
+* doc: DATA_MODEL_JSON.md, spelling ([#276](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/276)) ([f504f0d](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/f504f0d40a4269fb4ab5a47ce6797e43c1564d32))
+* doc: Graphic_Timetable.md, spelling, grammar ([#277](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/277)) ([853b80f](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/853b80fa30b4e2119a919787f2b22bd4f4ac2600))
+
 ## [2.7.13](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.12...netzgrafik-frontend-v2.7.13) (2024-08-29)
 
 
