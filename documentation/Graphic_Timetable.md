@@ -6,15 +6,14 @@ The graphic timetable (Streckengraphik) is a ***distance-time diagram***. This d
 representation which shows the relationship between the distance travelled and the time taken. The
 diagram shows the course of train journeys along a route corridor.
 
-In the distance-time diagram, the horizontal axis (x-axis) represents the distance traveled a long
+In the distance-time diagram, the horizontal axis (x-axis) represents the distance traveled along
 the corridor of interest, and the vertical axis (y-axis) represents time. The units on the time axis
 are given in minutes. Due to the unspecified distance in the previously designed Netzgrafik, the
 exact distance cannot be determined. To ensure readability, there are two different scaling
 heuristics:
 
-- **Equal distances between the sections**: Each section has the same width, i.e. it has the same
-  number
-  of pixels. It is important to understand that the speed can only be compared within a section
+- **Equal distances between the sections**: Each section has the same width, i.e., it has the same
+  number of pixels. It is important to understand that the speed can only be compared within a section
   based on the angles. Comparing two sections based on the angle is not very meaningful as the
   actual distance travelled can be very different. Therefore, the comparison cannot be made due to
   the lack of information.
@@ -77,7 +76,7 @@ there must be future expand the node's capacity to run the concept smoothly.
 This information can help in efficient train planning and ensures that there is adequate
 infrastructure to accommodate trains during their scheduled stops. It enables better utilization of
 resources and facilitates smooth and reliable train processes. Further can this information help to
-continue working on a variant or reject in a early phase.
+continue working on a variant or reject in an early phase.
 
 When a train ends or starts at a node, track occupancy is more complicated. The track occupancy must
 take the turnaround into account. A simple turnaround is possible if the minimum dwell time for the
@@ -98,9 +97,9 @@ Example
 #### Minimum number of tracks on sections
 
 The distance-time diagram provides a graphical overview of the entire corridor of interest and
-reveal points of intersection or overlap between different train runs. These intersection points
-indicate potential conflicts or temporal overlaps between trains. The temporal overlaps takes also
-into account of the headway time which can be defined for each trainrun category seperatly.
+reveals points of intersection or overlap between different train runs. These intersection points
+indicate potential conflicts or temporal overlaps between trains. The temporal overlaps take also
+into account the headway time which can be defined for each trainrun category separately.
 
 By analyzing these conflicting regions in the distance-time diagram, it is possible to estimate the
 minimum number of tracks needed to ensure smooth train operations. These projections can give
@@ -117,6 +116,6 @@ working on the variant or reject it.
 Example
 </summary>
 
-![minum number of tracks on sections](./images/Overview_Streckengrafik_Screenshot_003.png)
+![minimum number of tracks on sections](./images/Overview_Streckengrafik_Screenshot_003.png)
 
 </details>
