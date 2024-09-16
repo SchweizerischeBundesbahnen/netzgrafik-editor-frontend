@@ -289,6 +289,10 @@ export class TrainrunService {
     return Object.assign({}, this.trainrunsStore).trainruns;
   }
 
+  getVisibleTrainruns(): Trainrun[] {
+    return this.getTrainruns().filter((t) => this.filterService.filterTrainrun(t));
+  }
+
   getAllTrainrunLabels(): string[] {
     let trainrunLabels = [];
     this.getTrainruns().forEach((t) =>
@@ -767,6 +771,24 @@ export class TrainrunService {
 
   public getNonStopIterator(node: Node, trainrunSection: TrainrunSection) {
     return new NonStopTrainrunIterator(this.logService, node, trainrunSection);
+  }
+
+  // For each trainrun, get iterators from the source (trainruns may be split).
+  public getRootIterators(): Map<number, TrainrunIterator[]> {
+    const trainrunSections = this.trainrunSectionService.getTrainrunSections();
+    const iterators = new Map<number, TrainrunIterator[]>();
+    trainrunSections.forEach((ts) => {
+      const node = ts.getSourceNode();
+      if (node.isEndNode(ts)) {
+        const it = iterators.get(ts.getTrainrunId());
+        if (it === undefined) {
+          iterators.set(ts.getTrainrunId(), [this.getIterator(node, ts)]);
+        } else {
+          it.push(this.getIterator(node, ts));
+        }
+      }
+    });
+    return iterators;
   }
 
   getBothEndNodesWithTrainrunId(trainrunId: number) {
