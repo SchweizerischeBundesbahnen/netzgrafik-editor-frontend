@@ -2,653 +2,652 @@
   "app-routing": {
     "module": {
       "path": {
-        "404": "The page you were looking for was not found.",
-        "401": "You are not authorized, please reload the page.",
-        "403": "You are not authorized to perform this action.",
-        "409": "There was a conflict while executing your action, please try again.",
-        "error": "An error has occurred."
+        "404": "La page recherchée n'a pas été trouvée.",
+        "401": "Vous n'êtes pas autorisé, veuillez recharger la page.",
+        "403": "Vous n'êtes pas autorisé à effectuer cette action.",
+        "409": "Un conflit s'est produit lors de l'exécution de votre action, veuillez réessayer.",
+        "error": "Une erreur s'est produite."
       }
     }
   },
   "app": {
     "version": "Version {$version}",
-    "user-guide": "User guide",
-    "user-manual": "User manual",
-    "logout": "Logout",
-    "login": "You are getting logged in...",
+    "user-guide": "Guide de l'utilisateur",
+    "user-manual": "Manuel de l'utilisateur",
+    "logout": "Déconnexion",
+    "login": "Vous êtes en train de vous connecter...",
     "logger": {
-      "title": "Title"
+      "title": "Titre"
     },
     "models": {
       "node": {
         "shortNameDefault": "NEW",
-        "full-name-default": "New node"
+        "full-name-default": "Nouveau noeud"
       },
       "note": {
-        "title-default": "Note title",
-        "text-default": "Note text",
-        "default-title": "Note title",
-        "default-text": "Note text"
+        "title-default": "Titre de la note",
+        "text-default": "Texte de la note",
+        "default-title": "Titre de la note",
+        "default-text": "Texte de la note"
       }
     },
     "netzgrafik-application": {
-      "variants": "Variants",
-      "filter": "Filter",
-      "analytics": "Analytics",
-      "edit": "Edit",
-      "more-functions": "More functions",
-      "settings": "Settings"
+      "variants": "Variantes",
+      "filter": "Filtre",
+      "analytics": "Analyse",
+      "edit": "Edition",
+      "more-functions": "Plus de fonctionnalités",
+      "settings": "Paramètres"
     },
     "perlenkette": {
       "perlenkette-node": {
-        "0-warning-connection": "No incorrect connection",
-        "1-warning-connection": "1 incorrect connection",
-        "n-warning-connections": "{$number} incorrect connections",
-        "0-fitting-connection": "No fitting connection",
-        "1-fitting-connection": "1 fitting connection",
-        "n-fitting-connections": "{$number} fitting connections"
+        "0-warning-connection": "Pas de correspondance incorrecte",
+        "1-warning-connection": "1 correspondance incorrecte",
+        "n-warning-connections": "{$number} correspondances incorrectes",
+        "0-fitting-connection": "Pas de correspondance correcte",
+        "1-fitting-connection": "1 correspondance correcte",
+        "n-fitting-connections": "{$number} correspondances correctes"
       },
       "perlenkette-section": {
-        "propagate-times-upwards": "Propagate times upwards",
-        "propagate-times-downwards": "Propagate times downwards"
+        "propagate-times-upwards": "Propager les temps vers l'avant",
+        "propagate-times-downwards": "Propager les temps vers l'arrière"
       },
-      "show-only-closed-locks": "Show only closed locks",
-      "show-all-locks": "Show all locks"
+      "show-only-closed-locks": "Afficher uniquement les verrous fermés",
+      "show-all-locks": "Afficher tous les verrous"
     },
     "services": {
       "data": {
         "node": {
           "transit-modified": {
-            "title": "Transition changed",
-            "description": "Times cannot be adjusted, lock found on both sides"
+            "title": "Transition modifiée",
+            "description": "Les temps ne peuvent pas être ajustés, le verrou se trouve des deux côtés."
           }
         },
         "trainrunsection": {
           "intermediate-stop-replacement": {
-            "title": "Intermediate stop replacement",
-            "description": "Intermediate stop replacement led to inconsistencies in the allocation of times!"
+            "title": "Remplacement des arrêts intermédiaires",
+            "description": "Le remplacement des arrêts intermédiaires a entraîné des incohérences dans l'attribution des temps !"
           }
         }
       },
       "ui": {
-        "newFilter": "New filter"
+        "newFilter": "Nouveau filtre"
       },
       "util": {
         "connection-validator": {
           "connection-marked-for-transit": {
-            "title": "Connection marked for transition!",
-            "description": "Connection marked for transition!"
+            "title": "Correspondance marquée par une transition",
+            "description": "Correspondance marquée par une transition!"
           }
         },
         "trainrun-iteration": {
           "error": {
-            "infinity-loop": "Iterator has detected an infinity loop. The iteration terminated early!"
+            "infinity-loop": "L'itérateur a détecté une boucle infinie. L'itération s'est terminée prématurément !"
           }
         },
         "trainrunsection-validator": {
           "target-arrival-not-reacheable": {
-            "title": "Target Arrival Warning",
-            "description": "Target arrival time cannot be reached"
+            "title": "Avertissement d'arrivée à la destination",
+            "description": "L'heure d'arrivée à la destination ne peut être atteinte"
           },
           "source-arrival-not-reacheable": {
-            "title": "Source Arrival Warning",
-            "description": "Source arrival time cannot be reached"
+            "title": "Avertissement d'arrivée à l'origine",
+            "description": "L'heure d'arrivée à l'origine ne peut être atteinte"
           },
           "travel-time-less-than-1": {
-            "title": "Travel Time less than 1",
-            "description": "Travel time must be greater than or equal to 1"
+            "title": "Temps de trajet inférieur à 1",
+            "description": "Le temps de trajet doit être supérieur ou égal à 1"
           }
         },
         "transition-validator": {
           "source-arrival-not-reacheable": {
-            "title": "Source Arrival Warning",
-            "description": "Source arrival time cannot be reached"
+            "title": "Avertissement d'arrivée à l'origine",
+            "description": "L'heure d'arrivée à l'origine ne peut être atteinte"
           },
           "source-departure-not-reacheable": {
-            "title": "Source Departure Warning",
-            "description": "Source departure time cannot be reached"
+            "title": "Avertissement de départ à l'origine",
+            "description": "L'heure de départ à l'origine ne peut être atteinte"
           },
           "target-arrival-not-reacheable": {
-            "title": "Target Arrival Warning",
-            "description": "Target arrival time cannot be reached"
+            "title": "Avertissement d'arrivée à la destination",
+            "description": "L'heure d'arrivée à la destination ne peut être atteinte"
           },
           "target-departure-not-reacheable": {
-            "title": "Target Departure Warning",
-            "description": "Target departure time cannot be reached"
+            "title": "Avertissement de départ à la destination",
+            "description": "L'heure de départ à la destination ne peut être atteinte"
           }
         }
       }
     },
     "streckengrafik": {
       "components": {
-        "reset": "Reset",
-        "close-all-path-nodes": "Close all path nodes",
-        "open-all-path-nodes": "Open all path nodes",
-        "show-advanced-display-functions": "Show advanced display functions",
-        "show-or-hide-time-for-non-selected-trainruns": "Show/hide time for non-selected trainruns",
-        "show-or-hide": "Enable/disable {$component}",
-        "show-or-hide-name-for-non-selected-trainruns": "Show/hide trainrun names for unselected trainruns",
-        "hide-advanced-display-functions": "Hide advanced display functions",
-        "mainTracks": "Main tracks",
-        "headway-band": "Headway band",
-        "time": "Time",
-        "name": "Name"
+        "reset": "Réinitialiser",
+        "close-all-path-nodes": "Fermer tous les noeuds du chemin",
+        "open-all-path-nodes": "Ouvrir tous les noeuds du chemin",
+        "show-advanced-display-functions": "Afficher les fonctionnalités d'affichage avancées",
+        "show-or-hide-time-for-non-selected-trainruns": "Afficher/masquer le temps des lignes de train non sélectionnées",
+        "show-or-hide": "Activer/Désactiver {$component}",
+        "show-or-hide-name-for-non-selected-trainruns": "Afficher/masquer le nom des lignes de train non sélectionnées",
+        "hide-advanced-display-functions": "Masquer les fonctionnalités d'affichage avancées",
+        "headway-band": "Espacement",
+        "time": "Temps",
+        "name": "Nom"
       }
     },
     "utils": {
       "navigation-parameters": {
-        "no-project-id": "No project ID available",
-        "no-variant-id": "No variant ID available",
-        "no-version-id": "No version ID available"
+        "no-project-id": "ID du projet indisponible",
+        "no-variant-id": "ID de la variante indisponible",
+        "no-version-id": "ID de la version indisponible"
       }
     },
     "view": {
       "card-grid": {
         "card": {
-          "open": "Open"
+          "open": "Ouvrir"
         }
       },
       "dialogs": {
         "confirmation-dialog": {
-          "confirmation-default": "Yes",
-          "abort-default": "No"
+          "confirmation-default": "Oui",
+          "abort-default": "Non"
         },
         "filterable-labels-dialog": {
           "filterable-label-dialog-component": {
-            "edit-filterable-labels": "Edit filterable labels for {$element}",
-            "transfer-to-all-visible": "transfer to all visible",
-            "delete-from-all-visible": "delete from all visible",
+            "edit-filterable-labels": "Modifier les labels filtrables pour {$element}",
+            "transfer-to-all-visible": "transférer à tous les visibles",
+            "delete-from-all-visible": "supprimer de tous les visibles",
             "transfer": {
-              "title": "Transfer",
-              "content": "Should the label {$label} be applied on all visible {$element}?"
+              "title": "Transférer",
+              "content": "Le label {$label} doit-il être appliqué à tous les {$element} visibles ?"
             },
             "delete": {
-              "title": "Delete",
-              "content": "Should the label {$label} be definitely delete on all visible {$element}?"
+              "title": "Supprimer",
+              "content": "Le label {$label} doit-il être définitivement supprimé sur tous les {$element} visibles ?"
             }
           },
           "filterable-labels-form": {
-            "mandatory-field": "Mandatory field"
+            "mandatory-field": "Champ obligatoire"
           }
         },
         "note-dialog": {
           "html-editor": {
-            "reset-color": "Reset color",
-            "editor-placeholder": "Enter comment here...",
-            "mandatory-field": "Mandatory field",
+            "reset-color": "Réinitialiser la couleur",
+            "editor-placeholder": "Entrez un commentaire ici...",
+            "mandatory-field": "Champ obligatoire",
             "color-presets": {
               "ec": {
-                "title": "Use color of the color scheme for EC"
+                "title": "Utiliser la couleur du schéma de couleurs de EC"
               },
               "ic": {
-                "title": "Use color of the color scheme for IC"
+                "title": "Utiliser la couleur du schéma de couleurs de IC"
               },
               "ir": {
-                "title": "Use color of the color scheme for IR"
+                "title": "Utiliser la couleur du schéma de couleurs de IR"
               },
               "re": {
-                "title": "Use color of the color scheme for RE"
+                "title": "Utiliser la couleur du schéma de couleurs de RE"
               },
               "s": {
-                "title": "Use color of the color scheme for S"
+                "title": "Utiliser la couleur du schéma de couleurs de S"
               },
               "gex": {
-                "title": "Use color of the color scheme for GEX"
+                "title": "Utiliser la couleur du schéma de couleurs de GEX"
               },
               "g": {
-                "title": "Use color of the color scheme for G"
+                "title": "Utiliser la couleur du schéma de couleurs de G"
               },
               "green": {
-                "title": "green"
+                "title": "vert"
               },
               "blue": {
-                "title": "blue"
+                "title": "bleu"
               },
               "magenta": {
                 "title": "magenta"
               },
               "red": {
-                "title": "red"
+                "title": "rouge"
               },
               "warning": {
-                "title": "warning color"
+                "title": "couleur d'avertissement"
               }
             }
           },
           "note-tab": "Note",
-          "filterable-labels-tab": "Filterable labels",
-          "delete-note": "Delete note",
+          "filterable-labels-tab": "Labels filtrables",
+          "delete-note": "Supprimer la note",
           "note-filter-tab": {
             "labels": "Labels",
-            "label-placeholder": "New label..."
+            "label-placeholder": "Nouveau label..."
           },
           "note-form": {
-            "title": "Title",
-            "name": "Name"
+            "title": "Titre",
+            "name": "Nom"
           }
         },
         "stammdaten-dialog": {
-          "base-data": "Base data",
-          "operationalPoint": "Operational point",
-          "ipv-stop-time": "IPV stop time",
-          "a-stop-time": "A stop time",
-          "b-stop-time": "B stop time",
-          "c-stop-time": "C stop time",
-          "d-stop-time": "D stop time",
+          "base-data": "Données de base",
+          "operationalPoint": "Point opérationnel",
+          "ipv-stop-time": "Temps d'arrêt IPV",
+          "a-stop-time": "Temps d'arrêt A",
+          "b-stop-time": "Temps d'arrêt B",
+          "c-stop-time": "Temps d'arrêt C",
+          "d-stop-time": "Temps d'arrêt D",
           "zaz": "ZAZ",
-          "connection-time": "Connection time",
-          "region": "Region",
-          "category": "Category",
-          "filterable-labels": "Filterable labels",
+          "connection-time": "Temps de correspondance",
+          "region": "Région",
+          "category": "Catégorie",
+          "filterable-labels": "Labels filtrables",
           "position": "Position",
-          "close": "Close"
+          "close": "Fermer"
         },
         "trainrun-and-section-dialog": {
-          "filterableLabels": "Filterable Labels",
+          "filterableLabels": "Labels filtrables",
           "trainrun-filter-tab": {
             "labels": "Labels",
-            "newLabels" : "New label...",
-            "trainrunDuplicate": "Duplicate trainrun",
-            "trainrunDelete": "Delete trainrun",
-            "delete": "Delete",
-            "deleteConfirmationQuestion": "Should the entire train route be definitively deleted?"
+            "newLabels" : "Nouveau label...",
+            "trainrunDuplicate": "Dupliquer la ligne de train",
+            "trainrunDelete": "Supprimer la ligne de train",
+            "delete": "Supprimer",
+            "deleteConfirmationQuestion": "Faut-il supprimer définitivement l'ensemble de la ligne de train ?"
           },
           "trainrun-tab": {
-            "tabName": "Name",
-            "category": "Category",
-            "frequency": "Frequency",
-            "verkehrt": "Operates",
-            "trainrunDuplicate": "Duplicate trainrun",
-            "trainrunDelete": "Delete trainrun",
-            "delete": "Delete",
-            "deleteConfirmationQuestion": "Should the entire train route be definitively deleted?"
+            "tabName": "Nom",
+            "category": "Catégorie",
+            "frequency": "Fréquence",
+            "verkehrt": "Fonctionnement",
+            "trainrunDuplicate": "Dupliquer la ligne de train",
+            "trainrunDelete": "Supprimer la ligne de train",
+            "delete": "Supprimer",
+            "deleteConfirmationQuestion": "Faut-il supprimer définitivement l'ensemble de la ligne de train ?"
           },
           "trainrun-section-tab": {
-            "warningTwoLocks": "Warning: Too many times are locked!",
-            "propagateTimesToLeft": "Propagate times to the left",
-            "propagateTimesToRight": "Propagate times to the right"
+            "warningTwoLocks": "Avertissement : Trop de temps sont bloqués !",
+            "propagateTimesToLeft": "Propager les temps à gauche",
+            "propagateTimesToRight": "Propager les temps à droite"
           }
         }
       },
       "editor-edit-tools-view-component": {
-        "edit": "Edit",
-        "filterable-labels": "Filterable labels",
-        "trainruns": "Trainruns",
-        "nodes": "Nodes",
+        "edit": "Editer",
+        "filterable-labels": "Labels filtrables",
+        "trainruns": "Lignes de train",
+        "nodes": "Noeuds",
         "notes": "Notes",
-        "delete-netzgrafik-title": "Netzgrafik - Delete",
-        "non-visible-elements": "Non visible elements",
-        "delete-all-non-visible-elements-tooltip": "Delete all non-visible elements, such as nodes, trainruns and notes",
-        "delete-all-non-visible-elements": "Delete all non-visible elements",
-        "visible-elements": "Visible elements",
-        "delete-all-visible-trainruns-tooltip": "Delete all visible trainruns",
-        "delete-all-visible-trainruns": "Delete all visible trainruns",
-        "delete-all-visible-notes-tooltip": "Delete all visible notes",
-        "delete-all-visible-notes": "Delete all visible notes",
-        "delete-all-visible-elements-tooltip": "Delete all visible elements, such as nodes, trainruns and notes",
-        "delete-all-visible-elements": "Delete all visible elements",
-        "merge-netzgrafik-title": "Netzgrafik - Merge",
-        "add-netzgrafik-as-copy-tooltip": "Add netzgrafik as a copy (trainruns, nodes, notes)",
-        "add-netzgrafik-as-copy": "Add netzgrafik as a copy",
-        "merge-netzgrafik-tooltip": "Merge netzgrafik (trainruns, nodes, notes)",
-        "merge-netzgrafik": "Merge netzgrafik",
-        "delete": "Delete",
-        "on-clear-delete-all-non-visible-elements": "Should all non-visible elements be permanently deleted from the netzgrafik?",
-        "on-clear-delete-all-visible-elements": "Should all visible elements be permanently deleted from the netzgrafik?",
-        "on-clear-delete-all-visible-trainruns": "Should all visible trainruns be permanently deleted from the netzgrafik?",
-        "on-clear-delete-all-visible-notes": "Should all visible notes be permanently deleted from the netzgrafik?",
+        "delete-netzgrafik-title": "Netzgrafik - Supprimer",
+        "non-visible-elements": "Éléments non visibles",
+        "delete-all-non-visible-elements-tooltip": "Supprimer tous les éléments non visibles, tels que les noeuds, les lignes de train et les notes",
+        "delete-all-non-visible-elements": "Supprimer tous les éléments non visibles",
+        "visible-elements": "Éléments visibles",
+        "delete-all-visible-trainruns-tooltip": "Supprimer toutes les lignes de trains visibles",
+        "delete-all-visible-trainruns": "Supprimer toutes les lignes de trains visibles",
+        "delete-all-visible-notes-tooltip": "Supprimer toutes les notes visibles",
+        "delete-all-visible-notes": "Supprimer toutes les notes visibles",
+        "delete-all-visible-elements-tooltip": "Supprimer tous les éléments visibles, tels que les noeuds, les lignes de train et les notes",
+        "delete-all-visible-elements": "Supprimer tous les éléments visibles",
+        "merge-netzgrafik-title": "Netzgrafik - Fusionner",
+        "add-netzgrafik-as-copy-tooltip": "Ajouter un netzgrafik en tant que copie (lignes de train, noeuds, notes)",
+        "add-netzgrafik-as-copy": "Ajouter un netzgrafik en tant que copie",
+        "merge-netzgrafik-tooltip": "Fusionner les réticulaires (lignes de train, noeuds, notes)",
+        "merge-netzgrafik": "Fusionner un netzgrafik",
+        "delete": "Supprimer",
+        "on-clear-delete-all-non-visible-elements": "Tous les éléments non visibles doivent-ils être définitivement supprimés du netzgrafik ?",
+        "on-clear-delete-all-visible-elements": "Tous les éléments visibles doivent-ils être définitivement supprimés du netzgrafik ?",
+        "on-clear-delete-all-visible-trainruns": "Toutes les lignes de train visibles doivent-elles être définitivement supprimées du netzgrafik ?",
+        "on-clear-delete-all-visible-notes": "Toutes les notes visibles doivent-elles être définitivement supprimées du netzgrafik ?",
         "label-drop-list": {
-          "no-labels-available": "No labels available",
-          "delete-group": "Delete group",
-          "add-new-group": "Add new group",
-          "trainruns": "Trainruns",
+          "no-labels-available": "Aucun label disponible",
+          "delete-group": "Supprimer le groupe",
+          "add-new-group": "Ajouter un nouveau groupe",
+          "trainruns": "Lignes de train",
           "notes": "Notes",
-          "nodes": "Nodes"
+          "nodes": "Noeuds"
         }
       },
       "editor-filter-view": {
-        "filter": "Filter",
-        "general": "General",
-        "category": "Category",
-        "frequency": "Frequence",
-        "time-category": "Time category",
-        "display-all-trainruns": "Display all trainruns",
-        "reset-trainrun-filter": "Reset trainrun filter",
-        "filterable-labels-trainruns": "Filterable labels: Trainruns",
-        "filterable-labels-nodes": "Filterable labels: Nodes",
-        "filterable-labels-notes": "Filterable labels: Notes",
-        "display": "Display",
-        "times": "Times",
-        "decimal-displayed": "Number of decimal place displayed",
-        "display-arrival-departure-times": "Display departure and arrival times",
-        "display-arrival-departure-times-for-connections": "Display departure and arrival times for connections",
-        "display-travel-times": "Display travel times",
-        "display-trainrun-name": "Display trainrun name",
-        "connections": "Connections",
-        "display-connections": "Display connections",
-        "nodes": "Nodes",
-        "display-nodes-without-visible-trainruns": "Display nodes without (visible) trainruns",
-        "display-nodes-with-only-stopping-trainruns": "Display nodes with only stopping trainruns",
+        "filter": "Filtre",
+        "general": "Général",
+        "category": "Catégorie",
+        "frequency": "Fréquence",
+        "time-category": "Période de fonctionnement",
+        "display-all-trainruns": "Afficher toutes les lignes de train",
+        "reset-trainrun-filter": "Réinitialiser le filtre sur les lignes de train",
+        "filterable-labels-trainruns": "Labels filtrables: Lignes de train",
+        "filterable-labels-nodes": "Labels filtrables: Noeuds",
+        "filterable-labels-notes": "Labels filtrables: Notes",
+        "display": "Afficher",
+        "times": "Temps",
+        "decimal-displayed": "Nombre de décimales affichées",
+        "display-arrival-departure-times": "Afficher les heures de départ et d'arrivée",
+        "display-arrival-departure-times-for-connections": "Afficher les heures de départ et d'arrivée des correspondances",
+        "display-travel-times": "Afficher les temps de parcours",
+        "display-trainrun-name": "Afficher le nom du train",
+        "connections": "Correspondances",
+        "display-connections": "Afficher les correspondances",
+        "nodes": "Noeuds",
+        "display-nodes-without-visible-trainruns": "Afficher les noeuds sans lignes de train (visibles)",
+        "display-nodes-with-only-stopping-trainruns": "Afficher les noeuds où les trains s'arrêtent",
         "notes": "Notes",
-        "display-notes": "Display notes",
-        "reset-display-filter": "Reset display filter",
-        "saved-filters": "Saved filters",
-        "save-filters": "Save filters and add them as filter settings",
-        "reset-all-display-filters": "Reset all display filters",
-        "load-filter": "Load {$filter}",
-        "reload-filter": "Reload {$filter}",
-        "show-trainrun-category": "Show {$trainrunCategory}",
-        "hide-trainrun-category": "Hide {$trainrunCategory}",
-        "show-trainrun-time-category": "Show {$trainrunTimeCategory}",
-        "hide-trainrun-time-category": "Hide {$trainrunTimeCategory}",
-        "show-trainrun-frequency": "Show {$trainrunFrequency}",
-        "hide-trainrun-frequency": "Hide {$trainrunFrequency}",
+        "display-notes": "Afficher les notes",
+        "reset-display-filter": "Réinitialiser l'affichage des filtres",
+        "saved-filters": "Filtres sauvegardés",
+        "save-filters": "Enregistrer les filtres et les ajouter en tant que paramètres de filtre",
+        "reset-all-display-filters": "Réinitialiser l'affichage des filtres",
+        "load-filter": "Charger {$filter}",
+        "reload-filter": "Recharger {$filter}",
+        "show-trainrun-category": "Afficher {$trainrunCategory}",
+        "hide-trainrun-category": "Masquer {$trainrunCategory}",
+        "show-trainrun-time-category": "Afficher {$trainrunTimeCategory}",
+        "hide-trainrun-time-category": "Masquer {$trainrunTimeCategory}",
+        "show-trainrun-frequency": "Afficher {$trainrunFrequency}",
+        "hide-trainrun-frequency": "Masquer {$trainrunFrequency}",
         "filterable-label-filter": {
-          "no-labels-available": "No labels available",
-          "or": "Or",
-          "and": "And",
-          "show-all": "Show all",
-          "reset-filter": "Reset filter",
-          "show": "show",
-          "hide": "hide"
+          "no-labels-available": "Aucun label disponible",
+          "or": "Ou",
+          "and": "Et",
+          "show-all": "Afficher tout",
+          "reset-filter": "Réinitialiser le filtre",
+          "show": "afficher",
+          "hide": "masquer"
         }
       },
       "editor-menu": {
-        "save-changes": "Save changes",
-        "changes-saved": "Changes saved",
-        "read-mode": "Read mode",
-        "show-hide-filter": "Show/Hide filter",
-        "zoom-out": "Zoom out",
-        "zoom-in": "Zoom in",
-        "topology-editor-disabled": "Topology editor disabled",
-        "topology-editor-enabled": "Topology editor enabled",
-        "multiple-selection-tool-disabled": "Multiple selection tool is disabled",
-        "multiple-selection-tool-enabled": "Multiple selection tool is enabled",
-        "note-editor-disabled": "Note editor disabled",
-        "note-editor-enabled": "Note editor enabled",
-        "analytics-disabled": "Analytics disabled",
-        "analytics-enabled": "Analytics enabled",
-        "displayGraphicTimetable": "Display graphic timetable",
-        "closeGraphicTimetable": "Close graphic timetable",
-        "errorGraphicTimetable": "Graphic timetable cannot be displayed because no trainrun or no nodes have been selected."
+        "save-changes": "Enregistrer les modifications",
+        "changes-saved": "Modifications enregistrées",
+        "read-mode": "Mode lecture",
+        "show-hide-filter": "Filtre",
+        "zoom-out": "Zoom arrière",
+        "zoom-in": "Zoom avant",
+        "topology-editor-disabled": "Editeur de topologie désactivé",
+        "topology-editor-enabled": "Editeur de topologie activé",
+        "multiple-selection-tool-disabled": "Outil de sélection multiple désactivé",
+        "multiple-selection-tool-enabled": "Outil de sélection multiple activé",
+        "note-editor-disabled": "Editeur de notes désactivé",
+        "note-editor-enabled": "Editeur de notes activé",
+        "analytics-disabled": "Analyse désactivée",
+        "analytics-enabled": "Analyse activée",
+        "displayGraphicTimetable": "Afficher le graphique espace-temps",
+        "closeGraphicTimetable": "Fermer le graphique espace-temps",
+        "errorGraphicTimetable": "Le graphique espace-temps ne peut pas être affiché parce qu'aucune ligne de train ou aucun noeud n'a été sélectionné."
       },
       "editor-properties-view-component": {
-        "settings": "Settings",
-        "color-scheme": "Color scheme",
-        "theme": "Theme",
-        "background-color": "Background color",
-        "set-color-to-white": "Set color to 'white'",
-        "reset-background-color-to-default": "Reset background color to default",
-        "background-color-black": "Background color (black)",
-        "editor": "Editor",
-        "useDefaultBrowserColorTheme": "Use the default browser color theme.",
-        "defaultBrowserColorTheme": "Default browser color theme",
-        "travel-time-presetting-default": "Travel time presetting (heuristics)",
-        "graphicTimetable": "Graphic timetable",
-        "axis-scaling-distance": "Axis scaling (distance)",
-        "standardColorTheme": "Standard color theme",
-        "specialColorTheme": "Special color theme",
-        "grayscaleColorTheme": "Grayscale color theme",
-        "optimizedPrintColorTheme": "Optimized color theme for printing/exporting",
-        "standardDarkColorTheme": "Standard color theme (dark)",
-        "specialDarkColorTheme": "Special color theme (dark)",
-        "grayscaleDarkColorTheme": "Grayscale color theme (dark)",
-        "timeScaledDistance": "Travel time scaled",
-        "timeScaledDistanceTooltip": "The route graphic sections are displayed with travel time scaling, i.e. it is assumed that the selected train travels at a constant speed.",
-        "uniformDistance": "Uniform",
-        "uniformDistanceTooltip": "The route graphic sections are uniformly displayed.",
-        "fixed": "Constant 1min",
-        "fixedTooltip": "Adopts the travel time with a constant 1min (default).",
-        "retrieveFromEdge": "Section travel time",
-        "retrieveFromEdgeTooltip": "Takes over the max. travel time on the same section of all trains of the same category, otherwise max. travel time of all trains, otherwise 1 min."
+        "settings": "Paramètres",
+        "color-scheme": "Palette de couleurs",
+        "theme": "Thème",
+        "background-color": "Couleur d'arrière-plan",
+        "set-color-to-white": "Définir la couleur à 'blanc'",
+        "reset-background-color-to-default": "Réinitialiser la couleur d'arrière-plan par défaut",
+        "background-color-black": "Couleur d'arrière-plan (noir)",
+        "editor": "Editeur",
+        "useDefaultBrowserColorTheme": "Utiliser le thème de couleur par défaut du navigateur",
+        "defaultBrowserColorTheme": "Thème de couleur par défaut du navigateur",
+        "travel-time-presetting-default": "Prédétermination du temps de parcours (heuristique)",
+        "graphicTimetable": "Graphique espace-temps",
+        "axis-scaling-distance": "Mise à l'échelle de l'axe (distance)",
+        "standardColorTheme": "Thème de couleur standard",
+        "specialColorTheme": "Thème de couleur spécial",
+        "grayscaleColorTheme": "Thème de couleurs en niveaux de gris",
+        "optimizedPrintColorTheme": "Thème de couleurs optimisé pour l'import/export",
+        "standardDarkColorTheme": "Thème de couleur standard (sombre)",
+        "specialDarkColorTheme": "Thème de couleur spécial (sombre)",
+        "grayscaleDarkColorTheme": "Thème de couleurs en niveaux de gris (sombre)",
+        "timeScaledDistance": "Temps de trajet mis à l'échelle",
+        "timeScaledDistanceTooltip": "Les sections graphiques de l'itinéraire sont affichées avec une mise à l'échelle des temps de parcours, c'est-à-dire que l'on suppose que le train sélectionné circule à une vitesse constante.",
+        "uniformDistance": "Uniforme",
+        "uniformDistanceTooltip": "Les sections graphiques de l'itinéraire sont affichées de manière uniforme.",
+        "fixed": "Constante 1min",
+        "fixedTooltip": "Adopte le temps de parcours avec une constante de 1min (par défaut).",
+        "retrieveFromEdge": "Temps de parcours de la section",
+        "retrieveFromEdgeTooltip": "Reprend le temps de parcours maximal sur le même tronçon de tous les trains de la même catégorie, sinon le temps de parcours maximal de tous les trains, sinon 1 min."
       },
       "editor-side-view": {
         "editor-node-detail-view": {
-          "base-data": "Base data",
-          "operational-point": "Operational point",
-          "name": "Name",
-          "connection-time": "Connection time",
-          "occupancy": "Occupancy",
-          "capacity": "Capacity",
-          "filterable-labels": "Filterable labels",
+          "base-data": "Données de base",
+          "operational-point": "Point opérationnel",
+          "name": "Nom",
+          "connection-time": "Temps de correspondance",
+          "occupancy": "Occupation",
+          "capacity": "Capacité",
+          "filterable-labels": "Labels filtrables",
           "labels": "Labels",
-          "new-label-placeholder": "New label...",
-          "stopping-times": "Stopping times",
-          "stopping-time-per-product": "Stopping time per product",
-          "no-stop": "No stop",
+          "new-label-placeholder": "Nouveau label...",
+          "stopping-times": "Temps d'arrêt",
+          "stopping-time-per-product": "Temps d'arrêt par produit",
+          "no-stop": "Pas d'arrêt",
           "ipv": "IPV",
           "a": "A",
           "b": "B",
           "c": "C",
           "d": "D",
-          "links": "Links",
-          "platform-information": "Platform information",
-          "platform-length": "Platform length",
-          "delete-node": "Delete node",
-          "delete": "Delete",
-          "deleteNodeDialog": "Should the node {$operationalPointShortName} ({$operationalPointName}) be definitely deleted?"
+          "links": "Liens",
+          "platform-information": "Informations sur les quais",
+          "platform-length": "Longueur des quais",
+          "delete-node": "Supprimer le noeud",
+          "delete": "Supprimer",
+          "deleteNodeDialog": "Le noeud {$operationalPointShortName} ({$operationalPointName}) doit-il être définitivement supprimé ?"
         },
         "editor-tools-view-component": {
-          "more-functions": "More functions",
-          "export": "Export",
-          "export-netzgrafik-as-svg": "Export netzgrafik as SVG",
-          "export-as-svg": "Export as SVG",
-          "export-netzgrafik-as-png": "Export netzgrafik as PNG",
-          "export-as-png": "Export as PNG",
-          "print-netzgrafik": "Print netzgrafik",
-          "print": "Print",
+          "more-functions": "Plus de fonctionnalités",
+          "export": "Exporter",
+          "export-netzgrafik-as-svg": "Exporter le netzgrafik au format SVG",
+          "export-as-svg": "Exporter au format SVG",
+          "export-netzgrafik-as-png": "Exporter le netzgrafik au format PNG",
+          "export-as-png": "Exporter au format PNG",
+          "print-netzgrafik": "Imprimer le netzgrafik",
+          "print": "Imprimer",
           "netzgrafik": "Netzgrafik",
-          "export-netzgrafik": "Export netzgrafik",
-          "export-netzgrafik-as-json": "Export netzgrafik as JSON",
-          "import-netzgrafik": "Import netzgrafik",
-          "import-netzgrafik-as-json": "Import netzgrafik as JSON",
-          "export-trainruns": "Export trainruns",
-          "export-trainruns-as-csv": "Export trainruns as CSV",
-          "export-trainruns-as-csv-excel": "In Excel: Data -> From Text/CSV -> Import ... filename",
-          "export-origin-destination": "Export origin-destination",
-          "export-origin-destination-as-csv": "Export origin-destination as CSV",
-          "base-data": "Base data",
-          "import-base-data": "Import base data",
-          "help-csv-data": "Help: CSV - Data",
-          "export-base-data": "Export base data",
+          "export-netzgrafik": "Exporter le netzgrafik",
+          "export-netzgrafik-as-json": "Exporter le netzgrafik au format JSON",
+          "import-netzgrafik": "Importer le netzgrafik",
+          "import-netzgrafik-as-json": "Importer le netzgrafik au format JSON",
+          "export-trainruns": "Exporter les lignes de train",
+          "export-trainruns-as-csv": "Exporter les lignes de train au format CSV",
+          "export-trainruns-as-csv-excel": "Dans Excel : Données -> txt/CSV -> Importer ... nom de fichier",
+          "export-origin-destination": "Exporter origine-destination",
+          "export-origin-destination-as-csv": "Exporter origine-destination au format CSV",
+          "base-data": "Données de base",
+          "import-base-data": "Importer les données de base",
+          "help-csv-data": "Aide: CSV - Données",
+          "export-base-data": "Exporter les données de base",
           "bp": "BP",
-          "station": "Station",
-          "category": "Category",
-          "region": "Region",
-          "passengerConnectionTimeIPV": "Passenger_connection_time_IPV",
-          "passengerConnectionTimeA": "Passenger_connection_time_A",
-          "passengerConnectionTimeB": "Passenger_connection_time_B",
-          "passengerConnectionTimeC": "Passenger_connection_time_C",
-          "passengerConnectionTimeD": "Passenger_connection_time_D",
+          "station": "Gare",
+          "category": "Catégorie",
+          "region": "Région",
+          "passengerConnectionTimeIPV": "Temps_correspondance_passager_IPV",
+          "passengerConnectionTimeA": "Temps_correspondance_passager_A",
+          "passengerConnectionTimeB": "Temps_correspondance_passager_B",
+          "passengerConnectionTimeC": "Temps_correspondance_passager_C",
+          "passengerConnectionTimeD": "Temps_correspondance_passager_D",
           "ZAZ": "ZAZ",
-          "transferTime": "Transfer_time",
+          "transferTime": "Temps_transfert",
           "labels": "Labels",
           "X": "X",
           "Y": "Y",
-          "create": "Create",
-          "yes": "YES",
-          "netzgrafikFile": "networkGraphic",
+          "create": "Créer",
+          "yes": "OUI",
+          "netzgrafikFile": "netzgrafik",
           "baseDataFile": "baseData",
-          "trainrunFile": "trainrun",
-          "originDestinationFile": "originDestination",
-          "trainCategory": "Train category",
-          "trainName": "Train name",
-          "startStation": "Start station",
-          "destinationStation": "Destination station",
-          "trafficPeriod": "Traffic period",
-          "frequence": "Frequence",
-          "departureMinuteAtStart": "Minute of departure at start node",
-          "travelTimeStartDestination": "Travel time start-destination",
-          "arrivalMinuteAtDestination": "Arrival minute at destination node",
-          "turnaroundTimeDestination": "Turnaround time at destination station",
-          "departureMinuteDeparture": "Departure minute at destination node",
-          "travelTimeDestinationStart": "Travel time destination-start",
-          "arrivalMinuteAtStart": "Arrival minute at start node",
-          "turnaroundTimeStart": "Turnaround time at start station",
-          "turnaroundTime": "Turnaround time",
-          "trainrunTimeCategory": "Trainrun time category",
-          "origin": "Origin",
+          "trainrunFile": "trains",
+          "originDestinationFile": "origineDestination",
+          "trainCategory": "Catégorie du train",
+          "trainName": "Nom du train",
+          "startStation": "Gare d'origine",
+          "destinationStation": "Gare de destination",
+          "trafficPeriod": "Période de circulation",
+          "frequence": "Fréquence",
+          "departureMinuteAtStart": "Minute de départ au noeud de départ",
+          "travelTimeStartDestination": "Temps de parcours origine-destination",
+          "arrivalMinuteAtDestination": "Minute d'arrivée au noeud de destination",
+          "turnaroundTimeDestination": "Durée de retournement à la gare de destination",
+          "departureMinuteDeparture": "Minute de départ au noeud de destination",
+          "travelTimeDestinationStart": "Temps de parcours destination-origine",
+          "arrivalMinuteAtStart": "Minute d'arrivée au noeud d'origine",
+          "turnaroundTimeStart": "Durée de retournement à la gare d'origine",
+          "turnaroundTime": "Durée de retournement",
+          "trainrunTimeCategory": "Catégorie temporelle d'opération",
+          "origin": "Origine",
           "destination": "Destination",
-          "travelTime": "Travel time",
-          "connections": "Connections",
-          "totalCost": "Total cost"
+          "travelTime": "Temps de parcours",
+          "connections": "Correspondances",
+          "totalCost": "Coût total"
         }
       },
       "error-view": {
-        "error": "Error"
+        "error": "Erreur"
       },
       "navigation-bar": {
-        "project-name": "Project «{$name}»",
-        "project-name-archived": "Project «{$name}» (archived)",
-        "variant-name": "Variant «{$name}»",
-        "variant-name-archived": "Variant «{$name}» (archived)"
+        "project-name": "Projet «{$name}»",
+        "project-name-archived": "Projet «{$name}» (archivé)",
+        "variant-name": "Variante «{$name}»",
+        "variant-name-archived": "Variante «{$name}» (archivée)"
       },
       "project": {
         "project-dialog": {
-          "create-project": "Create project",
-          "edit-project": "Edit project",
-          "create": "Create",
-          "save": "Save",
-          "cancel": "Cancel",
+          "create-project": "Créer un projet",
+          "edit-project": "Editer un projet",
+          "create": "Créer",
+          "save": "Sauvegarder",
+          "cancel": "Annuler",
           "project-form": {
-            "name": "Name",
-            "mandatory-field": "Mandatory field",
-            "summary": "Summary",
+            "name": "Nom",
+            "mandatory-field": "Champ obligatoire",
+            "summary": "Résumé",
             "description": "Description",
-            "tooltip": "Users must be entered with their e-mail address. Confirm the entry for each e-mail with 'Enter'.",
-            "user-with-write-access": "User with write access",
-            "new-user-placeholder": "New user...",
-            "invalid-values": "Invalid values (no e-mail address)",
-            "user-with-read-access": "User with read access"
+            "tooltip": "Les utilisateurs doivent être saisis avec leur adresse électronique. Confirmez la saisie de chaque e-mail avec « Entrée ».",
+            "user-with-write-access": "Utilisateur avec accès en écriture",
+            "new-user-placeholder": "Nouvel utilisateur...",
+            "invalid-values": "Valeurs invalides (pas d'adresse e-mail)",
+            "user-with-read-access": "Utilisateur avec accès en lecture"
           }
         },
         "projects-view": {
-          "projects": "Projects",
-          "search-project": "Search project",
-          "show-archive": "Show archive",
-          "archived": "(archived)",
+          "projects": "Projets",
+          "search-project": "Chercher un projet",
+          "show-archive": "Afficher les archives",
+          "archived": "(archivé)",
           "archive-project": {
-            "title": "Archive project",
-            "content": "Would you like to archive the project now?"
+            "title": "Archiver un projet",
+            "content": "Voulez-vous archiver le projet maintenant ?"
           },
           "undo-archiving-project": {
-            "title": "Undo archiving",
-            "content": "Would you like to undo the archiving the project now?"
+            "title": "Annuler l'archivage",
+            "content": "Voulez-vous annuler l'archivage du projet maintenant ?"
           },
-          "undo-archiving": "Undo archiving",
-          "edit": "Edit",
-          "archive": "Archive"
+          "undo-archiving": "Annuler l'archivage",
+          "edit": "Editer",
+          "archive": "Archiver"
         }
       },
       "variant": {
         "variant-dialog": {
-          "create-variant": "Create variant",
-          "edit-variant": "Edit variant",
-          "save": "Save",
-          "cancel": "Cancel",
+          "create-variant": "Créer une variante",
+          "edit-variant": "Editer une variante",
+          "save": "Sauvegarder",
+          "cancel": "Annuler",
           "variant-form": {
-            "name": "Name",
-            "mandatory-field": "Mandatory field"
+            "name": "Nom",
+            "mandatory-field": "Champ obligatoire"
           }
         },
         "variant-view": {
           "variant-history": {
             "publish-entry": {
-              "comment": "Comment",
-              "publish": "Publish",
-              "local-changes": "Local changes must be saved first",
-              "discard-changes": "Discard changes"
+              "comment": "Commentaire",
+              "publish": "Publier",
+              "local-changes": "Les modifications locales doivent d'abord être sauvegardées",
+              "discard-changes": "Annuler les modifications"
             },
             "released-entry": {
-              "download": "Download",
-              "discard-changes": "Discard changes",
-              "ignore-conflict": "Ignore conflict",
-              "restore": "Restore",
-              "as-new-variant": "As new variant",
-              "version-already-available": "Version already available",
-              "successfully-published": "Successfully published"
+              "download": "Télécharger",
+              "discard-changes": "Annuler les modifications",
+              "ignore-conflict": "Ignorer les conflits",
+              "restore": "Restaurer",
+              "as-new-variant": "En tant que nouvelle variante",
+              "version-already-available": "Version déjà disponible",
+              "successfully-published": "Publication réussie"
             },
             "version-entry-layout": {
-              "user-id-copied": "Copied to clipboard: {$msg}"
+              "user-id-copied": "Copié dans le presse-papiers : {$msg}"
             },
             "snapshot-entry": {
-              "download": "Download",
-              "restore": "Restore",
-              "as-new-variant": "As new variant",
-              "successfully-published": "Successfully published",
-              "change-snapshot-version": "Change {$snapshotVersion}"
+              "download": "Télécharger",
+              "restore": "Restaurer",
+              "as-new-variant": "En tant que nouvelle variante",
+              "successfully-published": "Publication réussie",
+              "change-snapshot-version": "Changer {$snapshotVersion}"
             },
             "new-version-published": {
-              "title": "New version published",
-              "content": "Would you like to publish your personal changes as a new version?"
+              "title": "Nouvelle version publiée",
+              "content": "Voulez-vous publier vos modifications personnelles dans une nouvelle version ?"
             },
             "discard-changes": {
-              "title": "Discard changes",
-              "content": "Would you like to irrevocably discard your personal changes?"
+              "title": "Annuler les modifications",
+              "content": "Voulez-vous annuler définitivement vos modifications personnelles ?"
             },
             "restore-version": {
-              "title": "Restore version",
-              "content": "Would you like to restore the status of this version?"
+              "title": "Restaurer version",
+              "content": "Voulez-vous restaurer cette version ?"
             },
             "ignore-conflict": {
-              "title": "Ignore conflict",
-              "content": "Would you like the current version to be based on the highest published version?"
+              "title": "Ignorer les conflits",
+              "content": "Voulez-vous que la version actuelle soit basée sur la version publiée la plus récente ?"
             }
           },
-          "archived": "(archived)",
-          "edit-variant": "Edit variant",
+          "archived": "(archivée)",
+          "edit-variant": "Editer la variante",
           "delete-variant": {
-            "title": "Delete variant",
-            "content": "Do you want to permanently delete the variant and all versions it contains? This action cannot be undone."
+            "title": "Supprimer la variante",
+            "content": "Voulez-vous supprimer définitivement la variante et toutes les versions qu'elle contient ? Cette action ne peut pas être annulée."
           },
           "versions": "Versions"
         },
         "variants-view": {
-          "archived": "(archived)",
-          "variants": "Variants",
-          "search-variants": "Search variants",
-          "show-archive": "Show archive",
-          "project-description": "Project description",
-          "edit-project": "Edit project",
+          "archived": "(archivée)",
+          "variants": "Variantes",
+          "search-variants": "Rechercher des variantes",
+          "show-archive": "Afficher les archives",
+          "project-description": "Description du projet",
+          "edit-project": "Editer le projet",
           "archive-project": {
-            "title": "Archive project",
-            "content": "Would you like to archive the project now?"
+            "title": "Archiver un projet",
+            "content": "Voulez-vous archiver le projet maintenant ?"
           },
-          "undo-archiving": "Undo archiving",
+          "undo-archiving": "Annuler l'archivage",
           "delete-project": {
-            "title": "Delete projekt",
-            "content": "Do you want to permanently delete the project and all the variants it contains? This action cannot be undone."
+            "title": "Supprimer le projet",
+            "content": "Voulez-vous supprimer définitivement le projet et toutes les variantes qu'il contient ? Cette action ne peut pas être annulée."
           },
-          "archive": "Archive",
+          "archive": "Archiver",
           "archive-variant": {
-            "title": "Archive variant",
-            "content": "Would you like to archive the variant now?"
+            "title": "Archiver la variante",
+            "content": "Souhaitez-vous archiver la variante maintenant ?"
           },
           "undo-archiving-variant": {
-            "title": "Undo archiving",
-            "content": "Would you like to undo the archiving of the variant?"
+            "title": "Annuler l'archivage",
+            "content": "Souhaitez-vous annuler l'archivage de la variante ?"
           },
           "undo-archiving-project": {
-            "title": "Archive variant",
-            "content": "Would you like to undo the archiving of the project?"
+            "title": "Archiver la variante",
+            "content": "Voulez-vous annuler l'archivage du projet ?"
           },
-          "error-unexpected-data": "Unexpected data: No snapshot and no released version."
+          "error-unexpected-data": "Données inattendues : Pas de snapshot ni de version publiée."
         }
       }
     }
   },
-  "sbbBreadcrumbExpand": "Show entire path",
-  "sbbDialogCloseDialog": "Close dialog",
-  "sbbFileSelectorUploadFile": "Upload file",
-  "sbbFileSelectorRemoveFile": "Remove file",
-  "sbbHeaderMenuBack": "Back",
-  "sbbHeaderOpenMenu": "Open Menu",
-  "sbbHeaderCloseMenu": "Close Menu",
-  "sbbSidebarCollapse": "Collapse",
-  "sbbSidebarExpand": "Expand",
-  "sbbSidebarCloseSidebar": "Close Sidebar",
-  "sbbSidebarOpenSidebar": "Open Sidebar",
-  "sbbTextareaCounterText": "{$PH} characters remaining",
+  "sbbBreadcrumbExpand": "Afficher l'ensemble du chemin",
+  "sbbDialogCloseDialog": "Fermer la boîte de dialogue",
+  "sbbFileSelectorUploadFile": "Télécharger le fichier",
+  "sbbFileSelectorRemoveFile": "Supprimer le fichier",
+  "sbbHeaderMenuBack": "Retour",
+  "sbbHeaderOpenMenu": "Ouvrir le menu",
+  "sbbHeaderCloseMenu": "Fermer le menu",
+  "sbbSidebarCollapse": "Réduire",
+  "sbbSidebarExpand": "Agrandir",
+  "sbbSidebarCloseSidebar": "Fermer la barre latérale",
+  "sbbSidebarOpenSidebar": "Ouvrir la barre latérale",
+  "sbbTextareaCounterText": "{$PH} caractères restants",
   "sbbUsermenuLogin": "Login",
-  "sbbUsermenuOpenPanel": "Logged in as {$PH}. Click or press enter to open user menu."
+  "sbbUsermenuOpenPanel": "Connecté en tant que {$PH}. Cliquez ou appuyez sur la touche Entrée pour ouvrir le menu utilisateur."
 }

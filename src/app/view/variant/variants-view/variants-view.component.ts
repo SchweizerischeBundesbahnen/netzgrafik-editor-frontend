@@ -84,7 +84,7 @@ export class VariantsViewComponent implements OnDestroy {
               action: () => this.onEditProjectClicked(),
             },
             {
-              name: $localize`:@@app.view.variant.variants-view.archive-project:Archive project`,
+              name: $localize`:@@app.view.variant.variants-view.archive-project.title:Archive project`,
               icon: "archive-box-small",
               action: () => this.onArchiveProjectClicked(),
             },
@@ -97,7 +97,7 @@ export class VariantsViewComponent implements OnDestroy {
               action: () => this.onUnarchiveProjectClicked(),
             },
             {
-              name: $localize`:@@app.view.variant.variants-view.delete-project:Delete project`,
+              name: $localize`:@@app.view.variant.variants-view.delete-project.title:Delete project`,
               icon: "trash-small",
               action: () => this.onDeleteProjectClicked(),
             },
