@@ -11,7 +11,7 @@ the trainrun has to have a transition. Press **CTRL key** and click with the mou
 #### Combine two trainruns 
 
 To combine two trainruns, you have to select one of the two trains. Then you have to navigate to the node where the trainrun ends (or starts). Now you can draw
-the new transition similar to creating a connection - but you have to press **CTRL key** and it must be hold pressed as long you are drawing a new transition. 
+the new transition similar to creating a connection - but you have to press **CTRL key** and it must be held pressed as long as you are drawing a new transition. 
 Once you finish drawing the new transition, both trains will be combined to one single trainrun.
 Please have as well a look into [Create Connections](CREATE_CONNECTIONS.md). 
 
