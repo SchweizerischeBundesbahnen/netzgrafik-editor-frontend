@@ -88,17 +88,17 @@ For more details and to create your first Netzgrafik have a look into [create a 
 ## Nodes
 The nodes represent the specific locations, such as stations or stops, where a trainrun can have different actions or events associated with it. These nodes serve as key points in the trainrun's route, determining where it stops, passes through, or starts and ends ([see data model](DATA_MODEL.md)).
 
-For mor details have a look into [create and modifiy nodes](CREATE_NODES.md).
+For more details have a look into [create and modifiy nodes](CREATE_NODES.md).
 
 <a id="Trains"></a>
 
 ## Trainruns
-A trainrun consists out of one ore more trainrun sections. The trainrun section represents a specific segment or portion of a trainrun that connects two nodes. It encapsulates all the relevant information related to that particular section, including temporal details like departure and arrival times. Additionally, it also stores the journey time, which indicates the duration it takes for the train to run to move from one node to another.
+A trainrun consists of one or more trainrun sections. The trainrun section represents a specific segment or portion of a trainrun that connects two nodes. It encapsulates all the relevant information related to that particular section, including temporal details like departure and arrival times. Additionally, it also stores the journey time, which indicates the duration it takes for the train to run to move from one node to another.
 
 A trainrun has references to behaviour-related abstractions such as
-category (e.g. a regional train, an intercity train or a goods train), frequency (e.g. 1/4h, 1/2h or every hourand) time category (e.g. peak times or off-peak times or occasional), which define the behaviour of a trainrun ([see data model](DATA_MODEL.md)).
+category (e.g., a regional train, an intercity train or a goods train), frequency (e.g., 1/4h, 1/2h or every hourand) time category (e.g., peak times or off-peak times or occasional), which define the behaviour of a trainrun ([see data model](DATA_MODEL.md)).
 
-For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
+For more details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
 
 - [Split / Combine two trainruns](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_TRAINRUN.md#split--combine-two-trainruns)
 - [Merge two indepandant Netzgrafik](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_TRAINRUN.md#merge-two-indepandant-netzgrafik) 
@@ -109,7 +109,7 @@ For mor details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.m
 
 ![Editing_Connections](./images/Editing_Connections.png)
 
-For mor details have a look into [create and modifiy connections](CREATE_CONNECTIONS.md).
+For more details have a look into [create and modifiy connections](CREATE_CONNECTIONS.md).
 
 
 ---
@@ -117,7 +117,7 @@ For mor details have a look into [create and modifiy connections](CREATE_CONNECT
 
 ## Filters
 
-For mor details have a look into [create and modifiy filters](CREATE_FILTERS.md).
+For more details have a look into [create and modifiy filters](CREATE_FILTERS.md).
 
 ---
 <a id="Streckengrafik"></a>
@@ -137,7 +137,7 @@ For mor details have a look into [graphic timetable](Graphic_Timetable.md).
 The Perlenkette allows you to view and edit the entire trainrun from a vertical perspective. It is
 displayed on the right-hand side.
 In the upper part of the Perlenkette, the train information is displayed.
-It can also be expanded to get more information. It also allows to edit the train name, category or
+It can also be expanded to get more information. It also allows you to edit the train name, category or
 frequency.
 
 Between the title and the train route display, there is a sorted list of all the passed nodes.
@@ -155,13 +155,13 @@ displaying the train's route as a vertical chain of nodes and trainrunsections.
 [2024-1-25_DeleteConnections-Perlenkette-Show_Connections.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/2674075/d272fc58-3f31-4427-aacf-cc3c50c03905)
 
 ### Change the time locks
-The time can be locked so that no propagtion (automated update) will be done. Just click on the lock icon and the lock state switchs: On to off or vice-versa. 
+The time can be locked so that no propagation (automated update) will be done. Just click on the lock icon and the lock state switches: On to off or vice-versa. 
 
 ### Toggle: show all locks / or only closed (default) 
 In the Perlenkette view, you can click on the eye icon in the bottom left corner
 to display all locks. By default, only the locks that are closed are shown. This is 
 visually visible with the disabled eye icon. When you click on the icon then the disable 
-eye icon switchs to the visible eye icon - or vive-versa. Visble eye means all locks are visible.
+eye icon switches to the visible eye icon - or vice-versa. Visible eye means all locks are visible.
 
 ---
 <a id="Conclusion"></a>
