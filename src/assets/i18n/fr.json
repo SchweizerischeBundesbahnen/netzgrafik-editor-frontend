@@ -33,7 +33,7 @@
     },
     "netzgrafik-application": {
       "variants": "Variantes",
-      "filter": "Filtre",
+      "filter": "Filtres",
       "analytics": "Analyse",
       "edit": "Edition",
       "more-functions": "Plus de fonctionnalités",
@@ -306,13 +306,13 @@
         }
       },
       "editor-filter-view": {
-        "filter": "Filtre",
+        "filter": "Filtres",
         "general": "Général",
         "category": "Catégorie",
         "frequency": "Fréquence",
         "time-category": "Période de fonctionnement",
         "display-all-trainruns": "Afficher toutes les lignes de train",
-        "reset-trainrun-filter": "Réinitialiser le filtre sur les lignes de train",
+        "reset-trainrun-filter": "Réinitialiser les filtres sur les lignes de train",
         "filterable-labels-trainruns": "Labels filtrables: Lignes de train",
         "filterable-labels-nodes": "Labels filtrables: Noeuds",
         "filterable-labels-notes": "Labels filtrables: Notes",
@@ -356,7 +356,7 @@
         "save-changes": "Enregistrer les modifications",
         "changes-saved": "Modifications enregistrées",
         "read-mode": "Mode lecture",
-        "show-hide-filter": "Filtre",
+        "show-hide-filter": "Filtres",
         "zoom-out": "Zoom arrière",
         "zoom-in": "Zoom avant",
         "topology-editor-disabled": "Editeur de topologie désactivé",
