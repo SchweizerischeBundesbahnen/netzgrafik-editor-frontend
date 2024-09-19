@@ -1,4 +1,4 @@
-import {Injectable, OnDestroy} from "@angular/core";
+import {Injectable, OnDestroy, EventEmitter} from "@angular/core";
 import {BehaviorSubject, Subject} from "rxjs";
 import {LogService} from "../../logger/log.service";
 import {
@@ -7,6 +7,11 @@ import {
 } from "../../data-structures/business.data.structures";
 import {Label} from "../../models/label.model";
 import {LabelGroupService} from "./labelgroup.service";
+import {
+  LabelOperation,
+  Operation,
+  OperationType,
+} from "src/app/models/operation.model";
 
 @Injectable({
   providedIn: "root",
@@ -15,6 +20,8 @@ export class LabelService implements OnDestroy {
   labelSubject = new BehaviorSubject<Label[]>([]);
   readonly labels = this.labelSubject.asObservable();
   private labelStore: {labels: Label[]} = {labels: []}; // store the data in memory
+
+  readonly operation = new EventEmitter<Operation>();
 
   private destroyed = new Subject<void>();
 
@@ -36,6 +43,7 @@ export class LabelService implements OnDestroy {
       labelObject.setLabel(newLabelValue);
     }
     this.labelUpdated();
+    this.operation.emit(new LabelOperation(OperationType.update, labelObject));
   }
 
   doUserDefinedLabelsOrdering(labelIds: number[]) {
