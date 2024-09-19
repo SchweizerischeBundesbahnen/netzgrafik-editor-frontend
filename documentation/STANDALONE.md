@@ -24,7 +24,7 @@ The emission of these events doesn't impact the general behavior of the applicat
 
 ## NGE Operations
 
-The operations related to the NGE framework are used to handle changes to Trainrun and Node entities. These operations ensure that any modifications are properly tracked and emitted, allowing for real-time updates and consistency within the application.
+The operations related to the NGE framework are used to handle changes to Trainrun, Node and Label entities. These operations ensure that any modifications are properly tracked and emitted, allowing for real-time updates and consistency within the application.
 
 ### Current list of actions available in NGE
 
@@ -63,8 +63,8 @@ The operations related to the NGE framework are used to handle changes to Trainr
 #### Node
 
 - create Node manually => NodeOperation(create)
-- copy-paste one or more Nodes (selection + CTRL-C key then CTRL-V key) => n*(NodeOperation(create))
-- duplicate one or more Nodes (selection + CTRL-D key) => n*(NodeOperation(create))
+- copy-paste one or more Nodes (selection + CTRL-C key then CTRL-V key) => n\*(NodeOperation(create))
+- duplicate one or more Nodes (selection + CTRL-D key) => n\*(NodeOperation(create))
 - modify Node name (node window, fill in the box then ENTER key / click elsewhere) => NodeOperation(update) / TODO: triggered on change (not great)
 - modify Node betriebspunktName (node window, fill in the box then ENTER key / click elsewhere) => NodeOperation(update) / TODO: triggered on change (not great)
 - modify Node connectionTime (node window, fill in the box then ENTER key / click elsewhere) => NodeOperation(update)
@@ -80,12 +80,16 @@ The operations related to the NGE framework are used to handle changes to Trainr
 - modify Node D stoppingTime time (node window, fill in the box then ENTER key / click elsewhere) => none (disabled feature)
 - modify Node D stoppingTime noStop (node window, tick button) => none (disabled feature)
 - modify Node position (cross cursor + drag) => NodeOperation(update)
-- modify Nodes positions (multi selection, cross cursor + drag) => n*(NodeOperation(update))
+- modify Nodes positions (multi selection, cross cursor + drag) => n\*(NodeOperation(update))
 - (if it does not exist, create and) add Node label (node window, fill in the box then ENTER key / click elsewhere) => NodeOperation(update)
 - delete Node label (node window, delete label button) => NodeOperation(update)
 - delete Node (selection + DEL key) => NodeOperation(delete)
-- delete Nodes (multi selection + DEL key) => n*(NodeOperation(delete))
+- delete Nodes (multi selection + DEL key) => n\*(NodeOperation(delete))
 - delete Node (node window, Delete node button) => NodeOperation(delete)
+
+#### Label
+
+- update Label (edit sidebar, Filterable labels / Trainruns, click on a label to edit it) => LabelOperation(update)
 
 ## Future work
 
