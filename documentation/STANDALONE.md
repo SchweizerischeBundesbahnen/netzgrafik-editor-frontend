@@ -20,7 +20,7 @@ The Operation class is designed to represent various operations performed on dif
 
 Emitting events about NGE changes is crucial for ensuring that all parts of the application are aware of modifications. This is especially useful when NGE is integrated into another application, as it allows for seamless updates and synchronization of state across different components.
 
-The emission of these events doesn't impact the general behavior of the application, and if the user doesn't need these events, the Operations can be simply ignore.
+The emission of these events doesn't impact the general behavior of the application, and if the user doesn't need these events, the Operations can be simply ignored.
 
 ## NGE Operations
 
