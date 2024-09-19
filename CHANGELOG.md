@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.7.15](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.14...netzgrafik-frontend-v2.7.15) (2024-09-19)
+
+
+### Bug Fixes
+
+* doc: Split_Combine_Trainruns.md grammar ([#293](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/293)) ([ae64d44](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/ae64d446ca979db5b95601dbd414a3c9d6e6419f))
+* doc: STANDALONE.md grammar ([#292](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/292)) ([22f4f87](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/22f4f87074faa9b9a06a7b482ffb9a0d7312303d))
+* doc: USERMANUAL.md spelling grammar punctuation ([#294](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/294)) ([6a402c8](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/6a402c87322bac3daedadf7bc359c2875f7b31c1))
+
 ## [2.7.14](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.13...netzgrafik-frontend-v2.7.14) (2024-09-16)
 
 
