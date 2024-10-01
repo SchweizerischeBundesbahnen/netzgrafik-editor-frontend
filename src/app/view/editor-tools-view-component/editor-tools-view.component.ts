@@ -88,6 +88,35 @@ export class EditorToolsViewComponent {
     param.target.value = null;
   }
 
+  onCompareVariants(param){
+    const file = param.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      const netzgrafikDto = JSON.parse(reader.result.toString());
+      if (
+        "nodes" in netzgrafikDto &&
+        "trainrunSections" in netzgrafikDto &&
+        "trainruns" in netzgrafikDto &&
+        "resources" in netzgrafikDto &&
+        "metadata" in netzgrafikDto
+      ) {
+        this.logger.log("onLoad; load netzgrafik: ", netzgrafikDto);
+        this.uiInteractionService.showNetzgrafik();
+        this.uiInteractionService.closeNodeStammdaten();
+        this.uiInteractionService.closePerlenkette();
+        this.nodeService.unselectAllNodes();
+        const comparisonNetzgrafikDto = this.dataService.compareVariants(netzgrafikDto, this.dataService.getNetzgrafikDto());
+        console.log("eeee");
+        this.dataService.loadNetzgrafikDto(comparisonNetzgrafikDto);
+        this.uiInteractionService.viewportCenteringOnNodesBoundingBox();
+      }
+    };
+    reader.readAsText(file);
+
+    // set the event target value to null in order to be able to load the same file multiple times after one another
+    param.target.value = null;
+  }
+
   onSave() {
     const data: NetzgrafikDto = this.dataService.getNetzgrafikDto();
     const blob = new Blob([JSON.stringify(data)], {type: "application/json"});

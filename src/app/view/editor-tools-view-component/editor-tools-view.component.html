@@ -59,6 +59,25 @@
       {{ 'app.view.editor-side-view.editor-tools-view-component.import-netzgrafik-as-json' | translate }}
     </ng-container>
 
+    <ng-container *ngIf="getVariantIsWritable()">
+      <br />
+      <button
+        (click)="onLoadButton()"
+        [title]="'app.view.editor-side-view.editor-tools-view-component.compare-variants-data' | translate"
+        class="TrainrunDialog EditorToolButton"
+      >
+        <sbb-icon svgIcon="arrows-left-right-dotted-small"></sbb-icon>
+      </button>
+      <input
+        hidden
+        #netgrafikJsonFileInput
+        type="file"
+        accept=".json"
+        (change)="onCompareVariants($event)"
+      />
+      {{ 'app.view.editor-side-view.editor-tools-view-component.compare-variants-data' | translate }}
+    </ng-container>
+
     <br />
     <button
       (click)="onExportZuglauf()"

@@ -447,6 +447,7 @@
           "export-trainruns-as-csv-excel": "In Excel: Data -> From Text/CSV -> Import ... filename",
           "export-origin-destination": "Export origin-destination",
           "export-origin-destination-as-csv": "Export origin-destination as CSV",
+          "compare-variants-data": "Compare Variants",
           "base-data": "Base data",
           "import-base-data": "Import base data",
           "help-csv-data": "Help: CSV - Data",

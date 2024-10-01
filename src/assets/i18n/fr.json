@@ -447,6 +447,7 @@
           "export-origin-destination": "Exporter origine-destination",
           "export-origin-destination-as-csv": "Exporter origine-destination au format CSV",
           "base-data": "Données de base",
+          "compare-variants-data": "Comparer une variante",
           "import-base-data": "Importer les données de base",
           "help-csv-data": "Aide: CSV - Données",
           "export-base-data": "Exporter les données de base",

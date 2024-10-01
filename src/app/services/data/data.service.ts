@@ -1,8 +1,10 @@
 import {Injectable, OnDestroy} from "@angular/core";
 import {
   NetzgrafikDto,
+  NodeDto,
   TrainrunCategory,
   TrainrunFrequency,
+  TrainrunSectionDto,
   TrainrunTimeCategory,
 } from "../../data-structures/business.data.structures";
 import {NetzgrafikDefault} from "../../sample-netzgrafik/netzgrafik.default";
@@ -271,4 +273,78 @@ export class DataService implements OnDestroy {
   getNetzgrafikLoadedInfo(): Observable<NetzgrafikLoadedInfo> {
     return this.netzgrafikLoadedInfo;
   }
+
+  compareVariants(netzgrafikDto1: NetzgrafikDto, netzgrafikDto2: NetzgrafikDto){
+    // first,go through all stations of Variant 1 and count the connections
+    const connectionMap1 =  this.countConnections(netzgrafikDto1);
+    // first,go through all stations of Variant 2 and count the connections
+    const connectionMap2 = this.countConnections(netzgrafikDto2);
+    //compare the counts of each station with the same ID for Variant 1 and 2
+    // const comparisonNetzgrafikDto = this.compareConnectionCounts(connectionMap1,connectionMap2);
+    const nodesComparisonMap = this.compareConnectionCounts(connectionMap1, connectionMap2);
+
+    const comparisonNetzgrafikDto = this.updateConnectionsForNetzgrafikDto(nodesComparisonMap, netzgrafikDto1.nodes);
+
+    // this.loadNetzgrafikDto(comparisonNetzgrafikDto);
+    // <= -1
+    // 0
+    // >= 1
+    return comparisonNetzgrafikDto;
+  }
+
+  countConnections(netzgrafikDto : NetzgrafikDto): Map<string, number> {
+    let map = new Map()
+    console.log("azeazeazeaze");
+
+    netzgrafikDto.nodes.forEach(node => {
+      let connectionsCount = 0;
+      let sourceTrainrunSections = netzgrafikDto.trainrunSections.filter((trainrunSection) => trainrunSection.sourceNodeId == node.id);
+
+      netzgrafikDto.trainrunSections.filter((trainrunSection) => trainrunSection.targetNodeId == node.id).forEach(trainrunSection => {
+        // TODO: add trainrunSections when frequency < 60'
+        trainrunSection.sourceNodeId = trainrunSection.targetNodeId;
+        let newTrainrunSection : TrainrunSectionDto = {
+          ...trainrunSection,
+          sourceNodeId: trainrunSection.targetNodeId,
+          targetNodeId: trainrunSection.sourceNodeId,
+          sourceArrival: trainrunSection.sourceDeparture,
+          sourceDeparture: trainrunSection.sourceArrival,
+          targetArrival: trainrunSection.targetDeparture,
+          targetDeparture: trainrunSection.targetArrival,
+        }
+        sourceTrainrunSections.push(newTrainrunSection);
+      });
+
+      sourceTrainrunSections.forEach(trainrunSection => { // reasonable connections = [7 ; 22]
+        let minimalDepartureTime = trainrunSection.sourceArrival.time + node.connectionTime;
+
+        sourceTrainrunSections.forEach(trainrunSection2 => {
+          if (trainrunSection2.id != trainrunSection.id && ((trainrunSection2.sourceDeparture.time - minimalDepartureTime + 60) % 60 < 15)
+          ) {
+            connectionsCount =+ 1;
+          }
+        })        
+      });
+
+      map.set(node.id, node.connections.length);
+      console.log("map", map);
+    })
+
+    return map;
+  }
+
+  compareConnectionCounts(connectionMap1, connectionMap2): Map<string, number> {
+
+
+    return undefined;
+  }
+
+  updateConnectionsForNetzgrafikDto(nodesComparisonMap : Map<string, number>, nodes : NodeDto[]) : NetzgrafikDto {
+    // let newNetzgrafikDto;
+
+
+    return this.getNetzgrafikDto();
+  }
+
+
 }
