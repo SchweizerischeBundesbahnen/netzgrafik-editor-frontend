@@ -42,8 +42,6 @@ export class Node {
   private isSelected: boolean;
   private labelIds: number[];
 
-  private comparedValue: number | undefined;
-
   constructor(
     {
       id,
@@ -77,7 +75,6 @@ export class Node {
       symmetryAxis: null,
       warnings: null,
       labelIds: [],
-      // comparedValue: undefined,
     },
   ) {
     this.id = id;
@@ -905,9 +902,5 @@ export class Node {
     } else {
       trainrunSectionNew.setTargetPortId(port.getId());
     }
-  }
-
-  getComparedValue() {
-    return this.comparedValue;
   }
 }

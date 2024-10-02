@@ -276,20 +276,15 @@ export class DataService implements OnDestroy {
 
   compareVariants(netzgrafikDto1: NetzgrafikDto, netzgrafikDto2: NetzgrafikDto): NetzgrafikDto {
     // first,go through all stations of Variant 1 and count the connections
-    console.log("netzgrafikdto", netzgrafikDto1);
     const connectionMap1 =  this.countConnections(netzgrafikDto1);
     // first,go through all stations of Variant 2 and count the connections
-    // const connectionMap2 = this.countConnections(netzgrafikDto2);
+    const connectionMap2 = this.countConnections(netzgrafikDto2);
     // compare the counts of each station with the same ID for Variant 1 and 2
-    // const comparisonNetzgrafikDto = this.compareConnectionCounts(connectionMap1,connectionMap2);
-    const nodesComparisonMap = this.compareConnectionCounts(connectionMap1, connectionMap1);
+    const nodesComparisonMap = this.compareConnectionCounts(connectionMap1, connectionMap2);
 
-    const comparisonNetzgrafikDto = this.updateConnectionsForNetzgrafikDto(nodesComparisonMap, netzgrafikDto1.nodes);
+    const comparisonNetzgrafikDto = this.updateConnectionsForNetzgrafikDto(netzgrafikDto1, nodesComparisonMap);
 
-    // this.loadNetzgrafikDto(comparisonNetzgrafikDto);
-    // <= -1
-    // 0
-    // >= 1
+    this.loadNetzgrafikDto(comparisonNetzgrafikDto);
     return comparisonNetzgrafikDto;
   }
 
@@ -316,20 +311,12 @@ export class DataService implements OnDestroy {
         sourceTrainrunSections.push(newTrainrunSection);
       });
 
-      console.log("node", node.fullName);
-      console.log("sourcetrainruns", sourceTrainrunSections);
       sourceTrainrunSections.forEach(trainrunSection => {
         let minimalDepartureTime = trainrunSection.sourceArrival.time + node.connectionTime;
-        console.log("sourceArrivaltime", trainrunSection.sourceArrival.time);
         sourceTrainrunSections.forEach(trainrunSection2 => {
-          console.log("minimalDepartureTime", minimalDepartureTime);
-          console.log("departure", trainrunSection2.sourceDeparture.time);
-          console.log("calcul", (trainrunSection2.sourceDeparture.time - minimalDepartureTime + 60) % 60);
           if (trainrunSection2.id != trainrunSection.id && ((trainrunSection2.sourceDeparture.time - minimalDepartureTime + 60) % 60 <= 15)
           ) {
-            console.log("connectionsCount1", connectionsCount);
             connectionsCount += 1;
-            console.log("connectionsCount2", connectionsCount);
           }
         })        
       });
@@ -341,25 +328,26 @@ export class DataService implements OnDestroy {
         if (!transition.isNonStopTransit) stoppingTransitionsCount += 2;
       })
 
-      console.log(connectionsCount, stoppingTransitionsCount);
-      map.set(node.betriebspunktName, connectionsCount + stoppingTransitionsCount);
-      console.log(node.fullName, map);
+      map.set(node.betriebspunktName, (connectionsCount + stoppingTransitionsCount) / 2);
     })
 
     return map;
   }
 
-  compareConnectionCounts(connectionMap1, connectionMap2): Map<string, number> {
-
-
-    return undefined;
+  compareConnectionCounts(connectionMap1 : Map<string, number>, connectionMap2 : Map<string, number>): Map<string, number> {
+    let result = new Map();
+    for (let [key, val1] of connectionMap1) {
+      result.set(key, val1 - connectionMap2.get(key));
+    }
+    return result;
   }
 
-  updateConnectionsForNetzgrafikDto(nodesComparisonMap : Map<string, number>, nodes : NodeDto[]) : NetzgrafikDto {
-    // let newNetzgrafikDto;
-
-
-    return this.getNetzgrafikDto();
+  updateConnectionsForNetzgrafikDto(netzgrafikDto : NetzgrafikDto, nodesComparisonMap : Map<string, number>) : NetzgrafikDto {
+    let newNetzgrafikDto = {...netzgrafikDto};
+    newNetzgrafikDto.nodes.map(node => {
+      node.connectionTime = nodesComparisonMap.get(node.betriebspunktName);
+    })
+    return newNetzgrafikDto;
   }
 
 

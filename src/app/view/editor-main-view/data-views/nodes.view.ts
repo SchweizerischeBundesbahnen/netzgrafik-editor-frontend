@@ -573,20 +573,6 @@ export class NodesView {
       .attr(StaticDomTags.NODE_ID, (n: NodeViewObject) => n.node.getId());
   }
 
-
-  // private makeLabelTravelTimeDiff(groupEnter: any) {
-  //   const added = groupEnter.append(StaticDomTags.NODE_LABELAREA_TEXT_SVG);
-  //   added
-  //     .attr("class", StaticDomTags.NODE_LABELAREA_TEXT_CLASS)
-  //     .attr(StaticDomTags.NODE_ID, (n: NodeViewObject) => n.node.getId())
-  //     .attr("x", NODE_TEXT_LEFT_SPACING)
-  //     .attr("y", (n: NodeViewObject) => n.node.getNodeHeight() - TEXT_SIZE / 2)
-  //     .text((n: NodeViewObject) => n.node.getTimeDiff())
-  //     .classed("time-diff-pos", (n: NodeViewObject) => n.node.getTimeDiff() > 0)
-  //     .classed("time-diff-neg", (n: NodeViewObject) => n.node.getTimeDiff() < 0);
-  //   }
-
-
   private makeLabelText(groupEnter: any) {
     const added = groupEnter
       .append(StaticDomTags.NODE_LABELAREA_TEXT_SVG);

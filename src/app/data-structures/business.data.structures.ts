@@ -187,7 +187,6 @@ export interface NodeDto {
   warnings: WarningDto[]; // business logic failures - warnings storage
 
   labelIds: number[]; // list of assigned filterable labels (identifiers: See Label, LabelDto.)
-  // comparedValue: number | undefined;
 }
 
 /**
