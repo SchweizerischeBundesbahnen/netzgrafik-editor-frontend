@@ -32,6 +32,8 @@ export class EditorToolsViewComponent {
   stammdatenFileInput: ElementRef;
   @ViewChild("netgrafikJsonFileInput", {static: false})
   netgrafikJsonFileInput: ElementRef;
+  @ViewChild("comparedNetzgrafikJsonFileInput", {static: false})
+  comparedNetzgrafikJsonFileInput: ElementRef;
 
   public isDeletable$ = this.versionControlService.variant$.pipe(
     map((v) => v?.isDeletable),
@@ -88,6 +90,10 @@ export class EditorToolsViewComponent {
     param.target.value = null;
   }
 
+  onComparisionButton() {
+    this.comparedNetzgrafikJsonFileInput.nativeElement.click();
+  }
+
   onCompareVariants(param){
     const file = param.target.files[0];
     const reader = new FileReader();
@@ -106,7 +112,6 @@ export class EditorToolsViewComponent {
         this.uiInteractionService.closePerlenkette();
         this.nodeService.unselectAllNodes();
         const comparisonNetzgrafikDto = this.dataService.compareVariants(netzgrafikDto, this.dataService.getNetzgrafikDto());
-        console.log("eeee");
         this.dataService.loadNetzgrafikDto(comparisonNetzgrafikDto);
         this.uiInteractionService.viewportCenteringOnNodesBoundingBox();
       }

@@ -274,14 +274,15 @@ export class DataService implements OnDestroy {
     return this.netzgrafikLoadedInfo;
   }
 
-  compareVariants(netzgrafikDto1: NetzgrafikDto, netzgrafikDto2: NetzgrafikDto){
+  compareVariants(netzgrafikDto1: NetzgrafikDto, netzgrafikDto2: NetzgrafikDto): NetzgrafikDto {
     // first,go through all stations of Variant 1 and count the connections
+    console.log("netzgrafikdto", netzgrafikDto1);
     const connectionMap1 =  this.countConnections(netzgrafikDto1);
     // first,go through all stations of Variant 2 and count the connections
-    const connectionMap2 = this.countConnections(netzgrafikDto2);
-    //compare the counts of each station with the same ID for Variant 1 and 2
+    // const connectionMap2 = this.countConnections(netzgrafikDto2);
+    // compare the counts of each station with the same ID for Variant 1 and 2
     // const comparisonNetzgrafikDto = this.compareConnectionCounts(connectionMap1,connectionMap2);
-    const nodesComparisonMap = this.compareConnectionCounts(connectionMap1, connectionMap2);
+    const nodesComparisonMap = this.compareConnectionCounts(connectionMap1, connectionMap1);
 
     const comparisonNetzgrafikDto = this.updateConnectionsForNetzgrafikDto(nodesComparisonMap, netzgrafikDto1.nodes);
 
@@ -294,7 +295,6 @@ export class DataService implements OnDestroy {
 
   countConnections(netzgrafikDto : NetzgrafikDto): Map<string, number> {
     let map = new Map()
-    console.log("azeazeazeaze");
 
     netzgrafikDto.nodes.forEach(node => {
       let connectionsCount = 0;
@@ -302,32 +302,48 @@ export class DataService implements OnDestroy {
 
       netzgrafikDto.trainrunSections.filter((trainrunSection) => trainrunSection.targetNodeId == node.id).forEach(trainrunSection => {
         // TODO: add trainrunSections when frequency < 60'
-        trainrunSection.sourceNodeId = trainrunSection.targetNodeId;
         let newTrainrunSection : TrainrunSectionDto = {
           ...trainrunSection,
           sourceNodeId: trainrunSection.targetNodeId,
           targetNodeId: trainrunSection.sourceNodeId,
-          sourceArrival: trainrunSection.sourceDeparture,
-          sourceDeparture: trainrunSection.sourceArrival,
-          targetArrival: trainrunSection.targetDeparture,
-          targetDeparture: trainrunSection.targetArrival,
+
+          sourceDeparture: trainrunSection.targetDeparture,
+          targetDeparture: trainrunSection.sourceDeparture,
+
+          sourceArrival: trainrunSection.targetArrival,
+          targetArrival: trainrunSection.sourceArrival,
         }
         sourceTrainrunSections.push(newTrainrunSection);
       });
 
-      sourceTrainrunSections.forEach(trainrunSection => { // reasonable connections = [7 ; 22]
+      console.log("node", node.fullName);
+      console.log("sourcetrainruns", sourceTrainrunSections);
+      sourceTrainrunSections.forEach(trainrunSection => {
         let minimalDepartureTime = trainrunSection.sourceArrival.time + node.connectionTime;
-
+        console.log("sourceArrivaltime", trainrunSection.sourceArrival.time);
         sourceTrainrunSections.forEach(trainrunSection2 => {
-          if (trainrunSection2.id != trainrunSection.id && ((trainrunSection2.sourceDeparture.time - minimalDepartureTime + 60) % 60 < 15)
+          console.log("minimalDepartureTime", minimalDepartureTime);
+          console.log("departure", trainrunSection2.sourceDeparture.time);
+          console.log("calcul", (trainrunSection2.sourceDeparture.time - minimalDepartureTime + 60) % 60);
+          if (trainrunSection2.id != trainrunSection.id && ((trainrunSection2.sourceDeparture.time - minimalDepartureTime + 60) % 60 <= 15)
           ) {
-            connectionsCount =+ 1;
+            console.log("connectionsCount1", connectionsCount);
+            connectionsCount += 1;
+            console.log("connectionsCount2", connectionsCount);
           }
         })        
       });
 
-      map.set(node.id, node.connections.length);
-      console.log("map", map);
+      // transition if stop and both directions
+      let stoppingTransitionsCount = 0;
+
+      node.transitions.forEach(transition => {
+        if (!transition.isNonStopTransit) stoppingTransitionsCount += 2;
+      })
+
+      console.log(connectionsCount, stoppingTransitionsCount);
+      map.set(node.betriebspunktName, connectionsCount + stoppingTransitionsCount);
+      console.log(node.fullName, map);
     })
 
     return map;

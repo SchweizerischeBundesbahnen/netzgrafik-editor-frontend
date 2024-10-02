@@ -62,7 +62,7 @@
     <ng-container *ngIf="getVariantIsWritable()">
       <br />
       <button
-        (click)="onLoadButton()"
+        (click)="onComparisionButton()"
         [title]="'app.view.editor-side-view.editor-tools-view-component.compare-variants-data' | translate"
         class="TrainrunDialog EditorToolButton"
       >
@@ -70,7 +70,7 @@
       </button>
       <input
         hidden
-        #netgrafikJsonFileInput
+        #comparedNetzgrafikJsonFileInput
         type="file"
         accept=".json"
         (change)="onCompareVariants($event)"
