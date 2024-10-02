@@ -491,6 +491,14 @@ export class NodesView {
           n.node.selected() &&
           this.editorView.editorMode === EditorMode.MultiNodeMoving,
       )
+      .style("fill", (n: NodeViewObject) => {
+        const connectionTime = n.node.getConnectionTime();
+        if (connectionTime < 0) {
+          return "red";
+        } else if (connectionTime > 0 && connectionTime < 3) {
+          return "green";
+        }
+      })
       .on("mouseover", (n: NodeViewObject, i, a) =>
         this.onNodeDockableMouseover(n.node, a[i]),
       )
