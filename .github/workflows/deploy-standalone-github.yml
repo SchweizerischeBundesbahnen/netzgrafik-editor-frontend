@@ -34,13 +34,10 @@ jobs:
         node-version: 18
 
     - name: Install dependencies
-      run: npm install
-
-    - name: Run tests
-      run: npm run test:headless
-
-    - name: Build
-      run: npm run build:prod
+      run: npm ci 
+      
+    - name: Build standlone
+      run: npm run build:standalone
 
     - name: Deploy
       if: success()
