@@ -36,14 +36,22 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build:standalone
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy
+        if: success()
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          # Upload dist folder
-          # path: './dist/netzgrafik-frontend'
-          path: './dist'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist/angular-github-actions
+          enable_jekyll: true
+        
+      #- name: Setup Pages
+      #  uses: actions/configure-pages@v4
+      #- name: Upload artifact
+      #  uses: actions/upload-pages-artifact@v3
+      #  with:
+      #    # Upload dist folder
+      #    # path: './dist/netzgrafik-frontend'
+      #    path: './dist'
+      #- name: Deploy to GitHub Pages
+      #  id: deployment
+      #  uses: actions/deploy-pages@v4
