@@ -5,7 +5,7 @@ including metadata such as colors and train categories, among others.
 ## Import JSON 
 
 ![image](https://github.com/user-attachments/assets/df46327d-5a00-4510-ab8f-563292ce81f8)
-The exported data as JSON file can be reimported using the import button. 
+The exported data in JSON format can be imported again using the `Import netzgrafik as JSON` button.
 
 ## Export JSON 
 By exporting or importing data in JSON format, information can be efficiently and flexibly exchanged or connected between 
