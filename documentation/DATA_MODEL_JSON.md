@@ -9,11 +9,13 @@ understandable representation of data, which facilitates manual editing.
 
 [DATA MODEL](DATA_MODEL.md)
 
-### Export JSON 
+## Export/Import 
 ![image](https://github.com/user-attachments/assets/df46327d-5a00-4510-ab8f-563292ce81f8)
+
+#### Export  
 To export the current Netzgrafik use the `Export netzgrafik as JSON` button.
 
-### Import JSON 
+#### Import 
 The exported data in JSON format can be imported again using the `Import netzgrafik as JSON` button.
 
 ## JSON Description (basic data structure)
