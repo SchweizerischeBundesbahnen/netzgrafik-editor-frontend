@@ -2,6 +2,12 @@
 The complete data export can be used for data exchange between different network graphics/variants, merging network graphics, or for user-specific customization, 
 including metadata such as colors and train categories, among others.
 
+## Import JSON 
+
+![image](https://github.com/user-attachments/assets/df46327d-5a00-4510-ab8f-563292ce81f8)
+The exported data as JSON file can be reimported using the import button. 
+
+## Export JSON 
 By exporting or importing data in JSON format, information can be efficiently and flexibly exchanged or connected between 
 different systems or applications. JSON format is a widely used format for exchanging structured data and allows for easy 
 integration and processing of information in third-party applications. Additionally, it provides a readable and easily 
