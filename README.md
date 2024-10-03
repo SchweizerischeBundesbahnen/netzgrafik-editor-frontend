@@ -150,7 +150,9 @@ Get an insight into the plan and future [ROADMAP.md](ROADMAP.md).
 The user manual can be found here [USERMANUAL.md](documentation/USERMANUAL.md)
 
 ## Online Demo
-[nge.flatland.cloud](https://nge.flatland.cloud)
+[Standalone Demo](https://schweizerischebundesbahnen.github.io/netzgrafik-editor-frontend/) ( [Sample Netzgrafik](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/src/app/sample-netzgrafik/Demo_Netzgrafik_Fernverkehr_2024.json) - [How to Import JSON](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md) ) 
+
+[Extern: nge.flatland.cloud](https://nge.flatland.cloud) - powered by [Flatland Association](https://www.flatland-association.org/)
 
 ## Getting-Started
 
