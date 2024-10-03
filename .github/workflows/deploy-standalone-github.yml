@@ -30,4 +30,5 @@ jobs:
       with:
         # path: dist/${{ github.event.repository.name }}                                               # default
         path: dist
-        build_command: npm run build:standalone -- --base-href=/${{ github.event.repository.name }}/ # default
+        # build_command: npm run build:standalone -- --base-href=/${{ github.event.repository.name }}/ # default
+        build_command: npm run build:standalone 
