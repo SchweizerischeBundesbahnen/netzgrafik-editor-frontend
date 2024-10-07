@@ -7,5 +7,5 @@ export interface Environment {
   authConfig?: AuthConfig;
   disableBackend: boolean;
   customElement: boolean;
-  standalonedemo: boolean
+  standalonedemo: boolean;
 }
