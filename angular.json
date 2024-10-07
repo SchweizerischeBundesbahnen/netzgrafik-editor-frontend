@@ -89,7 +89,16 @@
                   "with": "src/environments/environment.standalone.ts"
                 }
               ]
-            }
+            },
+            "standalonedemo": {
+              "outputHashing": "none",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.standalonedemo.ts"
+                }
+              ]
+            },
           },
           "defaultConfiguration": ""
         },
@@ -110,6 +119,9 @@
             },
             "standalone": {
               "buildTarget": "netzgrafik-frontend:build:standalone"
+            },
+            "standalonedemo": {
+              "buildTarget": "netzgrafik-frontend:build:standalonedemo"
             }
           }
         },
