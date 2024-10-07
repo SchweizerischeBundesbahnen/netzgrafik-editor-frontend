@@ -3,9 +3,14 @@ import {
   LinePatternRefs,
   NetzgrafikDto,
 } from "../data-structures/business.data.structures";
+import {environment} from "../../environments/environment";
+import {NetzgrafikDemoStandaloneGithub} from "./netzgrafik.demo.standalone.github";
 
 export class NetzgrafikDefault {
   static getDefaultNetzgrafik(): NetzgrafikDto {
+    if (environment.standalonedemo) {
+      return NetzgrafikDemoStandaloneGithub.getNetzgrafikDemoStandaloneGithub();
+    }
     return {
       nodes: [
         {

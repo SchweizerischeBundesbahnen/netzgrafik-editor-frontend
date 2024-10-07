@@ -25,6 +25,7 @@ export const environment: Environment = {
   authConfig,
   disableBackend: false,
   customElement: false,
+  standalonedemo: false,
 };
 
 /*
