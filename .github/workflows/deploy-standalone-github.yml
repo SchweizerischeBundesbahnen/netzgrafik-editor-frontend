@@ -29,4 +29,4 @@ jobs:
       uses: bitovi/github-actions-angular-to-github-pages@v1.0.0
       with:
         path: dist/netzgrafik-frontend
-        build_command: npm run build:standalone -- --base-href=netzgrafik-frontend
+        build_command: npm run build:standalonedemo -- --base-href=netzgrafik-frontend
