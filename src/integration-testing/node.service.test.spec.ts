@@ -88,6 +88,8 @@ describe("NodeService Test", () => {
     const netzgrafik = NetzgrafikUnitTesting.getUnitTestNetzgrafik();
     dataService.loadNetzgrafikDto(netzgrafik);
     expect(nodes.length).toBe(5);
+    expect(nodeService.getVisibleNodes().length).toBe(5);
+    expect(nodeService.getSelectedNodes().length).toBe(0);
     nodeService.setDataService(dataService);
     const node = netzgrafik.nodes.pop();
     node.resourceId = null;
@@ -95,6 +97,8 @@ describe("NodeService Test", () => {
     netzgrafik.nodes.push(node);
     nodeService.setNodeData(netzgrafik.nodes);
     expect(nodes.length).toBe(netzgrafik.nodes.length);
+    expect(nodeService.getVisibleNodes().length).toBe(netzgrafik.nodes.length);
+    expect(nodeService.getSelectedNodes().length).toBe(0);
     nodes.forEach((n) => {
       expect(n.getResourceId() !== null).toBe(true);
     });
@@ -215,11 +219,13 @@ describe("NodeService Test", () => {
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
     expect(nodes.length).toBe(5);
+    expect(nodeService.getVisibleNodes().length).toBe(5);
     expect(trainrunSections.length).toBe(8);
 
     nodeService.deleteAllNonVisibleNodes();
 
     expect(nodes.length).toBe(5);
+    expect(nodeService.getVisibleNodes().length).toBe(5);
     expect(trainrunSections.length).toBe(8);
   });
 
@@ -228,12 +234,15 @@ describe("NodeService Test", () => {
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
     expect(nodes.length).toBe(5);
+    expect(nodeService.getVisibleNodes().length).toBe(5);
     expect(trainrunSections.length).toBe(8);
 
     filterService.setFilterNodeLabels([3]);
+    expect(nodeService.getVisibleNodes().length).toBe(4);
     nodeService.deleteAllNonVisibleNodes();
 
     expect(nodes.length).toBe(4);
+    expect(nodeService.getVisibleNodes().length).toBe(4);
     expect(trainrunSections.length).toBe(6);
   });
 
@@ -788,6 +797,7 @@ describe("NodeService Test", () => {
       }
       n.setPosition(n.getId() * 32, n.getId() * 32);
     });
+    expect(nodeService.getSelectedNodes().length).toBe(3);
 
     nodeService.moveSelectedNodes(-63, 132, 32, false);
 
@@ -803,6 +813,7 @@ describe("NodeService Test", () => {
 
     nodeService.unselectAllNodes();
     expect(nodeService.getSelectedNode()).toBe(null);
+    expect(nodeService.getSelectedNodes().length).toBe(0);
   });
 
   it("select single node as selected test", () => {
@@ -824,6 +835,7 @@ describe("NodeService Test", () => {
     nodeService.setSingleNodeAsSelected(ids[2]);
 
     expect(nodeService.getSelectedNode().getId()).toBe(ids[2]);
+    expect(nodeService.getSelectedNodes().length).toBe(1);
 
     nodeService.getNodes().forEach((n: Node) => {
       if (n.getId() === ids[2]) {
@@ -837,6 +849,7 @@ describe("NodeService Test", () => {
       expect(n.selected()).toBe(false);
       expect(nodeService.isNodeSelected(n.getId())).toBe(false);
     });
+    expect(nodeService.getSelectedNodes().length).toBe(0);
   });
 
   it("unselect all nodes test", () => {
@@ -861,5 +874,6 @@ describe("NodeService Test", () => {
       expect(n.selected()).toBe(false);
       expect(nodeService.isNodeSelected(n.getId())).toBe(false);
     });
+    expect(nodeService.getSelectedNodes().length).toBe(0);
   });
 });
