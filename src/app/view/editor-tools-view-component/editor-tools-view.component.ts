@@ -21,6 +21,8 @@ import {LabelService} from "../../services/data/label.serivce";
 import {NetzgrafikColoringService} from "../../services/data/netzgrafikColoring.service";
 import {ViewportCullService} from "../../services/ui/viewport.cull.service";
 import {LevelOfDetailService} from "../../services/ui/level.of.detail.service";
+import {_ViewRepeaterItemContext} from "@angular/cdk/collections";
+import {buildEdges, computeNeighbors, computeShortestPaths, topoSort} from "../util/origin-destination-graph";
 
 @Component({
   selector: "sbb-editor-tools-view-component",
@@ -495,7 +497,16 @@ export class EditorToolsViewComponent {
     return this.buildCSVString(headers, rows);
   }
 
+  // Split trainruns are not supported at the moment:
+  // https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/285
   private convertToOriginDestinationCSV(): string {
+    // The cost to add for each connection.
+    // TODO: this may belong to the grafix metadata.
+    const connectionPenalty = 5;
+    // Duration of the schedule to consider (in minutes).
+    // TODO: ideally this would be 24 hours, but performance is a concern.
+    const timeLimit = 10*60;
+
     const headers: string[] = [];
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.origin:Origin`);
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.destination:Destination`);
@@ -503,16 +514,43 @@ export class EditorToolsViewComponent {
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.connections:Connections`);
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.totalCost:Total cost`);
 
+    const nodes = this.nodeService.getNodes();
     const selectedNodes = this.nodeService.getSelectedNodes();
-    const nodes = selectedNodes.length > 0 ? selectedNodes : this.nodeService.getVisibleNodes();
+    const odNodes = selectedNodes.length > 0 ? selectedNodes : this.nodeService.getVisibleNodes();
+    const trainruns = this.trainrunService.getVisibleTrainruns();
 
-    // TODO: implement the actual shortest path algorithm.
+    const edges = buildEdges(nodes, odNodes, trainruns, connectionPenalty, this.trainrunService, timeLimit);
+
+    const neighbors = computeNeighbors(edges);
+    const vertices = topoSort(neighbors);
+    // In theory we could parallelize the pathfindings, but the overhead might be too big.
+    const res = new Map<string, [number, number]>();
+    odNodes.forEach((origin) => {
+      computeShortestPaths(origin.getId(), neighbors, vertices).forEach((value, key) => {
+        res.set([origin.getId(), key].join(","), value);
+      });
+    });
+
     const rows = [];
-    nodes.forEach((origin) => {
-      nodes.forEach((destination) => {
-        const row = [origin.getFullName(), destination.getFullName(), "-1", "-1", "-1"];
+    odNodes.sort((a, b) => a.getBetriebspunktName().localeCompare(b.getBetriebspunktName()));
+    odNodes.forEach((origin) => {
+      odNodes.forEach((destination) => {
+        if (origin.getId() === destination.getId()) {
+          return;
+        }
+        const costs = res.get([origin.getId(), destination.getId()].join(","));
+        if (costs === undefined) {
+          // Keep empty if no path is found.
+          rows.push([origin.getBetriebspunktName(), destination.getBetriebspunktName(), "", "", ""]);
+          return;
+        }
+        const [totalCost, connections] = costs;
+        const row = [origin.getBetriebspunktName(), destination.getBetriebspunktName(),
+                     (totalCost-connections*connectionPenalty).toString(),
+                     connections.toString(), totalCost.toString()];
         rows.push(row);
-    });});
+      });
+    });
 
     return this.buildCSVString(headers, rows);
   }
