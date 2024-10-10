@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.0](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.17...netzgrafik-frontend-v2.8.0) (2024-10-10)
+
+
+### Features
+
+* Implement Origin/Destination matrix ([#301](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/301)) ([383c99d](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/383c99d9e2081c1587bf36aa71dcb7ee6e73c7d9))
+
 ## [2.7.17](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.16...netzgrafik-frontend-v2.7.17) (2024-10-03)
 
 
