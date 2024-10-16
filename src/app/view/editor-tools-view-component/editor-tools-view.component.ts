@@ -500,9 +500,6 @@ export class EditorToolsViewComponent {
   // Split trainruns are not supported at the moment:
   // https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/285
   private convertToOriginDestinationCSV(): string {
-    // The cost to add for each connection.
-    // TODO: this may belong to the grafix metadata.
-    const connectionPenalty = 5;
     // Duration of the schedule to consider (in minutes).
     // TODO: ideally this would be 24 hours, but performance is a concern.
     const timeLimit = 10*60;
@@ -514,6 +511,9 @@ export class EditorToolsViewComponent {
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.connections:Connections`);
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.totalCost:Total cost`);
 
+    const metadata = this.dataService.getNetzgrafikDto().metadata;
+    // The cost to add for each connection.
+    const connectionPenalty = metadata.analyticsSettings.originDestinationSettings.connectionPenalty;
     const nodes = this.nodeService.getNodes();
     const selectedNodes = this.nodeService.getSelectedNodes();
     const odNodes = selectedNodes.length > 0 ? selectedNodes : this.nodeService.getVisibleNodes();

@@ -205,6 +205,11 @@ export class NetzgrafikDefault {
       trainruns: [],
       resources: [],
       metadata: {
+        analyticsSettings: {
+          originDestinationSettings: {
+            connectionPenalty: 5,
+          }
+        },
         trainrunCategories: [
           {
             id: 0,

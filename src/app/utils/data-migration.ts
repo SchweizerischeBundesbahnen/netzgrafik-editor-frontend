@@ -80,6 +80,11 @@ export class DataMigration {
         NetzgrafikDefault.getDefaultNetzgrafik().metadata.netzgrafikColors;
     }
 
+    if (netzgrafikDto.metadata.analyticsSettings === undefined) {
+      netzgrafikDto.metadata.analyticsSettings =
+        NetzgrafikDefault.getDefaultNetzgrafik().metadata.analyticsSettings;
+    }
+
     if (netzgrafikDto.freeFloatingTexts === undefined) {
       netzgrafikDto.freeFloatingTexts =
         NetzgrafikDefault.getDefaultNetzgrafik().freeFloatingTexts;

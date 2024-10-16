@@ -252,6 +252,15 @@ export interface Haltezeit {
   no_halt: boolean; // no halt per default
 }
 
+export interface OriginDestinationSettingsDto {
+  // TODO: we may want a UI to display/edit this.
+  connectionPenalty: number; // the cost to add for each connection, in minutes
+}
+
+export interface AnalyticsSettingsDto {
+  originDestinationSettings: OriginDestinationSettingsDto;
+}
+
 /**
  * Groups Meta data in exported JSON / internal data structure (global properties for a project)
  */
@@ -260,6 +269,7 @@ export interface MetadataDto {
   trainrunFrequencies: TrainrunFrequency[];
   trainrunTimeCategories: TrainrunTimeCategory[];
   netzgrafikColors: NetzgrafikColorDto[];
+  analyticsSettings: AnalyticsSettingsDto;
 }
 
 /**

@@ -696,6 +696,11 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
         },
       ],
       metadata: {
+        analyticsSettings: {
+          originDestinationSettings: {
+            connectionPenalty: 5,
+          }
+        },
         trainrunCategories: [
           {
             id: 0,

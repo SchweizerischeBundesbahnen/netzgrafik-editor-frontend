@@ -950,6 +950,11 @@ export class NetzgrafikUnitTestingOdMatrix {
           }
       ],
       "metadata": {
+          "analyticsSettings": {
+              "originDestinationSettings": {
+                  "connectionPenalty": 5,
+              }
+          },
           "trainrunCategories": [
               {
                   "id": 0,
