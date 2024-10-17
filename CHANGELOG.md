@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.0](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.8.0...netzgrafik-frontend-v2.9.0) (2024-10-17)
+
+
+### Features
+
+* migrate originDestination connectionPenalty to netzgrafikDto ([#314](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/314)) ([ce3f90d](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/ce3f90d73784fabb49f29ac3625b142ceaa4134f))
+
 ## [2.8.0](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.17...netzgrafik-frontend-v2.8.0) (2024-10-10)
 
 
