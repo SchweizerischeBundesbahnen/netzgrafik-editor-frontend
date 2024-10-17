@@ -1126,6 +1126,11 @@ export class NetzgrafikUnitTestingTransition {
         },
       ],
       metadata: {
+        analyticsSettings: {
+          originDestinationSettings: {
+            connectionPenalty: 5,
+          }
+        },
         trainrunCategories: [
           {
             id: 0,

@@ -378,7 +378,8 @@ More details about TimeLock
   "netzgrafikColors": [],
   "trainrunCategories": [],
   "trainrunFrequencies": [],
-  "trainrunTimeCategories": []
+  "trainrunTimeCategories": [],
+  "analyticsSettings": {}
 }
 ```
 
@@ -600,6 +601,26 @@ Define the dayTimeIntervalElement
 ```
 - **from** : interval starts at time (include), in minute : numeric
 - **to** : interval ends at time (include), in minute : numeric 
+</details>
+
+<details>
+<summary>
+analyticsSettings: Contains settings for analytics features, such as originDestination matrix.
+</summary>
+
+  
+```JSON
+"analyticsSettings": {
+    "originDestinationSettings": {
+        "connectionPenalty": 5
+    },
+}
+```
+
+- **connectionPenalty**: Cost to add for each connection, in minute : numeric
+  
+
+
 </details>
 
 --- 
