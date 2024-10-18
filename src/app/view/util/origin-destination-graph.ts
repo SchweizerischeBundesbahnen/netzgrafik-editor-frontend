@@ -27,14 +27,13 @@ export class Edge {
     ){}
 }
 
-export const buildEdges = (nodes: Node[], odNodes: Node[], trainruns: Trainrun[], connectionPenalty: number, trainrunService: TrainrunService,
-    timeLimit: number
+export const buildEdges = (nodes: Node[], odNodes: Node[], trainruns: Trainrun[], connectionPenalty: number,
+    trainrunService: TrainrunService, timeLimit: number
 ): Edge[] => {
     let edges = buildSectionEdges(trainruns, trainrunService, timeLimit);
 
-    // TODO: organize by trainrun and sort
-    const verticesDepartureByNode = new Map<number, Vertex[]>();
-    const verticesArrivalByNode = new Map<number, Vertex[]>();
+    const verticesDepartureByTrainrunByNode = new Map<number, Map<number, Vertex[]>>();
+    const verticesArrivalByTrainrunByNode = new Map<number, Map<number, Vertex[]>>();
     edges.forEach((edge) => {
       const src = edge.v1;
       const tgt = edge.v2;
@@ -44,23 +43,47 @@ export const buildEdges = (nodes: Node[], odNodes: Node[], trainruns: Trainrun[]
       if (tgt.isDeparture !== false) {
         console.log("tgt is not an arrival: ", tgt);
       }
-      const departures = verticesDepartureByNode.get(src.nodeId);
-      if (departures === undefined) {
-        verticesDepartureByNode.set(src.nodeId, [src]);
+      const departuresByTrainrun = verticesDepartureByTrainrunByNode.get(src.nodeId);
+      if (departuresByTrainrun === undefined) {
+        verticesDepartureByTrainrunByNode.set(src.nodeId, new Map<number, Vertex[]>([[src.trainrunId, [src]]]));
       } else {
-        departures.push(src);
+        const departures = departuresByTrainrun.get(src.trainrunId);
+        if (departures === undefined) {
+          departuresByTrainrun.set(src.trainrunId, [src]);
+        } else {
+          departures.push(src);
+        }
       }
-      const arrivals = verticesArrivalByNode.get(tgt.nodeId);
-      if (arrivals === undefined) {
-        verticesArrivalByNode.set(tgt.nodeId, [tgt]);
+      const arrivalsByTrainrun = verticesArrivalByTrainrunByNode.get(tgt.nodeId);
+      if (arrivalsByTrainrun === undefined) {
+        verticesArrivalByTrainrunByNode.set(tgt.nodeId, new Map<number, Vertex[]>([[tgt.trainrunId, [tgt]]]));
       } else {
-        arrivals.push(tgt);
+        const arrivals = arrivalsByTrainrun.get(tgt.trainrunId);
+        if (arrivals === undefined) {
+          arrivalsByTrainrun.set(tgt.trainrunId, [tgt]);
+        } else {
+          arrivals.push(tgt);
+        }
       }
+    });
+
+    // Sorting is useful to find relevant connections later.
+    verticesDepartureByTrainrunByNode.forEach((verticesDepartureByTrainrun) => {
+      verticesDepartureByTrainrun.forEach((departures, trainrunId) => {
+        departures.sort((a, b) => a.time - b.time);
+      });
+    });
+    verticesArrivalByTrainrunByNode.forEach((verticesArrivalByTrainrun) => {
+      verticesArrivalByTrainrun.forEach((arrivals, trainrunId) => {
+        arrivals.sort((a, b) => a.time - b.time);
+      });
     });
     
     // Note: pushing too many elements at once does not work well.
-    edges = [...edges, ...buildConvenienceEdges(odNodes, verticesDepartureByNode, verticesArrivalByNode)];
-    edges = [...edges, ...buildConnectionEdges(nodes, verticesDepartureByNode, verticesArrivalByNode, connectionPenalty)];
+    edges = [...edges, ...buildConvenienceEdges(odNodes, verticesDepartureByTrainrunByNode, verticesArrivalByTrainrunByNode)];
+    edges = [...edges,
+      ...buildConnectionEdges(nodes, verticesDepartureByTrainrunByNode, verticesArrivalByTrainrunByNode, connectionPenalty)
+    ];
 
     return edges;
 };
@@ -102,6 +125,7 @@ Map<number, [number, number]> => {
     let started = false;
     vertices.forEach((vertex) => {
         const key = JSON.stringify(vertex);
+        // First, look for our start node.
         if (!started) {
             if (from === vertex.nodeId && vertex.isDeparture === true && vertex.time === undefined) {
                 started = true;
@@ -110,6 +134,7 @@ Map<number, [number, number]> => {
                 return;
             }
         }
+        // We found an end node.
         if (vertex.isDeparture === false && vertex.time === undefined && dist.get(key) !== undefined
             && vertex.nodeId !== from) {
             res.set(vertex.nodeId, dist.get(key));
@@ -118,12 +143,15 @@ Map<number, [number, number]> => {
         if (neighs === undefined || dist.get(key) === undefined) {
             return;
         }
+        // The shortest path from the start node to this vertex is a shortest path from the start node to a neighbor
+        // plus the weight of the edge connecting the neighbor to this vertex.
         neighs.forEach(([neighbor, weight]) => {
             const alt = dist.get(key)[0] + weight;
             const neighborKey = JSON.stringify(neighbor);
             if (dist.get(neighborKey) === undefined || alt < dist.get(neighborKey)[0]) {
                 let connection = 0;
-                if (vertex.trainrunId !== undefined && neighbor.trainrunId !== undefined && vertex.trainrunId !== neighbor.trainrunId) {
+                if (vertex.trainrunId !== undefined && neighbor.trainrunId !== undefined
+                      && vertex.trainrunId !== neighbor.trainrunId) {
                     connection = 1;
                 }
                 dist.set(neighborKey, [alt, dist.get(key)[1] + connection]);
@@ -144,6 +172,7 @@ const buildSectionEdges = (trainruns: Trainrun[], trainrunService: TrainrunServi
         }
         tsIterators.forEach((tsIterator) => {
           edges.push(...buildSectionEdgesFromIterator(tsIterator, false, timeLimit));
+          // Don't forget the reverse direction.
           const ts = tsIterator.current().trainrunSection;
           const nextIterator = trainrunService.getIterator(ts.getTargetNode(), ts);
           edges.push(...buildSectionEdgesFromIterator(nextIterator, true, timeLimit));
@@ -162,6 +191,7 @@ const buildSectionEdgesFromIterator = (tsIterator: TrainrunIterator, reverse: bo
       const trainrunId = reverse ? -ts.getTrainrunId() : ts.getTrainrunId();
       const v1Time = reverse ? ts.getTargetDepartureDto().consecutiveTime : ts.getSourceDepartureDto().consecutiveTime;
       const v1Node = reverse ? ts.getTargetNodeId() : ts.getSourceNodeId();
+      // If we don't stop here, we need to remember where we started.
       if (reverse ? ts.getSourceNode().isNonStop(ts) : ts.getTargetNode().isNonStop(ts)) {
         if (nonStopV1Time === -1) {
           nonStopV1Time = v1Time;
@@ -190,58 +220,67 @@ const buildSectionEdgesFromIterator = (tsIterator: TrainrunIterator, reverse: bo
     return edges;
 };
 
-const buildConvenienceEdges = (nodes: Node[], verticesDepartureByNode: Map<number, Vertex[]>,
-    verticesArrivalByNode: Map<number, Vertex[]>): Edge[] => {
+const buildConvenienceEdges = (nodes: Node[], verticesDepartureByTrainrunByNode: Map<number, Map<number, Vertex[]>>,
+    verticesArrivalByTrainrunByNode: Map<number, Map<number, Vertex[]>>): Edge[] => {
     const edges = [];
     nodes.forEach((node) => {
-        const v1 = new Vertex(node.getId(), true);
-        const v2 = new Vertex(node.getId(), false);
-        const edge = new Edge(v1, v2, 0);
-        edges.push(edge);
-        const departures = verticesDepartureByNode.get(node.getId());
-        if (departures !== undefined) {
-            const srcVertex = new Vertex(node.getId(), true);
-            departures.forEach((departure) => {
-                const edge = new Edge(srcVertex, departure, 0);
-                edges.push(edge);
-            });
+      const nodeId = node.getId();
+      // We add a single start and end vertex for each node, so we can compute shortest paths more easily.
+      const srcVertex = new Vertex(nodeId, true);
+      const tgtVertex = new Vertex(nodeId, false);
+      // Going from one node to itself is free.
+      const edge = new Edge(srcVertex, tgtVertex, 0);
+      edges.push(edge);
+      const departuresByTrainrun = verticesDepartureByTrainrunByNode.get(nodeId);
+      if (departuresByTrainrun !== undefined) {
+        departuresByTrainrun.forEach((departures, trainrunId) => {
+          departures.forEach((departure) => {
+            const edge = new Edge(srcVertex, departure, 0);
+            edges.push(edge);
+          });
+        });
         }
-        const arrivals = verticesArrivalByNode.get(node.getId());
-        if (arrivals !== undefined) {
-            const tgtVertex = new Vertex(node.getId(), false);
-            arrivals.forEach((arrival) => {
-                const edge = new Edge(arrival, tgtVertex, 0);
-                edges.push(edge);
-            });
-        }
+      const arrivalsByTrainrun = verticesArrivalByTrainrunByNode.get(nodeId);
+      if (arrivalsByTrainrun !== undefined) {
+        arrivalsByTrainrun.forEach((arrivals, trainrunId) => {
+          arrivals.forEach((arrival) => {
+            const edge = new Edge(arrival, tgtVertex, 0);
+            edges.push(edge);
+          });
+        });
+      }
     });
     return edges;
 };
 
-const buildConnectionEdges = (nodes: Node[], verticesDepartureByNode: Map<number, Vertex[]>,
-    verticesArrivalByNode: Map<number, Vertex[]>, connectionPenalty: number): Edge[] => {
+const buildConnectionEdges = (nodes: Node[], verticesDepartureByTrainrunByNode: Map<number, Map<number, Vertex[]>>,
+    verticesArrivalByTrainrunByNode: Map<number, Map<number, Vertex[]>>, connectionPenalty: number): Edge[] => {
     const edges = [];
     nodes.forEach((node) => {
-        const departures = verticesDepartureByNode.get(node.getId());
-        const arrivals = verticesArrivalByNode.get(node.getId());
-        if (departures !== undefined && arrivals !== undefined) {
-            departures.forEach((departure) => {
-                arrivals.forEach((arrival) => {
-                    if (departure.trainrunId === arrival.trainrunId) {
-                        if (departure.time < arrival.time) {
-                            return;
-                        }
-                        const edge = new Edge(arrival, departure, departure.time - arrival.time);
-                        edges.push(edge);
-                        return;
-                    }
-                    if (departure.time < arrival.time + node.getConnectionTime()) {
-                        return;
-                    }
-                    const edge = new Edge(arrival, departure, departure.time - arrival.time + connectionPenalty);
-                    edges.push(edge);
-                });
+        const departuresByTrainrun = verticesDepartureByTrainrunByNode.get(node.getId());
+        const arrivalsByTrainrun = verticesArrivalByTrainrunByNode.get(node.getId());
+        if (departuresByTrainrun !== undefined && arrivalsByTrainrun !== undefined) {
+          arrivalsByTrainrun.forEach((arrivals, arrivalTrainrunId) => {
+            arrivals.forEach((arrival) => {
+              departuresByTrainrun.forEach((departures, departureTrainrunId) => {
+                let minDepartureTime = arrival.time;
+                if (arrivalTrainrunId !== departureTrainrunId) {
+                  minDepartureTime += node.getConnectionTime();
+                }
+                // For each arrival and for each trainrun available, we only want to consider the first departure.
+                // This could be a binary search but it does not seem to be worth it.
+                const departure = departures.find((departure) => {return departure.time >= minDepartureTime;});
+                if (departure !== undefined) {
+                  let cost = departure.time - arrival.time;
+                  if (arrivalTrainrunId !== departureTrainrunId) {
+                    cost += connectionPenalty;
+                  }
+                  const edge = new Edge(arrival, departure, cost);
+                  edges.push(edge);
+                }
+              });
             });
+          });
         }
     });
     return edges;

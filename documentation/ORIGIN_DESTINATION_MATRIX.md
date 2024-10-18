@@ -15,4 +15,4 @@ The Origin Destination Matrix will only use visible trainruns to compute paths.
 ### Caveats
 
 Split trainruns are not supported at the moment: https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/285.
-As a simplification, we currently consider trains run at their frequency for a fixed schedule duration (10 hours).
+As a simplification, we currently consider trains run at their frequency for a fixed schedule duration (16 hours).
