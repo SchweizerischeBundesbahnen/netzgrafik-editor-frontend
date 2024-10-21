@@ -502,7 +502,9 @@ export class EditorToolsViewComponent {
   private convertToOriginDestinationCSV(): string {
     // Duration of the schedule to consider (in minutes).
     // TODO: ideally this would be 24 hours, but performance is a concern.
-    const timeLimit = 10*60;
+    // One idea to optimize would be to consider the minimum time window before the schedule repeats (LCM).
+    // Draft here: https://colab.research.google.com/drive/1Z1r2uU2pgffWxCbG_wt2zoLStZKzWleE#scrollTo=F6vOevK6znee
+    const timeLimit = 16*60;
 
     const headers: string[] = [];
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.origin:Origin`);

@@ -80,6 +80,7 @@ describe("Origin Destination CSV Test", () => {
     const connectionPenalty = 5;
     const timeLimit = 60*10;
 
+    const start = new Date().getTime();
     const edges = buildEdges(nodes, nodes, trainruns, connectionPenalty, trainrunService, timeLimit);
 
     const neighbors = computeNeighbors(edges);
@@ -91,6 +92,7 @@ describe("Origin Destination CSV Test", () => {
         res.set([origin.getId(), key].join(","), value);
       });
     });
+    const end = new Date().getTime();
 
     // Note: there may be some other equivalent solutions, depending on connections.
     // See https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/199
@@ -99,6 +101,8 @@ describe("Origin Destination CSV Test", () => {
       ["12,11", [4, 0]], ["13,14", [29, 1]], ["13,11", [22, 1]], ["13,12", [2, 0]], ["14,13", [29, 1]],
       ["14,11", [6, 0]], ["14,12", [2, 0]]
     ]));
+    // This should be reasonably fast, likely less than 10ms.
+    expect(end - start).toBeLessThan(100);
   });
 
   it("integration test with selected nodes", () => {
