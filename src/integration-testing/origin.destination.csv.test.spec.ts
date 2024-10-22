@@ -11,7 +11,14 @@ import {StammdatenService} from "src/app/services/data/stammdaten.service";
 import {TrainrunService} from "src/app/services/data/trainrun.service";
 import {TrainrunSectionService} from "src/app/services/data/trainrunsection.service";
 import {FilterService} from "src/app/services/ui/filter.service";
-import {buildEdges, computeNeighbors, computeShortestPaths, Edge, topoSort, Vertex} from "src/app/view/util/origin-destination-graph";
+import {
+  buildEdges,
+  computeNeighbors,
+  computeShortestPaths,
+  Edge,
+  topoSort,
+  Vertex,
+} from "src/app/view/util/origin-destination-graph";
 import {NetzgrafikUnitTestingOdMatrix} from "./netzgrafik.unit.testing.od.matrix";
 
 describe("Origin Destination CSV Test", () => {
@@ -28,7 +35,7 @@ describe("Origin Destination CSV Test", () => {
   let stammdatenService: StammdatenService = null;
   let noteService: NoteService = null;
   let netzgrafikColoringService: NetzgrafikColoringService = null;
-  
+
   beforeEach(() => {
     resourceService = new ResourceService();
     logPublishersService = new LogPublishersService();
@@ -78,29 +85,49 @@ describe("Origin Destination CSV Test", () => {
     const nodes = nodeService.getNodes();
     const trainruns = trainrunService.getTrainruns();
     const connectionPenalty = 5;
-    const timeLimit = 60*10;
+    const timeLimit = 60 * 10;
 
     const start = new Date().getTime();
-    const edges = buildEdges(nodes, nodes, trainruns, connectionPenalty, trainrunService, timeLimit);
+    const edges = buildEdges(
+      nodes,
+      nodes,
+      trainruns,
+      connectionPenalty,
+      trainrunService,
+      timeLimit,
+    );
 
     const neighbors = computeNeighbors(edges);
     const vertices = topoSort(neighbors);
 
     const res = new Map<string, [number, number]>();
     nodes.forEach((origin) => {
-      computeShortestPaths(origin.getId(), neighbors, vertices).forEach((value, key) => {
-        res.set([origin.getId(), key].join(","), value);
-      });
+      computeShortestPaths(origin.getId(), neighbors, vertices).forEach(
+        (value, key) => {
+          res.set([origin.getId(), key].join(","), value);
+        },
+      );
     });
     const end = new Date().getTime();
 
     // Note: there may be some other equivalent solutions, depending on connections.
     // See https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/199
-    expect(res).toEqual(new Map([
-      ["11,13", [22, 1]], ["11,14", [6, 0]], ["11,12", [4, 0]], ["12,13", [2, 0]], ["12,14", [2, 0]],
-      ["12,11", [4, 0]], ["13,14", [29, 1]], ["13,11", [22, 1]], ["13,12", [2, 0]], ["14,13", [29, 1]],
-      ["14,11", [6, 0]], ["14,12", [2, 0]]
-    ]));
+    expect(res).toEqual(
+      new Map([
+        ["11,13", [22, 1]],
+        ["11,14", [6, 0]],
+        ["11,12", [4, 0]],
+        ["12,13", [2, 0]],
+        ["12,14", [2, 0]],
+        ["12,11", [4, 0]],
+        ["13,14", [29, 1]],
+        ["13,11", [22, 1]],
+        ["13,12", [2, 0]],
+        ["14,13", [29, 1]],
+        ["14,11", [6, 0]],
+        ["14,12", [2, 0]],
+      ]),
+    );
     // This should be reasonably fast, likely less than 10ms.
     expect(end - start).toBeLessThan(100);
   });
@@ -115,23 +142,37 @@ describe("Origin Destination CSV Test", () => {
     const odNodes = nodeService.getSelectedNodes();
     const trainruns = trainrunService.getTrainruns();
     const connectionPenalty = 5;
-    const timeLimit = 60*10;
+    const timeLimit = 60 * 10;
 
-    const edges = buildEdges(nodes, odNodes, trainruns, connectionPenalty, trainrunService, timeLimit);
+    const edges = buildEdges(
+      nodes,
+      odNodes,
+      trainruns,
+      connectionPenalty,
+      trainrunService,
+      timeLimit,
+    );
 
     const neighbors = computeNeighbors(edges);
     const vertices = topoSort(neighbors);
 
     const res = new Map<string, [number, number]>();
     nodes.forEach((origin) => {
-      computeShortestPaths(origin.getId(), neighbors, vertices).forEach((value, key) => {
-        res.set([origin.getId(), key].join(","), value);
-      });
+      computeShortestPaths(origin.getId(), neighbors, vertices).forEach(
+        (value, key) => {
+          res.set([origin.getId(), key].join(","), value);
+        },
+      );
     });
 
     // Note: there may be some other equivalent solutions, depending on connections.
     // See https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/199
-    expect(res).toEqual(new Map([["13,14", [29, 1]],  ["14,13", [29, 1]]]));
+    expect(res).toEqual(
+      new Map([
+        ["13,14", [29, 1]],
+        ["14,13", [29, 1]],
+      ]),
+    );
   });
 
   it("simple path unit test", () => {
@@ -159,8 +200,12 @@ describe("Origin Destination CSV Test", () => {
 
     expect(topoVertices).toHaveSize(4);
     edges.forEach((edge) => {
-      const v1Index = topoVertices.findIndex((value, index, obj) => {return value === edge.v1;});
-      const v2Index = topoVertices.findIndex((value, index, obj) => {return value === edge.v2;});
+      const v1Index = topoVertices.findIndex((value, index, obj) => {
+        return value === edge.v1;
+      });
+      const v2Index = topoVertices.findIndex((value, index, obj) => {
+        return value === edge.v2;
+      });
       expect(v1Index).toBeLessThan(v2Index);
     });
 
@@ -190,7 +235,7 @@ describe("Origin Destination CSV Test", () => {
     const e6 = new Edge(v7, v8, 0);
     const e7 = new Edge(v8, v9, 10);
     // connection
-    const e8 = new Edge(v9, v4, 6+5);
+    const e8 = new Edge(v9, v4, 6 + 5);
     // convenience
     const v10 = new Vertex(1, false);
     const e9 = new Edge(v3, v10, 0);
@@ -214,8 +259,12 @@ describe("Origin Destination CSV Test", () => {
     const topoVertices = topoSort(neighbors);
     expect(topoVertices).toHaveSize(11);
     edges.forEach((edge) => {
-      const v1Index = topoVertices.findIndex((value, index, obj) => {return value === edge.v1;});
-      const v2Index = topoVertices.findIndex((value, index, obj) => {return value === edge.v2;});
+      const v1Index = topoVertices.findIndex((value, index, obj) => {
+        return value === edge.v1;
+      });
+      const v2Index = topoVertices.findIndex((value, index, obj) => {
+        return value === edge.v2;
+      });
       expect(v1Index).toBeLessThan(v2Index);
     });
 
@@ -232,6 +281,6 @@ describe("Origin Destination CSV Test", () => {
     expect(distances3).toHaveSize(2);
     expect(distances3.get(1)).toEqual([10, 0]);
     // connection
-    expect(distances3.get(2)).toEqual([30+5, 1]);
+    expect(distances3.get(2)).toEqual([30 + 5, 1]);
   });
 });
