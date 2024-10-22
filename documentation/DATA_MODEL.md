@@ -41,6 +41,9 @@ trainrun routes and schedules.
 
 ### Technically orientated description
 
+![image](https://github.com/user-attachments/assets/21fdb029-2a59-468a-ac93-11cf702536bd)
+
+
 Thus, the data model, consisting of TrainrunSection and nodes, forms a network of edges and nodes,
 similar to an undirected graph. The TrainrunSections represent the connections between the nodes and
 enable the representation and analysis of complex relationships in the model.
