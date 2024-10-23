@@ -110,7 +110,6 @@ describe("Origin Destination CSV Test", () => {
     });
     const end = new Date().getTime();
 
-    // Note: there may be some other equivalent solutions, depending on connections.
     // See https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/199
     expect(res).toEqual(
       new Map([
@@ -126,6 +125,13 @@ describe("Origin Destination CSV Test", () => {
         ["14,13", [29, 1]],
         ["14,11", [6, 0]],
         ["14,12", [2, 0]],
+        // Making sure we traverse E <- F -> G correctly.
+        ["15,17", [4, 0]],
+        ["15,16", [1, 0]],
+        ["16,15", [1, 0]],
+        ["16,17", [1, 0]],
+        ["17,15", [4, 0]],
+        ["17,16", [1, 0]],
       ]),
     );
     // This should be reasonably fast, likely less than 10ms.
@@ -165,7 +171,6 @@ describe("Origin Destination CSV Test", () => {
       );
     });
 
-    // Note: there may be some other equivalent solutions, depending on connections.
     // See https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/199
     expect(res).toEqual(
       new Map([

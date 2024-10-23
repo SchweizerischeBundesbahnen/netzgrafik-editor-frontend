@@ -497,8 +497,7 @@ export class EditorToolsViewComponent {
     return this.buildCSVString(headers, rows);
   }
 
-  // Split trainruns are not supported at the moment:
-  // https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/285
+  // TODO: this may be incorrect for trainruns going through the same node several times.
   private convertToOriginDestinationCSV(): string {
     // Duration of the schedule to consider (in minutes).
     // TODO: ideally this would be 24 hours, but performance is a concern.
