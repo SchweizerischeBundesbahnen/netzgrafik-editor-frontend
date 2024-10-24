@@ -190,10 +190,6 @@ More details can be found in the source code:
 To understand how the trainrun iteration has to work, please take another look at this illustration:
 ![image](https://github.com/user-attachments/assets/21fdb029-2a59-468a-ac93-11cf702536bd)
 
-
-
-More information can be found at https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL.md#data-model
-
 The [TrainrunIterator](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/d170955ecc466bfa9c10071927c63199eb7a86f7/src/app/services/util/trainrun.iterator.ts#L12) operates over a structure that can be conceptualized as an undirected acyclic graph (DAG), where each trainrun is a connected component.
 
 #### Structure
