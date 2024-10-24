@@ -194,15 +194,14 @@ The [TrainrunIterator](https://github.com/SchweizerischeBundesbahnen/netzgrafik-
 
 #### Structure
 
-- **TrainrunSection:** Each section has a source and a target node, analogous to an edge in a graph.
-- **Node:** Nodes manage connections through ports, effectively acting as junction points within the graph.
-- **Transition:** Transitions are internal connections within nodes, linking two trainrun sections through ports.
+- **TrainrunSection:** Each section has a source and a target node, analogous to an edge in a graph. The trainrun section is not directly connected to a node. It's connected via a port.
+- **Node:** Nodes manage connections through ports, ports are effectively acting as a vertex within the graph. 
+- **Transition:** Transitions connect two train sections within a node with the help of ports. They can be interpreted as edges in the graph. 
 
 #### Traversal
-- Start from a given node and trainrun section.
-- The orientation (direction) is determined by the tuple of the node and trainrun section. This tuple can be interpreted as the oriented edge that points towards another node. For example, if the given node is the source node, the iterator moves towards the target node; if the node is the target node, the iterator moves towards the source node.
-- When reaching a transition, continue traversing through the next connected section.
-- Stop when no further transitions are available.
+- To start the traversal it's key to pass a location (node) where to start and trainrun section. With the help of the trainrun section the traverling direction gets determined. Thus the  direction (orientation) is determined by a tuple consiting of node and trainrun section. This tuple determines the directed edge in the directed graph. Each edge in a directed graph points towards another node. Thus the traversal direction is well determined. For example, if the given node is the source node, the iterator moves towards the target node; if the node is the target node, the iterator moves towards the source node.
+- When reaching a node, then the transition will be the object which determines the transition for input port to output port within the node. Thus to continue traversing through the next   section will require an transition.
+- Stop when no transitions are available. Thus the reach node is the destination of the trainrun or vice-versa spoken the starting node.
 
 
 The TrainrunIterator can effectively traverse through the trainrun sections by leveraging the source and target nodes of each section. This approach removes the need to explicitly define a direction and uses the inherent structure of the trainrun sections and nodes to guide the traversal. By managing transitions within nodes and ensuring each section is visited once, the iterator can navigate through the entire trainrun efficiently.
