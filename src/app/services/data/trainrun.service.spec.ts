@@ -344,18 +344,26 @@ describe("TrainrunService", () => {
     trainrunService.splitTrainrunIntoTwoParts(n.getTransition(0));
 
     const trainrunSections2 =
-      trainrunSectionService.getAllTrainrunSectionsForTrainrun(ts0.getTrainrunId());
+      trainrunSectionService.getAllTrainrunSectionsForTrainrun(
+        ts0.getTrainrunId(),
+      );
     expect(trainrunSections2.length).toBe(1);
     const trainrunSections3 =
-      trainrunSectionService.getAllTrainrunSectionsForTrainrun(ts1.getTrainrunId());
+      trainrunSectionService.getAllTrainrunSectionsForTrainrun(
+        ts1.getTrainrunId(),
+      );
     expect(trainrunSections3.length).toBe(1);
 
-    trainrunService.combineTwoTrainruns(n,
+    trainrunService.combineTwoTrainruns(
+      n,
       n.getPortOfTrainrunSection(0),
-      n.getPortOfTrainrunSection(1));
+      n.getPortOfTrainrunSection(1),
+    );
 
     const trainrunSections4 =
-      trainrunSectionService.getAllTrainrunSectionsForTrainrun(ts1.getTrainrunId());
+      trainrunSectionService.getAllTrainrunSectionsForTrainrun(
+        ts1.getTrainrunId(),
+      );
     expect(trainrunSections4.length).toBe(2);
   });
 
@@ -366,35 +374,34 @@ describe("TrainrunService", () => {
 
     const iterators = trainrunService.getRootIterators();
 
-    const iterators0 = iterators.get(0);
     // trainrun 0: 0 -> 1 -> 2
-    // 1 root: 0
-    expect(iterators0.length).toBe(1);
-    expect(iterators0[0].current().trainrunSection.getSourceNodeId()).toBe(0);
+    // root: 0
+    expect(iterators.get(0).current().trainrunSection.getSourceNodeId()).toBe(
+      0,
+    );
 
-    const iterators1 = iterators.get(1);
     // trainrun 1: 1 -> 2
-    // 1 root: 1
-    expect(iterators1.length).toBe(1);
-    expect(iterators1[0].current().trainrunSection.getSourceNodeId()).toBe(1);
+    // root: 1
+    expect(iterators.get(1).current().trainrunSection.getSourceNodeId()).toBe(
+      1,
+    );
 
-    const iterators2 = iterators.get(2);
     // trainrun 2: 0 -> 1 -> 2 -> 3
-    // 1 root: 0
-    expect(iterators2.length).toBe(1);
-    expect(iterators2[0].current().trainrunSection.getSourceNodeId()).toBe(0);
+    // root: 0
+    expect(iterators.get(2).current().trainrunSection.getSourceNodeId()).toBe(
+      0,
+    );
 
-    const iterators3 = iterators.get(3);
     // trainrun 3: 4 -> 2
-    // 1 root: 4
-    expect(iterators3.length).toBe(1);
-    expect(iterators3[0].current().trainrunSection.getSourceNodeId()).toBe(4);
+    // root: 4
+    expect(iterators.get(3).current().trainrunSection.getSourceNodeId()).toBe(
+      4,
+    );
 
-    const iterators4 = iterators.get(4);
     // trainrun 4: 4 -> 2
-    // 1 root: 4
-    expect(iterators4.length).toBe(1);
-    expect(iterators4[0].current().trainrunSection.getSourceNodeId()).toBe(4);
+    // root: 4
+    expect(iterators.get(4).current().trainrunSection.getSourceNodeId()).toBe(
+      4,
+    );
   });
-
 });

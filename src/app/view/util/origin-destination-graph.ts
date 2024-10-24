@@ -220,29 +220,26 @@ const buildSectionEdges = (
   const edges = [];
   const its = trainrunService.getRootIterators();
   trainruns.forEach((trainrun) => {
-    const tsIterators = its.get(trainrun.getId());
-    if (tsIterators === undefined) {
+    const tsIterator = its.get(trainrun.getId());
+    if (tsIterator === undefined) {
       console.log("Ignoring trainrun (no root found): ", trainrun.getId());
       return;
     }
-    tsIterators.forEach((tsIterator) => {
-      edges.push(
-        ...buildSectionEdgesFromIterator(tsIterator, false, timeLimit),
-      );
-      // Don't forget the reverse direction.
-      const ts = tsIterator.current().trainrunSection;
-      const nextIterator = trainrunService.getIterator(ts.getTargetNode(), ts);
-      edges.push(
-        ...buildSectionEdgesFromIterator(nextIterator, true, timeLimit),
-      );
-    });
+    edges.push(...buildSectionEdgesFromIterator(tsIterator, false, timeLimit));
+    // Don't forget the reverse direction.
+    const ts = tsIterator.current().trainrunSection;
+    const nextIterator = trainrunService.getIterator(
+      tsIterator.current().node,
+      ts,
+    );
+    edges.push(...buildSectionEdgesFromIterator(nextIterator, true, timeLimit));
   });
   return edges;
 };
 
 const buildSectionEdgesFromIterator = (
   tsIterator: TrainrunIterator,
-  reverse: boolean,
+  reverseIterator: boolean,
   timeLimit: number,
 ): Edge[] => {
   const edges = [];
@@ -251,14 +248,18 @@ const buildSectionEdgesFromIterator = (
   while (tsIterator.hasNext()) {
     tsIterator.next();
     const ts = tsIterator.current().trainrunSection;
-    const trainrunId = reverse ? -ts.getTrainrunId() : ts.getTrainrunId();
-    const v1Time = reverse
+    const trainrunId = reverseIterator
+      ? -ts.getTrainrunId()
+      : ts.getTrainrunId();
+    const reverseSection =
+      tsIterator.current().node.getId() !== ts.getTargetNodeId();
+    const v1Time = reverseSection
       ? ts.getTargetDepartureDto().consecutiveTime
       : ts.getSourceDepartureDto().consecutiveTime;
-    const v1Node = reverse ? ts.getTargetNodeId() : ts.getSourceNodeId();
+    const v1Node = reverseSection ? ts.getTargetNodeId() : ts.getSourceNodeId();
     // If we don't stop here, we need to remember where we started.
     if (
-      reverse
+      reverseSection
         ? ts.getSourceNode().isNonStop(ts)
         : ts.getTargetNode().isNonStop(ts)
     ) {
@@ -269,16 +270,15 @@ const buildSectionEdgesFromIterator = (
       continue;
     }
     let v1 = new Vertex(v1Node, true, v1Time, trainrunId);
-    let nonStop = false;
+    // If we didn't stop previously, we need to use the stored start.
     if (nonStopV1Time !== -1) {
       v1 = new Vertex(nonStopV1Node, true, nonStopV1Time, trainrunId);
       nonStopV1Time = -1;
-      nonStop = true;
     }
-    const v2Time = reverse
+    const v2Time = reverseSection
       ? ts.getSourceArrivalDto().consecutiveTime
       : ts.getTargetArrivalDto().consecutiveTime;
-    const v2Node = reverse ? ts.getSourceNodeId() : ts.getTargetNodeId();
+    const v2Node = reverseSection ? ts.getSourceNodeId() : ts.getTargetNodeId();
     const v2 = new Vertex(v2Node, false, v2Time, trainrunId);
 
     for (let i = 0; i * ts.getTrainrun().getFrequency() < timeLimit; i++) {
