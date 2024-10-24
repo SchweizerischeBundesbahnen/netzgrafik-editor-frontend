@@ -187,7 +187,7 @@ More details can be found in the source code:
 ---
 
 ### Trainrun Iteration
-To understand how the train works, please take another look at this illustration:
+To understand how the trainrun iteration has to work, please take another look at this illustration:
 ![image](https://github.com/user-attachments/assets/21fdb029-2a59-468a-ac93-11cf702536bd)
 
 
