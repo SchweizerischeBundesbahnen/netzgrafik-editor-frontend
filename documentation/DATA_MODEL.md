@@ -186,7 +186,7 @@ More details can be found in the source code:
 
 ---
 
-### Iterate through all trainrun section (forward/backward)
+### Iterate through all train run sections (forward/backward)
 To understand how the trainrun iteration has to work, please take another look at this illustration:
 ![image](https://github.com/user-attachments/assets/21fdb029-2a59-468a-ac93-11cf702536bd)
 
