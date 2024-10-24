@@ -152,6 +152,8 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     const selectedTrainrun: Trainrun = this.getSelectedTrainrun();
     if (selectedTrainrun) {
       if (selectedTrainrun.selected()) {
+        // The template path (along which the graphical timetable is projected) does
+        // not support current trains with partial cancellations.
         const ts: TrainrunSection = this.trainrunSectionService
           .getAllTrainrunSectionsForTrainrun(selectedTrainrun.getId())
           .find(ts => true);
@@ -686,16 +688,25 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
   public loadTrainrunItems(
     templateTrainrunItem: TrainrunItem,
   ): TrainrunItem[] {
+    // Extract for all trainruns the sections which are part of the
+    // template path (along which the graphical timetable is projected) and it does
+    // support current for those trains with partial cancellations.
     const trainrunItems: TrainrunItem[] = [];
     if (this.trainruns) {
       this.trainruns.forEach((trainrun: Trainrun) => {
         if (this.filterService.filterTrainrun(trainrun)) {
+          // get all trainrun section for given trainrun
           let alltrainrunsections = this.trainrunSectionService
             .getAllTrainrunSectionsForTrainrun(trainrun.getId());
+
+          // As long not all trainrun section are visited (process) continue
+          // this part of code supports partial cancelatlations, e.g. trainrun runs from
+          // A - B - C [ partial canceled ] D - E
           while (alltrainrunsections.length > 0) {
             const ts: TrainrunSection = alltrainrunsections.find(ts => true);
             const loadeddata = this.loadTrainrunItem(ts, false);
 
+            // correct projections directions
             this.sortTrainrunItemAndRotateAlongTemplatePath(
               trainrun,
               loadeddata.trainrunItem,
@@ -703,10 +714,10 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
             );
             trainrunItems.push(loadeddata.trainrunItem);
 
+            // filter all still visited trainrun sections
             alltrainrunsections = alltrainrunsections.filter(ts =>
               loadeddata.visitedTrainrunSections.find(ts2 => ts2.getId() === ts.getId()) === undefined
             );
-
           }
         }
       });
