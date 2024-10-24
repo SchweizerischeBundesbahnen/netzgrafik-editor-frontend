@@ -199,25 +199,21 @@ The [TrainrunIterator](https://github.com/SchweizerischeBundesbahnen/netzgrafik-
 - **Transition:** Transitions connect two train sections within a node with the help of ports. They can be interpreted as edges in the graph. 
 
 #### Traversal
-- To start the traversal it's key to pass a location (node) where to start and trainrun section. With the help of the trainrun section the traverling direction gets determined. Thus the  direction (orientation) is determined by a tuple consiting of node and trainrun section. This tuple determines the directed edge in the directed graph. Each edge in a directed graph points towards another node. Thus the traversal direction is well determined. For example, if the given node is the source node, the iterator moves towards the target node; if the node is the target node, the iterator moves towards the source node.
-- When reaching a node, then the transition will be the object which determines the transition for input port to output port within the node. Thus to continue traversing through the next   section will require an transition.
-- Stop when no transitions are available. Thus the reach node is the destination of the trainrun or vice-versa spoken the starting node.
+To initiate traversal, it is important to specify a location (node) where the traversal begins. To determine the traversal direction a trainrun section is required. The trainrun section must be connected to the node. Otherwise the traversal will fail. With the help of the trainrun section the traversal method determines the travel direction. Therefore, a tuple consisting of a node and a trainrun section is needed for each traversal. This tuple determines the directed edge in the directed graph. Each edge in a directed graph points to another node. For example, if the given node is the source node, the iterator moves towards the target node; if the node is the target node, the iterator moves towards the source node. This can be defined very simply using the tuple.
 
+Upon reaching a node, the transition is the object that determines the transition from the input port to the output port within the node. This is important to correctly determine the transition from the incoming trainrun section to the continuing trainrun section. Therefore, to continue traversing through the next section, a transition is needed. Once no transitions are available, the traversal stops. At that point, either the target node of the trainrun or, conversely, the starting node is found.
 
-The TrainrunIterator can effectively traverse through the trainrun sections by leveraging the source and target nodes of each section. This approach removes the need to explicitly define a direction and uses the inherent structure of the trainrun sections and nodes to guide the traversal. By managing transitions within nodes and ensuring each section is visited once, the iterator can navigate through the entire trainrun efficiently.
+The TrainrunIterator can effectively traverse through the trainrun sections by utilizing the source and target nodes of each section. This approach eliminates the need to explicitly maintain a direction in the data and is independent of the input (drawing direction). This allows everything to be kept very simple for the user.
 
 ### TrainrunIterator
 
 The TrainrunIterator is a concept aimed at iterating through the sections of a trainrun, similar to how one navigates through the edges of a graph. Here is a detailed description of how this iterator works and how it can be used:
 
 #### Structure of the Trainrun
-- **TrainrunSection**: Each section has a source node and a target node, connected by ports. These sections function similarly to edges in a graph.
-- **Node**: Nodes manage the ports and serve as connection points within the graph.
-- **Transition**: Transitions are internal connections within a node that link two trainrun sections through ports.
 - **Graph**: The entire graph is generally an undirected acyclic graph (DAG). Each trainrun (segment) represents a connected component.
 
 #### Traversal Logic
-- **Starting Point**: Iteration begins with a given node ID and a specific trainrun section.
+- **Starting Point**: Iteration begins with a given node and a specific trainrun section.
 - **Section Connection**: The iterator moves through connected sections by utilizing the source and target nodes of each section.
 - **Transitions**: When a transition is reached, the next connected section is followed through the corresponding port.
 - **End of Traversal**: Iteration ends when no further sections or transitions are available.
