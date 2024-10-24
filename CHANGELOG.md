@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.9.0](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.8.0...netzgrafik-frontend-v2.9.0) (2024-10-24)
+
+
+### Features
+
+* migrate originDestination connectionPenalty to netzgrafikDto ([#314](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/314)) ([ce3f90d](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/ce3f90d73784fabb49f29ac3625b142ceaa4134f))
+* optimize originDestination graph ([#316](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/316)) ([83895a1](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/83895a153bcbc83cbbb692f48b8df196a56a9467))
+
+
+### Bug Fixes
+
+* fix O/D Matrix for unordered trainruns ([#321](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/321)) ([3d9644f](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/3d9644fbe94ea0a11a5403b798ea5634481166fa))
+
 ## [2.8.0](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.7.17...netzgrafik-frontend-v2.8.0) (2024-10-10)
 
 
