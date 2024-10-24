@@ -186,50 +186,53 @@ More details can be found in the source code:
 
 ---
 
-### Trainrun Iteration
+### Iterate through all trainrun section (forward/backward)
 To understand how the trainrun iteration has to work, please take another look at this illustration:
 ![image](https://github.com/user-attachments/assets/21fdb029-2a59-468a-ac93-11cf702536bd)
 
+#### General 
+
 The [TrainrunIterator](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/d170955ecc466bfa9c10071927c63199eb7a86f7/src/app/services/util/trainrun.iterator.ts#L12) operates over a structure that can be conceptualized as an undirected acyclic graph (DAG), where each trainrun is a connected component.
 
-#### Structure
+
+
+##### Structure
 
 - **TrainrunSection:** Each section has a source and a target node, analogous to an edge in a graph. The trainrun section is not directly connected to a node. It's connected via a port.
 - **Node:** Nodes manage connections through ports, ports are effectively acting as a vertex within the graph. 
 - **Transition:** Transitions connect two train sections within a node with the help of ports. They can be interpreted as edges in the graph. 
 
-#### Traversal
+##### Traversal
 To initiate traversal, it is important to specify a location (node) where the traversal begins. To determine the traversal direction a trainrun section is required. The trainrun section must be connected to the node. Otherwise the traversal will fail. With the help of the trainrun section the traversal method determines the travel direction. Therefore, a tuple consisting of a node and a trainrun section is needed for each traversal. This tuple determines the directed edge in the directed graph. Each edge in a directed graph points to another node. For example, if the given node is the source node, the iterator moves towards the target node; if the node is the target node, the iterator moves towards the source node. This can be defined very simply using the tuple.
 
 Upon reaching a node, the transition is the object that determines the transition from the input port to the output port within the node. This is important to correctly determine the transition from the incoming trainrun section to the continuing trainrun section. Therefore, to continue traversing through the next section, a transition is needed. Once no transitions are available, the traversal stops. At that point, either the target node of the trainrun or, conversely, the starting node is found.
 
 The TrainrunIterator can effectively traverse through the trainrun sections by utilizing the source and target nodes of each section. This approach eliminates the need to explicitly maintain a direction in the data and is independent of the input (drawing direction). This allows everything to be kept very simple for the user.
 
-### TrainrunIterator
+#### TrainrunIterator
 
 The TrainrunIterator is a concept aimed at iterating through the sections of a trainrun, similar to how one navigates through the edges of a graph. Here is a detailed description of how this iterator works and how it can be used:
 
-#### Structure of the Trainrun
+##### Structure of the Trainrun
 - **Graph**: The entire graph is generally an undirected acyclic graph (DAG). Each trainrun (segment) represents a connected component.
 
-#### Traversal Logic
+##### Traversal Logic
 - **Starting Point**: Iteration begins with a given node and a specific trainrun section.
 - **Section Connection**: The iterator moves through connected sections by utilizing the source and target nodes of each section.
 - **Transitions**: When a transition is reached, the next connected section is followed through the corresponding port.
 - **End of Traversal**: Iteration ends when no further sections or transitions are available.
 
-#### Example Application
+##### Example Application
 - **Initialization**: The iterator is initialized with a start node ID and a specific trainrun section.
 - **Forward Traversal**: The iterator moves from section to section by navigating from one node to the next. During traversal, the source and target nodes of the sections are used to determine the path.
 - **Backward Traversal**: To traverse in the opposite direction, the iterator can be re-initialized with the end node ID of the current traversal and the corresponding trainrun section. This reverses the path and allows a return to the starting point.
 
-#### Detailed Steps
+##### Detailed Steps
 1. **Start with a Node ID and a Trainrun Section**: The iterator begins with a defined node ID and a specific trainrun section. This represents the starting point.
 2. **Section-wise Traversal**: The iterator traverses the sections by using the connections between the nodes. It moves from the source node to the target node of a section.
 3. **Handling Transitions**: When a transition within a node is reached, the iterator follows the transition to the next connected section.
 4. **Traversal End**: Iteration ends when no further connected sections or transitions are available. This signals the end of the trainrun.
 
-#### Summary
 The TrainrunIterator enables structured traversal through the sections of a trainrun by using both a node ID and a specific trainrun section as a starting point. This increases the precision and flexibility of the traversal. By utilizing the source and target nodes of each section and following transitions within the nodes, the iterator can efficiently navigate through the entire trainrun. This method is particularly useful for traversing complex trainrun paths and ensuring that the traversal logic is correctly understood and applied both forwards and backwards.
 
 If functionality should be initiated by providing a port ID, this could be a further extension allowing a start directly from a specific port. However, this functionality is not yet implemented.
