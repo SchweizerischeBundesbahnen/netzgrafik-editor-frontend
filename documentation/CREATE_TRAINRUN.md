@@ -109,7 +109,7 @@ For more details have a look into
 
 ## Special cases
 
-### Trainrun path  
+### Trainrun path with "holes" (missing sections) 
 
 When creating a trainrun, the trairnun path should connect all nodes from start to destination using trainrun sections. 
 However, it can happen during the creation that not all trainrun sections have been drawn in the meantime. 
