@@ -714,17 +714,6 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
             );
             trainrunItems.push(loadeddata.trainrunItem);
 
-            // debug log
-            console.log(trainrun.getTitle(), alltrainrunsections.length);
-            const path: string[] = [];
-            loadeddata.trainrunItem.pathItems.forEach(pi => {
-              if (pi.isNode()) {
-                path.push(pi.getPathNode().nodeShortName);
-              }
-            });
-            console.log(trainrun.getTitle(), loadeddata.trainrunItem);
-            console.log(trainrun.getTitle(), path);
-
             // filter all still visited trainrun sections
             alltrainrunsections = alltrainrunsections.filter(ts =>
               loadeddata.visitedTrainrunSections.find(ts2 => ts2.getId() === ts.getId()) === undefined
