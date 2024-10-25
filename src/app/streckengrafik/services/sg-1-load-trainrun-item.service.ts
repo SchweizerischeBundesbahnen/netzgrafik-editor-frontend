@@ -443,7 +443,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     trainrunItem: TrainrunItem;
     visitedTrainrunSections: TrainrunSection[];
   } {
-    const visitedTrainrunSections: TrainrunSection[] = [];
+    let visitedTrainrunSections: TrainrunSection[] = [];
     let index = 0;
     let trainrunStartTime = 0;
     let trainrunEndTime = 0;
@@ -467,9 +467,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       true
     );
     const forwardTrainrunSectionGroup = tsgForward.trainrunSectionGroups;
-    tsgForward.visitedTrainrunSections.forEach(ts => {
-      visitedTrainrunSections.push(ts);
-    });
+    visitedTrainrunSections = visitedTrainrunSections.concat(tsgForward.visitedTrainrunSections);
 
     const tsgBackward = this.trainrunSectionGroup(
       trainrun.getId(),
@@ -477,9 +475,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       false
     );
     const backwardTrainrunSectionGroup = tsgBackward.trainrunSectionGroups;
-    tsgBackward.visitedTrainrunSections.forEach(ts => {
-      visitedTrainrunSections.push(ts);
-    });
+    visitedTrainrunSections = visitedTrainrunSections.concat(tsgBackward.visitedTrainrunSections);
 
     let forwardStartNode: PathNode = undefined;
     let forwardEndNode: PathNode = undefined;
@@ -974,7 +970,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     check: boolean;
     visitedTrainrunSections: TrainrunSection[];
   } {
-    const visitedTrainrunSections: TrainrunSection[] = [];
+    let visitedTrainrunSections: TrainrunSection[] = [];
 
     const tsgForward = this.trainrunSectionGroup(
       trainrun.getId(),
@@ -982,9 +978,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       true
     );
     const forwardTrainrunSectionGroups = tsgForward.trainrunSectionGroups;
-    tsgForward.visitedTrainrunSections.forEach(ts => {
-      visitedTrainrunSections.push(ts);
-    });
+    visitedTrainrunSections = visitedTrainrunSections.concat(tsgForward.visitedTrainrunSections);
 
     const tsgBackward = this.trainrunSectionGroup(
       trainrun.getId(),
@@ -992,9 +986,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       false
     );
     const backwardTrainrunSectionGroups = tsgBackward.trainrunSectionGroups;
-    tsgBackward.visitedTrainrunSections.forEach(ts => {
-      visitedTrainrunSections.push(ts);
-    });
+    visitedTrainrunSections= visitedTrainrunSections.concat(tsgBackward.visitedTrainrunSections);
 
     const selectedPaths = this.betriebspunktNamePaths(
       selectedForwardTrainrunSectionGroups,
@@ -1024,7 +1016,10 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
         this.addStartEnde(backwardPaths),
       );
     }
-    return {check: rateForward < rateBackward, visitedTrainrunSections: visitedTrainrunSections};
+    return {
+      check: rateForward < rateBackward,
+      visitedTrainrunSections: visitedTrainrunSections
+    };
   }
 
   setDataOnlyForTestPurpose() {
