@@ -111,6 +111,9 @@ For more details have a look into
 
 ### Trainrun path with "holes" (missing sections) 
 
+![image](https://github.com/user-attachments/assets/d87b842c-7696-4e81-aa78-75cc966b5306)
+Example Netzgrafik with missing sections (See the cargo trainrun GTwo_Part_trainrun)
+
 When creating a trainrun, the trairnun path should connect all nodes from start to destination using trainrun sections. 
 However, it can happen during the creation that not all trainrun sections have been drawn in the meantime. 
 Gaps may occur along the trainrun path where at least one trainrun section is missing. 
@@ -120,6 +123,9 @@ For example, a trainrun path could look like this with a "hole" in the middle,
 A - B - C ---- (missing section) ---- E - F - G
 
 The trainrun section between C and E is missing here. However, these gaps can also occur if a partial cancelation is made for a train run.
+
+![image](https://github.com/user-attachments/assets/5d1ef657-e421-41ff-ae57-622eee82f295)
+Graphical timetable.
 
 In each of these cases, the trainrun has at least two parts, e.g. [(A B), (A C)] and [(E F)(F G)]. 
 In this case, the trainrun is interpreted as two separate trainruns.
