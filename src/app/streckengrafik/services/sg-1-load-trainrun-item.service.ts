@@ -700,7 +700,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
             .getAllTrainrunSectionsForTrainrun(trainrun.getId());
 
           // As long not all trainrun section are visited (process) continue
-          // this part of code supports partial cancelatlations, e.g. trainrun runs from
+          // this part of code supports partial cancellations, e.g., trainrun runs from
           // A - B - C [ partial canceled ] D - E
           while (alltrainrunsections.length > 0) {
             const ts: TrainrunSection = alltrainrunsections.find(ts => true);
