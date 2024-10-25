@@ -712,7 +712,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
 
             // filter all still visited trainrun sections
             alltrainrunsections = alltrainrunsections.filter(ts =>
-              loadeddata.visitedTrainrunSections.find(ts2 => ts2.getId() === ts.getId()) === undefined
+              loadeddata.visitedTrainrunSections.indexOf(ts) === -1
             );
           }
         }
@@ -986,7 +986,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       false
     );
     const backwardTrainrunSectionGroups = tsgBackward.trainrunSectionGroups;
-    visitedTrainrunSections= visitedTrainrunSections.concat(tsgBackward.visitedTrainrunSections);
+    visitedTrainrunSections = visitedTrainrunSections.concat(tsgBackward.visitedTrainrunSections);
 
     const selectedPaths = this.betriebspunktNamePaths(
       selectedForwardTrainrunSectionGroups,

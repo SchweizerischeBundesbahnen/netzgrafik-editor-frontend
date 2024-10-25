@@ -582,7 +582,10 @@ export class TrainrunService {
       return;
     }
 
-    let alltrainrunsections = this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(inTrainrunSection.getTrainrunId());
+    let alltrainrunsections =
+      this.trainrunSectionService
+        .getAllTrainrunSectionsForTrainrun(inTrainrunSection.getTrainrunId());
+
     while (alltrainrunsections.length > 0) {
       // propagate Consecutive Times Forward
       const trainrunSection = alltrainrunsections[0];
@@ -629,10 +632,8 @@ export class TrainrunService {
 
       // filter all still visited trainrun sections
       alltrainrunsections = alltrainrunsections.filter(ts =>
-        propDataForward.visitedTrainrunSections.find(ts2 => ts2.getId() === ts.getId()) === undefined
-      );
-      alltrainrunsections = alltrainrunsections.filter(ts =>
-        propDataBackward.visitedTrainrunSections.find(ts2 => ts2.getId() === ts.getId()) === undefined
+        propDataForward.visitedTrainrunSections.indexOf(ts) === -1 &&
+        propDataBackward.visitedTrainrunSections.indexOf(ts) === -1
       );
     }
   }
