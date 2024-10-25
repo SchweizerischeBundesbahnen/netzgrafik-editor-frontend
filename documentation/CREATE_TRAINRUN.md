@@ -106,3 +106,23 @@ To switch a train from a stop to a non-stop at a node, follow these steps:
 For more details have a look into 
 - [Split/Combine two trainruns](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Split_Combine_Trainruns.md)
 - [Merge Netzgrafik](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Merge_Netzgrafik.md)
+
+## Special cases
+
+### Trainrun path  
+
+When creating a trainrun, the trairnun path should connect all nodes from start to destination using trainrun sections. 
+However, it can happen during the creation that not all trainrun sections have been drawn in the meantime. 
+Gaps may occur along the trainrun path where at least one trainrun section is missing. 
+These “holes” usually occur if the trainrun path has not yet been drawn completely or correctly.
+For example, a trainrun path could look like this with a "hole" in the middle, 
+
+A - B - C ---- (missing section) ---- E - F - G
+
+The trainrun section between C and E is missing here. However, these gaps can also occur if a partial cancelation is made for a train run.
+
+In each of these cases, the trainrun has at least two parts, e.g. [(A B), (A C)] and [(E F)(F G)]. 
+In this case, the trainrun is interpreted as two separate trainruns.
+The Netzgrafik has no information about whether the missing part could be closed between C - E, C - D - E or 
+another possible variant, therefore the assumption that there is an independent trainrun for each trainrun part is 
+the best assumption. This avoids many new problems. 
