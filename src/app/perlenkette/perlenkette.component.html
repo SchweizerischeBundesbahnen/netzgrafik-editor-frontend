@@ -126,6 +126,10 @@
               [isBottomNode]="idx === perlenketteTrainrun.pathItems.length-1"
             >
             </sbb-perlenkette-node>
+            <div *ngIf="doSplitTrainrun(perlenketteTrainrun.pathItems, idx)">
+              <br>
+              <br>
+            </div>
             <sbb-perlenkette-section
               *ngIf="pathItem.isPerlenketteSection()"
               [perlenketteSection]="pathItem.getPerlenketteSection()"

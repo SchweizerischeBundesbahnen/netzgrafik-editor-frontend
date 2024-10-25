@@ -54,7 +54,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     readonly filterService: FilterService,
     private readonly uiInteractionService: UiInteractionService,
     private readonly nodeService: NodeService,
-    private versionControlService : VersionControlService,
+    private versionControlService: VersionControlService,
     private changeDetectorRef: ChangeDetectorRef,
   ) {
     this.selectedPerlenketteConnection = undefined;
@@ -215,6 +215,15 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     this.signalAllChildrenIsBeingEditedSubject.next(event);
   }
 
+  doSplitTrainrun(pathItems: PerlenketteItem[], idx: number): boolean {
+    if (idx >= pathItems.length - 1) {
+      return false;
+    }
+    const item = pathItems[idx];
+    const previousItem = pathItems[idx + 1];
+    return item.isPerlenketteNode() === previousItem.isPerlenketteNode();
+  }
+
   signalHeightChanged(height: number, pathItem: PerlenketteItem) {
     this.perlenketteRenderingElementsHeight.push([pathItem, height]);
     this.renderedElementsHeight = 0;
@@ -229,7 +238,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     return this.signalAllChildrenIsBeingEditedSubject.asObservable();
   }
 
-  getVariantIsWritable() : boolean {
+  getVariantIsWritable(): boolean {
     return this.versionControlService.getVariantIsWritable();
   }
 
