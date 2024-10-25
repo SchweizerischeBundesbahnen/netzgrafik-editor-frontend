@@ -972,7 +972,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     selectedForwardTrainrunSectionGroups: TrainrunSectionGroup[],
   ): {
     check: boolean;
-    visitedTrainrunSections: TrainrunSection[]
+    visitedTrainrunSections: TrainrunSection[];
   } {
     const visitedTrainrunSections: TrainrunSection[] = [];
 
