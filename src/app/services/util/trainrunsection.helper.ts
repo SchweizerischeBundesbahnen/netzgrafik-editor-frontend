@@ -104,14 +104,14 @@ export class TrainrunsectionHelper {
   getLeftRightSections(trainrunSection: TrainrunSection) {
     const bothLastNonStopTransitNodes =
       this.trainrunService.getBothLastNonStopNodes(trainrunSection);
-    const lastLeftNode = GeneralViewFunctions.getLeftOrTopNode(
-      bothLastNonStopTransitNodes.lastNonStopNode1,
-      bothLastNonStopTransitNodes.lastNonStopNode2,
-    );
-    const lastRightNode =
-      lastLeftNode.getId() === bothLastNonStopTransitNodes.lastNonStopNode1.getId() ?
-        bothLastNonStopTransitNodes.lastNonStopNode2 :
-        bothLastNonStopTransitNodes.lastNonStopNode1;
+
+    const startForwardBackwardNode =
+      GeneralViewFunctions.getStartForwardAndBackwardNode(
+        bothLastNonStopTransitNodes.lastNonStopNode1,
+        bothLastNonStopTransitNodes.lastNonStopNode2,
+      );
+    const lastLeftNode = startForwardBackwardNode.startForwardNode;
+    const lastRightNode = startForwardBackwardNode.startBackwardNode;
 
     const towardsSource =
       this.trainrunService.getLastNonStopTrainrunSection(

@@ -604,17 +604,15 @@ export class TrainrunService {
       const bothEndNodes =
         this.getBothEndNodesFromTrainrunPart(trainrunSection);
 
-      const startForwardNode = GeneralViewFunctions.getLeftOrTopNode(
-        bothEndNodes.endNode1,
-        bothEndNodes.endNode2,
-      );
-      const startBackwardNode =
-        bothEndNodes.endNode1.getId() === startForwardNode.getId()
-          ? bothEndNodes.endNode2
-          : bothEndNodes.endNode1;
+      const startForwardBackwardNode =
+        GeneralViewFunctions.getStartForwardAndBackwardNode(
+          bothEndNodes.endNode1,
+          bothEndNodes.endNode2,
+        );
+
       const propDataForward = this.propagateConsecutiveTimes(
-        startForwardNode,
-        startForwardNode.getStartTrainrunSection(
+        startForwardBackwardNode.startForwardNode,
+        startForwardBackwardNode.startForwardNode.getStartTrainrunSection(
           trainrunSection.getTrainrunId(),
           true
         ),
@@ -631,8 +629,8 @@ export class TrainrunService {
       offset = Math.floor(offset / 60) * 60;
 
       const propDataBackward = this.propagateConsecutiveTimes(
-        startBackwardNode,
-        startBackwardNode.getStartTrainrunSection(
+        startForwardBackwardNode.startBackwardNode,
+        startForwardBackwardNode.startBackwardNode.getStartTrainrunSection(
           trainrunSection.getTrainrunId(),
           false
         ),

@@ -394,19 +394,15 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     const bothEndNodes =
       this.trainrunService.getBothEndNodesFromTrainrunPart(trainrunSection);
 
-    let startForwardNode = GeneralViewFunctions.getLeftOrTopNode(
+    const startForwardBackwardNode = GeneralViewFunctions.getStartForwardAndBackwardNode(
       bothEndNodes.endNode1,
       bothEndNodes.endNode2,
     );
-    let startBackwardNode =
-      bothEndNodes.endNode1.getId() === startForwardNode.getId()
-        ? bothEndNodes.endNode2
-        : bothEndNodes.endNode1;
 
     if (onlyForward) {
       const tsg = this.trainrunSectionGroup(
         trainrun.getId(),
-        startForwardNode,
+        startForwardBackwardNode.startForwardNode,
         true
       );
       this.forwardTrainrunSectionGroup = tsg.trainrunSectionGroups;
@@ -414,21 +410,21 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     } else {
       const extractedInfo = this.isTrainRunWayDirectionBackward(
         trainrun,
-        startForwardNode,
-        startBackwardNode,
+        startForwardBackwardNode.startForwardNode,
+        startForwardBackwardNode.startBackwardNode,
         this.forwardTrainrunSectionGroup,
       );
       visitedTrainrunSections = extractedInfo.visitedTrainrunSections;
       if (extractedInfo.check) {
-        const nextStartForwardNode = startBackwardNode;
-        const nextStartBackwardNode = startForwardNode;
-        startForwardNode = nextStartForwardNode;
-        startBackwardNode = nextStartBackwardNode;
+        const nextStartForwardNode = startForwardBackwardNode.startBackwardNode;
+        const nextStartBackwardNode = startForwardBackwardNode.startForwardNode;
+        startForwardBackwardNode.startForwardNode = nextStartForwardNode;
+        startForwardBackwardNode.startBackwardNode = nextStartBackwardNode;
       }
     }
     return {
-      startForwardNode: startForwardNode,
-      startBackwardNode: startBackwardNode,
+      startForwardNode: startForwardBackwardNode.startForwardNode,
+      startBackwardNode: startForwardBackwardNode.startBackwardNode,
       visitedTrainrunSections: visitedTrainrunSections,
     };
   }
