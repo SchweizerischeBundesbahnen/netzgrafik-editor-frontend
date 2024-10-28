@@ -156,7 +156,6 @@ export class LoadPerlenketteService implements OnDestroy {
           startTrainrunSection,
         );
 
-        const visitedTrainrunSections: TrainrunSection[] = [startTrainrunSection];
         let firstSection = true;
         while (iterator.hasNext()) {
           const currentTrainrunSectionNodePair = iterator.next();
@@ -192,7 +191,10 @@ export class LoadPerlenketteService implements OnDestroy {
           );
           lastNode = node;
 
-          visitedTrainrunSections.push(currentTrainrunSectionNodePair.trainrunSection);
+          // filter all still visited trainrun sections
+          alltrainrunsections = alltrainrunsections.filter(ts =>
+            ts.getId() !== currentTrainrunSectionNodePair.trainrunSection.getId()
+          );
         }
 
         if (perlenketteItem.length > 1) {
@@ -208,10 +210,7 @@ export class LoadPerlenketteService implements OnDestroy {
           }
         }
 
-        // filter all still visited trainrun sections
-        alltrainrunsections = alltrainrunsections.filter(ts =>
-          visitedTrainrunSections.indexOf(ts) === -1
-        );
+
       }
     }
     return perlenketteItem;
