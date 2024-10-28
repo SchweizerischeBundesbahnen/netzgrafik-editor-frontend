@@ -12,7 +12,22 @@ export class PerlenketteNode implements PerlenketteItem {
     public connectionTime: number,
     public connections: PerlenketteConnection[],
     public transition: Transition,
-  ) {}
+    public fristTrainrunPartNode: boolean,
+    public lastTrainrunPartNode: boolean
+  ) {
+  }
+
+  isFristTrainrunPartNode(): boolean {
+    return this.fristTrainrunPartNode;
+  }
+
+  isLastTrainrunPartNode(): boolean {
+    return this.lastTrainrunPartNode;
+  }
+
+  setLastTrainrunPartNode(flag : boolean) {
+    this.lastTrainrunPartNode = flag;
+  }
 
   isPerlenketteNode(): boolean {
     return true;

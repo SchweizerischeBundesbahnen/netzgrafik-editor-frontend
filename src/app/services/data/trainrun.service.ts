@@ -439,7 +439,7 @@ export class TrainrunService {
         port2.getTrainrunSection().getSourceDeparture();
 
     let frequencyOffset = 0;
-    while ( 60 + arrivalTimeAtNode > departTimeAtNode + frequencyOffset) {
+    while (60 + arrivalTimeAtNode > departTimeAtNode + frequencyOffset) {
       frequencyOffset += port1.getTrainrunSection().getFrequency();
     }
 
@@ -464,7 +464,7 @@ export class TrainrunService {
     const trans2 = node.getTransitionFromPortId(port2.getId());
     if (trans1 === undefined && trans2 === undefined) {
       const trans = node.addTransitionAndComputeRouting(port1, port2, trainrun1);
-      if (60 + arrivalTimeAtNode === departTimeAtNode+frequencyOffset) {
+      if (60 + arrivalTimeAtNode === departTimeAtNode + frequencyOffset) {
         trans.setIsNonStopTransit(true);
       } else {
         trans.setIsNonStopTransit(false);
@@ -575,48 +575,74 @@ export class TrainrunService {
     this.propagateConsecutiveTimesForTrainrun(ts.getId());
   }
 
+  getBothEndNodesFromTrainrunPart(trainrunSection: TrainrunSection):
+    {
+      endNode1: Node;
+      endNode2: Node;
+    } {
+    const sourceNode = trainrunSection.getSourceNode();
+    const targetNode = trainrunSection.getTargetNode();
+    const endNode1 = this.getEndNode(sourceNode, trainrunSection);
+    const endNode2 = this.getEndNode(targetNode, trainrunSection);
+    return {endNode1, endNode2};
+  }
+
   propagateConsecutiveTimesForTrainrun(trainrunSectionId: number) {
-    const trainrunSection =
+    const inTrainrunSection =
       this.trainrunSectionService.getTrainrunSectionFromId(trainrunSectionId);
-    if (trainrunSection === undefined) {
+    if (inTrainrunSection === undefined) {
       return;
     }
-    // propagate Consecutive Times Forward
-    const bothEndNodes = this.getBothEndNodesWithTrainrunId(
-      trainrunSection.getTrainrunId(),
-    );
-    const startForwardNode = GeneralViewFunctions.getLeftOrTopNode(
-      bothEndNodes.endNode1,
-      bothEndNodes.endNode2,
-    );
-    const startBackwardNode =
-      bothEndNodes.endNode1.getId() === startForwardNode.getId()
-        ? bothEndNodes.endNode2
-        : bothEndNodes.endNode1;
-    const arrivalTime = this.propagateConsecutiveTimes(
-      startForwardNode,
-      startForwardNode.getStartTrainrunSection(
-        trainrunSection.getTrainrunId(),
-        true
-      ),
-      trainrunSection.getFrequencyOffset(),
-    );
-    // propagate Consecutive Times Backward
-    const freq = trainrunSection.getTrainrun().getTrainrunFrequency().frequency;
-    const restFreqArrivalTime = Math.floor(arrivalTime / freq) * freq;
-    const freqDependantArrivalTime = arrivalTime - restFreqArrivalTime;
-    let offset = freq - freqDependantArrivalTime;
-    offset += restFreqArrivalTime;
-    offset = Math.floor(offset / 60) * 60;
 
-    this.propagateConsecutiveTimes(
-      startBackwardNode,
-      startBackwardNode.getStartTrainrunSection(
-        trainrunSection.getTrainrunId(),
-        false
-      ),
-      offset,
-    );
+    let alltrainrunsections =
+      this.trainrunSectionService
+        .getAllTrainrunSectionsForTrainrun(inTrainrunSection.getTrainrunId());
+
+    while (alltrainrunsections.length > 0) {
+      // propagate Consecutive Times Forward
+      const trainrunSection = alltrainrunsections[0];
+      const bothEndNodes =
+        this.getBothEndNodesFromTrainrunPart(trainrunSection);
+
+      const startForwardBackwardNode =
+        GeneralViewFunctions.getStartForwardAndBackwardNode(
+          bothEndNodes.endNode1,
+          bothEndNodes.endNode2,
+        );
+
+      const propDataForward = this.propagateConsecutiveTimes(
+        startForwardBackwardNode.startForwardNode,
+        startForwardBackwardNode.startForwardNode.getStartTrainrunSection(
+          trainrunSection.getTrainrunId(),
+          true
+        ),
+        trainrunSection.getFrequencyOffset(),
+      );
+      const arrivalTime = propDataForward.cumTime;
+
+      // propagate Consecutive Times Backward
+      const freq = trainrunSection.getTrainrun().getTrainrunFrequency().frequency;
+      const restFreqArrivalTime = Math.floor(arrivalTime / freq) * freq;
+      const freqDependantArrivalTime = arrivalTime - restFreqArrivalTime;
+      let offset = freq - freqDependantArrivalTime;
+      offset += restFreqArrivalTime;
+      offset = Math.floor(offset / 60) * 60;
+
+      const propDataBackward = this.propagateConsecutiveTimes(
+        startForwardBackwardNode.startBackwardNode,
+        startForwardBackwardNode.startBackwardNode.getStartTrainrunSection(
+          trainrunSection.getTrainrunId(),
+          false
+        ),
+        offset,
+      );
+
+      // filter all still visited trainrun sections
+      alltrainrunsections = alltrainrunsections.filter(ts =>
+        propDataForward.visitedTrainrunSections.indexOf(ts) === -1 &&
+        propDataBackward.visitedTrainrunSections.indexOf(ts) === -1
+      );
+    }
   }
 
   getStartNodeWithTrainrunId(trainrunId: number): Node {
@@ -808,11 +834,7 @@ export class TrainrunService {
     const trainrunSection = trainrunSections.find(
       (trs) => trs.getTrainrunId() === trainrunId,
     );
-    const sourceNode = trainrunSection.getSourceNode();
-    const targetNode = trainrunSection.getTargetNode();
-    const endNode1 = this.getEndNode(sourceNode, trainrunSection);
-    const endNode2 = this.getEndNode(targetNode, trainrunSection);
-    return {endNode1, endNode2};
+    return this.getBothEndNodesFromTrainrunPart(trainrunSection);
   }
 
   private createNewTrainrunFromDto(trainrun: TrainrunDto): Trainrun {
@@ -836,9 +858,16 @@ export class TrainrunService {
     node: Node,
     trainrunSection: TrainrunSection,
     offset: number,
-  ): number {
+  ): {
+    cumTime: number;
+    visitedTrainrunSections: TrainrunSection[];
+  } {
+    const visitedTrainrunSections: TrainrunSection[] = [trainrunSection];
     if (trainrunSection === undefined) {
-      return 0;
+      return {
+        cumTime: 0,
+        visitedTrainrunSections: visitedTrainrunSections
+      };
     }
     let accumulatedTime = node.getDepartureTime(trainrunSection) + offset;
     const iterator = this.getIterator(node, trainrunSection);
@@ -885,8 +914,12 @@ export class TrainrunService {
             : nextDeparture - oldArrival;
       }
       accumulatedTime += halteZeit;
+      visitedTrainrunSections.push(nextPair.trainrunSection);
     }
-    return accumulatedTime;
+    return {
+      cumTime: accumulatedTime,
+      visitedTrainrunSections: visitedTrainrunSections
+    };
   }
 
   private findClearedLabel(trainrun: Trainrun, labelIds: number[]) {

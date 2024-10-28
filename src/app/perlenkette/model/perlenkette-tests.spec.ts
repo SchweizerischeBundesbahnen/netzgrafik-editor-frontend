@@ -3,8 +3,18 @@ import {PerlenketteSection} from "./perlenketteSection";
 
 describe("PerlenketteModelTests", () => {
   it("Perlenkette-Model - Test - PerlenketteNode - 001", () => {
-    const node = new PerlenketteNode(0, "BN", "Berm", 10, [], undefined);
+    const node = new PerlenketteNode(0,
+      "BN",
+      "Berm",
+      10,
+      [],
+      undefined,
+      false,
+      true
+    );
 
+    expect(node.isFristTrainrunPartNode()).toBe(false);
+    expect(node.isLastTrainrunPartNode()).toBe(true);
     expect(node.isPerlenketteNode()).toBe(true);
     expect(node.isPerlenketteSection()).toBe(false);
     expect(node.getPerlenketteNode()).toEqual(node);
@@ -19,8 +29,12 @@ describe("PerlenketteModelTests", () => {
       undefined,
       0,
       false,
+      false,
+      true
     );
 
+    expect(section.isFristTrainrunPartSection()).toBe(false);
+    expect(section.isLastTrainrunPartSection()).toBe(true);
     expect(section.isPerlenketteNode()).toBe(false);
     expect(section.isPerlenketteSection()).toBe(true);
     expect(section.getPerlenketteNode()).toEqual(undefined);

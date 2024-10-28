@@ -54,7 +54,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     readonly filterService: FilterService,
     private readonly uiInteractionService: UiInteractionService,
     private readonly nodeService: NodeService,
-    private versionControlService : VersionControlService,
+    private versionControlService: VersionControlService,
     private changeDetectorRef: ChangeDetectorRef,
   ) {
     this.selectedPerlenketteConnection = undefined;
@@ -215,6 +215,15 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     this.signalAllChildrenIsBeingEditedSubject.next(event);
   }
 
+  doSplitTrainrun(pathItems: PerlenketteItem[], idx: number): boolean {
+    if (idx >= pathItems.length - 1) {
+      return false;
+    }
+    const item = pathItems[idx];
+    const previousItem = pathItems[idx + 1];
+    return item.isPerlenketteNode() === previousItem.isPerlenketteNode();
+  }
+
   signalHeightChanged(height: number, pathItem: PerlenketteItem) {
     this.perlenketteRenderingElementsHeight.push([pathItem, height]);
     this.renderedElementsHeight = 0;
@@ -225,11 +234,42 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     });
   }
 
+  isFirstSection(item: PerlenketteItem): boolean {
+    if (item.isPerlenketteSection()) {
+      const psi = item.getPerlenketteSection();
+      return psi.isFristTrainrunPartSection();
+    }
+    return false;
+  }
+
+  isLastSection(item: PerlenketteItem): boolean {
+    if (item.isPerlenketteSection()) {
+      const psi = item.getPerlenketteSection();
+      return psi.isLastTrainrunPartSection();
+    }
+    return false;
+  }
+
+  isLastNode(item: PerlenketteItem): boolean {
+    if (item.isPerlenketteNode()) {
+      const pni = item.getPerlenketteNode();
+      return pni.isLastTrainrunPartNode();
+    }
+    return false;
+  }
+
+  isLastNodeButNotVeryLast(item: PerlenketteItem) {
+    if (this.perlenketteTrainrun.pathItems.indexOf(item) === this.perlenketteTrainrun.pathItems.length - 1) {
+      return false;
+    }
+    return this.isLastNode(item);
+  }
+
   getSignalAllChildrenIsBeingEditedObservable() {
     return this.signalAllChildrenIsBeingEditedSubject.asObservable();
   }
 
-  getVariantIsWritable() : boolean {
+  getVariantIsWritable(): boolean {
     return this.versionControlService.getVariantIsWritable();
   }
 

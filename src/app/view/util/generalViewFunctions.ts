@@ -81,6 +81,26 @@ export class GeneralViewFunctions {
     }
   }
 
+  static getStartForwardAndBackwardNode(endNode1: Node, endNode2: Node): {
+    startForwardNode: Node;
+    startBackwardNode: Node;
+  } {
+    const startForwardNode = GeneralViewFunctions.getLeftOrTopNode(
+      endNode1,
+      endNode2,
+    );
+
+    const startBackwardNode =
+      endNode1.getId() === startForwardNode.getId()
+        ? endNode2
+        : endNode1;
+
+    return {
+      startForwardNode: startForwardNode,
+      startBackwardNode: startBackwardNode
+    };
+  }
+
   static getRightOrBottomNode(node1: Node, node2: Node): Node {
     const posNode1: Vec2D = new Vec2D(
       node1.getPositionX(),

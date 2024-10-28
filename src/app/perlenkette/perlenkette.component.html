@@ -94,7 +94,10 @@
             (click)="goto(pathItem)"
           >{{ pathItem.getPerlenketteNode().shortName }}</span
           >
-        </p>
+
+        <ng-container *ngIf="isLastNodeButNotVeryLast(pathItem)">
+          <span [class]="getSmallstationClassTag(pathItem)"> &#x2022; </span>
+        </ng-container>
       </div>
     </ng-container>
 
@@ -126,6 +129,10 @@
               [isBottomNode]="idx === perlenketteTrainrun.pathItems.length-1"
             >
             </sbb-perlenkette-node>
+            <div *ngIf="doSplitTrainrun(perlenketteTrainrun.pathItems, idx)">
+              <br>
+              <br>
+            </div>
             <sbb-perlenkette-section
               *ngIf="pathItem.isPerlenketteSection()"
               [perlenketteSection]="pathItem.getPerlenketteSection()"
@@ -136,8 +143,8 @@
               [notificationIsBeingEdited]="
                 getSignalAllChildrenIsBeingEditedObservable()
               "
-              [isFirstSection]="idx === 1"
-              [isLastSection]="idx === perlenketteTrainrun.pathItems.length-2"
+              [isFirstSection]="isFirstSection(pathItem)"
+              [isLastSection]="isLastSection(pathItem)"
             >
             </sbb-perlenkette-section>
           </ng-container>

@@ -15,6 +15,7 @@ import {Node} from "../../models/node.model";
 import {TrainrunSectionService} from "../../services/data/trainrunsection.service";
 import {NodeService} from "../../services/data/node.service";
 import {FilterService} from "../../services/ui/filter.service";
+import {TrainrunSection} from "../../models/trainrunsection.model";
 
 @Injectable({
   providedIn: "root",
@@ -114,62 +115,102 @@ export class LoadPerlenketteService implements OnDestroy {
 
   private getPerlenketteItem(trainrun: Trainrun): PerlenketteItem[] {
     const perlenketteItem: PerlenketteItem[] = [];
-    const bothEndNodes = this.trainrunService.getBothEndNodesWithTrainrunId(
-      trainrun.getId(),
-    );
-    const startForwardNode = GeneralViewFunctions.getLeftOrTopNode(
-      bothEndNodes.endNode1,
-      bothEndNodes.endNode2,
-    );
-    if (startForwardNode) {
-      const startTrainrunSection = startForwardNode.getStartTrainrunSection(
-        trainrun.getId(),
+
+    let alltrainrunsections =
+      this.trainrunSectionService
+        .getAllTrainrunSectionsForTrainrun(trainrun.getId());
+
+    while (alltrainrunsections.length > 0) {
+      // traverse over all trainrun parts
+      const trainrunSection = alltrainrunsections[0];
+      const bothEndNodes =
+        this.trainrunService.getBothEndNodesFromTrainrunPart(trainrunSection);
+      const startForwardNode = GeneralViewFunctions.getLeftOrTopNode(
+        bothEndNodes.endNode1,
+        bothEndNodes.endNode2,
       );
-      if (startTrainrunSection === undefined) {
-        return perlenketteItem;
-      }
-      // Start Node
-      perlenketteItem.push(
-        new PerlenketteNode(
-          startForwardNode.getId(),
-          startForwardNode.getBetriebspunktName(),
-          startForwardNode.getFullName(),
-          startForwardNode.getConnectionTime(),
-          this.getPerlenketteConnections(trainrun, startForwardNode),
-          startForwardNode.getTransition(startTrainrunSection.getId()),
-        ),
-      );
-      let lastNode = startForwardNode;
-      const iterator: TrainrunIterator = this.trainrunService.getIterator(
-        startForwardNode,
-        startTrainrunSection,
-      );
-      while (iterator.hasNext()) {
-        const currentTrainrunSectionNodePair = iterator.next();
-        const trainrunSection = currentTrainrunSectionNodePair.trainrunSection;
-        const node = currentTrainrunSectionNodePair.node;
-        // Section X
-        perlenketteItem.push(
-          new PerlenketteSection(
-            trainrunSection.getId(),
-            trainrunSection.getTravelTime(),
-            lastNode,
-            node,
-            trainrunSection.getNumberOfStops(),
-          ),
+
+      if (startForwardNode) {
+        const startTrainrunSection = startForwardNode.getStartTrainrunSection(
+          trainrun.getId(),
         );
-        // Node X
+        if (startTrainrunSection === undefined) {
+          return perlenketteItem;
+        }
+        // Start Node
         perlenketteItem.push(
           new PerlenketteNode(
-            node.getId(),
-            node.getBetriebspunktName(),
-            node.getFullName(),
-            node.getConnectionTime(),
-            this.getPerlenketteConnections(trainrun, node),
-            node.getTransition(trainrunSection.getId()),
+            startForwardNode.getId(),
+            startForwardNode.getBetriebspunktName(),
+            startForwardNode.getFullName(),
+            startForwardNode.getConnectionTime(),
+            this.getPerlenketteConnections(trainrun, startForwardNode),
+            startForwardNode.getTransition(startTrainrunSection.getId()),
+            true,
+            false,
           ),
         );
-        lastNode = node;
+        let lastNode = startForwardNode;
+        const iterator: TrainrunIterator = this.trainrunService.getIterator(
+          startForwardNode,
+          startTrainrunSection,
+        );
+
+        let firstSection = true;
+        while (iterator.hasNext()) {
+          const currentTrainrunSectionNodePair = iterator.next();
+          const trainrunSection = currentTrainrunSectionNodePair.trainrunSection;
+          const node = currentTrainrunSectionNodePair.node;
+          // Section X
+          perlenketteItem.push(
+            new PerlenketteSection(
+              trainrunSection.getId(),
+              trainrunSection.getTravelTime(),
+              lastNode,
+              node,
+              trainrunSection.getNumberOfStops(),
+              false,
+              firstSection,
+              false
+            ),
+          );
+          firstSection = false;
+
+          // Node X
+          perlenketteItem.push(
+            new PerlenketteNode(
+              node.getId(),
+              node.getBetriebspunktName(),
+              node.getFullName(),
+              node.getConnectionTime(),
+              this.getPerlenketteConnections(trainrun, node),
+              node.getTransition(trainrunSection.getId()),
+              false,
+              false
+            ),
+          );
+          lastNode = node;
+
+          // filter all still visited trainrun sections
+          alltrainrunsections = alltrainrunsections.filter(ts =>
+            ts.getId() !== currentTrainrunSectionNodePair.trainrunSection.getId()
+          );
+        }
+
+        if (perlenketteItem.length > 1) {
+          const itemSec = perlenketteItem[perlenketteItem.length - 2];
+          if (itemSec.isPerlenketteSection()) {
+            const pn = itemSec.getPerlenketteSection();
+            pn.setLastTrainrunPartSection(true);
+          }
+          const itemNode = perlenketteItem[perlenketteItem.length - 1];
+          if (itemNode.isPerlenketteNode()) {
+            const pn = itemNode.getPerlenketteNode();
+            pn.setLastTrainrunPartNode(true);
+          }
+        }
+
+
       }
     }
     return perlenketteItem;
