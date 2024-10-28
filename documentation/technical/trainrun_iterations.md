@@ -4,7 +4,40 @@
 
 https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/pull/325
 
-Iterator pattern for iterating through all trainrun parts seperatly
+### Simple trainrun iterator - just one trainrun part
+To iterate starting from a node of interest with the orientation passed through the trainrun section, you can use the sample code (pattern) below. 
+The iteration will proceed along the trainrun. Be aware that this does not ensure traveling through the full train run.
+
+https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_TRAINRUN.md#trainrun-path-with-holes-missing-sections
+
+```typescript
+ 
+  // create forward iterator
+  const iterator: TrainrunIterator = this.trainrunService.getIterator(
+    startForwardNode,
+    startTrainrunSection,
+  );
+  while (iterator.hasNext()) {
+    // move iterator forward
+    const currentTrainrunSectionNodePair = iterator.next();
+
+    // get data 
+    const trainrunSection = currentTrainrunSectionNodePair.trainrunSection;
+    const node = currentTrainrunSectionNodePair.node;
+
+  ...
+    user
+    defined
+    data
+    processing
+  ...
+ 
+  } 
+}
+```
+
+### Complete Train Run Iterator - Over All Train Run Parts
+Iterator pattern for iterating through all train run parts separately.
  
 ```typescript
 getForwardTrainrunPartIterator(trainrunSection : TrainrunSection) {
@@ -30,7 +63,6 @@ getForwardTrainrunPartIterator(trainrunSection : TrainrunSection) {
       );
   return iterator;
 }
-
 
 simpleTrainrunAllPartsIterator(trainrun: Trainrun) {
     let alltrainrunsections =
