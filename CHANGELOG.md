@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.1](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.0...netzgrafik-frontend-v2.9.1) (2024-10-28)
+
+
+### Bug Fixes
+
+* 320 bug graphical timetable streckengrafik renders only one trainrun segement ([#325](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/325)) ([790f53b](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/790f53b7f7493cc7204719643dd368eccad89d16))
+
 ## [2.9.0](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.8.0...netzgrafik-frontend-v2.9.0) (2024-10-24)
 
 
