@@ -180,4 +180,4 @@ creation of comprehensive and visually appealing network representations.
 - [DATA MODEL](DATA_MODEL.md)
 
 ## Technical documentation 
-- [Trainrun iterator](/technical/trainrun_iterations.md)
+- [Trainrun iterator](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/technical/trainrun_iterations.md)
