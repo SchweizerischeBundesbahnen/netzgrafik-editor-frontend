@@ -8,7 +8,7 @@ https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/pull/32
 To iterate starting from a node of interest with the orientation passed through the trainrun section, you can use the sample code (pattern) below. 
 The iteration will proceed along the trainrun. Be aware that this does not ensure traveling through the full train run.
 
-https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_TRAINRUN.md#trainrun-path-with-holes-missing-sections
+[See also](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_TRAINRUN.md#special-cases)
 
 ```typescript
  
