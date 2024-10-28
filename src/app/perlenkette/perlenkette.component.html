@@ -94,7 +94,10 @@
             (click)="goto(pathItem)"
           >{{ pathItem.getPerlenketteNode().shortName }}</span
           >
-        </p>
+
+        <ng-container *ngIf="isLastNodeButNotVeryLast(pathItem)">
+          <span [class]="getSmallstationClassTag(pathItem)"> &#x2022; </span>
+        </ng-container>
       </div>
     </ng-container>
 

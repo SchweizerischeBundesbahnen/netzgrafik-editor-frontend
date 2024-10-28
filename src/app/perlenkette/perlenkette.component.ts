@@ -250,6 +250,20 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     return false;
   }
 
+  isLastNode(item: PerlenketteItem): boolean {
+    if (item.isPerlenketteNode()) {
+      const pni = item.getPerlenketteNode();
+      return pni.isLastTrainrunPartNode();
+    }
+    return false;
+  }
+
+  isLastNodeButNotVeryLast(item: PerlenketteItem) {
+    if (this.perlenketteTrainrun.pathItems.indexOf(item) === this.perlenketteTrainrun.pathItems.length - 1) {
+      return false;
+    }
+    return this.isLastNode(item);
+  }
 
   getSignalAllChildrenIsBeingEditedObservable() {
     return this.signalAllChildrenIsBeingEditedSubject.asObservable();
