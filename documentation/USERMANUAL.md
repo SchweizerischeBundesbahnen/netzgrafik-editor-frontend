@@ -178,3 +178,6 @@ creation of comprehensive and visually appealing network representations.
 ## Links
 - [Netzgrafik-Editor data export/import (JSON)](DATA_MODEL_JSON.md)
 - [DATA MODEL](DATA_MODEL.md)
+
+## Technical documentation 
+- [Trainrun iterator](/technical/trainrun_iterations.md)
