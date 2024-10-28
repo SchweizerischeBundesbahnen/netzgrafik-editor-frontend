@@ -575,6 +575,18 @@ export class TrainrunService {
     this.propagateConsecutiveTimesForTrainrun(ts.getId());
   }
 
+  getBothEndNodesFromTrainrunPart(trainrunSection: TrainrunSection):
+    {
+      endNode1: Node;
+      endNode2: Node;
+    } {
+    const sourceNode = trainrunSection.getSourceNode();
+    const targetNode = trainrunSection.getTargetNode();
+    const endNode1 = this.getEndNode(sourceNode, trainrunSection);
+    const endNode2 = this.getEndNode(targetNode, trainrunSection);
+    return {endNode1, endNode2};
+  }
+
   propagateConsecutiveTimesForTrainrun(trainrunSectionId: number) {
     const inTrainrunSection =
       this.trainrunSectionService.getTrainrunSectionFromId(trainrunSectionId);
@@ -589,11 +601,8 @@ export class TrainrunService {
     while (alltrainrunsections.length > 0) {
       // propagate Consecutive Times Forward
       const trainrunSection = alltrainrunsections[0];
-      const sourceNode = trainrunSection.getSourceNode();
-      const targetNode = trainrunSection.getTargetNode();
-      const endNode1 = this.getEndNode(sourceNode, trainrunSection);
-      const endNode2 = this.getEndNode(targetNode, trainrunSection);
-      const bothEndNodes = {endNode1, endNode2};
+      const bothEndNodes =
+        this.getBothEndNodesFromTrainrunPart(trainrunSection);
 
       const startForwardNode = GeneralViewFunctions.getLeftOrTopNode(
         bothEndNodes.endNode1,
@@ -827,11 +836,7 @@ export class TrainrunService {
     const trainrunSection = trainrunSections.find(
       (trs) => trs.getTrainrunId() === trainrunId,
     );
-    const sourceNode = trainrunSection.getSourceNode();
-    const targetNode = trainrunSection.getTargetNode();
-    const endNode1 = this.getEndNode(sourceNode, trainrunSection);
-    const endNode2 = this.getEndNode(targetNode, trainrunSection);
-    return {endNode1, endNode2};
+    return this.getBothEndNodesFromTrainrunPart(trainrunSection);
   }
 
   private createNewTrainrunFromDto(trainrun: TrainrunDto): Trainrun {

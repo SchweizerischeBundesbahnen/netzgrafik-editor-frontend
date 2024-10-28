@@ -391,11 +391,8 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     let visitedTrainrunSections: TrainrunSection[] = [];
     const trainrun = trainrunSection.getTrainrun();
 
-    const sourceNode = trainrunSection.getSourceNode();
-    const targetNode = trainrunSection.getTargetNode();
-    const endNode1 = this.trainrunService.getEndNode(sourceNode, trainrunSection);
-    const endNode2 = this.trainrunService.getEndNode(targetNode, trainrunSection);
-    const bothEndNodes = {endNode1, endNode2};
+    const bothEndNodes =
+      this.trainrunService.getBothEndNodesFromTrainrunPart(trainrunSection);
 
     let startForwardNode = GeneralViewFunctions.getLeftOrTopNode(
       bothEndNodes.endNode1,
