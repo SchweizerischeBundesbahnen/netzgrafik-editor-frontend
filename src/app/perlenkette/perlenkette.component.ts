@@ -234,6 +234,23 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     });
   }
 
+  isFirstSection(item: PerlenketteItem): boolean {
+    if (item.isPerlenketteSection()) {
+      const psi = item.getPerlenketteSection();
+      return psi.isFristTrainrunPartSection();
+    }
+    return false;
+  }
+
+  isLastSection(item: PerlenketteItem): boolean {
+    if (item.isPerlenketteSection()) {
+      const psi = item.getPerlenketteSection();
+      return psi.isLastTrainrunPartSection();
+    }
+    return false;
+  }
+
+
   getSignalAllChildrenIsBeingEditedObservable() {
     return this.signalAllChildrenIsBeingEditedSubject.asObservable();
   }

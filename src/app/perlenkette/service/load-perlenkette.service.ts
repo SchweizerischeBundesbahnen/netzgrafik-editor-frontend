@@ -123,11 +123,8 @@ export class LoadPerlenketteService implements OnDestroy {
     while (alltrainrunsections.length > 0) {
       // traverse over all trainrun parts
       const trainrunSection = alltrainrunsections[0];
-      const sourceNode = trainrunSection.getSourceNode();
-      const targetNode = trainrunSection.getTargetNode();
-      const endNode1 = this.trainrunService.getEndNode(sourceNode, trainrunSection);
-      const endNode2 = this.trainrunService.getEndNode(targetNode, trainrunSection);
-      const bothEndNodes = {endNode1, endNode2};
+      const bothEndNodes =
+        this.trainrunService.getBothEndNodesFromTrainrunPart(trainrunSection);
       const startForwardNode = GeneralViewFunctions.getLeftOrTopNode(
         bothEndNodes.endNode1,
         bothEndNodes.endNode2,
@@ -149,6 +146,8 @@ export class LoadPerlenketteService implements OnDestroy {
             startForwardNode.getConnectionTime(),
             this.getPerlenketteConnections(trainrun, startForwardNode),
             startForwardNode.getTransition(startTrainrunSection.getId()),
+            true,
+            false,
           ),
         );
         let lastNode = startForwardNode;
@@ -158,6 +157,7 @@ export class LoadPerlenketteService implements OnDestroy {
         );
 
         const visitedTrainrunSections: TrainrunSection[] = [startTrainrunSection];
+        let firstSection = true;
         while (iterator.hasNext()) {
           const currentTrainrunSectionNodePair = iterator.next();
           const trainrunSection = currentTrainrunSectionNodePair.trainrunSection;
@@ -170,8 +170,13 @@ export class LoadPerlenketteService implements OnDestroy {
               lastNode,
               node,
               trainrunSection.getNumberOfStops(),
+              false,
+              firstSection,
+              false
             ),
           );
+          firstSection = false;
+
           // Node X
           perlenketteItem.push(
             new PerlenketteNode(
@@ -181,11 +186,26 @@ export class LoadPerlenketteService implements OnDestroy {
               node.getConnectionTime(),
               this.getPerlenketteConnections(trainrun, node),
               node.getTransition(trainrunSection.getId()),
+              false,
+              false
             ),
           );
           lastNode = node;
 
           visitedTrainrunSections.push(currentTrainrunSectionNodePair.trainrunSection);
+        }
+
+        if (perlenketteItem.length > 1) {
+          const itemSec = perlenketteItem[perlenketteItem.length - 2];
+          if (itemSec.isPerlenketteSection()) {
+            const pn = itemSec.getPerlenketteSection();
+            pn.setLastTrainrunPartSection(true);
+          }
+          const itemNode = perlenketteItem[perlenketteItem.length - 1];
+          if (itemNode.isPerlenketteNode()) {
+            const pn = itemNode.getPerlenketteNode();
+            pn.setLastTrainrunPartNode(true);
+          }
         }
 
         // filter all still visited trainrun sections

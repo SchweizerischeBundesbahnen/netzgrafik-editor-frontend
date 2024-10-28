@@ -140,8 +140,8 @@
               [notificationIsBeingEdited]="
                 getSignalAllChildrenIsBeingEditedObservable()
               "
-              [isFirstSection]="idx === 1"
-              [isLastSection]="idx === perlenketteTrainrun.pathItems.length-2"
+              [isFirstSection]="isFirstSection(pathItem)"
+              [isLastSection]="isLastSection(pathItem)"
             >
             </sbb-perlenkette-section>
           </ng-container>
