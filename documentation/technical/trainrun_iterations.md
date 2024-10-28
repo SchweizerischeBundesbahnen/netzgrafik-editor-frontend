@@ -8,11 +8,6 @@ https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/pull/32
 To iterate starting from a node of interest with the orientation passed through the trainrun section, you can use the sample code (pattern) below. 
 The iteration will proceed along the trainrun. Be aware that this does not ensure traveling through the full train run.
 
-![image](https://github.com/user-attachments/assets/d87b842c-7696-4e81-aa78-75cc966b5306)
-*Example Netzgrafik with missing sections (See the cargo trainrun GTwo_Part_trainrun)*
-
-[See also](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_TRAINRUN.md#special-cases)
-
 ```typescript
  
   // create forward iterator
@@ -41,7 +36,12 @@ The iteration will proceed along the trainrun. Be aware that this does not ensur
 
 ### Complete Train Run Iterator - Over All Train Run Parts
 Iterator pattern for iterating through all train run parts separately.
- 
+
+![image](https://github.com/user-attachments/assets/d87b842c-7696-4e81-aa78-75cc966b5306)
+*Example Netzgrafik with missing sections (See the cargo trainrun GTwo_Part_trainrun)*
+
+[See also](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_TRAINRUN.md#special-cases)
+
 ```typescript
 getForwardTrainrunPartIterator(trainrunSection : TrainrunSection) {
       // find both start nodes ( N1 - N2 - N3 - N4 ) => N1 , N2
