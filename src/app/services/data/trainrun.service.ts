@@ -484,6 +484,13 @@ export class TrainrunService {
     trainrun1.unselect();
     trainrun2.unselect();
 
+    // Change all trainrun sections' trainrunId reference from trainrun2 to trainrun1
+    // There can be some other "unconnected" trainrun segments left; those have to be moved to
+    // trainrun1, which will "survive".
+    this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(trainrun2.getId()).forEach(
+      (ts: TrainrunSection) => ts.setTrainrun(trainrun1)
+    );
+
     // remove empty trainrun
     this.deleteTrainrun(trainrun2, false);
 
