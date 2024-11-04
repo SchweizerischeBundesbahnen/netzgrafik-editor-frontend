@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.2](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.1...netzgrafik-frontend-v2.9.2) (2024-11-04)
+
+
+### Bug Fixes
+
+* While combining two trainruns the first trainrun will "survive" and the second one will be deleted. If the trainrun which will be deleted consists of more than one trainrun segment (connected paths) the reported issue will be generated. (Test added) ([c55388b](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/c55388b2d58efd788d64f745560c4b37c5d227e9))
+
 ## [2.9.1](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.0...netzgrafik-frontend-v2.9.1) (2024-10-28)
 
 
