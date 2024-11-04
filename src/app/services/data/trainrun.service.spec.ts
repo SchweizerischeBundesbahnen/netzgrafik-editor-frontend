@@ -367,6 +367,46 @@ describe("TrainrunService", () => {
     expect(trainrunSections4.length).toBe(2);
   });
 
+  it("combineTwoTrainruns - 002 - two trainrun segments tests", () => {
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
+
+    trainrunSectionService.deleteTrainrunSection(4);
+
+    const ts5: TrainrunSection =
+      trainrunSectionService.getTrainrunSectionFromId(5);
+    const ts7: TrainrunSection =
+      trainrunSectionService.getTrainrunSectionFromId(7);
+
+    const node2: Node = nodeService.getNodeFromId(2);
+
+    const trainrunSections5 =
+      trainrunSectionService.getAllTrainrunSectionsForTrainrun(
+        ts5.getTrainrunId(),
+      );
+    const trainrunSections7 =
+      trainrunSectionService.getAllTrainrunSectionsForTrainrun(
+        ts7.getTrainrunId(),
+      );
+
+    trainrunService.combineTwoTrainruns(
+      node2,
+      node2.getPortOfTrainrunSection(7),
+      node2.getPortOfTrainrunSection(5),
+    );
+
+    const trainrunSections75 =
+      trainrunSectionService.getAllTrainrunSectionsForTrainrun(
+        ts7.getTrainrunId(),
+      );
+
+    expect(trainrunSections75.length).toBe(
+      trainrunSections5.length +
+      trainrunSections7.length);
+    expect(trainrunSections75.length).toBe(3);
+  });
+
   it("getRootIterators", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
