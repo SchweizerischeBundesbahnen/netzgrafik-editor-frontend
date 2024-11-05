@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.3](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.2...netzgrafik-frontend-v2.9.3) (2024-11-05)
+
+
+### Bug Fixes
+
+* fix O/D Matrix for trainrun 0 ([#337](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/337)) ([28a6d3a](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/28a6d3ae56c436a40e06eed54a3bbc117b97bdb7))
+
 ## [2.9.2](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.1...netzgrafik-frontend-v2.9.2) (2024-11-04)
 
 
