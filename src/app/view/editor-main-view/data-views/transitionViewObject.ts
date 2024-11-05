@@ -52,7 +52,8 @@ export class TransitionViewObject {
       editorView.isTemporaryDisableFilteringOfItemsInViewEnabled() +
       "_" +
       isMuted +
-      "_";
+      "_" +
+      editorView.trainrunSectionPreviewLineView.getVariantIsWritable();
 
     transition.getPath().forEach((p) => {
       key += p.toString();
