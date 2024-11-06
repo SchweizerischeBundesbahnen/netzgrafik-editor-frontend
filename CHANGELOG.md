@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.4](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.3...netzgrafik-frontend-v2.9.4) (2024-11-06)
+
+
+### Bug Fixes
+
+* 334 bug archived read mode allows to move nodes but not persisted ([#336](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/336)) ([6275ae1](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/6275ae17929fbf564b7419896ad11946b90c20b1))
+
 ## [2.9.3](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.2...netzgrafik-frontend-v2.9.3) (2024-11-05)
 
 
