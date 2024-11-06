@@ -59,10 +59,6 @@
   cursor: default;
 }
 
-::ng-deep rect.node_hover_drag_root_background.readonly {
-  cursor: default;
-}
-
 ::ng-deep text.node_text.hover {
   fill: $COLOR_Edit;
 }
@@ -215,6 +211,10 @@
   cursor: move;
   stroke-width: 64px;
   transform: translateX(-64px) translateY(-32px);
+}
+
+::ng-deep rect.node_hover_drag_root_background.readonly {
+  cursor: default;
 }
 
 ::ng-deep path.node_edit_button {
