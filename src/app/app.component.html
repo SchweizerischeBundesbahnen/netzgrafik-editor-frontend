@@ -11,8 +11,8 @@
       {{ 'app.user-manual' | translate }}
     </a>
     <sbb-select
-      (selectionChange)="changeLocale($event.value)"
-      [value]="locale"
+      (selectionChange)="changeLanguage($event.value)"
+      [value]="language"
       class="language-selector"
     >
       <sbb-option value="en">🇬🇧 English</sbb-option>
@@ -35,8 +35,8 @@
   </sbb-usermenu>
   <sbb-menu #menu="sbbMenu">
     <sbb-select
-      (selectionChange)="changeLocale($event.value)"
-      [value]="locale"
+      (selectionChange)="changeLanguage($event.value)"
+      [value]="language"
       class="language-selector language-selector-menu"
       (click)="$event.stopPropagation()"
       (keydown)="$event.stopPropagation()"

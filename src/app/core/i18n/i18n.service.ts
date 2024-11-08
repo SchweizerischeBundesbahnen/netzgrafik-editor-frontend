@@ -5,46 +5,46 @@ import {loadTranslations} from "@angular/localize";
 @Injectable({
     providedIn: "root",
   })
-  export class I18n {
-    readonly allowedLocales = ["en", "fr", "de", "it"];
+  export class I18nService {
+    readonly allowedLanguages = ["en", "fr", "de", "it"];
     translations: any = {};
-    locale: string;
+    language: string;
 
-    async setLocale() {
-      const userLocale = localStorage.getItem("locale");
-      if (userLocale && this.allowedLocales.includes(userLocale)) {
-        this.locale = userLocale;
+    async setLanguage() {
+      const userLanguage = localStorage.getItem("i18nLng");
+      if (userLanguage && this.allowedLanguages.includes(userLanguage)) {
+        this.language = userLanguage;
       }
       else {
-        const navigatorLocale = navigator.language.slice(0, 2);
-        if (this.allowedLocales.includes(navigatorLocale)) {
-          this.locale = navigatorLocale;
+        const navigatorLanguage = navigator.language.slice(0, 2);
+        if (this.allowedLanguages.includes(navigatorLanguage)) {
+          this.language = navigatorLanguage;
         } else {
-          this.locale = "en";
+          this.language = this.allowedLanguages[0];
         }
-        localStorage.setItem("locale", this.locale);
+        localStorage.setItem("i18nLng", this.language);
       }
 
       // Use webpack magic string to only include required locale data
-      const localeModule = await import(
+      const languageModule = await import(
         /* webpackInclude: /(en|de|fr|it)\.mjs$/ */
-        `/node_modules/@angular/common/locales/${this.locale}.mjs`
+        `/node_modules/@angular/common/locales/${this.language}.mjs`
       );
-      registerLocaleData(localeModule.default);
+      registerLocaleData(languageModule.default);
   
       // Load translation file initially
       await this.loadTranslations();
     }
   
     async loadTranslations() {
-      const localeTranslationsModule = await import(
-        `src/assets/i18n/${this.locale}.json`
+      const languageTranslationsModule = await import(
+        `src/assets/i18n/${this.language}.json`
       );
   
       // Ensure translations are flattened if necessary
-      this.translations = this.flattenTranslations(localeTranslationsModule.default);
+      this.translations = this.flattenTranslations(languageTranslationsModule.default);
   
-      // Load translations for the current locale at runtime
+      // Load translations for the current language at runtime
       loadTranslations(this.translations);
     }
   

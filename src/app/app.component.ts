@@ -47,6 +47,7 @@ export class AppComponent {
               private nodeService: NodeService,
               private labelService: LabelService,
             ) {
+    this.language = localStorage.getItem("i18nLng");
     if (!this.disableBackend) {
       this.authenticated = authService.initialized;
     }
@@ -58,8 +59,9 @@ export class AppComponent {
     }
   }
 
-  changeLocale(locale: string) {
-    localStorage.setItem("locale", locale);
+  changeLanguage(language: string) {
+    localStorage.setItem("i18nLng", language);
+    this.language = language;
     location.reload();
   }
 
