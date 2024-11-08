@@ -6,20 +6,25 @@ import {loadTranslations} from "@angular/localize";
     providedIn: "root",
   })
   export class I18n {
-    locale = "en";
     readonly allowedLocales = ["en", "fr", "de", "it"];
     translations: any = {};
-  
+    locale: string;
+
     async setLocale() {
       const userLocale = localStorage.getItem("locale");
-  
-      // If the user has a preferred language stored in LocalStorage, use it.
       if (userLocale && this.allowedLocales.includes(userLocale)) {
         this.locale = userLocale;
-      } else {
+      }
+      else {
+        const navigatorLocale = navigator.language.slice(0, 2);
+        if (this.allowedLocales.includes(navigatorLocale)) {
+          this.locale = navigatorLocale;
+        } else {
+          this.locale = "en";
+        }
         localStorage.setItem("locale", this.locale);
       }
-  
+
       // Use webpack magic string to only include required locale data
       const localeModule = await import(
         /* webpackInclude: /(en|de|fr|it)\.mjs$/ */
