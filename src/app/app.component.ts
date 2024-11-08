@@ -20,7 +20,6 @@ import {NodeService} from "./services/data/node.service";
 export class AppComponent {
   readonly disableBackend = environment.disableBackend;
   readonly version = packageJson.version;
-  readonly locale = localStorage.getItem("locale");
   readonly environmentLabel = environment.label;
   readonly authenticated: Promise<unknown>;
 
@@ -64,6 +63,8 @@ export class AppComponent {
     this.language = language;
     location.reload();
   }
+
+  @Input() language: string;
 
   @Input()
   get netzgrafikDto() {
