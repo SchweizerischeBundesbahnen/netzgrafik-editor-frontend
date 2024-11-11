@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.9.5](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.4...netzgrafik-frontend-v2.9.5) (2024-11-11)
+
+
+### Bug Fixes
+
+* CSV base data export  ([#343](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/343)) ([2d75f2d](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/2d75f2da23d63a87638bac8ba3f1551f54054b9c))
+* Simplified third-party JSON import (no port alignment/path precalculation required) ([#341](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/341)) ([d7d1776](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/d7d1776e7bb9fd4872821d315f9a81a8c2313c4d))
+
 ## [2.9.4](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.3...netzgrafik-frontend-v2.9.4) (2024-11-06)
 
 
