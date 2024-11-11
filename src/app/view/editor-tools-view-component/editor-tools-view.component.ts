@@ -273,6 +273,8 @@ export class EditorToolsViewComponent {
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.bp:BP`);
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.station:Station`);
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.category:category`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.region:Region`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.passengerConnectionTimeIPV:passengerConnectionTimeIPV`);
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.passengerConnectionTimeA:Passenger_connection_time_A`);
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.passengerConnectionTimeB:Passenger_connection_time_B`);
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.passengerConnectionTimeC:Passenger_connection_time_C`);
