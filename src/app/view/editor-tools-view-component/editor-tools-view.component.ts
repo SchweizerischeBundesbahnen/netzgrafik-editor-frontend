@@ -13,7 +13,9 @@ import {VersionControlService} from "../../services/data/version-control.service
 import {
   HaltezeitFachCategories,
   NetzgrafikDto,
+  NodeDto,
   TrainrunCategoryHaltezeit,
+  TrainrunSectionDto,
 } from "../../data-structures/business.data.structures";
 import {downloadBlob} from "../util/download-utils";
 import {map} from "rxjs/operators";
@@ -21,8 +23,12 @@ import {LabelService} from "../../services/data/label.serivce";
 import {NetzgrafikColoringService} from "../../services/data/netzgrafikColoring.service";
 import {ViewportCullService} from "../../services/ui/viewport.cull.service";
 import {LevelOfDetailService} from "../../services/ui/level.of.detail.service";
-import {_ViewRepeaterItemContext} from "@angular/cdk/collections";
-import {buildEdges, computeNeighbors, computeShortestPaths, topoSort} from "../util/origin-destination-graph";
+import {
+  buildEdges,
+  computeNeighbors,
+  computeShortestPaths,
+  topoSort
+} from "../util/origin-destination-graph";
 
 @Component({
   selector: "sbb-editor-tools-view-component",
@@ -67,7 +73,7 @@ export class EditorToolsViewComponent {
     const file = param.target.files[0];
     const reader = new FileReader();
     reader.onload = () => {
-      const netzgrafikDto = JSON.parse(reader.result.toString());
+      const netzgrafikDto: NetzgrafikDto = JSON.parse(reader.result.toString());
       if (
         "nodes" in netzgrafikDto &&
         "trainrunSections" in netzgrafikDto &&
@@ -75,12 +81,54 @@ export class EditorToolsViewComponent {
         "resources" in netzgrafikDto &&
         "metadata" in netzgrafikDto
       ) {
-        this.logger.log("onLoad; load netzgrafik: ", netzgrafikDto);
+        // prepare JSON import
         this.uiInteractionService.showNetzgrafik();
         this.uiInteractionService.closeNodeStammdaten();
         this.uiInteractionService.closePerlenkette();
         this.nodeService.unselectAllNodes();
-        this.dataService.loadNetzgrafikDto(netzgrafikDto);
+
+        // check for 3rd Party JSON generated files
+        const detect3rdParty =
+          netzgrafikDto.nodes.find((n: NodeDto) =>
+            n.ports === undefined) !== undefined
+          ||
+          netzgrafikDto.nodes.filter((n: NodeDto) =>
+            n.ports?.length === 0).length === netzgrafikDto.nodes.length
+          ||
+          netzgrafikDto.trainrunSections.find((ts: TrainrunSectionDto) =>
+            ts.path === undefined ||
+            ts.path?.path === undefined ||
+            ts.path?.path?.length === 0
+          ) !== undefined;
+
+        // import data
+        if (
+          netzgrafikDto.trainrunSections.length === 0
+          ||
+          !detect3rdParty
+        ) {
+          // -----------------------------------------------
+          // Default: Netzgrafik-Editor exported JSON
+          // -----------------------------------------------
+          this.dataService.loadNetzgrafikDto(netzgrafikDto);
+          // -----------------------------------------------
+        } else {
+          // --------------------------------------------------------------------------------
+          // 3rd party generated JSON detected
+          // --------------------------------------------------------------------------------
+          console.log("Import: Automatic Port Alignment Detection - 3rd Party Data Import.");
+          // --------------------------------------------------------------------------------
+          // (Step 1) Import only nodes
+          // (Step 2) Import nodes and trainrunSectiosn by trainrun inseration (copy => create)
+          const netzgrafikOnlyNodeDto: NetzgrafikDto = JSON.parse(reader.result.toString());
+          netzgrafikOnlyNodeDto.trainruns = [];
+          netzgrafikOnlyNodeDto.trainrunSections = [];
+          this.dataService.loadNetzgrafikDto(netzgrafikOnlyNodeDto);
+          this.dataService.insertCopyNetzgrafikDto(netzgrafikDto);
+          this.trainrunService.propagateInitialConsecutiveTimes();
+        }
+
+        // recompute viewport
         this.uiInteractionService.viewportCenteringOnNodesBoundingBox();
       }
     };
@@ -207,7 +255,7 @@ export class EditorToolsViewComponent {
     return this.versionControlService.getVariantIsWritable();
   }
 
-  private buildCSVString(headers: string[], rows: string[][]): string{
+  private buildCSVString(headers: string[], rows: string[][]): string {
     const separator = ";";
 
     const contentData: string[] = [];
@@ -503,7 +551,7 @@ export class EditorToolsViewComponent {
     // TODO: ideally this would be 24 hours, but performance is a concern.
     // One idea to optimize would be to consider the minimum time window before the schedule repeats (LCM).
     // Draft here: https://colab.research.google.com/drive/1Z1r2uU2pgffWxCbG_wt2zoLStZKzWleE#scrollTo=F6vOevK6znee
-    const timeLimit = 16*60;
+    const timeLimit = 16 * 60;
 
     const headers: string[] = [];
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.origin:Origin`);
@@ -547,8 +595,8 @@ export class EditorToolsViewComponent {
         }
         const [totalCost, connections] = costs;
         const row = [origin.getBetriebspunktName(), destination.getBetriebspunktName(),
-                     (totalCost-connections*connectionPenalty).toString(),
-                     connections.toString(), totalCost.toString()];
+          (totalCost - connections * connectionPenalty).toString(),
+          connections.toString(), totalCost.toString()];
         rows.push(row);
       });
     });
