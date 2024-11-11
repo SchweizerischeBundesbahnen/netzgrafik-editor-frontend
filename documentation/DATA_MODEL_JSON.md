@@ -18,7 +18,7 @@ To export the current Netzgrafik use the `Export netzgrafik as JSON` button.
 #### Import 
 The exported data in JSON format can be imported again using the `Import netzgrafik as JSON` button.
 
-##### 3rd party JSON 
+##### JSON-Based Data Import from 3rd Party Data Providers
 If nodes have no port objects or if no TrainrunSection has a defined path element, the import process will automatically adjust, 
 respectively create the required elements. This adjustment ensures that all nodes are created first, followed by the systematic 
 insertion of each train, section by section. Inserting each section by section ensures that the Netzgrafik drawing gets well routed. 
