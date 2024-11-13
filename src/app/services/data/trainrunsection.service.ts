@@ -816,8 +816,11 @@ export class TrainrunSectionService implements OnDestroy {
 
   deleteListOfTrainrunSections(trainrunSections: TrainrunSection[]) {
     trainrunSections.forEach((trainrunSection) => {
-      this.deleteTrainrunSectionAndCleanupNodes(trainrunSection);
+      this.deleteTrainrunSectionAndCleanupNodes(trainrunSection, false);
     });
+    this.nodeService.transitionsUpdated();
+    this.nodeService.connectionsUpdated();
+    this.trainrunService.trainrunsUpdated();
     this.trainrunSectionsUpdated();
   }
 
@@ -825,9 +828,12 @@ export class TrainrunSectionService implements OnDestroy {
     const allTrainrunSections = this.trainrunSectionsStore.trainrunSections;
     allTrainrunSections.forEach((trainrunSection: TrainrunSection) => {
       if (this.filterService.filterTrainrunsection(trainrunSection)) {
-        this.deleteTrainrunSectionAndCleanupNodes(trainrunSection);
+        this.deleteTrainrunSectionAndCleanupNodes(trainrunSection, false);
       }
     });
+    this.nodeService.transitionsUpdated();
+    this.nodeService.connectionsUpdated();
+    this.trainrunService.trainrunsUpdated();
     this.trainrunSectionsUpdated();
   }
 
@@ -835,9 +841,12 @@ export class TrainrunSectionService implements OnDestroy {
     const allTrainrunSections = this.trainrunSectionsStore.trainrunSections;
     allTrainrunSections.forEach((trainrunSection: TrainrunSection) => {
       if (!this.filterService.filterTrainrunsection(trainrunSection)) {
-        this.deleteTrainrunSectionAndCleanupNodes(trainrunSection);
+        this.deleteTrainrunSectionAndCleanupNodes(trainrunSection, false);
       }
     });
+    this.nodeService.transitionsUpdated();
+    this.nodeService.connectionsUpdated();
+    this.trainrunService.trainrunsUpdated();
     this.trainrunSectionsUpdated();
   }
 
