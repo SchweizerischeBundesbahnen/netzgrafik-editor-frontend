@@ -438,6 +438,7 @@
           "print": "Print",
           "netzgrafik": "Netzgrafik",
           "export-netzgrafik": "Export netzgrafik",
+          "import-netzgrafik-error": "Netzgrafik could not be imported.",
           "export-netzgrafik-as-json": "Export netzgrafik as JSON",
           "import-netzgrafik": "Import netzgrafik",
           "import-netzgrafik-as-json": "Import netzgrafik as JSON",

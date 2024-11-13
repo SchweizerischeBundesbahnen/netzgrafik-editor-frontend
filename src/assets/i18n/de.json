@@ -441,6 +441,7 @@
           "export-netzgrafik": "Netzgrafik exportieren",
           "export-netzgrafik-as-json": "Netzgrafik als JSON exportieren",
           "import-netzgrafik": "Netzgrafik importieren",
+          "import-netzgrafik-error": "Netzgrafik konnte nicht importiert werden.",
           "import-netzgrafik-as-json": "Netzgrafik aus JSON importieren",
           "import-netzgrafik-as-json-info-3rd-party": "Drittanbieter JSON Daten erkannt: Import Heuristik angewandt.",
           "export-trainruns": "Zugfahrten exportieren",
