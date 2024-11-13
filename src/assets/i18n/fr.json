@@ -441,6 +441,7 @@
           "export-netzgrafik-as-json": "Exporter le réticulaire au format JSON",
           "import-netzgrafik": "Importer le réticulaire",
           "import-netzgrafik-as-json": "Importer le réticulaire au format JSON",
+          "import-netzgrafik-as-json-info-3rd-party": "Réticulaire au format JSON de tiers détectées: heuristique d'importation appliquée.",
           "export-trainruns": "Exporter les trajets de train",
           "export-trainruns-as-csv": "Exporter les trajets de train au format CSV",
           "export-trainruns-as-csv-excel": "Dans Excel : Données -> txt/CSV -> Importer ... nom de fichier",

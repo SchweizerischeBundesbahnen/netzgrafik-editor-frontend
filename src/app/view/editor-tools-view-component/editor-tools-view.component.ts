@@ -117,14 +117,39 @@ export class EditorToolsViewComponent {
           // 3rd party generated JSON detected
           // --------------------------------------------------------------------------------
           console.log("Import: Automatic Port Alignment Detection - 3rd Party Data Import.");
+          const msg = $localize`:@@app.view.editor-side-view.editor-tools-view-component.import-netzgrafik-as-json-info-3rd-party:3rd party import`;
+          this.logger.info(msg);
+
+
           // --------------------------------------------------------------------------------
           // (Step 1) Import only nodes
-          // (Step 2) Import nodes and trainrunSectiosn by trainrun inseration (copy => create)
           const netzgrafikOnlyNodeDto: NetzgrafikDto = JSON.parse(reader.result.toString());
           netzgrafikOnlyNodeDto.trainruns = [];
           netzgrafikOnlyNodeDto.trainrunSections = [];
           this.dataService.loadNetzgrafikDto(netzgrafikOnlyNodeDto);
+
+          // (Step 2) Import nodes and trainrunSectiosn by trainrun inseration (copy => create)
           this.dataService.insertCopyNetzgrafikDto(netzgrafikDto);
+
+          // step(3) Check whether a transitions object was given when not
+          //         departureTime - arrivatelTime == 0 => non-stop
+          this.nodeService.getNodes().forEach((n) => {
+            n.getTransitions().forEach((trans) => {
+              const p1 = n.getPort(trans.getPortId1());
+              const p2 = n.getPort(trans.getPortId2());
+              let arrivalTime = p1.getTrainrunSection().getTargetArrival();
+              if (p1.getTrainrunSection().getSourceNodeId() === n.getId()) {
+                arrivalTime = p1.getTrainrunSection().getSourceArrival();
+              }
+              let departureTime = p2.getTrainrunSection().getTargetDeparture();
+              if (p2.getTrainrunSection().getSourceNodeId() === n.getId()) {
+                departureTime = p2.getTrainrunSection().getSourceDeparture();
+              }
+              trans.setIsNonStopTransit(arrivalTime - departureTime === 0);
+            });
+          });
+
+          // step(4) Recalc/propagte consecutive times
           this.trainrunService.propagateInitialConsecutiveTimes();
         }
 
