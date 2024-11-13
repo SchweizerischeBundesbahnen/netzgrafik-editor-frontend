@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.6](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.5...netzgrafik-frontend-v2.9.6) (2024-11-13)
+
+
+### Bug Fixes
+
+* 346 bug importing 3rd party json misses detecting non stop transitions ([#347](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/347)) ([9d71b4a](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/9d71b4aa9608eaec4d50f7f13178693305ea4a3c))
+
 ## [2.9.5](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.4...netzgrafik-frontend-v2.9.5) (2024-11-11)
 
 
