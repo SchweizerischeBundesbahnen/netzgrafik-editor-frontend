@@ -11,6 +11,7 @@ import {NetzgrafikDto} from "./data-structures/business.data.structures";
 import {Operation} from "./models/operation.model";
 import {LabelService} from "./services/data/label.serivce";
 import {NodeService} from "./services/data/node.service";
+import {I18nService} from "./core/i18n/i18n.service";
 
 @Component({
   selector: "sbb-root",
@@ -22,6 +23,7 @@ export class AppComponent {
   readonly version = packageJson.version;
   readonly environmentLabel = environment.label;
   readonly authenticated: Promise<unknown>;
+  protected localStorageLanguage: string;
 
   projectInMenu: Observable<ProjectDto | null>;
 
@@ -45,8 +47,10 @@ export class AppComponent {
               private trainrunSectionService: TrainrunSectionService,
               private nodeService: NodeService,
               private labelService: LabelService,
+              private i18nService: I18nService,
             ) {
-    this.language = localStorage.getItem("i18nLng");
+    this.i18nService.setLanguage();
+    this.localStorageLanguage = localStorage.getItem("i18nLng");
     if (!this.disableBackend) {
       this.authenticated = authService.initialized;
     }
@@ -58,13 +62,14 @@ export class AppComponent {
     }
   }
 
-  changeLanguage(language: string) {
-    localStorage.setItem("i18nLng", language);
-    this.language = language;
-    location.reload();
+  @Input()
+  set language(value: string) {
+    if (value !== this.localStorageLanguage) {
+      localStorage.setItem("i18nLng", value);
+      this.i18nService.setLanguage();
+      this.localStorageLanguage = localStorage.getItem("i18nLng");
+    }
   }
-
-  @Input() language: string;
 
   @Input()
   get netzgrafikDto() {
