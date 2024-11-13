@@ -814,40 +814,46 @@ export class TrainrunSectionService implements OnDestroy {
     this.operation.emit(new TrainrunOperation(OperationType.update, trainrunSection.getTrainrun()));
   }
 
-  deleteListOfTrainrunSections(trainrunSections: TrainrunSection[]) {
+  deleteListOfTrainrunSections(trainrunSections: TrainrunSection[], enforceUpdate = true) {
     trainrunSections.forEach((trainrunSection) => {
       this.deleteTrainrunSectionAndCleanupNodes(trainrunSection, false);
     });
-    this.nodeService.transitionsUpdated();
-    this.nodeService.connectionsUpdated();
-    this.trainrunService.trainrunsUpdated();
-    this.trainrunSectionsUpdated();
+    if (enforceUpdate) {
+      this.nodeService.transitionsUpdated();
+      this.nodeService.connectionsUpdated();
+      this.trainrunService.trainrunsUpdated();
+      this.trainrunSectionsUpdated();
+    }
   }
 
-  deleteAllVisibleTrainrunSections() {
+  deleteAllVisibleTrainrunSections(enforceUpdate = true) {
     const allTrainrunSections = this.trainrunSectionsStore.trainrunSections;
     allTrainrunSections.forEach((trainrunSection: TrainrunSection) => {
       if (this.filterService.filterTrainrunsection(trainrunSection)) {
         this.deleteTrainrunSectionAndCleanupNodes(trainrunSection, false);
       }
     });
-    this.nodeService.transitionsUpdated();
-    this.nodeService.connectionsUpdated();
-    this.trainrunService.trainrunsUpdated();
-    this.trainrunSectionsUpdated();
+    if (enforceUpdate){
+      this.nodeService.transitionsUpdated();
+      this.nodeService.connectionsUpdated();
+      this.trainrunService.trainrunsUpdated();
+      this.trainrunSectionsUpdated();
+    }
   }
 
-  deleteAllNonVisibleTrainrunSections() {
+  deleteAllNonVisibleTrainrunSections(enforceUpdate = true) {
     const allTrainrunSections = this.trainrunSectionsStore.trainrunSections;
     allTrainrunSections.forEach((trainrunSection: TrainrunSection) => {
       if (!this.filterService.filterTrainrunsection(trainrunSection)) {
         this.deleteTrainrunSectionAndCleanupNodes(trainrunSection, false);
       }
     });
-    this.nodeService.transitionsUpdated();
-    this.nodeService.connectionsUpdated();
-    this.trainrunService.trainrunsUpdated();
-    this.trainrunSectionsUpdated();
+    if (enforceUpdate) {
+      this.nodeService.transitionsUpdated();
+      this.nodeService.connectionsUpdated();
+      this.trainrunService.trainrunsUpdated();
+      this.trainrunSectionsUpdated();
+    }
   }
 
   deleteTrainrunSection(trainrunSectionId: number, enforceUpdate = true) {
