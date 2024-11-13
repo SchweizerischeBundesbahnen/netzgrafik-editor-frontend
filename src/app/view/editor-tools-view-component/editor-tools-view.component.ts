@@ -73,7 +73,21 @@ export class EditorToolsViewComponent {
     const file = param.target.files[0];
     const reader = new FileReader();
     reader.onload = () => {
-      const netzgrafikDto: NetzgrafikDto = JSON.parse(reader.result.toString());
+      let netzgrafikDto: any;
+      try {
+        netzgrafikDto = JSON.parse(reader.result.toString());
+      } catch (err: any) {
+        const msg = $localize`:@@app.view.editor-side-view.editor-tools-view-component.import-netzgrafik-error:JSON error`;
+        this.logger.error(msg);
+        return;
+      }
+
+      if (netzgrafikDto === undefined) {
+        const msg = $localize`:@@app.view.editor-side-view.editor-tools-view-component.import-netzgrafik-error:JSON error`;
+        this.logger.error(msg);
+        return;
+      }
+
       if (
         "nodes" in netzgrafikDto &&
         "trainrunSections" in netzgrafikDto &&
@@ -81,56 +95,12 @@ export class EditorToolsViewComponent {
         "resources" in netzgrafikDto &&
         "metadata" in netzgrafikDto
       ) {
-        // prepare JSON import
-        this.uiInteractionService.showNetzgrafik();
-        this.uiInteractionService.closeNodeStammdaten();
-        this.uiInteractionService.closePerlenkette();
-        this.nodeService.unselectAllNodes();
-
-        // check for 3rd Party JSON generated files
-        const detect3rdParty =
-          netzgrafikDto.nodes.find((n: NodeDto) =>
-            n.ports === undefined) !== undefined
-          ||
-          netzgrafikDto.nodes.filter((n: NodeDto) =>
-            n.ports?.length === 0).length === netzgrafikDto.nodes.length
-          ||
-          netzgrafikDto.trainrunSections.find((ts: TrainrunSectionDto) =>
-            ts.path === undefined ||
-            ts.path?.path === undefined ||
-            ts.path?.path?.length === 0
-          ) !== undefined;
-
-        // import data
-        if (
-          netzgrafikDto.trainrunSections.length === 0
-          ||
-          !detect3rdParty
-        ) {
-          // -----------------------------------------------
-          // Default: Netzgrafik-Editor exported JSON
-          // -----------------------------------------------
-          this.dataService.loadNetzgrafikDto(netzgrafikDto);
-          // -----------------------------------------------
-        } else {
-          // --------------------------------------------------------------------------------
-          // 3rd party generated JSON detected
-          // --------------------------------------------------------------------------------
-          console.log("Import: Automatic Port Alignment Detection - 3rd Party Data Import.");
-          // --------------------------------------------------------------------------------
-          // (Step 1) Import only nodes
-          // (Step 2) Import nodes and trainrunSectiosn by trainrun inseration (copy => create)
-          const netzgrafikOnlyNodeDto: NetzgrafikDto = JSON.parse(reader.result.toString());
-          netzgrafikOnlyNodeDto.trainruns = [];
-          netzgrafikOnlyNodeDto.trainrunSections = [];
-          this.dataService.loadNetzgrafikDto(netzgrafikOnlyNodeDto);
-          this.dataService.insertCopyNetzgrafikDto(netzgrafikDto);
-          this.trainrunService.propagateInitialConsecutiveTimes();
-        }
-
-        // recompute viewport
-        this.uiInteractionService.viewportCenteringOnNodesBoundingBox();
+        this.processNetzgrafikJSON(netzgrafikDto);
+        return;
       }
+
+      const msg = $localize`:@@app.view.editor-side-view.editor-tools-view-component.import-netzgrafik-error:JSON error`;
+      this.logger.error(msg);
     };
     reader.readAsText(file);
 
@@ -604,5 +574,89 @@ export class EditorToolsViewComponent {
     });
 
     return this.buildCSVString(headers, rows);
+  }
+
+  private detectNetzgrafikJSON3rdParty(netzgrafikDto: NetzgrafikDto): boolean {
+    return netzgrafikDto.nodes.find((n: NodeDto) =>
+        n.ports === undefined) !== undefined
+      ||
+      netzgrafikDto.nodes.filter((n: NodeDto) =>
+        n.ports?.length === 0).length === netzgrafikDto.nodes.length
+      ||
+      netzgrafikDto.trainrunSections.find((ts: TrainrunSectionDto) =>
+        ts.path === undefined ||
+        ts.path?.path === undefined ||
+        ts.path?.path?.length === 0
+      ) !== undefined;
+  }
+
+  private processNetzgrafikJSON3rdParty(netzgrafikDto: NetzgrafikDto) {
+    // --------------------------------------------------------------------------------
+    // 3rd party generated JSON detected
+    // --------------------------------------------------------------------------------
+    console.log("Import: Automatic Port Alignment Detection - 3rd Party Data Import.");
+    const msg = $localize`:@@app.view.editor-side-view.editor-tools-view-component.import-netzgrafik-as-json-info-3rd-party:3rd party import`;
+    this.logger.info(msg);
+
+
+    // --------------------------------------------------------------------------------
+    // (Step 1) Import only nodes
+    const netzgrafikOnlyNodeDto: NetzgrafikDto = Object.assign({}, netzgrafikDto);
+    netzgrafikOnlyNodeDto.trainruns = [];
+    netzgrafikOnlyNodeDto.trainrunSections = [];
+    this.dataService.loadNetzgrafikDto(netzgrafikOnlyNodeDto);
+
+    // (Step 2) Import nodes and trainrunSectiosn by trainrun inseration (copy => create)
+    this.dataService.insertCopyNetzgrafikDto(netzgrafikDto);
+
+    // step(3) Check whether a transitions object was given when not
+    //         departureTime - arrivatelTime == 0 => non-stop
+    this.nodeService.getNodes().forEach((n) => {
+      n.getTransitions().forEach((trans) => {
+        const p1 = n.getPort(trans.getPortId1());
+        const p2 = n.getPort(trans.getPortId2());
+        let arrivalTime = p1.getTrainrunSection().getTargetArrival();
+        if (p1.getTrainrunSection().getSourceNodeId() === n.getId()) {
+          arrivalTime = p1.getTrainrunSection().getSourceArrival();
+        }
+        let departureTime = p2.getTrainrunSection().getTargetDeparture();
+        if (p2.getTrainrunSection().getSourceNodeId() === n.getId()) {
+          departureTime = p2.getTrainrunSection().getSourceDeparture();
+        }
+        trans.setIsNonStopTransit(arrivalTime - departureTime === 0);
+      });
+    });
+
+    // step(4) Recalc/propagte consecutive times
+    this.trainrunService.propagateInitialConsecutiveTimes();
+  }
+
+  private processNetzgrafikJSON(netzgrafikDto: NetzgrafikDto) {
+    // prepare JSON import
+    this.uiInteractionService.showNetzgrafik();
+    this.uiInteractionService.closeNodeStammdaten();
+    this.uiInteractionService.closePerlenkette();
+    this.nodeService.unselectAllNodes();
+
+    // import data
+    if (
+      netzgrafikDto.trainrunSections.length === 0
+      ||
+      !this.detectNetzgrafikJSON3rdParty(netzgrafikDto)
+    ) {
+      // -----------------------------------------------
+      // Default: Netzgrafik-Editor exported JSON
+      // -----------------------------------------------
+      this.dataService.loadNetzgrafikDto(netzgrafikDto);
+      // -----------------------------------------------
+    } else {
+      // -----------------------------------------------
+      // 3rd Party: Netzgrafik-Editor exported JSON
+      // -----------------------------------------------
+      this.processNetzgrafikJSON3rdParty(netzgrafikDto);
+    }
+
+    // recompute viewport
+    this.uiInteractionService.viewportCenteringOnNodesBoundingBox();
   }
 }
