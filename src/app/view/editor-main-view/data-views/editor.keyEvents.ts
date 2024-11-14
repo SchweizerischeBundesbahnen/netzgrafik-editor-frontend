@@ -558,7 +558,13 @@ export class EditorKeyEvents {
         }
       }
     });
+
+    this.trainrunSectionService.trainrunSectionsUpdated();
+    this.trainrunService.trainrunsUpdated();
+    this.nodeSerivce.transitionsUpdated();
+    this.nodeSerivce.connectionsUpdated();
     this.nodeSerivce.nodesUpdated();
+
     if (selectedNodeDeleted) {
       this.uiInteractionService.closeNodeStammdaten();
     }
@@ -572,7 +578,13 @@ export class EditorKeyEvents {
         this.nodeSerivce.deleteNode(n.getId(), false);
       }
     });
+
+    this.trainrunSectionService.trainrunSectionsUpdated();
+    this.trainrunService.trainrunsUpdated();
+    this.nodeSerivce.transitionsUpdated();
+    this.nodeSerivce.connectionsUpdated();
     this.nodeSerivce.nodesUpdated();
+
     if (selectedNodeDeleted) {
       this.uiInteractionService.closeNodeStammdaten();
     }
