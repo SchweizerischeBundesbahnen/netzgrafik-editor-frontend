@@ -14,8 +14,7 @@ import {loadTranslations} from "@angular/localize";
       const userLanguage = localStorage.getItem("i18nLng");
       if (userLanguage && this.allowedLanguages.includes(userLanguage)) {
         this.language = userLanguage;
-      }
-      else {
+      } else {
         const navigatorLanguage = navigator.language.slice(0, 2);
         if (this.allowedLanguages.includes(navigatorLanguage)) {
           this.language = navigatorLanguage;

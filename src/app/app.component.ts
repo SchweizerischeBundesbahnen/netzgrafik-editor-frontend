@@ -23,7 +23,7 @@ export class AppComponent {
   readonly version = packageJson.version;
   readonly environmentLabel = environment.label;
   readonly authenticated: Promise<unknown>;
-  protected localStorageLanguage: string;
+  protected currentLanguage: string;
 
   projectInMenu: Observable<ProjectDto | null>;
 
@@ -50,7 +50,7 @@ export class AppComponent {
               private i18nService: I18nService,
             ) {
     this.i18nService.setLanguage();
-    this.localStorageLanguage = localStorage.getItem("i18nLng");
+    this.currentLanguage = localStorage.getItem("i18nLng");
     if (!this.disableBackend) {
       this.authenticated = authService.initialized;
     }
@@ -63,11 +63,15 @@ export class AppComponent {
   }
 
   @Input()
+  get language() {
+    return this.currentLanguage;
+  }
+  
   set language(value: string) {
-    if (value !== this.localStorageLanguage) {
+    if (value !== this.currentLanguage) {
       localStorage.setItem("i18nLng", value);
       this.i18nService.setLanguage();
-      this.localStorageLanguage = localStorage.getItem("i18nLng");
+      this.currentLanguage = value;
     }
   }
 

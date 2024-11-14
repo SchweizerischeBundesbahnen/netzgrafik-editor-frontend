@@ -26,7 +26,7 @@
   <sbb-menu #menu="sbbMenu">
     <sbb-select
       (selectionChange)="language = $event.value"
-      [value]="localStorageLanguage"
+      [value]="currentLanguage"
       class="language-selector language-selector-menu"
       (click)="$event.stopPropagation()"
       (keydown)="$event.stopPropagation()"
