@@ -21,7 +21,6 @@ import {loadTranslations} from "@angular/localize";
         } else {
           this.language = this.allowedLanguages[0];
         }
-        localStorage.setItem("i18nLng", this.language);
       }
 
       // Use webpack magic string to only include required locale data
