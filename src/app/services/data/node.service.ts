@@ -286,7 +286,7 @@ export class NodeService implements OnDestroy {
       this.makeLabelIDCounterMap(this.getNodes()),
     );
     this.filterService.clearDeletetFilterNodeLabels(deletetLabelIds);
-    this.deleteNodeWithoutUpdate(nodeId);
+    this.deleteNodeWithoutUpdate(nodeId, enforceUpdate);
     if (enforceUpdate) {
       this.nodesUpdated();
     }
@@ -1277,12 +1277,13 @@ export class NodeService implements OnDestroy {
     return {minCoordX: minX, minCoordY: minY, maxCoordX: maxX, maxCoordY: maxY};
   }
 
-  private deleteNodeWithoutUpdate(nodeId: number) {
+  private deleteNodeWithoutUpdate(nodeId: number, enforceUpdate = true) {
     const node = this.getNodeFromId(nodeId);
     const connectedTrainrunSections = node.getConnectedTrainrunSections();
     if (connectedTrainrunSections.length !== 0) {
       this.trainrunSectionService.deleteListOfTrainrunSections(
         node.getConnectedTrainrunSections(),
+        enforceUpdate
       );
     }
     this.nodesStore.nodes = this.nodesStore.nodes.filter(
