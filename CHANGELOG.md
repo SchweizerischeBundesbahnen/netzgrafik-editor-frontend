@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.7](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.6...netzgrafik-frontend-v2.9.7) (2024-11-14)
+
+
+### Bug Fixes
+
+* 350 bug delete node or trainrunsections cause low performance ([#351](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/351)) ([72f8599](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/72f859920ac425668356fcb095f2ef49f019421f))
+
 ## [2.9.6](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.5...netzgrafik-frontend-v2.9.6) (2024-11-13)
 
 
