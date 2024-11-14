@@ -193,7 +193,7 @@ export class EditorKeyEvents {
   }
 
   private onInsertAllVisibleElementsFromCopyCache(): boolean {
-    if ( !this.trainrunSectionPreviewLineView.getVariantIsWritable() ) {
+    if (!this.trainrunSectionPreviewLineView.getVariantIsWritable()) {
       return true;
     }
     this.copyService.insertCopiedNetzgrafik();
@@ -201,7 +201,7 @@ export class EditorKeyEvents {
   }
 
   private onRevertLastChange(): boolean {
-    if ( !this.trainrunSectionPreviewLineView.getVariantIsWritable() ) {
+    if (!this.trainrunSectionPreviewLineView.getVariantIsWritable()) {
       return true;
     }
     this.undoService.undo();
@@ -209,7 +209,7 @@ export class EditorKeyEvents {
   }
 
   private onDuplicate(): boolean {
-    if ( !this.trainrunSectionPreviewLineView.getVariantIsWritable() ) {
+    if (!this.trainrunSectionPreviewLineView.getVariantIsWritable()) {
       return true;
     }
 
@@ -500,7 +500,7 @@ export class EditorKeyEvents {
   }
 
   private onKeyPressedInsert(): boolean {
-    if ( !this.trainrunSectionPreviewLineView.getVariantIsWritable() ) {
+    if (!this.trainrunSectionPreviewLineView.getVariantIsWritable()) {
       return true;
     }
 
@@ -559,11 +559,7 @@ export class EditorKeyEvents {
       }
     });
 
-    this.trainrunSectionService.trainrunSectionsUpdated();
-    this.trainrunService.trainrunsUpdated();
-    this.nodeSerivce.transitionsUpdated();
-    this.nodeSerivce.connectionsUpdated();
-    this.nodeSerivce.nodesUpdated();
+    this.netzgrafikElementsUpdated();
 
     if (selectedNodeDeleted) {
       this.uiInteractionService.closeNodeStammdaten();
@@ -579,12 +575,6 @@ export class EditorKeyEvents {
       }
     });
 
-    this.trainrunSectionService.trainrunSectionsUpdated();
-    this.trainrunService.trainrunsUpdated();
-    this.nodeSerivce.transitionsUpdated();
-    this.nodeSerivce.connectionsUpdated();
-    this.nodeSerivce.nodesUpdated();
-
     if (selectedNodeDeleted) {
       this.uiInteractionService.closeNodeStammdaten();
     }
@@ -599,7 +589,7 @@ export class EditorKeyEvents {
   }
 
   private onKeyPressedDelete(): boolean {
-    if ( !this.trainrunSectionPreviewLineView.getVariantIsWritable() ) {
+    if (!this.trainrunSectionPreviewLineView.getVariantIsWritable()) {
       return true;
     }
     const selectedTrainrunSectionId = this.getSelectedTrainSectionId();
@@ -629,18 +619,10 @@ export class EditorKeyEvents {
       /* handle Nodes and Trainruns/TrainrunSections */
       if (this.filterService.isAnyFilterActive()) {
         this.deleteTrainrunsAndEmptyNodesIfFilteringActive();
-        this.trainrunSectionService.trainrunSectionsUpdated();
-        this.trainrunService.trainrunsUpdated();
-        this.nodeSerivce.transitionsUpdated();
-        this.nodeSerivce.connectionsUpdated();
-        this.nodeSerivce.nodesUpdated();
-        this.noteSerivce.notesUpdated();
       } else {
         this.removeAllSelectedNodes();
-        this.nodeSerivce.transitionsUpdated();
-        this.nodeSerivce.connectionsUpdated();
-        this.nodeSerivce.nodesUpdated();
       }
+      this.netzgrafikElementsUpdated();
 
       /* handle Notes */
       this.removeAllSelectedNotes();
@@ -676,5 +658,14 @@ export class EditorKeyEvents {
     }
 
     return false;
+  }
+
+
+  private netzgrafikElementsUpdated() {
+    this.trainrunSectionService.trainrunSectionsUpdated();
+    this.trainrunService.trainrunsUpdated();
+    this.nodeSerivce.transitionsUpdated();
+    this.nodeSerivce.connectionsUpdated();
+    this.nodeSerivce.nodesUpdated();
   }
 }
