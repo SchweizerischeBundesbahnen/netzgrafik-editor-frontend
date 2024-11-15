@@ -18,8 +18,6 @@ export class I18nService {
     if (language && this.allowedLanguages.includes(this.language)) {
       this.setLanguageToStorage(language);
       this.currentLanguage = language;
-    } else if (!this.allowedLanguages.includes(this.currentLanguage)) {
-      this.currentLanguage = this.allowedLanguages[0];
     }
 
     const languageModule = await import(
@@ -36,7 +34,8 @@ export class I18nService {
   }
 
   private getLanguageFromStorage(): string | null {
-    return localStorage.getItem("i18nLng");
+    const lang = localStorage.getItem("i18nLng");
+    return this.allowedLanguages.includes(lang) ? lang : null;
   }
 
   private detectNavigatorLanguage(): string {
