@@ -7,31 +7,41 @@ import {loadTranslations} from "@angular/localize";
   })
 export class I18nService {
   readonly allowedLanguages = ["en", "fr", "de", "it"];
+  private currentLanguage: string = this.getLanguageFromStorage() || this.detectNavigatorLanguage();
   translations: any = {};
-  language: string;
 
-  async setLanguage() {
-    const userLanguage = localStorage.getItem("i18nLng");
-    if (userLanguage && this.allowedLanguages.includes(userLanguage)) {
-      this.language = userLanguage;
-    } else {
-      const navigatorLanguage = navigator.language.slice(0, 2);
-      if (this.allowedLanguages.includes(navigatorLanguage)) {
-        this.language = navigatorLanguage;
-      } else {
-        this.language = this.allowedLanguages[0];
-      }
+  get language(): string {
+    return this.currentLanguage;
+  }
+
+  async setLanguage(language?: string) {
+    if (language && this.allowedLanguages.includes(this.language)) {
+      this.setLanguageToStorage(language);
+      this.currentLanguage = language;
+    } else if (!this.allowedLanguages.includes(this.currentLanguage)) {
+      this.currentLanguage = this.allowedLanguages[0];
     }
 
-    // Use webpack magic string to only include required locale data
     const languageModule = await import(
       /* webpackInclude: /(en|de|fr|it)\.mjs$/ */
       `/node_modules/@angular/common/locales/${this.language}.mjs`
     );
     registerLocaleData(languageModule.default);
 
-    // Load translation file initially
     await this.loadTranslations();
+  }
+
+  private setLanguageToStorage(language: string) {
+    localStorage.setItem("i18nLng", language);
+  }
+
+  private getLanguageFromStorage(): string | null {
+    return localStorage.getItem("i18nLng");
+  }
+
+  private detectNavigatorLanguage(): string {
+    const navigatorLanguage = navigator.language.slice(0, 2);
+    return this.allowedLanguages.includes(navigatorLanguage) ? navigatorLanguage : this.allowedLanguages[0];
   }
 
   async loadTranslations() {
@@ -39,10 +49,7 @@ export class I18nService {
       `src/assets/i18n/${this.language}.json`
     );
 
-    // Ensure translations are flattened if necessary
     this.translations = this.flattenTranslations(languageTranslationsModule.default);
-
-    // Load translations for the current language at runtime
     loadTranslations(this.translations);
   }
 
