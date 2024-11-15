@@ -11,6 +11,7 @@ import {NetzgrafikDto} from "./data-structures/business.data.structures";
 import {Operation} from "./models/operation.model";
 import {LabelService} from "./services/data/label.serivce";
 import {NodeService} from "./services/data/node.service";
+import {I18nService} from "./core/i18n/i18n.service";
 
 @Component({
   selector: "sbb-root",
@@ -20,9 +21,9 @@ import {NodeService} from "./services/data/node.service";
 export class AppComponent {
   readonly disableBackend = environment.disableBackend;
   readonly version = packageJson.version;
-  readonly locale = localStorage.getItem("locale");
   readonly environmentLabel = environment.label;
   readonly authenticated: Promise<unknown>;
+  protected currentLanguage: string = this.i18nService.language;
 
   projectInMenu: Observable<ProjectDto | null>;
 
@@ -46,6 +47,7 @@ export class AppComponent {
               private trainrunSectionService: TrainrunSectionService,
               private nodeService: NodeService,
               private labelService: LabelService,
+              private i18nService: I18nService,
             ) {
     if (!this.disableBackend) {
       this.authenticated = authService.initialized;
@@ -58,9 +60,16 @@ export class AppComponent {
     }
   }
 
-  changeLocale(locale: string) {
-    localStorage.setItem("locale", locale);
-    location.reload();
+  @Input()
+  get language() {
+    return this.currentLanguage;
+  }
+  
+  set language(language: string) {
+    if (language !== this.currentLanguage) {
+      this.i18nService.setLanguage(language);
+      this.currentLanguage = language;
+    }
   }
 
   @Input()
