@@ -38,17 +38,17 @@ export class TrainrunsectionValidator {
     const sourceSymmetricCheck = sourceSum % 60 === 0;
     if (!sourceSymmetricCheck) {
       trainrunSection.setSourceArrivalWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
-        " " + (trainrunSection.getSourceArrival() + " + " + trainrunSection.getSourceDeparture()) + " != 60 ");
+        " " + (trainrunSection.getSourceArrival() + " + " + trainrunSection.getSourceDeparture()) + " = " + sourceSum);
       trainrunSection.setSourceDepartureWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
-        " " + (trainrunSection.getSourceArrival() + " + " + trainrunSection.getSourceDeparture()) + " != 60 ");
+        " " + (trainrunSection.getSourceArrival() + " + " + trainrunSection.getSourceDeparture()) + " = " + sourceSum);
     }
     const targetSum = (trainrunSection.getTargetArrival() + trainrunSection.getTargetDeparture());
     const targetSymmetricCheck = targetSum % 60 === 0;
     if (!targetSymmetricCheck) {
       trainrunSection.setTargetArrivalWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
-        " " + (trainrunSection.getTargetArrival() + " + " + trainrunSection.getTargetDeparture()) + " != 60 ");
+        " " + (trainrunSection.getTargetArrival() + " + " + trainrunSection.getTargetDeparture()) + " = " + targetSum);
       trainrunSection.setTargetDepartureWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
-        " " + (trainrunSection.getTargetArrival() + " + " + trainrunSection.getTargetDeparture()) + " != 60 ");
+        " " + (trainrunSection.getTargetArrival() + " + " + trainrunSection.getTargetDeparture()) + " =  " + targetSum);
     }
 
 
