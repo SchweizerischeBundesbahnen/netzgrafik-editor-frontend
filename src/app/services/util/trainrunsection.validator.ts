@@ -1,4 +1,5 @@
 import {TrainrunSection} from "../../models/trainrunsection.model";
+import {MathUtils} from "../../utils/math";
 
 export class TrainrunsectionValidator {
   static validateOneSection(trainrunSection: TrainrunSection) {
@@ -34,7 +35,7 @@ export class TrainrunsectionValidator {
     // check for broken symmetry (times)
     trainrunSection.resetSourceDepartureWarning();
     trainrunSection.resetTargetDepartureWarning();
-    const sourceSum = (trainrunSection.getSourceArrival() + trainrunSection.getSourceDeparture());
+    const sourceSum = MathUtils.round(trainrunSection.getSourceArrival() + trainrunSection.getSourceDeparture(), 4);
     const sourceSymmetricCheck = sourceSum % 60 === 0;
     if (!sourceSymmetricCheck) {
       trainrunSection.setSourceArrivalWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
@@ -42,7 +43,7 @@ export class TrainrunsectionValidator {
       trainrunSection.setSourceDepartureWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
         " " + (trainrunSection.getSourceArrival() + " + " + trainrunSection.getSourceDeparture()) + " = " + sourceSum);
     }
-    const targetSum = (trainrunSection.getTargetArrival() + trainrunSection.getTargetDeparture());
+    const targetSum = MathUtils.round(trainrunSection.getTargetArrival() + trainrunSection.getTargetDeparture(), 4);
     const targetSymmetricCheck = targetSum % 60 === 0;
     if (!targetSymmetricCheck) {
       trainrunSection.setTargetArrivalWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
@@ -50,8 +51,6 @@ export class TrainrunsectionValidator {
       trainrunSection.setTargetDepartureWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
         " " + (trainrunSection.getTargetArrival() + " + " + trainrunSection.getTargetDeparture()) + " =  " + targetSum);
     }
-
-
   }
 
   static validateTravelTime(trainrunSection: TrainrunSection) {
