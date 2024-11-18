@@ -201,7 +201,7 @@ export class TrainrunSection {
     return formattedText;
   }
 
-  shiftAllTimes(translateMinutes: number, mirrorSourceDeparture : boolean) {
+  shiftAllTimes(translateMinutes: number, mirrorSourceDeparture: boolean) {
     this.sourceDeparture.time += translateMinutes;
     this.targetArrival.time += translateMinutes;
     this.sourceArrival.time += translateMinutes;
@@ -503,6 +503,26 @@ export class TrainrunSection {
     };
   }
 
+  getTargetArrivalWarning() {
+    return this.targetArrival.warning;
+  }
+
+  getSourceArrivalWarning() {
+    return this.sourceArrival.warning;
+  }
+
+  getTargetDepartureWarning() {
+    return this.targetDeparture.warning;
+  }
+
+  getSourceDepartureWarning() {
+    return this.sourceDeparture.warning;
+  }
+
+  getTravelTimeWarning() {
+    return this.travelTime.warning;
+  }
+
   resetTargetArrivalWarning() {
     this.targetArrival.warning = null;
   }
@@ -639,7 +659,7 @@ export class TrainrunSection {
       resourceId: this.resourceId,
 
       specificTrainrunSectionFrequencyId:
-        this.specificTrainrunSectionFrequencyId,
+      this.specificTrainrunSectionFrequencyId,
       path: this.path,
       warnings: this.warnings,
     };

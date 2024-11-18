@@ -29,6 +29,7 @@ import {
   computeShortestPaths,
   topoSort
 } from "../util/origin-destination-graph";
+import {TrainrunsectionValidator} from "../../services/util/trainrunsection.validator";
 
 @Component({
   selector: "sbb-editor-tools-view-component",
@@ -629,6 +630,12 @@ export class EditorToolsViewComponent {
 
     // step(4) Recalc/propagte consecutive times
     this.trainrunService.propagateInitialConsecutiveTimes();
+
+    // step(5) Validate all trainrun sections
+    this.trainrunSectionService.getTrainrunSections().forEach((ts) => {
+      TrainrunsectionValidator.validateOneSection(ts);
+      TrainrunsectionValidator.validateTravelTime(ts);
+    });
   }
 
   private processNetzgrafikJSON(netzgrafikDto: NetzgrafikDto) {

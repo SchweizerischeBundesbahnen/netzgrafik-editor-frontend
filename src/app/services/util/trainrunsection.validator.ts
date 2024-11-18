@@ -1,5 +1,4 @@
 import {TrainrunSection} from "../../models/trainrunsection.model";
-import {MathUtils} from "../../utils/math";
 
 export class TrainrunsectionValidator {
   static validateOneSection(trainrunSection: TrainrunSection) {
@@ -10,7 +9,7 @@ export class TrainrunsectionValidator {
       (trainrunSection.getSourceDeparture() + trainrunSection.getTravelTime()) %
       60;
     if (Math.abs(calculatedTargetArrivalTime - trainrunSection.getTargetArrival())
-       > 1 / 60) {
+      > 1 / 60) {
       trainrunSection.setTargetArrivalWarning(
         $localize`:@@app.services.util.trainrunsection-validator.target-arrival-not-reacheable.title:Target Arrival Warning`,
         $localize`:@@app.services.util.trainrunsection-validator.target-arrival-not-reacheable.description:Target arrival time cannot be reached`,
@@ -23,7 +22,7 @@ export class TrainrunsectionValidator {
       (trainrunSection.getTargetDeparture() + trainrunSection.getTravelTime()) %
       60;
     if (Math.abs(calculatedSourceArrivalTime - trainrunSection.getSourceArrival())
-       > 1 / 60) {
+      > 1 / 60) {
       trainrunSection.setSourceArrivalWarning(
         $localize`:@@app.services.util.trainrunsection-validator.source-arrival-not-reacheable.title:Source Arrival Warning`,
         $localize`:@@app.services.util.trainrunsection-validator.source-arrival-not-reacheable.description:Source arrival time cannot be reached`,
@@ -31,6 +30,28 @@ export class TrainrunsectionValidator {
     } else {
       trainrunSection.resetSourceArrivalWarning();
     }
+
+    // check for broken symmetry (times)
+    trainrunSection.resetSourceDepartureWarning();
+    trainrunSection.resetTargetDepartureWarning();
+    const sourceSum = (trainrunSection.getSourceArrival() + trainrunSection.getSourceDeparture());
+    const sourceSymmetricCheck = sourceSum % 60 === 0;
+    if (!sourceSymmetricCheck) {
+      trainrunSection.setSourceArrivalWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
+        " " + (trainrunSection.getSourceArrival() + " + " + trainrunSection.getSourceDeparture()) + " != 60 ");
+      trainrunSection.setSourceDepartureWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
+        " " + (trainrunSection.getSourceArrival() + " + " + trainrunSection.getSourceDeparture()) + " != 60 ");
+    }
+    const targetSum = (trainrunSection.getTargetArrival() + trainrunSection.getTargetDeparture());
+    const targetSymmetricCheck = targetSum % 60 === 0;
+    if (!targetSymmetricCheck) {
+      trainrunSection.setTargetArrivalWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
+        " " + (trainrunSection.getTargetArrival() + " + " + trainrunSection.getTargetDeparture()) + " != 60 ");
+      trainrunSection.setTargetDepartureWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
+        " " + (trainrunSection.getTargetArrival() + " + " + trainrunSection.getTargetDeparture()) + " != 60 ");
+    }
+
+
   }
 
   static validateTravelTime(trainrunSection: TrainrunSection) {

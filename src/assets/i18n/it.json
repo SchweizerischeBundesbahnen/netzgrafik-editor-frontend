@@ -86,6 +86,7 @@
           }
         },
         "trainrunsection-validator": {
+          "broken-symmetry": "Broken symmetry",
           "target-arrival-not-reacheable": {
             "title": "Target Arrival Warning",
             "description": "Target arrival time cannot be reached"

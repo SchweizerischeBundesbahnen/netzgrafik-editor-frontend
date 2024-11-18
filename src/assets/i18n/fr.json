@@ -86,6 +86,7 @@
           }
         },
         "trainrunsection-validator": {
+          "broken-symmetry": "Symétrie brisée",
           "target-arrival-not-reacheable": {
             "title": "Avertissement d'arrivée à la destination",
             "description": "L'heure d'arrivée à la destination ne peut être atteinte"
