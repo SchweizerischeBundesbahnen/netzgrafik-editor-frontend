@@ -628,7 +628,7 @@ export class EditorToolsViewComponent {
       });
     });
 
-    // step(4) Recalc/propagte consecutive times
+    // step(4) Recalc/propagate consecutive times
     this.trainrunService.propagateInitialConsecutiveTimes();
 
     // step(5) Validate all trainrun sections
