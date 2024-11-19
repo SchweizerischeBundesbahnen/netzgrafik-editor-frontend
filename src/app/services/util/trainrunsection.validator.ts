@@ -43,7 +43,7 @@ export class TrainrunsectionValidator {
     trainrunSection.resetSourceDepartureWarning();
     trainrunSection.resetTargetDepartureWarning();
     const sourceSum = MathUtils.round(trainrunSection.getSourceArrival() + trainrunSection.getSourceDeparture(), 4);
-    const sourceSymmetricCheck = sourceSum % 60 === 0;
+    const sourceSymmetricCheck = Math.abs(sourceSum % 60) < 1 / 60;
     if (!sourceSymmetricCheck) {
       trainrunSection.setSourceArrivalWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
         "" + (trainrunSection.getSourceArrival() + " + " + trainrunSection.getSourceDeparture()) + " = " + sourceSum);
@@ -51,7 +51,7 @@ export class TrainrunsectionValidator {
         "" + (trainrunSection.getSourceArrival() + " + " + trainrunSection.getSourceDeparture()) + " = " + sourceSum);
     }
     const targetSum = MathUtils.round(trainrunSection.getTargetArrival() + trainrunSection.getTargetDeparture(), 4);
-    const targetSymmetricCheck = targetSum % 60 === 0;
+    const targetSymmetricCheck = Math.abs(targetSum % 60) < 1 / 60;
     if (!targetSymmetricCheck) {
       trainrunSection.setTargetArrivalWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
         "" + (trainrunSection.getTargetArrival() + " + " + trainrunSection.getTargetDeparture()) + " = " + targetSum);
