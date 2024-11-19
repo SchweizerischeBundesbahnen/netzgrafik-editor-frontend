@@ -12,10 +12,8 @@ export class TrainrunsectionValidator {
 
   static validateTravelTimeOneSection(trainrunSection: TrainrunSection) {
     const calculatedTargetArrivalTime =
-      (trainrunSection.getSourceDeparture() + trainrunSection.getTravelTime()) %
-      60;
-    if (Math.abs(calculatedTargetArrivalTime - trainrunSection.getTargetArrival())
-      > 1 / 60) {
+      (trainrunSection.getSourceDeparture() + trainrunSection.getTravelTime()) % 60;
+    if (Math.abs(calculatedTargetArrivalTime - trainrunSection.getTargetArrival()) > 1 / 60) {
       trainrunSection.setTargetArrivalWarning(
         $localize`:@@app.services.util.trainrunsection-validator.target-arrival-not-reacheable.title:Target Arrival Warning`,
         $localize`:@@app.services.util.trainrunsection-validator.target-arrival-not-reacheable.description:Target arrival time cannot be reached`,
@@ -25,10 +23,8 @@ export class TrainrunsectionValidator {
     }
 
     const calculatedSourceArrivalTime =
-      (trainrunSection.getTargetDeparture() + trainrunSection.getTravelTime()) %
-      60;
-    if (Math.abs(calculatedSourceArrivalTime - trainrunSection.getSourceArrival())
-      > 1 / 60) {
+      (trainrunSection.getTargetDeparture() + trainrunSection.getTravelTime()) % 60;
+    if (Math.abs(calculatedSourceArrivalTime - trainrunSection.getSourceArrival()) > 1 / 60) {
       trainrunSection.setSourceArrivalWarning(
         $localize`:@@app.services.util.trainrunsection-validator.source-arrival-not-reacheable.title:Source Arrival Warning`,
         $localize`:@@app.services.util.trainrunsection-validator.source-arrival-not-reacheable.description:Source arrival time cannot be reached`,
