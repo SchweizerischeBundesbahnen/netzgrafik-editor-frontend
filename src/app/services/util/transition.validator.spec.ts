@@ -184,16 +184,16 @@ describe("TransitionValidator", () => {
       nodeHaltezeiten[
         trainrunSections.trainrunSection1.getTrainrun().getTrainrunCategory()
           .fachCategory
-      ].haltezeit;
+        ].haltezeit;
     trainrunSections.trainrunSection2.setSourceDeparture(
       trainrunSections.trainrunSection1.getSourceArrival() -
-        trainrunHaltezeit -
-        1,
+      trainrunHaltezeit -
+      1,
     );
     trainrunSections.trainrunSection2.setTargetDeparture(
       trainrunSections.trainrunSection1.getTargetArrival() -
-        trainrunHaltezeit -
-        1,
+      trainrunHaltezeit -
+      1,
     );
 
     trainrunSections.trainrunSection1.resetTargetArrivalWarning();
@@ -276,16 +276,16 @@ describe("TransitionValidator", () => {
       nodeHaltezeiten[
         trainrunSections.trainrunSection2.getTrainrun().getTrainrunCategory()
           .fachCategory
-      ].haltezeit;
+        ].haltezeit;
     trainrunSections.trainrunSection1.setSourceDeparture(
       trainrunSections.trainrunSection2.getSourceArrival() -
-        trainrunHaltezeit -
-        1,
+      trainrunHaltezeit -
+      1,
     );
     trainrunSections.trainrunSection1.setTargetDeparture(
       trainrunSections.trainrunSection2.getTargetArrival() -
-        trainrunHaltezeit -
-        1,
+      trainrunHaltezeit -
+      1,
     );
 
     trainrunSections.trainrunSection1.resetTargetArrivalWarning();
@@ -386,16 +386,16 @@ describe("TransitionValidator", () => {
       nodeHaltezeiten[
         trainrunSections.trainrunSection2.getTrainrun().getTrainrunCategory()
           .fachCategory
-      ].haltezeit;
+        ].haltezeit;
     trainrunSections.trainrunSection1.setSourceDeparture(
       trainrunSections.trainrunSection2.getSourceArrival() -
-        trainrunHaltezeit -
-        1,
+      trainrunHaltezeit -
+      1,
     );
     trainrunSections.trainrunSection1.setTargetDeparture(
       trainrunSections.trainrunSection2.getTargetArrival() -
-        trainrunHaltezeit -
-        1,
+      trainrunHaltezeit -
+      1,
     );
 
     trainrunSections.trainrunSection1.resetTargetArrivalWarning();
@@ -496,16 +496,16 @@ describe("TransitionValidator", () => {
       nodeHaltezeiten[
         trainrunSections.trainrunSection2.getTrainrun().getTrainrunCategory()
           .fachCategory
-      ].haltezeit;
+        ].haltezeit;
     trainrunSections.trainrunSection1.setSourceDeparture(
       trainrunSections.trainrunSection2.getSourceArrival() -
-        trainrunHaltezeit -
-        1,
+      trainrunHaltezeit -
+      1,
     );
     trainrunSections.trainrunSection1.setTargetDeparture(
       trainrunSections.trainrunSection2.getTargetArrival() -
-        trainrunHaltezeit -
-        1,
+      trainrunHaltezeit -
+      1,
     );
 
     trainrunSections.trainrunSection1.resetTargetArrivalWarning();
@@ -606,16 +606,16 @@ describe("TransitionValidator", () => {
       nodeHaltezeiten[
         trainrunSections.trainrunSection2.getTrainrun().getTrainrunCategory()
           .fachCategory
-      ].haltezeit;
+        ].haltezeit;
     trainrunSections.trainrunSection1.setSourceDeparture(
       trainrunSections.trainrunSection2.getSourceArrival() -
-        trainrunHaltezeit -
-        1,
+      trainrunHaltezeit -
+      1,
     );
     trainrunSections.trainrunSection2.setTargetDeparture(
       trainrunSections.trainrunSection1.getTargetArrival() -
-        trainrunHaltezeit -
-        1,
+      trainrunHaltezeit -
+      1,
     );
 
     trainrunSections.trainrunSection1.resetTargetArrivalWarning();
@@ -681,5 +681,16 @@ describe("TransitionValidator", () => {
     expect(trainrunSections.trainrunSection2.hasSourceDepartureWarning()).toBe(
       false,
     );
+  });
+
+  it("Validate Test - 007", () => {
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
+    const ts1 = trainrunSectionService.getTrainrunSectionFromId(4);
+    ts1.setSourceDeparture((ts1.getSourceDeparture() + 1) % 60);
+    const a = ts1.getSourceArrival();
+    const b = ts1.getSourceDeparture();
+    expect(ts1.getSourceArrivalWarning().description).toBe("" + a + " + " + b + " = " + (a + b));
   });
 });
