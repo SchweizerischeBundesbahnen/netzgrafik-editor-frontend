@@ -6,6 +6,11 @@ export class TrainrunsectionValidator {
     trainrunSection.resetSourceDepartureWarning();
     trainrunSection.resetTargetDepartureWarning();
 
+    TrainrunsectionValidator.validateTravelTimeOneSection(trainrunSection);
+    TrainrunsectionValidator.validateUnsymmetricTimesOneSection(trainrunSection);
+  }
+
+  static validateTravelTimeOneSection(trainrunSection: TrainrunSection) {
     const calculatedTargetArrivalTime =
       (trainrunSection.getSourceDeparture() + trainrunSection.getTravelTime()) %
       60;
@@ -31,7 +36,9 @@ export class TrainrunsectionValidator {
     } else {
       trainrunSection.resetSourceArrivalWarning();
     }
+  }
 
+  static validateUnsymmetricTimesOneSection(trainrunSection: TrainrunSection) {
     // check for broken symmetry (times)
     trainrunSection.resetSourceDepartureWarning();
     trainrunSection.resetTargetDepartureWarning();
@@ -39,17 +46,17 @@ export class TrainrunsectionValidator {
     const sourceSymmetricCheck = sourceSum % 60 === 0;
     if (!sourceSymmetricCheck) {
       trainrunSection.setSourceArrivalWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
-        " " + (trainrunSection.getSourceArrival() + " + " + trainrunSection.getSourceDeparture()) + " = " + sourceSum);
+        "" + (trainrunSection.getSourceArrival() + " + " + trainrunSection.getSourceDeparture()) + " = " + sourceSum);
       trainrunSection.setSourceDepartureWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
-        " " + (trainrunSection.getSourceArrival() + " + " + trainrunSection.getSourceDeparture()) + " = " + sourceSum);
+        "" + (trainrunSection.getSourceArrival() + " + " + trainrunSection.getSourceDeparture()) + " = " + sourceSum);
     }
     const targetSum = MathUtils.round(trainrunSection.getTargetArrival() + trainrunSection.getTargetDeparture(), 4);
     const targetSymmetricCheck = targetSum % 60 === 0;
     if (!targetSymmetricCheck) {
       trainrunSection.setTargetArrivalWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
-        " " + (trainrunSection.getTargetArrival() + " + " + trainrunSection.getTargetDeparture()) + " = " + targetSum);
+        "" + (trainrunSection.getTargetArrival() + " + " + trainrunSection.getTargetDeparture()) + " = " + targetSum);
       trainrunSection.setTargetDepartureWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
-        " " + (trainrunSection.getTargetArrival() + " + " + trainrunSection.getTargetDeparture()) + " =  " + targetSum);
+        "" + (trainrunSection.getTargetArrival() + " + " + trainrunSection.getTargetDeparture()) + " =  " + targetSum);
     }
   }
 

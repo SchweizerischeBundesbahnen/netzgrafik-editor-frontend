@@ -187,15 +187,15 @@ export class TrainrunSectionsView {
     }
     switch (textElement) {
       case TrainrunSectionText.SourceDeparture:
-        return trainrunSection.getSourceDepartureWarning().title + ":" + trainrunSection.getSourceDepartureWarning().description;
+        return trainrunSection.getSourceDepartureWarning().title + ": " + trainrunSection.getSourceDepartureWarning().description;
       case TrainrunSectionText.SourceArrival:
-        return trainrunSection.getSourceArrivalWarning().title + ":" + trainrunSection.getSourceArrivalWarning().description;
+        return trainrunSection.getSourceArrivalWarning().title + ": " + trainrunSection.getSourceArrivalWarning().description;
       case TrainrunSectionText.TargetDeparture:
-        return trainrunSection.getTargetDepartureWarning().title + ":" + trainrunSection.getTargetDepartureWarning().description;
+        return trainrunSection.getTargetDepartureWarning().title + ": " + trainrunSection.getTargetDepartureWarning().description;
       case TrainrunSectionText.TargetArrival:
-        return trainrunSection.getTargetArrivalWarning().title + ":" + trainrunSection.getTargetArrivalWarning().description;
+        return trainrunSection.getTargetArrivalWarning().title + ": " + trainrunSection.getTargetArrivalWarning().description;
       case TrainrunSectionText.TrainrunSectionTravelTime:
-        return trainrunSection.getTravelTimeWarning().title + ":" + trainrunSection.getTravelTimeWarning().description;
+        return trainrunSection.getTravelTimeWarning().title + ": " + trainrunSection.getTravelTimeWarning().description;
       case TrainrunSectionText.TrainrunSectionName:
       default:
         return "";
