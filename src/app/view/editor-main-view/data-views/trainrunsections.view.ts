@@ -178,6 +178,31 @@ export class TrainrunSectionsView {
     }
   }
 
+  static getWarning(
+    trainrunSection: TrainrunSection,
+    textElement: TrainrunSectionText,
+  ): string {
+    if (!TrainrunSectionsView.hasWarning(trainrunSection, textElement)) {
+      return "";
+    }
+    switch (textElement) {
+      case TrainrunSectionText.SourceDeparture:
+        return trainrunSection.getSourceDepartureWarning().title + ": " + trainrunSection.getSourceDepartureWarning().description;
+      case TrainrunSectionText.SourceArrival:
+        return trainrunSection.getSourceArrivalWarning().title + ": " + trainrunSection.getSourceArrivalWarning().description;
+      case TrainrunSectionText.TargetDeparture:
+        return trainrunSection.getTargetDepartureWarning().title + ": " + trainrunSection.getTargetDepartureWarning().description;
+      case TrainrunSectionText.TargetArrival:
+        return trainrunSection.getTargetArrivalWarning().title + ": " + trainrunSection.getTargetArrivalWarning().description;
+      case TrainrunSectionText.TrainrunSectionTravelTime:
+        return trainrunSection.getTravelTimeWarning().title + ": " + trainrunSection.getTravelTimeWarning().description;
+      case TrainrunSectionText.TrainrunSectionName:
+      default:
+        return "";
+    }
+    return "";
+  }
+
   static getTime(
     trainrunSection: TrainrunSection,
     textElement: TrainrunSectionText,
@@ -1221,7 +1246,7 @@ export class TrainrunSectionsView {
     connectedTrainIds: any,
     atSource: boolean,
   ) {
-    if (!this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()){
+    if (!this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()) {
       return;
     }
     groupEnter
@@ -1314,21 +1339,21 @@ export class TrainrunSectionsView {
       );
   }
 
-  createTrainrunSectionElement(
+  private createInternTrainrunSectionElementFilteringWarningElements(
     groupEnter: d3.Selector,
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
     textElement: TrainrunSectionText,
-    enableEvents = true
+    enableEvents = true,
+    hasWarning = true
   ) {
-
     const atSource =
       textElement === TrainrunSectionText.SourceArrival ||
       textElement === TrainrunSectionText.SourceDeparture;
     const isArrival =
       textElement === TrainrunSectionText.SourceArrival ||
       textElement === TrainrunSectionText.TargetArrival;
-    groupEnter
+    const renderingObjects = groupEnter
       .filter(
         (d: TrainrunSectionViewObject) =>
           this.filterTrainrunsectionAtNode(d.trainrunSection, atSource) &&
@@ -1336,7 +1361,8 @@ export class TrainrunSectionsView {
             d.trainrunSection,
             atSource,
             isArrival,
-          ),
+          ) &&
+          TrainrunSectionsView.hasWarning(d.trainrunSection, textElement) === hasWarning
       )
       .append(StaticDomTags.EDGE_LINE_TEXT_SVG)
       .attr("class", (d: TrainrunSectionViewObject) =>
@@ -1417,6 +1443,32 @@ export class TrainrunSectionsView {
           );
         }
       });
+
+    if (hasWarning) {
+      renderingObjects
+        .append("svg:title")
+        .text((d: TrainrunSectionViewObject) => {
+          return TrainrunSectionsView.getWarning(d.trainrunSection, textElement);
+        });
+    }
+  }
+
+  createTrainrunSectionElement(
+    groupEnter: d3.Selector,
+    selectedTrainrun: Trainrun,
+    connectedTrainIds: any,
+    textElement: TrainrunSectionText,
+    enableEvents = true
+  ) {
+    // pass(1) : render all elements without warnings
+    this.createInternTrainrunSectionElementFilteringWarningElements(
+      groupEnter, selectedTrainrun, connectedTrainIds, textElement, enableEvents, false
+    );
+    // pass(2) : render all elements with warnings
+    //           especially <svg:title>warning_msg</svg:title>
+    this.createInternTrainrunSectionElementFilteringWarningElements(
+      groupEnter, selectedTrainrun, connectedTrainIds, textElement, enableEvents, true
+    );
   }
 
   createTrainrunSectionGotoInfoElement(

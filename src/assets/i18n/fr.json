@@ -86,9 +86,10 @@
           }
         },
         "trainrunsection-validator": {
+          "broken-symmetry": "Symétrie brisée",
           "target-arrival-not-reacheable": {
-            "title": "Avertissement d'arrivée à la destination",
-            "description": "L'heure d'arrivée à la destination ne peut être atteinte"
+            "title": "Avertissement d'arrivée à destination",
+            "description": "L'heure d'arrivée à destination ne peut être atteinte"
           },
           "source-arrival-not-reacheable": {
             "title": "Avertissement d'arrivée à l'origine",
@@ -109,12 +110,12 @@
             "description": "L'heure de départ à l'origine ne peut être atteinte"
           },
           "target-arrival-not-reacheable": {
-            "title": "Avertissement d'arrivée à la destination",
-            "description": "L'heure d'arrivée à la destination ne peut être atteinte"
+            "title": "Avertissement d'arrivée à destination",
+            "description": "L'heure d'arrivée à destination ne peut être atteinte"
           },
           "target-departure-not-reacheable": {
-            "title": "Avertissement de départ à la destination",
-            "description": "L'heure de départ à la destination ne peut être atteinte"
+            "title": "Avertissement de départ à destination",
+            "description": "L'heure de départ à destination ne peut être atteinte"
           }
         }
       }
