@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.10](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.9...netzgrafik-frontend-v2.9.10) (2024-11-22)
+
+
+### Bug Fixes
+
+* warn users when having unsymmetric times ([#359](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/359)) ([9923567](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/992356722772db594e48a1f7aa8511b904a62c79))
+
 ## [2.9.9](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.8...netzgrafik-frontend-v2.9.9) (2024-11-14)
 
 
