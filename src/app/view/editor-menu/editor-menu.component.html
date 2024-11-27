@@ -1,5 +1,5 @@
 <div class="editorMenuGripLayout">
-  <div class="NodeNetzgrafikVariante">
+  <div class="NodeNetzgrafikVariante" *ngIf="!disableBackend">
     <div class="LabelNetzgrafik">
       <div class="LabelNetzgrafikVariante" title="{{ label$ | async }}">
         {{ label$ | async }}
