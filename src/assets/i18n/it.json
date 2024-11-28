@@ -489,11 +489,11 @@
           "turnaroundTimeStart": "Turnaround time at start station",
           "turnaroundTime": "Turnaround time",
           "trainrunTimeCategory": "Trainrun time category",
-          "origin": "Origin",
-          "destination": "Destination",
-          "travelTime": "Travel time",
+          "origin": "Origine",
+          "destination": "Destinazione",
+          "travelTime": "Tempo di viaggio",
           "transfers": "Cambiamenti",
-          "totalCost": "Total cost"
+          "totalCost": "Costo totale"
         }
       },
       "error-view": {
