@@ -492,7 +492,7 @@
           "origin": "Origin",
           "destination": "Destination",
           "travelTime": "Travel time",
-          "connections": "Connections",
+          "transfers": "Cambiamenti",
           "totalCost": "Total cost"
         }
       },
