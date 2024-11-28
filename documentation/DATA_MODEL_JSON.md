@@ -23,8 +23,36 @@ If nodes have no port objects or if no TrainrunSection has a defined path elemen
 respectively create the required elements. This adjustment ensures that all nodes are created first, followed by the systematic 
 insertion of each train, section by section. Inserting each section by section ensures that the Netzgrafik drawing gets well routed. 
 This streamlines the import process, making the exchange of data much more straightforward and efficient. 
-The 3rd party has to care about the nodes' position only. The TrainrunSection routing gets computed while importing, 
+The 3rd party has only to care about the nodes' position and ensure the trainrun sections are temporally sorted. The TrainrunSection routing gets computed while importing, 
 thus no complex calculation must be reimplemented by the 3rd party provider.
+
+
+###### Detection of Third-Party Data
+The function [detectNetzgrafikJSON3rdParty](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/src/app/view/editor-tools-view-component/editor-tools-view.component.ts#L580) checks if the imported data comes from a third party and if it needs to be adjusted accordingly.
+    
+```typescript
+private detectNetzgrafikJSON3rdParty(netzgrafikDto: NetzgrafikDto): boolean {
+    return netzgrafikDto.nodes.find((n: NodeDto) =>
+        n.ports === undefined) !== undefined
+      ||
+      netzgrafikDto.nodes.filter((n: NodeDto) =>
+        n.ports?.length === 0).length === netzgrafikDto.nodes.length
+      ||
+      netzgrafikDto.trainrunSections.find((ts: TrainrunSectionDto) =>
+        ts.path === undefined ||
+        ts.path?.path === undefined ||
+        ts.path?.path?.length === 0
+      ) !== undefined;
+  }
+  ```
+The function performs the following checks:
+- Whether there are nodes without port objects.
+- Whether all nodes have empty port lists.
+- Whether there are trainrun sections without a defined path.
+If any of these conditions are met, the import process is adjusted to automatically create the necessary elements.
+
+The JSON-based data import from third parties into the net graphic system is designed to simplify the process and ensure that all required elements are correctly created and inserted. This ensures efficient and error-free data transfer.
+
 
 ## JSON Description (basic data structure)
 
