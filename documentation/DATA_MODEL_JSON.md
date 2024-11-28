@@ -48,7 +48,7 @@ private detectNetzgrafikJSON3rdParty(netzgrafikDto: NetzgrafikDto): boolean {
 The function performs the following checks:
 - Whether there are nodes without port objects.
 - Whether all nodes have empty port lists.
-- Whether there are train run sections without a defined path.
+- Whether there are trainrun sections without a defined path.
 If any of these conditions are met, the import process is adjusted to automatically create the necessary elements.
 
 The JSON-based data import from third parties into the net graphic system is designed to simplify the process and ensure that all required elements are correctly created and inserted. This ensures efficient and error-free data transfer.
