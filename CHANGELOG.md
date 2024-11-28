@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.9.11](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.10...netzgrafik-frontend-v2.9.11) (2024-11-28)
+
+
+### Bug Fixes
+
+* correct connections-&gt;transfers naming for O/D matrix ([#365](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/365)) ([454c201](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/454c201abf3228dacecb8685f80545ef13eea554))
+* documentation for 3rd party import ([#367](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/367)) ([53ee469](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/53ee469b7cbba5042530d6436f1dbfaa447a1285))
+
 ## [2.9.10](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.9...netzgrafik-frontend-v2.9.10) (2024-11-22)
 
 
