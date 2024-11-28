@@ -530,7 +530,7 @@ export class EditorToolsViewComponent {
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.origin:Origin`);
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.destination:Destination`);
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.travelTime:Travel time`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.connections:Connections`);
+    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.transfers:Transfers`);
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.totalCost:Total cost`);
 
     const metadata = this.dataService.getNetzgrafikDto().metadata;

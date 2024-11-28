@@ -490,11 +490,11 @@
           "turnaroundTimeStart": "Wendezeit Startbahnhof",
           "turnaroundTime": "Umlaufzeit",
           "trainrunTimeCategory": "Verkehrt",
-          "origin": "Origin",
-          "destination": "Destination",
-          "travelTime": "Travel time",
-          "connections": "Connections",
-          "totalCost": "Total cost"
+          "origin": "Start",
+          "destination": "Ziel",
+          "travelTime": "Fahrzeit",
+          "transfers": "Transfers",
+          "totalCost": "Gesamtkosten"
         }
       },
       "error-view": {

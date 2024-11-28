@@ -493,7 +493,7 @@
           "origin": "Origin",
           "destination": "Destination",
           "travelTime": "Travel time",
-          "connections": "Connections",
+          "transfers": "Transfers",
           "totalCost": "Total cost"
         }
       },
