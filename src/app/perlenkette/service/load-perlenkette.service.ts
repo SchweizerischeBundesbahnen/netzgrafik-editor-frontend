@@ -123,6 +123,12 @@ export class LoadPerlenketteService implements OnDestroy {
     while (alltrainrunsections.length > 0) {
       // traverse over all trainrun parts
       const trainrunSection = alltrainrunsections[0];
+
+      // filter all still visited trainrun sections
+      alltrainrunsections = alltrainrunsections.filter(ts =>
+        ts.getId() !== trainrunSection.getId()
+      );
+
       const bothEndNodes =
         this.trainrunService.getBothEndNodesFromTrainrunPart(trainrunSection);
       const startForwardNode = GeneralViewFunctions.getLeftOrTopNode(
