@@ -22,11 +22,7 @@ import {Transition} from "../../models/transition.model";
 import {takeUntil} from "rxjs/operators";
 import {FilterService} from "../ui/filter.service";
 import {TrainrunSectionNodePair} from "../util/trainrun.iterator";
-import {
-  Operation,
-  OperationType,
-  TrainrunOperation,
-} from "../../models/operation.model";
+import {Operation, OperationType, TrainrunOperation,} from "../../models/operation.model";
 
 interface DepartureAndArrivalTimes {
   nodeFromDepartureTime: number;
@@ -833,7 +829,7 @@ export class TrainrunSectionService implements OnDestroy {
         this.deleteTrainrunSectionAndCleanupNodes(trainrunSection, false);
       }
     });
-    if (enforceUpdate){
+    if (enforceUpdate) {
       this.nodeService.transitionsUpdated();
       this.nodeService.connectionsUpdated();
       this.trainrunService.trainrunsUpdated();
@@ -1306,6 +1302,7 @@ export class TrainrunSectionService implements OnDestroy {
       trainrunSection.getSourceNodeId(),
       trainrunSection.getTargetNodeId(),
     );
+    this.checkMissingTransitionsAfterDeletion(trainrunSection.getTrainrun());
     this.deleteTrainrunIfNotUsedAnymore(trainrunSection.getTrainrun(), false);
 
     if (
@@ -1321,6 +1318,39 @@ export class TrainrunSectionService implements OnDestroy {
         this.trainrunService.trainrunsUpdated();
       }
     }
+  }
+
+  private checkMissingTransitionsAfterDeletion(trainrun: Trainrun) {
+    const trainrunSections = this.getAllTrainrunSectionsForTrainrun(trainrun.getId());
+    trainrunSections.forEach( ts => {
+      const sourceNode = ts.getSourceNode();
+      const targetNode = ts.getTargetNode();
+
+      const srcPortsWithoutTransitions = sourceNode.getPorts().filter(
+        (port) => port.getTrainrunSection().getTrainrunId() === trainrun.getId() &&
+          sourceNode.getTransitionFromPortId(port.getId()) === undefined
+      );
+      const trgPortsWithoutTransitions = targetNode.getPorts().filter(
+        (port) => port.getTrainrunSection().getTrainrunId() === trainrun.getId() &&
+          targetNode.getTransitionFromPortId(port.getId()) === undefined
+      );
+
+      if (srcPortsWithoutTransitions.length > 1){
+        this.nodeService.addTransitionToNodes(
+          sourceNode.getId(),
+          targetNode.getId(),
+          srcPortsWithoutTransitions[0].getTrainrunSection(),
+        );
+      }
+
+      if (trgPortsWithoutTransitions.length > 1){
+        this.nodeService.addTransitionToNodes(
+          sourceNode.getId(),
+          targetNode.getId(),
+          trgPortsWithoutTransitions[0].getTrainrunSection(),
+        );
+      }
+    });
   }
 
   private reRouteAffectedTrainrunSections(
