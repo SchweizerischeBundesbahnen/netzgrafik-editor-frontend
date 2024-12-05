@@ -679,7 +679,7 @@ export class TrainrunSectionService implements OnDestroy {
       a.getTravelTime() > b.getTravelTime() ? a : b).getTravelTime();
   }
 
-  createTrainrunSection(sourceNodeId: number, targetNodeId: number, retrieveTravelTimeFromEdge: boolean = false) {
+  createTrainrunSection(sourceNodeId: number, targetNodeId: number, retrieveTravelTimeFromEdge: boolean = false): TrainrunSection {
     const trainrunSection: TrainrunSection = new TrainrunSection();
     const initialTrainrunsLength = this.trainrunService.trainrunsStore.trainruns.length;
 
@@ -719,6 +719,8 @@ export class TrainrunSectionService implements OnDestroy {
     } else {
       this.operation.emit(new TrainrunOperation(OperationType.update, trainrunSection.getTrainrun()));
     }
+
+    return trainrunSection;
   }
 
   reconnectTrainrunSection(
@@ -1322,7 +1324,7 @@ export class TrainrunSectionService implements OnDestroy {
 
   private checkMissingTransitionsAfterDeletion(trainrun: Trainrun) {
     const trainrunSections = this.getAllTrainrunSectionsForTrainrun(trainrun.getId());
-    trainrunSections.forEach( ts => {
+    trainrunSections.forEach(ts => {
       const sourceNode = ts.getSourceNode();
       const targetNode = ts.getTargetNode();
 
@@ -1335,7 +1337,7 @@ export class TrainrunSectionService implements OnDestroy {
           targetNode.getTransitionFromPortId(port.getId()) === undefined
       );
 
-      if (srcPortsWithoutTransitions.length > 1){
+      if (srcPortsWithoutTransitions.length > 1) {
         this.nodeService.addTransitionToNodes(
           sourceNode.getId(),
           targetNode.getId(),
@@ -1343,7 +1345,7 @@ export class TrainrunSectionService implements OnDestroy {
         );
       }
 
-      if (trgPortsWithoutTransitions.length > 1){
+      if (trgPortsWithoutTransitions.length > 1) {
         this.nodeService.addTransitionToNodes(
           sourceNode.getId(),
           targetNode.getId(),
