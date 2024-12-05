@@ -14,7 +14,6 @@ import {LabelService} from "../data/label.serivce";
 import {NetzgrafikUnitTesting} from "../../../integration-testing/netzgrafik.unit.testing";
 import {FilterService} from "../ui/filter.service";
 import {NetzgrafikColoringService} from "../data/netzgrafikColoring.service";
-import {IsTrainrunSelectedService} from "./is-trainrun-section.service";
 
 describe("TrainrunSectionService", () => {
   let dataService: DataService;
@@ -138,4 +137,51 @@ describe("TrainrunSectionService", () => {
     expect(ts.getSourceDepartureConsecutiveTime()).toBe(12);
     expect(ts.getSourceArrivalConsecutiveTime()).toBe(48);
   });
+
+
+  it("TrainrunSectionService.checkMissingTransitionsAfterDeletion", () => {
+    // tests: https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/369
+    dataService.loadNetzgrafikDto(
+      NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
+    );
+    trainrunSectionService.deleteAllVisibleTrainrunSections();
+    nodeService.deleteAllVisibleNodes();
+    noteService.deleteAllVisibleNotes();
+
+    const nodeA = nodeService.addNodeWithPosition(0, 0, "A");
+    const nodeB = nodeService.addNodeWithPosition(0, 1, "B");
+    const nodeC = nodeService.addNodeWithPosition(0, 2, "C");
+    const nodeD = nodeService.addNodeWithPosition(0, 3, "D");
+    const nodeE = nodeService.addNodeWithPosition(0, 4, "E");
+    const tsAB = trainrunSectionService.createTrainrunSection(nodeA.getId(), nodeB.getId());
+    const tsBC = trainrunSectionService.createTrainrunSection(nodeB.getId(), nodeC.getId());
+    const tsCD = trainrunSectionService.createTrainrunSection(nodeC.getId(), nodeD.getId());
+    const tsDE = trainrunSectionService.createTrainrunSection(nodeD.getId(), nodeE.getId());
+    const tsEA = trainrunSectionService.createTrainrunSection(nodeE.getId(), nodeA.getId());
+
+    expect(nodeA.getTransitions().length).toBe(0);
+    expect(nodeB.getTransitions().length).toBe(1);
+    expect(nodeC.getTransitions().length).toBe(1);
+    expect(nodeD.getTransitions().length).toBe(1);
+    expect(nodeE.getTransitions().length).toBe(1);
+
+    const transA_AB1 = nodeA.getTransition(tsAB.getId());
+    const transA_EA1 = nodeA.getTransition(tsEA.getId());
+    expect(transA_AB1 ).toBe(undefined);
+    expect(transA_EA1 ).toBe(undefined);
+
+    trainrunSectionService.deleteTrainrunSection(trainrunSectionService.getTrainrunSections()[1].getId());
+
+    expect(nodeA.getTransitions().length).toBe(1);
+    expect(nodeB.getTransitions().length).toBe(0);
+    expect(nodeC.getTransitions().length).toBe(0);
+    expect(nodeD.getTransitions().length).toBe(1);
+    expect(nodeE.getTransitions().length).toBe(1);
+
+    const transA_AB2 = nodeA.getTransition(tsAB.getId());
+    const transA_EA2 = nodeA.getTransition(tsEA.getId());
+    expect(transA_AB2.getId()).toBe(transA_EA2.getId());
+
+  });
+
 });
