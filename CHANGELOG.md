@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.12](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.11...netzgrafik-frontend-v2.9.12) (2024-12-05)
+
+
+### Bug Fixes
+
+* build broken! ([#371](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/371)) ([04f9a2f](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/04f9a2fab45b987e352a75f71616e7e1a02a34ac))
+
 ## [2.9.11](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.10...netzgrafik-frontend-v2.9.11) (2024-11-28)
 
 
