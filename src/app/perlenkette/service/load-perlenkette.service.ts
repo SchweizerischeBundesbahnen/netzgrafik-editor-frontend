@@ -116,13 +116,13 @@ export class LoadPerlenketteService implements OnDestroy {
   private getPerlenketteItem(trainrun: Trainrun): PerlenketteItem[] {
     const perlenketteItem: PerlenketteItem[] = [];
 
-    let alltrainrunsections =
+    let allTrainrunSections =
       this.trainrunSectionService
         .getAllTrainrunSectionsForTrainrun(trainrun.getId());
 
-    while (alltrainrunsections.length > 0) {
+    while (allTrainrunSections.length > 0) {
       // traverse over all trainrun parts
-      const trainrunSection = alltrainrunsections[0];
+      const trainrunSection = allTrainrunSections[0];
 
       // filter all still visited trainrun sections
       allTrainrunSections = allTrainrunSections.filter(ts =>
@@ -198,7 +198,7 @@ export class LoadPerlenketteService implements OnDestroy {
           lastNode = node;
 
           // filter all still visited trainrun sections
-          alltrainrunsections = alltrainrunsections.filter(ts =>
+          allTrainrunSections = allTrainrunSections.filter(ts =>
             ts.getId() !== currentTrainrunSectionNodePair.trainrunSection.getId()
           );
         }
