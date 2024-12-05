@@ -125,7 +125,7 @@ export class LoadPerlenketteService implements OnDestroy {
       const trainrunSection = alltrainrunsections[0];
 
       // filter all still visited trainrun sections
-      alltrainrunsections = alltrainrunsections.filter(ts =>
+      allTrainrunSections = allTrainrunSections.filter(ts =>
         ts.getId() !== trainrunSection.getId()
       );
 
