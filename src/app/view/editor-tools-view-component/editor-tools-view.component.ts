@@ -608,7 +608,7 @@ export class EditorToolsViewComponent {
     this.dataService.loadNetzgrafikDto(netzgrafikOnlyNodeDto);
 
     // (Step 2) Import nodes and trainrunSectiosn by trainrun inseration (copy => create)
-    this.dataService.insertCopyNetzgrafikDto(netzgrafikDto);
+    this.dataService.insertCopyNetzgrafikDto(netzgrafikDto, false);
 
     // step(3) Check whether a transitions object was given when not
     //         departureTime - arrivatelTime == 0 => non-stop
