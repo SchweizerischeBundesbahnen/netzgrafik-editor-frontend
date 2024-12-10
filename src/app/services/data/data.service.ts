@@ -112,7 +112,10 @@ export class DataService implements OnDestroy {
     );
   }
 
-  insertCopyNetzgrafikDto(netzgrafikDto: NetzgrafikDto) {
+  insertCopyNetzgrafikDto(
+    netzgrafikDto: NetzgrafikDto,
+    enforceUpdate = true
+  ) {
     this.nodeService.unselectAllNodes();
     const nodeMap = this.nodeService.mergeNodes(netzgrafikDto.nodes);
     const trainrunMap = this.trainrunService.createNewTrainrunsFromDtoList(
@@ -124,6 +127,7 @@ export class DataService implements OnDestroy {
         nodeMap,
         trainrunMap,
         netzgrafikDto.nodes,
+        enforceUpdate
       );
     this.nodeService.mergeLabelNode(netzgrafikDto, nodeMap);
     this.nodeService.mergeConnections(
@@ -131,8 +135,10 @@ export class DataService implements OnDestroy {
       trainrunSectionMap,
       nodeMap,
     );
-    this.nodeService.connectionsUpdated();
-    this.nodeService.transitionsUpdated();
+    if (enforceUpdate) {
+      this.nodeService.connectionsUpdated();
+      this.nodeService.transitionsUpdated();
+    }
     this.trainrunService.mergeLabelTrainrun(netzgrafikDto, trainrunMap);
     this.noteService.createNewNoteFromDtoList(netzgrafikDto.freeFloatingTexts);
   }

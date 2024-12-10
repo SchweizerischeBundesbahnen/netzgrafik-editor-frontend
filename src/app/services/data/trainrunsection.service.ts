@@ -254,6 +254,7 @@ export class TrainrunSectionService implements OnDestroy {
     nodeMap: Map<number, number>,
     trainrunMap: Map<number, number>,
     nodes: NodeDto[],
+    enforceUpdate = true
   ): Map<number, number> {
     const trainrunSectionMap: Map<number, number> = new Map<number, number>();
     trainrunSections.forEach((trainrunSection) => {
@@ -262,10 +263,13 @@ export class TrainrunSectionService implements OnDestroy {
         nodeMap,
         trainrunMap,
         nodes,
+        enforceUpdate
       );
       trainrunSectionMap.set(trainrunSection.id, newTrainrunSection.getId());
     });
-    this.trainrunSectionsUpdated();
+    if (enforceUpdate) {
+      this.trainrunSectionsUpdated();
+    }
     return trainrunSectionMap;
   }
 
@@ -1427,6 +1431,7 @@ export class TrainrunSectionService implements OnDestroy {
     trainrunSection: TrainrunSection,
     sourceIsNonStop = false,
     targetIsNonStop = false,
+    enforceUpdate = true
   ) {
     this.nodeService.addPortsToNodes(
       sourceNode.getId(),
@@ -1440,8 +1445,10 @@ export class TrainrunSectionService implements OnDestroy {
       sourceIsNonStop,
       targetIsNonStop,
     );
-    this.nodeService.nodesUpdated();
-    this.nodeService.transitionsUpdated();
+    if (enforceUpdate) {
+      this.nodeService.nodesUpdated();
+      this.nodeService.transitionsUpdated();
+    }
     trainrunSection.routeEdgeAndPlaceText();
     this.reRouteAffectedTrainrunSections(
       sourceNode.getId(),
@@ -1454,6 +1461,7 @@ export class TrainrunSectionService implements OnDestroy {
     nodeMap: Map<number, number>,
     trainrunMap: Map<number, number>,
     nodes: NodeDto[],
+    enforceUpdate = true
   ) {
     const trainrunId = trainrunMap.get(trainrunSection.trainrunId);
     const trainrun = this.trainrunService.getTrainrunFromId(trainrunId);
@@ -1490,6 +1498,7 @@ export class TrainrunSectionService implements OnDestroy {
       newTrainrunSection,
       sourceIsNonStop,
       targetIsNonStop,
+      enforceUpdate
     );
     return newTrainrunSection;
   }
