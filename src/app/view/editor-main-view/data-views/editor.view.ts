@@ -577,6 +577,11 @@ export class EditorView implements SVGMouseControllerObserver {
     this.trainrunSectionPreviewLineView.stopPreviewLine();
   }
 
+
+  onScaleNetzgrafik(factor: number, scaleCenter: Vec2D) {
+    this.scaleNetzgrafikArea(factor, scaleCenter);
+  }
+
   zoomFactorChanged(newZoomFactor: number) {
     this.controller.zoomFactorChanged(newZoomFactor);
     this.viewportCullService.onViewportChangeUpdateRendering(true);
@@ -687,4 +692,74 @@ export class EditorView implements SVGMouseControllerObserver {
       el.classed("ShowCellCursor", false);
     }
   }
+
+
+  private scaleFullNetzgrafikArea(factor: number, zoomCenter: Vec2D) {
+    const vp = this.uiInteractionService.getViewboxProperties(EditorView.svgName);
+    const scaleCenterCoordinates = new Vec2D(
+      vp.panZoomLeft + zoomCenter.getX() * vp.panZoomWidth,
+      vp.panZoomTop + zoomCenter.getY() * vp.panZoomHeight,
+    );
+
+    // get the node under the mouse cursos and update the scaleCenter
+    const focalNode = this.nodeService.getNodes().find((n) =>
+      scaleCenterCoordinates.getX() > n.getPositionX() && scaleCenterCoordinates.getX() < (n.getPositionX() + n.getNodeWidth()) &&
+      scaleCenterCoordinates.getY() > n.getPositionY() && scaleCenterCoordinates.getY() < (n.getPositionY() + n.getNodeHeight())
+    );
+
+    this.nodeService.getNodes().forEach((n, index) => {
+      let newPos = new Vec2D(
+        (n.getPositionX() - scaleCenterCoordinates.getX()) * factor + scaleCenterCoordinates.getX(),
+        (n.getPositionY() - scaleCenterCoordinates.getY()) * factor + scaleCenterCoordinates.getY()
+      );
+
+      if (focalNode?.getId() === n.getId()) {
+        const delta = Vec2D.sub(newPos, new Vec2D(focalNode.getPositionX(), focalNode.getPositionY(),));
+        newPos = Vec2D.sub(newPos, delta);
+      }
+      n.setPosition(newPos.getX(), newPos.getY());
+    });
+  }
+
+  private scaleNetzgrafikSelectedNodesArea(factor: number, nodes: Node[]) {
+    /*
+    * if more than one node is selected (multi-selected nodes) transform the nodes with center of
+    * mass
+     */
+    let cx = 0;
+    let cy = 0;
+    nodes.forEach(n => {
+      cx += n.getPositionX() + n.getNodeWidth() / 2.0;
+      cy += n.getPositionY() + n.getNodeHeight() / 2.0;
+    });
+    cx /= nodes.length;
+    cy /= nodes.length;
+    const v = Vec2D.normalize(new Vec2D(cx, cy));
+    nodes.forEach((n, index) => {
+      const posX = (n.getPositionX() + n.getNodeWidth() / 2.0 - cx) * factor + cx - n.getNodeWidth() / 2.0;
+      const posY = (n.getPositionY() + n.getNodeHeight() / 2.0 - cy) * factor + cy - n.getNodeHeight() / 2.0;
+      n.setPosition(posX, posY);
+    });
+  }
+
+  private scaleNetzgrafikArea(factor: number, zoomCenter: Vec2D) {
+    const nodes: Node[] = this.nodeService.getSelectedNodes();
+
+    if (nodes.length < 2) {
+      this.scaleFullNetzgrafikArea(factor, zoomCenter);
+    } else {
+      this.scaleNetzgrafikSelectedNodesArea(factor, nodes);
+    }
+
+    this.trainrunSectionService.getTrainrunSections().forEach(ts => {
+      ts.routeEdgeAndPlaceText();
+      ts.getSourceNode().updateTransitionsAndConnections();
+    });
+
+    this.nodeService.initPortOrdering();
+
+    this.viewportCullService.onViewportChangeUpdateRendering(true);
+  }
+
+
 }
