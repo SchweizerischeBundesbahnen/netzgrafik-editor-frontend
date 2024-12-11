@@ -26,11 +26,10 @@ easier to manage and edit complex network structures.
 
 ### Scale Netzgrafik 
 When you press `Ctrl` and use the `mouse wheel`, the netzgrafik gets scaled. This feature can be used when the nodes are spatially too close together. 
-[chrome-capture-2024-12-11 (1).webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/785c4c38-8444-4b81-a357-42d84f47f525)
 
 
 When you have selected multiple nodes with `right mouse button pressed and move`, then only the multi-selected nodes get scaled around their center of mass.
-[chrome-capture-2024-12-11.webm](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/assets/fa1ed9f9-5902-41e2-9e2a-7e8bb536b4e9)
+
 
 
 ### Duplicate
