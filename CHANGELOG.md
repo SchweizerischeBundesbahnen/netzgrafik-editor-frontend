@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.14](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.13...netzgrafik-frontend-v2.9.14) (2024-12-11)
+
+
+### Bug Fixes
+
+* if the ctrl + mouse wheel lets scale the netzgrafik or multi-selected nodes (local scale) ([#376](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/376)) ([de55afe](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/de55afe8b1101615c43906c807989be62d84485d))
+
 ## [2.9.13](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.12...netzgrafik-frontend-v2.9.13) (2024-12-10)
 
 
