@@ -17,6 +17,8 @@ export interface SVGMouseControllerObserver {
   updateMultiSelect(topLeft: Vec2D, bottomRight: Vec2D);
 
   onEndMultiSelect();
+
+  onScaleNetzgrafik(factor: number, scaleCenter: Vec2D);
 }
 
 export class SVGMouseController {
@@ -36,7 +38,8 @@ export class SVGMouseController {
   constructor(
     private svgName: string,
     private svgMouseControllerObserver: SVGMouseControllerObserver,
-  ) {}
+  ) {
+  }
 
   init(viewboxProperties: ViewboxProperties) {
     this.viewboxProperties = viewboxProperties;
@@ -98,6 +101,15 @@ export class SVGMouseController {
     this.svgMouseControllerObserver.zoomFactorChanged(
       this.viewboxProperties.zoomFactor,
     );
+  }
+
+
+  scaleIn(scaleCenter: Vec2D) {
+    this.svgMouseControllerObserver.onScaleNetzgrafik(1.125, scaleCenter);
+  }
+
+  scaleOut(scaleCenter: Vec2D) {
+    this.svgMouseControllerObserver.onScaleNetzgrafik(1.0 / 1.125, scaleCenter);
   }
 
   zoomIn(zoomCenter: Vec2D, factor = 1.0) {
@@ -312,11 +324,23 @@ export class SVGMouseController {
       d3.event.offsetX / this.viewboxProperties.origWidth,
       d3.event.offsetY / this.viewboxProperties.origHeight,
     );
-    if (d3.event.deltaY > 0) {
-      this.zoomOut(zoomCenter);
+
+    if (!d3.event.ctrlKey) {
+      // mouse wheel
+      if (d3.event.deltaY > 0) {
+        this.zoomOut(zoomCenter);
+      } else {
+        this.zoomIn(zoomCenter);
+      }
     } else {
-      this.zoomIn(zoomCenter);
+      // ctrl and mouse wheel
+      if (d3.event.deltaY > 0) {
+        this.scaleOut(zoomCenter);
+      } else {
+        this.scaleIn(zoomCenter);
+      }
     }
+
     d3.event.preventDefault();
     d3.event.stopPropagation();
   }
