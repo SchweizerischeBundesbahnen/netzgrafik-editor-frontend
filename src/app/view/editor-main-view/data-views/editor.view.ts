@@ -12,10 +12,7 @@ import {
 } from "../../../services/ui/ui.interaction.service";
 import {EditorMode} from "../../editor-menu/editor-mode";
 import {ConnectionsView} from "./connections.view";
-import {
-  SVGMouseController,
-  SVGMouseControllerObserver,
-} from "../../util/svg.mouse.controller";
+import {SVGMouseController, SVGMouseControllerObserver,} from "../../util/svg.mouse.controller";
 import {D3Utils} from "./d3.utils";
 import {NotesView} from "./notes.view";
 import {NodeService} from "../../../services/data/node.service";
@@ -30,7 +27,9 @@ import {EditorKeyEvents} from "./editor.keyEvents";
 import {MultiSelectRenderer} from "./multiSelectRenderer";
 import {UndoService} from "../../../services/data/undo.service";
 import {CopyService} from "../../../services/data/copy.service";
-import {StreckengrafikDrawingContext} from "../../../streckengrafik/model/util/streckengrafik.drawing.context";
+import {
+  StreckengrafikDrawingContext
+} from "../../../streckengrafik/model/util/streckengrafik.drawing.context";
 import {LevelOfDetail, LevelOfDetailService} from "../../../services/ui/level.of.detail.service";
 import {ViewportCullService} from "../../../services/ui/viewport.cull.service";
 import {VersionControlService} from "../../../services/data/version-control.service";
@@ -130,7 +129,7 @@ export class EditorView implements SVGMouseControllerObserver {
     private logService: LogService,
     private viewportCullService: ViewportCullService,
     private levelOfDetailService: LevelOfDetailService,
-    private versionControlService : VersionControlService
+    private versionControlService: VersionControlService
   ) {
     this.controller = controller;
     this.svgMouseController = new SVGMouseController(EditorView.svgName, this);
@@ -721,24 +720,50 @@ export class EditorView implements SVGMouseControllerObserver {
     });
   }
 
-  private scaleNetzgrafikSelectedNodesArea(factor: number, nodes: Node[]) {
-    /*
-    * if more than one node is selected (multi-selected nodes) transform the nodes with center of
-    * mass
-     */
-    let cx = 0;
-    let cy = 0;
-    nodes.forEach(n => {
-      cx += n.getPositionX() + n.getNodeWidth() / 2.0;
-      cy += n.getPositionY() + n.getNodeHeight() / 2.0;
-    });
-    cx /= nodes.length;
-    cy /= nodes.length;
-    const v = Vec2D.normalize(new Vec2D(cx, cy));
+  private scaleNetzgrafikSelectedNodesArea(factor: number, zoomCenter: Vec2D, nodes: Node[]) {
+
+    const vp = this.uiInteractionService.getViewboxProperties(EditorView.svgName);
+    const scaleCenterCoordinates = new Vec2D(
+      vp.panZoomLeft + zoomCenter.getX() * vp.panZoomWidth,
+      vp.panZoomTop + zoomCenter.getY() * vp.panZoomHeight,
+    );
+
+    // get the node under the mouse cursos and update the scaleCenter
+    const focalNode = this.nodeService.getNodes().find((n) =>
+      scaleCenterCoordinates.getX() > n.getPositionX() && scaleCenterCoordinates.getX() < (n.getPositionX() + n.getNodeWidth()) &&
+      scaleCenterCoordinates.getY() > n.getPositionY() && scaleCenterCoordinates.getY() < (n.getPositionY() + n.getNodeHeight())
+    );
+
+    if (!focalNode) {
+      /*
+      * if more than one node is selected (multi-selected nodes) transform the nodes with center of
+      * mass
+       */
+      let centerOfMass = new Vec2D(0, 0);
+      nodes.forEach(n => {
+        centerOfMass = Vec2D.add(
+          centerOfMass,
+          new Vec2D(n.getPositionX() + n.getNodeWidth() / 2.0, n.getPositionY() + n.getNodeHeight() / 2.0)
+        );
+      });
+      centerOfMass = Vec2D.scale(centerOfMass, 1.0 / Math.max(1, nodes.length));
+
+      scaleCenterCoordinates.setData(centerOfMass.getX(), centerOfMass.getY());
+    }
+
     nodes.forEach((n, index) => {
-      const posX = (n.getPositionX() + n.getNodeWidth() / 2.0 - cx) * factor + cx - n.getNodeWidth() / 2.0;
-      const posY = (n.getPositionY() + n.getNodeHeight() / 2.0 - cy) * factor + cy - n.getNodeHeight() / 2.0;
-      n.setPosition(posX, posY);
+      let newPos = new Vec2D(
+        (n.getPositionX() + n.getNodeWidth() / 2.0 - scaleCenterCoordinates.getX()) * factor + scaleCenterCoordinates.getX() - n.getNodeWidth() / 2.0,
+        (n.getPositionY() + n.getNodeHeight() / 2.0 - scaleCenterCoordinates.getY()) * factor + scaleCenterCoordinates.getY() - n.getNodeHeight() / 2.0
+      );
+
+      if (focalNode?.getId() === n.getId()) {
+        const delta = Vec2D.sub(newPos, new Vec2D(focalNode.getPositionX(), focalNode.getPositionY(),));
+        newPos = Vec2D.sub(newPos, delta);
+      }
+
+      n.setPosition(newPos.getX(), newPos.getY());
+
     });
   }
 
@@ -748,7 +773,7 @@ export class EditorView implements SVGMouseControllerObserver {
     if (nodes.length < 2) {
       this.scaleFullNetzgrafikArea(factor, zoomCenter);
     } else {
-      this.scaleNetzgrafikSelectedNodesArea(factor, nodes);
+      this.scaleNetzgrafikSelectedNodesArea(factor, zoomCenter, nodes);
     }
 
     this.trainrunSectionService.getTrainrunSections().forEach(ts => {
