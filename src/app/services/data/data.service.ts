@@ -211,27 +211,33 @@ export class DataService implements OnDestroy {
   }
 
   getTrainrunCategory(categoryId: number): TrainrunCategory {
-    return this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunCategories.find(
+    const found = this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunCategories.find(
       (trainrunCategory) => trainrunCategory.id === categoryId,
     );
+    if (found === undefined) {
+      return this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunCategories.find((freq) => true);
+    }
+    return found;
   }
 
   getTrainrunFrequency(frequencyId: number): TrainrunFrequency {
-    if (frequencyId > 5) {
-      frequencyId = 5; // ensure no overflow happens (HVZ, zeitweise -> remove)
-    }
-    return this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunFrequencies.find(
+    const found = this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunFrequencies.find(
       (trainrunFrequency) => trainrunFrequency.id === frequencyId,
     );
+    if (found === undefined) {
+      return this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunFrequencies.find((freq) => true);
+    }
+    return found;
   }
 
   getTrainrunTimeCategory(timeCategoryId: number): TrainrunTimeCategory {
-    if (timeCategoryId === undefined) {
-      timeCategoryId = 0; // set to default
-    }
-    return this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunTimeCategories.find(
+    const found = this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunTimeCategories.find(
       (trainrunTimeCategory) => trainrunTimeCategory.id === timeCategoryId,
     );
+    if (found === undefined) {
+      return this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunTimeCategories.find((freq) => true);
+    }
+    return found;
   }
 
   getTrainrunCategories(): TrainrunCategory[] {
