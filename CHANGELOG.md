@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.16](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.15...netzgrafik-frontend-v2.9.16) (2024-12-12)
+
+
+### Bug Fixes
+
+* issue fixed and two other methods refactored to same code structure as the getTrainrunFrequency method ([#383](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/383)) ([e864528](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/e864528c3ce6c993edc4eec5e047836cee21c9b4))
+
 ## [2.9.15](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.14...netzgrafik-frontend-v2.9.15) (2024-12-11)
 
 
