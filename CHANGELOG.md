@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.17](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.16...netzgrafik-frontend-v2.9.17) (2024-12-12)
+
+
+### Bug Fixes
+
+* multi-nodes scaling ctrl + mouse wheel ([#386](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/386)) ([f393f4a](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/f393f4add7e0ae05f63d6a20762d3efc266fb0ed))
+
 ## [2.9.16](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.15...netzgrafik-frontend-v2.9.16) (2024-12-12)
 
 
