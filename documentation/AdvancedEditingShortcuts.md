@@ -26,11 +26,10 @@ easier to manage and edit complex network structures.
 
 ### Scale Netzgrafik 
 When you press `Ctrl` and use the `mouse wheel`, the netzgrafik gets scaled. This feature can be used when the nodes are spatially too close together. 
-[CTRL_WHEEL_FULL.webm](https://github.com/user-attachments/assets/2a8889d0-b642-4248-8cf7-37fb24d7267c)
-
 
 When you have selected multiple nodes with `right mouse button pressed and move`, then only the multi-selected nodes get scaled around their center of mass.
-[CTRL_WHEEL_MS_NODE.webm](https://github.com/user-attachments/assets/0c7b0a4c-2155-458b-a30b-88ad00ca5585)
+ 
+[CTRL_WHEEL_FULL_DEMO.webm](https://github.com/user-attachments/assets/1799626a-5e36-46f7-bdeb-f61e43bdbc9d)
 
 
 ### Duplicate
