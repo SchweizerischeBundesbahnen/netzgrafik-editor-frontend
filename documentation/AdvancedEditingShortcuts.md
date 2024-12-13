@@ -31,7 +31,7 @@ When you have selected multiple nodes with `right mouse button pressed and move`
  
 [CTRL_WHEEL_FULL_DEMO.webm](https://github.com/user-attachments/assets/1799626a-5e36-46f7-bdeb-f61e43bdbc9d)
 
---
+---
 
 ### Duplicate
 
