@@ -28,6 +28,9 @@ import {TrainrunSectionsView} from "./trainrunsections.view";
 import {Vec2D} from "../../../utils/vec2D";
 import {LevelOfDetailService} from "../../../services/ui/level.of.detail.service";
 import {ViewportCullService} from "../../../services/ui/viewport.cull.service";
+import {
+  PositionTransformationService
+} from "../../../services/util/position.transformation.service";
 
 describe("TrainrunSection-View", () => {
   let dataService: DataService;
@@ -136,11 +139,23 @@ describe("TrainrunSection-View", () => {
     const levelOfDetailService = new LevelOfDetailService(
       uiInteractionService
     );
+
     const viewportCullSerivce = new ViewportCullService(
       uiInteractionService,
       nodeService,
       noteService,
       trainrunSectionService
+    );
+
+    const positionTransformationService = new PositionTransformationService(
+      dataService,
+      trainrunService,
+      trainrunSectionService,
+      nodeService,
+      noteService,
+      filterService,
+      uiInteractionService,
+      viewportCullSerivce
     );
 
     const controller = new EditorMainViewComponent(
@@ -156,7 +171,8 @@ describe("TrainrunSection-View", () => {
       logService,
       viewportCullSerivce,
       levelOfDetailService,
-      undefined
+      undefined,
+      positionTransformationService
     );
 
     new EditorView(
@@ -172,7 +188,8 @@ describe("TrainrunSection-View", () => {
       logService,
       viewportCullSerivce,
       levelOfDetailService,
-      undefined
+      undefined,
+      positionTransformationService
     );
 
     controller.bindViewToServices();

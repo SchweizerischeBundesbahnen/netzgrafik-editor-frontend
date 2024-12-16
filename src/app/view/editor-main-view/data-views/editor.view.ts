@@ -27,6 +27,8 @@ import {EditorKeyEvents} from "./editor.keyEvents";
 import {MultiSelectRenderer} from "./multiSelectRenderer";
 import {UndoService} from "../../../services/data/undo.service";
 import {CopyService} from "../../../services/data/copy.service";
+import {PositionTransformationService} from "../../../services/util/position.transformation.service";
+
 import {
   StreckengrafikDrawingContext
 } from "../../../streckengrafik/model/util/streckengrafik.drawing.context";
@@ -129,7 +131,8 @@ export class EditorView implements SVGMouseControllerObserver {
     private logService: LogService,
     private viewportCullService: ViewportCullService,
     private levelOfDetailService: LevelOfDetailService,
-    private versionControlService: VersionControlService
+    private versionControlService: VersionControlService,
+    private positionTransformationService: PositionTransformationService
   ) {
     this.controller = controller;
     this.svgMouseController = new SVGMouseController(EditorView.svgName, this);
@@ -578,7 +581,7 @@ export class EditorView implements SVGMouseControllerObserver {
 
 
   onScaleNetzgrafik(factor: number, scaleCenter: Vec2D) {
-    this.scaleNetzgrafikArea(factor, scaleCenter);
+    this.positionTransformationService.scaleNetzgrafikArea(factor, scaleCenter, EditorView.svgName);
   }
 
   zoomFactorChanged(newZoomFactor: number) {
@@ -693,98 +696,6 @@ export class EditorView implements SVGMouseControllerObserver {
   }
 
 
-  private scaleFullNetzgrafikArea(factor: number, zoomCenter: Vec2D) {
-    const vp = this.uiInteractionService.getViewboxProperties(EditorView.svgName);
-    const scaleCenterCoordinates = new Vec2D(
-      vp.panZoomLeft + zoomCenter.getX() * vp.panZoomWidth,
-      vp.panZoomTop + zoomCenter.getY() * vp.panZoomHeight,
-    );
-
-    // get the node under the mouse cursos and update the scaleCenter
-    const focalNode = this.nodeService.getNodes().find((n) =>
-      scaleCenterCoordinates.getX() > n.getPositionX() && scaleCenterCoordinates.getX() < (n.getPositionX() + n.getNodeWidth()) &&
-      scaleCenterCoordinates.getY() > n.getPositionY() && scaleCenterCoordinates.getY() < (n.getPositionY() + n.getNodeHeight())
-    );
-
-    this.nodeService.getNodes().forEach((n, index) => {
-      let newPos = new Vec2D(
-        (n.getPositionX() - scaleCenterCoordinates.getX()) * factor + scaleCenterCoordinates.getX(),
-        (n.getPositionY() - scaleCenterCoordinates.getY()) * factor + scaleCenterCoordinates.getY()
-      );
-
-      if (focalNode?.getId() === n.getId()) {
-        const delta = Vec2D.sub(newPos, new Vec2D(focalNode.getPositionX(), focalNode.getPositionY(),));
-        newPos = Vec2D.sub(newPos, delta);
-      }
-      n.setPosition(newPos.getX(), newPos.getY());
-    });
-  }
-
-  private scaleNetzgrafikSelectedNodesArea(factor: number, zoomCenter: Vec2D, nodes: Node[]) {
-
-    const vp = this.uiInteractionService.getViewboxProperties(EditorView.svgName);
-    const scaleCenterCoordinates = new Vec2D(
-      vp.panZoomLeft + zoomCenter.getX() * vp.panZoomWidth,
-      vp.panZoomTop + zoomCenter.getY() * vp.panZoomHeight,
-    );
-
-    // get the node under the mouse cursos and update the scaleCenter
-    const focalNode = this.nodeService.getNodes().find((n) =>
-      scaleCenterCoordinates.getX() > n.getPositionX() && scaleCenterCoordinates.getX() < (n.getPositionX() + n.getNodeWidth()) &&
-      scaleCenterCoordinates.getY() > n.getPositionY() && scaleCenterCoordinates.getY() < (n.getPositionY() + n.getNodeHeight())
-    );
-
-    if (!focalNode) {
-      /*
-      * if more than one node is selected (multi-selected nodes) transform the nodes with center of
-      * mass
-       */
-      let centerOfMass = new Vec2D(0, 0);
-      nodes.forEach(n => {
-        centerOfMass = Vec2D.add(
-          centerOfMass,
-          new Vec2D(n.getPositionX() + n.getNodeWidth() / 2.0, n.getPositionY() + n.getNodeHeight() / 2.0)
-        );
-      });
-      centerOfMass = Vec2D.scale(centerOfMass, 1.0 / Math.max(1, nodes.length));
-
-      scaleCenterCoordinates.setData(centerOfMass.getX(), centerOfMass.getY());
-    }
-
-    nodes.forEach((n, index) => {
-      let newPos = new Vec2D(
-        (n.getPositionX() + n.getNodeWidth() / 2.0 - scaleCenterCoordinates.getX()) * factor + scaleCenterCoordinates.getX() - n.getNodeWidth() / 2.0,
-        (n.getPositionY() + n.getNodeHeight() / 2.0 - scaleCenterCoordinates.getY()) * factor + scaleCenterCoordinates.getY() - n.getNodeHeight() / 2.0
-      );
-
-      if (focalNode?.getId() === n.getId()) {
-        const delta = Vec2D.sub(newPos, new Vec2D(focalNode.getPositionX(), focalNode.getPositionY(),));
-        newPos = Vec2D.sub(newPos, delta);
-      }
-
-      n.setPosition(newPos.getX(), newPos.getY());
-
-    });
-  }
-
-  private scaleNetzgrafikArea(factor: number, zoomCenter: Vec2D) {
-    const nodes: Node[] = this.nodeService.getSelectedNodes();
-
-    if (nodes.length < 2) {
-      this.scaleFullNetzgrafikArea(factor, zoomCenter);
-    } else {
-      this.scaleNetzgrafikSelectedNodesArea(factor, zoomCenter, nodes);
-    }
-
-    this.trainrunSectionService.getTrainrunSections().forEach(ts => {
-      ts.routeEdgeAndPlaceText();
-      ts.getSourceNode().updateTransitionsAndConnections();
-    });
-
-    this.nodeService.initPortOrdering();
-
-    this.viewportCullService.onViewportChangeUpdateRendering(true);
-  }
 
 
 }
