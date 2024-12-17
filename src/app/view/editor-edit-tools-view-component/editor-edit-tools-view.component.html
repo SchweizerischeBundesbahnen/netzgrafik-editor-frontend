@@ -30,7 +30,7 @@
   </sbb-expansion-panel>
 
   <sbb-expansion-panel
-    [expanded]="getVariantIsWritable()"
+    [expanded]="getVariantIsWritable() && !getAreMultiObjectSelected()"
     [disabled]="!getVariantIsWritable()">
     <sbb-expansion-panel-header>{{ 'app.view.editor-edit-tools-view-component.delete-netzgrafik-title' | translate }}</sbb-expansion-panel-header>
 
@@ -123,4 +123,55 @@
       (change)="onLoadNetzgrafikToMerge($event)"
     />
   </sbb-expansion-panel>
+
+
+  <sbb-expansion-panel
+    [expanded]="getAreMultiObjectSelected()"
+    [disabled]="!getVariantIsWritable()">
+    <sbb-expansion-panel-header>
+      {{ 'app.view.editor-edit-tools-view-component.align-elements-netzgrafik-title' | translate }}
+    </sbb-expansion-panel-header>
+    <br />
+    <button
+      (click)="onAlignElementsLeft()"
+      [title]="'app.view.editor-edit-tools-view-component.align-elements-left' | translate"
+      class="TrainrunDialog EditorToolButton"
+    >
+      <sbb-icon svgIcon="arrow-left-small"></sbb-icon>
+    </button>
+    {{ 'app.view.editor-edit-tools-view-component.align-elements-left' | translate }}
+
+    <br />
+    <button
+      (click)="onAlignElementsRight()"
+      [title]="'app.view.editor-edit-tools-view-component.align-elements-right' | translate"
+      class="TrainrunDialog EditorToolButton"
+    >
+      <sbb-icon svgIcon="arrow-right-small"></sbb-icon>
+    </button>
+    {{ 'app.view.editor-edit-tools-view-component.align-elements-right' | translate }}
+
+    <br />
+    <button
+      (click)="onAlignElementsTop()"
+      [title]="'app.view.editor-edit-tools-view-component.align-elements-top' | translate"
+      class="TrainrunDialog EditorToolButton"
+    >
+      <sbb-icon svgIcon="arrow-up-small"></sbb-icon>
+    </button>
+    {{ 'app.view.editor-edit-tools-view-component.align-elements-top' | translate }}
+
+    <br />
+    <button
+      (click)="onAlignElementsBottom()"
+      [title]="'app.view.editor-edit-tools-view-component.align-elements-bottom' | translate"
+      class="TrainrunDialog EditorToolButton"
+    >
+      <sbb-icon svgIcon="arrow-down-small"></sbb-icon>
+    </button>
+    {{ 'app.view.editor-edit-tools-view-component.align-elements-bottom' | translate }}
+
+  </sbb-expansion-panel>
+
+
 </sbb-accordion>

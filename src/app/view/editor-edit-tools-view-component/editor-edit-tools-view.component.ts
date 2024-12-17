@@ -17,6 +17,7 @@ import {LabelGroupService} from "../../services/data/labelgroup.service";
 import {LabelGroup} from "../../models/labelGroup.model";
 import {environment} from "../../../environments/environment";
 import {VersionControlService} from "../../services/data/version-control.service";
+import {PositionTransformationService} from "../../services/util/position.transformation.service";
 
 @Component({
   selector: "sbb-editor-edit-tools-view-component",
@@ -47,7 +48,8 @@ export class EditorEditToolsViewComponent implements OnDestroy {
     private logger: LogService,
     public filterService: FilterService,
     private uiInteractionService: UiInteractionService,
-    private versionControlService : VersionControlService
+    private versionControlService : VersionControlService,
+    private positionTransformationService : PositionTransformationService
   ) {
     this.nodeLabelGroups = this.labelGroupService.getLabelGroupsFromLabelRef(
       LabelRef.Node,
@@ -80,6 +82,12 @@ export class EditorEditToolsViewComponent implements OnDestroy {
 
   getVariantIsWritable() {
     return this.versionControlService.getVariantIsWritable();
+  }
+
+  getAreMultiObjectSelected(): boolean {
+    return (
+      this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving
+    );
   }
 
   onClearAllFiltered() {
@@ -164,6 +172,22 @@ export class EditorEditToolsViewComponent implements OnDestroy {
     this.loadNetzgrafik(param, (netzgrafikDto) =>
       this.dataService.mergeNetzgrafikDto(netzgrafikDto),
     );
+  }
+
+  onAlignElementsLeft() {
+    this.positionTransformationService.alignSelectedElementsToLeftBorder();
+  }
+
+  onAlignElementsTop() {
+    this.positionTransformationService.alignSelectedElementsToTopBorder();
+  }
+
+  onAlignElementsRight() {
+    this.positionTransformationService.alignSelectedElementsToRightBorder();
+  }
+
+  onAlignElementsBottom() {
+    this.positionTransformationService.alignSelectedElementsToBottomBorder();
   }
 
   private loadNetzgrafik(param, callback) {

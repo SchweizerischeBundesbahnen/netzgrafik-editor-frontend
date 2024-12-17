@@ -105,6 +105,14 @@ export class NetzgrafikApplicationComponent {
     return this.sanitizer.bypassSecurityTrustStyle("");
   }
 
+  getEditStyle() {
+    if (this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving) {
+      return this.sanitizer.bypassSecurityTrustStyle("color:red");
+    }
+    return this.sanitizer.bypassSecurityTrustStyle("");
+  }
+
+
   getFilterActivatedTag() {
     return this.getActivatedTag(FilterWindowType.EDITOR_FILTER);
   }
