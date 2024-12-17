@@ -27,7 +27,9 @@ import {EditorKeyEvents} from "./editor.keyEvents";
 import {MultiSelectRenderer} from "./multiSelectRenderer";
 import {UndoService} from "../../../services/data/undo.service";
 import {CopyService} from "../../../services/data/copy.service";
-import {PositionTransformationService} from "../../../services/util/position.transformation.service";
+import {
+  PositionTransformationService
+} from "../../../services/util/position.transformation.service";
 
 import {
   StreckengrafikDrawingContext
@@ -159,6 +161,7 @@ export class EditorView implements SVGMouseControllerObserver {
       copyService,
       this.svgMouseController,
       this.trainrunSectionPreviewLineView,
+      this.positionTransformationService
     );
   }
 
@@ -694,8 +697,6 @@ export class EditorView implements SVGMouseControllerObserver {
       el.classed("ShowCellCursor", false);
     }
   }
-
-
 
 
 }

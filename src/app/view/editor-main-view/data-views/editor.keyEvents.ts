@@ -19,6 +19,9 @@ import {Connection} from "../../../models/connection.model";
 import {PreviewLineMode, TrainrunSectionPreviewLineView,} from "./trainrunsection.previewline.view";
 import {TrainrunSection} from "../../../models/trainrunsection.model";
 import {Trainrun} from "../../../models/trainrun.model";
+import {
+  PositionTransformationService
+} from "../../../services/util/position.transformation.service";
 
 export class EditorKeyEvents {
   private editorMode: EditorMode;
@@ -35,6 +38,7 @@ export class EditorKeyEvents {
     private copyService: CopyService,
     private svgMouseController: SVGMouseController,
     private trainrunSectionPreviewLineView: TrainrunSectionPreviewLineView,
+    private positionTransformationService: PositionTransformationService
   ) {
     this.activateMousekeyDownHandler(EditorMode.NetzgrafikEditing);
   }
@@ -128,6 +132,23 @@ export class EditorKeyEvents {
             d3.event.preventDefault();
           }
           break;
+        case "ArrowLeft":
+          this.onArrowLeft();
+          d3.event.preventDefault();
+          break;
+        case "ArrowUp":
+          this.onArrowUp();
+          d3.event.preventDefault();
+          break;
+        case "ArrowRight":
+          this.onArrowRight();
+          d3.event.preventDefault();
+          break;
+        case "ArrowDown":
+          this.onArrowDown();
+          d3.event.preventDefault();
+          break;
+
         default:
           break;
       }
@@ -198,6 +219,26 @@ export class EditorKeyEvents {
     }
     this.copyService.insertCopiedNetzgrafik();
     return false;
+  }
+
+  private onArrowLeft(): boolean {
+    this.positionTransformationService.alignSelectedElementsToLeftBorder();
+    return true;
+  }
+
+  private onArrowUp(): boolean {
+    this.positionTransformationService.alignSelectedElementsToTopBorder();
+    return true;
+  }
+
+  private onArrowDown(): boolean {
+    this.positionTransformationService.alignSelectedElementsToBottomBorder();
+    return true;
+  }
+
+  private onArrowRight(): boolean {
+    this.positionTransformationService.alignSelectedElementsToRightBorder();
+    return true;
   }
 
   private onRevertLastChange(): boolean {

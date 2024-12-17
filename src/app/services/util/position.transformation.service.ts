@@ -96,6 +96,16 @@ export class PositionTransformationService {
     });
   }
 
+  private upateRendering() {
+    this.trainrunSectionService.getTrainrunSections().forEach(ts => {
+      ts.routeEdgeAndPlaceText();
+      ts.getSourceNode().updateTransitionsAndConnections();
+    });
+
+    this.nodeSerivce.initPortOrdering();
+    this.viewportCullService.onViewportChangeUpdateRendering(true);
+  }
+
   scaleNetzgrafikArea(factor: number, zoomCenter: Vec2D, windowViewboxPropertiesMapKey: string) {
     const nodes: Node[] = this.nodeSerivce.getSelectedNodes();
 
@@ -105,14 +115,95 @@ export class PositionTransformationService {
       this.scaleNetzgrafikSelectedNodesArea(factor, zoomCenter, nodes, windowViewboxPropertiesMapKey);
     }
 
-    this.trainrunSectionService.getTrainrunSections().forEach(ts => {
-      ts.routeEdgeAndPlaceText();
-      ts.getSourceNode().updateTransitionsAndConnections();
+    this.upateRendering();
+  }
+
+  alignSelectedElementsToLeftBorder() {
+    const nodes: Node[] = this.nodeSerivce.getSelectedNodes();
+
+    let leftX = undefined;
+    nodes.forEach((n) => {
+      const pos = n.getPositionX();
+      if (leftX === undefined) {
+        leftX = pos;
+      } else {
+        leftX = Math.min(leftX, pos);
+      }
     });
 
-    this.nodeSerivce.initPortOrdering();
+    if (leftX !== undefined) {
+      nodes.forEach((n) => {
+        n.setPosition(leftX, n.getPositionY());
+      });
+    }
 
-    this.viewportCullService.onViewportChangeUpdateRendering(true);
+    this.upateRendering();
+  }
+
+  alignSelectedElementsToRightBorder() {
+    const nodes: Node[] = this.nodeSerivce.getSelectedNodes();
+
+    let rightX = undefined;
+    nodes.forEach((n) => {
+      const pos = n.getPositionX() + n.getNodeWidth();
+      if (rightX === undefined) {
+        rightX = pos;
+      } else {
+        rightX = Math.max(rightX, pos);
+      }
+    });
+
+    if (rightX !== undefined) {
+      nodes.forEach((n) => {
+        n.setPosition(rightX - n.getNodeWidth(), n.getPositionY());
+      });
+    }
+
+    this.upateRendering();
+  }
+
+  alignSelectedElementsToTopBorder() {
+    const nodes: Node[] = this.nodeSerivce.getSelectedNodes();
+
+    let topY = undefined;
+    nodes.forEach((n) => {
+      const pos = n.getPositionY();
+      if (topY === undefined) {
+        topY = pos;
+      } else {
+        topY = Math.min(topY, pos);
+      }
+    });
+
+    if (topY !== undefined) {
+      nodes.forEach((n) => {
+        n.setPosition(n.getPositionX(), topY);
+      });
+    }
+
+    this.upateRendering();
+  }
+
+  alignSelectedElementsToBottomBorder() {
+    const nodes: Node[] = this.nodeSerivce.getSelectedNodes();
+
+    let bottomY = undefined;
+    nodes.forEach((n) => {
+      const pos = n.getPositionY() + n.getNodeHeight();
+      if (bottomY === undefined) {
+        bottomY = pos;
+      } else {
+        bottomY = Math.max(bottomY, pos);
+      }
+    });
+
+    if (bottomY !== undefined) {
+      nodes.forEach((n) => {
+        n.setPosition(n.getPositionX(), bottomY - n.getNodeHeight());
+      });
+    }
+
+    this.upateRendering();
   }
 
 }
