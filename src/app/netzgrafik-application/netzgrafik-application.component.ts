@@ -14,6 +14,7 @@ import {UndoService} from "../services/data/undo.service";
 import {EditorView} from "../view/editor-main-view/data-views/editor.view";
 import {NetzgrafikDefault} from "../sample-netzgrafik/netzgrafik.default";
 import {environment} from "../../environments/environment";
+import {NodeService} from "../services/data/node.service";
 
 export enum IconSidebarMode {
   VARIANTEN = "varianten",
@@ -42,6 +43,7 @@ export class NetzgrafikApplicationComponent {
     private readonly activatedRoute: ActivatedRoute,
     private readonly versionControlService: VersionControlService,
     private readonly undoService: UndoService,
+    private readonly nodeService: NodeService,
     private sanitizer: DomSanitizer,
   ) {
     activatedRoute.params
@@ -107,11 +109,12 @@ export class NetzgrafikApplicationComponent {
 
   getEditStyle() {
     if (this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving) {
-      return this.sanitizer.bypassSecurityTrustStyle("color:red");
+      if (this.nodeService.getSelectedNodes().length > 0) {
+        return this.sanitizer.bypassSecurityTrustStyle("color:red");
+      }
     }
     return this.sanitizer.bypassSecurityTrustStyle("");
   }
-
 
   getFilterActivatedTag() {
     return this.getActivatedTag(FilterWindowType.EDITOR_FILTER);
