@@ -30,7 +30,6 @@
   </sbb-expansion-panel>
 
   <sbb-expansion-panel
-    *ngif="getAreMultiObjectSelected()"
     [expanded]="getVariantIsWritable() && !getAreMultiObjectSelected()"
     [disabled]="!getVariantIsWritable()">
     <sbb-expansion-panel-header>{{ 'app.view.editor-edit-tools-view-component.delete-netzgrafik-title' | translate }}</sbb-expansion-panel-header>
@@ -127,10 +126,12 @@
 
 
   <sbb-expansion-panel
-    [expanded]="getAreMultiObjectSelected()"
-    [disabled]="!getVariantIsWritable()">
+    *ngIf="getAreMultiObjectSelected()"
+    [expanded]="getAreMultiObjectSelected()">
     <sbb-expansion-panel-header>
-      {{ 'app.view.editor-edit-tools-view-component.align-elements-netzgrafik-title' | translate }}
+      <label style="color: red">
+        {{ 'app.view.editor-edit-tools-view-component.align-elements-netzgrafik-title' | translate }}
+      </label>
     </sbb-expansion-panel-header>
     <br/>
     <button

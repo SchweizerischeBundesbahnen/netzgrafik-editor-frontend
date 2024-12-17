@@ -87,8 +87,7 @@ export class EditorEditToolsViewComponent implements OnDestroy {
   }
 
   getAreMultiObjectSelected(): boolean {
-    return this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving &&
-      this.nodeService.getSelectedNodes().length > 0;
+    return this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving;
   }
 
   onClearAllFiltered() {

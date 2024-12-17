@@ -293,7 +293,7 @@
         "add-netzgrafik-as-copy": "Netzgrafik als Kopie einfügen",
         "merge-netzgrafik-tooltip": "Netzgrafik zusammenführen (Zugfahrten, Knoten, Kommentare)",
         "merge-netzgrafik": "Netzgrafik durch zusammenführen",
-        "align-elements-netzgrafik-title": "Ausrichten mehrerer Elemente (Knoten)",
+        "align-elements-netzgrafik-title": "Elemente ausrichten",
         "align-elements-left": "Linksbündig ausrichten",
         "align-elements-right": "Rechtsbündig ausrichten",
         "align-elements-top": "Oben ausrichten",
