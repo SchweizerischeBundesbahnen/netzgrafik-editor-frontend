@@ -23,6 +23,9 @@ import {EditorView} from "./editor.view";
 import {NetzgrafikUnitTesting} from "../../../../integration-testing/netzgrafik.unit.testing";
 import {LevelOfDetailService} from "../../../services/ui/level.of.detail.service";
 import {ViewportCullService} from "../../../services/ui/viewport.cull.service";
+import {
+  PositionTransformationService
+} from "../../../services/util/position.transformation.service";
 
 describe("Notes-View", () => {
   let dataService: DataService;
@@ -131,11 +134,20 @@ describe("Notes-View", () => {
     const levelOfDetailService = new LevelOfDetailService(
       uiInteractionService
     );
+
     const viewportCullSerivce = new ViewportCullService(
       uiInteractionService,
       nodeService,
       noteService,
       trainrunSectionService
+    );
+
+    const positionTransformationService = new PositionTransformationService(
+      trainrunSectionService,
+      nodeService,
+      noteService,
+      uiInteractionService,
+      viewportCullSerivce
     );
 
     const controller = new EditorMainViewComponent(
@@ -151,7 +163,8 @@ describe("Notes-View", () => {
       logService,
       viewportCullSerivce,
       levelOfDetailService,
-      undefined
+      undefined,
+      positionTransformationService
     );
 
     new EditorView(
@@ -167,7 +180,8 @@ describe("Notes-View", () => {
       logService,
       viewportCullSerivce,
       levelOfDetailService,
-      undefined
+      undefined,
+      positionTransformationService
     );
     controller.bindViewToServices();
     editorView = controller.editorView;

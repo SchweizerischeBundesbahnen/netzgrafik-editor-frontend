@@ -10,19 +10,24 @@ easier to manage and edit complex network structures.
 
 ### Short-cuts
 
-|                                                  Keyboard                                                  |                                                                                            description                                                                                             |
-|:----------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|                                                                                                            |                                                                                                                                                                                                    |
-|                                                  `delete`                                                  |                                                                          Delete nodes, comments, and selected trainruns.                                                                           |
-|                                             `ctrl`+`d` / `insert`                                              |                                   Duplicate nodes, comments, and selected trainruns (if multiple nodes are selected, trains including nodes will be duplicated).                                   |
-|                                                  `insert`                                                  |                                                                         Add new nodes under the mouse on the drawing area.                                                                         |
-|                                                  `escape`                                                  |                                                         Select trainruns / In multi-node move mode, all selected nodes will be unselected.                                                         |
+|                                                     Keyboard                                                     |                                                                                            description                                                                                             |
+|:----------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|                                                                                                                  |                                                                                                                                                                                                    |
+|                                                     `delete`                                                     |                                                                          Delete nodes, comments, and selected trainruns.                                                                           |
+|                                              `ctrl`+`d` / `insert`                                               |                                   Duplicate nodes, comments, and selected trainruns (if multiple nodes are selected, trains including nodes will be duplicated).                                   |
+|                                                     `insert`                                                     |                                                                         Add new nodes under the mouse on the drawing area.                                                                         |
+|                                                     `escape`                                                     |                                                         Select trainruns / In multi-node move mode, all selected nodes will be unselected.                                                         |
 | `shift` + `left mouse button` pressed and move (or alternatively with the `right mouse button` pressed and move) |                                               Multi-select nodes and notes for subsequent moving or delete all selected elements by using `Delete`.                                                |
-|                                                   `ctrl`+`z`                                                   |                                                                                Undo - Reverse the previous action.                                                                                 |
-|                                                   `ctrl`+`c`                                                   | Copy the currently visible trainruns. The copied content remains in the browser's memory/cache and can be pasted into different variants (even after closing the browser, the data remains saved). |
-|                                                   `ctrl`+`v`                                                   |                                                                                    Paste the copied trainruns.                                                                                     |
-|                                                   `ctrl`+`a`                                                   |                                                                                            Select all.                                                                                             |
-
+|                                                    `ctrl`+`z`                                                    |                                                                                Undo - Reverse the previous action.                                                                                 |
+|                                                    `ctrl`+`c`                                                    | Copy the currently visible trainruns. The copied content remains in the browser's memory/cache and can be pasted into different variants (even after closing the browser, the data remains saved). |
+|                                                    `ctrl`+`v`                                                    |                                                                                    Paste the copied trainruns.                                                                                     |
+|                                                    `ctrl`+`a`                                                    |                                                                                            Select all.                                                                                             |
+|                                                                                                                  |                                                                                                                                                                                                    |
+|                                                   `Arrow left`                                                   |                                                                                  Align all selected nodes - left.                                                                                  |
+|                                                    `Arrow up`                                                    |                                                                                  Align all selected nodes - top.                                                                                   |
+|                                                  `Arrow right`                                                   |                                                                                 Align all selected nodes - right.                                                                                  |
+|                                                   `Arrow down`                                                   |                                                                                 Align all selected nodes - bottom.                                                                                 |
+---
 
 ### Scale Netzgrafik 
 When you press `Ctrl` and use the `mouse wheel`, the netzgrafik gets scaled. This feature can be used when the nodes are spatially too close together. 
@@ -31,6 +36,7 @@ When you have selected multiple nodes with `right mouse button pressed and move`
  
 [CTRL_WHEEL_FULL_DEMO.webm](https://github.com/user-attachments/assets/1799626a-5e36-46f7-bdeb-f61e43bdbc9d)
 
+---
 
 ### Duplicate
 
@@ -72,6 +78,8 @@ to duplicate and press `ctrl`+`d`.
 
 To duplicate a note, ensure there is no trainrun selected. Move with the mouse pointer over the note
 to duplicate and press `ctrl`+`d`.
+
+---
 
 ### Delete
 
