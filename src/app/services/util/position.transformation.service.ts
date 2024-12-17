@@ -97,12 +97,13 @@ export class PositionTransformationService {
   }
 
   private upateRendering() {
+    this.nodeSerivce.initPortOrdering();
+
     this.trainrunSectionService.getTrainrunSections().forEach(ts => {
       ts.routeEdgeAndPlaceText();
       ts.getSourceNode().updateTransitionsAndConnections();
     });
 
-    this.nodeSerivce.initPortOrdering();
     this.viewportCullService.onViewportChangeUpdateRendering(true);
   }
 
