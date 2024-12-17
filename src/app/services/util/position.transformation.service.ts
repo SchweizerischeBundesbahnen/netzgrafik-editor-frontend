@@ -1,7 +1,4 @@
 import {Injectable} from "@angular/core";
-import {DataService} from "../data/data.service";
-import {FilterService} from "../ui/filter.service";
-import {TrainrunService} from "../data/trainrun.service";
 import {TrainrunSectionService} from "../data/trainrunsection.service";
 import {UiInteractionService} from "../ui/ui.interaction.service";
 import {NodeService} from "../data/node.service";
@@ -15,12 +12,9 @@ import {ViewportCullService} from "../ui/viewport.cull.service";
 })
 export class PositionTransformationService {
   constructor(
-    private readonly dataService: DataService,
-    private readonly trainrunService: TrainrunService,
     private readonly trainrunSectionService: TrainrunSectionService,
     private readonly nodeSerivce: NodeService,
     private readonly noteSerivce: NoteService,
-    private readonly filterService: FilterService,
     private readonly uiInteractionService: UiInteractionService,
     private readonly viewportCullService: ViewportCullService,
   ) {
