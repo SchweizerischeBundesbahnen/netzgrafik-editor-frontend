@@ -28,6 +28,9 @@ import {TransitionViewObject} from "./transitionViewObject";
 import {StaticDomTags} from "./static.dom.tags";
 import {LevelOfDetailService} from "../../../services/ui/level.of.detail.service";
 import {ViewportCullService} from "../../../services/ui/viewport.cull.service";
+import {
+  PositionTransformationService
+} from "../../../services/util/position.transformation.service";
 
 describe("Editor-DataView", () => {
   let dataService: DataService;
@@ -140,9 +143,19 @@ describe("Editor-DataView", () => {
       noteService,
       trainrunSectionService
     );
+
     const levelOfDetailService = new LevelOfDetailService(
       uiInteractionService
     );
+
+    const positionTransformationService = new PositionTransformationService(
+      trainrunSectionService,
+      nodeService,
+      noteService,
+      uiInteractionService,
+      viewportCullSerivce
+    );
+
 
     const controller = new EditorMainViewComponent(
       nodeService,
@@ -157,7 +170,8 @@ describe("Editor-DataView", () => {
       logService,
       viewportCullSerivce,
       levelOfDetailService,
-      undefined
+      undefined,
+      positionTransformationService
     );
 
     new EditorView(
@@ -173,7 +187,8 @@ describe("Editor-DataView", () => {
       logService,
       viewportCullSerivce,
       levelOfDetailService,
-      undefined
+      undefined,
+      positionTransformationService
     );
 
     controller.bindViewToServices();
