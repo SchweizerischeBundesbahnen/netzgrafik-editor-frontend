@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.18](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.17...netzgrafik-frontend-v2.9.18) (2024-12-17)
+
+
+### Bug Fixes
+
+* 260 feature request align selected nodes all at once ([#390](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/390)) ([af03ac9](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/af03ac956543103e9f0604dda75ed498fa6af94d))
+
 ## [2.9.17](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.16...netzgrafik-frontend-v2.9.17) (2024-12-12)
 
 
