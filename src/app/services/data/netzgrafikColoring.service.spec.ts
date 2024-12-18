@@ -10,7 +10,7 @@ import {TrainrunSection} from "../../models/trainrunsection.model";
 import {LogService} from "../../logger/log.service";
 import {LogPublishersService} from "../../logger/log.publishers.service";
 import {LabelGroupService} from "../data/labelgroup.service";
-import {LabelService} from "../data/label.serivce";
+import {LabelService} from "./label.service";
 import {FilterService} from "../ui/filter.service";
 import {NetzgrafikColoringService} from "../data/netzgrafikColoring.service";
 import {UndoService} from "../data/undo.service";
@@ -19,7 +19,7 @@ import {UiInteractionService} from "../ui/ui.interaction.service";
 import {LoadPerlenketteService} from "../../perlenkette/service/load-perlenkette.service";
 import {NetzgrafikUnitTesting} from "../../../integration-testing/netzgrafik.unit.testing";
 
-describe("NetzgraphikColoringSerivce", () => {
+describe("NetzgraphikColoringService", () => {
   let dataService: DataService;
   let nodeService: NodeService;
   let resourceService: ResourceService;

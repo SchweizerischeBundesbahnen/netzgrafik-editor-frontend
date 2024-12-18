@@ -17,7 +17,7 @@ import {TimeFormatter} from "../../../model/util/timeFormatter";
 import {
   UpdateCounterController,
   UpdateCounterHandler,
-  UpdateCounterTriggerSerivce,
+  UpdateCounterTriggerService,
 } from "../../../services/util/update-counter.service";
 
 @Component({
@@ -70,7 +70,7 @@ export class TimeSliderComponent
   constructor(
     private readonly timeSliderService: TimeSliderService,
     private readonly viewBoxService: ViewBoxService,
-    private readonly updateCounterTriggerSerivce: UpdateCounterTriggerSerivce,
+    private readonly updateCounterTriggerService: UpdateCounterTriggerService,
     private readonly cd: ChangeDetectorRef,
   ) {}
 
@@ -312,8 +312,8 @@ export class TimeSliderComponent
     }
   }
 
-  getUpdateCounterTriggerSerivce(): UpdateCounterTriggerSerivce {
-    return this.updateCounterTriggerSerivce;
+  getUpdateCounterTriggerService(): UpdateCounterTriggerService {
+    return this.updateCounterTriggerService;
   }
 
   getCurrentUpdateCounter(): number {

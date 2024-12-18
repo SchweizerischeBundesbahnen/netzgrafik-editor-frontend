@@ -27,7 +27,7 @@ import {takeUntil} from "rxjs/operators";
 import {Vec2D} from "../../utils/vec2D";
 import {NODE_POSITION_BASIC_RASTER} from "../../view/rastering/definitions";
 import {MathUtils} from "../../utils/math";
-import {LabelService} from "./label.serivce";
+import {LabelService} from "./label.service";
 import {FilterService} from "../ui/filter.service";
 import {ConnectionDto} from "../../data-structures/technical.data.structures";
 import {TrainrunsectionValidator} from "../util/trainrunsection.validator";

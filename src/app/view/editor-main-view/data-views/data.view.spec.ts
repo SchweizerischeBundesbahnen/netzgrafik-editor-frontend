@@ -8,7 +8,7 @@ import {NoteService} from "../../../services/data/note.service";
 import {Node} from "../../../models/node.model";
 import {TrainrunSection} from "../../../models/trainrunsection.model";
 import {LabelGroupService} from "../../../services/data/labelgroup.service";
-import {LabelService} from "../../../services/data/label.serivce";
+import {LabelService} from "../../../services/data/label.service";
 import {NetzgrafikColoringService} from "../../../services/data/netzgrafikColoring.service";
 import {UndoService} from "../../../services/data/undo.service";
 import {CopyService} from "../../../services/data/copy.service";
@@ -137,7 +137,7 @@ describe("Editor-DataView", () => {
     );
 
 
-    const viewportCullSerivce = new ViewportCullService(
+    const viewportCullService = new ViewportCullService(
       uiInteractionService,
       nodeService,
       noteService,
@@ -153,7 +153,7 @@ describe("Editor-DataView", () => {
       nodeService,
       noteService,
       uiInteractionService,
-      viewportCullSerivce
+      viewportCullService
     );
 
 
@@ -168,7 +168,7 @@ describe("Editor-DataView", () => {
       undoService,
       copyService,
       logService,
-      viewportCullSerivce,
+      viewportCullService,
       levelOfDetailService,
       undefined,
       positionTransformationService
@@ -185,7 +185,7 @@ describe("Editor-DataView", () => {
       undoService,
       copyService,
       logService,
-      viewportCullSerivce,
+      viewportCullService,
       levelOfDetailService,
       undefined,
       positionTransformationService

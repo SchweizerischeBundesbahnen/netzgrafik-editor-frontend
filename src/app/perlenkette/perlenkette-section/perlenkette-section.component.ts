@@ -101,7 +101,7 @@ export class PerlenketteSectionComponent
   constructor(
     private trainrunService: TrainrunService,
     private trainrunSectionService: TrainrunSectionService,
-    private nodeSerivce: NodeService,
+    private nodeService: NodeService,
     private uiInteractionService: UiInteractionService,
     public trainrunSectionTimesService: TrainrunSectionTimesService,
     readonly filterService: FilterService,

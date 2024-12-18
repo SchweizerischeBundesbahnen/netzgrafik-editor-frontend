@@ -14,7 +14,7 @@ import {Subject} from "rxjs";
 import {TrainrunService} from "../../services/data/trainrun.service";
 import {NoteService} from "../../services/data/note.service";
 import {LabelRef} from "../../data-structures/business.data.structures";
-import {LabelService} from "../../services/data/label.serivce";
+import {LabelService} from "../../services/data/label.service";
 import {LabelGroupService} from "../../services/data/labelgroup.service";
 import {LabelGroup} from "../../models/labelGroup.model";
 import {environment} from "../../../environments/environment";

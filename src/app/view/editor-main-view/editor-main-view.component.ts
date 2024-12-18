@@ -73,10 +73,10 @@ export class EditorMainViewComponent implements AfterViewInit, OnDestroy {
     private uiInteractionService: UiInteractionService,
     private noteService: NoteService,
     private analyticsService: AnalyticsService,
-    private undoSerivce: UndoService,
+    private undoService: UndoService,
     private copyService: CopyService,
     private logService: LogService,
-    private viewportCullSerivce: ViewportCullService,
+    private viewportCullService: ViewportCullService,
     private levelOfDetailService: LevelOfDetailService,
     private versionControlService: VersionControlService,
     private positionTransformationService: PositionTransformationService
@@ -89,10 +89,10 @@ export class EditorMainViewComponent implements AfterViewInit, OnDestroy {
       noteService,
       filterService,
       uiInteractionService,
-      undoSerivce,
+      undoService,
       copyService,
       logService,
-      viewportCullSerivce,
+      viewportCullService,
       levelOfDetailService,
       versionControlService,
       positionTransformationService
@@ -591,11 +591,11 @@ export class EditorMainViewComponent implements AfterViewInit, OnDestroy {
     );
 
     this.editorView.bindPauseUndoRecording(() => {
-      this.undoSerivce.pauseUndoRecording();
+      this.undoService.pauseUndoRecording();
     });
 
     this.editorView.bindStartUndoRecording(() => {
-      this.undoSerivce.startUndoRecording();
+      this.undoService.startUndoRecording();
     });
   }
 

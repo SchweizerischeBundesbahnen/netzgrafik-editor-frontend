@@ -32,8 +32,8 @@ export class CopyService implements OnDestroy {
     private readonly dataService: DataService,
     private readonly trainrunService: TrainrunService,
     private readonly trainrunSectionService: TrainrunSectionService,
-    private readonly nodeSerivce: NodeService,
-    private readonly noteSerivce: NoteService,
+    private readonly nodeService: NodeService,
+    private readonly noteService: NoteService,
     private readonly filterService: FilterService,
     private readonly uiInteractionService: UiInteractionService,
     private readonly undoService: UndoService,
@@ -128,7 +128,7 @@ export class CopyService implements OnDestroy {
   private filterNote(copiedNetzgrafik: NetzgrafikDto) {
     copiedNetzgrafik.freeFloatingTexts =
       copiedNetzgrafik.freeFloatingTexts.filter((text: FreeFloatingTextDto) => {
-        const note = this.noteSerivce.getNoteFromId(text.id);
+        const note = this.noteService.getNoteFromId(text.id);
         return this.filterService.filterNote(note);
       });
   }
@@ -139,7 +139,7 @@ export class CopyService implements OnDestroy {
     ) {
       // selected notes to copy
       const selNodes: Node[] = [];
-      this.nodeSerivce.getNodes().forEach((n: Node) => {
+      this.nodeService.getNodes().forEach((n: Node) => {
         if (n.selected()) {
           selNodes.push(n);
         }
@@ -161,7 +161,7 @@ export class CopyService implements OnDestroy {
       copiedNetzgrafik.freeFloatingTexts =
         copiedNetzgrafik.freeFloatingTexts.filter(
           (text: FreeFloatingTextDto) => {
-            const note: Note = this.noteSerivce.getNoteFromId(text.id);
+            const note: Note = this.noteService.getNoteFromId(text.id);
             if (note === undefined) {
               return false;
             }
@@ -202,7 +202,7 @@ export class CopyService implements OnDestroy {
     if (netzgrafik !== undefined) {
       this.undoService.pushCurrentVersion(true);
       this.dataService.insertCopyNetzgrafikDto(netzgrafik);
-      this.nodeSerivce.unselectAllNodes();
+      this.nodeService.unselectAllNodes();
     }
   }
 

@@ -2,7 +2,7 @@ import {Component, HostListener} from "@angular/core";
 import {DrawingBackgroundMouseListenerService} from "../../../services/util/drawingBackgroundMouseListener.service";
 import {TrainrunService} from "../../../../services/data/trainrun.service";
 import {Sg8RenderService} from "../../../services/sg-8-render.service";
-import {UpdateCounterTriggerSerivce} from "../../../services/util/update-counter.service";
+import {UpdateCounterTriggerService} from "../../../services/util/update-counter.service";
 
 @Component({
   selector: "sbb-drawing-background-mouse-listener",
@@ -15,7 +15,7 @@ export class DrawingBackgroundMouseListenerComponent {
   constructor(
     private drawingBackgroundMouseListenerService: DrawingBackgroundMouseListenerService,
     private readonly trainrunService: TrainrunService,
-    private readonly updateCounterTriggerSerivce: UpdateCounterTriggerSerivce,
+    private readonly updateCounterTriggerService: UpdateCounterTriggerService,
     private sg8RenderService: Sg8RenderService,
   ) {}
 
@@ -29,7 +29,7 @@ export class DrawingBackgroundMouseListenerComponent {
     event.stopImmediatePropagation();
     this.trainrunService.unselectAllTrainruns();
     this.sg8RenderService.doRender();
-    this.updateCounterTriggerSerivce.sendUpdateTrigger();
+    this.updateCounterTriggerService.sendUpdateTrigger();
     return;
   }
 
@@ -40,7 +40,7 @@ export class DrawingBackgroundMouseListenerComponent {
     if (event.buttons > 0) {
       this.isMouseMovingButtonDown = true;
     } else {
-      this.updateCounterTriggerSerivce.sendUpdateTrigger();
+      this.updateCounterTriggerService.sendUpdateTrigger();
     }
     this.drawingBackgroundMouseListenerService.onMouseMove(event);
     return;
@@ -62,7 +62,7 @@ export class DrawingBackgroundMouseListenerComponent {
     this.drawingBackgroundMouseListenerService.onMouseLeave(event);
     this.isMouseMovingButtonDown = false;
 
-    this.updateCounterTriggerSerivce.sendUpdateTrigger();
+    this.updateCounterTriggerService.sendUpdateTrigger();
 
     return;
   }

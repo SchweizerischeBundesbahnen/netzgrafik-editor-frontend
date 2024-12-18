@@ -28,7 +28,7 @@ import {FilterService} from "../../../services/ui/filter.service";
 import {
   UpdateCounterController,
   UpdateCounterHandler,
-  UpdateCounterTriggerSerivce,
+  UpdateCounterTriggerService,
 } from "../../services/util/update-counter.service";
 import {SliderChangeInfo} from "../../model/util/sliderChangeInfo";
 import {NodeService} from "../../../services/data/node.service";
@@ -77,12 +77,12 @@ export class TrainRunSectionComponent
   constructor(
     private readonly trainrunService: TrainrunService,
     private readonly trainDataService: TrainDataService,
-    private readonly nodeSerivce: NodeService,
+    private readonly nodeService: NodeService,
     private readonly timeSliderService: TimeSliderService,
     private readonly uiInteractionService: UiInteractionService,
     private readonly trainrunSectionService: TrainrunSectionService,
     private readonly filterService: FilterService,
-    private readonly updateCounterTriggerSerivce: UpdateCounterTriggerSerivce,
+    private readonly updateCounterTriggerService: UpdateCounterTriggerService,
     private readonly streckengrafikDisplayElementService: StreckengrafikDisplayElementService,
     private readonly viewBoxService: ViewBoxService,
     private readonly sg4ToggleTrackOccupierService: Sg4ToggleTrackOccupierService,
@@ -700,7 +700,7 @@ export class TrainRunSectionComponent
 
   isTimeFiltering(nodeId: number) {
     const sgTs: SgTrainrunSection = this.trainrunItem.getTrainrunSection();
-    const node = this.nodeSerivce.getNodeFromId(nodeId);
+    const node = this.nodeService.getNodeFromId(nodeId);
     const trans = node.getTransition(sgTs.trainrunSectionId);
     if (trans) {
       if (trans.getIsNonStopTransit()) {
@@ -1010,8 +1010,8 @@ export class TrainRunSectionComponent
     }
   }
 
-  getUpdateCounterTriggerSerivce(): UpdateCounterTriggerSerivce {
-    return this.updateCounterTriggerSerivce;
+  getUpdateCounterTriggerService(): UpdateCounterTriggerService {
+    return this.updateCounterTriggerService;
   }
 
   updateCounterCallback(delayedRendering = true) {

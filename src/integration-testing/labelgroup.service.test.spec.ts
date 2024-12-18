@@ -7,7 +7,7 @@ import {ResourceService} from "../app/services/data/resource.service";
 import {LogService} from "../app/logger/log.service";
 import {LogPublishersService} from "../app/logger/log.publishers.service";
 import {NoteService} from "../app/services/data/note.service";
-import {LabelService} from "../app/services/data/label.serivce";
+import {LabelService} from "../app/services/data/label.service";
 import {LabelGroupService} from "../app/services/data/labelgroup.service";
 import {NetzgrafikUnitTesting} from "./netzgrafik.unit.testing";
 import {Label} from "../app/models/label.model";

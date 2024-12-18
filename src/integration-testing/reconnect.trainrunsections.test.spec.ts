@@ -9,7 +9,7 @@ import {LogPublishersService} from "../app/logger/log.publishers.service";
 import {NetzgrafikUnitTestingReconnectTrainrunSection} from "./netzgrafik.unit.test.reconnec.trainrunsectionst";
 import {NoteService} from "../app/services/data/note.service";
 import {LabelGroupService} from "../app/services/data/labelgroup.service";
-import {LabelService} from "../app/services/data/label.serivce";
+import {LabelService} from "../app/services/data/label.service";
 import {FilterService} from "../app/services/ui/filter.service";
 import {NetzgrafikColoringService} from "../app/services/data/netzgrafikColoring.service";
 
