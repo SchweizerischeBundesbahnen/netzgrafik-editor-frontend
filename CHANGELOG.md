@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.19](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.18...netzgrafik-frontend-v2.9.19) (2024-12-18)
+
+
+### Bug Fixes
+
+* typo 'Serivce' -&gt; 'Service' ([#392](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/392)) ([1d6b811](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/1d6b81110c662d3ca1fc01207eb7ab9974b2b9fe))
+
 ## [2.9.18](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.17...netzgrafik-frontend-v2.9.18) (2024-12-17)
 
 
