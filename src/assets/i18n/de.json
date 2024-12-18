@@ -244,11 +244,11 @@
           "position": "Position",
           "close": "Schliessen"
         },
-        "trainrun-and-section-dialog" : {
+        "trainrun-and-section-dialog": {
           "filterableLabels": "Filterbare Labels",
           "trainrun-filter-tab": {
             "labels": "Labels",
-            "newLabels" : "Neues Label...",
+            "newLabels": "Neues Label...",
             "trainrunDuplicate": "Zuglauf duplizieren",
             "trainrunDelete": "Zuglauf löschen",
             "delete": "Löschen",
@@ -293,6 +293,11 @@
         "add-netzgrafik-as-copy": "Netzgrafik als Kopie einfügen",
         "merge-netzgrafik-tooltip": "Netzgrafik zusammenführen (Zugfahrten, Knoten, Kommentare)",
         "merge-netzgrafik": "Netzgrafik durch zusammenführen",
+        "align-elements-netzgrafik-title": "Elemente ausrichten",
+        "align-elements-left": "Linksbündig ausrichten",
+        "align-elements-right": "Rechtsbündig ausrichten",
+        "align-elements-top": "Oben ausrichten",
+        "align-elements-bottom": "Unten ausrichten",
         "delete": "Löschen",
         "on-clear-delete-all-non-visible-elements": "Sollen alle nicht sichtbare Elemente aus der Netzgrafik definitiv gelöscht werden?",
         "on-clear-delete-all-visible-elements": "Sollen alle sichtbare Elemente aus der Netzgrafik definitiv gelöscht werden?",
