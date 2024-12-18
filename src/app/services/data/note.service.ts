@@ -9,7 +9,7 @@ import {
 import {Vec2D} from "../../utils/vec2D";
 import {MathUtils} from "../../utils/math";
 import {NOTE_POSITION_BASIC_RASTER} from "../../view/rastering/definitions";
-import {LabelService} from "./label.serivce";
+import {LabelService} from "./label.service";
 import {FilterService} from "../ui/filter.service";
 
 @Injectable({

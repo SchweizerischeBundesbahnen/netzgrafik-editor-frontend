@@ -13,8 +13,8 @@ import {ViewportCullService} from "../ui/viewport.cull.service";
 export class PositionTransformationService {
   constructor(
     private readonly trainrunSectionService: TrainrunSectionService,
-    private readonly nodeSerivce: NodeService,
-    private readonly noteSerivce: NoteService,
+    private readonly nodeService: NodeService,
+    private readonly noteService: NoteService,
     private readonly uiInteractionService: UiInteractionService,
     private readonly viewportCullService: ViewportCullService,
   ) {
@@ -24,7 +24,7 @@ export class PositionTransformationService {
     const scaleCenterCoordinates: Vec2D = this.computeScaleCenterCoordinates(zoomCenter, windowViewboxPropertiesMapKey);
     const focalNode: Node = this.getFocalNode(scaleCenterCoordinates);
 
-    this.nodeSerivce.getNodes().forEach((n, index) => {
+    this.nodeService.getNodes().forEach((n, index) => {
       let newPos = new Vec2D(
         (n.getPositionX() - scaleCenterCoordinates.getX()) * factor + scaleCenterCoordinates.getX(),
         (n.getPositionY() - scaleCenterCoordinates.getY()) * factor + scaleCenterCoordinates.getY()
@@ -51,8 +51,8 @@ export class PositionTransformationService {
   }
 
   private getFocalNode(scaleCenterCoordinates: Vec2D): Node {
-    // get the node under the mouse cursos and update the scaleCenter
-    const focalNode = this.nodeSerivce.getNodes().find((n) =>
+    // get the node under the mouse cursor and update the scaleCenter
+    const focalNode = this.nodeService.getNodes().find((n) =>
       scaleCenterCoordinates.getX() > n.getPositionX() && scaleCenterCoordinates.getX() < (n.getPositionX() + n.getNodeWidth()) &&
       scaleCenterCoordinates.getY() > n.getPositionY() && scaleCenterCoordinates.getY() < (n.getPositionY() + n.getNodeHeight())
     );
@@ -96,8 +96,8 @@ export class PositionTransformationService {
     });
   }
 
-  private upateRendering() {
-    this.nodeSerivce.initPortOrdering();
+  private updateRendering() {
+    this.nodeService.initPortOrdering();
 
     this.trainrunSectionService.getTrainrunSections().forEach(ts => {
       ts.routeEdgeAndPlaceText();
@@ -108,7 +108,7 @@ export class PositionTransformationService {
   }
 
   scaleNetzgrafikArea(factor: number, zoomCenter: Vec2D, windowViewboxPropertiesMapKey: string) {
-    const nodes: Node[] = this.nodeSerivce.getSelectedNodes();
+    const nodes: Node[] = this.nodeService.getSelectedNodes();
 
     if (nodes.length < 2) {
       this.scaleFullNetzgrafikArea(factor, zoomCenter, windowViewboxPropertiesMapKey);
@@ -116,11 +116,11 @@ export class PositionTransformationService {
       this.scaleNetzgrafikSelectedNodesArea(factor, zoomCenter, nodes, windowViewboxPropertiesMapKey);
     }
 
-    this.upateRendering();
+    this.updateRendering();
   }
 
   alignSelectedElementsToLeftBorder() {
-    const nodes: Node[] = this.nodeSerivce.getSelectedNodes();
+    const nodes: Node[] = this.nodeService.getSelectedNodes();
 
     let leftX = undefined;
     nodes.forEach((n) => {
@@ -138,11 +138,11 @@ export class PositionTransformationService {
       });
     }
 
-    this.upateRendering();
+    this.updateRendering();
   }
 
   alignSelectedElementsToRightBorder() {
-    const nodes: Node[] = this.nodeSerivce.getSelectedNodes();
+    const nodes: Node[] = this.nodeService.getSelectedNodes();
 
     let rightX = undefined;
     nodes.forEach((n) => {
@@ -160,11 +160,11 @@ export class PositionTransformationService {
       });
     }
 
-    this.upateRendering();
+    this.updateRendering();
   }
 
   alignSelectedElementsToTopBorder() {
-    const nodes: Node[] = this.nodeSerivce.getSelectedNodes();
+    const nodes: Node[] = this.nodeService.getSelectedNodes();
 
     let topY = undefined;
     nodes.forEach((n) => {
@@ -182,11 +182,11 @@ export class PositionTransformationService {
       });
     }
 
-    this.upateRendering();
+    this.updateRendering();
   }
 
   alignSelectedElementsToBottomBorder() {
-    const nodes: Node[] = this.nodeSerivce.getSelectedNodes();
+    const nodes: Node[] = this.nodeService.getSelectedNodes();
 
     let bottomY = undefined;
     nodes.forEach((n) => {
@@ -204,7 +204,7 @@ export class PositionTransformationService {
       });
     }
 
-    this.upateRendering();
+    this.updateRendering();
   }
 
 }

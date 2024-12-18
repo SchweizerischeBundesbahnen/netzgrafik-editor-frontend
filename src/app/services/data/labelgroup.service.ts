@@ -6,7 +6,7 @@ import {
   LabelRef,
 } from "../../data-structures/business.data.structures";
 import {LabelGroup} from "../../models/labelGroup.model";
-import {LabelService} from "./label.serivce";
+import {LabelService} from "./label.service";
 import {Label} from "../../models/label.model";
 
 @Injectable({

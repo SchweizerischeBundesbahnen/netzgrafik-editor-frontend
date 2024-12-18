@@ -9,7 +9,7 @@ import {
 } from "@angular/cdk/drag-drop";
 import {NodeService} from "../../../services/data/node.service";
 import {TrainrunService} from "../../../services/data/trainrun.service";
-import {LabelService} from "../../../services/data/label.serivce";
+import {LabelService} from "../../../services/data/label.service";
 import {LabelGroupService} from "../../../services/data/labelgroup.service";
 import {FilterService} from "../../../services/ui/filter.service";
 import {LabelRef} from "../../../data-structures/business.data.structures";

@@ -11,7 +11,7 @@ import {TrainrunSection} from "../../models/trainrunsection.model";
 import {LogService} from "../../logger/log.service";
 import {LogPublishersService} from "../../logger/log.publishers.service";
 import {LabelGroupService} from "../../services/data/labelgroup.service";
-import {LabelService} from "../../services/data/label.serivce";
+import {LabelService} from "../../services/data/label.service";
 import {FilterService} from "../../services/ui/filter.service";
 import {NetzgrafikColoringService} from "../../services/data/netzgrafikColoring.service";
 import {Sg6TrackService} from "./sg-6-track.service";

@@ -15,7 +15,7 @@ import {ResourceService} from "./resource.service";
 import {BehaviorSubject, combineLatest, Observable, Subject} from "rxjs";
 import {debounceTime, map, skip, takeUntil} from "rxjs/operators";
 import {NoteService} from "./note.service";
-import {LabelService} from "./label.serivce";
+import {LabelService} from "./label.service";
 import {LabelGroupService} from "./labelgroup.service";
 import {DataMigration} from "../../utils/data-migration";
 import {FilterService} from "../ui/filter.service";

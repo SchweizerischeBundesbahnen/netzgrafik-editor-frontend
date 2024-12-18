@@ -9,7 +9,7 @@ import {Observable, merge} from "rxjs";
 import {ProjectDto} from "./api/generated";
 import {NetzgrafikDto} from "./data-structures/business.data.structures";
 import {Operation} from "./models/operation.model";
-import {LabelService} from "./services/data/label.serivce";
+import {LabelService} from "./services/data/label.service";
 import {NodeService} from "./services/data/node.service";
 import {I18nService} from "./core/i18n/i18n.service";
 

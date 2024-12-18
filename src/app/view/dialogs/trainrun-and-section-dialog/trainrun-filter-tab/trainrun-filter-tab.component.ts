@@ -12,7 +12,7 @@ import {TrainrunSectionService} from "../../../../services/data/trainrunsection.
 import {UiInteractionService} from "../../../../services/ui/ui.interaction.service";
 import {ConfirmationDialogParameter} from "../../confirmation-dialog/confirmation-dialog.component";
 import {DataService} from "../../../../services/data/data.service";
-import {LabelService} from "../../../../services/data/label.serivce";
+import {LabelService} from "../../../../services/data/label.service";
 import {LabelRef} from "../../../../data-structures/business.data.structures";
 import {LabelGroupService} from "../../../../services/data/labelgroup.service";
 import {Subject} from "rxjs";

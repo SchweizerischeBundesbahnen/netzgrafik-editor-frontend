@@ -51,7 +51,7 @@ export class PathGridComponent implements OnInit, OnDestroy, AfterViewInit {
     private readonly sgPathSliderService: Sg7PathSliderService,
     private readonly resizeService: ResizeService,
     private readonly viewBoxService: ViewBoxService,
-    private readonly nodeSerivce: NodeService,
+    private readonly nodeService: NodeService,
     private readonly cd: ChangeDetectorRef,
   ) {}
 
@@ -165,14 +165,14 @@ export class PathGridComponent implements OnInit, OnDestroy, AfterViewInit {
 
     let ret = "[ ";
     if (trackData.nodeId1 !== undefined) {
-      const node1 = this.nodeSerivce.getNodeFromId(trackData.nodeId1);
+      const node1 = this.nodeService.getNodeFromId(trackData.nodeId1);
       if (node1 !== undefined && node1) {
         ret += node1.getBetriebspunktName();
       }
     }
 
     if (trackData.nodeId2 !== undefined) {
-      const node2 = this.nodeSerivce.getNodeFromId(trackData.nodeId2);
+      const node2 = this.nodeService.getNodeFromId(trackData.nodeId2);
       if (node2 !== undefined && node2) {
         if (ret !== "") {
           ret += " , ";

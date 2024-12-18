@@ -10,7 +10,7 @@ import {TrainrunSection} from "../../models/trainrunsection.model";
 import {LogService} from "../../logger/log.service";
 import {LogPublishersService} from "../../logger/log.publishers.service";
 import {LabelGroupService} from "../data/labelgroup.service";
-import {LabelService} from "../data/label.serivce";
+import {LabelService} from "../data/label.service";
 import {NetzgrafikUnitTesting} from "../../../integration-testing/netzgrafik.unit.testing";
 import {FilterService} from "../ui/filter.service";
 import {AnalyticsService} from "../analytics/analytics.service";

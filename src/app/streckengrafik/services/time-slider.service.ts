@@ -3,7 +3,7 @@ import {BehaviorSubject, interval, Observable, Subject, take} from "rxjs";
 import {DrawingBackgroundMouseListenerService} from "./util/drawingBackgroundMouseListener.service";
 import {SliderChangeInfo} from "../model/util/sliderChangeInfo";
 import {takeUntil} from "rxjs/operators";
-import {UpdateCounterTriggerSerivce} from "./util/update-counter.service";
+import {UpdateCounterTriggerService} from "./util/update-counter.service";
 
 @Injectable({
   providedIn: "root",
@@ -29,11 +29,11 @@ export class TimeSliderService implements OnDestroy {
   private readonly destroyed$ = new Subject<void>();
 
   constructor(
-    private readonly drawingBackgroundMouseListenerSerice: DrawingBackgroundMouseListenerService,
-    private readonly updateCounterTriggerSerivce: UpdateCounterTriggerSerivce,
+    private readonly drawingBackgroundMouseListenerService: DrawingBackgroundMouseListenerService,
+    private readonly updateCounterTriggerService: UpdateCounterTriggerService,
     private readonly ngZone: NgZone,
   ) {
-    drawingBackgroundMouseListenerSerice
+    drawingBackgroundMouseListenerService
       .getMouseMoveObservable()
       .pipe(takeUntil(this.destroyed$))
       .subscribe((event: MouseEvent) => {
@@ -137,6 +137,6 @@ export class TimeSliderService implements OnDestroy {
   }
 
   stopHandleZoomPanning() {
-    this.updateCounterTriggerSerivce.sendUpdateTrigger();
+    this.updateCounterTriggerService.sendUpdateTrigger();
   }
 }

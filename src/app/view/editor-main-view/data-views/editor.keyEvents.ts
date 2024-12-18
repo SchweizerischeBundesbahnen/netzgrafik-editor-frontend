@@ -27,10 +27,10 @@ export class EditorKeyEvents {
   private editorMode: EditorMode;
 
   constructor(
-    private nodeSerivce: NodeService,
+    private nodeService: NodeService,
     private trainrunService: TrainrunService,
     private trainrunSectionService: TrainrunSectionService,
-    private noteSerivce: NoteService,
+    private noteService: NoteService,
     private filterService: FilterService,
     private uiInteractionService: UiInteractionService,
     private logService: LogService,
@@ -283,15 +283,15 @@ export class EditorKeyEvents {
   private doDuplicateNote(): boolean {
     const hoveredNoteId = this.getHoveredNoteId();
     if (hoveredNoteId !== undefined) {
-      const note = this.noteSerivce.duplicateNote(hoveredNoteId);
-      this.noteSerivce.moveNote(
+      const note = this.noteService.duplicateNote(hoveredNoteId);
+      this.noteService.moveNote(
         note.getId(),
         RASTERING_BASIC_GRID_SIZE,
         RASTERING_BASIC_GRID_SIZE,
         1,
         true,
       );
-      this.noteSerivce.unselectNote(note.getId());
+      this.noteService.unselectNote(note.getId());
       return true;
     }
     return false;
@@ -305,7 +305,7 @@ export class EditorKeyEvents {
     }
     const hoveredNodeId = this.getHoveredNodeId();
     if (hoveredNodeId !== undefined) {
-      const node = this.nodeSerivce.getNodeFromId(hoveredNodeId);
+      const node = this.nodeService.getNodeFromId(hoveredNodeId);
       this.duplicateNode(node, node.getNodeWidth(), node.getNodeHeight());
       return true;
     }
@@ -321,7 +321,7 @@ export class EditorKeyEvents {
 
     // --- Pass 1 ---- collect all selected nodes
     const collectedSelectedNodes: Node[] = [];
-    this.nodeSerivce.getNodes().forEach((n: Node) => {
+    this.nodeService.getNodes().forEach((n: Node) => {
       if (n.selected()) {
         collectedSelectedNodes.push(n);
       }
@@ -373,7 +373,7 @@ export class EditorKeyEvents {
     });
 
     // --- Pass 3 ----  duplicate all notes and calculate the max notes offset (position move to)
-    this.nodeSerivce.unselectAllNodes(false);
+    this.nodeService.unselectAllNodes(false);
     const newNodes: Node[] = [];
     let maxW = 0;
     let maxH = 0;
@@ -443,9 +443,9 @@ export class EditorKeyEvents {
     });
 
     // call update - due of disabled update (signal) in the passes 1-5
-    this.nodeSerivce.nodesUpdated();
-    this.nodeSerivce.transitionsUpdated();
-    this.nodeSerivce.connectionsUpdated();
+    this.nodeService.nodesUpdated();
+    this.nodeService.transitionsUpdated();
+    this.nodeService.connectionsUpdated();
     this.trainrunService.trainrunsUpdated();
     this.trainrunService.trainrunsUpdated();
     return true;
@@ -460,14 +460,14 @@ export class EditorKeyEvents {
 
     // --- Pass 1 ---- collect all selected nodes
     const collectedSelectedNotes: Note[] = [];
-    this.noteSerivce.getNotes().forEach((n: Note) => {
+    this.noteService.getNotes().forEach((n: Note) => {
       if (n.selected()) {
         collectedSelectedNotes.push(n);
       }
     });
 
     // --- Pass 2 ----  duplicate all notes and calculate the max notes offset (position move to)
-    this.noteSerivce.unselectAllNotes(false);
+    this.noteService.unselectAllNotes(false);
     const newNotes: Note[] = [];
     let maxW = 0;
     let maxH = 0;
@@ -476,8 +476,8 @@ export class EditorKeyEvents {
       maxH = Math.max(n.getHeight(), maxH);
     });
     collectedSelectedNotes.forEach((n: Note) => {
-      const cNode = this.noteSerivce.duplicateNote(n.getId());
-      this.noteSerivce.moveNote(
+      const cNode = this.noteService.duplicateNote(n.getId());
+      this.noteService.moveNote(
         cNode.getId(),
         maxW + RASTERING_BASIC_GRID_SIZE,
         maxH + RASTERING_BASIC_GRID_SIZE,
@@ -494,7 +494,7 @@ export class EditorKeyEvents {
     });
 
     // call update - due of disabled update (signal) in the passes 1-5
-    this.noteSerivce.notesUpdated();
+    this.noteService.notesUpdated();
     return true;
   }
 
@@ -504,23 +504,23 @@ export class EditorKeyEvents {
     nodeHeight: number,
     enforceUpdate = true,
   ): Node {
-    const newNode = this.nodeSerivce.duplicateNode(node.getId());
-    this.nodeSerivce.changeNodePosition(
+    const newNode = this.nodeService.duplicateNode(node.getId());
+    this.nodeService.changeNodePosition(
       newNode.getId(),
       newNode.getPositionX() + nodeWidth + RASTERING_BASIC_GRID_SIZE,
       newNode.getPositionY() + nodeHeight + RASTERING_BASIC_GRID_SIZE,
       true,
       enforceUpdate,
     );
-    this.nodeSerivce.unselectNode(newNode.getId(), enforceUpdate);
+    this.nodeService.unselectNode(newNode.getId(), enforceUpdate);
     return newNode;
   }
 
   private onKeyPressedEscape(): boolean {
     this.trainrunService.unselectAllTrainruns();
     if (this.editorMode === EditorMode.MultiNodeMoving) {
-      this.nodeSerivce.unselectAllNodes();
-      this.noteSerivce.unselectAllNotes();
+      this.nodeService.unselectAllNodes();
+      this.noteService.unselectAllNotes();
     }
     return true;
   }
@@ -532,10 +532,10 @@ export class EditorKeyEvents {
       this.uiInteractionService.getEditorMode() === EditorMode.NetzgrafikEditing
     ) {
       this.uiInteractionService.setEditorMode(EditorMode.MultiNodeMoving);
-      this.noteSerivce.getNotes().forEach((n: Note) => n.select());
-      this.nodeSerivce.getNodes().forEach((n: Node) => n.select());
-      this.noteSerivce.notesUpdated();
-      this.nodeSerivce.nodesUpdated();
+      this.noteService.getNotes().forEach((n: Note) => n.select());
+      this.nodeService.getNodes().forEach((n: Node) => n.select());
+      this.noteService.notesUpdated();
+      this.nodeService.nodesUpdated();
     }
     return true;
   }
@@ -552,14 +552,14 @@ export class EditorKeyEvents {
     const mousePosition = this.svgMouseController.getLastMousePosition();
     const hoveredNodeId = this.getHoveredNodeId();
     if (hoveredNodeId !== undefined) {
-      this.nodeSerivce.addNodeWithPosition(
+      this.nodeService.addNodeWithPosition(
         mousePosition.getX(),
         mousePosition.getY(),
       );
       return true;
     }
 
-    this.nodeSerivce.addNodeWithPosition(
+    this.nodeService.addNodeWithPosition(
       mousePosition.getX(),
       mousePosition.getY(),
     );
@@ -568,7 +568,7 @@ export class EditorKeyEvents {
 
   private deleteTrainrunsAndEmptyNodesIfFilteringActive() {
     let visibleTrainrunSections: number[] = [];
-    this.nodeSerivce.getNodes().forEach((n: Node) => {
+    this.nodeService.getNodes().forEach((n: Node) => {
       if (n.selected()) {
         n.getPorts().forEach((p: Port) => {
           const trainrunSection = p.getTrainrunSection();
@@ -589,13 +589,13 @@ export class EditorKeyEvents {
     });
 
     let selectedNodeDeleted = false;
-    this.nodeSerivce.getNodes().forEach((n: Node) => {
+    this.nodeService.getNodes().forEach((n: Node) => {
       if (n.selected()) {
         if (n.getPorts().length === 0) {
           if (n.selected()) {
             selectedNodeDeleted = true;
           }
-          this.nodeSerivce.deleteNode(n.getId(), false);
+          this.nodeService.deleteNode(n.getId(), false);
         }
       }
     });
@@ -609,10 +609,10 @@ export class EditorKeyEvents {
 
   private removeAllSelectedNodes() {
     let selectedNodeDeleted = false;
-    this.nodeSerivce.getNodes().forEach((n: Node) => {
+    this.nodeService.getNodes().forEach((n: Node) => {
       if (n.selected()) {
         selectedNodeDeleted = true;
-        this.nodeSerivce.deleteNode(n.getId(), false);
+        this.nodeService.deleteNode(n.getId(), false);
       }
     });
 
@@ -622,9 +622,9 @@ export class EditorKeyEvents {
   }
 
   private removeAllSelectedNotes() {
-    this.noteSerivce.getNotes().forEach((n: Note) => {
+    this.noteService.getNotes().forEach((n: Note) => {
       if (n.selected()) {
-        this.noteSerivce.deleteNote(n.getId(), false);
+        this.noteService.deleteNote(n.getId(), false);
       }
     });
   }
@@ -635,10 +635,10 @@ export class EditorKeyEvents {
     }
     const selectedTrainrunSectionId = this.getSelectedTrainSectionId();
 
-    const connections = this.nodeSerivce.getAllSelectedConnections();
+    const connections = this.nodeService.getAllSelectedConnections();
     if (connections.length > 0) {
       connections.forEach((connection: Connection) => {
-        const node = this.nodeSerivce
+        const node = this.nodeService
           .getNodes()
           .find(
             (n: Node) =>
@@ -647,7 +647,7 @@ export class EditorKeyEvents {
                 .find((c) => connection.getId() === c.getId()) !== undefined,
           );
         if (node !== undefined) {
-          this.nodeSerivce.removeConnectionFromNode(
+          this.nodeService.removeConnectionFromNode(
             node.getId(),
             connection.getId(),
           );
@@ -667,11 +667,11 @@ export class EditorKeyEvents {
 
       /* handle Notes */
       this.removeAllSelectedNotes();
-      this.noteSerivce.notesUpdated();
+      this.noteService.notesUpdated();
 
       this.uiInteractionService.setEditorMode(EditorMode.NetzgrafikEditing);
-      this.nodeSerivce.unselectAllNodes();
-      this.noteSerivce.unselectAllNotes();
+      this.nodeService.unselectAllNodes();
+      this.noteService.unselectAllNotes();
       return true;
     }
 
@@ -684,8 +684,8 @@ export class EditorKeyEvents {
 
     const hoveredNodeId = this.getHoveredNodeId();
     if (hoveredNodeId !== undefined) {
-      const selNodeDelete = this.nodeSerivce.isNodeSelected(hoveredNodeId);
-      this.nodeSerivce.deleteNode(hoveredNodeId);
+      const selNodeDelete = this.nodeService.isNodeSelected(hoveredNodeId);
+      this.nodeService.deleteNode(hoveredNodeId);
       if (selNodeDelete) {
         this.uiInteractionService.closeNodeStammdaten();
       }
@@ -694,7 +694,7 @@ export class EditorKeyEvents {
 
     const hoveredNoteId = this.getHoveredNoteId();
     if (hoveredNoteId !== undefined) {
-      this.noteSerivce.deleteNote(hoveredNoteId);
+      this.noteService.deleteNote(hoveredNoteId);
       return true;
     }
 
@@ -705,8 +705,8 @@ export class EditorKeyEvents {
   private netzgrafikElementsUpdated() {
     this.trainrunSectionService.trainrunSectionsUpdated();
     this.trainrunService.trainrunsUpdated();
-    this.nodeSerivce.transitionsUpdated();
-    this.nodeSerivce.connectionsUpdated();
-    this.nodeSerivce.nodesUpdated();
+    this.nodeService.transitionsUpdated();
+    this.nodeService.connectionsUpdated();
+    this.nodeService.nodesUpdated();
   }
 }
