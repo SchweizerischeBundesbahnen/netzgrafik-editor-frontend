@@ -18,7 +18,7 @@ import {ResourceService} from "../../../services/data/resource.service";
 import {Resource} from "../../../models/resource.model";
 import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
-import {LabelService} from "../../../services/data/label.serivce";
+import {LabelService} from "../../../services/data/label.service";
 import {LabelGroupService} from "../../../services/data/labelgroup.service";
 import {SbbChipEvent, SbbChipInputEvent} from "@sbb-esta/angular/chips";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";

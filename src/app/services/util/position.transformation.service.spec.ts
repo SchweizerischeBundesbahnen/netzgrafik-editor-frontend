@@ -8,7 +8,7 @@ import {NoteService} from "../../services/data/note.service";
 import {Node} from "../../models/node.model";
 import {TrainrunSection} from "../../models/trainrunsection.model";
 import {LabelGroupService} from "../../services/data/labelgroup.service";
-import {LabelService} from "../../services/data/label.serivce";
+import {LabelService} from "../data/label.service";
 import {NetzgrafikColoringService} from "../../services/data/netzgrafikColoring.service";
 import {LogService} from "../../logger/log.service";
 import {LogPublishersService} from "../../logger/log.publishers.service";
@@ -103,7 +103,7 @@ describe("PositionTransformationService", () => {
       loadPerlenketteService,
     );
 
-    const viewportCullSerivce = new ViewportCullService(
+    const viewportCullService = new ViewportCullService(
       uiInteractionService,
       nodeService,
       noteService,
@@ -115,7 +115,7 @@ describe("PositionTransformationService", () => {
       nodeService,
       noteService,
       uiInteractionService,
-      viewportCullSerivce
+      viewportCullService
     );
   });
 

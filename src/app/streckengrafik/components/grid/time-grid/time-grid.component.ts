@@ -15,7 +15,7 @@ import {ViewBoxService} from "../../../services/util/view-box.service";
 import {
   UpdateCounterController,
   UpdateCounterHandler,
-  UpdateCounterTriggerSerivce,
+  UpdateCounterTriggerService,
 } from "../../../services/util/update-counter.service";
 
 @Component({
@@ -42,7 +42,7 @@ export class TimeGridComponent
   constructor(
     private timeSliderService: TimeSliderService,
     private readonly viewBoxService: ViewBoxService,
-    private readonly updateCounterTriggerSerivce: UpdateCounterTriggerSerivce,
+    private readonly updateCounterTriggerService: UpdateCounterTriggerService,
     private readonly cd: ChangeDetectorRef,
   ) {}
 
@@ -134,8 +134,8 @@ export class TimeGridComponent
     }
   }
 
-  getUpdateCounterTriggerSerivce(): UpdateCounterTriggerSerivce {
-    return this.updateCounterTriggerSerivce;
+  getUpdateCounterTriggerService(): UpdateCounterTriggerService {
+    return this.updateCounterTriggerService;
   }
 
   getCurrentUpdateCounter(): number {

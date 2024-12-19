@@ -18,7 +18,7 @@ import {ResizeChangeInfo} from "../model/util/resizeChangeInfo";
 import {ResizeService} from "../services/util/resize.service";
 import {SliderChangeInfo} from "../model/util/sliderChangeInfo";
 import {TimeSliderService} from "../services/time-slider.service";
-import {UpdateCounterTriggerSerivce} from "../services/util/update-counter.service";
+import {UpdateCounterTriggerService} from "../services/util/update-counter.service";
 import {Sg4ToggleTrackOccupierService} from "../services/sg-4-toggle-track-occupier.service";
 import {
   StreckengrafikDisplayElementService
@@ -56,7 +56,7 @@ export class StreckengrafikComponent
     private readonly timeSliderService: TimeSliderService,
     private readonly viewBoxService: ViewBoxService,
     private readonly sg4ToggleTrackOccupierService: Sg4ToggleTrackOccupierService,
-    private readonly updateCounterTriggerSerivce: UpdateCounterTriggerSerivce,
+    private readonly updateCounterTriggerService: UpdateCounterTriggerService,
     private readonly cd: ChangeDetectorRef,
     private resizeService: ResizeService,
     private streckengrafikDisplayElementService: StreckengrafikDisplayElementService,

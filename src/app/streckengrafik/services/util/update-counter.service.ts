@@ -3,7 +3,7 @@ import {Directive, Injectable, OnDestroy} from "@angular/core";
 export interface UpdateCounterHandler {
   updateCounterCallback: () => void;
   getCurrentUpdateCounter: () => number;
-  getUpdateCounterTriggerSerivce: () => UpdateCounterTriggerSerivce;
+  getUpdateCounterTriggerService: () => UpdateCounterTriggerService;
 }
 
 @Directive()
@@ -13,7 +13,7 @@ export class UpdateCounterController implements OnDestroy {
     private updateCounterHandler: UpdateCounterHandler,
   ) {
     this.updateCounterHandler
-      .getUpdateCounterTriggerSerivce()
+      .getUpdateCounterTriggerService()
       .registerUpdateHandler(updateCounterHandler, counter);
   }
 
@@ -23,7 +23,7 @@ export class UpdateCounterController implements OnDestroy {
 
   clear() {
     this.updateCounterHandler
-      .getUpdateCounterTriggerSerivce()
+      .getUpdateCounterTriggerService()
       .clear(this.updateCounterHandler);
   }
 }
@@ -31,7 +31,7 @@ export class UpdateCounterController implements OnDestroy {
 @Injectable({
   providedIn: "root",
 })
-export class UpdateCounterTriggerSerivce {
+export class UpdateCounterTriggerService {
   private updateMap = new Map<UpdateCounterHandler, number>();
 
   constructor() {}

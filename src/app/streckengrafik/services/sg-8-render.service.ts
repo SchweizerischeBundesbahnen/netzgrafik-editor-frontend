@@ -5,7 +5,7 @@ import {Sg7PathSliderService} from "./sg-7-path-slider.service";
 import {takeUntil} from "rxjs/operators";
 import {SgTrainrun} from "../model/streckengrafik-model/sg-trainrun";
 import {SgStopService} from "./sg-stop-.service";
-import {UpdateCounterTriggerSerivce} from "./util/update-counter.service";
+import {UpdateCounterTriggerService} from "./util/update-counter.service";
 
 @Injectable({
   providedIn: "root",
@@ -25,7 +25,7 @@ export class Sg8RenderService implements OnDestroy {
 
   constructor(
     private readonly sg7PathSliderService: Sg7PathSliderService,
-    private readonly updateCounterTriggerSerivce: UpdateCounterTriggerSerivce,
+    private readonly updateCounterTriggerService: UpdateCounterTriggerService,
     private readonly sgStopService: SgStopService,
   ) {
     this.sg7PathSliderService
@@ -58,7 +58,7 @@ export class Sg8RenderService implements OnDestroy {
     if (this.sgStopService.isGO(this.selectedTrainrun.counter)) {
       this.trainrunSubject.next(this.selectedTrainrun.trainruns);
       this.selectedTrainrunSubject.next(this.selectedTrainrun);
-      this.updateCounterTriggerSerivce.sendUpdateTrigger();
+      this.updateCounterTriggerService.sendUpdateTrigger();
     }
   }
 }

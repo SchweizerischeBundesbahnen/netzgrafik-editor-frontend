@@ -13,7 +13,7 @@ import {LogPublishersService} from "../app/logger/log.publishers.service";
 import {NetzgrafikUnitTesting} from "./netzgrafik.unit.testing";
 import {NetzgrafikUnitTestingTransition} from "./netzgrafik.unit.testing.transition";
 import {NoteService} from "../app/services/data/note.service";
-import {LabelService} from "../app/services/data/label.serivce";
+import {LabelService} from "../app/services/data/label.service";
 import {LabelGroupService} from "../app/services/data/labelgroup.service";
 import {LabelRef} from "../app/data-structures/business.data.structures";
 import {FilterService} from "../app/services/ui/filter.service";

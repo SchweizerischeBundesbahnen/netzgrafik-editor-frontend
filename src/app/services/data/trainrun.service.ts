@@ -18,7 +18,7 @@ import {TrainrunSection} from "../../models/trainrunsection.model";
 import {GeneralViewFunctions} from "../../view/util/generalViewFunctions";
 import {NonStopTrainrunIterator, TrainrunIterator,} from "../util/trainrun.iterator";
 import {LogService} from "../../logger/log.service";
-import {LabelService} from "./label.serivce";
+import {LabelService} from "./label.service";
 import {FilterService} from "../ui/filter.service";
 import {Transition} from "../../models/transition.model";
 import {Port} from "../../models/port.model";

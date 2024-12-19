@@ -19,7 +19,7 @@ import {
 } from "../../data-structures/business.data.structures";
 import {downloadBlob} from "../util/download-utils";
 import {map} from "rxjs/operators";
-import {LabelService} from "../../services/data/label.serivce";
+import {LabelService} from "../../services/data/label.service";
 import {NetzgrafikColoringService} from "../../services/data/netzgrafikColoring.service";
 import {ViewportCullService} from "../../services/ui/viewport.cull.service";
 import {LevelOfDetailService} from "../../services/ui/level.of.detail.service";

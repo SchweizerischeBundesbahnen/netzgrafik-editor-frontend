@@ -3,7 +3,7 @@ import {FilterService} from "../../../services/ui/filter.service";
 import {LabelRef} from "../../../data-structures/business.data.structures";
 import {DataService} from "../../../services/data/data.service";
 import {UiInteractionService} from "../../../services/ui/ui.interaction.service";
-import {LabelService} from "../../../services/data/label.serivce";
+import {LabelService} from "../../../services/data/label.service";
 import {Label} from "../../../models/label.model";
 import {takeUntil} from "rxjs/operators";
 import {LabelGroupService} from "../../../services/data/labelgroup.service";

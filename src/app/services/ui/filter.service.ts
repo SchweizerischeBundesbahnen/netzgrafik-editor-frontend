@@ -9,7 +9,7 @@ import {
 import {BehaviorSubject, Subject} from "rxjs";
 import {DataService} from "../data/data.service";
 import {Node} from "../../models/node.model";
-import {LabelService} from "../data/label.serivce";
+import {LabelService} from "../data/label.service";
 import {Label} from "../../models/label.model";
 import {LabelGroupService} from "../data/labelgroup.service";
 import {LabelGroup, LogicalFilterOperator} from "../../models/labelGroup.model";

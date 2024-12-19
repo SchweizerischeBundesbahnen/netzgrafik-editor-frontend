@@ -8,7 +8,7 @@ import {
   Output,
 } from "@angular/core";
 import {DataService} from "../../../../services/data/data.service";
-import {LabelService} from "../../../../services/data/label.serivce";
+import {LabelService} from "../../../../services/data/label.service";
 import {LabelRef} from "../../../../data-structures/business.data.structures";
 import {LabelGroupService} from "../../../../services/data/labelgroup.service";
 import {Subject} from "rxjs";

@@ -11,7 +11,7 @@ import * as d3 from "d3";
 import {
   UpdateCounterController,
   UpdateCounterHandler,
-  UpdateCounterTriggerSerivce,
+  UpdateCounterTriggerService,
 } from "../../services/util/update-counter.service";
 
 @Component({
@@ -48,7 +48,7 @@ export class TrainRunItemComponent
   constructor(
     private readonly timeSliderService: TimeSliderService,
     private readonly viewBoxService: ViewBoxService,
-    private readonly updateCounterTriggerSerivce: UpdateCounterTriggerSerivce,
+    private readonly updateCounterTriggerService: UpdateCounterTriggerService,
     private readonly cd: ChangeDetectorRef,
     private readonly ngZone: NgZone,
   ) {
@@ -184,8 +184,8 @@ export class TrainRunItemComponent
     d3.selectAll(key).raise();
   }
 
-  getUpdateCounterTriggerSerivce(): UpdateCounterTriggerSerivce {
-    return this.updateCounterTriggerSerivce;
+  getUpdateCounterTriggerService(): UpdateCounterTriggerService {
+    return this.updateCounterTriggerService;
   }
 
   updateCounterCallback() {
