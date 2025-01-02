@@ -541,14 +541,14 @@ export class EditorToolsViewComponent {
     const odNodes = selectedNodes.length > 0 ? selectedNodes : this.nodeService.getVisibleNodes();
     const trainruns = this.trainrunService.getVisibleTrainruns();
 
-    const edges = buildEdges(nodes, odNodes, trainruns, connectionPenalty, this.trainrunService, timeLimit);
+    const [edges, tsSuccessor] = buildEdges(nodes, odNodes, trainruns, connectionPenalty, this.trainrunService, timeLimit);
 
     const neighbors = computeNeighbors(edges);
     const vertices = topoSort(neighbors);
     // In theory we could parallelize the pathfindings, but the overhead might be too big.
     const res = new Map<string, [number, number]>();
     odNodes.forEach((origin) => {
-      computeShortestPaths(origin.getId(), neighbors, vertices).forEach((value, key) => {
+      computeShortestPaths(origin.getId(), neighbors, vertices, tsSuccessor).forEach((value, key) => {
         res.set([origin.getId(), key].join(","), value);
       });
     });

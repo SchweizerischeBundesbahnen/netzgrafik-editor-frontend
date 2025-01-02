@@ -162,6 +162,8 @@ export const computeShortestPaths = (
   vertices: Vertex[],
   tsSuccessor: Map<number, number>,
 ): Map<number, [number, number]> => {
+  const tsPredecessor = new Map<number, number>();
+  tsSuccessor.forEach((v, k) => {tsPredecessor.set(v, k);});
   const res = new Map<number, [number, number]>();
   const dist = new Map<string, [number, number]>();
   let started = false;
@@ -203,11 +205,15 @@ export const computeShortestPaths = (
         alt < dist.get(neighborKey)[0]
       ) {
         let connection = 0;
+        let successor = tsSuccessor;
+        if (vertex.trainrunId < 0) {
+          successor = tsPredecessor;
+        }
         if (
           vertex.trainrunId !== undefined &&
           neighbor.trainrunId !== undefined &&
           (vertex.trainrunId !== neighbor.trainrunId || 
-            (tsSuccessor.get(vertex.trainrunSectionId) !== neighbor.trainrunSectionId && vertex.isDeparture === false)
+            (successor.get(vertex.trainrunSectionId) !== neighbor.trainrunSectionId && vertex.isDeparture === false)
           )
         ) {
           connection = 1;
@@ -311,7 +317,7 @@ const buildSectionEdgesFromIterator = (
       const edge = new Edge(newV1, newV2, newV2.time - newV1.time);
       edges.push(edge);
     }
-    if (previousTsId !== -1) {
+    if (previousTsId !== -1 && !reverseIterator) {
       tsSuccessor.set(previousTsId, tsId);
     }
     previousTsId = tsId;
@@ -362,6 +368,8 @@ const buildConnectionEdges = (
   connectionPenalty: number,
   tsSuccessor: Map<number, number>,
 ): Edge[] => {
+  const tsPredecessor = new Map<number, number>();
+  tsSuccessor.forEach((v, k) => {tsPredecessor.set(v, k);});
   const edges = [];
   nodes.forEach((node) => {
     const departuresByTrainrun = verticesDepartureByTrainrunByNode.get(
@@ -380,7 +388,11 @@ const buildConnectionEdges = (
           departuresByTrainrun.forEach((departures, departureTrainrunId) => {
             let minDepartureTime = arrival.time;
             const [departureTrId, departureTsId] = JSON.parse(departureTrainrunId);
-            const connection = arrivalTrId !== departureTrId || tsSuccessor.get(arrivalTsId) !== departureTsId;
+            let successor = tsSuccessor;
+            if (arrivalTrId < 0) {
+              successor = tsPredecessor;
+            }
+            const connection = arrivalTrId !== departureTrId || successor.get(arrivalTsId) !== departureTsId;
             if (connection) {
               minDepartureTime += node.getConnectionTime();
             }
