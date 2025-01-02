@@ -88,7 +88,7 @@ describe("Origin Destination CSV Test", () => {
     const timeLimit = 60 * 10;
 
     const start = new Date().getTime();
-    const edges = buildEdges(
+    const [edges, tsSuccessor] = buildEdges(
       nodes,
       nodes,
       trainruns,
@@ -102,7 +102,7 @@ describe("Origin Destination CSV Test", () => {
 
     const res = new Map<string, [number, number]>();
     nodes.forEach((origin) => {
-      computeShortestPaths(origin.getId(), neighbors, vertices).forEach(
+      computeShortestPaths(origin.getId(), neighbors, vertices, tsSuccessor).forEach(
         (value, key) => {
           res.set([origin.getId(), key].join(","), value);
         },
@@ -132,6 +132,20 @@ describe("Origin Destination CSV Test", () => {
         ["16,17", [1, 0]],
         ["17,15", [4, 0]],
         ["17,16", [1, 0]],
+        // Making sure we consider connections in H -> I -> J -> I -> K.
+        ["1,7", [1, 0]],
+        ["1,2", [1, 0]],
+        ["1,4", [1, 0]],
+        ["2,7", [15, 1]],
+        ["2,4", [4, 0]],
+        ["2,1", [1, 0]],
+        ["4,7", [8, 0]],
+        // FIXME
+        ["4,2", [23, 1]],
+        ["4,1", [1, 0]],
+        ["7,2", [15, 1]],
+        ["7,4", [8, 0]],
+        ["7,1", [1, 0]],
       ]),
     );
     // This should be reasonably fast, likely less than 10ms.
@@ -150,7 +164,7 @@ describe("Origin Destination CSV Test", () => {
     const connectionPenalty = 5;
     const timeLimit = 60 * 10;
 
-    const edges = buildEdges(
+    const [edges, tsSuccessor] = buildEdges(
       nodes,
       odNodes,
       trainruns,
@@ -164,7 +178,7 @@ describe("Origin Destination CSV Test", () => {
 
     const res = new Map<string, [number, number]>();
     nodes.forEach((origin) => {
-      computeShortestPaths(origin.getId(), neighbors, vertices).forEach(
+      computeShortestPaths(origin.getId(), neighbors, vertices, tsSuccessor).forEach(
         (value, key) => {
           res.set([origin.getId(), key].join(","), value);
         },
@@ -182,13 +196,14 @@ describe("Origin Destination CSV Test", () => {
 
   it("simple path unit test", () => {
     const v1 = new Vertex(0, true);
-    const v2 = new Vertex(0, true, 0, 0);
-    const v3 = new Vertex(1, false, 15, 0);
+    const v2 = new Vertex(0, true, 0, 0, 0);
+    const v3 = new Vertex(1, false, 15, 0, 0);
     const v4 = new Vertex(1, false);
     const e1 = new Edge(v1, v2, 0);
     const e2 = new Edge(v2, v3, 15);
     const e3 = new Edge(v3, v4, 0);
     const edges = [e1, e2, e3];
+    const tsSuccessor = new Map<number, number>();
 
     const neighbors = computeNeighbors(edges);
 
@@ -214,7 +229,7 @@ describe("Origin Destination CSV Test", () => {
       expect(v1Index).toBeLessThan(v2Index);
     });
 
-    const distances0 = computeShortestPaths(0, neighbors, topoVertices);
+    const distances0 = computeShortestPaths(0, neighbors, topoVertices, tsSuccessor);
 
     expect(distances0).toHaveSize(1);
     expect(distances0.get(1)).toEqual([15, 0]);
@@ -223,10 +238,10 @@ describe("Origin Destination CSV Test", () => {
   it("connection unit test", () => {
     // trainrun 0
     const v1 = new Vertex(0, true);
-    const v2 = new Vertex(0, true, 0, 0);
-    const v3 = new Vertex(1, false, 15, 0);
-    const v4 = new Vertex(1, true, 16, 0);
-    const v5 = new Vertex(2, false, 30, 0);
+    const v2 = new Vertex(0, true, 0, 0, 0);
+    const v3 = new Vertex(1, false, 15, 0, 0);
+    const v4 = new Vertex(1, true, 16, 0, 1);
+    const v5 = new Vertex(2, false, 30, 0, 1);
     const v6 = new Vertex(2, false);
     const e1 = new Edge(v1, v2, 0);
     const e2 = new Edge(v2, v3, 15);
@@ -235,8 +250,8 @@ describe("Origin Destination CSV Test", () => {
     const e5 = new Edge(v5, v6, 0);
     // trainrun 1
     const v7 = new Vertex(3, true);
-    const v8 = new Vertex(3, true, 0, 1);
-    const v9 = new Vertex(1, false, 10, 1);
+    const v8 = new Vertex(3, true, 0, 1, 2);
+    const v9 = new Vertex(1, false, 10, 1, 2);
     const e6 = new Edge(v7, v8, 0);
     const e7 = new Edge(v8, v9, 10);
     // connection
@@ -248,6 +263,7 @@ describe("Origin Destination CSV Test", () => {
     const v11 = new Vertex(1, true);
     const e11 = new Edge(v11, v4, 0);
     const edges = [e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11];
+    const tsSuccessor = new Map<number, number>([[0, 1]]);
 
     const neighbors = computeNeighbors(edges);
     expect(neighbors).toHaveSize(9);
@@ -273,16 +289,16 @@ describe("Origin Destination CSV Test", () => {
       expect(v1Index).toBeLessThan(v2Index);
     });
 
-    const distances0 = computeShortestPaths(0, neighbors, topoVertices);
+    const distances0 = computeShortestPaths(0, neighbors, topoVertices, tsSuccessor);
     expect(distances0).toHaveSize(2);
     expect(distances0.get(1)).toEqual([15, 0]);
     expect(distances0.get(2)).toEqual([30, 0]);
 
-    const distances1 = computeShortestPaths(1, neighbors, topoVertices);
+    const distances1 = computeShortestPaths(1, neighbors, topoVertices, tsSuccessor);
     expect(distances1).toHaveSize(1);
     expect(distances1.get(2)).toEqual([14, 0]);
 
-    const distances3 = computeShortestPaths(3, neighbors, topoVertices);
+    const distances3 = computeShortestPaths(3, neighbors, topoVertices, tsSuccessor);
     expect(distances3).toHaveSize(2);
     expect(distances3.get(1)).toEqual([10, 0]);
     // connection
