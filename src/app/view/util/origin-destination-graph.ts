@@ -14,7 +14,8 @@ export class Vertex {
     public time?: number,
     // Negative trainrun ids are used for reverse directions.
     public trainrunId?: number,
-    // FIXME
+    // In addition to the trainrunId, the trainrunSectionId allows us to check for connections
+    // (especially useful for trains going back to a previous node).
     public trainrunSectionId?: number,
   ) {}
 }
@@ -29,6 +30,8 @@ export class Edge {
   ) {}
 }
 
+// In addition to edges, return a map of trainrunSection ids to their successor
+// (in the forward direction), so we can check for connections.
 export const buildEdges = (
   nodes: Node[],
   odNodes: Node[],
@@ -37,9 +40,14 @@ export const buildEdges = (
   trainrunService: TrainrunService,
   timeLimit: number,
 ): [Edge[], Map<number, number>] => {
-  const [sectionEdges, tsSuccessor] = buildSectionEdges(trainruns, trainrunService, timeLimit);
+  const [sectionEdges, tsSuccessor] = buildSectionEdges(
+    trainruns,
+    trainrunService,
+    timeLimit,
+  );
   let edges = sectionEdges;
 
+  // Both trainrun and trainrunSection ids are encoded in JSON keys.
   const verticesDepartureByTrainrunByNode = new Map<
     number,
     Map<string, Vertex[]>
@@ -60,29 +68,31 @@ export const buildEdges = (
     const departuresByTrainrun = verticesDepartureByTrainrunByNode.get(
       src.nodeId,
     );
+    const srcKey = JSON.stringify([src.trainrunId, src.trainrunSectionId]);
     if (departuresByTrainrun === undefined) {
       verticesDepartureByTrainrunByNode.set(
         src.nodeId,
-        new Map<string, Vertex[]>([[JSON.stringify([src.trainrunId, src.trainrunSectionId]), [src]]]),
+        new Map<string, Vertex[]>([[srcKey, [src]]]),
       );
     } else {
-      const departures = departuresByTrainrun.get(JSON.stringify([src.trainrunId, src.trainrunSectionId]));
+      const departures = departuresByTrainrun.get(srcKey);
       if (departures === undefined) {
-        departuresByTrainrun.set(JSON.stringify([src.trainrunId, src.trainrunSectionId]), [src]);
+        departuresByTrainrun.set(srcKey, [src]);
       } else {
         departures.push(src);
       }
     }
     const arrivalsByTrainrun = verticesArrivalByTrainrunByNode.get(tgt.nodeId);
+    const tgtKey = JSON.stringify([tgt.trainrunId, tgt.trainrunSectionId]);
     if (arrivalsByTrainrun === undefined) {
       verticesArrivalByTrainrunByNode.set(
         tgt.nodeId,
-        new Map<string, Vertex[]>([[JSON.stringify([tgt.trainrunId, tgt.trainrunSectionId]), [tgt]]]),
+        new Map<string, Vertex[]>([[tgtKey, [tgt]]]),
       );
     } else {
-      const arrivals = arrivalsByTrainrun.get(JSON.stringify([tgt.trainrunId, tgt.trainrunSectionId]));
+      const arrivals = arrivalsByTrainrun.get(tgtKey);
       if (arrivals === undefined) {
-        arrivalsByTrainrun.set(JSON.stringify([tgt.trainrunId, tgt.trainrunSectionId]), [tgt]);
+        arrivalsByTrainrun.set(tgtKey, [tgt]);
       } else {
         arrivals.push(tgt);
       }
@@ -163,7 +173,9 @@ export const computeShortestPaths = (
   tsSuccessor: Map<number, number>,
 ): Map<number, [number, number]> => {
   const tsPredecessor = new Map<number, number>();
-  tsSuccessor.forEach((v, k) => {tsPredecessor.set(v, k);});
+  tsSuccessor.forEach((v, k) => {
+    tsPredecessor.set(v, k);
+  });
   const res = new Map<number, [number, number]>();
   const dist = new Map<string, [number, number]>();
   let started = false;
@@ -212,9 +224,10 @@ export const computeShortestPaths = (
         if (
           vertex.trainrunId !== undefined &&
           neighbor.trainrunId !== undefined &&
-          (vertex.trainrunId !== neighbor.trainrunId || 
-            (successor.get(vertex.trainrunSectionId) !== neighbor.trainrunSectionId && vertex.isDeparture === false)
-          )
+          (vertex.trainrunId !== neighbor.trainrunId ||
+            (successor.get(vertex.trainrunSectionId) !==
+              neighbor.trainrunSectionId &&
+              vertex.isDeparture === false))
         ) {
           connection = 1;
         }
@@ -239,14 +252,28 @@ const buildSectionEdges = (
       console.log("Ignoring trainrun (no root found): ", trainrun.getId());
       return;
     }
-    edges.push(...buildSectionEdgesFromIterator(tsIterator, false, timeLimit, tsSuccessor));
+    edges.push(
+      ...buildSectionEdgesFromIterator(
+        tsIterator,
+        false,
+        timeLimit,
+        tsSuccessor,
+      ),
+    );
     // Don't forget the reverse direction.
     const ts = tsIterator.current().trainrunSection;
     const nextIterator = trainrunService.getIterator(
       tsIterator.current().node,
       ts,
     );
-    edges.push(...buildSectionEdgesFromIterator(nextIterator, true, timeLimit, tsSuccessor));
+    edges.push(
+      ...buildSectionEdgesFromIterator(
+        nextIterator,
+        true,
+        timeLimit,
+        tsSuccessor,
+      ),
+    );
   });
   return [edges, tsSuccessor];
 };
@@ -369,7 +396,9 @@ const buildConnectionEdges = (
   tsSuccessor: Map<number, number>,
 ): Edge[] => {
   const tsPredecessor = new Map<number, number>();
-  tsSuccessor.forEach((v, k) => {tsPredecessor.set(v, k);});
+  tsSuccessor.forEach((v, k) => {
+    tsPredecessor.set(v, k);
+  });
   const edges = [];
   nodes.forEach((node) => {
     const departuresByTrainrun = verticesDepartureByTrainrunByNode.get(
@@ -387,12 +416,15 @@ const buildConnectionEdges = (
         arrivals.forEach((arrival) => {
           departuresByTrainrun.forEach((departures, departureTrainrunId) => {
             let minDepartureTime = arrival.time;
-            const [departureTrId, departureTsId] = JSON.parse(departureTrainrunId);
+            const [departureTrId, departureTsId] =
+              JSON.parse(departureTrainrunId);
             let successor = tsSuccessor;
             if (arrivalTrId < 0) {
               successor = tsPredecessor;
             }
-            const connection = arrivalTrId !== departureTrId || successor.get(arrivalTsId) !== departureTsId;
+            const connection =
+              arrivalTrId !== departureTrId ||
+              successor.get(arrivalTsId) !== departureTsId;
             if (connection) {
               minDepartureTime += node.getConnectionTime();
             }

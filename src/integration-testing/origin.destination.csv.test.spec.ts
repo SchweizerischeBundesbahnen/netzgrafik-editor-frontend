@@ -102,11 +102,14 @@ describe("Origin Destination CSV Test", () => {
 
     const res = new Map<string, [number, number]>();
     nodes.forEach((origin) => {
-      computeShortestPaths(origin.getId(), neighbors, vertices, tsSuccessor).forEach(
-        (value, key) => {
-          res.set([origin.getId(), key].join(","), value);
-        },
-      );
+      computeShortestPaths(
+        origin.getId(),
+        neighbors,
+        vertices,
+        tsSuccessor,
+      ).forEach((value, key) => {
+        res.set([origin.getId(), key].join(","), value);
+      });
     });
     const end = new Date().getTime();
 
@@ -177,11 +180,14 @@ describe("Origin Destination CSV Test", () => {
 
     const res = new Map<string, [number, number]>();
     nodes.forEach((origin) => {
-      computeShortestPaths(origin.getId(), neighbors, vertices, tsSuccessor).forEach(
-        (value, key) => {
-          res.set([origin.getId(), key].join(","), value);
-        },
-      );
+      computeShortestPaths(
+        origin.getId(),
+        neighbors,
+        vertices,
+        tsSuccessor,
+      ).forEach((value, key) => {
+        res.set([origin.getId(), key].join(","), value);
+      });
     });
 
     // See https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/199
@@ -228,7 +234,12 @@ describe("Origin Destination CSV Test", () => {
       expect(v1Index).toBeLessThan(v2Index);
     });
 
-    const distances0 = computeShortestPaths(0, neighbors, topoVertices, tsSuccessor);
+    const distances0 = computeShortestPaths(
+      0,
+      neighbors,
+      topoVertices,
+      tsSuccessor,
+    );
 
     expect(distances0).toHaveSize(1);
     expect(distances0.get(1)).toEqual([15, 0]);
@@ -288,16 +299,31 @@ describe("Origin Destination CSV Test", () => {
       expect(v1Index).toBeLessThan(v2Index);
     });
 
-    const distances0 = computeShortestPaths(0, neighbors, topoVertices, tsSuccessor);
+    const distances0 = computeShortestPaths(
+      0,
+      neighbors,
+      topoVertices,
+      tsSuccessor,
+    );
     expect(distances0).toHaveSize(2);
     expect(distances0.get(1)).toEqual([15, 0]);
     expect(distances0.get(2)).toEqual([30, 0]);
 
-    const distances1 = computeShortestPaths(1, neighbors, topoVertices, tsSuccessor);
+    const distances1 = computeShortestPaths(
+      1,
+      neighbors,
+      topoVertices,
+      tsSuccessor,
+    );
     expect(distances1).toHaveSize(1);
     expect(distances1.get(2)).toEqual([14, 0]);
 
-    const distances3 = computeShortestPaths(3, neighbors, topoVertices, tsSuccessor);
+    const distances3 = computeShortestPaths(
+      3,
+      neighbors,
+      topoVertices,
+      tsSuccessor,
+    );
     expect(distances3).toHaveSize(2);
     expect(distances3.get(1)).toEqual([10, 0]);
     // connection
