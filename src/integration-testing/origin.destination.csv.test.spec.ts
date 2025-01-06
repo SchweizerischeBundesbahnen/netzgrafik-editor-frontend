@@ -148,6 +148,7 @@ describe("Origin Destination CSV Test", () => {
         ["7,2", [15, 1]],
         ["7,4", [8, 0]],
         ["7,1", [1, 0]],
+        // TODO: ideally we would test L -> M -> Non-stop -> O works well in both directions.
       ]),
     );
     // This should be reasonably fast, likely less than 10ms.

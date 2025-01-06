@@ -287,11 +287,12 @@ const buildSectionEdgesFromIterator = (
   const edges = [];
   let nonStopV1Time = -1;
   let nonStopV1Node = -1;
+  let nonStopV1TsId = -1;
   let previousTsId = -1;
   while (tsIterator.hasNext()) {
     tsIterator.next();
     const ts = tsIterator.current().trainrunSection;
-    const tsId = ts.getId();
+    let tsId = ts.getId();
     const trainrunId = reverseIterator
       ? // Minus 1 so we don't conflate 0 with -0.
         -ts.getTrainrunId() - 1
@@ -311,12 +312,18 @@ const buildSectionEdgesFromIterator = (
       if (nonStopV1Time === -1) {
         nonStopV1Time = v1Time;
         nonStopV1Node = v1Node;
+        nonStopV1TsId = tsId;
       }
       continue;
     }
     let v1 = new Vertex(v1Node, true, v1Time, trainrunId, tsId);
     // If we didn't stop previously, we need to use the stored start.
     if (nonStopV1Time !== -1) {
+      // Since we only store successors for the forward direction,
+      // we need to keep a consistent section id in the reverse direction as well.
+      if (reverseIterator) {
+        tsId = nonStopV1TsId;
+      }
       v1 = new Vertex(nonStopV1Node, true, nonStopV1Time, trainrunId, tsId);
       nonStopV1Time = -1;
     }

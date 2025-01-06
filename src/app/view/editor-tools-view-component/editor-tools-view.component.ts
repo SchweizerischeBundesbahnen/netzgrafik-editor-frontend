@@ -567,6 +567,13 @@ export class EditorToolsViewComponent {
           return;
         }
         const [totalCost, connections] = costs;
+        // Check if the reverse path has the same cost.
+        if (destination.getId() < origin.getId()) {
+          const reverseCosts = res.get([destination.getId(), origin.getId()].join(","));
+          if (reverseCosts === undefined || reverseCosts[0] !== totalCost) {
+            console.log("Reverse path not found or different cost: ", origin.getId(), destination.getId());
+          }
+        }
         const row = [origin.getBetriebspunktName(), destination.getBetriebspunktName(),
           (totalCost - connections * connectionPenalty).toString(),
           connections.toString(), totalCost.toString()];
