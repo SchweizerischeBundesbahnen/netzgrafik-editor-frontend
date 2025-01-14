@@ -100,7 +100,7 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
     this.destroyed.complete();
   }
 
-  getVariantIsWritable() : boolean {
+  getVariantIsWritable(): boolean {
     return this.versionControlService.getVariantIsWritable();
   }
 
@@ -226,7 +226,10 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
   onStreckengrafik() {
     const editorMode = this.uiInteractionService.getEditorMode();
     this.uiInteractionService.disableMultiSelectedNodesCorridor();
-    if (editorMode !== EditorMode.NetzgrafikEditing && editorMode !== EditorMode.MultiNodeMoving) {
+    if (
+      editorMode !== EditorMode.NetzgrafikEditing &&
+      editorMode !== EditorMode.MultiNodeMoving
+    ) {
       // enforce unselect all nodes
       this.nodeService.unselectAllNodes();
       this.uiInteractionService.showNetzgrafik();
@@ -265,6 +268,17 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
     }
   }
 
+  onOriginDestination() {
+    const editorMode = this.uiInteractionService.getEditorMode();
+    if (editorMode === EditorMode.OriginDestination) {
+      this.uiInteractionService.showNetzgrafik();
+      this.uiInteractionService.setEditorMode(EditorMode.NetzgrafikEditing);
+    } else {
+      this.uiInteractionService.showOriginDestination();
+      this.uiInteractionService.setEditorMode(EditorMode.OriginDestination);
+    }
+  }
+
   isStreckengrafikEditing(): boolean {
     return (
       this.uiInteractionService.getEditorMode() ===
@@ -273,8 +287,12 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
   }
 
   isNotStreckengrafikAllowed(): boolean {
-    if (this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving) {
-      const nodes = this.nodeService.getNodes().filter((n: Node) => n.selected());
+    if (
+      this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving
+    ) {
+      const nodes = this.nodeService
+        .getNodes()
+        .filter((n: Node) => n.selected());
       return nodes.length < 2;
     }
     return this.trainrunService.getSelectedTrainrun() === null;

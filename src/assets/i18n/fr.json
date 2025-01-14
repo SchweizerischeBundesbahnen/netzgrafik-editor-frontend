@@ -135,6 +135,13 @@
         "name": "Nom"
       }
     },
+    "origin-destination": {
+      "tooltip": {
+        "total-cost": "Coût total",
+        "travel-time": "Temps de parcours",
+        "transfers": "Changements"
+      }
+    },
     "utils": {
       "navigation-parameters": {
         "no-project-id": "ID du projet indisponible",
@@ -247,7 +254,7 @@
           "filterableLabels": "Labels filtrables",
           "trainrun-filter-tab": {
             "labels": "Labels",
-            "newLabels" : "Nouveau label...",
+            "newLabels": "Nouveau label...",
             "trainrunDuplicate": "Dupliquer le trajet de train",
             "trainrunDelete": "Supprimer le trajet de train",
             "delete": "Supprimer",
@@ -374,6 +381,7 @@
         "analytics-disabled": "Analyse désactivée",
         "analytics-enabled": "Analyse activée",
         "displayGraphicTimetable": "Afficher le graphique espace-temps",
+        "displayOriginDestination": "Afficher les matrices Origine-Destination",
         "closeGraphicTimetable": "Fermer le graphique espace-temps",
         "errorGraphicTimetable": "Le graphique espace-temps ne peut pas être affiché parce qu'aucun trajet de train ou aucun noeud n'a été sélectionné."
       },

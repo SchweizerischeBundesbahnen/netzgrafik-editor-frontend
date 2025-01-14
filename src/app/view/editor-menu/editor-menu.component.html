@@ -351,4 +351,21 @@
       </button>
     </ng-container>
   </div>
+
+  <div class="OriginDestination">
+    <ng-container>
+      <button
+        mode="icon"
+        class="ButtonStreckengrafikEditor NetzgrafikEditing"
+        (click)="onOriginDestination()"
+        [title]="'app.view.editor-menu.displayOriginDestination' | translate"
+      >
+      <sbb-icon 
+      svgIcon="five-circles-interconnected-medium" 
+      height="25px"
+      width="25px"
+      aria-hidden="false"></sbb-icon>
+      </button>
+    </ng-container>
+  </div>
 </div>
