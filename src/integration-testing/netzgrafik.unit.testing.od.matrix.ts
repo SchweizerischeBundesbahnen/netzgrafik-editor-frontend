@@ -426,6 +426,246 @@ export class NetzgrafikUnitTestingOdMatrix {
           warnings: null,
           labelIds: [],
         },
+        {
+          id: 1,
+          betriebspunktName: "I",
+          fullName: "I",
+          positionX: 832,
+          positionY: 32,
+          ports: [
+            {
+              id: 11,
+              trainrunSectionId: 15,
+              positionIndex: 0,
+              positionAlignment: 1,
+            },
+            {
+              id: 14,
+              trainrunSectionId: 16,
+              positionIndex: 1,
+              positionAlignment: 1,
+            },
+            {
+              id: 10,
+              trainrunSectionId: 14,
+              positionIndex: 0,
+              positionAlignment: 2,
+            },
+            {
+              id: 15,
+              trainrunSectionId: 17,
+              positionIndex: 0,
+              positionAlignment: 3,
+            },
+          ],
+          transitions: [
+            {
+              id: 4,
+              port1Id: 11,
+              port2Id: 10,
+              isNonStopTransit: false,
+            },
+            {
+              id: 6,
+              port1Id: 14,
+              port2Id: 15,
+              isNonStopTransit: false,
+            },
+          ],
+          connections: [],
+          resourceId: 2,
+          perronkanten: 10,
+          connectionTime: 5,
+          trainrunCategoryHaltezeiten: {
+            HaltezeitIPV: {
+              haltezeit: 3,
+              no_halt: false,
+            },
+            HaltezeitA: {
+              haltezeit: 2,
+              no_halt: false,
+            },
+            HaltezeitB: {
+              haltezeit: 2,
+              no_halt: false,
+            },
+            HaltezeitC: {
+              haltezeit: 1,
+              no_halt: false,
+            },
+            HaltezeitD: {
+              haltezeit: 1,
+              no_halt: false,
+            },
+            HaltezeitUncategorized: {
+              haltezeit: 0,
+              no_halt: true,
+            },
+          },
+          symmetryAxis: null,
+          warnings: null,
+          labelIds: [],
+        },
+        {
+          id: 2,
+          betriebspunktName: "K",
+          fullName: "K",
+          positionX: 1632,
+          positionY: 32,
+          ports: [
+            {
+              id: 16,
+              trainrunSectionId: 17,
+              positionIndex: 0,
+              positionAlignment: 2,
+            },
+          ],
+          transitions: [],
+          connections: [],
+          resourceId: 3,
+          perronkanten: 10,
+          connectionTime: 5,
+          trainrunCategoryHaltezeiten: {
+            HaltezeitIPV: {
+              haltezeit: 3,
+              no_halt: false,
+            },
+            HaltezeitA: {
+              haltezeit: 2,
+              no_halt: false,
+            },
+            HaltezeitB: {
+              haltezeit: 2,
+              no_halt: false,
+            },
+            HaltezeitC: {
+              haltezeit: 1,
+              no_halt: false,
+            },
+            HaltezeitD: {
+              haltezeit: 1,
+              no_halt: false,
+            },
+            HaltezeitUncategorized: {
+              haltezeit: 0,
+              no_halt: true,
+            },
+          },
+          symmetryAxis: null,
+          warnings: null,
+          labelIds: [],
+        },
+        {
+          id: 4,
+          betriebspunktName: "J",
+          fullName: "J",
+          positionX: 832,
+          positionY: 448,
+          ports: [
+            {
+              id: 12,
+              trainrunSectionId: 15,
+              positionIndex: 0,
+              positionAlignment: 0,
+            },
+            {
+              id: 13,
+              trainrunSectionId: 16,
+              positionIndex: 1,
+              positionAlignment: 0,
+            },
+          ],
+          transitions: [
+            {
+              id: 5,
+              port1Id: 12,
+              port2Id: 13,
+              isNonStopTransit: false,
+            },
+          ],
+          connections: [],
+          resourceId: 5,
+          perronkanten: 5,
+          connectionTime: 3,
+          trainrunCategoryHaltezeiten: {
+            HaltezeitIPV: {
+              haltezeit: 3,
+              no_halt: false,
+            },
+            HaltezeitA: {
+              haltezeit: 2,
+              no_halt: false,
+            },
+            HaltezeitB: {
+              haltezeit: 2,
+              no_halt: false,
+            },
+            HaltezeitC: {
+              haltezeit: 1,
+              no_halt: false,
+            },
+            HaltezeitD: {
+              haltezeit: 1,
+              no_halt: false,
+            },
+            HaltezeitUncategorized: {
+              haltezeit: 0,
+              no_halt: true,
+            },
+          },
+          symmetryAxis: null,
+          warnings: null,
+          labelIds: [],
+        },
+        {
+          id: 7,
+          betriebspunktName: "H",
+          fullName: "H",
+          positionX: 320,
+          positionY: 32,
+          ports: [
+            {
+              id: 9,
+              trainrunSectionId: 14,
+              positionIndex: 0,
+              positionAlignment: 3,
+            },
+          ],
+          transitions: [],
+          connections: [],
+          resourceId: 8,
+          perronkanten: 5,
+          connectionTime: 5,
+          trainrunCategoryHaltezeiten: {
+            HaltezeitIPV: {
+              haltezeit: 3,
+              no_halt: false,
+            },
+            HaltezeitA: {
+              haltezeit: 2,
+              no_halt: false,
+            },
+            HaltezeitB: {
+              haltezeit: 2,
+              no_halt: false,
+            },
+            HaltezeitC: {
+              haltezeit: 1,
+              no_halt: false,
+            },
+            HaltezeitD: {
+              haltezeit: 1,
+              no_halt: false,
+            },
+            HaltezeitUncategorized: {
+              haltezeit: 0,
+              no_halt: true,
+            },
+          },
+          symmetryAxis: null,
+          warnings: null,
+          labelIds: [],
+        },
       ],
       trainrunSections: [
         {
@@ -1204,6 +1444,394 @@ export class NetzgrafikUnitTestingOdMatrix {
           },
           warnings: null,
         },
+        {
+          id: 14,
+          sourceNodeId: 7,
+          sourcePortId: 9,
+          targetNodeId: 1,
+          targetPortId: 10,
+          travelTime: {
+            time: 1,
+            consecutiveTime: 1,
+            lock: true,
+            warning: null,
+            timeFormatter: null,
+          },
+          sourceDeparture: {
+            time: 0,
+            consecutiveTime: 0,
+            lock: false,
+            warning: null,
+            timeFormatter: null,
+          },
+          sourceArrival: {
+            time: 0,
+            consecutiveTime: 180,
+            lock: false,
+            warning: null,
+            timeFormatter: null,
+          },
+          targetDeparture: {
+            time: 59,
+            consecutiveTime: 179,
+            lock: false,
+            warning: null,
+            timeFormatter: null,
+          },
+          targetArrival: {
+            time: 1,
+            consecutiveTime: 1,
+            lock: false,
+            warning: null,
+            timeFormatter: null,
+          },
+          numberOfStops: 0,
+          trainrunId: 2,
+          resourceId: 0,
+          specificTrainrunSectionFrequencyId: null,
+          path: {
+            path: [
+              {
+                x: 418,
+                y: 48,
+              },
+              {
+                x: 482,
+                y: 48,
+              },
+              {
+                x: 766,
+                y: 48,
+              },
+              {
+                x: 830,
+                y: 48,
+              },
+            ],
+            textPositions: {
+              "0": {
+                x: 436,
+                y: 60,
+              },
+              "1": {
+                x: 464,
+                y: 36,
+              },
+              "2": {
+                x: 812,
+                y: 36,
+              },
+              "3": {
+                x: 784,
+                y: 60,
+              },
+              "4": {
+                x: 624,
+                y: 36,
+              },
+              "5": {
+                x: 624,
+                y: 36,
+              },
+              "6": {
+                x: 624,
+                y: 60,
+              },
+            },
+          },
+          warnings: null,
+        },
+        {
+          id: 15,
+          sourceNodeId: 1,
+          sourcePortId: 11,
+          targetNodeId: 4,
+          targetPortId: 12,
+          travelTime: {
+            time: 5,
+            consecutiveTime: 1,
+            lock: true,
+            warning: null,
+            timeFormatter: null,
+          },
+          sourceDeparture: {
+            time: 3,
+            consecutiveTime: 3,
+            lock: false,
+            warning: null,
+            timeFormatter: null,
+          },
+          sourceArrival: {
+            time: 57,
+            consecutiveTime: 177,
+            lock: false,
+            warning: null,
+            timeFormatter: null,
+          },
+          targetDeparture: {
+            time: 52,
+            consecutiveTime: 172,
+            lock: false,
+            warning: null,
+            timeFormatter: null,
+          },
+          targetArrival: {
+            time: 8,
+            consecutiveTime: 8,
+            lock: false,
+            warning: null,
+            timeFormatter: null,
+          },
+          numberOfStops: 0,
+          trainrunId: 2,
+          resourceId: 0,
+          specificTrainrunSectionFrequencyId: null,
+          path: {
+            path: [
+              {
+                x: 848,
+                y: 98,
+              },
+              {
+                x: 848,
+                y: 162,
+              },
+              {
+                x: 848,
+                y: 382,
+              },
+              {
+                x: 848,
+                y: 446,
+              },
+            ],
+            textPositions: {
+              "0": {
+                x: 836,
+                y: 116,
+              },
+              "1": {
+                x: 860,
+                y: 144,
+              },
+              "2": {
+                x: 860,
+                y: 428,
+              },
+              "3": {
+                x: 836,
+                y: 400,
+              },
+              "4": {
+                x: 836,
+                y: 272,
+              },
+              "5": {
+                x: 836,
+                y: 272,
+              },
+              "6": {
+                x: 860,
+                y: 272,
+              },
+            },
+          },
+          warnings: null,
+        },
+        {
+          id: 16,
+          sourceNodeId: 4,
+          sourcePortId: 13,
+          targetNodeId: 1,
+          targetPortId: 14,
+          travelTime: {
+            time: 1,
+            consecutiveTime: 1,
+            lock: true,
+            warning: null,
+            timeFormatter: null,
+          },
+          sourceDeparture: {
+            time: 6,
+            consecutiveTime: 66,
+            lock: false,
+            warning: null,
+            timeFormatter: null,
+          },
+          sourceArrival: {
+            time: 54,
+            consecutiveTime: 114,
+            lock: false,
+            warning: null,
+            timeFormatter: null,
+          },
+          targetDeparture: {
+            time: 53,
+            consecutiveTime: 113,
+            lock: false,
+            warning: null,
+            timeFormatter: null,
+          },
+          targetArrival: {
+            time: 7,
+            consecutiveTime: 67,
+            lock: false,
+            warning: null,
+            timeFormatter: null,
+          },
+          numberOfStops: 0,
+          trainrunId: 2,
+          resourceId: 0,
+          specificTrainrunSectionFrequencyId: null,
+          path: {
+            path: [
+              {
+                x: 880,
+                y: 446,
+              },
+              {
+                x: 880,
+                y: 382,
+              },
+              {
+                x: 880,
+                y: 162,
+              },
+              {
+                x: 880,
+                y: 98,
+              },
+            ],
+            textPositions: {
+              "0": {
+                x: 892,
+                y: 428,
+              },
+              "1": {
+                x: 868,
+                y: 400,
+              },
+              "2": {
+                x: 868,
+                y: 116,
+              },
+              "3": {
+                x: 892,
+                y: 144,
+              },
+              "4": {
+                x: 868,
+                y: 272,
+              },
+              "5": {
+                x: 868,
+                y: 272,
+              },
+              "6": {
+                x: 892,
+                y: 272,
+              },
+            },
+          },
+          warnings: null,
+        },
+        {
+          id: 17,
+          sourceNodeId: 1,
+          sourcePortId: 15,
+          targetNodeId: 2,
+          targetPortId: 16,
+          travelTime: {
+            time: 1,
+            consecutiveTime: 1,
+            lock: true,
+            warning: null,
+            timeFormatter: null,
+          },
+          sourceDeparture: {
+            time: 9,
+            consecutiveTime: 69,
+            lock: false,
+            warning: null,
+            timeFormatter: null,
+          },
+          sourceArrival: {
+            time: 51,
+            consecutiveTime: 111,
+            lock: false,
+            warning: null,
+            timeFormatter: null,
+          },
+          targetDeparture: {
+            time: 50,
+            consecutiveTime: 110,
+            lock: false,
+            warning: null,
+            timeFormatter: null,
+          },
+          targetArrival: {
+            time: 10,
+            consecutiveTime: 70,
+            lock: false,
+            warning: null,
+            timeFormatter: null,
+          },
+          numberOfStops: 0,
+          trainrunId: 2,
+          resourceId: 0,
+          specificTrainrunSectionFrequencyId: null,
+          path: {
+            path: [
+              {
+                x: 930,
+                y: 48,
+              },
+              {
+                x: 994,
+                y: 48,
+              },
+              {
+                x: 1566,
+                y: 48,
+              },
+              {
+                x: 1630,
+                y: 48,
+              },
+            ],
+            textPositions: {
+              "0": {
+                x: 948,
+                y: 60,
+              },
+              "1": {
+                x: 976,
+                y: 36,
+              },
+              "2": {
+                x: 1612,
+                y: 36,
+              },
+              "3": {
+                x: 1584,
+                y: 60,
+              },
+              "4": {
+                x: 1280,
+                y: 36,
+              },
+              "5": {
+                x: 1280,
+                y: 36,
+              },
+              "6": {
+                x: 1280,
+                y: 60,
+              },
+            },
+          },
+          warnings: null,
+        },
       ],
       trainruns: [
         {
@@ -1240,6 +1868,14 @@ export class NetzgrafikUnitTestingOdMatrix {
         },
         {
           id: 8,
+          name: "X",
+          categoryId: 1,
+          frequencyId: 3,
+          trainrunTimeCategoryId: 0,
+          labelIds: [],
+        },
+        {
+          id: 2,
           name: "X",
           categoryId: 1,
           frequencyId: 3,

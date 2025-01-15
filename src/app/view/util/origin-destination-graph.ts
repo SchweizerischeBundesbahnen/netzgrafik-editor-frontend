@@ -14,6 +14,9 @@ export class Vertex {
     public time?: number,
     // Negative trainrun ids are used for reverse directions.
     public trainrunId?: number,
+    // In addition to the trainrunId, the trainrunSectionId allows us to check for connections
+    // (especially useful for trains going back to a previous node).
+    public trainrunSectionId?: number,
   ) {}
 }
 
@@ -27,6 +30,8 @@ export class Edge {
   ) {}
 }
 
+// In addition to edges, return a map of trainrunSection ids to their successor
+// (in the forward direction), so we can check for connections.
 export const buildEdges = (
   nodes: Node[],
   odNodes: Node[],
@@ -34,16 +39,22 @@ export const buildEdges = (
   connectionPenalty: number,
   trainrunService: TrainrunService,
   timeLimit: number,
-): Edge[] => {
-  let edges = buildSectionEdges(trainruns, trainrunService, timeLimit);
+): [Edge[], Map<number, number>] => {
+  const [sectionEdges, tsSuccessor] = buildSectionEdges(
+    trainruns,
+    trainrunService,
+    timeLimit,
+  );
+  let edges = sectionEdges;
 
+  // Both trainrun and trainrunSection ids are encoded in JSON keys.
   const verticesDepartureByTrainrunByNode = new Map<
     number,
-    Map<number, Vertex[]>
+    Map<string, Vertex[]>
   >();
   const verticesArrivalByTrainrunByNode = new Map<
     number,
-    Map<number, Vertex[]>
+    Map<string, Vertex[]>
   >();
   edges.forEach((edge) => {
     const src = edge.v1;
@@ -57,29 +68,31 @@ export const buildEdges = (
     const departuresByTrainrun = verticesDepartureByTrainrunByNode.get(
       src.nodeId,
     );
+    const srcKey = JSON.stringify([src.trainrunId, src.trainrunSectionId]);
     if (departuresByTrainrun === undefined) {
       verticesDepartureByTrainrunByNode.set(
         src.nodeId,
-        new Map<number, Vertex[]>([[src.trainrunId, [src]]]),
+        new Map<string, Vertex[]>([[srcKey, [src]]]),
       );
     } else {
-      const departures = departuresByTrainrun.get(src.trainrunId);
+      const departures = departuresByTrainrun.get(srcKey);
       if (departures === undefined) {
-        departuresByTrainrun.set(src.trainrunId, [src]);
+        departuresByTrainrun.set(srcKey, [src]);
       } else {
         departures.push(src);
       }
     }
     const arrivalsByTrainrun = verticesArrivalByTrainrunByNode.get(tgt.nodeId);
+    const tgtKey = JSON.stringify([tgt.trainrunId, tgt.trainrunSectionId]);
     if (arrivalsByTrainrun === undefined) {
       verticesArrivalByTrainrunByNode.set(
         tgt.nodeId,
-        new Map<number, Vertex[]>([[tgt.trainrunId, [tgt]]]),
+        new Map<string, Vertex[]>([[tgtKey, [tgt]]]),
       );
     } else {
-      const arrivals = arrivalsByTrainrun.get(tgt.trainrunId);
+      const arrivals = arrivalsByTrainrun.get(tgtKey);
       if (arrivals === undefined) {
-        arrivalsByTrainrun.set(tgt.trainrunId, [tgt]);
+        arrivalsByTrainrun.set(tgtKey, [tgt]);
       } else {
         arrivals.push(tgt);
       }
@@ -114,10 +127,11 @@ export const buildEdges = (
       verticesDepartureByTrainrunByNode,
       verticesArrivalByTrainrunByNode,
       connectionPenalty,
+      tsSuccessor,
     ),
   ];
 
-  return edges;
+  return [edges, tsSuccessor];
 };
 
 // Given edges, return the neighbors (with weights) for each vertex, if any (outgoing adjacency list).
@@ -156,7 +170,12 @@ export const computeShortestPaths = (
   from: number,
   neighbors: Map<string, [Vertex, number][]>,
   vertices: Vertex[],
+  tsSuccessor: Map<number, number>,
 ): Map<number, [number, number]> => {
+  const tsPredecessor = new Map<number, number>();
+  tsSuccessor.forEach((v, k) => {
+    tsPredecessor.set(v, k);
+  });
   const res = new Map<number, [number, number]>();
   const dist = new Map<string, [number, number]>();
   let started = false;
@@ -198,10 +217,17 @@ export const computeShortestPaths = (
         alt < dist.get(neighborKey)[0]
       ) {
         let connection = 0;
+        let successor = tsSuccessor;
+        if (vertex.trainrunId < 0) {
+          successor = tsPredecessor;
+        }
         if (
           vertex.trainrunId !== undefined &&
           neighbor.trainrunId !== undefined &&
-          vertex.trainrunId !== neighbor.trainrunId
+          (vertex.trainrunId !== neighbor.trainrunId ||
+            (successor.get(vertex.trainrunSectionId) !==
+              neighbor.trainrunSectionId &&
+              vertex.isDeparture === false))
         ) {
           connection = 1;
         }
@@ -216,38 +242,57 @@ const buildSectionEdges = (
   trainruns: Trainrun[],
   trainrunService: TrainrunService,
   timeLimit: number,
-): Edge[] => {
+): [Edge[], Map<number, number>] => {
   const edges = [];
   const its = trainrunService.getRootIterators();
+  const tsSuccessor = new Map<number, number>();
   trainruns.forEach((trainrun) => {
     const tsIterator = its.get(trainrun.getId());
     if (tsIterator === undefined) {
       console.log("Ignoring trainrun (no root found): ", trainrun.getId());
       return;
     }
-    edges.push(...buildSectionEdgesFromIterator(tsIterator, false, timeLimit));
+    edges.push(
+      ...buildSectionEdgesFromIterator(
+        tsIterator,
+        false,
+        timeLimit,
+        tsSuccessor,
+      ),
+    );
     // Don't forget the reverse direction.
     const ts = tsIterator.current().trainrunSection;
     const nextIterator = trainrunService.getIterator(
       tsIterator.current().node,
       ts,
     );
-    edges.push(...buildSectionEdgesFromIterator(nextIterator, true, timeLimit));
+    edges.push(
+      ...buildSectionEdgesFromIterator(
+        nextIterator,
+        true,
+        timeLimit,
+        tsSuccessor,
+      ),
+    );
   });
-  return edges;
+  return [edges, tsSuccessor];
 };
 
 const buildSectionEdgesFromIterator = (
   tsIterator: TrainrunIterator,
   reverseIterator: boolean,
   timeLimit: number,
+  tsSuccessor: Map<number, number>,
 ): Edge[] => {
   const edges = [];
   let nonStopV1Time = -1;
   let nonStopV1Node = -1;
+  let nonStopV1TsId = -1;
+  let previousTsId = -1;
   while (tsIterator.hasNext()) {
     tsIterator.next();
     const ts = tsIterator.current().trainrunSection;
+    let tsId = ts.getId();
     const trainrunId = reverseIterator
       ? // Minus 1 so we don't conflate 0 with -0.
         -ts.getTrainrunId() - 1
@@ -267,20 +312,26 @@ const buildSectionEdgesFromIterator = (
       if (nonStopV1Time === -1) {
         nonStopV1Time = v1Time;
         nonStopV1Node = v1Node;
+        nonStopV1TsId = tsId;
       }
       continue;
     }
-    let v1 = new Vertex(v1Node, true, v1Time, trainrunId);
+    let v1 = new Vertex(v1Node, true, v1Time, trainrunId, tsId);
     // If we didn't stop previously, we need to use the stored start.
     if (nonStopV1Time !== -1) {
-      v1 = new Vertex(nonStopV1Node, true, nonStopV1Time, trainrunId);
+      // Since we only store successors for the forward direction,
+      // we need to keep a consistent section id in the reverse direction as well.
+      if (reverseIterator) {
+        tsId = nonStopV1TsId;
+      }
+      v1 = new Vertex(nonStopV1Node, true, nonStopV1Time, trainrunId, tsId);
       nonStopV1Time = -1;
     }
     const v2Time = reverseSection
       ? ts.getSourceArrivalDto().consecutiveTime
       : ts.getTargetArrivalDto().consecutiveTime;
     const v2Node = reverseSection ? ts.getSourceNodeId() : ts.getTargetNodeId();
-    const v2 = new Vertex(v2Node, false, v2Time, trainrunId);
+    const v2 = new Vertex(v2Node, false, v2Time, trainrunId, tsId);
 
     for (let i = 0; i * ts.getTrainrun().getFrequency() < timeLimit; i++) {
       const newV1 = new Vertex(
@@ -288,24 +339,30 @@ const buildSectionEdgesFromIterator = (
         v1.isDeparture,
         v1.time + i * ts.getTrainrun().getFrequency(),
         v1.trainrunId,
+        tsId,
       );
       const newV2 = new Vertex(
         v2.nodeId,
         v2.isDeparture,
         v2.time + i * ts.getTrainrun().getFrequency(),
         v2.trainrunId,
+        tsId,
       );
       const edge = new Edge(newV1, newV2, newV2.time - newV1.time);
       edges.push(edge);
     }
+    if (previousTsId !== -1 && !reverseIterator) {
+      tsSuccessor.set(previousTsId, tsId);
+    }
+    previousTsId = tsId;
   }
   return edges;
 };
 
 const buildConvenienceEdges = (
   nodes: Node[],
-  verticesDepartureByTrainrunByNode: Map<number, Map<number, Vertex[]>>,
-  verticesArrivalByTrainrunByNode: Map<number, Map<number, Vertex[]>>,
+  verticesDepartureByTrainrunByNode: Map<number, Map<string, Vertex[]>>,
+  verticesArrivalByTrainrunByNode: Map<number, Map<string, Vertex[]>>,
 ): Edge[] => {
   const edges = [];
   nodes.forEach((node) => {
@@ -340,10 +397,15 @@ const buildConvenienceEdges = (
 
 const buildConnectionEdges = (
   nodes: Node[],
-  verticesDepartureByTrainrunByNode: Map<number, Map<number, Vertex[]>>,
-  verticesArrivalByTrainrunByNode: Map<number, Map<number, Vertex[]>>,
+  verticesDepartureByTrainrunByNode: Map<number, Map<string, Vertex[]>>,
+  verticesArrivalByTrainrunByNode: Map<number, Map<string, Vertex[]>>,
   connectionPenalty: number,
+  tsSuccessor: Map<number, number>,
 ): Edge[] => {
+  const tsPredecessor = new Map<number, number>();
+  tsSuccessor.forEach((v, k) => {
+    tsPredecessor.set(v, k);
+  });
   const edges = [];
   nodes.forEach((node) => {
     const departuresByTrainrun = verticesDepartureByTrainrunByNode.get(
@@ -357,10 +419,20 @@ const buildConnectionEdges = (
       arrivalsByTrainrun !== undefined
     ) {
       arrivalsByTrainrun.forEach((arrivals, arrivalTrainrunId) => {
+        const [arrivalTrId, arrivalTsId] = JSON.parse(arrivalTrainrunId);
         arrivals.forEach((arrival) => {
           departuresByTrainrun.forEach((departures, departureTrainrunId) => {
             let minDepartureTime = arrival.time;
-            if (arrivalTrainrunId !== departureTrainrunId) {
+            const [departureTrId, departureTsId] =
+              JSON.parse(departureTrainrunId);
+            let successor = tsSuccessor;
+            if (arrivalTrId < 0) {
+              successor = tsPredecessor;
+            }
+            const connection =
+              arrivalTrId !== departureTrId ||
+              successor.get(arrivalTsId) !== departureTsId;
+            if (connection) {
               minDepartureTime += node.getConnectionTime();
             }
             // For each arrival and for each trainrun available, we only want to consider the first departure.
@@ -370,7 +442,7 @@ const buildConnectionEdges = (
             });
             if (departure !== undefined) {
               let cost = departure.time - arrival.time;
-              if (arrivalTrainrunId !== departureTrainrunId) {
+              if (connection) {
                 cost += connectionPenalty;
               }
               const edge = new Edge(arrival, departure, cost);
