@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.20](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.19...netzgrafik-frontend-v2.9.20) (2025-01-15)
+
+
+### Bug Fixes
+
+* fix trains going back in OD matrix ([#395](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/395)) ([173986c](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/173986c8b3e140327d45d44d983310709a3541d0))
+
 ## [2.9.19](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.18...netzgrafik-frontend-v2.9.19) (2024-12-18)
 
 
