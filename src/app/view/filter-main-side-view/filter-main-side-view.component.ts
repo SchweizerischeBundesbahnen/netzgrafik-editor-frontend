@@ -160,6 +160,11 @@ export class FilterMainSideViewComponent implements OnInit, OnDestroy {
       .subscribe((mainViewMode: MainViewMode) => {
         this.mainViewMode = mainViewMode;
       });
+    this.uiInteractionService.originDestinationWindow
+        .pipe(takeUntil(this.destroyed))
+        .subscribe((mainViewMode: MainViewMode) => {
+          this.mainViewMode = mainViewMode;
+        });
 
     this.dataService.triggerViewUpdate();
   }
@@ -204,5 +209,9 @@ export class FilterMainSideViewComponent implements OnInit, OnDestroy {
 
   isStreckengrafik() {
     return this.mainViewMode === MainViewMode.Streckengrafik;
+  }
+
+  isOriginDestination() {
+    return this.mainViewMode === MainViewMode.OriginDestination;
   }
 }
