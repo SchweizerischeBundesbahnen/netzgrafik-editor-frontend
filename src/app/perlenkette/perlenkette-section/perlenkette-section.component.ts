@@ -654,7 +654,7 @@ export class PerlenketteSectionComponent
       this.getTimeButtonPlusMinusStep(
         this.leftAndRightTimeStructure.leftDepartureTime,
       );
-    this.leftAndRightTimeStructure.leftDepartureTime %= 60;
+    this.leftAndRightTimeStructure.leftDepartureTime %= 120;
     this.onNodeLeftDepartureTimeChanged();
   }
 
@@ -665,15 +665,15 @@ export class PerlenketteSectionComponent
         this.leftAndRightTimeStructure.leftDepartureTime,
       );
     this.leftAndRightTimeStructure.leftDepartureTime +=
-      this.leftAndRightTimeStructure.leftDepartureTime < 0 ? 60 : 0;
+      this.leftAndRightTimeStructure.leftDepartureTime < 0 ? 120 : 0;
     this.onNodeLeftDepartureTimeChanged();
   }
 
   onNodeLeftDepartureTimeChanged() {
     this.leftAndRightTimeStructure.leftDepartureTime =
-      this.leftAndRightTimeStructure.leftDepartureTime % 60;
+      this.leftAndRightTimeStructure.leftDepartureTime % 120;
     this.leftAndRightTimeStructure.leftDepartureTime +=
-      this.leftAndRightTimeStructure.leftDepartureTime < 0 ? 60 : 0;
+      this.leftAndRightTimeStructure.leftDepartureTime < 0 ? 120 : 0;
 
     this.leftAndRightTimeStructure.leftArrivalTime =
       TrainrunsectionHelper.getSymmetricTime(
@@ -682,8 +682,8 @@ export class PerlenketteSectionComponent
     if (!this.lockStructure.rightLock) {
       this.leftAndRightTimeStructure.rightArrivalTime =
         this.leftAndRightTimeStructure.leftDepartureTime +
-        (this.leftAndRightTimeStructure.travelTime % 60);
-      this.leftAndRightTimeStructure.rightArrivalTime %= 60;
+        (this.leftAndRightTimeStructure.travelTime % 120);
+      this.leftAndRightTimeStructure.rightArrivalTime %= 120;
       this.leftAndRightTimeStructure.rightDepartureTime =
         TrainrunsectionHelper.getSymmetricTime(
           this.leftAndRightTimeStructure.rightArrivalTime,
@@ -696,7 +696,7 @@ export class PerlenketteSectionComponent
         this.leftAndRightTimeStructure.leftArrivalTime -
         this.leftAndRightTimeStructure.rightDepartureTime;
       this.leftAndRightTimeStructure.travelTime +=
-        this.leftAndRightTimeStructure.travelTime < 0 ? 60 : 0;
+        this.leftAndRightTimeStructure.travelTime < 0 ? 120 : 0;
     }
 
     this.updateTrainrunSectionTime();
@@ -709,7 +709,7 @@ export class PerlenketteSectionComponent
       this.getTimeButtonPlusMinusStep(
         this.leftAndRightTimeStructure.leftArrivalTime,
       );
-    this.leftAndRightTimeStructure.leftArrivalTime %= 60;
+    this.leftAndRightTimeStructure.leftArrivalTime %= 120;
     this.onNodeLeftArrivalTimeChanged();
   }
 
@@ -720,15 +720,15 @@ export class PerlenketteSectionComponent
         this.leftAndRightTimeStructure.leftArrivalTime,
       );
     this.leftAndRightTimeStructure.leftArrivalTime +=
-      this.leftAndRightTimeStructure.leftArrivalTime < 0 ? 60 : 0;
+      this.leftAndRightTimeStructure.leftArrivalTime < 0 ? 120 : 0;
     this.onNodeLeftArrivalTimeChanged();
   }
 
   onNodeLeftArrivalTimeChanged() {
     this.leftAndRightTimeStructure.leftArrivalTime =
-      this.leftAndRightTimeStructure.leftArrivalTime % 60;
+      this.leftAndRightTimeStructure.leftArrivalTime % 120;
     this.leftAndRightTimeStructure.leftArrivalTime +=
-      this.leftAndRightTimeStructure.leftArrivalTime < 0 ? 60 : 0;
+      this.leftAndRightTimeStructure.leftArrivalTime < 0 ? 120 : 0;
 
     this.leftAndRightTimeStructure.leftDepartureTime =
       TrainrunsectionHelper.getSymmetricTime(
@@ -737,9 +737,9 @@ export class PerlenketteSectionComponent
     if (!this.lockStructure.rightLock) {
       this.leftAndRightTimeStructure.rightDepartureTime =
         this.leftAndRightTimeStructure.leftArrivalTime -
-        (this.leftAndRightTimeStructure.travelTime % 60);
+        (this.leftAndRightTimeStructure.travelTime % 120);
       this.leftAndRightTimeStructure.rightDepartureTime +=
-        this.leftAndRightTimeStructure.rightDepartureTime < 0 ? 60 : 0;
+        this.leftAndRightTimeStructure.rightDepartureTime < 0 ? 120 : 0;
       this.leftAndRightTimeStructure.rightArrivalTime =
         TrainrunsectionHelper.getSymmetricTime(
           this.leftAndRightTimeStructure.rightDepartureTime,
@@ -752,7 +752,7 @@ export class PerlenketteSectionComponent
         this.leftAndRightTimeStructure.leftArrivalTime -
         this.leftAndRightTimeStructure.rightDepartureTime;
       this.leftAndRightTimeStructure.travelTime +=
-        this.leftAndRightTimeStructure.travelTime < 0 ? 60 : 0;
+        this.leftAndRightTimeStructure.travelTime < 0 ? 120 : 0;
     }
 
     this.updateTrainrunSectionTime();
@@ -765,7 +765,7 @@ export class PerlenketteSectionComponent
       this.getTimeButtonPlusMinusStep(
         this.leftAndRightTimeStructure.rightArrivalTime,
       );
-    this.leftAndRightTimeStructure.rightArrivalTime %= 60;
+    this.leftAndRightTimeStructure.rightArrivalTime %= 120;
     this.onNodeRightArrivalTimeChanged();
   }
 
@@ -776,15 +776,15 @@ export class PerlenketteSectionComponent
         this.leftAndRightTimeStructure.rightArrivalTime,
       );
     this.leftAndRightTimeStructure.rightArrivalTime +=
-      this.leftAndRightTimeStructure.rightArrivalTime < 0 ? 60 : 0;
+      this.leftAndRightTimeStructure.rightArrivalTime < 0 ? 120 : 0;
     this.onNodeRightArrivalTimeChanged();
   }
 
   onNodeRightArrivalTimeChanged() {
     this.leftAndRightTimeStructure.rightArrivalTime =
-      this.leftAndRightTimeStructure.rightArrivalTime % 60;
+      this.leftAndRightTimeStructure.rightArrivalTime % 120;
     this.leftAndRightTimeStructure.rightArrivalTime +=
-      this.leftAndRightTimeStructure.rightArrivalTime < 0 ? 60 : 0;
+      this.leftAndRightTimeStructure.rightArrivalTime < 0 ? 120 : 0;
 
     this.leftAndRightTimeStructure.rightDepartureTime =
       TrainrunsectionHelper.getSymmetricTime(
@@ -793,9 +793,9 @@ export class PerlenketteSectionComponent
     if (!this.lockStructure.leftLock) {
       this.leftAndRightTimeStructure.leftDepartureTime =
         this.leftAndRightTimeStructure.rightArrivalTime -
-        (this.leftAndRightTimeStructure.travelTime % 60);
+        (this.leftAndRightTimeStructure.travelTime % 120);
       this.leftAndRightTimeStructure.leftDepartureTime +=
-        this.leftAndRightTimeStructure.leftDepartureTime < 0 ? 60 : 0;
+        this.leftAndRightTimeStructure.leftDepartureTime < 0 ? 120 : 0;
       this.leftAndRightTimeStructure.leftArrivalTime =
         TrainrunsectionHelper.getSymmetricTime(
           this.leftAndRightTimeStructure.leftDepartureTime,
@@ -808,7 +808,7 @@ export class PerlenketteSectionComponent
         this.leftAndRightTimeStructure.rightArrivalTime -
         this.leftAndRightTimeStructure.leftDepartureTime;
       this.leftAndRightTimeStructure.travelTime +=
-        this.leftAndRightTimeStructure.travelTime < 0 ? 60 : 0;
+        this.leftAndRightTimeStructure.travelTime < 0 ? 120 : 0;
     }
 
     this.updateTrainrunSectionTime();
@@ -821,7 +821,7 @@ export class PerlenketteSectionComponent
       this.getTimeButtonPlusMinusStep(
         this.leftAndRightTimeStructure.rightDepartureTime,
       );
-    this.leftAndRightTimeStructure.rightDepartureTime %= 60;
+    this.leftAndRightTimeStructure.rightDepartureTime %= 120;
     this.onNodeRightDepartureTimeChanged();
   }
 
@@ -832,15 +832,15 @@ export class PerlenketteSectionComponent
         this.leftAndRightTimeStructure.rightDepartureTime,
       );
     this.leftAndRightTimeStructure.rightDepartureTime +=
-      this.leftAndRightTimeStructure.rightDepartureTime < 0 ? 60 : 0;
+      this.leftAndRightTimeStructure.rightDepartureTime < 0 ? 120 : 0;
     this.onNodeRightDepartureTimeChanged();
   }
 
   onNodeRightDepartureTimeChanged() {
     this.leftAndRightTimeStructure.rightDepartureTime =
-      this.leftAndRightTimeStructure.rightDepartureTime % 60;
+      this.leftAndRightTimeStructure.rightDepartureTime % 120;
     this.leftAndRightTimeStructure.rightDepartureTime +=
-      this.leftAndRightTimeStructure.rightDepartureTime < 0 ? 60 : 0;
+      this.leftAndRightTimeStructure.rightDepartureTime < 0 ? 120 : 0;
 
     this.leftAndRightTimeStructure.rightArrivalTime =
       TrainrunsectionHelper.getSymmetricTime(
@@ -849,8 +849,8 @@ export class PerlenketteSectionComponent
     if (!this.lockStructure.leftLock) {
       this.leftAndRightTimeStructure.leftArrivalTime =
         this.leftAndRightTimeStructure.rightDepartureTime +
-        (this.leftAndRightTimeStructure.travelTime % 60);
-      this.leftAndRightTimeStructure.leftArrivalTime %= 60;
+        (this.leftAndRightTimeStructure.travelTime % 120);
+      this.leftAndRightTimeStructure.leftArrivalTime %= 120;
       this.leftAndRightTimeStructure.leftDepartureTime =
         TrainrunsectionHelper.getSymmetricTime(
           this.leftAndRightTimeStructure.leftArrivalTime,
@@ -863,7 +863,7 @@ export class PerlenketteSectionComponent
         this.leftAndRightTimeStructure.rightArrivalTime -
         this.leftAndRightTimeStructure.leftDepartureTime;
       this.leftAndRightTimeStructure.travelTime +=
-        this.leftAndRightTimeStructure.travelTime < 0 ? 60 : 0;
+        this.leftAndRightTimeStructure.travelTime < 0 ? 120 : 0;
     }
 
     this.updateTrainrunSectionTime();
@@ -903,8 +903,8 @@ export class PerlenketteSectionComponent
         this.leftAndRightTimeStructure.leftDepartureTime +
         this.leftAndRightTimeStructure.travelTime;
       this.leftAndRightTimeStructure.rightArrivalTime +=
-        this.leftAndRightTimeStructure.rightArrivalTime < 0 ? 60 : 0;
-      this.leftAndRightTimeStructure.rightArrivalTime %= 60;
+        this.leftAndRightTimeStructure.rightArrivalTime < 0 ? 120 : 0;
+      this.leftAndRightTimeStructure.rightArrivalTime %= 120;
       this.leftAndRightTimeStructure.rightDepartureTime =
         TrainrunsectionHelper.getSymmetricTime(
           this.leftAndRightTimeStructure.rightArrivalTime,
@@ -914,8 +914,8 @@ export class PerlenketteSectionComponent
         this.leftAndRightTimeStructure.rightDepartureTime +
         this.leftAndRightTimeStructure.travelTime;
       this.leftAndRightTimeStructure.leftArrivalTime +=
-        this.leftAndRightTimeStructure.leftArrivalTime < 0 ? 60 : 0;
-      this.leftAndRightTimeStructure.leftArrivalTime %= 60;
+        this.leftAndRightTimeStructure.leftArrivalTime < 0 ? 120 : 0;
+      this.leftAndRightTimeStructure.leftArrivalTime %= 120;
       this.leftAndRightTimeStructure.leftDepartureTime =
         TrainrunsectionHelper.getSymmetricTime(
           this.leftAndRightTimeStructure.leftArrivalTime,

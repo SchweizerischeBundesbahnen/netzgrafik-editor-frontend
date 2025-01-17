@@ -78,14 +78,14 @@ export class TrainrunSection {
       },
       sourceArrival: {
         time: 0,
-        consecutiveTime: 60,
+        consecutiveTime: 120,
         lock: false,
         warning: null,
         timeFormatter: null,
       },
       targetDeparture: {
-        time: 59,
-        consecutiveTime: 59,
+        time: 119,
+        consecutiveTime: 119,
         lock: false,
         warning: null,
         timeFormatter: null,
@@ -207,17 +207,17 @@ export class TrainrunSection {
     this.sourceArrival.time += translateMinutes;
     this.targetDeparture.time += translateMinutes;
 
-    this.sourceDeparture.time = this.sourceDeparture.time % 60;
-    this.targetArrival.time = this.targetArrival.time % 60;
-    this.sourceArrival.time = this.sourceArrival.time % 60;
-    this.targetDeparture.time = this.targetDeparture.time % 60;
+    this.sourceDeparture.time = this.sourceDeparture.time % 120;
+    this.targetArrival.time = this.targetArrival.time % 120;
+    this.sourceArrival.time = this.sourceArrival.time % 120;
+    this.targetDeparture.time = this.targetDeparture.time % 120;
 
     if (mirrorSourceDeparture) {
-      this.sourceArrival.time = (120 - this.sourceDeparture.time) % 60;
-      this.targetDeparture.time = (120 - this.targetArrival.time) % 60;
+      this.sourceArrival.time = (120 - this.sourceDeparture.time) % 120;
+      this.targetDeparture.time = (120 - this.targetArrival.time) % 120;
     } else {
-      this.sourceDeparture.time = (120 - this.sourceArrival.time) % 60;
-      this.targetArrival.time = (120 - this.targetDeparture.time) % 60;
+      this.sourceDeparture.time = (120 - this.sourceArrival.time) % 120;
+      this.targetArrival.time = (120 - this.targetDeparture.time) % 120;
     }
   }
 

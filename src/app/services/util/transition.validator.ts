@@ -26,8 +26,8 @@ export class TransitionValidator {
             .fachCategory
         ].haltezeit;
 
-      const calculatedDepartureTime2 = (arrivalTime1 + trainrunHaltezeit) % 60;
-      const calculatedDepartureTime1 = (arrivalTime2 + trainrunHaltezeit) % 60;
+      const calculatedDepartureTime2 = (arrivalTime1 + trainrunHaltezeit) % 120;
+      const calculatedDepartureTime1 = (arrivalTime2 + trainrunHaltezeit) % 120;
       if (
         calculatedDepartureTime2 !== departureTime2 ||
         calculatedDepartureTime1 !== departureTime1

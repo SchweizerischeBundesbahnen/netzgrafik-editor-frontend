@@ -12,8 +12,8 @@ export class TrainrunsectionValidator {
 
   static validateTravelTimeOneSection(trainrunSection: TrainrunSection) {
     const calculatedTargetArrivalTime =
-      (trainrunSection.getSourceDeparture() + trainrunSection.getTravelTime()) % 60;
-    if (Math.abs(calculatedTargetArrivalTime - trainrunSection.getTargetArrival()) > 1 / 60) {
+      (trainrunSection.getSourceDeparture() + trainrunSection.getTravelTime()) % 120;
+    if (Math.abs(calculatedTargetArrivalTime - trainrunSection.getTargetArrival()) > 1 / 120) {
       trainrunSection.setTargetArrivalWarning(
         $localize`:@@app.services.util.trainrunsection-validator.target-arrival-not-reacheable.title:Target Arrival Warning`,
         $localize`:@@app.services.util.trainrunsection-validator.target-arrival-not-reacheable.description:Target arrival time cannot be reached`,
@@ -23,8 +23,8 @@ export class TrainrunsectionValidator {
     }
 
     const calculatedSourceArrivalTime =
-      (trainrunSection.getTargetDeparture() + trainrunSection.getTravelTime()) % 60;
-    if (Math.abs(calculatedSourceArrivalTime - trainrunSection.getSourceArrival()) > 1 / 60) {
+      (trainrunSection.getTargetDeparture() + trainrunSection.getTravelTime()) % 120;
+    if (Math.abs(calculatedSourceArrivalTime - trainrunSection.getSourceArrival()) > 1 / 120) {
       trainrunSection.setSourceArrivalWarning(
         $localize`:@@app.services.util.trainrunsection-validator.source-arrival-not-reacheable.title:Source Arrival Warning`,
         $localize`:@@app.services.util.trainrunsection-validator.source-arrival-not-reacheable.description:Source arrival time cannot be reached`,
@@ -39,7 +39,7 @@ export class TrainrunsectionValidator {
     trainrunSection.resetSourceDepartureWarning();
     trainrunSection.resetTargetDepartureWarning();
     const sourceSum = MathUtils.round(trainrunSection.getSourceArrival() + trainrunSection.getSourceDeparture(), 4);
-    const sourceSymmetricCheck = Math.abs(sourceSum % 60) < 1 / 60;
+    const sourceSymmetricCheck = Math.abs(sourceSum % 120) < 1 / 120;
     if (!sourceSymmetricCheck) {
       trainrunSection.setSourceArrivalWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
         "" + (trainrunSection.getSourceArrival() + " + " + trainrunSection.getSourceDeparture()) + " = " + sourceSum);
@@ -47,7 +47,7 @@ export class TrainrunsectionValidator {
         "" + (trainrunSection.getSourceArrival() + " + " + trainrunSection.getSourceDeparture()) + " = " + sourceSum);
     }
     const targetSum = MathUtils.round(trainrunSection.getTargetArrival() + trainrunSection.getTargetDeparture(), 4);
-    const targetSymmetricCheck = Math.abs(targetSum % 60) < 1 / 60;
+    const targetSymmetricCheck = Math.abs(targetSum % 120) < 1 / 120;
     if (!targetSymmetricCheck) {
       trainrunSection.setTargetArrivalWarning($localize`:@@app.services.util.trainrunsection-validator.broken-symmetry:Broken symmetry`,
         "" + (trainrunSection.getTargetArrival() + " + " + trainrunSection.getTargetDeparture()) + " = " + targetSum);

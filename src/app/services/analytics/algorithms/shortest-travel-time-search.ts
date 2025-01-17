@@ -49,7 +49,7 @@ export class ShortestTravelTimeSearch {
   ) {
     let correctToTime = toTime;
     if (fromTime > toTime) {
-      correctToTime += 60;
+      correctToTime += 120;
     }
     return correctToTime;
   }
@@ -77,7 +77,7 @@ export class ShortestTravelTimeSearch {
     const departureTime =
       ShortestTravelTimeSearch.correctHourOverflowFromToTime(
         arrivalTime,
-        (departureTimeOrg + currentFrequency) % 60,
+        (departureTimeOrg + currentFrequency) % 120,
       );
 
     let transitionCost = departureTime - arrivalTime;

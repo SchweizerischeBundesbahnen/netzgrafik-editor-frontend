@@ -688,7 +688,7 @@ describe("TransitionValidator", () => {
       NetzgrafikUnitTesting.getUnitTestNetzgrafik(),
     );
     const ts1 = trainrunSectionService.getTrainrunSectionFromId(4);
-    ts1.setSourceDeparture((ts1.getSourceDeparture() + 1) % 60);
+    ts1.setSourceDeparture((ts1.getSourceDeparture() + 1) % 120);
     const a = ts1.getSourceArrival();
     const b = ts1.getSourceDeparture();
     expect(ts1.getSourceArrivalWarning().description).toBe("" + a + " + " + b + " = " + (a + b));

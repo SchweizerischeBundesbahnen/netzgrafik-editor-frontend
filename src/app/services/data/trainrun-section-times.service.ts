@@ -126,7 +126,7 @@ export class TrainrunSectionTimesService {
     this.timeStructure.leftDepartureTime += this.getTimeButtonPlusMinusStep(
       this.timeStructure.leftDepartureTime,
     );
-    this.timeStructure.leftDepartureTime %= 60;
+    this.timeStructure.leftDepartureTime %= 120;
     this.onNodeLeftDepartureTimeChanged();
   }
 
@@ -135,7 +135,7 @@ export class TrainrunSectionTimesService {
       this.timeStructure.leftDepartureTime,
     );
     this.timeStructure.leftDepartureTime +=
-      this.timeStructure.leftDepartureTime < 0 ? 60 : 0;
+      this.timeStructure.leftDepartureTime < 0 ? 120 : 0;
     this.onNodeLeftDepartureTimeChanged();
   }
 
@@ -150,8 +150,8 @@ export class TrainrunSectionTimesService {
     if (!this.lockStructure.rightLock) {
       this.timeStructure.rightArrivalTime =
         this.timeStructure.leftDepartureTime +
-        (this.timeStructure.travelTime % 60);
-      this.timeStructure.rightArrivalTime %= 60;
+        (this.timeStructure.travelTime % 120);
+      this.timeStructure.rightArrivalTime %= 120;
       this.timeStructure.rightDepartureTime =
         TrainrunsectionHelper.getSymmetricTime(
           this.timeStructure.rightArrivalTime,
@@ -161,12 +161,12 @@ export class TrainrunSectionTimesService {
       this.lockStructure.rightLock
     ) {
       const extraHour =
-        this.timeStructure.travelTime - (this.timeStructure.travelTime % 60);
+        this.timeStructure.travelTime - (this.timeStructure.travelTime % 120);
       this.timeStructure.travelTime =
         this.timeStructure.leftArrivalTime -
         this.timeStructure.rightDepartureTime;
       this.timeStructure.travelTime +=
-        this.timeStructure.travelTime < 0 ? 60 : 0;
+        this.timeStructure.travelTime < 0 ? 120 : 0;
       this.timeStructure.travelTime += extraHour;
     } else {
       this.showWarningTwoLocks = true;
@@ -181,7 +181,7 @@ export class TrainrunSectionTimesService {
     this.timeStructure.leftArrivalTime += this.getTimeButtonPlusMinusStep(
       this.timeStructure.leftArrivalTime,
     );
-    this.timeStructure.leftArrivalTime %= 60;
+    this.timeStructure.leftArrivalTime %= 120;
     this.onNodeLeftArrivalTimeChanged();
   }
 
@@ -190,7 +190,7 @@ export class TrainrunSectionTimesService {
       this.timeStructure.leftArrivalTime,
     );
     this.timeStructure.leftArrivalTime +=
-      this.timeStructure.leftArrivalTime < 0 ? 60 : 0;
+      this.timeStructure.leftArrivalTime < 0 ? 120 : 0;
     this.onNodeLeftArrivalTimeChanged();
   }
 
@@ -206,9 +206,9 @@ export class TrainrunSectionTimesService {
     if (!this.lockStructure.rightLock) {
       this.timeStructure.rightDepartureTime =
         this.timeStructure.leftArrivalTime -
-        (this.timeStructure.travelTime % 60);
+        (this.timeStructure.travelTime % 120);
       this.timeStructure.rightDepartureTime +=
-        this.timeStructure.rightDepartureTime < 0 ? 60 : 0;
+        this.timeStructure.rightDepartureTime < 0 ? 120 : 0;
       this.timeStructure.rightArrivalTime =
         TrainrunsectionHelper.getSymmetricTime(
           this.timeStructure.rightDepartureTime,
@@ -218,12 +218,12 @@ export class TrainrunSectionTimesService {
       this.lockStructure.rightLock
     ) {
       const extraHour =
-        this.timeStructure.travelTime - (this.timeStructure.travelTime % 60);
+        this.timeStructure.travelTime - (this.timeStructure.travelTime % 120);
       this.timeStructure.travelTime =
         this.timeStructure.leftArrivalTime -
         this.timeStructure.rightDepartureTime;
       this.timeStructure.travelTime +=
-        this.timeStructure.travelTime < 0 ? 60 : 0;
+        this.timeStructure.travelTime < 0 ? 120 : 0;
       this.timeStructure.travelTime += extraHour;
     } else {
       this.showWarningTwoLocks = true;
@@ -238,7 +238,7 @@ export class TrainrunSectionTimesService {
     this.timeStructure.rightArrivalTime += this.getTimeButtonPlusMinusStep(
       this.timeStructure.rightArrivalTime,
     );
-    this.timeStructure.rightArrivalTime %= 60;
+    this.timeStructure.rightArrivalTime %= 120;
     this.onNodeRightArrivalTimeChanged();
   }
 
@@ -247,7 +247,7 @@ export class TrainrunSectionTimesService {
       this.timeStructure.rightArrivalTime,
     );
     this.timeStructure.rightArrivalTime +=
-      this.timeStructure.rightArrivalTime < 0 ? 60 : 0;
+      this.timeStructure.rightArrivalTime < 0 ? 120 : 0;
     this.onNodeRightArrivalTimeChanged();
   }
 
@@ -263,9 +263,9 @@ export class TrainrunSectionTimesService {
     if (!this.lockStructure.leftLock) {
       this.timeStructure.leftDepartureTime =
         this.timeStructure.rightArrivalTime -
-        (this.timeStructure.travelTime % 60);
+        (this.timeStructure.travelTime % 120);
       this.timeStructure.leftDepartureTime +=
-        this.timeStructure.leftDepartureTime < 0 ? 60 : 0;
+        this.timeStructure.leftDepartureTime < 0 ? 120 : 0;
       this.timeStructure.leftArrivalTime =
         TrainrunsectionHelper.getSymmetricTime(
           this.timeStructure.leftDepartureTime,
@@ -275,12 +275,12 @@ export class TrainrunSectionTimesService {
       this.lockStructure.leftLock
     ) {
       const extraHour =
-        this.timeStructure.travelTime - (this.timeStructure.travelTime % 60);
+        this.timeStructure.travelTime - (this.timeStructure.travelTime % 120);
       this.timeStructure.travelTime =
         this.timeStructure.rightArrivalTime -
         this.timeStructure.leftDepartureTime;
       this.timeStructure.travelTime +=
-        this.timeStructure.travelTime < 0 ? 60 : 0;
+        this.timeStructure.travelTime < 0 ? 120 : 0;
       this.timeStructure.travelTime += extraHour;
     } else {
       this.showWarningTwoLocks = true;
@@ -295,7 +295,7 @@ export class TrainrunSectionTimesService {
     this.timeStructure.rightDepartureTime += this.getTimeButtonPlusMinusStep(
       this.timeStructure.rightDepartureTime,
     );
-    this.timeStructure.rightDepartureTime %= 60;
+    this.timeStructure.rightDepartureTime %= 120;
     this.onNodeRightDepartureTimeChanged();
   }
 
@@ -304,7 +304,7 @@ export class TrainrunSectionTimesService {
       this.timeStructure.rightDepartureTime,
     );
     this.timeStructure.rightDepartureTime +=
-      this.timeStructure.rightDepartureTime < 0 ? 60 : 0;
+      this.timeStructure.rightDepartureTime < 0 ? 120 : 0;
     this.onNodeRightDepartureTimeChanged();
   }
 
@@ -320,8 +320,8 @@ export class TrainrunSectionTimesService {
     if (!this.lockStructure.leftLock) {
       this.timeStructure.leftArrivalTime =
         this.timeStructure.rightDepartureTime +
-        (this.timeStructure.travelTime % 60);
-      this.timeStructure.leftArrivalTime %= 60;
+        (this.timeStructure.travelTime % 120);
+      this.timeStructure.leftArrivalTime %= 120;
       this.timeStructure.leftDepartureTime =
         TrainrunsectionHelper.getSymmetricTime(
           this.timeStructure.leftArrivalTime,
@@ -331,12 +331,12 @@ export class TrainrunSectionTimesService {
       this.lockStructure.leftLock
     ) {
       const extraHour =
-        this.timeStructure.travelTime - (this.timeStructure.travelTime % 60);
+        this.timeStructure.travelTime - (this.timeStructure.travelTime % 120);
       this.timeStructure.travelTime =
         this.timeStructure.rightArrivalTime -
         this.timeStructure.leftDepartureTime;
       this.timeStructure.travelTime +=
-        this.timeStructure.travelTime < 0 ? 60 : 0;
+        this.timeStructure.travelTime < 0 ? 120 : 0;
       this.timeStructure.travelTime += extraHour;
     } else {
       this.showWarningTwoLocks = true;
@@ -372,8 +372,8 @@ export class TrainrunSectionTimesService {
       this.timeStructure.rightArrivalTime =
         this.timeStructure.leftDepartureTime + this.timeStructure.travelTime;
       this.timeStructure.rightArrivalTime +=
-        this.timeStructure.rightArrivalTime < 0 ? 60 : 0;
-      this.timeStructure.rightArrivalTime %= 60;
+        this.timeStructure.rightArrivalTime < 0 ? 120 : 0;
+      this.timeStructure.rightArrivalTime %= 120;
       this.timeStructure.rightDepartureTime =
         TrainrunsectionHelper.getSymmetricTime(
           this.timeStructure.rightArrivalTime,
@@ -382,8 +382,8 @@ export class TrainrunSectionTimesService {
       this.timeStructure.leftArrivalTime =
         this.timeStructure.rightDepartureTime + this.timeStructure.travelTime;
       this.timeStructure.leftArrivalTime +=
-        this.timeStructure.leftArrivalTime < 0 ? 60 : 0;
-      this.timeStructure.leftArrivalTime %= 60;
+        this.timeStructure.leftArrivalTime < 0 ? 120 : 0;
+      this.timeStructure.leftArrivalTime %= 120;
       this.timeStructure.leftDepartureTime =
         TrainrunsectionHelper.getSymmetricTime(
           this.timeStructure.leftArrivalTime,
@@ -492,22 +492,22 @@ export class TrainrunSectionTimesService {
       LeftAndRightElement.LeftRightTrainrunName
     ) {
       this.timeStructure.leftDepartureTime =
-        (this.timeStructure.leftDepartureTime + this.offset) % 60;
+        (this.timeStructure.leftDepartureTime + this.offset) % 120;
       this.timeStructure.rightArrivalTime =
-        (this.timeStructure.rightArrivalTime + this.offset) % 60;
+        (this.timeStructure.rightArrivalTime + this.offset) % 120;
       this.timeStructure.leftArrivalTime =
-        (maxMinutes + this.timeStructure.leftArrivalTime - this.offset) % 60;
+        (maxMinutes + this.timeStructure.leftArrivalTime - this.offset) % 120;
       this.timeStructure.rightDepartureTime =
-        (maxMinutes + this.timeStructure.rightDepartureTime - this.offset) % 60;
+        (maxMinutes + this.timeStructure.rightDepartureTime - this.offset) % 120;
     } else {
       this.timeStructure.leftDepartureTime =
-        (maxMinutes + this.timeStructure.leftDepartureTime - this.offset) % 60;
+        (maxMinutes + this.timeStructure.leftDepartureTime - this.offset) % 120;
       this.timeStructure.rightArrivalTime =
-        (maxMinutes + this.timeStructure.rightArrivalTime - this.offset) % 60;
+        (maxMinutes + this.timeStructure.rightArrivalTime - this.offset) % 120;
       this.timeStructure.leftArrivalTime =
-        (this.timeStructure.leftArrivalTime + this.offset) % 60;
+        (this.timeStructure.leftArrivalTime + this.offset) % 120;
       this.timeStructure.rightDepartureTime =
-        (this.timeStructure.rightDepartureTime + this.offset) % 60;
+        (this.timeStructure.rightDepartureTime + this.offset) % 120;
     }
     this.offsetTransformationActive = true;
     this.fixAllTimesPrecision();
@@ -522,22 +522,22 @@ export class TrainrunSectionTimesService {
       LeftAndRightElement.LeftRightTrainrunName
     ) {
       this.timeStructure.leftDepartureTime =
-        (maxMinutes + this.timeStructure.leftDepartureTime - this.offset) % 60;
+        (maxMinutes + this.timeStructure.leftDepartureTime - this.offset) % 120;
       this.timeStructure.rightArrivalTime =
-        (maxMinutes + this.timeStructure.rightArrivalTime - this.offset) % 60;
+        (maxMinutes + this.timeStructure.rightArrivalTime - this.offset) % 120;
       this.timeStructure.leftArrivalTime =
-        (this.timeStructure.leftArrivalTime + this.offset) % 60;
+        (this.timeStructure.leftArrivalTime + this.offset) % 120;
       this.timeStructure.rightDepartureTime =
-        (this.timeStructure.rightDepartureTime + this.offset) % 60;
+        (this.timeStructure.rightDepartureTime + this.offset) % 120;
     } else {
       this.timeStructure.leftDepartureTime =
-        (this.timeStructure.leftDepartureTime + this.offset) % 60;
+        (this.timeStructure.leftDepartureTime + this.offset) % 120;
       this.timeStructure.rightArrivalTime =
-        (this.timeStructure.rightArrivalTime + this.offset) % 60;
+        (this.timeStructure.rightArrivalTime + this.offset) % 120;
       this.timeStructure.leftArrivalTime =
-        (maxMinutes + this.timeStructure.leftArrivalTime - this.offset) % 60;
+        (maxMinutes + this.timeStructure.leftArrivalTime - this.offset) % 120;
       this.timeStructure.rightDepartureTime =
-        (maxMinutes + this.timeStructure.rightDepartureTime - this.offset) % 60;
+        (maxMinutes + this.timeStructure.rightDepartureTime - this.offset) % 120;
     }
     this.originalTimeStructure =
       this.trainrunSectionHelper.getLeftAndRightTimes(

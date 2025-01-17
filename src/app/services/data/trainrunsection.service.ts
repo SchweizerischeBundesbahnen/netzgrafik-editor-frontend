@@ -88,7 +88,7 @@ export class TrainrunSectionService implements OnDestroy {
         ].haltezeit;
     haltezeit = nonStop ? 0 : haltezeit;
     const fromDepartureTime = MathUtils.round(
-      (nodeArrival + haltezeit) % 60,
+      (nodeArrival + haltezeit) % 120,
       precision,
     );
     const fromArrivalTime = MathUtils.round(
@@ -96,7 +96,7 @@ export class TrainrunSectionService implements OnDestroy {
       precision,
     );
     const toArrivalTime = MathUtils.round(
-      (fromDepartureTime + (trainrunSection.getTravelTime() % 60)) % 60,
+      (fromDepartureTime + (trainrunSection.getTravelTime() % 120)) % 120,
       precision,
     );
     const toDepartureTime = MathUtils.round(
@@ -113,11 +113,11 @@ export class TrainrunSectionService implements OnDestroy {
   }
 
   static boundMinutesToOneHour(time: number) {
-    while (time >= 60) {
-      time -= 60;
+    while (time >= 120) {
+      time -= 120;
     }
     while (time < 0) {
-      time += 60;
+      time += 120;
     }
     return time;
   }
@@ -197,7 +197,7 @@ export class TrainrunSectionService implements OnDestroy {
     } else {
       // first or unconnected section - special case
       const targetArrivalTime = MathUtils.round(
-        (trainrunSection.getSourceDeparture() + (trainrunSection.getTravelTime() % 60)) % 60,
+        (trainrunSection.getSourceDeparture() + (trainrunSection.getTravelTime() % 120)) % 120,
         TrainrunSectionService.TIME_PRECISION
       );
       const targetDepartureTime = MathUtils.round(
@@ -446,7 +446,7 @@ export class TrainrunSectionService implements OnDestroy {
     // update source arrival time
     // ----------------------------------------------------------------------------------
     const depTimeAtSource = MathUtils.round(
-      (arrivalTimeAtSource + halteZeit) % 60,
+      (arrivalTimeAtSource + halteZeit) % 120,
       TrainrunSectionService.TIME_PRECISION
     );
     const arrTimeAtSource = MathUtils.round(
@@ -462,7 +462,7 @@ export class TrainrunSectionService implements OnDestroy {
     if (!pair.trainrunSection.getTargetArrivalLock()) {
       // Target is not locked -> update the Target Arrival Time
       const arrTimeAtTarget = MathUtils.round(
-        (depTimeAtSource + pair.trainrunSection.getTravelTime()) % 60,
+        (depTimeAtSource + pair.trainrunSection.getTravelTime()) % 120,
         TrainrunSectionService.TIME_PRECISION
       );
       const depTimeAtTarget = MathUtils.round(
@@ -483,9 +483,9 @@ export class TrainrunSectionService implements OnDestroy {
     }
 
     let newTravelTime = pair.trainrunSection.getTargetArrival() - depTimeAtSource;
-    newTravelTime += Math.floor(pair.trainrunSection.getTravelTime() / 60) * 60;
+    newTravelTime += Math.floor(pair.trainrunSection.getTravelTime() / 120) * 120;
     while (newTravelTime < 0.0) {
-      newTravelTime += 60;
+      newTravelTime += 120;
     }
     pair.trainrunSection.setTravelTime(newTravelTime);
   }
@@ -520,7 +520,7 @@ export class TrainrunSectionService implements OnDestroy {
     // update source arrival time
     // ----------------------------------------------------------------------------------
     const depTimeAtTarget = MathUtils.round(
-      (arrivalTimeAtTarget + halteZeit) % 60,
+      (arrivalTimeAtTarget + halteZeit) % 120,
       TrainrunSectionService.TIME_PRECISION
     );
     const arrTimeAtTarget = MathUtils.round(
@@ -536,7 +536,7 @@ export class TrainrunSectionService implements OnDestroy {
     if (!pair.trainrunSection.getSourceArrivalLock()) {
       // Target is not locked -> update the Target Arrival Time
       const arrTimeAtSource = MathUtils.round(
-        (depTimeAtTarget + pair.trainrunSection.getTravelTime()) % 60,
+        (depTimeAtTarget + pair.trainrunSection.getTravelTime()) % 120,
         TrainrunSectionService.TIME_PRECISION
       );
       const depTimeAtSource = MathUtils.round(
@@ -557,9 +557,9 @@ export class TrainrunSectionService implements OnDestroy {
     }
 
     let newTravelTime = pair.trainrunSection.getSourceArrival() - depTimeAtTarget;
-    newTravelTime += Math.floor(pair.trainrunSection.getTravelTime() / 60) * 60;
+    newTravelTime += Math.floor(pair.trainrunSection.getTravelTime() / 120) * 120;
     while (newTravelTime < 0.0) {
-      newTravelTime += 60;
+      newTravelTime += 120;
     }
     pair.trainrunSection.setTravelTime(newTravelTime);
   }

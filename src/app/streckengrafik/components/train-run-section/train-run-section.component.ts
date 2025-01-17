@@ -526,7 +526,7 @@ export class TrainRunSectionComponent
         orgTime = this.trainrunItem.arrivalTime;
       }
     }
-    return "" + (Math.floor(orgTime + this.freqOffset + 10080) % 60);
+    return "" + (Math.floor(orgTime + this.freqOffset + 10080) % 120);
   }
 
   getArrivalText(): string {
@@ -591,7 +591,7 @@ export class TrainRunSectionComponent
       }
     }
 
-    return "" + (Math.floor(orgTime + this.freqOffset + 10080) % 60);
+    return "" + (Math.floor(orgTime + this.freqOffset + 10080) % 120);
   }
 
   isArrivalTimeTextFiltering() {

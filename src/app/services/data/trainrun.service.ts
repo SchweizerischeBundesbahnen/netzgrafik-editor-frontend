@@ -237,14 +237,14 @@ export class TrainrunService {
       .getAllTrainrunSectionsForTrainrun(trainrun.getId())
       .forEach((ts: TrainrunSection) => {
         const sourceDeparture =
-          (60 + ts.getSourceDeparture() + freqOffset) % 60;
-        const targetArrival = (60 + ts.getTargetArrival() + freqOffset) % 60;
+          (120 + ts.getSourceDeparture() + freqOffset) % 120;
+        const targetArrival = (120 + ts.getTargetArrival() + freqOffset) % 120;
         this.trainrunSectionService.updateTrainrunSectionTime(
           ts.getId(),
-          (60 - sourceDeparture) % 60,
+          (120 - sourceDeparture) % 120,
           sourceDeparture,
           targetArrival,
-          (60 - targetArrival) % 60,
+          (120 - targetArrival) % 120,
           ts.getTravelTime(),
           false, // disable event emission since UpdateTrainrunOperation is emitted below
         );
@@ -439,7 +439,7 @@ export class TrainrunService {
         port2.getTrainrunSection().getSourceDeparture();
 
     let frequencyOffset = 0;
-    while (60 + arrivalTimeAtNode > departTimeAtNode + frequencyOffset) {
+    while (120 + arrivalTimeAtNode > departTimeAtNode + frequencyOffset) {
       frequencyOffset += port1.getTrainrunSection().getFrequency();
     }
 
@@ -464,7 +464,7 @@ export class TrainrunService {
     const trans2 = node.getTransitionFromPortId(port2.getId());
     if (trans1 === undefined && trans2 === undefined) {
       const trans = node.addTransitionAndComputeRouting(port1, port2, trainrun1);
-      if (60 + arrivalTimeAtNode === departTimeAtNode + frequencyOffset) {
+      if (120 + arrivalTimeAtNode === departTimeAtNode + frequencyOffset) {
         trans.setIsNonStopTransit(true);
       } else {
         trans.setIsNonStopTransit(false);
@@ -633,7 +633,7 @@ export class TrainrunService {
       const freqDependantArrivalTime = arrivalTime - restFreqArrivalTime;
       let offset = freq - freqDependantArrivalTime;
       offset += restFreqArrivalTime;
-      offset = Math.floor(offset / 60) * 60;
+      offset = Math.floor(offset / 120) * 120;
 
       const propDataBackward = this.propagateConsecutiveTimes(
         startForwardBackwardNode.startBackwardNode,
@@ -892,13 +892,13 @@ export class TrainrunService {
       );
       const travelTime =
         arrivalTime < oppositeNodeDepartureTime
-          ? arrivalTime + 60 - oppositeNodeDepartureTime
+          ? arrivalTime + 120 - oppositeNodeDepartureTime
           : arrivalTime - oppositeNodeDepartureTime;
       accumulatedTime += travelTime;
 
       const travelTimeOffset =
         nextPair.trainrunSection.getTravelTime() -
-        (nextPair.trainrunSection.getTravelTime() % 60);
+        (nextPair.trainrunSection.getTravelTime() % 120);
       accumulatedTime += travelTimeOffset;
 
       nextPair.node.setArrivalConsecutiveTime(
@@ -917,7 +917,7 @@ export class TrainrunService {
         const nextDeparture = nextPair.node.getDepartureTime(trs);
         halteZeit =
           nextDeparture < oldArrival
-            ? nextDeparture + 60 - oldArrival
+            ? nextDeparture + 120 - oldArrival
             : nextDeparture - oldArrival;
       }
       accumulatedTime += halteZeit;

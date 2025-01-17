@@ -47,7 +47,7 @@ export class ConnectionValidator {
     const connectionTime = node.getConnectionTime();
     const trainrunSection = port.getTrainrunSection();
     const arrivalTime = node.getArrivalTime(trainrunSection);
-    return (arrivalTime + connectionTime) % 60;
+    return (arrivalTime + connectionTime) % 120;
   }
 
   public static getShortestConnectionTime(

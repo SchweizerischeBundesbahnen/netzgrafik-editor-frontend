@@ -25,7 +25,7 @@ export class TrainrunsectionHelper {
   }
 
   static getSymmetricTime(time: number) {
-    return time === 0 ? 0 : 60 - time;
+    return time === 0 ? 0 : 120 - time;
   }
 
   static getDefaultTimeStructure(
@@ -64,7 +64,7 @@ export class TrainrunsectionHelper {
     precision = TrainrunSectionService.TIME_PRECISION
   ): number {
     return MathUtils.round(
-      (timeStructure.leftDepartureTime + (timeStructure.travelTime % 60)) % 60,
+      (timeStructure.leftDepartureTime + (timeStructure.travelTime % 120)) % 120,
       precision
     );
   }
