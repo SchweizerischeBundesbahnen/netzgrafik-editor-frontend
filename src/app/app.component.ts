@@ -12,6 +12,7 @@ import {Operation} from "./models/operation.model";
 import {LabelService} from "./services/data/label.service";
 import {NodeService} from "./services/data/node.service";
 import {I18nService} from "./core/i18n/i18n.service";
+import {PositionTransformationService} from "./services/util/position.transformation.service";
 
 @Component({
   selector: "sbb-root",
@@ -46,6 +47,7 @@ export class AppComponent {
               private trainrunService: TrainrunService,
               private trainrunSectionService: TrainrunSectionService,
               private nodeService: NodeService,
+              private positionTransformationService: PositionTransformationService,
               private labelService: LabelService,
               private i18nService: I18nService,
             ) {
@@ -86,6 +88,7 @@ export class AppComponent {
     this.trainrunService.operation,
     this.trainrunSectionService.operation,
     this.nodeService.operation,
+    this.positionTransformationService.operation,
     this.labelService.operation,
   );
 }

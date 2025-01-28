@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {EventEmitter, Injectable} from "@angular/core";
 import {TrainrunSectionService} from "../data/trainrunsection.service";
 import {UiInteractionService} from "../ui/ui.interaction.service";
 import {NodeService} from "../data/node.service";
@@ -6,6 +6,7 @@ import {NoteService} from "../data/note.service";
 import {Vec2D} from "../../utils/vec2D";
 import {Node} from "../../models/node.model";
 import {ViewportCullService} from "../ui/viewport.cull.service";
+import {NodeOperation, Operation, OperationType} from "src/app/models/operation.model";
 
 @Injectable({
   providedIn: "root",
@@ -19,6 +20,7 @@ export class PositionTransformationService {
     private readonly viewportCullService: ViewportCullService,
   ) {
   }
+  readonly operation = new EventEmitter<Operation>();
 
   private scaleFullNetzgrafikArea(factor: number, zoomCenter: Vec2D, windowViewboxPropertiesMapKey: string) {
     const scaleCenterCoordinates: Vec2D = this.computeScaleCenterCoordinates(zoomCenter, windowViewboxPropertiesMapKey);
@@ -135,6 +137,7 @@ export class PositionTransformationService {
     if (leftX !== undefined) {
       nodes.forEach((n) => {
         n.setPosition(leftX, n.getPositionY());
+        this.operation.emit(new NodeOperation(OperationType.update, n));
       });
     }
 
@@ -157,6 +160,7 @@ export class PositionTransformationService {
     if (rightX !== undefined) {
       nodes.forEach((n) => {
         n.setPosition(rightX - n.getNodeWidth(), n.getPositionY());
+        this.operation.emit(new NodeOperation(OperationType.update, n));
       });
     }
 
@@ -179,6 +183,7 @@ export class PositionTransformationService {
     if (topY !== undefined) {
       nodes.forEach((n) => {
         n.setPosition(n.getPositionX(), topY);
+        this.operation.emit(new NodeOperation(OperationType.update, n));
       });
     }
 
@@ -201,6 +206,7 @@ export class PositionTransformationService {
     if (bottomY !== undefined) {
       nodes.forEach((n) => {
         n.setPosition(n.getPositionX(), bottomY - n.getNodeHeight());
+        this.operation.emit(new NodeOperation(OperationType.update, n));
       });
     }
 
