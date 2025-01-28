@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.21](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.20...netzgrafik-frontend-v2.9.21) (2025-01-28)
+
+
+### Bug Fixes
+
+* aemit operations for position transformation service ([#400](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/400)) ([a7dae9e](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/a7dae9ef2f71e32238c3015d1ae4165dfd0d7bf8))
+
 ## [2.9.20](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.19...netzgrafik-frontend-v2.9.20) (2025-01-15)
 
 
