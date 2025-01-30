@@ -32,7 +32,7 @@ the editor effectively.
 Key Features
 
 1. **Interactive Drawing Interface:** The user can define nodes, trains with their routes and
-   attributes to create a comprehensive Netzgrafik. The editor offers an user-friendly
+   attributes to create a comprehensive Netzgrafik. The editor offers a user-friendly
    drag-and-drop interface that allows to easily draw the entire Netzgrafik. When a node
    is repositioned (moved), the edge paths of all train segments at the node are redrawn using a
    heuristic to minimize the number of overlapping edges. This ensures that the network graph is
@@ -96,7 +96,7 @@ For more details have a look into [create and modify nodes](CREATE_NODES.md).
 A trainrun consists of one or more trainrun sections. The trainrun section represents a specific segment or portion of a trainrun that connects two nodes. It encapsulates all the relevant information related to that particular section, including temporal details like departure and arrival times. Additionally, it also stores the journey time, which indicates the duration it takes for the train to run to move from one node to another.
 
 A trainrun has references to behaviour-related abstractions such as
-category (e.g., a regional train, an intercity train or a goods train), frequency (e.g., 1/4h, 1/2h or every hourand) time category (e.g., peak times or off-peak times or occasional), which define the behaviour of a trainrun ([see data model](DATA_MODEL.md)).
+category (e.g., a regional train, an intercity train or a goods train), frequency (e.g., 1/4h, 1/2h or every hour), and time category (e.g., peak times or off-peak times or occasional), which define the behaviour of a trainrun ([see data model](DATA_MODEL.md)).
 
 For more details have a look into [create and modify trainrun](CREATE_TRAINRUN.md).
 
