@@ -32,7 +32,7 @@ the editor effectively.
 Key Features
 
 1. **Interactive Drawing Interface:** The user can define nodes, trains with their routes and
-   attributes to create a comprehensive Netzgrafik. The editor offers an user-friendly
+   attributes to create a comprehensive Netzgrafik. The editor offers a user-friendly
    drag-and-drop interface that allows to easily draw the entire Netzgrafik. When a node
    is repositioned (moved), the edge paths of all train segments at the node are redrawn using a
    heuristic to minimize the number of overlapping edges. This ensures that the network graph is
@@ -88,7 +88,7 @@ For more details and to create your first Netzgrafik have a look into [create a 
 ## Nodes
 The nodes represent the specific locations, such as stations or stops, where a trainrun can have different actions or events associated with it. These nodes serve as key points in the trainrun's route, determining where it stops, passes through, or starts and ends ([see data model](DATA_MODEL.md)).
 
-For more details have a look into [create and modifiy nodes](CREATE_NODES.md).
+For more details have a look into [create and modify nodes](CREATE_NODES.md).
 
 <a id="Trains"></a>
 
@@ -96,12 +96,12 @@ For more details have a look into [create and modifiy nodes](CREATE_NODES.md).
 A trainrun consists of one or more trainrun sections. The trainrun section represents a specific segment or portion of a trainrun that connects two nodes. It encapsulates all the relevant information related to that particular section, including temporal details like departure and arrival times. Additionally, it also stores the journey time, which indicates the duration it takes for the train to run to move from one node to another.
 
 A trainrun has references to behaviour-related abstractions such as
-category (e.g., a regional train, an intercity train or a goods train), frequency (e.g., 1/4h, 1/2h or every hourand) time category (e.g., peak times or off-peak times or occasional), which define the behaviour of a trainrun ([see data model](DATA_MODEL.md)).
+category (e.g., a regional train, an intercity train or a goods train), frequency (e.g., 1/4h, 1/2h or every hour), and time category (e.g., peak times or off-peak times or occasional), which define the behaviour of a trainrun ([see data model](DATA_MODEL.md)).
 
-For more details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.md).
+For more details have a look into [create and modify trainrun](CREATE_TRAINRUN.md).
 
 - [Split / Combine two trainruns](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_TRAINRUN.md#split--combine-two-trainruns)
-- [Merge two indepandant Netzgrafik](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_TRAINRUN.md#merge-two-indepandant-netzgrafik) 
+- [Merge two independent Netzgrafik](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/CREATE_TRAINRUN.md#merge-two-indepandant-netzgrafik) 
 
 <a id="Connections"></a>
 
@@ -109,7 +109,7 @@ For more details have a look into [create and modifiy trainrun](CREATE_TRAINRUN.
 
 ![Editing_Connections](./images/Editing_Connections.png)
 
-For more details have a look into [create and modifiy connections](CREATE_CONNECTIONS.md).
+For more details have a look into [create and modify connections](CREATE_CONNECTIONS.md).
 
 
 ---
@@ -117,7 +117,7 @@ For more details have a look into [create and modifiy connections](CREATE_CONNEC
 
 ## Filters
 
-For more details have a look into [create and modifiy filters](CREATE_FILTERS.md).
+For more details have a look into [create and modify filters](CREATE_FILTERS.md).
 
 ---
 <a id="Streckengrafik"></a>
@@ -126,7 +126,7 @@ For more details have a look into [create and modifiy filters](CREATE_FILTERS.md
 
 ![Overview_Streckengrafik_Screenshot_001](./images/Overview_Streckengrafik_Screenshot_001.PNG)
 
-For mor details have a look into [graphic timetable](Graphic_Timetable.md).
+For more details have a look into [graphic timetable](Graphic_Timetable.md).
 
 
 ---
@@ -160,7 +160,7 @@ The time can be locked so that no propagation (automated update) will be done. J
 ### Toggle: show all locks / or only closed (default) 
 In the Perlenkette view, you can click on the eye icon in the bottom left corner
 to display all locks. By default, only the locks that are closed are shown. This is 
-visually visible with the disabled eye icon. When you click on the icon then the disable 
+visually visible with the disabled eye icon. When you click on the icon then the disabled 
 eye icon switches to the visible eye icon - or vice-versa. Visible eye means all locks are visible.
 
 ---
