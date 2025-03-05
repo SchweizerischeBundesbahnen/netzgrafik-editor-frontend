@@ -15,11 +15,18 @@ export class NetzgrafikDefault {
       nodes: [
         {
           id: 0,
-          betriebspunktName: "BN",
-          fullName: "Bern",
-          positionX: -192,
-          positionY: 32,
-          ports: [],
+          betriebspunktName: "A",
+          fullName: "A",
+          positionX: 384,
+          positionY: 288,
+          ports: [
+            {
+              id: 1,
+              trainrunSectionId: 1,
+              positionIndex: 0,
+              positionAlignment: 2
+            },
+          ],
           transitions: [],
           connections: [],
           resourceId: null,
@@ -32,12 +39,27 @@ export class NetzgrafikDefault {
         },
         {
           id: 1,
-          betriebspunktName: "OL",
-          fullName: "Olten",
-          positionX: 832,
-          positionY: 32,
-          ports: [],
-          transitions: [],
+          betriebspunktName: "B",
+          fullName: "B",
+          positionX: 800,
+          positionY: 288,
+          ports: [
+            {
+              id: 2,
+              trainrunSectionId: 1,
+              positionIndex: 0,
+              positionAlignment: 2
+            },
+            {
+              id: 3,
+              trainrunSectionId: 2,
+              positionIndex: 0,
+              positionAlignment: 3
+            }
+          ],
+          transitions: [
+            {"id": 1, "port1Id": 2, "port2Id": 3, "isNonStopTransit": false}
+          ],
           connections: [],
           resourceId: null,
           perronkanten: 10,
@@ -49,151 +71,22 @@ export class NetzgrafikDefault {
         },
         {
           id: 2,
-          betriebspunktName: "ZUE",
-          fullName: "Zuerich",
-          positionX: 1632,
-          positionY: 32,
-          ports: [],
+          betriebspunktName: "C",
+          fullName: "C",
+          positionX: 1184,
+          positionY: 288,
+          ports: [
+            {
+            id: 4,
+            trainrunSectionId: 2,
+            positionIndex: 0,
+            positionAlignment: 2
+          },
+        ],
           transitions: [],
           connections: [],
           resourceId: null,
           perronkanten: 10,
-          connectionTime: 5,
-          trainrunCategoryHaltezeiten: null,
-          symmetryAxis: null,
-          warnings: null,
-          labelIds: [],
-        },
-        {
-          id: 3,
-          betriebspunktName: "LZ",
-          fullName: "Luzern",
-          positionX: 1184,
-          positionY: 960,
-          ports: [],
-          transitions: [],
-          connections: [],
-          resourceId: null,
-          perronkanten: 10,
-          connectionTime: 5,
-          trainrunCategoryHaltezeiten: null,
-          symmetryAxis: null,
-          warnings: null,
-          labelIds: [],
-        },
-        {
-          id: 4,
-          betriebspunktName: "ZF",
-          fullName: "Zofingen",
-          positionX: 832,
-          positionY: 448,
-          ports: [],
-          transitions: [],
-          connections: [],
-          resourceId: null,
-          perronkanten: 5,
-          connectionTime: 3,
-          trainrunCategoryHaltezeiten: null,
-          symmetryAxis: null,
-          warnings: null,
-          labelIds: [],
-        },
-        {
-          id: 5,
-          betriebspunktName: "ZG",
-          fullName: "Zug",
-          positionX: 1184,
-          positionY: 576,
-          ports: [],
-          transitions: [],
-          connections: [],
-          resourceId: null,
-          perronkanten: 5,
-          connectionTime: 5,
-          trainrunCategoryHaltezeiten: null,
-          symmetryAxis: null,
-          warnings: null,
-          labelIds: [],
-        },
-        {
-          id: 6,
-          betriebspunktName: "SS",
-          fullName: "Sursee",
-          positionX: 672,
-          positionY: 800,
-          ports: [],
-          transitions: [],
-          connections: [],
-          resourceId: null,
-          perronkanten: 5,
-          connectionTime: 6,
-          trainrunCategoryHaltezeiten: null,
-          symmetryAxis: null,
-          warnings: null,
-          labelIds: [],
-        },
-        {
-          id: 7,
-          betriebspunktName: "RTR",
-          fullName: "Rothrist",
-          positionX: 320,
-          positionY: 32,
-          ports: [],
-          transitions: [],
-          connections: [],
-          resourceId: null,
-          perronkanten: 5,
-          connectionTime: 5,
-          trainrunCategoryHaltezeiten: null,
-          symmetryAxis: null,
-          warnings: null,
-          labelIds: [],
-        },
-        {
-          id: 8,
-          betriebspunktName: "LTH",
-          fullName: "Langenthal",
-          positionX: 320,
-          positionY: 192,
-          ports: [],
-          transitions: [],
-          connections: [],
-          resourceId: null,
-          perronkanten: 5,
-          connectionTime: 5,
-          trainrunCategoryHaltezeiten: null,
-          symmetryAxis: null,
-          warnings: null,
-          labelIds: [],
-        },
-        {
-          id: 9,
-          betriebspunktName: "BAA",
-          fullName: "Baar",
-          positionX: 1536,
-          positionY: 480,
-          ports: [],
-          transitions: [],
-          connections: [],
-          resourceId: null,
-          perronkanten: 5,
-          connectionTime: 5,
-          trainrunCategoryHaltezeiten: null,
-          symmetryAxis: null,
-          warnings: null,
-          labelIds: [],
-        },
-        {
-          id: 10,
-          betriebspunktName: "GD",
-          fullName: "Goldau",
-          positionX: 1728,
-          positionY: 960,
-          ports: [],
-          transitions: [],
-          connections: [],
-          resourceId: null,
-          perronkanten: 5,
           connectionTime: 5,
           trainrunCategoryHaltezeiten: null,
           symmetryAxis: null,
@@ -201,8 +94,146 @@ export class NetzgrafikDefault {
           labelIds: [],
         },
       ],
-      trainrunSections: [],
-      trainruns: [],
+      trainrunSections: [
+        {
+          id: 1,
+          sourceNodeId: 0,
+          sourcePortId: 1,
+          targetNodeId: 1,
+          targetPortId: 2,
+          travelTime: {
+            time: 5,
+            consecutiveTime: 1,
+            lock: true,
+            warning: null,
+            timeFormatter: null
+          },
+          sourceDeparture: {
+            time: 0,
+            consecutiveTime: 0,
+            lock: false,
+            warning: null,
+            timeFormatter: null
+          },
+          sourceArrival: {
+            time: 0,
+            consecutiveTime: 60,
+            lock: false,
+            warning: null,
+            timeFormatter: null
+          },
+          targetDeparture: {
+            time: 55,
+            consecutiveTime: 55,
+            lock: false,
+            warning: null,
+            timeFormatter: null
+          },
+          targetArrival: {
+            time: 5,
+            consecutiveTime: 5,
+            lock: false,
+            warning: null,
+            timeFormatter: null
+          },
+          numberOfStops: 0,
+          trainrunId: 2,
+          resourceId: 0,
+          specificTrainrunSectionFrequencyId: null,
+          path: {
+            path: [
+              {x: 482, y: 304},
+              {x: 546, y: 304},
+              {x: 734, y: 304},
+              {x: 798, y: 304}
+            ],
+            textPositions: {
+              0: {x: 500, y: 316},
+              1: {x: 528, y: 292},
+              2: {x: 780, y: 292},
+              3: {x: 752, y: 316},
+              4: {x: 640, y: 292},
+              5: {x: 640, y: 292},
+              6: {x: 640, y: 316}
+            }
+          },
+          warnings: null
+        },
+        {
+          id: 2,
+          sourceNodeId: 1,
+          sourcePortId: 3,
+          targetNodeId: 2,
+          targetPortId: 4,
+          travelTime: {
+            time: 10,
+            consecutiveTime: 1,
+            lock: true,
+            warning: null,
+            timeFormatter: null
+          },
+          sourceDeparture: {
+            time: 7,
+            consecutiveTime: 7,
+            lock: false,
+            warning: null,
+            timeFormatter: null
+          },
+          sourceArrival: {
+            time: 53,
+            consecutiveTime: 53,
+            lock: false,
+            warning: null,
+            timeFormatter: null
+          },
+          targetDeparture: {
+            time: 43,
+            consecutiveTime: 43,
+            lock: false,
+            warning: null,
+            timeFormatter: null
+          },
+          targetArrival: {
+            time: 17,
+            consecutiveTime: 17,
+            lock: false,
+            warning: null,
+            timeFormatter: null
+          },
+          numberOfStops: 0,
+          trainrunId: 2,
+          resourceId: 0,
+          specificTrainrunSectionFrequencyId: null,
+          path: {
+            path: [
+              {x: 898, y: 304},
+              {x: 962, y: 304},
+              {x: 1118, y: 304},
+              {x: 1182, y: 304}
+            ],
+            textPositions: {
+              0: {x: 916, y: 316},
+              1: {x: 944, y: 292},
+              2: {x: 1164, y: 292},
+              3: {x: 1136, y: 316},
+              4: {x: 1040, y: 292},
+              5: {x: 1040, y: 292},
+              6: {x: 1040, y: 316}
+            }
+          },
+          warnings: null
+        }
+      ],
+      trainruns: [
+        {
+          id: 2,
+          name: "X",
+          categoryId: 1,
+          frequencyId: 3,
+          trainrunTimeCategoryId: 0,
+          labelIds: []
+        }
+      ],
       resources: [],
       metadata: {
         analyticsSettings: {
