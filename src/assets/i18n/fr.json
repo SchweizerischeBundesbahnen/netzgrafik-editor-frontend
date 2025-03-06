@@ -258,6 +258,8 @@
             "category": "Catégorie",
             "frequency": "Fréquence",
             "verkehrt": "Fonctionnement",
+            "symmetry": "Symétrie",
+            "enableSymmetry": "Activer la symétrie",
             "trainrunDuplicate": "Dupliquer le trajet de train",
             "trainrunDelete": "Supprimer le trajet de train",
             "delete": "Supprimer",

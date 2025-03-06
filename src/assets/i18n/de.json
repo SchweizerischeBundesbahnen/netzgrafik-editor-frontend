@@ -259,6 +259,8 @@
             "category": "Kategorie",
             "frequency": "Takt",
             "verkehrt": "verkehrt",
+            "symmetry": "Symmetrie",
+            "enableSymmetry": "Symmetrie aktivieren",
             "trainrunDuplicate": "Zuglauf duplizieren",
             "trainrunDelete": "Zuglauf löschen",
             "delete": "Löschen",
