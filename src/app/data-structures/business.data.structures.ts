@@ -200,6 +200,7 @@ export interface TrainrunDto {
   trainrunTimeCategoryId: number; // reference to the trainrun time category
 
   labelIds: number[];
+  isSymmetric?: boolean;
 }
 
 /**

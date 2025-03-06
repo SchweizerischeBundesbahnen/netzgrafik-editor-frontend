@@ -196,6 +196,14 @@ export class TrainrunTabComponent implements OnDestroy {
     this.initializeWithCurrentSelectedTrainrun();
   }
 
+  getIsSymmetric(): boolean {
+    return this.selectedTrainrun.getIsSymmetric();
+  }
+
+  setIsSymmetric() {
+    this.selectedTrainrun.setIsSymmetric(!this.selectedTrainrun.getIsSymmetric());
+  }
+
   private initializeWithCurrentSelectedTrainrun() {
     this.selectedTrainrun = this.trainrunService.getSelectedTrainrun();
     if (this.selectedTrainrun !== null) {
