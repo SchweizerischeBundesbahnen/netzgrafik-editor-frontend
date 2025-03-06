@@ -61,8 +61,8 @@
     <div class="column" style="float: left; width: auto">
       <div class="sbb-checkbox-group-vertical">
       <sbb-checkbox
-      [(ngModel)]="getIsSymmetric"
-      (change)="setIsSymmetric()"
+      [(ngModel)]="isSymmetric"
+      (change)="onIsSymmetricChanged()"
       style="padding-top: 10px;"
       >
       {{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.enableSymmetry' | translate }}
