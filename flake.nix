@@ -1,5 +1,5 @@
 {
-  description = "A flake for a TypeScript project";
+  description = "A Nix flake for NGE dev shell";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
