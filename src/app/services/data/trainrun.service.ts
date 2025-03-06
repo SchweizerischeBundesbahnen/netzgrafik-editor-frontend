@@ -285,6 +285,12 @@ export class TrainrunService {
     this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
   }
 
+  updateIsSymmetric(trainrun: Trainrun, isSymmetric: boolean) {
+    this.getTrainrunFromId(trainrun.getId()).setIsSymmetric(isSymmetric);
+    this.trainrunsUpdated();
+    this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
+  }
+
   getTrainruns(): Trainrun[] {
     return Object.assign({}, this.trainrunsStore).trainruns;
   }
