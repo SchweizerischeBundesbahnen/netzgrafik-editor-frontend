@@ -211,7 +211,7 @@ Combined with the `direnv` tool, the following commands can be used to setup the
 
 ```shell
 # allow direnv to use the flake
-echo \"use flake\" >> .envrc && direnv allow
+echo "use flake" >> .envrc && direnv allow
 ```
 
 See [official direnv documentation](https://direnv.net/) for more information.
