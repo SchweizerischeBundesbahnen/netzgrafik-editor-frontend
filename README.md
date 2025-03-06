@@ -9,7 +9,6 @@ Netzgrafik-Editor – designed to make better decisions.
 The product vision is to accelerate the planning and sizing of transport systems by creating an intuitive and powerful platform that uses smart projections and analyses. This will enable timetable variations or service options to be created, compared, and optimized very easily, with maximum support for the human planner during their creative process. The goal is to ensure that decisions can be made based on data-driven insights, to guarantee a smooth mobility for the future that is fast, efficient, and goal-oriented.
 <br><br>
 
->
 > **Flexible level of detail** - start with a rough sketch, continuously add more detail.
 >
 > Applicable across **different industries** - bus, train, plane.
@@ -22,7 +21,6 @@ The product vision is to accelerate the planning and sizing of transport systems
 >
 > **Excellent and intuitive UX** - using Netzgrafik-Editor should be as easy and natural as drawing
 > on a whiteboard. No training required. Analysis happens in real time.
->
 
 </details>
 
@@ -38,7 +36,6 @@ Regular-interval timetable
 
 <br>
 
->
 > Regular-interval timetables were first developed in Germany at the beginning of the 20th century
 > to coordinate urban traffic in large cities such as Berlin.
 >
@@ -54,12 +51,9 @@ Regular-interval timetable
 >
 > [clock-faced schedules](https://en.wikipedia.org/wiki/Clock-face_scheduling)
 >
->
 > [Source](https://www.swissinfo.ch/eng/to-the-second_the-swiss-timetable-is-due-to-meticulous-planning/34102496)
->
 
 </details>
-
 
 ![Netzgrafik-Editor](./documentation/images/Overview_Editor_Screenshot_001.PNG)
 
@@ -142,7 +136,8 @@ The openness of the project encourages innovation, expertise from different sect
 improvements to optimize the
 planning processes.
 
-## Roadmap 
+## Roadmap
+
 Get an insight into the plan and future [ROADMAP.md](ROADMAP.md).
 
 ## User Manual
@@ -204,6 +199,23 @@ docker compose up
 >
 > Login with username **user** and password **user**
 
+#### For Nix Package Manager users
+
+Nix users can use the `flake.nix` file to setup a development environment.
+
+To use the flake, the Nix experimental features `nix-command` and `flakes` are required.
+
+See [official Nix documentation](https://nixos.wiki/wiki/Flakes) for more information.
+
+Combined with the `direnv` tool, the following commands can be used to setup the development environment each time the project folder is entered:
+
+```shell
+# allow direnv to use the flake
+echo \"use flake\" >> .envrc && direnv allow
+```
+
+See [official direnv documentation](https://direnv.net/) for more information.
+
 ### Testing
 
 ```
@@ -255,7 +267,6 @@ This project is licensed under [Apache 2.0](LICENSE).
 Open-source projects thrive on collaboration and contributions from the community. All
 contributors are requested to read the [CONTRIBUTING.md](CONTRIBUTING.md) file as it outlines how to
 contribute to the project, including how to submit bug reports, feature requests, and pull requests.
-
 
 ## Coding Standards
 
