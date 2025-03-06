@@ -149,9 +149,11 @@ export class TrainrunSectionTimesService {
 
     TrainrunsectionHelper.checkAndAdjustSymmetry(
       this.selectedTrainrunSection,
+      if (this.selectedTrainrunSection.getTrainrun().getIsSymmetric()) {
       this.timeStructure.leftArrivalTime,
-      this.timeStructure.leftDepartureTime,
-    );
+        this.timeStructure.leftDepartureTime,
+      );
+    }
     if (!this.lockStructure.rightLock) {
       this.timeStructure.rightArrivalTime =
         this.timeStructure.leftDepartureTime +
