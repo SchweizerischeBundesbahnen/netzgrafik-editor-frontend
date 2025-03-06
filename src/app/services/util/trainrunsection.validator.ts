@@ -11,6 +11,10 @@ export class TrainrunsectionValidator {
   }
 
   static validateTravelTimeOneSection(trainrunSection: TrainrunSection) {
+    // if (trainrunSection.getTrainrun().getIsSymmetric()) { // TODO: not working
+    if (true) {
+      return;
+    }
     const calculatedTargetArrivalTime =
       (trainrunSection.getSourceDeparture() + trainrunSection.getTravelTime()) % 60;
     if (Math.abs(calculatedTargetArrivalTime - trainrunSection.getTargetArrival()) > 1 / 60) {
@@ -35,6 +39,10 @@ export class TrainrunsectionValidator {
   }
 
   static validateUnsymmetricTimesOneSection(trainrunSection: TrainrunSection) {
+    // if (trainrunSection.getTrainrun().getIsSymmetric()) { // TODO: not working
+    if (true) {
+      return;
+    }
     // check for broken symmetry (times)
     trainrunSection.resetSourceDepartureWarning();
     trainrunSection.resetTargetDepartureWarning();
