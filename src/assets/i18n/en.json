@@ -259,6 +259,8 @@
             "category": "Category",
             "frequency": "Frequency",
             "verkehrt": "Operates",
+            "symmetry": "Symmetry",
+            "enableSymmetry": "Enable symmetry",
             "trainrunDuplicate": "Duplicate trainrun",
             "trainrunDelete": "Delete trainrun",
             "delete": "Delete",

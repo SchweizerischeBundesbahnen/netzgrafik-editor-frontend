@@ -21,8 +21,7 @@ export enum LeftAndRightElement {
 }
 
 export class TrainrunsectionHelper {
-  constructor(private trainrunService: TrainrunService) {
-  }
+  constructor(private trainrunService: TrainrunService) {}
 
   static getSymmetricTime(time: number) {
     return time === 0 ? 0 : 60 - time;
@@ -46,11 +45,13 @@ export class TrainrunsectionHelper {
     travelTimeFactor: number,
     trsTravelTime: number,
     isRightNodeNonStopTransit: boolean,
-    precision = TrainrunSectionService.TIME_PRECISION
+    precision = TrainrunSectionService.TIME_PRECISION,
   ): number {
     if (isRightNodeNonStopTransit) {
-      return Math.max(MathUtils.round(trsTravelTime * travelTimeFactor, precision),
-        1.0 / Math.pow(10, precision));
+      return Math.max(
+        MathUtils.round(trsTravelTime * travelTimeFactor, precision),
+        1.0 / Math.pow(10, precision),
+      );
     } else {
       return Math.max(
         MathUtils.round(totalTravelTime - summedTravelTime, precision),
@@ -61,21 +62,21 @@ export class TrainrunsectionHelper {
 
   static getRightArrivalTime(
     timeStructure: LeftAndRightTimeStructure,
-    precision = TrainrunSectionService.TIME_PRECISION
+    precision = TrainrunSectionService.TIME_PRECISION,
   ): number {
     return MathUtils.round(
       (timeStructure.leftDepartureTime + (timeStructure.travelTime % 60)) % 60,
-      precision
+      precision,
     );
   }
 
   static getRightDepartureTime(
     timeStructure: LeftAndRightTimeStructure,
-    precision = TrainrunSectionService.TIME_PRECISION
+    precision = TrainrunSectionService.TIME_PRECISION,
   ): number {
     return MathUtils.round(
       this.getSymmetricTime(timeStructure.rightArrivalTime),
-      precision
+      precision,
     );
   }
 
@@ -113,19 +114,21 @@ export class TrainrunsectionHelper {
     const lastLeftNode = startForwardBackwardNode.startForwardNode;
     const lastRightNode = startForwardBackwardNode.startBackwardNode;
 
-    const towardsSource =
-      this.trainrunService.getLastNonStopTrainrunSection(
-        trainrunSection.getSourceNode(),
-        trainrunSection);
-    const towradsTarget =
-      this.trainrunService.getLastNonStopTrainrunSection(
-        trainrunSection.getTargetNode(),
-        trainrunSection);
+    const towardsSource = this.trainrunService.getLastNonStopTrainrunSection(
+      trainrunSection.getSourceNode(),
+      trainrunSection,
+    );
+    const towradsTarget = this.trainrunService.getLastNonStopTrainrunSection(
+      trainrunSection.getTargetNode(),
+      trainrunSection,
+    );
 
     let leftSection = towradsTarget;
     let rightSection = towardsSource;
-    if (towardsSource.getSourceNodeId() === lastLeftNode.getId() ||
-      towardsSource.getTargetNodeId() === lastLeftNode.getId()) {
+    if (
+      towardsSource.getSourceNodeId() === lastLeftNode.getId() ||
+      towardsSource.getTargetNodeId() === lastLeftNode.getId()
+    ) {
       leftSection = towardsSource;
       rightSection = towradsTarget;
     }
@@ -133,7 +136,7 @@ export class TrainrunsectionHelper {
       leftSection: leftSection,
       rightSection: rightSection,
       lastLeftNode: lastLeftNode,
-      lastRightNode: lastRightNode
+      lastRightNode: lastRightNode,
     };
   }
 
@@ -172,12 +175,20 @@ export class TrainrunsectionHelper {
     const lastLeftNode = this.getLeftNode(trainrunSection, orderedNodes);
     const lastRightNode = this.getRightNode(trainrunSection, orderedNodes);
 
-    const towardsSource = this.trainrunService.getLastNonStopTrainrunSection(trainrunSection.getSourceNode(), trainrunSection);
-    const towradsTarget = this.trainrunService.getLastNonStopTrainrunSection(trainrunSection.getTargetNode(), trainrunSection);
+    const towardsSource = this.trainrunService.getLastNonStopTrainrunSection(
+      trainrunSection.getSourceNode(),
+      trainrunSection,
+    );
+    const towradsTarget = this.trainrunService.getLastNonStopTrainrunSection(
+      trainrunSection.getTargetNode(),
+      trainrunSection,
+    );
     let leftSection = towradsTarget;
     let rightSection = towardsSource;
-    if (towardsSource.getSourceNodeId() === lastLeftNode.getId() ||
-      towardsSource.getTargetNodeId() === lastLeftNode.getId()) {
+    if (
+      towardsSource.getSourceNodeId() === lastLeftNode.getId() ||
+      towardsSource.getTargetNodeId() === lastLeftNode.getId()
+    ) {
       leftSection = towardsSource;
       rightSection = towradsTarget;
     }
@@ -186,15 +197,15 @@ export class TrainrunsectionHelper {
       leftLock:
         leftSection.getSourceNodeId() === lastLeftNode.getId()
           ? leftSection.getSourceArrivalLock() ||
-          leftSection.getSourceDepartureLock()
+            leftSection.getSourceDepartureLock()
           : leftSection.getTargetArrivalLock() ||
-          leftSection.getTargetDepartureLock(),
+            leftSection.getTargetDepartureLock(),
       rightLock:
         rightSection.getSourceNodeId() === lastRightNode.getId()
           ? rightSection.getSourceArrivalLock() ||
-          rightSection.getSourceDepartureLock()
+            rightSection.getSourceDepartureLock()
           : rightSection.getTargetArrivalLock() ||
-          rightSection.getTargetDepartureLock(),
+            rightSection.getTargetDepartureLock(),
       travelTimeLock: trainrunSection.getTravelTimeLock(),
     };
   }
@@ -361,5 +372,15 @@ export class TrainrunsectionHelper {
       );
     }
     return rightNode;
+  }
+
+  static checkAndAdjustSymmetry(
+    selectedTrainrunSection: TrainrunSection,
+    firstTime: number,
+    secondTime: number,
+  ) {
+    if (selectedTrainrunSection.getTrainrun().getIsSymmetric()) {
+      firstTime = TrainrunsectionHelper.getSymmetricTime(secondTime);
+    }
   }
 }
