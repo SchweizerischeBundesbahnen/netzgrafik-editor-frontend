@@ -9,31 +9,31 @@ import {
   Output,
   ViewChild,
 } from "@angular/core";
-import {PerlenketteSection} from "../model/perlenketteSection";
-import {PerlenketteTrainrun} from "../model/perlenketteTrainrun";
-import {TrainrunsectionHelper} from "../../services/util/trainrunsection.helper";
-import {TrainrunService} from "../../services/data/trainrun.service";
-import {TrainrunSectionService} from "../../services/data/trainrunsection.service";
-import {takeUntil} from "rxjs/operators";
-import {UiInteractionService} from "../../services/ui/ui.interaction.service";
-import {Observable, Subject} from "rxjs";
-import {TrainrunSection} from "../../models/trainrunsection.model";
-import {TrainrunSectionTimesService} from "../../services/data/trainrun-section-times.service";
-import {TrainrunSectionsView} from "../../view/editor-main-view/data-views/trainrunsections.view";
-import {FilterService} from "../../services/ui/filter.service";
-import {Node} from "../../models/node.model";
-import {LoadPerlenketteService} from "../service/load-perlenkette.service";
-import {NodeService} from "../../services/data/node.service";
-import {EditorMode} from "../../view/editor-menu/editor-mode";
-import {Vec2D} from "../../utils/vec2D";
-import {PortAlignment} from "../../data-structures/technical.data.structures";
+import { PerlenketteSection } from "../model/perlenketteSection";
+import { PerlenketteTrainrun } from "../model/perlenketteTrainrun";
+import { TrainrunsectionHelper } from "../../services/util/trainrunsection.helper";
+import { TrainrunService } from "../../services/data/trainrun.service";
+import { TrainrunSectionService } from "../../services/data/trainrunsection.service";
+import { takeUntil } from "rxjs/operators";
+import { UiInteractionService } from "../../services/ui/ui.interaction.service";
+import { Observable, Subject } from "rxjs";
+import { TrainrunSection } from "../../models/trainrunsection.model";
+import { TrainrunSectionTimesService } from "../../services/data/trainrun-section-times.service";
+import { TrainrunSectionsView } from "../../view/editor-main-view/data-views/trainrunsections.view";
+import { FilterService } from "../../services/ui/filter.service";
+import { Node } from "../../models/node.model";
+import { LoadPerlenketteService } from "../service/load-perlenkette.service";
+import { NodeService } from "../../services/data/node.service";
+import { EditorMode } from "../../view/editor-menu/editor-mode";
+import { Vec2D } from "../../utils/vec2D";
+import { PortAlignment } from "../../data-structures/technical.data.structures";
 import {
   TRAINRUN_SECTION_PORT_SPAN_HORIZONTAL,
   TRAINRUN_SECTION_PORT_SPAN_VERTICAL,
 } from "../../view/rastering/definitions";
-import {StaticDomTags} from "../../view/editor-main-view/data-views/static.dom.tags";
-import {MathUtils} from "../../utils/math";
-import {VersionControlService} from "../../services/data/version-control.service";
+import { StaticDomTags } from "../../view/editor-main-view/data-views/static.dom.tags";
+import { MathUtils } from "../../utils/math";
+import { VersionControlService } from "../../services/data/version-control.service";
 
 export interface TopAndBottomTimeStructure {
   leftDepartureTime: number;
@@ -70,16 +70,16 @@ export class PerlenketteSectionComponent
   @Output() signalHeightChanged = new EventEmitter<number>();
   @Input() notificationIsBeingEdited: Observable<PerlenketteSection>;
 
-  @ViewChild("rightArrivalTime", {static: false})
+  @ViewChild("rightArrivalTime", { static: false })
   rightArrivalTimeElement: ElementRef;
-  @ViewChild("rightDepartureTime", {static: false})
+  @ViewChild("rightDepartureTime", { static: false })
   rightDepartureTimeElement: ElementRef;
-  @ViewChild("travelTime", {static: false}) travelTimeElement: ElementRef;
-  @ViewChild("leftDepartureTime", {static: false})
+  @ViewChild("travelTime", { static: false }) travelTimeElement: ElementRef;
+  @ViewChild("leftDepartureTime", { static: false })
   leftDepartureTimeElement: ElementRef;
-  @ViewChild("leftArrivalTime", {static: false})
+  @ViewChild("leftArrivalTime", { static: false })
   leftArrivalTimeElement: ElementRef;
-  @ViewChild("nbrOfStops", {static: false}) nbrOfStops: ElementRef;
+  @ViewChild("nbrOfStops", { static: false }) nbrOfStops: ElementRef;
 
   private static timeEditor = true;
 
@@ -106,7 +106,7 @@ export class PerlenketteSectionComponent
     public trainrunSectionTimesService: TrainrunSectionTimesService,
     readonly filterService: FilterService,
     private loadPerlenketteService: LoadPerlenketteService,
-    private versionControlService : VersionControlService
+    private versionControlService: VersionControlService
   ) {
     this.trainrunSectionHelper = new TrainrunsectionHelper(
       this.trainrunService,
@@ -172,7 +172,7 @@ export class PerlenketteSectionComponent
     this.destroyed$.complete();
   }
 
-  getVariantIsWritable() : boolean {
+  getVariantIsWritable(): boolean {
     return this.versionControlService.getVariantIsWritable();
   }
 
@@ -213,10 +213,10 @@ export class PerlenketteSectionComponent
       " ColorRef_" +
       this.perlenketteTrainrun.colorRef +
       (noLinePatterns ? " " :
-          " Freq_" +
-          this.perlenketteTrainrun.frequency +
-          " LinePatternRef_" +
-          this.perlenketteTrainrun.trainrunTimeCategory.linePatternRef
+        " Freq_" +
+        this.perlenketteTrainrun.frequency +
+        " LinePatternRef_" +
+        this.perlenketteTrainrun.trainrunTimeCategory.linePatternRef
       )
     );
   }
@@ -234,7 +234,7 @@ export class PerlenketteSectionComponent
   }
 
 
-  switchSectionViewToogleLock(event: MouseEvent, fieldKey: string) {
+  switchSectionViewToggleLock(event: MouseEvent, fieldKey: string) {
     event.stopPropagation();
 
     if (fieldKey === "leftDepartureTime") {
@@ -245,7 +245,7 @@ export class PerlenketteSectionComponent
       this.onButtonTravelTimeLock(event);
       return;
     }
-    if (fieldKey === "rightDepatureTime") {
+    if (fieldKey === "rightDepartureTime") {
       this.onButtonNodeRightLock(event);
       return;
     }
