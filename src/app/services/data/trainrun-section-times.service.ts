@@ -390,6 +390,21 @@ export class TrainrunSectionTimesService {
         this.timeStructure.rightDepartureTime,
         this.timeStructure.rightArrivalTime,
       );
+      if (!this.selectedTrainrunSection.getTrainrun().getIsSymmetric()) {
+        if (this.lockStructure.leftLock) {
+          this.timeStructure.rightDepartureTime =
+            this.timeStructure.leftArrivalTime - this.timeStructure.travelTime;
+          this.timeStructure.rightDepartureTime +=
+            this.timeStructure.rightDepartureTime < 0 ? 60 : 0;
+          this.timeStructure.rightDepartureTime %= 60;
+        } else {
+          this.timeStructure.leftArrivalTime =
+            this.timeStructure.rightDepartureTime + this.timeStructure.travelTime;
+          this.timeStructure.leftArrivalTime +=
+            this.timeStructure.leftArrivalTime < 0 ? 60 : 0;
+          this.timeStructure.leftArrivalTime %= 60;
+        }
+      }
     } else if (!this.lockStructure.leftLock) {
       this.timeStructure.leftArrivalTime =
         this.timeStructure.rightDepartureTime + this.timeStructure.travelTime;
@@ -401,6 +416,13 @@ export class TrainrunSectionTimesService {
         this.timeStructure.leftDepartureTime,
         this.timeStructure.leftArrivalTime,
       );
+      if (!this.selectedTrainrunSection.getTrainrun().getIsSymmetric()) {
+        this.timeStructure.leftDepartureTime =
+          this.timeStructure.rightArrivalTime - this.timeStructure.travelTime;
+        this.timeStructure.leftDepartureTime +=
+          this.timeStructure.leftDepartureTime < 0 ? 60 : 0;
+        this.timeStructure.leftDepartureTime %= 60;
+      }
     } else {
       this.showWarningTwoLocks = true;
     }

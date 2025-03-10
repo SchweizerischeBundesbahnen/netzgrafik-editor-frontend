@@ -948,8 +948,10 @@ export class TrainrunSectionService implements OnDestroy {
         ? bothLastNonStopTrainrunSections.lastNonStopTrainrunSection1
         : bothLastNonStopTrainrunSections.lastNonStopTrainrunSection2;
 
-    const trsTimeStructure =
-      TrainrunsectionHelper.getDefaultTimeStructure(timeStructure);
+    const trsTimeStructure = TrainrunsectionHelper.getDefaultTimeStructure(
+      timeStructure,
+      trainrunSection,
+    );
     let summedTravelTime = 0;
 
     const iterator = this.trainrunService.getNonStopIterator(leftNode, trs);
@@ -969,8 +971,11 @@ export class TrainrunSectionService implements OnDestroy {
       );
       trsTimeStructure.rightArrivalTime =
         TrainrunsectionHelper.getRightArrivalTime(trsTimeStructure, precision);
-      trsTimeStructure.rightDepartureTime =
-        TrainrunsectionHelper.getRightDepartureTime(trsTimeStructure, precision);
+      TrainrunsectionHelper.checkAndAdjustSymmetry(
+        trainrunSection,
+        trsTimeStructure.rightDepartureTime,
+        trsTimeStructure.rightArrivalTime,
+      );
       const rightIsTarget =
         nextPair.node.getId() ===
         nextPair.trainrunSection.getTargetNode().getId();
