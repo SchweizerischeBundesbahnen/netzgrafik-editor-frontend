@@ -109,14 +109,14 @@
           width="12"
           height="22"
           style="cursor: pointer; fill: var(--sbb-header-lean-background-color);"
-          (click)="switchSectionViewToogleLock($event, 'leftDepartureTime')"
+          (click)="switchSectionViewToggleLock($event, 'leftDepartureTime')"
         ></rect>
         <path
           [attr.d]="getLockSvgPath(lockStructure.leftLock)"
           [ngClass]="[getPathClassTag(true)]"
           class="edge_line"
           style="stroke-width: 1px; cursor: pointer"
-          (click)="switchSectionViewToogleLock($event, 'leftDepartureTime')"
+          (click)="switchSectionViewToggleLock($event, 'leftDepartureTime')"
         />
       </g>
       <g
@@ -132,14 +132,14 @@
           width="12"
           height="22"
           style="cursor: pointer; fill: var(--sbb-header-lean-background-color);"
-          (click)="switchSectionViewToogleLock($event, 'travelTime')"
+          (click)="switchSectionViewToggleLock($event, 'travelTime')"
         ></rect>
         <path
           [attr.d]="getLockSvgPath(lockStructure.travelTimeLock)"
           [ngClass]="[getPathClassTag(true)]"
           class="edge_line"
           style="stroke-width: 1px; cursor: pointer"
-          (click)="switchSectionViewToogleLock($event, 'travelTime')"
+          (click)="switchSectionViewToggleLock($event, 'travelTime')"
         />
       </g>
 
@@ -153,14 +153,14 @@
           width="12"
           height="22"
           style="cursor: pointer; fill: var(--sbb-header-lean-background-color);"
-          (click)="switchSectionViewToogleLock($event, 'rightDepatureTime')"
+          (click)="switchSectionViewToggleLock($event, 'rightDepartureTime')"
         ></rect>
         <path
           [attr.d]="getLockSvgPath(lockStructure.rightLock)"
           [ngClass]="[getPathClassTag(true)]"
           class="edge_line"
           style="stroke-width: 1px; cursor: pointer"
-          (click)="switchSectionViewToogleLock($event, 'rightDepatureTime')"
+          (click)="switchSectionViewToggleLock($event, 'rightDepartureTime')"
         />
       </g>
 
