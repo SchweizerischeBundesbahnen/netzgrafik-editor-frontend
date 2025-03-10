@@ -971,7 +971,7 @@ export class TrainrunSectionService implements OnDestroy {
       );
       trsTimeStructure.rightArrivalTime =
         TrainrunsectionHelper.getRightArrivalTime(trsTimeStructure, precision);
-      TrainrunsectionHelper.checkAndAdjustSymmetry(
+      trsTimeStructure.rightDepartureTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
         trainrunSection,
         trsTimeStructure.rightDepartureTime,
         trsTimeStructure.rightArrivalTime,

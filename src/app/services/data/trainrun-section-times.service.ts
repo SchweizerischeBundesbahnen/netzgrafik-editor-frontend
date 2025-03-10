@@ -147,7 +147,7 @@ export class TrainrunSectionTimesService {
     this.roundAllTimes();
     this.removeOffsetAndBackTransformTimeStructure();
 
-    TrainrunsectionHelper.checkAndAdjustSymmetry(
+    this.timeStructure.leftArrivalTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
       this.selectedTrainrunSection,
       this.timeStructure.leftArrivalTime,
       this.timeStructure.leftDepartureTime,
@@ -157,7 +157,7 @@ export class TrainrunSectionTimesService {
         this.timeStructure.leftDepartureTime +
         (this.timeStructure.travelTime % 60);
       this.timeStructure.rightArrivalTime %= 60;
-      TrainrunsectionHelper.checkAndAdjustSymmetry(
+      this.timeStructure.rightDepartureTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
         this.selectedTrainrunSection,
         this.timeStructure.rightDepartureTime,
         this.timeStructure.rightArrivalTime,
@@ -204,7 +204,7 @@ export class TrainrunSectionTimesService {
     this.showWarningTwoLocks = false;
     this.roundAllTimes();
     this.removeOffsetAndBackTransformTimeStructure();
-    TrainrunsectionHelper.checkAndAdjustSymmetry(
+    this.timeStructure.leftDepartureTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
       this.selectedTrainrunSection,
       this.timeStructure.leftDepartureTime,
       this.timeStructure.leftArrivalTime,
@@ -215,7 +215,7 @@ export class TrainrunSectionTimesService {
         (this.timeStructure.travelTime % 60);
       this.timeStructure.rightDepartureTime +=
         this.timeStructure.rightDepartureTime < 0 ? 60 : 0;
-      TrainrunsectionHelper.checkAndAdjustSymmetry(
+      this.timeStructure.rightArrivalTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
         this.selectedTrainrunSection,
         this.timeStructure.rightArrivalTime,
         this.timeStructure.rightDepartureTime,
@@ -262,7 +262,7 @@ export class TrainrunSectionTimesService {
     this.showWarningTwoLocks = false;
     this.roundAllTimes();
     this.removeOffsetAndBackTransformTimeStructure();
-    TrainrunsectionHelper.checkAndAdjustSymmetry(
+    this.timeStructure.rightDepartureTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
       this.selectedTrainrunSection,
       this.timeStructure.rightDepartureTime,
       this.timeStructure.rightArrivalTime,
@@ -274,7 +274,7 @@ export class TrainrunSectionTimesService {
         (this.timeStructure.travelTime % 60);
       this.timeStructure.leftDepartureTime +=
         this.timeStructure.leftDepartureTime < 0 ? 60 : 0;
-      TrainrunsectionHelper.checkAndAdjustSymmetry(
+      this.timeStructure.leftArrivalTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
         this.selectedTrainrunSection,
         this.timeStructure.leftArrivalTime,
         this.timeStructure.leftDepartureTime,
@@ -321,7 +321,7 @@ export class TrainrunSectionTimesService {
     this.showWarningTwoLocks = false;
     this.roundAllTimes();
     this.removeOffsetAndBackTransformTimeStructure();
-    TrainrunsectionHelper.checkAndAdjustSymmetry(
+    this.timeStructure.rightArrivalTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
       this.selectedTrainrunSection,
       this.timeStructure.rightArrivalTime,
       this.timeStructure.rightDepartureTime,
@@ -332,7 +332,7 @@ export class TrainrunSectionTimesService {
         this.timeStructure.rightDepartureTime +
         (this.timeStructure.travelTime % 60);
       this.timeStructure.leftArrivalTime %= 60;
-      TrainrunsectionHelper.checkAndAdjustSymmetry(
+      this.timeStructure.leftDepartureTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
         this.selectedTrainrunSection,
         this.timeStructure.leftDepartureTime,
         this.timeStructure.leftArrivalTime,
@@ -385,7 +385,7 @@ export class TrainrunSectionTimesService {
       this.timeStructure.rightArrivalTime +=
         this.timeStructure.rightArrivalTime < 0 ? 60 : 0;
       this.timeStructure.rightArrivalTime %= 60;
-      TrainrunsectionHelper.checkAndAdjustSymmetry(
+      this.timeStructure.rightDepartureTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
         this.selectedTrainrunSection,
         this.timeStructure.rightDepartureTime,
         this.timeStructure.rightArrivalTime,
@@ -411,7 +411,7 @@ export class TrainrunSectionTimesService {
       this.timeStructure.leftArrivalTime +=
         this.timeStructure.leftArrivalTime < 0 ? 60 : 0;
       this.timeStructure.leftArrivalTime %= 60;
-      TrainrunsectionHelper.checkAndAdjustSymmetry(
+      this.timeStructure.leftDepartureTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
         this.selectedTrainrunSection,
         this.timeStructure.leftDepartureTime,
         this.timeStructure.leftArrivalTime,

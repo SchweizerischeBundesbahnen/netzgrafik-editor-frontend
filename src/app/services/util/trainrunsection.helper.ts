@@ -381,13 +381,14 @@ export class TrainrunsectionHelper {
     return rightNode;
   }
 
-  static checkAndAdjustSymmetry(
+  static getAdjustedTimeBasedOnSymmetry(
     selectedTrainrunSection: TrainrunSection,
-    firstTime: number,
+    firstNumber: number,
     secondTime: number,
-  ) {
+  ): number {
     if (selectedTrainrunSection.getTrainrun().getIsSymmetric()) {
-      firstTime = TrainrunsectionHelper.getSymmetricTime(secondTime);
+      return TrainrunsectionHelper.getSymmetricTime(secondTime);
     }
+    return firstNumber;
   }
 }
