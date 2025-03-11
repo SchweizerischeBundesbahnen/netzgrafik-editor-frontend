@@ -59,15 +59,23 @@
   </div>
   <div class="row">
     <div class="column" style="float: left; width: auto">
-      <div class="sbb-checkbox-group-vertical">
-      <sbb-checkbox
-      [(ngModel)]="isSymmetric"
-      (change)="onIsSymmetricChanged()"
-      style="padding-top: 10px;"
-      >
-      {{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.enableSymmetry' | translate }}
-      </sbb-checkbox>
-    </div>
+      <div class="sbb-checkbox-group-horizontal">
+        <sbb-checkbox
+          [(ngModel)]="isRoundTrip"
+          (change)="onIsRoundTripChanged()"
+          style="padding-top: 10px;"
+        >
+          {{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.isRoundTrip' | translate }}
+        </sbb-checkbox>
+        <sbb-checkbox
+          [(ngModel)]="isSymmetric"
+          (change)="onIsSymmetricChanged()"
+          [disabled]="!isRoundTrip"
+          style="padding-top: 10px;"
+        >
+          {{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.enableSymmetry' | translate }}
+        </sbb-checkbox>
+      </div>
     </div>
   </div>
   <div class="row">

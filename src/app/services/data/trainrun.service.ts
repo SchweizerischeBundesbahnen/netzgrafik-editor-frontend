@@ -291,6 +291,12 @@ export class TrainrunService {
     this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
   }
 
+  updateIsRoundTrip(trainrun: Trainrun, isRoundTrip: boolean) {
+    this.getTrainrunFromId(trainrun.getId()).setIsRoundTrip(isRoundTrip);
+    this.trainrunsUpdated();
+    this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
+  }
+
   getTrainruns(): Trainrun[] {
     return Object.assign({}, this.trainrunsStore).trainruns;
   }

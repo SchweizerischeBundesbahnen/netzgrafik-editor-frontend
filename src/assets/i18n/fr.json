@@ -260,6 +260,7 @@
             "verkehrt": "Fonctionnement",
             "symmetry": "Symétrie",
             "enableSymmetry": "Activer la symétrie",
+            "isRoundTrip": "Aller-retour",
             "trainrunDuplicate": "Dupliquer le trajet de train",
             "trainrunDelete": "Supprimer le trajet de train",
             "delete": "Supprimer",
