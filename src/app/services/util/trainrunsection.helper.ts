@@ -29,12 +29,17 @@ export class TrainrunsectionHelper {
 
   static getDefaultTimeStructure(
     timeStructure: LeftAndRightTimeStructure,
+    trainSection: TrainrunSection,
   ): LeftAndRightTimeStructure {
     return {
       leftDepartureTime: timeStructure.leftDepartureTime,
       leftArrivalTime: timeStructure.leftArrivalTime,
-      rightDepartureTime: 0,
-      rightArrivalTime: 0,
+      rightDepartureTime: trainSection.getTrainrun().getIsSymmetric()
+        ? 0
+        : timeStructure.rightDepartureTime,
+      rightArrivalTime: trainSection.getTrainrun().getIsSymmetric()
+        ? 0
+        : timeStructure.rightArrivalTime,
       travelTime: 0,
     };
   }
@@ -275,8 +280,10 @@ export class TrainrunsectionHelper {
     const localLeftNode = this.getLeftNode(trainrunSection, orderedNodes);
     if (leftNode.getId() !== localLeftNode.getId()) {
       console.log("remap timeStructure", leftNode, localLeftNode);
-      const mappedTimeStructure =
-        TrainrunsectionHelper.getDefaultTimeStructure(timeStructure);
+      const mappedTimeStructure = TrainrunsectionHelper.getDefaultTimeStructure(
+        timeStructure,
+        trainrunSection,
+      );
       mappedTimeStructure.rightArrivalTime = timeStructure.leftArrivalTime;
       mappedTimeStructure.leftArrivalTime = timeStructure.rightArrivalTime;
       mappedTimeStructure.rightDepartureTime = timeStructure.leftDepartureTime;
@@ -374,13 +381,14 @@ export class TrainrunsectionHelper {
     return rightNode;
   }
 
-  static checkAndAdjustSymmetry(
+  static getAdjustedTimeBasedOnSymmetry(
     selectedTrainrunSection: TrainrunSection,
-    firstTime: number,
+    firstNumber: number,
     secondTime: number,
-  ) {
+  ): number {
     if (selectedTrainrunSection.getTrainrun().getIsSymmetric()) {
-      firstTime = TrainrunsectionHelper.getSymmetricTime(secondTime);
+      return TrainrunsectionHelper.getSymmetricTime(secondTime);
     }
+    return firstNumber;
   }
 }
