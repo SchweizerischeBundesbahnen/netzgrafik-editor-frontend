@@ -942,20 +942,23 @@ export class TrainrunSectionsView {
       return !this.editorView.checkFilterNonStopNode(node) ||
              (isFilterShowNonStopTimeEnabled ? false : node.isNonStop(trainrunSection));
     };
+
+    const isRoundTrip = trainrunSection.getTrainrun().getIsRoundTrip();
   
     switch (textElement) {
       case TrainrunSectionText.SourceDeparture:
+        return !isFilterArrivalDepartureTimeEnabled || checkNonStopNode(true)
       case TrainrunSectionText.SourceArrival:
-        return !isFilterArrivalDepartureTimeEnabled || checkNonStopNode(true) ;
-  
+        return !isFilterArrivalDepartureTimeEnabled || checkNonStopNode(false) || !isRoundTrip;
       case TrainrunSectionText.TargetDeparture:
+        return !isFilterArrivalDepartureTimeEnabled || checkNonStopNode(false) || !isRoundTrip;
       case TrainrunSectionText.TargetArrival:
         return !isFilterArrivalDepartureTimeEnabled || checkNonStopNode(false);
   
       case TrainrunSectionText.TrainrunSectionTravelTime:
         return !this.editorView.isFilterTravelTimeEnabled() ||
              (isFilterShowNonStopTimeEnabled ? false :
-               (!trainrunSection.getTrainrun().selected() &&
+              (!trainrunSection.getTrainrun().selected() &&
                TrainrunSectionsView.isBothSideNonStop(trainrunSection)));
   
       case TrainrunSectionText.TrainrunSectionName:
