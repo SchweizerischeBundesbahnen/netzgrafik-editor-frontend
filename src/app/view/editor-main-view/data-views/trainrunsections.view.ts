@@ -933,81 +933,52 @@ export class TrainrunSectionsView {
       // disable filtering in view (render all objects)
       return false;
     }
+  
+    const isFilterArrivalDepartureTimeEnabled = this.editorView.isFilterArrivalDepartureTimeEnabled();
+    const isFilterShowNonStopTimeEnabled = this.editorView.isFilterShowNonStopTimeEnabled();
+  
+    const checkNonStopNode = (isSource: boolean) => {
+      const node = TrainrunSectionsView.getNode(trainrunSection, isSource);
+      return !this.editorView.checkFilterNonStopNode(node) ||
+             (isFilterShowNonStopTimeEnabled ? false : node.isNonStop(trainrunSection));
+    };
+  
     switch (textElement) {
       case TrainrunSectionText.SourceDeparture:
       case TrainrunSectionText.SourceArrival:
-        if (!this.editorView.isFilterArrivalDepartureTimeEnabled()) {
-          return true;
-        }
-        if (
-          !this.editorView.checkFilterNonStopNode(
-            TrainrunSectionsView.getNode(trainrunSection, true),
-          )
-        ) {
-          return true;
-        }
-        if (this.editorView.isFilterShowNonStopTimeEnabled()) {
-          return false;
-        }
-        return TrainrunSectionsView.getNode(trainrunSection, true).isNonStop(
-          trainrunSection,
-        );
+        return !isFilterArrivalDepartureTimeEnabled || checkNonStopNode(true) ;
+  
       case TrainrunSectionText.TargetDeparture:
       case TrainrunSectionText.TargetArrival:
-        if (!this.editorView.isFilterArrivalDepartureTimeEnabled()) {
-          return true;
-        }
-        if (
-          !this.editorView.checkFilterNonStopNode(
-            TrainrunSectionsView.getNode(trainrunSection, false),
-          )
-        ) {
-          return true;
-        }
-        if (this.editorView.isFilterShowNonStopTimeEnabled()) {
-          return false;
-        }
-        return TrainrunSectionsView.getNode(trainrunSection, false).isNonStop(
-          trainrunSection,
-        );
+        return !isFilterArrivalDepartureTimeEnabled || checkNonStopNode(false);
+  
       case TrainrunSectionText.TrainrunSectionTravelTime:
-        if (!this.editorView.isFilterTravelTimeEnabled()) {
-          return true;
-        }
-        if (this.editorView.isFilterShowNonStopTimeEnabled()) {
-          return false;
-        }
-        return (
-          !trainrunSection.getTrainrun().selected() &&
-          TrainrunSectionsView.isBothSideNonStop(trainrunSection)
-        );
-      case TrainrunSectionText.TrainrunSectionName: {
+        return !this.editorView.isFilterTravelTimeEnabled() ||
+             (isFilterShowNonStopTimeEnabled ? false :
+               (!trainrunSection.getTrainrun().selected() &&
+               TrainrunSectionsView.isBothSideNonStop(trainrunSection)));
+  
+      case TrainrunSectionText.TrainrunSectionName:
         if (!this.editorView.isFilterTrainrunNameEnabled()) {
           return true;
         }
         const srcNode = TrainrunSectionsView.getNode(trainrunSection, true);
         const trgNode = TrainrunSectionsView.getNode(trainrunSection, false);
-        if (
-          !this.editorView.checkFilterNonStopNode(srcNode) ||
-          !this.editorView.checkFilterNonStopNode(trgNode)
-        ) {
+        if (!this.editorView.checkFilterNonStopNode(srcNode) ||
+            !this.editorView.checkFilterNonStopNode(trgNode)) {
           const transSrc = srcNode.getTransition(trainrunSection.getId());
           const transTrg = trgNode.getTransition(trainrunSection.getId());
-          if (transSrc !== undefined && transTrg !== undefined) {
-            if (
-              transSrc.getIsNonStopTransit() &&
-              transTrg.getIsNonStopTransit()
-            ) {
-              return true;
-            }
+          if (transSrc?.getIsNonStopTransit() && transTrg?.getIsNonStopTransit()) {
+            return true;
           }
         }
-      }
         return false;
+  
       default:
         return false;
     }
   }
+  
 
   setGroup(trainrunSectionGroup: d3.Selector) {
     trainrunSectionGroup.attr("class", "TrainrunSectionsView");
