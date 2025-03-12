@@ -33,6 +33,7 @@ export class TrainrunTabComponent implements OnDestroy {
   public selectedTimeCategory: TrainrunTimeCategory;
   public trainrunTitle: string;
   public isSymmetric: boolean;
+  public isRoundTrip: boolean;
 
   private destroyed = new Subject<void>();
 
@@ -170,6 +171,10 @@ export class TrainrunTabComponent implements OnDestroy {
     this.trainrunService.updateIsSymmetric(this.selectedTrainrun, this.isSymmetric);
   }
 
+  onIsRoundTripChanged() {
+    this.trainrunService.updateIsRoundTrip(this.selectedTrainrun, this.isRoundTrip);
+  }
+
   makeButtonLabel(label: string): string {
     if (label.length > 4) {
       return label.substring(0, 3) + "...";
@@ -210,6 +215,7 @@ export class TrainrunTabComponent implements OnDestroy {
         this.selectedTrainrun.getTrainrunTimeCategory();
       this.trainrunTitle = this.selectedTrainrun.getTitle();
       this.isSymmetric = this.selectedTrainrun.getIsSymmetric();
+      this.isRoundTrip = this.selectedTrainrun.getIsRoundTrip();
     }
   }
 }

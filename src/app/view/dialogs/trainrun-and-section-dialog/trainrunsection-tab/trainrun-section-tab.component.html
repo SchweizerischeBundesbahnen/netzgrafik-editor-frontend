@@ -122,10 +122,10 @@
             </svg>
           </div>
 
-          <div class="NodeLeftArrival"></div>
-          <div class="NodeLeftDeparture"></div>
-          <div class="NodeRightArrival"></div>
-          <div class="NodeRightDeparture"></div>
+          <div class="NodeLeftArrival" *ngIf="isRoundTripOrTargetIsLeft()"></div> 
+          <div class="NodeLeftDeparture" *ngIf="isRoundTripOrTargetIsRight()"></div>
+          <div class="NodeRightArrival" *ngIf="isRoundTripOrTargetIsRight()"></div>
+          <div class="NodeRightDeparture" *ngIf="isRoundTripOrTargetIsLeft()"></div>
           <div class="TravelTime"></div>
 
           <div
@@ -141,7 +141,7 @@
             (focus)="setFocusToBeginningOfLoop()"
           ></div>
 
-          <div class="NodeLeftArrivalMinus">
+          <div class="NodeLeftArrivalMinus" *ngIf="isRoundTripOrTargetIsLeft()">
             <button
               tabindex="-1"
               mode="ghost"
@@ -153,7 +153,7 @@
               -
             </button>
           </div>
-          <div class="NodeLeftArrivalTime">
+          <div class="NodeLeftArrivalTime" *ngIf="isRoundTripOrTargetIsLeft()">
             <input
               tabindex="6"
               id="NodeLeftArrivalTimeInputElement"
@@ -172,7 +172,7 @@
             />
           </div>
 
-          <div class="NodeLeftArrivalPlus">
+          <div class="NodeLeftArrivalPlus" *ngIf="isRoundTripOrTargetIsLeft()">
             <button
               tabindex="-1"
               mode="ghost"
@@ -185,7 +185,7 @@
             </button>
           </div>
 
-          <div class="NodeLeftDepartureMinus">
+          <div class="NodeLeftDepartureMinus" *ngIf="isRoundTripOrTargetIsRight()">
             <button
               tabindex="-1"
               mode="ghost"
@@ -197,7 +197,7 @@
               -
             </button>
           </div>
-          <div class="NodeLeftDepartureTime">
+          <div class="NodeLeftDepartureTime" *ngIf="isRoundTripOrTargetIsRight()">
             <input
               tabindex="2"
               id="NodeLeftDepartureTimeInputElement"
@@ -215,7 +215,7 @@
               #leftDepartureTimeInputElement
             />
           </div>
-          <div class="NodeLeftDeparturePlus">
+          <div class="NodeLeftDeparturePlus" *ngIf="isRoundTripOrTargetIsRight()">
             <button
               tabindex="-1"
               mode="ghost"
@@ -228,7 +228,7 @@
             </button>
           </div>
 
-          <div class="NodeRightArrivalMinus">
+          <div class="NodeRightArrivalMinus" *ngIf="isRoundTripOrTargetIsRight()">
             <button
               tabindex="-1"
               mode="ghost"
@@ -240,7 +240,7 @@
               -
             </button>
           </div>
-          <div class="NodeRightArrivalTime">
+          <div class="NodeRightArrivalTime" *ngIf="isRoundTripOrTargetIsRight()">
             <input
               tabindex="4"
               id="NodeRightArrivalTimeInputElement"
@@ -258,7 +258,7 @@
               #rightArrivalTimeInputElement
             />
           </div>
-          <div class="NodeRightArrivalPlus">
+          <div class="NodeRightArrivalPlus" *ngIf="isRoundTripOrTargetIsRight()">
             <button
               tabindex="-1"
               mode="ghost"
@@ -271,7 +271,7 @@
             </button>
           </div>
 
-          <div class="NodeRightDepartureMinus">
+          <div class="NodeRightDepartureMinus" *ngIf="isRoundTripOrTargetIsLeft()">
             <button
               tabindex="-1"
               mode="ghost"
@@ -283,7 +283,7 @@
               -
             </button>
           </div>
-          <div class="NodeRightDepartureTime">
+          <div class="NodeRightDepartureTime" *ngIf="isRoundTripOrTargetIsLeft()">
             <input
               tabindex="5"
               id="NodeRightDepartureTimeInputElement"
@@ -302,7 +302,7 @@
               #rightDepartureTimeInputElement
             />
           </div>
-          <div class="NodeRightDeparturePlus">
+          <div class="NodeRightDeparturePlus" *ngIf="isRoundTripOrTargetIsLeft()">
             <button
               tabindex="-1"
               mode="ghost"

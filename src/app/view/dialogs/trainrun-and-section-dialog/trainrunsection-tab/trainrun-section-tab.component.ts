@@ -73,6 +73,8 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   public timeCategoryShortName: string;
   public timeCategoryLinePattern: LinePatternRefs;
 
+  public isRoundTrip: boolean;
+
   private trainrunSectionHelper: TrainrunsectionHelper;
   private destroyed = new Subject<void>();
 
@@ -305,6 +307,14 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     return "NumberOfStopsInputElement" + activeTag;
   }
 
+  isRoundTripOrTargetIsRight() {
+    return this.getIsRoundTrip() || this.targetIsRight();
+  }
+
+  isRoundTripOrTargetIsLeft() {
+    return this.getIsRoundTrip() || this.targetIsLeft();
+  }
+
   private resetOffsetAfterTrainrunChanged() {
     if (this.trainrunSectionTimesService.getOffsetTransformationActive()) {
       this.trainrunSectionTimesService.removeOffsetAndBackTransformTimeStructure();
@@ -336,5 +346,25 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
         this.trainrunDialogParameter.offset,
       );
     }
+  }
+
+  private getIsRoundTrip() {
+    return this.trainrunService.getIsRoundTrip(this.selectedTrainrunSection.getTrainrun());
+  }
+
+  private targetIsRight() {
+    const trainrunSection = this.trainrunSectionService.getSelectedTrainrunSection();
+    return trainrunSection.getTargetNode() === this.trainrunSectionHelper.getRightNode(
+      trainrunSection,
+      this.trainrunSectionTimesService.getNodesOrdered()
+    );
+  }
+
+  private targetIsLeft() {
+    const trainrunSection = this.trainrunSectionService.getSelectedTrainrunSection();
+    return trainrunSection.getTargetNode() === this.trainrunSectionHelper.getLeftNode(
+      trainrunSection,
+      this.trainrunSectionTimesService.getNodesOrdered()
+    );
   }
 }

@@ -261,6 +261,7 @@
             "verkehrt": "verkehrt",
             "symmetry": "Symmetrie",
             "enableSymmetry": "Symmetrie aktivieren",
+            "isRoundTrip": "Rundreise",
             "trainrunDuplicate": "Zuglauf duplizieren",
             "trainrunDelete": "Zuglauf löschen",
             "delete": "Löschen",
