@@ -201,6 +201,7 @@ export interface TrainrunDto {
 
   labelIds: number[];
   isSymmetric?: boolean;
+  isRoundTrip?: boolean;
 }
 
 /**
