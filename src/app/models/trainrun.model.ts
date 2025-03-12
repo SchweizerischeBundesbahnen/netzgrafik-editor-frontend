@@ -52,8 +52,6 @@ export class Trainrun {
     this.isSelected = false;
     this.trainrunTimeCategoryId = trainrunTimeCategoryId;
     this.labelIds = labelIds;
-    this.isSymmetric = false;
-    this.isRoundTrip = false;
 
     if (Trainrun.currentId < this.id) {
       Trainrun.currentId = this.id;
@@ -168,9 +166,6 @@ export class Trainrun {
 
   setIsRoundTrip(isRoundTrip: boolean) {
     this.isRoundTrip = isRoundTrip;
-    if (!isRoundTrip) {
-      this.isSymmetric = false;
-    }
   }
 
   getDto(): TrainrunDto {

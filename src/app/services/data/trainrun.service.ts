@@ -296,7 +296,10 @@ export class TrainrunService {
   }
 
   updateIsRoundTrip(trainrun: Trainrun, isRoundTrip: boolean) {
-    this.getTrainrunFromId(trainrun.getId()).setIsRoundTrip(isRoundTrip);
+    const trainrunSection = this.getTrainrunFromId(trainrun.getId());
+    trainrunSection.setIsRoundTrip(isRoundTrip);
+    // If the trainrun is a one-way trip, it cannot be symmetric
+    if (!trainrunSection.getIsRoundTrip()) trainrunSection.setIsSymmetric(false);
     this.trainrunsUpdated();
     this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
   }
