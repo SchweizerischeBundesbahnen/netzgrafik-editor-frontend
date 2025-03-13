@@ -82,6 +82,8 @@ export class TrainrunService {
           trainrunDto.trainrunTimeCategoryId,
         ),
       );
+      trainrun.setIsSymmetric(trainrunDto.isSymmetric);
+      trainrun.setIsRoundTrip(trainrunDto.isRoundTrip);
       return trainrun;
     });
   }
@@ -799,6 +801,20 @@ export class TrainrunService {
       iterator.current().trainrunSection,
     );
   }
+
+  // getCumulativeReturnTravelTime(trainrunSection: TrainrunSection) {
+  //   const iterator = this.getNonStopIterator(
+  //     trainrunSection.getTargetNode(),
+  //     trainrunSection,
+  //   );
+  //   while (iterator.hasNext()) {
+  //     iterator.next();
+  //   }
+  //   return this.sumTravelTimeUpToLastNonStopNode(
+  //     iterator.current().node,
+  //     iterator.current().trainrunSection,
+  //   );
+  // }
 
   getCumSumTravelTimeNodePathToLastNonStopNode(n: Node, ts: TrainrunSection) {
     const data = [
