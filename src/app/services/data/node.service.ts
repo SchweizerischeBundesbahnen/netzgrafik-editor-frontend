@@ -30,7 +30,7 @@ import {MathUtils} from "../../utils/math";
 import {LabelService} from "./label.service";
 import {FilterService} from "../ui/filter.service";
 import {ConnectionDto} from "../../data-structures/technical.data.structures";
-import {TrainrunsectionValidator} from "../util/trainrunsection.validator";
+import {TrainrunSectionValidator} from "../util/trainrunsection.validator";
 import {NodeOperation, Operation, OperationType, TrainrunOperation} from "../../models/operation.model";
 
 @Injectable({
@@ -500,7 +500,7 @@ export class NodeService implements OnDestroy {
     );
 
     // re-validate the section after it was correctly updated (full update done)
-    TrainrunsectionValidator.validateOneSection(trainrunSection1);
+    TrainrunSectionValidator.validateOneSection(trainrunSection1);
 
     if (enforceUpdate) {
       this.trainrunSectionService.trainrunSectionsUpdated();

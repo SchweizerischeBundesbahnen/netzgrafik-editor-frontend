@@ -1,13 +1,13 @@
 import {TrainrunSection} from "../../models/trainrunsection.model";
 import {MathUtils} from "../../utils/math";
 
-export class TrainrunsectionValidator {
+export class TrainrunSectionValidator {
   static validateOneSection(trainrunSection: TrainrunSection) {
     trainrunSection.resetSourceDepartureWarning();
     trainrunSection.resetTargetDepartureWarning();
 
-    TrainrunsectionValidator.validateTravelTimeOneSection(trainrunSection);
-    TrainrunsectionValidator.validateUnsymmetricTimesOneSection(trainrunSection);
+    TrainrunSectionValidator.validateTravelTimeOneSection(trainrunSection);
+    TrainrunSectionValidator.validateUnsymmetricTimesOneSection(trainrunSection);
   }
 
   static validateTravelTimeOneSection(trainrunSection: TrainrunSection) {

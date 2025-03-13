@@ -9,7 +9,7 @@ import {EventEmitter, Injectable, OnDestroy} from "@angular/core";
 import {BehaviorSubject, Subject} from "rxjs";
 import {TrainrunService} from "./trainrun.service";
 import {NodeService} from "./node.service";
-import {TrainrunsectionValidator} from "../util/trainrunsection.validator";
+import {TrainrunSectionValidator} from "../util/trainrunsection.validator";
 import {Trainrun} from "../../models/trainrun.model";
 import {MathUtils} from "../../utils/math";
 import {GeneralViewFunctions} from "../../view/util/generalViewFunctions";
@@ -244,8 +244,8 @@ export class TrainrunSectionService implements OnDestroy {
     );
 
     this.trainrunSectionsStore.trainrunSections.forEach((trainrunSection) => {
-      TrainrunsectionValidator.validateOneSection(trainrunSection);
-      TrainrunsectionValidator.validateTravelTime(trainrunSection);
+      TrainrunSectionValidator.validateOneSection(trainrunSection);
+      TrainrunSectionValidator.validateTravelTime(trainrunSection);
     });
   }
 
@@ -350,7 +350,7 @@ export class TrainrunSectionService implements OnDestroy {
     trainrunSection.setTargetArrival(targetArrival);
     trainrunSection.setTargetDeparture(targetDeparture);
     trainrunSection.setTravelTime(travelTime);
-    TrainrunsectionValidator.validateOneSection(trainrunSection);
+    TrainrunSectionValidator.validateOneSection(trainrunSection);
     this.trainrunService.propagateConsecutiveTimesForTrainrun(
       trainrunSection.getId(),
     );
@@ -576,7 +576,7 @@ export class TrainrunSectionService implements OnDestroy {
     );
     let previousPair = iterator.next();
 
-    TrainrunsectionValidator.validateOneSection(previousPair.trainrunSection);
+    TrainrunSectionValidator.validateOneSection(previousPair.trainrunSection);
 
     while (iterator.hasNext()) {
       const pair = iterator.next();
@@ -602,7 +602,7 @@ export class TrainrunSectionService implements OnDestroy {
       } else {
         this.propagteTimeTargetToSource(previousPair, pair, arrivalDepartureTimes, isNonStop);
       }
-      TrainrunsectionValidator.validateOneSection(pair.trainrunSection);
+      TrainrunSectionValidator.validateOneSection(pair.trainrunSection);
 
       if (
         pair.trainrunSection.getSourceDepartureLock() ||
