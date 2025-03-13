@@ -33,6 +33,8 @@ export class TrainrunSection {
   private travelTime: TimeLockDto;
   private numberOfStops: number;
 
+  private isSymmetric: boolean;
+
   private trainrunId: number;
   private resourceId: number;
   private specificTrainrunSectionFrequencyId: number;
@@ -57,6 +59,7 @@ export class TrainrunSection {
       targetDeparture,
       targetArrival,
       travelTime,
+      isSymmetric,
       numberOfStops,
       trainrunId,
       resourceId,
@@ -108,6 +111,7 @@ export class TrainrunSection {
       resourceId: 0,
       specificTrainrunSectionFrequencyId: null,
       numberOfStops: 0,
+      isSymmetric: false,
       path: {
         path: [],
         textPositions: {
@@ -185,11 +189,31 @@ export class TrainrunSection {
     timeDate.setSeconds(((time.time + offset + 24 * 60) % 60) * 60);
 
     const patterns = {
-      "{{consecutiveTime}}.format(HH:mm:ss)": formatDate(consecutiveTimeDate.toISOString(), "HH:mm:ss", "en-US", "UTC"),
-      "{{consecutiveTime}}.format(HH:mm)": formatDate(consecutiveTimeDate.toISOString(), "HH:mm", "en-US", "UTC"),
+      "{{consecutiveTime}}.format(HH:mm:ss)": formatDate(
+        consecutiveTimeDate.toISOString(),
+        "HH:mm:ss",
+        "en-US",
+        "UTC",
+      ),
+      "{{consecutiveTime}}.format(HH:mm)": formatDate(
+        consecutiveTimeDate.toISOString(),
+        "HH:mm",
+        "en-US",
+        "UTC",
+      ),
       "{{consecutiveTime}}": "" + time.consecutiveTime,
-      "{{time}}.format(HH:mm:ss)": formatDate(timeDate.toISOString(), "HH:mm:ss", "en-US", "UTC"),
-      "{{time}}.format(HH:mm)": formatDate(timeDate.toISOString(), "HH:mm", "en-US", "UTC"),
+      "{{time}}.format(HH:mm:ss)": formatDate(
+        timeDate.toISOString(),
+        "HH:mm:ss",
+        "en-US",
+        "UTC",
+      ),
+      "{{time}}.format(HH:mm)": formatDate(
+        timeDate.toISOString(),
+        "HH:mm",
+        "en-US",
+        "UTC",
+      ),
       "{{time}}": "" + ((time.time + offset + 24 * 60) % 60),
     };
 
@@ -659,7 +683,7 @@ export class TrainrunSection {
       resourceId: this.resourceId,
 
       specificTrainrunSectionFrequencyId:
-      this.specificTrainrunSectionFrequencyId,
+        this.specificTrainrunSectionFrequencyId,
       path: this.path,
       warnings: this.warnings,
     };
@@ -717,6 +741,14 @@ export class TrainrunSection {
 
   getTargetArrivalConsecutiveTime(): number {
     return this.targetArrival.consecutiveTime;
+  }
+
+  getIsSymmetric(): boolean {
+    return this.isSymmetric;
+  }
+
+  setIsSymmetric(isSymmetric: boolean) {
+    this.isSymmetric = isSymmetric;
   }
 
   private convertPathToVec2D() {

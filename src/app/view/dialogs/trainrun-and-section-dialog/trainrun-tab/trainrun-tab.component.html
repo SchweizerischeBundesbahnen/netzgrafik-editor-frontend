@@ -67,14 +67,6 @@
         >
           {{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.isRoundTrip' | translate }}
         </sbb-checkbox>
-        <sbb-checkbox
-          [(ngModel)]="isSymmetric"
-          (change)="onIsSymmetricChanged()"
-          [disabled]="!isRoundTrip"
-          style="padding-top: 10px;"
-        >
-          {{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.enableSymmetry' | translate }}
-        </sbb-checkbox>
       </div>
     </div>
   </div>
