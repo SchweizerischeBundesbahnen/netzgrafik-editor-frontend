@@ -70,16 +70,16 @@ export class PerlenketteSectionComponent
   @Output() signalHeightChanged = new EventEmitter<number>();
   @Input() notificationIsBeingEdited: Observable<PerlenketteSection>;
 
-  @ViewChild("rightArrivalTime", { static: false })
+  @ViewChild("rightArrivalTime", {static: false})
   rightArrivalTimeElement: ElementRef;
-  @ViewChild("rightDepartureTime", { static: false })
+  @ViewChild("rightDepartureTime", {static: false})
   rightDepartureTimeElement: ElementRef;
-  @ViewChild("travelTime", { static: false }) travelTimeElement: ElementRef;
-  @ViewChild("leftDepartureTime", { static: false })
+  @ViewChild("travelTime", {static: false}) travelTimeElement: ElementRef;
+  @ViewChild("leftDepartureTime", {static: false})
   leftDepartureTimeElement: ElementRef;
-  @ViewChild("leftArrivalTime", { static: false })
+  @ViewChild("leftArrivalTime", {static: false})
   leftArrivalTimeElement: ElementRef;
-  @ViewChild("nbrOfStops", { static: false }) nbrOfStops: ElementRef;
+  @ViewChild("nbrOfStops", {static: false}) nbrOfStops: ElementRef;
 
   private static timeEditor = true;
 
