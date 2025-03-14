@@ -34,10 +34,10 @@ export class TrainrunsectionHelper {
     return {
       leftDepartureTime: timeStructure.leftDepartureTime,
       leftArrivalTime: timeStructure.leftArrivalTime,
-      rightDepartureTime: trainSection.getTrainrun().getIsSymmetric()
+      rightDepartureTime: trainSection.getIsSymmetric()
         ? 0
         : timeStructure.rightDepartureTime,
-      rightArrivalTime: trainSection.getTrainrun().getIsSymmetric()
+      rightArrivalTime: trainSection.getIsSymmetric()
         ? 0
         : timeStructure.rightArrivalTime,
       travelTime: 0,
@@ -386,7 +386,7 @@ export class TrainrunsectionHelper {
     firstNumber: number,
     secondTime: number,
   ): number {
-    if (selectedTrainrunSection.getTrainrun().getIsSymmetric()) {
+    if (selectedTrainrunSection.getIsSymmetric()) {
       return TrainrunsectionHelper.getSymmetricTime(secondTime);
     }
     return firstNumber;

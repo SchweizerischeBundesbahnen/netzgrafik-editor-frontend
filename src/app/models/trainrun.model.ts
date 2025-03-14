@@ -23,7 +23,6 @@ export class Trainrun {
   private trainrunTimeCategory: TrainrunTimeCategory;
   private isSelected: boolean;
   private labelIds: number[];
-  private isSymmetric: boolean;
   private isRoundTrip: boolean;
 
   constructor(
@@ -41,7 +40,6 @@ export class Trainrun {
       frequencyId: Trainrun.DEFAULT_TRAINRUN_FREQUENCY,
       trainrunTimeCategoryId: Trainrun.DEFAULT_TRAINRUN_TIME_CATEGORY,
       labelIds: [],
-      isSymmetric: false,
       isRoundTrip: false,
     },
   ) {
@@ -152,14 +150,6 @@ export class Trainrun {
     this.labelIds = labelIds;
   }
 
-  getIsSymmetric(): boolean {
-    return this.isSymmetric;
-  }
-
-  setIsSymmetric(isSymmetric: boolean) {
-    this.isSymmetric = isSymmetric;
-  }
-
   getIsRoundTrip(): boolean {
     return this.isRoundTrip;
   }
@@ -176,7 +166,7 @@ export class Trainrun {
       frequencyId: this.trainrunFrequency.id,
       trainrunTimeCategoryId: this.trainrunTimeCategory.id,
       labelIds: this.labelIds,
-      isSymmetric: this.isSymmetric,
+      isRoundTrip: this.isRoundTrip,
     };
   }
 }

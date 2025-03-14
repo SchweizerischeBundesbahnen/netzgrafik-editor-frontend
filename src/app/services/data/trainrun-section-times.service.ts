@@ -390,7 +390,7 @@ export class TrainrunSectionTimesService {
         this.timeStructure.rightDepartureTime,
         this.timeStructure.rightArrivalTime,
       );
-      if (!this.selectedTrainrunSection.getTrainrun().getIsSymmetric()) {
+      if (!this.selectedTrainrunSection.getIsSymmetric()) {
         if (this.lockStructure.leftLock) {
           this.timeStructure.rightDepartureTime =
             this.timeStructure.leftArrivalTime - this.timeStructure.travelTime;
@@ -416,7 +416,7 @@ export class TrainrunSectionTimesService {
         this.timeStructure.leftDepartureTime,
         this.timeStructure.leftArrivalTime,
       );
-      if (!this.selectedTrainrunSection.getTrainrun().getIsSymmetric()) {
+      if (!this.selectedTrainrunSection.getIsSymmetric()) {
         this.timeStructure.leftDepartureTime =
           this.timeStructure.rightArrivalTime - this.timeStructure.travelTime;
         this.timeStructure.leftDepartureTime +=
@@ -520,7 +520,7 @@ export class TrainrunSectionTimesService {
       );
 
     // TODO: not sure if it's important to keep this, but it breaks the assymetry
-    if (this.selectedTrainrunSection.getTrainrun().getIsSymmetric()) {
+    if (this.selectedTrainrunSection.getIsSymmetric()) {
       this.timeStructure = Object.assign({}, this.originalTimeStructure);
     }
 

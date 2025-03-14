@@ -24,7 +24,7 @@ export class NetzgrafikDefault {
               id: 1,
               trainrunSectionId: 1,
               positionIndex: 0,
-              positionAlignment: 2
+              positionAlignment: 2,
             },
           ],
           transitions: [],
@@ -48,17 +48,17 @@ export class NetzgrafikDefault {
               id: 2,
               trainrunSectionId: 1,
               positionIndex: 0,
-              positionAlignment: 2
+              positionAlignment: 2,
             },
             {
               id: 3,
               trainrunSectionId: 2,
               positionIndex: 0,
-              positionAlignment: 3
-            }
+              positionAlignment: 3,
+            },
           ],
           transitions: [
-            {"id": 1, "port1Id": 2, "port2Id": 3, "isNonStopTransit": false}
+            {id: 1, port1Id: 2, port2Id: 3, isNonStopTransit: false},
           ],
           connections: [],
           resourceId: null,
@@ -77,12 +77,12 @@ export class NetzgrafikDefault {
           positionY: 288,
           ports: [
             {
-            id: 4,
-            trainrunSectionId: 2,
-            positionIndex: 0,
-            positionAlignment: 2
-          },
-        ],
+              id: 4,
+              trainrunSectionId: 2,
+              positionIndex: 0,
+              positionAlignment: 2,
+            },
+          ],
           transitions: [],
           connections: [],
           resourceId: null,
@@ -106,37 +106,38 @@ export class NetzgrafikDefault {
             consecutiveTime: 1,
             lock: true,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           sourceDeparture: {
             time: 0,
             consecutiveTime: 0,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           sourceArrival: {
             time: 0,
             consecutiveTime: 60,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           targetDeparture: {
             time: 55,
             consecutiveTime: 55,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           targetArrival: {
             time: 5,
             consecutiveTime: 5,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           numberOfStops: 0,
+          isSymmetric: false,
           trainrunId: 2,
           resourceId: 0,
           specificTrainrunSectionFrequencyId: null,
@@ -145,7 +146,7 @@ export class NetzgrafikDefault {
               {x: 482, y: 304},
               {x: 546, y: 304},
               {x: 734, y: 304},
-              {x: 798, y: 304}
+              {x: 798, y: 304},
             ],
             textPositions: {
               0: {x: 500, y: 316},
@@ -154,10 +155,10 @@ export class NetzgrafikDefault {
               3: {x: 752, y: 316},
               4: {x: 640, y: 292},
               5: {x: 640, y: 292},
-              6: {x: 640, y: 316}
-            }
+              6: {x: 640, y: 316},
+            },
           },
-          warnings: null
+          warnings: null,
         },
         {
           id: 2,
@@ -170,37 +171,38 @@ export class NetzgrafikDefault {
             consecutiveTime: 1,
             lock: true,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           sourceDeparture: {
             time: 7,
             consecutiveTime: 7,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           sourceArrival: {
             time: 53,
             consecutiveTime: 53,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           targetDeparture: {
             time: 43,
             consecutiveTime: 43,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           targetArrival: {
             time: 17,
             consecutiveTime: 17,
             lock: false,
             warning: null,
-            timeFormatter: null
+            timeFormatter: null,
           },
           numberOfStops: 0,
+          isSymmetric: false,
           trainrunId: 2,
           resourceId: 0,
           specificTrainrunSectionFrequencyId: null,
@@ -209,7 +211,7 @@ export class NetzgrafikDefault {
               {x: 898, y: 304},
               {x: 962, y: 304},
               {x: 1118, y: 304},
-              {x: 1182, y: 304}
+              {x: 1182, y: 304},
             ],
             textPositions: {
               0: {x: 916, y: 316},
@@ -218,11 +220,11 @@ export class NetzgrafikDefault {
               3: {x: 1136, y: 316},
               4: {x: 1040, y: 292},
               5: {x: 1040, y: 292},
-              6: {x: 1040, y: 316}
-            }
+              6: {x: 1040, y: 316},
+            },
           },
-          warnings: null
-        }
+          warnings: null,
+        },
       ],
       trainruns: [
         {
@@ -231,15 +233,15 @@ export class NetzgrafikDefault {
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
-        }
+          labelIds: [],
+        },
       ],
       resources: [],
       metadata: {
         analyticsSettings: {
           originDestinationSettings: {
             connectionPenalty: 5,
-          }
+          },
         },
         trainrunCategories: [
           {

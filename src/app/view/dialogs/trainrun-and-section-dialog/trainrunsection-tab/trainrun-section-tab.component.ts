@@ -22,9 +22,7 @@ import {Subject} from "rxjs";
 import {LinePatternRefs} from "../../../../data-structures/business.data.structures";
 import {StaticDomTags} from "../../../editor-main-view/data-views/static.dom.tags";
 import {ColorRefType} from "../../../../data-structures/technical.data.structures";
-import {
-  TrainrunSectionTimesService
-} from "../../../../services/data/trainrun-section-times.service";
+import {TrainrunSectionTimesService} from "../../../../services/data/trainrun-section-times.service";
 import {VersionControlService} from "../../../../services/data/version-control.service";
 
 export interface LeftAndRightTimeStructure {
@@ -74,10 +72,10 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   public timeCategoryLinePattern: LinePatternRefs;
 
   public isRoundTrip: boolean;
+  public isSymmetric: boolean;
 
   private trainrunSectionHelper: TrainrunsectionHelper;
   private destroyed = new Subject<void>();
-
 
   constructor(
     private dataService: DataService,
@@ -88,7 +86,6 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     public trainrunSectionTimesService: TrainrunSectionTimesService,
     private versionControlService: VersionControlService,
   ) {
-
     this.trainrunSectionHelper = new TrainrunsectionHelper(
       this.trainrunService,
     );
@@ -100,13 +97,21 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
         this.resetOffsetAfterTrainrunChanged();
         this.updateAllValues();
       });
-    this.trainrunSectionService.trainrunSections.pipe(takeUntil(this.destroyed))
+    this.trainrunSectionService.trainrunSections
+      .pipe(takeUntil(this.destroyed))
       .subscribe(() => {
-        if (this.selectedTrainrunSection !== this.trainrunSectionService.getSelectedTrainrunSection()) {
+        if (
+          this.selectedTrainrunSection !==
+          this.trainrunSectionService.getSelectedTrainrunSection()
+        ) {
           this.resetOffsetAfterTrainrunChanged();
           this.updateAllValues();
         }
       });
+  }
+
+  onIsSymmetricChanged() {
+    this.trainrunSectionService.updateIsSymmetric(this.isSymmetric);
   }
 
   updateAllValues() {
@@ -114,6 +119,11 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
       this.trainrunSectionService.getSelectedTrainrunSection();
     if (this.selectedTrainrunSection === null) {
       return;
+    }
+    this.isRoundTrip = this.getIsRoundTrip();
+    if (!this.isRoundTrip) {
+      this.isSymmetric = false;
+      this.onIsSymmetricChanged();
     }
     this.trainrunSectionTimesService.setTrainrunSection(
       this.selectedTrainrunSection,
@@ -184,17 +194,17 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     this.changeDetection.detectChanges();
   }
 
-  getContentClassTag() : string {
+  getContentClassTag(): string {
     const retVal: string = "EditTrainrunSectionDialogTabContent";
-    if (this.versionControlService.getVariantIsWritable()){
+    if (this.versionControlService.getVariantIsWritable()) {
       return retVal;
     }
     return retVal + " readonly";
   }
 
-  getContentFooterClassTag() : string {
+  getContentFooterClassTag(): string {
     const retVal: string = "EditTrainrunDialogTabFooter";
-    if (this.versionControlService.getVariantIsWritable()){
+    if (this.versionControlService.getVariantIsWritable()) {
       return retVal;
     }
     return retVal + " readonly";
@@ -339,7 +349,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     if (this.trainrunDialogParameter.offset < 0) {
       this.trainrunSectionTimesService.setOffset(
         Math.ceil(Math.abs(this.trainrunDialogParameter.offset) / 60) * 60 -
-        Math.abs(this.trainrunDialogParameter.offset),
+          Math.abs(this.trainrunDialogParameter.offset),
       );
     } else {
       this.trainrunSectionTimesService.setOffset(
@@ -348,23 +358,33 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  private getIsRoundTrip() {
-    return this.trainrunService.getIsRoundTrip(this.selectedTrainrunSection.getTrainrun());
+  getIsRoundTrip() {
+    return this.trainrunService.getIsRoundTrip(
+      this.selectedTrainrunSection.getTrainrun(),
+    );
   }
 
   private targetIsRight() {
-    const trainrunSection = this.trainrunSectionService.getSelectedTrainrunSection();
-    return trainrunSection.getTargetNode() === this.trainrunSectionHelper.getRightNode(
-      trainrunSection,
-      this.trainrunSectionTimesService.getNodesOrdered()
+    const trainrunSection =
+      this.trainrunSectionService.getSelectedTrainrunSection();
+    return (
+      trainrunSection.getTargetNode() ===
+      this.trainrunSectionHelper.getRightNode(
+        trainrunSection,
+        this.trainrunSectionTimesService.getNodesOrdered(),
+      )
     );
   }
 
   private targetIsLeft() {
-    const trainrunSection = this.trainrunSectionService.getSelectedTrainrunSection();
-    return trainrunSection.getTargetNode() === this.trainrunSectionHelper.getLeftNode(
-      trainrunSection,
-      this.trainrunSectionTimesService.getNodesOrdered()
+    const trainrunSection =
+      this.trainrunSectionService.getSelectedTrainrunSection();
+    return (
+      trainrunSection.getTargetNode() ===
+      this.trainrunSectionHelper.getLeftNode(
+        trainrunSection,
+        this.trainrunSectionTimesService.getNodesOrdered(),
+      )
     );
   }
 }
