@@ -254,6 +254,7 @@ export class TrainrunService {
           targetArrival,
           (60 - targetArrival) % 60,
           ts.getTravelTime(),
+          ts.getReturnTravelTime(),
           false, // disable event emission since UpdateTrainrunOperation is emitted below
         );
       });
@@ -778,19 +779,20 @@ export class TrainrunService {
   sumTravelTimeUpToLastNonStopNode(
     node: Node,
     trainrunSection: TrainrunSection,
+    returnTravel: boolean = false,
   ): number {
     let summedTravelTime = 0;
     const iterator = this.getNonStopIterator(node, trainrunSection);
     while (iterator.hasNext()) {
       const nextPair = iterator.next();
-      summedTravelTime += nextPair.trainrunSection.getTravelTime();
+      summedTravelTime += returnTravel ? nextPair.trainrunSection.getReturnTravelTime() : nextPair.trainrunSection.getTravelTime();
     }
     return summedTravelTime;
   }
 
-  getCumulativeTravelTime(trainrunSection: TrainrunSection) {
+  getCumulativeTravelTime(trainrunSection: TrainrunSection, returnTravel: boolean = false) {
     const iterator = this.getNonStopIterator(
-      trainrunSection.getSourceNode(),
+      returnTravel ? trainrunSection.getTargetNode() : trainrunSection.getSourceNode(),
       trainrunSection,
     );
     while (iterator.hasNext()) {
@@ -799,24 +801,11 @@ export class TrainrunService {
     return this.sumTravelTimeUpToLastNonStopNode(
       iterator.current().node,
       iterator.current().trainrunSection,
+      returnTravel,
     );
   }
 
-  // getCumulativeReturnTravelTime(trainrunSection: TrainrunSection) {
-  //   const iterator = this.getNonStopIterator(
-  //     trainrunSection.getTargetNode(),
-  //     trainrunSection,
-  //   );
-  //   while (iterator.hasNext()) {
-  //     iterator.next();
-  //   }
-  //   return this.sumTravelTimeUpToLastNonStopNode(
-  //     iterator.current().node,
-  //     iterator.current().trainrunSection,
-  //   );
-  // }
-
-  getCumSumTravelTimeNodePathToLastNonStopNode(n: Node, ts: TrainrunSection) {
+  getCumSumTravelTimeNodePathToLastNonStopNode(n: Node, ts: TrainrunSection, returnTravel: boolean = false) {
     const data = [
       {
         node: n,
@@ -828,7 +817,7 @@ export class TrainrunService {
     const iterator = this.getNonStopIterator(n, ts);
     while (iterator.hasNext()) {
       const nextPair = iterator.next();
-      summedTravelTime += nextPair.trainrunSection.getTravelTime();
+      summedTravelTime += returnTravel ? nextPair.trainrunSection.getReturnTravelTime() : nextPair.trainrunSection.getTravelTime();
       data.push({
         node: nextPair.node,
         sumTravelTime: summedTravelTime,
@@ -838,9 +827,9 @@ export class TrainrunService {
     return data;
   }
 
-  getCumulativeTravelTimeAndNodePath(trainrunSection: TrainrunSection) {
+  getCumulativeTravelTimeAndNodePath(trainrunSection: TrainrunSection, returnTravel: boolean = false) {
     const iterator = this.getNonStopIterator(
-      trainrunSection.getSourceNode(),
+      returnTravel ? trainrunSection.getTargetNode() : trainrunSection.getSourceNode(),
       trainrunSection,
     );
     while (iterator.hasNext()) {
@@ -849,6 +838,7 @@ export class TrainrunService {
     return this.getCumSumTravelTimeNodePathToLastNonStopNode(
       iterator.current().node,
       iterator.current().trainrunSection,
+      returnTravel,
     );
   }
 

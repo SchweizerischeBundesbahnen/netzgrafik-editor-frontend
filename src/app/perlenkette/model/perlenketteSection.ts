@@ -6,6 +6,7 @@ export class PerlenketteSection implements PerlenketteItem {
   constructor(
     public trainrunSectionId: number,
     public travelTime: number,
+    public returnTravelTime: number,
     public fromNode: Node,
     public toNode: Node,
     public numberOfStops: number,

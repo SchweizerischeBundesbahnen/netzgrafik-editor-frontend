@@ -74,4 +74,15 @@ export class TrainrunSectionValidator {
       trainrunSection.resetTravelTimeWarning();
     }
   }
+
+  static validateReturnTravelTime(trainrunSection: TrainrunSection) {
+    if (trainrunSection.getReturnTravelTime() < 1) {
+      trainrunSection.setReturnTravelTimeWarning(
+        $localize`:@@app.services.util.trainrunsection-validator.return-travel-time-less-than-1.title:Return travel Time less than 1`,
+        $localize`:@@app.services.util.trainrunsection-validator.return-travel-time-less-than-1.description:Return travel time must be greater than or equal to 1`,
+      );
+    } else {
+      trainrunSection.resetReturnTravelTimeWarning();
+    }
+  }
 }
