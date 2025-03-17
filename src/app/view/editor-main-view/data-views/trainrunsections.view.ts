@@ -503,9 +503,14 @@ export class TrainrunSectionsView {
   static extractTravelTime(
     trainrunSection: TrainrunSection,
     editorView: EditorView,
+    returnTravel: boolean = false,
   ): string {
-    const cumTravelTimeData =
-      editorView.getCumulativeTravelTimeAndNodePath(trainrunSection);
+    const travelTime = returnTravel
+      ? trainrunSection.getReturnTravelTime()
+      : trainrunSection.getTravelTime();
+    const cumTravelTimeData = returnTravel
+      ? editorView.getCumulativeReturnTravelTimeAndNodePath(trainrunSection)
+      : editorView.getCumulativeTravelTimeAndNodePath(trainrunSection)
     const cumulativeTravelTime =
       cumTravelTimeData[cumTravelTimeData.length - 1].sumTravelTime;
     if (
@@ -513,11 +518,11 @@ export class TrainrunSectionsView {
       editorView.isFilterShowNonStopTimeEnabled() ||
       editorView.isTemporaryDisableFilteringOfItemsInViewEnabled()
     ) {
-      if (cumulativeTravelTime === trainrunSection.getTravelTime()) {
+      if (cumulativeTravelTime === travelTime) {
         // default case
         return (
           TrainrunSectionsView.formatTime(
-            trainrunSection.getTravelTime(),
+            travelTime,
             editorView.getTimeDisplayPrecision(),
           ) + "'"
         );
@@ -683,7 +688,7 @@ export class TrainrunSectionsView {
           return (
             "(" +
             TrainrunSectionsView.formatTime(
-              trainrunSection.getTravelTime(),
+              travelTime,
               1,
             ) +
             "')"
@@ -696,7 +701,7 @@ export class TrainrunSectionsView {
             editorView.getTimeDisplayPrecision(),
           ) +
           "' (" +
-          TrainrunSectionsView.formatTime(trainrunSection.getTravelTime(), 1) +
+          TrainrunSectionsView.formatTime(travelTime, 1) +
           "')"
         );
       }
@@ -826,10 +831,20 @@ export class TrainrunSectionsView {
         if (data !== undefined) {
           return data;
         }
-        return TrainrunSectionsView.extractTravelTime(
+
+        const travelTime = TrainrunSectionsView.extractTravelTime(
           trainrunSection,
           editorView,
         );
+        const returnTravelTime = TrainrunSectionsView.extractTravelTime(
+          trainrunSection,
+          editorView,
+          true,
+        );
+        if (trainrunSection.isRoundTrip() && !trainrunSection.getIsSymmetric() && travelTime !== returnTravelTime) {
+          return "<" + returnTravelTime + "|" + travelTime +">";
+        }
+        return travelTime;
       }
       case TrainrunSectionText.TrainrunSectionName:
         return TrainrunSectionsView.extractTrainrunName(trainrunSection);
@@ -943,15 +958,13 @@ export class TrainrunSectionsView {
              (isFilterShowNonStopTimeEnabled ? false : node.isNonStop(trainrunSection));
     };
 
-    const isRoundTrip = trainrunSection.getTrainrun().getIsRoundTrip();
-  
     switch (textElement) {
       case TrainrunSectionText.SourceDeparture:
         return !isFilterArrivalDepartureTimeEnabled || checkNonStopNode(true)
       case TrainrunSectionText.SourceArrival:
-        return !isFilterArrivalDepartureTimeEnabled || checkNonStopNode(false) || !isRoundTrip;
+        return !isFilterArrivalDepartureTimeEnabled || checkNonStopNode(false) || !trainrunSection.isRoundTrip();
       case TrainrunSectionText.TargetDeparture:
-        return !isFilterArrivalDepartureTimeEnabled || checkNonStopNode(false) || !isRoundTrip;
+        return !isFilterArrivalDepartureTimeEnabled || checkNonStopNode(false) || !trainrunSection.isRoundTrip();
       case TrainrunSectionText.TargetArrival:
         return !isFilterArrivalDepartureTimeEnabled || checkNonStopNode(false);
   

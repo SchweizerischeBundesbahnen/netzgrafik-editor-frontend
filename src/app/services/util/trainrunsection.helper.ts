@@ -41,6 +41,7 @@ export class TrainrunsectionHelper {
         ? 0
         : timeStructure.rightArrivalTime,
       travelTime: 0,
+      returnTravelTime: timeStructure.returnTravelTime, // TODO: not sure of that
     };
   }
 
@@ -81,6 +82,28 @@ export class TrainrunsectionHelper {
   ): number {
     return MathUtils.round(
       this.getSymmetricTime(timeStructure.rightArrivalTime),
+      precision,
+    );
+  }
+
+  // TODO: unused
+  static getLeftArrivalTime(
+    timeStructure: LeftAndRightTimeStructure,
+    precision = TrainrunSectionService.TIME_PRECISION,
+  ): number {
+    return MathUtils.round(
+      (timeStructure.rightDepartureTime + (timeStructure.returnTravelTime % 60)) % 60,
+      precision,
+    );
+  }
+
+  // TODO: unused
+  static getLeftDepartureTime(
+    timeStructure: LeftAndRightTimeStructure,
+    precision = TrainrunSectionService.TIME_PRECISION,
+  ): number {
+    return MathUtils.round(
+      this.getSymmetricTime(timeStructure.leftArrivalTime),
       precision,
     );
   }
@@ -289,6 +312,7 @@ export class TrainrunsectionHelper {
       mappedTimeStructure.rightDepartureTime = timeStructure.leftDepartureTime;
       mappedTimeStructure.leftDepartureTime = timeStructure.rightDepartureTime;
       mappedTimeStructure.travelTime = timeStructure.travelTime;
+      mappedTimeStructure.returnTravelTime = timeStructure.returnTravelTime;
       return mappedTimeStructure;
     }
     return timeStructure;
@@ -313,15 +337,14 @@ export class TrainrunsectionHelper {
       lastRightNode.getId() === bothLastNonStopNodes.lastNonStopNode1.getId()
         ? bothLastNonStopTrainrunSections.lastNonStopTrainrunSection1
         : bothLastNonStopTrainrunSections.lastNonStopTrainrunSection2;
-    const cumulativeTravelTime =
-      this.trainrunService.getCumulativeTravelTime(trainrunSection);
 
     return {
       leftDepartureTime: lastLeftNode.getDepartureTime(leftTrainrunSection),
       leftArrivalTime: lastLeftNode.getArrivalTime(leftTrainrunSection),
       rightDepartureTime: lastRightNode.getDepartureTime(rightTrainrunSection),
       rightArrivalTime: lastRightNode.getArrivalTime(rightTrainrunSection),
-      travelTime: cumulativeTravelTime,
+      travelTime: this.trainrunService.getCumulativeTravelTime(trainrunSection),
+      returnTravelTime: this.trainrunService.getCumulativeTravelTime(trainrunSection, true),
     };
   }
 

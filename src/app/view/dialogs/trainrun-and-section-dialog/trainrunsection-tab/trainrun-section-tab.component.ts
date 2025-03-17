@@ -31,6 +31,7 @@ export interface LeftAndRightTimeStructure {
   rightDepartureTime: number;
   rightArrivalTime: number;
   travelTime: number;
+  returnTravelTime: number;
 }
 
 export interface LeftAndRightLockStructure {
@@ -58,6 +59,8 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   rightArrivalTimeInputElement: ElementRef;
   @ViewChild("travelTimeInputElement")
   travelTimeInputElement: ElementRef;
+  @ViewChild("returnTravelTimeInputElement")
+  returnTravelTimeInputElement: ElementRef;
 
   public selectedTrainrunSection: TrainrunSection;
   public leftBetriebspunkt: string[] = ["", ""];
@@ -144,6 +147,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
       .getTrainrun()
       .getTimeCategoryLinePatternRef();
     this.trainrunSectionTimesService.setHighlightTravelTimeElement(false);
+    this.trainrunSectionTimesService.setHighlightReturnTravelTimeElement(false);
     this.numberOfStops = this.selectedTrainrunSection.getNumberOfStops();
     this.trainrunSectionTimesService.applyOffsetAndTransformTimeStructure();
 
@@ -233,9 +237,17 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
         );
         break;
       case LeftAndRightElement.TravelTime:
+        // to deal with one-trip left->right and left<-right trainrunSections
+        if (this.travelTimeInputElement) {
         this.setFocusAndSelectInputElement(
           this.travelTimeInputElement.nativeElement,
         );
+        } else {
+          this.setFocusAndSelectInputElement(
+            this.returnTravelTimeInputElement.nativeElement,
+          );
+        }
+        
         break;
     }
   }
@@ -292,6 +304,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   onInputNumberOfStopsElementButtonPlus() {
     this.numberOfStops += 1;
     this.trainrunSectionTimesService.setHighlightTravelTimeElement(false);
+    this.trainrunSectionTimesService.setHighlightReturnTravelTimeElement(false);
     this.onNumberOfStopsChanged();
   }
 
@@ -315,6 +328,10 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
       return "NumberOfStopsInputElement show" + activeTag;
     }
     return "NumberOfStopsInputElement" + activeTag;
+  }
+
+  getIsRoundTrip() {
+    return this.trainrunService.getIsRoundTrip(this.selectedTrainrunSection.getTrainrun());
   }
 
   isRoundTripOrTargetIsRight() {
@@ -356,12 +373,6 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
         this.trainrunDialogParameter.offset,
       );
     }
-  }
-
-  getIsRoundTrip() {
-    return this.trainrunService.getIsRoundTrip(
-      this.selectedTrainrunSection.getTrainrun(),
-    );
   }
 
   private targetIsRight() {

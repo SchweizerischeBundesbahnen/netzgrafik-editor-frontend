@@ -121,7 +121,8 @@ export interface TrainrunSectionDto {
   sourceDeparture: TimeLockDto; // declares the soruce departure time
   targetArrival: TimeLockDto; // declares the target arrival time
   targetDeparture: TimeLockDto; // declares the target departure time
-  travelTime: TimeLockDto; // declares the travel arrival time
+  travelTime: TimeLockDto; // declares the travel time
+  returnTravelTime?: TimeLockDto; // declares the return travel time
 
   isSymmetric?: boolean;
 

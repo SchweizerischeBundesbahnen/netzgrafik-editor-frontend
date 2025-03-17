@@ -357,6 +357,7 @@ export class TrainrunSectionService implements OnDestroy {
     targetArrival: number,
     targetDeparture: number,
     travelTime: number,
+    returnTravelTime: number,
     emit: boolean = true,
   ) {
     const trainrunSection = this.getTrainrunSectionFromId(trsId);
@@ -365,6 +366,7 @@ export class TrainrunSectionService implements OnDestroy {
     trainrunSection.setTargetArrival(targetArrival);
     trainrunSection.setTargetDeparture(targetDeparture);
     trainrunSection.setTravelTime(travelTime);
+    trainrunSection.setReturnTravelTime(returnTravelTime);
     TrainrunSectionValidator.validateOneSection(trainrunSection);
     this.trainrunService.propagateConsecutiveTimesForTrainrun(
       trainrunSection.getId(),
@@ -1074,6 +1076,7 @@ export class TrainrunSectionService implements OnDestroy {
           ? trsTimeStructure.rightDepartureTime
           : trsTimeStructure.leftDepartureTime,
         trsTimeStructure.travelTime,
+        trsTimeStructure.returnTravelTime, // TODO: not working for the update in the background
       );
 
       trsTimeStructure.leftDepartureTime = trsTimeStructure.rightArrivalTime;

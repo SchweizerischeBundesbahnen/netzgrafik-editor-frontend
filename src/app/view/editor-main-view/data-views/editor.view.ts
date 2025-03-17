@@ -73,6 +73,8 @@ export class EditorView implements SVGMouseControllerObserver {
   getSelectedTrainrun = null;
   getCumulativeTravelTime = null;
   getCumulativeTravelTimeAndNodePath = null;
+  getCumulativeReturnTravelTime = null;
+  getCumulativeReturnTravelTimeAndNodePath = null;
   unselectAllTrainruns = null;
   isAnyTrainSelected = null;
   getConnectedTrainrunIds = null;
@@ -239,6 +241,14 @@ export class EditorView implements SVGMouseControllerObserver {
 
   bindGetCumulativeTravelTimeAndNodePath(callback) {
     this.getCumulativeTravelTimeAndNodePath = callback;
+  }
+
+  bindGetCumulativeReturnTravelTime(callback) {
+    this.getCumulativeReturnTravelTime = callback;
+  }
+
+  bindGetCumulativeReturnTravelTimeAndNodePath(callback) {
+    this.getCumulativeReturnTravelTimeAndNodePath = callback;
   }
 
   bindUnselectAllTrainruns(callback) {

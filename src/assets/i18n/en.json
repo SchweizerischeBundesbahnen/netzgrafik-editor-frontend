@@ -98,6 +98,10 @@
           "travel-time-less-than-1": {
             "title": "Travel Time less than 1",
             "description": "Travel time must be greater than or equal to 1"
+          },
+          "return-travel-time-less-than-1": {
+            "title": "Return travel Time less than 1",
+            "description": "Return travel time must be greater than or equal to 1"
           }
         },
         "transition-validator": {
