@@ -106,7 +106,7 @@ export class PerlenketteSectionComponent
     public trainrunSectionTimesService: TrainrunSectionTimesService,
     readonly filterService: FilterService,
     private loadPerlenketteService: LoadPerlenketteService,
-    private versionControlService : VersionControlService
+    private versionControlService: VersionControlService
   ) {
     this.trainrunSectionHelper = new TrainrunsectionHelper(
       this.trainrunService,
@@ -172,7 +172,7 @@ export class PerlenketteSectionComponent
     this.destroyed$.complete();
   }
 
-  getVariantIsWritable() : boolean {
+  getVariantIsWritable(): boolean {
     return this.versionControlService.getVariantIsWritable();
   }
 
@@ -213,10 +213,10 @@ export class PerlenketteSectionComponent
       " ColorRef_" +
       this.perlenketteTrainrun.colorRef +
       (noLinePatterns ? " " :
-          " Freq_" +
-          this.perlenketteTrainrun.frequency +
-          " LinePatternRef_" +
-          this.perlenketteTrainrun.trainrunTimeCategory.linePatternRef
+        " Freq_" +
+        this.perlenketteTrainrun.frequency +
+        " LinePatternRef_" +
+        this.perlenketteTrainrun.trainrunTimeCategory.linePatternRef
       )
     );
   }
@@ -234,7 +234,7 @@ export class PerlenketteSectionComponent
   }
 
 
-  switchSectionViewToogleLock(event: MouseEvent, fieldKey: string) {
+  switchSectionViewToggleLock(event: MouseEvent, fieldKey: string) {
     event.stopPropagation();
 
     if (fieldKey === "leftDepartureTime") {
@@ -245,7 +245,7 @@ export class PerlenketteSectionComponent
       this.onButtonTravelTimeLock(event);
       return;
     }
-    if (fieldKey === "rightDepatureTime") {
+    if (fieldKey === "rightDepartureTime") {
       this.onButtonNodeRightLock(event);
       return;
     }

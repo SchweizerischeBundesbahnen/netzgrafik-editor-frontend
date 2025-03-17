@@ -163,8 +163,8 @@ export class TrainrunSectionTimesService {
       const extraHour =
         this.timeStructure.travelTime - (this.timeStructure.travelTime % 60);
       this.timeStructure.travelTime =
-        this.timeStructure.leftArrivalTime -
-        this.timeStructure.rightDepartureTime;
+        this.timeStructure.rightArrivalTime -
+        this.timeStructure.leftDepartureTime;
       this.timeStructure.travelTime +=
         this.timeStructure.travelTime < 0 ? 60 : 0;
       this.timeStructure.travelTime += extraHour;
@@ -333,8 +333,8 @@ export class TrainrunSectionTimesService {
       const extraHour =
         this.timeStructure.travelTime - (this.timeStructure.travelTime % 60);
       this.timeStructure.travelTime =
-        this.timeStructure.rightArrivalTime -
-        this.timeStructure.leftDepartureTime;
+        this.timeStructure.leftArrivalTime -
+        this.timeStructure.rightDepartureTime;
       this.timeStructure.travelTime +=
         this.timeStructure.travelTime < 0 ? 60 : 0;
       this.timeStructure.travelTime += extraHour;

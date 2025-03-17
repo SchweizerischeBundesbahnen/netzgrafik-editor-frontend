@@ -13,7 +13,7 @@ import {
   TrainrunSectionText,
   WarningDto,
 } from "../data-structures/technical.data.structures";
-import {TrainrunsectionValidator} from "../services/util/trainrunsection.validator";
+import {TrainrunSectionValidator} from "../services/util/trainrunsection.validator";
 import {formatDate} from "@angular/common";
 
 export class TrainrunSection {
@@ -381,27 +381,27 @@ export class TrainrunSection {
 
   setTravelTime(time: number) {
     this.travelTime.time = time;
-    TrainrunsectionValidator.validateTravelTime(this);
+    TrainrunSectionValidator.validateTravelTime(this);
   }
 
   setSourceDeparture(time: number) {
     this.sourceDeparture.time = time;
-    TrainrunsectionValidator.validateOneSection(this);
+    TrainrunSectionValidator.validateOneSection(this);
   }
 
   setSourceArrival(time: number) {
     this.sourceArrival.time = time;
-    TrainrunsectionValidator.validateOneSection(this);
+    TrainrunSectionValidator.validateOneSection(this);
   }
 
   setTargetDeparture(time: number) {
     this.targetDeparture.time = time;
-    TrainrunsectionValidator.validateOneSection(this);
+    TrainrunSectionValidator.validateOneSection(this);
   }
 
   setTargetArrival(time: number) {
     this.targetArrival.time = time;
-    TrainrunsectionValidator.validateOneSection(this);
+    TrainrunSectionValidator.validateOneSection(this);
   }
 
   getTravelTimeLock(): boolean {
