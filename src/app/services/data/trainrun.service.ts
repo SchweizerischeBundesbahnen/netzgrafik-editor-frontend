@@ -82,7 +82,6 @@ export class TrainrunService {
           trainrunDto.trainrunTimeCategoryId,
         ),
       );
-      trainrun.setIsSymmetric(trainrunDto.isSymmetric);
       trainrun.setIsRoundTrip(trainrunDto.isRoundTrip);
       return trainrun;
     });
@@ -298,14 +297,13 @@ export class TrainrunService {
     return this.getTrainrunFromId(trainrun.getId()).getIsRoundTrip();
   }
 
-  updateIsRoundTrip(value: Trainrun, isRoundTrip: boolean) {
-    const trainrun = this.getTrainrunFromId(value.getId());
-    const trainrunSection =
-      this.trainrunSectionService.getTrainrunSectionFromId(trainrun.getId());
-    trainrun.setIsRoundTrip(isRoundTrip);
-    // If the trainrun is a one-way trip, it cannot be symmetric
+  updateIsRoundTrip(trainrun: Trainrun, isRoundTrip: boolean) {
+    this.getTrainrunFromId(trainrun.getId()).setIsRoundTrip(isRoundTrip);
+    // If the trainrun is a one-way trip, no symmetry is possible
     if (!isRoundTrip) {
-      trainrunSection.setIsSymmetric(false);
+      this.trainrunSectionService.getTrainrunSections().forEach((ts) => {
+        ts.setIsSymmetric(false);
+      });
     }
     this.trainrunsUpdated();
     this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));

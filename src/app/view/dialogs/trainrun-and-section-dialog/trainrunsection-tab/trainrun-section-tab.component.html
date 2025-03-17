@@ -559,7 +559,7 @@
     </tr>
   </table>
   <div class="sbb-checkbox-group-horizontal" *ngIf="getIsRoundTrip()">
-    <sbb-checkbox [(ngModel)]="isSymmetric" (change)="onIsSymmetricChanged()">
+    <sbb-checkbox [(ngModel)]="isSymmetric" (change)="onSymmetryChanged()">
       {{
         "app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.enableSymmetry"
           | translate

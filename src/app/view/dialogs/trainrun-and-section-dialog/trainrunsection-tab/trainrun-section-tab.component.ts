@@ -74,7 +74,6 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   public timeCategoryShortName: string;
   public timeCategoryLinePattern: LinePatternRefs;
 
-  public isRoundTrip: boolean;
   public isSymmetric: boolean;
 
   private trainrunSectionHelper: TrainrunsectionHelper;
@@ -113,24 +112,16 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
       });
   }
 
-  onIsSymmetricChanged() {
-    this.trainrunSectionService.updateIsSymmetric(this.isSymmetric);
-  }
-
   updateAllValues() {
     this.selectedTrainrunSection =
       this.trainrunSectionService.getSelectedTrainrunSection();
     if (this.selectedTrainrunSection === null) {
       return;
     }
-    this.isRoundTrip = this.getIsRoundTrip();
-    if (!this.isRoundTrip) {
-      this.isSymmetric = false;
-      this.onIsSymmetricChanged();
-    }
     this.trainrunSectionTimesService.setTrainrunSection(
       this.selectedTrainrunSection,
     );
+    this.isSymmetric = this.selectedTrainrunSection.getIsSymmetric();
     this.frequency = this.selectedTrainrunSection.getFrequency();
     this.frequencyLinePattern =
       this.selectedTrainrunSection.getFrequencyLinePatternRef();
@@ -239,9 +230,9 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
       case LeftAndRightElement.TravelTime:
         // to deal with one-trip left->right and left<-right trainrunSections
         if (this.travelTimeInputElement) {
-        this.setFocusAndSelectInputElement(
-          this.travelTimeInputElement.nativeElement,
-        );
+          this.setFocusAndSelectInputElement(
+            this.travelTimeInputElement.nativeElement,
+          );
         } else {
           this.setFocusAndSelectInputElement(
             this.returnTravelTimeInputElement.nativeElement,
@@ -340,6 +331,10 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
 
   isRoundTripOrTargetIsLeft() {
     return this.getIsRoundTrip() || this.targetIsLeft();
+  }
+
+  onSymmetryChanged() {
+    this.trainrunSectionTimesService.onSymmetryChanged(this.isSymmetric);
   }
 
   private resetOffsetAfterTrainrunChanged() {

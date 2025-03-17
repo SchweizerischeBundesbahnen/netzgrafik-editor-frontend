@@ -330,9 +330,10 @@ export class TrainrunSectionService implements OnDestroy {
   }
 
   updateIsSymmetric(isSymmetric: boolean) {
-    this.trainrunSectionsStore.trainrunSections.forEach((trainrunSection) => {
-      trainrunSection.setIsSymmetric(isSymmetric);
-    });
+    const selectedTrainrunSection = this.getSelectedTrainrunSection();
+    if (selectedTrainrunSection !== null) {
+      selectedTrainrunSection.setIsSymmetric(isSymmetric);
+    }
   }
 
   updateTrainrunSectionNumberOfStops(

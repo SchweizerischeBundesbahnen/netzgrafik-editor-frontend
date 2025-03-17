@@ -434,7 +434,7 @@ export class TrainrunSectionTimesService {
         this.timeStructure.leftArrivalTime,
         this.timeStructure.leftDepartureTime,
       );
-        } else {
+    } else {
       this.showWarningTwoLocks = true;
     }
 
@@ -536,6 +536,15 @@ export class TrainrunSectionTimesService {
       undefined,
       true,
     );
+  }
+
+  /* Symmetry */
+  onSymmetryChanged(isSymmetric: boolean) {
+    this.removeOffsetAndBackTransformTimeStructure();
+    this.trainrunSectionService.updateIsSymmetric(isSymmetric);
+    this.timeStructure.returnTravelTime = this.timeStructure.travelTime;
+    this.updateTrainrunSectionTime();
+    this.applyOffsetAndTransformTimeStructure();
   }
 
   /* Buttons in Footer */
