@@ -503,9 +503,14 @@ export class TrainrunSectionsView {
   static extractTravelTime(
     trainrunSection: TrainrunSection,
     editorView: EditorView,
+    returnTravel: boolean = false,
   ): string {
-    const cumTravelTimeData =
-      editorView.getCumulativeTravelTimeAndNodePath(trainrunSection);
+    const travelTime = returnTravel
+      ? trainrunSection.getReturnTravelTime()
+      : trainrunSection.getTravelTime();
+    const cumTravelTimeData = returnTravel
+      ? editorView.getCumulativeReturnTravelTimeAndNodePath(trainrunSection)
+      : editorView.getCumulativeTravelTimeAndNodePath(trainrunSection)
     const cumulativeTravelTime =
       cumTravelTimeData[cumTravelTimeData.length - 1].sumTravelTime;
     if (
@@ -513,11 +518,11 @@ export class TrainrunSectionsView {
       editorView.isFilterShowNonStopTimeEnabled() ||
       editorView.isTemporaryDisableFilteringOfItemsInViewEnabled()
     ) {
-      if (cumulativeTravelTime === trainrunSection.getTravelTime()) {
+      if (cumulativeTravelTime === travelTime) {
         // default case
         return (
           TrainrunSectionsView.formatTime(
-            trainrunSection.getTravelTime(),
+            travelTime,
             editorView.getTimeDisplayPrecision(),
           ) + "'"
         );
@@ -683,7 +688,7 @@ export class TrainrunSectionsView {
           return (
             "(" +
             TrainrunSectionsView.formatTime(
-              trainrunSection.getTravelTime(),
+              travelTime,
               1,
             ) +
             "')"
@@ -696,7 +701,7 @@ export class TrainrunSectionsView {
             editorView.getTimeDisplayPrecision(),
           ) +
           "' (" +
-          TrainrunSectionsView.formatTime(trainrunSection.getTravelTime(), 1) +
+          TrainrunSectionsView.formatTime(travelTime, 1) +
           "')"
         );
       }
@@ -826,10 +831,20 @@ export class TrainrunSectionsView {
         if (data !== undefined) {
           return data;
         }
-        return TrainrunSectionsView.extractTravelTime(
+
+        const travelTime = TrainrunSectionsView.extractTravelTime(
           trainrunSection,
           editorView,
         );
+        const returnTravelTime = TrainrunSectionsView.extractTravelTime(
+          trainrunSection,
+          editorView,
+          true,
+        );
+        if (trainrunSection.isRoundTrip() && !trainrunSection.getIsSymmetric() && travelTime !== returnTravelTime) {
+          return "<" + returnTravelTime + "|" + travelTime +">";
+        }
+        return travelTime;
       }
       case TrainrunSectionText.TrainrunSectionName:
         return TrainrunSectionsView.extractTrainrunName(trainrunSection);
@@ -933,81 +948,53 @@ export class TrainrunSectionsView {
       // disable filtering in view (render all objects)
       return false;
     }
+  
+    const isFilterArrivalDepartureTimeEnabled = this.editorView.isFilterArrivalDepartureTimeEnabled();
+    const isFilterShowNonStopTimeEnabled = this.editorView.isFilterShowNonStopTimeEnabled();
+  
+    const checkNonStopNode = (isSource: boolean) => {
+      const node = TrainrunSectionsView.getNode(trainrunSection, isSource);
+      return !this.editorView.checkFilterNonStopNode(node) ||
+             (isFilterShowNonStopTimeEnabled ? false : node.isNonStop(trainrunSection));
+    };
+
     switch (textElement) {
       case TrainrunSectionText.SourceDeparture:
+        return !isFilterArrivalDepartureTimeEnabled || checkNonStopNode(true)
       case TrainrunSectionText.SourceArrival:
-        if (!this.editorView.isFilterArrivalDepartureTimeEnabled()) {
-          return true;
-        }
-        if (
-          !this.editorView.checkFilterNonStopNode(
-            TrainrunSectionsView.getNode(trainrunSection, true),
-          )
-        ) {
-          return true;
-        }
-        if (this.editorView.isFilterShowNonStopTimeEnabled()) {
-          return false;
-        }
-        return TrainrunSectionsView.getNode(trainrunSection, true).isNonStop(
-          trainrunSection,
-        );
+        return !isFilterArrivalDepartureTimeEnabled || checkNonStopNode(false) || !trainrunSection.isRoundTrip();
       case TrainrunSectionText.TargetDeparture:
+        return !isFilterArrivalDepartureTimeEnabled || checkNonStopNode(false) || !trainrunSection.isRoundTrip();
       case TrainrunSectionText.TargetArrival:
-        if (!this.editorView.isFilterArrivalDepartureTimeEnabled()) {
-          return true;
-        }
-        if (
-          !this.editorView.checkFilterNonStopNode(
-            TrainrunSectionsView.getNode(trainrunSection, false),
-          )
-        ) {
-          return true;
-        }
-        if (this.editorView.isFilterShowNonStopTimeEnabled()) {
-          return false;
-        }
-        return TrainrunSectionsView.getNode(trainrunSection, false).isNonStop(
-          trainrunSection,
-        );
+        return !isFilterArrivalDepartureTimeEnabled || checkNonStopNode(false);
+  
       case TrainrunSectionText.TrainrunSectionTravelTime:
-        if (!this.editorView.isFilterTravelTimeEnabled()) {
-          return true;
-        }
-        if (this.editorView.isFilterShowNonStopTimeEnabled()) {
-          return false;
-        }
-        return (
-          !trainrunSection.getTrainrun().selected() &&
-          TrainrunSectionsView.isBothSideNonStop(trainrunSection)
-        );
-      case TrainrunSectionText.TrainrunSectionName: {
+        return !this.editorView.isFilterTravelTimeEnabled() ||
+             (isFilterShowNonStopTimeEnabled ? false :
+              (!trainrunSection.getTrainrun().selected() &&
+               TrainrunSectionsView.isBothSideNonStop(trainrunSection)));
+  
+      case TrainrunSectionText.TrainrunSectionName:
         if (!this.editorView.isFilterTrainrunNameEnabled()) {
           return true;
         }
         const srcNode = TrainrunSectionsView.getNode(trainrunSection, true);
         const trgNode = TrainrunSectionsView.getNode(trainrunSection, false);
-        if (
-          !this.editorView.checkFilterNonStopNode(srcNode) ||
-          !this.editorView.checkFilterNonStopNode(trgNode)
-        ) {
+        if (!this.editorView.checkFilterNonStopNode(srcNode) ||
+            !this.editorView.checkFilterNonStopNode(trgNode)) {
           const transSrc = srcNode.getTransition(trainrunSection.getId());
           const transTrg = trgNode.getTransition(trainrunSection.getId());
-          if (transSrc !== undefined && transTrg !== undefined) {
-            if (
-              transSrc.getIsNonStopTransit() &&
-              transTrg.getIsNonStopTransit()
-            ) {
-              return true;
-            }
+          if (transSrc?.getIsNonStopTransit() && transTrg?.getIsNonStopTransit()) {
+            return true;
           }
         }
-      }
         return false;
+  
       default:
         return false;
     }
   }
+  
 
   setGroup(trainrunSectionGroup: d3.Selector) {
     trainrunSectionGroup.attr("class", "TrainrunSectionsView");
