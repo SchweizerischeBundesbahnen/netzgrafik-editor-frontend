@@ -12,7 +12,6 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {EditorMode} from "../view/editor-menu/editor-mode";
 import {UndoService} from "../services/data/undo.service";
 import {EditorView} from "../view/editor-main-view/data-views/editor.view";
-import {NetzgrafikDefault} from "../sample-netzgrafik/netzgrafik.default";
 import {environment} from "../../environments/environment";
 import {NodeService} from "../services/data/node.service";
 
@@ -54,10 +53,9 @@ export class NetzgrafikApplicationComponent {
       .subscribe((params) => {
         uiInteractionService.setEditorMode(EditorMode.NetzgrafikEditing);
         uiInteractionService.showNetzgrafik();
-        try {
-          versionControlService.load(params.getVariantId(), true);
-        } catch (e) {
-          versionControlService.loadNetzgrafikDTO(NetzgrafikDefault.getDefaultNetzgrafik());
+        const variantId = params.tryGetVariantId();
+        if (variantId !== null) {
+          versionControlService.load(variantId, true);
         }
         uiInteractionService.setViewboxProperties(
           EditorView.svgName,

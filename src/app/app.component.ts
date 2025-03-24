@@ -1,4 +1,4 @@
-import {Component, Input, Output} from "@angular/core";
+import {Component, Input, Output, OnInit} from "@angular/core";
 import {AuthService} from "./services/auth/auth.service";
 import {TrainrunService} from "./services/data/trainrun.service";
 import {TrainrunSectionService} from "./services/data/trainrunsection.service";
@@ -13,18 +13,20 @@ import {LabelService} from "./services/data/label.service";
 import {NodeService} from "./services/data/node.service";
 import {I18nService} from "./core/i18n/i18n.service";
 import {PositionTransformationService} from "./services/util/position.transformation.service";
+import {NetzgrafikDefault} from "./sample-netzgrafik/netzgrafik.default";
 
 @Component({
   selector: "sbb-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   readonly disableBackend = environment.disableBackend;
   readonly version = packageJson.version;
   readonly environmentLabel = environment.label;
   readonly authenticated: Promise<unknown>;
   protected currentLanguage: string = this.i18nService.language;
+  private netzgrafikDtoIsSet = false;
 
   projectInMenu: Observable<ProjectDto | null>;
 
@@ -56,6 +58,12 @@ export class AppComponent {
     }
   }
 
+  ngOnInit() {
+    if (this.disableBackend && !this.netzgrafikDtoIsSet) {
+      this.netzgrafikDto = NetzgrafikDefault.getDefaultNetzgrafik();
+    }
+  }
+
   logout() {
     if (!this.disableBackend) {
       this.authService.logOut();
@@ -66,7 +74,7 @@ export class AppComponent {
   get language() {
     return this.currentLanguage;
   }
-  
+
   set language(language: string) {
     if (language !== this.currentLanguage) {
       this.i18nService.setLanguage(language);
@@ -80,6 +88,7 @@ export class AppComponent {
   }
 
   set netzgrafikDto(netzgrafikDto: NetzgrafikDto) {
+    this.netzgrafikDtoIsSet = true;
     this.dataService.loadNetzgrafikDto(netzgrafikDto);
   }
 
