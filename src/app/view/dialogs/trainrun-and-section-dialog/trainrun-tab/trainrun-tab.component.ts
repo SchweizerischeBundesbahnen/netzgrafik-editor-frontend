@@ -32,6 +32,7 @@ export class TrainrunTabComponent implements OnDestroy {
   public selectedCategory: TrainrunCategory;
   public selectedTimeCategory: TrainrunTimeCategory;
   public trainrunTitle: string;
+  public isRoundTrip: boolean;
 
   private destroyed = new Subject<void>();
 
@@ -56,7 +57,8 @@ export class TrainrunTabComponent implements OnDestroy {
   }
 
   getContentClassTag(): string {
-    const readonlyTag: string = this.versionControlService.getVariantIsWritable() ? " " : " readonly";
+    const readonlyTag: string =
+      this.versionControlService.getVariantIsWritable() ? " " : " readonly";
     if (this.isIntegratedComponent) {
       return "EditTrainrunDialogTabContent IntegratedComponent" + readonlyTag;
     }
@@ -70,7 +72,6 @@ export class TrainrunTabComponent implements OnDestroy {
     }
     return retVal + " readonly";
   }
-
 
   getFrequencyClassname(trainrunFrequency: TrainrunFrequency): string {
     if (trainrunFrequency.id === this.selectedFrequency.id) {
@@ -165,6 +166,13 @@ export class TrainrunTabComponent implements OnDestroy {
     }
   }
 
+  onIsRoundTripChanged() {
+    this.trainrunService.updateIsRoundTrip(
+      this.selectedTrainrun,
+      this.isRoundTrip,
+    );
+  }
+
   makeButtonLabel(label: string): string {
     if (label.length > 4) {
       return label.substring(0, 3) + "...";
@@ -192,7 +200,9 @@ export class TrainrunTabComponent implements OnDestroy {
   }
 
   onDuplicateTrainrun() {
-    this.trainrunService.duplicateTrainrunAndSections(this.selectedTrainrun.getId());
+    this.trainrunService.duplicateTrainrunAndSections(
+      this.selectedTrainrun.getId(),
+    );
     this.initializeWithCurrentSelectedTrainrun();
   }
 
@@ -204,6 +214,7 @@ export class TrainrunTabComponent implements OnDestroy {
       this.selectedTimeCategory =
         this.selectedTrainrun.getTrainrunTimeCategory();
       this.trainrunTitle = this.selectedTrainrun.getTitle();
+      this.isRoundTrip = this.selectedTrainrun.getIsRoundTrip();
     }
   }
 }
