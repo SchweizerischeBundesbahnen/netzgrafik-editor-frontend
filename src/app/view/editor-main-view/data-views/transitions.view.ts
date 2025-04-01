@@ -244,9 +244,12 @@ export class TransitionsView {
         this.editorView.getConnectedTrainrunIds(selectedTrainrun);
     }
 
-    const transitions = inputTransitions.filter((t) =>
-      this.filtertransitionToDisplay(t, t.getTrainrun()) &&
-      this.editorView.doCullCheckPositionsInViewport(t.getPath())
+    const transitions = inputTransitions.filter((t) => {
+        if (this.editorView.doCullCheckPositionsInViewport(t.getPath())) {
+          return this.filtertransitionToDisplay(t, t.getTrainrun());
+        }
+        return false;
+      }
     );
     this.createTransitions(
       transitions,

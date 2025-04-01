@@ -98,15 +98,18 @@ export class NodesView {
   }
 
   displayNodes(inputNodes: Node[]) {
-    const nodes = inputNodes.filter((n) =>
-      this.filterNodesToDisplay(n) &&
-      this.editorView.doCullCheckPositionsInViewport(
-        [
-          new Vec2D(n.getPositionX(), n.getPositionY()),
-          new Vec2D(n.getPositionX() + n.getNodeWidth(), n.getPositionY()),
-          new Vec2D(n.getPositionX(), n.getPositionY() + n.getNodeHeight()),
-          new Vec2D(n.getPositionX() + n.getNodeWidth(), n.getPositionY() + n.getNodeHeight())
-        ])
+    const nodes = inputNodes.filter((n) => {
+        if (this.editorView.doCullCheckPositionsInViewport(
+          [
+            new Vec2D(n.getPositionX(), n.getPositionY()),
+            new Vec2D(n.getPositionX() + n.getNodeWidth(), n.getPositionY()),
+            new Vec2D(n.getPositionX(), n.getPositionY() + n.getNodeHeight()),
+            new Vec2D(n.getPositionX() + n.getNodeWidth(), n.getPositionY() + n.getNodeHeight())
+          ])) {
+          return this.filterNodesToDisplay(n);
+        }
+        return false;
+      }
     );
 
     const group = this.nodeGroup
