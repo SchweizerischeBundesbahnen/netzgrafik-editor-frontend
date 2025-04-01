@@ -245,15 +245,17 @@ export class TransitionsView {
     }
 
     const transitions = inputTransitions.filter((t) =>
-      this.filtertransitionToDisplay(t, t.getTrainrun()) &&
-      this.editorView.doCullCheckPositionsInViewport(t.getPath())
+      this.editorView.doCullCheckPositionsInViewport(t.getPath()) &&
+      this.filtertransitionToDisplay(t, t.getTrainrun())
     );
+
     this.createTransitions(
       transitions,
       selectedTrainrun,
       connectedTrainIds,
       true,
     );
+
     this.createTransitions(
       transitions,
       selectedTrainrun,
