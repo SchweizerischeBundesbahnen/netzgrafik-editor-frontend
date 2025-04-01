@@ -292,12 +292,9 @@ export class ConnectionsView {
   }
 
   displayConnections(inputConnections: Connection[]) {
-    const connections = inputConnections.filter((c) => {
-        if (this.editorView.doCullCheckPositionsInViewport(c.getPath())) {
-          return this.filterConnectionsToDisplay(c);
-        }
-        return false;
-      }
+    const connections = inputConnections.filter((c) =>
+      this.editorView.doCullCheckPositionsInViewport(c.getPath()) &&
+      this.filterConnectionsToDisplay(c)
     );
     const connectionsGroup = this.connectionsGroup
       .selectAll(StaticDomTags.CONNECTION_ROOT_CONTAINER_DOM_REF)
