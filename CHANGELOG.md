@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.22](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.21...netzgrafik-frontend-v2.9.22) (2025-04-01)
+
+
+### Bug Fixes
+
+* The performance gets improved for big Netzgrafik ([#427](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/427)) ([bb00a4d](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/bb00a4d54cded069132d1bbf5b1e7e754af97288))
+
 ## [2.9.21](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.20...netzgrafik-frontend-v2.9.21) (2025-01-28)
 
 
