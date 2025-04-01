@@ -353,9 +353,6 @@ export class FilterService implements OnDestroy {
         const oppNode = node.getOppositeNode(p.getTrainrunSection());
         if (oppNodes.find((n) => n === oppNode.getId()) === undefined) {
           oppNodes.push(oppNode.getId());
-          if (oppNodes.length > 2) {
-            return true;
-          }
         }
       }
     });
