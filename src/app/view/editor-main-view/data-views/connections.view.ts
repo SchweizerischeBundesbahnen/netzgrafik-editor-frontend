@@ -296,6 +296,7 @@ export class ConnectionsView {
       this.editorView.doCullCheckPositionsInViewport(c.getPath()) &&
       this.filterConnectionsToDisplay(c)
     );
+
     const connectionsGroup = this.connectionsGroup
       .selectAll(StaticDomTags.CONNECTION_ROOT_CONTAINER_DOM_REF)
       .data(
