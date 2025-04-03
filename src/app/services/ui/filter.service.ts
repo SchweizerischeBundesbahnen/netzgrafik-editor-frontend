@@ -391,12 +391,10 @@ export class FilterService implements OnDestroy {
       trainrun.getLabelIds(),
     );
     return (
+      filterTrainrunSection &&
       this.isFilterTrainrunFrequencyEnabled(trainrun.getTrainrunFrequency()) &&
       this.isFilterTrainrunCategoryEnabled(trainrun.getTrainrunCategory()) &&
-      this.isFilterTrainrunTimeCategoryEnabled(
-        trainrun.getTrainrunTimeCategory(),
-      ) &&
-      filterTrainrunSection
+      this.isFilterTrainrunTimeCategoryEnabled(trainrun.getTrainrunTimeCategory())
     );
   }
 
@@ -868,14 +866,6 @@ export class FilterService implements OnDestroy {
           groupedLabelsFromEnvironment.filter(
             (value) => groupedLabelsAllMinusFilter.indexOf(value) !== -1,
           ).length === groupedLabelsAllMinusFilter.length;
-        console.log(
-          "groupedLabelsAllMinusFilter",
-          groupedLabelsAllMinusFilter,
-          "groupedLabelsFromEnvironment",
-          groupedLabelsFromEnvironment,
-          "doFiltering",
-          doFiltering,
-        );
       }
     });
     return doFiltering;
