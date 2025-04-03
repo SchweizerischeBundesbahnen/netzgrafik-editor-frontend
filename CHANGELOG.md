@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.23](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.22...netzgrafik-frontend-v2.9.23) (2025-04-03)
+
+
+### Bug Fixes
+
+* changed filtering oder and add cull for notes ([#429](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/429)) ([b863cda](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/b863cda2554e49c5fa6da4d4d53d1a10042eb1e4))
+
 ## [2.9.22](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.21...netzgrafik-frontend-v2.9.22) (2025-04-01)
 
 
