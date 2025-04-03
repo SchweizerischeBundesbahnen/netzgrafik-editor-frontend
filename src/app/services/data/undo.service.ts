@@ -66,6 +66,10 @@ export class UndoService implements OnDestroy {
     this.undoRecordingStopped = false;
   }
 
+  getUndoRecording(): boolean {
+    return this.undoRecordingStopped;
+  }
+
   private subscribeSnapshots() {
     if (this.changesSubscription !== undefined) {
       this.changesSubscription.unsubscribe();
@@ -129,7 +133,7 @@ export class UndoService implements OnDestroy {
     this.currentVariantId = variantId;
   }
 
-  public getCurrentVariantId():number{
+  public getCurrentVariantId(): number {
     return this.currentVariantId;
   }
 }
