@@ -128,7 +128,16 @@ export class NotesView {
   }
 
   displayNotes(inputNotes: Note[]) {
-    const notes = inputNotes.filter((n) => this.filterNotesToDisplay(n));
+    const notes = inputNotes.filter((n) =>
+      this.editorView.doCullCheckPositionsInViewport(
+        [
+          new Vec2D(n.getPositionX(), n.getPositionY()),
+          new Vec2D(n.getPositionX() + n.getWidth(), n.getPositionY()),
+          new Vec2D(n.getPositionX(), n.getPositionY() + n.getHeight()),
+          new Vec2D(n.getPositionX() + n.getWidth(), n.getPositionY() + n.getHeight())
+        ]) &&
+      this.filterNotesToDisplay(n)
+    );
 
     const group = this.notesGroup
       .selectAll(StaticDomTags.NOTE_ROOT_CONTAINER_DOM_REF)
