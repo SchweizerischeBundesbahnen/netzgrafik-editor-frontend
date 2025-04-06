@@ -102,6 +102,7 @@ import {PathGridComponent} from "./streckengrafik/components/grid/path-grid/path
 import {TrainRunNodeComponent} from "./streckengrafik/components/train-run-node/trainrun-node.component";
 import {ActionMenuComponent} from "./view/action-menu/action-menu/action-menu.component";
 import {I18nModule} from "./core/i18n/i18n.module";
+import {OriginDestinationComponent} from "./origin-destination/components/origin-destination.component";
 
 @NgModule({
   declarations: [
@@ -158,6 +159,7 @@ import {I18nModule} from "./core/i18n/i18n.module";
     ActionMenuComponent,
     LogNotificationToastComponent,
     StreckengrafikComponent,
+    OriginDestinationComponent,
     TimelineComponent,
     TimeSliderComponent,
     DrawingBackgroundMouseListenerComponent,
@@ -235,17 +237,20 @@ import {I18nModule} from "./core/i18n/i18n.module";
   ],
   bootstrap: environment.customElement ? [] : [AppComponent],
   providers: [
-    ... environment.backendUrl ? [{provide: BASE_PATH, useValue: environment.backendUrl}] : [],
+    ...(environment.backendUrl
+      ? [{provide: BASE_PATH, useValue: environment.backendUrl}]
+      : []),
     {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
   ],
 })
-
 export class AppModule implements DoBootstrap {
   constructor(private injector: Injector) {}
 
   ngDoBootstrap() {
     if (environment.customElement) {
-      const element = createCustomElement(AppComponent, {injector: this.injector});
+      const element = createCustomElement(AppComponent, {
+        injector: this.injector,
+      });
       customElements.define("sbb-root", element);
     }
   }
