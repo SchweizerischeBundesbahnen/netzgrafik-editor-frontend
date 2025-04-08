@@ -14,6 +14,7 @@ import {NodeService} from "./services/data/node.service";
 import {I18nService} from "./core/i18n/i18n.service";
 import {PositionTransformationService} from "./services/util/position.transformation.service";
 import {NetzgrafikDefault} from "./sample-netzgrafik/netzgrafik.default";
+import {UiInteractionService} from "./services/ui/ui.interaction.service";
 
 @Component({
   selector: "sbb-root",
@@ -46,6 +47,7 @@ export class AppComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private dataService: DataService,
+              private uiInteractionService: UiInteractionService,
               private trainrunService: TrainrunService,
               private trainrunSectionService: TrainrunSectionService,
               private nodeService: NodeService,
@@ -90,6 +92,7 @@ export class AppComponent implements OnInit {
   set netzgrafikDto(netzgrafikDto: NetzgrafikDto) {
     this.netzgrafikDtoIsSet = true;
     this.dataService.loadNetzgrafikDto(netzgrafikDto);
+    this.uiInteractionService.closeTrainrunDialog();
   }
 
   @Output()
