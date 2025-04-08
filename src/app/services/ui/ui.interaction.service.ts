@@ -440,6 +440,11 @@ export class UiInteractionService implements OnDestroy {
     return this.editorMode;
   }
 
+  resetEditorMode() {
+    this.editorMode = EditorMode.NetzgrafikEditing;
+    this.setEditorModeSubject.next(this.editorMode);
+  }
+
   disableMultiSelectedNodesCorridor() {
     this.isMultiSelectedNodesCorridor = false;
   }

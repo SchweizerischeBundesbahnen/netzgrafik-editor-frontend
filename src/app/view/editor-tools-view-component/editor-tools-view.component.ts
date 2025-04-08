@@ -650,6 +650,7 @@ export class EditorToolsViewComponent {
     this.uiInteractionService.showNetzgrafik();
     this.uiInteractionService.closeNodeStammdaten();
     this.uiInteractionService.closePerlenkette();
+    this.uiInteractionService.resetEditorMode();
     this.nodeService.unselectAllNodes();
 
     // import data
