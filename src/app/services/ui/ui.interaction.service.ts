@@ -74,7 +74,7 @@ export class UiInteractionService implements OnDestroy {
   printGraphikSubject = new Subject<null>();
   readonly printGraphik = this.printGraphikSubject.asObservable();
 
-  showTrainrunDialogSubject = new Subject<TrainrunDialogParameter>();
+  showTrainrunDialogSubject = new Subject<TrainrunDialogParameter | null>();
   readonly trainrunDialog = this.showTrainrunDialogSubject.asObservable();
 
   showNoteDialogSubject = new Subject<NoteDialogParameter>();
@@ -392,6 +392,10 @@ export class UiInteractionService implements OnDestroy {
   closePerlenkette() {
     this.nodeService.unselectAllConnections();
     this.showPerlenketteSubject.next(false);
+  }
+
+  closeTrainrunDialog() {
+    this.showTrainrunDialogSubject.next(null);
   }
 
   print() {

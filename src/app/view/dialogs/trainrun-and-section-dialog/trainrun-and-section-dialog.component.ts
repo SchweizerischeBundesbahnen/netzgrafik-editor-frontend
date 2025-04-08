@@ -90,6 +90,11 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
     this.uiInteractionService.trainrunDialog
       .pipe(takeUntil(this.destroyed))
       .subscribe((parameter) => {
+        if (!parameter) {
+          this.closeDialog();
+          return;
+        }
+
         this.data = parameter;
         const selectedTrainrunSection =
           this.trainrunSectionService.getSelectedTrainrunSection();
