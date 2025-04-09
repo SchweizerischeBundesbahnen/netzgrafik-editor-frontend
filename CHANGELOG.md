@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.24](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.23...netzgrafik-frontend-v2.9.24) (2025-04-09)
+
+
+### Bug Fixes
+
+* reset main view after netzgrafikDto import ([c0e2d02](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/c0e2d0202e96d1097362b519e274e74c862213be))
+
 ## [2.9.23](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.22...netzgrafik-frontend-v2.9.23) (2025-04-03)
 
 
