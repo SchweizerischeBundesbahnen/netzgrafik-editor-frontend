@@ -23,6 +23,7 @@ export class Trainrun {
   private trainrunTimeCategory: TrainrunTimeCategory;
   private isSelected: boolean;
   private labelIds: number[];
+  private isRoundTrip: boolean;
 
   constructor(
     {
@@ -39,6 +40,7 @@ export class Trainrun {
       frequencyId: Trainrun.DEFAULT_TRAINRUN_FREQUENCY,
       trainrunTimeCategoryId: Trainrun.DEFAULT_TRAINRUN_TIME_CATEGORY,
       labelIds: [],
+      isRoundTrip: false,
     },
   ) {
     this.id = id;
@@ -148,6 +150,14 @@ export class Trainrun {
     this.labelIds = labelIds;
   }
 
+  getIsRoundTrip(): boolean {
+    return this.isRoundTrip;
+  }
+
+  setIsRoundTrip(isRoundTrip: boolean) {
+    this.isRoundTrip = isRoundTrip;
+  }
+
   getDto(): TrainrunDto {
     return {
       id: this.id,
@@ -156,6 +166,7 @@ export class Trainrun {
       frequencyId: this.trainrunFrequency.id,
       trainrunTimeCategoryId: this.trainrunTimeCategory.id,
       labelIds: this.labelIds,
+      isRoundTrip: this.isRoundTrip,
     };
   }
 }
