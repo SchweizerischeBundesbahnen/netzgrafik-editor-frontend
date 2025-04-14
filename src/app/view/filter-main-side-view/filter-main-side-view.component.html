@@ -27,6 +27,9 @@
       <ng-container *ngIf="isStreckengrafik()">
         <sbb-streckengrafik></sbb-streckengrafik>
       </ng-container>
+      <ng-container *ngIf="isOriginDestination()">
+        <sbb-origin-destination></sbb-origin-destination>
+      </ng-container>
 
       <sbb-editor-menu style="width: 0"></sbb-editor-menu>
 
