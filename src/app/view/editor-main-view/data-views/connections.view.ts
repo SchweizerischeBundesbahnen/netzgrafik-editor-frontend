@@ -297,10 +297,11 @@ export class ConnectionsView {
       this.filterConnectionsToDisplay(c)
     );
 
+    const connectionData = this.createTransitionViewObjects(connections);
     const connectionsGroup = this.connectionsGroup
       .selectAll(StaticDomTags.CONNECTION_ROOT_CONTAINER_DOM_REF)
       .data(
-        this.createTransitionViewObjects(connections),
+        connectionData,
         (c: ConnectionsViewObject) => c.key,
       );
 

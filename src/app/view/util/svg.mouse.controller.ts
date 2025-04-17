@@ -2,6 +2,7 @@ import * as d3 from "d3";
 import {Vec2D} from "../../utils/vec2D";
 import {StaticDomTags} from "../editor-main-view/data-views/static.dom.tags";
 import {ViewboxProperties} from "../../services/ui/ui.interaction.service";
+import {UndoService} from "../../services/data/undo.service";
 
 export interface SVGMouseControllerObserver {
   onEarlyReturnFromMousemove(): boolean;
@@ -38,6 +39,7 @@ export class SVGMouseController {
   constructor(
     private svgName: string,
     private svgMouseControllerObserver: SVGMouseControllerObserver,
+    private undoService: UndoService
   ) {
   }
 
@@ -191,6 +193,16 @@ export class SVGMouseController {
   }
 
   setViewbox() {
+    if (this.undoService?.getUndoRecording()) {
+      this.undoService.pauseUndoRecording();
+      this.setViewboxInternal();
+      this.undoService.startUndoRecording();
+    } else {
+      this.setViewboxInternal();
+    }
+  }
+
+  setViewboxInternal() {
     this.viewboxProperties.currentViewBox = this.makeViewboxString();
     this.svgDrawingContext.attr(
       "viewBox",
@@ -438,6 +450,7 @@ export class SVGMouseController {
 
       this.viewboxProperties.panZoomLeft += delta.getX();
       this.viewboxProperties.panZoomTop += delta.getY();
+
       this.setViewbox();
     }
 

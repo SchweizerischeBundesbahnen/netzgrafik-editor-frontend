@@ -109,10 +109,11 @@ export class NodesView {
       this.filterNodesToDisplay(n)
     );
 
+    const nodeData = this.createViewNodeDataObjects(nodes);
     const group = this.nodeGroup
       .selectAll(StaticDomTags.NODE_ROOT_CONTAINER_DOM_REF)
       .data(
-        this.createViewNodeDataObjects(nodes),
+        nodeData,
         (n: NodeViewObject) => n.key,
       );
 

@@ -66,6 +66,10 @@ export class UndoService implements OnDestroy {
     this.undoRecordingStopped = false;
   }
 
+  getUndoRecording(): boolean {
+    return this.undoRecordingStopped;
+  }
+
   private subscribeSnapshots() {
     if (this.changesSubscription !== undefined) {
       this.changesSubscription.unsubscribe();
@@ -74,13 +78,10 @@ export class UndoService implements OnDestroy {
       .getNetzgrafikChangesObservable(10)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
-        if (this.undoRecordingStopped) {
-          return;
+        if (!this.undoRecordingStopped &&
+          !(this.netzgrafikIsLoading || this.undoNetzgrafikIsLoading)) {
+          this.pushCurrentVersion();
         }
-        if (this.netzgrafikIsLoading || this.undoNetzgrafikIsLoading) {
-          return;
-        }
-        this.pushCurrentVersion();
       });
   }
 
@@ -129,7 +130,7 @@ export class UndoService implements OnDestroy {
     this.currentVariantId = variantId;
   }
 
-  public getCurrentVariantId():number{
+  public getCurrentVariantId(): number {
     return this.currentVariantId;
   }
 }
