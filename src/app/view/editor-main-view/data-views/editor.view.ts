@@ -445,6 +445,7 @@ export class EditorView implements SVGMouseControllerObserver {
     if (this.trainrunSectionPreviewLineView.isDragging()) {
       return;
     }
+    this.undoService.pauseUndoRecording();
     this.isMultiSelectOn = true;
     this.uiInteractionService.setEditorMode(EditorMode.MultiNodeMoving);
     this.multiSelectRenderer.displayBox();
@@ -503,6 +504,8 @@ export class EditorView implements SVGMouseControllerObserver {
   }
 
   onEndMultiSelect() {
+    this.undoService.startUndoRecording();
+
     if (!this.isMultiSelectOn) {
       return;
     }

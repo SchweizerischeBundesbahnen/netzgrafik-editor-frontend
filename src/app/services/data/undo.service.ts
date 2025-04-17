@@ -78,13 +78,10 @@ export class UndoService implements OnDestroy {
       .getNetzgrafikChangesObservable(10)
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
-        if (this.undoRecordingStopped) {
-          return;
+        if (!this.undoRecordingStopped &&
+          !(this.netzgrafikIsLoading || this.undoNetzgrafikIsLoading)) {
+          this.pushCurrentVersion();
         }
-        if (this.netzgrafikIsLoading || this.undoNetzgrafikIsLoading) {
-          return;
-        }
-        this.pushCurrentVersion();
       });
   }
 

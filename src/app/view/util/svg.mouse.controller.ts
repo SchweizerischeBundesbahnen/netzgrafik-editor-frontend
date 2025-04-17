@@ -193,6 +193,16 @@ export class SVGMouseController {
   }
 
   setViewbox() {
+    if (this.undoService?.getUndoRecording()) {
+      this.undoService.pauseUndoRecording();
+      this.setViewboxInternal();
+      this.undoService.startUndoRecording();
+    } else {
+      this.setViewboxInternal();
+    }
+  }
+
+  setViewboxInternal() {
     this.viewboxProperties.currentViewBox = this.makeViewboxString();
     this.svgDrawingContext.attr(
       "viewBox",
@@ -441,14 +451,7 @@ export class SVGMouseController {
       this.viewboxProperties.panZoomLeft += delta.getX();
       this.viewboxProperties.panZoomTop += delta.getY();
 
-      if (this.undoService?.getUndoRecording()) {
-        this.undoService.pauseUndoRecording();
-        this.setViewbox();
-        this.undoService.startUndoRecording();
-      } else {
-        this.setViewbox();
-      }
-
+      this.setViewbox();
     }
 
     this.previousPanMousePosition = this.getCurrentMousePosition();
