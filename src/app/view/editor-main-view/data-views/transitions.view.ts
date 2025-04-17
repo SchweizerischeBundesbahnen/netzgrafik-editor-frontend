@@ -278,15 +278,16 @@ export class TransitionsView {
       rootGroup = this.selectedTransitionsGroup;
     }
 
+    const transitionData = TransitionsView.createTransitionViewObjects(
+      this.editorView,
+      transitions,
+      selectedTrainrun,
+      connectedTrainIds,
+    );
     const transitionsGroup = rootGroup
       .selectAll(StaticDomTags.TRANSITION_ROOT_CONTAINER_DOM_REF)
       .data(
-        TransitionsView.createTransitionViewObjects(
-          this.editorView,
-          transitions,
-          selectedTrainrun,
-          connectedTrainIds,
-        ),
+        transitionData,
         (t: TransitionViewObject) => t.key,
       );
 

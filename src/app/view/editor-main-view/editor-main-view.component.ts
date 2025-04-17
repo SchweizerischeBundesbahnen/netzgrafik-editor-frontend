@@ -610,21 +610,27 @@ export class EditorMainViewComponent implements AfterViewInit, OnDestroy {
       .pipe(takeUntil(this.destroyed))
       .subscribe((updatedNodes) => {
         this.editorView.nodesView.displayNodes(updatedNodes);
-        this.editorView.postDisplayRendering();
+        if (this.undoService.getUndoRecording()) {
+          this.editorView.postDisplayRendering();
+        }
       });
 
     this.nodeService.transitions
       .pipe(takeUntil(this.destroyed))
       .subscribe((updatedTransitions) => {
         this.editorView.transitionsView.displayTransitions(updatedTransitions);
-        this.editorView.postDisplayRendering();
+        if (this.undoService.getUndoRecording()) {
+          this.editorView.postDisplayRendering();
+        }
       });
 
     this.nodeService.connections
       .pipe(takeUntil(this.destroyed))
       .subscribe((updatedConnections) => {
         this.editorView.connectionsView.displayConnections(updatedConnections);
-        this.editorView.postDisplayRendering();
+        if (this.undoService.getUndoRecording()) {
+          this.editorView.postDisplayRendering();
+        }
       });
 
     this.trainrunSectionService.trainrunSections
@@ -640,7 +646,9 @@ export class EditorMainViewComponent implements AfterViewInit, OnDestroy {
       .pipe(takeUntil(this.destroyed))
       .subscribe((updatedNotes) => {
         this.editorView.notesView.displayNotes(updatedNotes);
-        this.editorView.postDisplayRendering();
+        if (this.undoService.getUndoRecording()) {
+          this.editorView.postDisplayRendering();
+        }
       });
 
     this.nodeService.nodes

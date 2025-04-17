@@ -1721,15 +1721,16 @@ export class TrainrunSectionsView {
         this.filterTrainrunSectionToDisplay(trainrunSection)
     );
 
+    const trainrunSectionData = this.createViewTrainrunSectionDataObjects(
+      this.editorView,
+      filteredTrainrunSections,
+      selectedTrainrun,
+      connectedTrainIds,
+    );
     const group = this.trainrunSectionGroup
       .selectAll(StaticDomTags.EDGE_ROOT_CONTAINER_DOM_REF)
       .data(
-        this.createViewTrainrunSectionDataObjects(
-          this.editorView,
-          filteredTrainrunSections,
-          selectedTrainrun,
-          connectedTrainIds,
-        ),
+        trainrunSectionData,
         (d: TrainrunSectionViewObject) => d.key,
       );
 

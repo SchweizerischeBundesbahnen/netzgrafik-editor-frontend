@@ -139,10 +139,11 @@ export class NotesView {
       this.filterNotesToDisplay(n)
     );
 
+    const notesData = this.createViewNoteDataObjects(notes);
     const group = this.notesGroup
       .selectAll(StaticDomTags.NOTE_ROOT_CONTAINER_DOM_REF)
       .data(
-        this.createViewNoteDataObjects(notes),
+        notesData,
         (n: NodeViewObject) => n.key,
       );
 
