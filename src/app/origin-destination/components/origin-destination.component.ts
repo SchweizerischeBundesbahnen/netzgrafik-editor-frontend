@@ -7,6 +7,7 @@ import {
   ViewChild,
 } from "@angular/core";
 import * as d3 from "d3";
+import {NodeService} from "src/app/services/data/node.service";
 
 import {Subject} from "rxjs";
 
@@ -27,9 +28,7 @@ export class OriginDestinationComponent implements OnInit {
 
   private readonly destroyed$ = new Subject<void>();
 
-  constructor(
-    private origineDestinationService: OriginDestinationService,
-  ) {}
+  constructor(private origineDestinationService: OriginDestinationService) {}
 
   ngOnInit(): void {
     const originDestinationData =
@@ -65,11 +64,20 @@ export class OriginDestinationComponent implements OnInit {
 
     // Build X scales and axis:
     const x = d3.scaleBand().range([0, width]).domain(nodeNames).padding(0.05);
+
     svg
       .append("g")
       .style("font-size", 15)
       .attr("transform", "translate(0, -20)")
       .call(d3.axisBottom(x).tickSize(0))
+      .call((g) =>
+        g
+          .selectAll("text")
+          .style("text-anchor", "start")
+          .attr("dx", "-0.8em")
+          .attr("dy", "0.4em")
+          .attr("transform", "rotate(-45)"),
+      )
       .select(".domain")
       .remove();
 
@@ -88,9 +96,10 @@ export class OriginDestinationComponent implements OnInit {
 
     // Build color scale
     const myColor = d3
-      .scaleSequential()
-      .interpolator(d3.interpolateInferno)
-      .domain([1, 50]);
+      .scaleLinear<string>()
+      .domain([0, 15, 30, 50])
+      .range(["#4CAF50", "#FFCA28", "#F57C00", "#C60018"])
+      .clamp(true);
 
     // create a tooltip
     const tooltip = d3
