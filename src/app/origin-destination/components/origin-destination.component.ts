@@ -64,20 +64,11 @@ export class OriginDestinationComponent implements OnInit {
 
     // Build X scales and axis:
     const x = d3.scaleBand().range([0, width]).domain(nodeNames).padding(0.05);
-
     svg
       .append("g")
       .style("font-size", 15)
       .attr("transform", "translate(0, -20)")
       .call(d3.axisBottom(x).tickSize(0))
-      .call((g) =>
-        g
-          .selectAll("text")
-          .style("text-anchor", "start")
-          .attr("dx", "-0.8em")
-          .attr("dy", "0.4em")
-          .attr("transform", "rotate(-45)"),
-      )
       .select(".domain")
       .remove();
 
@@ -97,8 +88,10 @@ export class OriginDestinationComponent implements OnInit {
     // Build color scale
     const myColor = d3
       .scaleLinear<string>()
-      .domain([0, 15, 30, 50])
-      .range(["#4CAF50", "#FFCA28", "#F57C00", "#C60018"])
+      .domain([0, 30, 90, 120])
+      // .range(["#4CAF50", "#FFCA28", "#F57C00", "#C60018"])
+      // .range(["#2166AC", "#67A9CF", "#FDAE61", "#B2182B"])
+      .range(["#003366", "#00A3E0", "#FDAE61", "#E60000"])
       .clamp(true);
 
     // create a tooltip
