@@ -69,6 +69,14 @@ export class OriginDestinationComponent implements OnInit {
       .style("font-size", 15)
       .attr("transform", "translate(0, -20)")
       .call(d3.axisBottom(x).tickSize(0))
+      .call((g) =>
+        g
+          .selectAll("text")
+          .style("text-anchor", "start")
+          .attr("dx", "-0.8em")
+          .attr("dy", "0.4em")
+          .attr("transform", "rotate(-45)"),
+      )
       .select(".domain")
       .remove();
 
