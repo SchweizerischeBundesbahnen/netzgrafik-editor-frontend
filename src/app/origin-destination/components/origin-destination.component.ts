@@ -3,18 +3,21 @@ import {
   Component,
   ElementRef,
   HostListener,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from "@angular/core";
 import * as d3 from "d3";
 import {NodeService} from "src/app/services/data/node.service";
+import {UiInteractionService} from "../../services/ui/ui.interaction.service";
 
-import {Subject} from "rxjs";
+import {Subject, takeUntil} from "rxjs";
 import {
   SVGMouseController,
   SVGMouseControllerObserver,
 } from "src/app/view/util/svg.mouse.controller";
 import {ViewboxProperties} from "src/app/services/ui/ui.interaction.service";
+import {Vec2D} from "src/app/utils/vec2D";
 
 type OriginDestination = {
   origin: string;
@@ -28,7 +31,7 @@ type OriginDestination = {
   templateUrl: "./origin-destination.component.html",
   styleUrls: ["./origin-destination.component.scss"],
 })
-export class OriginDestinationComponent implements OnInit {
+export class OriginDestinationComponent implements OnInit, OnDestroy {
   @ViewChild("div") divRef: ElementRef;
 
   private readonly destroyed$ = new Subject<void>();
@@ -36,7 +39,10 @@ export class OriginDestinationComponent implements OnInit {
   constructor(
     private nodeService: NodeService,
     private origineDestinationService: OriginDestinationService,
+    private uiInteractionService: UiInteractionService,
   ) {}
+
+  private controller: SVGMouseController;
 
   ngOnInit(): void {
     const originDestinationData =
@@ -44,6 +50,19 @@ export class OriginDestinationComponent implements OnInit {
     const nodes = this.nodeService.getNodes();
     const nodeNames = nodes.map((node) => node.getBetriebspunktName());
     this.renderMatriceOD(originDestinationData, nodeNames);
+    this.controller = new SVGMouseController(
+      "main-origin-destination-container",
+      this.createSvgMouseControllerObserver(),
+    );
+    this.controller.init(this.createInitialViewboxProperties());
+
+    this.uiInteractionService.zoomInObservable
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((zoomCenter: Vec2D) => this.controller.zoomIn(zoomCenter));
+
+    this.uiInteractionService.zoomOutObservable
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((zoomCenter: Vec2D) => this.controller.zoomOut(zoomCenter));
   }
 
   renderMatriceOD(
@@ -63,7 +82,11 @@ export class OriginDestinationComponent implements OnInit {
       .append("svg")
       .attr("id", "main-origin-destination-container")
       .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom);
+      .attr("height", height + margin.top + margin.bottom)
+      .attr(
+        "viewBox",
+        `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`,
+      );
 
     const containerGroup = svg
       .append("g")
@@ -81,6 +104,7 @@ export class OriginDestinationComponent implements OnInit {
       .style("font-size", 15)
       .attr("transform", "translate(0, -20)")
       .call(d3.axisBottom(x).tickSize(0))
+      .style("user-select", "none")
       .call((g) =>
         g
           .selectAll("text")
@@ -102,6 +126,7 @@ export class OriginDestinationComponent implements OnInit {
       .append("g")
       .style("font-size", 14)
       .call(d3.axisLeft(y).tickSize(0))
+      .style("user-select", "none")
       .select(".domain")
       .remove();
 
@@ -109,10 +134,10 @@ export class OriginDestinationComponent implements OnInit {
     const myColor = d3
       .scaleLinear<string>()
       .domain([0, 30, 90, 120])
-      // .range(["#4CAF50", "#FFCA28", "#F57C00", "#C60018"])
-      // .range(["#2166AC", "#67A9CF", "#FDAE61", "#B2182B"])
-      .range(["#003366", "#00A3E0", "#FDAE61", "#E60000"])
-      .clamp(true);
+      // .range(["#4CAF50", "#FFCA28", "#F57C00", "#C60018"]);
+      // .range(["#2166AC", "#67A9CF", "#FDAE61", "#B2182B"]);
+      .range(["#003366", "#00A3E0", "#FDAE61", "#E60000"]);
+    // .range(["#CCCCCC", "#999999", "#666666", "#333333"]);
 
     // create a tooltip
     const tooltip = d3
@@ -196,12 +221,6 @@ export class OriginDestinationComponent implements OnInit {
       .style("alignment-baseline", "middle")
       .style("font-size", "10px")
       .style("fill", "white");
-
-    const controller = new SVGMouseController(
-      "main-origin-destination-container",
-      this.createSvgMouseControllerObserver(),
-    );
-    controller.init(this.createInitialViewboxProperties());
   }
 
   @HostListener("wheel", ["$event"])
@@ -212,13 +231,21 @@ export class OriginDestinationComponent implements OnInit {
   private createSvgMouseControllerObserver(): SVGMouseControllerObserver {
     return {
       onEarlyReturnFromMousemove: () => false,
-      onGraphContainerMouseup: (mousePosition, onPanning) => {},
-      zoomFactorChanged: (newZoomFactor) => {},
-      onViewboxChanged: (viewboxProperties) => {},
+      onGraphContainerMouseup: () => {},
+      zoomFactorChanged: (newZoomFactor) => {
+        console.log("zoom factor", newZoomFactor);
+      },
+      onViewboxChanged: (viewboxProperties) => {
+        const svg = d3.select("#main-origin-destination-container");
+        svg.attr(
+          "viewBox",
+          `${viewboxProperties.panZoomLeft} ${viewboxProperties.panZoomTop} ${viewboxProperties.panZoomWidth} ${viewboxProperties.panZoomHeight}`,
+        );
+      },
       onStartMultiSelect: () => {},
-      updateMultiSelect: (topLeft, bottomRight) => {},
+      updateMultiSelect: () => {},
       onEndMultiSelect: () => {},
-      onScaleNetzgrafik: (factor, scaleCenter) => {},
+      onScaleNetzgrafik: () => {},
     };
   }
 
@@ -233,5 +260,10 @@ export class OriginDestinationComponent implements OnInit {
       panZoomHeight: 1000,
       currentViewBox: null,
     };
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 }
