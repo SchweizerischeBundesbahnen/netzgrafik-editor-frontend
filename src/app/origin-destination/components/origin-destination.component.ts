@@ -10,6 +10,11 @@ import * as d3 from "d3";
 import {NodeService} from "src/app/services/data/node.service";
 
 import {Subject} from "rxjs";
+import {
+  SVGMouseController,
+  SVGMouseControllerObserver,
+} from "src/app/view/util/svg.mouse.controller";
+import {ViewboxProperties} from "src/app/services/ui/ui.interaction.service";
 
 type OriginDestination = {
   origin: string;
@@ -43,14 +48,11 @@ export class OriginDestinationComponent implements OnInit {
     nodeNames: string[],
   ) {
     // set the dimensions and margins of the graph
-    const margin = {top: 80, right: 25, bottom: 30, left: 40},
-      width = 650 - margin.left - margin.right,
-      height = 650 - margin.top - margin.bottom;
+    const margin = {top: 80, right: 25, bottom: 30, left: 10};
+    const cellSize = 30;
 
-    const {height: parentElementHeight, width: parentElementWidth} = d3
-      .select("#main-origin-destination-container-root")
-      .node()
-      .getBoundingClientRect();
+    const width = cellSize * nodeNames.length;
+    const height = cellSize * nodeNames.length;
 
     // append the svg object to the body of the page
     const svg = d3
@@ -58,13 +60,20 @@ export class OriginDestinationComponent implements OnInit {
       .append("svg")
       .attr("id", "main-origin-destination-container")
       .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+      .attr("height", height + margin.top + margin.bottom);
+
+    const containerGroup = svg
       .append("g")
       .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
+    const graphContentGroup = containerGroup
+      .append("g")
+      .attr("id", "zoom-group");
+
     // Build X scales and axis:
     const x = d3.scaleBand().range([0, width]).domain(nodeNames).padding(0.05);
-    svg
+
+    graphContentGroup
       .append("g")
       .style("font-size", 15)
       .attr("transform", "translate(0, -20)")
@@ -86,9 +95,9 @@ export class OriginDestinationComponent implements OnInit {
       .range([height, 0])
       .domain(nodeNames.reverse())
       .padding(0.05);
-    svg
+    graphContentGroup
       .append("g")
-      .style("font-size", 15)
+      .style("font-size", 14)
       .call(d3.axisLeft(y).tickSize(0))
       .select(".domain")
       .remove();
@@ -112,7 +121,8 @@ export class OriginDestinationComponent implements OnInit {
       .style("border", "solid")
       .style("border-width", "2px")
       .style("border-radius", "5px")
-      .style("padding", "5px");
+      .style("padding", "5px")
+      .style("pointer-events", "none");
 
     // Three function that change the tooltip when user hover / move / leave a cell
     const mouseover = function (d) {
@@ -139,7 +149,7 @@ export class OriginDestinationComponent implements OnInit {
     };
 
     // add the squares
-    svg
+    graphContentGroup
       .selectAll()
       .data(originDestinationData)
       .enter()
@@ -164,7 +174,7 @@ export class OriginDestinationComponent implements OnInit {
       .on("mousemove", mousemove)
       .on("mouseleave", mouseleave);
 
-    svg
+    graphContentGroup
       .selectAll()
       .data(originDestinationData)
       .enter()
@@ -180,10 +190,42 @@ export class OriginDestinationComponent implements OnInit {
       .style("alignment-baseline", "middle")
       .style("font-size", "10px")
       .style("fill", "white");
+
+    const controller = new SVGMouseController(
+      "main-origin-destination-container",
+      this.createSvgMouseControllerObserver(),
+    );
+    controller.init(this.createInitialViewboxProperties());
   }
 
   @HostListener("wheel", ["$event"])
   public onScroll(event: WheelEvent) {
     console.log("event", event);
+  }
+
+  private createSvgMouseControllerObserver(): SVGMouseControllerObserver {
+    return {
+      onEarlyReturnFromMousemove: () => false,
+      onGraphContainerMouseup: (mousePosition, onPanning) => {},
+      zoomFactorChanged: (newZoomFactor) => {},
+      onViewboxChanged: (viewboxProperties) => {},
+      onStartMultiSelect: () => {},
+      updateMultiSelect: (topLeft, bottomRight) => {},
+      onEndMultiSelect: () => {},
+      onScaleNetzgrafik: (factor, scaleCenter) => {},
+    };
+  }
+
+  private createInitialViewboxProperties(): ViewboxProperties {
+    return {
+      zoomFactor: 100,
+      origWidth: 1000,
+      origHeight: 1000,
+      panZoomLeft: 0,
+      panZoomTop: 0,
+      panZoomWidth: 1000,
+      panZoomHeight: 1000,
+      currentViewBox: null,
+    };
   }
 }
