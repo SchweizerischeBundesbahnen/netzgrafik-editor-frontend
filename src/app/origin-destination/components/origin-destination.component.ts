@@ -191,7 +191,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     const mousemove = function (d) {
       tooltip
         .html(
-          `${travelTimeTranslation}: ${d.travelTime}<br>${transfersTranslation}: ${d.transfert}<br>${totalCostTranslation}: ${d.totalCost}`,
+          `${d.origin} &#x2192; ${d.destination}<br><hr> ${travelTimeTranslation}: ${d.travelTime}<br>${transfersTranslation}: ${d.transfert}<br>${totalCostTranslation}: ${d.totalCost}`,
         )
         .style("left", `${d3.mouse(this)[0] + 100}px`)
         .style("top", `${d3.mouse(this)[1] - 50}px`);
