@@ -1,3 +1,8 @@
+#main-origin-destination-container-root {
+  display: flex;
+  justify-content: center;
+}
+
 ::ng-deep .tooltip {
   position: absolute;
   z-index: 1070;
@@ -8,9 +13,4 @@
   line-height: 1.5;
   text-align: left;
   text-align: start;
-}
-
-#main-origin-destination-container-root {
-  display: flex;
-  justify-content: center;
 }

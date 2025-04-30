@@ -127,7 +127,10 @@ export class OriginDestinationComponent implements OnInit {
     // Three function that change the tooltip when user hover / move / leave a cell
     const mouseover = function (d) {
       tooltip.style("opacity", 1);
-      d3.select(this).style("stroke", "black").style("opacity", 1);
+      d3.select(this)
+        .style("stroke", "black")
+        .style("stroke-width", "2px")
+        .style("opacity", 1);
     };
 
     const totalCostTranslation = $localize`:@@app.origin-destination.tooltip.total-cost:Total cost`;
@@ -139,8 +142,8 @@ export class OriginDestinationComponent implements OnInit {
         .html(
           `${travelTimeTranslation}: ${d.travelTime}<br>${transfersTranslation}: ${d.transfert}<br>${totalCostTranslation}: ${d.totalCost}`,
         )
-        .style("left", d3.mouse(this)[0] + 70 + "px")
-        .style("top", d3.mouse(this)[1] + "px");
+        .style("left", `${d3.mouse(this)[0] + 100}px`)
+        .style("top", `${d3.mouse(this)[1] - 50}px`);
     };
 
     const mouseleave = function (d) {
