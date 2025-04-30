@@ -157,11 +157,13 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     const totalCostTranslation = $localize`:@@app.origin-destination.tooltip.total-cost:Total cost`;
     const transfersTranslation = $localize`:@@app.origin-destination.tooltip.transfers:Transfers`;
     const travelTimeTranslation = $localize`:@@app.origin-destination.tooltip.travel-time:Travel time`;
+    const originTranslation = $localize`:@@app.origin-destination.tooltip.origin:Origin`;
+    const destinationTranslation = $localize`:@@app.origin-destination.tooltip.destination:Destination`;
 
     const mousemove = function (d) {
       tooltip
         .html(
-          `${travelTimeTranslation}: ${d.travelTime}<br>${transfersTranslation}: ${d.transfert}<br>${totalCostTranslation}: ${d.totalCost}`,
+          ` ${originTranslation}: ${d.origin}<br>${destinationTranslation}: ${d.destination}<br>${travelTimeTranslation}: ${d.travelTime}<br>${transfersTranslation}: ${d.transfert}<br>${totalCostTranslation}: ${d.totalCost}`,
         )
         .style("left", `${d3.mouse(this)[0] + 100}px`)
         .style("top", `${d3.mouse(this)[1] - 50}px`);
