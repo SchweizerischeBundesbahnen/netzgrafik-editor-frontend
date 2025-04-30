@@ -70,7 +70,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     nodeNames: string[],
   ) {
     // set the dimensions and margins of the graph
-    const margin = {top: 80, right: 25, bottom: 30, left: 10};
+    const margin = {top: 80, right: 25, bottom: 30, left: 20};
     const cellSize = 30;
 
     const width = cellSize * nodeNames.length;
@@ -132,35 +132,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .select(".domain")
       .remove();
 
-    // Build color scale
-    let maxValues = parseFloat(
-      originDestinationData.reduce(
-        (a: OriginDestination, b: OriginDestination) => {
-          if (a.transfert === "") {
-            if (b.transfert === "") {
-              return {
-                origin: "",
-                destination: "",
-                travelTime: "0",
-                transfert: "0",
-                totalCost: "0",
-              };
-            }
-            return b;
-          }
-          return parseFloat(b.transfert) > parseFloat(a.transfert) ? b : a;
-        },
-      ).transfert,
-    );
-    maxValues = isNaN(maxValues) ? 1 : maxValues;
-
-    const myColor = d3
-      .scaleLinear()
-      .domain([0, maxValues * 0.33, maxValues * 0.66, maxValues])
-      // .range(["#4CAF50", "#FFCA28", "#F57C00", "#C60018"])
-      // .range(["#2166AC", "#67A9CF", "#FDAE61", "#B2182B"])
-      .range(["#003366", "#00A3E0", "#FDAE61", "#E60000"])
-      .clamp(true);
+    const myColor = this.getColorScale();
 
     // create a tooltip
     const tooltip = d3
@@ -245,7 +217,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .style("alignment-baseline", "middle")
       .style("font-size", "10px")
       .style("fill", "white")
-      .style("pointer-events", "none")
+      .style("pointer-events", "none");
   }
 
   @HostListener("wheel", ["$event"])
@@ -290,5 +262,52 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroyed$.next();
     this.destroyed$.complete();
+  }
+
+  colorSetName: "custom" | "blue" | "orange" | "gray" = "custom";
+
+  getColorScale(): d3.ScaleLinear<string, string> {
+    switch (this.colorSetName) {
+      case "custom":
+        return d3
+          .scaleLinear<string>()
+          .domain([0, 30, 90, 120])
+          .range(["#2166AC", "#67A9CF", "#FDAE61", "#B2182B"])
+          .clamp(true);
+      case "gray":
+        return d3
+          .scaleLinear<string>()
+          .domain([0, 30, 90, 120])
+          .range(["#CCCCCC", "#999999", "#666666", "#333333"])
+          .clamp(true);
+      case "blue":
+        return d3
+          .scaleLinear<string>()
+          .domain([0, 30, 90, 120])
+          .range(["#003366", "#00A3E0", "#FDAE61", "#E60000"])
+          .clamp(true);
+      case "orange":
+        return d3
+          .scaleLinear<string>()
+          .domain([0, 30, 90, 120])
+          .range(["#4CAF50", "#FFCA28", "#F57C00", "#C60018"])
+          .clamp(true);
+      default:
+        return d3
+          .scaleLinear<string>()
+          .domain([0, 30, 90, 120])
+          .range(["#003366", "#00A3E0", "#FDAE61", "#E60000"])
+          .clamp(true);
+    }
+  }
+
+  onChangePalette(name: "custom" | "blue" | "orange" | "gray") {
+    this.colorSetName = name;
+    d3.select("#main-origin-destination-container").remove();
+    const originDestinationData =
+      this.origineDestinationService.originDestinationData();
+    const nodes = this.nodeService.getNodes();
+    const nodeNames = nodes.map((node) => node.getBetriebspunktName());
+    this.renderMatriceOD(originDestinationData, nodeNames);
   }
 }
