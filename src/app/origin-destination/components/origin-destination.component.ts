@@ -101,10 +101,10 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
 
     graphContentGroup
       .append("g")
-      .style("pointer-events", "none")
       .style("font-size", 15)
       .attr("transform", "translate(0, -20)")
       .call(d3.axisBottom(x).tickSize(0))
+      .style("user-select", "none")
       .call((g) =>
         g
           .selectAll("text")
@@ -124,11 +124,12 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .padding(0.05);
     graphContentGroup
       .append("g")
-      .style("pointer-events", "none")
       .style("font-size", 14)
       .call(d3.axisLeft(y).tickSize(0))
+      .style("user-select", "none")
       .select(".domain")
       .remove();
+
 
     // Build color scale
     let maxValues =
@@ -152,17 +153,17 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     maxValues = isNaN(maxValues) ? 1 : maxValues;
 
     const myColor = d3
-      .scaleLinear()
-      .domain([
-        0,
-        maxValues * 0.33,
-        maxValues * 0.66,
-        maxValues,
-      ])
-      // .range(["#4CAF50", "#FFCA28", "#F57C00", "#C60018"])
-      // .range(["#2166AC", "#67A9CF", "#FDAE61", "#B2182B"])
-      .range(["#003366", "#00A3E0", "#FDAE61", "#E60000"])
-      .clamp(true);
+        .scaleLinear()
+        .domain([
+          0,
+          maxValues * 0.33,
+          maxValues * 0.66,
+          maxValues,
+        ])
+      // .range(["#4CAF50", "#FFCA28", "#F57C00", "#C60018"]);
+      // .range(["#2166AC", "#67A9CF", "#FDAE61", "#B2182B"]);
+      .range(["#003366", "#00A3E0", "#FDAE61", "#E60000"]);
+    // .range(["#CCCCCC", "#999999", "#666666", "#333333"]);
 
     // create a tooltip
     const tooltip = d3
@@ -221,7 +222,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .attr("width", x.bandwidth())
       .attr("height", y.bandwidth())
       .style("fill", function (d) {
-        return myColor(parseFloat(d.transfert));
+        return myColor(+d.transfert);
       })
       .style("stroke-width", 4)
       .style("stroke", "none")
@@ -235,7 +236,6 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .data(originDestinationData)
       .enter()
       .append("text")
-      .style("pointer-events", "none")
       .attr("x", (d) => {
         return x(d.origin) + x.bandwidth() / 2;
       })
@@ -246,8 +246,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .style("text-anchor", "middle")
       .style("alignment-baseline", "middle")
       .style("font-size", "10px")
-      .style("fill", "white")
-      .style("pointer-events", "none");
+      .style("fill", "white");
   }
 
   @HostListener("wheel", ["$event"])
