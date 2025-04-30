@@ -246,7 +246,8 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .style("text-anchor", "middle")
       .style("alignment-baseline", "middle")
       .style("font-size", "10px")
-      .style("fill", "white");
+      .style("fill", "white")
+      .style("pointer-events", "none")
   }
 
   @HostListener("wheel", ["$event"])
