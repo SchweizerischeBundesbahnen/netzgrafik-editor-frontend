@@ -279,6 +279,12 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
     }
   }
 
+  isOriginDestination(): boolean {
+    return (
+      this.uiInteractionService.getEditorMode() === EditorMode.OriginDestination
+    );
+  }
+
   isStreckengrafikEditing(): boolean {
     return (
       this.uiInteractionService.getEditorMode() ===
