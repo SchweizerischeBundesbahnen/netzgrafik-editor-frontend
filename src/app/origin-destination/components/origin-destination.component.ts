@@ -105,6 +105,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .style("font-size", 15)
       .attr("transform", "translate(0, -20)")
       .call(d3.axisBottom(x).tickSize(0))
+      .style("user-select", "none")
       .call((g) =>
         g
           .selectAll("text")
@@ -127,15 +128,16 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .style("pointer-events", "none")
       .style("font-size", 14)
       .call(d3.axisLeft(y).tickSize(0))
+      .style("user-select", "none")
       .select(".domain")
       .remove();
 
     // Build color scale
-    let maxValues =
-      parseFloat(originDestinationData.reduce(
+    let maxValues = parseFloat(
+      originDestinationData.reduce(
         (a: OriginDestination, b: OriginDestination) => {
-          if (a.transfert === '') {
-            if (b.transfert === '') {
+          if (a.transfert === "") {
+            if (b.transfert === "") {
               return {
                 origin: "",
                 destination: "",
@@ -147,18 +149,14 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
             return b;
           }
           return parseFloat(b.transfert) > parseFloat(a.transfert) ? b : a;
-        }
-      ).transfert);
+        },
+      ).transfert,
+    );
     maxValues = isNaN(maxValues) ? 1 : maxValues;
 
     const myColor = d3
       .scaleLinear()
-      .domain([
-        0,
-        maxValues * 0.33,
-        maxValues * 0.66,
-        maxValues,
-      ])
+      .domain([0, maxValues * 0.33, maxValues * 0.66, maxValues])
       // .range(["#4CAF50", "#FFCA28", "#F57C00", "#C60018"])
       // .range(["#2166AC", "#67A9CF", "#FDAE61", "#B2182B"])
       .range(["#003366", "#00A3E0", "#FDAE61", "#E60000"])
@@ -246,8 +244,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .style("text-anchor", "middle")
       .style("alignment-baseline", "middle")
       .style("font-size", "10px")
-      .style("fill", "white")
-      .style("pointer-events", "none");
+      .style("fill", "white");
   }
 
   @HostListener("wheel", ["$event"])
