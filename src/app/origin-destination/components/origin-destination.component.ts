@@ -101,6 +101,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
 
     graphContentGroup
       .append("g")
+      .style("pointer-events", "none")
       .style("font-size", 15)
       .attr("transform", "translate(0, -20)")
       .call(d3.axisBottom(x).tickSize(0))
@@ -123,15 +124,41 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .padding(0.05);
     graphContentGroup
       .append("g")
+      .style("pointer-events", "none")
       .style("font-size", 14)
       .call(d3.axisLeft(y).tickSize(0))
       .select(".domain")
       .remove();
 
     // Build color scale
+    let maxValues =
+      parseFloat(originDestinationData.reduce(
+        (a: OriginDestination, b: OriginDestination) => {
+          if (a.transfert === '') {
+            if (b.transfert === '') {
+              return {
+                origin: "",
+                destination: "",
+                travelTime: "0",
+                transfert: "0",
+                totalCost: "0",
+              };
+            }
+            return b;
+          }
+          return parseFloat(b.transfert) > parseFloat(a.transfert) ? b : a;
+        }
+      ).transfert);
+    maxValues = isNaN(maxValues) ? 1 : maxValues;
+
     const myColor = d3
-      .scaleLinear<string>()
-      .domain([0, 30, 90, 120])
+      .scaleLinear()
+      .domain([
+        0,
+        maxValues * 0.33,
+        maxValues * 0.66,
+        maxValues,
+      ])
       // .range(["#4CAF50", "#FFCA28", "#F57C00", "#C60018"])
       // .range(["#2166AC", "#67A9CF", "#FDAE61", "#B2182B"])
       .range(["#003366", "#00A3E0", "#FDAE61", "#E60000"])
@@ -194,7 +221,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .attr("width", x.bandwidth())
       .attr("height", y.bandwidth())
       .style("fill", function (d) {
-        return myColor(+d.totalCost);
+        return myColor(parseFloat(d.transfert));
       })
       .style("stroke-width", 4)
       .style("stroke", "none")
@@ -208,6 +235,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .data(originDestinationData)
       .enter()
       .append("text")
+      .style("pointer-events", "none")
       .attr("x", (d) => {
         return x(d.origin) + x.bandwidth() / 2;
       })
@@ -218,7 +246,8 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .style("text-anchor", "middle")
       .style("alignment-baseline", "middle")
       .style("font-size", "10px")
-      .style("fill", "white");
+      .style("fill", "white")
+      .style("pointer-events", "none");
   }
 
   @HostListener("wheel", ["$event"])
