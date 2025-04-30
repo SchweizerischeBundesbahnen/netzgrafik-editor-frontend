@@ -159,6 +159,8 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     const totalCostTranslation = $localize`:@@app.origin-destination.tooltip.total-cost:Total cost`;
     const transfersTranslation = $localize`:@@app.origin-destination.tooltip.transfers:Transfers`;
     const travelTimeTranslation = $localize`:@@app.origin-destination.tooltip.travel-time:Travel time`;
+    const originTranslation = $localize`:@@app.origin-destination.tooltip.origin:Origin`;
+    const destinationTranslation = $localize`:@@app.origin-destination.tooltip.destination:Destination`;
 
     const mousemove = function (d) {
       tooltip
@@ -216,8 +218,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .style("text-anchor", "middle")
       .style("alignment-baseline", "middle")
       .style("font-size", "10px")
-      .style("fill", "white")
-      .style("pointer-events", "none");
+      .style("fill", "white");
   }
 
   @HostListener("wheel", ["$event"])
