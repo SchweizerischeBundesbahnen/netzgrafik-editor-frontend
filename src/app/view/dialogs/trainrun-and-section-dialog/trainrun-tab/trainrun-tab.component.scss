@@ -8,8 +8,9 @@
 ::ng-deep div.sbb-tab-label {
   background: var(--sbb-header-lean-background-color);
 }
-::ng-deep div.sbb-tab-label:has(span.one-way-trip) {
+::ng-deep div.sbb-tab-label:has(span.onewayTrip) {
   padding: 0 15px;
+  height: 35px
 }
 
 ::ng-deep .sbb-trainrun-chip-group {

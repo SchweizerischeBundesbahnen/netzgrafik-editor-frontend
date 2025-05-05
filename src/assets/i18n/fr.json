@@ -286,6 +286,9 @@
             "delete": "Supprimer",
             "deleteConfirmationQuestion": "Faut-il supprimer définitivement l'ensemble du trajet de train ?"
           },
+          "trainrun-roundtrip-tab": {
+            "one-way": "Aller simple"
+          },
           "trainrun-section-tab": {
             "warningTwoLocks": "Avertissement : Trop de temps sont bloqués !",
             "propagateTimesToLeft": "Propager les temps à gauche",

@@ -98,6 +98,9 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   }
 
   public get isBottomTrainrunSectionInfosDisplayed(): boolean {
+    if (this.selectedTrainrunSection === null) {
+      return false;
+    }
     const trainrunDirection = this.selectedTrainrunSection
       .getTrainrun()
       .getTrainrunDirection();
@@ -115,8 +118,6 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   }
 
   constructor(
-    private dataService: DataService,
-    private filterService: FilterService,
     private trainrunService: TrainrunService,
     private trainrunSectionService: TrainrunSectionService,
     private changeDetection: ChangeDetectorRef,
