@@ -26,19 +26,44 @@
             (trainrunDeleted)="closeDialog()"
           ></sbb-trainrun-tab>
         </sbb-tab>
-        <sbb-tab
-          label="{{ selectedTrainrunSectionName }}"
-          id="trainrun-section-tab"
-        >
+        <sbb-tab id="trainrun-section-tab">
+          @if (arrowDirection !== null) {
+              <ng-template
+                sbb-tab-label
+              >
+                <span class="one-way-trip">{{ leftNodeName }}</span>
+                <sbb-icon
+                  [svgIcon]="arrowDirection"
+                  aria-hidden="false"
+                  height="13px"
+                  width="13px"
+                ></sbb-icon>
+                <span>{{ rightNodeName }}</span>
+              </ng-template>
+          } @else {
+            <ng-template sbb-tab-label>
+              <span>{{ leftNodeName + " — " + rightNodeName }}</span>
+            </ng-template>
+          }
           <sbb-trainrunsection-tab
             [trainrunDialogParameter]="data"
           ></sbb-trainrunsection-tab>
         </sbb-tab>
-        <sbb-tab [label]="'app.view.dialogs.trainrun-and-section-dialog.filterableLabels' | translate"
-                 id="trainrun-filterable-labels-tab">
+        <sbb-tab
+          [label]="
+            'app.view.dialogs.trainrun-and-section-dialog.filterableLabels'
+              | translate
+          "
+          id="trainrun-filterable-labels-tab"
+        >
           <sbb-trainrun-filter-tab
             (trainrunDeleted)="closeDialog()"
           ></sbb-trainrun-filter-tab>
+        </sbb-tab>
+        <sbb-tab label="&#8942;" id="trainrun-roundTrip-tab">
+          <sbb-trainrun-roundtrip-tab
+            (trainrunDeleted)="closeDialog()"
+          ></sbb-trainrun-roundtrip-tab>
         </sbb-tab>
       </sbb-tab-group>
     </div>

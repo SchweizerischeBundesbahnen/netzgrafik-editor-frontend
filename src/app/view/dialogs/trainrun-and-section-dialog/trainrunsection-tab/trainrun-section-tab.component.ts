@@ -19,12 +19,13 @@ import {
 import {FilterService} from "../../../../services/ui/filter.service";
 import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
-import {LinePatternRefs} from "../../../../data-structures/business.data.structures";
+import {
+  LinePatternRefs,
+  TrainrunDirection,
+} from "../../../../data-structures/business.data.structures";
 import {StaticDomTags} from "../../../editor-main-view/data-views/static.dom.tags";
 import {ColorRefType} from "../../../../data-structures/technical.data.structures";
-import {
-  TrainrunSectionTimesService
-} from "../../../../services/data/trainrun-section-times.service";
+import {TrainrunSectionTimesService} from "../../../../services/data/trainrun-section-times.service";
 import {VersionControlService} from "../../../../services/data/version-control.service";
 
 export interface LeftAndRightTimeStructure {
@@ -76,6 +77,42 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   private trainrunSectionHelper: TrainrunsectionHelper;
   private destroyed = new Subject<void>();
 
+  public get isTopTrainrunSectionInfosDisplayed(): boolean {
+    if (this.selectedTrainrunSection === null) {
+      return false;
+    }
+    const trainrunDirection = this.selectedTrainrunSection
+      .getTrainrun()
+      .getTrainrunDirection();
+    const isTargetRight = this.trainrunSectionHelper.getIsTargetRight(
+      this.selectedTrainrunSection,
+      this.trainrunSectionTimesService.getNodesOrdered(),
+    );
+    return (
+      this.getIsRoundTrip() ||
+      (trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD &&
+        isTargetRight) ||
+      (trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD &&
+        !isTargetRight)
+    );
+  }
+
+  public get isBottomTrainrunSectionInfosDisplayed(): boolean {
+    const trainrunDirection = this.selectedTrainrunSection
+      .getTrainrun()
+      .getTrainrunDirection();
+    const isTargetLeft = this.trainrunSectionHelper.getIsTargetLeft(
+      this.selectedTrainrunSection,
+      this.trainrunSectionTimesService.getNodesOrdered(),
+    );
+    return (
+      this.getIsRoundTrip() ||
+      (trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD &&
+        isTargetLeft) ||
+      (trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD &&
+        !isTargetLeft)
+    );
+  }
 
   constructor(
     private dataService: DataService,
@@ -98,9 +135,13 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
         this.resetOffsetAfterTrainrunChanged();
         this.updateAllValues();
       });
-    this.trainrunSectionService.trainrunSections.pipe(takeUntil(this.destroyed))
+    this.trainrunSectionService.trainrunSections
+      .pipe(takeUntil(this.destroyed))
       .subscribe(() => {
-        if (this.selectedTrainrunSection !== this.trainrunSectionService.getSelectedTrainrunSection()) {
+        if (
+          this.selectedTrainrunSection !==
+          this.trainrunSectionService.getSelectedTrainrunSection()
+        ) {
           this.resetOffsetAfterTrainrunChanged();
           this.updateAllValues();
         }
@@ -257,6 +298,36 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     );
   }
 
+  getEdgeLineArrowClassAttrString() {
+    return (
+      StaticDomTags.EDGE_LINE_ARROW_CLASS +
+      StaticDomTags.makeClassTag(
+        StaticDomTags.FREQ_LINE_PATTERN,
+        this.frequencyLinePattern,
+      ) +
+      " " +
+      StaticDomTags.TAG_UI_DIALOG +
+      " " +
+      StaticDomTags.makeClassTag(
+        StaticDomTags.TAG_COLOR_REF,
+        this.categoryColorRef,
+      ) +
+      StaticDomTags.makeClassTag(
+        StaticDomTags.TAG_LINEPATTERN_REF,
+        this.timeCategoryLinePattern,
+      )
+    );
+  };
+
+  getArrowTranslateAndRotate() {
+    if(this.isTopTrainrunSectionInfosDisplayed && !this.isBottomTrainrunSectionInfosDisplayed) {
+      return "translate(60, 16) rotate(0)";
+    } else if(!this.isTopTrainrunSectionInfosDisplayed && this.isBottomTrainrunSectionInfosDisplayed) {
+      return "translate(60, 16) rotate(180)";
+    }
+    return "";
+  };
+
   /* methods for tabbing */
   setFocusToBeginningOfLoop() {
     this.leftDepartureTimeInputElement.nativeElement.focus();
@@ -329,12 +400,16 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     if (this.trainrunDialogParameter.offset < 0) {
       this.trainrunSectionTimesService.setOffset(
         Math.ceil(Math.abs(this.trainrunDialogParameter.offset) / 60) * 60 -
-        Math.abs(this.trainrunDialogParameter.offset),
+          Math.abs(this.trainrunDialogParameter.offset),
       );
     } else {
       this.trainrunSectionTimesService.setOffset(
         this.trainrunDialogParameter.offset,
       );
     }
+  }
+
+  private getIsRoundTrip() {
+    return this.selectedTrainrunSection.getTrainrun().getIsRoundTrip();
   }
 }
