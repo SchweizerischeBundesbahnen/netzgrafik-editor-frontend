@@ -496,7 +496,7 @@ export class NetzgrafikColoringService {
     colorRefs = colorRefs.filter((v, i, a) => a.indexOf(v) === i);
     colorRefs = colorRefs.filter((str) => str !== undefined);
 
-    return colorRefs;
+    return [...colorRefs, "NORMAL"];
   }
 
   private generateColorAndStyling(
