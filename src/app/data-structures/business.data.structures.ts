@@ -198,8 +198,8 @@ export interface TrainrunDto {
   categoryId: number; // reference to the trainrun category
   frequencyId: number; // reference to the trainrun frequency
   trainrunTimeCategoryId: number; // reference to the trainrun time category
-
   labelIds: number[];
+  trainrunDirection?: TrainrunDirection; // direction of the trainrun
 }
 
 /**
@@ -284,7 +284,7 @@ export interface ResourceDto {
  * Represents the filter settings, which can be stored.
  */
 export interface FilterSettingDto {
-  id: number;  // unique indentifier
+  id: number; // unique indentifier
   name: string; // name
   description: string; // description
   filterNodeLabels: number[]; // labels to filter out (labels only of type - LabelRef: node)
@@ -326,4 +326,13 @@ export interface NetzgrafikDto {
   labels: LabelDto[]; // list of all labels - DB table (filterable labels)
   labelGroups: LabelGroupDto[]; // list of all label groups - DB table (filterable groups)
   filterData: FilterDataDto; // reference to the filter settings (predefined filters)
+}
+
+/**
+ * Represents the trainrun direction.
+ */
+export enum TrainrunDirection {
+  ROUND_TRIP = "round_trip",
+  ONE_WAY_FORWARD = "oneway_forward",
+  ONE_WAY_BACKWARD = "oneway_backward",
 }

@@ -4,6 +4,7 @@ import {
   LabelRef,
   NetzgrafikDto,
   TrainrunCategory,
+  TrainrunDirection,
   TrainrunDto,
   TrainrunFrequency,
   TrainrunTimeCategory,
@@ -16,7 +17,7 @@ import {DataService} from "./data.service";
 import {Node} from "../../models/node.model";
 import {TrainrunSection} from "../../models/trainrunsection.model";
 import {GeneralViewFunctions} from "../../view/util/generalViewFunctions";
-import {NonStopTrainrunIterator, TrainrunIterator,} from "../util/trainrun.iterator";
+import {NonStopTrainrunIterator, TrainrunIterator} from "../util/trainrun.iterator";
 import {LogService} from "../../logger/log.service";
 import {LabelService} from "./label.service";
 import {FilterService} from "../ui/filter.service";
@@ -33,7 +34,7 @@ export class TrainrunService {
   trainrunsSubject = new BehaviorSubject<Trainrun[]>([]);
   readonly trainruns = this.trainrunsSubject.asObservable();
 
-  trainrunsStore: { trainruns: Trainrun[] } = {trainruns: []}; // store the data in memory
+  trainrunsStore: {trainruns: Trainrun[]} = {trainruns: []}; // store the data in memory
 
   readonly operation = new EventEmitter<Operation>();
 
@@ -45,8 +46,7 @@ export class TrainrunService {
     private logService: LogService,
     private labelService: LabelService,
     private filterService: FilterService,
-  ) {
-  }
+  ) {}
 
   setDataService(dataService: DataService) {
     this.dataService = dataService;
@@ -285,6 +285,24 @@ export class TrainrunService {
     this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
   }
 
+  getIsRoundTrip(trainrun: Trainrun): boolean {
+    return this.getTrainrunFromId(trainrun.getId()).getIsRoundTrip();
+  }
+
+  getTrainrunDirection(trainrun: Trainrun): TrainrunDirection {
+    return this.getTrainrunFromId(trainrun.getId()).getTrainrunDirection();
+  }
+
+  updateTrainrunDirection(
+    trainrun: Trainrun,
+    trainrunDirection: TrainrunDirection,
+  ) {
+    const trainrunSection = this.getTrainrunFromId(trainrun.getId());
+    trainrunSection.setTrainrunDirection(trainrunDirection);
+    this.trainrunsUpdated();
+    this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
+  }
+
   getTrainruns(): Trainrun[] {
     return Object.assign({}, this.trainrunsStore).trainruns;
   }
@@ -388,8 +406,8 @@ export class TrainrunService {
     const trainrunSection2 = port2.getTrainrunSection();
     const newTrainrun =
       this.duplicateTrainrun(
-        trainrunSection2.getTrainrunId(),
-        false,
+      trainrunSection2.getTrainrunId(),
+      false,
         "-2");
 
     trainrunSection2.setTrainrun(newTrainrun);
@@ -455,7 +473,7 @@ export class TrainrunService {
       }
       iterator.current().trainrunSection.setTrainrun(trainrun1);
       iterator.current().trainrunSection.shiftAllTimes(
-        frequencyOffset,
+          frequencyOffset,
         node.getId() === port2.getTrainrunSection().getSourceNodeId());
     }
 
@@ -584,9 +602,9 @@ export class TrainrunService {
 
   getBothEndNodesFromTrainrunPart(trainrunSection: TrainrunSection):
     {
-      endNode1: Node;
-      endNode2: Node;
-    } {
+    endNode1: Node;
+    endNode2: Node;
+  } {
     const sourceNode = trainrunSection.getSourceNode();
     const targetNode = trainrunSection.getTargetNode();
     const endNode1 = this.getEndNode(sourceNode, trainrunSection);
@@ -646,7 +664,7 @@ export class TrainrunService {
 
       // filter all still visited trainrun sections
       alltrainrunsections = alltrainrunsections.filter(ts =>
-        propDataForward.visitedTrainrunSections.indexOf(ts) === -1 &&
+          propDataForward.visitedTrainrunSections.indexOf(ts) === -1 &&
         propDataBackward.visitedTrainrunSections.indexOf(ts) === -1
       );
     }

@@ -1,6 +1,7 @@
 import {
   LinePatternRefs,
   TrainrunCategory,
+  TrainrunDirection,
   TrainrunDto,
   TrainrunFrequency,
   TrainrunTimeCategory,
@@ -12,6 +13,7 @@ export class Trainrun {
   public static DEFAULT_TRAINRUN_CATEGORY = 1; // default is IC
   public static DEFAULT_TRAINRUN_FREQUENCY = 3; // default is stuendlich
   public static DEFAULT_TRAINRUN_TIME_CATEGORY = 0; // default is täglich, immer
+
   private static currentId = 0;
   private id: number;
   private name: string;
@@ -23,6 +25,7 @@ export class Trainrun {
   private trainrunTimeCategory: TrainrunTimeCategory;
   private isSelected: boolean;
   private labelIds: number[];
+  private trainrunDirection: TrainrunDirection;
 
   constructor(
     {
@@ -32,6 +35,7 @@ export class Trainrun {
       frequencyId,
       trainrunTimeCategoryId,
       labelIds,
+      trainrunDirection,
     }: TrainrunDto = {
       id: Trainrun.incrementId(),
       name: Trainrun.DEFAULT_TRAINRUN_NAME,
@@ -48,6 +52,7 @@ export class Trainrun {
     this.isSelected = false;
     this.trainrunTimeCategoryId = trainrunTimeCategoryId;
     this.labelIds = labelIds;
+    this.trainrunDirection = TrainrunDirection.ROUND_TRIP;
 
     if (Trainrun.currentId < this.id) {
       Trainrun.currentId = this.id;
@@ -148,6 +153,18 @@ export class Trainrun {
     this.labelIds = labelIds;
   }
 
+  getIsRoundTrip(): boolean {
+    return this.trainrunDirection === TrainrunDirection.ROUND_TRIP;
+  }
+
+  getTrainrunDirection(): TrainrunDirection {
+    return this.trainrunDirection;
+  }
+
+  setTrainrunDirection(trainrunDirection: TrainrunDirection) {
+    this.trainrunDirection = trainrunDirection;
+  }
+
   getDto(): TrainrunDto {
     return {
       id: this.id,
@@ -156,6 +173,7 @@ export class Trainrun {
       frequencyId: this.trainrunFrequency.id,
       trainrunTimeCategoryId: this.trainrunTimeCategory.id,
       labelIds: this.labelIds,
+      trainrunDirection: this.trainrunDirection,
     };
   }
 }
