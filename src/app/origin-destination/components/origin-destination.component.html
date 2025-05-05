@@ -1,4 +1,33 @@
-<div
-  id="main-origin-destination-container-root"
-  style="width: 98%; height: 100%; position: relative"
-></div>
+<div class="matrix-wrapper">
+  <div
+    id="main-origin-destination-container-root"
+    style="width: 98%; height: 100%"
+  ></div>
+
+  <div class="palette-buttons">
+    <div
+      class="palette-option custom"
+      [class.active]="colorSetName === 'custom'"
+      title="Custom palette"
+      (click)="onChangePalette('custom')"
+    ></div>
+    <div
+      class="palette-option blue"
+      [class.active]="colorSetName === 'blue'"
+      title="Blue palette"
+      (click)="onChangePalette('blue')"
+    ></div>
+    <div
+      class="palette-option orange"
+      [class.active]="colorSetName === 'orange'"
+      title="Orange palette"
+      (click)="onChangePalette('orange')"
+    ></div>
+    <div
+      class="palette-option gray"
+      [class.active]="colorSetName === 'gray'"
+      title="Gray alette"
+      (click)="onChangePalette('gray')"
+    ></div>
+  </div>
+</div>
