@@ -1,15 +1,16 @@
 import {OriginDestinationService} from "./../../services/data/origin-destination.service";
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
+import {Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild,} from "@angular/core";
 import * as d3 from "d3";
 import {NodeService} from "src/app/services/data/node.service";
+import {UiInteractionService} from "../../services/ui/ui.interaction.service";
 
-import {Subject} from "rxjs";
+import {Subject, takeUntil} from "rxjs";
+import {
+  SVGMouseController,
+  SVGMouseControllerObserver,
+} from "src/app/view/util/svg.mouse.controller";
+import {ViewboxProperties} from "src/app/services/ui/ui.interaction.service";
+import {Vec2D} from "src/app/utils/vec2D";
 
 type OriginDestination = {
   origin: string;
@@ -23,7 +24,7 @@ type OriginDestination = {
   templateUrl: "./origin-destination.component.html",
   styleUrls: ["./origin-destination.component.scss"],
 })
-export class OriginDestinationComponent implements OnInit {
+export class OriginDestinationComponent implements OnInit, OnDestroy {
   @ViewChild("div") divRef: ElementRef;
 
   private readonly destroyed$ = new Subject<void>();
@@ -31,7 +32,10 @@ export class OriginDestinationComponent implements OnInit {
   constructor(
     private nodeService: NodeService,
     private origineDestinationService: OriginDestinationService,
+    private uiInteractionService: UiInteractionService,
   ) {}
+
+  private controller: SVGMouseController;
 
   ngOnInit(): void {
     const originDestinationData =
@@ -39,6 +43,19 @@ export class OriginDestinationComponent implements OnInit {
     const nodes = this.nodeService.getNodes();
     const nodeNames = nodes.map((node) => node.getBetriebspunktName());
     this.renderMatriceOD(originDestinationData, nodeNames);
+    this.controller = new SVGMouseController(
+      "main-origin-destination-container",
+      this.createSvgMouseControllerObserver(),
+    );
+    this.controller.init(this.createInitialViewboxProperties());
+
+    this.uiInteractionService.zoomInObservable
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((zoomCenter: Vec2D) => this.controller.zoomIn(zoomCenter));
+
+    this.uiInteractionService.zoomOutObservable
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((zoomCenter: Vec2D) => this.controller.zoomOut(zoomCenter));
   }
 
   renderMatriceOD(
@@ -46,14 +63,11 @@ export class OriginDestinationComponent implements OnInit {
     nodeNames: string[],
   ) {
     // set the dimensions and margins of the graph
-    const margin = {top: 80, right: 25, bottom: 30, left: 40},
-      width = 650 - margin.left - margin.right,
-      height = 650 - margin.top - margin.bottom;
+    const margin = {top: 80, right: 25, bottom: 30, left: 20};
+    const cellSize = 30;
 
-    const {height: parentElementHeight, width: parentElementWidth} = d3
-      .select("#main-origin-destination-container-root")
-      .node()
-      .getBoundingClientRect();
+    const width = cellSize * nodeNames.length;
+    const height = cellSize * nodeNames.length;
 
     // append the svg object to the body of the page
     const svg = d3
@@ -62,16 +76,37 @@ export class OriginDestinationComponent implements OnInit {
       .attr("id", "main-origin-destination-container")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
+      .attr(
+        "viewBox",
+        `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`,
+      );
+
+    const containerGroup = svg
       .append("g")
       .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
+    const graphContentGroup = containerGroup
+      .append("g")
+      .attr("id", "zoom-group");
+
     // Build X scales and axis:
     const x = d3.scaleBand().range([0, width]).domain(nodeNames).padding(0.05);
-    svg
+
+    graphContentGroup
       .append("g")
       .style("font-size", 15)
       .attr("transform", "translate(0, -20)")
       .call(d3.axisBottom(x).tickSize(0))
+      .style("user-select", "none")
+      .call((g) =>
+        g
+          .selectAll("text")
+          .style("text-anchor", "start")
+          .attr("dx", "-0.8em")
+          .attr("dy", "0.4em")
+          .attr("transform", "rotate(-45)")
+          .style("user-select","none")
+      )
       .select(".domain")
       .remove();
 
@@ -81,18 +116,15 @@ export class OriginDestinationComponent implements OnInit {
       .range([height, 0])
       .domain(nodeNames.reverse())
       .padding(0.05);
-    svg
+    graphContentGroup
       .append("g")
-      .style("font-size", 15)
+      .style("font-size", 14)
       .call(d3.axisLeft(y).tickSize(0))
+      .style("user-select", "none")
       .select(".domain")
       .remove();
 
-    // Build color scale
-    const myColor = d3
-      .scaleSequential()
-      .interpolator(d3.interpolateInferno)
-      .domain([1, 50]);
+    const myColor = this.getColorScale();
 
     // create a tooltip
     const tooltip = d3
@@ -104,25 +136,32 @@ export class OriginDestinationComponent implements OnInit {
       .style("border", "solid")
       .style("border-width", "2px")
       .style("border-radius", "5px")
-      .style("padding", "5px");
+      .style("padding", "5px")
+      .style("user-select","none")
+      .style("pointer-events", "none");
 
     // Three function that change the tooltip when user hover / move / leave a cell
     const mouseover = function (d) {
       tooltip.style("opacity", 1);
-      d3.select(this).style("stroke", "black").style("opacity", 1);
+      d3.select(this)
+        .style("stroke", "black")
+        .style("stroke-width", "2px")
+        .style("opacity", 1);
     };
 
     const totalCostTranslation = $localize`:@@app.origin-destination.tooltip.total-cost:Total cost`;
     const transfersTranslation = $localize`:@@app.origin-destination.tooltip.transfers:Transfers`;
     const travelTimeTranslation = $localize`:@@app.origin-destination.tooltip.travel-time:Travel time`;
+    const originTranslation = $localize`:@@app.origin-destination.tooltip.origin:Origin`;
+    const destinationTranslation = $localize`:@@app.origin-destination.tooltip.destination:Destination`;
 
     const mousemove = function (d) {
       tooltip
         .html(
-          `${travelTimeTranslation}: ${d.travelTime}<br>${transfersTranslation}: ${d.transfert}<br>${totalCostTranslation}: ${d.totalCost}`,
+          ` ${originTranslation}: ${d.origin}<br>${destinationTranslation}: ${d.destination}<br>${travelTimeTranslation}: ${d.travelTime}<br>${transfersTranslation}: ${d.transfert}<br>${totalCostTranslation}: ${d.totalCost}`,
         )
-        .style("left", d3.mouse(this)[0] + 70 + "px")
-        .style("top", d3.mouse(this)[1] + "px");
+        .style("left", `${d3.event.offsetX + 64}px`)
+        .style("top", `${d3.event.offsetY + 64 < 0 ? 0 : d3.event.offsetY + 64}px`);
     };
 
     const mouseleave = function (d) {
@@ -131,7 +170,7 @@ export class OriginDestinationComponent implements OnInit {
     };
 
     // add the squares
-    svg
+    graphContentGroup
       .selectAll()
       .data(originDestinationData)
       .enter()
@@ -156,7 +195,7 @@ export class OriginDestinationComponent implements OnInit {
       .on("mousemove", mousemove)
       .on("mouseleave", mouseleave);
 
-    svg
+    graphContentGroup
       .selectAll()
       .data(originDestinationData)
       .enter()
@@ -171,11 +210,99 @@ export class OriginDestinationComponent implements OnInit {
       .style("text-anchor", "middle")
       .style("alignment-baseline", "middle")
       .style("font-size", "10px")
+      .style("pointer-events", "none")
+      .style("user-select","none")
       .style("fill", "white");
   }
 
   @HostListener("wheel", ["$event"])
   public onScroll(event: WheelEvent) {
     console.log("event", event);
+  }
+
+  private createSvgMouseControllerObserver(): SVGMouseControllerObserver {
+    return {
+      onEarlyReturnFromMousemove: () => false,
+      onGraphContainerMouseup: () => {},
+      zoomFactorChanged: (newZoomFactor) => {
+        console.log("zoom factor", newZoomFactor);
+      },
+      onViewboxChanged: (viewboxProperties) => {
+        const svg = d3.select("#main-origin-destination-container");
+        svg.attr(
+          "viewBox",
+          `${viewboxProperties.panZoomLeft} ${viewboxProperties.panZoomTop} ${viewboxProperties.panZoomWidth} ${viewboxProperties.panZoomHeight}`,
+        );
+      },
+      onStartMultiSelect: () => {},
+      updateMultiSelect: () => {},
+      onEndMultiSelect: () => {},
+      onScaleNetzgrafik: () => {},
+    };
+  }
+
+  private createInitialViewboxProperties(): ViewboxProperties {
+    return {
+      zoomFactor: 100,
+      origWidth: 1000,
+      origHeight: 1000,
+      panZoomLeft: 0,
+      panZoomTop: 0,
+      panZoomWidth: 1000,
+      panZoomHeight: 1000,
+      currentViewBox: null,
+    };
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
+  }
+
+  colorSetName: "custom" | "blue" | "orange" | "gray" = "custom";
+
+  getColorScale(): d3.ScaleLinear<string, string> {
+    switch (this.colorSetName) {
+      case "custom":
+        return d3
+          .scaleLinear<string>()
+          .domain([0, 30, 90, 120])
+          .range(["#2166AC", "#67A9CF", "#FDAE61", "#B2182B"])
+          .clamp(true);
+      case "gray":
+        return d3
+          .scaleLinear<string>()
+          .domain([0, 30, 90, 120])
+          .range(["#CCCCCC", "#999999", "#666666", "#333333"])
+          .clamp(true);
+      case "blue":
+        return d3
+          .scaleLinear<string>()
+          .domain([0, 30, 90, 120])
+          .range(["#003366", "#00A3E0", "#FDAE61", "#E60000"])
+          .clamp(true);
+      case "orange":
+        return d3
+          .scaleLinear<string>()
+          .domain([0, 30, 90, 120])
+          .range(["#4CAF50", "#FFCA28", "#F57C00", "#C60018"])
+          .clamp(true);
+      default:
+        return d3
+          .scaleLinear<string>()
+          .domain([0, 30, 90, 120])
+          .range(["#003366", "#00A3E0", "#FDAE61", "#E60000"])
+          .clamp(true);
+    }
+  }
+
+  onChangePalette(name: "custom" | "blue" | "orange" | "gray") {
+    this.colorSetName = name;
+    d3.select("#main-origin-destination-container").remove();
+    const originDestinationData =
+      this.origineDestinationService.originDestinationData();
+    const nodes = this.nodeService.getNodes();
+    const nodeNames = nodes.map((node) => node.getBetriebspunktName());
+    this.renderMatriceOD(originDestinationData, nodeNames);
   }
 }
