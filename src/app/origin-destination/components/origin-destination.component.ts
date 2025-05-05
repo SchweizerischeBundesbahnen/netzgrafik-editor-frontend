@@ -1,12 +1,5 @@
 import {OriginDestinationService} from "./../../services/data/origin-destination.service";
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
+import {Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild,} from "@angular/core";
 import * as d3 from "d3";
 import {NodeService} from "src/app/services/data/node.service";
 import {UiInteractionService} from "../../services/ui/ui.interaction.service";
@@ -112,7 +105,8 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
           .style("text-anchor", "start")
           .attr("dx", "-0.8em")
           .attr("dy", "0.4em")
-          .attr("transform", "rotate(-45)"),
+          .attr("transform", "rotate(-45)")
+          .style("user-select","none")
       )
       .select(".domain")
       .remove();
@@ -145,6 +139,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .style("border-width", "2px")
       .style("border-radius", "5px")
       .style("padding", "5px")
+      .style("user-select","none")
       .style("pointer-events", "none");
 
     // Three function that change the tooltip when user hover / move / leave a cell
@@ -167,8 +162,8 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
         .html(
           `${d.origin} &#x2192; ${d.destination}<br><hr> ${travelTimeTranslation}: ${d.travelTime}<br>${transfersTranslation}: ${d.transfert}<br>${totalCostTranslation}: ${d.totalCost}`,
         )
-        .style("left", `${d3.mouse(this)[0] + 100}px`)
-        .style("top", `${d3.mouse(this)[1] - 50}px`);
+        .style("left", `${d3.event.offsetX + 64}px`)
+        .style("top", `${d3.event.offsetY + 64 < 0 ? 0 : d3.event.offsetY + 64}px`);
     };
 
     const mouseleave = function (d) {
@@ -218,6 +213,8 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .style("text-anchor", "middle")
       .style("alignment-baseline", "middle")
       .style("font-size", "10px")
+      .style("pointer-events", "none")
+      .style("user-select","none")
       .style("fill", "white");
   }
 
