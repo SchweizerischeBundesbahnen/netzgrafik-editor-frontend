@@ -105,6 +105,8 @@ export class TrainrunSectionViewObject {
       "_" +
       d.getTrainrun().getTrainrunFrequency().offset +
       "_" +
+      d.getTrainrun().getTrainrunDirection() +
+      "_" +
       isNonStopAtSource +
       "_" +
       isNonStopAtTarget +
@@ -135,7 +137,7 @@ export class TrainrunSectionViewObject {
       "_" +
       editorView.checkFilterNode(d.getTargetNode()) +
       "_" +
-      editorView.getLevelOfDetail()  +
+      editorView.getLevelOfDetail() +
       "_" +
       editorView.trainrunSectionPreviewLineView.getVariantIsWritable();
 
