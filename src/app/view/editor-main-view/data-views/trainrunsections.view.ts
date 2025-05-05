@@ -1164,15 +1164,10 @@ export class TrainrunSectionsView {
       }
     })();
 
-    let x, y;
-    if (arrow_index === 0) {
-      x = positions[1].getX() - dx;
-      y = positions[1].getY() - dy;
-    } else {
-      x = positions[2].getX() + dx;
-      y = positions[2].getY() + dy;
-    }
-
+    const x =
+      arrow_index === 0 ? positions[1].getX() - dx : positions[2].getX() + dx;
+    const y =
+      arrow_index === 0 ? positions[1].getY() - dy : positions[2].getY() + dy;
     return `translate(${x},${y}) rotate(${angle})`;
   }
 
@@ -2747,6 +2742,13 @@ export class TrainrunSectionsView {
       groupLines,
       StaticDomTags.EDGE_LINE_LAYER_3,
       [LinePatternRefs.Freq60, LinePatternRefs.Freq120],
+      selectedTrainrun,
+      connectedTrainIds,
+      enableEvents,
+    );
+
+    this.createDirectionArrow(
+      groupLines,
       selectedTrainrun,
       connectedTrainIds,
       enableEvents,
