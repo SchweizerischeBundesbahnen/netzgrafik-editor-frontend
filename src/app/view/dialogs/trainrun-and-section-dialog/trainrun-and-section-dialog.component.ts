@@ -16,7 +16,10 @@ import {Node} from "../../../models/node.model";
 import {Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
 import {DataService} from "../../../services/data/data.service";
-import {TrainrunFrequency} from "../../../data-structures/business.data.structures";
+import {
+  TrainrunDirection,
+  TrainrunFrequency,
+} from "../../../data-structures/business.data.structures";
 
 export enum TrainrunDialogType {
   TRAINRUN_DIALOG,
@@ -67,7 +70,9 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
   trainrunAndSectionEditorTabsViewTemplate: TemplateRef<any>;
 
   public selectedTrainrun: Trainrun;
-  public selectedTrainrunSectionName: string;
+  public leftNodeName: string;
+  public rightNodeName: string;
+  public arrowDirection: string | null = null;
 
   public data = null;
 
@@ -87,6 +92,12 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
     private trainrunSectionService: TrainrunSectionService,
     private dataService: DataService,
   ) {
+    this.trainrunService.trainruns
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(() => {
+        this.arrowDirection = this.getArrowDirectionForOneWayTrainrun();
+      });
+
     this.uiInteractionService.trainrunDialog
       .pipe(takeUntil(this.destroyed))
       .subscribe((parameter) => {
@@ -111,8 +122,10 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
           selectedTrainrunSection,
           parameter.nodesOrdered,
         );
-        this.selectedTrainrunSectionName =
-          leftNode.getFullName() + " — " + rightNode.getFullName();
+
+        this.leftNodeName = leftNode.getFullName();
+        this.rightNodeName = rightNode.getFullName();
+        this.arrowDirection = this.getArrowDirectionForOneWayTrainrun();
 
         this.openDialog(parameter);
       });
@@ -224,5 +237,24 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
       right: dialogPos.right + "px",
       top: dialogPos.top + "px",
     };
+  }
+
+  private getArrowDirectionForOneWayTrainrun(): string | null {
+    if (!this.selectedTrainrun || this.selectedTrainrun.getIsRoundTrip()) return null;
+    const isTargetRight = this.trainrunSectionHelper.getIsTargetRight(
+      this.trainrunSectionService.getSelectedTrainrunSection(),
+      this.data.nodesOrdered,
+    );
+    const trainrunDirection = this.selectedTrainrun.getTrainrunDirection();
+    if (
+      (trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD &&
+        isTargetRight) ||
+      (trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD &&
+        !isTargetRight)
+    ) {
+      return "arrow-right-medium";
+    } else {
+      return "arrow-left-medium";
+    }
   }
 }
