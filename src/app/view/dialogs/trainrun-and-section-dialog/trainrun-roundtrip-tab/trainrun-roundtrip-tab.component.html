@@ -1,0 +1,40 @@
+<div sbbDialogContent [class]="getContentClassTag()">
+  <div class="toggle-container">
+    <span class="toggle-label">{{ "One Way" }}</span>
+    <label class="toggle-switch">
+      <input
+        sbbInput
+        type="checkbox"
+        [checked]="isOneWay"
+        (change)="onIsOneWayChanged($event.target.checked)"
+      />
+      <span class="slider"></span>
+    </label>
+  </div>
+  <sbb-trainrunsection-card *ngIf="isOneWay"></sbb-trainrunsection-card>
+</div>
+
+<div sbbDialogActions [class]="getContentFooterClassTag()">
+  <button
+    class="FunctionButton"
+    tabindex="-1"
+    (click)="onDuplicateTrainrun()"
+    [title]="
+      'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDuplicate'
+        | translate
+    "
+  >
+    <sbb-icon svgIcon="plus-medium" aria-hidden="false"></sbb-icon>
+  </button>
+  <button
+    class="FunctionButton"
+    tabindex="-1"
+    (click)="onDeleteTrainrun()"
+    [title]="
+      'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDelete'
+        | translate
+    "
+  >
+    <sbb-icon svgIcon="trash-medium" aria-hidden="false"></sbb-icon>
+  </button>
+</div>
