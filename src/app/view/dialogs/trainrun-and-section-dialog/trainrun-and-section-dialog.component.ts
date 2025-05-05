@@ -94,7 +94,11 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
   ) {
     this.trainrunService.trainruns
       .pipe(takeUntil(this.destroyed))
-      .subscribe(() => {
+      .subscribe((trainrunList) => {
+         if (!trainrunList.length) {
+          this.closeDialog();
+          return;
+        }
         this.arrowDirection = this.getArrowDirectionForOneWayTrainrun();
       });
 
