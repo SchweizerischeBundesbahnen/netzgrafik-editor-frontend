@@ -21,8 +21,7 @@ export enum LeftAndRightElement {
 }
 
 export class TrainrunsectionHelper {
-  constructor(private trainrunService: TrainrunService) {
-  }
+  constructor(private trainrunService: TrainrunService) {}
 
   static getSymmetricTime(time: number) {
     return time === 0 ? 0 : 60 - time;
@@ -115,11 +114,11 @@ export class TrainrunsectionHelper {
 
     const towardsSource =
       this.trainrunService.getLastNonStopTrainrunSection(
-        trainrunSection.getSourceNode(),
+      trainrunSection.getSourceNode(),
         trainrunSection);
     const towradsTarget =
       this.trainrunService.getLastNonStopTrainrunSection(
-        trainrunSection.getTargetNode(),
+      trainrunSection.getTargetNode(),
         trainrunSection);
 
     let leftSection = towradsTarget;
@@ -186,15 +185,15 @@ export class TrainrunsectionHelper {
       leftLock:
         leftSection.getSourceNodeId() === lastLeftNode.getId()
           ? leftSection.getSourceArrivalLock() ||
-          leftSection.getSourceDepartureLock()
+            leftSection.getSourceDepartureLock()
           : leftSection.getTargetArrivalLock() ||
-          leftSection.getTargetDepartureLock(),
+            leftSection.getTargetDepartureLock(),
       rightLock:
         rightSection.getSourceNodeId() === lastRightNode.getId()
           ? rightSection.getSourceArrivalLock() ||
-          rightSection.getSourceDepartureLock()
+            rightSection.getSourceDepartureLock()
           : rightSection.getTargetArrivalLock() ||
-          rightSection.getTargetDepartureLock(),
+            rightSection.getTargetDepartureLock(),
       travelTimeLock: trainrunSection.getTravelTimeLock(),
     };
   }
@@ -360,5 +359,25 @@ export class TrainrunsectionHelper {
       );
     }
     return rightNode;
+  }
+
+  getIsTargetRight(
+    trainrunSection: TrainrunSection,
+    orderedNodes: Node[],
+  ): boolean {
+    return (
+      trainrunSection.getTargetNode() ===
+      this.getRightNode(trainrunSection, orderedNodes)
+    );
+  }
+
+  getIsTargetLeft(
+    trainrunSection: TrainrunSection,
+    orderedNodes: Node[],
+  ): boolean {
+    return (
+      trainrunSection.getTargetNode() ===
+      this.getLeftNode(trainrunSection, orderedNodes)
+    );
   }
 }
