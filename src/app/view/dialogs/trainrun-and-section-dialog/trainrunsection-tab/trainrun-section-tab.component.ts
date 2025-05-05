@@ -115,8 +115,6 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   }
 
   constructor(
-    private dataService: DataService,
-    private filterService: FilterService,
     private trainrunService: TrainrunService,
     private trainrunSectionService: TrainrunSectionService,
     private changeDetection: ChangeDetectorRef,

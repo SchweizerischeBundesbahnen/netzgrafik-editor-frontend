@@ -1,0 +1,68 @@
+@import "../../../rastering/definitions";
+@import "../../../editor-main-view/data-views/trainrunsections.view.edgeline";
+
+::ng-deep div.OneWayCardBetriebspunkt {
+  max-width: 160px;
+  padding: 1px;
+  text-align: center;
+  align-content: center;
+  height: 40px;
+  font-family: "SBBWeb Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+::ng-deep div.TrainrunSection {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  row-gap: 6px;
+  padding-top: 13px;
+}
+
+::ng-deep .renderer {
+  shape-rendering: geometricPrecision;
+}
+
+::ng-deep
+  div.sbb-dialog-content.sbb-scrollbar.EditTrainrunSectionDialogTabContent {
+  border-style: none;
+  min-height: 250px;
+  max-height: 250px;
+  padding-top: 30px;
+  padding-bottom: 0px;
+}
+
+::ng-deep div.EditTrainrunDialogTabFooter {
+  border-style: none;
+  padding: 0 15px 0 0;
+  max-height: 48px;
+  min-height: 48px;
+}
+
+::ng-deep div.EditTrainrunSectionDialogTabContent.readonly {
+  pointer-events: none;
+}
+
+::ng-deep div.EditTrainrunDialogTabFooter.readonly {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+::ng-deep div.OneWayCard {
+  border-radius: 10px;
+  border: 1px solid black;
+  display: flex;
+  padding: 1rem;
+}
+
+::ng-deep div.OneWayCard.bottom {
+  align-items: start;
+}
+
+::ng-deep div.OneWayCard.top {
+  align-items: end;
+}
+
+::ng-deep div.NodeTimeStructures {
+  display: flex;
+  justify-content: space-between;
+}
