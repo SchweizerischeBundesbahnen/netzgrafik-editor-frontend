@@ -2494,7 +2494,7 @@ export class TrainrunSectionsView {
     this.createTrainrunSection(
       groupLines,
       StaticDomTags.EDGE_LINE_LAYER_0,
-      [],//20, 30, 60], (background is required to "strech the hower area"
+      [LinePatternRefs.Freq30],// LinePatternRefs.Freq60], (background is required to "strech the hower area"
       selectedTrainrun,
       connectedTrainIds,
       enableEvents,

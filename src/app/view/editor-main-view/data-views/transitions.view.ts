@@ -303,7 +303,7 @@ export class TransitionsView {
     TransitionsView.createTransitionLineLayer(
       grpEnter,
       StaticDomTags.TRANSITION_LINE_CLASS_0,
-      [],//20, 30, 60], (background is required to "strech the hower area"
+      [LinePatternRefs.Freq30],// LinePatternRefs.Freq60], (background is required to "strech the hower area"
       selectedTrainrun,
       connectedTrainIds,
       this.editorView,
