@@ -11,6 +11,7 @@ import {
 } from "./trainrunsection.previewline.view";
 import {Vec2D} from "../../../utils/vec2D";
 import {TransitionViewObject} from "./transitionViewObject";
+import {LinePatternRefs} from "../../../data-structures/business.data.structures";
 
 export class TransitionsView {
   transitionsGroup;
@@ -99,14 +100,14 @@ export class TransitionsView {
   static createTransitionLineLayer(
     grpEnter: d3.selector,
     classRef: string,
-    levelFreqFilter: number[],
+    levelFreqFilter: LinePatternRefs[],
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
     editorView: EditorView,
   ) {
     grpEnter
       .filter((d: TransitionViewObject) => {
-        return !levelFreqFilter.includes(d.transition.getTrainrun().getFrequency());
+        return !levelFreqFilter.includes(d.transition.getTrainrun().getFrequencyLinePatternRef());
       })
       .append(StaticDomTags.TRANSITION_LINE_SVG)
       .attr(
@@ -310,7 +311,7 @@ export class TransitionsView {
     TransitionsView.createTransitionLineLayer(
       grpEnter,
       StaticDomTags.TRANSITION_LINE_CLASS_1,
-      [30],
+      [LinePatternRefs.Freq30],
       selectedTrainrun,
       connectedTrainIds,
       this.editorView,
@@ -318,7 +319,7 @@ export class TransitionsView {
     TransitionsView.createTransitionLineLayer(
       grpEnter,
       StaticDomTags.TRANSITION_LINE_CLASS_2,
-      [60, 120],
+      [LinePatternRefs.Freq60, LinePatternRefs.Freq120],
       selectedTrainrun,
       connectedTrainIds,
       this.editorView,
@@ -326,7 +327,7 @@ export class TransitionsView {
     TransitionsView.createTransitionLineLayer(
       grpEnter,
       StaticDomTags.TRANSITION_LINE_CLASS_3,
-      [60, 120],
+      [LinePatternRefs.Freq60, LinePatternRefs.Freq120],
       selectedTrainrun,
       connectedTrainIds,
       this.editorView,

@@ -28,6 +28,7 @@ import {EditorMode} from "../../editor-menu/editor-mode";
 import {Transition} from "../../../models/transition.model";
 import {InformSelectedTrainrunClick} from "../../../services/data/trainrunsection.service";
 import {LevelOfDetail} from "../../../services/ui/level.of.detail.service";
+import {LinePatternRefs} from "../../../data-structures/business.data.structures";
 
 export class TrainrunSectionsView {
   trainrunSectionGroup;
@@ -1089,14 +1090,14 @@ export class TrainrunSectionsView {
   createTrainrunSection(
     groupEnter: d3.Selector,
     classRef,
-    levelFreqFilter: number[],
+    levelFreqFilter: LinePatternRefs[],
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
     enableEvents = true,
   ) {
     const trainrunSectionElements = groupEnter
       .filter((d: TrainrunSectionViewObject) => {
-        return !levelFreqFilter.includes(d.trainrunSection.getFrequency());
+        return !levelFreqFilter.includes(d.trainrunSection.getFrequencyLinePatternRef());
       })
       .append(StaticDomTags.EDGE_LINE_SVG)
       .attr(
@@ -2501,7 +2502,7 @@ export class TrainrunSectionsView {
     this.createTrainrunSection(
       groupLines,
       StaticDomTags.EDGE_LINE_LAYER_1,
-      [30],
+      [LinePatternRefs.Freq30],
       selectedTrainrun,
       connectedTrainIds,
       enableEvents,
@@ -2509,7 +2510,7 @@ export class TrainrunSectionsView {
     this.createTrainrunSection(
       groupLines,
       StaticDomTags.EDGE_LINE_LAYER_2,
-      [60, 120],
+      [LinePatternRefs.Freq60, LinePatternRefs.Freq120],
       selectedTrainrun,
       connectedTrainIds,
       enableEvents,
@@ -2517,7 +2518,7 @@ export class TrainrunSectionsView {
     this.createTrainrunSection(
       groupLines,
       StaticDomTags.EDGE_LINE_LAYER_3,
-      [60, 120],
+      [LinePatternRefs.Freq60, LinePatternRefs.Freq120],
       selectedTrainrun,
       connectedTrainIds,
       enableEvents,
