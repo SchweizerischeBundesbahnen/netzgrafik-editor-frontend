@@ -1089,11 +1089,15 @@ export class TrainrunSectionsView {
   createTrainrunSection(
     groupEnter: d3.Selector,
     classRef,
+    levelFreqFilter: number[],
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
     enableEvents = true,
   ) {
     const trainrunSectionElements = groupEnter
+      .filter((d: TrainrunSectionViewObject) => {
+        return !levelFreqFilter.includes(d.trainrunSection.getFrequency());
+      })
       .append(StaticDomTags.EDGE_LINE_SVG)
       .attr(
         "class",
@@ -2489,6 +2493,7 @@ export class TrainrunSectionsView {
     this.createTrainrunSection(
       groupLines,
       StaticDomTags.EDGE_LINE_LAYER_0,
+      [],//20, 30, 60], (background is required to "strech the hower area"
       selectedTrainrun,
       connectedTrainIds,
       enableEvents,
@@ -2496,6 +2501,7 @@ export class TrainrunSectionsView {
     this.createTrainrunSection(
       groupLines,
       StaticDomTags.EDGE_LINE_LAYER_1,
+      [30],
       selectedTrainrun,
       connectedTrainIds,
       enableEvents,
@@ -2503,6 +2509,7 @@ export class TrainrunSectionsView {
     this.createTrainrunSection(
       groupLines,
       StaticDomTags.EDGE_LINE_LAYER_2,
+      [60, 120],
       selectedTrainrun,
       connectedTrainIds,
       enableEvents,
@@ -2510,6 +2517,7 @@ export class TrainrunSectionsView {
     this.createTrainrunSection(
       groupLines,
       StaticDomTags.EDGE_LINE_LAYER_3,
+      [60, 120],
       selectedTrainrun,
       connectedTrainIds,
       enableEvents,
