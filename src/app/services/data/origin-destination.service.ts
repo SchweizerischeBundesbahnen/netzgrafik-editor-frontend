@@ -1,4 +1,5 @@
 import {Injectable} from "@angular/core";
+import {Node} from "../../models/node.model";
 import {NodeService} from "./node.service";
 import {DataService} from "./data.service";
 import {TrainrunService} from "./trainrun.service";
@@ -27,6 +28,18 @@ export class OriginDestinationService {
     private trainrunService: TrainrunService,
   ) {}
 
+  /**
+   * Returns the origin/destination nodes used for output.
+   *
+   * Note that other nodes may be used for the calculation.
+   */
+  odNodes(): Node[] {
+    const selectedNodes = this.nodeService.getSelectedNodes();
+    return selectedNodes.length > 0
+      ? selectedNodes
+      : this.nodeService.getVisibleNodes();
+  }
+
   originDestinationData(): OriginDestination[] {
     // Duration of the schedule to consider (in minutes).
     // TODO: ideally this would be 24 hours, but performance is a concern.
@@ -39,11 +52,7 @@ export class OriginDestinationService {
     const connectionPenalty =
       metadata.analyticsSettings.originDestinationSettings.connectionPenalty;
     const nodes = this.nodeService.getNodes();
-    const selectedNodes = this.nodeService.getSelectedNodes();
-    const odNodes =
-      selectedNodes.length > 0
-        ? selectedNodes
-        : this.nodeService.getVisibleNodes();
+    const odNodes = this.odNodes();
     const trainruns = this.trainrunService.getVisibleTrainruns();
 
     const edges = buildEdges(
