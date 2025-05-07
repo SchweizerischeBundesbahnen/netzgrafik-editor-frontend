@@ -92,10 +92,11 @@ export class UndoService implements OnDestroy {
   }
 
   public pushCurrentVersion(enforce = false) {
-    this.ignoreNextPushCurrentVersionCall = false;
     if (this.ignoreNextPushCurrentVersionCall && !enforce) {
+      this.ignoreNextPushCurrentVersionCall = false;
       return;
     }
+    this.ignoreNextPushCurrentVersionCall = false;
     this.internalPushCurrentVersion(enforce);
   }
 
@@ -104,6 +105,7 @@ export class UndoService implements OnDestroy {
       this.dataService.getNetzgrafikDto(),
     );
     const modified = newNetzgrafikJson !== this.currentNetzgrafikJSON;
+    console.log(modified, this.dataService.getNetzgrafikDto());
     if (modified || enforce) {
       this.changeHistoryStack.push(JSON.parse(newNetzgrafikJson));
       this.currentNetzgrafikJSON = newNetzgrafikJson;
