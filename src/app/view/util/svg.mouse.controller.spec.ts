@@ -60,6 +60,7 @@ describe("general view functions", () => {
     const svgMouseController = new SVGMouseController(
       "graphContainer",
       dummySVGMouseControllerObserver,
+      undefined,
     );
     svgMouseController.init(viewboxProperties);
     const prop = svgMouseController.getViewboxProperties();
@@ -82,6 +83,7 @@ describe("general view functions", () => {
     const svgMouseController = new SVGMouseController(
       "graphContainer",
       dummySVGMouseControllerObserver,
+      undefined,
     );
     svgMouseController.init(viewboxProperties);
     const prop = svgMouseController.getViewboxProperties();
@@ -104,6 +106,7 @@ describe("general view functions", () => {
     const svgMouseController = new SVGMouseController(
       "graphContainer",
       dummySVGMouseControllerObserver,
+      undefined,
     );
     svgMouseController.init(viewboxProperties);
     const prop = svgMouseController.getViewboxProperties();
@@ -120,6 +123,7 @@ describe("general view functions", () => {
     const svgMouseController = new SVGMouseController(
       "graphContainer",
       dummySVGMouseControllerObserver,
+      undefined,
     );
     svgMouseController.init(viewboxProperties);
     const prop = svgMouseController.getViewboxProperties();

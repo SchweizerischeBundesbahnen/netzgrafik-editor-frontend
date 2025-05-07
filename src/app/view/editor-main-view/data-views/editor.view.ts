@@ -137,7 +137,7 @@ export class EditorView implements SVGMouseControllerObserver {
     private positionTransformationService: PositionTransformationService
   ) {
     this.controller = controller;
-    this.svgMouseController = new SVGMouseController(EditorView.svgName, this);
+    this.svgMouseController = new SVGMouseController(EditorView.svgName, this, undoService);
     this.nodesView = new NodesView(this);
     this.transitionsView = new TransitionsView(this);
     this.connectionsView = new ConnectionsView(this);
