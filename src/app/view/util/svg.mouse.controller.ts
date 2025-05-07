@@ -232,6 +232,7 @@ export class SVGMouseController {
       (d3.event.buttons === 2 && this.lastMouseEventTimeStamp === undefined)
     ) {
       this.previousMultiSelectShiftPosition = this.getCurrentMousePosition();
+      this.temporaryDisableUndoServicePushCurrentVersion();
       this.svgMouseControllerObserver.onStartMultiSelect();
     } else {
       this.previousPanMousePosition = null;
