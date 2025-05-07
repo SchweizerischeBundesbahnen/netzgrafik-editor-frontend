@@ -93,8 +93,8 @@ export class UndoService implements OnDestroy {
 
   public pushCurrentVersion(enforce = false) {
     if (enforce) {
-      this.internalPushCurrentVersion(enforce);
       this.ignoreNextPushCurrentVersionCall = false;
+      this.internalPushCurrentVersion(enforce);
       return;
     }
     if (this.ignoreNextPushCurrentVersionCall) {
