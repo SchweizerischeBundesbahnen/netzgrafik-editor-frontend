@@ -131,6 +131,7 @@ export class SVGMouseController {
       );
       this.viewboxProperties.zoomFactor =
         Math.round(this.viewboxProperties.zoomFactor / 10) * 10;
+      this.temporaryDisableUndoServicePushCurrentVersion();
       this.updateZoomCenter(zoomCenter);
       this.svgMouseControllerObserver.zoomFactorChanged(
         this.viewboxProperties.zoomFactor,
@@ -155,6 +156,7 @@ export class SVGMouseController {
       );
       this.viewboxProperties.zoomFactor =
         Math.round(this.viewboxProperties.zoomFactor / 10) * 10;
+      this.temporaryDisableUndoServicePushCurrentVersion();
       this.updateZoomCenter(zoomCenter);
       this.svgMouseControllerObserver.zoomFactorChanged(
         this.viewboxProperties.zoomFactor,
@@ -167,6 +169,7 @@ export class SVGMouseController {
       return;
     }
     this.viewboxProperties.zoomFactor = 100;
+    this.temporaryDisableUndoServicePushCurrentVersion();
     this.updateZoomCenter(zoomCenter);
     this.svgMouseControllerObserver.zoomFactorChanged(
       this.viewboxProperties.zoomFactor,
@@ -193,9 +196,6 @@ export class SVGMouseController {
   }
 
   setViewbox() {
-    if (this.undoService !== undefined){
-      this.undoService.setIgnoreNextPushCurrentVersionCall();
-    }
     this.viewboxProperties.currentViewBox = this.makeViewboxString();
     this.svgDrawingContext.attr(
       "viewBox",
@@ -292,6 +292,7 @@ export class SVGMouseController {
               curPos.getY(),
             ),
           );
+          this.temporaryDisableUndoServicePushCurrentVersion();
           this.svgMouseControllerObserver.updateMultiSelect(
             topLef,
             bottomRight,
@@ -443,6 +444,7 @@ export class SVGMouseController {
 
       this.viewboxProperties.panZoomLeft += delta.getX();
       this.viewboxProperties.panZoomTop += delta.getY();
+      this.temporaryDisableUndoServicePushCurrentVersion();
       this.setViewbox();
     }
 
@@ -459,5 +461,12 @@ export class SVGMouseController {
       " " +
       this.viewboxProperties.panZoomHeight
     );
+  }
+
+  private temporaryDisableUndoServicePushCurrentVersion(){
+    // temporary disable undoService push current version
+    if (this.undoService !== undefined){
+      this.undoService.setIgnoreNextPushCurrentVersionCall();
+    }
   }
 }
