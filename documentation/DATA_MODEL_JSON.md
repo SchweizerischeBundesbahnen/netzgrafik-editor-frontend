@@ -554,7 +554,7 @@ LinePatternRefs {
 
 ![image](https://github.com/user-attachments/assets/f12d1fe4-cb30-4d9c-95f6-bbe026eae1c0)
 
-This image illustrates the four-layer (level) approach. Start by drawing the background on layer 0, then add levels 1, 2, and 3. Choose the appropriate stroke width and stroke color. Finally, ensure that we always have level 0, which serves as the background event handling area for mouse hovering and clicks (selection). To ensure that mouse events are captured, the stroke opacity for level 0 is set to 0.001 when it is not visible. Rendering styling is controlled via trainrunsections.view.scss 
+The above image illustrates the four-layer (level) approach. Start by drawing the background on layer 0, then add levels 1, 2, and 3. Choose the appropriate stroke width and stroke color. Finally, ensure that we always have level 0, which serves as the background event handling area for mouse hovering and clicks (selection). To ensure that mouse events are captured, the stroke opacity for level 0 is set to 0.001 when it is not visible. Rendering styling is controlled via trainrunsections.view.scss 
 
 
 See also, [TrainrunSectionsView::make4LayerTrainrunSectionLines](https://github.com/search?q=repo%3ASchweizerischeBundesbahnen/netzgrafik-editor-frontend%20make4LayerTrainrunSectionLines&type=code)
