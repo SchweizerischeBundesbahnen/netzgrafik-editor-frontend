@@ -551,6 +551,9 @@ LinePatternRefs {
   "15", // four lines ; unique indentifier
 }
 ```
+The rendering pattern [TrainrunSectionsView::make4LayerTrainrunSectionLines](https://github.com/search?q=repo%3ASchweizerischeBundesbahnen/netzgrafik-editor-frontend%20make4LayerTrainrunSectionLines&type=code)
+![image](https://github.com/user-attachments/assets/b0ed81ec-a9fc-4125-9270-2874f7100338)
+
 
 </details>
 
