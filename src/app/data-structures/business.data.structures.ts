@@ -121,7 +121,10 @@ export interface TrainrunSectionDto {
   sourceDeparture: TimeLockDto; // declares the soruce departure time
   targetArrival: TimeLockDto; // declares the target arrival time
   targetDeparture: TimeLockDto; // declares the target departure time
-  travelTime: TimeLockDto; // declares the travel arrival time
+  travelTime: TimeLockDto; // declares the travel time
+  returnTravelTime?: TimeLockDto; // declares the return travel time
+
+  isSymmetric?: boolean;
 
   numberOfStops: number; // number of stops - not declared in detail (no node attached)
 
@@ -152,7 +155,6 @@ export interface LabelDto {
   labelGroupId: number; // reference to the labelgroup
   labelRef: LabelRef; // label ref - declares the label group - used for double check - deprecate???
 }
-
 
 /**
  * Represents a filterable LabelGroup - in general one group per LabelRef are avaible, but user can
@@ -200,6 +202,7 @@ export interface TrainrunDto {
   trainrunTimeCategoryId: number; // reference to the trainrun time category
 
   labelIds: number[];
+  isRoundTrip?: boolean;
 }
 
 /**
@@ -284,7 +287,7 @@ export interface ResourceDto {
  * Represents the filter settings, which can be stored.
  */
 export interface FilterSettingDto {
-  id: number;  // unique indentifier
+  id: number; // unique indentifier
   name: string; // name
   description: string; // description
   filterNodeLabels: number[]; // labels to filter out (labels only of type - LabelRef: node)

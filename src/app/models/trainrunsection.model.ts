@@ -31,7 +31,10 @@ export class TrainrunSection {
   private targetArrival: TimeLockDto;
   private targetDeparture: TimeLockDto;
   private travelTime: TimeLockDto;
+  private returnTravelTime: TimeLockDto;
   private numberOfStops: number;
+
+  private isSymmetric: boolean;
 
   private trainrunId: number;
   private resourceId: number;
@@ -57,6 +60,8 @@ export class TrainrunSection {
       targetDeparture,
       targetArrival,
       travelTime,
+      isSymmetric,
+      returnTravelTime,
       numberOfStops,
       trainrunId,
       resourceId,
@@ -104,10 +109,18 @@ export class TrainrunSection {
         warning: null,
         timeFormatter: null,
       },
+      returnTravelTime: {
+        time: 1,
+        consecutiveTime: 1,
+        lock: true,
+        warning: null,
+        timeFormatter: null,
+      },
       trainrunId: 0,
       resourceId: 0,
       specificTrainrunSectionFrequencyId: null,
       numberOfStops: 0,
+      isSymmetric: false,
       path: {
         path: [],
         textPositions: {
@@ -133,6 +146,7 @@ export class TrainrunSection {
     this.targetDeparture = targetDeparture;
     this.targetArrival = targetArrival;
     this.travelTime = travelTime;
+    this.returnTravelTime = returnTravelTime;
     this.trainrunId = trainrunId;
     this.resourceId = resourceId;
     this.specificTrainrunSectionFrequencyId =
@@ -141,6 +155,7 @@ export class TrainrunSection {
     this.warnings = warnings;
     this.isSelected = false;
     this.numberOfStops = numberOfStops;
+    this.isSymmetric = isSymmetric;
 
     this.convertPathToVec2D();
 
@@ -185,11 +200,31 @@ export class TrainrunSection {
     timeDate.setSeconds(((time.time + offset + 24 * 60) % 60) * 60);
 
     const patterns = {
-      "{{consecutiveTime}}.format(HH:mm:ss)": formatDate(consecutiveTimeDate.toISOString(), "HH:mm:ss", "en-US", "UTC"),
-      "{{consecutiveTime}}.format(HH:mm)": formatDate(consecutiveTimeDate.toISOString(), "HH:mm", "en-US", "UTC"),
+      "{{consecutiveTime}}.format(HH:mm:ss)": formatDate(
+        consecutiveTimeDate.toISOString(),
+        "HH:mm:ss",
+        "en-US",
+        "UTC",
+      ),
+      "{{consecutiveTime}}.format(HH:mm)": formatDate(
+        consecutiveTimeDate.toISOString(),
+        "HH:mm",
+        "en-US",
+        "UTC",
+      ),
       "{{consecutiveTime}}": "" + time.consecutiveTime,
-      "{{time}}.format(HH:mm:ss)": formatDate(timeDate.toISOString(), "HH:mm:ss", "en-US", "UTC"),
-      "{{time}}.format(HH:mm)": formatDate(timeDate.toISOString(), "HH:mm", "en-US", "UTC"),
+      "{{time}}.format(HH:mm:ss)": formatDate(
+        timeDate.toISOString(),
+        "HH:mm:ss",
+        "en-US",
+        "UTC",
+      ),
+      "{{time}}.format(HH:mm)": formatDate(
+        timeDate.toISOString(),
+        "HH:mm",
+        "en-US",
+        "UTC",
+      ),
       "{{time}}": "" + ((time.time + offset + 24 * 60) % 60),
     };
 
@@ -251,6 +286,10 @@ export class TrainrunSection {
     this.travelTime = travelTimeDto;
   }
 
+  setReturnTravelTimeDto(returnTravelTimeDto: TimeLockDto) {
+    this.returnTravelTime = returnTravelTimeDto;
+  }
+
   getSourceArrivalDto(): TimeLockDto {
     return this.sourceArrival;
   }
@@ -271,12 +310,20 @@ export class TrainrunSection {
     return this.travelTime;
   }
 
+  getReturnTravelTimeDto(): TimeLockDto {
+    return this.returnTravelTime;
+  }
+
   getId(): number {
     return this.id;
   }
 
   getTravelTime(): number {
     return this.travelTime.time;
+  }
+
+  getReturnTravelTime(): number {
+    return this.returnTravelTime.time;
   }
 
   getSourceDeparture(): number {
@@ -299,6 +346,10 @@ export class TrainrunSection {
     return TrainrunSection.formatDisplayText(this.travelTime, offset);
   }
 
+  getReturnTravelTimeFormattedDisplayText(offset = 0): string {
+    return TrainrunSection.formatDisplayText(this.returnTravelTime, offset);
+  }
+
   getSourceDepartureFormattedDisplayText(offset = 0): string {
     return TrainrunSection.formatDisplayText(this.sourceDeparture, offset);
   }
@@ -317,6 +368,10 @@ export class TrainrunSection {
 
   getTravelTimeFormattedDisplayTextWidth(): number {
     return TrainrunSection.getDisplayTextWidth(this.travelTime);
+  }
+
+  getReturnTravelTimeFormattedDisplayTextWidth(): number {
+    return TrainrunSection.getDisplayTextWidth(this.returnTravelTime);
   }
 
   getSourceDepartureFormattedDisplayTextWidth(): number {
@@ -339,6 +394,10 @@ export class TrainrunSection {
     return TrainrunSection.getDisplayHtmlStyle(this.travelTime);
   }
 
+  getReturnTravelTimeFormattedDisplayHtmlStyle(): string {
+    return TrainrunSection.getDisplayHtmlStyle(this.returnTravelTime);
+  }
+
   getSourceDepartureFormattedDisplayHtmlStyle(): string {
     return TrainrunSection.getDisplayHtmlStyle(this.sourceDeparture);
   }
@@ -357,6 +416,10 @@ export class TrainrunSection {
 
   getTravelTimeFormatterColorRef(): ColorRefType {
     return TrainrunSection.getDisplayColorRef(this.travelTime);
+  }
+
+  getReturnTravelTimeFormatterColorRef(): ColorRefType {
+    return TrainrunSection.getDisplayColorRef(this.returnTravelTime);
   }
 
   getSourceDepartureFormatterColorRef(): ColorRefType {
@@ -384,6 +447,11 @@ export class TrainrunSection {
     TrainrunSectionValidator.validateTravelTime(this);
   }
 
+  setReturnTravelTime(time: number) {
+    this.returnTravelTime.time = time;
+    TrainrunSectionValidator.validateReturnTravelTime(this);
+  }
+
   setSourceDeparture(time: number) {
     this.sourceDeparture.time = time;
     TrainrunSectionValidator.validateOneSection(this);
@@ -408,6 +476,10 @@ export class TrainrunSection {
     return this.travelTime.lock;
   }
 
+  getReturnTravelTimeLock(): boolean {
+    return this.returnTravelTime.lock;
+  }
+
   getSourceDepartureLock(): boolean {
     return this.sourceDeparture.lock;
   }
@@ -426,6 +498,10 @@ export class TrainrunSection {
 
   setTravelTimeLock(lock: boolean) {
     this.travelTime.lock = lock;
+  }
+
+  setReturnTravelTimeLock(lock: boolean) {
+    this.returnTravelTime.lock = lock;
   }
 
   setSourceDepartureLock(lock: boolean) {
@@ -450,6 +526,11 @@ export class TrainrunSection {
 
   hasTravelTimeWarning(): boolean {
     return this.travelTime.warning !== null;
+  }
+
+
+  hasReturnTravelTimeWarning(): boolean {
+    return this.returnTravelTime.warning !== null;
   }
 
   hasSourceDepartureWarning(): boolean {
@@ -503,6 +584,13 @@ export class TrainrunSection {
     };
   }
 
+  setReturnTravelTimeWarning(warningTitle: string, warningDescription: string) {
+    this.returnTravelTime.warning = {
+      title: warningTitle,
+      description: warningDescription,
+    };
+  }
+
   getTargetArrivalWarning() {
     return this.targetArrival.warning;
   }
@@ -523,6 +611,10 @@ export class TrainrunSection {
     return this.travelTime.warning;
   }
 
+  getReturnTravelTimeWarning() {
+    return this.returnTravelTime.warning;
+  }
+
   resetTargetArrivalWarning() {
     this.targetArrival.warning = null;
   }
@@ -541,6 +633,10 @@ export class TrainrunSection {
 
   resetTravelTimeWarning() {
     this.travelTime.warning = null;
+  }
+
+  resetReturnTravelTimeWarning() {
+    this.returnTravelTime.warning = null;
   }
 
   getTrainrunId(): number {
@@ -647,6 +743,7 @@ export class TrainrunSection {
       targetNodeId: this.targetNodeId,
       targetPortId: this.targetPortId,
       travelTime: this.travelTime,
+      returnTravelTime: this.returnTravelTime,
 
       sourceDeparture: this.sourceDeparture,
       sourceArrival: this.sourceArrival,
@@ -659,7 +756,7 @@ export class TrainrunSection {
       resourceId: this.resourceId,
 
       specificTrainrunSectionFrequencyId:
-      this.specificTrainrunSectionFrequencyId,
+        this.specificTrainrunSectionFrequencyId,
       path: this.path,
       warnings: this.warnings,
     };
@@ -717,6 +814,18 @@ export class TrainrunSection {
 
   getTargetArrivalConsecutiveTime(): number {
     return this.targetArrival.consecutiveTime;
+  }
+
+  getIsSymmetric(): boolean {
+    return this.isSymmetric;
+  }
+
+  setIsSymmetric(isSymmetric: boolean) {
+    this.isSymmetric = isSymmetric;
+  }
+
+  isRoundTrip(): boolean {
+    return this.trainrun.getIsRoundTrip();
   }
 
   private convertPathToVec2D() {
