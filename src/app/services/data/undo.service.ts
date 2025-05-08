@@ -21,6 +21,7 @@ export class UndoService implements OnDestroy {
   private undoNetzgrafikIsLoading = false;
   private currentVariantId: number = undefined;
   private undoRecordingStopped = false;
+  private ignoreNextPushCurrentVersionCall = false;
 
   constructor(
     private readonly dataService: DataService,
@@ -66,6 +67,12 @@ export class UndoService implements OnDestroy {
     this.undoRecordingStopped = false;
   }
 
+  setIgnoreNextPushCurrentVersionCall() {
+    // performance improvement: pan, ... should only be used when the data doesn't change
+    // - such as when changing the viewBox, etc. which requires a redrawing/update
+    this.ignoreNextPushCurrentVersionCall = true;
+  }
+
   private subscribeSnapshots() {
     if (this.changesSubscription !== undefined) {
       this.changesSubscription.unsubscribe();
@@ -85,6 +92,15 @@ export class UndoService implements OnDestroy {
   }
 
   public pushCurrentVersion(enforce = false) {
+    if (this.ignoreNextPushCurrentVersionCall && !enforce) {
+      this.ignoreNextPushCurrentVersionCall = false;
+      return;
+    }
+    this.ignoreNextPushCurrentVersionCall = false;
+    this.internalPushCurrentVersion(enforce);
+  }
+
+  private internalPushCurrentVersion(enforce = false) {
     const newNetzgrafikJson = JSON.stringify(
       this.dataService.getNetzgrafikDto(),
     );
@@ -129,7 +145,7 @@ export class UndoService implements OnDestroy {
     this.currentVariantId = variantId;
   }
 
-  public getCurrentVariantId():number{
+  public getCurrentVariantId(): number {
     return this.currentVariantId;
   }
 }

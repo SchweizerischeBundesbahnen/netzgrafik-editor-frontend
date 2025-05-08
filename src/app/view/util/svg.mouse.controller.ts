@@ -2,6 +2,7 @@ import * as d3 from "d3";
 import {Vec2D} from "../../utils/vec2D";
 import {StaticDomTags} from "../editor-main-view/data-views/static.dom.tags";
 import {ViewboxProperties} from "../../services/ui/ui.interaction.service";
+import {UndoService} from "../../services/data/undo.service";
 
 export interface SVGMouseControllerObserver {
   onEarlyReturnFromMousemove(): boolean;
@@ -38,6 +39,7 @@ export class SVGMouseController {
   constructor(
     private svgName: string,
     private svgMouseControllerObserver: SVGMouseControllerObserver,
+    private undoService : UndoService
   ) {
   }
 
@@ -129,6 +131,7 @@ export class SVGMouseController {
       );
       this.viewboxProperties.zoomFactor =
         Math.round(this.viewboxProperties.zoomFactor / 10) * 10;
+      this.temporaryDisableUndoServicePushCurrentVersion();
       this.updateZoomCenter(zoomCenter);
       this.svgMouseControllerObserver.zoomFactorChanged(
         this.viewboxProperties.zoomFactor,
@@ -153,6 +156,7 @@ export class SVGMouseController {
       );
       this.viewboxProperties.zoomFactor =
         Math.round(this.viewboxProperties.zoomFactor / 10) * 10;
+      this.temporaryDisableUndoServicePushCurrentVersion();
       this.updateZoomCenter(zoomCenter);
       this.svgMouseControllerObserver.zoomFactorChanged(
         this.viewboxProperties.zoomFactor,
@@ -165,6 +169,7 @@ export class SVGMouseController {
       return;
     }
     this.viewboxProperties.zoomFactor = 100;
+    this.temporaryDisableUndoServicePushCurrentVersion();
     this.updateZoomCenter(zoomCenter);
     this.svgMouseControllerObserver.zoomFactorChanged(
       this.viewboxProperties.zoomFactor,
@@ -227,6 +232,7 @@ export class SVGMouseController {
       (d3.event.buttons === 2 && this.lastMouseEventTimeStamp === undefined)
     ) {
       this.previousMultiSelectShiftPosition = this.getCurrentMousePosition();
+      this.temporaryDisableUndoServicePushCurrentVersion();
       this.svgMouseControllerObserver.onStartMultiSelect();
     } else {
       this.previousPanMousePosition = null;
@@ -287,6 +293,7 @@ export class SVGMouseController {
               curPos.getY(),
             ),
           );
+          this.temporaryDisableUndoServicePushCurrentVersion();
           this.svgMouseControllerObserver.updateMultiSelect(
             topLef,
             bottomRight,
@@ -438,6 +445,7 @@ export class SVGMouseController {
 
       this.viewboxProperties.panZoomLeft += delta.getX();
       this.viewboxProperties.panZoomTop += delta.getY();
+      this.temporaryDisableUndoServicePushCurrentVersion();
       this.setViewbox();
     }
 
@@ -454,5 +462,12 @@ export class SVGMouseController {
       " " +
       this.viewboxProperties.panZoomHeight
     );
+  }
+
+  private temporaryDisableUndoServicePushCurrentVersion(){
+    // temporary disable undoService push current version
+    if (this.undoService !== undefined){
+      this.undoService.setIgnoreNextPushCurrentVersionCall();
+    }
   }
 }
