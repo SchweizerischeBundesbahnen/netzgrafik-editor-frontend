@@ -544,15 +544,16 @@ trainrunFrequencies: Represents the frequencies at which trainruns operates.
 The defined line pattern which can be used are 
 ```
 LinePatternRefs {
-  "120", // -.-.-.  ; unique indentifier
-  "60", // ----- ; unique indentifier
-  "30", // ==== ; unique indentifier
-  "20", // three lines  ; unique indentifier
   "15", // four lines ; unique indentifier
+  "20", // three lines  ; unique indentifier
+  "30", // ==== ; unique indentifier
+  "60", // ----- ; unique indentifier
+  "120", // -.-.-.  ; unique indentifier
 }
 ```
 The rendering pattern [TrainrunSectionsView::make4LayerTrainrunSectionLines](https://github.com/search?q=repo%3ASchweizerischeBundesbahnen/netzgrafik-editor-frontend%20make4LayerTrainrunSectionLines&type=code)
-![image](https://github.com/user-attachments/assets/b0ed81ec-a9fc-4125-9270-2874f7100338)
+![image](https://github.com/user-attachments/assets/f12d1fe4-cb30-4d9c-95f6-bbe026eae1c0)
+
 
 
 </details>
