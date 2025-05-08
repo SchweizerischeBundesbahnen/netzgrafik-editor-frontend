@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.25](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.24...netzgrafik-frontend-v2.9.25) (2025-05-08)
+
+
+### Bug Fixes
+
+* remove undoService.pushCurrentVersion - call … ([#445](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/445)) ([8ba733d](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/8ba733dd668a2cc546b41ccfc2c24ac7515e80f0))
+
 ## [2.9.24](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.23...netzgrafik-frontend-v2.9.24) (2025-04-09)
 
 
