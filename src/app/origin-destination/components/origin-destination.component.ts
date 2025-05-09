@@ -7,7 +7,6 @@ import {
   ViewChild,
 } from "@angular/core";
 import * as d3 from "d3";
-import {NodeService} from "src/app/services/data/node.service";
 
 import {Subject} from "rxjs";
 
@@ -29,14 +28,13 @@ export class OriginDestinationComponent implements OnInit {
   private readonly destroyed$ = new Subject<void>();
 
   constructor(
-    private nodeService: NodeService,
     private origineDestinationService: OriginDestinationService,
   ) {}
 
   ngOnInit(): void {
     const originDestinationData =
       this.origineDestinationService.originDestinationData();
-    const nodes = this.nodeService.getNodes();
+    const nodes = this.origineDestinationService.getODOutputNodes();
     const nodeNames = nodes.map((node) => node.getBetriebspunktName());
     this.renderMatriceOD(originDestinationData, nodeNames);
   }
