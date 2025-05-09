@@ -31,9 +31,11 @@ export class OriginDestinationService {
   /**
    * Returns the origin/destination nodes used for output.
    *
+   * If nodes are selected, we output those, otherwise,
+   * we output all visible nodes.
    * Note that other nodes may be used for the calculation.
    */
-  odNodes(): Node[] {
+  getODOutputNodes(): Node[] {
     const selectedNodes = this.nodeService.getSelectedNodes();
     return selectedNodes.length > 0
       ? selectedNodes
@@ -52,7 +54,7 @@ export class OriginDestinationService {
     const connectionPenalty =
       metadata.analyticsSettings.originDestinationSettings.connectionPenalty;
     const nodes = this.nodeService.getNodes();
-    const odNodes = this.odNodes();
+    const odNodes = this.getODOutputNodes();
     const trainruns = this.trainrunService.getVisibleTrainruns();
 
     const edges = buildEdges(

@@ -34,7 +34,7 @@ export class OriginDestinationComponent implements OnInit {
   ngOnInit(): void {
     const originDestinationData =
       this.origineDestinationService.originDestinationData();
-    const nodes = this.origineDestinationService.odNodes();
+    const nodes = this.origineDestinationService.getODOutputNodes();
     const nodeNames = nodes.map((node) => node.getBetriebspunktName());
     this.renderMatriceOD(originDestinationData, nodeNames);
   }
