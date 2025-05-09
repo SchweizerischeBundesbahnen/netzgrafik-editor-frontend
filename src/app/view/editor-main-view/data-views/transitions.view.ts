@@ -11,6 +11,7 @@ import {
 } from "./trainrunsection.previewline.view";
 import {Vec2D} from "../../../utils/vec2D";
 import {TransitionViewObject} from "./transitionViewObject";
+import {LinePatternRefs} from "../../../data-structures/business.data.structures";
 
 export class TransitionsView {
   transitionsGroup;
@@ -99,11 +100,15 @@ export class TransitionsView {
   static createTransitionLineLayer(
     grpEnter: d3.selector,
     classRef: string,
+    levelFreqFilter: LinePatternRefs[],
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
     editorView: EditorView,
   ) {
     grpEnter
+      .filter((d: TransitionViewObject) => {
+        return !levelFreqFilter.includes(d.transition.getTrainrun().getFrequencyLinePatternRef());
+      })
       .append(StaticDomTags.TRANSITION_LINE_SVG)
       .attr(
         "class",
@@ -298,6 +303,7 @@ export class TransitionsView {
     TransitionsView.createTransitionLineLayer(
       grpEnter,
       StaticDomTags.TRANSITION_LINE_CLASS_0,
+      [LinePatternRefs.Freq30],// LinePatternRefs.Freq60], (background is required to "strech the hower area"
       selectedTrainrun,
       connectedTrainIds,
       this.editorView,
@@ -305,6 +311,7 @@ export class TransitionsView {
     TransitionsView.createTransitionLineLayer(
       grpEnter,
       StaticDomTags.TRANSITION_LINE_CLASS_1,
+      [LinePatternRefs.Freq30],
       selectedTrainrun,
       connectedTrainIds,
       this.editorView,
@@ -312,6 +319,7 @@ export class TransitionsView {
     TransitionsView.createTransitionLineLayer(
       grpEnter,
       StaticDomTags.TRANSITION_LINE_CLASS_2,
+      [LinePatternRefs.Freq60, LinePatternRefs.Freq120],
       selectedTrainrun,
       connectedTrainIds,
       this.editorView,
@@ -319,6 +327,7 @@ export class TransitionsView {
     TransitionsView.createTransitionLineLayer(
       grpEnter,
       StaticDomTags.TRANSITION_LINE_CLASS_3,
+      [LinePatternRefs.Freq60, LinePatternRefs.Freq120],
       selectedTrainrun,
       connectedTrainIds,
       this.editorView,

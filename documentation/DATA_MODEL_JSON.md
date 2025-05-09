@@ -544,13 +544,23 @@ trainrunFrequencies: Represents the frequencies at which trainruns operates.
 The defined line pattern which can be used are 
 ```
 LinePatternRefs {
-  "120", // -.-.-.  ; unique indentifier
-  "60", // ----- ; unique indentifier
-  "30", // ==== ; unique indentifier
-  "20", // three lines  ; unique indentifier
   "15", // four lines ; unique indentifier
+  "20", // three lines  ; unique indentifier
+  "30", // ==== ; unique indentifier
+  "60", // ----- ; unique indentifier
+  "120", // -.-.-.  ; unique indentifier
 }
 ```
+
+
+The following figure illustrates the four-layer (level) approach. Start by drawing the background on layer 0, then add levels 1, 2, and 3. Choose the appropriate stroke width and stroke color. Finally, ensure that we always have level 0, which serves as the background event handling area for mouse hovering and clicks (selection). To ensure that mouse events are captured, the stroke opacity for level 0 is set to 0.001 when it is not visible. Rendering styling is controlled via trainrunsections.view.scss 
+
+![image](https://github.com/user-attachments/assets/f12d1fe4-cb30-4d9c-95f6-bbe026eae1c0)
+
+
+See also, [TrainrunSectionsView::make4LayerTrainrunSectionLines](https://github.com/search?q=repo%3ASchweizerischeBundesbahnen/netzgrafik-editor-frontend%20make4LayerTrainrunSectionLines&type=code)
+
+
 
 </details>
 
