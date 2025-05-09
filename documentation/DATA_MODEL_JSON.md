@@ -560,6 +560,9 @@ The following figure illustrates the four-layer (level) approach. Start by drawi
 
 See also, [TrainrunSectionsView::make4LayerTrainrunSectionLines](https://github.com/search?q=repo%3ASchweizerischeBundesbahnen/netzgrafik-editor-frontend%20make4LayerTrainrunSectionLines&type=code)
 
+See also, 
+![image](https://github.com/user-attachments/assets/4f6c0bb7-aba0-4aab-a7ae-ebce421705ce)
+
 
 
 </details>
@@ -646,7 +649,11 @@ Define the dayTimeIntervalElement
 }
 ```
 - **from** : interval starts at time (include), in minute : numeric
-- **to** : interval ends at time (include), in minute : numeric 
+- **to** : interval ends at time (include), in minute : numeric
+
+See also, 
+![image](https://github.com/user-attachments/assets/4f6c0bb7-aba0-4aab-a7ae-ebce421705ce)
+
 </details>
 
 <details>
