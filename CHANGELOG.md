@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.26](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.25...netzgrafik-frontend-v2.9.26) (2025-05-09)
+
+
+### Bug Fixes
+
+* Performance - only render trainrunSection and transition element - which are required ([#444](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/444)) ([4d2ba01](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/4d2ba01c3edfa556aa33ddc2f3eeb58a0c7c1476))
+
 ## [2.9.25](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.24...netzgrafik-frontend-v2.9.25) (2025-05-08)
 
 
