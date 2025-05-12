@@ -178,7 +178,10 @@ export class TrainrunSectionPreviewLineView {
     this.startNode = startNode;
     this.startPos = startPosition;
 
-    this.filterService.switchOffTemporaryEmptyAndNonStopFiltering();
+    if (!this.filterService.isTemporaryDisableFilteringOfItemsInViewEnabled()) {
+      this.filterService.switchOffTemporaryEmptyAndNonStopFiltering();
+    }
+
     this.displayTrainrunSectionPreviewLine();
 
     D3Utils.highlightNode(startNode);
@@ -287,8 +290,9 @@ export class TrainrunSectionPreviewLineView {
     if (this.drawingTrainrunSectionObjectCreated) {
       return;
     }
-    this.filterService.switchOffTemporaryEmptyAndNonStopFiltering();
-
+    if (!this.filterService.isTemporaryDisableFilteringOfItemsInViewEnabled()) {
+      this.filterService.switchOffTemporaryEmptyAndNonStopFiltering();
+    }
     this.drawingTrainrunSectionObjectCreated = true;
     d3.selectAll(StaticDomTags.PREVIEW_LINE_ROOT_DOM_REF)
       .append(StaticDomTags.PREVIEW_LINE_SVG)
