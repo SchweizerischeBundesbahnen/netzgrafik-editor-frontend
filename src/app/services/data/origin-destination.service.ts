@@ -13,9 +13,9 @@ import {
 export type OriginDestination = {
   origin: string;
   destination: string;
-  travelTime: number;
-  transfert: number;
-  totalCost: number;
+  travelTime: string;
+  transfert: string;
+  totalCost: string;
 };
 
 @Injectable({
@@ -94,7 +94,7 @@ export class OriginDestinationService {
             origin: origin.getBetriebspunktName(),
             destination: destination.getBetriebspunktName(),
             travelTime: "",
-            transfert: "",
+            transfer: "",
             totalCost: "",
           });
           return;
@@ -104,7 +104,7 @@ export class OriginDestinationService {
           origin: origin.getBetriebspunktName(),
           destination: destination.getBetriebspunktName(),
           travelTime: (totalCost - connections * connectionPenalty).toString(),
-          transfert: connections.toString(),
+          transfer: connections.toString(),
           totalCost: totalCost.toString(),
         };
         rows.push(row);

@@ -1,5 +1,12 @@
 import {OriginDestinationService} from "./../../services/data/origin-destination.service";
-import {Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild,} from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import * as d3 from "d3";
 import {NodeService} from "src/app/services/data/node.service";
 import {UiInteractionService} from "../../services/ui/ui.interaction.service";
@@ -11,8 +18,14 @@ import {
 } from "src/app/view/util/svg.mouse.controller";
 import {ViewboxProperties} from "src/app/services/ui/ui.interaction.service";
 import {Vec2D} from "src/app/utils/vec2D";
-import {OriginDestination} from "src/app/services/data/origin-destination.service";
 
+type OriginDestination = {
+  origin: string;
+  destination: string;
+  travelTime: string;
+  transfert: string;
+  totalCost: string;
+};
 @Component({
   selector: "sbb-origin-destination",
   templateUrl: "./origin-destination.component.html",
@@ -100,7 +113,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
           .attr("dx", "-0.8em")
           .attr("dy", "0.4em")
           .attr("transform", "rotate(-45)")
-          .style("user-select","none")
+          .style("user-select", "none"),
       )
       .select(".domain")
       .remove();
@@ -133,7 +146,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .style("border-width", "2px")
       .style("border-radius", "5px")
       .style("padding", "5px")
-      .style("user-select","none")
+      .style("user-select", "none")
       .style("pointer-events", "none");
 
     // Three function that change the tooltip when user hover / move / leave a cell
@@ -148,8 +161,6 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     const totalCostTranslation = $localize`:@@app.origin-destination.tooltip.total-cost:Total cost`;
     const transfersTranslation = $localize`:@@app.origin-destination.tooltip.transfers:Transfers`;
     const travelTimeTranslation = $localize`:@@app.origin-destination.tooltip.travel-time:Travel time`;
-    const originTranslation = $localize`:@@app.origin-destination.tooltip.origin:Origin`;
-    const destinationTranslation = $localize`:@@app.origin-destination.tooltip.destination:Destination`;
 
     const mousemove = function (d) {
       tooltip
@@ -157,7 +168,10 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
           `${d.origin} &#x2192; ${d.destination}<br><hr> ${travelTimeTranslation}: ${d.travelTime}<br>${transfersTranslation}: ${d.transfert}<br>${totalCostTranslation}: ${d.totalCost}`,
         )
         .style("left", `${d3.event.offsetX + 64}px`)
-        .style("top", `${d3.event.offsetY + 64 < 0 ? 0 : d3.event.offsetY + 64}px`);
+        .style(
+          "top",
+          `${d3.event.offsetY + 64 < 0 ? 0 : d3.event.offsetY + 64}px`,
+        );
     };
 
     const mouseleave = function (d) {
@@ -208,7 +222,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .style("alignment-baseline", "middle")
       .style("font-size", "10px")
       .style("pointer-events", "none")
-      .style("user-select","none")
+      .style("user-select", "none")
       .style("fill", "white");
   }
 
