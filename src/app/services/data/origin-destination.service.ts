@@ -10,12 +10,12 @@ import {
   topoSort,
 } from "src/app/view/util/origin-destination-graph";
 
-type OriginDestination = {
+export type OriginDestination = {
   origin: string;
   destination: string;
-  travelTime: string;
-  transfert: string;
-  totalCost: string;
+  travelTime: number;
+  transfert: number;
+  totalCost: number;
 };
 
 @Injectable({

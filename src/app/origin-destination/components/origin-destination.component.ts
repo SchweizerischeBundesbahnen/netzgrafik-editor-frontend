@@ -11,14 +11,8 @@ import {
 } from "src/app/view/util/svg.mouse.controller";
 import {ViewboxProperties} from "src/app/services/ui/ui.interaction.service";
 import {Vec2D} from "src/app/utils/vec2D";
+import {OriginDestination} from "src/app/services/data/origin-destination.service";
 
-type OriginDestination = {
-  origin: string;
-  destination: string;
-  travelTime: string;
-  transfert: string;
-  totalCost: string;
-};
 @Component({
   selector: "sbb-origin-destination",
   templateUrl: "./origin-destination.component.html",
