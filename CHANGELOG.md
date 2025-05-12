@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.28](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.27...netzgrafik-frontend-v2.9.28) (2025-05-12)
+
+
+### Bug Fixes
+
+* toggle temporay disable ([#455](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/455)) ([bdede87](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/bdede8730099a92669d4a741a229f8cdd56582cc))
+
 ## [2.9.27](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.26...netzgrafik-frontend-v2.9.27) (2025-05-12)
 
 
