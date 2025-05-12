@@ -184,6 +184,9 @@ export class FilterService implements OnDestroy {
   }
 
   resetTemporaryEmptyAndNonStopFilteringSwitchedOff() {
+    if (!this.isTemporaryEmptyAndNonStopFilteringSwitchedOff()){
+      return;
+    }
     if (
       this.activeFilterSetting.filterAllEmptyNodes ||
       this.activeFilterSetting.filterAllNonStopNodes
