@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.27](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.26...netzgrafik-frontend-v2.9.27) (2025-05-12)
+
+
+### Bug Fixes
+
+* check was missing - the filtering should only be reset when a filter is active and the filtering is not temporary switched off ([#451](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/451)) ([1551417](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/1551417d79c3184db82593d84d6ac62f8c7eff95))
+
 ## [2.9.26](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.25...netzgrafik-frontend-v2.9.26) (2025-05-09)
 
 
