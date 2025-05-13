@@ -18,14 +18,8 @@ import {
 } from "src/app/view/util/svg.mouse.controller";
 import {ViewboxProperties} from "src/app/services/ui/ui.interaction.service";
 import {Vec2D} from "src/app/utils/vec2D";
+import {OriginDestination} from "src/app/services/data/origin-destination.service";
 
-type OriginDestination = {
-  origin: string;
-  destination: string;
-  travelTime: string;
-  transfert: string;
-  totalCost: string;
-};
 @Component({
   selector: "sbb-origin-destination",
   templateUrl: "./origin-destination.component.html",
@@ -41,6 +35,8 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     private origineDestinationService: OriginDestinationService,
     private uiInteractionService: UiInteractionService,
   ) {}
+
+  private matrixData: OriginDestination[] = [];
 
   private colorScale: d3.ScaleLinear<string, string>;
 
@@ -60,7 +56,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     const nodes = this.origineDestinationService.getODOutputNodes();
     const nodeNames = nodes.map((node) => node.getBetriebspunktName());
 
-    this.renderMatriceOD(originDestinationData, nodeNames);
+    this.rendermatrixOD(nodeNames);
 
     this.controller = new SVGMouseController(
       "main-origin-destination-container",
@@ -70,6 +66,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.matrixData = this.origineDestinationService.originDestinationData();
     this.renderView();
 
     this.uiInteractionService.zoomInObservable
@@ -81,10 +78,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .subscribe((zoomCenter: Vec2D) => this.controller.zoomOut(zoomCenter));
   }
 
-  renderMatriceOD(
-    originDestinationData: OriginDestination[],
-    nodeNames: string[],
-  ) {
+  rendermatrixOD(nodeNames: string[]) {
     // set the dimensions and margins of the graph
     const margin = {top: 80, right: 0, bottom: 30, left: 20};
     const cellSize = 30;
@@ -150,7 +144,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .remove();
 
     const numericValues = this.extractNumericODValues(
-      originDestinationData,
+      this.matrixData,
       this.colorBy,
     );
     const maxValue = numericValues.length ? Math.max(...numericValues) : 1;
@@ -187,7 +181,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     const mousemove = function (d) {
       tooltip
         .html(
-          `${d.origin} &#x2192; ${d.destination}<br><hr> ${travelTimeTranslation}: ${d.travelTime}<br>${transfersTranslation}: ${d.transfert}<br>${totalCostTranslation}: ${d.totalCost}`,
+          `${d.origin} &#x2192; ${d.destination}<br><hr> ${travelTimeTranslation}: ${d.travelTime}<br>${transfersTranslation}: ${d.transfer}<br>${totalCostTranslation}: ${d.totalCost}`,
         )
         .style("left", `${d3.event.offsetX + 64}px`)
         .style(
@@ -204,7 +198,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     // add the squares
     graphContentGroup
       .selectAll()
-      .data(originDestinationData)
+      .data(this.matrixData)
       .enter()
       .append("rect")
       .attr("x", (d: OriginDestination) => {
@@ -229,7 +223,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
 
     graphContentGroup
       .selectAll()
-      .data(originDestinationData)
+      .data(this.matrixData)
       .enter()
       .append("text")
       .style("pointer-events", "none")

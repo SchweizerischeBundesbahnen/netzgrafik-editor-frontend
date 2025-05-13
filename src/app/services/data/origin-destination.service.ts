@@ -14,7 +14,7 @@ export type OriginDestination = {
   origin: string;
   destination: string;
   travelTime: string;
-  transfert: string;
+  transfer: string;
   totalCost: string;
 };
 
