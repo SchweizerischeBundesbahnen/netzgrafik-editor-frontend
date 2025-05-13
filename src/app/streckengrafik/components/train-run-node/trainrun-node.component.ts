@@ -23,6 +23,7 @@ import {UiInteractionService} from "../../../services/ui/ui.interaction.service"
 import {StreckengrafikDisplayElementService} from "../../services/util/streckengrafik-display-element.service";
 import {SliderChangeInfo} from "../../model/util/sliderChangeInfo";
 import * as d3 from "d3";
+import { TrainrunDirection } from "src/app/data-structures/business.data.structures";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -200,14 +201,16 @@ export class TrainRunNodeComponent implements OnInit, OnDestroy {
   nodePath() {
     const departureTime = this.sgTrainrunItem.departureTime * this.yZoom;
     const arrivalTime = this.sgTrainrunItem.arrivalTime * this.yZoom;
+    
     const track =
-      this.sgTrainrunItem.getTrainrunNode().trackData.track * this.trackWidth;
+    this.sgTrainrunItem.getTrainrunNode().trackData.track * this.trackWidth;
     const nodeWidth = this.sgTrainrunItem.getPathNode().nodeWidth();
-
+    
     const doRot = this.checkRotated();
-
+    
     if (this.isTrackOccupier()) {
       const tn = this.sgTrainrunItem.getTrainrunNode();
+      
       if (tn.isEndNode()) {
         if (this.sgTrainrunItem.getTrainrunNode().isTurnaround) {
           if (this.sgTrainrunItem.backward) {
@@ -424,6 +427,8 @@ export class TrainRunNodeComponent implements OnInit, OnDestroy {
   }
 
   pathHeadwayReservation() {
+    console.log('path headway reservation == ', 
+      { trackData: this.sgTrainrunItem.getTrainrunNode().trackData, trainrunElement: this.sgTrainrunItem, trainrun: this.trainrunService.getTrainrunFromId(this.trainrun.trainrunId) })
     const track =
       this.sgTrainrunItem.getTrainrunNode().trackData.track * this.trackWidth;
     const departureTime =

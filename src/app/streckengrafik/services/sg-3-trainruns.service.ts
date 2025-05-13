@@ -16,6 +16,7 @@ import {TrainrunBranchType} from "../model/enum/trainrun-branch-type-type";
 import {PathItem} from "../model/pathItem";
 import {TrackData} from "../model/trackData";
 import {Sg2TrainrunPathService} from "./sg-2-trainrun-path.service";
+import { TrainrunDirection } from "src/app/data-structures/business.data.structures";
 
 @Injectable({
   providedIn: "root",
@@ -84,26 +85,72 @@ export class Sg3TrainrunsService implements OnDestroy {
         trainrunItem.colorRef,
         [],
         this.selectedTrainrun,
+        trainrunItem.trainrunDirection,
       );
       const trainrunItems: SgTrainrunItem[] = [];
+      const isTrainrunGoingForward = trainrunItem.trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD;
+      const isTrainrunGoingBackward = trainrunItem.trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD;
 
-      trainrunItem.pathItems.forEach((pathItem) => {
+      // TODO: Ajout d'une fonction pour filtrer les pathItems ?
+      const filteredPathItems = trainrunItem.pathItems.filter((pathItem) => {
+        if(isTrainrunGoingForward) {
+          return pathItem.backward === false;
+        }
+        if(isTrainrunGoingBackward) {
+          return pathItem.backward === true;
+        }
+        return true;
+      });
+
+      console.log(' filteredPathItems coucou == ', { filteredPathItems });
+
+      // trainrunItem.pathItems.forEach((pathItem) => {
+      filteredPathItems.forEach((pathItem) => {
         if (pathItem.isNode()) {
           const pathNodes: SgPathNode[] = this.searchAllPathNodes(
             pathItem.getPathNode(),
           );
+
+          const isEndNode = this.checkIsEndNode(pathItem);
+          let departureTime = pathItem.departureTime;
+          let arrivalTime = pathItem.arrivalTime;
           pathNodes.forEach((pathNode: SgPathNode) => {
+
+            if (isTrainrunGoingForward) {
+              if(pathNode.departurePathSection === undefined){
+                console.log(' pathItem forward node fin == ', { pathItem });
+                departureTime = arrivalTime + 4;
+              }
+              if(pathNode.arrivalPathSection === undefined) {
+                console.log(' pathItem forward node debut == ', { pathItem });
+                arrivalTime = pathItem.departureTime - 4;
+              }
+            }
+
+            if (isTrainrunGoingBackward) {
+              if(pathNode.arrivalPathSection === undefined){
+                console.log(' pathItem backward node fin == ', { pathItem });
+                arrivalTime = pathItem.departureTime;
+                departureTime += 4;
+              }
+              if(pathNode.departurePathSection === undefined) {
+                console.log(' pathItem backward node debut == ', { pathItem });
+                arrivalTime = pathItem.departureTime - 4;
+              }
+            }
+
             const trainrunNode = new SgTrainrunNode(
               pathNode.index,
               pathNode.nodeId,
               pathNode.nodeShortName,
               trainrunItem.trainrunId,
-              pathItem.departureTime,
-              pathItem.arrivalTime,
+              departureTime,
+              arrivalTime,
+              // pathItem.departureTime - 2,
               pathItem.backward,
               new TrackData(this.getTrack(pathItem)),
               pathNode,
-              this.checkIsEndNode(pathItem),
+              isEndNode,
             );
             pathNode.trainrunNodes.push(trainrunNode);
             trainrunItems.push(trainrunNode);
