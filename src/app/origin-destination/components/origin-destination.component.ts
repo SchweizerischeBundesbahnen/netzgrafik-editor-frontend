@@ -43,18 +43,32 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
   ) {}
 
   private controller: SVGMouseController;
+  colorBy: "transfer" | "totalCost" | "travelTime" = "transfer";
 
-  ngOnInit(): void {
+  private extractNumericODValues(
+    odList: OriginDestination[],
+    field: "transfer" | "totalCost" | "travelTime",
+  ): number[] {
+    return odList.map((od) => parseFloat(od[field])).filter((v) => !isNaN(v));
+  }
+
+  private renderView() {
     const originDestinationData =
       this.origineDestinationService.originDestinationData();
     const nodes = this.origineDestinationService.getODOutputNodes();
     const nodeNames = nodes.map((node) => node.getBetriebspunktName());
+
     this.renderMatriceOD(originDestinationData, nodeNames);
+
     this.controller = new SVGMouseController(
       "main-origin-destination-container",
       this.createSvgMouseControllerObserver(),
     );
     this.controller.init(this.createInitialViewboxProperties());
+  }
+
+  ngOnInit(): void {
+    this.renderView();
 
     this.uiInteractionService.zoomInObservable
       .pipe(takeUntil(this.destroyed$))
@@ -133,7 +147,13 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .select(".domain")
       .remove();
 
-    const myColor = this.getColorScale();
+    const numericValues = this.extractNumericODValues(
+      originDestinationData,
+      this.colorBy,
+    );
+    const maxValue = numericValues.length ? Math.max(...numericValues) : 1;
+    const minValue = numericValues.length ? Math.min(...numericValues) : 0;
+    const myColor = this.getColorScale(minValue, maxValue);
 
     // create a tooltip
     const tooltip = d3
@@ -195,9 +215,12 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .attr("ry", 4)
       .attr("width", x.bandwidth())
       .attr("height", y.bandwidth())
-      .style("fill", function (d) {
-        return myColor(parseFloat(d.transfert));
+
+      .style("fill", (d) => {
+        const value = parseFloat(String(d[this.colorBy]));
+        return isNaN(value) ? "#76767633" : myColor(value);
       })
+
       .style("stroke-width", 4)
       .style("stroke", "none")
       .style("opacity", 0.8)
@@ -235,8 +258,8 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     return {
       onEarlyReturnFromMousemove: () => false,
       onGraphContainerMouseup: () => {},
-      zoomFactorChanged: (newZoomFactor) => {
-        console.log("zoom factor", newZoomFactor);
+      zoomFactorChanged: (zoomFactor) => {
+        this.uiInteractionService.zoomFactorChanged(zoomFactor);
       },
       onViewboxChanged: (viewboxProperties) => {
         const svg = d3.select("#main-origin-destination-container");
@@ -272,36 +295,39 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
 
   colorSetName: "custom" | "blue" | "orange" | "gray" = "custom";
 
-  getColorScale(): d3.ScaleLinear<string, string> {
+  getColorScale(min: number, max: number): d3.ScaleLinear<string, string> {
+    const d1 = min + (max - min) * 0.33;
+    const d2 = min + (max - min) * 0.66;
     switch (this.colorSetName) {
       case "custom":
         return d3
           .scaleLinear<string>()
-          .domain([0, 30, 90, 120])
+          .domain([min, d1, d2, max])
           .range(["#2166AC", "#67A9CF", "#FDAE61", "#B2182B"])
           .clamp(true);
+
       case "gray":
         return d3
           .scaleLinear<string>()
-          .domain([0, 30, 90, 120])
+          .domain([min, d1, d2, max])
           .range(["#CCCCCC", "#999999", "#666666", "#333333"])
           .clamp(true);
       case "blue":
         return d3
           .scaleLinear<string>()
-          .domain([0, 30, 90, 120])
+          .domain([min, d1, d2, max])
           .range(["#003366", "#00A3E0", "#FDAE61", "#E60000"])
           .clamp(true);
       case "orange":
         return d3
           .scaleLinear<string>()
-          .domain([0, 30, 90, 120])
+          .domain([min, d1, d2, max])
           .range(["#4CAF50", "#FFCA28", "#F57C00", "#C60018"])
           .clamp(true);
       default:
         return d3
           .scaleLinear<string>()
-          .domain([0, 30, 90, 120])
+          .domain([min, d1, d2, max])
           .range(["#003366", "#00A3E0", "#FDAE61", "#E60000"])
           .clamp(true);
     }
@@ -310,10 +336,12 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
   onChangePalette(name: "custom" | "blue" | "orange" | "gray") {
     this.colorSetName = name;
     d3.select("#main-origin-destination-container").remove();
-    const originDestinationData =
-      this.origineDestinationService.originDestinationData();
-    const nodes = this.nodeService.getNodes();
-    const nodeNames = nodes.map((node) => node.getBetriebspunktName());
-    this.renderMatriceOD(originDestinationData, nodeNames);
+    this.renderView();
+  }
+
+  onChangeColorBy(field: "transfer" | "totalCost" | "travelTime") {
+    this.colorBy = field;
+    d3.select("#main-origin-destination-container").remove();
+    this.renderView();
   }
 }

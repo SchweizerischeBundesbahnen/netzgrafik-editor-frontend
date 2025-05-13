@@ -73,4 +73,28 @@
       background: #c60018;
     }
   }
+  .color-by-selector {
+    position: absolute;
+    top: 52px;
+    right: 12px;
+    background: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    input[type="radio"] {
+      cursor: pointer;
+    }
+  }
 }

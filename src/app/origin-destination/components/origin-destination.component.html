@@ -29,5 +29,38 @@
       title="Gray palette"
       (click)="onChangePalette('gray')"
     ></div>
+
+    <div class="color-by-selector">
+      <label>
+        <input
+          type="radio"
+          name="colorBy"
+          value="transfer"
+          [checked]="colorBy === 'transfer'"
+          (change)="onChangeColorBy('transfer')"
+        />
+        Transfers
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="colorBy"
+          value="totalCost"
+          [checked]="colorBy === 'totalCost'"
+          (change)="onChangeColorBy('totalCost')"
+        />
+        Total Cost
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="colorBy"
+          value="travelTime"
+          [checked]="colorBy === 'travelTime'"
+          (change)="onChangeColorBy('travelTime')"
+        />
+        Travel Time
+      </label>
+    </div>
   </div>
 </div>
