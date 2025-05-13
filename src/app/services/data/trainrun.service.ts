@@ -231,6 +231,12 @@ export class TrainrunService {
     const newFreq = frequency.frequency;
 
     const freqOffset = (frequency.offset + offset) % newFreq;
+
+    if (trainrun.getTrainrunFrequency().id === frequency.id) {
+      // no update needed
+      return freqOffset;
+    }
+
     this.getTrainrunFromId(trainrun.getId()).setTrainrunFrequency(frequency);
 
     this.trainrunSectionService
@@ -250,18 +256,20 @@ export class TrainrunService {
         );
       });
 
-    this.nodeService.reorderPortsOnNodesForTrainrun(trainrun);
+    this.nodeService.reorderPortsOnNodesForTrainrun(trainrun, false);
     this.propagateTrainrunInitialConsecutiveTimes(trainrun);
-    this.trainrunSectionService.trainrunSectionsUpdated();
-
     this.trainrunsUpdated();
     this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
     return freqOffset;
   }
 
   updateTrainrunCategory(trainrun: Trainrun, category: TrainrunCategory) {
+    if (trainrun.getTrainrunCategory().id === category.id){
+      // no update needed
+      return;
+    }
     this.getTrainrunFromId(trainrun.getId()).setTrainrunCategory(category);
-    this.nodeService.reorderPortsOnNodesForTrainrun(trainrun);
+    this.nodeService.reorderPortsOnNodesForTrainrun(trainrun, false);
     this.trainrunsUpdated();
     this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
   }
@@ -270,17 +278,22 @@ export class TrainrunService {
     trainrun: Trainrun,
     timeCategory: TrainrunTimeCategory,
   ) {
+    if (trainrun.getTrainrunTimeCategory().id === timeCategory.id){
+      // no update needed
+      return;
+    }
+
     this.getTrainrunFromId(trainrun.getId()).setTrainrunTimeCategory(
       timeCategory,
     );
-    this.nodeService.reorderPortsOnNodesForTrainrun(trainrun);
+    this.nodeService.reorderPortsOnNodesForTrainrun(trainrun, false);
     this.trainrunsUpdated();
     this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
   }
 
   updateTrainrunTitle(trainrun: Trainrun, title: string) {
     this.getTrainrunFromId(trainrun.getId()).setTitle(title);
-    this.nodeService.reorderPortsOnNodesForTrainrun(trainrun);
+    this.nodeService.reorderPortsOnNodesForTrainrun(trainrun, false);
     this.trainrunsUpdated();
     this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
   }
