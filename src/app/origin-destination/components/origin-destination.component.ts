@@ -42,12 +42,14 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     private uiInteractionService: UiInteractionService,
   ) {}
 
+  private colorScale: d3.ScaleLinear<string, string>;
+
   private controller: SVGMouseController;
-  colorBy: "transfer" | "totalCost" | "travelTime" = "transfer";
+  colorBy: "totalCost" | "travelTime" | "transfer" = "totalCost";
 
   private extractNumericODValues(
     odList: OriginDestination[],
-    field: "transfer" | "totalCost" | "travelTime",
+    field: "totalCost" | "travelTime" | "transfer",
   ): number[] {
     return odList.map((od) => parseFloat(od[field])).filter((v) => !isNaN(v));
   }
@@ -84,7 +86,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     nodeNames: string[],
   ) {
     // set the dimensions and margins of the graph
-    const margin = {top: 80, right: 25, bottom: 30, left: 20};
+    const margin = {top: 80, right: 0, bottom: 30, left: 20};
     const cellSize = 30;
 
     const width = cellSize * nodeNames.length;
@@ -153,7 +155,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     );
     const maxValue = numericValues.length ? Math.max(...numericValues) : 1;
     const minValue = numericValues.length ? Math.min(...numericValues) : 0;
-    const myColor = this.getColorScale(minValue, maxValue);
+    this.colorScale = this.getColorScale(minValue, maxValue);
 
     // create a tooltip
     const tooltip = d3
@@ -216,10 +218,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .attr("width", x.bandwidth())
       .attr("height", y.bandwidth())
 
-      .style("fill", (d) => {
-        const value = parseFloat(String(d[this.colorBy]));
-        return isNaN(value) ? "#76767633" : myColor(value);
-      })
+      .style("fill", (d) => this.getCellColor(d))
 
       .style("stroke-width", 4)
       .style("stroke", "none")
@@ -240,7 +239,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .attr("y", function (d) {
         return y(d.destination) + y.bandwidth() / 2;
       })
-      .text((d) => d.travelTime)
+      .text((d) => this.getCellText(d))
       .style("text-anchor", "middle")
       .style("alignment-baseline", "middle")
       .style("font-size", "10px")
@@ -286,6 +285,20 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       panZoomHeight: 1000,
       currentViewBox: null,
     };
+  }
+
+  private getCellValue(d: OriginDestination): number {
+    return parseFloat(String(d[this.colorBy]));
+  }
+
+  private getCellColor(d: OriginDestination): string {
+    const value = this.getCellValue(d);
+    return isNaN(value) ? "#76767633" : this.colorScale(value);
+  }
+
+  private getCellText(d: OriginDestination): string {
+    const value = this.getCellValue(d);
+    return isNaN(value) ? "" : value.toString();
   }
 
   ngOnDestroy(): void {

@@ -35,16 +35,6 @@
         <input
           type="radio"
           name="colorBy"
-          value="transfer"
-          [checked]="colorBy === 'transfer'"
-          (change)="onChangeColorBy('transfer')"
-        />
-        Transfers
-      </label>
-      <label>
-        <input
-          type="radio"
-          name="colorBy"
           value="totalCost"
           [checked]="colorBy === 'totalCost'"
           (change)="onChangeColorBy('totalCost')"
@@ -60,6 +50,16 @@
           (change)="onChangeColorBy('travelTime')"
         />
         Travel Time
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="colorBy"
+          value="transfer"
+          [checked]="colorBy === 'transfer'"
+          (change)="onChangeColorBy('transfer')"
+        />
+        Transfers
       </label>
     </div>
   </div>
