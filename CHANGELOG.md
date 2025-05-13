@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.29](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.28...netzgrafik-frontend-v2.9.29) (2025-05-13)
+
+
+### Bug Fixes
+
+* updateTrainrunCategory,      updateTrainrunTimeCategory and     … ([#457](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/457)) ([ee9a0b7](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/commit/ee9a0b7aecdc256784de0b128d5f322c9f2f295e))
+
 ## [2.9.28](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.27...netzgrafik-frontend-v2.9.28) (2025-05-12)
 
 
