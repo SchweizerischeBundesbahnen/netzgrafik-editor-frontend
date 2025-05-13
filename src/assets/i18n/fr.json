@@ -98,6 +98,10 @@
           "travel-time-less-than-1": {
             "title": "Temps de trajet inférieur à 1",
             "description": "Le temps de trajet doit être supérieur ou égal à 1"
+          },
+          "return-travel-time-less-than-1": {
+            "title": "Temps de trajet retour inférieur à 1",
+            "description": "Le temps de trajet retour doit être supérieur ou égal à 1"
           }
         },
         "transition-validator": {
@@ -258,6 +262,9 @@
             "category": "Catégorie",
             "frequency": "Fréquence",
             "verkehrt": "Fonctionnement",
+            "symmetry": "Symétrie",
+            "enableSymmetry": "Activer la symétrie",
+            "isRoundTrip": "Aller-retour",
             "trainrunDuplicate": "Dupliquer le trajet de train",
             "trainrunDelete": "Supprimer le trajet de train",
             "delete": "Supprimer",

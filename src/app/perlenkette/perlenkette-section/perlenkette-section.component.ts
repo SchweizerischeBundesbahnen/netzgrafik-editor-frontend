@@ -41,6 +41,7 @@ export interface TopAndBottomTimeStructure {
   rightDepartureTime: number;
   rightArrivalTime: number;
   travelTime: number;
+  returnTravelTime: number;
   nbrOfStops: number;
 }
 
@@ -75,6 +76,7 @@ export class PerlenketteSectionComponent
   @ViewChild("rightDepartureTime", {static: false})
   rightDepartureTimeElement: ElementRef;
   @ViewChild("travelTime", {static: false}) travelTimeElement: ElementRef;
+  @ViewChild("returnTravelTime", {static: false}) returnTravelTimeElement: ElementRef;
   @ViewChild("leftDepartureTime", {static: false})
   leftDepartureTimeElement: ElementRef;
   @ViewChild("leftArrivalTime", {static: false})
@@ -643,6 +645,10 @@ export class PerlenketteSectionComponent
     return this.leftAndRightTimeStructure.travelTime;
   }
 
+  getSectionReturnTravelTime() {
+    return this.leftAndRightTimeStructure.returnTravelTime;
+  }
+
   private getTimeButtonPlusMinusStep(val: number) {
     return 1 - val + Math.floor(val);
   }
@@ -1110,6 +1116,7 @@ export class PerlenketteSectionComponent
     const targetArrival = this.getSectionTargetArrivalTime();
     const targetDeparture = this.getSectionTargetDepartureTime();
     const travelTime = this.getSectionTravelTime();
+    const returnTravelTime = this.getSectionReturnTravelTime();
 
     this.trainrunSectionService.updateTrainrunSectionTime(
       trsId,
@@ -1118,6 +1125,7 @@ export class PerlenketteSectionComponent
       targetArrival,
       targetDeparture,
       travelTime,
+      returnTravelTime,
     );
     this.trainrunSectionService.trainrunSectionsUpdated();
   }
@@ -1129,6 +1137,7 @@ export class PerlenketteSectionComponent
       rightArrivalTime: this.getRightArrivalTime(),
       rightDepartureTime: this.getRightDepartureTime(),
       travelTime: this.trainrunSection.getTravelTime(),
+      returnTravelTime: this.trainrunSection.getReturnTravelTime(),
       nbrOfStops: this.trainrunSection.getNumberOfStops(),
     };
   }

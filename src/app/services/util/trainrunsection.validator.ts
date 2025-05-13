@@ -11,6 +11,9 @@ export class TrainrunSectionValidator {
   }
 
   static validateTravelTimeOneSection(trainrunSection: TrainrunSection) {
+    if (!trainrunSection.getIsSymmetric()) {
+      return;
+    }
     const calculatedTargetArrivalTime =
       (trainrunSection.getSourceDeparture() + trainrunSection.getTravelTime()) % 60;
     if (Math.abs(calculatedTargetArrivalTime - trainrunSection.getTargetArrival()) > 1 / 60) {
@@ -35,6 +38,9 @@ export class TrainrunSectionValidator {
   }
 
   static validateUnsymmetricTimesOneSection(trainrunSection: TrainrunSection) {
+    if (!trainrunSection.getIsSymmetric()) {
+      return;
+    }
     // check for broken symmetry (times)
     trainrunSection.resetSourceDepartureWarning();
     trainrunSection.resetTargetDepartureWarning();
@@ -64,6 +70,17 @@ export class TrainrunSectionValidator {
       );
     } else {
       trainrunSection.resetTravelTimeWarning();
+    }
+  }
+
+  static validateReturnTravelTime(trainrunSection: TrainrunSection) {
+    if (trainrunSection.getReturnTravelTime() < 1) {
+      trainrunSection.setReturnTravelTimeWarning(
+        $localize`:@@app.services.util.trainrunsection-validator.return-travel-time-less-than-1.title:Return travel Time less than 1`,
+        $localize`:@@app.services.util.trainrunsection-validator.return-travel-time-less-than-1.description:Return travel time must be greater than or equal to 1`,
+      );
+    } else {
+      trainrunSection.resetReturnTravelTimeWarning();
     }
   }
 }
