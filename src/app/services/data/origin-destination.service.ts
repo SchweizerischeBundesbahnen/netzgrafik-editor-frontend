@@ -10,11 +10,11 @@ import {
   topoSort,
 } from "src/app/view/util/origin-destination-graph";
 
-type OriginDestination = {
+export type OriginDestination = {
   origin: string;
   destination: string;
   travelTime: string;
-  transfert: string;
+  transfer: string;
   totalCost: string;
 };
 
@@ -94,7 +94,7 @@ export class OriginDestinationService {
             origin: origin.getBetriebspunktName(),
             destination: destination.getBetriebspunktName(),
             travelTime: "",
-            transfert: "",
+            transfer: "",
             totalCost: "",
           });
           return;
@@ -104,7 +104,7 @@ export class OriginDestinationService {
           origin: origin.getBetriebspunktName(),
           destination: destination.getBetriebspunktName(),
           travelTime: (totalCost - connections * connectionPenalty).toString(),
-          transfert: connections.toString(),
+          transfer: connections.toString(),
           totalCost: totalCost.toString(),
         };
         rows.push(row);
