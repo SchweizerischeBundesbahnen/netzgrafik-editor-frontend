@@ -63,4 +63,9 @@
       </label>
     </div>
   </div>
+  <sbb-radio-group class="sbb-checkbox-group-horizontal" [(ngModel)]="displayBy">
+    <sbb-radio-button value="totalCost" (change)="onChangeDisplayBy('totalCost')">Total Cost</sbb-radio-button>
+    <sbb-radio-button value="travelTime" (change)="onChangeDisplayBy('travelTime')">Travel Time</sbb-radio-button>
+    <sbb-radio-button value="transfer" (change)="onChangeDisplayBy('transfer')">Transfers</sbb-radio-button>
+  </sbb-radio-group>
 </div>

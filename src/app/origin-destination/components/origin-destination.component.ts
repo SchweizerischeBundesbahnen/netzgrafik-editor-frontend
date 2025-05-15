@@ -42,6 +42,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
 
   private controller: SVGMouseController;
   colorBy: "totalCost" | "travelTime" | "transfer" = "totalCost";
+  displayBy: "totalCost" | "travelTime" | "transfer" = "totalCost";
 
   private extractNumericODValues(
     odList: OriginDestination[],
@@ -51,8 +52,6 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
   }
 
   private renderView() {
-    const originDestinationData =
-      this.origineDestinationService.originDestinationData();
     const nodes = this.origineDestinationService.getODOutputNodes();
     const nodeNames = nodes.map((node) => node.getBetriebspunktName());
 
@@ -281,17 +280,17 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     };
   }
 
-  private getCellValue(d: OriginDestination): number {
-    return parseFloat(String(d[this.colorBy]));
+  private getCellValue(d: OriginDestination, field: string): number {
+    return parseFloat(String(d[field]));
   }
 
   private getCellColor(d: OriginDestination): string {
-    const value = this.getCellValue(d);
+    const value = this.getCellValue(d, this.colorBy);
     return isNaN(value) ? "#76767633" : this.colorScale(value);
   }
 
   private getCellText(d: OriginDestination): string {
-    const value = this.getCellValue(d);
+    const value = this.getCellValue(d, this.displayBy);
     return isNaN(value) ? "" : value.toString();
   }
 
@@ -348,6 +347,12 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
 
   onChangeColorBy(field: "transfer" | "totalCost" | "travelTime") {
     this.colorBy = field;
+    d3.select("#main-origin-destination-container").remove();
+    this.renderView();
+  }
+
+  public onChangeDisplayBy(field: "transfer" | "totalCost" | "travelTime") {
+    this.displayBy = field;
     d3.select("#main-origin-destination-container").remove();
     this.renderView();
   }
