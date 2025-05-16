@@ -19,6 +19,7 @@ import {
 import {ViewboxProperties} from "src/app/services/ui/ui.interaction.service";
 import {Vec2D} from "src/app/utils/vec2D";
 import {OriginDestination} from "src/app/services/data/origin-destination.service";
+import { UndoService } from "src/app/services/data/undo.service";
 
 @Component({
   selector: "sbb-origin-destination",
@@ -34,6 +35,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     private nodeService: NodeService,
     private origineDestinationService: OriginDestinationService,
     private uiInteractionService: UiInteractionService,
+    private undoService: UndoService,
   ) {}
 
   private matrixData: OriginDestination[] = [];
@@ -60,6 +62,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     this.controller = new SVGMouseController(
       "main-origin-destination-container",
       this.createSvgMouseControllerObserver(),
+      this.undoService,
     );
     this.controller.init(this.createInitialViewboxProperties());
   }

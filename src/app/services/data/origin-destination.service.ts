@@ -57,7 +57,7 @@ export class OriginDestinationService {
     const odNodes = this.getODOutputNodes();
     const trainruns = this.trainrunService.getVisibleTrainruns();
 
-    const edges = buildEdges(
+    const [edges, tsSuccessor] = buildEdges(
       nodes,
       odNodes,
       trainruns,
@@ -71,7 +71,7 @@ export class OriginDestinationService {
     // In theory we could parallelize the pathfindings, but the overhead might be too big.
     const res = new Map<string, [number, number]>();
     odNodes.forEach((origin) => {
-      computeShortestPaths(origin.getId(), neighbors, vertices).forEach(
+      computeShortestPaths(origin.getId(), neighbors, vertices, tsSuccessor).forEach(
         (value, key) => {
           res.set([origin.getId(), key].join(","), value);
         },
