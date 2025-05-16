@@ -109,17 +109,24 @@ export class UiInteractionService implements OnDestroy {
   );
   readonly streckengrafikWindow = this.showStreckengrafikSubject.asObservable();
 
+  showOriginDestinationSubjet = new BehaviorSubject<MainViewMode>(
+    MainViewMode.Netzgrafik,
+  );
+  readonly originDestinationWindow =
+    this.showOriginDestinationSubjet.asObservable();
+
   moveNetzgrafikEditorViewFocalPointSubject = new Subject<Vec2D>();
   readonly moveNetzgrafikEditorViewFocalPointObservable =
     this.moveNetzgrafikEditorViewFocalPointSubject.asObservable();
 
   private activeTheme: ThemeBase = null;
   private activeStreckengrafikRenderingType: StreckengrafikRenderingType = null;
-  private activeTravelTimeCreationEstimatorType: TravelTimeCreationEstimatorType = null;
+  private activeTravelTimeCreationEstimatorType: TravelTimeCreationEstimatorType =
+    null;
   private editorMode: EditorMode = EditorMode.NetzgrafikEditing;
   private isMultiSelectedNodesCorridor = false;
 
-  private windowViewboxPropertiesMap: { [key: string]: ViewboxProperties } = {};
+  private windowViewboxPropertiesMap: {[key: string]: ViewboxProperties} = {};
   private destroyed = new Subject<void>();
   private filterWindowType = null;
   private oldSelectedTrainrunId: number = null;
@@ -140,7 +147,7 @@ export class UiInteractionService implements OnDestroy {
     // listen for browser setting update
     window
       .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", event => {
+      .addEventListener("change", (event) => {
         this.activeTheme = null;
         this.loadActiveTheme();
       });
@@ -239,7 +246,10 @@ export class UiInteractionService implements OnDestroy {
     this.loadUserSettingFromLocalStorage();
     if (this.activeTheme === null) {
       // detect at initialization
-      if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
         this.setActiveTheme(new ThemeFachDark(), false);
       } else {
         this.setActiveTheme(new ThemeFach(), false);
@@ -323,12 +333,13 @@ export class UiInteractionService implements OnDestroy {
     activeTravelTimeCreationEstimatorType: TravelTimeCreationEstimatorType,
   ) {
     if (activeTravelTimeCreationEstimatorType === undefined) {
-      activeTravelTimeCreationEstimatorType = TravelTimeCreationEstimatorType.Fixed;
+      activeTravelTimeCreationEstimatorType =
+        TravelTimeCreationEstimatorType.Fixed;
     }
-    this.activeTravelTimeCreationEstimatorType = activeTravelTimeCreationEstimatorType;
+    this.activeTravelTimeCreationEstimatorType =
+      activeTravelTimeCreationEstimatorType;
     this.saveUserSettingToLocalStorage();
   }
-
 
   updateNodeStammdaten() {
     this.updateNodeStammdatenSubject.next();
@@ -351,6 +362,10 @@ export class UiInteractionService implements OnDestroy {
     this.showStreckengrafikSubject.next(MainViewMode.Streckengrafik);
   }
 
+  showOriginDestination() {
+    this.showOriginDestinationSubjet.next(MainViewMode.OriginDestination);
+  }
+
   moveNetzgrafikEditorFocalViewPoint(center: Vec2D) {
     this.moveNetzgrafikEditorViewFocalPointSubject.next(center);
   }
@@ -359,7 +374,7 @@ export class UiInteractionService implements OnDestroy {
     const bb = this.nodeService.getNetzgrafikBoundingBox();
     const center = new Vec2D(
       (bb.minCoordX + bb.maxCoordX) / 2.0,
-      (bb.minCoordY + bb.maxCoordY) / 2.0
+      (bb.minCoordY + bb.maxCoordY) / 2.0,
     );
     this.moveNetzgrafikEditorFocalViewPoint(center);
   }
@@ -473,7 +488,9 @@ export class UiInteractionService implements OnDestroy {
   updateLightDark() {
     const el = document.getElementById("NetzgrafikRootHtml");
     if (el) {
-      el.className = "sbb-lean" + (this.getActiveTheme().isDark ? " sbb-dark" : " sbb-light");
+      el.className =
+        "sbb-lean" +
+        (this.getActiveTheme().isDark ? " sbb-dark" : " sbb-light");
     }
   }
 

@@ -136,6 +136,13 @@
         "name": "Name"
       }
     },
+    "origin-destination": {
+      "tooltip": {
+        "total-cost": "Total cost",
+        "travel-time": "Travel time",
+        "transfers": "Transfers"
+      }
+    },
     "utils": {
       "navigation-parameters": {
         "no-project-id": "No project ID available",
@@ -248,7 +255,7 @@
           "filterableLabels": "Filterable Labels",
           "trainrun-filter-tab": {
             "labels": "Labels",
-            "newLabels" : "New label...",
+            "newLabels": "New label...",
             "trainrunDuplicate": "Duplicate trainrun",
             "trainrunDelete": "Delete trainrun",
             "delete": "Delete",
@@ -375,6 +382,7 @@
         "analytics-disabled": "Analytics disabled",
         "analytics-enabled": "Analytics enabled",
         "displayGraphicTimetable": "Display graphic timetable",
+        "displayOriginDestination": "Display origin-destination matrices",
         "closeGraphicTimetable": "Close graphic timetable",
         "errorGraphicTimetable": "Graphic timetable cannot be displayed because no trainrun or no nodes have been selected."
       },
