@@ -21,6 +21,7 @@ import {OriginDestination} from "src/app/services/data/origin-destination.servic
 import {UndoService} from "src/app/services/data/undo.service";
 
 // TODO: format OD files
+// TODO: move the OD directory to src/app/services/analytics
 
 @Component({
   selector: "sbb-origin-destination",
