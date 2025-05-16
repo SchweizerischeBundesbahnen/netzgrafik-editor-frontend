@@ -8,7 +8,6 @@ import {
   ViewChild,
 } from "@angular/core";
 import * as d3 from "d3";
-import {NodeService} from "src/app/services/data/node.service";
 import {UiInteractionService} from "../../services/ui/ui.interaction.service";
 
 import {Subject, takeUntil} from "rxjs";
@@ -21,6 +20,8 @@ import {Vec2D} from "src/app/utils/vec2D";
 import {OriginDestination} from "src/app/services/data/origin-destination.service";
 import {UndoService} from "src/app/services/data/undo.service";
 
+// TODO: format OD files
+
 @Component({
   selector: "sbb-origin-destination",
   templateUrl: "./origin-destination.component.html",
@@ -32,7 +33,6 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
   private readonly destroyed$ = new Subject<void>();
 
   constructor(
-    private nodeService: NodeService,
     private origineDestinationService: OriginDestinationService,
     private uiInteractionService: UiInteractionService,
     private undoService: UndoService,
@@ -43,6 +43,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
   private colorScale: d3.ScaleLinear<string, string>;
 
   private controller: SVGMouseController;
+  // TODO: refacto and check names
   colorBy: "totalCost" | "travelTime" | "transfer" = "totalCost";
   displayBy: "totalCost" | "travelTime" | "transfer" = "totalCost";
 
@@ -168,7 +169,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .style("pointer-events", "none");
 
     // Three function that change the tooltip when user hover / move / leave a cell
-    const mouseover = function (d) {
+    const mouseover = function (_d) {
       tooltip.style("opacity", 1);
       d3.select(this)
         .style("stroke", "black")
@@ -192,7 +193,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
         );
     };
 
-    const mouseleave = function (d) {
+    const mouseleave = function (_d) {
       tooltip.style("opacity", 0);
       d3.select(this).style("stroke", "none").style("opacity", 0.8);
     };
@@ -355,6 +356,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
   }
 
   public onChangeDisplayBy(field: "transfer" | "totalCost" | "travelTime") {
+    // TODO: why is that needed?
     this.displayBy = field;
     d3.select("#main-origin-destination-container").remove();
     this.renderView();

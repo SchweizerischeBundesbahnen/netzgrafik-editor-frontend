@@ -10,6 +10,7 @@ import {
   topoSort,
 } from "src/app/view/util/origin-destination-graph";
 
+// TODO: refacto
 export type OriginDestination = {
   origin: string;
   destination: string;
@@ -18,6 +19,7 @@ export type OriginDestination = {
   totalCost: string;
 };
 
+// TODO: refacto with EditorToolsViewComponent
 @Injectable({
   providedIn: "root",
 })

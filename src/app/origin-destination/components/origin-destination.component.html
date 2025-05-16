@@ -30,6 +30,7 @@
       (click)="onChangePalette('gray')"
     ></div>
 
+    <!-- TODO: migrate to sbb-radio-group? -->
     <div class="color-by-selector">
       <label>
         <input
@@ -39,6 +40,7 @@
           [checked]="colorBy === 'totalCost'"
           (change)="onChangeColorBy('totalCost')"
         />
+        <!-- TODO: translate -->
         Total Cost
       </label>
       <label>
