@@ -19,7 +19,7 @@ import {
 import {ViewboxProperties} from "src/app/services/ui/ui.interaction.service";
 import {Vec2D} from "src/app/utils/vec2D";
 import {OriginDestination} from "src/app/services/data/origin-destination.service";
-import { UndoService } from "src/app/services/data/undo.service";
+import {UndoService} from "src/app/services/data/undo.service";
 
 @Component({
   selector: "sbb-origin-destination",
