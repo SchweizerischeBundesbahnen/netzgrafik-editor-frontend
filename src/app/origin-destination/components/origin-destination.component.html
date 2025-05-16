@@ -1,0 +1,71 @@
+<div class="matrix-wrapper">
+  <div
+    id="main-origin-destination-container-root"
+    style="width: 98%; height: 100%"
+  ></div>
+
+  <div class="palette-buttons">
+    <div
+      class="palette-option custom"
+      [class.active]="colorSetName === 'custom'"
+      title="Custom palette"
+      (click)="onChangePalette('custom')"
+    ></div>
+    <div
+      class="palette-option blue"
+      [class.active]="colorSetName === 'blue'"
+      title="Blue palette"
+      (click)="onChangePalette('blue')"
+    ></div>
+    <div
+      class="palette-option orange"
+      [class.active]="colorSetName === 'orange'"
+      title="Orange palette"
+      (click)="onChangePalette('orange')"
+    ></div>
+    <div
+      class="palette-option gray"
+      [class.active]="colorSetName === 'gray'"
+      title="Gray palette"
+      (click)="onChangePalette('gray')"
+    ></div>
+
+    <div class="color-by-selector">
+      <label>
+        <input
+          type="radio"
+          name="colorBy"
+          value="totalCost"
+          [checked]="colorBy === 'totalCost'"
+          (change)="onChangeColorBy('totalCost')"
+        />
+        Total Cost
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="colorBy"
+          value="travelTime"
+          [checked]="colorBy === 'travelTime'"
+          (change)="onChangeColorBy('travelTime')"
+        />
+        Travel Time
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="colorBy"
+          value="transfer"
+          [checked]="colorBy === 'transfer'"
+          (change)="onChangeColorBy('transfer')"
+        />
+        Transfers
+      </label>
+    </div>
+  </div>
+  <sbb-radio-group class="sbb-checkbox-group-horizontal" [(ngModel)]="displayBy">
+    <sbb-radio-button value="totalCost" (change)="onChangeDisplayBy('totalCost')">Total Cost</sbb-radio-button>
+    <sbb-radio-button value="travelTime" (change)="onChangeDisplayBy('travelTime')">Travel Time</sbb-radio-button>
+    <sbb-radio-button value="transfer" (change)="onChangeDisplayBy('transfer')">Transfers</sbb-radio-button>
+  </sbb-radio-group>
+</div>
