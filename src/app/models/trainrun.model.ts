@@ -43,6 +43,7 @@ export class Trainrun {
       frequencyId: Trainrun.DEFAULT_TRAINRUN_FREQUENCY,
       trainrunTimeCategoryId: Trainrun.DEFAULT_TRAINRUN_TIME_CATEGORY,
       labelIds: [],
+      trainrunDirection: TrainrunDirection.ROUND_TRIP
     },
   ) {
     this.id = id;
@@ -52,7 +53,7 @@ export class Trainrun {
     this.isSelected = false;
     this.trainrunTimeCategoryId = trainrunTimeCategoryId;
     this.labelIds = labelIds;
-    this.trainrunDirection = TrainrunDirection.ROUND_TRIP;
+    this.trainrunDirection = trainrunDirection;
 
     if (Trainrun.currentId < this.id) {
       Trainrun.currentId = this.id;
