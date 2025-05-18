@@ -98,6 +98,9 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   }
 
   public get isBottomTrainrunSectionInfosDisplayed(): boolean {
+    if (this.selectedTrainrunSection === null) {
+      return false;
+    }
     const trainrunDirection = this.selectedTrainrunSection
       .getTrainrun()
       .getTrainrunDirection();

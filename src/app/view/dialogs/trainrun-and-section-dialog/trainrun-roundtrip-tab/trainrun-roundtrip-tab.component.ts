@@ -45,13 +45,8 @@ export class TrainrunRoundtripTabComponent implements OnInit, OnDestroy {
     this.trainrunSectionService.trainrunSections
       .pipe(takeUntil(this.destroyed))
       .subscribe(() => {
-        this.updateTrainrunLabelsAutoCompleteOptions();
-      });
-
-    this.trainrunSectionService.trainrunSections
-      .pipe(takeUntil(this.destroyed))
-      .subscribe(() => {
         this.initializeWithCurrentSelectedTrainrun();
+        this.updateTrainrunLabelsAutoCompleteOptions();
       });
 
     this.updateTrainrunLabelsAutoCompleteOptions();
