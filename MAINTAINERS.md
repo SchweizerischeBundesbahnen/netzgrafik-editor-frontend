@@ -4,6 +4,7 @@ This document lists the Maintainers of the Project. Maintainers may be added onc
 
 | **NAME** | **Organization** |
 | -------- | ---------------- |
+| Martin Sojka | SBB AG |
 | Adrian Egli | SBB AG |
 
 ---
