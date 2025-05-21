@@ -30,6 +30,7 @@ import {
   topoSort
 } from "../util/origin-destination-graph";
 import {TrainrunSectionValidator} from "../../services/util/trainrunsection.validator";
+import {OriginDestinationService} from "src/app/services/data/origin-destination.service";
 
 @Component({
   selector: "sbb-editor-tools-view-component",
@@ -63,6 +64,7 @@ export class EditorToolsViewComponent {
     private netzgrafikColoringService: NetzgrafikColoringService,
     private viewportCullService: ViewportCullService,
     private levelOfDetailService: LevelOfDetailService,
+    private originDestinationService: OriginDestinationService,
   ) {
   }
 
@@ -518,14 +520,7 @@ export class EditorToolsViewComponent {
     return this.buildCSVString(headers, rows);
   }
 
-  // TODO: this may be incorrect for trainruns going through the same node several times.
   private convertToOriginDestinationCSV(): string {
-    // Duration of the schedule to consider (in minutes).
-    // TODO: ideally this would be 24 hours, but performance is a concern.
-    // One idea to optimize would be to consider the minimum time window before the schedule repeats (LCM).
-    // Draft here: https://colab.research.google.com/drive/1Z1r2uU2pgffWxCbG_wt2zoLStZKzWleE#scrollTo=F6vOevK6znee
-    const timeLimit = 16 * 60;
-
     const headers: string[] = [];
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.origin:Origin`);
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.destination:Destination`);
@@ -533,52 +528,22 @@ export class EditorToolsViewComponent {
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.transfers:Transfers`);
     headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.totalCost:Total cost`);
 
-    const metadata = this.dataService.getNetzgrafikDto().metadata;
-    // The cost to add for each connection.
-    const connectionPenalty = metadata.analyticsSettings.originDestinationSettings.connectionPenalty;
-    const nodes = this.nodeService.getNodes();
-    const selectedNodes = this.nodeService.getSelectedNodes();
-    const odNodes = selectedNodes.length > 0 ? selectedNodes : this.nodeService.getVisibleNodes();
-    const trainruns = this.trainrunService.getVisibleTrainruns();
-
-    const [edges, tsSuccessor] = buildEdges(nodes, odNodes, trainruns, connectionPenalty, this.trainrunService, timeLimit);
-
-    const neighbors = computeNeighbors(edges);
-    const vertices = topoSort(neighbors);
-    // In theory we could parallelize the pathfindings, but the overhead might be too big.
-    const res = new Map<string, [number, number]>();
-    odNodes.forEach((origin) => {
-      computeShortestPaths(origin.getId(), neighbors, vertices, tsSuccessor).forEach((value, key) => {
-        res.set([origin.getId(), key].join(","), value);
-      });
-    });
+    const matrixData = this.originDestinationService.originDestinationData();
 
     const rows = [];
-    odNodes.sort((a, b) => a.getBetriebspunktName().localeCompare(b.getBetriebspunktName()));
-    odNodes.forEach((origin) => {
-      odNodes.forEach((destination) => {
-        if (origin.getId() === destination.getId()) {
-          return;
-        }
-        const costs = res.get([origin.getId(), destination.getId()].join(","));
-        if (costs === undefined) {
-          // Keep empty if no path is found.
-          rows.push([origin.getBetriebspunktName(), destination.getBetriebspunktName(), "", "", ""]);
-          return;
-        }
-        const [totalCost, connections] = costs;
-        // Check if the reverse path has the same cost.
-        if (destination.getId() < origin.getId()) {
-          const reverseCosts = res.get([destination.getId(), origin.getId()].join(","));
-          if (reverseCosts === undefined || reverseCosts[0] !== totalCost) {
-            console.log("Reverse path not found or different cost: ", origin.getId(), destination.getId());
-          }
-        }
-        const row = [origin.getBetriebspunktName(), destination.getBetriebspunktName(),
-          (totalCost - connections * connectionPenalty).toString(),
-          connections.toString(), totalCost.toString()];
-        rows.push(row);
-      });
+    matrixData.forEach((d) => {
+      if (!d.found) {
+        rows.push([d.origin, d.destination, "", "", ""]);
+        return;
+      }
+      const row = [
+        d.origin,
+        d.destination,
+        d.travelTime.toString(),
+        d.transfers.toString(),
+        d.totalCost.toString(),
+      ];
+      rows.push(row);
     });
 
     return this.buildCSVString(headers, rows);

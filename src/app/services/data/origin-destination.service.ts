@@ -13,9 +13,10 @@ import {
 export type OriginDestination = {
   origin: string;
   destination: string;
-  travelTime: string;
-  transfer: string;
-  totalCost: string;
+  travelTime: number | undefined;
+  transfers: number | undefined;
+  totalCost: number | undefined;
+  found: boolean;
 };
 
 @Injectable({
@@ -57,7 +58,7 @@ export class OriginDestinationService {
     const odNodes = this.getODOutputNodes();
     const trainruns = this.trainrunService.getVisibleTrainruns();
 
-    const edges = buildEdges(
+    const [edges, tsSuccessor] = buildEdges(
       nodes,
       odNodes,
       trainruns,
@@ -71,7 +72,7 @@ export class OriginDestinationService {
     // In theory we could parallelize the pathfindings, but the overhead might be too big.
     const res = new Map<string, [number, number]>();
     odNodes.forEach((origin) => {
-      computeShortestPaths(origin.getId(), neighbors, vertices).forEach(
+      computeShortestPaths(origin.getId(), neighbors, vertices, tsSuccessor).forEach(
         (value, key) => {
           res.set([origin.getId(), key].join(","), value);
         },
@@ -93,9 +94,7 @@ export class OriginDestinationService {
           rows.push({
             origin: origin.getBetriebspunktName(),
             destination: destination.getBetriebspunktName(),
-            travelTime: "",
-            transfer: "",
-            totalCost: "",
+            found: false,
           });
           return;
         }
@@ -103,9 +102,10 @@ export class OriginDestinationService {
         const row = {
           origin: origin.getBetriebspunktName(),
           destination: destination.getBetriebspunktName(),
-          travelTime: (totalCost - connections * connectionPenalty).toString(),
-          transfer: connections.toString(),
-          totalCost: totalCost.toString(),
+          travelTime: totalCost - connections * connectionPenalty,
+          transfers: connections,
+          totalCost: totalCost,
+          found: true,
         };
         rows.push(row);
       });

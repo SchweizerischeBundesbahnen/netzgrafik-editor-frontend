@@ -8,7 +8,6 @@ import {
   ViewChild,
 } from "@angular/core";
 import * as d3 from "d3";
-import {NodeService} from "src/app/services/data/node.service";
 import {UiInteractionService} from "../../services/ui/ui.interaction.service";
 
 import {Subject, takeUntil} from "rxjs";
@@ -19,6 +18,14 @@ import {
 import {ViewboxProperties} from "src/app/services/ui/ui.interaction.service";
 import {Vec2D} from "src/app/utils/vec2D";
 import {OriginDestination} from "src/app/services/data/origin-destination.service";
+import {UndoService} from "src/app/services/data/undo.service";
+
+// TODO: format OD files
+// TODO: move the OD directory to src/app/services/analytics
+// TODO: document
+
+type FieldName = "totalCost" | "travelTime" | "transfers";
+type ColorSetName = "custom" | "blue" | "orange" | "gray";
 
 @Component({
   selector: "sbb-origin-destination",
@@ -31,9 +38,9 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
   private readonly destroyed$ = new Subject<void>();
 
   constructor(
-    private nodeService: NodeService,
     private origineDestinationService: OriginDestinationService,
     private uiInteractionService: UiInteractionService,
+    private undoService: UndoService,
   ) {}
 
   private matrixData: OriginDestination[] = [];
@@ -41,14 +48,16 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
   private colorScale: d3.ScaleLinear<string, string>;
 
   private controller: SVGMouseController;
-  colorBy: "totalCost" | "travelTime" | "transfer" = "totalCost";
-  displayBy: "totalCost" | "travelTime" | "transfer" = "totalCost";
+
+  colorBy: FieldName = "totalCost";
+  displayBy: FieldName = "totalCost";
+  colorSetName: ColorSetName = "custom";
 
   private extractNumericODValues(
     odList: OriginDestination[],
-    field: "totalCost" | "travelTime" | "transfer",
+    field: FieldName,
   ): number[] {
-    return odList.map((od) => parseFloat(od[field])).filter((v) => !isNaN(v));
+    return odList.filter((od) => od["found"]).map((od) => od[field]);
   }
 
   private renderView() {
@@ -60,6 +69,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     this.controller = new SVGMouseController(
       "main-origin-destination-container",
       this.createSvgMouseControllerObserver(),
+      this.undoService,
     );
     this.controller.init(this.createInitialViewboxProperties());
   }
@@ -165,7 +175,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .style("pointer-events", "none");
 
     // Three function that change the tooltip when user hover / move / leave a cell
-    const mouseover = function (d) {
+    const mouseover = function (_d) {
       tooltip.style("opacity", 1);
       d3.select(this)
         .style("stroke", "black")
@@ -177,10 +187,10 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     const transfersTranslation = $localize`:@@app.origin-destination.tooltip.transfers:Transfers`;
     const travelTimeTranslation = $localize`:@@app.origin-destination.tooltip.travel-time:Travel time`;
 
-    const mousemove = function (d) {
+    const mousemove = function (d: OriginDestination) {
       tooltip
         .html(
-          `${d.origin} &#x2192; ${d.destination}<br><hr> ${travelTimeTranslation}: ${d.travelTime}<br>${transfersTranslation}: ${d.transfer}<br>${totalCostTranslation}: ${d.totalCost}`,
+          `${d.origin} &#x2192; ${d.destination}<br><hr> ${travelTimeTranslation}: ${d.travelTime}<br>${transfersTranslation}: ${d.transfers}<br>${totalCostTranslation}: ${d.totalCost}`,
         )
         .style("left", `${d3.event.offsetX + 64}px`)
         .style(
@@ -189,7 +199,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
         );
     };
 
-    const mouseleave = function (d) {
+    const mouseleave = function (_d) {
       tooltip.style("opacity", 0);
       d3.select(this).style("stroke", "none").style("opacity", 0.8);
     };
@@ -211,7 +221,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .attr("width", x.bandwidth())
       .attr("height", y.bandwidth())
 
-      .style("fill", (d) => this.getCellColor(d))
+      .style("fill", (d: OriginDestination) => this.getCellColor(d))
 
       .style("stroke-width", 4)
       .style("stroke", "none")
@@ -229,7 +239,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .attr("x", (d) => {
         return x(d.origin) + x.bandwidth() / 2;
       })
-      .attr("y", function (d) {
+      .attr("y", function (d: OriginDestination) {
         return y(d.destination) + y.bandwidth() / 2;
       })
       .text((d) => this.getCellText(d))
@@ -280,26 +290,24 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     };
   }
 
-  private getCellValue(d: OriginDestination, field: string): number {
-    return parseFloat(String(d[field]));
+  private getCellValue(d: OriginDestination, field: FieldName): number | undefined {
+    return d["found"] ? d[field] : undefined;
   }
 
   private getCellColor(d: OriginDestination): string {
     const value = this.getCellValue(d, this.colorBy);
-    return isNaN(value) ? "#76767633" : this.colorScale(value);
+    return value === undefined ? "#76767633" : this.colorScale(value);
   }
 
   private getCellText(d: OriginDestination): string {
     const value = this.getCellValue(d, this.displayBy);
-    return isNaN(value) ? "" : value.toString();
+    return value === undefined ? "" : value.toString();
   }
 
   ngOnDestroy(): void {
     this.destroyed$.next();
     this.destroyed$.complete();
   }
-
-  colorSetName: "custom" | "blue" | "orange" | "gray" = "custom";
 
   getColorScale(min: number, max: number): d3.ScaleLinear<string, string> {
     const d1 = min + (max - min) * 0.33;
@@ -339,19 +347,20 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     }
   }
 
-  onChangePalette(name: "custom" | "blue" | "orange" | "gray") {
+  onChangePalette(name: ColorSetName) {
     this.colorSetName = name;
     d3.select("#main-origin-destination-container").remove();
     this.renderView();
   }
 
-  onChangeColorBy(field: "transfer" | "totalCost" | "travelTime") {
+  onChangeColorBy(field: FieldName) {
     this.colorBy = field;
     d3.select("#main-origin-destination-container").remove();
     this.renderView();
   }
 
-  public onChangeDisplayBy(field: "transfer" | "totalCost" | "travelTime") {
+  onChangeDisplayBy(field: FieldName) {
+    // TODO: why is that needed?
     this.displayBy = field;
     d3.select("#main-origin-destination-container").remove();
     this.renderView();

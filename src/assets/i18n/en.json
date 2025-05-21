@@ -141,6 +141,22 @@
         "total-cost": "Total cost",
         "travel-time": "Travel time",
         "transfers": "Transfers"
+      },
+      "palette-buttons": {
+        "custom": "Custom palette",
+        "blue": "Blue palette",
+        "orange": "Orange palette",
+        "gray": "Gray palette"
+      },
+      "color-by-selector": {
+        "total-cost": "Total cost",
+        "travel-time": "Travel time",
+        "transfers": "Transfers"
+      },
+      "display-by-selector": {
+        "total-cost": "Total cost",
+        "travel-time": "Travel time",
+        "transfers": "Transfers"
       }
     },
     "utils": {
