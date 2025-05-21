@@ -13,7 +13,6 @@ import {
   UpdateCounterHandler,
   UpdateCounterTriggerService,
 } from "../../services/util/update-counter.service";
-import { TrainrunDirection } from "src/app/data-structures/business.data.structures";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -259,8 +258,8 @@ export class TrainRunItemComponent
   // TODO: a retirer si on garde le filtre au render dans sg-3
   // isTrainrunSectionDisplayed(trainrunItem: SgTrainrunItem): boolean {
   //   const trainrunDirection = this.trainrun.selectedTrainrun.trainrunDirection;
-  //   return trainrunDirection === TrainrunDirection.ROUND_TRIP 
-  //     || trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD && !trainrunItem.backward 
+  //   return trainrunDirection === TrainrunDirection.ROUND_TRIP
+  //     || trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD && !trainrunItem.backward
   //     || trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD && trainrunItem.backward;
   // }
 }

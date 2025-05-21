@@ -23,7 +23,6 @@ import {UiInteractionService} from "../../../services/ui/ui.interaction.service"
 import {StreckengrafikDisplayElementService} from "../../services/util/streckengrafik-display-element.service";
 import {SliderChangeInfo} from "../../model/util/sliderChangeInfo";
 import * as d3 from "d3";
-import { TrainrunDirection } from "src/app/data-structures/business.data.structures";
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -201,18 +200,19 @@ export class TrainRunNodeComponent implements OnInit, OnDestroy {
   nodePath() {
     const departureTime = this.sgTrainrunItem.departureTime * this.yZoom;
     const arrivalTime = this.sgTrainrunItem.arrivalTime * this.yZoom;
-    
+
     const track =
-    this.sgTrainrunItem.getTrainrunNode().trackData.track * this.trackWidth;
+      this.sgTrainrunItem.getTrainrunNode().trackData.track * this.trackWidth;
     const nodeWidth = this.sgTrainrunItem.getPathNode().nodeWidth();
-    
+
     const doRot = this.checkRotated();
-    
+
     if (this.isTrackOccupier()) {
       const tn = this.sgTrainrunItem.getTrainrunNode();
-      
+
       if (tn.isEndNode()) {
         if (this.sgTrainrunItem.getTrainrunNode().isTurnaround) {
+          console.log("is turnaround == ", {trainrunITem: this.sgTrainrunItem});
           if (this.sgTrainrunItem.backward) {
             let p = tn.departurePathSection === undefined ? nodeWidth : 0;
             if (doRot) {
@@ -252,6 +252,7 @@ export class TrainRunNodeComponent implements OnInit, OnDestroy {
             (track + s * this.halfStrokeWidth) +
             " " +
             arrivalTime +
+            +
             " M " +
             (track + s * this.halfStrokeWidth) +
             " " +
@@ -264,41 +265,43 @@ export class TrainRunNodeComponent implements OnInit, OnDestroy {
         }
         if (this.sgTrainrunItem.backward) {
           let path = "";
-          if (tn.departurePathSection !== undefined) {
-            if (tn.departurePathSection.backward) {
-              const x0 = doRot ? nodeWidth : 0;
+          // Noeud extremité côté target (backward)
+          if (tn.departurePathSection !== undefined && tn.departurePathSection.backward) {
+            const x0 = doRot ? nodeWidth : 0;
+            path +=
+              " M " +
+              x0 +
+              " " +
+              departureTime +
+              " L " +
+              (track + this.halfStrokeWidth) +
+              " " +
+              departureTime;
+            if(this.sgTrainrunItem.getTrainrunNode().isTurnaround){
               path +=
-                " M " +
-                x0 +
-                " " +
-                departureTime +
-                " L " +
-                (track + this.halfStrokeWidth) +
-                " " +
-                departureTime;
-              path +=
-                " M " +
-                x0 +
-                " " +
-                arrivalTime +
-                " L " +
-                (track + this.halfStrokeWidth) +
-                " " +
-                arrivalTime;
+              " M " +
+              x0 +
+              " " +
+              arrivalTime +
+              " L " +
+              (track + this.halfStrokeWidth) +
+              " " +
+              arrivalTime;
             }
           }
-          if (tn.arrivalPathSection !== undefined) {
-            if (tn.arrivalPathSection.backward) {
-              const x1 = doRot ? 0 : nodeWidth;
-              path +=
-                " M " +
-                (track - this.halfStrokeWidth) +
-                " " +
-                arrivalTime +
-                " L " +
-                x1 +
-                " " +
-                arrivalTime;
+          // Noeud extremité côté source (backward)
+          if (tn.arrivalPathSection !== undefined && tn.arrivalPathSection.backward) {
+            const x1 = doRot ? 0 : nodeWidth;
+            path +=
+              " M " +
+              (track - this.halfStrokeWidth) +
+              " " +
+              arrivalTime +
+              " L " +
+              x1 +
+              " " +
+              arrivalTime;
+            if(this.sgTrainrunItem.getTrainrunNode().isTurnaround){
               path +=
                 " M " +
                 (track - this.halfStrokeWidth) +
@@ -313,18 +316,19 @@ export class TrainRunNodeComponent implements OnInit, OnDestroy {
           return path;
         }
         let path = "";
-        if (tn.arrivalPathSection !== undefined) {
-          if (!tn.arrivalPathSection.backward) {
-            const x0 = doRot ? nodeWidth : 0;
-            path +=
-              " M " +
-              x0 +
-              " " +
-              arrivalTime +
-              " L " +
-              (track + this.halfStrokeWidth) +
-              " " +
-              arrivalTime;
+        // Noeud extremité côté target (forward)
+        if (tn.arrivalPathSection !== undefined && !tn.arrivalPathSection.backward) {
+          const x0 = doRot ? nodeWidth : 0;
+          path +=
+            " M " +
+            x0 +
+            " " +
+            arrivalTime +
+            " L " +
+            (track + this.halfStrokeWidth) +
+            " " +
+            arrivalTime;
+          if(this.sgTrainrunItem.getTrainrunNode().isTurnaround){
             path +=
               " M " +
               x0 +
@@ -336,18 +340,19 @@ export class TrainRunNodeComponent implements OnInit, OnDestroy {
               departureTime;
           }
         }
-        if (tn.departurePathSection !== undefined) {
-          if (!tn.departurePathSection.backward) {
-            const x1 = doRot ? 0 : nodeWidth;
-            path +=
-              " M " +
-              (track - this.halfStrokeWidth) +
-              " " +
-              departureTime +
-              " L " +
-              x1 +
-              " " +
-              departureTime;
+        // Noeud extremité côté source (forward)
+        if (tn.departurePathSection !== undefined && !tn.departurePathSection.backward) {
+          const x1 = doRot ? 0 : nodeWidth;
+          path +=
+            " M " +
+            (track - this.halfStrokeWidth) +
+            " " +
+            departureTime +
+            " L " +
+            x1 +
+            " " +
+            departureTime;
+          if(this.sgTrainrunItem.getTrainrunNode().isTurnaround){
             path +=
               " M " +
               (track - this.halfStrokeWidth) +
@@ -427,8 +432,13 @@ export class TrainRunNodeComponent implements OnInit, OnDestroy {
   }
 
   pathHeadwayReservation() {
-    console.log('path headway reservation == ', 
-      { trackData: this.sgTrainrunItem.getTrainrunNode().trackData, trainrunElement: this.sgTrainrunItem, trainrun: this.trainrunService.getTrainrunFromId(this.trainrun.trainrunId) })
+    console.log("path headway reservation == ", {
+      trackData: this.sgTrainrunItem.getTrainrunNode().trackData,
+      trainrunElement: this.sgTrainrunItem,
+      trainrun: this.trainrunService.getTrainrunFromId(
+        this.trainrun.trainrunId,
+      ),
+    });
     const track =
       this.sgTrainrunItem.getTrainrunNode().trackData.track * this.trackWidth;
     const departureTime =

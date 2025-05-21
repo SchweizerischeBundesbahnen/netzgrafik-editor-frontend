@@ -16,7 +16,7 @@ import {TrainrunBranchType} from "../model/enum/trainrun-branch-type-type";
 import {PathItem} from "../model/pathItem";
 import {TrackData} from "../model/trackData";
 import {Sg2TrainrunPathService} from "./sg-2-trainrun-path.service";
-import { TrainrunDirection } from "src/app/data-structures/business.data.structures";
+import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
 
 @Injectable({
   providedIn: "root",
@@ -88,24 +88,27 @@ export class Sg3TrainrunsService implements OnDestroy {
         trainrunItem.trainrunDirection,
       );
       const trainrunItems: SgTrainrunItem[] = [];
-      const isTrainrunGoingForward = trainrunItem.trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD;
-      const isTrainrunGoingBackward = trainrunItem.trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD;
+
+      const isTrainrunGoingForward =
+        trainrunItem.trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD;
+      const isTrainrunGoingBackward =
+        trainrunItem.trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD;
 
       // TODO: Ajout d'une fonction pour filtrer les pathItems ?
-      const filteredPathItems = trainrunItem.pathItems.filter((pathItem) => {
-        if(isTrainrunGoingForward) {
-          return pathItem.backward === false;
-        }
-        if(isTrainrunGoingBackward) {
-          return pathItem.backward === true;
-        }
-        return true;
-      });
+      // const filteredPathItems = trainrunItem.pathItems.filter((pathItem) => {
+      //   if (isTrainrunGoingForward) {
+      //     return pathItem.backward === false;
+      //   }
+      //   if (isTrainrunGoingBackward) {
+      //     console.log("pathItem backward", {pathItem});
+      //     return pathItem.backward === true;
+      //   }
+      //   return true;
+      // });
 
-      console.log(' filteredPathItems coucou == ', { filteredPathItems });
+      // console.log(" filteredPathItems coucou == ", {filteredPathItems});
 
-      // trainrunItem.pathItems.forEach((pathItem) => {
-      filteredPathItems.forEach((pathItem) => {
+      trainrunItem.pathItems.forEach((pathItem) => {
         if (pathItem.isNode()) {
           const pathNodes: SgPathNode[] = this.searchAllPathNodes(
             pathItem.getPathNode(),
@@ -115,26 +118,24 @@ export class Sg3TrainrunsService implements OnDestroy {
           let departureTime = pathItem.departureTime;
           let arrivalTime = pathItem.arrivalTime;
           pathNodes.forEach((pathNode: SgPathNode) => {
-
             if (isTrainrunGoingForward) {
-              if(pathNode.departurePathSection === undefined){
-                console.log(' pathItem forward node fin == ', { pathItem });
+              if (pathNode.departurePathSection === undefined) {
+                console.log(" pathItem forward node fin == ", {pathItem});
                 departureTime = arrivalTime + 4;
               }
-              if(pathNode.arrivalPathSection === undefined) {
-                console.log(' pathItem forward node debut == ', { pathItem });
+              if (pathNode.arrivalPathSection === undefined) {
+                console.log(" pathItem forward node debut == ", {pathItem});
                 arrivalTime = pathItem.departureTime - 4;
               }
             }
 
             if (isTrainrunGoingBackward) {
-              if(pathNode.arrivalPathSection === undefined){
-                console.log(' pathItem backward node fin == ', { pathItem });
-                arrivalTime = pathItem.departureTime;
-                departureTime += 4;
+              if (pathNode.arrivalPathSection === undefined) {
+                console.log(" pathItem backward node fin == ", {pathItem});
+                departureTime = arrivalTime + 4;
               }
-              if(pathNode.departurePathSection === undefined) {
-                console.log(' pathItem backward node debut == ', { pathItem });
+              if (pathNode.departurePathSection === undefined) {
+                console.log(" pathItem backward node debut == ", {pathItem});
                 arrivalTime = pathItem.departureTime - 4;
               }
             }

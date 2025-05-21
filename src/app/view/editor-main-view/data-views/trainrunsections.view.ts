@@ -32,11 +32,16 @@ import {Transition} from "../../../models/transition.model";
 import {InformSelectedTrainrunClick} from "../../../services/data/trainrunsection.service";
 import {LevelOfDetail} from "../../../services/ui/level.of.detail.service";
 import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
+import {TrainrunService} from "src/app/services/data/trainrun.service";
+import {GeneralViewFunctions} from "../../util/generalViewFunctions";
 
 export class TrainrunSectionsView {
   trainrunSectionGroup;
 
-  constructor(private editorView: EditorView) {}
+  constructor(
+    private editorView: EditorView,
+    private trainrunService: TrainrunService,
+  ) {}
 
   static translateAndRotateText(
     trainrunSection: TrainrunSection,
@@ -1055,24 +1060,30 @@ export class TrainrunSectionsView {
 
     // BACKWARD : SOURCE ARRIVAL & TARGET DEPARTURE
     // FORWARD : SOURCE DEPARTURE & TARGET ARRIVAL
-    const trainrunDirectionToFilter = 
+    const trainrunDirectionToFilter =
       lineTextElement === TrainrunSectionText.SourceArrival ||
-      lineTextElement === TrainrunSectionText.TargetDeparture ? 
-      TrainrunDirection.ONE_WAY_BACKWARD : TrainrunDirection.ONE_WAY_FORWARD;
+      lineTextElement === TrainrunSectionText.TargetDeparture
+        ? TrainrunDirection.ONE_WAY_BACKWARD
+        : TrainrunDirection.ONE_WAY_FORWARD;
 
     groupEnter
-      .filter(
-        (d: TrainrunSectionViewObject) => {
-          const trainrunDirection = d.trainrunSection.getTrainrun().getTrainrunDirection();
-          const test = trainrunDirection === trainrunDirectionToFilter || trainrunDirection === TrainrunDirection.ROUND_TRIP;
-          return this.filterTrainrunsectionAtNode(d.trainrunSection, atSource) &&
+      .filter((d: TrainrunSectionViewObject) => {
+        const trainrunDirection = d.trainrunSection
+          .getTrainrun()
+          .getTrainrunDirection();
+        const displayTextBackground =
+          trainrunDirection === trainrunDirectionToFilter ||
+          trainrunDirection === TrainrunDirection.ROUND_TRIP;
+        return (
+          this.filterTrainrunsectionAtNode(d.trainrunSection, atSource) &&
           this.filterTimeTrainrunsectionNonStop(
             d.trainrunSection,
             atSource,
             isArrival,
-          ) && test;
-        }
-      )
+          ) &&
+          displayTextBackground
+        );
+      })
       .append(StaticDomTags.EDGE_LINE_TEXT_BACKGROUND_SVG)
       .attr(
         "class",
@@ -1120,27 +1131,45 @@ export class TrainrunSectionsView {
       );
   }
 
+  static translateAndRotateArrow() {
+
+  }
+
   createDirectionArrow(
     groupLinesEnter: d3.Selection,
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
     enableEvents = true,
   ) {
-
     const calculateRotation = (
       pos1: Vec2D,
       pos2: Vec2D,
+      trainrunSection: TrainrunSection,
     ): {angle: number; dx: number; dy: number} => {
+      const {lastNonStopNode1, lastNonStopNode2} =
+        this.trainrunService.getBothLastNonStopNodes(trainrunSection);
+      const rightOrBottomNode = GeneralViewFunctions.getRightOrBottomNode(
+        lastNonStopNode1,
+        lastNonStopNode2,
+      );
+      const isTargetRightOrBottom =
+        rightOrBottomNode === trainrunSection.getTargetNode();
+
       const dx = pos2.getX() - pos1.getX();
       const dy = pos2.getY() - pos1.getY();
+      const delta = isTargetRightOrBottom ? 15 : -15;
+
       if (dx === 0) {
-        return {angle: dy > 0 ? 90 : -90, dx: 0, dy: 6};
+        return {angle: dy > 0 ? 90 : -90, dx: 0, dy: delta};
       } else {
-        return {angle: dx > 0 ? 0 : 180, dx: 6, dy: 0};
+        return {angle: dx > 0 ? 0 : 180, dx: delta, dy: 0};
       }
     };
 
-    const getPositions = (positions: Vec2D[], trainrunSection: TrainrunSection): [Vec2D, Vec2D] => {
+    const getPositions = (
+      positions: Vec2D[],
+      trainrunSection: TrainrunSection,
+    ): [Vec2D, Vec2D] => {
       const direction = trainrunSection.getTrainrun().getTrainrunDirection();
       return direction === TrainrunDirection.ONE_WAY_FORWARD
         ? [positions[0], positions[1]]
@@ -1151,7 +1180,9 @@ export class TrainrunSectionsView {
       groupLinesEnter
         .append(StaticDomTags.EDGE_LINE_ARROW_SVG)
         .attr("d", (d: TrainrunSectionViewObject) => {
-          const tsDirection = d.trainrunSection.getTrainrun().getTrainrunDirection();
+          const tsDirection = d.trainrunSection
+            .getTrainrun()
+            .getTrainrunDirection();
           if (tsDirection === TrainrunDirection.ROUND_TRIP) {
             return "";
           } else {
@@ -1161,11 +1192,15 @@ export class TrainrunSectionsView {
         .attr("transform", (d: TrainrunSectionViewObject) => {
           const positions = d.trainrunSection.getPath();
           const [pos1, pos2] = getPositions(positions, d.trainrunSection);
-          const {angle, dx, dy} = calculateRotation(pos1, pos2);
+          const {angle, dx, dy} = calculateRotation(
+            pos1,
+            pos2,
+            d.trainrunSection,
+          );
           const x =
-          i === 0 ? positions[1].getX() - dx : positions[2].getX() + dx;
+            i === 0 ? positions[1].getX() - dx : positions[2].getX() + dx;
           const y =
-          i === 0 ? positions[1].getY() - dy : positions[2].getY() + dy;
+            i === 0 ? positions[1].getY() - dy : positions[2].getY() + dy;
           return `translate(${x},${y}) rotate(${angle})`;
         })
         .attr(
@@ -1367,7 +1402,9 @@ export class TrainrunSectionsView {
     connectedTrainIds: any,
     atSource: boolean,
   ) {
-    if (!this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()) {
+    if (
+      !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()
+    ) {
       return;
     }
     groupEnter
@@ -1418,8 +1455,8 @@ export class TrainrunSectionsView {
           }
           const port = node.getPortOfTrainrunSection(d.trainrunSection.getId());
           const trans = node.getTransitionFromPortId(port.getId());
-          return (trans === undefined);
-        }
+          return trans === undefined;
+        },
       )
       .classed(
         StaticDomTags.EDGE_IS_NOT_END_NODE,
@@ -1430,8 +1467,8 @@ export class TrainrunSectionsView {
           }
           const port = node.getPortOfTrainrunSection(d.trainrunSection.getId());
           const trans = node.getTransitionFromPortId(port.getId());
-          return (trans !== undefined);
-        }
+          return trans !== undefined;
+        },
       )
 
       .classed(StaticDomTags.TAG_MUTED, (d: TrainrunSectionViewObject) =>
@@ -1466,10 +1503,11 @@ export class TrainrunSectionsView {
     connectedTrainIds: any,
     textElement: TrainrunSectionText,
     enableEvents = true,
-    hasWarning = true
+    hasWarning = true,
   ) {
-
-    const isDefaultTextElement = textElement === TrainrunSectionText.TrainrunSectionName || textElement === TrainrunSectionText.TrainrunSectionTravelTime;
+    const isDefaultTextElement =
+      textElement === TrainrunSectionText.TrainrunSectionName ||
+      textElement === TrainrunSectionText.TrainrunSectionTravelTime;
     const atSource =
       textElement === TrainrunSectionText.SourceArrival ||
       textElement === TrainrunSectionText.SourceDeparture;
@@ -1477,26 +1515,34 @@ export class TrainrunSectionsView {
       textElement === TrainrunSectionText.SourceArrival ||
       textElement === TrainrunSectionText.TargetArrival;
 
-    const trainrunDirectionToFilter = 
+    const trainrunDirectionToFilter =
       textElement === TrainrunSectionText.SourceArrival ||
-      textElement === TrainrunSectionText.TargetDeparture ? 
-    TrainrunDirection.ONE_WAY_BACKWARD : TrainrunDirection.ONE_WAY_FORWARD;
+      textElement === TrainrunSectionText.TargetDeparture
+        ? TrainrunDirection.ONE_WAY_BACKWARD
+        : TrainrunDirection.ONE_WAY_FORWARD;
 
     const renderingObjects = groupEnter
-      .filter(
-        (d: TrainrunSectionViewObject) => {
-          const trainrunDirection = d.trainrunSection.getTrainrun().getTrainrunDirection();
-          const isTextApplicableForDirection = isDefaultTextElement || trainrunDirection === trainrunDirectionToFilter || trainrunDirection === TrainrunDirection.ROUND_TRIP;
-  
-          return this.filterTrainrunsectionAtNode(d.trainrunSection, atSource) &&
+      .filter((d: TrainrunSectionViewObject) => {
+        const trainrunDirection = d.trainrunSection
+          .getTrainrun()
+          .getTrainrunDirection();
+        const isTextApplicableForDirection =
+          isDefaultTextElement ||
+          trainrunDirection === trainrunDirectionToFilter ||
+          trainrunDirection === TrainrunDirection.ROUND_TRIP;
+
+        return (
+          this.filterTrainrunsectionAtNode(d.trainrunSection, atSource) &&
           this.filterTimeTrainrunsectionNonStop(
             d.trainrunSection,
             atSource,
             isArrival,
           ) &&
-          TrainrunSectionsView.hasWarning(d.trainrunSection, textElement) === hasWarning && isTextApplicableForDirection;
-        }
-      )
+          TrainrunSectionsView.hasWarning(d.trainrunSection, textElement) ===
+            hasWarning &&
+          isTextApplicableForDirection
+        );
+      })
       .append(StaticDomTags.EDGE_LINE_TEXT_SVG)
       .attr("class", (d: TrainrunSectionViewObject) =>
         TrainrunSectionsView.getTrainrunSectionTimeElementClass(
@@ -1581,7 +1627,10 @@ export class TrainrunSectionsView {
       renderingObjects
         .append("svg:title")
         .text((d: TrainrunSectionViewObject) => {
-          return TrainrunSectionsView.getWarning(d.trainrunSection, textElement);
+          return TrainrunSectionsView.getWarning(
+            d.trainrunSection,
+            textElement,
+          );
         });
     }
   }
@@ -1591,16 +1640,26 @@ export class TrainrunSectionsView {
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
     textElement: TrainrunSectionText,
-    enableEvents = true
+    enableEvents = true,
   ) {
     // pass(1) : render all elements without warnings
     this.createInternTrainrunSectionElementFilteringWarningElements(
-      groupEnter, selectedTrainrun, connectedTrainIds, textElement, enableEvents, false
+      groupEnter,
+      selectedTrainrun,
+      connectedTrainIds,
+      textElement,
+      enableEvents,
+      false,
     );
     // pass(2) : render all elements with warnings
     //           especially <svg:title>warning_msg</svg:title>
     this.createInternTrainrunSectionElementFilteringWarningElements(
-      groupEnter, selectedTrainrun, connectedTrainIds, textElement, enableEvents, true
+      groupEnter,
+      selectedTrainrun,
+      connectedTrainIds,
+      textElement,
+      enableEvents,
+      true,
     );
   }
 
@@ -1850,8 +1909,9 @@ export class TrainrunSectionsView {
 
     const filteredTrainrunSections = trainrunSections.filter(
       (trainrunSection: TrainrunSection) =>
-        this.editorView.doCullCheckPositionsInViewport(trainrunSection.getPath()) &&
-        this.filterTrainrunSectionToDisplay(trainrunSection)
+        this.editorView.doCullCheckPositionsInViewport(
+          trainrunSection.getPath(),
+        ) && this.filterTrainrunSectionToDisplay(trainrunSection),
     );
 
     const group = this.trainrunSectionGroup
@@ -2542,7 +2602,6 @@ export class TrainrunSectionsView {
       }
 
       if (this.editorView.getLevelOfDetail() === LevelOfDetail.FULL) {
-        
         this.createTrainrunSectionTextBackgrounds(
           // LevelOfDetail.FULL
           groupLabels,

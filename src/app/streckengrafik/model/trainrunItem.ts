@@ -1,4 +1,4 @@
-import { TrainrunDirection } from "src/app/data-structures/business.data.structures";
+import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
 import {PathItem} from "./pathItem";
 
 export class TrainrunItem {

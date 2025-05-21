@@ -2,6 +2,7 @@ import {TrainrunSection} from "../../models/trainrunsection.model";
 import {
   NodeDto,
   TrainrunCategoryHaltezeit,
+  TrainrunDirection,
   TrainrunSectionDto,
 } from "../../data-structures/business.data.structures";
 import {Node} from "../../models/node.model";
@@ -659,6 +660,19 @@ export class TrainrunSectionService implements OnDestroy {
     }
   }
 
+  updateTrainrunSectionIsRunningBackward() {
+    this.trainrunSectionsStore.trainrunSections.forEach((trainrunSection) => {
+      const sourceNode = trainrunSection.getSourceNode();
+      const targetNode = trainrunSection.getTargetNode();
+      const isTargetRight = GeneralViewFunctions.getRightOrBottomNode(sourceNode, targetNode) === targetNode;
+      const trainrunDirection = trainrunSection.getTrainrun().getTrainrunDirection();
+
+      const isTrainRunningBackward = trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD && !isTargetRight ||
+        trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD && isTargetRight;
+      trainrunSection.setIsRunningBackward(isTrainRunningBackward);
+    });
+  };
+
   retrieveTravelTime(sourceNodeId: number, targetNodeId: number, trainrun: Trainrun): number {
     const foundTrainruns = this.getTrainrunSections().filter(
       (ts) =>
@@ -699,6 +713,11 @@ export class TrainrunSectionService implements OnDestroy {
 
     const sourceNode = this.nodeService.getNodeFromId(sourceNodeId);
     const targetNode = this.nodeService.getNodeFromId(targetNodeId);
+
+    // If the target node is on the right/bottom side, the trainrun section is going in the "right way"
+    const isTargetRight = GeneralViewFunctions.getRightOrBottomNode(sourceNode, targetNode) === targetNode;
+    trainrunSection.setIsRunningBackward(!isTargetRight);
+
     trainrunSection.setSourceAndTargetNodeReference(sourceNode, targetNode);
     this.trainrunSectionsStore.trainrunSections.push(trainrunSection);
     this.logger.log(

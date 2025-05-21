@@ -23,7 +23,7 @@ import {IsTrainrunSelectedService} from "../../services/data/is-trainrun-section
 import {NodeService} from "../../services/data/node.service";
 import {TrainrunBranchType} from "../model/enum/trainrun-branch-type-type";
 import {MultiSelectNodeGraph} from "../../utils/multi-select-node-graph";
-import { TrainrunDirection } from "src/app/data-structures/business.data.structures";
+import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
 
 
 @Injectable({
@@ -281,7 +281,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       undefined,
       1,
       undefined,
-      false
+      false,
     );
     const node1 = this.nodeService.getNodeFromId(n1.nodeId);
     n1.nodeShortName = node1.getBetriebspunktName();
@@ -298,6 +298,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       ts12.setTargetNode(node2);
       ts12.setTravelTime(travelTime);
     }
+    console.log("createPathElement", {tsection: ts12});
     const s12 = new PathSection(
       ts12.getId(),
       0,
@@ -455,22 +456,23 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
 
     const forwardBackwardNodes =
       this.determineForwardBackwardNodes(trainrunSection, onlyForward);
-
-    const tsgForward = this.trainrunSectionGroup(
-      trainrun.getId(),
-      forwardBackwardNodes.startForwardNode,
-      true
-    );
-    const forwardTrainrunSectionGroup = tsgForward.trainrunSectionGroups;
-    visitedTrainrunSections = visitedTrainrunSections.concat(tsgForward.visitedTrainrunSections);
-
-    const tsgBackward = this.trainrunSectionGroup(
-      trainrun.getId(),
-      forwardBackwardNodes.startBackwardNode,
-      false
-    );
-    const backwardTrainrunSectionGroup = tsgBackward.trainrunSectionGroups;
-    visitedTrainrunSections = visitedTrainrunSections.concat(tsgBackward.visitedTrainrunSections);
+      
+      const tsgForward = this.trainrunSectionGroup(
+        trainrun.getId(),
+        forwardBackwardNodes.startForwardNode,
+        true
+      );
+      const forwardTrainrunSectionGroup = tsgForward.trainrunSectionGroups;
+      visitedTrainrunSections = visitedTrainrunSections.concat(tsgForward.visitedTrainrunSections);
+      
+      const tsgBackward = this.trainrunSectionGroup(
+        trainrun.getId(),
+        forwardBackwardNodes.startBackwardNode,
+        false
+      );
+      const backwardTrainrunSectionGroup = tsgBackward.trainrunSectionGroups;
+      visitedTrainrunSections = visitedTrainrunSections.concat(tsgBackward.visitedTrainrunSections);
+      console.log("Loading TrainrunItem _ determineForwardBackwardNodes __ ", {trainrun, forwardTrainrunSectionGroup, backwardTrainrunSectionGroup, trainrunSection});
 
     let forwardStartNode: PathNode = undefined;
     let forwardEndNode: PathNode = undefined;
@@ -483,6 +485,19 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       const fromNode = trainrunSectionGroup.trainrunSectionWithNodes.fromNode;
       const toNode = trainrunSectionGroup.trainrunSectionWithNodes.toNode;
       let toTrainrunSection = undefined;
+      // TODO: Extract this into a function
+      const trainrunDirection = trainrun.getTrainrunDirection();
+      const tsIsRunningBackward = trainrunSection.getIsRunningBackward();
+      
+      // If the trainrunSection is running "backward", it means that it's target node is on the left/top side.
+      const isForwardTSfiltered =  !tsIsRunningBackward && trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD || tsIsRunningBackward && trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD;
+
+      console.log("forward trainrunSectionGroup", {trainrunSection, trainrunDirection , isForwardTSfiltered});
+
+      if (isForwardTSfiltered) {
+        return;
+      }
+
       if (trainrunSectionGroup.toTrainrunSectionWithNodes) {
         toTrainrunSection =
           trainrunSectionGroup.toTrainrunSectionWithNodes.trainrunSection;
@@ -544,6 +559,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       }
       pathItems.push(targetPathNode);
     });
+    
     if (!onlyForward) {
       backwardTrainrunSectionGroup.forEach((trainrunSectionGroup) => {
         const trainrunSection =
@@ -551,6 +567,20 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
         const fromNode = trainrunSectionGroup.trainrunSectionWithNodes.fromNode;
         const toNode = trainrunSectionGroup.trainrunSectionWithNodes.toNode;
         let toTrainrunSection = undefined;
+
+        // TODO: Extract this into a function
+        const trainrunDirection = trainrun.getTrainrunDirection();
+        const tsIsRunningBackward = trainrunSection.getIsRunningBackward();
+        
+        // If the trainrunSection is running "backward", it means that it's target node is on the left/top side.
+        const isBackwardTSfiltered =  tsIsRunningBackward && trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD || !tsIsRunningBackward && trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD;
+
+        console.log("backward trainrunSectionGroup", {trainrunSection, trainrunDirection , isBackwardTSfiltered});
+
+        if (isBackwardTSfiltered) {
+          return;
+        }
+
         if (trainrunSectionGroup.toTrainrunSectionWithNodes) {
           toTrainrunSection =
             trainrunSectionGroup.toTrainrunSectionWithNodes.trainrunSection;
@@ -659,6 +689,15 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
         pathSection.departureBranchEndNode = this.getLastPathNode(pathItems);
       }
     });
+
+    const trainrunDirection = trainrun.getTrainrunDirection();
+    const filteredPathItems = pathItems.filter((pathItem) => {
+      // If the trainrunSection is running "backward", it means that it's target node is on the left/top side.
+      if(pathItem) {
+        return trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD ;
+      };
+    });
+    console.log("loaded trainrunItem path Items ", {pathItems});
 
     return {
       trainrunItem: new TrainrunItem(
@@ -957,6 +996,12 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     // isPartOfTemplatePath
   }
 
+  isTrainrunWayDirectionBackwardWithTSection(trainrunSection: TrainrunSection): boolean {
+    const trainrun = trainrunSection.getTrainrun();
+    const {startForwardNode,startBackwardNode} = this.determineForwardBackwardNodes(trainrunSection, false);
+    return this.isTrainRunWayDirectionBackward(trainrun, startForwardNode, startBackwardNode,this.forwardTrainrunSectionGroup).check;
+  }
+
   isTrainRunWayDirectionBackward(
     trainrun,
     startForwardNode,
@@ -983,6 +1028,8 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     );
     const backwardTrainrunSectionGroups = tsgBackward.trainrunSectionGroups;
     visitedTrainrunSections = visitedTrainrunSections.concat(tsgBackward.visitedTrainrunSections);
+
+    console.log('isTrainRunWayDirectionBackward', {trainrun, startForwardNode, startBackwardNode, forwardTrainrunSectionGroups, backwardTrainrunSectionGroups});
 
     const selectedPaths = this.betriebspunktNamePaths(
       selectedForwardTrainrunSectionGroups,
