@@ -5,7 +5,7 @@
     <button
       class="TrainrunDialog EditorToolButton"
       (click)="onExportNetzgrafikSVG()"
-      [title]="'app.view.editor-side-view.editor-tools-view-component.export-netzgrafik-as-svg' | translate"
+      [title]="'app.view.editor-side-view.editor-tools-view-component.export-container-as-svg' | translate: {'container': getContainerName() }"
     >
       <sbb-icon svgIcon="picture-small"></sbb-icon>
     </button>
@@ -14,7 +14,7 @@
     <button
       class="TrainrunDialog EditorToolButton"
       (click)="onExportNetzgrafikPNG()"
-      [title]="'app.view.editor-side-view.editor-tools-view-component.export-netzgrafik-as-png' | translate"
+      [title]="'app.view.editor-side-view.editor-tools-view-component.export-container-as-png' | translate: {'container': getContainerName() }"
     >
       <sbb-icon svgIcon="camera-small"></sbb-icon>
     </button>
@@ -23,7 +23,7 @@
     <button
       class="TrainrunDialog EditorToolButton"
       (click)="onPrintNetzgrafik()"
-      [title]="'app.view.editor-side-view.editor-tools-view-component.print-netzgrafik' | translate"
+      [title]="'app.view.editor-side-view.editor-tools-view-component.print-container' | translate: {'container': getContainerName() }"
     >
       <sbb-icon svgIcon="printer-small"></sbb-icon>
     </button>
