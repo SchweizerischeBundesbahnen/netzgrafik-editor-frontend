@@ -226,6 +226,8 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .style("stroke-width", 4)
       .style("stroke", "none")
       .style("opacity", 0.8)
+      .style("pointer-events", (d: OriginDestination) => d.found ? "auto" : "none")
+
       .on("mouseover", mouseover)
       .on("mousemove", mousemove)
       .on("mouseleave", mouseleave);
