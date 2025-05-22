@@ -120,13 +120,13 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     graphContentGroup
       .append("g")
       .style("pointer-events", "none")
-      .style("font-size", 15)
       .attr("transform", "translate(0, -20)")
       .call(d3.axisBottom(x).tickSize(0))
       .style("user-select", "none")
       .call((g) =>
         g
           .selectAll("text")
+          .attr("data-origin-label", (d: string) => d)
           .style("text-anchor", "start")
           .attr("dx", "-0.8em")
           .attr("dy", "0.4em")
@@ -145,9 +145,13 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     graphContentGroup
       .append("g")
       .style("pointer-events", "none")
-      .style("font-size", 14)
       .call(d3.axisLeft(y).tickSize(0))
       .style("user-select", "none")
+      .call((g) =>
+        g
+        .selectAll("text")
+        .attr("data-destination-label", (d: string) => d)
+      )
       .select(".domain")
       .remove();
 
@@ -180,6 +184,14 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
         .style("stroke", "black")
         .style("stroke-width", "2px")
         .style("opacity", 1);
+
+      // Highlight axis labels in bold when hovering over a cell
+      d3.selectAll(`[data-origin-label="${_d.origin}"]`)
+        .style("font-weight", "bold")
+        .style("font-size", "12px");
+      d3.selectAll(`[data-destination-label="${_d.destination}"]`)
+        .style("font-weight", "bold")
+        .style("font-size", "12px");
     };
 
     const totalCostTranslation = $localize`:@@app.origin-destination.tooltip.total-cost:Total cost`;
@@ -208,6 +220,14 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     const mouseleave = function (_d) {
       tooltip.style("opacity", 0);
       d3.select(this).style("stroke", "none").style("opacity", 0.8);
+
+      // Remove boldness from the axis labels
+      d3.selectAll(`[data-origin-label="${_d.origin}"]`)
+        .style("font-weight", null)
+        .style("font-size", null);
+      d3.selectAll(`[data-destination-label="${_d.destination}"]`)
+        .style("font-weight", null)
+        .style("font-size", null);
     };
 
     // add the squares
