@@ -5,14 +5,18 @@
 
   #main-origin-destination-container-root {
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     padding: 24px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
   }
 
   svg {
     display: block;
-    margin: 0;
+    max-width: 100%;
+    height: auto;
   }
 
   ::ng-deep .tooltip {
