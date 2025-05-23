@@ -109,10 +109,8 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
         `0 0 ${width} ${height}`,
       );
 
-    const containerGroup = svg
+    const graphContentGroup = svg
       .append("g")
-
-    const graphContentGroup = containerGroup
       .append("g")
       .attr("id", "zoom-group");
 
@@ -277,7 +275,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
 
   private createInitialViewboxProperties(numberOfNodes: number): ViewboxProperties {
     const matrixSize = this.cellSize * numberOfNodes;
-    const container = document.getElementById('main-origin-destination-container');
+    const container = document.getElementById("main-origin-destination-container");
     const containerHeight = container ? container.clientHeight : window.innerHeight;
     const panZoomTop = Math.max(0, (containerHeight - matrixSize) / 2);
     return {
