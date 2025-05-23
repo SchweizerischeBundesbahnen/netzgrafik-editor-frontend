@@ -118,7 +118,7 @@ export class EditorToolsViewComponent {
     downloadBlob(blob, $localize`:@@app.view.editor-side-view.editor-tools-view-component.netzgrafikFile:netzgrafik` + ".json");
   }
 
-  onExportNetzgrafikSVG() {
+  onExportContainerAsSVG() {
     // option 2: save svg as svg
     // https://www.npmjs.com/package/save-svg-as-png
     this.levelOfDetailService.disableLevelOfDetailRendering();
@@ -146,12 +146,14 @@ export class EditorToolsViewComponent {
       });
   }
 
-  onPrintNetzgrafik() {
+  onPrintContainer() {
     this.uiInteractionService.closeFilter();
-    this.uiInteractionService.print();
+    setTimeout(() => {
+      this.uiInteractionService.print();
+    }, 1500); // to allow cd-layout-filter to close
   }
 
-  onExportNetzgrafikPNG() {
+  onExportContainerAsPNG() {
     // option 1: save svg as png
     // https://www.npmjs.com/package/save-svg-as-png
     this.levelOfDetailService.disableLevelOfDetailRendering();

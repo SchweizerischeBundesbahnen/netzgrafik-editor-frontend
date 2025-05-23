@@ -4,7 +4,7 @@
     <sbb-expansion-panel-header>{{ 'app.view.editor-side-view.editor-tools-view-component.export' | translate }}</sbb-expansion-panel-header>
     <button
       class="TrainrunDialog EditorToolButton"
-      (click)="onExportNetzgrafikSVG()"
+      (click)="onExportContainerAsSVG()"
       [title]="'app.view.editor-side-view.editor-tools-view-component.export-container-as-svg' | translate: {'container': getContainerName() }"
     >
       <sbb-icon svgIcon="picture-small"></sbb-icon>
@@ -13,7 +13,7 @@
     <br />
     <button
       class="TrainrunDialog EditorToolButton"
-      (click)="onExportNetzgrafikPNG()"
+      (click)="onExportContainerAsPNG()"
       [title]="'app.view.editor-side-view.editor-tools-view-component.export-container-as-png' | translate: {'container': getContainerName() }"
     >
       <sbb-icon svgIcon="camera-small"></sbb-icon>
@@ -22,7 +22,7 @@
     <br />
     <button
       class="TrainrunDialog EditorToolButton"
-      (click)="onPrintNetzgrafik()"
+      (click)="onPrintContainer()"
       [title]="'app.view.editor-side-view.editor-tools-view-component.print-container' | translate: {'container': getContainerName() }"
     >
       <sbb-icon svgIcon="printer-small"></sbb-icon>
