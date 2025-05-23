@@ -53,6 +53,8 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
   displayBy: FieldName = "totalCost";
   colorSetName: ColorSetName = "custom";
 
+  private cellSize: number = 30;
+
   private extractNumericODValues(
     odList: OriginDestination[],
     field: FieldName,
@@ -71,7 +73,7 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       this.createSvgMouseControllerObserver(),
       this.undoService,
     );
-    this.controller.init(this.createInitialViewboxProperties());
+    this.controller.init(this.createInitialViewboxProperties(nodeNames.length));
   }
 
   ngOnInit(): void {
@@ -88,28 +90,23 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
   }
 
   rendermatrixOD(nodeNames: string[]) {
-    // set the dimensions and margins of the graph
-    const margin = {top: 80, right: 0, bottom: 30, left: 20};
-    const cellSize = 30;
-
-    const width = cellSize * nodeNames.length;
-    const height = cellSize * nodeNames.length;
+    const width = this.cellSize * nodeNames.length;
+    const height = this.cellSize * nodeNames.length;
 
     // append the svg object to the body of the page
     const svg = d3
       .select("#main-origin-destination-container-root")
       .append("svg")
       .attr("id", "main-origin-destination-container")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+      .attr("width", width)
+      .attr("height", height)
       .attr(
         "viewBox",
-        `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`,
+        `0 0 ${width} ${height}`,
       );
 
     const containerGroup = svg
       .append("g")
-      .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
     const graphContentGroup = containerGroup
       .append("g")
@@ -279,15 +276,19 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     };
   }
 
-  private createInitialViewboxProperties(): ViewboxProperties {
+  private createInitialViewboxProperties(numberOfNodes: number): ViewboxProperties {
+    const matrixSize = this.cellSize * numberOfNodes;
+    const container = document.getElementById('main-origin-destination-container');
+    const containerHeight = container ? container.clientHeight : window.innerHeight;
+    const panZoomTop = Math.max(0, (containerHeight - matrixSize) / 2);
     return {
       zoomFactor: 100,
-      origWidth: 1000,
-      origHeight: 1000,
+      origWidth: matrixSize,
+      origHeight: matrixSize,
       panZoomLeft: 0,
-      panZoomTop: 0,
-      panZoomWidth: 1000,
-      panZoomHeight: 1000,
+      panZoomTop,
+      panZoomWidth: matrixSize,
+      panZoomHeight: matrixSize,
       currentViewBox: null,
     };
   }
