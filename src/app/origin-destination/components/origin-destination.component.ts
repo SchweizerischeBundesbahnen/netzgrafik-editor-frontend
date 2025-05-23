@@ -187,9 +187,16 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     const travelTimeTranslation = $localize`:@@app.origin-destination.tooltip.travel-time:Travel time`;
 
     const mousemove = function (d: OriginDestination) {
+      let details = "";
+      if (d.found) {
+        details += "<br><hr> ";
+        details += `${travelTimeTranslation}: ${d.travelTime}<br>`;
+        details += `${transfersTranslation}: ${d.transfers}<br>`;
+        details += `${totalCostTranslation}: ${d.totalCost}`;
+      }
       tooltip
         .html(
-          `${d.origin} &#x2192; ${d.destination}<br><hr> ${travelTimeTranslation}: ${d.travelTime}<br>${transfersTranslation}: ${d.transfers}<br>${totalCostTranslation}: ${d.totalCost}`,
+          `${d.origin} &#x2192; ${d.destination}${details}`,
         )
         .style("left", `${d3.event.offsetX + 64}px`)
         .style(
@@ -237,13 +244,13 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .enter()
       .append("text")
       .style("pointer-events", "none")
-      .attr("x", (d) => {
+      .attr("x", (d: OriginDestination) => {
         return x(d.origin) + x.bandwidth() / 2;
       })
       .attr("y", function (d: OriginDestination) {
         return y(d.destination) + y.bandwidth() / 2;
       })
-      .text((d) => this.getCellText(d))
+      .text((d: OriginDestination) => this.getCellText(d))
       .style("text-anchor", "middle")
       .style("alignment-baseline", "middle")
       .style("font-size", "10px")
