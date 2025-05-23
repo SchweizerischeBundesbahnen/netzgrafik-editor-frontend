@@ -4,8 +4,8 @@
     <sbb-expansion-panel-header>{{ 'app.view.editor-side-view.editor-tools-view-component.export' | translate }}</sbb-expansion-panel-header>
     <button
       class="TrainrunDialog EditorToolButton"
-      (click)="onExportNetzgrafikSVG()"
-      [title]="'app.view.editor-side-view.editor-tools-view-component.export-netzgrafik-as-svg' | translate"
+      (click)="onExportContainerAsSVG()"
+      [title]="'app.view.editor-side-view.editor-tools-view-component.export-container-as-svg' | translate: {'container': getContainerName() }"
     >
       <sbb-icon svgIcon="picture-small"></sbb-icon>
     </button>
@@ -13,8 +13,8 @@
     <br />
     <button
       class="TrainrunDialog EditorToolButton"
-      (click)="onExportNetzgrafikPNG()"
-      [title]="'app.view.editor-side-view.editor-tools-view-component.export-netzgrafik-as-png' | translate"
+      (click)="onExportContainerAsPNG()"
+      [title]="'app.view.editor-side-view.editor-tools-view-component.export-container-as-png' | translate: {'container': getContainerName() }"
     >
       <sbb-icon svgIcon="camera-small"></sbb-icon>
     </button>
@@ -22,8 +22,8 @@
     <br />
     <button
       class="TrainrunDialog EditorToolButton"
-      (click)="onPrintNetzgrafik()"
-      [title]="'app.view.editor-side-view.editor-tools-view-component.print-netzgrafik' | translate"
+      (click)="onPrintContainer()"
+      [title]="'app.view.editor-side-view.editor-tools-view-component.print-container' | translate: {'container': getContainerName() }"
     >
       <sbb-icon svgIcon="printer-small"></sbb-icon>
     </button>
