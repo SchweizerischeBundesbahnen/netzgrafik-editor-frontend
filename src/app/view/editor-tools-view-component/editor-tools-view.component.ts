@@ -375,15 +375,18 @@ export class EditorToolsViewComponent {
           return;
         }
         const cellSize = 30;
-        const matrixSize = cellSize * this.originDestinationService.getODOutputNodes().length;
-        // add additional space for the labels
+        const nodeNames = this.originDestinationService.getODOutputNodes().map(n => n.getBetriebspunktName());
+        const longestLabelLength = nodeNames.reduce((max, name) => Math.max(max, name.length), 0);
+        const approxCharWidth = 12;
+        const labelPadding = longestLabelLength * approxCharWidth;
+        const matrixSize = cellSize * nodeNames.length;
         param = {
           encoderOptions: 1.0,
           scale: 1.0,
-          left: -40,
-          top: 20,
-          width: matrixSize + 70,
-          height: matrixSize + 70,
+          left: -labelPadding,
+          top: -labelPadding,
+          width: matrixSize + 2 * labelPadding,
+          height: matrixSize + 2 * labelPadding,
           backgroundColor: this.uiInteractionService.getActiveTheme().backgroundColor,
         };
         break;
