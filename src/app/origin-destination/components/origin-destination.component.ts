@@ -85,6 +85,10 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
     this.uiInteractionService.zoomOutObservable
       .pipe(takeUntil(this.destroyed$))
       .subscribe((zoomCenter: Vec2D) => this.controller.zoomOut(zoomCenter));
+
+    this.uiInteractionService.zoomResetObservable
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((zoomCenter: Vec2D) => this.controller.zoomReset(zoomCenter));
   }
 
   rendermatrixOD(nodeNames: string[]) {
@@ -249,11 +253,6 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .style("pointer-events", "none")
       .style("user-select", "none")
       .style("fill", "white");
-  }
-
-  @HostListener("wheel", ["$event"])
-  public onScroll(event: WheelEvent) {
-    console.log("event", event);
   }
 
   private createSvgMouseControllerObserver(): SVGMouseControllerObserver {

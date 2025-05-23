@@ -35,6 +35,8 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
 
   public zoomFactor = 100;
   public streckengrafikZoomFactor = 0;
+  // Remember the zoom factor for netzgrafik when switching (e.g. to origin-destination).
+  public mainZoomFactor = 100;
 
   public isWritable$ = this.versionControlService.variant$.pipe(
     map((v) => v?.isWritable),
@@ -273,7 +275,9 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
     if (editorMode === EditorMode.OriginDestination) {
       this.uiInteractionService.showNetzgrafik();
       this.uiInteractionService.setEditorMode(EditorMode.NetzgrafikEditing);
+      this.zoomFactor = this.mainZoomFactor;
     } else {
+      this.mainZoomFactor = this.zoomFactor;
       this.uiInteractionService.showOriginDestination();
       this.uiInteractionService.setEditorMode(EditorMode.OriginDestination);
     }
