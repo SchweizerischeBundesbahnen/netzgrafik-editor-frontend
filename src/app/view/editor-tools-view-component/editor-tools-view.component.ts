@@ -372,13 +372,16 @@ export class EditorToolsViewComponent {
         if (htmlElementToExport === null) {
           return;
         }
+        const cellSize = 30;
+        const matrixSize = cellSize * this.originDestinationService.getODOutputNodes().length;
+        // add additional space for the labels
         param = {
           encoderOptions: 1.0,
           scale: 1.0,
-          left: htmlElementToExport.offsetWidth / 3,
-          top: 80,
-          width: htmlElementToExport.offsetWidth,
-          height: htmlElementToExport.offsetHeight,
+          left: -40,
+          top: 20,
+          width: matrixSize + 70,
+          height: matrixSize + 70,
           backgroundColor: this.uiInteractionService.getActiveTheme().backgroundColor,
         };
         break;
