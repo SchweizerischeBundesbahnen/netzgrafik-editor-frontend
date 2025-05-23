@@ -374,19 +374,16 @@ export class EditorToolsViewComponent {
         if (htmlElementToExport === null) {
           return;
         }
-        const cellSize = 30;
-        const nodeNames = this.originDestinationService.getODOutputNodes().map(n => n.getBetriebspunktName());
-        const longestLabelLength = nodeNames.reduce((max, name) => Math.max(max, name.length), 0);
-        const approxCharWidth = 12;
-        const labelPadding = longestLabelLength * approxCharWidth;
-        const matrixSize = cellSize * nodeNames.length;
+        const group = document.getElementById("zoom-group");
+        const bbox = (group as unknown as SVGGElement).getBBox();
+        const padding = 10;
         param = {
           encoderOptions: 1.0,
           scale: 1.0,
-          left: -labelPadding,
-          top: -labelPadding,
-          width: matrixSize + 2 * labelPadding,
-          height: matrixSize + 2 * labelPadding,
+          left: bbox.x - padding,
+          top: bbox.y - padding,
+          width: bbox.width + 2 * padding,
+          height: bbox.height + 2 * padding,
           backgroundColor: this.uiInteractionService.getActiveTheme().backgroundColor,
         };
         break;
