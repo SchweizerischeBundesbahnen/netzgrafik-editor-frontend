@@ -178,8 +178,8 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       .style("pointer-events", "none");
 
     // Three function that change the tooltip when user hover / move / leave a cell
-    const mouseover = function (_d) {
-      if (_d.found) {
+    const mouseover = function (d: OriginDestination) {
+      if (d.found) {
         tooltip.style("opacity", 1);
         d3.select(this)
           .style("stroke", "black")
@@ -188,10 +188,10 @@ export class OriginDestinationComponent implements OnInit, OnDestroy {
       }
 
       // Highlight axis labels in bold when hovering over a cell
-      d3.selectAll(`[data-origin-label="${_d.origin}"]`)
+      d3.selectAll(`[data-origin-label="${d.origin}"]`)
         .style("font-weight", "bold")
         .style("font-size", "12px");
-      d3.selectAll(`[data-destination-label="${_d.destination}"]`)
+      d3.selectAll(`[data-destination-label="${d.destination}"]`)
         .style("font-weight", "bold")
         .style("font-size", "12px");
     };
