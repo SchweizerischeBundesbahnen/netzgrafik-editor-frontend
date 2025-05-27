@@ -1,3 +1,4 @@
+import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
 import {PathItem} from "./pathItem";
 
 export class TrainrunItem {
@@ -11,6 +12,7 @@ export class TrainrunItem {
     public categoryShortName: string,
     public colorRef: string,
     public pathItems: PathItem[],
+    public trainrunDirection?: TrainrunDirection,
   ) {}
 
   equal(trainrunItem: TrainrunItem) {
@@ -26,7 +28,8 @@ export class TrainrunItem {
       this.title === trainrunItem.title &&
       this.categoryShortName === trainrunItem.categoryShortName &&
       this.colorRef === trainrunItem.colorRef &&
-      this.equalPathItem(this.pathItems, trainrunItem.pathItems)
+      this.equalPathItem(this.pathItems, trainrunItem.pathItems) &&
+      this.trainrunDirection === trainrunItem.trainrunDirection
     );
   }
 

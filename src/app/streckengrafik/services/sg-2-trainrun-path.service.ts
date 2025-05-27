@@ -71,6 +71,7 @@ export class Sg2TrainrunPathService implements OnDestroy {
       this.addNodesSegmentRelation(this.getPaths(trainrunItem)),
       [],
       this.sgStopService.countPlus(),
+      trainrunItem.trainrunDirection,
     );
   }
 

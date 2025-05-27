@@ -1,3 +1,4 @@
+import { TrainrunDirection } from "src/app/data-structures/business.data.structures";
 import {SgPath} from "./sg-path";
 import {SgTrainrun} from "./sg-trainrun";
 
@@ -14,5 +15,6 @@ export class SgSelectedTrainrun {
     public paths: SgPath[],
     public trainruns: SgTrainrun[],
     public counter: number,
+    public trainrunDirection?: TrainrunDirection,
   ) {}
 }
