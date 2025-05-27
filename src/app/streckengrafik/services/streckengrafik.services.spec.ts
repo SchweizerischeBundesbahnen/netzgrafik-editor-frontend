@@ -535,6 +535,8 @@ describe("StreckengrafikServicesTests", () => {
       toNode.getArrivalConsecutiveTime(trainrunSection),
       trainrunSection.getNumberOfStops(),
       new TrackData(1),
+      false,
+      trainrunSection.getIsRunningBackward()
     );
 
     expect(pathSection.xPathFix()).toBe(false);
@@ -572,6 +574,8 @@ describe("StreckengrafikServicesTests", () => {
       fromNode.getBetriebspunktName(),
       1,
       new TrackData(1),
+      false,
+      pathSection.isRunningBackward
     );
     clonedPS1.arrivalPathNode = new PathNode(
       pathSection.departureTime,
@@ -580,6 +584,8 @@ describe("StreckengrafikServicesTests", () => {
       toNode.getBetriebspunktName(),
       1,
       new TrackData(1),
+      false,
+      pathSection.isRunningBackward
     );
 
     clonedPS1.backward = true;

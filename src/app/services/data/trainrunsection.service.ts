@@ -2,6 +2,7 @@ import {TrainrunSection} from "../../models/trainrunsection.model";
 import {
   NodeDto,
   TrainrunCategoryHaltezeit,
+  TrainrunDirection,
   TrainrunSectionDto,
 } from "../../data-structures/business.data.structures";
 import {Node} from "../../models/node.model";
@@ -658,6 +659,20 @@ export class TrainrunSectionService implements OnDestroy {
       this.trainrunSectionsUpdated();
     }
   }
+
+  updateTrainrunSectionIsRunningBackward() {
+    this.trainrunSectionsStore.trainrunSections.forEach((trainrunSection) => {
+      const sourceNode = trainrunSection.getSourceNode();
+      const targetNode = trainrunSection.getTargetNode();
+      const isTargetRight = GeneralViewFunctions.getRightOrBottomNode(sourceNode, targetNode) === targetNode;
+      const trainrunDirection = trainrunSection.getTrainrun().getTrainrunDirection();
+
+      // Indicates if the trainrun was drawn from left to right (forward) or right to left (backward) /!\ not the same as the trainrun direction 
+      const isTrainRunningBackward = trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD && !isTargetRight ||
+        trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD && isTargetRight;
+      trainrunSection.setIsRunningBackward(isTrainRunningBackward);
+    });
+  };
 
   retrieveTravelTime(sourceNodeId: number, targetNodeId: number, trainrun: Trainrun): number {
     const foundTrainruns = this.getTrainrunSections().filter(

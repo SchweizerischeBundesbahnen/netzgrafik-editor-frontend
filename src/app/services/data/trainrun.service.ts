@@ -25,6 +25,7 @@ import {Transition} from "../../models/transition.model";
 import {Port} from "../../models/port.model";
 import {Connection} from "../../models/connection.model";
 import {Operation, OperationType, TrainrunOperation} from "../../models/operation.model";
+import {TrainrunSectionTimesService} from "./trainrun-section-times.service";
 
 @Injectable({
   providedIn: "root",
@@ -41,6 +42,7 @@ export class TrainrunService {
   private dataService: DataService = null;
   private nodeService: NodeService = null;
   private trainrunSectionService: TrainrunSectionService = null;
+  private trainrunSectionTimesService: TrainrunSectionTimesService = null;
 
   constructor(
     private logService: LogService,
@@ -60,6 +62,12 @@ export class TrainrunService {
     trainrunSectionService: TrainrunSectionService,
   ) {
     this.trainrunSectionService = trainrunSectionService;
+  }
+
+  public setTrainrunSectionTimesService(
+    trainrunSectionTimesService: TrainrunSectionTimesService,
+  ) {
+    this.trainrunSectionTimesService = trainrunSectionTimesService;
   }
 
   setTrainrunData(trainrunsDto: TrainrunDto[]) {

@@ -16,6 +16,7 @@ import {TrainrunBranchType} from "../model/enum/trainrun-branch-type-type";
 import {PathItem} from "../model/pathItem";
 import {TrackData} from "../model/trackData";
 import {Sg2TrainrunPathService} from "./sg-2-trainrun-path.service";
+import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
 
 @Injectable({
   providedIn: "root",
@@ -84,26 +85,87 @@ export class Sg3TrainrunsService implements OnDestroy {
         trainrunItem.colorRef,
         [],
         this.selectedTrainrun,
+        trainrunItem.trainrunDirection,
       );
       const trainrunItems: SgTrainrunItem[] = [];
 
+      const isTrainrunGoingForward =
+        trainrunItem.trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD;
+      const isTrainrunGoingBackward =
+        trainrunItem.trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD;
+
+      // TODO: Ajout d'une fonction pour filtrer les pathItems ?
+      const filteredPathItems = trainrunItem.pathItems.filter((pathItem) => {
+        /** 
+         * Si on va de gauche a droite (!runningBackward):
+         * --> Forward : backward false
+         * --> Backward : backward true
+         * 
+         * Inverse si runningBackward === true
+         */
+        console.log("filtering pathitems -- ", { currentPathitem: pathItem, isTrainrunGoingForward, isTrainrunGoingBackward, allPathItems: trainrunItem.pathItems });
+
+        if(!isTrainrunGoingForward && !isTrainrunGoingBackward) return true;
+
+        if(!pathItem.isRunningBackward){
+          return isTrainrunGoingForward ? pathItem.backward === false : pathItem.backward === true;
+        }
+        if(pathItem.isRunningBackward){
+          const test = isTrainrunGoingForward ? pathItem.backward === true : pathItem.backward === false;
+          console.log("filtering pathitems --> isRunningBackward TRUE == ", {isTrainrunGoingForward, isTrainrunGoingBackward, pathItemIsBackward: pathItem.backward, test});
+          return isTrainrunGoingForward ? pathItem.backward === true : pathItem.backward === false;
+        }
+
+        return true;
+      });
+
+      console.log(" filteredPathItems == ", {filteredPathItems, TrainrunDirection, pathItems: trainrunItem.pathItems});
+
       trainrunItem.pathItems.forEach((pathItem) => {
+      // filteredPathItems.forEach((pathItem) => {
         if (pathItem.isNode()) {
           const pathNodes: SgPathNode[] = this.searchAllPathNodes(
             pathItem.getPathNode(),
           );
+
+          const isEndNode = this.checkIsEndNode(pathItem);
+          let departureTime = pathItem.departureTime;
+          let arrivalTime = pathItem.arrivalTime;
           pathNodes.forEach((pathNode: SgPathNode) => {
+            if (isTrainrunGoingForward) {
+              if (pathNode.departurePathSection === undefined) {
+                console.log(" pathItem forward node fin == ", {pathItem});
+                departureTime = arrivalTime + 4;
+              }
+              if (pathNode.arrivalPathSection === undefined) {
+                console.log(" pathItem forward node debut == ", {pathItem});
+                arrivalTime = pathItem.departureTime - 4;
+              }
+            }
+
+            if (isTrainrunGoingBackward) {
+              if (pathNode.arrivalPathSection === undefined) {
+                console.log(" pathItem backward node fin == ", {pathItem});
+                departureTime = arrivalTime + 4;
+              }
+              if (pathNode.departurePathSection === undefined) {
+                console.log(" pathItem backward node debut == ", {pathItem});
+                arrivalTime = pathItem.departureTime - 4;
+              }
+            }
+
             const trainrunNode = new SgTrainrunNode(
               pathNode.index,
               pathNode.nodeId,
               pathNode.nodeShortName,
               trainrunItem.trainrunId,
-              pathItem.departureTime,
-              pathItem.arrivalTime,
+              departureTime,
+              arrivalTime,
+              // pathItem.departureTime - 2,
               pathItem.backward,
               new TrackData(this.getTrack(pathItem)),
               pathNode,
-              this.checkIsEndNode(pathItem),
+              isEndNode,
             );
             pathNode.trainrunNodes.push(trainrunNode);
             trainrunItems.push(trainrunNode);

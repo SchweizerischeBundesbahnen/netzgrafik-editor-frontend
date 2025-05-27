@@ -254,4 +254,12 @@ export class TrainRunItemComponent
     // unique
     this.offsets = this.offsets.filter((v, i, a) => a.indexOf(v) === i);
   }
+
+  // TODO: a retirer si on garde le filtre au render dans sg-3
+  // isTrainrunSectionDisplayed(trainrunItem: SgTrainrunItem): boolean {
+  //   const trainrunDirection = this.trainrun.selectedTrainrun.trainrunDirection;
+  //   return trainrunDirection === TrainrunDirection.ROUND_TRIP
+  //     || trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD && !trainrunItem.backward
+  //     || trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD && trainrunItem.backward;
+  // }
 }
