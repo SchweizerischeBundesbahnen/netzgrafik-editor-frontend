@@ -26726,295 +26726,344 @@
       "id": 5,
       "name": "10",
       "categoryId": 1,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 6,
       "name": "20",
       "categoryId": 1,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 7,
       "name": "40",
       "categoryId": 1,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 8,
       "name": "50",
       "categoryId": 1,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 9,
       "name": "20",
       "categoryId": 3,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 12,
       "name": "X",
       "categoryId": 1,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 13,
       "name": "1",
       "categoryId": 2,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 14,
       "name": "X",
       "categoryId": 2,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 15,
       "name": "X",
       "categoryId": 2,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 16,
       "name": "20",
       "categoryId": 1,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 17,
       "name": "X",
       "categoryId": 3,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 18,
       "name": "X",
       "categoryId": 3,
-      "frequencyId": 0
+      "frequencyId": 0,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 20,
       "name": "30",
       "categoryId": 1,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 21,
       "name": "X",
       "categoryId": 2,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 22,
       "name": "X",
       "categoryId": 1,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 23,
       "name": "X",
       "categoryId": 3,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 24,
       "name": "X",
       "categoryId": 1,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 26,
       "name": "X",
       "categoryId": 2,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 27,
       "name": "X",
       "categoryId": 3,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 28,
       "name": "X",
       "categoryId": 3,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 29,
       "name": "X",
       "categoryId": 3,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 30,
       "name": "X20",
       "categoryId": 3,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 31,
       "name": "1",
       "categoryId": 1,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 32,
       "name": "X",
       "categoryId": 2,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 33,
       "name": "X",
       "categoryId": 3,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 34,
       "name": "X",
       "categoryId": 2,
-      "frequencyId": 0
+      "frequencyId": 0,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 35,
       "name": "X",
       "categoryId": 3,
-      "frequencyId": 0
+      "frequencyId": 0,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 37,
       "name": "X",
       "categoryId": 3,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 39,
       "name": "X",
       "categoryId": 1,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 40,
       "name": "X",
       "categoryId": 3,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 41,
       "name": "1",
       "categoryId": 1,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 42,
       "name": "X",
       "categoryId": 1,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 43,
       "name": "X",
       "categoryId": 3,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 44,
       "name": "X",
       "categoryId": 3,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 45,
       "name": "30",
       "categoryId": 1,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 47,
       "name": "60",
       "categoryId": 1,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 48,
       "name": "X",
       "categoryId": 3,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 49,
       "name": "X",
       "categoryId": 3,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 50,
       "name": "X",
       "categoryId": 1,
-      "frequencyId": 3
+      "frequencyId": 3,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 51,
       "name": "X",
       "categoryId": 2,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 53,
       "name": "X",
       "categoryId": 3,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 54,
       "name": "80",
       "categoryId": 5,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 55,
       "name": "90",
       "categoryId": 5,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 56,
       "name": "30",
       "categoryId": 5,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 57,
       "name": "40",
       "categoryId": 5,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 58,
       "name": "X",
       "categoryId": 2,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 59,
       "name": "X",
       "categoryId": 2,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 60,
       "name": "X",
       "categoryId": 3,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     },
     {
       "id": 62,
       "name": "X",
       "categoryId": 3,
-      "frequencyId": 2
+      "frequencyId": 2,
+      "trainrunDirection": "round-trip"
     }
   ],
   "resources": [],
