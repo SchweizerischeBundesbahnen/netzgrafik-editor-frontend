@@ -2,6 +2,7 @@ import {TrainrunSection} from "../../models/trainrunsection.model";
 import {
   NodeDto,
   TrainrunCategoryHaltezeit,
+  TrainrunDirection,
   TrainrunSectionDto,
 } from "../../data-structures/business.data.structures";
 import {Node} from "../../models/node.model";
@@ -718,6 +719,10 @@ export class TrainrunSectionService implements OnDestroy {
       }
     }
 
+    // If the target node is on the right/bottom side, the trainrun section is going in the "right way"
+    const isTargetRight = GeneralViewFunctions.getRightOrBottomNode(sourceNode, targetNode) === targetNode;
+    trainrunSection.setIsRunningBackward(!isTargetRight);
+
     trainrunSection.setSourceAndTargetNodeReference(sourceNode, targetNode);
     this.trainrunSectionsStore.trainrunSections.push(trainrunSection);
     this.logger.log(
@@ -1252,6 +1257,9 @@ export class TrainrunSectionService implements OnDestroy {
     );
     trainrunSection.setNumberOfStops(
       existingTrainrunSection.getNumberOfStops(),
+    );
+    trainrunSection.setIsRunningBackward(
+      existingTrainrunSection.getIsRunningBackward(),
     );
     this.trainrunSectionsStore.trainrunSections.push(trainrunSection);
     return trainrunSection;

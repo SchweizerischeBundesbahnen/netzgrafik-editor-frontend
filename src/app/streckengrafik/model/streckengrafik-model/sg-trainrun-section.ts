@@ -30,6 +30,7 @@ export class SgTrainrunSection implements SgTrainrunItem {
     public unrollOnlyEvenFrequencyOffsets = 0,
     public maxUnrollOnlyEvenFrequencyOffsets = 0,
     public minimumHeadwayTime = 2,
+    public isRunningBackward?: boolean,
   ) {
     this.id = SgTrainrunSection.currentId;
     SgTrainrunSection.currentId++;
@@ -65,6 +66,10 @@ export class SgTrainrunSection implements SgTrainrunItem {
 
   getStartposition(): number {
     return this.pathSection.startPosition;
+  }
+
+  getIsRunningBackward(): boolean {
+    return this.isRunningBackward;
   }
 
   checkUnrollAllowed(offset: number): boolean {
