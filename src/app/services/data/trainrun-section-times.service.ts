@@ -55,6 +55,7 @@ export class TrainrunSectionTimesService {
     this.trainrunSectionHelper = new TrainrunsectionHelper(
       this.trainrunService,
     );
+    this.trainrunService.setTrainrunSectionTimesService(this);
   }
 
   public setTrainrunSection(trainrunSection: TrainrunSection) {

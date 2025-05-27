@@ -317,6 +317,7 @@ export class Sg6TrackService implements OnDestroy {
           nDistanceCells,
         ),
       );
+      console.log("tracksMatrix == ", tracksMatrix);
     }
     return sectionsTracks;
   }
