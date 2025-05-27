@@ -10,6 +10,7 @@ export interface SgTrainrunItem {
   backward: boolean;
   minimumHeadwayTime: number;
   unrollOnlyEvenFrequencyOffsets: number;
+  isRunningBackward?: boolean;
 
   isNode(): boolean;
 
@@ -26,6 +27,8 @@ export interface SgTrainrunItem {
   getStartposition(): number;
 
   getId(): number;
+  
+  getIsRunningBackward(): boolean;
 
   checkUnrollAllowed(offset: number): boolean;
 

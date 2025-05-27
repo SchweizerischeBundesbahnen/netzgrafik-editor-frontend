@@ -10,6 +10,7 @@ export interface PathItem {
   trainrunBranchType: TrainrunBranchType;
   isPartOfTemplatePath: TrainrunTemplatePathAlignmentType;
   oppDirectionTemplatePath: boolean;
+  isRunningBackward: boolean;
 
   xPath(): number;
 
