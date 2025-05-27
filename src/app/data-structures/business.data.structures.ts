@@ -199,7 +199,7 @@ export interface TrainrunDto {
   frequencyId: number; // reference to the trainrun frequency
   trainrunTimeCategoryId: number; // reference to the trainrun time category
   labelIds: number[];
-  trainrunDirection?: TrainrunDirection; // direction of the trainrun
+  trainrunDirection: TrainrunDirection; // direction of the trainrun
 }
 
 /**

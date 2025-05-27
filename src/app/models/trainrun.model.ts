@@ -35,7 +35,7 @@ export class Trainrun {
       frequencyId,
       trainrunTimeCategoryId,
       labelIds,
-      trainrunDirection,
+      trainrunDirection = TrainrunDirection.ROUND_TRIP, // temporary, to allow migration of old trainruns
     }: TrainrunDto = {
       id: Trainrun.incrementId(),
       name: Trainrun.DEFAULT_TRAINRUN_NAME,
