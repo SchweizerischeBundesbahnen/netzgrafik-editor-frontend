@@ -122,11 +122,24 @@
             </svg>
           </div>
 
-          <div class="NodeLeftArrival"></div>
-          <div class="NodeLeftDeparture"></div>
-          <div class="NodeRightArrival"></div>
-          <div class="NodeRightDeparture"></div>
-          <div class="TravelTime"></div>
+          <div
+            class="NodeLeftArrival"
+            *ngIf="isRoundTripOrTargetIsLeft()"
+          ></div>
+          <div
+            class="NodeLeftDeparture"
+            *ngIf="isRoundTripOrTargetIsRight()"
+          ></div>
+          <div
+            class="NodeRightArrival"
+            *ngIf="isRoundTripOrTargetIsRight()"
+          ></div>
+          <div
+            class="NodeRightDeparture"
+            *ngIf="isRoundTripOrTargetIsLeft()"
+          ></div>
+          <div class="TravelTime" *ngIf="isRoundTripOrTargetIsRight()"></div>
+          <div class="ReturnTravelTime" *ngIf="isRoundTripOrTargetIsLeft() && !isSymmetric"></div>
 
           <div
             class="focusguard"
@@ -141,7 +154,7 @@
             (focus)="setFocusToBeginningOfLoop()"
           ></div>
 
-          <div class="NodeLeftArrivalMinus">
+          <div class="NodeLeftArrivalMinus" *ngIf="isRoundTripOrTargetIsLeft()">
             <button
               tabindex="-1"
               mode="ghost"
@@ -153,7 +166,7 @@
               -
             </button>
           </div>
-          <div class="NodeLeftArrivalTime">
+          <div class="NodeLeftArrivalTime" *ngIf="isRoundTripOrTargetIsLeft()">
             <input
               tabindex="6"
               id="NodeLeftArrivalTimeInputElement"
@@ -172,7 +185,7 @@
             />
           </div>
 
-          <div class="NodeLeftArrivalPlus">
+          <div class="NodeLeftArrivalPlus" *ngIf="isRoundTripOrTargetIsLeft()">
             <button
               tabindex="-1"
               mode="ghost"
@@ -185,7 +198,10 @@
             </button>
           </div>
 
-          <div class="NodeLeftDepartureMinus">
+          <div
+            class="NodeLeftDepartureMinus"
+            *ngIf="isRoundTripOrTargetIsRight()"
+          >
             <button
               tabindex="-1"
               mode="ghost"
@@ -197,7 +213,10 @@
               -
             </button>
           </div>
-          <div class="NodeLeftDepartureTime">
+          <div
+            class="NodeLeftDepartureTime"
+            *ngIf="isRoundTripOrTargetIsRight()"
+          >
             <input
               tabindex="2"
               id="NodeLeftDepartureTimeInputElement"
@@ -215,7 +234,10 @@
               #leftDepartureTimeInputElement
             />
           </div>
-          <div class="NodeLeftDeparturePlus">
+          <div
+            class="NodeLeftDeparturePlus"
+            *ngIf="isRoundTripOrTargetIsRight()"
+          >
             <button
               tabindex="-1"
               mode="ghost"
@@ -228,7 +250,10 @@
             </button>
           </div>
 
-          <div class="NodeRightArrivalMinus">
+          <div
+            class="NodeRightArrivalMinus"
+            *ngIf="isRoundTripOrTargetIsRight()"
+          >
             <button
               tabindex="-1"
               mode="ghost"
@@ -240,7 +265,10 @@
               -
             </button>
           </div>
-          <div class="NodeRightArrivalTime">
+          <div
+            class="NodeRightArrivalTime"
+            *ngIf="isRoundTripOrTargetIsRight()"
+          >
             <input
               tabindex="4"
               id="NodeRightArrivalTimeInputElement"
@@ -258,7 +286,10 @@
               #rightArrivalTimeInputElement
             />
           </div>
-          <div class="NodeRightArrivalPlus">
+          <div
+            class="NodeRightArrivalPlus"
+            *ngIf="isRoundTripOrTargetIsRight()"
+          >
             <button
               tabindex="-1"
               mode="ghost"
@@ -271,7 +302,10 @@
             </button>
           </div>
 
-          <div class="NodeRightDepartureMinus">
+          <div
+            class="NodeRightDepartureMinus"
+            *ngIf="isRoundTripOrTargetIsLeft()"
+          >
             <button
               tabindex="-1"
               mode="ghost"
@@ -283,7 +317,10 @@
               -
             </button>
           </div>
-          <div class="NodeRightDepartureTime">
+          <div
+            class="NodeRightDepartureTime"
+            *ngIf="isRoundTripOrTargetIsLeft()"
+          >
             <input
               tabindex="5"
               id="NodeRightDepartureTimeInputElement"
@@ -302,7 +339,10 @@
               #rightDepartureTimeInputElement
             />
           </div>
-          <div class="NodeRightDeparturePlus">
+          <div
+            class="NodeRightDeparturePlus"
+            *ngIf="isRoundTripOrTargetIsLeft()"
+          >
             <button
               tabindex="-1"
               mode="ghost"
@@ -315,19 +355,19 @@
             </button>
           </div>
 
-          <div class="TravelTimeMinus">
+          <div class="TravelTimeMinus" *ngIf="isRoundTripOrTargetIsRight()">
             <button
               tabindex="-1"
               mode="ghost"
               class="ButtonMinus"
               (click)="
-                trainrunSectionTimesService.onInputTravelTimeElementButtonMinus()
+                trainrunSectionTimesService.onTravelTimeButtonMinus()
               "
             >
               -
             </button>
           </div>
-          <div class="TravelTimeTime">
+          <div class="TravelTimeTime" *ngIf="isRoundTripOrTargetIsRight()">
             <ng-container>
               <input
                 tabindex="3"
@@ -348,19 +388,71 @@
                   trainrunSectionTimesService.getTimeStructure().travelTime
                 "
                 (change)="
-                  trainrunSectionTimesService.onInputTravelTimeChanged()
+                  trainrunSectionTimesService.onTravelTimeChanged()
                 "
                 #travelTimeInputElement
               />
             </ng-container>
           </div>
-          <div class="TravelTimePlus">
+          <div class="TravelTimePlus" *ngIf="isRoundTripOrTargetIsRight()">
             <button
               tabindex="-1"
               mode="ghost"
               class="ButtonPlus"
               (click)="
-                trainrunSectionTimesService.onInputTravelTimeElementButtonPlus()
+                trainrunSectionTimesService.onTravelTimeButtonPlus()
+              "
+            >
+              +
+            </button>
+          </div>
+
+          <div class="ReturnTravelTimeMinus" *ngIf="isRoundTripOrTargetIsLeft() && !isSymmetric">
+            <button
+              tabindex="-1"
+              mode="ghost"
+              class="ButtonMinus"
+              (click)="
+                trainrunSectionTimesService.onReturnTravelTimeButtonMinus()
+              "
+            >
+              -
+            </button>
+          </div>
+          <div class="ReturnTravelTimeTime" *ngIf="isRoundTripOrTargetIsLeft() && !isSymmetric">
+            <ng-container>
+              <input
+                tabindex="3"
+                id="ReturnTravelTimeTimeInputElement"
+                [ngClass]="{
+                  InputTravelTimeElement:
+                    !trainrunSectionTimesService.getHighlightReturnTravelTimeElement(),
+                  InputTravelTimeElementHighlighted:
+                    trainrunSectionTimesService.getHighlightReturnTravelTimeElement()
+                }"
+                type="number"
+                min="0.0001"
+                sbbInput
+                spellcheck="false"
+                pattern="^[0-9.]*"
+                minlength="1"
+                [(ngModel)]="
+                  trainrunSectionTimesService.getTimeStructure().returnTravelTime
+                "
+                (change)="
+                  trainrunSectionTimesService.onReturnTravelTimeChanged()
+                "
+                #returnTravelTimeInputElement
+              />
+            </ng-container>
+          </div>
+          <div class="ReturnTravelTimePlus" *ngIf="isRoundTripOrTargetIsLeft() && !isSymmetric">
+            <button
+              tabindex="-1"
+              mode="ghost"
+              class="ButtonPlus"
+              (click)="
+                trainrunSectionTimesService.onReturnTravelTimeButtonPlus()
               "
             >
               +
@@ -466,6 +558,14 @@
       </td>
     </tr>
   </table>
+  <div class="sbb-checkbox-group-horizontal" *ngIf="getIsRoundTrip()">
+    <sbb-checkbox [(ngModel)]="isSymmetric" (change)="onSymmetryChanged()">
+      {{
+        "app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.enableSymmetry"
+          | translate
+      }}
+    </sbb-checkbox>
+  </div>
 </div>
 <div sbbDialogActions [class]="getContentFooterClassTag()">
   <button
@@ -473,7 +573,10 @@
     *ngIf="trainrunSectionTimesService.getShowWarningTwoLocks() === true"
     disabled
   >
-    {{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-section-tab.warningTwoLocks' | translate }}
+    {{
+      "app.view.dialogs.trainrun-and-section-dialog.trainrun-section-tab.warningTwoLocks"
+        | translate
+    }}
   </button>
   <button
     class="FunctionButton"
@@ -482,7 +585,10 @@
     (click)="
       trainrunSectionTimesService.onPropagateTimeLeft(selectedTrainrunSection)
     "
-    [title]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-section-tab.propagateTimesToLeft' | translate"
+    [title]="
+      'app.view.dialogs.trainrun-and-section-dialog.trainrun-section-tab.propagateTimesToLeft'
+        | translate
+    "
   >
     <sbb-icon
       svgIcon="arrow-long-left-medium"
@@ -498,7 +604,10 @@
     (click)="
       trainrunSectionTimesService.onPropagateTimeRight(selectedTrainrunSection)
     "
-    [title]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-section-tab.propagateTimesToRight' | translate"
+    [title]="
+      'app.view.dialogs.trainrun-and-section-dialog.trainrun-section-tab.propagateTimesToRight'
+        | translate
+    "
   >
     <sbb-icon
       svgIcon="arrow-long-right-medium"
