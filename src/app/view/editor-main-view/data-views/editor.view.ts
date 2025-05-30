@@ -619,7 +619,8 @@ export class EditorView implements SVGMouseControllerObserver {
   setEditorMode(mode: EditorMode) {
     if (
       mode !== EditorMode.StreckengrafikEditing &&
-      mode !== EditorMode.NetzgrafikEditing
+      mode !== EditorMode.NetzgrafikEditing &&
+      mode !== EditorMode.OriginDestination
     ) {
       this.unselectAllNodes();
       this.unselectAllNotes();
