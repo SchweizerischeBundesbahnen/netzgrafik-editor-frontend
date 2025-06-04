@@ -5,4 +5,5 @@ export enum EditorMode {
   MultiNodeMoving,
   NoteEditing,
   Analytics,
+  OriginDestination,
 }

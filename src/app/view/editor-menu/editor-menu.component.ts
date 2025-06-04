@@ -35,6 +35,8 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
 
   public zoomFactor = 100;
   public streckengrafikZoomFactor = 0;
+  // Remember the zoom factor for netzgrafik when switching (e.g. to origin-destination).
+  public mainZoomFactor = 100;
 
   public isWritable$ = this.versionControlService.variant$.pipe(
     map((v) => v?.isWritable),
@@ -100,7 +102,7 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
     this.destroyed.complete();
   }
 
-  getVariantIsWritable() : boolean {
+  getVariantIsWritable(): boolean {
     return this.versionControlService.getVariantIsWritable();
   }
 
@@ -226,7 +228,10 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
   onStreckengrafik() {
     const editorMode = this.uiInteractionService.getEditorMode();
     this.uiInteractionService.disableMultiSelectedNodesCorridor();
-    if (editorMode !== EditorMode.NetzgrafikEditing && editorMode !== EditorMode.MultiNodeMoving) {
+    if (
+      editorMode !== EditorMode.NetzgrafikEditing &&
+      editorMode !== EditorMode.MultiNodeMoving
+    ) {
       // enforce unselect all nodes
       this.nodeService.unselectAllNodes();
       this.uiInteractionService.showNetzgrafik();
@@ -265,6 +270,55 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
     }
   }
 
+  onOriginDestination() {
+    const editorMode = this.uiInteractionService.getEditorMode();
+
+    // Check if at least 2 nodes are selected
+    const selectedNodes = this.nodeService.getNodes().filter((n: Node) => n.selected());
+    if (this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving && selectedNodes.length < 2){
+      this._notification.open(
+        $localize`:@@app.view.editor-menu.errorOriginDestination:Origin-destination matrix cannot be displayed because less than 2 nodes are selected.`,
+        {
+          type: "error",
+          verticalPosition: "top",
+          duration: 2000,
+        },
+      );
+      return;
+    }
+
+    // If Node details are open and only one node is selected, unselect the node and compute od for all nodes.
+    if (this.uiInteractionService.getEditorMode() !== EditorMode.MultiNodeMoving && selectedNodes.length === 1) {
+      this.nodeService.unselectAllNodes();
+    }
+    
+    if (editorMode === EditorMode.OriginDestination) {
+      this.nodeService.unselectAllNodes();
+      this.uiInteractionService.showNetzgrafik();
+      this.uiInteractionService.setEditorMode(EditorMode.NetzgrafikEditing);
+      this.zoomFactor = this.mainZoomFactor;
+    } else {
+      this.uiInteractionService.closeNodeStammdaten();
+      this.mainZoomFactor = this.zoomFactor;
+      this.uiInteractionService.showOriginDestination();
+      this.uiInteractionService.setEditorMode(EditorMode.OriginDestination);
+    }
+  }
+
+  isOriginDestination(): boolean {
+    return (
+      this.uiInteractionService.getEditorMode() === EditorMode.OriginDestination
+    );
+  }
+
+  getOriginDestinationTitle(): string {
+    if (this.isOriginDestination()) {
+      return $localize`:@@app.view.editor-menu.closeOriginDestination:Close origin-destination matrix`;
+
+    }
+    return $localize`:@@app.view.editor-menu.displayOriginDestination:Display origin-destination matrix`;
+  }
+
   isStreckengrafikEditing(): boolean {
     return (
       this.uiInteractionService.getEditorMode() ===
@@ -273,8 +327,12 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
   }
 
   isNotStreckengrafikAllowed(): boolean {
-    if (this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving) {
-      const nodes = this.nodeService.getNodes().filter((n: Node) => n.selected());
+    if (
+      this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving
+    ) {
+      const nodes = this.nodeService
+        .getNodes()
+        .filter((n: Node) => n.selected());
       return nodes.length < 2;
     }
     return this.trainrunService.getSelectedTrainrun() === null;

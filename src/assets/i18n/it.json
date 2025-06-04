@@ -135,6 +135,29 @@
         "name": "Name"
       }
     },
+    "origin-destination": {
+      "tooltip": {
+        "total-cost": "Total cost",
+        "travel-time": "Travel time",
+        "transfers": "Transfers"
+      },
+      "palette-buttons": {
+        "red": "Red palette",
+        "blue": "Blue palette",
+        "orange": "Orange palette",
+        "gray": "Gray palette"
+      },
+      "color-by-selector": {
+        "total-cost": "Total cost",
+        "travel-time": "Travel time",
+        "transfers": "Transfers"
+      },
+      "display-by-selector": {
+        "total-cost": "Total cost",
+        "travel-time": "Travel time",
+        "transfers": "Transfers"
+      }
+    },
     "utils": {
       "navigation-parameters": {
         "no-project-id": "No project ID available",
@@ -373,6 +396,9 @@
         "note-editor-enabled": "Note editor enabled",
         "analytics-disabled": "Analytics disabled",
         "analytics-enabled": "Analytics enabled",
+        "displayOriginDestination": "Display origin-destination matrix",
+        "closeOriginDestination": "Close origin-destination matrix",
+        "errorOriginDestination": "Origin-destination matrix cannot be displayed because at least 2 nodes have to have been selected.",
         "displayGraphicTimetable": "Display graphic timetable",
         "closeGraphicTimetable": "Close graphic timetable",
         "errorGraphicTimetable": "Graphic timetable cannot be displayed because no trainrun or no nodes have been selected."
@@ -436,13 +462,15 @@
         "editor-tools-view-component": {
           "more-functions": "More functions",
           "export": "Export",
-          "export-netzgrafik-as-svg": "Export netzgrafik as SVG",
+          "export-container-as-svg": "Export as SVG: {$container}",
           "export-as-svg": "Export as SVG",
-          "export-netzgrafik-as-png": "Export netzgrafik as PNG",
+          "export-container-as-png": "Export as PNG: {$container}",
           "export-as-png": "Export as PNG",
-          "print-netzgrafik": "Print netzgrafik",
+          "print-container": "Print: {$container}",
           "print": "Print",
           "netzgrafik": "Netzgrafik",
+          "spaceTimeChart": "Space-time chart",
+          "originDestination": "Origin-destination matrix",
           "export-netzgrafik": "Export netzgrafik",
           "import-netzgrafik-error": "Netzgrafik could not be imported.",
           "export-netzgrafik-as-json": "Export netzgrafik as JSON",
@@ -475,6 +503,7 @@
           "create": "Create",
           "yes": "YES",
           "netzgrafikFile": "networkGraphic",
+          "spaceTimeChartFile": "spaceTimeChart",
           "baseDataFile": "baseData",
           "trainrunFile": "trainrun",
           "originDestinationFile": "originDestination",

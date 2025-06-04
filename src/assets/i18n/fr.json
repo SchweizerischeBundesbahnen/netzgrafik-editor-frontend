@@ -135,6 +135,29 @@
         "name": "Nom"
       }
     },
+    "origin-destination": {
+      "tooltip": {
+        "total-cost": "Coût total",
+        "travel-time": "Temps de parcours",
+        "transfers": "Changements"
+      },
+      "palette-buttons": {
+        "red": "Palette rouge",
+        "blue": "Palette bleue",
+        "orange": "Palette orange",
+        "gray": "Palette grise"
+      },
+      "color-by-selector": {
+        "total-cost": "Coût total",
+        "travel-time": "Temps de parcours",
+        "transfers": "Changements"
+      },
+      "display-by-selector": {
+        "total-cost": "Coût total",
+        "travel-time": "Temps de parcours",
+        "transfers": "Changements"
+      }
+    },
     "utils": {
       "navigation-parameters": {
         "no-project-id": "ID du projet indisponible",
@@ -247,7 +270,7 @@
           "filterableLabels": "Labels filtrables",
           "trainrun-filter-tab": {
             "labels": "Labels",
-            "newLabels" : "Nouveau label...",
+            "newLabels": "Nouveau label...",
             "trainrunDuplicate": "Dupliquer le trajet de train",
             "trainrunDelete": "Supprimer le trajet de train",
             "delete": "Supprimer",
@@ -373,6 +396,9 @@
         "note-editor-enabled": "Editeur de notes activé",
         "analytics-disabled": "Analyse désactivée",
         "analytics-enabled": "Analyse activée",
+        "displayOriginDestination": "Afficher la matrice origine-destination",
+        "closeOriginDestination": "Fermer la matrice origine-destination",
+        "errorOriginDestination": "La matrice origine-destination ne peut être affichée car il faut un minimum de 2 noeuds sélectionnés.",
         "displayGraphicTimetable": "Afficher le graphique espace-temps",
         "closeGraphicTimetable": "Fermer le graphique espace-temps",
         "errorGraphicTimetable": "Le graphique espace-temps ne peut pas être affiché parce qu'aucun trajet de train ou aucun noeud n'a été sélectionné."
@@ -436,13 +462,15 @@
         "editor-tools-view-component": {
           "more-functions": "Plus de fonctionnalités",
           "export": "Exporter",
-          "export-netzgrafik-as-svg": "Exporter le réticulaire au format SVG",
+          "export-container-as-svg": "Exporter au format SVG : {$container}",
           "export-as-svg": "Exporter au format SVG",
-          "export-netzgrafik-as-png": "Exporter le réticulaire au format PNG",
+          "export-container-as-png": "Exporter au format PNG : {$container}",
           "export-as-png": "Exporter au format PNG",
-          "print-netzgrafik": "Imprimer le réticulaire",
+          "print-container": "Imprimer : {$container}",
           "print": "Imprimer",
           "netzgrafik": "Réticulaire",
+          "spaceTimeChart": "Graphique espace-temps",
+          "originDestination": "Matrice origine-destination",
           "export-netzgrafik": "Exporter le réticulaire",
           "export-netzgrafik-as-json": "Exporter le réticulaire au format JSON",
           "import-netzgrafik": "Importer le réticulaire",
@@ -475,6 +503,7 @@
           "create": "Créer",
           "yes": "OUI",
           "netzgrafikFile": "reticulaire",
+          "spaceTimeChartFile": "graphiqueEspaceTemps",
           "baseDataFile": "baseData",
           "trainrunFile": "trains",
           "originDestinationFile": "origineDestination",

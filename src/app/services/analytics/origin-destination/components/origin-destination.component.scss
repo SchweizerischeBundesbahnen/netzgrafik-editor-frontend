@@ -1,0 +1,112 @@
+.matrix-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  #main-origin-destination-container-root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 188px);
+    height: calc(100% - 74px);
+    box-sizing: border-box;
+}
+
+  ::ng-deep svg.main-origin-destination-container {
+    transform: translateX(16px);
+    display: block;
+    max-width: 100%;
+    height: calc(100% - 10px);
+    background: var(--NODE_DOCKABLE);
+    border: solid 1px var(--COLOR_Default);
+  }
+
+  ::ng-deep .tooltip {
+    position: absolute;
+    z-index: 1070;
+    display: block;
+    margin: 0;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+    text-align: start;
+  }
+  .palette-buttons {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+
+    .palette-option {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition:
+        transform 0.1s,
+        border 0.2s;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      &.active {
+        border-color: #000;
+        box-shadow:
+          0 0 0 2px white,
+          0 0 0 3px black;
+      }
+    }
+
+    .gray {
+      background: #a8a8a8;
+    }
+
+    .blue {
+      background: #0079c7;
+    }
+
+    .orange {
+      background: #f27e00;
+    }
+
+    .red {
+      background: #c60018;
+    }
+  }
+  .color-by-selector {
+    position: absolute;
+    top: 24px;
+    right: 0px;
+    padding: 12px 0px;
+    border-radius: 2px;
+    font-size: calc(var(--sbb-font-size) * 0.8);
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    input[type="radio"] {
+      cursor: pointer;
+    }
+  }
+
+  .sbb-checkbox-group-horizontal {
+    position: absolute;
+    bottom: 44px;
+    left: 12px;
+    padding: 8px 8px;
+    border-radius: 4px;
+    column-gap: 8px;
+  }
+}
