@@ -1185,6 +1185,9 @@ export class TrainrunSectionsView {
     ["arrow1", "arrow2"].forEach((_, i) => {
       groupLinesEnter
         .append(StaticDomTags.EDGE_LINE_ARROW_SVG)
+        .attr(StaticDomTags.TAG_HIDDEN, () =>
+          !this.editorView.isFilterTrainrunDirectionArrowsEnabled() ? "" : null
+        )
         .attr("d", (d: TrainrunSectionViewObject) => {
           const tsDirection = d.trainrunSection
             .getTrainrun()
@@ -1892,6 +1895,7 @@ export class TrainrunSectionsView {
             TrainrunSectionText.TrainrunSectionTravelTime,
           ),
           this.getHiddenTagForTime(d, TrainrunSectionText.TrainrunSectionName),
+          !this.editorView.isFilterTrainrunDirectionArrowsEnabled(),
         ),
       );
     });
