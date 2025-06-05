@@ -290,6 +290,7 @@ export interface FilterSettingDto {
   filterNodeLabels: number[]; // labels to filter out (labels only of type - LabelRef: node)
   filterNoteLabels: number[]; // labels to filter out (labels only of type - LabelRef: note)
   filterTrainrunLabels: number[]; // labels to filter out (labels only of type - LabelRef: trainrun)
+  filterTrainrunDirectionArrows: boolean; // flag for trainrun direction arrows (hide/show)
   filterArrivalDepartureTime: boolean; // flag for arrival and departure time filtering (hide/show)
   filterTravelTime: boolean; // flag for travel time filter (hide/show)
   filterTrainrunName: boolean; // flag for trainrun time filter (hide/show)

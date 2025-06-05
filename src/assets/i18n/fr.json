@@ -349,6 +349,8 @@
         "filterable-labels-nodes": "Labels filtrables: Noeuds",
         "filterable-labels-notes": "Labels filtrables: Notes",
         "display": "Affichage",
+        "round-trips": "Aller-retours",
+        "display-trainrun-direction-arrows": "Afficher les flèches de direction des trains",
         "times": "Temps",
         "decimal-displayed": "Nombre de décimales affichées",
         "display-arrival-departure-times": "Afficher les heures de départ et d'arrivée",
