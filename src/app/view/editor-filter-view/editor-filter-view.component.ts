@@ -24,6 +24,7 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
   filterAllEmptyNodes: boolean;
   filterNotes: boolean;
   filterAllNonStopNodes: boolean;
+  filterTrainrunDirectionArrows: boolean;
   filterArrivalDepartureTime: boolean;
   filterShowNonStopTime: boolean;
   filterTravelTime: boolean;
@@ -69,6 +70,8 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
   }
 
   updateFilterData() {
+    this.filterTrainrunDirectionArrows =
+      this.filterService.isFilterTrainrunDirectionArrowsEnabled();
     this.filterArrivalDepartureTime =
       this.filterService.isFilterArrivalDepartureTimeEnabled();
     this.filterShowNonStopTime =
@@ -214,6 +217,14 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
       this.filterService.enableFilterAllNonStopNodes();
     } else {
       this.filterService.disableFilterAllNonStopNodes();
+    }
+  }
+
+  filterTrainrunDirectionArrowsChanged() {
+    if (this.filterTrainrunDirectionArrows) {
+      this.filterService.enableFilterTrainrunDirectionArrows();
+    } else {
+      this.filterService.disableFilterTrainrunDirectionArrows();
     }
   }
 
@@ -430,11 +441,14 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
   onResetDisplayFilter() {
     this.onResetNodeFilter();
     this.onResetNoteFilter();
+    this.filterService.enableFilterTrainrunDirectionArrows();
     this.filterService.enableFilterArrivalDepartureTime();
     this.filterService.enableFilterTravelTime();
     this.filterService.enableFilterTrainrunName();
     this.filterService.enableFilterShowNonStopTime();
     this.filterService.enableFilterConnections();
+    this.filterTrainrunDirectionArrows =
+      this.filterService.isFilterTrainrunDirectionArrowsEnabled();
     this.filterArrivalDepartureTime =
       this.filterService.isFilterArrivalDepartureTimeEnabled();
     this.filterTravelTime = this.filterService.isFilterTravelTimeEnabled();
