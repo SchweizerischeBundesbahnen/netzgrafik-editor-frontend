@@ -116,18 +116,27 @@
       </ng-container>
     </sbb-expansion-panel-header>
 
-    <sbb-label>{{ 'app.view.editor-filter-view.times' | translate }}</sbb-label>
-    <div class="sbb-mt-m">
-      <sbb-form-field [label]="'app.view.editor-filter-view.decimal-displayed' | translate">
-        <input
-          sbbInput
-          type="number"
-          pattern="^[.0-9]*"
-          [(ngModel)]="timeDisplayPrecision"
-          (change)="onTimeDisplayPrecisionChanged()"
-        />
-      </sbb-form-field>
+    <sbb-form-field [label]="'app.view.editor-filter-view.decimal-displayed' | translate">
+      <input
+        sbbInput
+        type="number"
+        pattern="^[.0-9]*"
+        [(ngModel)]="timeDisplayPrecision"
+        (change)="onTimeDisplayPrecisionChanged()"
+      />
+    </sbb-form-field>
+
+    <sbb-label>{{ 'app.view.editor-filter-view.round-trips' | translate }}</sbb-label>
+    <div class="sbb-checkbox-group-vertical">
+      <sbb-checkbox
+        [(ngModel)]="filterTrainrunDirectionArrows"
+        (change)="filterTrainrunDirectionArrowsChanged()"
+        >{{ 'app.view.editor-filter-view.display-trainrun-direction-arrows' | translate }}
+      </sbb-checkbox>
     </div>
+    
+    <br />
+    <sbb-label>{{ 'app.view.editor-filter-view.times' | translate }}</sbb-label>
     <div class="sbb-checkbox-group-vertical">
       <sbb-checkbox
         [(ngModel)]="filterArrivalDepartureTime"

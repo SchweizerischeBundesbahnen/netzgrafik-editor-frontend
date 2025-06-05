@@ -17882,6 +17882,7 @@
         "filterNodeLabels": [],
         "filterNoteLabels": [],
         "filterTrainrunLabels": [],
+        "filterTrainrunDirectionArrows": false,
         "filterArrivalDepartureTime": true,
         "filterTravelTime": true,
         "filterTrainrunName": true,
