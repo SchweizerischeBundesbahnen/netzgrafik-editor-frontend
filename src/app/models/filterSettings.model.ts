@@ -18,6 +18,7 @@ export class FilterSetting {
   public filterNodeLabels: number[];
   public filterNoteLabels: number[];
   public filterTrainrunLabels: number[];
+  public filterTrainrunDirectionArrows;
   public filterArrivalDepartureTime;
   public filterTravelTime;
   public filterTrainrunName;
@@ -41,6 +42,7 @@ export class FilterSetting {
       filterNodeLabels,
       filterNoteLabels,
       filterTrainrunLabels,
+      filterTrainrunDirectionArrows,
       filterArrivalDepartureTime,
       filterTravelTime,
       filterTrainrunName,
@@ -62,6 +64,7 @@ export class FilterSetting {
       filterNodeLabels: [],
       filterNoteLabels: [],
       filterTrainrunLabels: [],
+      filterTrainrunDirectionArrows: true,
       filterArrivalDepartureTime: true,
       filterTravelTime: true,
       filterTrainrunName: true,
@@ -84,6 +87,7 @@ export class FilterSetting {
     this.filterNodeLabels = filterNodeLabels;
     this.filterNoteLabels = filterNoteLabels;
     this.filterTrainrunLabels = filterTrainrunLabels;
+    this.filterTrainrunDirectionArrows = filterTrainrunDirectionArrows;
     this.filterArrivalDepartureTime = filterArrivalDepartureTime;
     this.filterTravelTime = filterTravelTime;
     this.filterTrainrunName = filterTrainrunName;
@@ -163,6 +167,7 @@ export class FilterSetting {
       this.filterNodeLabels.length === 0 &&
       this.filterNoteLabels.length === 0 &&
       this.filterTrainrunLabels.length === 0 &&
+      this.filterTrainrunDirectionArrows === true &&
       this.filterArrivalDepartureTime === true &&
       this.filterTravelTime === true &&
       this.filterTrainrunName === true &&
@@ -188,6 +193,7 @@ export class FilterSetting {
       filterNodeLabels: this.filterNodeLabels,
       filterNoteLabels: this.filterNoteLabels,
       filterTrainrunLabels: this.filterTrainrunLabels,
+      filterTrainrunDirectionArrows: this.filterTrainrunDirectionArrows,
       filterArrivalDepartureTime: this.filterArrivalDepartureTime,
       filterTravelTime: this.filterTravelTime,
       filterTrainrunName: this.filterTrainrunName,
