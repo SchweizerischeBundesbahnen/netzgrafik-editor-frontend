@@ -323,6 +323,8 @@
         "filterable-labels-nodes": "Filterable labels: Nodes",
         "filterable-labels-notes": "Filterable labels: Notes",
         "display": "Display",
+        "round-trips": "Round trips",
+        "display-trainrun-direction-arrows": "Display trainrun direction arrows",
         "times": "Times",
         "decimal-displayed": "Number of decimal place displayed",
         "display-arrival-departure-times": "Display departure and arrival times",
