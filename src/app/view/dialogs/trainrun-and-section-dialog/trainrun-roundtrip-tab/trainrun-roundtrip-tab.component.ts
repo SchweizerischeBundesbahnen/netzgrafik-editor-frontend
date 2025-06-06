@@ -75,7 +75,7 @@ export class TrainrunRoundtripTabComponent implements OnInit, OnDestroy {
 
   onIsOneWayChanged(isChecked: boolean) {
     this.isOneWay = isChecked;
-    if (!isChecked) {
+    if (!isChecked && this.selectedTrainrun.getTrainrunDirection() !== TrainrunDirection.ROUND_TRIP) {
       this.trainrunService.updateTrainrunDirection(
         this.selectedTrainrun,
         TrainrunDirection.ROUND_TRIP,
