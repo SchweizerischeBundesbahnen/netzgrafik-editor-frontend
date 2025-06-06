@@ -203,7 +203,7 @@ export class Node {
         // In some cases the exported json contains ports with references to trainrunsections that do not exist,
         // unfortunately we don't know how this could happen
         // the fix implemented here deletes these ports
-        console.log(
+        console.error(
           "ERROR-fix: initializePortsWithReferencesToTrainrunSections",
           port,
           port.getTrainrunSectionId(),

@@ -1,10 +1,5 @@
 export class TimeFormatter {
   public static formatHHMM(inTime: number) {
-    if (inTime === 0) {
-      console.log(
-        "TODO: TimeFormatter -> private static formatDisplayText(time: TimeLockDto, offset: number): string { ... ",
-      );
-    }
     let time = inTime / 60;
     if (time < 0) {
       time = Math.abs(time) % (24 * 60);

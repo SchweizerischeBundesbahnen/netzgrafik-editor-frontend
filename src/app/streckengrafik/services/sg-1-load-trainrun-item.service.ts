@@ -725,12 +725,6 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
      There is sill an issue in the CODE - if the trainrun passes the second time a node, the in-/out
      branching edge will not all be rendered!
      */
-
-    /*
-    console.log('================================================================================================================');
-    console.log(trainrun, 'trainrunItem', trainrunItem, 'template', templateTrainrunItem);
-    console.log('----------------------------------------------------------------------------------------------------------------');
-     */
     this.classifyPathItem(trainrun, trainrunItem, templateTrainrunItem);
 
     const indicesForward: number[] = [];
@@ -763,7 +757,6 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       }
     });
 
-    // console.log(indicesForward, indicesBackward);
     let swapIndF: number[] = [];
     const collectRotateDirectionF: number[] = [];
     indicesForward.forEach((v) => {
@@ -836,8 +829,6 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     swapIndF = swapIndF.filter((v, i, a) => a.indexOf(v) === i);
     swapIndB = swapIndB.filter((v, i, a) => a.indexOf(v) === i);
 
-    // console.log(trainrunItem.pathItems.length, swapIndF, swapIndB);
-
     swapIndF.forEach((v, index) => {
       if (swapIndF[index] >= 0) {
         if (index === 0) {
@@ -845,7 +836,6 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
             trainrunItem.pathItems[swapIndF[index]].isPartOfTemplatePath !==
             TrainrunTemplatePathAlignmentType.SectionNotFound
           ) {
-            console.log("ERROR - sg-1-load-trainrun-item.service.ts");
             return;
           }
         }
@@ -873,16 +863,6 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
         trainrunItem.pathItems[swapIndB[index]] = fItem;
       }
     });
-
-    /*
-    trainrunItem.pathItems.forEach((item: PathItem) => {
-      console.log(
-        item.backward ? 'B ' : 'F ',
-        'OPP:', item.oppDirectionTemplatePath ? 'Y ' : 'N ',
-        TrainrunTemplatePathAlignmentType[item.isPartOfTemplatePath],
-        item);
-    });
-    */
   }
 
   classifyPathItem(

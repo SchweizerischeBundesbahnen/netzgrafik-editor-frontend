@@ -383,7 +383,6 @@ export class EditorKeyEvents {
     });
     collectedSelectedNodes.forEach((n: Node) => {
       const cNode = this.duplicateNode(n, maxW, maxH, false);
-      console.log(n.getId(), cNode.getId());
       newNodes.push(cNode);
     });
 
