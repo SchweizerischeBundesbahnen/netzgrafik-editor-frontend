@@ -96,8 +96,12 @@
             "description": "Quellankunftszeit kann nicht erreicht werden"
           },
           "travel-time-less-than-1": {
-            "title": "Reisezeit weniger als 1",
-            "description": "Die Reisezeit muss größer oder gleich 1 sein."
+            "title": "Rückreisezeit weniger als 1",
+            "description": "Die Rückreisezeit muss größer oder gleich 1 sein."
+          },
+          "return-travel-time-less-than-1": {
+            "title": "Rückreisezeit weniger als 1",
+            "description": "Die Rückreisezeit muss größer oder gleich 1 sein."
           }
         },
         "transition-validator": {
@@ -282,6 +286,9 @@
             "category": "Kategorie",
             "frequency": "Takt",
             "verkehrt": "verkehrt",
+            "symmetry": "Symmetrie",
+            "enableSymmetry": "Symmetrie aktivieren",
+            "isRoundTrip": "Rundreise",
             "trainrunDuplicate": "Zuglauf duplizieren",
             "trainrunDelete": "Zuglauf löschen",
             "delete": "Löschen",
