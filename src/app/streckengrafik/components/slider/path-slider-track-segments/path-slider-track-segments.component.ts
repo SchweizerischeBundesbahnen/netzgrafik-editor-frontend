@@ -26,7 +26,7 @@ export class PathSliderTrackSegmentsComponent {
     if (!ps.trackData?.sectionTrackSegments) {
       return path;
     }
-    console.log("get track data", {ps});
+    // console.log("get track data", {ps});
     ps.trackData.sectionTrackSegments.forEach(
       (sts: TrackSegments, index: number) => {
         const startAt = Math.max(0.0, sts.startPos * this.path.zoomedXPath());

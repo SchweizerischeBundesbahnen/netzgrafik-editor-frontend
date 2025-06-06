@@ -121,8 +121,8 @@ export class Sg3TrainrunsService implements OnDestroy {
 
       console.log(" filteredPathItems == ", {filteredPathItems, TrainrunDirection, pathItems: trainrunItem.pathItems});
 
-      trainrunItem.pathItems.forEach((pathItem) => {
-      // filteredPathItems.forEach((pathItem) => {
+      // trainrunItem.pathItems.forEach((pathItem) => {
+      filteredPathItems.forEach((pathItem) => {
         if (pathItem.isNode()) {
           const pathNodes: SgPathNode[] = this.searchAllPathNodes(
             pathItem.getPathNode(),
@@ -131,8 +131,9 @@ export class Sg3TrainrunsService implements OnDestroy {
           const isEndNode = this.checkIsEndNode(pathItem);
           let departureTime = pathItem.departureTime;
           let arrivalTime = pathItem.arrivalTime;
+          const isTsRunningBackward = pathItem.isRunningBackward;
           pathNodes.forEach((pathNode: SgPathNode) => {
-            if (isTrainrunGoingForward) {
+            if (isTrainrunGoingForward && !isTsRunningBackward || isTrainrunGoingBackward && isTsRunningBackward) {
               if (pathNode.departurePathSection === undefined) {
                 console.log(" pathItem forward node fin == ", {pathItem});
                 departureTime = arrivalTime + 4;
@@ -143,7 +144,7 @@ export class Sg3TrainrunsService implements OnDestroy {
               }
             }
 
-            if (isTrainrunGoingBackward) {
+            if (isTrainrunGoingBackward && !isTsRunningBackward || isTrainrunGoingForward && isTsRunningBackward) {
               if (pathNode.arrivalPathSection === undefined) {
                 console.log(" pathItem backward node fin == ", {pathItem});
                 departureTime = arrivalTime + 4;

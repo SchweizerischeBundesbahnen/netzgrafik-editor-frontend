@@ -660,20 +660,6 @@ export class TrainrunSectionService implements OnDestroy {
     }
   }
 
-  updateTrainrunSectionIsRunningBackward() {
-    this.trainrunSectionsStore.trainrunSections.forEach((trainrunSection) => {
-      const sourceNode = trainrunSection.getSourceNode();
-      const targetNode = trainrunSection.getTargetNode();
-      const isTargetRight = GeneralViewFunctions.getRightOrBottomNode(sourceNode, targetNode) === targetNode;
-      const trainrunDirection = trainrunSection.getTrainrun().getTrainrunDirection();
-
-      // Indicates if the trainrun was drawn from left to right (forward) or right to left (backward) /!\ not the same as the trainrun direction 
-      const isTrainRunningBackward = trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD && !isTargetRight ||
-        trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD && isTargetRight;
-      trainrunSection.setIsRunningBackward(isTrainRunningBackward);
-    });
-  };
-
   retrieveTravelTime(sourceNodeId: number, targetNodeId: number, trainrun: Trainrun): number {
     const foundTrainruns = this.getTrainrunSections().filter(
       (ts) =>
@@ -1271,6 +1257,9 @@ export class TrainrunSectionService implements OnDestroy {
     );
     trainrunSection.setNumberOfStops(
       existingTrainrunSection.getNumberOfStops(),
+    );
+    trainrunSection.setIsRunningBackward(
+      existingTrainrunSection.getIsRunningBackward(),
     );
     this.trainrunSectionsStore.trainrunSections.push(trainrunSection);
     return trainrunSection;
