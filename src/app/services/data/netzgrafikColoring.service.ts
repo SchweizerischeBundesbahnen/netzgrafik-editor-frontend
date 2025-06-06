@@ -470,7 +470,6 @@ export class NetzgrafikColoringService {
     if (netzgrafikColor === undefined) {
       netzgrafikColor = new NetzgrafikColor();
       netzgrafikColor.setColorRef(colorRef);
-      console.log("created default color - for colorRef:", colorRef);
       this.netzgrafikColorStore.netzgrafikColors.push(netzgrafikColor);
       this.netzgrafikColorUpdated();
     }

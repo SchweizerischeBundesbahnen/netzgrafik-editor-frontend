@@ -208,6 +208,7 @@ export class ShortestTravelTimeSearch {
     );
   }
 
+  // For debugging purposes only
   private printFinalInfo(finalShortestDistanceNodes: ShortestDistanceNode[]) {
     finalShortestDistanceNodes.forEach((snd: ShortestDistanceNode) => {
       console.log(
@@ -224,6 +225,7 @@ export class ShortestTravelTimeSearch {
     });
   }
 
+  // For debugging purposes only
   private printFinalInfoTimetable(snd: ShortestDistanceNode): string {
     const pathArray: string[] = [];
     const revTrainrunSections = Object.assign([], snd.path).reverse();
@@ -367,7 +369,7 @@ export class ShortestTravelTimeSearch {
       );
     }
 
-    this.printFinalInfo(finalShortestDistanceNodes);
+    // this.printFinalInfo(finalShortestDistanceNodes);
     return finalShortestDistanceNodes;
   }
 
