@@ -34,8 +34,13 @@
             [trainrunDialogParameter]="data"
           ></sbb-trainrunsection-tab>
         </sbb-tab>
-        <sbb-tab [label]="'app.view.dialogs.trainrun-and-section-dialog.filterableLabels' | translate"
-                 id="trainrun-filterable-labels-tab">
+        <sbb-tab
+          [label]="
+            'app.view.dialogs.trainrun-and-section-dialog.filterableLabels'
+              | translate
+          "
+          id="trainrun-filterable-labels-tab"
+        >
           <sbb-trainrun-filter-tab
             (trainrunDeleted)="closeDialog()"
           ></sbb-trainrun-filter-tab>

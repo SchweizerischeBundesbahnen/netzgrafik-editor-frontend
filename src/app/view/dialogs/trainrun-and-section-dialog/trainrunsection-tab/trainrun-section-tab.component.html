@@ -473,7 +473,10 @@
     *ngIf="trainrunSectionTimesService.getShowWarningTwoLocks() === true"
     disabled
   >
-    {{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-section-tab.warningTwoLocks' | translate }}
+    {{
+      "app.view.dialogs.trainrun-and-section-dialog.trainrun-section-tab.warningTwoLocks"
+        | translate
+    }}
   </button>
   <button
     class="FunctionButton"
@@ -482,7 +485,10 @@
     (click)="
       trainrunSectionTimesService.onPropagateTimeLeft(selectedTrainrunSection)
     "
-    [title]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-section-tab.propagateTimesToLeft' | translate"
+    [title]="
+      'app.view.dialogs.trainrun-and-section-dialog.trainrun-section-tab.propagateTimesToLeft'
+        | translate
+    "
   >
     <sbb-icon
       svgIcon="arrow-long-left-medium"
@@ -498,7 +504,10 @@
     (click)="
       trainrunSectionTimesService.onPropagateTimeRight(selectedTrainrunSection)
     "
-    [title]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-section-tab.propagateTimesToRight' | translate"
+    [title]="
+      'app.view.dialogs.trainrun-and-section-dialog.trainrun-section-tab.propagateTimesToRight'
+        | translate
+    "
   >
     <sbb-icon
       svgIcon="arrow-long-right-medium"

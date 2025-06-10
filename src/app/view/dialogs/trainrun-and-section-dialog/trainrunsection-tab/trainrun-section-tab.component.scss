@@ -337,7 +337,7 @@ input.NumberOfStopsInputElement.IsActive {
 }
 
 ::ng-deep button.warning {
-  background-color: var(--sbb-header-lean-background-color);;
+  background-color: var(--sbb-header-lean-background-color);
   border: none;
   color: $COLOR_Warning;
   text-align: center;
@@ -392,7 +392,7 @@ input.NumberOfStopsInputElement.IsActive {
 }
 
 ::ng-deep
-div.sbb-dialog-content.sbb-scrollbar.EditTrainrunSectionDialogTabContent {
+  div.sbb-dialog-content.sbb-scrollbar.EditTrainrunSectionDialogTabContent {
   border-style: none;
   min-height: 250px;
   max-height: 250px;
@@ -406,7 +406,6 @@ div.sbb-dialog-content.sbb-scrollbar.EditTrainrunSectionDialogTabContent {
   max-height: 48px;
   min-height: 48px;
 }
-
 
 ::ng-deep div.EditTrainrunSectionDialogTabContent.readonly {
   pointer-events: none;

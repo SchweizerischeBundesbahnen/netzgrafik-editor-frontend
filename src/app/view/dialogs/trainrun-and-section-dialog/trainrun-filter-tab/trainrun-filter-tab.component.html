@@ -1,9 +1,12 @@
 <div sbbDialogContent [class]="getContentClassTag()">
-  <sbb-form-field class="sbb-form-field-long" [label]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-filter-tab.labels' | translate">
-    <sbb-chip-list
-      [value]="trainrunLabels"
-      (focusout)="onLabelsFocusout()"
-    >
+  <sbb-form-field
+    class="sbb-form-field-long"
+    [label]="
+      'app.view.dialogs.trainrun-and-section-dialog.trainrun-filter-tab.labels'
+        | translate
+    "
+  >
+    <sbb-chip-list [value]="trainrunLabels" (focusout)="onLabelsFocusout()">
       <sbb-chip
         *ngFor="let element of trainrunLabels"
         [value]="element"
@@ -13,7 +16,10 @@
       </sbb-chip>
       <input
         id="trainrunLabelsInput"
-        [placeholder]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-filter-tab.newLabels' | translate"
+        [placeholder]="
+          'app.view.dialogs.trainrun-and-section-dialog.trainrun-filter-tab.newLabels'
+            | translate
+        "
         sbbChipInput
         cdkFocusInitial
         [sbbChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -35,7 +41,10 @@
     class="FunctionButton"
     tabindex="-1"
     (click)="onDuplicateTrainrun()"
-    [title]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDuplicate' | translate"
+    [title]="
+      'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDuplicate'
+        | translate
+    "
   >
     <sbb-icon svgIcon="plus-medium" aria-hidden="false"></sbb-icon>
   </button>
@@ -43,7 +52,10 @@
     class="FunctionButton"
     tabindex="-1"
     (click)="onDeleteTrainrun()"
-    [title]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDelete' | translate"
+    [title]="
+      'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDelete'
+        | translate
+    "
   >
     <sbb-icon svgIcon="trash-medium" aria-hidden="false"></sbb-icon>
   </button>

@@ -13,9 +13,8 @@ export class PerlenketteNode implements PerlenketteItem {
     public connections: PerlenketteConnection[],
     public transition: Transition,
     public fristTrainrunPartNode: boolean,
-    public lastTrainrunPartNode: boolean
-  ) {
-  }
+    public lastTrainrunPartNode: boolean,
+  ) {}
 
   isFristTrainrunPartNode(): boolean {
     return this.fristTrainrunPartNode;
@@ -25,7 +24,7 @@ export class PerlenketteNode implements PerlenketteItem {
     return this.lastTrainrunPartNode;
   }
 
-  setLastTrainrunPartNode(flag : boolean) {
+  setLastTrainrunPartNode(flag: boolean) {
     this.lastTrainrunPartNode = flag;
   }
 

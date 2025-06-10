@@ -116,7 +116,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
           ) {
             if (
               pathItem.getPerlenketteSection().trainrunSectionId ===
-              originalPathItem.getPerlenketteSection().trainrunSectionId &&
+                originalPathItem.getPerlenketteSection().trainrunSectionId &&
               originalPathItem.getPerlenketteSection().isBeingEdited
             ) {
               pathItem.getPerlenketteSection().isBeingEdited =
@@ -259,7 +259,10 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
   }
 
   isLastNodeButNotVeryLast(item: PerlenketteItem) {
-    if (this.perlenketteTrainrun.pathItems.indexOf(item) === this.perlenketteTrainrun.pathItems.length - 1) {
+    if (
+      this.perlenketteTrainrun.pathItems.indexOf(item) ===
+      this.perlenketteTrainrun.pathItems.length - 1
+    ) {
       return false;
     }
     return this.isLastNode(item);

@@ -630,6 +630,4 @@ describe("TrainrunSection Model Test", () => {
     expect(ts.getSourceArrival()).toBe(11);
     expect(ts.getTravelTime()).toBe(10);
   });
-
-
 });

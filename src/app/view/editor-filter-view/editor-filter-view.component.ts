@@ -46,7 +46,7 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     public dataService: DataService,
     public uiInteractionService: UiInteractionService,
     public filterService: FilterService,
-    public versionControlService : VersionControlService,
+    public versionControlService: VersionControlService,
   ) {
     this.activeFilterName = undefined;
     this.activeEditFilterSettingId = undefined;

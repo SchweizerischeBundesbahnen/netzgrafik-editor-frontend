@@ -91,7 +91,7 @@ describe("UiInteractionService", () => {
       trainrunService,
       trainrunSectionService,
       nodeService,
-      filterService
+      filterService,
     );
     nodeService.nodes.subscribe((updatesNodes) => (nodes = updatesNodes));
 

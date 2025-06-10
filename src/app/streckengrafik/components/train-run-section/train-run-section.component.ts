@@ -33,9 +33,7 @@ import {
 import {SliderChangeInfo} from "../../model/util/sliderChangeInfo";
 import {NodeService} from "../../../services/data/node.service";
 import {SgTrainrunSection} from "../../model/streckengrafik-model/sg-trainrun-section";
-import {
-  StreckengrafikDisplayElementService
-} from "../../services/util/streckengrafik-display-element.service";
+import {StreckengrafikDisplayElementService} from "../../services/util/streckengrafik-display-element.service";
 import {ViewBoxChangeInfo} from "../../model/util/viewBoxChangeInfo";
 import {ViewBoxService} from "../../services/util/view-box.service";
 import {Sg4ToggleTrackOccupierService} from "../../services/sg-4-toggle-track-occupier.service";
@@ -48,7 +46,8 @@ import {Sg4ToggleTrackOccupierService} from "../../services/sg-4-toggle-track-oc
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TrainRunSectionComponent
-  implements OnDestroy, UpdateCounterHandler {
+  implements OnDestroy, UpdateCounterHandler
+{
   @Input()
   trainrun: SgTrainrun;
 
@@ -121,7 +120,6 @@ export class TrainRunSectionComponent
       .subscribe(() => {
         this.cd.markForCheck();
       });
-
   }
 
   ngOnDestroy(): void {
@@ -141,7 +139,7 @@ export class TrainRunSectionComponent
     } else {
       const param: InformSelectedTrainrunClick = {
         trainrunSectionId:
-        this.trainrunItem.getTrainrunSection().trainrunSectionId,
+          this.trainrunItem.getTrainrunSection().trainrunSectionId,
         open: true,
       };
       this.trainrunSectionService.clickSelectedTrainrunSection(param);
@@ -156,7 +154,7 @@ export class TrainRunSectionComponent
       " trainrunBranchType_" +
       TrainrunBranchType[
         this.trainrunItem.getTrainrunSection().trainrunBranchType
-        ];
+      ];
 
     retTag += " Streckengrafik ";
     return retTag;
@@ -313,15 +311,15 @@ export class TrainRunSectionComponent
   private showArrivalBranch() {
     if (
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.ArrivalBranchWithSection ||
+        TrainrunBranchType.ArrivalBranchWithSection ||
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.ArrivalBranchFilter
+        TrainrunBranchType.ArrivalBranchFilter
     ) {
       return true;
     }
     if (
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.ArrivalBranchOnly &&
+        TrainrunBranchType.ArrivalBranchOnly &&
       !this.trainrunItem.backward &&
       this.trainrunItem.getPathSection().arrivalPathNode &&
       this.trainrunItem.getPathSection().arrivalPathNode.trackOccupier
@@ -330,7 +328,7 @@ export class TrainRunSectionComponent
     }
     return (
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.ArrivalBranchOnly &&
+        TrainrunBranchType.ArrivalBranchOnly &&
       this.trainrunItem.backward &&
       this.trainrunItem.getPathSection().departurePathNode &&
       this.trainrunItem.getPathSection().departurePathNode.trackOccupier
@@ -340,15 +338,15 @@ export class TrainRunSectionComponent
   private showDepartureBranch() {
     if (
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.DepartureBranchWithSection ||
+        TrainrunBranchType.DepartureBranchWithSection ||
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.DepartureBranchFilter
+        TrainrunBranchType.DepartureBranchFilter
     ) {
       return true;
     }
     if (
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.DepartureBranchOnly &&
+        TrainrunBranchType.DepartureBranchOnly &&
       !this.trainrunItem.backward &&
       this.trainrunItem.getPathSection().departurePathNode &&
       this.trainrunItem.getPathSection().departurePathNode.trackOccupier
@@ -357,7 +355,7 @@ export class TrainRunSectionComponent
     }
     return (
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.DepartureBranchOnly &&
+        TrainrunBranchType.DepartureBranchOnly &&
       this.trainrunItem.backward &&
       this.trainrunItem.getPathSection().arrivalPathNode &&
       this.trainrunItem.getPathSection().arrivalPathNode.trackOccupier
@@ -509,11 +507,11 @@ export class TrainRunSectionComponent
     let orgTime = this.trainrunItem.departureTime;
     if (
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.ArrivalBranchWithSection ||
+        TrainrunBranchType.ArrivalBranchWithSection ||
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.ArrivalBranchOnly ||
+        TrainrunBranchType.ArrivalBranchOnly ||
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.ArrivalBranchFilter
+        TrainrunBranchType.ArrivalBranchFilter
     ) {
       orgTime = this.trainrunItem.arrivalTime;
     }
@@ -532,11 +530,11 @@ export class TrainRunSectionComponent
   getArrivalText(): string {
     if (
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.ArrivalBranchWithSection ||
+        TrainrunBranchType.ArrivalBranchWithSection ||
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.ArrivalBranchOnly ||
+        TrainrunBranchType.ArrivalBranchOnly ||
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.ArrivalBranchFilter
+        TrainrunBranchType.ArrivalBranchFilter
     ) {
       if (this.trainrunItem.backward) {
         if (
@@ -557,11 +555,11 @@ export class TrainRunSectionComponent
     }
     if (
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.DepartureBranchWithSection ||
+        TrainrunBranchType.DepartureBranchWithSection ||
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.DepartureBranchOnly ||
+        TrainrunBranchType.DepartureBranchOnly ||
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.DepartureBranchFilter
+        TrainrunBranchType.DepartureBranchFilter
     ) {
       if (this.trainrunItem.backward) {
         if (
@@ -602,11 +600,11 @@ export class TrainRunSectionComponent
     if (!this.filterService.isFilterShowNonStopTimeEnabled()) {
       if (
         this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-        TrainrunBranchType.ArrivalBranchWithSection ||
+          TrainrunBranchType.ArrivalBranchWithSection ||
         this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-        TrainrunBranchType.ArrivalBranchOnly ||
+          TrainrunBranchType.ArrivalBranchOnly ||
         this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-        TrainrunBranchType.ArrivalBranchFilter
+          TrainrunBranchType.ArrivalBranchFilter
       ) {
         if (this.trainrunItem.backward) {
           if (
@@ -632,11 +630,11 @@ export class TrainRunSectionComponent
       }
       if (
         this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-        TrainrunBranchType.DepartureBranchWithSection ||
+          TrainrunBranchType.DepartureBranchWithSection ||
         this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-        TrainrunBranchType.DepartureBranchOnly ||
+          TrainrunBranchType.DepartureBranchOnly ||
         this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-        TrainrunBranchType.DepartureBranchFilter
+          TrainrunBranchType.DepartureBranchFilter
       ) {
         if (this.trainrunItem.backward) {
           if (
@@ -756,9 +754,9 @@ export class TrainRunSectionComponent
       this.trainrunSectionService.getSelectedTrainrunSection();
     if (
       selectedTrainrunSection.getTargetNode().getId() ===
-      this.trainrunItem.getTrainrunSection().departureNodeId &&
+        this.trainrunItem.getTrainrunSection().departureNodeId &&
       selectedTrainrunSection.getSourceNode().getId() ===
-      this.trainrunItem.getTrainrunSection().arrivalNodeId
+        this.trainrunItem.getTrainrunSection().arrivalNodeId
     ) {
       if (sgTrainrunItem.backward) {
         parameter.trainrunSectionText = TrainrunSectionText.SourceArrival;
@@ -768,9 +766,9 @@ export class TrainRunSectionComponent
     }
     if (
       selectedTrainrunSection.getTargetNode().getId() ===
-      this.trainrunItem.getTrainrunSection().arrivalNodeId &&
+        this.trainrunItem.getTrainrunSection().arrivalNodeId &&
       selectedTrainrunSection.getSourceNode().getId() ===
-      this.trainrunItem.getTrainrunSection().departureNodeId
+        this.trainrunItem.getTrainrunSection().departureNodeId
     ) {
       if (sgTrainrunItem.backward) {
         parameter.trainrunSectionText = TrainrunSectionText.TargetArrival;
@@ -803,9 +801,9 @@ export class TrainRunSectionComponent
       this.trainrunSectionService.getSelectedTrainrunSection();
     if (
       selectedTrainrunSection.getTargetNode().getId() ===
-      this.trainrunItem.getTrainrunSection().departureNodeId &&
+        this.trainrunItem.getTrainrunSection().departureNodeId &&
       selectedTrainrunSection.getSourceNode().getId() ===
-      this.trainrunItem.getTrainrunSection().arrivalNodeId
+        this.trainrunItem.getTrainrunSection().arrivalNodeId
     ) {
       if (sgTrainrunItem.backward) {
         parameter.trainrunSectionText = TrainrunSectionText.TargetDeparture;
@@ -815,9 +813,9 @@ export class TrainRunSectionComponent
     }
     if (
       selectedTrainrunSection.getTargetNode().getId() ===
-      this.trainrunItem.getTrainrunSection().arrivalNodeId &&
+        this.trainrunItem.getTrainrunSection().arrivalNodeId &&
       selectedTrainrunSection.getSourceNode().getId() ===
-      this.trainrunItem.getTrainrunSection().departureNodeId
+        this.trainrunItem.getTrainrunSection().departureNodeId
     ) {
       if (sgTrainrunItem.backward) {
         parameter.trainrunSectionText = TrainrunSectionText.SourceDeparture;
@@ -936,9 +934,9 @@ export class TrainRunSectionComponent
 
     if (
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.Trainrun ||
+        TrainrunBranchType.Trainrun ||
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.Filter
+        TrainrunBranchType.Filter
     ) {
       if (
         this.streckengrafikDisplayElementService.isFilterStreckengrafikTimeNotFocusNorEnabled()
@@ -951,7 +949,7 @@ export class TrainRunSectionComponent
       this.trainrunItem &&
       this.trainrunItem.isSection() &&
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.Trainrun
+        TrainrunBranchType.Trainrun
     ) {
       return this.isArrivalTimeTextFiltering();
     }
@@ -972,7 +970,7 @@ export class TrainRunSectionComponent
       this.trainrunItem &&
       this.trainrunItem.isSection() &&
       this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-      TrainrunBranchType.Trainrun
+        TrainrunBranchType.Trainrun
     ) {
       return this.isDepatureTimeTextFiltering(true);
     }
@@ -983,11 +981,11 @@ export class TrainRunSectionComponent
       (this.trainrunItem.getTrainrunSection().trainrunBranchType ===
         TrainrunBranchType.ArrivalBranchWithSection ||
         this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-        TrainrunBranchType.DepartureBranchWithSection ||
+          TrainrunBranchType.DepartureBranchWithSection ||
         this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-        TrainrunBranchType.ArrivalBranchOnly ||
+          TrainrunBranchType.ArrivalBranchOnly ||
         this.trainrunItem.getTrainrunSection().trainrunBranchType ===
-        TrainrunBranchType.DepartureBranchOnly)
+          TrainrunBranchType.DepartureBranchOnly)
     ) {
       return this.isDepatureTimeTextFiltering(false);
     }
@@ -1036,6 +1034,5 @@ export class ScaledPath {
   constructor(
     public scaledPathFrom: Vec2D,
     public scaledPathTo: Vec2D,
-  ) {
-  }
+  ) {}
 }

@@ -16,14 +16,21 @@ import {DataService} from "./data.service";
 import {Node} from "../../models/node.model";
 import {TrainrunSection} from "../../models/trainrunsection.model";
 import {GeneralViewFunctions} from "../../view/util/generalViewFunctions";
-import {NonStopTrainrunIterator, TrainrunIterator,} from "../util/trainrun.iterator";
+import {
+  NonStopTrainrunIterator,
+  TrainrunIterator,
+} from "../util/trainrun.iterator";
 import {LogService} from "../../logger/log.service";
 import {LabelService} from "./label.service";
 import {FilterService} from "../ui/filter.service";
 import {Transition} from "../../models/transition.model";
 import {Port} from "../../models/port.model";
 import {Connection} from "../../models/connection.model";
-import {Operation, OperationType, TrainrunOperation} from "../../models/operation.model";
+import {
+  Operation,
+  OperationType,
+  TrainrunOperation,
+} from "../../models/operation.model";
 
 @Injectable({
   providedIn: "root",
@@ -33,7 +40,7 @@ export class TrainrunService {
   trainrunsSubject = new BehaviorSubject<Trainrun[]>([]);
   readonly trainruns = this.trainrunsSubject.asObservable();
 
-  trainrunsStore: { trainruns: Trainrun[] } = {trainruns: []}; // store the data in memory
+  trainrunsStore: {trainruns: Trainrun[]} = {trainruns: []}; // store the data in memory
 
   readonly operation = new EventEmitter<Operation>();
 
@@ -45,8 +52,7 @@ export class TrainrunService {
     private logService: LogService,
     private labelService: LabelService,
     private filterService: FilterService,
-  ) {
-  }
+  ) {}
 
   setDataService(dataService: DataService) {
     this.dataService = dataService;
@@ -264,7 +270,7 @@ export class TrainrunService {
   }
 
   updateTrainrunCategory(trainrun: Trainrun, category: TrainrunCategory) {
-    if (trainrun.getTrainrunCategory().id === category.id){
+    if (trainrun.getTrainrunCategory().id === category.id) {
       // no update needed
       return;
     }
@@ -278,7 +284,7 @@ export class TrainrunService {
     trainrun: Trainrun,
     timeCategory: TrainrunTimeCategory,
   ) {
-    if (trainrun.getTrainrunTimeCategory().id === timeCategory.id){
+    if (trainrun.getTrainrunTimeCategory().id === timeCategory.id) {
       // no update needed
       return;
     }
@@ -303,7 +309,9 @@ export class TrainrunService {
   }
 
   getVisibleTrainruns(): Trainrun[] {
-    return this.getTrainruns().filter((t) => this.filterService.filterTrainrun(t));
+    return this.getTrainruns().filter((t) =>
+      this.filterService.filterTrainrun(t),
+    );
   }
 
   getAllTrainrunLabels(): string[] {
@@ -399,17 +407,19 @@ export class TrainrunService {
     const port1 = node.getPort(portId1);
     const port2 = node.getPort(portId2);
     const trainrunSection2 = port2.getTrainrunSection();
-    const newTrainrun =
-      this.duplicateTrainrun(
-        trainrunSection2.getTrainrunId(),
-        false,
-        "-2");
+    const newTrainrun = this.duplicateTrainrun(
+      trainrunSection2.getTrainrunId(),
+      false,
+      "-2",
+    );
 
     trainrunSection2.setTrainrun(newTrainrun);
     const iterator = this.getIterator(node, trainrunSection2);
     while (iterator.hasNext()) {
       iterator.next();
-      const trans = iterator.current().node.getTransition(iterator.current().trainrunSection.getId());
+      const trans = iterator
+        .current()
+        .node.getTransition(iterator.current().trainrunSection.getId());
       if (trans) {
         trans.setTrainrun(newTrainrun);
       }
@@ -442,14 +452,14 @@ export class TrainrunService {
     // should be shifted by 30 minutes (1 frequency ) so that both are in the same cycle position,
     // i.e. 02.
     const arrivalTimeAtNode =
-      node.getId() !== port1.getTrainrunSection().getSourceNodeId() ?
-        port1.getTrainrunSection().getTargetArrival() :
-        port1.getTrainrunSection().getSourceArrival();
+      node.getId() !== port1.getTrainrunSection().getSourceNodeId()
+        ? port1.getTrainrunSection().getTargetArrival()
+        : port1.getTrainrunSection().getSourceArrival();
 
     const departTimeAtNode =
-      node.getId() !== port2.getTrainrunSection().getSourceNodeId() ?
-        port2.getTrainrunSection().getTargetDeparture() :
-        port2.getTrainrunSection().getSourceDeparture();
+      node.getId() !== port2.getTrainrunSection().getSourceNodeId()
+        ? port2.getTrainrunSection().getTargetDeparture()
+        : port2.getTrainrunSection().getSourceDeparture();
 
     let frequencyOffset = 0;
     while (60 + arrivalTimeAtNode > departTimeAtNode + frequencyOffset) {
@@ -462,21 +472,30 @@ export class TrainrunService {
     const iterator = this.getIterator(node, trainrunSection);
     while (iterator.hasNext()) {
       iterator.next();
-      const trans = iterator.current().node.getTransition(iterator.current().trainrunSection.getId());
+      const trans = iterator
+        .current()
+        .node.getTransition(iterator.current().trainrunSection.getId());
       if (trans) {
         trans.setTrainrun(trainrun1);
       }
       iterator.current().trainrunSection.setTrainrun(trainrun1);
-      iterator.current().trainrunSection.shiftAllTimes(
-        frequencyOffset,
-        node.getId() === port2.getTrainrunSection().getSourceNodeId());
+      iterator
+        .current()
+        .trainrunSection.shiftAllTimes(
+          frequencyOffset,
+          node.getId() === port2.getTrainrunSection().getSourceNodeId(),
+        );
     }
 
     // update trainrun references (1st transition)
     const trans1 = node.getTransitionFromPortId(port1.getId());
     const trans2 = node.getTransitionFromPortId(port2.getId());
     if (trans1 === undefined && trans2 === undefined) {
-      const trans = node.addTransitionAndComputeRouting(port1, port2, trainrun1);
+      const trans = node.addTransitionAndComputeRouting(
+        port1,
+        port2,
+        trainrun1,
+      );
       if (60 + arrivalTimeAtNode === departTimeAtNode + frequencyOffset) {
         trans.setIsNonStopTransit(true);
       } else {
@@ -486,8 +505,11 @@ export class TrainrunService {
 
     // update trainrun references (connection)
     const connections2delete = node.getConnections().filter((c: Connection) => {
-      return (c.getPortId1() === port1.getId() && c.getPortId2() === port2.getId()) ||
-        (c.getPortId1() === port2.getId() && c.getPortId2() === port1.getId());
+      return (
+        (c.getPortId1() === port1.getId() &&
+          c.getPortId2() === port2.getId()) ||
+        (c.getPortId1() === port2.getId() && c.getPortId2() === port1.getId())
+      );
     });
     connections2delete.forEach((c: Connection) => {
       node.removeConnection(c.getId());
@@ -500,9 +522,9 @@ export class TrainrunService {
     // Change all trainrun sections' trainrunId reference from trainrun2 to trainrun1
     // There can be some other "unconnected" trainrun segments left; those have to be moved to
     // trainrun1, which will "survive".
-    this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(trainrun2.getId()).forEach(
-      (ts: TrainrunSection) => ts.setTrainrun(trainrun1)
-    );
+    this.trainrunSectionService
+      .getAllTrainrunSectionsForTrainrun(trainrun2.getId())
+      .forEach((ts: TrainrunSection) => ts.setTrainrun(trainrun1));
 
     // remove empty trainrun
     this.deleteTrainrun(trainrun2, false);
@@ -512,7 +534,9 @@ export class TrainrunService {
     this.nodeService.reorderPortsOnNodesForTrainrun(trainrun1, false);
 
     // Update the cumulative times for the combined trainrun
-    this.propagateConsecutiveTimesForTrainrun(port1.getTrainrunSection().getId());
+    this.propagateConsecutiveTimesForTrainrun(
+      port1.getTrainrunSection().getId(),
+    );
 
     // update
     this.trainrunsUpdated();
@@ -534,7 +558,9 @@ export class TrainrunService {
     copiedtrainrun.setTitle(trainrun.getTitle() + postfix);
     copiedtrainrun.setLabelIds(trainrun.getLabelIds());
     this.trainrunsStore.trainruns.push(copiedtrainrun);
-    this.operation.emit(new TrainrunOperation(OperationType.create, copiedtrainrun));
+    this.operation.emit(
+      new TrainrunOperation(OperationType.create, copiedtrainrun),
+    );
     return copiedtrainrun;
   }
 
@@ -543,7 +569,11 @@ export class TrainrunService {
     enforceUpdate = true,
     postfix = " COPY",
   ): Trainrun {
-    const copiedtrainrun = this.duplicateTrainrun(trainrunId, enforceUpdate, postfix);
+    const copiedtrainrun = this.duplicateTrainrun(
+      trainrunId,
+      enforceUpdate,
+      postfix,
+    );
     this.trainrunSectionService.copyAllTrainrunSectionsForTrainrun(
       trainrunId,
       copiedtrainrun.getId(),
@@ -562,8 +592,8 @@ export class TrainrunService {
 
     // ensure uniqueness of input labels
     const uniqueLabels = Array.from(new Set(labels));
-    const labelIds = uniqueLabels.map(label =>
-      this.labelService.getOrCreateLabel(label, LabelRef.Trainrun).getId()
+    const labelIds = uniqueLabels.map((label) =>
+      this.labelService.getOrCreateLabel(label, LabelRef.Trainrun).getId(),
     );
     const deletedLabelIds = this.labelService.clearLabel(
       this.findClearedLabel(trainrun, labelIds),
@@ -573,7 +603,9 @@ export class TrainrunService {
     trainrun.setLabelIds(labelIds);
     this.trainrunsUpdated();
     if (uniqueLabels.length === labels.length) {
-      this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
+      this.operation.emit(
+        new TrainrunOperation(OperationType.update, trainrun),
+      );
     }
   }
 
@@ -595,11 +627,10 @@ export class TrainrunService {
     this.propagateConsecutiveTimesForTrainrun(ts.getId());
   }
 
-  getBothEndNodesFromTrainrunPart(trainrunSection: TrainrunSection):
-    {
-      endNode1: Node;
-      endNode2: Node;
-    } {
+  getBothEndNodesFromTrainrunPart(trainrunSection: TrainrunSection): {
+    endNode1: Node;
+    endNode2: Node;
+  } {
     const sourceNode = trainrunSection.getSourceNode();
     const targetNode = trainrunSection.getTargetNode();
     const endNode1 = this.getEndNode(sourceNode, trainrunSection);
@@ -615,8 +646,9 @@ export class TrainrunService {
     }
 
     let alltrainrunsections =
-      this.trainrunSectionService
-        .getAllTrainrunSectionsForTrainrun(inTrainrunSection.getTrainrunId());
+      this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(
+        inTrainrunSection.getTrainrunId(),
+      );
 
     while (alltrainrunsections.length > 0) {
       // propagate Consecutive Times Forward
@@ -634,14 +666,16 @@ export class TrainrunService {
         startForwardBackwardNode.startForwardNode,
         startForwardBackwardNode.startForwardNode.getStartTrainrunSection(
           trainrunSection.getTrainrunId(),
-          true
+          true,
         ),
         trainrunSection.getFrequencyOffset(),
       );
       const arrivalTime = propDataForward.cumTime;
 
       // propagate Consecutive Times Backward
-      const freq = trainrunSection.getTrainrun().getTrainrunFrequency().frequency;
+      const freq = trainrunSection
+        .getTrainrun()
+        .getTrainrunFrequency().frequency;
       const restFreqArrivalTime = Math.floor(arrivalTime / freq) * freq;
       const freqDependantArrivalTime = arrivalTime - restFreqArrivalTime;
       let offset = freq - freqDependantArrivalTime;
@@ -652,15 +686,16 @@ export class TrainrunService {
         startForwardBackwardNode.startBackwardNode,
         startForwardBackwardNode.startBackwardNode.getStartTrainrunSection(
           trainrunSection.getTrainrunId(),
-          false
+          false,
         ),
         offset,
       );
 
       // filter all still visited trainrun sections
-      alltrainrunsections = alltrainrunsections.filter(ts =>
-        propDataForward.visitedTrainrunSections.indexOf(ts) === -1 &&
-        propDataBackward.visitedTrainrunSections.indexOf(ts) === -1
+      alltrainrunsections = alltrainrunsections.filter(
+        (ts) =>
+          propDataForward.visitedTrainrunSections.indexOf(ts) === -1 &&
+          propDataBackward.visitedTrainrunSections.indexOf(ts) === -1,
       );
     }
   }
@@ -830,7 +865,10 @@ export class TrainrunService {
       if (node.isEndNode(ts)) {
         const it = iterators.get(trainrunId);
         const consecutiveTime = ts.getSourceDepartureDto().consecutiveTime;
-        if (it === undefined || consecutiveTimes.get(trainrunId) > consecutiveTime) {
+        if (
+          it === undefined ||
+          consecutiveTimes.get(trainrunId) > consecutiveTime
+        ) {
           iterators.set(trainrunId, this.getIterator(node, ts));
           consecutiveTimes.set(trainrunId, consecutiveTime);
         }
@@ -839,7 +877,10 @@ export class TrainrunService {
       if (node.isEndNode(ts)) {
         const it = iterators.get(trainrunId);
         const consecutiveTime = ts.getTargetDepartureDto().consecutiveTime;
-        if (it === undefined || consecutiveTimes.get(trainrunId) > consecutiveTime) {
+        if (
+          it === undefined ||
+          consecutiveTimes.get(trainrunId) > consecutiveTime
+        ) {
           iterators.set(trainrunId, this.getIterator(node, ts));
           consecutiveTimes.set(trainrunId, consecutiveTime);
         }
@@ -886,7 +927,7 @@ export class TrainrunService {
     if (trainrunSection === undefined) {
       return {
         cumTime: 0,
-        visitedTrainrunSections: visitedTrainrunSections
+        visitedTrainrunSections: visitedTrainrunSections,
       };
     }
     let accumulatedTime = node.getDepartureTime(trainrunSection) + offset;
@@ -938,7 +979,7 @@ export class TrainrunService {
     }
     return {
       cumTime: accumulatedTime,
-      visitedTrainrunSections: visitedTrainrunSections
+      visitedTrainrunSections: visitedTrainrunSections,
     };
   }
 

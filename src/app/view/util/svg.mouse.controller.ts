@@ -125,7 +125,6 @@ export class SVGMouseController {
     );
   }
 
-
   scaleIn(scaleCenter: Vec2D) {
     this.svgMouseControllerObserver.onScaleNetzgrafik(1.125, scaleCenter);
   }
@@ -421,9 +420,9 @@ export class SVGMouseController {
   private updateZoomCenter(zoomCenter: Vec2D) {
     const oldZoomCenter = new Vec2D(
       this.viewboxProperties.panZoomLeft +
-      zoomCenter.getX() * this.viewboxProperties.panZoomWidth,
+        zoomCenter.getX() * this.viewboxProperties.panZoomWidth,
       this.viewboxProperties.panZoomTop +
-      zoomCenter.getY() * this.viewboxProperties.panZoomHeight,
+        zoomCenter.getY() * this.viewboxProperties.panZoomHeight,
     );
 
     const zoomFactor = 100.0 / this.viewboxProperties.zoomFactor;
@@ -442,9 +441,9 @@ export class SVGMouseController {
 
     const newZoomCenter = new Vec2D(
       this.viewboxProperties.panZoomLeft +
-      zoomCenter.getX() * this.viewboxProperties.panZoomWidth,
+        zoomCenter.getX() * this.viewboxProperties.panZoomWidth,
       this.viewboxProperties.panZoomTop +
-      zoomCenter.getY() * this.viewboxProperties.panZoomHeight,
+        zoomCenter.getY() * this.viewboxProperties.panZoomHeight,
     );
 
     this.viewboxProperties.panZoomLeft -=
@@ -486,9 +485,9 @@ export class SVGMouseController {
     );
   }
 
-  private temporaryDisableUndoServicePushCurrentVersion(){
+  private temporaryDisableUndoServicePushCurrentVersion() {
     // temporary disable undoService push current version
-    if (this.undoService !== undefined){
+    if (this.undoService !== undefined) {
       this.undoService.setIgnoreNextPushCurrentVersionCall();
     }
   }

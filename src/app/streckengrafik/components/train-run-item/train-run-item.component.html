@@ -1,7 +1,9 @@
 <svg:g class="AllTrainrunSections">
   <ng-container *ngFor="let offset of offsets">
     <ng-container *ngFor="let trainrunItem of trainrun.sgTrainrunItems">
-      <ng-container *ngIf="isElementNotFrustumCulled(trainrunItem, offset, yZoom)">
+      <ng-container
+        *ngIf="isElementNotFrustumCulled(trainrunItem, offset, yZoom)"
+      >
         <svg:g
           [attr.id]="getId(trainrun, trainrunItem)"
           (mouseover)="bringToFront(trainrun, trainrunItem, $event)"
@@ -9,8 +11,8 @@
           <svg:g [attr.transform]="'translate(0.0,' + offset * yZoom + ')'">
             <svg:g
               [attr.transform]="
-              'translate(' + getTranslate(trainrunItem) + ',0.0)'
-            "
+                'translate(' + getTranslate(trainrunItem) + ',0.0)'
+              "
             >
               <ng-container *ngIf="showSection(trainrunItem)">
                 <svg:g

@@ -157,7 +157,7 @@ export class VariantsViewComponent implements OnDestroy {
     if (event$.buttons === 1) {
       const ele = document.documentElement;
       ele.scrollTop = ele.scrollTop - event$.movementY;
-      if (event$.movementY > 2){
+      if (event$.movementY > 2) {
         event$.stopPropagation();
         event$.preventDefault();
         window.getSelection().removeAllRanges();
@@ -308,7 +308,9 @@ export class VariantsViewComponent implements OnDestroy {
   }
 
   getTitleCurrentVersion(variant: VariantSummaryDto): string {
-    const archivedSuffix = variant.isArchived ? " " + $localize`:@@app.view.variant.variants-view.archived:(archived)` : "";
+    const archivedSuffix = variant.isArchived
+      ? " " + $localize`:@@app.view.variant.variants-view.archived:(archived)`
+      : "";
 
     if (variant.latestSnapshotVersion) {
       return variant.latestSnapshotVersion.name + "*" + archivedSuffix;
@@ -318,7 +320,9 @@ export class VariantsViewComponent implements OnDestroy {
       return variant.latestReleaseVersion.name + archivedSuffix;
     }
 
-    throw new Error($localize`:@@app.view.variant.variants-view.error-unexpected-data:Unexpected data: No snapshot and no released version.`);
+    throw new Error(
+      $localize`:@@app.view.variant.variants-view.error-unexpected-data:Unexpected data: No snapshot and no released version.`,
+    );
   }
 
   getChangedAtCurrentVersion(variant: VariantSummaryDto): Date {
@@ -330,7 +334,9 @@ export class VariantsViewComponent implements OnDestroy {
       return new Date(variant.latestReleaseVersion.createdAt);
     }
 
-    throw new Error($localize`:@@app.view.variant.variants-view.error-unexpected-data:Unexpected data: No snapshot and no released version.`);
+    throw new Error(
+      $localize`:@@app.view.variant.variants-view.error-unexpected-data:Unexpected data: No snapshot and no released version.`,
+    );
   }
 
   private updateProject(project: ProjectDto): void {

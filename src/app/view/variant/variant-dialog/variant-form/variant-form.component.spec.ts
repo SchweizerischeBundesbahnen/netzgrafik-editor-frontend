@@ -12,7 +12,7 @@ describe("VariantFormComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[I18nModule],
+      imports: [I18nModule],
       declarations: [VariantFormComponent],
     }).compileComponents();
   });

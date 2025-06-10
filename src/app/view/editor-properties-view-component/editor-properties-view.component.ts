@@ -4,9 +4,7 @@ import {UiInteractionService} from "../../services/ui/ui.interaction.service";
 import {SbbRadioChange} from "@sbb-esta/angular/radio-button";
 import {ThemeBase} from "../themes/theme-base";
 import {ThemeRegistration} from "../themes/theme-registration";
-import {
-  StreckengrafikRenderingType
-} from "../themes/streckengrafik-rendering-type";
+import {StreckengrafikRenderingType} from "../themes/streckengrafik-rendering-type";
 import {TravelTimeCreationEstimatorType} from "../themes/editor-trainrun-traveltime-creator-type";
 
 @Component({
@@ -62,7 +60,8 @@ export class EditorPropertiesViewComponent {
     {
       name: $localize`:@@app.view.editor-properties-view-component.timeScaledDistance:travel time scaled`,
       title: $localize`:@@app.view.editor-properties-view-component.timeScaledDistanceTooltip:The route graphic sections are displayed with travel time scaling, i.e. it is assumed that the selected train travels at a constant speed.`,
-      streckengrafikRenderingType: StreckengrafikRenderingType.TimeScaledDistance,
+      streckengrafikRenderingType:
+        StreckengrafikRenderingType.TimeScaledDistance,
     },
     {
       name: $localize`:@@app.view.editor-properties-view-component.uniformDistance:uniform`,
@@ -81,7 +80,8 @@ export class EditorPropertiesViewComponent {
     {
       name: $localize`:@@app.view.editor-properties-view-component.retrieveFromEdge:Section travel time`,
       title: $localize`:@@app.view.editor-properties-view-component.retrieveFromEdgeTooltip:Takes over the max. travel time on the same section of all trains of the same category, otherwise max. travel time of all trains, otherwise 1 min.`,
-      travelTimeCreationEstimatorType: TravelTimeCreationEstimatorType.RetrieveFromEdge,
+      travelTimeCreationEstimatorType:
+        TravelTimeCreationEstimatorType.RetrieveFromEdge,
     },
   ];
   activeTravelTimeCreationEstimatorType: TravelTimeCreationEstimatorType = null;
@@ -128,9 +128,10 @@ export class EditorPropertiesViewComponent {
     this.uiInteractionService.setActiveStreckengrafikRenderingType(event.value);
   }
 
-
   onUpdateaTravelTimeCreationEstimatorType(event: SbbRadioChange) {
-    this.uiInteractionService.setActiveTravelTimeCreationEstimatorType(event.value);
+    this.uiInteractionService.setActiveTravelTimeCreationEstimatorType(
+      event.value,
+    );
   }
 
   colorPicked(value) {

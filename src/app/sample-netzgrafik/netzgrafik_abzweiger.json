@@ -3137,15 +3137,7 @@
         "shortName": "7/24",
         "name": "verkehrt uneingeschränkt",
         "dayTimeInterval": [],
-        "weekday": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
-        ],
+        "weekday": [1, 2, 3, 4, 5, 6, 7],
         "linePatternRef": "7/24"
       },
       {
@@ -3163,15 +3155,7 @@
             "to": 1140
           }
         ],
-        "weekday": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
-        ],
+        "weekday": [1, 2, 3, 4, 5, 6, 7],
         "linePatternRef": "HVZ"
       },
       {
@@ -3186,6 +3170,6 @@
     ]
   },
   "freeFloatingTexts": [],
-  "labels" : [],
-  "labelGroups" : []
+  "labels": [],
+  "labelGroups": []
 }

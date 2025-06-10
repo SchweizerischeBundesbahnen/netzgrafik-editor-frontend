@@ -112,10 +112,7 @@ export class DataService implements OnDestroy {
     );
   }
 
-  insertCopyNetzgrafikDto(
-    netzgrafikDto: NetzgrafikDto,
-    enforceUpdate = true
-  ) {
+  insertCopyNetzgrafikDto(netzgrafikDto: NetzgrafikDto, enforceUpdate = true) {
     this.nodeService.unselectAllNodes();
     const nodeMap = this.nodeService.mergeNodes(netzgrafikDto.nodes);
     const trainrunMap = this.trainrunService.createNewTrainrunsFromDtoList(
@@ -127,7 +124,7 @@ export class DataService implements OnDestroy {
         nodeMap,
         trainrunMap,
         netzgrafikDto.nodes,
-        enforceUpdate
+        enforceUpdate,
       );
     this.nodeService.mergeLabelNode(netzgrafikDto, nodeMap);
     this.nodeService.mergeConnections(
@@ -211,31 +208,40 @@ export class DataService implements OnDestroy {
   }
 
   getTrainrunCategory(categoryId: number): TrainrunCategory {
-    const found = this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunCategories.find(
-      (trainrunCategory) => trainrunCategory.id === categoryId,
-    );
+    const found =
+      this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunCategories.find(
+        (trainrunCategory) => trainrunCategory.id === categoryId,
+      );
     if (found === undefined) {
-      return this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunCategories.find((freq) => true);
+      return this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunCategories.find(
+        (freq) => true,
+      );
     }
     return found;
   }
 
   getTrainrunFrequency(frequencyId: number): TrainrunFrequency {
-    const found = this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunFrequencies.find(
-      (trainrunFrequency) => trainrunFrequency.id === frequencyId,
-    );
+    const found =
+      this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunFrequencies.find(
+        (trainrunFrequency) => trainrunFrequency.id === frequencyId,
+      );
     if (found === undefined) {
-      return this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunFrequencies.find((freq) => true);
+      return this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunFrequencies.find(
+        (freq) => true,
+      );
     }
     return found;
   }
 
   getTrainrunTimeCategory(timeCategoryId: number): TrainrunTimeCategory {
-    const found = this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunTimeCategories.find(
-      (trainrunTimeCategory) => trainrunTimeCategory.id === timeCategoryId,
-    );
+    const found =
+      this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunTimeCategories.find(
+        (trainrunTimeCategory) => trainrunTimeCategory.id === timeCategoryId,
+      );
     if (found === undefined) {
-      return this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunTimeCategories.find((freq) => true);
+      return this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunTimeCategories.find(
+        (freq) => true,
+      );
     }
     return found;
   }

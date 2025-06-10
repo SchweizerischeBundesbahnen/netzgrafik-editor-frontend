@@ -12,7 +12,10 @@ import {
 } from "../../../services/ui/ui.interaction.service";
 import {EditorMode} from "../../editor-menu/editor-mode";
 import {ConnectionsView} from "./connections.view";
-import {SVGMouseController, SVGMouseControllerObserver,} from "../../util/svg.mouse.controller";
+import {
+  SVGMouseController,
+  SVGMouseControllerObserver,
+} from "../../util/svg.mouse.controller";
 import {D3Utils} from "./d3.utils";
 import {NotesView} from "./notes.view";
 import {NodeService} from "../../../services/data/node.service";
@@ -27,14 +30,13 @@ import {EditorKeyEvents} from "./editor.keyEvents";
 import {MultiSelectRenderer} from "./multiSelectRenderer";
 import {UndoService} from "../../../services/data/undo.service";
 import {CopyService} from "../../../services/data/copy.service";
-import {
-  PositionTransformationService
-} from "../../../services/util/position.transformation.service";
+import {PositionTransformationService} from "../../../services/util/position.transformation.service";
 
+import {StreckengrafikDrawingContext} from "../../../streckengrafik/model/util/streckengrafik.drawing.context";
 import {
-  StreckengrafikDrawingContext
-} from "../../../streckengrafik/model/util/streckengrafik.drawing.context";
-import {LevelOfDetail, LevelOfDetailService} from "../../../services/ui/level.of.detail.service";
+  LevelOfDetail,
+  LevelOfDetailService,
+} from "../../../services/ui/level.of.detail.service";
 import {ViewportCullService} from "../../../services/ui/viewport.cull.service";
 import {VersionControlService} from "../../../services/data/version-control.service";
 
@@ -134,10 +136,14 @@ export class EditorView implements SVGMouseControllerObserver {
     private viewportCullService: ViewportCullService,
     private levelOfDetailService: LevelOfDetailService,
     private versionControlService: VersionControlService,
-    private positionTransformationService: PositionTransformationService
+    private positionTransformationService: PositionTransformationService,
   ) {
     this.controller = controller;
-    this.svgMouseController = new SVGMouseController(EditorView.svgName, this, undoService);
+    this.svgMouseController = new SVGMouseController(
+      EditorView.svgName,
+      this,
+      undoService,
+    );
     this.nodesView = new NodesView(this);
     this.transitionsView = new TransitionsView(this);
     this.connectionsView = new ConnectionsView(this);
@@ -145,7 +151,7 @@ export class EditorView implements SVGMouseControllerObserver {
     this.trainrunSectionPreviewLineView = new TrainrunSectionPreviewLineView(
       nodeService,
       filterService,
-      versionControlService
+      versionControlService,
     );
     this.multiSelectRenderer = new MultiSelectRenderer();
     this.notesView = new NotesView(this);
@@ -161,7 +167,7 @@ export class EditorView implements SVGMouseControllerObserver {
       copyService,
       this.svgMouseController,
       this.trainrunSectionPreviewLineView,
-      this.positionTransformationService
+      this.positionTransformationService,
     );
   }
 
@@ -586,9 +592,12 @@ export class EditorView implements SVGMouseControllerObserver {
     this.trainrunSectionPreviewLineView.stopPreviewLine();
   }
 
-
   onScaleNetzgrafik(factor: number, scaleCenter: Vec2D) {
-    this.positionTransformationService.scaleNetzgrafikArea(factor, scaleCenter, EditorView.svgName);
+    this.positionTransformationService.scaleNetzgrafikArea(
+      factor,
+      scaleCenter,
+      EditorView.svgName,
+    );
   }
 
   zoomFactorChanged(newZoomFactor: number) {
@@ -604,11 +613,15 @@ export class EditorView implements SVGMouseControllerObserver {
     this.viewportCullService.onViewportChangeUpdateRendering(true);
   }
 
-  doCullCheckPositionsInViewport(positions: Vec2D[], extraPixelsIn = 32): boolean {
+  doCullCheckPositionsInViewport(
+    positions: Vec2D[],
+    extraPixelsIn = 32,
+  ): boolean {
     return this.viewportCullService.cullCheckPositionsInViewport(
       positions,
       EditorView.svgName,
-      extraPixelsIn);
+      extraPixelsIn,
+    );
   }
 
   getLevelOfDetail() {
@@ -618,7 +631,6 @@ export class EditorView implements SVGMouseControllerObserver {
   skipElementLevelOfDetail(lod: LevelOfDetail): boolean {
     return lod < this.getLevelOfDetail();
   }
-
 
   setEditorMode(mode: EditorMode) {
     if (
@@ -685,7 +697,7 @@ export class EditorView implements SVGMouseControllerObserver {
       }
       D3Utils.enableSpecialEditing(
         this.editorMode === EditorMode.TopologyEditing ||
-        this.editorMode === EditorMode.NoteEditing,
+          this.editorMode === EditorMode.NoteEditing,
       );
     }
   }
@@ -702,6 +714,4 @@ export class EditorView implements SVGMouseControllerObserver {
       el.classed("ShowCellCursor", false);
     }
   }
-
-
 }

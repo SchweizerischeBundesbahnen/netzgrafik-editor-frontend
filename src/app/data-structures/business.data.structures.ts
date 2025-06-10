@@ -153,7 +153,6 @@ export interface LabelDto {
   labelRef: LabelRef; // label ref - declares the label group - used for double check - deprecate???
 }
 
-
 /**
  * Represents a filterable LabelGroup - in general one group per LabelRef are avaible, but user can
  * add more and algine labels to the right groups (right means = LabelRef must correspond to the
@@ -284,7 +283,7 @@ export interface ResourceDto {
  * Represents the filter settings, which can be stored.
  */
 export interface FilterSettingDto {
-  id: number;  // unique indentifier
+  id: number; // unique indentifier
   name: string; // name
   description: string; // description
   filterNodeLabels: number[]; // labels to filter out (labels only of type - LabelRef: node)
