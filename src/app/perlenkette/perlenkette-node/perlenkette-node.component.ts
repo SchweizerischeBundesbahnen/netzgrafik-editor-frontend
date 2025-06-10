@@ -38,16 +38,15 @@ export class PerlenketteNodeComponent implements OnInit {
     public trainrunService: TrainrunService,
     readonly filterService: FilterService,
     readonly uiInteractionService: UiInteractionService,
-    readonly versionControlService : VersionControlService,
-  ) {
-  }
+    readonly versionControlService: VersionControlService,
+  ) {}
 
   ngOnInit() {
     this.isExpanded = true;
     this.calculateHeightConnectionSurplus();
   }
 
-  getVariantIsWritable() : boolean {
+  getVariantIsWritable(): boolean {
     return this.versionControlService.getVariantIsWritable();
   }
 
@@ -272,8 +271,10 @@ export class PerlenketteNodeComponent implements OnInit {
   getPathClassTag(connection: PerlenketteConnection = undefined): string {
     if (connection === undefined) {
       const lineTag =
-        " Freq_" + this.perlenketteTrainrun.frequency +
-        " LinePatternRef_" + this.perlenketteTrainrun.trainrunTimeCategory.linePatternRef;
+        " Freq_" +
+        this.perlenketteTrainrun.frequency +
+        " LinePatternRef_" +
+        this.perlenketteTrainrun.trainrunTimeCategory.linePatternRef;
       return "UI_DIALOG " + this.getColoringClassTag() + lineTag;
     }
 
@@ -282,9 +283,16 @@ export class PerlenketteNodeComponent implements OnInit {
       selected_tag = " " + StaticDomTags.TAG_SELECTED;
     }
     const lineTag =
-      " Freq_" + connection.frequency +
-      " LinePatternRef_" + connection.connectedTrainrun.getTimeCategoryLinePatternRef();
-    return "UI_DIALOG " + selected_tag + this.getColoringClassTag(connection) + lineTag;
+      " Freq_" +
+      connection.frequency +
+      " LinePatternRef_" +
+      connection.connectedTrainrun.getTimeCategoryLinePatternRef();
+    return (
+      "UI_DIALOG " +
+      selected_tag +
+      this.getColoringClassTag(connection) +
+      lineTag
+    );
   }
 
   getConnectedTrainEdgeLineTransform(
@@ -363,15 +371,15 @@ export class PerlenketteNodeComponent implements OnInit {
         item
           .getPerlenketteNode()
           .connections.forEach((connection: PerlenketteConnection) => {
-          const name = connection.categoryShortName + "" + connection.title;
-          maxTrainrunNameLen = Math.max(
-            3 + connection.terminalStationBackward.length,
-            Math.max(
-              3 + connection.terminalStation.length,
-              Math.max(name.length, maxTrainrunNameLen),
-            ),
-          );
-        });
+            const name = connection.categoryShortName + "" + connection.title;
+            maxTrainrunNameLen = Math.max(
+              3 + connection.terminalStationBackward.length,
+              Math.max(
+                3 + connection.terminalStation.length,
+                Math.max(name.length, maxTrainrunNameLen),
+              ),
+            );
+          });
       }
     });
 

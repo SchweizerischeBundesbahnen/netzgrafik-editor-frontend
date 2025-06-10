@@ -1,5 +1,7 @@
-<div class="node-container" (click)="disableSectionView($event)"
-     [class.readonly]="!getVariantIsWritable()"
+<div
+  class="node-container"
+  (click)="disableSectionView($event)"
+  [class.readonly]="!getVariantIsWritable()"
 >
   <svg
     display="block"
@@ -159,7 +161,7 @@
               "
               dominant-baseline="text-after-edge"
               class="edge_text station start layer0"
-              style=" stroke-width: 6px;"
+              style="stroke-width: 6px"
               (click)="selectConnection(connection)"
               [ngClass]="[
                 getTextNameOrTimeClassTag(connection, connectionGrpKey, 0)
@@ -192,7 +194,7 @@
               dominant-baseline="text-after-edge"
               class="edge_text station end layer0"
               (click)="selectConnection(connection)"
-              style=" stroke-width: 6px;"
+              style="stroke-width: 6px"
               [ngClass]="[
                 getTextNameOrTimeClassTag(connection, connectionGrpKey, 1)
               ]"
@@ -224,7 +226,7 @@
               dominant-baseline="text-after-edge"
               class="edge_text end station layer0"
               (click)="selectConnection(connection)"
-              style=" stroke-width: 6px;"
+              style="stroke-width: 6px"
               [ngClass]="[
                 getTextTerminalStationlassTag(connection, connectionGrpKey, 0)
               ]"
@@ -255,7 +257,7 @@
               dominant-baseline="text-after-edge"
               class="edge_text start station layer0"
               (click)="selectConnection(connection)"
-              style=" stroke-width: 6px;"
+              style="stroke-width: 6px"
               [ngClass]="[
                 getTextTerminalStationlassTag(connection, connectionGrpKey, 1)
               ]"

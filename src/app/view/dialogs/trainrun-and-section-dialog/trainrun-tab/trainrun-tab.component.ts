@@ -56,7 +56,8 @@ export class TrainrunTabComponent implements OnDestroy {
   }
 
   getContentClassTag(): string {
-    const readonlyTag: string = this.versionControlService.getVariantIsWritable() ? " " : " readonly";
+    const readonlyTag: string =
+      this.versionControlService.getVariantIsWritable() ? " " : " readonly";
     if (this.isIntegratedComponent) {
       return "EditTrainrunDialogTabContent IntegratedComponent" + readonlyTag;
     }
@@ -70,7 +71,6 @@ export class TrainrunTabComponent implements OnDestroy {
     }
     return retVal + " readonly";
   }
-
 
   getFrequencyClassname(trainrunFrequency: TrainrunFrequency): string {
     if (trainrunFrequency.id === this.selectedFrequency.id) {
@@ -192,7 +192,9 @@ export class TrainrunTabComponent implements OnDestroy {
   }
 
   onDuplicateTrainrun() {
-    this.trainrunService.duplicateTrainrunAndSections(this.selectedTrainrun.getId());
+    this.trainrunService.duplicateTrainrunAndSections(
+      this.selectedTrainrun.getId(),
+    );
     this.initializeWithCurrentSelectedTrainrun();
   }
 

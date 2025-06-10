@@ -57,7 +57,8 @@ export interface LeftAndRightLockStructure {
   providers: [TrainrunSectionTimesService],
 })
 export class PerlenketteSectionComponent
-  implements OnInit, AfterContentInit, OnDestroy {
+  implements OnInit, AfterContentInit, OnDestroy
+{
   @Input() perlenketteSection: PerlenketteSection;
   @Input() perlenketteTrainrun: PerlenketteTrainrun;
 
@@ -106,7 +107,7 @@ export class PerlenketteSectionComponent
     public trainrunSectionTimesService: TrainrunSectionTimesService,
     readonly filterService: FilterService,
     private loadPerlenketteService: LoadPerlenketteService,
-    private versionControlService: VersionControlService
+    private versionControlService: VersionControlService,
   ) {
     this.trainrunSectionHelper = new TrainrunsectionHelper(
       this.trainrunService,
@@ -212,12 +213,12 @@ export class PerlenketteSectionComponent
       "UI_DIALOG " +
       " ColorRef_" +
       this.perlenketteTrainrun.colorRef +
-      (noLinePatterns ? " " :
-        " Freq_" +
-        this.perlenketteTrainrun.frequency +
-        " LinePatternRef_" +
-        this.perlenketteTrainrun.trainrunTimeCategory.linePatternRef
-      )
+      (noLinePatterns
+        ? " "
+        : " Freq_" +
+          this.perlenketteTrainrun.frequency +
+          " LinePatternRef_" +
+          this.perlenketteTrainrun.trainrunTimeCategory.linePatternRef)
     );
   }
 
@@ -232,7 +233,6 @@ export class PerlenketteSectionComponent
     event.stopPropagation();
     this.handleSwitchSection(fieldKey);
   }
-
 
   switchSectionViewToggleLock(event: MouseEvent, fieldKey: string) {
     event.stopPropagation();
@@ -249,7 +249,6 @@ export class PerlenketteSectionComponent
       this.onButtonNodeRightLock(event);
       return;
     }
-
   }
 
   handleSwitchSection(fieldKey: string) {
@@ -628,14 +627,20 @@ export class PerlenketteSectionComponent
     ) {
       return (
         "" +
-        this.roundTime(this.trainrunSectionTimesService.getTimeStructure().travelTime) +
+        this.roundTime(
+          this.trainrunSectionTimesService.getTimeStructure().travelTime,
+        ) +
         "' (" +
         this.roundTime(this.trainrunSection.getTravelTime()) +
         "')"
       );
     }
     return (
-      "" + this.roundTime(this.trainrunSectionTimesService.getTimeStructure().travelTime) + "'"
+      "" +
+      this.roundTime(
+        this.trainrunSectionTimesService.getTimeStructure().travelTime,
+      ) +
+      "'"
     );
   }
 
@@ -958,7 +963,6 @@ export class PerlenketteSectionComponent
       return this.lockStructure.leftLock;
     }
     return this.lockStructure.rightLock;
-
   }
 
   getTargetLock(): boolean {
@@ -1092,8 +1096,10 @@ export class PerlenketteSectionComponent
   }
 
   getLockCloseSvgPath(): string {
-    return "M12 4a2 2 0 0 0-2 2v3h4V6a2 2 0 0 0-2-2Zm3 5V6a3 3 0 0 0-6 0v3H6v11h12V9h-3Zm-2.5 " +
-      "4v4h-1v-4h1ZM7 19v-9h10v9H7Z";
+    return (
+      "M12 4a2 2 0 0 0-2 2v3h4V6a2 2 0 0 0-2-2Zm3 5V6a3 3 0 0 0-6 0v3H6v11h12V9h-3Zm-2.5 " +
+      "4v4h-1v-4h1ZM7 19v-9h10v9H7Z"
+    );
   }
 
   getLockSvgPath(isClosed: boolean) {
@@ -1137,17 +1143,21 @@ export class PerlenketteSectionComponent
     const sourceId = this.trainrunSection.getSourceNodeId();
     const fromId = this.perlenketteSection.fromNode.getId();
     if (sourceId === fromId) {
-      this.lockStructure.leftLock = this.trainrunSection.getSourceDepartureLock();
+      this.lockStructure.leftLock =
+        this.trainrunSection.getSourceDepartureLock();
     } else {
       this.lockStructure.leftLock = this.trainrunSection.getTargetArrivalLock();
     }
     const targetId = this.trainrunSection.getTargetNodeId();
     const toId = this.perlenketteSection.toNode.getId();
     if (targetId === toId) {
-      this.lockStructure.rightLock = this.trainrunSection.getTargetArrivalLock();
+      this.lockStructure.rightLock =
+        this.trainrunSection.getTargetArrivalLock();
     } else {
-      this.lockStructure.rightLock = this.trainrunSection.getSourceDepartureLock();
+      this.lockStructure.rightLock =
+        this.trainrunSection.getSourceDepartureLock();
     }
-    this.lockStructure.travelTimeLock = this.trainrunSection.getTravelTimeLock();
+    this.lockStructure.travelTimeLock =
+      this.trainrunSection.getTravelTimeLock();
   }
 }

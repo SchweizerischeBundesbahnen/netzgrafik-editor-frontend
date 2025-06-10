@@ -24,9 +24,7 @@ import {NetzgrafikUnitTesting} from "../../../../integration-testing/netzgrafik.
 import {Vec2D} from "../../../utils/vec2D";
 import {LevelOfDetailService} from "../../../services/ui/level.of.detail.service";
 import {ViewportCullService} from "../../../services/ui/viewport.cull.service";
-import {
-  PositionTransformationService
-} from "../../../services/util/position.transformation.service";
+import {PositionTransformationService} from "../../../services/util/position.transformation.service";
 
 describe("3d.Utils.tests", () => {
   let dataService: DataService;
@@ -99,7 +97,7 @@ describe("3d.Utils.tests", () => {
       trainrunService,
       trainrunSectionService,
       nodeService,
-      filterService
+      filterService,
     );
 
     uiInteractionService = new UiInteractionService(
@@ -132,14 +130,12 @@ describe("3d.Utils.tests", () => {
       undoService,
     );
 
-    const levelOfDetailService = new LevelOfDetailService(
-      uiInteractionService
-    );
+    const levelOfDetailService = new LevelOfDetailService(uiInteractionService);
     const viewportCullService = new ViewportCullService(
       uiInteractionService,
       nodeService,
       noteService,
-      trainrunSectionService
+      trainrunSectionService,
     );
 
     const positionTransformationService = new PositionTransformationService(
@@ -147,7 +143,7 @@ describe("3d.Utils.tests", () => {
       nodeService,
       noteService,
       uiInteractionService,
-      viewportCullService
+      viewportCullService,
     );
 
     const controller = new EditorMainViewComponent(
@@ -164,7 +160,7 @@ describe("3d.Utils.tests", () => {
       viewportCullService,
       levelOfDetailService,
       undefined,
-      positionTransformationService
+      positionTransformationService,
     );
 
     new EditorView(
@@ -181,7 +177,7 @@ describe("3d.Utils.tests", () => {
       viewportCullService,
       levelOfDetailService,
       undefined,
-      positionTransformationService
+      positionTransformationService,
     );
     controller.bindViewToServices();
     editorView = controller.editorView;

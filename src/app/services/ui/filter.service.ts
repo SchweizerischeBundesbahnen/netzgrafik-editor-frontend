@@ -28,7 +28,7 @@ export class FilterService implements OnDestroy {
 
   filterSettingSubject = new BehaviorSubject<FilterSetting[]>(null);
   readonly filterSetting = this.filterSettingSubject.asObservable();
-  filterSettingStore: { filterSettings: FilterSetting[] } = {filterSettings: []}; // store the data in memory
+  filterSettingStore: {filterSettings: FilterSetting[]} = {filterSettings: []}; // store the data in memory
 
   private activeFilterSetting: FilterSetting = null;
   private destroyed = new Subject<void>();
@@ -129,7 +129,10 @@ export class FilterService implements OnDestroy {
     const fs = this.activeFilterSetting.copy();
     this.filterSettingStore.filterSettings.push(fs);
     this.activateFilterSetting(fs.getId());
-    this.setActiveFilterSettingName($localize`:@@app.services.ui.newFilter:New filter`, fs.getId());
+    this.setActiveFilterSettingName(
+      $localize`:@@app.services.ui.newFilter:New filter`,
+      fs.getId(),
+    );
     this.filterSettingUpdated();
     return fs;
   }
@@ -399,7 +402,9 @@ export class FilterService implements OnDestroy {
       filterTrainrunSection &&
       this.isFilterTrainrunFrequencyEnabled(trainrun.getTrainrunFrequency()) &&
       this.isFilterTrainrunCategoryEnabled(trainrun.getTrainrunCategory()) &&
-      this.isFilterTrainrunTimeCategoryEnabled(trainrun.getTrainrunTimeCategory())
+      this.isFilterTrainrunTimeCategoryEnabled(
+        trainrun.getTrainrunTimeCategory(),
+      )
     );
   }
 

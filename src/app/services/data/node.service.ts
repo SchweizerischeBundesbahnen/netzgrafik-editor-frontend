@@ -31,7 +31,12 @@ import {LabelService} from "./label.service";
 import {FilterService} from "../ui/filter.service";
 import {ConnectionDto} from "../../data-structures/technical.data.structures";
 import {TrainrunSectionValidator} from "../util/trainrunsection.validator";
-import {NodeOperation, Operation, OperationType, TrainrunOperation} from "../../models/operation.model";
+import {
+  NodeOperation,
+  Operation,
+  OperationType,
+  TrainrunOperation,
+} from "../../models/operation.model";
 
 @Injectable({
   providedIn: "root",
@@ -393,10 +398,14 @@ export class NodeService implements OnDestroy {
     const port2 = node.getPort(transition.getPortId2());
     const trainrunSection1 = port1.getTrainrunSection();
     const trainrunSection2 = port2.getTrainrunSection();
-    const timeLock1 = trainrunSection1.getSourceNodeId() !== node.getId() ?
-      trainrunSection1.getSourceDepartureLock() : trainrunSection1.getTargetDepartureLock();
-    const timeLock2 = trainrunSection2.getSourceNodeId() !== node.getId() ?
-      trainrunSection2.getSourceDepartureLock() : trainrunSection2.getTargetDepartureLock();
+    const timeLock1 =
+      trainrunSection1.getSourceNodeId() !== node.getId()
+        ? trainrunSection1.getSourceDepartureLock()
+        : trainrunSection1.getTargetDepartureLock();
+    const timeLock2 =
+      trainrunSection2.getSourceNodeId() !== node.getId()
+        ? trainrunSection2.getSourceDepartureLock()
+        : trainrunSection2.getTargetDepartureLock();
 
     const oppNodeTrainrunSection1 = node.getOppositeNode(trainrunSection1);
     const oppNodeTrainrunSection2 = node.getOppositeNode(trainrunSection2);
@@ -425,7 +434,8 @@ export class NodeService implements OnDestroy {
     );
 
     // temporary store the source/target node information for updating the locks
-    const isTargetNodeEqToNodeId = trainrunSection1.getTargetNodeId() === node.getId();
+    const isTargetNodeEqToNodeId =
+      trainrunSection1.getTargetNodeId() === node.getId();
 
     // compute the new reconnected trainrun sections (create / fusion)
     this.trainrunSectionService.reconnectTrainrunSection(
@@ -469,7 +479,7 @@ export class NodeService implements OnDestroy {
         timeLock1,
         timeLock2,
         trainrunSection1.getTravelTimeLock(),
-        enforceUpdate
+        enforceUpdate,
       );
     } else {
       this.trainrunSectionService.updateTrainrunSectionTimeLock(
@@ -477,7 +487,7 @@ export class NodeService implements OnDestroy {
         timeLock2,
         timeLock1,
         trainrunSection1.getTravelTimeLock(),
-        enforceUpdate
+        enforceUpdate,
       );
     }
 
@@ -601,7 +611,12 @@ export class NodeService implements OnDestroy {
     TransitionValidator.validateTransition(node, transitionId);
     this.transitionsUpdated();
     this.nodesUpdated();
-    this.operation.emit(new TrainrunOperation(OperationType.update, trainrunSections.trainrunSection1.getTrainrun()));
+    this.operation.emit(
+      new TrainrunOperation(
+        OperationType.update,
+        trainrunSections.trainrunSection1.getTrainrun(),
+      ),
+    );
   }
 
   checkExistsNoCycleTrainrunAfterFreePortsConnecting(
@@ -973,13 +988,17 @@ export class NodeService implements OnDestroy {
   changeNodeFullName(nodeId: number, name: string) {
     this.getNodeFromId(nodeId).setFullName(name);
     this.nodesUpdated();
-    this.operation.emit(new NodeOperation(OperationType.update, this.getNodeFromId(nodeId)));
+    this.operation.emit(
+      new NodeOperation(OperationType.update, this.getNodeFromId(nodeId)),
+    );
   }
 
   changeConnectionTime(nodeId: number, connectionTime: number) {
     this.getNodeFromId(nodeId).setConnectionTime(connectionTime);
     this.nodesUpdated();
-    this.operation.emit(new NodeOperation(OperationType.update, this.getNodeFromId(nodeId)));
+    this.operation.emit(
+      new NodeOperation(OperationType.update, this.getNodeFromId(nodeId)),
+    );
   }
 
   changeLabels(nodeId: number, labels: string[]) {
@@ -987,8 +1006,8 @@ export class NodeService implements OnDestroy {
 
     // ensure uniqueness of input labels
     const uniqueLabels = Array.from(new Set(labels));
-    const labelIds = uniqueLabels.map(label =>
-      this.labelService.getOrCreateLabel(label, LabelRef.Node).getId()
+    const labelIds = uniqueLabels.map((label) =>
+      this.labelService.getOrCreateLabel(label, LabelRef.Node).getId(),
     );
     const deletedLabelIds = this.labelService.clearLabel(
       this.findClearedLabel(node, labelIds),
@@ -1283,7 +1302,7 @@ export class NodeService implements OnDestroy {
     if (connectedTrainrunSections.length !== 0) {
       this.trainrunSectionService.deleteListOfTrainrunSections(
         node.getConnectedTrainrunSections(),
-        enforceUpdate
+        enforceUpdate,
       );
     }
     this.nodesStore.nodes = this.nodesStore.nodes.filter(

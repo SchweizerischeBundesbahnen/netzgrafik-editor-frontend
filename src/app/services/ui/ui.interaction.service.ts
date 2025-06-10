@@ -2,13 +2,9 @@ import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {EditorMode} from "../../view/editor-menu/editor-mode";
 import {Injectable, OnDestroy} from "@angular/core";
 import {Stammdaten} from "../../models/stammdaten.model";
-import {
-  TrainrunDialogParameter
-} from "../../view/dialogs/trainrun-and-section-dialog/trainrun-and-section-dialog.component";
+import {TrainrunDialogParameter} from "../../view/dialogs/trainrun-and-section-dialog/trainrun-and-section-dialog.component";
 import {ThemeBase} from "../../view/themes/theme-base";
-import {
-  ConfirmationDialogParameter
-} from "../../view/dialogs/confirmation-dialog/confirmation-dialog.component";
+import {ConfirmationDialogParameter} from "../../view/dialogs/confirmation-dialog/confirmation-dialog.component";
 import {FilterService} from "./filter.service";
 import {NodeService} from "../data/node.service";
 import {StammdatenService} from "../data/stammdaten.service";
@@ -35,9 +31,7 @@ import {MainViewMode} from "../../view/filter-main-side-view/main-view-mode";
 import {TrainrunService} from "../data/trainrun.service";
 import {Trainrun} from "../../models/trainrun.model";
 import {LoadPerlenketteService} from "../../perlenkette/service/load-perlenkette.service";
-import {
-  TravelTimeCreationEstimatorType
-} from "../../view/themes/editor-trainrun-traveltime-creator-type";
+import {TravelTimeCreationEstimatorType} from "../../view/themes/editor-trainrun-traveltime-creator-type";
 
 export interface ViewboxProperties {
   currentViewBox: string;

@@ -81,7 +81,10 @@ export class GeneralViewFunctions {
     }
   }
 
-  static getStartForwardAndBackwardNode(endNode1: Node, endNode2: Node): {
+  static getStartForwardAndBackwardNode(
+    endNode1: Node,
+    endNode2: Node,
+  ): {
     startForwardNode: Node;
     startBackwardNode: Node;
   } {
@@ -91,13 +94,11 @@ export class GeneralViewFunctions {
     );
 
     const startBackwardNode =
-      endNode1.getId() === startForwardNode.getId()
-        ? endNode2
-        : endNode1;
+      endNode1.getId() === startForwardNode.getId() ? endNode2 : endNode1;
 
     return {
       startForwardNode: startForwardNode,
-      startBackwardNode: startBackwardNode
+      startBackwardNode: startBackwardNode,
     };
   }
 

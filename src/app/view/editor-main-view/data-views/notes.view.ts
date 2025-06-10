@@ -49,18 +49,18 @@ export class NotesView {
       .split("<br>")
       .join(
         '<tspan x="' +
-        (NOTE_TEXT_LEFT_SPACING - 4) +
-        '" dy="' +
-        TEXT_SIZE +
-        '">&nbsp;</tspan>',
+          (NOTE_TEXT_LEFT_SPACING - 4) +
+          '" dy="' +
+          TEXT_SIZE +
+          '">&nbsp;</tspan>',
       )
       .split("<p>")
       .join(
         '<tspan x="' +
-        NOTE_TEXT_LEFT_SPACING +
-        '" dy="' +
-        1.5 * TEXT_SIZE +
-        '">',
+          NOTE_TEXT_LEFT_SPACING +
+          '" dy="' +
+          1.5 * TEXT_SIZE +
+          '">',
       )
       .split("</p>")
       .join("&nbsp;</tspan>")
@@ -83,10 +83,10 @@ export class NotesView {
   static extractTextBasedHeight(n: Note): number {
     return Math.max(
       n.getText().split("<br>").join("<p>").split("<p>", 9999).length *
-      1.5 *
-      TEXT_SIZE +
-      NOTE_TEXT_AREA_HEIGHT +
-      16,
+        1.5 *
+        TEXT_SIZE +
+        NOTE_TEXT_AREA_HEIGHT +
+        16,
       n.getHeight(),
     );
   }
@@ -128,15 +128,17 @@ export class NotesView {
   }
 
   displayNotes(inputNotes: Note[]) {
-    const notes = inputNotes.filter((n) =>
-      this.editorView.doCullCheckPositionsInViewport(
-        [
+    const notes = inputNotes.filter(
+      (n) =>
+        this.editorView.doCullCheckPositionsInViewport([
           new Vec2D(n.getPositionX(), n.getPositionY()),
           new Vec2D(n.getPositionX() + n.getWidth(), n.getPositionY()),
           new Vec2D(n.getPositionX(), n.getPositionY() + n.getHeight()),
-          new Vec2D(n.getPositionX() + n.getWidth(), n.getPositionY() + n.getHeight())
-        ]) &&
-      this.filterNotesToDisplay(n)
+          new Vec2D(
+            n.getPositionX() + n.getWidth(),
+            n.getPositionY() + n.getHeight(),
+          ),
+        ]) && this.filterNotesToDisplay(n),
     );
 
     const group = this.notesGroup
@@ -236,8 +238,7 @@ export class NotesView {
   }
 
   private makeNoteHoverRoot(groupEnter: any) {
-    const added = groupEnter
-      .append(StaticDomTags.NOTE_HOVER_ROOT_SVG);
+    const added = groupEnter.append(StaticDomTags.NOTE_HOVER_ROOT_SVG);
     added
       .attr("class", StaticDomTags.NOTE_HOVER_ROOT_CLASS)
       .attr(StaticDomTags.NOTE_ID, (n: NoteViewObject) => n.note.getId())
@@ -252,7 +253,9 @@ export class NotesView {
       .attr("x", -24)
       .attr("y", -24);
 
-    if ( !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable() ){
+    if (
+      !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()
+    ) {
       return;
     }
 
@@ -265,7 +268,6 @@ export class NotesView {
   }
 
   private makeNoteRoot(groupEnter: any) {
-
     groupEnter
       .append(StaticDomTags.NOTE_ROOT_SVG)
       .attr("class", StaticDomTags.NOTE_ROOT_CLASS)
@@ -294,11 +296,9 @@ export class NotesView {
       .on("mouseover", (n: NoteViewObject, i, a) =>
         this.onNoteMouseover(n.note, a[i]),
       );
-
   }
 
   private makeNoteTitleArea(groupEnter: any) {
-
     groupEnter
       .append(StaticDomTags.NOTE_TITELAREA_SVG)
       .attr("class", StaticDomTags.NOTE_TITELAREA_CLASS)
@@ -326,7 +326,6 @@ export class NotesView {
   }
 
   private makeNoteTextArea(groupEnter: any) {
-
     groupEnter
       .append(StaticDomTags.NOTE_TEXTAREA_SVG)
       .attr("class", StaticDomTags.NOTE_TEXTAREA_CLASS)
@@ -358,7 +357,6 @@ export class NotesView {
   }
 
   private makeNoteTitleAreaText(groupEnter: any) {
-
     groupEnter
       .append(StaticDomTags.NOTE_TITELAREA_TEXT_SVG)
       .attr("class", StaticDomTags.NOTE_TITELAREA_TEXT_CLASS)
@@ -374,7 +372,6 @@ export class NotesView {
   }
 
   private makeNoteText(groupEnter: any) {
-
     groupEnter
       .append(StaticDomTags.NOTE_TEXT_SVG)
       .attr("class", StaticDomTags.NOTE_TEXT_CLASS)
@@ -387,13 +384,12 @@ export class NotesView {
       .on("mouseover", (n: NoteViewObject, i, a) =>
         this.onNoteMouseover(n.note, a[i]),
       );
-
   }
 
   private makeNoteDragAreaBackground(groupEnter: any) {
-
-    const added = groupEnter
-      .append(StaticDomTags.NOTE_HOVER_DRAG_AREA_BACKGROUND_SVG);
+    const added = groupEnter.append(
+      StaticDomTags.NOTE_HOVER_DRAG_AREA_BACKGROUND_SVG,
+    );
 
     added
       .attr("class", StaticDomTags.NOTE_HOVER_DRAG_AREA_BACKGROUND_CLASS)
@@ -407,7 +403,9 @@ export class NotesView {
       .attr("x", 0)
       .attr("y", 0);
 
-    if ( !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable() ){
+    if (
+      !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()
+    ) {
       return;
     }
 
@@ -422,7 +420,9 @@ export class NotesView {
   }
 
   private makeNoteDragArea(groupEnter: any) {
-    if ( !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable() ){
+    if (
+      !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()
+    ) {
       return;
     }
     groupEnter
@@ -435,11 +435,11 @@ export class NotesView {
       .attr(
         "d",
         "m11.855 2.398-.356-.36-.356.36-3.841 3.897.712.702L11 " +
-        "3.97V11H3.957l2.647-2.647-.707-.708-3.5 3.5-.354.354.354.354 3.5 " +
-        "3.5.707-.708-2.646-2.645H11v7.03l-2.995-3.027-.71.703 3.852 3.894.356.36.355-.36 " +
-        "3.842-3.898-.712-.701L12 19.032v-7.031h7.041l-2.645 2.645.708.708 " +
-        "3.5-3.5.353-.354-.353-.354-3.5-3.5-.707.708L19.043 11H12V3.967l2.997 " +
-        "3.029.711-.704-3.853-3.894Z",
+          "3.97V11H3.957l2.647-2.647-.707-.708-3.5 3.5-.354.354.354.354 3.5 " +
+          "3.5.707-.708-2.646-2.645H11v7.03l-2.995-3.027-.71.703 3.852 3.894.356.36.355-.36 " +
+          "3.842-3.898-.712-.701L12 19.032v-7.031h7.041l-2.645 2.645.708.708 " +
+          "3.5-3.5.353-.354-.353-.354-3.5-3.5-.707.708L19.043 11H12V3.967l2.997 " +
+          "3.029.711-.704-3.853-3.894Z",
       )
       .attr("transform", (n: NoteViewObject) => "translate(-45,-15),scale(1.0)")
       .on("mouseout", (n: NoteViewObject) =>
@@ -452,7 +452,9 @@ export class NotesView {
   }
 
   onNoteMousedown(note: Note) {
-    if ( !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable() ){
+    if (
+      !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()
+    ) {
       d3.event.stopPropagation();
       return;
     }
@@ -469,7 +471,9 @@ export class NotesView {
   }
 
   onNoteMouseup(note: Note, domObj: any) {
-    if ( !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable() ){
+    if (
+      !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()
+    ) {
       d3.event.stopPropagation();
       return;
     }

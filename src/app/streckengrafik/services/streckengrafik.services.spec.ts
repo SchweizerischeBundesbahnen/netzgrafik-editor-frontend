@@ -114,7 +114,7 @@ describe("StreckengrafikServicesTests", () => {
       trainrunService,
       trainrunSectionService,
       nodeService,
-      filterService
+      filterService,
     );
 
     uiInteractionService = new UiInteractionService(
@@ -260,9 +260,9 @@ describe("StreckengrafikServicesTests", () => {
           [
             101,
             sgSelectedTrainrun.frequency -
-            (101 % sgSelectedTrainrun.frequency) +
-            Math.floor(101 / sgSelectedTrainrun.frequency) *
-            sgSelectedTrainrun.frequency,
+              (101 % sgSelectedTrainrun.frequency) +
+              Math.floor(101 / sgSelectedTrainrun.frequency) *
+                sgSelectedTrainrun.frequency,
           ],
         ];
         for (
@@ -478,10 +478,10 @@ describe("StreckengrafikServicesTests", () => {
         const trackSegments = section.trackData.sectionTrackSegments;
         expect(trackSegments.length).toBe(12);
         const trackSegDataTracks: number[] = [
-          4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
+          4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
         ];
         const trackSegDataMinTracks: number[] = [
-          4, 3, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1
+          4, 3, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1,
         ];
         for (let idx = 0; idx < trackSegments.length; idx++) {
           expect(trackSegments[idx].nbrTracks).toBe(trackSegDataTracks[idx]);

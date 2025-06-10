@@ -294,9 +294,9 @@ export class KnotenAuslastungViewComponent implements AfterViewInit, OnDestroy {
           "" +
           Math.round(
             (100 * d) /
-            this.resourceService
-              .getResource(selectedNode.getResourceId())
-              .getCapacity(),
+              this.resourceService
+                .getResource(selectedNode.getResourceId())
+                .getCapacity(),
           ) +
           "%",
       );

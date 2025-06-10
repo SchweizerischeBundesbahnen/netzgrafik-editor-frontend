@@ -30,7 +30,7 @@ export class ConnectionValidator {
     if (nonStopConnectionError) {
       connection.setWarning(
         $localize`:@@app.services.util.connection-validator.connection-marked-for-transit.title:Connection marked for transition!`,
-        $localize`:@@app.services.util.connection-validator.connection-marked-for-transit.description:Connection marked for transition!`
+        $localize`:@@app.services.util.connection-validator.connection-marked-for-transit.description:Connection marked for transition!`,
       );
     } else {
       connection.resetWarning();

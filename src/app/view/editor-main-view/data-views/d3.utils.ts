@@ -38,12 +38,16 @@ export class D3Utils {
     //).raise();
     d3.selectAll(
       StaticDomTags.EDGE_ROOT_CONTAINER_DOM_REF +
-      "." +
-      StaticDomTags.TAG_SELECTED,
+        "." +
+        StaticDomTags.TAG_SELECTED,
     ).raise();
   }
 
-  static hoverTrainrunSection(trainrunSection: TrainrunSection, bringToFront = true, domObj: any) {
+  static hoverTrainrunSection(
+    trainrunSection: TrainrunSection,
+    bringToFront = true,
+    domObj: any,
+  ) {
     d3.selectAll(StaticDomTags.EDGE_LINE_DOM_REF)
       .filter(
         (d: TrainrunSectionViewObject) =>
@@ -76,7 +80,9 @@ export class D3Utils {
     } else {
       if (domObj !== undefined) {
         const attrId = d3.select(domObj).attr("id");
-        const objs = d3.selectAll(StaticDomTags.EDGE_ROOT_CONTAINER_DOM_REF + "[id='" + attrId + "']");
+        const objs = d3.selectAll(
+          StaticDomTags.EDGE_ROOT_CONTAINER_DOM_REF + "[id='" + attrId + "']",
+        );
         objs.raise();
       }
     }

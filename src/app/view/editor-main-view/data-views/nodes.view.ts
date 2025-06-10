@@ -98,15 +98,17 @@ export class NodesView {
   }
 
   displayNodes(inputNodes: Node[]) {
-    const nodes = inputNodes.filter((n) =>
-      this.editorView.doCullCheckPositionsInViewport(
-          [
-            new Vec2D(n.getPositionX(), n.getPositionY()),
-            new Vec2D(n.getPositionX() + n.getNodeWidth(), n.getPositionY()),
-            new Vec2D(n.getPositionX(), n.getPositionY() + n.getNodeHeight()),
-            new Vec2D(n.getPositionX() + n.getNodeWidth(), n.getPositionY() + n.getNodeHeight())
-          ]) &&
-      this.filterNodesToDisplay(n)
+    const nodes = inputNodes.filter(
+      (n) =>
+        this.editorView.doCullCheckPositionsInViewport([
+          new Vec2D(n.getPositionX(), n.getPositionY()),
+          new Vec2D(n.getPositionX() + n.getNodeWidth(), n.getPositionY()),
+          new Vec2D(n.getPositionX(), n.getPositionY() + n.getNodeHeight()),
+          new Vec2D(
+            n.getPositionX() + n.getNodeWidth(),
+            n.getPositionY() + n.getNodeHeight(),
+          ),
+        ]) && this.filterNodesToDisplay(n),
     );
 
     const group = this.nodeGroup
@@ -271,7 +273,6 @@ export class NodesView {
   }
 
   private makeBackground(groupEnter: any) {
-
     groupEnter
       .append(StaticDomTags.NODE_BACKGROUND_SVG)
       .attr("class", StaticDomTags.NODE_BACKGROUND_CLASS)
@@ -295,7 +296,6 @@ export class NodesView {
   }
 
   private makeLabelArea(groupEnter: any) {
-
     groupEnter
       .append(StaticDomTags.NODE_LABELAREA_SVG)
       .attr("class", StaticDomTags.NODE_LABELAREA_CLASS)
@@ -324,9 +324,9 @@ export class NodesView {
   }
 
   private makeHoverDragBackground(groupEnter: any) {
-    const added=
-      groupEnter
-        .append(StaticDomTags.NODE_HOVER_DRAG_AREA_BACKGROUND_SVG);
+    const added = groupEnter.append(
+      StaticDomTags.NODE_HOVER_DRAG_AREA_BACKGROUND_SVG,
+    );
     added
       .attr("class", StaticDomTags.NODE_HOVER_DRAG_AREA_BACKGROUND_CLASS)
       .classed(StaticDomTags.TAG_SELECTED, (n: NodeViewObject) =>
@@ -343,12 +343,11 @@ export class NodesView {
       )
       .classed(
         StaticDomTags.NODE_READONLY,
-        !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()
+        !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable(),
       );
 
-    if ( this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable() ){
-      added
-        .call(this.draggable);
+    if (this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()) {
+      added.call(this.draggable);
     }
 
     added
@@ -363,7 +362,9 @@ export class NodesView {
   }
 
   private makeHoverDragRoot(groupEnter: any) {
-    if ( !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable() ){
+    if (
+      !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()
+    ) {
       return;
     }
     groupEnter
@@ -376,11 +377,11 @@ export class NodesView {
       .attr(
         "d",
         "m11.855 2.398-.356-.36-.356.36-3.841 3.897.712.702L11 " +
-        "3.97V11H3.957l2.647-2.647-.707-.708-3.5 3.5-.354.354.354.354 3.5 " +
-        "3.5.707-.708-2.646-2.645H11v7.03l-2.995-3.027-.71.703 3.852 3.894.356.36.355-.36 " +
-        "3.842-3.898-.712-.701L12 19.032v-7.031h7.041l-2.645 2.645.708.708 " +
-        "3.5-3.5.353-.354-.353-.354-3.5-3.5-.707.708L19.043 11H12V3.967l2.997 " +
-        "3.029.711-.704-3.853-3.894Z",
+          "3.97V11H3.957l2.647-2.647-.707-.708-3.5 3.5-.354.354.354.354 3.5 " +
+          "3.5.707-.708-2.646-2.645H11v7.03l-2.995-3.027-.71.703 3.852 3.894.356.36.355-.36 " +
+          "3.842-3.898-.712-.701L12 19.032v-7.031h7.041l-2.645 2.645.708.708 " +
+          "3.5-3.5.353-.354-.353-.354-3.5-3.5-.707.708L19.043 11H12V3.967l2.997 " +
+          "3.029.711-.704-3.853-3.894Z",
       )
       .attr(
         "transform",
@@ -401,7 +402,6 @@ export class NodesView {
   }
 
   private makeEditButtonBackground(groupEnter: any) {
-
     groupEnter
       .append(StaticDomTags.NODE_EDIT_AREA_BACKGROUND_SVG)
       .attr("class", StaticDomTags.NODE_EDIT_AREA_BACKGROUND_CLASS)
@@ -429,7 +429,6 @@ export class NodesView {
   }
 
   private makeEditButton(groupEnter: any) {
-
     groupEnter
       .append(StaticDomTags.NODE_EDIT_AREA_SVG)
       .attr("class", StaticDomTags.NODE_EDIT_AREA_CLASS)
@@ -440,11 +439,11 @@ export class NodesView {
       .attr(
         "d",
         "m25.853 6.71-.354-.352-.353.353-3.435 3.435-.353.354.353.353 " +
-        "3.435 3.435.355.355.353-.355 3.435-3.449.353-.354-.354-.353-3.435-3.421Zm-" +
-        "3.081 3.79 2.729-2.729 2.727 2.717-2.729 2.739-2.727-2.727Zm-2.918 2.212-." +
-        "354-.354-.354.354-11.25 11.25-.146.146V28.25h4.142l.147-.146 11.25-11.252." +
-        "353-.353-.354-.354-3.434-3.433ZM8.75 24.522l10.75-10.75 2.728 2.727-10.75 " +
-        "10.751H8.75v-2.728Z",
+          "3.435 3.435.355.355.353-.355 3.435-3.449.353-.354-.354-.353-3.435-3.421Zm-" +
+          "3.081 3.79 2.729-2.729 2.727 2.717-2.729 2.739-2.727-2.727Zm-2.918 2.212-." +
+          "354-.354-.354.354-11.25 11.25-.146.146V28.25h4.142l.147-.146 11.25-11.252." +
+          "353-.353-.354-.354-3.434-3.433ZM8.75 24.522l10.75-10.75 2.728 2.727-10.75 " +
+          "10.751H8.75v-2.728Z",
       )
       .attr(
         "transform",
@@ -466,7 +465,6 @@ export class NodesView {
   }
 
   private makeNodeDockable(groupEnter: any) {
-
     groupEnter
       .append(StaticDomTags.NODE_DOCKABLE_SVG)
       .attr("class", StaticDomTags.NODE_DOCKABLE_CLASS)
@@ -503,7 +501,6 @@ export class NodesView {
   }
 
   private makeAnalyticsArea(groupEnter: any) {
-
     groupEnter
       .append(StaticDomTags.NODE_ANALYTICSAREA_SVG)
       .attr("class", StaticDomTags.NODE_ANALYTICSAREA_CLASS)
@@ -538,7 +535,6 @@ export class NodesView {
   }
 
   private makeAnalyticsTextLeftArea(groupEnter: any) {
-
     groupEnter
       .append(StaticDomTags.NODE_ANALYTICSAREA_TEXT_LEFT_SVG)
       .attr("class", StaticDomTags.NODE_ANALYTICSAREA_TEXT_LEFT_CLASS)
@@ -574,8 +570,7 @@ export class NodesView {
   }
 
   private makeLabelText(groupEnter: any) {
-    const added = groupEnter
-      .append(StaticDomTags.NODE_LABELAREA_TEXT_SVG);
+    const added = groupEnter.append(StaticDomTags.NODE_LABELAREA_TEXT_SVG);
     added
       .attr("class", StaticDomTags.NODE_LABELAREA_TEXT_CLASS)
       .attr(StaticDomTags.NODE_ID, (n: NodeViewObject) => n.node.getId())
@@ -591,10 +586,12 @@ export class NodesView {
       )
       .classed(
         StaticDomTags.NODE_READONLY,
-        !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()
+        !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable(),
       );
 
-    if ( !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable() ){
+    if (
+      !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()
+    ) {
       return;
     }
 
@@ -611,7 +608,6 @@ export class NodesView {
   }
 
   private makeLabelConnectionText(groupEnter: any) {
-
     groupEnter
       .append(StaticDomTags.NODE_CONNECTIONTIME_TEXT_SVG)
       .attr("class", StaticDomTags.NODE_CONNECTIONTIME_TEXT_CLASS)
@@ -866,9 +862,9 @@ export class NodesView {
     if (existingTrainrunSection === null) {
       const sourceObj = d3.select(
         StaticDomTags.NODE_DOCKABLE_DOM_REF +
-        '[id="' +
-        startNode.getId() +
-        '"]',
+          '[id="' +
+          startNode.getId() +
+          '"]',
       );
       const sourceRect: DOMRect = sourceObj.node().getBoundingClientRect();
       const sourcePos = new Vec2D(
@@ -928,13 +924,13 @@ export class NodesView {
     if (
       !(
         dragTransitionInfo.trainrunSection1.getSourceNodeId() !==
-        endNode.getId() &&
+          endNode.getId() &&
         dragTransitionInfo.trainrunSection1.getTargetNodeId() !==
-        endNode.getId() &&
+          endNode.getId() &&
         dragTransitionInfo.trainrunSection2.getSourceNodeId() !==
-        endNode.getId() &&
+          endNode.getId() &&
         dragTransitionInfo.trainrunSection2.getTargetNodeId() !==
-        endNode.getId()
+          endNode.getId()
       )
     ) {
       this.editorView.trainrunSectionPreviewLineView.stopPreviewLine();

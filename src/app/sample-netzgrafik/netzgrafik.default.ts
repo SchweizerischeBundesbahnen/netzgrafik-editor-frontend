@@ -208,7 +208,7 @@ export class NetzgrafikDefault {
         analyticsSettings: {
           originDestinationSettings: {
             connectionPenalty: 5,
-          }
+          },
         },
         trainrunCategories: [
           {

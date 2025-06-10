@@ -56,7 +56,11 @@ export class NoteService {
     });
   }
 
-  addNote(position: Vec2D, title = $localize`:@@app.models.note.default-title:Note title`, text = $localize`:@@app.models.note.default-text:Note text`): Note {
+  addNote(
+    position: Vec2D,
+    title = $localize`:@@app.models.note.default-title:Note title`,
+    text = $localize`:@@app.models.note.default-text:Note text`,
+  ): Note {
     const newNote = new Note();
     newNote.setPosition(position.getX(), position.getY());
     newNote.setTitle(title);
@@ -191,8 +195,8 @@ export class NoteService {
 
     // ensure uniqueness of input labels
     const uniqueLabels = Array.from(new Set(labels));
-    const labelIds = uniqueLabels.map(label =>
-      this.labelService.getOrCreateLabel(label, LabelRef.Note).getId()
+    const labelIds = uniqueLabels.map((label) =>
+      this.labelService.getOrCreateLabel(label, LabelRef.Note).getId(),
     );
     const deletedLabelIds = this.labelService.clearLabel(
       this.findClearedLabel(note, labelIds),

@@ -1,6 +1,9 @@
 import {Injectable} from "@angular/core";
 import {MathUtils} from "../../utils/math";
-import {LeftAndRightElement, TrainrunsectionHelper,} from "../util/trainrunsection.helper";
+import {
+  LeftAndRightElement,
+  TrainrunsectionHelper,
+} from "../util/trainrunsection.helper";
 import {
   LeftAndRightLockStructure,
   LeftAndRightTimeStructure,
@@ -421,8 +424,9 @@ export class TrainrunSectionTimesService {
   }
 
   updateTrainrunSectionTimeLock() {
-    const leftRight =
-      this.trainrunSectionHelper.getLeftRightSections(this.selectedTrainrunSection);
+    const leftRight = this.trainrunSectionHelper.getLeftRightSections(
+      this.selectedTrainrunSection,
+    );
 
     this.trainrunSectionService.updateTrainrunSectionTimeLock(
       leftRight.leftSection.getId(),
@@ -435,7 +439,7 @@ export class TrainrunSectionTimesService {
         leftRight.leftSection,
       ),
       this.lockStructure.travelTimeLock,
-      true
+      true,
     );
 
     this.trainrunSectionService.updateTrainrunSectionTimeLock(
@@ -449,7 +453,7 @@ export class TrainrunSectionTimesService {
         leftRight.rightSection,
       ),
       undefined,
-      true
+      true,
     );
   }
 
@@ -489,7 +493,7 @@ export class TrainrunSectionTimesService {
       this.initialLeftAndRightElement === LeftAndRightElement.LeftDeparture ||
       this.initialLeftAndRightElement === LeftAndRightElement.RightArrival ||
       this.initialLeftAndRightElement ===
-      LeftAndRightElement.LeftRightTrainrunName
+        LeftAndRightElement.LeftRightTrainrunName
     ) {
       this.timeStructure.leftDepartureTime =
         (this.timeStructure.leftDepartureTime + this.offset) % 60;
@@ -519,7 +523,7 @@ export class TrainrunSectionTimesService {
       this.initialLeftAndRightElement === LeftAndRightElement.LeftDeparture ||
       this.initialLeftAndRightElement === LeftAndRightElement.RightArrival ||
       this.initialLeftAndRightElement ===
-      LeftAndRightElement.LeftRightTrainrunName
+        LeftAndRightElement.LeftRightTrainrunName
     ) {
       this.timeStructure.leftDepartureTime =
         (maxMinutes + this.timeStructure.leftDepartureTime - this.offset) % 60;
@@ -598,7 +602,7 @@ export class TrainrunSectionTimesService {
         this.timeStructure,
       ),
       this.selectedTrainrunSection,
-      this.filterService.getTimeDisplayPrecision()
+      this.filterService.getTimeDisplayPrecision(),
     );
   }
 }
