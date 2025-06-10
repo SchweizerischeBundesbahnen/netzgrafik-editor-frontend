@@ -1,9 +1,7 @@
 import {Component, ElementRef, OnDestroy, ViewChild} from "@angular/core";
 import {DataService} from "../../services/data/data.service";
 import {UiInteractionService} from "../../services/ui/ui.interaction.service";
-import {
-  ConfirmationDialogParameter
-} from "../dialogs/confirmation-dialog/confirmation-dialog.component";
+import {ConfirmationDialogParameter} from "../dialogs/confirmation-dialog/confirmation-dialog.component";
 import {NodeService} from "../../services/data/node.service";
 import {TrainrunSectionService} from "../../services/data/trainrunsection.service";
 import {EditorMode} from "../editor-menu/editor-mode";
@@ -51,7 +49,7 @@ export class EditorEditToolsViewComponent implements OnDestroy {
     public filterService: FilterService,
     private uiInteractionService: UiInteractionService,
     private versionControlService: VersionControlService,
-    private positionTransformationService: PositionTransformationService
+    private positionTransformationService: PositionTransformationService,
   ) {
     this.nodeLabelGroups = this.labelGroupService.getLabelGroupsFromLabelRef(
       LabelRef.Node,
@@ -87,7 +85,9 @@ export class EditorEditToolsViewComponent implements OnDestroy {
   }
 
   getAreMultiObjectSelected(): boolean {
-    return this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving;
+    return (
+      this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving
+    );
   }
 
   onClearAllFiltered() {

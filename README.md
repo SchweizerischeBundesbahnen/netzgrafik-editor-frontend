@@ -216,9 +216,29 @@ echo "use flake" >> .envrc && direnv allow
 
 See [official direnv documentation](https://direnv.net/) for more information.
 
+### Linting
+
+```sh
+# to fix the eventual lint issues
+npm run lint
+
+# to check that the code is correctly linted
+npm run lint:fix
+```
+
+### Formatting
+
+```sh
+# to check that the code is correctly formatted
+npm run format:check
+
+# to format the code according to Prettier rules
+npm run format
+```
+
 ### Testing
 
-```
+```sh
 # just run the test once
 npm run test
 

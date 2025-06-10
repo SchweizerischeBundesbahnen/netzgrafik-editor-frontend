@@ -72,7 +72,7 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
     private nodeService: NodeService,
     private labelService: LabelService,
     private labelGroupService: LabelGroupService,
-    public versionControlService : VersionControlService,
+    public versionControlService: VersionControlService,
     private cd: ChangeDetectorRef,
   ) {}
 
@@ -179,7 +179,7 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
     const node = this.nodeService.getSelectedNode();
     const confirmationDialogParamter = new ConfirmationDialogParameter(
       $localize`:@@app.view.editor-side-view.editor-node-detail-view.delete:Delete`,
-      $localize`:@@app.view.editor-side-view.editor-node-detail-view.deleteNodeDialog:Should the node ${node.getBetriebspunktName()}:operationalPointShortName: (${node.getFullName()}:operationalPointName:) be definitely deleted?`
+      $localize`:@@app.view.editor-side-view.editor-node-detail-view.deleteNodeDialog:Should the node ${node.getBetriebspunktName()}:operationalPointShortName: (${node.getFullName()}:operationalPointName:) be definitely deleted?`,
     );
     this.uiInteractionService
       .showConfirmationDiagramDialog(confirmationDialogParamter)
@@ -272,11 +272,13 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
   private checkAndSetLabels() {
     if (
       this.nodeProperties.labels.length !== this.initialNodeLabels.length ||
-      !this.nodeProperties.labels.every((label, index) => label === this.initialNodeLabels[index])
+      !this.nodeProperties.labels.every(
+        (label, index) => label === this.initialNodeLabels[index],
+      )
     ) {
       this.nodeService.changeLabels(
         this.nodeProperties.nodeId,
-        this.nodeProperties.labels
+        this.nodeProperties.labels,
       );
       this.initialNodeLabels = [...this.nodeProperties.labels];
     }

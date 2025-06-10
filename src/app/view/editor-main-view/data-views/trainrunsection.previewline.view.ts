@@ -56,7 +56,7 @@ export class TrainrunSectionPreviewLineView {
   constructor(
     private nodeService: NodeService,
     private filterService: FilterService,
-    private versionControlService : VersionControlService
+    private versionControlService: VersionControlService,
   ) {}
 
   static setGroup(nodeGroup: d3.Selector) {
@@ -71,8 +71,8 @@ export class TrainrunSectionPreviewLineView {
       .attr("class", StaticDomTags.PREVIEW_CONNECTION_LINE_ROOT_CLASS);
   }
 
-  getVariantIsWritable() : boolean {
-    if ( !this.versionControlService?.getVariantIsWritable()){
+  getVariantIsWritable(): boolean {
+    if (!this.versionControlService?.getVariantIsWritable()) {
       return false;
     }
     return true;
@@ -102,7 +102,7 @@ export class TrainrunSectionPreviewLineView {
     dragIntermediateStopInfo: DragIntermediateStopInfo,
     startPosition: Vec2D,
   ) {
-    if ( !this.versionControlService?.getVariantIsWritable()){
+    if (!this.versionControlService?.getVariantIsWritable()) {
       return;
     }
     this.mode = PreviewLineMode.DragIntermediateStop;
@@ -117,7 +117,7 @@ export class TrainrunSectionPreviewLineView {
     dragTransition: DragTransitionInfo,
     startPosition: Vec2D,
   ) {
-    if ( !this.versionControlService?.getVariantIsWritable()){
+    if (!this.versionControlService?.getVariantIsWritable()) {
       return;
     }
     this.filterService.switchOffTemporaryEmptyAndNonStopFiltering();
@@ -158,7 +158,7 @@ export class TrainrunSectionPreviewLineView {
   }
 
   startPreviewLine(nodeId: number) {
-    if ( !this.versionControlService?.getVariantIsWritable()){
+    if (!this.versionControlService?.getVariantIsWritable()) {
       return;
     }
     this.mode = PreviewLineMode.DragNewTrainrunSection;
@@ -171,7 +171,7 @@ export class TrainrunSectionPreviewLineView {
   }
 
   startPreviewLineAtPosition(startNode: Node, startPosition: Vec2D) {
-    if ( !this.versionControlService?.getVariantIsWritable()){
+    if (!this.versionControlService?.getVariantIsWritable()) {
       return;
     }
     this.mode = PreviewLineMode.DragExistingTrainrunSection;
@@ -277,7 +277,7 @@ export class TrainrunSectionPreviewLineView {
         false,
       );
     }
-    if (this.existingTrainrunSection !== null){
+    if (this.existingTrainrunSection !== null) {
       D3Utils.removeGrayout(this.existingTrainrunSection);
     }
     if (this.startNode !== null) {

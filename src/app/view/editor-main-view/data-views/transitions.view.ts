@@ -107,7 +107,9 @@ export class TransitionsView {
   ) {
     grpEnter
       .filter((d: TransitionViewObject) => {
-        return !levelFreqFilter.includes(d.transition.getTrainrun().getFrequencyLinePatternRef());
+        return !levelFreqFilter.includes(
+          d.transition.getTrainrun().getFrequencyLinePatternRef(),
+        );
       })
       .append(StaticDomTags.TRANSITION_LINE_SVG)
       .attr(
@@ -156,7 +158,9 @@ export class TransitionsView {
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
   ) {
-    if (!this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()){
+    if (
+      !this.editorView.trainrunSectionPreviewLineView.getVariantIsWritable()
+    ) {
       return;
     }
     grpEnter
@@ -188,9 +192,7 @@ export class TransitionsView {
         t.transition.getIsNonStopTransit(),
       )
       .on("mousemove", (t: TransitionViewObject, i, a) =>
-        this.onTransitionMousemove(
-          a[i],
-        ),
+        this.onTransitionMousemove(a[i]),
       )
       .on("mouseover", (t: TransitionViewObject, i, a) =>
         this.onTransitionMouseover(
@@ -249,9 +251,10 @@ export class TransitionsView {
         this.editorView.getConnectedTrainrunIds(selectedTrainrun);
     }
 
-    const transitions = inputTransitions.filter((t) =>
-      this.editorView.doCullCheckPositionsInViewport(t.getPath()) &&
-      this.filtertransitionToDisplay(t, t.getTrainrun())
+    const transitions = inputTransitions.filter(
+      (t) =>
+        this.editorView.doCullCheckPositionsInViewport(t.getPath()) &&
+        this.filtertransitionToDisplay(t, t.getTrainrun()),
     );
 
     this.createTransitions(
@@ -303,7 +306,7 @@ export class TransitionsView {
     TransitionsView.createTransitionLineLayer(
       grpEnter,
       StaticDomTags.TRANSITION_LINE_CLASS_0,
-      [LinePatternRefs.Freq30],// LinePatternRefs.Freq60], (background is required to "strech the hower area"
+      [LinePatternRefs.Freq30], // LinePatternRefs.Freq60], (background is required to "strech the hower area"
       selectedTrainrun,
       connectedTrainIds,
       this.editorView,

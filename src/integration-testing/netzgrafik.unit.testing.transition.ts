@@ -1129,7 +1129,7 @@ export class NetzgrafikUnitTestingTransition {
         analyticsSettings: {
           originDestinationSettings: {
             connectionPenalty: 5,
-          }
+          },
         },
         trainrunCategories: [
           {

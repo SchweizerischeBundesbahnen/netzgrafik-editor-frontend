@@ -72,11 +72,14 @@ export class OriginDestinationService {
     // In theory we could parallelize the pathfindings, but the overhead might be too big.
     const res = new Map<string, [number, number]>();
     odNodes.forEach((origin) => {
-      computeShortestPaths(origin.getId(), neighbors, vertices, tsSuccessor).forEach(
-        (value, key) => {
-          res.set([origin.getId(), key].join(","), value);
-        },
-      );
+      computeShortestPaths(
+        origin.getId(),
+        neighbors,
+        vertices,
+        tsSuccessor,
+      ).forEach((value, key) => {
+        res.set([origin.getId(), key].join(","), value);
+      });
     });
 
     const rows = [];

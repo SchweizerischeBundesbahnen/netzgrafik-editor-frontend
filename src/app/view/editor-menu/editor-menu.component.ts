@@ -274,8 +274,14 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
     const editorMode = this.uiInteractionService.getEditorMode();
 
     // Check if at least 2 nodes are selected
-    const selectedNodes = this.nodeService.getNodes().filter((n: Node) => n.selected());
-    if (this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving && selectedNodes.length < 2){
+    const selectedNodes = this.nodeService
+      .getNodes()
+      .filter((n: Node) => n.selected());
+    if (
+      this.uiInteractionService.getEditorMode() ===
+        EditorMode.MultiNodeMoving &&
+      selectedNodes.length < 2
+    ) {
       this._notification.open(
         $localize`:@@app.view.editor-menu.errorOriginDestination:Origin-destination matrix cannot be displayed because less than 2 nodes are selected.`,
         {
@@ -288,10 +294,14 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
     }
 
     // If Node details are open and only one node is selected, unselect the node and compute od for all nodes.
-    if (this.uiInteractionService.getEditorMode() !== EditorMode.MultiNodeMoving && selectedNodes.length === 1) {
+    if (
+      this.uiInteractionService.getEditorMode() !==
+        EditorMode.MultiNodeMoving &&
+      selectedNodes.length === 1
+    ) {
       this.nodeService.unselectAllNodes();
     }
-    
+
     if (editorMode === EditorMode.OriginDestination) {
       this.nodeService.unselectAllNodes();
       this.uiInteractionService.showNetzgrafik();
@@ -314,7 +324,6 @@ export class EditorMenuComponent implements OnInit, OnDestroy {
   getOriginDestinationTitle(): string {
     if (this.isOriginDestination()) {
       return $localize`:@@app.view.editor-menu.closeOriginDestination:Close origin-destination matrix`;
-
     }
     return $localize`:@@app.view.editor-menu.displayOriginDestination:Display origin-destination matrix`;
   }

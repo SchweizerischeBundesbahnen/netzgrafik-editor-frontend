@@ -66,8 +66,7 @@ export class EditorToolsViewComponent {
     private viewportCullService: ViewportCullService,
     private levelOfDetailService: LevelOfDetailService,
     private originDestinationService: OriginDestinationService,
-  ) {
-  }
+  ) {}
 
   onLoadButton() {
     this.netgrafikJsonFileInput.nativeElement.click();
@@ -115,7 +114,11 @@ export class EditorToolsViewComponent {
   onSave() {
     const data: NetzgrafikDto = this.dataService.getNetzgrafikDto();
     const blob = new Blob([JSON.stringify(data)], {type: "application/json"});
-    downloadBlob(blob, $localize`:@@app.view.editor-side-view.editor-tools-view-component.netzgrafikFile:netzgrafik` + ".json");
+    downloadBlob(
+      blob,
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.netzgrafikFile:netzgrafik` +
+        ".json",
+    );
   }
 
   onExportContainerAsSVG() {
@@ -189,19 +192,25 @@ export class EditorToolsViewComponent {
   }
 
   onExportStammdaten() {
-    const filename = $localize`:@@app.view.editor-side-view.editor-tools-view-component.baseDataFile:baseData` + ".csv";
+    const filename =
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.baseDataFile:baseData` +
+      ".csv";
     const csvData = this.convertToStammdatenCSV();
     this.onExport(filename, csvData);
   }
 
   onExportZuglauf() {
-    const filename = $localize`:@@app.view.editor-side-view.editor-tools-view-component.trainrunFile:trainrun` + ".csv";
+    const filename =
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.trainrunFile:trainrun` +
+      ".csv";
     const csvData = this.convertToZuglaufCSV();
     this.onExport(filename, csvData);
   }
 
   onExportOriginDestination() {
-    const filename = $localize`:@@app.view.editor-side-view.editor-tools-view-component.originDestinationFile:originDestination` + ".csv";
+    const filename =
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.originDestinationFile:originDestination` +
+      ".csv";
     const csvData = this.convertToOriginDestinationCSV();
     this.onExport(filename, csvData);
   }
@@ -225,7 +234,6 @@ export class EditorToolsViewComponent {
     }
     window.URL.revokeObjectURL(url);
   }
-
 
   getVariantIsWritable() {
     return this.versionControlService.getVariantIsWritable();
@@ -258,21 +266,51 @@ export class EditorToolsViewComponent {
     const comma = ",";
 
     const headers: string[] = [];
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.bp:BP`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.station:Station`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.category:category`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.region:Region`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.passengerConnectionTimeIPV:passengerConnectionTimeIPV`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.passengerConnectionTimeA:Passenger_connection_time_A`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.passengerConnectionTimeB:Passenger_connection_time_B`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.passengerConnectionTimeC:Passenger_connection_time_C`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.passengerConnectionTimeD:Passenger_connection_time_D`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.ZAZ:ZAZ`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.transferTime:Transfer_time`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.labels:Labels`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.X:X`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.Y:Y`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.create:Create`);
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.bp:BP`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.station:Station`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.category:category`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.region:Region`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.passengerConnectionTimeIPV:passengerConnectionTimeIPV`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.passengerConnectionTimeA:Passenger_connection_time_A`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.passengerConnectionTimeB:Passenger_connection_time_B`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.passengerConnectionTimeC:Passenger_connection_time_C`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.passengerConnectionTimeD:Passenger_connection_time_D`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.ZAZ:ZAZ`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.transferTime:Transfer_time`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.labels:Labels`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.X:X`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.Y:Y`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.create:Create`,
+    );
 
     const rows: string[][] = [];
     this.nodeService.getNodes().forEach((nodeElement) => {
@@ -293,38 +331,38 @@ export class EditorToolsViewComponent {
       row.push(regions.map((reg) => "" + reg).join(comma));
       row.push(
         "" +
-        (trainrunCategoryHaltezeit[HaltezeitFachCategories.IPV].no_halt
-          ? 0
-          : trainrunCategoryHaltezeit[HaltezeitFachCategories.IPV].haltezeit -
-          zaz),
+          (trainrunCategoryHaltezeit[HaltezeitFachCategories.IPV].no_halt
+            ? 0
+            : trainrunCategoryHaltezeit[HaltezeitFachCategories.IPV].haltezeit -
+              zaz),
       );
       row.push(
         "" +
-        (trainrunCategoryHaltezeit[HaltezeitFachCategories.A].no_halt
-          ? 0
-          : trainrunCategoryHaltezeit[HaltezeitFachCategories.A].haltezeit -
-          zaz),
+          (trainrunCategoryHaltezeit[HaltezeitFachCategories.A].no_halt
+            ? 0
+            : trainrunCategoryHaltezeit[HaltezeitFachCategories.A].haltezeit -
+              zaz),
       );
       row.push(
         "" +
-        (trainrunCategoryHaltezeit[HaltezeitFachCategories.B].no_halt
-          ? 0
-          : trainrunCategoryHaltezeit[HaltezeitFachCategories.B].haltezeit -
-          zaz),
+          (trainrunCategoryHaltezeit[HaltezeitFachCategories.B].no_halt
+            ? 0
+            : trainrunCategoryHaltezeit[HaltezeitFachCategories.B].haltezeit -
+              zaz),
       );
       row.push(
         "" +
-        (trainrunCategoryHaltezeit[HaltezeitFachCategories.C].no_halt
-          ? 0
-          : trainrunCategoryHaltezeit[HaltezeitFachCategories.C].haltezeit -
-          zaz),
+          (trainrunCategoryHaltezeit[HaltezeitFachCategories.C].no_halt
+            ? 0
+            : trainrunCategoryHaltezeit[HaltezeitFachCategories.C].haltezeit -
+              zaz),
       );
       row.push(
         "" +
-        (trainrunCategoryHaltezeit[HaltezeitFachCategories.D].no_halt
-          ? 0
-          : trainrunCategoryHaltezeit[HaltezeitFachCategories.D].haltezeit -
-          zaz),
+          (trainrunCategoryHaltezeit[HaltezeitFachCategories.D].no_halt
+            ? 0
+            : trainrunCategoryHaltezeit[HaltezeitFachCategories.D].haltezeit -
+              zaz),
       );
       row.push("" + zaz);
       row.push("" + nodeElement.getConnectionTime());
@@ -364,13 +402,18 @@ export class EditorToolsViewComponent {
           top: boundingBox.minCoordY - 32,
           width: boundingBox.maxCoordX - boundingBox.minCoordX + 64,
           height: boundingBox.maxCoordY - boundingBox.minCoordY + 64,
-          backgroundColor: this.uiInteractionService.getActiveTheme().backgroundColor,
+          backgroundColor:
+            this.uiInteractionService.getActiveTheme().backgroundColor,
         };
-        htmlElementToExport = document.getElementById("main-streckengrafik-container");
+        htmlElementToExport = document.getElementById(
+          "main-streckengrafik-container",
+        );
         break;
       }
       case EditorMode.OriginDestination: {
-        htmlElementToExport = document.getElementById("main-origin-destination-container");
+        htmlElementToExport = document.getElementById(
+          "main-origin-destination-container",
+        );
         if (htmlElementToExport === null) {
           return undefined;
         }
@@ -383,7 +426,8 @@ export class EditorToolsViewComponent {
           top: bbox.y - padding,
           width: bbox.width + 2 * padding,
           height: bbox.height + 2 * padding,
-          backgroundColor: this.uiInteractionService.getActiveTheme().backgroundColor,
+          backgroundColor:
+            this.uiInteractionService.getActiveTheme().backgroundColor,
         };
         break;
       }
@@ -399,7 +443,8 @@ export class EditorToolsViewComponent {
           top: 80,
           width: htmlElementToExport.offsetWidth,
           height: htmlElementToExport.offsetHeight,
-          backgroundColor: this.uiInteractionService.getActiveTheme().backgroundColor,
+          backgroundColor:
+            this.uiInteractionService.getActiveTheme().backgroundColor,
         };
         break;
       }
@@ -428,29 +473,61 @@ export class EditorToolsViewComponent {
     return {
       documentToExport: htmlElementToExport,
       exportParameter: param,
-      documentSavedStyle: oldStyle
+      documentSavedStyle: oldStyle,
     };
   }
 
   private convertToZuglaufCSV(): string {
     const comma = ",";
     const headers: string[] = [];
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.trainCategory:Train category`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.trainName:Train name`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.startStation:Start station`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.destinationStation:Destination station`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.trafficPeriod:Traffic period`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.frequence:Frequence`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.departureMinuteAtStart:Minute of departure at start node`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.travelTimeStartDestination:Travel time start-destination`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.arrivalMinuteAtDestination:Arrival minute at destination node`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.turnaroundTimeDestination:Turnaround time at destination station`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.departureMinuteDeparture:Departure minute at destination node`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.travelTimeDestinationStart:Travel time destination-start`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.arrivalMinuteAtStart:Arrival minute at start node`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.turnaroundTimeStart:Turnaround time at start station`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.turnaroundTime:Turnaround time`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.labels:Labels`);
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.trainCategory:Train category`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.trainName:Train name`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.startStation:Start station`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.destinationStation:Destination station`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.trafficPeriod:Traffic period`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.frequence:Frequence`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.departureMinuteAtStart:Minute of departure at start node`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.travelTimeStartDestination:Travel time start-destination`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.arrivalMinuteAtDestination:Arrival minute at destination node`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.turnaroundTimeDestination:Turnaround time at destination station`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.departureMinuteDeparture:Departure minute at destination node`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.travelTimeDestinationStart:Travel time destination-start`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.arrivalMinuteAtStart:Arrival minute at start node`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.turnaroundTimeStart:Turnaround time at start station`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.turnaroundTime:Turnaround time`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.labels:Labels`,
+    );
 
     const rows: string[][] = [];
     this.trainrunService
@@ -463,44 +540,66 @@ export class EditorToolsViewComponent {
         // Retrieve start -> end with:
         // start {startNode, startTrainrunSection}
         // end {iterator.current.node, iterator.current.trainrunSection}
-        const startNode = this.trainrunService.getStartNodeWithTrainrunId(trainrun.getId());
-        const startTrainrunSection = startNode.getStartTrainrunSection(trainrun.getId());
-        const iterator = this.trainrunService.getIterator(startNode, startTrainrunSection);
+        const startNode = this.trainrunService.getStartNodeWithTrainrunId(
+          trainrun.getId(),
+        );
+        const startTrainrunSection = startNode.getStartTrainrunSection(
+          trainrun.getId(),
+        );
+        const iterator = this.trainrunService.getIterator(
+          startNode,
+          startTrainrunSection,
+        );
         while (iterator.hasNext()) {
           iterator.next();
         }
 
         startBetriebspunktName = startNode.getBetriebspunktName();
         endBetriebspunktName = iterator.current().node.getBetriebspunktName();
-        const departureTimeAtStart = startTrainrunSection.getSourceNodeId() === startNode.getId() ?
-          startTrainrunSection.getSourceDepartureConsecutiveTime() :
-          startTrainrunSection.getTargetDepartureConsecutiveTime();
-        const arrivalTimeAtEnd = iterator.current().trainrunSection.getSourceNodeId() === iterator.current().node.getId() ?
-          iterator.current().trainrunSection.getSourceArrivalConsecutiveTime() :
-          iterator.current().trainrunSection.getTargetArrivalConsecutiveTime();
+        const departureTimeAtStart =
+          startTrainrunSection.getSourceNodeId() === startNode.getId()
+            ? startTrainrunSection.getSourceDepartureConsecutiveTime()
+            : startTrainrunSection.getTargetDepartureConsecutiveTime();
+        const arrivalTimeAtEnd =
+          iterator.current().trainrunSection.getSourceNodeId() ===
+          iterator.current().node.getId()
+            ? iterator
+                .current()
+                .trainrunSection.getSourceArrivalConsecutiveTime()
+            : iterator
+                .current()
+                .trainrunSection.getTargetArrivalConsecutiveTime();
         const travelTime = arrivalTimeAtEnd - departureTimeAtStart;
 
-        const startNodeDeparture = startTrainrunSection.getSourceNodeId() === startNode.getId() ?
-          startTrainrunSection.getSourceDeparture() :
-          startTrainrunSection.getTargetDeparture();
-        const endNodeArrival = iterator.current().trainrunSection.getSourceNodeId() === iterator.current().node.getId() ?
-          iterator.current().trainrunSection.getSourceArrival() :
-          iterator.current().trainrunSection.getTargetArrival();
+        const startNodeDeparture =
+          startTrainrunSection.getSourceNodeId() === startNode.getId()
+            ? startTrainrunSection.getSourceDeparture()
+            : startTrainrunSection.getTargetDeparture();
+        const endNodeArrival =
+          iterator.current().trainrunSection.getSourceNodeId() ===
+          iterator.current().node.getId()
+            ? iterator.current().trainrunSection.getSourceArrival()
+            : iterator.current().trainrunSection.getTargetArrival();
 
-        const endNodeDeparture = iterator.current().trainrunSection.getSourceNodeId() === iterator.current().node.getId() ?
-          iterator.current().trainrunSection.getSourceDeparture() :
-          iterator.current().trainrunSection.getTargetDeparture();
-        const startNodeArrival = startTrainrunSection.getSourceNodeId() === startNode.getId() ?
-          startTrainrunSection.getSourceArrival() :
-          startTrainrunSection.getTargetArrival();
+        const endNodeDeparture =
+          iterator.current().trainrunSection.getSourceNodeId() ===
+          iterator.current().node.getId()
+            ? iterator.current().trainrunSection.getSourceDeparture()
+            : iterator.current().trainrunSection.getTargetDeparture();
+        const startNodeArrival =
+          startTrainrunSection.getSourceNodeId() === startNode.getId()
+            ? startTrainrunSection.getSourceArrival()
+            : startTrainrunSection.getTargetArrival();
 
         let waitingTimeOnStartStation = startNodeDeparture - startNodeArrival;
         let waitingTimeOnEndStation = endNodeDeparture - endNodeArrival;
 
         if (trainrun.getFrequency() > 60) {
           // special case - if the freq is bigger than 60min (1h) - then just mirror
-          waitingTimeOnStartStation = 2.0 * (trainrun.getFrequency() / 2.0 - startNodeArrival);
-          waitingTimeOnEndStation = 2.0 * (trainrun.getFrequency() / 2.0 - endNodeArrival);
+          waitingTimeOnStartStation =
+            2.0 * (trainrun.getFrequency() / 2.0 - startNodeArrival);
+          waitingTimeOnEndStation =
+            2.0 * (trainrun.getFrequency() / 2.0 - endNodeArrival);
         } else {
           // find next freq (departing)
           while (waitingTimeOnStartStation < 0) {
@@ -528,7 +627,9 @@ export class EditorToolsViewComponent {
         row.push(trainrun.getTitle().trim());
         row.push(startBetriebspunktName.trim());
         row.push(endBetriebspunktName.trim());
-        row.push("Verkehrt: " + trainrun.getTrainrunTimeCategory().shortName.trim());
+        row.push(
+          "Verkehrt: " + trainrun.getTrainrunTimeCategory().shortName.trim(),
+        );
         row.push("" + trainrun.getTrainrunFrequency().shortName.trim());
         row.push("" + startNodeDeparture);
         row.push("" + travelTime);
@@ -543,13 +644,12 @@ export class EditorToolsViewComponent {
           trainrun
             .getLabelIds()
             .map((labelID) => {
-                const label = this.labelService.getLabelFromId(labelID);
-                if (label) {
-                  return label.getLabel().trim();
-                }
-                return "";
+              const label = this.labelService.getLabelFromId(labelID);
+              if (label) {
+                return label.getLabel().trim();
               }
-            )
+              return "";
+            })
             .join(comma),
         );
 
@@ -560,11 +660,21 @@ export class EditorToolsViewComponent {
 
   private convertToOriginDestinationCSV(): string {
     const headers: string[] = [];
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.origin:Origin`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.destination:Destination`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.travelTime:Travel time`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.transfers:Transfers`);
-    headers.push($localize`:@@app.view.editor-side-view.editor-tools-view-component.totalCost:Total cost`);
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.origin:Origin`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.destination:Destination`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.travelTime:Travel time`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.transfers:Transfers`,
+    );
+    headers.push(
+      $localize`:@@app.view.editor-side-view.editor-tools-view-component.totalCost:Total cost`,
+    );
 
     const matrixData = this.originDestinationService.originDestinationData();
 
@@ -588,31 +698,36 @@ export class EditorToolsViewComponent {
   }
 
   private detectNetzgrafikJSON3rdParty(netzgrafikDto: NetzgrafikDto): boolean {
-    return netzgrafikDto.nodes.find((n: NodeDto) =>
-        n.ports === undefined) !== undefined
-      ||
-      netzgrafikDto.nodes.filter((n: NodeDto) =>
-        n.ports?.length === 0).length === netzgrafikDto.nodes.length
-      ||
-      netzgrafikDto.trainrunSections.find((ts: TrainrunSectionDto) =>
-        ts.path === undefined ||
-        ts.path?.path === undefined ||
-        ts.path?.path?.length === 0
-      ) !== undefined;
+    return (
+      netzgrafikDto.nodes.find((n: NodeDto) => n.ports === undefined) !==
+        undefined ||
+      netzgrafikDto.nodes.filter((n: NodeDto) => n.ports?.length === 0)
+        .length === netzgrafikDto.nodes.length ||
+      netzgrafikDto.trainrunSections.find(
+        (ts: TrainrunSectionDto) =>
+          ts.path === undefined ||
+          ts.path?.path === undefined ||
+          ts.path?.path?.length === 0,
+      ) !== undefined
+    );
   }
 
   private processNetzgrafikJSON3rdParty(netzgrafikDto: NetzgrafikDto) {
     // --------------------------------------------------------------------------------
     // 3rd party generated JSON detected
     // --------------------------------------------------------------------------------
-    console.log("Import: Automatic Port Alignment Detection - 3rd Party Data Import.");
+    console.log(
+      "Import: Automatic Port Alignment Detection - 3rd Party Data Import.",
+    );
     const msg = $localize`:@@app.view.editor-side-view.editor-tools-view-component.import-netzgrafik-as-json-info-3rd-party:3rd party import`;
     this.logger.info(msg);
 
-
     // --------------------------------------------------------------------------------
     // (Step 1) Import only nodes
-    const netzgrafikOnlyNodeDto: NetzgrafikDto = Object.assign({}, netzgrafikDto);
+    const netzgrafikOnlyNodeDto: NetzgrafikDto = Object.assign(
+      {},
+      netzgrafikDto,
+    );
     netzgrafikOnlyNodeDto.trainruns = [];
     netzgrafikOnlyNodeDto.trainrunSections = [];
     this.dataService.loadNetzgrafikDto(netzgrafikOnlyNodeDto);
@@ -658,8 +773,7 @@ export class EditorToolsViewComponent {
 
     // import data
     if (
-      netzgrafikDto.trainrunSections.length === 0
-      ||
+      netzgrafikDto.trainrunSections.length === 0 ||
       !this.detectNetzgrafikJSON3rdParty(netzgrafikDto)
     ) {
       // -----------------------------------------------

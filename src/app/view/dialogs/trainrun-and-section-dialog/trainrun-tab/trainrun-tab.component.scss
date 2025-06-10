@@ -28,15 +28,14 @@
   border-radius: 16px;
   background-color: $COLOR_BACKGROUND;
 
-
   opacity: var(--Button_TrainrunDialog_opacity);
 
   &.FilterableLabel {
-    opacity: 1.0;
+    opacity: 1;
   }
 
   &.EditorToolButton {
-    opacity: 1.0;
+    opacity: 1;
     border: none;
   }
 
@@ -45,7 +44,7 @@
     background-color: white;
     border-color: $COLOR_Focus;
 
-    opacity: 1.0;
+    opacity: 1;
   }
 }
 
@@ -73,28 +72,28 @@
   color: var(--NODE_TEXT_FOCUS);
   background-color: var(--NODE_COLOR_BACKGROUND);
   border-color: transparent;
-  opacity: 1.0;
+  opacity: 1;
 }
 
 ::ng-deep button.Frequency.selected {
   color: white;
   background-color: $COLOR_Default;
   border-color: transparent;
-  opacity: 1.0;
+  opacity: 1;
 }
 
 ::ng-deep button.TimeCategory {
   color: var(--NODE_TEXT_FOCUS);
   background-color: var(--NODE_COLOR_BACKGROUND);
   border-color: transparent;
-  opacity: 1.0;
+  opacity: 1;
 }
 
 ::ng-deep button.TimeCategory.selected {
   color: white;
   background-color: $COLOR_Default;
   border-color: transparent;
-  opacity: 1.0;
+  opacity: 1;
 }
 
 ::ng-deep div.EditTrainrunDialogTabContent {
@@ -113,7 +112,6 @@
   padding: 0px;
   min-height: 270px;
 }
-
 
 ::ng-deep div.EditTrainrunDialogTabContent.readonly {
   pointer-events: none;

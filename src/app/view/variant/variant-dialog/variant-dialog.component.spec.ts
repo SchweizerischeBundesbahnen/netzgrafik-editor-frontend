@@ -10,7 +10,7 @@ describe("VariantDialogComponent", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [VariantDialogComponent],
-      imports:[I18nModule],
+      imports: [I18nModule],
       providers: [
         {provide: SbbDialogRef, useValue: {}},
         {provide: SBB_DIALOG_DATA, useValue: {}},

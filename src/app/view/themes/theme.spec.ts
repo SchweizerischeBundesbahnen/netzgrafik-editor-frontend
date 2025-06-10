@@ -173,9 +173,13 @@ describe("Theme Tests", () => {
     const t2 = new ThemeDefaultUxDark("red");
     const t3 = new ThemeDefaultUxDark("yellow", "blue");
     expect(t1.backgroundColor).toBe("var(--sbb-header-lean-background-color)");
-    expect(t1.backgroundStreckengraphikColor).toBe("var(--sbb-header-lean-background-color)");
+    expect(t1.backgroundStreckengraphikColor).toBe(
+      "var(--sbb-header-lean-background-color)",
+    );
     expect(t2.backgroundColor).toBe("red");
-    expect(t2.backgroundStreckengraphikColor).toBe("var(--sbb-header-lean-background-color)");
+    expect(t2.backgroundStreckengraphikColor).toBe(
+      "var(--sbb-header-lean-background-color)",
+    );
     expect(t3.backgroundColor).toBe("yellow");
     expect(t3.backgroundStreckengraphikColor).toBe("blue");
   });
@@ -197,9 +201,13 @@ describe("Theme Tests", () => {
     const t2 = new ThemeFachDark("red");
     const t3 = new ThemeFachDark("yellow", "blue");
     expect(t1.backgroundColor).toBe("var(--sbb-header-lean-background-color)");
-    expect(t1.backgroundStreckengraphikColor).toBe("var(--sbb-header-lean-background-color)");
+    expect(t1.backgroundStreckengraphikColor).toBe(
+      "var(--sbb-header-lean-background-color)",
+    );
     expect(t2.backgroundColor).toBe("red");
-    expect(t2.backgroundStreckengraphikColor).toBe("var(--sbb-header-lean-background-color)");
+    expect(t2.backgroundStreckengraphikColor).toBe(
+      "var(--sbb-header-lean-background-color)",
+    );
     expect(t3.backgroundColor).toBe("yellow");
     expect(t3.backgroundStreckengraphikColor).toBe("blue");
   });
@@ -233,9 +241,13 @@ describe("Theme Tests", () => {
     const t2 = new ThemeGrayDark("red");
     const t3 = new ThemeGrayDark("yellow", "blue");
     expect(t1.backgroundColor).toBe("var(--sbb-header-lean-background-color)");
-    expect(t1.backgroundStreckengraphikColor).toBe("var(--sbb-header-lean-background-color)");
+    expect(t1.backgroundStreckengraphikColor).toBe(
+      "var(--sbb-header-lean-background-color)",
+    );
     expect(t2.backgroundColor).toBe("red");
-    expect(t2.backgroundStreckengraphikColor).toBe("var(--sbb-header-lean-background-color)");
+    expect(t2.backgroundStreckengraphikColor).toBe(
+      "var(--sbb-header-lean-background-color)",
+    );
     expect(t3.backgroundColor).toBe("yellow");
     expect(t3.backgroundStreckengraphikColor).toBe("blue");
   });

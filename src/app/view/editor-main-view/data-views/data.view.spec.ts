@@ -28,9 +28,7 @@ import {TransitionViewObject} from "./transitionViewObject";
 import {StaticDomTags} from "./static.dom.tags";
 import {LevelOfDetailService} from "../../../services/ui/level.of.detail.service";
 import {ViewportCullService} from "../../../services/ui/viewport.cull.service";
-import {
-  PositionTransformationService
-} from "../../../services/util/position.transformation.service";
+import {PositionTransformationService} from "../../../services/util/position.transformation.service";
 
 describe("Editor-DataView", () => {
   let dataService: DataService;
@@ -103,7 +101,7 @@ describe("Editor-DataView", () => {
       trainrunService,
       trainrunSectionService,
       nodeService,
-      filterService
+      filterService,
     );
 
     uiInteractionService = new UiInteractionService(
@@ -136,26 +134,22 @@ describe("Editor-DataView", () => {
       undoService,
     );
 
-
     const viewportCullService = new ViewportCullService(
       uiInteractionService,
       nodeService,
       noteService,
-      trainrunSectionService
+      trainrunSectionService,
     );
 
-    const levelOfDetailService = new LevelOfDetailService(
-      uiInteractionService
-    );
+    const levelOfDetailService = new LevelOfDetailService(uiInteractionService);
 
     const positionTransformationService = new PositionTransformationService(
       trainrunSectionService,
       nodeService,
       noteService,
       uiInteractionService,
-      viewportCullService
+      viewportCullService,
     );
-
 
     const controller = new EditorMainViewComponent(
       nodeService,
@@ -171,7 +165,7 @@ describe("Editor-DataView", () => {
       viewportCullService,
       levelOfDetailService,
       undefined,
-      positionTransformationService
+      positionTransformationService,
     );
 
     new EditorView(
@@ -188,7 +182,7 @@ describe("Editor-DataView", () => {
       viewportCullService,
       levelOfDetailService,
       undefined,
-      positionTransformationService
+      positionTransformationService,
     );
 
     controller.bindViewToServices();
@@ -215,10 +209,14 @@ describe("Editor-DataView", () => {
     const node = nodeService.getNodeFromId(2);
 
     const cvo1 = new NodeViewObject(editorView, node, false);
-    expect(cvo1.key).toBe("#2@736_64_ZUE_6_5_96_124_false_2_false_true_false_0_false");
+    expect(cvo1.key).toBe(
+      "#2@736_64_ZUE_6_5_96_124_false_2_false_true_false_0_false",
+    );
 
     const cvo2 = new NodeViewObject(editorView, node, true);
-    expect(cvo2.key).toBe("#2@736_64_ZUE_6_5_96_124_false_2_true_true_false_0_false");
+    expect(cvo2.key).toBe(
+      "#2@736_64_ZUE_6_5_96_124_false_2_true_true_false_0_false",
+    );
   });
 
   it("NodeViewObject   - 001", () => {

@@ -699,7 +699,7 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
         analyticsSettings: {
           originDestinationSettings: {
             connectionPenalty: 5,
-          }
+          },
         },
         trainrunCategories: [
           {
