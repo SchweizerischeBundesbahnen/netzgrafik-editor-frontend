@@ -15,6 +15,18 @@ permissions:
   packages: write
 
 jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+      - run: npm clean-install
+      - name: Check code formatting
+        run: npx prettier --check .
+
   lint:
     runs-on: ubuntu-latest
     steps:
