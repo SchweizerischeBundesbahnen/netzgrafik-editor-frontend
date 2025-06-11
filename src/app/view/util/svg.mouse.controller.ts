@@ -35,12 +35,21 @@ export class SVGMouseController {
   private viewboxIsFixed = false;
 
   private lastMouseEventTimeStamp: number = undefined;
+  private static ctrlKeyPressed = false;
 
   constructor(
     private svgName: string,
     private svgMouseControllerObserver: SVGMouseControllerObserver,
     private undoService : UndoService
   ) {
+    // Listens to ctrl key events to differentiate
+    // between pinch-to-zoom touchpad gesture and ctrl + mousewheel
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Control") SVGMouseController.ctrlKeyPressed = true;
+    });
+    window.addEventListener("keyup", (e) => {
+      if (e.key === "Control") SVGMouseController.ctrlKeyPressed = false;
+    });
   }
 
   init(viewboxProperties: ViewboxProperties) {
@@ -332,7 +341,8 @@ export class SVGMouseController {
       d3.event.offsetY / this.viewboxProperties.origHeight,
     );
 
-    if (!d3.event.ctrlKey) {
+  // to differentiate pinch-to-zoom touchpad gesture and ctrl + mousewheel
+  if (!SVGMouseController.ctrlKeyPressed) {
       // mouse wheel
       if (d3.event.deltaY > 0) {
         this.zoomOut(zoomCenter);
