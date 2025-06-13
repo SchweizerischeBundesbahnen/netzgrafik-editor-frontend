@@ -1,5 +1,6 @@
 import {SgTrainrunItem} from "./sg-trainrun-item";
 import {SgSelectedTrainrun} from "./sg-selected-trainrun";
+import { TrainrunDirection } from "src/app/data-structures/business.data.structures";
 
 export class SgTrainrun {
   static currentId = 0;
@@ -16,6 +17,7 @@ export class SgTrainrun {
     public colorRef: string,
     public sgTrainrunItems: SgTrainrunItem[],
     public selectedTrainrun: SgSelectedTrainrun,
+    public trainrunDirection: TrainrunDirection,
   ) {
     this.id = SgTrainrun.currentId;
     SgTrainrun.currentId++;
