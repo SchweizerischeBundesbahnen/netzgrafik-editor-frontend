@@ -31,18 +31,18 @@
               <ng-template
                 sbb-tab-label
               >
-                <span class="onewayTrip">{{ leftNodeName }}</span>
+                <span class="onewayTrip">{{ nextStopLeftNodeName }}</span>
                 <sbb-icon
                   [svgIcon]="arrowDirection"
                   aria-hidden="false"
                   height="13px"
                   width="13px"
                 ></sbb-icon>
-                <span>{{ rightNodeName }}</span>
+                <span>{{ nextStopRightNodeName }}</span>
               </ng-template>
           } @else {
             <ng-template sbb-tab-label>
-              <span>{{ leftNodeName + " — " + rightNodeName }}</span>
+              <span>{{ nextStopLeftNodeName + " — " + nextStopRightNodeName }}</span>
             </ng-template>
           }
           <sbb-trainrunsection-tab

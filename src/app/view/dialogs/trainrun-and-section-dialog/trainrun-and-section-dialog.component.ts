@@ -70,8 +70,8 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
   trainrunAndSectionEditorTabsViewTemplate: TemplateRef<any>;
 
   public selectedTrainrun: Trainrun;
-  public leftNodeName: string;
-  public rightNodeName: string;
+  public nextStopLeftNodeName: string;
+  public nextStopRightNodeName: string;
   public arrowDirection: string | null = null;
 
   public data = null;
@@ -95,7 +95,7 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
     this.trainrunService.trainruns
       .pipe(takeUntil(this.destroyed))
       .subscribe((trainrunList) => {
-         if (!trainrunList.length) {
+        if (!trainrunList.length) {
           this.closeDialog();
           return;
         }
@@ -118,17 +118,18 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
           this.trainrunService,
         );
 
-        const leftNode = this.trainrunSectionHelper.getLeftNode(
+        const nextStopLeftNode = this.trainrunSectionHelper.getNextStopLeftNode(
           selectedTrainrunSection,
           parameter.nodesOrdered,
         );
-        const rightNode = this.trainrunSectionHelper.getRightNode(
-          selectedTrainrunSection,
-          parameter.nodesOrdered,
-        );
+        const nextStopRightNode =
+          this.trainrunSectionHelper.getNextStopRightNode(
+            selectedTrainrunSection,
+            parameter.nodesOrdered,
+          );
 
-        this.leftNodeName = leftNode.getFullName();
-        this.rightNodeName = rightNode.getFullName();
+        this.nextStopLeftNodeName = nextStopLeftNode.getFullName();
+        this.nextStopRightNodeName = nextStopRightNode.getFullName();
         this.arrowDirection = this.getArrowDirectionForOneWayTrainrun();
 
         this.openDialog(parameter);
@@ -244,10 +245,11 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
   }
 
   private getArrowDirectionForOneWayTrainrun(): string | null {
-    if (!this.selectedTrainrun || this.selectedTrainrun.getIsRoundTrip()) return null;
+    if (!this.selectedTrainrun || this.selectedTrainrun.getIsRoundTrip()) {
+      return null;
+    }
     const isTargetRight = this.trainrunSectionHelper.getIsTargetRight(
       this.trainrunSectionService.getSelectedTrainrunSection(),
-      this.data.nodesOrdered,
     );
     const trainrunDirection = this.selectedTrainrun.getTrainrunDirection();
     if (

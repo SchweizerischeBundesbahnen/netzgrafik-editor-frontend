@@ -86,7 +86,6 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
       .getTrainrunDirection();
     const isTargetRight = this.trainrunSectionHelper.getIsTargetRight(
       this.selectedTrainrunSection,
-      this.trainrunSectionTimesService.getNodesOrdered(),
     );
     return (
       this.getIsRoundTrip() ||
@@ -106,7 +105,6 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
       .getTrainrunDirection();
     const isTargetLeft = this.trainrunSectionHelper.getIsTargetLeft(
       this.selectedTrainrunSection,
-      this.trainrunSectionTimesService.getNodesOrdered(),
     );
     return (
       this.getIsRoundTrip() ||

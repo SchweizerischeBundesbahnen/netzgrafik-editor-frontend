@@ -9,9 +9,7 @@ import {TrainrunSectionService} from "../../../../services/data/trainrunsection.
 import {TrainrunSection} from "../../../../models/trainrunsection.model";
 import {TrainrunService} from "../../../../services/data/trainrun.service";
 import {TrainrunDialogParameter} from "../trainrun-and-section-dialog.component";
-import {
-  TrainrunsectionHelper,
-} from "../../../../services/util/trainrunsection.helper";
+import {TrainrunsectionHelper} from "../../../../services/util/trainrunsection.helper";
 import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
 import {Node} from "../../../../models/node.model";
@@ -22,6 +20,7 @@ import {
 import {StaticDomTags} from "../../../editor-main-view/data-views/static.dom.tags";
 import {ColorRefType} from "../../../../data-structures/technical.data.structures";
 import {TrainrunSectionTimesService} from "../../../../services/data/trainrun-section-times.service";
+import {GeneralViewFunctions} from "src/app/view/util/generalViewFunctions";
 
 @Component({
   selector: "sbb-trainrunsection-card",
@@ -84,13 +83,13 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
       this.selectedTrainrunSection,
     );
     this.frequencyLinePattern =
-    this.selectedTrainrunSection.getFrequencyLinePatternRef();
+      this.selectedTrainrunSection.getFrequencyLinePatternRef();
     this.categoryColorRef = selectedTrainrun.getCategoryColorRef();
     this.timeCategoryLinePattern =
-    selectedTrainrun.getTimeCategoryLinePatternRef();
+      selectedTrainrun.getTimeCategoryLinePatternRef();
     this.trainrunSectionTimesService.setHighlightTravelTimeElement(false);
     this.trainrunSectionTimesService.applyOffsetAndTransformTimeStructure();
-    
+
     this.leftBetriebspunkt = this.trainrunSectionHelper.getLeftBetriebspunkt(
       this.selectedTrainrunSection,
       this.nodesOrdered,
@@ -101,16 +100,21 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
     );
 
     const selectedTrainrunDirection = selectedTrainrun.getTrainrunDirection();
-    if(selectedTrainrunDirection !== TrainrunDirection.ROUND_TRIP) {
+    if (selectedTrainrunDirection !== TrainrunDirection.ROUND_TRIP) {
       const isTargetRight = this.trainrunSectionHelper.getIsTargetRight(
         this.selectedTrainrunSection,
-        this.nodesOrdered,
       );
 
-      if(isTargetRight){
-        this.chosenCard = selectedTrainrunDirection === TrainrunDirection.ONE_WAY_FORWARD ? "top" : "bottom";
+      if (isTargetRight) {
+        this.chosenCard =
+          selectedTrainrunDirection === TrainrunDirection.ONE_WAY_FORWARD
+            ? "top"
+            : "bottom";
       } else {
-        this.chosenCard = selectedTrainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD ? "top" : "bottom";
+        this.chosenCard =
+          selectedTrainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD
+            ? "top"
+            : "bottom";
       }
     }
   }
@@ -134,7 +138,7 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
     this.changeDetection.detectChanges();
   }
 
-  getEdgeLineClassAttrString(layer: number, cardPosition: string ) {
+  getEdgeLineClassAttrString(layer: number, cardPosition: string) {
     return (
       StaticDomTags.EDGE_LINE_CLASS +
       StaticDomTags.makeClassTag(StaticDomTags.LINE_LAYER, "" + layer) +
@@ -157,7 +161,8 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
   }
 
   getColorRefTag(cardPosition: string) {
-    const colorRefTag = cardPosition === this.chosenCard ? this.categoryColorRef : "NORMAL";
+    const colorRefTag =
+      cardPosition === this.chosenCard ? this.categoryColorRef : "NORMAL";
     return colorRefTag;
   }
 
@@ -184,15 +189,7 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
   }
 
   onTrainrunSectionCardSelection(targetSide: "right" | "left") {
-    const isTowardTarget = targetSide === "right"
-      ? this.trainrunSectionHelper.getIsTargetRight(
-          this.selectedTrainrunSection,
-          this.nodesOrdered,
-        )
-      : this.trainrunSectionHelper.getIsTargetLeft(
-          this.selectedTrainrunSection,
-          this.nodesOrdered,
-        );
+    const isTowardTarget = this.isTowardTarget(targetSide);
 
     const newTrainrunDirection = isTowardTarget
       ? TrainrunDirection.ONE_WAY_FORWARD
@@ -204,5 +201,13 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
       this.selectedTrainrunSection.getTrainrun(),
       newTrainrunDirection,
     );
+  }
+
+  private isTowardTarget(targetSide: "right" | "left"): boolean {
+    if (targetSide === "right") {
+      return this.trainrunSectionHelper.getIsTargetRight(this.selectedTrainrunSection);
+    } else {
+      return this.trainrunSectionHelper.getIsTargetLeft(this.selectedTrainrunSection);
+    }
   }
 }
