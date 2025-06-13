@@ -30,7 +30,7 @@ easier to manage and edit complex network structures.
 ---
 
 ### Scale Netzgrafik 
-When you press `Ctrl` and use the `mouse wheel`, the netzgrafik gets scaled. This feature can be used when the nodes are spatially too close together. 
+When you press `Ctrl` and use the `mouse wheel` (or `Ctrl` and pinch-to-zoom touchpad gesture), the netzgrafik gets scaled. This feature can be used when the nodes are spatially too close together. 
 
 When you have selected multiple nodes with `right mouse button pressed and move`, then only the multi-selected nodes get scaled around their center of mass.
  
