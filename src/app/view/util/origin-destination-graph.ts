@@ -2,6 +2,7 @@ import {Trainrun} from "src/app/models/trainrun.model";
 import {TrainrunService} from "src/app/services/data/trainrun.service";
 import {TrainrunIterator} from "src/app/services/util/trainrun.iterator";
 import {Node} from "src/app/models/node.model";
+import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
 
 // A vertex indicates a "state": e.g. arriving at a node at a certain time and from a given trainrun.
 export class Vertex {
@@ -252,15 +253,18 @@ const buildSectionEdges = (
       console.log("Ignoring trainrun (no root found): ", trainrun.getId());
       return;
     }
-    edges.push(
-      ...buildSectionEdgesFromIterator(
-        tsIterator,
-        false,
-        timeLimit,
-        tsSuccessor,
-      ),
+    // Forward edges are calculated first, so we can use the successor map.
+    const forwardEdges = buildSectionEdgesFromIterator(
+      tsIterator,
+      false,
+      timeLimit,
+      tsSuccessor,
     );
-    // Don't forget the reverse direction.
+    // Add forward edges to round trip and one-way forward trainruns.
+    if (trainrun.getTrainrunDirection() !== TrainrunDirection.ONE_WAY_BACKWARD) edges.push(...forwardEdges);
+    // We only need the forward edges for forward trainruns.
+    if (trainrun.getTrainrunDirection() === TrainrunDirection.ONE_WAY_FORWARD) return;
+    // Don't forget the reverse direction for round trip and one-way backward trainruns.
     const ts = tsIterator.current().trainrunSection;
     const nextIterator = trainrunService.getIterator(
       tsIterator.current().node,

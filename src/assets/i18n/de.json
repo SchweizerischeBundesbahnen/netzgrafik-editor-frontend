@@ -347,6 +347,8 @@
         "filterable-labels-nodes": "Filterbare Labels: Knoten",
         "filterable-labels-notes": "Filterbare Labels: Kommentare",
         "display": "Anzeigen",
+        "round-trips": "Rundreisen",
+        "display-trainrun-direction-arrows": "Zugfahrt-Richtungs-Pfeile anzeigen",
         "times": "Zeiten",
         "decimal-displayed": "Anzahl Nachkommastellenanzeigen",
         "display-arrival-departure-times": "Abfahrt- und Ankuftszeiten anzeigen",

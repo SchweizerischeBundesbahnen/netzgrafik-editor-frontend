@@ -496,7 +496,7 @@ export class NetzgrafikColoringService {
     colorRefs = colorRefs.filter((v, i, a) => a.indexOf(v) === i);
     colorRefs = colorRefs.filter((str) => str !== undefined);
 
-    return colorRefs;
+    return [...colorRefs, "NORMAL"];
   }
 
   private generateColorAndStyling(
@@ -513,6 +513,13 @@ export class NetzgrafikColoringService {
       colorRef,
       "stroke",
       StaticDomTags.EDGE_LINE_DOM_REF,
+      verbose,
+    );
+    NetzgrafikColoringService.generateColors(
+      sheet,
+      colorRef,
+      "fill",
+      StaticDomTags.EDGE_LINE_ARROW_DOM_REF,
       verbose,
     );
     NetzgrafikColoringService.generateColors(
