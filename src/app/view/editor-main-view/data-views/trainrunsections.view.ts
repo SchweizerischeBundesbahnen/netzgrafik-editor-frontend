@@ -1134,19 +1134,20 @@ export class TrainrunSectionsView {
 
   translateAndRotateArrow(
     trainrunSection: TrainrunSection,
-    index: number
+    arrow_index: number,
   ) {
     const positions = trainrunSection.getPath();
-    const direction = trainrunSection.getTrainrun().getTrainrunDirection();
-    const [pos1, pos2] = direction === TrainrunDirection.ONE_WAY_FORWARD
-      ? [positions[0], positions[1]]
-      : [positions[1], positions[0]];
-    
-    const {lastNonStopNode1, lastNonStopNode2} =
-      this.trainrunService.getBothLastNonStopNodes(trainrunSection);
+    const [pos1, pos2] =
+      trainrunSection.getTrainrun().getTrainrunDirection() ===
+      TrainrunDirection.ONE_WAY_FORWARD
+        ? [positions[0], positions[1]]
+        : [positions[1], positions[0]];
+
+    const firstNode = trainrunSection.getSourceNode();
+    const lastNode = trainrunSection.getTargetNode();
     const rightOrBottomNode = GeneralViewFunctions.getRightOrBottomNode(
-      lastNonStopNode1,
-      lastNonStopNode2,
+      firstNode,
+      lastNode,
     );
     const isTargetRightOrBottom =
       rightOrBottomNode === trainrunSection.getTargetNode();
@@ -1163,10 +1164,15 @@ export class TrainrunSectionsView {
       }
     })();
 
-    const x =
-      index === 0 ? positions[1].getX() - dx : positions[2].getX() + dx;
-    const y =
-      index === 0 ? positions[1].getY() - dy : positions[2].getY() + dy;
+    let x, y;
+    if (arrow_index === 0) {
+      x = positions[1].getX() - dx;
+      y = positions[1].getY() - dy;
+    } else {
+      x = positions[2].getX() + dx;
+      y = positions[2].getY() + dy;
+    }
+
     return `translate(${x},${y}) rotate(${angle})`;
   }
 
@@ -1183,9 +1189,13 @@ export class TrainrunSectionsView {
           const tsDirection = d.trainrunSection
             .getTrainrun()
             .getTrainrunDirection();
-          return tsDirection === TrainrunDirection.ROUND_TRIP ? "" : "M-5,-7L3,0L-5,7Z";
+          return tsDirection === TrainrunDirection.ROUND_TRIP
+            ? ""
+            : "M-5,-7L3,0L-5,7Z";
         })
-        .attr("transform", (d: TrainrunSectionViewObject) => this.translateAndRotateArrow(d.trainrunSection, i))
+        .attr("transform", (d: TrainrunSectionViewObject) =>
+          this.translateAndRotateArrow(d.trainrunSection, i),
+        )
         .attr(
           "class",
           (d: TrainrunSectionViewObject) =>
@@ -1235,7 +1245,9 @@ export class TrainrunSectionsView {
   ) {
     const trainrunSectionElements = groupEnter
       .filter((d: TrainrunSectionViewObject) => {
-        return !levelFreqFilter.includes(d.trainrunSection.getFrequencyLinePatternRef());
+        return !levelFreqFilter.includes(
+          d.trainrunSection.getFrequencyLinePatternRef(),
+        );
       })
       .append(StaticDomTags.EDGE_LINE_SVG)
       .attr(
@@ -2706,7 +2718,7 @@ export class TrainrunSectionsView {
     this.createTrainrunSection(
       groupLines,
       StaticDomTags.EDGE_LINE_LAYER_0,
-      [LinePatternRefs.Freq30],// LinePatternRefs.Freq60], (background is required to "strech the hower area"
+      [LinePatternRefs.Freq30], // LinePatternRefs.Freq60], (background is required to "strech the hower area"
       selectedTrainrun,
       connectedTrainIds,
       enableEvents,
