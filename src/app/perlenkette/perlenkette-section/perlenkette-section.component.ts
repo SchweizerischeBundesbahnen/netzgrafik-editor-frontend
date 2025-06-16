@@ -34,6 +34,7 @@ import {
 import {StaticDomTags} from "../../view/editor-main-view/data-views/static.dom.tags";
 import {MathUtils} from "../../utils/math";
 import {VersionControlService} from "../../services/data/version-control.service";
+import { TrainrunDirection } from "src/app/data-structures/business.data.structures";
 
 export interface TopAndBottomTimeStructure {
   leftDepartureTime: number;
@@ -170,6 +171,82 @@ export class PerlenketteSectionComponent
   ngOnDestroy() {
     this.destroyed$.next();
     this.destroyed$.complete();
+  }
+
+  getIsTrainrunRoundTrip(): boolean {
+    return (
+      this.trainrunSection.getTrainrun().getTrainrunDirection() ===
+      TrainrunDirection.ROUND_TRIP
+    );
+  }
+
+  getEdgeLineArrowClass() {
+    const trainrun = this.trainrunSection.getTrainrun();
+    return (
+      StaticDomTags.EDGE_LINE_ARROW_CLASS +
+      StaticDomTags.makeClassTag(
+        StaticDomTags.FREQ_LINE_PATTERN,
+        trainrun.getFrequencyLinePatternRef(),
+      ) +
+      " " +
+      StaticDomTags.TAG_UI_DIALOG +
+      " " +
+      StaticDomTags.makeClassTag(
+        StaticDomTags.TAG_COLOR_REF,
+        trainrun.getCategoryColorRef(),
+      ) +
+      StaticDomTags.makeClassTag(
+        StaticDomTags.TAG_LINEPATTERN_REF,
+        trainrun.getTimeCategoryLinePatternRef(),
+      )
+    );
+  };
+
+  getArrowTranslateAndRotate(y: number) {
+    if(this.isOnlyRightSideDisplayed() && !this.isOnlyLeftSideDisplayed()) {
+      return `translate(142, ${y}) rotate(90)`;
+    } else if(!this.isOnlyRightSideDisplayed() && this.isOnlyLeftSideDisplayed()) {
+      return `translate(132, ${y + 15}) rotate(-90)`;
+    }
+    return "";
+  };
+  
+  isOnlyLeftSideDisplayed(): boolean {
+    if (this.trainrunSection === null) {
+      return false;
+    }
+    const trainrunDirection = this.trainrunSection
+      .getTrainrun()
+      .getTrainrunDirection();
+    const isTargetLeft = this.trainrunSectionHelper.getIsTargetLeft(
+      this.trainrunSection,
+    );
+    return (
+      trainrunDirection === TrainrunDirection.ROUND_TRIP ||
+      (trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD &&
+        isTargetLeft) ||
+      (trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD &&
+        !isTargetLeft)
+    );
+  }
+  
+  isOnlyRightSideDisplayed(): boolean {
+    if (this.trainrunSection === null) {
+      return false;
+    }
+    const trainrunDirection = this.trainrunSection
+      .getTrainrun()
+      .getTrainrunDirection();
+    const isTargetRight = this.trainrunSectionHelper.getIsTargetRight(
+      this.trainrunSection,
+    );
+    return (
+      trainrunDirection === TrainrunDirection.ROUND_TRIP ||
+      (trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD &&
+        isTargetRight) ||
+      (trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD &&
+        !isTargetRight)
+    );
   }
 
   getVariantIsWritable(): boolean {
