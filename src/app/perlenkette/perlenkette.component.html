@@ -30,31 +30,49 @@
               >
             </p>
 
-            <p class="alignright" (click)="trainrunNameClicked($event)">
+            <span class="trainrun-od alignright" (click)="trainrunNameClicked($event)">
               <span class="station" (click)="trainrunNameClicked($event)">{{
                 perlenketteTrainrun.pathItems.at(0).getPerlenketteNode()
                   .fullName
                 }}</span>
-              <span class="arrow">-</span>
+                @if (arrowDirection !== null) {
+                  <sbb-icon
+                    [svgIcon]="arrowDirection"
+                    aria-hidden="false"
+                    height="13px"
+                    width="13px"
+                  ></sbb-icon>
+                } @else {
+                  <span class="arrow">-</span>
+                }
               <span class="station" (click)="trainrunNameClicked($event)">{{
                 perlenketteTrainrun.pathItems.at(-1).getPerlenketteNode()
                   .fullName
                 }}</span>
-            </p>
+            </span>
           </ng-container>
 
           <ng-container *ngIf="!showTrainrunName()">
-            <p class="alignleft">
+            <span class="trainrun-od alignleft">
               <span class="station" (click)="scrollFirst($event)">{{
                 perlenketteTrainrun.pathItems.at(0).getPerlenketteNode()
                   .fullName
                 }}</span>
-              <span class="arrow">-</span>
+              @if (arrowDirection !== null) {
+                <sbb-icon
+                  [svgIcon]="arrowDirection"
+                  aria-hidden="false"
+                  height="13px"
+                  width="13px"
+                ></sbb-icon>
+              } @else {
+                <span class="arrow">-</span>
+              }
               <span class="station" (click)="scrollLast($event)">{{
                 perlenketteTrainrun.pathItems.at(-1).getPerlenketteNode()
                   .fullName
                 }}</span>
-            </p>
+            </span>
           </ng-container>
         </div>
         <ng-container *ngIf="showTrainrunEditor()">

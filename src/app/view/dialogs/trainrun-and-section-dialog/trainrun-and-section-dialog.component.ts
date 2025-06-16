@@ -100,7 +100,8 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
           return;
         }
         this.arrowDirection = this.getArrowDirectionForOneWayTrainrun();
-      });
+      }
+    );
 
     this.uiInteractionService.trainrunDialog
       .pipe(takeUntil(this.destroyed))
@@ -133,7 +134,8 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
         this.arrowDirection = this.getArrowDirectionForOneWayTrainrun();
 
         this.openDialog(parameter);
-      });
+      }
+    );
   }
 
   static getDialogConfig(
