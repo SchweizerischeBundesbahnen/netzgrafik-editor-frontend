@@ -7,6 +7,7 @@ import {TrainrunService} from "../../data/trainrun.service";
 import {ShortestDistanceNode} from "./shortest-distance-node";
 import {ShortestDistanceEdge} from "./shortest-distance-edge";
 import {FilterService} from "../../ui/filter.service";
+import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
 
 //
 // The shortest travel time search method is based on the Dijkstra Algorithm.
@@ -312,12 +313,20 @@ export class ShortestTravelTimeSearch {
       incomingEdge
         .getToNode()
         .getPorts()
-        .filter((p: Port) =>
-          ShortestTravelTimeSearch.isEdgeChangeAllowed(
+        .filter((p: Port) => {
+          // only allow sections that go "away" from the current node
+          const isDirectionCompatible = ShortestTravelTimeSearch.isDirectionCompatible(
+              incomingEdge.getToNode(),
+              p.getTrainrunSection(),
+              incomingEdge.getFullPath(),
+            );
+          const isEdgeChangeAllowed = ShortestTravelTimeSearch.isEdgeChangeAllowed(
             incomingEdge,
             p.getTrainrunSection(),
-          ),
-        )
+          );
+
+          return isDirectionCompatible && isEdgeChangeAllowed;
+        })
         .forEach((p: Port) => {
           const outgoingTrainrunSection: TrainrunSection =
             p.getTrainrunSection();
@@ -405,5 +414,48 @@ export class ShortestTravelTimeSearch {
         .node.getArrivalConsecutiveTime(iterator.current().trainrunSection),
       path,
     );
+  }
+
+  private static isDirectionCompatible(
+    currentNode: Node,
+    departureTrainrunSection: TrainrunSection,
+    fullPath: TrainrunSection[],
+  ): boolean {
+    const direction = departureTrainrunSection
+      .getTrainrun()
+      .getTrainrunDirection();
+
+    // Determine if departureTrainrunSection goes "away" from currentNode
+    // If the direction is "round-trip", it is always compatible
+    if (direction === TrainrunDirection.ROUND_TRIP) return true;
+    // For "forward", sourceNode must be the currentNode
+    if (
+      direction === TrainrunDirection.ONE_WAY_FORWARD &&
+      departureTrainrunSection.getSourceNodeId() !== currentNode.getId()
+    ) {
+      return false;
+    }
+    // For "backward", targetNode must be the currentNode
+    if (
+      direction === TrainrunDirection.ONE_WAY_BACKWARD &&
+      departureTrainrunSection.getTargetNodeId() !== currentNode.getId()
+    ) {
+      return false;
+    }
+
+    // Check direction of the next trainrun section with the previous one
+    if (fullPath.length > 0) {
+      const previousDirection = fullPath[fullPath.length - 1]
+        .getTrainrun()
+        .getTrainrunDirection();
+      if (
+        previousDirection !== direction &&
+        previousDirection !== TrainrunDirection.ROUND_TRIP
+      ) {
+        return false;
+      }
+    }
+
+    return true;
   }
 }
