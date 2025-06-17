@@ -148,6 +148,7 @@ export class EditorMainViewComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroyed.next();
     this.destroyed.complete();
+    this.editorView.destroyView();
   }
 
   moveNetzgrafikEditorViewFocalPoint(center: Vec2D) {

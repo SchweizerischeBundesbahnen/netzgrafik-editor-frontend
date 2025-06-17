@@ -165,6 +165,10 @@ export class EditorView implements SVGMouseControllerObserver {
     );
   }
 
+  destroyView() {
+    this.svgMouseController.destroy();
+  }
+
   bindAddNode(callback) {
     this.addNode = callback;
   }
