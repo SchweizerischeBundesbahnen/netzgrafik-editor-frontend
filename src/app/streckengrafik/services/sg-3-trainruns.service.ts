@@ -116,23 +116,24 @@ export class Sg3TrainrunsService implements OnDestroy {
           const isEndNode = this.checkIsEndNode(pathItem);
           let departureTime = pathItem.departureTime;
           let arrivalTime = pathItem.arrivalTime;
+          const pathNodeHaltezeit = pathItem.getPathNode().haltezeit;
           const isTsRunningBackward = pathItem.isRunningBackward;
           pathNodes.forEach((pathNode: SgPathNode) => {
             if (isTrainrunGoingForward && !isTsRunningBackward || isTrainrunGoingBackward && isTsRunningBackward) {
               if (pathNode.departurePathSection === undefined) {
-                departureTime = arrivalTime + 4;
+                departureTime = arrivalTime + pathNodeHaltezeit;
               }
               if (pathNode.arrivalPathSection === undefined) {
-                arrivalTime = pathItem.departureTime - 4;
+                arrivalTime = pathItem.departureTime - pathNodeHaltezeit;
               }
             }
 
             if (isTrainrunGoingBackward && !isTsRunningBackward || isTrainrunGoingForward && isTsRunningBackward) {
               if (pathNode.arrivalPathSection === undefined) {
-                departureTime = arrivalTime + 4;
+                departureTime = arrivalTime + pathNodeHaltezeit;
               }
               if (pathNode.departurePathSection === undefined) {
-                arrivalTime = pathItem.departureTime - 4;
+                arrivalTime = pathItem.departureTime - pathNodeHaltezeit;
               }
             }
 

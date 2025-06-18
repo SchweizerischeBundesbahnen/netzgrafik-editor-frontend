@@ -12,7 +12,7 @@ export class TrainrunItem {
     public categoryShortName: string,
     public colorRef: string,
     public pathItems: PathItem[],
-    public trainrunDirection?: TrainrunDirection,
+    public trainrunDirection: TrainrunDirection,
   ) {}
 
   equal(trainrunItem: TrainrunItem) {
