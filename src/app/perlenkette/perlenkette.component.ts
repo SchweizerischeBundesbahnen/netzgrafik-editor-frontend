@@ -22,10 +22,10 @@ import {NodeService} from "../services/data/node.service";
 import {takeUntil} from "rxjs/operators";
 import {PerlenketteConnection} from "./model/perlenketteConnection";
 import {VersionControlService} from "../services/data/version-control.service";
-import { TrainrunDirection } from "../data-structures/business.data.structures";
-import { TrainrunsectionHelper } from "../services/util/trainrunsection.helper";
-import { TrainrunSectionService } from "../services/data/trainrunsection.service";
-import { TrainrunService } from "../services/data/trainrun.service";
+import {TrainrunDirection} from "../data-structures/business.data.structures";
+import {TrainrunsectionHelper} from "../services/util/trainrunsection.helper";
+import {TrainrunSectionService} from "../services/data/trainrunsection.service";
+import {TrainrunService} from "../services/data/trainrun.service";
 
 @Component({
   selector: "sbb-perlenkette",

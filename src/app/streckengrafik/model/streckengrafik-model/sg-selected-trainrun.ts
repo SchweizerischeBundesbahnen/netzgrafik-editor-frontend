@@ -1,4 +1,4 @@
-import { TrainrunDirection } from "src/app/data-structures/business.data.structures";
+import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
 import {SgPath} from "./sg-path";
 import {SgTrainrun} from "./sg-trainrun";
 

@@ -1,6 +1,6 @@
 import {SgTrainrunItem} from "./sg-trainrun-item";
 import {SgSelectedTrainrun} from "./sg-selected-trainrun";
-import { TrainrunDirection } from "src/app/data-structures/business.data.structures";
+import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
 
 export class SgTrainrun {
   static currentId = 0;

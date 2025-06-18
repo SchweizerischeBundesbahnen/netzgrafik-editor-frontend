@@ -34,7 +34,7 @@ import {
 import {StaticDomTags} from "../../view/editor-main-view/data-views/static.dom.tags";
 import {MathUtils} from "../../utils/math";
 import {VersionControlService} from "../../services/data/version-control.service";
-import { TrainrunDirection } from "src/app/data-structures/business.data.structures";
+import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
 
 export interface TopAndBottomTimeStructure {
   leftDepartureTime: number;

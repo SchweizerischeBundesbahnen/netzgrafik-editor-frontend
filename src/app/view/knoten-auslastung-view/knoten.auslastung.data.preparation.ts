@@ -4,7 +4,7 @@ import {Node} from "../../models/node.model";
 import {ResourceService} from "../../services/data/resource.service";
 import {TrainrunSectionService} from "../../services/data/trainrunsection.service";
 import {TrainrunService} from "../../services/data/trainrun.service";
-import { TrainrunDirection } from "src/app/data-structures/business.data.structures";
+import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
 
 export class KnotenAuslastungDataPreparation {
   static MAX_NR_MINUTES = 60;
