@@ -4,6 +4,7 @@ import {Node} from "../../models/node.model";
 import {ResourceService} from "../../services/data/resource.service";
 import {TrainrunSectionService} from "../../services/data/trainrunsection.service";
 import {TrainrunService} from "../../services/data/trainrun.service";
+import { TrainrunDirection } from "src/app/data-structures/business.data.structures";
 
 export class KnotenAuslastungDataPreparation {
   static MAX_NR_MINUTES = 60;
@@ -26,12 +27,23 @@ export class KnotenAuslastungDataPreparation {
     return trainrunName;
   }
 
-  addTrainrunSectionToMatrix(
+  addExtremitySectionToMatrix(
     trainrunSectionObject: TrainrunSection,
     node: Node,
     isTargetNode: boolean,
   ) {
-    for (let directionLoop = 0; directionLoop < 2; directionLoop += 1) {
+    const trainrunDirection = trainrunSectionObject.getTrainrun().getTrainrunDirection();
+    let directionLoops: number[] = [0, 1];
+
+    if (trainrunDirection !== TrainrunDirection.ROUND_TRIP) {
+      if (trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD) {
+        directionLoops = isTargetNode ? [1] : [0];
+      } else if (trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD) {
+        directionLoops = isTargetNode ? [0] : [1];
+      }
+    }
+
+    for (const directionLoop of directionLoops) {
       const haltezeit = node.getTrainrunCategoryHaltezeit();
       const delta = Math.floor(
         haltezeit[
@@ -55,6 +67,7 @@ export class KnotenAuslastungDataPreparation {
           ? trainrunSectionObject.getSourceNode()
           : trainrunSectionObject.getTargetNode();
       }
+
       let freq = trainrunSectionObject.getFrequency();
       if (freq === null) {
         freq = 60;
@@ -175,45 +188,45 @@ export class KnotenAuslastungDataPreparation {
       },
     );
 
+    // Add trainrun sections that are connected to an intermediate node.
     sortedTransitions.forEach((transition: Transition) => {
-      const trainrunSection11 = node
+      const direction = transition.getTrainrun().getTrainrunDirection();
+      const trainrunSection1 = node
         .getPort(transition.getPortId1())
         .getTrainrunSection();
-      const trainrunSection12 = node
+      const trainrunSection2 = node
         .getPort(transition.getPortId2())
         .getTrainrunSection();
-      this.addTransitionsToMatrix(
-        trainrunSection11,
-        trainrunSection12,
-        node.getId(),
-      );
-      const trainrunSection21 = node
-        .getPort(transition.getPortId2())
-        .getTrainrunSection();
-      const trainrunSection22 = node
-        .getPort(transition.getPortId1())
-        .getTrainrunSection();
-      this.addTransitionsToMatrix(
-        trainrunSection21,
-        trainrunSection22,
-        node.getId(),
-      );
+      
+      const [tsFromNode, tsToNode] = trainrunSection1.getSourceNodeId() === node.getId()
+        ? [trainrunSection1, trainrunSection2]
+        : [trainrunSection2, trainrunSection1];
+
+      if(direction === TrainrunDirection.ROUND_TRIP || direction === TrainrunDirection.ONE_WAY_FORWARD) {
+        this.addSectionsAtTransitionToMatrix(
+          tsToNode,
+          tsFromNode,
+          node.getId(),
+        );
+      }
+      if(direction === TrainrunDirection.ROUND_TRIP || direction === TrainrunDirection.ONE_WAY_BACKWARD) {
+        this.addSectionsAtTransitionToMatrix(
+          tsFromNode,
+          tsToNode,
+          node.getId(),
+        );
+      }
     });
 
+    // Add trainrun sections that are connected to the 1st and the last nodes of the trainrun.
     this.trainrunSectionService
       .getTrainrunSections()
       .forEach((ts: TrainrunSection) => {
-        if (
-          ts.getTargetNodeId() === node.getId() &&
-          node.getNextTrainrunSection(ts) === undefined
-        ) {
-          this.addTrainrunSectionToMatrix(ts, node, true);
-        }
-        if (
-          ts.getSourceNodeId() === node.getId() &&
-          node.getNextTrainrunSection(ts) === undefined
-        ) {
-          this.addTrainrunSectionToMatrix(ts, node, false);
+        const isSourceNode = ts.getSourceNodeId() === node.getId();
+        const isTargetNode = ts.getTargetNodeId() === node.getId();
+        const isExtremitySection = (isSourceNode || isTargetNode) && node.getNextTrainrunSection(ts) === undefined;
+        if (isExtremitySection) {
+          this.addExtremitySectionToMatrix(ts, node, isTargetNode);
         }
       });
 
@@ -264,7 +277,8 @@ export class KnotenAuslastungDataPreparation {
     return trainrunName;
   }
 
-  private addTransitionsToMatrix(
+  /** Computes occupancy data for trainrunsections that are connected to an intermediate nodes. */
+  private addSectionsAtTransitionToMatrix(
     trainrunSection1: TrainrunSection,
     trainrunSection2: TrainrunSection,
     nodeId: number,
