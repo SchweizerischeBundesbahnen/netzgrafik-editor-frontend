@@ -469,7 +469,8 @@ describe("TransitionValidator", () => {
     );
     const ts1 = trainrunSectionService.getTrainrunSectionFromId(4);
     const ts2 = trainrunSectionService.getTrainrunSectionFromId(5);
-    const trainrun = trainrunService.getSelectedOrNewTrainrun();
+    trainrunService.getSelectedOrNewTrainrun();
+    
     trainrunSectionService.createTrainrunSection(
       ts1.getTargetNodeId(),
       ts1.getSourceNodeId(),
