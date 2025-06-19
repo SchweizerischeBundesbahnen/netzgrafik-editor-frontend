@@ -564,6 +564,20 @@ export class FilterService implements OnDestroy {
     this.filterSubject.next();
   }
 
+  isFilterTrainrunDirectionArrowsEnabled(): boolean {
+    return this.activeFilterSetting.filterTrainrunDirectionArrows;
+  }
+
+  enableFilterTrainrunDirectionArrows() {
+    this.activeFilterSetting.filterTrainrunDirectionArrows = true;
+    this.filterChanged();
+  }
+
+  disableFilterTrainrunDirectionArrows() {
+    this.activeFilterSetting.filterTrainrunDirectionArrows = false;
+    this.filterChanged();
+  }
+
   isFilterArrivalDepartureTimeEnabled(): boolean {
     return this.activeFilterSetting.filterArrivalDepartureTime;
   }
@@ -780,6 +794,7 @@ export class FilterService implements OnDestroy {
   isDisplayFilteringActive(): boolean {
     return (
       !this.isFilterNotesEnabled() &&
+      this.isFilterTrainrunDirectionArrowsEnabled() &&
       this.isFilterArrivalDepartureTimeEnabled() &&
       this.isFilterConnectionsEnabled() &&
       this.isFilterTrainrunNameEnabled() &&

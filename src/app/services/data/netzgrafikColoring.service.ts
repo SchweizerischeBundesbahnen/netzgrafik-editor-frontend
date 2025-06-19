@@ -470,7 +470,6 @@ export class NetzgrafikColoringService {
     if (netzgrafikColor === undefined) {
       netzgrafikColor = new NetzgrafikColor();
       netzgrafikColor.setColorRef(colorRef);
-      console.log("created default color - for colorRef:", colorRef);
       this.netzgrafikColorStore.netzgrafikColors.push(netzgrafikColor);
       this.netzgrafikColorUpdated();
     }
@@ -496,7 +495,8 @@ export class NetzgrafikColoringService {
     colorRefs = colorRefs.filter((v, i, a) => a.indexOf(v) === i);
     colorRefs = colorRefs.filter((str) => str !== undefined);
 
-    return colorRefs;
+    // Add default color ref when no trainrun is selected
+    return [...colorRefs, "NORMAL"];
   }
 
   private generateColorAndStyling(
@@ -513,6 +513,13 @@ export class NetzgrafikColoringService {
       colorRef,
       "stroke",
       StaticDomTags.EDGE_LINE_DOM_REF,
+      verbose,
+    );
+    NetzgrafikColoringService.generateColors(
+      sheet,
+      colorRef,
+      "fill",
+      StaticDomTags.EDGE_LINE_ARROW_DOM_REF,
       verbose,
     );
     NetzgrafikColoringService.generateColors(

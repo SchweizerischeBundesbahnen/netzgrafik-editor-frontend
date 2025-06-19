@@ -109,6 +109,17 @@ For more details have a look into
 
 ## Special cases
 
+### One-way trainruns (TrainrunDirection)
+
+By default, a trainrun is a round-trip schedule for a defined path. However, some situations need to deal with only "one-way" trainruns. For that, a trainrun can be modified to only show either the "forward" journey, or either the "backward" journey. The direction of the trainrun is then stored in its attribute `TrainrunDirection`, that is either one of the following value:
+- `"round-trip"`: trainrun represents `A - B - C`
+- `"forward"`: trainrun represents `A -> B -> C`
+- `"backward"`: trainrun represents `A <- B <- C`
+
+The resulting trainrun then behave then differently with the rest of the features of NGE (space-time chart, origin-destination matrix, node occupancy...).
+
+[2025-06-18-Update_Trainrun_Direction.webm](documentation/animated_images/2025-06-18-Update_Trainrun_Direction.webm)
+
 ### Trainrun path with "holes" (missing sections) 
 
 ![image](https://github.com/user-attachments/assets/d87b842c-7696-4e81-aa78-75cc966b5306)
