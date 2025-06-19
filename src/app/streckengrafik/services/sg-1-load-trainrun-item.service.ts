@@ -790,7 +790,6 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       }
     });
 
-    // console.log(indicesForward, indicesBackward);
     let swapIndF: number[] = [];
     const collectRotateDirectionF: number[] = [];
     indicesForward.forEach((v) => {
@@ -862,8 +861,6 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
     swapIndB = swapIndB.reverse();
     swapIndF = swapIndF.filter((v, i, a) => a.indexOf(v) === i);
     swapIndB = swapIndB.filter((v, i, a) => a.indexOf(v) === i);
-
-    // console.log(trainrunItem.pathItems.length, swapIndF, swapIndB);
 
     swapIndF.forEach((v, index) => {
       if (swapIndF[index] >= 0) {
