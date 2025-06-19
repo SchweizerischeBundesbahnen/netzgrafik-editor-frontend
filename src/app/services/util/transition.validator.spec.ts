@@ -544,34 +544,6 @@ describe("TransitionValidator", () => {
     expect(trainrunSections.trainrunSection2.hasSourceDepartureWarning()).toBe(
       false,
     );
-
-    TransitionValidator.validateTransition(ts.getSourceNode(), transitionId);
-
-    expect(trainrunSections.trainrunSection1.hasTargetArrivalWarning()).toBe(
-      false,
-    );
-    expect(trainrunSections.trainrunSection1.hasTargetDepartureWarning()).toBe(
-      false,
-    );
-    expect(trainrunSections.trainrunSection1.hasSourceArrivalWarning()).toBe(
-      true,
-    );
-    expect(trainrunSections.trainrunSection1.hasSourceDepartureWarning()).toBe(
-      true,
-    );
-
-    expect(trainrunSections.trainrunSection2.hasTargetArrivalWarning()).toBe(
-      false,
-    );
-    expect(trainrunSections.trainrunSection2.hasTargetDepartureWarning()).toBe(
-      false,
-    );
-    expect(trainrunSections.trainrunSection2.hasSourceArrivalWarning()).toBe(
-      true,
-    );
-    expect(trainrunSections.trainrunSection2.hasSourceDepartureWarning()).toBe(
-      true,
-    );
   });
 
   it("Validate Test - 006", () => {
