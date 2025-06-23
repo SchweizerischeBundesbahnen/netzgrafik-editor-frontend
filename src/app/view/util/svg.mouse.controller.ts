@@ -35,12 +35,22 @@ export class SVGMouseController {
   private viewboxIsFixed = false;
 
   private lastMouseEventTimeStamp: number = undefined;
+  private ctrlKeyPressed = false;
 
   constructor(
     private svgName: string,
     private svgMouseControllerObserver: SVGMouseControllerObserver,
-    private undoService : UndoService
+    private undoService: UndoService,
   ) {
+    this.ctrlKeyDownListener = this.ctrlKeyDownListener.bind(this);
+    this.ctrlKeyUpListener = this.ctrlKeyUpListener.bind(this);
+  }
+
+  private ctrlKeyDownListener(e: KeyboardEvent) {
+    if (e.key === "Control") this.ctrlKeyPressed = true;
+  }
+  private ctrlKeyUpListener(e: KeyboardEvent) {
+    if (e.key === "Control") this.ctrlKeyPressed = false;
   }
 
   init(viewboxProperties: ViewboxProperties) {
@@ -73,7 +83,17 @@ export class SVGMouseController {
       this.resize(rect.width, rect.height);
     }
 
+    // Listens to ctrl key events to differentiate
+    // between pinch-to-zoom touchpad gesture and ctrl + mousewheel
+    window.addEventListener("keydown", this.ctrlKeyDownListener);
+    window.addEventListener("keyup", this.ctrlKeyUpListener);
+
     return this.svgDrawingContext.append(StaticDomTags.GROUP_DOM_REF);
+  }
+
+  destroy() {
+    window.removeEventListener("keydown", this.ctrlKeyDownListener);
+    window.removeEventListener("keyup", this.ctrlKeyUpListener);
   }
 
   fixViewbox() {
@@ -332,7 +352,9 @@ export class SVGMouseController {
       d3.event.offsetY / this.viewboxProperties.origHeight,
     );
 
-    if (!d3.event.ctrlKey) {
+    // We can't use d3.event.ctrlKey because it'll be set to true during
+    // pinch-to-zoom touchpad gestures. Use keydown/keyup event listeners instead.
+    if (!this.ctrlKeyPressed) {
       // mouse wheel
       if (d3.event.deltaY > 0) {
         this.zoomOut(zoomCenter);
