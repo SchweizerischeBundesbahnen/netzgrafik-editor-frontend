@@ -605,7 +605,6 @@ export class EditorToolsViewComponent {
     // --------------------------------------------------------------------------------
     // 3rd party generated JSON detected
     // --------------------------------------------------------------------------------
-    console.log("Import: Automatic Port Alignment Detection - 3rd Party Data Import.");
     const msg = $localize`:@@app.view.editor-side-view.editor-tools-view-component.import-netzgrafik-as-json-info-3rd-party:3rd party import`;
     this.logger.info(msg);
 

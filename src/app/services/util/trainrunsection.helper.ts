@@ -263,7 +263,6 @@ export class TrainrunsectionHelper {
     );
     const localLeftNode = this.getLeftNode(trainrunSection, orderedNodes);
     if (leftNode.getId() !== localLeftNode.getId()) {
-      console.log("remap timeStructure", leftNode, localLeftNode);
       const mappedTimeStructure =
         TrainrunsectionHelper.getDefaultTimeStructure(timeStructure);
       mappedTimeStructure.rightArrivalTime = timeStructure.leftArrivalTime;

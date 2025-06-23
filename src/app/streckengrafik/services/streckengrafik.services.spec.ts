@@ -423,7 +423,6 @@ describe("StreckengrafikServicesTests", () => {
         );
         const node = sgSelectedTrainrun.paths[nodeIdx].getPathNode();
         for (let idx = 0; idx < 6; idx++) {
-          console.log(idx, node.trainrunNodes[idx].minimumHeadwayTime);
           expect(node.trainrunNodes[idx].minimumHeadwayTime).toBe(2);
         }
         expect(node.trainrunNodes[7].minimumHeadwayTime).toBe(2);

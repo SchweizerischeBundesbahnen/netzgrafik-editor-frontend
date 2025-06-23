@@ -640,7 +640,6 @@ export class NodesView {
   onNodeDetailsClicked(node: Node) {
     d3.event.stopPropagation();
     this.editorView.showNodeInformation(node);
-    console.log(node, "onNodeDetailsClicked");
   }
 
   onNodeDockableMouseover(node: Node, domObj: any) {
