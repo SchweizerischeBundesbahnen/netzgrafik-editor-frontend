@@ -1,5 +1,5 @@
 <div class="TrainrunSection">
-  <div [ngClass]="['OneWayCard', chosenCard === 'top' ? 'selected' : 'muted']" (click)="onTrainrunSectionCardSelection('right')">
+  <div [ngClass]="['OneWayCard', chosenCard === 'top' ? 'selected' : 'muted']" (click)="onTrainrunSectionCardClick('top')">
     <div class="OneWayCardBetriebspunkt">
       <b>{{ leftBetriebspunkt[0] }}</b> {{ leftBetriebspunkt[1] }}
     </div>
@@ -31,7 +31,7 @@
     </div>
   </div>
 
-  <div [ngClass]="['OneWayCard', chosenCard === 'bottom' ? 'selected' : 'muted']" (click)="onTrainrunSectionCardSelection('left')">
+  <div [ngClass]="['OneWayCard', chosenCard === 'bottom' ? 'selected' : 'muted']" (click)="onTrainrunSectionCardClick('bottom')">
     <div class="OneWayCardBetriebspunkt">
       <b>{{ leftBetriebspunkt[0] }}</b> {{ leftBetriebspunkt[1] }}
     </div>

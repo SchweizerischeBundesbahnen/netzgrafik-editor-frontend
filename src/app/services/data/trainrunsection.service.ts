@@ -2,7 +2,6 @@ import {TrainrunSection} from "../../models/trainrunsection.model";
 import {
   NodeDto,
   TrainrunCategoryHaltezeit,
-  TrainrunDirection,
   TrainrunSectionDto,
 } from "../../data-structures/business.data.structures";
 import {Node} from "../../models/node.model";
@@ -1545,5 +1544,29 @@ export class TrainrunSectionService implements OnDestroy {
       });
     });
     return returnValue;
+  }
+
+  invertTrainrunSectionsSourceAndTarget(trainrunId: number){
+    this.getAllTrainrunSectionsForTrainrun(trainrunId).map((trainrunSection) => {
+      const newSourceNode = trainrunSection.getTargetNode();
+      const newTargetNode = trainrunSection.getSourceNode();
+      const newSourceDepartureTime = trainrunSection.getTargetDeparture();
+      const newTargetDepartureTime = trainrunSection.getSourceDeparture();
+      const newSourceArrivalTime = trainrunSection.getTargetArrival();  
+      const newTargetArrivalTime = trainrunSection.getSourceArrival();
+      const newSourcePortId = trainrunSection.getTargetPortId();
+      const newTargetPortId = trainrunSection.getSourcePortId();
+      trainrunSection.setSourceNode(newSourceNode);
+      trainrunSection.setTargetNode(newTargetNode);
+      trainrunSection.setSourceDeparture(newSourceDepartureTime);
+      trainrunSection.setTargetDeparture(newTargetDepartureTime);
+      trainrunSection.setSourceArrival(newSourceArrivalTime);
+      trainrunSection.setTargetArrival(newTargetArrivalTime);
+      trainrunSection.setSourcePortId(newSourcePortId);
+      trainrunSection.setTargetPortId(newTargetPortId);
+      trainrunSection.setIsRunningBackward(!trainrunSection.getIsRunningBackward());
+      trainrunSection.routeEdgeAndPlaceText();
+      trainrunSection.convertVec2DToPath();
+    });
   }
 }

@@ -1059,13 +1059,11 @@ export class TrainrunSectionsView {
       lineTextElement === TrainrunSectionText.SourceArrival ||
       lineTextElement === TrainrunSectionText.TargetArrival;
 
+    const isForwardText = lineTextElement === TrainrunSectionText.SourceDeparture ||
+      lineTextElement === TrainrunSectionText.TargetArrival;
+
     // BACKWARD : SOURCE ARRIVAL & TARGET DEPARTURE
     // FORWARD : SOURCE DEPARTURE & TARGET ARRIVAL
-    const trainrunDirectionToFilter =
-      lineTextElement === TrainrunSectionText.SourceArrival ||
-      lineTextElement === TrainrunSectionText.TargetDeparture
-        ? TrainrunDirection.ONE_WAY_BACKWARD
-        : TrainrunDirection.ONE_WAY_FORWARD;
 
     groupEnter
       .filter((d: TrainrunSectionViewObject) => {
@@ -1073,7 +1071,7 @@ export class TrainrunSectionsView {
           .getTrainrun()
           .getTrainrunDirection();
         const displayTextBackground =
-          trainrunDirection === trainrunDirectionToFilter ||
+          (trainrunDirection === TrainrunDirection.ONE_WAY && isForwardText) ||
           trainrunDirection === TrainrunDirection.ROUND_TRIP;
         return (
           this.filterTrainrunsectionAtNode(d.trainrunSection, atSource) &&
@@ -1137,12 +1135,6 @@ export class TrainrunSectionsView {
     arrow_index: number,
   ) {
     const positions = trainrunSection.getPath();
-    const [pos1, pos2] =
-      trainrunSection.getTrainrun().getTrainrunDirection() ===
-      TrainrunDirection.ONE_WAY_FORWARD
-        ? [positions[0], positions[1]]
-        : [positions[1], positions[0]];
-
     const firstNode = trainrunSection.getSourceNode();
     const lastNode = trainrunSection.getTargetNode();
     const rightOrBottomNode = GeneralViewFunctions.getRightOrBottomNode(
@@ -1150,7 +1142,11 @@ export class TrainrunSectionsView {
       lastNode,
     );
     const isTargetRightOrBottom =
-      rightOrBottomNode === trainrunSection.getTargetNode();
+    rightOrBottomNode === trainrunSection.getTargetNode();
+
+    const [pos1, pos2] = isTargetRightOrBottom
+        ? [positions[0], positions[1]]
+        : [positions[1], positions[0]];
 
     const xDiff = pos2.getX() - pos1.getX();
     const yDiff = pos2.getY() - pos1.getY();
@@ -1158,9 +1154,11 @@ export class TrainrunSectionsView {
 
     const {angle, dx, dy} = (() => {
       if (xDiff === 0) {
-        return {angle: yDiff > 0 ? 90 : -90, dx: 0, dy: delta};
+        const angle = yDiff > 0 && isTargetRightOrBottom ? 90 : -90;
+        return {angle, dx: 0, dy: delta};
       } else {
-        return {angle: xDiff > 0 ? 0 : 180, dx: delta, dy: 0};
+        const angle = xDiff > 0 && isTargetRightOrBottom ? 0 : 180;
+        return {angle, dx: delta, dy: 0};
       }
     })();
 
@@ -1512,21 +1510,15 @@ export class TrainrunSectionsView {
       textElement === TrainrunSectionText.SourceArrival ||
       textElement === TrainrunSectionText.TargetArrival;
 
-    const trainrunDirectionToFilter =
-      textElement === TrainrunSectionText.SourceArrival ||
-      textElement === TrainrunSectionText.TargetDeparture
-        ? TrainrunDirection.ONE_WAY_BACKWARD
-        : TrainrunDirection.ONE_WAY_FORWARD;
-
-    const renderingObjects = groupEnter
-      .filter((d: TrainrunSectionViewObject) => {
-        const trainrunDirection = d.trainrunSection
+    const isForwardText = textElement === TrainrunSectionText.SourceDeparture ||
+      textElement === TrainrunSectionText.TargetArrival;
+        
+        const renderingObjects = groupEnter
+        .filter((d: TrainrunSectionViewObject) => {
+          const trainrunDirection = d.trainrunSection
           .getTrainrun()
           .getTrainrunDirection();
-        const isTextApplicableForDirection =
-          isDefaultTextElement ||
-          trainrunDirection === trainrunDirectionToFilter ||
-          trainrunDirection === TrainrunDirection.ROUND_TRIP;
+          const displayTextElement = (trainrunDirection === TrainrunDirection.ROUND_TRIP) || (isDefaultTextElement || isForwardText);
 
         return (
           this.filterTrainrunsectionAtNode(d.trainrunSection, atSource) &&
@@ -1537,7 +1529,7 @@ export class TrainrunSectionsView {
           ) &&
           TrainrunSectionsView.hasWarning(d.trainrunSection, textElement) ===
             hasWarning &&
-          isTextApplicableForDirection
+          displayTextElement
         );
       })
       .append(StaticDomTags.EDGE_LINE_TEXT_SVG)
@@ -2742,13 +2734,6 @@ export class TrainrunSectionsView {
       groupLines,
       StaticDomTags.EDGE_LINE_LAYER_3,
       [LinePatternRefs.Freq60, LinePatternRefs.Freq120],
-      selectedTrainrun,
-      connectedTrainIds,
-      enableEvents,
-    );
-
-    this.createDirectionArrow(
-      groupLines,
       selectedTrainrun,
       connectedTrainIds,
       enableEvents,

@@ -732,7 +732,7 @@ export class TrainrunSection {
     this.pathVec2D = this.path.path.map((point) => new Vec2D(point.x, point.y));
   }
 
-  private convertVec2DToPath() {
+  convertVec2DToPath() {
     this.path = {
       path: this.pathVec2D.map((point) => ({
         x: point.getX(),
