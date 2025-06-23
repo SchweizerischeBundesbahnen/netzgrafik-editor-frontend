@@ -105,17 +105,7 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
         this.selectedTrainrunSection,
       );
 
-      if (isTargetRight) {
-        this.chosenCard =
-          selectedTrainrunDirection === TrainrunDirection.ONE_WAY_FORWARD
-            ? "top"
-            : "bottom";
-      } else {
-        this.chosenCard =
-          selectedTrainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD
-            ? "top"
-            : "bottom";
-      }
+      this.chosenCard = isTargetRight ? "top" : "bottom";
     }
   }
 
@@ -188,26 +178,43 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
     );
   }
 
-  onTrainrunSectionCardSelection(targetSide: "right" | "left") {
-    const isTowardTarget = this.isTowardTarget(targetSide);
+  // onTrainrunSectionCardSelection(targetSide: "right" | "left") {
+  //   const isTowardTarget = this.isTowardTarget(targetSide);
 
-    const newTrainrunDirection = isTowardTarget
-      ? TrainrunDirection.ONE_WAY_FORWARD
-      : TrainrunDirection.ONE_WAY_BACKWARD;
+  //   const newTrainrunDirection = isTowardTarget
+  //     ? TrainrunDirection.ONE_WAY_FORWARD
+  //     : TrainrunDirection.ONE_WAY_BACKWARD;
 
-    this.chosenCard = targetSide === "right" ? "top" : "bottom";
+  //   this.chosenCard = targetSide === "right" ? "top" : "bottom";
 
+  //   this.trainrunService.updateTrainrunDirection(
+  //     this.selectedTrainrunSection.getTrainrun(),
+  //     newTrainrunDirection,
+  //   );
+  // }
+
+  // private isTowardTarget(targetSide: "right" | "left"): boolean {
+  //   if (targetSide === "right") {
+  //     return this.trainrunSectionHelper.getIsTargetRight(this.selectedTrainrunSection);
+  //   } else {
+  //     return this.trainrunSectionHelper.getIsTargetLeft(this.selectedTrainrunSection);
+  //   }
+  // }
+
+  // we go from the source to the target  --> inversion of the trainrun
+  onTrainrunSectionCardClick(position: "top" | "bottom") {
+    const left_node = this.trainrunSectionHelper.getNextStopLeftNode(this.selectedTrainrunSection, this.nodesOrdered);
+    const right_node = this.trainrunSectionHelper.getNextStopRightNode(this.selectedTrainrunSection, this.nodesOrdered);
+    
+    const wantedSourceNode = position === "top" ? left_node : right_node;
+    console.log('selected card infos -- ', {position, selectedTrainrunSection: this.selectedTrainrunSection, wantedSourceNode})  
+    if(wantedSourceNode !== this.selectedTrainrunSection.getSourceNode()) {
+      this.trainrunSectionService.invertTrainrunSectionsSourceAndTarget(this.selectedTrainrunSection.getTrainrunId())
+    }
+    this.chosenCard = position;
     this.trainrunService.updateTrainrunDirection(
       this.selectedTrainrunSection.getTrainrun(),
-      newTrainrunDirection,
+      TrainrunDirection.ONE_WAY,
     );
-  }
-
-  private isTowardTarget(targetSide: "right" | "left"): boolean {
-    if (targetSide === "right") {
-      return this.trainrunSectionHelper.getIsTargetRight(this.selectedTrainrunSection);
-    } else {
-      return this.trainrunSectionHelper.getIsTargetLeft(this.selectedTrainrunSection);
-    }
   }
 }
