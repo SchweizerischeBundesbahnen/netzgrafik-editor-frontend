@@ -53,7 +53,7 @@ describe("ProjectFormComponent", () => {
       "u123456",
       "ue123456",
       "e123456",
-      "u000000"
+      "u000000",
     ];
 
     validEMailExamples.forEach((e) => {
@@ -71,7 +71,8 @@ describe("ProjectFormComponent", () => {
       "a",
       "u",
       "ue",
-      "e"];
+      "e",
+    ];
     invalidEMailExamples.forEach((e) => {
       const test = new UntypedFormControl();
       test.setValue([e]);
@@ -96,7 +97,8 @@ describe("ProjectFormComponent", () => {
       "adrian@AI.ORG",
       "adrian@ai.ORG",
       "adrian@AI.org",
-      "adrian@AI.orG"];
+      "adrian@AI.orG",
+    ];
 
     const test = new UntypedFormControl();
     test.setValue(validEMailExamples);
@@ -107,7 +109,8 @@ describe("ProjectFormComponent", () => {
     const invalidEMailExamples = [
       "u123456",
       "name.vorname.vorname2#mail.domain.ch",
-      ""];
+      "",
+    ];
     const test = new UntypedFormControl();
     test.setValue(invalidEMailExamples);
     expect(userIdsAsEmailValidator(test).invalidUserIdAsEmails.length).toBe(38);
@@ -125,7 +128,8 @@ describe("ProjectFormComponent", () => {
       "a2#b.ch",
       "1234@1234.org",
       "123a4@1234.org",
-      ""];
+      "",
+    ];
     const test = new UntypedFormControl();
     test.setValue(mixedValInvalidExamples);
     expect(userIdsAsEmailValidator(test).invalidUserIdAsEmails.length).toBe(9);

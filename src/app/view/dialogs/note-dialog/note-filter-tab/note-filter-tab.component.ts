@@ -49,9 +49,7 @@ export class NoteFilterTabComponent implements OnInit, OnDestroy {
     this.noteService.notes.pipe(takeUntil(this.destroyed)).subscribe(() => {
       this.updateNoteLabelsAutoCompleteOptions();
     });
-    this.noteService.notes
-    .pipe(takeUntil(this.destroyed))
-    .subscribe(() => {
+    this.noteService.notes.pipe(takeUntil(this.destroyed)).subscribe(() => {
       this.initializeWithCurrentNote();
     });
     this.updateNoteLabelsAutoCompleteOptions();
@@ -137,12 +135,11 @@ export class NoteFilterTabComponent implements OnInit, OnDestroy {
   private checkAndSetLabels() {
     if (
       this.noteLabels.length !== this.initialNoteLabels.length ||
-      !this.noteLabels.every((label, index) => label === this.initialNoteLabels[index])
+      !this.noteLabels.every(
+        (label, index) => label === this.initialNoteLabels[index],
+      )
     ) {
-      this.noteService.setLabels(
-        this.note.getId(),
-        this.noteLabels
-      );
+      this.noteService.setLabels(this.note.getId(), this.noteLabels);
       this.initialNoteLabels = [...this.noteLabels];
     }
   }

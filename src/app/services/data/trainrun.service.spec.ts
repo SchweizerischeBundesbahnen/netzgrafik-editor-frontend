@@ -402,8 +402,8 @@ describe("TrainrunService", () => {
       );
 
     expect(trainrunSections75.length).toBe(
-      trainrunSections5.length +
-      trainrunSections7.length);
+      trainrunSections5.length + trainrunSections7.length,
+    );
     expect(trainrunSections75.length).toBe(3);
   });
 

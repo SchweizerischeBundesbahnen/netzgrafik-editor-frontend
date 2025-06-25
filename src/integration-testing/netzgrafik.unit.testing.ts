@@ -823,7 +823,7 @@ export class NetzgrafikUnitTesting {
         analyticsSettings: {
           originDestinationSettings: {
             connectionPenalty: 5,
-          }
+          },
         },
         trainrunCategories: [
           {

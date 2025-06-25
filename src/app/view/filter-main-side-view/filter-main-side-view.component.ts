@@ -161,10 +161,10 @@ export class FilterMainSideViewComponent implements OnInit, OnDestroy {
         this.mainViewMode = mainViewMode;
       });
     this.uiInteractionService.originDestinationWindow
-        .pipe(takeUntil(this.destroyed))
-        .subscribe((mainViewMode: MainViewMode) => {
-          this.mainViewMode = mainViewMode;
-        });
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((mainViewMode: MainViewMode) => {
+        this.mainViewMode = mainViewMode;
+      });
 
     this.dataService.triggerViewUpdate();
   }

@@ -117,16 +117,17 @@ export class LoadPerlenketteService implements OnDestroy {
     const perlenketteItem: PerlenketteItem[] = [];
 
     let allTrainrunSections =
-      this.trainrunSectionService
-        .getAllTrainrunSectionsForTrainrun(trainrun.getId());
+      this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(
+        trainrun.getId(),
+      );
 
     while (allTrainrunSections.length > 0) {
       // traverse over all trainrun parts
       const trainrunSection = allTrainrunSections[0];
 
       // filter all still visited trainrun sections
-      allTrainrunSections = allTrainrunSections.filter(ts =>
-        ts.getId() !== trainrunSection.getId()
+      allTrainrunSections = allTrainrunSections.filter(
+        (ts) => ts.getId() !== trainrunSection.getId(),
       );
 
       const bothEndNodes =
@@ -165,7 +166,8 @@ export class LoadPerlenketteService implements OnDestroy {
         let firstSection = true;
         while (iterator.hasNext()) {
           const currentTrainrunSectionNodePair = iterator.next();
-          const trainrunSection = currentTrainrunSectionNodePair.trainrunSection;
+          const trainrunSection =
+            currentTrainrunSectionNodePair.trainrunSection;
           const node = currentTrainrunSectionNodePair.node;
           // Section X
           perlenketteItem.push(
@@ -177,7 +179,7 @@ export class LoadPerlenketteService implements OnDestroy {
               trainrunSection.getNumberOfStops(),
               false,
               firstSection,
-              false
+              false,
             ),
           );
           firstSection = false;
@@ -192,14 +194,16 @@ export class LoadPerlenketteService implements OnDestroy {
               this.getPerlenketteConnections(trainrun, node),
               node.getTransition(trainrunSection.getId()),
               false,
-              false
+              false,
             ),
           );
           lastNode = node;
 
           // filter all still visited trainrun sections
-          allTrainrunSections = allTrainrunSections.filter(ts =>
-            ts.getId() !== currentTrainrunSectionNodePair.trainrunSection.getId()
+          allTrainrunSections = allTrainrunSections.filter(
+            (ts) =>
+              ts.getId() !==
+              currentTrainrunSectionNodePair.trainrunSection.getId(),
           );
         }
 
@@ -215,8 +219,6 @@ export class LoadPerlenketteService implements OnDestroy {
             pn.setLastTrainrunPartNode(true);
           }
         }
-
-
       }
     }
     return perlenketteItem;
@@ -241,7 +243,11 @@ export class LoadPerlenketteService implements OnDestroy {
         }
 
         // filter connection
-        if (!this.filterService.filterTrainrun(port2.getTrainrunSection().getTrainrun())) {
+        if (
+          !this.filterService.filterTrainrun(
+            port2.getTrainrunSection().getTrainrun(),
+          )
+        ) {
           return;
         }
 
@@ -296,7 +302,6 @@ export class LoadPerlenketteService implements OnDestroy {
           );
         }
 
-
         // calculate real connection time
         const arrivalTime = node.getArrivalTime(port1.getTrainrunSection());
         let departureTime = node.getDepartureTime(port2.getTrainrunSection());
@@ -305,15 +310,22 @@ export class LoadPerlenketteService implements OnDestroy {
         }
         let remainingTime = 24 * 3600;
         for (let freqOff1 = 0; freqOff1 < 8; freqOff1 += 1) {
-          const freq1 = freqOff1 * port1.getTrainrunSection().getTrainrun().getFrequency();
+          const freq1 =
+            freqOff1 * port1.getTrainrunSection().getTrainrun().getFrequency();
           for (let freqOff2 = 0; freqOff2 < 8; freqOff2 += 1) {
-            const freq2 = freqOff2 * port2.getTrainrunSection().getTrainrun().getFrequency();
-            const d = departureTime +
+            const freq2 =
+              freqOff2 *
+              port2.getTrainrunSection().getTrainrun().getFrequency();
+            const d =
+              departureTime +
               freq2 +
-              port2.getTrainrunSection().getTrainrun().getTrainrunFrequency().offset;
-            const a = arrivalTime +
+              port2.getTrainrunSection().getTrainrun().getTrainrunFrequency()
+                .offset;
+            const a =
+              arrivalTime +
               freq1 +
-              port1.getTrainrunSection().getTrainrun().getTrainrunFrequency().offset;
+              port1.getTrainrunSection().getTrainrun().getTrainrunFrequency()
+                .offset;
             const delta = d - a;
             if (delta >= node.getConnectionTime()) {
               remainingTime = Math.min(remainingTime, delta);

@@ -59,7 +59,8 @@ export class NetzgrafikApplicationComponent {
         }
         uiInteractionService.setViewboxProperties(
           EditorView.svgName,
-          uiInteractionService.getDefaultViewProperties());
+          uiInteractionService.getDefaultViewProperties(),
+        );
       });
   }
 
@@ -106,7 +107,9 @@ export class NetzgrafikApplicationComponent {
   }
 
   getEditStyle() {
-    if (this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving) {
+    if (
+      this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving
+    ) {
       if (this.nodeService.getSelectedNodes().length > 0) {
         return this.sanitizer.bypassSecurityTrustStyle("color:red");
       }

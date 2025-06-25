@@ -49,11 +49,11 @@ export class Sg6TrackService implements OnDestroy {
         this.dataService
           .getNetzgrafikDto()
           .metadata.trainrunFrequencies.forEach((freq: TrainrunFrequency) => {
-          this.maxFrequency = Math.max(
-            (this.maxFrequency = 0),
-            freq.frequency,
-          );
-        });
+            this.maxFrequency = Math.max(
+              (this.maxFrequency = 0),
+              freq.frequency,
+            );
+          });
         this.selectedTrainrun = selectedTrainrun;
         this.render();
       });
@@ -444,7 +444,8 @@ export class Sg6TrackService implements OnDestroy {
       // second track
       // tag / mark for further processing
       let estimateFreqOffset =
-        (backwardNode.departureTime - forwardNode.arrivalTime) / trainrun.frequency;
+        (backwardNode.departureTime - forwardNode.arrivalTime) /
+        trainrun.frequency;
       estimateFreqOffset = Math.floor(estimateFreqOffset);
       forwardNode.unrollOnlyEvenFrequencyOffsets = estimateFreqOffset % 2;
       backwardNode.unrollOnlyEvenFrequencyOffsets = 1;
@@ -499,10 +500,12 @@ export class Sg6TrackService implements OnDestroy {
     if (!item.backward && item.index === minIndexEndNode) {
       // forward starting node (case 1)
       const forwardNode = item;
-      const backwardNodes = trainrun.sgTrainrunItems
-        .filter((el) => el.backward && el.index === item.index);
+      const backwardNodes = trainrun.sgTrainrunItems.filter(
+        (el) => el.backward && el.index === item.index,
+      );
       if (backwardNodes.length > 0) {
-        const backwardNode = backwardNodes[backwardNodes.length - 1].getTrainrunNode();
+        const backwardNode =
+          backwardNodes[backwardNodes.length - 1].getTrainrunNode();
         this.transformUmlaufNodePair(
           forwardNode,
           backwardNode,
@@ -516,8 +519,9 @@ export class Sg6TrackService implements OnDestroy {
     if (item.backward && item.index !== minIndexEndNode) {
       // backward starting node (case 2)
       const backwardNode = item;
-      const forwardNodes = trainrun.sgTrainrunItems
-        .filter((el) => !el.backward && el.index === item.index);
+      const forwardNodes = trainrun.sgTrainrunItems.filter(
+        (el) => !el.backward && el.index === item.index,
+      );
 
       if (forwardNodes.length > 0) {
         const forwardNode = forwardNodes[0].getTrainrunNode();
@@ -1184,8 +1188,8 @@ export class Sg6TrackService implements OnDestroy {
               ps.trackData.sectionTrackSegments = convertedTrackSegments;
               maxTrackMap.set(
                 pathItem.getTrainrunSection().departureNodeId +
-                ":" +
-                pathItem.getTrainrunSection().arrivalNodeId,
+                  ":" +
+                  pathItem.getTrainrunSection().arrivalNodeId,
                 ps.trackData,
               );
             }
@@ -1209,8 +1213,8 @@ export class Sg6TrackService implements OnDestroy {
         if (path.isSection()) {
           if (
             path.getPathSection().arrivalNodeId +
-            ":" +
-            path.getPathSection().departureNodeId ===
+              ":" +
+              path.getPathSection().departureNodeId ===
             key
           ) {
             path.getPathSection().trackData = trackData;
@@ -1253,6 +1257,5 @@ class PathNodeNeighbour {
     public trackNbr: number,
     public mainTrackIdx: number,
     public pathNodes: SgTrainrunNode[],
-  ) {
-  }
+  ) {}
 }

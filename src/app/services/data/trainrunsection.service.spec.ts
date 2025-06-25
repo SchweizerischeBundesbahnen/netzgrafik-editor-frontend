@@ -138,7 +138,6 @@ describe("TrainrunSectionService", () => {
     expect(ts.getSourceArrivalConsecutiveTime()).toBe(48);
   });
 
-
   it("TrainrunSectionService.checkMissingTransitionsAfterDeletion", () => {
     // tests: https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/369
     dataService.loadNetzgrafikDto(
@@ -153,11 +152,26 @@ describe("TrainrunSectionService", () => {
     const nodeC = nodeService.addNodeWithPosition(0, 2, "C");
     const nodeD = nodeService.addNodeWithPosition(0, 3, "D");
     const nodeE = nodeService.addNodeWithPosition(0, 4, "E");
-    const tsAB = trainrunSectionService.createTrainrunSection(nodeA.getId(), nodeB.getId());
-    const tsBC = trainrunSectionService.createTrainrunSection(nodeB.getId(), nodeC.getId());
-    const tsCD = trainrunSectionService.createTrainrunSection(nodeC.getId(), nodeD.getId());
-    const tsDE = trainrunSectionService.createTrainrunSection(nodeD.getId(), nodeE.getId());
-    const tsEA = trainrunSectionService.createTrainrunSection(nodeE.getId(), nodeA.getId());
+    const tsAB = trainrunSectionService.createTrainrunSection(
+      nodeA.getId(),
+      nodeB.getId(),
+    );
+    const tsBC = trainrunSectionService.createTrainrunSection(
+      nodeB.getId(),
+      nodeC.getId(),
+    );
+    const tsCD = trainrunSectionService.createTrainrunSection(
+      nodeC.getId(),
+      nodeD.getId(),
+    );
+    const tsDE = trainrunSectionService.createTrainrunSection(
+      nodeD.getId(),
+      nodeE.getId(),
+    );
+    const tsEA = trainrunSectionService.createTrainrunSection(
+      nodeE.getId(),
+      nodeA.getId(),
+    );
 
     expect(nodeA.getTransitions().length).toBe(0);
     expect(nodeB.getTransitions().length).toBe(1);
@@ -167,10 +181,12 @@ describe("TrainrunSectionService", () => {
 
     const transA_AB1 = nodeA.getTransition(tsAB.getId());
     const transA_EA1 = nodeA.getTransition(tsEA.getId());
-    expect(transA_AB1 ).toBe(undefined);
-    expect(transA_EA1 ).toBe(undefined);
+    expect(transA_AB1).toBe(undefined);
+    expect(transA_EA1).toBe(undefined);
 
-    trainrunSectionService.deleteTrainrunSection(trainrunSectionService.getTrainrunSections()[1].getId());
+    trainrunSectionService.deleteTrainrunSection(
+      trainrunSectionService.getTrainrunSections()[1].getId(),
+    );
 
     expect(nodeA.getTransitions().length).toBe(1);
     expect(nodeB.getTransitions().length).toBe(0);
@@ -181,7 +197,5 @@ describe("TrainrunSectionService", () => {
     const transA_AB2 = nodeA.getTransition(tsAB.getId());
     const transA_EA2 = nodeA.getTransition(tsEA.getId());
     expect(transA_AB2.getId()).toBe(transA_EA2.getId());
-
   });
-
 });

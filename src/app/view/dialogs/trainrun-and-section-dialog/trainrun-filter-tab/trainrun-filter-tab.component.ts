@@ -71,9 +71,9 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
     this.destroyed.complete();
   }
 
-  getContentClassTag() : string {
+  getContentClassTag(): string {
     const retVal = "EditTrainrunFilterableLabelsDialogTabContent";
-    if (this.versionControlService.getVariantIsWritable()){
+    if (this.versionControlService.getVariantIsWritable()) {
       return retVal;
     }
     return retVal + " readonly";
@@ -86,7 +86,6 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
     }
     return retVal + " readonly";
   }
-
 
   remove(chipEvent: SbbChipEvent): void {
     const valueDelete = chipEvent.chip.value as string;
@@ -134,7 +133,9 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
   }
 
   onDuplicateTrainrun() {
-    this.trainrunService.duplicateTrainrunAndSections(this.selectedTrainrun.getId());
+    this.trainrunService.duplicateTrainrunAndSections(
+      this.selectedTrainrun.getId(),
+    );
     this.initializeWithCurrentSelectedTrainrun();
   }
 
@@ -178,11 +179,13 @@ export class TrainrunFilterTabComponent implements OnInit, OnDestroy {
   private checkAndSetLabels() {
     if (
       this.trainrunLabels.length !== this.initialTrainrunLabels.length ||
-      !this.trainrunLabels.every((label, index) => label === this.initialTrainrunLabels[index])
+      !this.trainrunLabels.every(
+        (label, index) => label === this.initialTrainrunLabels[index],
+      )
     ) {
       this.trainrunService.setLabels(
         this.selectedTrainrun.getId(),
-        this.trainrunLabels
+        this.trainrunLabels,
       );
       this.initialTrainrunLabels = [...this.trainrunLabels];
     }

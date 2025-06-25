@@ -205,7 +205,8 @@ export class VersionControlService implements OnDestroy {
       this.variantChanged = true;
       return;
     }
-    this.variantChanged = this.previousVariantDto.projectId !== variant.projectId &&
+    this.variantChanged =
+      this.previousVariantDto.projectId !== variant.projectId &&
       this.previousVariantDto.id !== variant.id;
     this.previousVariantDto = variant;
   }

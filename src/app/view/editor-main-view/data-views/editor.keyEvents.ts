@@ -16,12 +16,13 @@ import {CopyService} from "../../../services/data/copy.service";
 import {Port} from "../../../models/port.model";
 import {FilterService} from "../../../services/ui/filter.service";
 import {Connection} from "../../../models/connection.model";
-import {PreviewLineMode, TrainrunSectionPreviewLineView,} from "./trainrunsection.previewline.view";
+import {
+  PreviewLineMode,
+  TrainrunSectionPreviewLineView,
+} from "./trainrunsection.previewline.view";
 import {TrainrunSection} from "../../../models/trainrunsection.model";
 import {Trainrun} from "../../../models/trainrun.model";
-import {
-  PositionTransformationService
-} from "../../../services/util/position.transformation.service";
+import {PositionTransformationService} from "../../../services/util/position.transformation.service";
 
 export class EditorKeyEvents {
   private editorMode: EditorMode;
@@ -38,14 +39,13 @@ export class EditorKeyEvents {
     private copyService: CopyService,
     private svgMouseController: SVGMouseController,
     private trainrunSectionPreviewLineView: TrainrunSectionPreviewLineView,
-    private positionTransformationService: PositionTransformationService
+    private positionTransformationService: PositionTransformationService,
   ) {
     this.activateMousekeyDownHandler(EditorMode.NetzgrafikEditing);
   }
 
   deactivateMousekeyDownHandler() {
-    d3.select("body").on("keydown", () => {
-    });
+    d3.select("body").on("keydown", () => {});
   }
 
   ignoreKeyEvent(event: KeyboardEvent): boolean {
@@ -274,7 +274,9 @@ export class EditorKeyEvents {
   private doDuplicateTrainrun(): boolean {
     const selectedTrainrunSectionId = this.getSelectedTrainSectionId();
     if (selectedTrainrunSectionId !== undefined) {
-      this.trainrunService.duplicateTrainrunAndSections(selectedTrainrunSectionId);
+      this.trainrunService.duplicateTrainrunAndSections(
+        selectedTrainrunSectionId,
+      );
       return true;
     }
     return false;
@@ -527,7 +529,7 @@ export class EditorKeyEvents {
   private onSelectAll(): boolean {
     if (
       this.uiInteractionService.getEditorMode() ===
-      EditorMode.MultiNodeMoving ||
+        EditorMode.MultiNodeMoving ||
       this.uiInteractionService.getEditorMode() === EditorMode.NetzgrafikEditing
     ) {
       this.uiInteractionService.setEditorMode(EditorMode.MultiNodeMoving);
@@ -699,7 +701,6 @@ export class EditorKeyEvents {
 
     return false;
   }
-
 
   private netzgrafikElementsUpdated() {
     this.trainrunSectionService.trainrunSectionsUpdated();

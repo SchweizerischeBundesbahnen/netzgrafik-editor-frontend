@@ -23,7 +23,12 @@ export class NavigationBarComponent implements OnInit {
         {
           name: this.projectsBackendService
             .getProject(params[0].asNumber())
-            .pipe(map((project) => $localize`:@@app.view.navigation-bar.project-name:Project «${project.name}:name:»`)),
+            .pipe(
+              map(
+                (project) =>
+                  $localize`:@@app.view.navigation-bar.project-name:Project «${project.name}:name:»`,
+              ),
+            ),
           route: this.navigationService.getRouteToVariants(
             params[0].asNumber(),
           ),

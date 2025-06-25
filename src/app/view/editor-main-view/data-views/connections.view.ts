@@ -131,7 +131,6 @@ export class ConnectionsView {
   }
 
   createConnectionCurve(drawingGroup: d3.selector) {
-
     drawingGroup
       .append(StaticDomTags.CONNECTION_LINE_SVG)
       .attr("class", StaticDomTags.CONNECTION_LINE_CLASS)
@@ -292,9 +291,10 @@ export class ConnectionsView {
   }
 
   displayConnections(inputConnections: Connection[]) {
-    const connections = inputConnections.filter((c) =>
-      this.editorView.doCullCheckPositionsInViewport(c.getPath()) &&
-      this.filterConnectionsToDisplay(c)
+    const connections = inputConnections.filter(
+      (c) =>
+        this.editorView.doCullCheckPositionsInViewport(c.getPath()) &&
+        this.filterConnectionsToDisplay(c),
     );
 
     const connectionsGroup = this.connectionsGroup
@@ -319,8 +319,8 @@ export class ConnectionsView {
 
     d3.selectAll(
       StaticDomTags.CONNECTION_ROOT_CONTAINER_DOM_REF +
-      "." +
-      StaticDomTags.TAG_SELECTED,
+        "." +
+        StaticDomTags.TAG_SELECTED,
     ).raise();
   }
 
@@ -371,8 +371,7 @@ export class ConnectionsView {
     this.createConnectionCurve(groupEnter);
   }
 
-  makeConnectionLOD0(groupEnter: any) {
-  }
+  makeConnectionLOD0(groupEnter: any) {}
 
   onConnectionMouseup(connection: Connection, domObj: any, node: Node) {
     d3.event.stopPropagation();

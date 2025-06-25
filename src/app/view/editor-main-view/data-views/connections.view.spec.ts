@@ -90,7 +90,7 @@ describe("Connections View", () => {
       trainrunService,
       trainrunSectionService,
       nodeService,
-      filterService
+      filterService,
     );
 
     uiInteractionService = new UiInteractionService(

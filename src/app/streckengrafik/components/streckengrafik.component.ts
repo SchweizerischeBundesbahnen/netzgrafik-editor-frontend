@@ -20,9 +20,7 @@ import {SliderChangeInfo} from "../model/util/sliderChangeInfo";
 import {TimeSliderService} from "../services/time-slider.service";
 import {UpdateCounterTriggerService} from "../services/util/update-counter.service";
 import {Sg4ToggleTrackOccupierService} from "../services/sg-4-toggle-track-occupier.service";
-import {
-  StreckengrafikDisplayElementService
-} from "../services/util/streckengrafik-display-element.service";
+import {StreckengrafikDisplayElementService} from "../services/util/streckengrafik-display-element.service";
 import {StreckengrafikDrawingContext} from "../model/util/streckengrafik.drawing.context";
 
 @Component({
@@ -31,7 +29,8 @@ import {StreckengrafikDrawingContext} from "../model/util/streckengrafik.drawing
   styleUrls: ["./streckengrafik.component.scss"],
 })
 export class StreckengrafikComponent
-  implements OnInit, OnDestroy, AfterViewInit {
+  implements OnInit, OnDestroy, AfterViewInit
+{
   @ViewChild("svg") svgRef: ElementRef;
 
   viewBox: string;
@@ -61,8 +60,7 @@ export class StreckengrafikComponent
     private resizeService: ResizeService,
     private streckengrafikDisplayElementService: StreckengrafikDisplayElementService,
     private ngZone: NgZone,
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.oldRect = undefined;
@@ -101,7 +99,7 @@ export class StreckengrafikComponent
   }
 
   getIsLoading(): boolean {
-    return !this.doShowTrainruns;//this.isLoading;
+    return !this.doShowTrainruns; //this.isLoading;
   }
 
   onResetButton() {
@@ -281,7 +279,10 @@ export class StreckengrafikComponent
   }
 
   private renderViewBox() {
-    if (this.viewBoxChangeInfo.width === 0 && this.viewBoxChangeInfo.height === 0) {
+    if (
+      this.viewBoxChangeInfo.width === 0 &&
+      this.viewBoxChangeInfo.height === 0
+    ) {
       return;
     }
     let viewBox = "";

@@ -1,4 +1,11 @@
-import {ChangeDetectorRef, Component, Input, NgZone, OnDestroy, OnInit} from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  NgZone,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
 import {SgTrainrun} from "../../model/streckengrafik-model/sg-trainrun";
 import {SgTrainrunItem} from "../../model/streckengrafik-model/sg-trainrun-item";
 import {TimeSliderService} from "../../services/time-slider.service";
@@ -21,7 +28,8 @@ import {
   styleUrls: ["./train-run-item.component.scss"],
 })
 export class TrainRunItemComponent
-  implements OnInit, OnDestroy, UpdateCounterHandler {
+  implements OnInit, OnDestroy, UpdateCounterHandler
+{
   @Input()
   trainrun: SgTrainrun;
 
@@ -116,7 +124,11 @@ export class TrainRunItemComponent
     return "" + path.getStartposition();
   }
 
-  isElementNotFrustumCulled(item: SgTrainrunItem, offset: number, yZoom: number): boolean {
+  isElementNotFrustumCulled(
+    item: SgTrainrunItem,
+    offset: number,
+    yZoom: number,
+  ): boolean {
     if (!this.internalDoShowTrainruns) {
       return false;
     }
@@ -129,7 +141,8 @@ export class TrainRunItemComponent
     // extend view box for frustum culling (the 2 * yZoom extra space is just a heuristics - might
     // thus must be more calculated based on pixel height !!!
     const fromTime = this.viewBoxChangeInfo.y - 2 * yZoom;
-    const toTime = this.viewBoxChangeInfo.height + this.viewBoxChangeInfo.y + 2 * yZoom;
+    const toTime =
+      this.viewBoxChangeInfo.height + this.viewBoxChangeInfo.y + 2 * yZoom;
     let fromPoint = 0;
     let toPoint = 0;
     if (item.isNode()) {
@@ -151,16 +164,17 @@ export class TrainRunItemComponent
           return false;
         }
       }
-
     }
     if (item.isSection()) {
       const ts = item.getTrainrunSection();
       fromPoint = (ts.departureTime + offset) * yZoom;
       toPoint = (ts.arrivalTime + offset + ts.minimumHeadwayTime) * yZoom;
     }
-    return (fromPoint >= fromTime && fromPoint <= toTime) ||
+    return (
+      (fromPoint >= fromTime && fromPoint <= toTime) ||
       (toPoint >= fromTime && toPoint <= toTime) ||
-      (fromPoint <= fromTime && toPoint >= toTime);
+      (fromPoint <= fromTime && toPoint >= toTime)
+    );
   }
 
   getId(trainrun: SgTrainrun, trainrunItem: SgTrainrunItem) {

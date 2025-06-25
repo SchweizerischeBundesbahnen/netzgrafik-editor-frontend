@@ -89,7 +89,7 @@ describe("PositionTransformationService", () => {
       trainrunService,
       trainrunSectionService,
       nodeService,
-      filterService
+      filterService,
     );
 
     uiInteractionService = new UiInteractionService(
@@ -107,7 +107,7 @@ describe("PositionTransformationService", () => {
       uiInteractionService,
       nodeService,
       noteService,
-      trainrunSectionService
+      trainrunSectionService,
     );
 
     positionTransformationService = new PositionTransformationService(
@@ -115,7 +115,7 @@ describe("PositionTransformationService", () => {
       nodeService,
       noteService,
       uiInteractionService,
-      viewportCullService
+      viewportCullService,
     );
   });
 
@@ -185,13 +185,14 @@ describe("PositionTransformationService", () => {
       pos.push(new Vec2D(n.getPositionX(), n.getPositionY()));
     });
     // all node are selected (default) - nothing changes
-    positionTransformationService.scaleNetzgrafikArea(2.0,
+    positionTransformationService.scaleNetzgrafikArea(
+      2.0,
       new Vec2D(0.0, 0.0),
-      "graphContainer");
+      "graphContainer",
+    );
     nodeService.getNodes().forEach((n: Node, index: number) => {
       expect(n.getPositionX()).toBe(pos[index].getX() * 2.0);
       expect(n.getPositionY()).toBe(pos[index].getY() * 2.0);
     });
   });
-
 });
