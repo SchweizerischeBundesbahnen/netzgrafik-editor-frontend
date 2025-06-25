@@ -1548,25 +1548,46 @@ export class TrainrunSectionService implements OnDestroy {
 
   invertTrainrunSectionsSourceAndTarget(trainrunId: number){
     this.getAllTrainrunSectionsForTrainrun(trainrunId).map((trainrunSection) => {
-      const newSourceDepartureDto = trainrunSection.getTargetDepartureDto();
-      const newSourceArrivalDto = trainrunSection.getTargetArrivalDto();
-      const newTargetDepartureDto = trainrunSection.getSourceDepartureDto();
-      const newTargetArrivalDto = trainrunSection.getSourceArrivalDto();
-      const newSourcePortId = trainrunSection.getTargetPortId();
-      const newTargetPortId = trainrunSection.getSourcePortId();
-      trainrunSection.setSourceAndTargetNodeReference(
-        trainrunSection.getTargetNode(),
-        trainrunSection.getSourceNode(),
-      );
-      trainrunSection.setSourcePortId(newSourcePortId);
-      trainrunSection.setTargetPortId(newTargetPortId);
-      trainrunSection.setSourceDepartureDto(newSourceDepartureDto);
-      trainrunSection.setSourceArrivalDto(newSourceArrivalDto);
-      trainrunSection.setTargetDepartureDto(newTargetDepartureDto);
-      trainrunSection.setTargetArrivalDto(newTargetArrivalDto);
-      trainrunSection.setIsRunningBackward(!trainrunSection.getIsRunningBackward());
-      trainrunSection.routeEdgeAndPlaceText();
-      trainrunSection.convertVec2DToPath();
+    // Swap nodes
+    trainrunSection.setSourceAndTargetNodeReference(
+      trainrunSection.getTargetNode(),
+      trainrunSection.getSourceNode(),
+    );
+
+    // Swap ports
+    const oldSourcePortId = trainrunSection.getSourcePortId();
+    const oldTargetPortId = trainrunSection.getTargetPortId();
+    trainrunSection.setSourcePortId(oldTargetPortId);
+    trainrunSection.setTargetPortId(oldSourcePortId);
+
+    // Swap Timelocks and restore consecutive times
+    const oldSourceDepartureDto = trainrunSection.getSourceDepartureDto();
+    const oldTargetArrivalDto = trainrunSection.getTargetArrivalDto();
+    const oldTargetDepartureDto = trainrunSection.getTargetDepartureDto();
+    const oldSourceArrivalDto = trainrunSection.getSourceArrivalDto();
+
+    // Source departure becomes target departure
+    trainrunSection.setSourceDepartureDto(oldTargetDepartureDto);
+    trainrunSection.setSourceDepartureConsecutiveTime(oldSourceDepartureDto.consecutiveTime);
+
+    // Target arrival becomes source arrival
+    trainrunSection.setTargetArrivalDto(oldSourceArrivalDto);
+    trainrunSection.setTargetArrivalConsecutiveTime(oldTargetArrivalDto.consecutiveTime);
+
+    // Target departure becomes source departure
+    trainrunSection.setTargetDepartureDto(oldSourceDepartureDto);
+    trainrunSection.setTargetDepartureConsecutiveTime(oldTargetDepartureDto.consecutiveTime);
+
+    // Source arrival becomes target arrival
+    trainrunSection.setSourceArrivalDto(oldTargetArrivalDto);
+    trainrunSection.setSourceArrivalConsecutiveTime(oldSourceArrivalDto.consecutiveTime);
+
+    // Invert drawing direction
+    trainrunSection.setIsRunningBackward(!trainrunSection.getIsRunningBackward());
+
+    // Update visuals and geometry
+    trainrunSection.routeEdgeAndPlaceText();
+    trainrunSection.convertVec2DToPath();
     });
   }
 }
