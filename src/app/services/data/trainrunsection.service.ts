@@ -1548,22 +1548,22 @@ export class TrainrunSectionService implements OnDestroy {
 
   invertTrainrunSectionsSourceAndTarget(trainrunId: number){
     this.getAllTrainrunSectionsForTrainrun(trainrunId).map((trainrunSection) => {
-      const newSourceNode = trainrunSection.getTargetNode();
-      const newTargetNode = trainrunSection.getSourceNode();
-      const newSourceDepartureTime = trainrunSection.getTargetDeparture();
-      const newTargetDepartureTime = trainrunSection.getSourceDeparture();
-      const newSourceArrivalTime = trainrunSection.getTargetArrival();  
-      const newTargetArrivalTime = trainrunSection.getSourceArrival();
+      const newSourceDepartureDto = trainrunSection.getTargetDepartureDto();
+      const newSourceArrivalDto = trainrunSection.getTargetArrivalDto();
+      const newTargetDepartureDto = trainrunSection.getSourceDepartureDto();
+      const newTargetArrivalDto = trainrunSection.getSourceArrivalDto();
       const newSourcePortId = trainrunSection.getTargetPortId();
       const newTargetPortId = trainrunSection.getSourcePortId();
-      trainrunSection.setSourceNode(newSourceNode);
-      trainrunSection.setTargetNode(newTargetNode);
-      trainrunSection.setSourceDeparture(newSourceDepartureTime);
-      trainrunSection.setTargetDeparture(newTargetDepartureTime);
-      trainrunSection.setSourceArrival(newSourceArrivalTime);
-      trainrunSection.setTargetArrival(newTargetArrivalTime);
+      trainrunSection.setSourceAndTargetNodeReference(
+        trainrunSection.getTargetNode(),
+        trainrunSection.getSourceNode(),
+      );
       trainrunSection.setSourcePortId(newSourcePortId);
       trainrunSection.setTargetPortId(newTargetPortId);
+      trainrunSection.setSourceDepartureDto(newSourceDepartureDto);
+      trainrunSection.setSourceArrivalDto(newSourceArrivalDto);
+      trainrunSection.setTargetDepartureDto(newTargetDepartureDto);
+      trainrunSection.setTargetArrivalDto(newTargetArrivalDto);
       trainrunSection.setIsRunningBackward(!trainrunSection.getIsRunningBackward());
       trainrunSection.routeEdgeAndPlaceText();
       trainrunSection.convertVec2DToPath();
