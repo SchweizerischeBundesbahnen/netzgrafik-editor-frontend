@@ -1,7 +1,7 @@
 <div class="TrainrunSection">
   <div [ngClass]="['OneWayCard', chosenCard === 'top' ? 'selected' : 'muted']" (click)="onTrainrunSectionCardClick('top')">
     <div class="OneWayCardBetriebspunkt">
-      <b>{{ leftBetriebspunkt[0] }}</b> {{ leftBetriebspunkt[1] }}
+      <b>{{ startNode[0] }}</b> {{ startNode[1] }}
     </div>
     <div class="TrainFreqContainer">
       <svg class="renderer" width="96px" height="48px" viewBox="0 0 48 24">
@@ -27,13 +27,13 @@
       </svg>
     </div>
     <div class="OneWayCardBetriebspunkt">
-      <b>{{ rightBetriebspunkt[0] }}</b> {{ rightBetriebspunkt[1] }}
+      <b>{{ endNode[0] }}</b> {{ endNode[1] }}
     </div>
   </div>
 
   <div [ngClass]="['OneWayCard', chosenCard === 'bottom' ? 'selected' : 'muted']" (click)="onTrainrunSectionCardClick('bottom')">
     <div class="OneWayCardBetriebspunkt">
-      <b>{{ leftBetriebspunkt[0] }}</b> {{ leftBetriebspunkt[1] }}
+      <b>{{ startNode[0] }}</b> {{ startNode[1] }}
     </div>
     <div class="TrainFreqContainer">
       <svg class="renderer" width="96px" height="48px" viewBox="0 0 48 24">
@@ -59,7 +59,7 @@
       </svg>
     </div>
     <div class="OneWayCardBetriebspunkt">
-      <b>{{ rightBetriebspunkt[0] }}</b> {{ rightBetriebspunkt[1] }}
+      <b>{{ endNode[0] }}</b> {{ endNode[1] }}
     </div>
   </div>
 </div>
