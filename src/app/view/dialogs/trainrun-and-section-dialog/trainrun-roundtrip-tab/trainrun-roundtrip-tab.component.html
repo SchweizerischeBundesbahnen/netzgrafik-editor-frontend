@@ -1,6 +1,6 @@
 <div sbbDialogContent [class]="getContentClassTag()">
   <div class="toggle-container">
-    <span class="toggle-label">{{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.one-way' | translate }}</span>
+    <span class="toggle-label">{{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.round-trip' | translate }}</span>
     <label class="toggle-switch">
       <input
         sbbInput
@@ -10,6 +10,7 @@
       />
       <span class="slider"></span>
     </label>
+    <span class="toggle-label">{{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.one-way' | translate }}</span>
   </div>
   <sbb-trainrunsection-card *ngIf="isOneWay"></sbb-trainrunsection-card>
 </div>

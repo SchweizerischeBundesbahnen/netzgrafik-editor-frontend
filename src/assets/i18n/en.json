@@ -288,7 +288,8 @@
             "deleteConfirmationQuestion": "Should the entire train route be definitively deleted?"
           },
           "trainrun-roundtrip-tab": {
-            "one-way": "One-way"
+            "one-way": "One-way",
+            "round-trip": "Round-trip"
           },
           "trainrun-section-tab": {
             "warningTwoLocks": "Warning: Too many times are locked!",
