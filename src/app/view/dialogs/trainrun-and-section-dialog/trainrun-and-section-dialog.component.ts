@@ -254,12 +254,7 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
       this.trainrunSectionService.getSelectedTrainrunSection(),
     );
     const trainrunDirection = this.selectedTrainrun.getTrainrunDirection();
-    if (
-      (trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD &&
-        isTargetRight) ||
-      (trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD &&
-        !isTargetRight)
-    ) {
+    if (trainrunDirection === TrainrunDirection.ONE_WAY && isTargetRight) {
       return "arrow-right-medium";
     } else {
       return "arrow-left-medium";
