@@ -690,6 +690,14 @@ export class TrainrunService {
       bothEndNodes.endNode2,
     );
   }
+  
+  getEndNodeWithTrainrunId(trainrunId: number): Node {
+    const bothEndNodes = this.getBothEndNodesWithTrainrunId(trainrunId);
+    return GeneralViewFunctions.getRightOrBottomNode(
+      bothEndNodes.endNode1,
+      bothEndNodes.endNode2,
+    );
+  }
 
   getEndNode(node: Node, trainrunSection: TrainrunSection): Node {
     const iterator = this.getIterator(node, trainrunSection);

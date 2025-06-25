@@ -33,8 +33,8 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
   trainrunDialogParameter: TrainrunDialogParameter;
 
   public selectedTrainrunSection: TrainrunSection;
-  public leftBetriebspunkt: string[] = ["", ""];
-  public rightBetriebspunkt: string[] = ["", ""];
+  public startNode: string[] = ["", ""];
+  public endNode: string[] = ["", ""];
   public frequencyLinePattern: LinePatternRefs;
   public categoryColorRef: ColorRefType;
   public timeCategoryLinePattern: LinePatternRefs;
@@ -90,14 +90,14 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
     this.trainrunSectionTimesService.setHighlightTravelTimeElement(false);
     this.trainrunSectionTimesService.applyOffsetAndTransformTimeStructure();
 
-    this.leftBetriebspunkt = this.trainrunSectionHelper.getLeftBetriebspunkt(
-      this.selectedTrainrunSection,
-      this.nodesOrdered,
+    const startNode = this.trainrunService.getStartNodeWithTrainrunId(
+      this.selectedTrainrunSection.getTrainrunId(),
     );
-    this.rightBetriebspunkt = this.trainrunSectionHelper.getRightBetriebspunkt(
-      this.selectedTrainrunSection,
-      this.nodesOrdered,
+    this.startNode = [startNode.getFullName(), startNode.getBetriebspunktName()];
+    const endNode = this.trainrunService.getEndNodeWithTrainrunId(
+      this.selectedTrainrunSection.getTrainrunId(),
     );
+    this.endNode = [endNode.getFullName(), endNode.getBetriebspunktName()];
 
     const selectedTrainrunDirection = selectedTrainrun.getTrainrunDirection();
     if (selectedTrainrunDirection !== TrainrunDirection.ROUND_TRIP) {
@@ -178,38 +178,16 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
     );
   }
 
-  // onTrainrunSectionCardSelection(targetSide: "right" | "left") {
-  //   const isTowardTarget = this.isTowardTarget(targetSide);
-
-  //   const newTrainrunDirection = isTowardTarget
-  //     ? TrainrunDirection.ONE_WAY_FORWARD
-  //     : TrainrunDirection.ONE_WAY_BACKWARD;
-
-  //   this.chosenCard = targetSide === "right" ? "top" : "bottom";
-
-  //   this.trainrunService.updateTrainrunDirection(
-  //     this.selectedTrainrunSection.getTrainrun(),
-  //     newTrainrunDirection,
-  //   );
-  // }
-
-  // private isTowardTarget(targetSide: "right" | "left"): boolean {
-  //   if (targetSide === "right") {
-  //     return this.trainrunSectionHelper.getIsTargetRight(this.selectedTrainrunSection);
-  //   } else {
-  //     return this.trainrunSectionHelper.getIsTargetLeft(this.selectedTrainrunSection);
-  //   }
-  // }
-
-  // we go from the source to the target  --> inversion of the trainrun
   onTrainrunSectionCardClick(position: "top" | "bottom") {
-    const left_node = this.trainrunSectionHelper.getNextStopLeftNode(this.selectedTrainrunSection, this.nodesOrdered);
-    const right_node = this.trainrunSectionHelper.getNextStopRightNode(this.selectedTrainrunSection, this.nodesOrdered);
-    
-    const wantedSourceNode = position === "top" ? left_node : right_node;
-    console.log('selected card infos -- ', {position, selectedTrainrunSection: this.selectedTrainrunSection, wantedSourceNode})  
-    if(wantedSourceNode !== this.selectedTrainrunSection.getSourceNode()) {
-      this.trainrunSectionService.invertTrainrunSectionsSourceAndTarget(this.selectedTrainrunSection.getTrainrunId())
+    // Get the left and right nodes to determine the cards order
+    const leftNode = this.trainrunSectionHelper.getNextStopLeftNode(this.selectedTrainrunSection, this.nodesOrdered);
+    const rightNode = this.trainrunSectionHelper.getNextStopRightNode(this.selectedTrainrunSection, this.nodesOrdered);
+
+    const wantedSourceNode = position === "top" ? leftNode : rightNode;
+    if (wantedSourceNode !== this.selectedTrainrunSection.getSourceNode()) {
+      this.trainrunSectionService.invertTrainrunSectionsSourceAndTarget(
+        this.selectedTrainrunSection.getTrainrunId(),
+      );
     }
     this.chosenCard = position;
     this.trainrunService.updateTrainrunDirection(
