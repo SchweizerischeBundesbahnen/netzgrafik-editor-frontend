@@ -144,6 +144,19 @@ export class ShortestTravelTimeSearch {
     return !trans.getIsNonStopTransit();
   }
 
+  private static isDirectionCompatible(
+    currentNode: Node,
+    departureTrainrunSection: TrainrunSection,
+  ): boolean {
+    const direction = departureTrainrunSection
+      .getTrainrun()
+      .getTrainrunDirection();
+    // ROUND_TRIP: always compatible
+    // ONE_WAY: only allow if currentNode is the source node
+    return direction === TrainrunDirection.ROUND_TRIP ||
+      departureTrainrunSection.getSourceNodeId() === currentNode.getId();
+  }
+
   calculateShortestDistanceNodesFromStartingNode(
     departureNodeId: number,
   ): ShortestDistanceNode[] {
@@ -318,7 +331,6 @@ export class ShortestTravelTimeSearch {
           const isDirectionCompatible = ShortestTravelTimeSearch.isDirectionCompatible(
               incomingEdge.getToNode(),
               p.getTrainrunSection(),
-              incomingEdge.getFullPath(),
             );
           const isEdgeChangeAllowed = ShortestTravelTimeSearch.isEdgeChangeAllowed(
             incomingEdge,
@@ -414,48 +426,5 @@ export class ShortestTravelTimeSearch {
         .node.getArrivalConsecutiveTime(iterator.current().trainrunSection),
       path,
     );
-  }
-
-  private static isDirectionCompatible(
-    currentNode: Node,
-    departureTrainrunSection: TrainrunSection,
-    fullPath: TrainrunSection[],
-  ): boolean {
-    const direction = departureTrainrunSection
-      .getTrainrun()
-      .getTrainrunDirection();
-
-    // Determine if departureTrainrunSection goes "away" from currentNode
-    // If the direction is "round-trip", it is always compatible
-    if (direction === TrainrunDirection.ROUND_TRIP) return true;
-    // For "forward", sourceNode must be the currentNode
-    if (
-      direction === TrainrunDirection.ONE_WAY_FORWARD &&
-      departureTrainrunSection.getSourceNodeId() !== currentNode.getId()
-    ) {
-      return false;
-    }
-    // For "backward", targetNode must be the currentNode
-    if (
-      direction === TrainrunDirection.ONE_WAY_BACKWARD &&
-      departureTrainrunSection.getTargetNodeId() !== currentNode.getId()
-    ) {
-      return false;
-    }
-
-    // Check direction of the next trainrun section with the previous one
-    if (fullPath.length > 0) {
-      const previousDirection = fullPath[fullPath.length - 1]
-        .getTrainrun()
-        .getTrainrunDirection();
-      if (
-        previousDirection !== direction &&
-        previousDirection !== TrainrunDirection.ROUND_TRIP
-      ) {
-        return false;
-      }
-    }
-
-    return true;
   }
 }
