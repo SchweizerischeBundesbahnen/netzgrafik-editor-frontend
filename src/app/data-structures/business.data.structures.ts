@@ -334,7 +334,5 @@ export interface NetzgrafikDto {
  */
 export enum TrainrunDirection {
   ROUND_TRIP = "round_trip",
-  ONE_WAY_FORWARD = "oneway_forward",
-  ONE_WAY_BACKWARD = "oneway_backward",
-  ONE_WAY = "one way",
+  ONE_WAY = "one_way",
 }
