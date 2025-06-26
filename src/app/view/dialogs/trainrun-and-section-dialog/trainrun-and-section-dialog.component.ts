@@ -246,9 +246,9 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
     };
   }
 
-  private getArrowDirectionForOneWayTrainrun(): string | null {
+  private getArrowDirectionForOneWayTrainrun(): string {
     if (!this.selectedTrainrun || this.selectedTrainrun.getIsRoundTrip()) {
-      return null;
+      return "minus-medium";
     }
     const isTargetRight = this.trainrunSectionHelper.getIsTargetRight(
       this.trainrunSectionService.getSelectedTrainrunSection(),

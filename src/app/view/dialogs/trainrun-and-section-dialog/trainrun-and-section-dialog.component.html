@@ -31,14 +31,15 @@
               <ng-template
                 sbb-tab-label
               >
-                <span class="onewayTrip">{{ nextStopLeftNodeName }}</span>
+                <span style="transform: translateY(-2px);" class="onewayTrip">{{ nextStopLeftNodeName }}</span>
                 <sbb-icon
+                  style="transform: translateY(-2px);"
                   [svgIcon]="arrowDirection"
                   aria-hidden="false"
                   height="13px"
                   width="13px"
                 ></sbb-icon>
-                <span>{{ nextStopRightNodeName }}</span>
+                <span style="transform: translateY(-2px);">{{ nextStopRightNodeName }}</span>
               </ng-template>
           } @else {
             <ng-template sbb-tab-label>

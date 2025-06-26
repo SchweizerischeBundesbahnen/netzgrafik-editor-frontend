@@ -31,7 +31,8 @@
             </p>
 
             <span class="trainrun-od alignright" (click)="trainrunNameClicked($event)">
-              <span class="station" (click)="trainrunNameClicked($event)">{{
+              <span class="station" (click)="trainrunNameClicked($event)"
+                    style="transform: translateY(-2px);">{{
                 perlenketteTrainrun.pathItems.at(0).getPerlenketteNode()
                   .fullName
                 }}</span>
@@ -41,11 +42,13 @@
                     aria-hidden="false"
                     height="13px"
                     width="13px"
+                    style="transform: translateY(-2px);"
                   ></sbb-icon>
                 } @else {
                   <span class="arrow">-</span>
                 }
-              <span class="station" (click)="trainrunNameClicked($event)">{{
+              <span class="station" (click)="trainrunNameClicked($event)"
+                    style="transform: translateY(-2px);">{{
                 perlenketteTrainrun.pathItems.at(-1).getPerlenketteNode()
                   .fullName
                 }}</span>
