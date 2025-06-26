@@ -288,7 +288,8 @@
             "deleteConfirmationQuestion": "Soll der gesamte Zuglauf definitiv gelöscht werden?"
           },
           "trainrun-roundtrip-tab": {
-            "one-way": "Rundreise"
+            "one-way": "Einzelfahrt",
+            "round-trip": "Rundreise"
           },
           "trainrun-section-tab": {
             "warningTwoLocks": "Warnung: Zu viele Zeiten sind gelockt!",

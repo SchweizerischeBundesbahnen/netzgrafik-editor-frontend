@@ -87,13 +87,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     const isTargetRight = this.trainrunSectionHelper.getIsTargetRight(
       this.selectedTrainrunSection,
     );
-    return (
-      this.getIsRoundTrip() ||
-      (trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD &&
-        isTargetRight) ||
-      (trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD &&
-        !isTargetRight)
-    );
+    return this.getIsRoundTrip() || trainrunDirection === TrainrunDirection.ONE_WAY && isTargetRight;
   }
 
   public get isBottomTrainrunSectionInfosDisplayed(): boolean {
@@ -106,13 +100,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     const isTargetLeft = this.trainrunSectionHelper.getIsTargetLeft(
       this.selectedTrainrunSection,
     );
-    return (
-      this.getIsRoundTrip() ||
-      (trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD &&
-        isTargetLeft) ||
-      (trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD &&
-        !isTargetLeft)
-    );
+    return this.getIsRoundTrip() || trainrunDirection === TrainrunDirection.ONE_WAY && isTargetLeft;
   }
 
   constructor(

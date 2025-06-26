@@ -2,7 +2,6 @@ import {TrainrunSection} from "../../models/trainrunsection.model";
 import {
   NodeDto,
   TrainrunCategoryHaltezeit,
-  TrainrunDirection,
   TrainrunSectionDto,
 } from "../../data-structures/business.data.structures";
 import {Node} from "../../models/node.model";
@@ -1545,5 +1544,50 @@ export class TrainrunSectionService implements OnDestroy {
       });
     });
     return returnValue;
+  }
+
+  invertTrainrunSectionsSourceAndTarget(trainrunId: number){
+    this.getAllTrainrunSectionsForTrainrun(trainrunId).map((trainrunSection) => {
+    // Swap nodes
+    trainrunSection.setSourceAndTargetNodeReference(
+      trainrunSection.getTargetNode(),
+      trainrunSection.getSourceNode(),
+    );
+
+    // Swap ports
+    const oldSourcePortId = trainrunSection.getSourcePortId();
+    const oldTargetPortId = trainrunSection.getTargetPortId();
+    trainrunSection.setSourcePortId(oldTargetPortId);
+    trainrunSection.setTargetPortId(oldSourcePortId);
+
+    // Swap Timelocks and restore consecutive times
+    const oldSourceDepartureDto = trainrunSection.getSourceDepartureDto();
+    const oldTargetArrivalDto = trainrunSection.getTargetArrivalDto();
+    const oldTargetDepartureDto = trainrunSection.getTargetDepartureDto();
+    const oldSourceArrivalDto = trainrunSection.getSourceArrivalDto();
+
+    // Source departure becomes target departure
+    trainrunSection.setSourceDepartureDto(oldTargetDepartureDto);
+    trainrunSection.setSourceDepartureConsecutiveTime(oldSourceDepartureDto.consecutiveTime);
+
+    // Target arrival becomes source arrival
+    trainrunSection.setTargetArrivalDto(oldSourceArrivalDto);
+    trainrunSection.setTargetArrivalConsecutiveTime(oldTargetArrivalDto.consecutiveTime);
+
+    // Target departure becomes source departure
+    trainrunSection.setTargetDepartureDto(oldSourceDepartureDto);
+    trainrunSection.setTargetDepartureConsecutiveTime(oldTargetDepartureDto.consecutiveTime);
+
+    // Source arrival becomes target arrival
+    trainrunSection.setSourceArrivalDto(oldTargetArrivalDto);
+    trainrunSection.setSourceArrivalConsecutiveTime(oldSourceArrivalDto.consecutiveTime);
+
+    // Invert drawing direction
+    trainrunSection.setIsRunningBackward(!trainrunSection.getIsRunningBackward());
+
+    // Update visuals and geometry
+    trainrunSection.routeEdgeAndPlaceText();
+    trainrunSection.convertVec2DToPath();
+    });
   }
 }

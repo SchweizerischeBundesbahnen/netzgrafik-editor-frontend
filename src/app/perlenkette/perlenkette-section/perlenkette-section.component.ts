@@ -221,13 +221,8 @@ export class PerlenketteSectionComponent
     const isTargetLeft = this.trainrunSectionHelper.getIsTargetLeft(
       this.trainrunSection,
     );
-    return (
-      trainrunDirection === TrainrunDirection.ROUND_TRIP ||
-      (trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD &&
-        isTargetLeft) ||
-      (trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD &&
-        !isTargetLeft)
-    );
+    return trainrunDirection === TrainrunDirection.ROUND_TRIP ||
+      (trainrunDirection === TrainrunDirection.ONE_WAY && isTargetLeft);
   }
   
   isOnlyRightSideDisplayed(): boolean {
@@ -240,13 +235,8 @@ export class PerlenketteSectionComponent
     const isTargetRight = this.trainrunSectionHelper.getIsTargetRight(
       this.trainrunSection,
     );
-    return (
-      trainrunDirection === TrainrunDirection.ROUND_TRIP ||
-      (trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD &&
-        isTargetRight) ||
-      (trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD &&
-        !isTargetRight)
-    );
+    return trainrunDirection === TrainrunDirection.ROUND_TRIP ||
+      (trainrunDirection === TrainrunDirection.ONE_WAY && isTargetRight);
   }
 
   getVariantIsWritable(): boolean {

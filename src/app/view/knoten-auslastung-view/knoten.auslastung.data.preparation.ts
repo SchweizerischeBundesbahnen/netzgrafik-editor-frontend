@@ -5,6 +5,7 @@ import {ResourceService} from "../../services/data/resource.service";
 import {TrainrunSectionService} from "../../services/data/trainrunsection.service";
 import {TrainrunService} from "../../services/data/trainrun.service";
 import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
+import {TrainrunsectionHelper} from "src/app/services/util/trainrunsection.helper";
 
 export class KnotenAuslastungDataPreparation {
   static MAX_NR_MINUTES = 60;
@@ -28,47 +29,41 @@ export class KnotenAuslastungDataPreparation {
   }
 
   addExtremitySectionToMatrix(
-    trainrunSectionObject: TrainrunSection,
+    trainrunSection: TrainrunSection,
     node: Node,
     isTargetNode: boolean,
   ) {
-    const trainrunDirection = trainrunSectionObject.getTrainrun().getTrainrunDirection();
     let directionLoops: number[] = [0, 1];
-
-    if (trainrunDirection !== TrainrunDirection.ROUND_TRIP) {
-      if (trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD) {
-        directionLoops = isTargetNode ? [1] : [0];
-      } else if (trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD) {
-        directionLoops = isTargetNode ? [0] : [1];
-      }
+    if (trainrunSection.getTrainrun().getTrainrunDirection() !== TrainrunDirection.ROUND_TRIP) {
+      directionLoops = isTargetNode ? [0] : [1];
     }
 
     for (const directionLoop of directionLoops) {
       const haltezeit = node.getTrainrunCategoryHaltezeit();
       const delta = Math.floor(
         haltezeit[
-          trainrunSectionObject.getTrainrun().getTrainrunCategory().fachCategory
+          trainrunSection.getTrainrun().getTrainrunCategory().fachCategory
         ].haltezeit,
       );
       let arrivalTime = isTargetNode
-        ? trainrunSectionObject.getTargetArrivalConsecutiveTime()
-        : trainrunSectionObject.getSourceArrivalConsecutiveTime();
+        ? trainrunSection.getTargetArrivalConsecutiveTime()
+        : trainrunSection.getSourceArrivalConsecutiveTime();
       let targetNode = isTargetNode
-        ? trainrunSectionObject.getTargetNode()
-        : trainrunSectionObject.getSourceNode();
+        ? trainrunSection.getTargetNode()
+        : trainrunSection.getSourceNode();
       if (directionLoop === 0) {
         arrivalTime =
           (isTargetNode
-            ? trainrunSectionObject.getTargetDepartureConsecutiveTime()
-            : trainrunSectionObject.getSourceDepartureConsecutiveTime()) -
+            ? trainrunSection.getTargetDepartureConsecutiveTime()
+            : trainrunSection.getSourceDepartureConsecutiveTime()) -
           delta +
           60;
         targetNode = isTargetNode
-          ? trainrunSectionObject.getSourceNode()
-          : trainrunSectionObject.getTargetNode();
+          ? trainrunSection.getSourceNode()
+          : trainrunSection.getTargetNode();
       }
 
-      let freq = trainrunSectionObject.getFrequency();
+      let freq = trainrunSection.getFrequency();
       if (freq === null) {
         freq = 60;
       }
@@ -94,15 +89,15 @@ export class KnotenAuslastungDataPreparation {
           uLoop += 1
         ) {
           this.matrix[uLoop % 60][freeIdx] =
-            trainrunSectionObject.getTrainrunId();
+            trainrunSection.getTrainrunId();
         }
         this.nbrUsedOfTrackFound = Math.max(this.nbrUsedOfTrackFound, freeIdx);
         this.nodeDatas.push({
-          trainrunSection: trainrunSectionObject,
+          trainrunSection: trainrunSection,
           name: KnotenAuslastungDataPreparation.getTrainrunLabel(
-            trainrunSectionObject,
+            trainrunSection,
           ),
-          tooltip: this.getTrainrunTooltip(trainrunSectionObject, targetNode),
+          tooltip: this.getTrainrunTooltip(trainrunSection, targetNode),
           color: freeIdx,
           startAngle: (freqArrivalTime / 60) * (2 * Math.PI),
           endAngle: (freqDeparturetime / 60) * (2 * Math.PI),
@@ -202,14 +197,15 @@ export class KnotenAuslastungDataPreparation {
         ? [trainrunSection1, trainrunSection2]
         : [trainrunSection2, trainrunSection1];
 
-      if(direction === TrainrunDirection.ROUND_TRIP || direction === TrainrunDirection.ONE_WAY_FORWARD) {
+      const isTargetNode = tsToNode.getTargetNodeId() === node.getId();
+      if (direction === TrainrunDirection.ROUND_TRIP || isTargetNode) {
         this.addSectionsAtTransitionToMatrix(
           tsToNode,
           tsFromNode,
           node.getId(),
         );
       }
-      if(direction === TrainrunDirection.ROUND_TRIP || direction === TrainrunDirection.ONE_WAY_BACKWARD) {
+      if (direction === TrainrunDirection.ROUND_TRIP || !isTargetNode) {
         this.addSectionsAtTransitionToMatrix(
           tsFromNode,
           tsToNode,
