@@ -27,6 +27,7 @@ export class SgTrainrunNode implements SgTrainrunItem {
     public maxUnrollOnlyEvenFrequencyOffsets = 0,
     public extraTrains = false,
     public minimumHeadwayTime = 2,
+    public isRunningBackward?: boolean,
   ) {
     this.id = SgTrainrunNode.currentId;
     SgTrainrunNode.currentId++;
@@ -57,6 +58,7 @@ export class SgTrainrunNode implements SgTrainrunItem {
       item.maxUnrollOnlyEvenFrequencyOffsets,
       item.extraTrains,
       item.minimumHeadwayTime,
+      item.isRunningBackward,
     );
   }
 
@@ -102,6 +104,10 @@ export class SgTrainrunNode implements SgTrainrunItem {
 
   getMinimumHeadwayTime(): number {
     return this.minimumHeadwayTime;
+  }
+
+  getIsRunningBackward(): boolean {
+    return this.isRunningBackward;
   }
 
   checkUnrollAllowed(offset: number): boolean {

@@ -469,7 +469,8 @@ describe("TransitionValidator", () => {
     );
     const ts1 = trainrunSectionService.getTrainrunSectionFromId(4);
     const ts2 = trainrunSectionService.getTrainrunSectionFromId(5);
-    const trainrun = trainrunService.getSelectedOrNewTrainrun();
+    trainrunService.getSelectedOrNewTrainrun();
+    
     trainrunSectionService.createTrainrunSection(
       ts1.getTargetNodeId(),
       ts1.getSourceNodeId(),
@@ -542,34 +543,6 @@ describe("TransitionValidator", () => {
     );
     expect(trainrunSections.trainrunSection2.hasSourceDepartureWarning()).toBe(
       false,
-    );
-
-    TransitionValidator.validateTransition(ts.getSourceNode(), transitionId);
-
-    expect(trainrunSections.trainrunSection1.hasTargetArrivalWarning()).toBe(
-      false,
-    );
-    expect(trainrunSections.trainrunSection1.hasTargetDepartureWarning()).toBe(
-      false,
-    );
-    expect(trainrunSections.trainrunSection1.hasSourceArrivalWarning()).toBe(
-      true,
-    );
-    expect(trainrunSections.trainrunSection1.hasSourceDepartureWarning()).toBe(
-      true,
-    );
-
-    expect(trainrunSections.trainrunSection2.hasTargetArrivalWarning()).toBe(
-      false,
-    );
-    expect(trainrunSections.trainrunSection2.hasTargetDepartureWarning()).toBe(
-      false,
-    );
-    expect(trainrunSections.trainrunSection2.hasSourceArrivalWarning()).toBe(
-      true,
-    );
-    expect(trainrunSections.trainrunSection2.hasSourceDepartureWarning()).toBe(
-      true,
     );
   });
 

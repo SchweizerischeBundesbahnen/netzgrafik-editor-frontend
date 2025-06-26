@@ -2,6 +2,7 @@ import {TrainrunSection} from "../../models/trainrunsection.model";
 import {
   NodeDto,
   TrainrunCategoryHaltezeit,
+  TrainrunDirection,
   TrainrunSectionDto,
 } from "../../data-structures/business.data.structures";
 import {Node} from "../../models/node.model";
@@ -697,8 +698,31 @@ export class TrainrunSectionService implements OnDestroy {
       );
     }
 
-    const sourceNode = this.nodeService.getNodeFromId(sourceNodeId);
-    const targetNode = this.nodeService.getNodeFromId(targetNodeId);
+    let sourceNode = this.nodeService.getNodeFromId(sourceNodeId);
+    let targetNode = this.nodeService.getNodeFromId(targetNodeId);
+
+    // Enforce [source → target] [source → target] sections, disallow
+    // [source → target] [target → source] and [target → source] [source → target]
+    const isUpdate = this.trainrunSectionsStore.trainrunSections.some((s) =>
+      trainrunSection.getTrainrunId() === s.getTrainrunId()
+    );
+    if (isUpdate) {
+      const {
+        endNode1: trainrunTargetNode,
+        endNode2: trainrunSourceNode
+      } = this.trainrunService.getBothEndNodesWithTrainrunId(
+        trainrunSection.getTrainrunId()
+      );
+      if (sourceNode.getId() === trainrunSourceNode.getId() ||
+          targetNode.getId() === trainrunTargetNode.getId()) {
+        [sourceNode, targetNode] = [targetNode, sourceNode];
+      }
+    }
+
+    // If the target node is on the right/bottom side, the trainrun section is going in the "right way"
+    const isTargetRight = GeneralViewFunctions.getRightOrBottomNode(sourceNode, targetNode) === targetNode;
+    trainrunSection.setIsRunningBackward(!isTargetRight);
+
     trainrunSection.setSourceAndTargetNodeReference(sourceNode, targetNode);
     this.trainrunSectionsStore.trainrunSections.push(trainrunSection);
     this.logger.log(
@@ -1233,6 +1257,9 @@ export class TrainrunSectionService implements OnDestroy {
     );
     trainrunSection.setNumberOfStops(
       existingTrainrunSection.getNumberOfStops(),
+    );
+    trainrunSection.setIsRunningBackward(
+      existingTrainrunSection.getIsRunningBackward(),
     );
     this.trainrunSectionsStore.trainrunSections.push(trainrunSection);
     return trainrunSection;
