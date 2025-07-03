@@ -2,6 +2,7 @@ import {Injectable, OnDestroy} from "@angular/core";
 import {
   NetzgrafikDto,
   TrainrunCategory,
+  TrainrunDirection,
   TrainrunFrequency,
   TrainrunTimeCategory,
 } from "../../data-structures/business.data.structures";
@@ -20,6 +21,7 @@ import {LabelGroupService} from "./labelgroup.service";
 import {DataMigration} from "../../utils/data-migration";
 import {FilterService} from "../ui/filter.service";
 import {NetzgrafikColoringService} from "./netzgrafikColoring.service";
+import {Trainrun} from "src/app/models/trainrun.model";
 
 export class NetzgrafikLoadedInfo {
   constructor(
@@ -217,6 +219,10 @@ export class DataService implements OnDestroy {
     };
   }
 
+  getTrainruns(): Trainrun[] {
+    return this.trainrunService.getTrainruns();
+  }
+
   getTrainrunCategory(categoryId: number): TrainrunCategory {
     const found = this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunCategories.find(
       (trainrunCategory) => trainrunCategory.id === categoryId,
@@ -258,6 +264,10 @@ export class DataService implements OnDestroy {
   getTrainrunTimeCategories(): TrainrunTimeCategory[] {
     return this.netzgrafikDtoStore.netzgrafikDto.metadata
       .trainrunTimeCategories;
+  }
+
+  getTrainrunDirections(): TrainrunDirection[] {
+    return Object.values(TrainrunDirection);
   }
 
   getBPStammdaten(betriebspunktName: string): Stammdaten {
