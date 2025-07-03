@@ -17,6 +17,7 @@ import {PathItem} from "../model/pathItem";
 import {TrackData} from "../model/trackData";
 import {Sg2TrainrunPathService} from "./sg-2-trainrun-path.service";
 import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
+import {TrainrunService} from "src/app/services/data/trainrun.service";
 
 @Injectable({
   providedIn: "root",
@@ -35,6 +36,7 @@ export class Sg3TrainrunsService implements OnDestroy {
   constructor(
     private readonly sg2TrainrunPathService: Sg2TrainrunPathService,
     private readonly sg1LoadTrainrunItemService: Sg1LoadTrainrunItemService,
+    private readonly trainrunService: TrainrunService,
   ) {
     this.sg2TrainrunPathService
       .getSgSelectedTrainrun()
@@ -85,29 +87,12 @@ export class Sg3TrainrunsService implements OnDestroy {
         trainrunItem.colorRef,
         [],
         this.selectedTrainrun,
-        trainrunItem.trainrunDirection,
       );
       const trainrunItems: SgTrainrunItem[] = [];
 
-      const isTrainrunGoingForward =
-        trainrunItem.trainrunDirection === TrainrunDirection.ONE_WAY_FORWARD;
-      const isTrainrunGoingBackward =
-        trainrunItem.trainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD;
-
-      const filteredPathItems = trainrunItem.pathItems.filter((pathItem) => {
-        if (trainrunItem.trainrunDirection === TrainrunDirection.ROUND_TRIP) return true;
-
-        if (!pathItem.isRunningBackward) {
-          return isTrainrunGoingForward ? pathItem.backward === false : pathItem.backward === true;
-        }
-        if (pathItem.isRunningBackward) {
-          return isTrainrunGoingForward ? pathItem.backward === true : pathItem.backward === false;
-        }
-
-        return true;
-      });
-
-      filteredPathItems.forEach((pathItem) => {
+      trainrunItem.pathItems.forEach((pathItem) => {
+        if (trainrunItem.trainrunDirection === TrainrunDirection.ONE_WAY && pathItem.backward === trainrunItem.leftToRight) return;
+        // Node items
         if (pathItem.isNode()) {
           const pathNodes: SgPathNode[] = this.searchAllPathNodes(
             pathItem.getPathNode(),
@@ -117,23 +102,25 @@ export class Sg3TrainrunsService implements OnDestroy {
           let departureTime = pathItem.departureTime;
           let arrivalTime = pathItem.arrivalTime;
           const pathNodeHaltezeit = pathItem.getPathNode().haltezeit;
-          const isTsRunningBackward = pathItem.isRunningBackward;
-          pathNodes.forEach((pathNode: SgPathNode) => {
-            if (isTrainrunGoingForward && !isTsRunningBackward || isTrainrunGoingBackward && isTsRunningBackward) {
-              if (pathNode.departurePathSection === undefined) {
-                departureTime = arrivalTime + pathNodeHaltezeit;
-              }
-              if (pathNode.arrivalPathSection === undefined) {
-                arrivalTime = pathItem.departureTime - pathNodeHaltezeit;
-              }
-            }
 
-            if (isTrainrunGoingBackward && !isTsRunningBackward || isTrainrunGoingForward && isTsRunningBackward) {
-              if (pathNode.arrivalPathSection === undefined) {
-                departureTime = arrivalTime + pathNodeHaltezeit;
-              }
-              if (pathNode.departurePathSection === undefined) {
-                arrivalTime = pathItem.departureTime - pathNodeHaltezeit;
+          pathNodes.forEach((pathNode: SgPathNode) => {
+            if (trainrunItem.trainrunDirection === TrainrunDirection.ONE_WAY) {
+              console.log(pathNode);
+              if (!trainrunItem.leftToRight) {
+                if (pathNode.departurePathSection === undefined) {
+                  arrivalTime = pathItem.departureTime - pathNodeHaltezeit;
+                }
+                if (pathNode.arrivalPathSection === undefined) {
+                  departureTime = arrivalTime + pathNodeHaltezeit;
+                }
+              } else {
+                if (pathNode.departurePathSection === undefined) {
+                  departureTime = arrivalTime + pathNodeHaltezeit;
+                }
+                if (pathNode.arrivalPathSection === undefined) {
+                  arrivalTime = pathItem.departureTime - pathNodeHaltezeit;
+                }
+
               }
             }
 
@@ -152,8 +139,9 @@ export class Sg3TrainrunsService implements OnDestroy {
             pathNode.trainrunNodes.push(trainrunNode);
             trainrunItems.push(trainrunNode);
           });
-        } // --- end if pathItem.isNode()
+        }
 
+        // Section items
         let isAddSection = false;
         if (pathItem.isSection()) {
           const pathSection = pathItem.getPathSection();
@@ -337,7 +325,7 @@ export class Sg3TrainrunsService implements OnDestroy {
               trainrunItems.push(trainrunSection);
             });
           }
-        } // --- end if pathItem.isSection()
+        }
       });
       trainrunItems.forEach((trainrunItem) => {
         trainrun.sgTrainrunItems.push(trainrunItem);

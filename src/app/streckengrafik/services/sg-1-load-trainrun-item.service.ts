@@ -24,6 +24,7 @@ import {NodeService} from "../../services/data/node.service";
 import {TrainrunBranchType} from "../model/enum/trainrun-branch-type-type";
 import {MultiSelectNodeGraph} from "../../utils/multi-select-node-graph";
 import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
+import {TrainrunsectionHelper} from "src/app/services/util/trainrunsection.helper";
 
 
 @Injectable({
@@ -49,6 +50,8 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
   private forwardTrainrunSectionGroup: TrainrunSectionGroup[];
 
   private doInit = true;
+
+  private trainrunSectionHelper: TrainrunsectionHelper;
 
   constructor(
     private readonly nodeService: NodeService,
@@ -93,6 +96,10 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       .subscribe(() => {
         this.render();
       });
+
+    this.trainrunSectionHelper = new TrainrunsectionHelper(
+      this.trainrunService,
+    );
   }
 
   ngOnDestroy() {
@@ -182,6 +189,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       undefined,
       undefined,
       [],
+      false,
       TrainrunDirection.ROUND_TRIP,
     );
 
@@ -272,7 +280,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       0,
       undefined,
       false,
-      false // isRunningBackward
+      // false // isRunningBackward
     );
     const n2 = new PathNode(
       travelTime,
@@ -282,7 +290,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       1,
       undefined,
       false,
-      false // isRunningBackward
+      // false // isRunningBackward
     );
     const node1 = this.nodeService.getNodeFromId(n1.nodeId);
     n1.nodeShortName = node1.getBetriebspunktName();
@@ -299,8 +307,8 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       ts12.setTargetNode(node2);
       ts12.setTravelTime(travelTime);
     }
-    n1.setIsRunningBackward(ts12.getIsRunningBackward());
-    n2.setIsRunningBackward(ts12.getIsRunningBackward());
+    // n1.setIsRunningBackward(ts12.getIsRunningBackward());
+    // n2.setIsRunningBackward(ts12.getIsRunningBackward());
     const s12 = new PathSection(
       ts12.getId(),
       0,
@@ -308,7 +316,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       0,
       undefined,
       false,//(ts12.getSourceNodeId() === n2.nodeId && ts12.getTargetNodeId() === n1.nodeId),
-      ts12.getIsRunningBackward(),
+      // ts12.getIsRunningBackward(),
       undefined,
       undefined,
       TrainrunBranchType.Trainrun,
@@ -510,7 +518,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
           index++,
           new TrackData(1), //forward track 1
           false,
-          trainrunSection.getIsRunningBackward(),
+          // trainrunSection.getIsRunningBackward(),
           fromNodeHaltezeit[trainrunFachCategory].haltezeit,
           !this.filterService.filterNode(fromNode)
         );
@@ -526,7 +534,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
         trainrunSection.getNumberOfStops(),
         new TrackData(1),
         false,
-        trainrunSection.getIsRunningBackward()
+        // trainrunSection.getIsRunningBackward()
       );
       trainrunEndTime = toNode.getArrivalConsecutiveTime(trainrunSection);
       pathItems.push(pathSection);
@@ -543,7 +551,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
         index++,
         new TrackData(1), // forward
         false,
-        trainrunSection.getIsRunningBackward(),
+        // trainrunSection.getIsRunningBackward(),
         toNodeHaltezeit[trainrunFachCategory].haltezeit,
         !this.filterService.filterNode(toNode)
       );
@@ -588,7 +596,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
             index-- - 1,
             new TrackData(2), // backward
             true,
-            trainrunSection.getIsRunningBackward(),
+            // trainrunSection.getIsRunningBackward(),
             fromNodeHaltezeit[trainrunFachCategory].haltezeit,
             !this.filterService.filterNode(fromNode)
           );
@@ -603,7 +611,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
           trainrunSection.getNumberOfStops(),
           new TrackData(1),
           true,
-          trainrunSection.getIsRunningBackward()
+          // trainrunSection.getIsRunningBackward()
         );
         trainrunEndTime = toNode.getArrivalConsecutiveTime(trainrunSection);
         pathItems.push(pathSection);
@@ -620,7 +628,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
           index-- - 1,
           new TrackData(2), // backward
           true,
-          trainrunSection.getIsRunningBackward(),
+          // trainrunSection.getIsRunningBackward(),
           toNodeHaltezeit[trainrunFachCategory].haltezeit,
           !this.filterService.filterNode(toNode)
         );
@@ -684,6 +692,12 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       }
     });
 
+    if (!this.trainrunSectionHelper) {
+      this.trainrunSectionHelper = new TrainrunsectionHelper(this.trainrunService);
+    }
+
+    const leftToRight = this.trainrunSectionHelper.getIsTargetRight(trainrunSection);
+
     return {
       trainrunItem: new TrainrunItem(
         trainrun.getId(),
@@ -695,6 +709,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
         trainrun.getCategoryShortName(),
         trainrun.getCategoryColorRef(),
         pathItems,
+        leftToRight,
         trainrun.getTrainrunDirection(),
       ),
       visitedTrainrunSections: visitedTrainrunSections

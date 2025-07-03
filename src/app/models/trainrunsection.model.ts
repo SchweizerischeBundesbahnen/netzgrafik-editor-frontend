@@ -32,7 +32,6 @@ export class TrainrunSection {
   private targetDeparture: TimeLockDto;
   private travelTime: TimeLockDto;
   private numberOfStops: number;
-  private isRunningBackward: boolean;
 
   private trainrunId: number;
   private resourceId: number;
@@ -704,10 +703,6 @@ export class TrainrunSection {
     this.targetArrival.consecutiveTime = time;
   }
 
-  setIsRunningBackward(isRunningBackward: boolean) {
-    this.isRunningBackward = isRunningBackward;
-  }
-
   getSourceDepartureConsecutiveTime(): number {
     return this.sourceDeparture.consecutiveTime;
   }
@@ -722,10 +717,6 @@ export class TrainrunSection {
 
   getTargetArrivalConsecutiveTime(): number {
     return this.targetArrival.consecutiveTime;
-  }
-
-  getIsRunningBackward(): boolean {
-    return this.isRunningBackward;
   }
 
   private convertPathToVec2D() {

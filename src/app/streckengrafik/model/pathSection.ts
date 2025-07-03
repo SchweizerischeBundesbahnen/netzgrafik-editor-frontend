@@ -14,7 +14,7 @@ export class PathSection implements PathItem {
     public numberOfStops: number,
     public trackData: TrackData,
     public backward: boolean = false,
-    public isRunningBackward: boolean,
+    // public isRunningBackward: boolean,
     public departureBranchEndNode: PathNode = undefined,
     public arrivalBranchEndNode: PathNode = undefined,
     public trainrunBranchType: TrainrunBranchType = TrainrunBranchType.Trainrun,
@@ -108,7 +108,7 @@ export class PathSection implements PathItem {
       this.arrivalTime === pathSection.arrivalTime &&
       this.numberOfStops === pathSection.numberOfStops &&
       this.backward === pathSection.backward &&
-      this.isRunningBackward === pathSection.isRunningBackward &&
+      // this.isRunningBackward === pathSection.isRunningBackward &&
       this.trainrunBranchType === pathSection.trainrunBranchType &&
       this.departurePathNode === pathSection.departurePathNode &&
       this.arrivalPathNode === pathSection.arrivalPathNode &&
@@ -127,7 +127,7 @@ export class PathSection implements PathItem {
       this.numberOfStops,
       this.trackData,
       this.backward,
-      this.isRunningBackward,
+      // this.isRunningBackward,
       this.departureBranchEndNode,
       this.arrivalBranchEndNode,
       this.trainrunBranchType,

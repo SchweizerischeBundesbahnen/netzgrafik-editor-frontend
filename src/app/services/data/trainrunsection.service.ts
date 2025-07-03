@@ -1247,9 +1247,6 @@ export class TrainrunSectionService implements OnDestroy {
     trainrunSection.setNumberOfStops(
       existingTrainrunSection.getNumberOfStops(),
     );
-    trainrunSection.setIsRunningBackward(
-      existingTrainrunSection.getIsRunningBackward(),
-    );
     this.trainrunSectionsStore.trainrunSections.push(trainrunSection);
     return trainrunSection;
   }
@@ -1652,6 +1649,7 @@ export class TrainrunSectionService implements OnDestroy {
   }
 
   private invertTrainrunSectionSourceAndTarget(trainrunSection: TrainrunSection) {
+    console.log(JSON.parse(JSON.stringify(trainrunSection.getDto())));
     // Swap nodes
     trainrunSection.setSourceAndTargetNodeReference(
       trainrunSection.getTargetNode(),
@@ -1672,25 +1670,24 @@ export class TrainrunSectionService implements OnDestroy {
 
     // Source departure becomes target departure
     trainrunSection.setSourceDepartureDto(oldTargetDepartureDto);
-    trainrunSection.setSourceDepartureConsecutiveTime(oldSourceDepartureDto.consecutiveTime);
+    // trainrunSection.setSourceDepartureConsecutiveTime(oldSourceDepartureDto.consecutiveTime);
 
     // Target arrival becomes source arrival
     trainrunSection.setTargetArrivalDto(oldSourceArrivalDto);
-    trainrunSection.setTargetArrivalConsecutiveTime(oldTargetArrivalDto.consecutiveTime);
+    // trainrunSection.setTargetArrivalConsecutiveTime(oldTargetArrivalDto.consecutiveTime);
 
     // Target departure becomes source departure
     trainrunSection.setTargetDepartureDto(oldSourceDepartureDto);
-    trainrunSection.setTargetDepartureConsecutiveTime(oldTargetDepartureDto.consecutiveTime);
+    // trainrunSection.setTargetDepartureConsecutiveTime(oldTargetDepartureDto.consecutiveTime);
 
     // Source arrival becomes target arrival
     trainrunSection.setSourceArrivalDto(oldTargetArrivalDto);
-    trainrunSection.setSourceArrivalConsecutiveTime(oldSourceArrivalDto.consecutiveTime);
-
-    // Invert drawing direction
-    trainrunSection.setIsRunningBackward(!trainrunSection.getIsRunningBackward());
+    // trainrunSection.setSourceArrivalConsecutiveTime(oldSourceArrivalDto.consecutiveTime);
 
     // Update visuals and geometry
     trainrunSection.routeEdgeAndPlaceText();
     trainrunSection.convertVec2DToPath();
+    console.log(JSON.parse(JSON.stringify(trainrunSection.getDto())));
+
   }
 }

@@ -15,7 +15,7 @@ export class PathNode implements PathItem {
     public index: number,
     public trackData: TrackData,
     public backward = false,
-    public isRunningBackward: boolean,
+    // public isRunningBackward: boolean,
     public haltezeit: number = 4,
     public filter = false,
     public trackOccupier = false,
@@ -78,9 +78,9 @@ export class PathNode implements PathItem {
     return Math.max(1 / 60, this.arrivalTime - this.departureTime);
   }
 
-  setIsRunningBackward(isRunningBackward: boolean) {
-    this.isRunningBackward = isRunningBackward;
-  }
+  // setIsRunningBackward(isRunningBackward: boolean) {
+  //   this.isRunningBackward = isRunningBackward;
+  // }
 
   equal(pathNode: PathNode): boolean {
     return (
@@ -90,7 +90,7 @@ export class PathNode implements PathItem {
       this.nodeShortName === pathNode.nodeShortName &&
       this.trackData === pathNode.trackData &&
       this.backward === pathNode.backward &&
-      this.isRunningBackward === pathNode.isRunningBackward && 
+      // this.isRunningBackward === pathNode.isRunningBackward && 
       this.haltezeit === pathNode.haltezeit &&
       this.filter === pathNode.filter &&
       this.trackOccupier === pathNode.trackOccupier &&
@@ -110,7 +110,7 @@ export class PathNode implements PathItem {
       this.index,
       this.trackData,
       this.backward,
-      this.isRunningBackward,
+      // this.isRunningBackward,
       this.haltezeit,
       this.filter,
       this.trackOccupier,

@@ -12,6 +12,7 @@ export class TrainrunItem {
     public categoryShortName: string,
     public colorRef: string,
     public pathItems: PathItem[],
+    public leftToRight: boolean,
     public trainrunDirection: TrainrunDirection,
   ) {}
 
@@ -28,8 +29,7 @@ export class TrainrunItem {
       this.title === trainrunItem.title &&
       this.categoryShortName === trainrunItem.categoryShortName &&
       this.colorRef === trainrunItem.colorRef &&
-      this.equalPathItem(this.pathItems, trainrunItem.pathItems) &&
-      this.trainrunDirection === trainrunItem.trainrunDirection
+      this.equalPathItem(this.pathItems, trainrunItem.pathItems)
     );
   }
 

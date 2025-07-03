@@ -17,7 +17,6 @@ export class SgTrainrun {
     public colorRef: string,
     public sgTrainrunItems: SgTrainrunItem[],
     public selectedTrainrun: SgSelectedTrainrun,
-    public trainrunDirection: TrainrunDirection,
   ) {
     this.id = SgTrainrun.currentId;
     SgTrainrun.currentId++;
