@@ -107,6 +107,13 @@ export class DataService implements OnDestroy {
     );
 
     this.initializeDataServices();
+
+    this.trainrunService.getTrainruns().forEach((trainrun) => {
+      this.trainrunSectionService.enforceConsistentSectionDirection(
+        trainrun.getId(),
+      );
+    });
+
     this.netzgrafikLoadedInfoSubject.next(
       new NetzgrafikLoadedInfo(false, preview),
     );

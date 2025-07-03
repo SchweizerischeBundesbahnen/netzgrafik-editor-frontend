@@ -697,30 +697,11 @@ export class TrainrunSectionService implements OnDestroy {
       );
     }
 
-    let sourceNode = this.nodeService.getNodeFromId(sourceNodeId);
-    let targetNode = this.nodeService.getNodeFromId(targetNodeId);
-
-    // Enforce [source → target] [source → target] sections, disallow
-    // [source → target] [target → source] and [target → source] [source → target]
-    const isUpdate = this.trainrunSectionsStore.trainrunSections.some((s) =>
-      trainrunSection.getTrainrunId() === s.getTrainrunId()
+    const {sourceNode, targetNode} = this.enforceSourceTargetDirection(
+      trainrunSection,
+      this.nodeService.getNodeFromId(sourceNodeId),
+      this.nodeService.getNodeFromId(targetNodeId),
     );
-    if (isUpdate) {
-      const {
-        endNode1: trainrunTargetNode,
-        endNode2: trainrunSourceNode
-      } = this.trainrunService.getBothEndNodesWithTrainrunId(
-        trainrunSection.getTrainrunId()
-      );
-      if (sourceNode.getId() === trainrunSourceNode.getId() ||
-          targetNode.getId() === trainrunTargetNode.getId()) {
-        [sourceNode, targetNode] = [targetNode, sourceNode];
-      }
-    }
-
-    // If the target node is on the right/bottom side, the trainrun section is going in the "right way"
-    const isTargetRight = GeneralViewFunctions.getRightOrBottomNode(sourceNode, targetNode) === targetNode;
-    trainrunSection.setIsRunningBackward(!isTargetRight);
 
     trainrunSection.setSourceAndTargetNodeReference(sourceNode, targetNode);
     this.trainrunSectionsStore.trainrunSections.push(trainrunSection);
@@ -738,7 +719,10 @@ export class TrainrunSectionService implements OnDestroy {
 
     this.setTrainrunSectionAsSelected(trainrunSection.getId());
     this.propagateTimesForNewTrainrunSection(trainrunSection);
-    //this.trainrunSectionsUpdated();
+
+    this.enforceConsistentSectionDirection(trainrunSection.getTrainrunId());
+
+    // this.trainrunSectionsUpdated();
     this.trainrunService.trainrunsUpdated();
 
     if (initialTrainrunsLength !== this.trainrunService.trainrunsStore.trainruns.length) {
@@ -1227,6 +1211,12 @@ export class TrainrunSectionService implements OnDestroy {
     this.informSelectedTrainrunClickSubject.next(informSelectedTrainrunClick);
   }
 
+  invertTrainrunSectionsSourceAndTarget(trainrunId: number){
+    this.getAllTrainrunSectionsForTrainrun(trainrunId).map((trainrunSection) => {
+      this.invertTrainrunSectionSourceAndTarget(trainrunSection);
+    });
+  }
+
   private copyTrainrunSection(
     existingTrainrunSection: TrainrunSection,
     newTrainrunId: number,
@@ -1546,8 +1536,122 @@ export class TrainrunSectionService implements OnDestroy {
     return returnValue;
   }
 
-  invertTrainrunSectionsSourceAndTarget(trainrunId: number){
-    this.getAllTrainrunSectionsForTrainrun(trainrunId).map((trainrunSection) => {
+  /**
+   * Enforce [source → target] [source → target] sections, disallow
+   * [source → target] [target → source] and [target → source] [source → target]
+   * Returns an object with the (possibly swapped) sourceNode and targetNode.
+   */
+  private enforceSourceTargetDirection(
+    trainrunSection: TrainrunSection,
+    sourceNode: Node,
+    targetNode: Node
+  ): { sourceNode: Node; targetNode: Node } {
+    const isUpdate = this.trainrunSectionsStore.trainrunSections.some(
+      (s) => trainrunSection.getTrainrunId() === s.getTrainrunId()
+    );
+    if (isUpdate) {
+      const {
+        endNode1: trainrunTargetNode,
+        endNode2: trainrunSourceNode,
+      } = this.trainrunService.getBothEndNodesWithTrainrunId(
+        trainrunSection.getTrainrunId()
+      );
+      if (
+        sourceNode.getId() === trainrunSourceNode.getId() ||
+        targetNode.getId() === trainrunTargetNode.getId()
+      ) {
+        return {sourceNode: targetNode, targetNode: sourceNode};
+      }
+    }
+    return {sourceNode, targetNode};
+  }
+
+  private findConnectedPortId(node: Node, portId: number): number | null {
+    const transition = node.getTransitions().find(
+      (tr) => tr.getPortId1() === portId || tr.getPortId2() === portId
+    );
+    if (!transition) {
+      return null;
+    }
+    return transition.getPortId1() === portId ? transition.getPortId2() : transition.getPortId1();
+  }
+
+  /**
+   * Ensure all sections for a trainrun sections chain is [source → target] [source → target]
+   * consistent and invert sections if needed.
+   */
+  enforceConsistentSectionDirection(trainrunId: number) {
+    const sections = this.getAllTrainrunSectionsForTrainrun(trainrunId);
+    if (sections.length < 2) return;
+
+    // Build a map of sections keyed by the outgoing port ID they are connected to.
+    // Find the leaf (departure/arrival) sections: these are the ones without
+    // a transition for their source or target port.
+    const sectionsByConnectedPortId = new Map<number, TrainrunSection>();
+    const leafSectionsAndNodes: [TrainrunSection, number][] = [];
+
+    for (const section of sections) {
+      const sourceNode = section.getSourceNode();
+      const targetNode = section.getTargetNode();
+
+      const sourceConnectedPortId = this.findConnectedPortId(sourceNode, section.getSourcePortId());
+      const targetConnectedPortId = this.findConnectedPortId(targetNode, section.getTargetPortId());
+
+      if (sourceConnectedPortId !== null && sourceConnectedPortId !== undefined) {
+        sectionsByConnectedPortId.set(sourceConnectedPortId, section);
+      } else {
+        leafSectionsAndNodes.push([section, section.getSourceNodeId()]);
+      }
+      if (targetConnectedPortId !== null && targetConnectedPortId !== undefined) {
+        sectionsByConnectedPortId.set(targetConnectedPortId, section);
+      } else {
+        leafSectionsAndNodes.push([section, section.getTargetNodeId()]);
+      }
+    }
+
+    // Use first leaf as starting point and its direction as reference for the whole trainrun.
+    if (leafSectionsAndNodes.length === 0) return;
+    const [firstSection, firstNodeId] = leafSectionsAndNodes[0];
+    let referenceDirection: "ltr" | "rtl";
+    if (firstSection.getSourceNodeId() === firstNodeId) {
+      // Reference direction is left-to-right
+      referenceDirection = "ltr";
+    } else {
+      // Reference direction is right-to-left
+      referenceDirection = "rtl";
+    }
+
+    // Start with a leaf node and walk over the path. Ignore any leaf node we've
+    // already seen (because we've reached it at the end of a previous walk).
+    const seenSectionIds = new Set<number>();
+    let section: TrainrunSection | undefined = firstSection;
+    let nodeId = firstNodeId;
+    while (section) {
+      if (seenSectionIds.has(section.getId())) {
+        // /!\ TODO: makes files unusable if a cycle is detected.
+        throw new Error("Cycle detected in trainrun");
+      }
+      seenSectionIds.add(section.getId());
+
+      if (
+        (referenceDirection === "rtl" && section.getSourceNodeId() === nodeId) ||
+        (referenceDirection === "ltr" && section.getTargetNodeId() === nodeId)
+      ) {
+        // Section is in the wrong direction, invert it
+        this.invertTrainrunSectionSourceAndTarget(section);
+      }
+      nodeId = referenceDirection === "ltr"
+        ? section.getTargetNodeId()
+        : section.getSourceNodeId();
+      section = sectionsByConnectedPortId.get(
+        referenceDirection === "ltr"
+          ? section.getTargetPortId()
+          : section.getSourcePortId()
+      );
+    }
+  }
+
+  private invertTrainrunSectionSourceAndTarget(trainrunSection: TrainrunSection) {
     // Swap nodes
     trainrunSection.setSourceAndTargetNodeReference(
       trainrunSection.getTargetNode(),
@@ -1588,6 +1692,5 @@ export class TrainrunSectionService implements OnDestroy {
     // Update visuals and geometry
     trainrunSection.routeEdgeAndPlaceText();
     trainrunSection.convertVec2DToPath();
-    });
   }
 }
