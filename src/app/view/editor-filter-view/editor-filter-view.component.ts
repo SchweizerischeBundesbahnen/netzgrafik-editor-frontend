@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from "@angular/core";
 import {FilterService} from "../../services/ui/filter.service";
 import {
   TrainrunCategory,
+  TrainrunDirection,
   TrainrunFrequency,
   TrainrunTimeCategory,
 } from "../../data-structures/business.data.structures";
@@ -314,6 +315,29 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     );
   }
 
+  getTrainrunDirectionClassname(trainrunDirection: TrainrunDirection): string {
+    if (
+      this.filterService.isFilterTrainrunDirectionEnabled(
+        trainrunDirection,
+      )
+    ) {
+      return (
+        "TrainrunDialog TrainrunDirection " +
+        StaticDomTags.TAG_SELECTED
+      );
+    }
+    return (
+      "TrainrunDialog TrainrunDirection "
+    );
+  }
+
+  isAsymmetryActive(): boolean {
+    for (const trainrun of this.dataService.getTrainruns()) {
+      if (trainrun.getTrainrunDirection() !== TrainrunDirection.ROUND_TRIP) return true;
+    }
+    return false;
+  }
+
   getCategoryTooltip(trainrunCategory: TrainrunCategory): string {
     if (!this.filterService.isFilterTrainrunCategoryEnabled(trainrunCategory)) {
       return $localize`:@@app.view.editor-filter-view.show-trainrun-category:Show ${trainrunCategory.name}:trainrunCategory:`;
@@ -328,6 +352,27 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     }
     */
     return $localize`:@@app.view.editor-filter-view.hide-trainrun-time-category:Hide ${trainrunTimeCategory.name}:trainrunTimeCategory:`;
+  }
+
+  private getTrainrunDirectionTranslation(trainrunDirection: TrainrunDirection): string {
+    switch (trainrunDirection) {
+      case TrainrunDirection.ROUND_TRIP:
+        return $localize`:@@app.view.editor-filter-view.round-trips:Round trips`;
+      case TrainrunDirection.ONE_WAY:
+        return $localize`:@@app.view.editor-filter-view.one-ways:One-ways`;
+      default:
+        return trainrunDirection;
+    }
+  }
+
+  getTrainrunDirectionTooltip(trainrunDirection: TrainrunDirection): string {
+    const trainrunDirectionTranslation = this.getTrainrunDirectionTranslation(trainrunDirection);
+    if (
+      !this.filterService.isFilterTrainrunDirectionEnabled(trainrunDirection)
+    ) {
+      return $localize`:@@app.view.editor-filter-view.show-trainrun-direction:Show ${trainrunDirectionTranslation}:trainrunDirection:`;
+    }
+    return $localize`:@@app.view.editor-filter-view.hide-trainrun-direction:Hide ${trainrunDirectionTranslation}:trainrunDirection:`;
   }
 
   makeCategoryButtonLabel(trainrunCategory: TrainrunCategory): string {
@@ -346,6 +391,16 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
       return label.substring(0, 3) + "...";
     }
     return label;
+  }
+
+  makeTrainrunDirectionButtonLabel(
+    trainrunDirection: TrainrunDirection,
+  ): string {
+    if (trainrunDirection === TrainrunDirection.ROUND_TRIP) {
+      return "↔";
+    } else {
+      return "→";
+    }
   }
 
   onCategoryChanged(trainrunCategory: TrainrunCategory) {
@@ -367,6 +422,16 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
       this.filterService.disableFilterTrainrunTimeCategory(
         trainrunTimeCategory,
       );
+    }
+  }
+
+  onTrainrunDirectionChanged(trainrunDirection: TrainrunDirection) {
+    if (
+      !this.filterService.isFilterTrainrunDirectionEnabled(trainrunDirection)
+    ) {
+      this.filterService.enableFilterTrainrunDirection(trainrunDirection);
+    } else {
+      this.filterService.disableFilterTrainrunDirection(trainrunDirection);
     }
   }
 
@@ -423,6 +488,7 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     this.filterService.resetFilterTrainrunCategory();
     this.filterService.resetFilterTrainrunFrequency();
     this.filterService.resetFilterTrainrunTimeCategory();
+    this.filterService.resetFilterTrainrunDirection();
   }
 
   onResetNodeFilter() {

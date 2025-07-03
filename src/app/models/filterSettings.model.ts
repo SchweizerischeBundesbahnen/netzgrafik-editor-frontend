@@ -1,6 +1,7 @@
 import {
   FilterSettingDto,
   TrainrunCategory,
+  TrainrunDirection,
   TrainrunFrequency,
   TrainrunTimeCategory,
 } from "../data-structures/business.data.structures";
@@ -27,6 +28,7 @@ export class FilterSetting {
   public filterTrainrunCategory: TrainrunCategory[];
   public filterTrainrunFrequency: TrainrunFrequency[];
   public filterTrainrunTimeCategory: TrainrunTimeCategory[];
+  public filterTrainrunDirection: TrainrunDirection[];
   public filterAllEmptyNodes;
   public filterAllNonStopNodes;
   public filterNotes;
@@ -51,6 +53,7 @@ export class FilterSetting {
       filterTrainrunCategory,
       filterTrainrunFrequency,
       filterTrainrunTimeCategory,
+      filterTrainrunDirection,
       filterAllEmptyNodes,
       filterAllNonStopNodes,
       filterNotes,
@@ -73,6 +76,7 @@ export class FilterSetting {
       filterTrainrunCategory: null,
       filterTrainrunFrequency: null,
       filterTrainrunTimeCategory: null,
+      filterTrainrunDirection: null,
       filterAllEmptyNodes: false,
       filterAllNonStopNodes: false,
       filterNotes: false,
@@ -96,6 +100,7 @@ export class FilterSetting {
     this.filterTrainrunCategory = filterTrainrunCategory;
     this.filterTrainrunFrequency = filterTrainrunFrequency;
     this.filterTrainrunTimeCategory = filterTrainrunTimeCategory;
+    this.filterTrainrunDirection = filterTrainrunDirection;
     this.filterAllEmptyNodes = filterAllEmptyNodes;
     this.filterAllNonStopNodes = filterAllNonStopNodes;
     this.filterNotes = filterNotes;
@@ -176,6 +181,7 @@ export class FilterSetting {
       this.filterTrainrunCategory.length === trainrunCategoriesLength &&
       this.filterTrainrunFrequency.length === frainrunFrequenciesLength &&
       this.filterTrainrunTimeCategory.length === trainrunTimeCategoryLength &&
+      this.filterTrainrunDirection.length === Object.values(TrainrunDirection).length &&
       this.filterAllEmptyNodes === false &&
       this.filterAllNonStopNodes === false &&
       this.filterNotes === false &&
@@ -202,6 +208,7 @@ export class FilterSetting {
       filterTrainrunCategory: this.filterTrainrunCategory,
       filterTrainrunFrequency: this.filterTrainrunFrequency,
       filterTrainrunTimeCategory: this.filterTrainrunTimeCategory,
+      filterTrainrunDirection: this.filterTrainrunDirection,
       filterAllEmptyNodes: this.filterAllEmptyNodes,
       filterAllNonStopNodes: this.filterAllNonStopNodes,
       filterNotes: this.filterNotes,
