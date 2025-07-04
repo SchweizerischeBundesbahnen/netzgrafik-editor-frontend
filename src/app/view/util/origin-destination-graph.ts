@@ -260,11 +260,10 @@ const buildSectionEdges = (
       timeLimit,
       tsSuccessor,
     );
-    // Add forward edges to round trip and one-way forward trainruns.
-    if (trainrun.getTrainrunDirection() !== TrainrunDirection.ONE_WAY_BACKWARD) edges.push(...forwardEdges);
-    // We only need the forward edges for forward trainruns.
-    if (trainrun.getTrainrunDirection() === TrainrunDirection.ONE_WAY_FORWARD) return;
-    // Don't forget the reverse direction for round trip and one-way backward trainruns.
+    // Add forward edges to round trip and one-way trainruns.
+    edges.push(...forwardEdges);
+    if (trainrun.getTrainrunDirection() === TrainrunDirection.ONE_WAY) return;
+    // Don't forget the reverse direction for round trip trainruns.
     const ts = tsIterator.current().trainrunSection;
     const nextIterator = trainrunService.getIterator(
       tsIterator.current().node,

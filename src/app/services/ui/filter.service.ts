@@ -3,6 +3,7 @@ import {
   FilterDataDto,
   LabelRef,
   TrainrunCategory,
+  TrainrunDirection,
   TrainrunFrequency,
   TrainrunTimeCategory,
 } from "../../data-structures/business.data.structures";
@@ -399,7 +400,8 @@ export class FilterService implements OnDestroy {
       filterTrainrunSection &&
       this.isFilterTrainrunFrequencyEnabled(trainrun.getTrainrunFrequency()) &&
       this.isFilterTrainrunCategoryEnabled(trainrun.getTrainrunCategory()) &&
-      this.isFilterTrainrunTimeCategoryEnabled(trainrun.getTrainrunTimeCategory())
+      this.isFilterTrainrunTimeCategoryEnabled(trainrun.getTrainrunTimeCategory()) &&
+      this.isFilterTrainrunDirectionEnabled(trainrun.getTrainrunDirection())
     );
   }
 
@@ -740,6 +742,38 @@ export class FilterService implements OnDestroy {
     this.filterChanged();
   }
 
+  isFilterTrainrunDirectionEnabled(
+    trainrunDirection: TrainrunDirection,
+  ): boolean {
+    return this.activeFilterSetting.filterTrainrunDirection.includes(
+      trainrunDirection,
+    );
+  }
+
+  enableFilterTrainrunDirection(trainrunDirection: TrainrunDirection) {
+    if (
+      !this.activeFilterSetting.filterTrainrunDirection.includes(
+        trainrunDirection,
+      )
+    ) {
+      this.activeFilterSetting.filterTrainrunDirection.push(trainrunDirection);
+      this.filterChanged();
+    }
+  }
+
+  disableFilterTrainrunDirection(trainrunDirection: TrainrunDirection) {
+    this.activeFilterSetting.filterTrainrunDirection =
+      this.activeFilterSetting.filterTrainrunDirection.filter(
+        (direction) => direction !== trainrunDirection,
+      );
+    this.filterChanged();
+  }
+
+  resetFilterTrainrunDirection() {
+    this.activeFilterSetting.filterTrainrunDirection = Object.values(TrainrunDirection);
+    this.filterChanged();
+  }
+
   isAnyFilterActive(): boolean {
     return (
       !this.isDisplayFilteringActive() ||
@@ -777,6 +811,15 @@ export class FilterService implements OnDestroy {
       .getTrainrunTimeCategories()
       .forEach((catTime: TrainrunTimeCategory) => {
         const isFilter = this.isFilterTrainrunTimeCategoryEnabled(catTime);
+        if (!isFilter) {
+          isActive = false;
+          return;
+        }
+      });
+    this.dataService
+      .getTrainrunDirections()
+      .forEach((direction: TrainrunDirection) => {
+        const isFilter = this.isFilterTrainrunDirectionEnabled(direction);
         if (!isFilter) {
           isActive = false;
           return;
@@ -904,6 +947,10 @@ export class FilterService implements OnDestroy {
       if (filterSetting.filterTrainrunTimeCategory === null) {
         filterSetting.filterTrainrunTimeCategory =
           this.dataService.getTrainrunTimeCategories();
+      }
+      if (filterSetting.filterTrainrunDirection === null) {
+        filterSetting.filterTrainrunDirection =
+          this.dataService.getTrainrunDirections();
       }
     }
   }

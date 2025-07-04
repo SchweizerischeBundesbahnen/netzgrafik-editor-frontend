@@ -288,7 +288,8 @@
             "deleteConfirmationQuestion": "Soll der gesamte Zuglauf definitiv gelöscht werden?"
           },
           "trainrun-roundtrip-tab": {
-            "one-way": "Rundreise"
+            "one-way": "Einzelfahrt",
+            "round-trip": "Rundreise"
           },
           "trainrun-section-tab": {
             "warningTwoLocks": "Warnung: Zu viele Zeiten sind gelockt!",
@@ -350,7 +351,9 @@
         "filterable-labels-nodes": "Filterbare Labels: Knoten",
         "filterable-labels-notes": "Filterbare Labels: Kommentare",
         "display": "Anzeigen",
+        "Round-trips": "Rundreisen",
         "round-trips": "Rundreisen",
+        "one-ways": "Einzelfahrten",
         "display-trainrun-direction-arrows": "Zugfahrt-Richtungs-Pfeile anzeigen",
         "times": "Zeiten",
         "decimal-displayed": "Anzahl Nachkommastellenanzeigen",
@@ -377,6 +380,9 @@
         "hide-trainrun-time-category": "{$trainrunTimeCategory} ausblenden",
         "show-trainrun-frequency": "{$trainrunFrequency} einblenden",
         "hide-trainrun-frequency": "{$trainrunFrequency} ausblenden",
+        "symmetry": "Symmetrie",
+        "show-trainrun-direction": "{$trainrunDirection} einblenden",
+        "hide-trainrun-direction": "{$trainrunDirection} ausblenden",
         "filterable-label-filter": {
           "no-labels-available": "Keine Labels vorhanden",
           "or": "Oder",

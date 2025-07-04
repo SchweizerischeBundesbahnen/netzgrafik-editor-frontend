@@ -299,6 +299,7 @@ export interface FilterSettingDto {
   filterTrainrunCategory: TrainrunCategory[]; // list of category to filter out
   filterTrainrunFrequency: TrainrunFrequency[]; // list of frequency to filter out
   filterTrainrunTimeCategory: TrainrunTimeCategory[]; // list of time categroy to filter out
+  filterTrainrunDirection: TrainrunDirection[]; // list of trainrun direction to filter out
   filterAllEmptyNodes: boolean; // flag to filter all empty nodes (hide/show)
   filterAllNonStopNodes: boolean; // flag to filter all only non-stop nodes (hide/show)
   filterNotes: boolean; // flag to filter notes (hide/show)
@@ -334,6 +335,5 @@ export interface NetzgrafikDto {
  */
 export enum TrainrunDirection {
   ROUND_TRIP = "round_trip",
-  ONE_WAY_FORWARD = "oneway_forward",
-  ONE_WAY_BACKWARD = "oneway_backward",
+  ONE_WAY = "one_way",
 }

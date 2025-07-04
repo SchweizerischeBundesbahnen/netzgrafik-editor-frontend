@@ -33,8 +33,8 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
   trainrunDialogParameter: TrainrunDialogParameter;
 
   public selectedTrainrunSection: TrainrunSection;
-  public leftBetriebspunkt: string[] = ["", ""];
-  public rightBetriebspunkt: string[] = ["", ""];
+  public startNode: string[] = ["", ""];
+  public endNode: string[] = ["", ""];
   public frequencyLinePattern: LinePatternRefs;
   public categoryColorRef: ColorRefType;
   public timeCategoryLinePattern: LinePatternRefs;
@@ -90,14 +90,14 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
     this.trainrunSectionTimesService.setHighlightTravelTimeElement(false);
     this.trainrunSectionTimesService.applyOffsetAndTransformTimeStructure();
 
-    this.leftBetriebspunkt = this.trainrunSectionHelper.getLeftBetriebspunkt(
-      this.selectedTrainrunSection,
-      this.nodesOrdered,
+    const startNode = this.trainrunService.getStartNodeWithTrainrunId(
+      this.selectedTrainrunSection.getTrainrunId(),
     );
-    this.rightBetriebspunkt = this.trainrunSectionHelper.getRightBetriebspunkt(
-      this.selectedTrainrunSection,
-      this.nodesOrdered,
+    this.startNode = [startNode.getFullName(), startNode.getBetriebspunktName()];
+    const endNode = this.trainrunService.getEndNodeWithTrainrunId(
+      this.selectedTrainrunSection.getTrainrunId(),
     );
+    this.endNode = [endNode.getFullName(), endNode.getBetriebspunktName()];
 
     const selectedTrainrunDirection = selectedTrainrun.getTrainrunDirection();
     if (selectedTrainrunDirection !== TrainrunDirection.ROUND_TRIP) {
@@ -105,17 +105,7 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
         this.selectedTrainrunSection,
       );
 
-      if (isTargetRight) {
-        this.chosenCard =
-          selectedTrainrunDirection === TrainrunDirection.ONE_WAY_FORWARD
-            ? "top"
-            : "bottom";
-      } else {
-        this.chosenCard =
-          selectedTrainrunDirection === TrainrunDirection.ONE_WAY_BACKWARD
-            ? "top"
-            : "bottom";
-      }
+      this.chosenCard = isTargetRight ? "top" : "bottom";
     }
   }
 
@@ -188,26 +178,21 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
     );
   }
 
-  onTrainrunSectionCardSelection(targetSide: "right" | "left") {
-    const isTowardTarget = this.isTowardTarget(targetSide);
+  onTrainrunSectionCardClick(position: "top" | "bottom") {
+    // Get the left and right nodes to determine the cards order
+    const leftNode = this.trainrunSectionHelper.getNextStopLeftNode(this.selectedTrainrunSection, this.nodesOrdered);
+    const rightNode = this.trainrunSectionHelper.getNextStopRightNode(this.selectedTrainrunSection, this.nodesOrdered);
 
-    const newTrainrunDirection = isTowardTarget
-      ? TrainrunDirection.ONE_WAY_FORWARD
-      : TrainrunDirection.ONE_WAY_BACKWARD;
-
-    this.chosenCard = targetSide === "right" ? "top" : "bottom";
-
+    const wantedSourceNode = position === "top" ? leftNode : rightNode;
+    if (wantedSourceNode !== this.selectedTrainrunSection.getSourceNode()) {
+      this.trainrunSectionService.invertTrainrunSectionsSourceAndTarget(
+        this.selectedTrainrunSection.getTrainrunId(),
+      );
+    }
+    this.chosenCard = position;
     this.trainrunService.updateTrainrunDirection(
       this.selectedTrainrunSection.getTrainrun(),
-      newTrainrunDirection,
+      TrainrunDirection.ONE_WAY,
     );
-  }
-
-  private isTowardTarget(targetSide: "right" | "left"): boolean {
-    if (targetSide === "right") {
-      return this.trainrunSectionHelper.getIsTargetRight(this.selectedTrainrunSection);
-    } else {
-      return this.trainrunSectionHelper.getIsTargetLeft(this.selectedTrainrunSection);
-    }
   }
 }
