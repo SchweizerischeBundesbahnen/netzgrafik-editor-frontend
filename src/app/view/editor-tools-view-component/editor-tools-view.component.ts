@@ -450,11 +450,14 @@ export class EditorToolsViewComponent {
 
     Pro Zugfahrt gibt es eine ID, Name, TrainName, Part, Frequenz oder Takt, Direction und ein Pfad (Vektor Path) bestehend aus Knoten,
     die durch die Zugfahrt durchfahren werden. Aus den Path-Vektoren kann eine Topologie abgeleitet werden. Die abgeleitete
-    Topologie ist ein gerichteter Graph. Des Weiteren gibt es noch einen Vektor PathTime, welcher den Pfad nochmals abbildet,
-    jedoch mit der Ankunftszeit und Abfahrtszeit erweitert ist. Somit besteht PathTime aus Elementen mit folgenden drei Einträgen (Ort: Knoten, Ankunftszeit: Zeit in Minuten, Abfahrtszeit: Zeit in Minuten, Hält am Knoten oder nicht). Diese
-    Darstellung gilt für alle Zügen, egal der Richtung - also (Ort, An, Ab). Bitte beachte, dass Ankunftszeit relevant ist, wann der Kunde ankommt. Abfahrtszeit ist wichtig, wann der Zug frühstens abfährt. Wichtig wird dies bei der Fahrplan abfragen
-    wann der Kunde am Ort sein muss und wann der Kunde am Ziel ankommt, aber auch ob ein Umsteigen funktioniert oder auf den nächsten Takt (Zug) gewartet werden muss. Falls der Zug nicht hält am Knoten, können keine Passagiere auststeien noch zusteigen, also
-    auch nicht umsteigen.
+    Topologie ist ein gerichteter Graph.
+
+    Des Weiteren gibt es noch einen Vektor PathTime, welcher den Pfad nochmals abbildet,
+    jedoch mit der Ankunftszeit und Abfahrtszeit erweitert ist, sowie beschreibt ob am Knoten der Zug hält. Hält ein Zug kann ein Reisender diesen nutzen für umsteigen, resp. ein- und aussteigen.
+    Somit besteht PathTime aus Elementen mit folgenden drei Einträgen (Ort: Knoten, Ankunftszeit: Zeit in Minuten, Abfahrtszeit: Zeit in Minuten, False oder True : Stop am Knoten).
+    Diese Darstellung (Daten) gelten für alle Zügen, egal der Richtung - also (Ort, An, Ab). Bitte beachte, dass Ankunftszeit relevant ist, wann der Kunde ankommt.
+    Abfahrtszeit ist wichtig, wann der Zug frühstens abfährt.  Dies wird wichtig bei der Fahrplan abfragen
+    wann der Kunde am Ort sein muss und wann der Kunde am Ziel ankommt. Auch ist wichtig ob ein Zug stopped oder durchfährt. Stopped ein Zug nicht, muss versucht werden den Ort wie umstiegen erreicht zu werden.
 
     Hier sind noch mehr Informationen zu den Daten:
 
@@ -525,6 +528,8 @@ export class EditorToolsViewComponent {
     98	IC1B	IC1	0	60	B	Path=[F2,E2,D,C,B,A1]	PathTime=[(F2, null ,47,true),(E2,48,50,true),(D,51,53,true),(C,56,56,false),(B,57,59,true),(A1,60, null,true)]
     99	IC2F	IC2	0	60	F	Path=[A2,B,C,D,E1,F1]	PathTime=[(A2, null ,2,true),(B,3,5,true),(C,6,8,true),(D,11,13,true),(E1,14,14,false),(F1,15, null,true)]
     99	IC2B	IC2	0	60	B	Path=[F1,E1,D,C,B,A2]	PathTime=[(F1, null ,45,true),(E1,46,46,false),(D,47,49,true),(C,52,54,true),(B,55,57,true),(A2,58, null,true)]
+    104	IC3F	IC3	0	60	F	Path=[E1,F1]	PathTime=[(E1, null ,0,true),(F1,1, null,true)]
+    104	IC3B	IC3	0	60	B	Path=[F1,E1]	PathTime=[(F1, null ,59,true),(E1,60, null,true)]
 
 
     Daten für Variante 2 mit Zugfahrten pro Zeile
@@ -538,9 +543,9 @@ export class EditorToolsViewComponent {
     102	IC4B	IC4	0	60	B	Path=[F2,E2,D]	PathTime=[(F2, null ,49,true),(E2,50,52,true),(D,53, null,true)]
     103	IC3F	IC3	0	60	F	Path=[C,D]	PathTime=[(C, null ,5,true),(D,6, null,true)]
     103	IC3B	IC3	0	60	B	Path=[D,C]	PathTime=[(D, null ,54,true),(C,55, null,true)]
-    104	IC3F	IC3	0	60	F	Path=[E1,F1]	PathTime=[(E1, null ,0,true),(F1,1, null,true)]
-    104	IC3B	IC3	0	60	B	Path=[F1,E1]	PathTime=[(F1, null ,59,true),(E1,60, null,true)]
 
+
+    Bitte gib die Anzahl der geladenen Züge aus, sowie wo ein Zug nicht hält und wo umsteigen möglich ist.
 
     */
 
