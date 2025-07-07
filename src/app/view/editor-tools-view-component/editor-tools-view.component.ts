@@ -451,9 +451,10 @@ export class EditorToolsViewComponent {
     Pro Zugfahrt gibt es eine ID, Name, TrainName, Part, Frequenz oder Takt, Direction und ein Pfad (Vektor Path) bestehend aus Knoten,
     die durch die Zugfahrt durchfahren werden. Aus den Path-Vektoren kann eine Topologie abgeleitet werden. Die abgeleitete
     Topologie ist ein gerichteter Graph. Des Weiteren gibt es noch einen Vektor PathTime, welcher den Pfad nochmals abbildet,
-    jedoch mit der Ankunftszeit und Abfahrtszeit erweitert ist. Somit besteht PathTime aus Elementen mit folgenden drei Einträgen (Ort: Knoten, Ankunftszeit: Zeit in Minuten, Abfahrtszeit: Zeit in Minuten). Diese
+    jedoch mit der Ankunftszeit und Abfahrtszeit erweitert ist. Somit besteht PathTime aus Elementen mit folgenden drei Einträgen (Ort: Knoten, Ankunftszeit: Zeit in Minuten, Abfahrtszeit: Zeit in Minuten, Hält am Knoten oder nicht). Diese
     Darstellung gilt für alle Zügen, egal der Richtung - also (Ort, An, Ab). Bitte beachte, dass Ankunftszeit relevant ist, wann der Kunde ankommt. Abfahrtszeit ist wichtig, wann der Zug frühstens abfährt. Wichtig wird dies bei der Fahrplan abfragen
-    wann der Kunde am Ort sein muss und wann der Kunde am Ziel ankommt, aber auch ob ein Umsteigen funktioniert oder auf den nächsten Takt (Zug) gewartet werden muss.
+    wann der Kunde am Ort sein muss und wann der Kunde am Ziel ankommt, aber auch ob ein Umsteigen funktioniert oder auf den nächsten Takt (Zug) gewartet werden muss. Falls der Zug nicht hält am Knoten, können keine Passagiere auststeien noch zusteigen, also
+    auch nicht umsteigen.
 
     Hier sind noch mehr Informationen zu den Daten:
 
@@ -554,14 +555,14 @@ export class EditorToolsViewComponent {
 
     const rows: string[][] = [];
 
-    const direction = ["F","B"];
+    const direction = ["F", "B"];
 
     this.trainrunService
       .getTrainruns()
       .filter((trainrun) => this.filterService.filterTrainrun(trainrun))
       .forEach((trainrun) => {
 
-        direction.forEach( dir => {
+        direction.forEach(dir => {
 
           let alltrainrunsections = this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(trainrun.getId());
           let partCnt = 0;
@@ -585,7 +586,7 @@ export class EditorToolsViewComponent {
 
             // forward / backward
             const startNode = dir === "F" ? startNodeTmp :
-              startNodeTmp.getId() ===bothEndNodes.endNode1.getId() ?
+              startNodeTmp.getId() === bothEndNodes.endNode1.getId() ?
                 bothEndNodes.endNode2 : bothEndNodes.endNode1;
 
 
@@ -598,7 +599,7 @@ export class EditorToolsViewComponent {
             const startTime = startTrainrunSection.getSourceNodeId() === iterator.current().node.getId() ?
               startTrainrunSection.getTargetDepartureConsecutiveTime() :
               startTrainrunSection.getSourceDepartureConsecutiveTime();
-            let pathTime: string = "PathTime=[(" + startNode.getBetriebspunktName() + ", null " + "," + startTime + ")";
+            let pathTime: string = "PathTime=[(" + startNode.getBetriebspunktName() + ", null " + "," + startTime + ", false )";
             while (iterator.hasNext()) {
               iterator.next();
               knoten += sep + iterator.current().node.getBetriebspunktName();
@@ -606,14 +607,21 @@ export class EditorToolsViewComponent {
               const timeA = ts.getSourceNodeId() === iterator.current().node.getId() ?
                 ts.getSourceArrivalConsecutiveTime() :
                 ts.getTargetArrivalConsecutiveTime();
+
+              const node = iterator.current().node;
+              const bpName = node.getBetriebspunktName();
+              const trans = node.getTransition(iterator.current().trainrunSection.getId());
+
+              const nonStop = trans === undefined? false : !trans.getIsNonStopTransit();
+
               if (iterator.hasNext()) {
                 const tsNext = iterator.current().node.getNextTrainrunSection(iterator.current().trainrunSection);
                 const timeD = tsNext.getSourceNodeId() === iterator.current().node.getId() ?
                   tsNext.getSourceDepartureConsecutiveTime() :
                   tsNext.getTargetDepartureConsecutiveTime();
-                pathTime += sep + "(" + iterator.current().node.getBetriebspunktName() + "," + timeA + "," + timeD + ")";
+                pathTime += sep + "(" + bpName + "," + timeA + "," + timeD + "," + nonStop + ")";
               } else {
-                pathTime += sep + "(" + iterator.current().node.getBetriebspunktName() + "," + timeA + ", null" + ")";
+                pathTime += sep + "(" + bpName + "," + timeA + ", null" + "," + nonStop + ")";
               }
 
               visitedTrainrunSections.push(iterator.current().trainrunSection);
