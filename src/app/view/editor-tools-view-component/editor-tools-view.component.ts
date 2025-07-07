@@ -521,25 +521,25 @@ export class EditorToolsViewComponent {
     Daten für Variante 1 mit Zugfahrten pro Zeile
 
     ID	Name	TrainName	Part	Frequency	Direction	Path	PathTime
-    98	IC1F	IC1	0	60	F	Path=[A1,B,C,D,E2,F2]	PathTime=[(A1, null ,0, false ),(B,1,3,true),(C,4,4,false),(D,7,9,true),(E2,10,12,true),(F2,13, null,false)]
-    98	IC1B	IC1	0	60	B	Path=[F2,E2,D,C,B,A1]	PathTime=[(F2, null ,47, false ),(E2,48,50,true),(D,51,53,true),(C,56,56,false),(B,57,59,true),(A1,60, null,false)]
-    99	IC2F	IC2	0	60	F	Path=[A2,B,C,D,E1,F1]	PathTime=[(A2, null ,2, false ),(B,3,5,true),(C,6,8,true),(D,11,13,true),(E1,14,14,false),(F1,15, null,false)]
-    99	IC2B	IC2	0	60	B	Path=[F1,E1,D,C,B,A2]	PathTime=[(F1, null ,45, false ),(E1,46,46,false),(D,47,49,true),(C,52,54,true),(B,55,57,true),(A2,58, null,false)]
+    98	IC1F	IC1	0	60	F	Path=[A1,B,C,D,E2,F2]	PathTime=[(A1, null ,0,true),(B,1,3,true),(C,4,4,false),(D,7,9,true),(E2,10,12,true),(F2,13, null,true)]
+    98	IC1B	IC1	0	60	B	Path=[F2,E2,D,C,B,A1]	PathTime=[(F2, null ,47,true),(E2,48,50,true),(D,51,53,true),(C,56,56,false),(B,57,59,true),(A1,60, null,true)]
+    99	IC2F	IC2	0	60	F	Path=[A2,B,C,D,E1,F1]	PathTime=[(A2, null ,2,true),(B,3,5,true),(C,6,8,true),(D,11,13,true),(E1,14,14,false),(F1,15, null,true)]
+    99	IC2B	IC2	0	60	B	Path=[F1,E1,D,C,B,A2]	PathTime=[(F1, null ,45,true),(E1,46,46,false),(D,47,49,true),(C,52,54,true),(B,55,57,true),(A2,58, null,true)]
 
 
     Daten für Variante 2 mit Zugfahrten pro Zeile
 
     ID	Name	TrainName	Part	Frequency	Direction	Path	PathTime
-    100	IC1F	IC1	0	60	F	Path=[A1,B,C]	PathTime=[(A1, null ,0, false ),(B,1,1,false),(C,2, null,false)]
-    100	IC1B	IC1	0	60	B	Path=[C,B,A1]	PathTime=[(C, null ,58, false ),(B,59,59,false),(A1,60, null,false)]
-    101	IC2F	IC2	0	60	F	Path=[A2,B,C,D,E1,F1]	PathTime=[(A2, null ,0, false ),(B,1,3,true),(C,4,6,true),(D,7,7,false),(E1,8,10,true),(F1,11, null,false)]
-    101	IC2B	IC2	0	60	B	Path=[F1,E1,D,C,B,A2]	PathTime=[(F1, null ,49, false ),(E1,50,52,true),(D,53,53,false),(C,54,56,true),(B,57,59,true),(A2,60, null,false)]
-    102	IC4F	IC4	0	60	F	Path=[D,E2,F2]	PathTime=[(D, null ,7, false ),(E2,8,10,true),(F2,11, null,false)]
-    102	IC4B	IC4	0	60	B	Path=[F2,E2,D]	PathTime=[(F2, null ,49, false ),(E2,50,52,true),(D,53, null,false)]
-    103	IC3F	IC3	0	60	F	Path=[C,D]	PathTime=[(C, null ,5, false ),(D,6, null,false)]
-    103	IC3B	IC3	0	60	B	Path=[D,C]	PathTime=[(D, null ,54, false ),(C,55, null,false)]
-    104	IC3F	IC3	0	60	F	Path=[E1,F1]	PathTime=[(E1, null ,0, false ),(F1,1, null,false)]
-    104	IC3B	IC3	0	60	B	Path=[F1,E1]	PathTime=[(F1, null ,59, false ),(E1,60, null,false)]
+    100	IC1F	IC1	0	60	F	Path=[A1,B,C]	PathTime=[(A1, null ,0,true),(B,1,1,false),(C,2, null,true)]
+    100	IC1B	IC1	0	60	B	Path=[C,B,A1]	PathTime=[(C, null ,58,true),(B,59,59,false),(A1,60, null,true)]
+    101	IC2F	IC2	0	60	F	Path=[A2,B,C,D,E1,F1]	PathTime=[(A2, null ,0,true),(B,1,3,true),(C,4,6,true),(D,7,7,false),(E1,8,10,true),(F1,11, null,true)]
+    101	IC2B	IC2	0	60	B	Path=[F1,E1,D,C,B,A2]	PathTime=[(F1, null ,49,true),(E1,50,52,true),(D,53,53,false),(C,54,56,true),(B,57,59,true),(A2,60, null,true)]
+    102	IC4F	IC4	0	60	F	Path=[D,E2,F2]	PathTime=[(D, null ,7,true),(E2,8,10,true),(F2,11, null,true)]
+    102	IC4B	IC4	0	60	B	Path=[F2,E2,D]	PathTime=[(F2, null ,49,true),(E2,50,52,true),(D,53, null,true)]
+    103	IC3F	IC3	0	60	F	Path=[C,D]	PathTime=[(C, null ,5,true),(D,6, null,true)]
+    103	IC3B	IC3	0	60	B	Path=[D,C]	PathTime=[(D, null ,54,true),(C,55, null,true)]
+    104	IC3F	IC3	0	60	F	Path=[E1,F1]	PathTime=[(E1, null ,0,true),(F1,1, null,true)]
+    104	IC3B	IC3	0	60	B	Path=[F1,E1]	PathTime=[(F1, null ,59,true),(E1,60, null,true)]
 
 
     */
