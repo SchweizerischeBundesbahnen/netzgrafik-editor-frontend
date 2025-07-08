@@ -13,6 +13,7 @@ import {ActivatedRoute} from "@angular/router";
 import {NavigationService} from "../../../services/ui/navigation.service";
 import {VersionControlService} from "../../../services/data/version-control.service";
 import {I18nModule} from "../../../core/i18n/i18n.module";
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 describe("VariantsViewComponent", () => {
   let component: VariantsViewComponent;
@@ -70,6 +71,7 @@ describe("VariantsViewComponent", () => {
         },
         {provide: VersionControlService, useValue: versionControlService},
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 

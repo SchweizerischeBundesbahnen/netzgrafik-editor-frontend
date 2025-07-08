@@ -8,6 +8,7 @@ import {
 import {FormModel} from "../../../../utils/form-model";
 import {I18nModule} from "../../../../core/i18n/i18n.module";
 import {UntypedFormControl} from "@angular/forms";
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 describe("ProjectFormComponent", () => {
   let component: ProjectFormComponent;
@@ -17,6 +18,7 @@ describe("ProjectFormComponent", () => {
     await TestBed.configureTestingModule({
       declarations: [ProjectFormComponent],
       imports: [I18nModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 
