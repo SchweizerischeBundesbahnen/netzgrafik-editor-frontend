@@ -202,10 +202,6 @@ export class EditorEditToolsViewComponent implements OnDestroy {
         "resources" in netzgrafikDto &&
         "metadata" in netzgrafikDto
       ) {
-        this.logger.log(
-          "onLoadNetzgrafikToMerge; load netzgrafik: ",
-          netzgrafikDto,
-        );
         this.setEditModeToNetzgrafikEditing();
         callback(netzgrafikDto);
       }
