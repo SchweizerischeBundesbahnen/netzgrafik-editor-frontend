@@ -153,6 +153,10 @@ export class Trainrun {
     this.labelIds = labelIds;
   }
 
+  getIsRoundTrip(): boolean {
+    return this.trainrunDirection === TrainrunDirection.ROUND_TRIP;
+  }
+
   getTrainrunDirection(): TrainrunDirection {
     return this.trainrunDirection;
   }

@@ -105,6 +105,8 @@ export class TrainrunSectionViewObject {
       "_" +
       d.getTrainrun().getTrainrunFrequency().offset +
       "_" +
+      d.getTrainrun().getTrainrunDirection() +
+      "_" +
       isNonStopAtSource +
       "_" +
       isNonStopAtTarget +

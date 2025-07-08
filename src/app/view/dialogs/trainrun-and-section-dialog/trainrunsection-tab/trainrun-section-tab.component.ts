@@ -76,6 +76,25 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   private trainrunSectionHelper: TrainrunsectionHelper;
   private destroyed = new Subject<void>();
 
+  public get isTopTrainrunSectionInfosDisplayed(): boolean {
+    if (this.selectedTrainrunSection === null) {
+      return false;
+    }
+    const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
+      this.selectedTrainrunSection,
+    );
+    return this.getIsRoundTrip() || isTargetRightOrBottom;
+  }
+
+  public get isBottomTrainrunSectionInfosDisplayed(): boolean {
+    if (this.selectedTrainrunSection === null) {
+      return false;
+    }
+    const isTargetLeftOrTop = TrainrunsectionHelper.isTargetLeftOrTop(
+      this.selectedTrainrunSection,
+    );
+    return this.getIsRoundTrip() || isTargetLeftOrTop;
+  }
 
   constructor(
     private dataService: DataService,
@@ -257,6 +276,36 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     );
   }
 
+  getEdgeLineArrowClassAttrString() {
+    return (
+      StaticDomTags.EDGE_LINE_ARROW_CLASS +
+      StaticDomTags.makeClassTag(
+        StaticDomTags.FREQ_LINE_PATTERN,
+        this.frequencyLinePattern,
+      ) +
+      " " +
+      StaticDomTags.TAG_UI_DIALOG +
+      " " +
+      StaticDomTags.makeClassTag(
+        StaticDomTags.TAG_COLOR_REF,
+        this.categoryColorRef,
+      ) +
+      StaticDomTags.makeClassTag(
+        StaticDomTags.TAG_LINEPATTERN_REF,
+        this.timeCategoryLinePattern,
+      )
+    );
+  };
+
+  getArrowTranslateAndRotate() {
+    if(this.isTopTrainrunSectionInfosDisplayed && !this.isBottomTrainrunSectionInfosDisplayed) {
+      return "translate(60, 16) rotate(0)";
+    } else if(!this.isTopTrainrunSectionInfosDisplayed && this.isBottomTrainrunSectionInfosDisplayed) {
+      return "translate(60, 16) rotate(180)";
+    }
+    return "";
+  };
+
   /* methods for tabbing */
   setFocusToBeginningOfLoop() {
     this.leftDepartureTimeInputElement.nativeElement.focus();
@@ -336,5 +385,9 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
         this.trainrunDialogParameter.offset,
       );
     }
+  }
+
+  private getIsRoundTrip() {
+    return this.selectedTrainrunSection.getTrainrun().getIsRoundTrip();
   }
 }
