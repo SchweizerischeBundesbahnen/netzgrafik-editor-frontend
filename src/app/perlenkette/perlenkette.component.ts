@@ -22,6 +22,10 @@ import {NodeService} from "../services/data/node.service";
 import {takeUntil} from "rxjs/operators";
 import {PerlenketteConnection} from "./model/perlenketteConnection";
 import {VersionControlService} from "../services/data/version-control.service";
+import {TrainrunDirection} from "../data-structures/business.data.structures";
+import {TrainrunsectionHelper} from "../services/util/trainrunsection.helper";
+import {TrainrunSectionService} from "../services/data/trainrunsection.service";
+import {TrainrunService} from "../services/data/trainrun.service";
 
 @Component({
   selector: "sbb-perlenkette",
@@ -49,6 +53,9 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
 
   private showAllLockStates = false;
 
+  private trainrunSectionHelper: TrainrunsectionHelper;
+  public arrowDirection: string | null = null;
+
   constructor(
     private readonly loadPerlenketteService: LoadPerlenketteService,
     readonly filterService: FilterService,
@@ -56,8 +63,13 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     private readonly nodeService: NodeService,
     private versionControlService: VersionControlService,
     private changeDetectorRef: ChangeDetectorRef,
+    private trainrunService: TrainrunService,
+    private trainrunSectionService: TrainrunSectionService,
   ) {
     this.selectedPerlenketteConnection = undefined;
+    this.trainrunSectionHelper = new TrainrunsectionHelper(
+      this.trainrunService,
+    );
 
     this.loadPerlenketteService
       .getPerlenketteData()
@@ -72,6 +84,16 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
       .subscribe((trainrunSectionId: number) => {
         this.gotoTrainrunSection(trainrunSectionId);
       });
+
+    this.trainrunService.trainruns
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((trainrunList) => {
+        if (!trainrunList.length) {
+          return;
+        }
+        this.arrowDirection = this.getArrowDirectionForOneWayTrainrun();
+      }
+    );
 
     this.svgPoint = new Vec2D(0, -64);
   }
@@ -398,5 +420,18 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
         Math.min(this.renderedElementsHeight - 48, y),
       ),
     );
+  }
+
+  private getArrowDirectionForOneWayTrainrun(): string {
+    const trainrunDirection = this.perlenketteTrainrun.trainrunDirection;
+    if (!this.perlenketteTrainrun || trainrunDirection === TrainrunDirection.ROUND_TRIP) return "minus-medium";
+    const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
+      this.trainrunSectionService.getSelectedTrainrunSection()
+    );
+    if (trainrunDirection === TrainrunDirection.ONE_WAY && isTargetRightOrBottom) {
+      return "arrow-right-medium";
+    } else {
+      return "arrow-left-medium";
+    }
   }
 }
