@@ -7,6 +7,7 @@ import {TrainrunService} from "../../data/trainrun.service";
 import {ShortestDistanceNode} from "./shortest-distance-node";
 import {ShortestDistanceEdge} from "./shortest-distance-edge";
 import {FilterService} from "../../ui/filter.service";
+import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
 
 //
 // The shortest travel time search method is based on the Dijkstra Algorithm.
@@ -141,6 +142,19 @@ export class ShortestTravelTimeSearch {
       return true;
     }
     return !trans.getIsNonStopTransit();
+  }
+
+  private static isDirectionCompatible(
+    currentNode: Node,
+    departureTrainrunSection: TrainrunSection,
+  ): boolean {
+    const direction = departureTrainrunSection
+      .getTrainrun()
+      .getTrainrunDirection();
+    // ROUND_TRIP: always compatible
+    // ONE_WAY: only allow if currentNode is the source node
+    return direction === TrainrunDirection.ROUND_TRIP ||
+      departureTrainrunSection.getSourceNodeId() === currentNode.getId();
   }
 
   calculateShortestDistanceNodesFromStartingNode(
@@ -312,12 +326,19 @@ export class ShortestTravelTimeSearch {
       incomingEdge
         .getToNode()
         .getPorts()
-        .filter((p: Port) =>
-          ShortestTravelTimeSearch.isEdgeChangeAllowed(
+        .filter((p: Port) => {
+          // only allow sections that go "away" from the current node
+          const isDirectionCompatible = ShortestTravelTimeSearch.isDirectionCompatible(
+              incomingEdge.getToNode(),
+              p.getTrainrunSection(),
+            );
+          const isEdgeChangeAllowed = ShortestTravelTimeSearch.isEdgeChangeAllowed(
             incomingEdge,
             p.getTrainrunSection(),
-          ),
-        )
+          );
+
+          return isDirectionCompatible && isEdgeChangeAllowed;
+        })
         .forEach((p: Port) => {
           const outgoingTrainrunSection: TrainrunSection =
             p.getTrainrunSection();
