@@ -531,6 +531,7 @@ export class TrainrunService {
     copiedtrainrun.setTrainrunCategory(trainrun.getTrainrunCategory());
     copiedtrainrun.setTrainrunFrequency(trainrun.getTrainrunFrequency());
     copiedtrainrun.setTrainrunTimeCategory(trainrun.getTrainrunTimeCategory());
+    copiedtrainrun.setTrainrunDirection(trainrun.getTrainrunDirection());
     copiedtrainrun.setTitle(trainrun.getTitle() + postfix);
     copiedtrainrun.setLabelIds(trainrun.getLabelIds());
     this.trainrunsStore.trainruns.push(copiedtrainrun);
@@ -868,6 +869,7 @@ export class TrainrunService {
     newTrainrun.setTrainrunTimeCategory(
       this.dataService.getTrainrunTimeCategory(trainrun.trainrunTimeCategoryId),
     );
+    newTrainrun.setTrainrunDirection(trainrun.trainrunDirection);
     newTrainrun.setTitle(trainrun.name);
     newTrainrun.setLabelIds(trainrun.labelIds);
     this.trainrunsStore.trainruns.push(newTrainrun);
