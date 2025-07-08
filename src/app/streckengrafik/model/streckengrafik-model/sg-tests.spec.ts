@@ -8,6 +8,7 @@ import {PathNode} from "../pathNode";
 import {SgTrainrun} from "./sg-trainrun";
 import {PathSection} from "../pathSection";
 import {TrainrunBranchType} from "../enum/trainrun-branch-type-type";
+import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
 
 describe("StreckengrafikModelTests", () => {
   it("Streckengrafik-Model - Test - SgPathNode - 001", () => {
@@ -156,6 +157,8 @@ describe("StreckengrafikModelTests", () => {
       "S",
       "S",
       [],
+      true,
+      TrainrunDirection.ROUND_TRIP,
     );
 
     const item1: TrainrunItem = new TrainrunItem(
@@ -168,6 +171,8 @@ describe("StreckengrafikModelTests", () => {
       "S",
       "S",
       [],
+      true,
+      TrainrunDirection.ROUND_TRIP,
     );
 
     const item2: TrainrunItem = new TrainrunItem(
@@ -180,6 +185,8 @@ describe("StreckengrafikModelTests", () => {
       "S",
       "S",
       [],
+      true,
+      TrainrunDirection.ROUND_TRIP,
     );
 
     expect(item0.equal(item0)).toBe(true);
@@ -222,6 +229,7 @@ describe("StreckengrafikModelTests", () => {
       10,
       new TrackData(2),
       false,
+      undefined,
       false,
       false,
     );
@@ -233,6 +241,7 @@ describe("StreckengrafikModelTests", () => {
       10,
       new TrackData(2),
       false,
+      undefined,
       false,
       false,
     );
@@ -245,6 +254,7 @@ describe("StreckengrafikModelTests", () => {
       10,
       new TrackData(1),
       true,
+      undefined,
       false,
       false,
     );
@@ -259,6 +269,8 @@ describe("StreckengrafikModelTests", () => {
       "S",
       "S",
       [node0],
+      true,
+      TrainrunDirection.ROUND_TRIP,
     );
 
     const item1: TrainrunItem = new TrainrunItem(
@@ -271,6 +283,8 @@ describe("StreckengrafikModelTests", () => {
       "S",
       "S",
       [node0, node1],
+      true,
+      TrainrunDirection.ROUND_TRIP,
     );
 
     const item2: TrainrunItem = new TrainrunItem(
@@ -283,6 +297,8 @@ describe("StreckengrafikModelTests", () => {
       "S",
       "S",
       [node0, node1],
+      true,
+      TrainrunDirection.ROUND_TRIP,
     );
 
     const item3: TrainrunItem = new TrainrunItem(
@@ -295,6 +311,8 @@ describe("StreckengrafikModelTests", () => {
       "S",
       "S",
       item0.pathItems,
+      true,
+      TrainrunDirection.ROUND_TRIP,
     );
 
     const item4: TrainrunItem = new TrainrunItem(
@@ -307,6 +325,8 @@ describe("StreckengrafikModelTests", () => {
       "S",
       "S",
       [node2, node2],
+      true,
+      TrainrunDirection.ROUND_TRIP,
     );
 
     expect(item0.equal(item0)).toBe(true);
@@ -340,6 +360,7 @@ describe("StreckengrafikModelTests", () => {
       10,
       new TrackData(2),
       false,
+      undefined,
       false,
       true,
     );
@@ -364,6 +385,8 @@ describe("StreckengrafikModelTests", () => {
       "S",
       "S",
       [],
+      true,
+      TrainrunDirection.ROUND_TRIP,
     );
 
     const item1: TrainrunItem = new TrainrunItem(
@@ -376,6 +399,8 @@ describe("StreckengrafikModelTests", () => {
       "S",
       "S",
       item0.pathItems,
+      true,
+      TrainrunDirection.ROUND_TRIP,
     );
 
     expect(item0.equal(item1)).toBe(true);
@@ -404,6 +429,8 @@ describe("StreckengrafikModelTests", () => {
       "S",
       "S",
       [s1],
+      true,
+      TrainrunDirection.ROUND_TRIP,
     );
 
     const item1: TrainrunItem = new TrainrunItem(
@@ -416,6 +443,8 @@ describe("StreckengrafikModelTests", () => {
       "S",
       "S",
       [s1],
+      true,
+      TrainrunDirection.ROUND_TRIP,
     );
 
     expect(item0.equal(item1)).toBe(true);
@@ -456,6 +485,8 @@ describe("StreckengrafikModelTests", () => {
       "S",
       "S",
       [s1],
+      true,
+      TrainrunDirection.ROUND_TRIP,
     );
 
     const item1: TrainrunItem = new TrainrunItem(
@@ -468,6 +499,8 @@ describe("StreckengrafikModelTests", () => {
       "S",
       "S",
       [s2, s1],
+      true,
+      TrainrunDirection.ROUND_TRIP,
     );
 
     expect(item0.equal(item1)).toBe(false);
@@ -508,6 +541,8 @@ describe("StreckengrafikModelTests", () => {
       "S",
       "S",
       [s1],
+      true,
+      TrainrunDirection.ROUND_TRIP,
     );
 
     const item1: TrainrunItem = new TrainrunItem(
@@ -520,6 +555,8 @@ describe("StreckengrafikModelTests", () => {
       "S",
       "S",
       [s2],
+      true,
+      TrainrunDirection.ROUND_TRIP,
     );
 
     expect(item0.equal(item1)).toBe(true);
@@ -548,6 +585,8 @@ describe("StreckengrafikModelTests", () => {
       "S",
       "S",
       [],
+      true,
+      TrainrunDirection.ROUND_TRIP,
     );
 
     const item1: TrainrunItem = new TrainrunItem(
@@ -560,6 +599,8 @@ describe("StreckengrafikModelTests", () => {
       "S",
       "S",
       [s2],
+      true,
+      TrainrunDirection.ROUND_TRIP,
     );
 
     expect(item0.equal(item1)).toBe(false);
