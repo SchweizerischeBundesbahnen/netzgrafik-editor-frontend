@@ -1838,6 +1838,7 @@ export class TrainrunSectionsView {
             TrainrunSectionText.TrainrunSectionTravelTime,
           ),
           this.getHiddenTagForTime(d, TrainrunSectionText.TrainrunSectionName),
+          !this.editorView.isFilterTrainrunDirectionArrowsEnabled(),
         ),
       );
     });
@@ -2056,7 +2057,8 @@ export class TrainrunSectionsView {
     ) {
       D3Utils.hoverTrainrunSection(trainrunSection,
         this.editorView.getSelectedTrainrun() !== null,
-        domObj);
+        domObj,
+      );
     }
   }
 
