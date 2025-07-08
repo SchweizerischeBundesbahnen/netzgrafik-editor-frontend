@@ -702,11 +702,6 @@ export class TrainrunSectionService implements OnDestroy {
 
     trainrunSection.setSourceAndTargetNodeReference(sourceNode, targetNode);
     this.trainrunSectionsStore.trainrunSections.push(trainrunSection);
-    this.logger.log(
-      "create new trainrunSection between nodes",
-      sourceNode.getBetriebspunktName(),
-      targetNode.getBetriebspunktName(),
-    );
 
     this.handleNodeAndTrainrunSectionDetails(
       sourceNode,
