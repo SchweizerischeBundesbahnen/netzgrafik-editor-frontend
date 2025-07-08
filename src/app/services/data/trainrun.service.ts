@@ -4,6 +4,7 @@ import {
   LabelRef,
   NetzgrafikDto,
   TrainrunCategory,
+  TrainrunDirection,
   TrainrunDto,
   TrainrunFrequency,
   TrainrunTimeCategory,
@@ -294,6 +295,16 @@ export class TrainrunService {
   updateTrainrunTitle(trainrun: Trainrun, title: string) {
     this.getTrainrunFromId(trainrun.getId()).setTitle(title);
     this.nodeService.reorderPortsOnNodesForTrainrun(trainrun, false);
+    this.trainrunsUpdated();
+    this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
+  }
+
+  updateTrainrunDirection(
+    trainrun: Trainrun,
+    trainrunDirection: TrainrunDirection,
+  ) {
+    const trainrunSection = this.getTrainrunFromId(trainrun.getId());
+    trainrunSection.setTrainrunDirection(trainrunDirection);
     this.trainrunsUpdated();
     this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
   }
