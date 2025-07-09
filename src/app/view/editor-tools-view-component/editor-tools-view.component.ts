@@ -509,7 +509,8 @@ export class EditorToolsViewComponent {
     Bitte gib mir für jede Variante als Origin-Destination-Matrix an, d.h. die kürzeste Fahrzeit an. Dann noch eine zweite Darstellung mit den Anzahl Umstiegen.
 
     ScheduleAgent:
-    Bitte gib mir für alle Varianten den Fahrplan ab 08:00 aus. Ich möchte von {} nach {} reisen.
+    Bitte gib mir für alle Varianten den Fahrplan ab 08:00 aus. Ich möchte von {} nach {} reisen. Dazu erstelle im Hintergrund einen Time-Expanded-Graphen, der dann für die
+    Abfrage verwendet werden kann, dies nur als Tipp.
 
     CompareAgent:
     Bitte vergleiche mir die Fahrpläne für die Reise von {} nach {},
@@ -555,7 +556,6 @@ export class EditorToolsViewComponent {
     const headers: string[] = [];
     headers.push("ID");
     headers.push("Name");
-    headers.push("TrainName");
     headers.push("Part");
     headers.push("Frequency");
     headers.push("Direction");
@@ -578,7 +578,6 @@ export class EditorToolsViewComponent {
           while (alltrainrunsections.length > 0) {
             const row: string[] = [];
             row.push("" + trainrun.getId());
-            row.push("" + trainrun.getCategoryShortName() + trainrun.getTitle() + dir);
             row.push("" + trainrun.getCategoryShortName() + trainrun.getTitle());
             row.push("" + partCnt++);
             row.push("" + trainrun.getTrainrunFrequency().frequency);
