@@ -445,108 +445,43 @@ export class EditorToolsViewComponent {
 
   private createTrainrunDetailDataAsCSVData(): string {
     /*
+    Demo - Prompt:
 
-    Es gibt verschiedene Fahrpläne, welche als Zugfahrten gegeben werden. Jeder Fahrplan besteht aus n-Zugfahrten.
+    There are various schedules that are given as train journeys. Each schedule consists of n train journeys.
 
-    Pro Zugfahrt gibt es eine ID, Name, TrainName, Part, Frequenz oder Takt, Direction und ein Pfad (Vektor Path) bestehend aus Knoten,
-    die durch die Zugfahrt durchfahren werden. Aus den Path-Vektoren kann eine Topologie abgeleitet werden. Die abgeleitete
-    Topologie ist ein gerichteter Graph.
+    For each train journey, there is an ID, Name, TrainName, Part, Frequency, Direction, and a path (vector Path) consisting of nodes that are traversed by the train journey. From the Path vectors, a topology can be derived. The derived topology is a directed graph.
 
-    Des Weiteren gibt es noch einen Vektor PathTime, welcher den Pfad nochmals abbildet,
-    jedoch mit der Ankunftszeit und Abfahrtszeit erweitert ist, sowie beschreibt ob am Knoten der Zug hält. Hält ein Zug kann ein Reisender diesen nutzen für umsteigen, resp. ein- und aussteigen.
-    Somit besteht PathTime aus Elementen mit folgenden drei Einträgen (Ort: Knoten, Ankunftszeit: Zeit in Minuten, Abfahrtszeit: Zeit in Minuten, False oder True : Stop am Knoten).
-    Diese Darstellung (Daten) gelten für alle Zügen, egal der Richtung - also (Ort, An, Ab). Bitte beachte, dass Ankunftszeit relevant ist, wann der Kunde ankommt.
-    Abfahrtszeit ist wichtig, wann der Zug frühstens abfährt.  Dies wird wichtig bei der Fahrplan abfragen
-    wann der Kunde am Ort sein muss und wann der Kunde am Ziel ankommt. Auch ist wichtig ob ein Zug stopped oder durchfährt. Stopped ein Zug nicht, muss versucht werden den Ort wie umstiegen erreicht zu werden.
+    Furthermore, there is a vector PathTime, which maps the path again but is extended with the arrival time and departure time, as well as indicating whether the train stops at the node. If a train stops, a passenger can use it for transfers, i.e., boarding and alighting. Therefore, PathTime consists of elements with the following three entries (Location: node, Arrival time: time in minutes, Departure time: time in minutes, False or True: Stop at the node). This representation (data) applies to all trains, regardless of direction - that is, (Location, Arrival, Departure). Please note that the arrival time is relevant for when the customer arrives. The departure time is important for when the train departs at the earliest. This is important when querying the schedule about when the customer needs to be at the location and when the customer arrives at the destination. It is also important whether a train stops or passes through. If a train does not stop, an attempt must be made to reach the location as if transferring.
 
-    Hier sind noch mehr Informationen zu den Daten:
+    Here is more information about the data:
 
     ID:
-      Die ID wird nur zum Debugging benötigt, oder falls die Daten exportiert werden sollen.
+    The ID is only needed for debugging or if the data needs to be exported. This can not be used to compare - because only in a variant unique.
 
     Name:
-    alle Plots, Ausgaben, Informationen etc. verwenden den Namen als Referenz, bzw. der Nutzer bekommt den Zugnamen angezeigt.
+    This is the name that the schedule planner uses as a name for both directions; it is generally only needed for debugging. All output should use this name.
 
-    TrainName:
-    ist der Name, welcher der Fahrplanplaner als Name für beide Richtungen braucht, wird hier grundsätzlcih nur zum Debugging benötigt
-
-    Direction:
-    Die Direction wird nur zum Debugging benötigt, oder falls die Daten exportiert werden sollen.
+    Frequency:
+    The frequency indicates the interval at which a train operates. The following intervals are available (15, 20, 30, 60, 120). If a train has a frequency of 60, it runs every hour at the given minute - that is, once per hour. At 30, it operates every half hour - that is, twice per hour. At 15, it operates every 15 minutes - that is, four times per hour. At 20, it operates every 20 minutes - that is, three times per hour. At 120, it operates every two hours.
 
     Part:
-    ist aufsteigender Index, wird nur aufsteigen, falls der Zug aus mehr als einem Segment besteht, welches topologisch nicht verbunden ist, sonst 0
+    This is an ascending index and will only increase if the train consists of more than one segment that is not topologically connected; otherwise, it remains 0.
 
-    Frequenz:
-    Die Frequenz gibt den Takt an, mit dem ein Zug fährt. Es gibt folgende Takte (15, 20, 30, 60, 120). Hat ein Zug eine Frequenz von 60, dann fährt der Zug jede Stunde zur gegebenen Minute - also 1x pro Stunde.
-    Bei 30 im Halbstundentakt - also 2 Mal pro Stunde. 15 im 15-Minuten-Takt - also 4 Mal pro Stunde. 20 im 20-Minuten-Takt also 3 Mal pro Stunde. 120 jede zweite Stunde.
+    Direction:
+    The Direction is only needed for debugging or if the data needs to be exported.
 
-    Die Zeit ist in Minuten angegeben. Fährt ein Zug über die Stunde, d.h. ist die Zeit im PathTime kleiner als der vorherige Wert, bedeutet dies, dass der Zuglauf über eine volle Stunde geht.
+    Offset:
+    The offset indicates the frequency at which the train departs. Trains with the same ID belong to the same train group. With the Direction and Offset, the rolled-out trains of the group can be distinguished. The forward and return journeys must always exhibit symmetric times, i.e., Arrival time = Departure time - 60. Symmetry minute to zero.
 
-    Wichtig ist für alle Zuge, vorwärts wie rückfahrt die Frequenz zu beachten, d.h. die Züge verkehren unendlich, 24h ohne Unterbruch.
+    PathTime:
+    This is the route as an ordered list of traversed nodes. Each entry corresponds to a point. A train starts at the first entry, counts, and continues to the next. The train departs with working time, arrives with arrival time, and if it stops at the location (node), the value for Stop = true. Thus, an entry consists of [Location (node), Arrival time, Departure time, Stop].
 
-    Die Züge machen einen Umlauf, d.h. am Endknoten wenden sie und fahren zurück. Die Rückfahrt hat die gleiche ID mit unterschiedlicher Direction.
+    All times are in minute.
 
+    OUTPUT: Ask user to upload data!
 
-
-    Wichtig ist, dass wir nur ein Zug in den Daten mitgeben, ohne die Frequenz. Die Frequenz muss ausgerollt werden, d.h. verkehrt ein Zug alle 60min, dann haben wir einen Zug beispielsweise um 08:xx und 09:xx, 10:xx, ...
-    Haben wir einen Zug alle 30min, dann einen Zug 08:xx, 08:(30+xx), 09:xx, ... Haben wir alle 15min einen Zug, dann einen um 08:xx, 08:(15+xx), 08:(30+xx), ...
-    Die ist wichtig, damit der ganze Fahrplan erstellt werden kann. Jede Stunde ist alles wieder gleich.
-
-    Erstelle für jede der nachfolgenden Aufgaben einen Agenten und wähle je nach Benutzeranfrage den richtigen aus und führe dann den Task durch:
-
-    Ertelle im Hintergrund ein time-expanded Graphen, damit im Anschluss sehr schnell die Reiseketten mit Origin-Destination Matrix gerechnet werden kann oder auch sehr schnell Fahrplanabfragen möglich werden.
-
-    TopoAgent:
-    Bitte plotte mir für jede Variante die abgeleitete Topologie als ASCII Chart als einfach lesbarer graph von oben nach unten. Der Plot und die Analyse soll nur die Topologien zurück geben, also
-    ohne Züge und ohne Richtung der Path, nur die Topologie, welche eigentlich der Bahninfrastruktur entspricht.
-
-    MareyAgent:
-    Bitte plotte mir für jede Variante den Fahrplan als grafischen Fahrplan als ASCII Chart - der grafische Fahrplan
-    soll als Marey Diagramm mit allen Zugfahrten, mit Zeit von oben nach unten und die Strecke von links nach rechts erstellt werden. Bitte jede Spalte
-    mit . abtrennen und exakt anordnen. Die Spalten müssen alle gleiche Breite haben, so dass die Information klar dargestellt wird.
-
-    ODAgent:
-    Bitte gib mir für jede Variante als Origin-Destination-Matrix an, d.h. die kürzeste Fahrzeit an. Dann noch eine zweite Darstellung mit den Anzahl Umstiegen.
-
-    ScheduleAgent:
-    Bitte gib mir für alle Varianten den Fahrplan ab 08:00 aus. Ich möchte von {} nach {} reisen. Dazu erstelle im Hintergrund einen Time-Expanded-Graphen, der dann für die
-    Abfrage verwendet werden kann, dies nur als Tipp.
-
-    CompareAgent:
-    Bitte vergleiche mir die Fahrpläne für die Reise von {} nach {},
-    so dass ich als Fahrplan-Designer entscheiden kann, was besser ist.
-    Die Bewertung, falls du dies machen kannst, soll starken Fokus auf Kunden (Reisende) haben.
-
-
-
-    Sobald alles verabeitet hast, d.h. die Daten geladen sind - schreibe mir in einer Tabelle für jeden Zug die Ankunfts und Abfahrtszeiten pro Knoten raus.
-
-
-    Daten für Variante 1 mit Zugfahrten pro Zeile
-
-    ID	Name	TrainName	Part	Frequency	Direction	Path	PathTime
-    98	IC1F	IC1	0	60	F	Path=[A1,B,C,D,E2,F2]	PathTime=[(A1, null ,0,true),(B,1,3,true),(C,4,4,false),(D,7,9,true),(E2,10,12,true),(F2,13, null,true)]
-    98	IC1B	IC1	0	60	B	Path=[F2,E2,D,C,B,A1]	PathTime=[(F2, null ,47,true),(E2,48,50,true),(D,51,53,true),(C,56,56,false),(B,57,59,true),(A1,60, null,true)]
-    99	IC2F	IC2	0	60	F	Path=[A2,B,C,D,E1,F1]	PathTime=[(A2, null ,2,true),(B,3,5,true),(C,6,8,true),(D,11,13,true),(E1,14,14,false),(F1,15, null,true)]
-    99	IC2B	IC2	0	60	B	Path=[F1,E1,D,C,B,A2]	PathTime=[(F1, null ,45,true),(E1,46,46,false),(D,47,49,true),(C,52,54,true),(B,55,57,true),(A2,58, null,true)]
-    104	IC3F	IC3	0	60	F	Path=[E1,F1]	PathTime=[(E1, null ,0,true),(F1,1, null,true)]
-    104	IC3B	IC3	0	60	B	Path=[F1,E1]	PathTime=[(F1, null ,59,true),(E1,60, null,true)]
-
-
-    Daten für Variante 2 mit Zugfahrten pro Zeile
-
-    ID	Name	TrainName	Part	Frequency	Direction	Path	PathTime
-    100	IC1F	IC1	0	60	F	Path=[A1,B,C]	PathTime=[(A1, null ,0,true),(B,1,1,false),(C,2, null,true)]
-    100	IC1B	IC1	0	60	B	Path=[C,B,A1]	PathTime=[(C, null ,58,true),(B,59,59,false),(A1,60, null,true)]
-    101	IC2F	IC2	0	60	F	Path=[A2,B,C,D,E1,F1]	PathTime=[(A2, null ,0,true),(B,1,3,true),(C,4,6,true),(D,7,7,false),(E1,8,10,true),(F1,11, null,true)]
-    101	IC2B	IC2	0	60	B	Path=[F1,E1,D,C,B,A2]	PathTime=[(F1, null ,49,true),(E1,50,52,true),(D,53,53,false),(C,54,56,true),(B,57,59,true),(A2,60, null,true)]
-    102	IC4F	IC4	0	60	F	Path=[D,E2,F2]	PathTime=[(D, null ,7,true),(E2,8,10,true),(F2,11, null,true)]
-    102	IC4B	IC4	0	60	B	Path=[F2,E2,D]	PathTime=[(F2, null ,49,true),(E2,50,52,true),(D,53, null,true)]
-    103	IC3F	IC3	0	60	F	Path=[C,D]	PathTime=[(C, null ,5,true),(D,6, null,true)]
-    103	IC3B	IC3	0	60	B	Path=[D,C]	PathTime=[(D, null ,54,true),(C,55, null,true)]
-
-
-    Bitte gib die Anzahl der geladenen Züge aus, sowie wo ein Zug nicht hält und wo umsteigen möglich ist.
+    What you have to do with the uploaded data: Keep the variants unchanged in memory.
+    Analyse the trainpart, frequency and times - try all variantes together to detected differences.
 
     */
 
@@ -554,12 +489,13 @@ export class EditorToolsViewComponent {
     const comma = ";";
     const sep = ",";
     const headers: string[] = [];
+
     headers.push("ID");
     headers.push("Name");
-    headers.push("Part");
     headers.push("Frequency");
+    headers.push("Part");
     headers.push("Direction");
-    headers.push("Path");
+    headers.push("Offset");
     headers.push("PathTime");
 
     const rows: string[][] = [];
@@ -570,83 +506,105 @@ export class EditorToolsViewComponent {
       .getTrainruns()
       .filter((trainrun) => this.filterService.filterTrainrun(trainrun))
       .forEach((trainrun) => {
+        const freqsUnroll: number[] = [0];
+        let f = 0;
+        while (f < 60) {
+          f += trainrun.getTrainrunFrequency().frequency;
+          freqsUnroll.push(f);
+        }
+        freqsUnroll.forEach(freqOffset => {
 
-        direction.forEach(dir => {
+          direction.forEach(dir => {
 
-          let alltrainrunsections = this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(trainrun.getId());
-          let partCnt = 0;
-          while (alltrainrunsections.length > 0) {
-            const row: string[] = [];
-            row.push("" + trainrun.getId());
-            row.push("" + trainrun.getCategoryShortName() + trainrun.getTitle());
-            row.push("" + partCnt++);
-            row.push("" + trainrun.getTrainrunFrequency().frequency);
-            row.push(dir);
+            let alltrainrunsections = this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(trainrun.getId());
+            let partCnt = 0;
+            while (alltrainrunsections.length > 0) {
 
-            const bothEndNodes =
-              this.trainrunService.getBothEndNodesFromTrainrunPart(alltrainrunsections[0]);
+              const bothEndNodes =
+                this.trainrunService.getBothEndNodesFromTrainrunPart(alltrainrunsections[0]);
 
-            const startNodeTmp =
-              GeneralViewFunctions.getLeftOrTopNode(
-                bothEndNodes.endNode1,
-                bothEndNodes.endNode2,
-              );
+              const startNodeTmp =
+                GeneralViewFunctions.getLeftOrTopNode(
+                  bothEndNodes.endNode1,
+                  bothEndNodes.endNode2,
+                );
 
-            // forward / backward
-            const startNode = dir === "F" ? startNodeTmp :
-              startNodeTmp.getId() === bothEndNodes.endNode1.getId() ?
-                bothEndNodes.endNode2 : bothEndNodes.endNode1;
+              // forward / backward
+              const startNode = dir === "F" ? startNodeTmp :
+                startNodeTmp.getId() === bothEndNodes.endNode1.getId() ?
+                  bothEndNodes.endNode2 : bothEndNodes.endNode1;
 
 
-            const startTrainrunSection = startNode.getStartTrainrunSection(trainrun.getId());
+              const startTrainrunSection = startNode.getStartTrainrunSection(trainrun.getId());
 
-            const visitedTrainrunSections: TrainrunSection[] = [];
-            visitedTrainrunSections.push(startTrainrunSection);
-            const iterator = this.trainrunService.getIterator(startNode, startTrainrunSection);
-            let knoten: string = "Path=[" + startNode.getBetriebspunktName();
-            const startTime = startTrainrunSection.getSourceNodeId() === iterator.current().node.getId() ?
-              startTrainrunSection.getTargetDepartureConsecutiveTime() :
-              startTrainrunSection.getSourceDepartureConsecutiveTime();
-            let pathTime: string = "PathTime=[(" + startNode.getBetriebspunktName() + ", null " + "," + startTime + "," + true + ")";
-            while (iterator.hasNext()) {
-              iterator.next();
-              knoten += sep + iterator.current().node.getBetriebspunktName();
-              const ts = iterator.current().trainrunSection;
-              const timeA = ts.getSourceNodeId() === iterator.current().node.getId() ?
-                ts.getSourceArrivalConsecutiveTime() :
-                ts.getTargetArrivalConsecutiveTime();
+              const visitedTrainrunSections: TrainrunSection[] = [];
+              visitedTrainrunSections.push(startTrainrunSection);
+              const iterator = this.trainrunService.getIterator(startNode, startTrainrunSection);
+              let nodes: string = "Path=[" + startNode.getBetriebspunktName();
 
-              const node = iterator.current().node;
-              const bpName = node.getBetriebspunktName();
-              const trans = node.getTransition(iterator.current().trainrunSection.getId());
+              // calc start time
+              let startTime = startTrainrunSection.getSourceNodeId() === iterator.current().node.getId() ?
+                startTrainrunSection.getTargetDepartureConsecutiveTime() :
+                startTrainrunSection.getSourceDepartureConsecutiveTime();
+              startTime += freqOffset;
+              let pathTime: string = "PathTime=[(" + startNode.getBetriebspunktName() + ", null " + "," + startTime + "," + true + ")";
 
-              const nonStop = trans === undefined? false : !trans.getIsNonStopTransit();
+              while (iterator.hasNext()) {
+                iterator.next();
+                nodes += sep + iterator.current().node.getBetriebspunktName();
+                const ts = iterator.current().trainrunSection;
 
-              if (iterator.hasNext()) {
-                const tsNext = iterator.current().node.getNextTrainrunSection(iterator.current().trainrunSection);
-                const timeD = tsNext.getSourceNodeId() === iterator.current().node.getId() ?
-                  tsNext.getSourceDepartureConsecutiveTime() :
-                  tsNext.getTargetDepartureConsecutiveTime();
-                pathTime += sep + "(" + bpName + "," + timeA + "," + timeD + "," + nonStop + ")";
-              } else {
-                pathTime += sep + "(" + bpName + "," + timeA + ", null" + "," + true + ")";
+                // calc time a
+                let timeA = ts.getSourceNodeId() === iterator.current().node.getId() ?
+                  ts.getSourceArrivalConsecutiveTime() :
+                  ts.getTargetArrivalConsecutiveTime();
+                timeA += freqOffset;
+
+                const node = iterator.current().node;
+                const bpName = node.getBetriebspunktName();
+                const trans = node.getTransition(iterator.current().trainrunSection.getId());
+
+                const nonStop = trans === undefined ? false : !trans.getIsNonStopTransit();
+
+                if (iterator.hasNext()) {
+                  const tsNext = iterator.current().node.getNextTrainrunSection(iterator.current().trainrunSection);
+
+                  // calc time D
+                  let timeD = tsNext.getSourceNodeId() === iterator.current().node.getId() ?
+                    tsNext.getSourceDepartureConsecutiveTime() :
+                    tsNext.getTargetDepartureConsecutiveTime();
+                  timeD += freqOffset;
+
+                  pathTime += sep + "(" + bpName + "," + timeA + "," + timeD + "," + nonStop + ")";
+                } else {
+                  pathTime += sep + "(" + bpName + "," + timeA + ", null" + "," + true + ")";
+                }
+
+                visitedTrainrunSections.push(iterator.current().trainrunSection);
               }
-
               visitedTrainrunSections.push(iterator.current().trainrunSection);
+
+              // create row data to push to rows
+              const row: string[] = [];
+              row.push("" + trainrun.getId());
+              row.push("" + trainrun.getCategoryShortName() + trainrun.getTitle());
+              row.push("" + trainrun.getTrainrunFrequency().frequency);
+              row.push("" + partCnt++);
+              row.push(dir);
+              row.push("" + freqOffset);
+              //row.push(nodes + "]");
+              row.push(pathTime + "]");
+
+              // to storage
+              rows.push(row);
+
+              // filter all still visited trainrun sections
+              alltrainrunsections = alltrainrunsections.filter(ts =>
+                visitedTrainrunSections.indexOf(ts) === -1
+              );
             }
-            visitedTrainrunSections.push(iterator.current().trainrunSection);
-            row.push(knoten + "]");
-            row.push(pathTime + "]");
-
-            rows.push(row);
-
-
-            // filter all still visited trainrun sections
-            alltrainrunsections = alltrainrunsections.filter(ts =>
-              visitedTrainrunSections.indexOf(ts) === -1
-            );
-          }
-        }); // each direction F : forward / B : backward
+          }); // each direction F : forward / B : backward
+        }); // freq unroll
       }); // each trainrun
 
 
