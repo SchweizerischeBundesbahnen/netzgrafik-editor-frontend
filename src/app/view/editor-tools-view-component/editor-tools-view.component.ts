@@ -483,6 +483,11 @@ export class EditorToolsViewComponent {
     What you have to do with the uploaded data: Keep the variants unchanged in memory.
     Analyse the trainpart, frequency and times - try all variantes together to detected differences.
 
+
+    Prompt 2
+
+    Please create a results table for variant comparison. Use the train identifier name (ID) pattern. The table should have the variants and KPIs in the columns, and the analyses in the rows. Additionally, compare the train run paths and possibly the times. Do you see any differences?
+
     */
 
 
