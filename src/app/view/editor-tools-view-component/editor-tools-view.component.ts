@@ -211,7 +211,7 @@ export class EditorToolsViewComponent {
   }
 
   onExportTrainrunDetailsCSV() {
-    const filename = $localize`:@@app.view.editor-side-view.editor-tools-view-component.trainrunsExport:trainrunsExport` + ".csv";
+    const filename = $localize`:@@app.view.editor-side-view.editor-tools-view-component.trainrunsExportFile:trainrunsExport` + ".csv";
     const csvData = this.createTrainrunDetailDataAsCSVData();
     this.onExport(filename, csvData);
   }
