@@ -75,13 +75,16 @@
 
     <br />
     <button
-      (click)="onConvertZuglaufeCSV()"
-      [title]="onConvertZuglaufeCSV"
+      (click)="onExportTrainrunDetailsCSV()"
+      [title]="'app.view.editor-side-view.editor-tools-view-component.export-trainruns-detail' | translate"
       class="TrainrunDialog EditorToolButton"
     >
       <sbb-icon svgIcon="locomotive-small"></sbb-icon>
     </button>
-    Export trainruns (Experimental)
+    {{ 'app.view.editor-side-view.editor-tools-view-component.export-trainruns-detail-as-csv' | translate }}
+    <sbb-tooltip
+    >{{ 'app.view.editor-side-view.editor-tools-view-component.export-trainruns-detail-as-csv-excel' | translate }}</sbb-tooltip
+    >
 
     <br />
     <button

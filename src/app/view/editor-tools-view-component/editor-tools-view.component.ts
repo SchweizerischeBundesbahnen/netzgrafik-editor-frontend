@@ -28,8 +28,8 @@ import {
   OriginDestinationService
 } from "src/app/services/analytics/origin-destination/components/origin-destination.service";
 import {EditorMode} from "../editor-menu/editor-mode";
-import {TrainrunSection} from '../../models/trainrunsection.model';
-import {GeneralViewFunctions} from '../util/generalViewFunctions';
+import {TrainrunSection} from "../../models/trainrunsection.model";
+import {GeneralViewFunctions} from "../util/generalViewFunctions";
 
 interface ContainertoExportData {
   documentToExport: HTMLElement;
@@ -210,9 +210,9 @@ export class EditorToolsViewComponent {
     this.onExport(filename, csvData);
   }
 
-  onConvertZuglaufeCSV() {
-    const filename = "experiment.csv";
-    const csvData = this.convertZuglaufeCSV();
+  onExportTrainrunDetailsCSV() {
+    const filename = $localize`:@@app.view.editor-side-view.editor-tools-view-component.trainrunsExport:trainrunsExport` + ".csv";
+    const csvData = this.createTrainrunDetailDataAsCSVData();
     this.onExport(filename, csvData);
   }
 
@@ -443,7 +443,7 @@ export class EditorToolsViewComponent {
     };
   }
 
-  private convertZuglaufeCSV(): string {
+  private createTrainrunDetailDataAsCSVData(): string {
     /*
 
     Es gibt verschiedene Fahrpläne, welche als Zugfahrten gegeben werden. Jeder Fahrplan besteht aus n-Zugfahrten.
