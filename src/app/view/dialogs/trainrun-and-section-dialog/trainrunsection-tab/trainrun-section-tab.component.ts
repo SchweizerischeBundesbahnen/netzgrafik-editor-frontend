@@ -33,6 +33,7 @@ export interface LeftAndRightTimeStructure {
   rightDepartureTime: number;
   rightArrivalTime: number;
   travelTime: number;
+  backwardTravelTime: number;
 }
 
 export interface LeftAndRightLockStructure {
@@ -60,6 +61,8 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   rightArrivalTimeInputElement: ElementRef;
   @ViewChild("travelTimeInputElement")
   travelTimeInputElement: ElementRef;
+  @ViewChild("backwardTravelTimeInputElement")
+  backwardTravelTimeInputElement: ElementRef;
 
   public selectedTrainrunSection: TrainrunSection;
   public leftBetriebspunkt: string[] = ["", ""];
@@ -72,6 +75,9 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   public categoryColorRef: ColorRefType;
   public timeCategoryShortName: string;
   public timeCategoryLinePattern: LinePatternRefs;
+
+  public isLeftNodeSymmetric: boolean;
+  public isRightNodeSymmetric: boolean;
 
   private trainrunSectionHelper: TrainrunsectionHelper;
   private destroyed = new Subject<void>();
@@ -94,6 +100,13 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
       this.selectedTrainrunSection,
     );
     return this.getIsRoundTrip() || isTargetLeftOrTop;
+  }
+
+  public get isAsymmetric(): boolean {
+    if (this.selectedTrainrunSection === null) {
+      return false;
+    }
+    return !this.selectedTrainrunSection.isSymmetric();
   }
 
   constructor(
@@ -124,6 +137,8 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
           this.updateAllValues();
         }
       });
+    this.isLeftNodeSymmetric = this.selectedTrainrunSection.getSourceSymmetry();
+    this.isRightNodeSymmetric = this.selectedTrainrunSection.getTargetSymmetry();
   }
 
   updateAllValues() {
@@ -151,6 +166,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
       .getTrainrun()
       .getTimeCategoryLinePatternRef();
     this.trainrunSectionTimesService.setHighlightTravelTimeElement(false);
+    this.trainrunSectionTimesService.setHighlightBackwardTravelTimeElement(false);
     this.numberOfStops = this.selectedTrainrunSection.getNumberOfStops();
     this.trainrunSectionTimesService.applyOffsetAndTransformTimeStructure();
 
@@ -244,6 +260,11 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
           this.travelTimeInputElement.nativeElement,
         );
         break;
+      case LeftAndRightElement.BackwardTravelTime:
+        this.setFocusAndSelectInputElement(
+          this.backwardTravelTimeInputElement.nativeElement,
+        );
+        break;
     }
   }
 
@@ -329,6 +350,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   onInputNumberOfStopsElementButtonPlus() {
     this.numberOfStops += 1;
     this.trainrunSectionTimesService.setHighlightTravelTimeElement(false);
+    this.trainrunSectionTimesService.setHighlightBackwardTravelTimeElement(false);
     this.onNumberOfStopsChanged();
   }
 
@@ -352,6 +374,14 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
       return "NumberOfStopsInputElement show" + activeTag;
     }
     return "NumberOfStopsInputElement" + activeTag;
+  }
+
+  onLeftNodeSymmetryChanged() {
+    this.trainrunSectionTimesService.onLeftNodeSymmetryChanged(this.isLeftNodeSymmetric);
+  }
+
+  onRightNodeSymmetryChanged() {
+    this.trainrunSectionTimesService.onRightNodeSymmetryChanged(this.isRightNodeSymmetric);
   }
 
   private resetOffsetAfterTrainrunChanged() {

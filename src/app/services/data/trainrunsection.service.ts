@@ -342,6 +342,7 @@ export class TrainrunSectionService implements OnDestroy {
     targetArrival: number,
     targetDeparture: number,
     travelTime: number,
+    backwardTravelTime: number,
     emit: boolean = true
   ) {
     const trainrunSection = this.getTrainrunSectionFromId(trsId);
@@ -350,6 +351,7 @@ export class TrainrunSectionService implements OnDestroy {
     trainrunSection.setTargetArrival(targetArrival);
     trainrunSection.setTargetDeparture(targetDeparture);
     trainrunSection.setTravelTime(travelTime);
+    trainrunSection.setBackwardTravelTime(backwardTravelTime);
     TrainrunSectionValidator.validateOneSection(trainrunSection);
     this.trainrunService.propagateConsecutiveTimesForTrainrun(
       trainrunSection.getId(),
@@ -358,6 +360,22 @@ export class TrainrunSectionService implements OnDestroy {
     this.nodeService.validateConnections(trainrunSection.getTargetNode());
     if (emit) {
       this.operation.emit(new TrainrunOperation(OperationType.update, trainrunSection.getTrainrun()));
+    }
+  }
+
+  updateSourceSymmetry(isLeftNodeSymmetric: boolean) {
+    const selectedTrainrunSection = this.getSelectedTrainrunSection();
+    if (selectedTrainrunSection !== null) {
+      selectedTrainrunSection.setSourceSymmetry(isLeftNodeSymmetric);
+      this.operation.emit(new TrainrunOperation(OperationType.update, selectedTrainrunSection.getTrainrun()));
+    }
+  }
+
+  updateTargetSymmetry(isRightNodeSymmetric: boolean) {
+    const selectedTrainrunSection = this.getSelectedTrainrunSection();
+    if (selectedTrainrunSection !== null) {
+      selectedTrainrunSection.setTargetSymmetry(isRightNodeSymmetric);
+      this.operation.emit(new TrainrunOperation(OperationType.update, selectedTrainrunSection.getTrainrun()));
     }
   }
 
@@ -638,6 +656,7 @@ export class TrainrunSectionService implements OnDestroy {
     }
     if (travelTimeLock !== undefined) {
       trainrunSection.setTravelTimeLock(travelTimeLock);
+      trainrunSection.setBackwardTravelTimeLock(travelTimeLock);
     }
     if (enforceUpdate) {
       this.trainrunSectionsUpdated();
@@ -957,7 +976,7 @@ export class TrainrunSectionService implements OnDestroy {
         : bothLastNonStopTrainrunSections.lastNonStopTrainrunSection2;
 
     const trsTimeStructure =
-      TrainrunsectionHelper.getDefaultTimeStructure(timeStructure);
+      TrainrunsectionHelper.getDefaultTimeStructure(timeStructure, trs);
     let summedTravelTime = 0;
 
     const iterator = this.trainrunService.getNonStopIterator(leftNode, trs);
@@ -976,9 +995,13 @@ export class TrainrunSectionService implements OnDestroy {
         precision
       );
       trsTimeStructure.rightArrivalTime =
-        TrainrunsectionHelper.getRightArrivalTime(trsTimeStructure, precision);
+        TrainrunsectionHelper.getRightArrivalTime(trsTimeStructure, precision); // pareil ici ?
       trsTimeStructure.rightDepartureTime =
-        TrainrunsectionHelper.getRightDepartureTime(trsTimeStructure, precision);
+        TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
+          trainrunSection.getTargetSymmetry(),
+          trsTimeStructure.rightDepartureTime,
+          trsTimeStructure.rightArrivalTime,
+        );
       const rightIsTarget =
         nextPair.node.getId() ===
         nextPair.trainrunSection.getTargetNode().getId();
@@ -997,6 +1020,7 @@ export class TrainrunSectionService implements OnDestroy {
           ? trsTimeStructure.rightDepartureTime
           : trsTimeStructure.leftDepartureTime,
         trsTimeStructure.travelTime,
+        trsTimeStructure.backwardTravelTime, // TODO: not working for the update in the background
       );
 
       trsTimeStructure.leftDepartureTime = trsTimeStructure.rightArrivalTime;

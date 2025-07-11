@@ -253,6 +253,7 @@ export class TrainrunService {
           targetArrival,
           (60 - targetArrival) % 60,
           ts.getTravelTime(),
+          ts.getBackwardTravelTime(),
           false, // disable event emission since UpdateTrainrunOperation is emitted below
         );
       });
@@ -781,6 +782,20 @@ export class TrainrunService {
     );
   }
 
+  getCumulativeBackwardTravelTime(trainrunSection: TrainrunSection) {
+    const iterator = this.getNonStopIterator( // get reverse iterator instead
+      trainrunSection.getTargetNode(), // ???
+      trainrunSection,
+    );
+    while (iterator.hasNext()) { // p-e le faire avant
+      iterator.next();
+    }
+    return this.sumTravelTimeUpToLastNonStopNode( // changer pour backward ?
+      iterator.current().node,
+      iterator.current().trainrunSection,
+    );
+  }
+
   getCumSumTravelTimeNodePathToLastNonStopNode(n: Node, ts: TrainrunSection) {
     const data = [
       {
@@ -812,6 +827,20 @@ export class TrainrunService {
       iterator.next();
     }
     return this.getCumSumTravelTimeNodePathToLastNonStopNode(
+      iterator.current().node,
+      iterator.current().trainrunSection,
+    );
+  }
+
+  getCumulativeBackwardTravelTimeAndNodePath(trainrunSection: TrainrunSection) {
+    const iterator = this.getNonStopIterator( // p-e reverse iterator instead
+      trainrunSection.getTargetNode(), // ??
+      trainrunSection,
+    );
+    while (iterator.hasNext()) {
+      iterator.next();
+    }
+    return this.getCumSumTravelTimeNodePathToLastNonStopNode(  // changer pour backward ?
       iterator.current().node,
       iterator.current().trainrunSection,
     );

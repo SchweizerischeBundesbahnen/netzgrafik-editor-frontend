@@ -16,6 +16,7 @@ export enum LeftAndRightElement {
   RightDeparture,
   RightArrival,
   TravelTime,
+  BackwardTravelTime,
   LeftRightTrainrunName,
   RightLeftTrainrunName,
 }
@@ -30,13 +31,19 @@ export class TrainrunsectionHelper {
 
   static getDefaultTimeStructure(
     timeStructure: LeftAndRightTimeStructure,
+    trainrunSection: TrainrunSection,
   ): LeftAndRightTimeStructure {
     return {
       leftDepartureTime: timeStructure.leftDepartureTime,
       leftArrivalTime: timeStructure.leftArrivalTime,
-      rightDepartureTime: 0,
-      rightArrivalTime: 0,
+      rightDepartureTime: trainrunSection.getTargetSymmetry()
+        ? 0
+        : timeStructure.rightDepartureTime,
+      rightArrivalTime: trainrunSection.getTargetSymmetry()
+        ? 0
+        : timeStructure.rightArrivalTime,
       travelTime: 0,
+      backwardTravelTime: timeStructure.backwardTravelTime, // TODO: not sure of that
     };
   }
 
@@ -246,6 +253,9 @@ export class TrainrunsectionHelper {
 
       case TrainrunSectionText.TrainrunSectionTravelTime:
         return LeftAndRightElement.TravelTime;
+
+      case TrainrunSectionText.TrainrunSectionBackwardTravelTime:
+        return LeftAndRightElement.BackwardTravelTime;
     }
     return undefined;
   }
@@ -264,12 +274,13 @@ export class TrainrunsectionHelper {
     const localLeftNode = this.getNextStopLeftNode(trainrunSection, orderedNodes);
     if (leftNode.getId() !== localLeftNode.getId()) {
       const mappedTimeStructure =
-        TrainrunsectionHelper.getDefaultTimeStructure(timeStructure);
+        TrainrunsectionHelper.getDefaultTimeStructure(timeStructure, trainrunSection);
       mappedTimeStructure.rightArrivalTime = timeStructure.leftArrivalTime;
       mappedTimeStructure.leftArrivalTime = timeStructure.rightArrivalTime;
       mappedTimeStructure.rightDepartureTime = timeStructure.leftDepartureTime;
       mappedTimeStructure.leftDepartureTime = timeStructure.rightDepartureTime;
       mappedTimeStructure.travelTime = timeStructure.travelTime;
+      mappedTimeStructure.backwardTravelTime = timeStructure.backwardTravelTime;
       return mappedTimeStructure;
     }
     return timeStructure;
@@ -316,7 +327,9 @@ export class TrainrunsectionHelper {
       leftArrivalTime: lastLeftNode.getArrivalTime(leftTrainrunSection),
       rightDepartureTime: lastRightNode.getDepartureTime(rightTrainrunSection),
       rightArrivalTime: lastRightNode.getArrivalTime(rightTrainrunSection),
-      travelTime: cumulativeTravelTime,
+      travelTime: this.trainrunService.getCumulativeTravelTime(trainrunSection),
+      backwardTravelTime: this.trainrunService.getCumulativeTravelTime(trainrunSection), // ?
+      // backwardTravelTime: this.trainrunService.getCumulativeTravelTime(trainrunSection, true), // ?
     };
   }
 
@@ -400,5 +413,16 @@ export class TrainrunsectionHelper {
     const targetNode = trainrunSection.getTargetNode();
 
     return GeneralViewFunctions.getLeftOrTopNode(sourceNode, targetNode) === targetNode;
+  }
+
+  static getAdjustedTimeBasedOnSymmetry(
+    isSymmetricOnNode: boolean,
+    firstNumber: number,
+    secondTime: number,
+  ): number {
+    if (isSymmetricOnNode) {
+      return TrainrunsectionHelper.getSymmetricTime(secondTime);
+    }
+    return firstNumber;
   }
 }

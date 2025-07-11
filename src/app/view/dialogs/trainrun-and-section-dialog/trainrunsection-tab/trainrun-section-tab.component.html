@@ -149,6 +149,7 @@
             *ngIf="isBottomTrainrunSectionInfosDisplayed"
           ></div>
           <div class="TravelTime"></div>
+          <div class="BackwardTravelTime" *ngIf="isAsymmetric"></div>
 
           <div
             class="focusguard"
@@ -379,7 +380,7 @@
               mode="ghost"
               class="ButtonMinus"
               (click)="
-                trainrunSectionTimesService.onInputTravelTimeElementButtonMinus()
+                trainrunSectionTimesService.onTravelTimeButtonMinus()
               "
             >
               -
@@ -418,7 +419,60 @@
               mode="ghost"
               class="ButtonPlus"
               (click)="
-                trainrunSectionTimesService.onInputTravelTimeElementButtonPlus()
+                trainrunSectionTimesService.onTravelTimeButtonPlus()
+              "
+            >
+              +
+            </button>
+          </div>
+
+          <div class="BackwardTravelTimeMinus" *ngIf="isAsymmetric">
+            <button
+              tabindex="-1"
+              mode="ghost"
+              class="ButtonMinus"
+              (click)="
+                trainrunSectionTimesService.onBackwardTravelTimeButtonMinus()
+              "
+            >
+              -
+            </button>
+          </div>
+          <div class="BackwardTravelTimeTime" *ngIf="isAsymmetric">
+            <ng-container>
+              <input
+                tabindex="3"
+                id="BackwardTravelTimeTimeInputElement"
+                [ngClass]="{
+                  InputBackwardTravelTimeElement:
+                    !trainrunSectionTimesService.getHighlightBackwardTravelTimeElement(),
+                  InputBackwardTravelTimeElementHighlighted:
+                    trainrunSectionTimesService.getHighlightBackwardTravelTimeElement()
+                }"
+                type="number"
+                min="0.0001"
+                sbbInput
+                spellcheck="false"
+                pattern="^[0-9.]*"
+                minlength="1"
+                [(ngModel)]="
+                  trainrunSectionTimesService.getTimeStructure()
+                    .backwardTravelTime
+                "
+                (change)="
+                  trainrunSectionTimesService.onInputBackwardTravelTimeChanged()
+                "
+                #backwardTravelTimeInputElement
+              />
+            </ng-container>
+          </div>
+          <div class="BackwardTravelTimePlus" *ngIf="isAsymmetric">
+            <button
+              tabindex="-1"
+              mode="ghost"
+              class="ButtonPlus"
+              (click)="
+                trainrunSectionTimesService.onBackwardTravelTimeButtonPlus()
               "
             >
               +
@@ -524,6 +578,22 @@
       </td>
     </tr>
   </table>
+    <div class="sbb-checkbox-group-horizontal" style="justify-content: space-between">
+    <sbb-checkbox [(ngModel)]="isLeftNodeSymmetric" (change)="onLeftNodeSymmetryChanged()">
+      Left symmetry = {{ isLeftNodeSymmetric }}
+      <!-- {{
+        "app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.enableSymmetry"
+          | translate
+      }} -->
+    </sbb-checkbox>
+    <sbb-checkbox [(ngModel)]="isRightNodeSymmetric" (change)="onRightNodeSymmetryChanged()">
+      Right symmetry = {{ isRightNodeSymmetric }}
+      <!-- {{
+        "app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.enableSymmetry"
+          | translate
+      }} -->
+    </sbb-checkbox>
+  </div>
 </div>
 <div sbbDialogActions [class]="getContentFooterClassTag()">
   <button

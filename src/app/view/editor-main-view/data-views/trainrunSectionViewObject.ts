@@ -12,7 +12,8 @@ export class TrainrunSectionViewObject {
     isMuted: boolean,
     hiddenTagSource: boolean,
     hiddenTagTarget: boolean,
-    hiddenTagTraveltime: boolean,
+    hiddenTagTravelTime: boolean,
+    hiddenTagBackwardTravelTime: boolean,
     hiddenTagTrainrunName: boolean,
     hiddenTagTrainrunDirectionArrows: boolean,
   ) {
@@ -24,7 +25,8 @@ export class TrainrunSectionViewObject {
       isMuted,
       hiddenTagSource,
       hiddenTagTarget,
-      hiddenTagTraveltime,
+      hiddenTagTravelTime,
+      hiddenTagBackwardTravelTime,
       hiddenTagTrainrunName,
       hiddenTagTrainrunDirectionArrows,
     );
@@ -38,7 +40,8 @@ export class TrainrunSectionViewObject {
     isMuted: boolean,
     hiddenTagSource: boolean,
     hiddenTagTarget: boolean,
-    hiddenTagTraveltime: boolean,
+    hiddenTagTravelTime: boolean,
+    hiddenTagBackwardTravelTime: boolean,
     hiddenTagTrainrunName: boolean,
     hiddenTagTrainrunDirectionArrows: boolean,
   ): string {
@@ -120,7 +123,9 @@ export class TrainrunSectionViewObject {
       "_" +
       hiddenTagTarget +
       "_" +
-      hiddenTagTraveltime +
+      hiddenTagTravelTime +
+      "_" +
+      hiddenTagBackwardTravelTime +
       "_" +
       hiddenTagTrainrunName +
       "_" +
