@@ -8,8 +8,8 @@ and outlines more general ideas.
 
 ### Short-term goals on the roadmap:
 
-| Version | Release date | Description | More Info | Issues |
-| --- | --- | --- | --- | --- |
+| Version | Release | Description | Info | Issues |
+| :--- | :---: | :--- | :--- | :--- |
 | 0.1 | May 2019 | Initial test| | |
 | 1.0 | Sep 2019 | 1st Release | | |
 | 2.0 | Dec 2020 | 2nd Release  | | | 
@@ -22,8 +22,8 @@ and outlines more general ideas.
 | 2.7 | Jul 2024 | Standalone mode and support for multilingual translations (German, French, English) - many short cuts    |     |     |
 | 2.8 | Oct 2024 | Origin-Destination-Matrix: Export as CSV File.   |  https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/pull/301   |     |
 | 2.9 | Nov 2024 | Origin-Destination-Matrix: UI Integration - Travel time matrix for different routes / visualisation & analytics. | https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/126  |  [Open Issues / Tasks](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues?q=is%3Aissue%20state%3Aopen%20label%3AOrigin-Destination-Matrix) |
-| 2.10 | **announced : Sep 2025** | One-way trainruns | https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/438 |   [Open Issues / Tasks](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22Asymmetric%20times%22) |
-| 2.11 | **announced : Dec 2025**| Asymmetric times | https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/421 |   [Open Issues / Tasks](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22Asymmetric%20times%22) |
+| 2.10 | **announced <br> Sep 2025** | One-way trainruns | https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/438 |   [Open Issues / Tasks](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22Asymmetric%20times%22) |
+| 2.11 | **announced <br> Dec 2025**| Asymmetric times | https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/421 |   [Open Issues / Tasks](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22Asymmetric%20times%22) |
 | ? |  | Check conformity of business rules |  | |
 | ? |  | Comparision of variants | | |
 | ? | | Merge different variants | | [Partially implemented](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Merge_Netzgrafik.md)|
