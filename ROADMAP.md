@@ -8,7 +8,7 @@ and outlines more general ideas.
 
 ### Short-term goals on the roadmap:
 
-| Version | | Description | More Info | Issues |
+| Version | Release date | Description | More Info | Issues |
 | --- | --- | --- | --- | --- |
 | 0.1 | May 2019 | Initial test| | |
 | 1.0 | Sep 2019 | 1st Release | | |
