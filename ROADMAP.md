@@ -8,9 +8,19 @@ and outlines more general ideas.
 
 ### Short-term goals on the roadmap:
 
-| Version | Feature | More Info | Issues |
+| Version | Description | More Info | Issues |
 | --- | --- | --- | --- |
-| 2.9 |  Origin-Destination-Matrix: Travel time matrix for different routes / visualisation & analytics. | https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/126  |  [Open Issues / Tasks](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues?q=is%3Aissue%20state%3Aopen%20label%3AOrigin-Destination-Matrix) |
+| 0.1 | Initial test| | |
+| 2.0 |  | | | 
+| 2.1 | Backend to store, share and manage projects and variants | | |
+| 2.2 | Enhanced filtering | | |
+| 2.3 | Graphic timetable | | |
+| 2.4  | Pearls view    |     | |
+| 2.5 | Open Source   |     |     |
+| 2.6 | Netzgrafik-Editor performance improvements, resolving various bugs, updating documentation for better user guidance.    |     |     |
+| 2.7 | Standalone mode and support for multilingual translations (German, French, English) - many short cuts    |     |     |
+| 2.8 |  Origin-Destination-Matrix: Export as CSV File.   |  https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/pull/301   |     |
+| 2.9 |  Origin-Destination-Matrix: UI Integration - Travel time matrix for different routes / visualisation & analytics. | https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/126  |  [Open Issues / Tasks](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues?q=is%3Aissue%20state%3Aopen%20label%3AOrigin-Destination-Matrix) |
 | 2.10 | One-way trainruns | https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/438 |   [Open Issues / Tasks](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22Asymmetric%20times%22) |
 | 2.11 | Asymmetric times | https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/421 |   [Open Issues / Tasks](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22Asymmetric%20times%22) |
 | ? |  Check conformity of business rules |  | |
