@@ -10,7 +10,7 @@ and outlines more general ideas.
 
 | Version | Release | Description | Info | Issues |
 | :--- | :---: | :--- | :--- | :--- |
-| 0.1 | May 2019 | Initial test| | |
+| 0.1 | May 2019 | The Netzgrafik Editor has been launched as a software project | | |
 | 1.0 | Sep 2019 | 1st Release | | |
 | 2.0 | Dec 2020 | 2nd Release  | | | 
 | 2.1 | May 2021 | Bug fixes / Backend to store, share and manage projects and variants  | | |
