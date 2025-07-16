@@ -15,7 +15,7 @@ and outlines more general ideas.
 | 2.11 | Asymmetric times | https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/421 |   [Open Issues / Tasks](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22Asymmetric%20times%22) |
 | ? |  Check conformity of business rules |  | |
 | ? |  Comparision of variants | | |
-| ? | Merge different variants: | | [Current working](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Merge_Netzgrafik.md)|
+| ? | Merge different variants | | [Partially implemented](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Merge_Netzgrafik.md)|
 
 ### Long-term goals on the roadmap:
 
