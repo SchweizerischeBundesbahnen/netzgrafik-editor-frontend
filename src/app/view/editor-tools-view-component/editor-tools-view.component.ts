@@ -442,7 +442,8 @@ export class EditorToolsViewComponent {
 
   private createTrainrunDetailDataAsCSVData(): string {
     /*
-      Prompt
+      This prompt can be uses to test with any LLM
+
       ---- start ----
       Build agent that can process, analyze, and compare timetable data. In order to do this, data with trainruns is required.
       A timetable consists of at least one or an unlimited number of trainruns. Each trainrun is described with attributes
