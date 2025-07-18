@@ -16,7 +16,10 @@ import {Node} from "../../../models/node.model";
 import {Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
 import {DataService} from "../../../services/data/data.service";
-import {TrainrunFrequency} from "../../../data-structures/business.data.structures";
+import {
+  TrainrunDirection,
+  TrainrunFrequency,
+} from "../../../data-structures/business.data.structures";
 
 export enum TrainrunDialogType {
   TRAINRUN_DIALOG,
@@ -67,7 +70,9 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
   trainrunAndSectionEditorTabsViewTemplate: TemplateRef<any>;
 
   public selectedTrainrun: Trainrun;
-  public selectedTrainrunSectionName: string;
+  public nextStopLeftNodeName: string;
+  public nextStopRightNodeName: string;
+  public arrowDirection: string | null = null;
 
   public data = null;
 
@@ -87,6 +92,17 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
     private trainrunSectionService: TrainrunSectionService,
     private dataService: DataService,
   ) {
+    this.trainrunService.trainruns
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((trainrunList) => {
+        if (!trainrunList.length) {
+          this.closeDialog();
+          return;
+        }
+        this.arrowDirection = this.getArrowDirectionForOneWayTrainrun();
+      }
+    );
+
     this.uiInteractionService.trainrunDialog
       .pipe(takeUntil(this.destroyed))
       .subscribe((parameter) => {
@@ -103,19 +119,23 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
           this.trainrunService,
         );
 
-        const leftNode = this.trainrunSectionHelper.getLeftNode(
+        const nextStopLeftNode = this.trainrunSectionHelper.getNextStopLeftNode(
           selectedTrainrunSection,
           parameter.nodesOrdered,
         );
-        const rightNode = this.trainrunSectionHelper.getRightNode(
-          selectedTrainrunSection,
-          parameter.nodesOrdered,
-        );
-        this.selectedTrainrunSectionName =
-          leftNode.getFullName() + " — " + rightNode.getFullName();
+        const nextStopRightNode =
+          this.trainrunSectionHelper.getNextStopRightNode(
+            selectedTrainrunSection,
+            parameter.nodesOrdered,
+          );
+
+        this.nextStopLeftNodeName = nextStopLeftNode.getFullName();
+        this.nextStopRightNodeName = nextStopRightNode.getFullName();
+        this.arrowDirection = this.getArrowDirectionForOneWayTrainrun();
 
         this.openDialog(parameter);
-      });
+      }
+    );
   }
 
   static getDialogConfig(
@@ -224,5 +244,20 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
       right: dialogPos.right + "px",
       top: dialogPos.top + "px",
     };
+  }
+
+  private getArrowDirectionForOneWayTrainrun(): string {
+    if (!this.selectedTrainrun || this.selectedTrainrun.getIsRoundTrip()) {
+      return "minus-medium";
+    }
+    const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
+      this.trainrunSectionService.getSelectedTrainrunSection(),
+    );
+    const trainrunDirection = this.selectedTrainrun.getTrainrunDirection();
+    if (trainrunDirection === TrainrunDirection.ONE_WAY && isTargetRightOrBottom) {
+      return "arrow-right-medium";
+    } else {
+      return "arrow-left-medium";
+    }
   }
 }

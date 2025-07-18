@@ -8,6 +8,10 @@
 ::ng-deep div.sbb-tab-label {
   background: var(--sbb-header-lean-background-color);
 }
+::ng-deep div.sbb-tab-label:has(span.onewayTrip) {
+  padding: 0 15px;
+  height: 36px
+}
 
 ::ng-deep .sbb-trainrun-chip-group {
   display: flex;
@@ -91,6 +95,20 @@
 }
 
 ::ng-deep button.TimeCategory.selected {
+  color: white;
+  background-color: $COLOR_Default;
+  border-color: transparent;
+  opacity: 1.0;
+}
+
+::ng-deep button.TrainrunDirection {
+  color: var(--NODE_TEXT_FOCUS);
+  background-color: var(--NODE_COLOR_BACKGROUND);
+  border-color: transparent;
+  opacity: 1.0;
+}
+
+::ng-deep button.TrainrunDirection.selected {
   color: white;
   background-color: $COLOR_Default;
   border-color: transparent;

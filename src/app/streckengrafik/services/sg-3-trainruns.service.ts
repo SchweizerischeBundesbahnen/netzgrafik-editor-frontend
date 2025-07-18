@@ -16,6 +16,7 @@ import {TrainrunBranchType} from "../model/enum/trainrun-branch-type-type";
 import {PathItem} from "../model/pathItem";
 import {TrackData} from "../model/trackData";
 import {Sg2TrainrunPathService} from "./sg-2-trainrun-path.service";
+import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
 
 @Injectable({
   providedIn: "root",
@@ -88,28 +89,55 @@ export class Sg3TrainrunsService implements OnDestroy {
       const trainrunItems: SgTrainrunItem[] = [];
 
       trainrunItem.pathItems.forEach((pathItem) => {
+        if (trainrunItem.trainrunDirection === TrainrunDirection.ONE_WAY && pathItem.backward === trainrunItem.leftToRight) return;
+        // Node items
         if (pathItem.isNode()) {
           const pathNodes: SgPathNode[] = this.searchAllPathNodes(
             pathItem.getPathNode(),
           );
+
+          const isEndNode = this.checkIsEndNode(pathItem);
+          let departureTime = pathItem.departureTime;
+          let arrivalTime = pathItem.arrivalTime;
+          const pathNodeHaltezeit = pathItem.getPathNode().haltezeit;
+
           pathNodes.forEach((pathNode: SgPathNode) => {
+            if (trainrunItem.trainrunDirection === TrainrunDirection.ONE_WAY) {
+              if (trainrunItem.leftToRight) {
+                if (pathNode.departurePathSection === undefined) {
+                  departureTime = pathItem.arrivalTime + pathNodeHaltezeit;
+                }
+                if (pathNode.arrivalPathSection === undefined) {
+                  arrivalTime = pathItem.departureTime - pathNodeHaltezeit;
+                }
+              } else {
+                if (pathNode.departurePathSection === undefined) {
+                  arrivalTime = pathItem.departureTime - pathNodeHaltezeit;
+                }
+                if (pathNode.arrivalPathSection === undefined) {
+                  departureTime = pathItem.arrivalTime + pathNodeHaltezeit;
+                }
+              }
+            }
+
             const trainrunNode = new SgTrainrunNode(
               pathNode.index,
               pathNode.nodeId,
               pathNode.nodeShortName,
               trainrunItem.trainrunId,
-              pathItem.departureTime,
-              pathItem.arrivalTime,
+              departureTime,
+              arrivalTime,
               pathItem.backward,
               new TrackData(this.getTrack(pathItem)),
               pathNode,
-              this.checkIsEndNode(pathItem),
+              isEndNode,
             );
             pathNode.trainrunNodes.push(trainrunNode);
             trainrunItems.push(trainrunNode);
           });
-        } // --- end if pathItem.isNode()
+        }
 
+        // Section items
         let isAddSection = false;
         if (pathItem.isSection()) {
           const pathSection = pathItem.getPathSection();
@@ -293,7 +321,7 @@ export class Sg3TrainrunsService implements OnDestroy {
               trainrunItems.push(trainrunSection);
             });
           }
-        } // --- end if pathItem.isSection()
+        }
       });
       trainrunItems.forEach((trainrunItem) => {
         trainrun.sgTrainrunItems.push(trainrunItem);
