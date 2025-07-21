@@ -6,29 +6,30 @@ This roadmap description outlines the strategic goals to improve the Netzgrafik-
 value. It serves as a guiding document that aligns goals on the roadmap in the short and long term
 and outlines more general ideas.
 
-### Short-term goals on the roadmap:
+### Short-term goals on the roadmap
 
-| Version | Release | Description | Info | Issues |
-| :--- | :---: | :--- | :--- | :--- |
-| 0.1 | May 2019 | The Netzgrafik Editor has been launched as a software project | | |
-| 1.0 | Sep 2019 | 1st Release | | |
-| 2.0 | Dec 2020 | 2nd Release  | | | 
-| 2.1 | May 2021 | Bug fixes / Backend to store, share and manage projects and variants  | | |
-| 2.2 | Nov 2021 | Enhanced filtering | | |
-| 2.3 | Dec 2022 | Graphic timetable | | |
-| 2.4 | Dec 2023 | Pearls view    |     | |
-| 2.5 | Apr 2024 | Open Source   |     |     |
-| 2.6 | Jun 2024 | Netzgrafik-Editor performance improvements, resolving various bugs, updating documentation for better user guidance.    |     |     |
-| 2.7 | Jul 2024 | Standalone mode and support for multilingual translations (German, French, English) - many short cuts    |     |     |
-| 2.8 | Oct 2024 | Origin-Destination-Matrix: Export as CSV File.   |  https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/pull/301   |     |
-| 2.9 | Nov 2024 | Origin-Destination-Matrix: UI Integration - Travel time matrix for different routes / visualisation & analytics. | https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/126  |  [Open Issues / Tasks](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues?q=is%3Aissue%20state%3Aopen%20label%3AOrigin-Destination-Matrix) |
-| 2.10 | **announced <br> Sep 2025** | One-way trainruns | https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/438 |   [Open Issues / Tasks](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22Asymmetric%20times%22) |
-| 2.11 | **announced <br> Dec 2025**| Asymmetric times | https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues/421 |   [Open Issues / Tasks](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22Asymmetric%20times%22) |
-| ? |  | Check conformity of business rules |  | |
-| ? |  | Comparision of variants | | |
-| ? | | Merge different variants | | [Partially implemented](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Merge_Netzgrafik.md)|
+| Version | Date       | Feature / Change                                                                                                             | Status      | Issues  |
+| :-----: | :--------: | :----------------------------------------------------------------------------------------------------------------------------|-------------|---------|
+| ?       |            | Check conformity of business rules                                                                                           | ❓ time horizon not yet clear   | –       |
+| ?       |            | Comparison of variants                                                                                                       | ❓ time horizon not yet clear   | –       |
+| ?       |            | Merge different variants                                                                                                     | ⚠️ Partial implemented / time horizon not yet clear  | [Partially implemented](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Merge_Netzgrafik.md) |
+| 2.11    | Dec 2025   | Asymmetric travel times                                                                                                      | ⏳ Planned   | #421    |
+| 2.10    | Oct 2025   | One-way train runs                                                                                                           | ⏳ Planned   | #438    |
+| 2.9     | Nov 2024   | UI integration of O/D-Matrix (visualization and analytics)                                                                   | ✔️ Done     | #126    |
+| 2.8     | Oct 2024   | Origin-Destination Matrix export as CSV                                                                                      | ✔️ Done     | #301    |
+| 2.7     | Jul 2024   | Standalone mode & multilingual support (German, French, English) + extensive keyboard shortcuts                              | ✔️ Done     | –       |
+| 2.6     | Jun 2024   | Performance improvements, bug fixes, updated user documentation                                                              | ✔️ Done     | –       |
+| 2.5     | Apr 2024   | Open-source release                                                                                                          | ✔️ Done     | –       |
+| 2.4     | Dec 2023   | “Pearls” view                                                                                                                | ✔️ Done     | –       |
+| 2.3     | Dec 2022   | Graphic timetable display                                                                                                    | ✔️ Done     | –       |
+| 2.2     | Nov 2021   | Enhanced filtering functionality                                                                                             | ✔️ Done     | –       |
+| 2.1     | May 2021   | Bug fixes / Backend to store, share, and manage projects and variants                                                        | ✔️ Done     | –       |
+| 2.0     | Dec 2020   | Second release                                                                                                               | ✔️ Done     | –       |
+| 1.0     | Sep 2019   | First release                                                                                                                | ✔️ Done     | –       |
+| 0.1     | May 2019   | Initial launch of the Netzgrafik Editor project                                                                              | ✔️ Done     | –       |
 
-### Long-term goals on the roadmap:
+
+### Long-term goals on the roadmap
 
 - **Integration in existing landscape of tools:**
   Integrate the developed tools with existing
