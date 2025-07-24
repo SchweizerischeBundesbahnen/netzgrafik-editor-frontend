@@ -6,7 +6,7 @@ import {DataService} from "../app/services/data/data.service";
 import {ResourceService} from "../app/services/data/resource.service";
 import {LogService} from "../app/logger/log.service";
 import {LogPublishersService} from "../app/logger/log.publishers.service";
-import {NetzgrafikUnitTestingReconnectTrainrunSection} from "./netzgrafik.unit.test.reconnec.trainrunsectionst";
+import {NetzgrafikUnitTestingReconnectTrainrunSection} from "./netzgrafik.unit.test.reconnect.trainrunsections";
 import {NoteService} from "../app/services/data/note.service";
 import {LabelGroupService} from "../app/services/data/labelgroup.service";
 import {LabelService} from "../app/services/data/label.service";
