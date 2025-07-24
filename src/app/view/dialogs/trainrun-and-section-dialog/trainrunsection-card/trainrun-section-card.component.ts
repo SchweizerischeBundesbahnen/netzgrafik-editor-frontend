@@ -40,7 +40,7 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
   public timeCategoryLinePattern: LinePatternRefs;
   public TrainrunDirection = TrainrunDirection;
   public chosenCard: "top" | "bottom" | null = null;
-  public trainrunTimeStructure: LeftAndRightTimeStructure;
+  public trainrunTimeStructure: Omit<LeftAndRightTimeStructure, "travelTime">;
 
   private trainrunSectionHelper: TrainrunsectionHelper;
   private destroyed = new Subject<void>();

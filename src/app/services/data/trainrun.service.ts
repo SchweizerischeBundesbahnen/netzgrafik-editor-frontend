@@ -172,7 +172,7 @@ export class TrainrunService {
     return trainrun;
   }
 
-  getTrainrunTimeStructure(): LeftAndRightTimeStructure {
+  getTrainrunTimeStructure(): Omit<LeftAndRightTimeStructure, "travelTime"> {
     const selectedTrainrunId = this.getSelectedTrainrun().getId();
     const trainrunSections =
       this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(
@@ -196,18 +196,29 @@ export class TrainrunService {
     
     if (isLeftToRight) {
       // leftNode -> rightNode: left times from first section, right times from last section
-      leftTimes = {leftDepartureTime: firstTrainrunSection.getSourceDeparture(), leftArrivalTime: firstTrainrunSection.getSourceArrival()};
-      rightTimes = {rightDepartureTime: lastTrainrunSection.getTargetDeparture(), rightArrivalTime: lastTrainrunSection.getTargetArrival()};
+      leftTimes = {
+        leftDepartureTime: firstTrainrunSection.getSourceDeparture(), 
+        leftArrivalTime: firstTrainrunSection.getSourceArrival()
+      };
+      rightTimes = {
+        rightDepartureTime: lastTrainrunSection.getTargetDeparture(), 
+        rightArrivalTime: lastTrainrunSection.getTargetArrival()
+      };
     } else {
       // rightNode -> leftNode: left times from last section, right times from first section
-      leftTimes = {leftDepartureTime: lastTrainrunSection.getTargetDeparture(), leftArrivalTime: lastTrainrunSection.getTargetArrival()};
-      rightTimes = {rightDepartureTime: firstTrainrunSection.getSourceDeparture(), rightArrivalTime: firstTrainrunSection.getSourceArrival()};
+      leftTimes = {
+        leftDepartureTime: lastTrainrunSection.getTargetDeparture(), 
+        leftArrivalTime: lastTrainrunSection.getTargetArrival()
+      };
+      rightTimes = {
+        rightDepartureTime: firstTrainrunSection.getSourceDeparture(), 
+        rightArrivalTime: firstTrainrunSection.getSourceArrival()
+      };
     }
 
     return {
       ...leftTimes,
       ...rightTimes,
-      travelTime: lastTrainrunSection.getTargetArrivalConsecutiveTime(),
     };
   }
 
