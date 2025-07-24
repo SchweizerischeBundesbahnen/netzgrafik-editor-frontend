@@ -20,6 +20,7 @@ import {
 import {StaticDomTags} from "../../../editor-main-view/data-views/static.dom.tags";
 import {ColorRefType} from "../../../../data-structures/technical.data.structures";
 import {TrainrunSectionTimesService} from "../../../../services/data/trainrun-section-times.service";
+import { LeftAndRightTimeStructure } from "../trainrunsection-tab/trainrun-section-tab.component";
 
 @Component({
   selector: "sbb-trainrunsection-card",
@@ -39,6 +40,7 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
   public timeCategoryLinePattern: LinePatternRefs;
   public TrainrunDirection = TrainrunDirection;
   public chosenCard: "top" | "bottom" | null = null;
+  public trainrunTimeStructure: LeftAndRightTimeStructure;
 
   private trainrunSectionHelper: TrainrunsectionHelper;
   private destroyed = new Subject<void>();
@@ -97,6 +99,9 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
       this.selectedTrainrunSection.getTrainrunId(),
     );
     this.endNode = [endNode.getFullName(), endNode.getBetriebspunktName()];
+
+    this.trainrunTimeStructure =
+      this.trainrunService.getTrainrunTimeStructure();
 
     const selectedTrainrunDirection = selectedTrainrun.getTrainrunDirection();
     if (selectedTrainrunDirection !== TrainrunDirection.ROUND_TRIP) {

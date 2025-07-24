@@ -25,6 +25,7 @@ import {Transition} from "../../models/transition.model";
 import {Port} from "../../models/port.model";
 import {Connection} from "../../models/connection.model";
 import {Operation, OperationType, TrainrunOperation} from "../../models/operation.model";
+import { LeftAndRightTimeStructure } from "src/app/view/dialogs/trainrun-and-section-dialog/trainrunsection-tab/trainrun-section-tab.component";
 
 @Injectable({
   providedIn: "root",
@@ -169,6 +170,45 @@ export class TrainrunService {
       this.trainrunsStore.trainruns.push(trainrun);
     }
     return trainrun;
+  }
+
+  getTrainrunTimeStructure(): LeftAndRightTimeStructure {
+    const selectedTrainrunId = this.getSelectedTrainrun().getId();
+    const trainrunSections =
+      this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(
+        selectedTrainrunId,
+      );
+    const [leftNode, rightNode] = [this.getStartNodeWithTrainrunId(selectedTrainrunId), this.getEndNodeWithTrainrunId(selectedTrainrunId)];
+    
+    // leftNode -> rightNode
+    let firstTrainrunSection = trainrunSections.find(ts => ts.getSourceNodeId() === leftNode.getId());
+    let lastTrainrunSection = trainrunSections.reverse().find(ts => ts.getTargetNodeId() === rightNode.getId());
+    let isLeftToRight = true;
+    
+    // rightNode -> leftNode
+    if (!firstTrainrunSection && !lastTrainrunSection) {
+      firstTrainrunSection = trainrunSections.find(ts => ts.getSourceNodeId() === rightNode.getId());
+      lastTrainrunSection = trainrunSections.reverse().find(ts => ts.getTargetNodeId() === leftNode.getId());
+      isLeftToRight = false;
+    }
+
+    let leftTimes, rightTimes;
+    
+    if (isLeftToRight) {
+      // leftNode -> rightNode: left times from first section, right times from last section
+      leftTimes = {leftDepartureTime: firstTrainrunSection.getSourceDeparture(), leftArrivalTime: firstTrainrunSection.getSourceArrival()};
+      rightTimes = {rightDepartureTime: lastTrainrunSection.getTargetDeparture(), rightArrivalTime: lastTrainrunSection.getTargetArrival()};
+    } else {
+      // rightNode -> leftNode: left times from last section, right times from first section
+      leftTimes = {leftDepartureTime: lastTrainrunSection.getTargetDeparture(), leftArrivalTime: lastTrainrunSection.getTargetArrival()};
+      rightTimes = {rightDepartureTime: firstTrainrunSection.getSourceDeparture(), rightArrivalTime: firstTrainrunSection.getSourceArrival()};
+    }
+
+    return {
+      ...leftTimes,
+      ...rightTimes,
+      travelTime: lastTrainrunSection.getTargetArrivalConsecutiveTime(),
+    };
   }
 
   deleteTrainrun(trainrun: Trainrun, enforceUpdate = true) {

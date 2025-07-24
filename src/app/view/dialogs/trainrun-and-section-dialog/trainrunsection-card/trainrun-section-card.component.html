@@ -6,7 +6,7 @@
     <div class="TrainFreqContainer">
       <svg class="renderer" width="96px" height="48px" viewBox="0 0 48 24">
         <text [class]="getEdgeLineTextClass('top')" x="8" y="5">{{
-          trainrunSectionTimesService.getTimeStructure().leftDepartureTime
+          trainrunTimeStructure.leftDepartureTime
         }}</text>
         <path [class]="getEdgeLineClassAttrString(0, 'top')" d="M0,12L48,12"></path>
         <path [class]="getEdgeLineClassAttrString(1, 'top')" d="M0,12L48,12"></path>
@@ -18,7 +18,7 @@
       </svg>
       <svg class="renderer" width="96px" height="48px" viewBox="0 0 48 24">
         <text [class]="getEdgeLineTextClass('top')" x="40" y="5">{{
-          trainrunSectionTimesService.getTimeStructure().rightArrivalTime
+          trainrunTimeStructure.rightArrivalTime
         }}</text>
         <path [class]="getEdgeLineClassAttrString(0, 'top')" d="M0,12L48,12"></path>
         <path [class]="getEdgeLineClassAttrString(1, 'top')" d="M0,12L48,12"></path>
@@ -38,7 +38,7 @@
     <div class="TrainFreqContainer">
       <svg class="renderer" width="96px" height="48px" viewBox="0 0 48 24">
         <text [class]="getEdgeLineTextClass('bottom')" x="8" y="21">{{
-          trainrunSectionTimesService.getTimeStructure().leftArrivalTime
+          trainrunTimeStructure.leftArrivalTime
         }}</text>
         <path [class]="getEdgeLineClassAttrString(0, 'bottom')" d="M0,12L48,12"></path>
         <path [class]="getEdgeLineClassAttrString(1, 'bottom')" d="M0,12L48,12"></path>
@@ -50,7 +50,7 @@
       </svg>
       <svg class="renderer" width="96px" height="48px" viewBox="0 0 48 24">
         <text [class]="getEdgeLineTextClass('bottom')" x="40" y="21">{{
-          trainrunSectionTimesService.getTimeStructure().rightDepartureTime
+          trainrunTimeStructure.rightDepartureTime
         }}</text>
         <path [class]="getEdgeLineClassAttrString(0, 'bottom')" d="M0,12L48,12"></path>
         <path [class]="getEdgeLineClassAttrString(1, 'bottom')" d="M0,12L48,12"></path>
