@@ -203,15 +203,15 @@ export class PerlenketteSectionComponent
   };
 
   getArrowTranslateAndRotate(y: number) {
-    if (this.isOnlyRightSideDisplayed() && !this.isOnlyLeftSideDisplayed()) {
+    if (this.isRightSideDisplayed() && !this.isLeftSideDisplayed()) {
       return `translate(142, ${y}) rotate(90)`;
-    } else if (!this.isOnlyRightSideDisplayed() && this.isOnlyLeftSideDisplayed()) {
+    } else if (!this.isRightSideDisplayed() && this.isLeftSideDisplayed()) {
       return `translate(132, ${y + 15}) rotate(-90)`;
     }
     return "";
   };
   
-  isOnlyLeftSideDisplayed(): boolean {
+  isLeftSideDisplayed(): boolean {
     if (this.trainrunSection === null) {
       return false;
     }
@@ -226,7 +226,7 @@ export class PerlenketteSectionComponent
     return trainrunDirection === TrainrunDirection.ROUND_TRIP || isTargetLeftOrTop;
   }
   
-  isOnlyRightSideDisplayed(): boolean {
+  isRightSideDisplayed(): boolean {
     if (this.trainrunSection === null) {
       return false;
     }

@@ -112,7 +112,7 @@ export class TrainrunRoundtripTabComponent implements OnInit, OnDestroy {
   private initializeWithCurrentSelectedTrainrun() {
     this.selectedTrainrun = this.trainrunService.getSelectedTrainrun();
     if (this.selectedTrainrun) {
-      this.isOneWay = !this.selectedTrainrun.getIsRoundTrip();
+      this.isOneWay = !this.selectedTrainrun.isRoundTrip();
       this.trainrunDirection = this.selectedTrainrun.getTrainrunDirection();
     }
   }

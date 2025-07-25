@@ -92,7 +92,7 @@
     <g>
       <g
         transform="translate(137, 0)"
-        *ngIf="!showLeftDepartureTime() && showStopArcStart() && isOnlyRightSideDisplayed()"
+        *ngIf="!showLeftDepartureTime() && showStopArcStart() && isRightSideDisplayed()"
       >
         <path
           d="M4,0A4,4,0,1,1,-4,4.898587196589413e-16L0,0Z"
@@ -176,7 +176,7 @@
         />
       </g>
 
-      <g transform="translate(124, 18)" *ngIf="showLeftArrivalTime() && isOnlyLeftSideDisplayed()">
+      <g transform="translate(124, 18)" *ngIf="showLeftArrivalTime() && isLeftSideDisplayed()">
         <text
           x="0"
           y="0"
@@ -191,7 +191,7 @@
           {{ getLeftArrivalTime() }}
         </text>
       </g>
-      <g transform="translate(149, 32)" *ngIf="showLeftDepartureTime() && isOnlyRightSideDisplayed()">
+      <g transform="translate(149, 32)" *ngIf="showLeftDepartureTime() && isRightSideDisplayed()">
         <text
           (click)="switchSectionView($event, 'leftDepartureTime')"
           x="0"
@@ -219,7 +219,7 @@
           </text>
         </g>
       </g>
-      <g transform="translate(124, 164)" *ngIf="showRightDepartureTime() && isOnlyLeftSideDisplayed()">
+      <g transform="translate(124, 164)" *ngIf="showRightDepartureTime() && isLeftSideDisplayed()">
         <text
           x="0"
           y="0"
@@ -234,7 +234,7 @@
           {{ getRightDepartureTime() }}
         </text>
       </g>
-      <g transform="translate(149, 178)" *ngIf="showRightArrivalTime() && isOnlyRightSideDisplayed()">
+      <g transform="translate(149, 178)" *ngIf="showRightArrivalTime() && isRightSideDisplayed()">
         <text
           x="0"
           y="0"
@@ -298,7 +298,7 @@
           <div class="mainGridLayout">
             <div
               class="nodeBorderContainer nodeBorderContainerTopLeft"
-              *ngIf="showLeftArrivalTime() && isOnlyLeftSideDisplayed()"
+              *ngIf="showLeftArrivalTime() && isLeftSideDisplayed()"
             >
               <div class="nodeMinus">
                 <button
@@ -372,7 +372,7 @@
 
             <div
               class="nodeBorderContainer nodeBorderContainerTopRight"
-              *ngIf="showLeftDepartureTime() && isOnlyRightSideDisplayed()"
+              *ngIf="showLeftDepartureTime() && isRightSideDisplayed()"
             >
               <div class="nodeMinus">
                 <button
@@ -482,7 +482,7 @@
 
             <div
               class="nodeBorderContainer nodeBorderContainerBottomLeft"
-              *ngIf="showRightDepartureTime() && isOnlyLeftSideDisplayed()"
+              *ngIf="showRightDepartureTime() && isLeftSideDisplayed()"
             >
               <div class="nodeMinus">
                 <button
@@ -557,7 +557,7 @@
 
             <div
               class="nodeBorderContainer nodeBorderContainerBottomRight"
-              *ngIf="showRightArrivalTime() && isOnlyRightSideDisplayed()"
+              *ngIf="showRightArrivalTime() && isRightSideDisplayed()"
             >
               <div class="nodeMinus">
                 <button

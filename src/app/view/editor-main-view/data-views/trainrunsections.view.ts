@@ -1138,7 +1138,7 @@ export class TrainrunSectionsView {
     return `translate(${x},${y}) rotate(${angle})`;
   }
 
-  createDirectionArrow(
+  createDirectionArrows(
     groupLinesEnter: d3.Selection,
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
@@ -2658,7 +2658,7 @@ export class TrainrunSectionsView {
       enableEvents,
     );
 
-    this.createDirectionArrow(
+    this.createDirectionArrows(
       groupLines,
       selectedTrainrun,
       connectedTrainIds,

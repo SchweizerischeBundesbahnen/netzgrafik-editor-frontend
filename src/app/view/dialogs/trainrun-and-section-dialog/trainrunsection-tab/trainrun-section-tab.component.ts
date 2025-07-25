@@ -83,7 +83,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
       this.selectedTrainrunSection,
     );
-    return this.getIsRoundTrip() || isTargetRightOrBottom;
+    return this.isRoundTrip() || isTargetRightOrBottom;
   }
 
   public get isBottomTrainrunSectionInfosDisplayed(): boolean {
@@ -93,7 +93,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     const isTargetLeftOrTop = TrainrunsectionHelper.isTargetLeftOrTop(
       this.selectedTrainrunSection,
     );
-    return this.getIsRoundTrip() || isTargetLeftOrTop;
+    return this.isRoundTrip() || isTargetLeftOrTop;
   }
 
   constructor(
@@ -387,7 +387,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  private getIsRoundTrip() {
-    return this.selectedTrainrunSection.getTrainrun().getIsRoundTrip();
+  private isRoundTrip() {
+    return this.selectedTrainrunSection.getTrainrun().isRoundTrip();
   }
 }

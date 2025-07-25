@@ -1213,7 +1213,7 @@ export class TrainrunSectionService implements OnDestroy {
   }
 
   invertTrainrunSectionsSourceAndTarget(trainrunId: number){
-    this.getAllTrainrunSectionsForTrainrun(trainrunId).map((trainrunSection) => {
+    this.getAllTrainrunSectionsForTrainrun(trainrunId).forEach((trainrunSection) => {
       this.invertTrainrunSectionSourceAndTarget(trainrunSection);
     });
   }
