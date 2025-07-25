@@ -26,6 +26,7 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
   filterNotes: boolean;
   filterAllNonStopNodes: boolean;
   filterTrainrunDirectionArrows: boolean;
+  filterTrainrunSectionSymmetryArrows: boolean;
   filterArrivalDepartureTime: boolean;
   filterShowNonStopTime: boolean;
   filterTravelTime: boolean;
@@ -73,6 +74,8 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
   updateFilterData() {
     this.filterTrainrunDirectionArrows =
       this.filterService.isFilterTrainrunDirectionArrowsEnabled();
+    this.filterTrainrunSectionSymmetryArrows =
+      this.filterService.isFilterTrainrunSectionSymmetryArrowsEnabled();
     this.filterArrivalDepartureTime =
       this.filterService.isFilterArrivalDepartureTimeEnabled();
     this.filterShowNonStopTime =
@@ -229,6 +232,14 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     }
   }
 
+  filterTrainrunSectionSymmetryArrowsChanged() {
+    if (this.filterTrainrunSectionSymmetryArrows) {
+      this.filterService.enableFilterTrainrunSectionSymmetryArrows();
+    } else {
+      this.filterService.disableFilterTrainrunSectionSymmetryArrows();
+    }
+  }
+
   filterArrivalDepartureTimeChanged() {
     if (this.filterArrivalDepartureTime) {
       this.filterService.enableFilterArrivalDepartureTime();
@@ -331,9 +342,28 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     );
   }
 
-  isAsymmetryActive(): boolean {
+  getTrainrunSectionSymmetryClassname(symmetry: boolean): string {
+    if (this.filterService.isFilterTrainrunSectionSymmetryEnabled(symmetry)) {
+      return (
+        "TrainrunDialog TrainrunSectionSymmetry " +
+        StaticDomTags.TAG_SELECTED
+      );
+    }
+    return (
+      "TrainrunDialog TrainrunSectionSymmetry "
+    );
+  }
+
+  isOneWayActive(): boolean {
     for (const trainrun of this.dataService.getTrainruns()) {
       if (trainrun.getTrainrunDirection() !== TrainrunDirection.ROUND_TRIP) return true;
+    }
+    return false;
+  }
+
+  isAsymmetryActive(): boolean {
+    for (const section of this.dataService.getTrainrunSections()) {
+      if (!section.isSymmetric()) return true;
     }
     return false;
   }
@@ -375,6 +405,14 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     return $localize`:@@app.view.editor-filter-view.hide-trainrun-direction:Hide ${trainrunDirectionTranslation}:trainrunDirection:`;
   }
 
+  getTrainrunSectionSymmetryTooltip(symmetry: boolean): string {
+    if (!this.filterService.isFilterTrainrunSectionSymmetryEnabled(symmetry)) {
+      return $localize`:@@app.view.editor-filter-view.show-asymmetric-trainruns:Show asymmetric trainruns`;
+    }
+    return $localize`:@@app.view.editor-filter-view.hide-asymmetric-trainruns:Hide asymmetric trainruns`;
+  }
+
+
   makeCategoryButtonLabel(trainrunCategory: TrainrunCategory): string {
     const label = trainrunCategory.shortName.toUpperCase();
     if (label.length > 4) {
@@ -400,6 +438,14 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
       return "↔";
     } else {
       return "→";
+    }
+  }
+
+  makeTrainrunSectionSymmetryButtonLabel(symmetry: boolean): string {
+    if (symmetry) {
+      return $localize`:@@app.view.editor-filter-view.symmetric-short:Symm.`;
+    } else {
+      return $localize`:@@app.view.editor-filter-view.asymmetric-short:Asymm.`;
     }
   }
 
@@ -432,6 +478,16 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
       this.filterService.enableFilterTrainrunDirection(trainrunDirection);
     } else {
       this.filterService.disableFilterTrainrunDirection(trainrunDirection);
+    }
+  }
+
+  onTrainrunSectionSymmetryChanged(symmetry: boolean) {
+    if (
+      !this.filterService.isFilterTrainrunSectionSymmetryEnabled(symmetry)
+    ) {
+      this.filterService.enableFilterTrainrunSectionSymmetry(symmetry);
+    } else {
+      this.filterService.disableFilterTrainrunSectionSymmetry(symmetry);
     }
   }
 
@@ -489,6 +545,7 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     this.filterService.resetFilterTrainrunFrequency();
     this.filterService.resetFilterTrainrunTimeCategory();
     this.filterService.resetFilterTrainrunDirection();
+    this.filterService.resetFilterTrainrunSectionSymmetry();
   }
 
   onResetNodeFilter() {
@@ -508,6 +565,7 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     this.onResetNodeFilter();
     this.onResetNoteFilter();
     this.filterService.enableFilterTrainrunDirectionArrows();
+    this.filterService.enableFilterTrainrunSectionSymmetryArrows();
     this.filterService.enableFilterArrivalDepartureTime();
     this.filterService.enableFilterTravelTime();
     this.filterService.enableFilterTrainrunName();
@@ -515,6 +573,8 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     this.filterService.enableFilterConnections();
     this.filterTrainrunDirectionArrows =
       this.filterService.isFilterTrainrunDirectionArrowsEnabled();
+    this.filterTrainrunSectionSymmetryArrows =
+      this.filterService.isFilterTrainrunSectionSymmetryArrowsEnabled();
     this.filterArrivalDepartureTime =
       this.filterService.isFilterArrivalDepartureTimeEnabled();
     this.filterTravelTime = this.filterService.isFilterTravelTimeEnabled();

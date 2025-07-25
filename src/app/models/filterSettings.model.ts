@@ -20,6 +20,7 @@ export class FilterSetting {
   public filterNoteLabels: number[];
   public filterTrainrunLabels: number[];
   public filterTrainrunDirectionArrows;
+  public filterTrainrunSectionSymmetryArrows;
   public filterArrivalDepartureTime;
   public filterTravelTime;
   public filterTrainrunName;
@@ -29,6 +30,7 @@ export class FilterSetting {
   public filterTrainrunFrequency: TrainrunFrequency[];
   public filterTrainrunTimeCategory: TrainrunTimeCategory[];
   public filterTrainrunDirection: TrainrunDirection[];
+  public filterTrainrunSectionSymmetry: boolean[];
   public filterAllEmptyNodes;
   public filterAllNonStopNodes;
   public filterNotes;
@@ -45,6 +47,7 @@ export class FilterSetting {
       filterNoteLabels,
       filterTrainrunLabels,
       filterTrainrunDirectionArrows,
+      filterTrainrunSectionSymmetryArrows,
       filterArrivalDepartureTime,
       filterTravelTime,
       filterTrainrunName,
@@ -54,6 +57,7 @@ export class FilterSetting {
       filterTrainrunFrequency,
       filterTrainrunTimeCategory,
       filterTrainrunDirection,
+      filterTrainrunSectionSymmetry,
       filterAllEmptyNodes,
       filterAllNonStopNodes,
       filterNotes,
@@ -68,6 +72,7 @@ export class FilterSetting {
       filterNoteLabels: [],
       filterTrainrunLabels: [],
       filterTrainrunDirectionArrows: true,
+      filterTrainrunSectionSymmetryArrows: true,
       filterArrivalDepartureTime: true,
       filterTravelTime: true,
       filterTrainrunName: true,
@@ -77,6 +82,7 @@ export class FilterSetting {
       filterTrainrunFrequency: null,
       filterTrainrunTimeCategory: null,
       filterTrainrunDirection: null,
+      filterTrainrunSectionSymmetry: null,
       filterAllEmptyNodes: false,
       filterAllNonStopNodes: false,
       filterNotes: false,
@@ -92,6 +98,7 @@ export class FilterSetting {
     this.filterNoteLabels = filterNoteLabels;
     this.filterTrainrunLabels = filterTrainrunLabels;
     this.filterTrainrunDirectionArrows = filterTrainrunDirectionArrows;
+    this.filterTrainrunSectionSymmetryArrows = filterTrainrunSectionSymmetryArrows;
     this.filterArrivalDepartureTime = filterArrivalDepartureTime;
     this.filterTravelTime = filterTravelTime;
     this.filterTrainrunName = filterTrainrunName;
@@ -101,6 +108,7 @@ export class FilterSetting {
     this.filterTrainrunFrequency = filterTrainrunFrequency;
     this.filterTrainrunTimeCategory = filterTrainrunTimeCategory;
     this.filterTrainrunDirection = filterTrainrunDirection;
+    this.filterTrainrunSectionSymmetry = filterTrainrunSectionSymmetry;
     this.filterAllEmptyNodes = filterAllEmptyNodes;
     this.filterAllNonStopNodes = filterAllNonStopNodes;
     this.filterNotes = filterNotes;
@@ -173,6 +181,7 @@ export class FilterSetting {
       this.filterNoteLabels.length === 0 &&
       this.filterTrainrunLabels.length === 0 &&
       this.filterTrainrunDirectionArrows === true &&
+      this.filterTrainrunSectionSymmetryArrows === true &&
       this.filterArrivalDepartureTime === true &&
       this.filterTravelTime === true &&
       this.filterTrainrunName === true &&
@@ -182,6 +191,7 @@ export class FilterSetting {
       this.filterTrainrunFrequency.length === frainrunFrequenciesLength &&
       this.filterTrainrunTimeCategory.length === trainrunTimeCategoryLength &&
       this.filterTrainrunDirection.length === Object.values(TrainrunDirection).length &&
+      this.filterTrainrunSectionSymmetry.length === 2 &&
       this.filterAllEmptyNodes === false &&
       this.filterAllNonStopNodes === false &&
       this.filterNotes === false &&
@@ -200,6 +210,7 @@ export class FilterSetting {
       filterNoteLabels: this.filterNoteLabels,
       filterTrainrunLabels: this.filterTrainrunLabels,
       filterTrainrunDirectionArrows: this.filterTrainrunDirectionArrows,
+      filterTrainrunSectionSymmetryArrows: this.filterTrainrunSectionSymmetryArrows,
       filterArrivalDepartureTime: this.filterArrivalDepartureTime,
       filterTravelTime: this.filterTravelTime,
       filterTrainrunName: this.filterTrainrunName,
@@ -209,6 +220,7 @@ export class FilterSetting {
       filterTrainrunFrequency: this.filterTrainrunFrequency,
       filterTrainrunTimeCategory: this.filterTrainrunTimeCategory,
       filterTrainrunDirection: this.filterTrainrunDirection,
+      filterTrainrunSectionSymmetry: this.filterTrainrunSectionSymmetry,
       filterAllEmptyNodes: this.filterAllEmptyNodes,
       filterAllNonStopNodes: this.filterAllNonStopNodes,
       filterNotes: this.filterNotes,

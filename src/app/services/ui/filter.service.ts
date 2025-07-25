@@ -396,12 +396,17 @@ export class FilterService implements OnDestroy {
     const filterTrainrunSection = this.checkFilterTrainrunLabels(
       trainrun.getLabelIds(),
     );
+    const trainrunSectionAsymmetry = this.dataService.getTrainrunSectionsByTrainrunId(trainrun.getId()).some(
+      (trainrunSection: TrainrunSection) =>
+        this.isFilterTrainrunSectionSymmetryEnabled(trainrunSection.isSymmetric())
+    );
     return (
       filterTrainrunSection &&
       this.isFilterTrainrunFrequencyEnabled(trainrun.getTrainrunFrequency()) &&
       this.isFilterTrainrunCategoryEnabled(trainrun.getTrainrunCategory()) &&
       this.isFilterTrainrunTimeCategoryEnabled(trainrun.getTrainrunTimeCategory()) &&
-      this.isFilterTrainrunDirectionEnabled(trainrun.getTrainrunDirection())
+      this.isFilterTrainrunDirectionEnabled(trainrun.getTrainrunDirection()) &&
+      trainrunSectionAsymmetry
     );
   }
 
@@ -577,6 +582,20 @@ export class FilterService implements OnDestroy {
 
   disableFilterTrainrunDirectionArrows() {
     this.activeFilterSetting.filterTrainrunDirectionArrows = false;
+    this.filterChanged();
+  }
+
+  isFilterTrainrunSectionSymmetryArrowsEnabled(): boolean {
+    return this.activeFilterSetting.filterTrainrunSectionSymmetryArrows;
+  }
+
+  enableFilterTrainrunSectionSymmetryArrows() {
+    this.activeFilterSetting.filterTrainrunSectionSymmetryArrows = true;
+    this.filterChanged();
+  }
+
+  disableFilterTrainrunSectionSymmetryArrows() {
+    this.activeFilterSetting.filterTrainrunSectionSymmetryArrows = false;
     this.filterChanged();
   }
 
@@ -774,6 +793,34 @@ export class FilterService implements OnDestroy {
     this.filterChanged();
   }
 
+  isFilterTrainrunSectionSymmetryEnabled(symmetry: boolean): boolean {
+    return this.activeFilterSetting.filterTrainrunSectionSymmetry.includes(
+      symmetry,
+    );
+  }
+
+  enableFilterTrainrunSectionSymmetry(symmetry: boolean) {
+    if (
+      !this.activeFilterSetting.filterTrainrunSectionSymmetry.includes(symmetry)
+    ) {
+      this.activeFilterSetting.filterTrainrunSectionSymmetry.push(symmetry);
+      this.filterChanged();
+    }
+  }
+
+  disableFilterTrainrunSectionSymmetry(symmetry: boolean) {
+    this.activeFilterSetting.filterTrainrunSectionSymmetry =
+      this.activeFilterSetting.filterTrainrunSectionSymmetry.filter(
+        (sym) => sym !== symmetry,
+      );
+    this.filterChanged();
+  }
+
+  resetFilterTrainrunSectionSymmetry() {
+    this.activeFilterSetting.filterTrainrunSectionSymmetry = [true, false];
+    this.filterChanged();
+  }
+
   isAnyFilterActive(): boolean {
     return (
       !this.isDisplayFilteringActive() ||
@@ -825,6 +872,13 @@ export class FilterService implements OnDestroy {
           return;
         }
       });
+    [true, false].forEach((symmetry: boolean) => {
+      const isFilter = this.isFilterTrainrunSectionSymmetryEnabled(symmetry);
+      if (!isFilter) {
+        isActive = false;
+        return;
+      }
+    });
     return isActive;
   }
 
@@ -838,6 +892,7 @@ export class FilterService implements OnDestroy {
     return (
       !this.isFilterNotesEnabled() &&
       this.isFilterTrainrunDirectionArrowsEnabled() &&
+      this.isFilterTrainrunSectionSymmetryArrowsEnabled() &&
       this.isFilterArrivalDepartureTimeEnabled() &&
       this.isFilterConnectionsEnabled() &&
       this.isFilterTrainrunNameEnabled() &&
@@ -952,6 +1007,7 @@ export class FilterService implements OnDestroy {
         filterSetting.filterTrainrunDirection =
           this.dataService.getTrainrunDirections();
       }
+      filterSetting.filterTrainrunSectionSymmetry = [true, false];
     }
   }
 }

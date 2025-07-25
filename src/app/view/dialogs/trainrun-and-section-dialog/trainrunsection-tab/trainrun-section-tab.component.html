@@ -148,7 +148,8 @@
             class="NodeRightDeparture"
             *ngIf="isBottomTrainrunSectionInfosDisplayed"
           ></div>
-          <div class="TravelTime"></div>
+          <div [ngClass]="'TravelTime' + getTravelTimeComponentScssClassSuffix()"></div>
+          <div [ngClass]="'BackwardTravelTime' + getTravelTimeComponentScssClassSuffix()" *ngIf="!isSymmetric"></div>
 
           <div
             class="focusguard"
@@ -199,7 +200,17 @@
               #leftArrivalTimeInputElement
             />
           </div>
-
+          <div class="toggle-container LeftSymmetryToggle" *ngIf="isRoundTrip()">
+            <label class="toggle-switch">
+              <input
+                sbbInput
+                type="checkbox"
+                [checked]="!isLeftNodeSymmetric"
+                (change)="onLeftNodeSymmetryChanged(!$event.target.checked)"
+              />
+              <span class="slider"></span>
+            </label>
+          </div>
           <div
             class="NodeLeftArrivalPlus"
             *ngIf="isBottomTrainrunSectionInfosDisplayed"
@@ -267,7 +278,17 @@
               +
             </button>
           </div>
-
+          <div class="toggle-container RightSymmetryToggle" *ngIf="isRoundTrip()">
+            <label class="toggle-switch">
+              <input
+                sbbInput
+                type="checkbox"
+                [checked]="!isRightNodeSymmetric"
+                (change)="onRightNodeSymmetryChanged(!$event.target.checked)"
+              />
+              <span class="slider"></span>
+            </label>
+          </div>
           <div
             class="NodeRightArrivalMinus"
             *ngIf="isTopTrainrunSectionInfosDisplayed"
@@ -373,19 +394,19 @@
             </button>
           </div>
 
-          <div class="TravelTimeMinus">
+          <div [class]="'TravelTimeMinus' + getTravelTimeComponentScssClassSuffix()">
             <button
               tabindex="-1"
               mode="ghost"
               class="ButtonMinus"
               (click)="
-                trainrunSectionTimesService.onInputTravelTimeElementButtonMinus()
+                trainrunSectionTimesService.onTravelTimeButtonMinus()
               "
             >
               -
             </button>
           </div>
-          <div class="TravelTimeTime">
+          <div [class]="'TravelTimeTime' + getTravelTimeComponentScssClassSuffix()">
             <ng-container>
               <input
                 tabindex="3"
@@ -406,26 +427,79 @@
                   trainrunSectionTimesService.getTimeStructure().travelTime
                 "
                 (change)="
-                  trainrunSectionTimesService.onInputTravelTimeChanged()
+                  trainrunSectionTimesService.onTravelTimeChanged()
                 "
                 #travelTimeInputElement
               />
             </ng-container>
           </div>
-          <div class="TravelTimePlus">
+          <div [class]="'TravelTimePlus' + getTravelTimeComponentScssClassSuffix()">
             <button
               tabindex="-1"
               mode="ghost"
               class="ButtonPlus"
               (click)="
-                trainrunSectionTimesService.onInputTravelTimeElementButtonPlus()
+                trainrunSectionTimesService.onTravelTimeButtonPlus()
               "
             >
               +
             </button>
           </div>
 
-          <div class="TravelTimeLock">
+          <div [class]="'BackwardTravelTimeMinus' + getTravelTimeComponentScssClassSuffix()" *ngIf="!isSymmetric">
+            <button
+              tabindex="-1"
+              mode="ghost"
+              class="ButtonMinus"
+              (click)="
+                trainrunSectionTimesService.onBackwardTravelTimeButtonMinus()
+              "
+            >
+              -
+            </button>
+          </div>
+          <div [class]="'BackwardTravelTimeTime' + getTravelTimeComponentScssClassSuffix()" *ngIf="!isSymmetric">
+            <ng-container>
+              <input
+                tabindex="3"
+                id="BackwardTravelTimeTimeInputElement"
+                [ngClass]="{
+                  InputBackwardTravelTimeElement:
+                    !trainrunSectionTimesService.getHighlightBackwardTravelTimeElement(),
+                  InputBackwardTravelTimeElementHighlighted:
+                    trainrunSectionTimesService.getHighlightBackwardTravelTimeElement()
+                }"
+                type="number"
+                min="0.0001"
+                sbbInput
+                spellcheck="false"
+                pattern="^[0-9.]*"
+                minlength="1"
+                [(ngModel)]="
+                  trainrunSectionTimesService.getTimeStructure()
+                    .backwardTravelTime
+                "
+                (change)="
+                  trainrunSectionTimesService.onBackwardTravelTimeChanged()
+                "
+                #backwardTravelTimeInputElement
+              />
+            </ng-container>
+          </div>
+          <div [class]="'BackwardTravelTimePlus' + getTravelTimeComponentScssClassSuffix()" *ngIf="!isSymmetric">
+            <button
+              tabindex="-1"
+              mode="ghost"
+              class="ButtonPlus"
+              (click)="
+                trainrunSectionTimesService.onBackwardTravelTimeButtonPlus()
+              "
+            >
+              +
+            </button>
+          </div>
+
+          <div [class]="'TravelTimeLock' + getTravelTimeComponentScssClassSuffix()">
             <div
               *ngIf="
                 trainrunSectionTimesService.getLockStructure()

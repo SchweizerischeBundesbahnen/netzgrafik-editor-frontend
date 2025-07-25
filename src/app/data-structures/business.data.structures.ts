@@ -117,11 +117,14 @@ export interface TrainrunSectionDto {
   targetNodeId: number; // reference to the node by Node.id
   targetPortId: number; // reference to the node by Node.id
 
+  sourceSymmetry: boolean; // binds sourceDeparture and sourceArrival times
+  targetSymmetry: boolean; // binds targetDeparture and targetArrival times
   sourceArrival: TimeLockDto; // declares the soruce arrival time
   sourceDeparture: TimeLockDto; // declares the soruce departure time
   targetArrival: TimeLockDto; // declares the target arrival time
   targetDeparture: TimeLockDto; // declares the target departure time
-  travelTime: TimeLockDto; // declares the travel arrival time
+  travelTime: TimeLockDto; // declares the travel time (forward direction)
+  backwardTravelTime: TimeLockDto; // declares the travel time in the opposite direction
 
   numberOfStops: number; // number of stops - not declared in detail (no node attached)
 
@@ -291,6 +294,7 @@ export interface FilterSettingDto {
   filterNoteLabels: number[]; // labels to filter out (labels only of type - LabelRef: note)
   filterTrainrunLabels: number[]; // labels to filter out (labels only of type - LabelRef: trainrun)
   filterTrainrunDirectionArrows: boolean; // flag for trainrun direction arrows (hide/show)
+  filterTrainrunSectionSymmetryArrows: boolean; // flag for trainrun section symmetry arrows (hide/show)
   filterArrivalDepartureTime: boolean; // flag for arrival and departure time filtering (hide/show)
   filterTravelTime: boolean; // flag for travel time filter (hide/show)
   filterTrainrunName: boolean; // flag for trainrun time filter (hide/show)
@@ -300,6 +304,7 @@ export interface FilterSettingDto {
   filterTrainrunFrequency: TrainrunFrequency[]; // list of frequency to filter out
   filterTrainrunTimeCategory: TrainrunTimeCategory[]; // list of time categroy to filter out
   filterTrainrunDirection: TrainrunDirection[]; // list of trainrun direction to filter out
+  filterTrainrunSectionSymmetry: boolean[]; // list of trainrun symmetry values (true/false) to filter out
   filterAllEmptyNodes: boolean; // flag to filter all empty nodes (hide/show)
   filterAllNonStopNodes: boolean; // flag to filter all only non-stop nodes (hide/show)
   filterNotes: boolean; // flag to filter notes (hide/show)

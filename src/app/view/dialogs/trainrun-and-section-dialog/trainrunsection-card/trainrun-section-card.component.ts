@@ -85,6 +85,7 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
     this.timeCategoryLinePattern =
       selectedTrainrun.getTimeCategoryLinePatternRef();
     this.trainrunSectionTimesService.setHighlightTravelTimeElement(false);
+    this.trainrunSectionTimesService.setHighlightBackwardTravelTimeElement(false);
     this.trainrunSectionTimesService.applyOffsetAndTransformTimeStructure();
 
     const startNode = this.trainrunService.getStartNodeWithTrainrunId(

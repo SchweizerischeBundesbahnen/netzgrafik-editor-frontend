@@ -52,20 +52,31 @@
       </button>
     </div>
 
-    <div *ngIf="isAsymmetryActive()">
+    <div *ngIf="isOneWayActive() || isAsymmetryActive()">
       <sbb-label class="sbb-mt-m">{{ 'app.view.editor-filter-view.symmetry' | translate }}</sbb-label>
       <div class="sbb-trainrun-chip-group">
-        <button
-          [class]="getTrainrunDirectionClassname(direction)"
-          (click)="onTrainrunDirectionChanged(direction)"
-          mode="ghost"
-          [title]="getTrainrunDirectionTooltip(direction)"
-          *ngFor="
-            let direction of this.dataService.getTrainrunDirections()
-          "
-        >
-          {{ makeTrainrunDirectionButtonLabel(direction) }}
-        </button>
+        <ng-container *ngIf="isOneWayActive()">
+          <button
+            *ngFor="let direction of dataService.getTrainrunDirections()"
+            [class]="getTrainrunDirectionClassname(direction)"
+            (click)="onTrainrunDirectionChanged(direction)"
+            mode="ghost"
+            [title]="getTrainrunDirectionTooltip(direction)"
+          >
+            {{ makeTrainrunDirectionButtonLabel(direction) }}
+          </button>
+        </ng-container>
+        <ng-container *ngIf="isAsymmetryActive()">
+          <button
+            *ngFor="let symmetry of [true, false]"
+            [class]="getTrainrunSectionSymmetryClassname(symmetry)"
+            (click)="onTrainrunSectionSymmetryChanged(symmetry)"
+            mode="ghost"
+            [title]="getTrainrunSectionSymmetryTooltip(symmetry)"
+          >
+            {{ makeTrainrunSectionSymmetryButtonLabel(symmetry) }}
+          </button>
+        </ng-container>
       </div>
     </div>
 
@@ -149,6 +160,11 @@
         [(ngModel)]="filterTrainrunDirectionArrows"
         (change)="filterTrainrunDirectionArrowsChanged()"
         >{{ 'app.view.editor-filter-view.display-trainrun-direction-arrows' | translate }}
+      </sbb-checkbox>
+      <sbb-checkbox
+        [(ngModel)]="filterTrainrunSectionSymmetryArrows"
+        (change)="filterTrainrunSectionSymmetryArrowsChanged()"
+        >{{ 'app.view.editor-filter-view.display-trainrun-section-symmetry-arrows' | translate }}
       </sbb-checkbox>
     </div>
     
