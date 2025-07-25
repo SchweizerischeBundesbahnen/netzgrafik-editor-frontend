@@ -102,6 +102,11 @@ export class Sg3TrainrunsService implements OnDestroy {
           const pathNodeHaltezeit = pathItem.getPathNode().haltezeit;
 
           pathNodes.forEach((pathNode: SgPathNode) => {
+            /* For one-way trains, adjust extremity nodes occupation times to use only the stop time (haltezeit)
+              instead of the default 1-hour occupation time used for round-trip trains.
+              Departure node: occupation from (departure - haltezeit) to departure
+              Arrival node: occupation from arrival to (arrival + haltezeit)
+            */
             if (trainrunItem.trainrunDirection === TrainrunDirection.ONE_WAY) {
               if (trainrunItem.leftToRight) {
                 if (pathNode.departurePathSection === undefined) {
