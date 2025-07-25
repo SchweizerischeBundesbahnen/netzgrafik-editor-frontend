@@ -396,12 +396,17 @@ export class FilterService implements OnDestroy {
     const filterTrainrunSection = this.checkFilterTrainrunLabels(
       trainrun.getLabelIds(),
     );
+    const asymmetry = this.dataService.getTrainrunSectionsByTrainrunId(trainrun.getId()).some(
+      (trainrunSection: TrainrunSection) =>
+        this.isFilterSymmetryEnabled(trainrunSection.isSymmetric())
+    );
     return (
       filterTrainrunSection &&
       this.isFilterTrainrunFrequencyEnabled(trainrun.getTrainrunFrequency()) &&
       this.isFilterTrainrunCategoryEnabled(trainrun.getTrainrunCategory()) &&
       this.isFilterTrainrunTimeCategoryEnabled(trainrun.getTrainrunTimeCategory()) &&
-      this.isFilterDirectionEnabled(trainrun.getDirection())
+      this.isFilterDirectionEnabled(trainrun.getDirection()) &&
+      asymmetry
     );
   }
 
@@ -580,6 +585,20 @@ export class FilterService implements OnDestroy {
     this.filterChanged();
   }
 
+  isFilterAsymmetryArrowsEnabled(): boolean {
+    return this.activeFilterSetting.filterAsymmetryArrows;
+  }
+
+  enableFilterAsymmetryArrows() {
+    this.activeFilterSetting.filterAsymmetryArrows = true;
+    this.filterChanged();
+  }
+
+  disableFilterAsymmetryArrows() {
+    this.activeFilterSetting.filterAsymmetryArrows = false;
+    this.filterChanged();
+  }
+
   isFilterArrivalDepartureTimeEnabled(): boolean {
     return this.activeFilterSetting.filterArrivalDepartureTime;
   }
@@ -619,6 +638,20 @@ export class FilterService implements OnDestroy {
 
   disableFilterTravelTime() {
     this.activeFilterSetting.filterTravelTime = false;
+    this.filterChanged();
+  }
+
+  isFilterBackwardTravelTimeEnabled(): boolean {
+    return this.activeFilterSetting.filterBackwardTravelTime;
+  }
+
+  enableFilterBackwardTravelTime() {
+    this.activeFilterSetting.filterBackwardTravelTime = true;
+    this.filterChanged();
+  }
+
+  disableFilterBackwardTravelTime() {
+    this.activeFilterSetting.filterBackwardTravelTime = false;
     this.filterChanged();
   }
 
@@ -774,6 +807,34 @@ export class FilterService implements OnDestroy {
     this.filterChanged();
   }
 
+  isFilterSymmetryEnabled(symmetry: boolean): boolean {
+    return this.activeFilterSetting.filterSymmetry.includes(
+      symmetry,
+    );
+  }
+
+  enableFilterSymmetry(symmetry: boolean) {
+    if (
+      !this.activeFilterSetting.filterSymmetry.includes(symmetry)
+    ) {
+      this.activeFilterSetting.filterSymmetry.push(symmetry);
+      this.filterChanged();
+    }
+  }
+
+  disableFilterSymmetry(symmetry: boolean) {
+    this.activeFilterSetting.filterSymmetry =
+      this.activeFilterSetting.filterSymmetry.filter(
+        (sym) => sym !== symmetry,
+      );
+    this.filterChanged();
+  }
+
+  resetFilterSymmetry() {
+    this.activeFilterSetting.filterSymmetry = [true, false];
+    this.filterChanged();
+  }
+
   isAnyFilterActive(): boolean {
     return (
       !this.isDisplayFilteringActive() ||
@@ -825,6 +886,13 @@ export class FilterService implements OnDestroy {
           return;
         }
       });
+    [true, false].forEach((symmetry: boolean) => {
+      const isFilter = this.isFilterSymmetryEnabled(symmetry);
+      if (!isFilter) {
+        isActive = false;
+        return;
+      }
+    });
     return isActive;
   }
 
@@ -838,10 +906,12 @@ export class FilterService implements OnDestroy {
     return (
       !this.isFilterNotesEnabled() &&
       this.isFilterDirectionArrowsEnabled() &&
+      this.isFilterAsymmetryArrowsEnabled() &&
       this.isFilterArrivalDepartureTimeEnabled() &&
       this.isFilterConnectionsEnabled() &&
       this.isFilterTrainrunNameEnabled() &&
       this.isFilterTravelTimeEnabled() &&
+      this.isFilterBackwardTravelTimeEnabled() &&
       this.isFilterShowNonStopTimeEnabled()
     );
   }
@@ -952,6 +1022,7 @@ export class FilterService implements OnDestroy {
         filterSetting.filterDirection =
           this.dataService.getDirections();
       }
+      filterSetting.filterSymmetry = [true, false];
     }
   }
 }
