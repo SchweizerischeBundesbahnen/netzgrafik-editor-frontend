@@ -29,7 +29,7 @@ import {TrainrunService} from "../services/data/trainrun.service";
 import {
   TrainrunDialogParameter,
   TrainrunDialogType
-} from '../view/dialogs/trainrun-and-section-dialog/trainrun-and-section-dialog.component';
+} from "../view/dialogs/trainrun-and-section-dialog/trainrun-and-section-dialog.component";
 
 @Component({
   selector: "sbb-perlenkette",
