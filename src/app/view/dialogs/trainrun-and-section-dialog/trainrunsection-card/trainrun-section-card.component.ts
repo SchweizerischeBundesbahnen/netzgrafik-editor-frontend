@@ -20,7 +20,7 @@ import {
 import {StaticDomTags} from "../../../editor-main-view/data-views/static.dom.tags";
 import {ColorRefType} from "../../../../data-structures/technical.data.structures";
 import {TrainrunSectionTimesService} from "../../../../services/data/trainrun-section-times.service";
-import { LeftAndRightTimeStructure } from "../trainrunsection-tab/trainrun-section-tab.component";
+import {LeftAndRightTimeStructure} from "../trainrunsection-tab/trainrun-section-tab.component";
 
 @Component({
   selector: "sbb-trainrunsection-card",
