@@ -22,7 +22,7 @@
         <div
           id="textbox"
           (click)="trainrunNameClicked($event)"
-          [attr.style]="'width:' + (contentWidth - 100) + 'px;float: left;'"
+          [attr.style]="'width:' + (contentWidth - 80) + 'px;float: left;'"
         >
           <ng-container *ngIf="showTrainrunName()">
             <p
@@ -91,18 +91,10 @@
           ></sbb-icon>
         </ng-container>
         <ng-container *ngIf="showTrainrunEditor()">
-          <ng-container *ngIf="isSbbTrainrunTab()">
-            <sbb-icon
-              svgIcon="context-menu-medium"
-              (click)="showTrainrunDialogOneWay($event)"
-            ></sbb-icon>
-          </ng-container>
-          <ng-container *ngIf="isSbbTrainrunRoundtripTab()">
-            <sbb-icon
-              svgIcon="cross-medium"
-              (click)="showTrainrunDialogOneWay($event)"
-            ></sbb-icon>
-          </ng-container>
+          <sbb-icon
+            svgIcon="chevron-up-medium"
+            (click)="trainrunNameClicked($event)"
+          ></sbb-icon>
         </ng-container>
       </div>
     </div>
