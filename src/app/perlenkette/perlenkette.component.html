@@ -86,19 +86,21 @@
         &nbsp;
         <ng-container *ngIf="!showTrainrunEditor()">
           <sbb-icon
-            svgIcon="controls-medium"
+            svgIcon="chevron-down-medium"
             (click)="trainrunNameClicked($event)"
           ></sbb-icon>
         </ng-container>
         <ng-container *ngIf="showTrainrunEditor()">
           <ng-container *ngIf="isSbbTrainrunTab()">
-            <sbb-icon svgIcon="circle-three-dots-medium"
-                      (click)="showTrainrunDialogOneWay($event)"
+            <sbb-icon
+              svgIcon="controls-medium"
+              (click)="showTrainrunDialogOneWay($event)"
             ></sbb-icon>
           </ng-container>
           <ng-container *ngIf="isSbbTrainrunRoundtripTab()">
-            <sbb-icon svgIcon="cross-medium"
-                      (click)="showTrainrunDialogOneWay($event)"
+            <sbb-icon
+              svgIcon="cross-medium"
+              (click)="showTrainrunDialogOneWay($event)"
             ></sbb-icon>
           </ng-container>
         </ng-container>
