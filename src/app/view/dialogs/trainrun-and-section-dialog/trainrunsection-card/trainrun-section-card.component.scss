@@ -39,6 +39,14 @@
   border: 1px solid $COLOR_Focus;
 }
 
+.OneWayCard:hover {
+  background: var(--COLOR_TRANSITION_GRAYEDOUT);
+}
+
+.OneWayCard:active {
+  background-color: $COLOR_MUTED_SILVER;
+}
+
 .TrainFreqContainer {
   display: flex;
   align-items: center;

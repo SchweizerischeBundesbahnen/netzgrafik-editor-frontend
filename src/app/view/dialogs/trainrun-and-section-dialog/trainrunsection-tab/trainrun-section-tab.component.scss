@@ -384,11 +384,11 @@ input.NumberOfStopsInputElement.IsActive {
 }
 
 ::ng-deep button.FunctionButton:hover {
-  background-color: $COLOR_MUTED_SILVER;
+  background-color: var(--COLOR_TRANSITION_GRAYEDOUT);
 }
 
 ::ng-deep button.FunctionButton:active {
-  background-color: var(--sbb-menu-item-label);
+  background-color: $COLOR_MUTED_SILVER;
 }
 
 ::ng-deep

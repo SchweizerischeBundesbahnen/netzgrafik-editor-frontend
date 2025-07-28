@@ -63,6 +63,8 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
 
   public showTrainrunEditTab: ShowTrainrunEditTab = ShowTrainrunEditTab.sbb_trainrun_tab;
 
+  sbbToogleValue = "General";
+
   constructor(
     private readonly loadPerlenketteService: LoadPerlenketteService,
     readonly filterService: FilterService,
@@ -113,6 +115,18 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     this.svgPoint = new Vec2D(0, -64);
   }
 
+  onSbbToogleChange(event) {
+    this.sbbToogleValue = event.value;
+  }
+
+  isSbbToogleRoundtrip() : boolean {
+    return this.sbbToogleValue === "Roundtrip";
+  }
+
+  isSbbToogleGeneral() : boolean {
+    return this.sbbToogleValue === "General";
+  }
+
   showTrainrunEditor(): boolean {
     return this.trainrunEditorVisible;
   }
@@ -149,7 +163,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
       this.trainrunSectionService.setTrainrunSectionAsSelected(pItemSection.getPerlenketteSection().trainrunSectionId);
     }
     // toogle
-    if (this.showTrainrunEditTab === ShowTrainrunEditTab.sbb_trainrun_tab){
+    if (this.showTrainrunEditTab === ShowTrainrunEditTab.sbb_trainrun_tab) {
       this.showTrainrunEditTab = ShowTrainrunEditTab.sbb_trainrun_roundtrip_tab;
     } else {
       this.showTrainrunEditTab = ShowTrainrunEditTab.sbb_trainrun_tab;

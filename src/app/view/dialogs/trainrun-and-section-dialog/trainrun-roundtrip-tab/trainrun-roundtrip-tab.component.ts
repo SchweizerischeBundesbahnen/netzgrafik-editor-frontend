@@ -28,6 +28,7 @@ export class TrainrunRoundtripTabComponent implements OnInit, OnDestroy {
   @Input() toolbarVisible = true;
   @Input() isIntegratedComponent = false;
   @Input() minHeightPx = "250px";
+  @Input() innerContentScaleFactor = "1.0";
   public selectedTrainrun: Trainrun;
   private destroyed = new Subject<void>();
   public isOneWay: boolean = false;
@@ -71,8 +72,8 @@ export class TrainrunRoundtripTabComponent implements OnInit, OnDestroy {
     return retVal + " readonly";
   }
 
-  getContentStyleTag() : string {
-    return "min-height: " + this.minHeightPx;
+  getContentStyleTag(): string {
+    return "min-height: " + this.minHeightPx + ";";
   }
 
   getContentFooterClassTag(): string {

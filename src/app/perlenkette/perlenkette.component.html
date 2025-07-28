@@ -101,25 +101,41 @@
 
     <!--- Trainrun Editor --->
     <ng-container *ngIf="showTrainrunEditor()">
-      <p class="trainRunEditor">
-        <ng-container *ngIf="isSbbTrainrunTab()">
-          <sbb-trainrun-tab
-            class="TrainrunTabTrainrunEditor"
-            [toolbarVisible]="false"
-            [isIntegratedComponent]="true"
-          >
-          </sbb-trainrun-tab>
-        </ng-container>
-        <ng-container *ngIf="isSbbTrainrunRoundtripTab()">
-          <sbb-trainrun-roundtrip-tab
-            class="TrainrunTabTrainrunEditor"
-            [toolbarVisible]="false"
-            [isIntegratedComponent]="true"
-            [minHeightPx]="'40px'"
-          >
-          </sbb-trainrun-roundtrip-tab>
-        </ng-container>
-      </p>
+      <p class="trainRunEditor"></p>
+      <div style="transform: translateX(4px)">
+        <sbb-toggle aria-label="Choose journey" (change)="onSbbToogleChange($event)">
+          <sbb-toggle-option label="" subtitle="" value="General">
+            <sbb-toggle-icon>
+              <sbb-icon svgIcon="train-small"></sbb-icon>
+            </sbb-toggle-icon>
+
+          </sbb-toggle-option>
+          <sbb-toggle-option label="&#8942;" subtitle="" value="Roundtrip">
+          </sbb-toggle-option>
+        </sbb-toggle>
+      </div>
+      <br>
+      <div style="transform: translateX(4px)">
+        <p class="trainRunEditor">
+          <ng-container *ngIf="isSbbToogleGeneral()">
+            <sbb-trainrun-tab
+              class="TrainrunTabTrainrunEditor"
+              [toolbarVisible]="false"
+              [isIntegratedComponent]="true"
+            ></sbb-trainrun-tab>
+          </ng-container>
+          <ng-container *ngIf="isSbbToogleRoundtrip()">
+              <sbb-trainrun-roundtrip-tab
+                class="TrainrunTabTrainrunEditor"
+                [toolbarVisible]="false"
+                [isIntegratedComponent]="true"
+                [innerContentScaleFactor]="0.75"
+                [minHeightPx]="'20px'"
+              ></sbb-trainrun-roundtrip-tab>
+          </ng-container>
+        </p>
+      </div>
+      <p class="trainRunEditor"></p>
       <div class="sepdiv"></div>
     </ng-container>
 

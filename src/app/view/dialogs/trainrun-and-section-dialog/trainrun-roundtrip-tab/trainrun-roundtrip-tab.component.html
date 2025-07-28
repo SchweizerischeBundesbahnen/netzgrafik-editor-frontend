@@ -14,7 +14,9 @@
     </label>
     <span class="toggle-label">{{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.one-way' | translate }}</span>
   </div>
-  <sbb-trainrunsection-card *ngIf="isOneWay"></sbb-trainrunsection-card>
+  <sbb-trainrunsection-card *ngIf="isOneWay"
+                            [innerContentScaleFactor]="innerContentScaleFactor">
+  </sbb-trainrunsection-card>
 </div>
 <ng-container *ngIf="toolbarVisible">
   <div sbbDialogActions [class]="getContentFooterClassTag()">
