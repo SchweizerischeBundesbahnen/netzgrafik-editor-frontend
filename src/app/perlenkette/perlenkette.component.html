@@ -101,7 +101,7 @@
 
     <!--- Trainrun Editor --->
     <ng-container *ngIf="showTrainrunEditor()">
-      <div class="sepdiv" style="transform: translate(4px,50px);"></div>
+      <div class="sepdiv" style="transform: translate(4px,52px);"></div>
       <p class="trainRunEditor"></p>
       <div style="transform: translateX(4px); width: 35%;background: yellow">
         <sbb-toggle aria-label="" (change)="onSbbToogleChange($event)">
@@ -121,7 +121,9 @@
           </sbb-toggle-option>
         </sbb-toggle>
       </div>
-      <br>
+
+      <div style="width: 100%; height: 4px"></div>
+
       <div style="transform: translateX(4px)">
         <p class="trainRunEditor">
           <ng-container *ngIf="isSbbToogleGeneral()">

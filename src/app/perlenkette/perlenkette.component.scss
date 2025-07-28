@@ -7,6 +7,9 @@
   overflow: hidden;
 }
 
+::ng-deep .sbb-toggle-option .sbb-toggle-option-button {
+  border-bottom: none;
+}
 ::ng-deep .sbb-toggle-option-selected .sbb-toggle-option-button {
   border-bottom: none;
 }
