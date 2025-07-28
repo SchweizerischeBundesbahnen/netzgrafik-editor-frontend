@@ -1103,7 +1103,7 @@ export class TrainrunSectionsView {
 
   translateAndRotateArrow(
     trainrunSection: TrainrunSection,
-    arrowIndex: number,
+    arrowType: "BEGINNING_ARROW" | "ENDING_ARROW",
   ) {
     const positions = trainrunSection.getPath();
     const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(trainrunSection);
@@ -1127,7 +1127,7 @@ export class TrainrunSectionsView {
     // the 2 intermediate points where the sections change direction
     const arrowOffset = isTargetRightOrBottom ? [-44, 20] : [44, -20];
     let x, y: number;
-    if (arrowIndex === 0) {
+    if (arrowType === "BEGINNING_ARROW") {
       x = positions[1].getX() + (xDiff === 0 ? 0 : arrowOffset[0]);
       y = positions[1].getY() + (xDiff === 0 ? arrowOffset[0] : 0);
     } else {
@@ -1138,13 +1138,23 @@ export class TrainrunSectionsView {
     return `translate(${x},${y}) rotate(${angle})`;
   }
 
+  /**
+   * Creates direction arrow SVG elements for train run sections within the provided D3 selection.
+   * Appends arrows for both the beginning and ending of each train run section, applying appropriate
+   * attributes, classes, and event handlers based on the train run's state and configuration.
+   *
+   * @param groupLinesEnter - The D3 selection to which the arrow SVG elements will be appended.
+   * @param selectedTrainrun - The currently selected train run, used for styling and event logic.
+   * @param connectedTrainIds - An object or collection representing train runs connected to the current section.
+   * @param enableEvents - Optional flag to enable or disable mouse event handlers on the arrows. Defaults to true.
+   */
   createDirectionArrows(
     groupLinesEnter: d3.Selection,
     selectedTrainrun: Trainrun,
     connectedTrainIds: any,
     enableEvents = true,
   ) {
-    ["arrow1", "arrow2"].forEach((_, i) => {
+    (["BEGINNING_ARROW", "ENDING_ARROW"] as const).forEach((arrowType) => {
       groupLinesEnter
         .append(StaticDomTags.EDGE_LINE_ARROW_SVG)
         .attr(StaticDomTags.TAG_HIDDEN, () =>
@@ -1159,7 +1169,7 @@ export class TrainrunSectionsView {
             : "M-5,-7L3,0L-5,7Z";
         })
         .attr("transform", (d: TrainrunSectionViewObject) =>
-          this.translateAndRotateArrow(d.trainrunSection, i),
+          this.translateAndRotateArrow(d.trainrunSection, arrowType),
         )
         .attr(
           "class",
