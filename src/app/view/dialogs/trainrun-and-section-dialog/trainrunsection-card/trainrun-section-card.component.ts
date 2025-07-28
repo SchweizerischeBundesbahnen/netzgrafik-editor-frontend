@@ -181,6 +181,9 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
   }
 
   onTrainrunSectionCardClick(position: "top" | "bottom") {
+    if (this.chosenCard === position) {
+      return;
+    }
     // Get the left and right nodes to determine the cards order
     const leftNode = this.trainrunSectionHelper.getNextStopLeftNode(this.selectedTrainrunSection, this.nodesOrdered);
     const rightNode = this.trainrunSectionHelper.getNextStopRightNode(this.selectedTrainrunSection, this.nodesOrdered);
