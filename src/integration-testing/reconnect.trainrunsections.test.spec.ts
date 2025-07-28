@@ -76,6 +76,17 @@ describe("Reconnect TrainrunSection Test", () => {
     );
     const trainrunSectionOfInterest1 =
       trainrunSectionService.getTrainrunSectionFromId(1);
+    
+    // Reconnect trainrunSection 1 to node 7 and 8 
+    // TODO --> Change input data for the trainrun section 1
+    trainrunSectionService.reconnectTrainrunSection(
+      7,
+      8,
+      trainrunSectionOfInterest1.getId(),
+      trainrunSectionOfInterest1.getTargetNodeId(),
+      trainrunSectionOfInterest1.getSourceNodeId(),
+    );
+
     trainrunSectionService.reconnectTrainrunSection(
       1,
       7,
