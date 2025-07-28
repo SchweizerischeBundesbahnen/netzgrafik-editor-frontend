@@ -14,28 +14,29 @@
   </div>
   <sbb-trainrunsection-card *ngIf="isOneWay"></sbb-trainrunsection-card>
 </div>
-
-<div sbbDialogActions [class]="getContentFooterClassTag()">
-  <button
-    class="FunctionButton"
-    tabindex="-1"
-    (click)="onDuplicateTrainrun()"
-    [title]="
-      'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDuplicate'
-        | translate
-    "
-  >
-    <sbb-icon svgIcon="plus-medium" aria-hidden="false"></sbb-icon>
-  </button>
-  <button
-    class="FunctionButton"
-    tabindex="-1"
-    (click)="onDeleteTrainrun()"
-    [title]="
-      'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDelete'
-        | translate
-    "
-  >
-    <sbb-icon svgIcon="trash-medium" aria-hidden="false"></sbb-icon>
-  </button>
-</div>
+<ng-container *ngIf="toolbarVisible">
+  <div sbbDialogActions [class]="getContentFooterClassTag()">
+    <button
+      class="FunctionButton"
+      tabindex="-1"
+      (click)="onDuplicateTrainrun()"
+      [title]="
+        'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDuplicate'
+          | translate
+      "
+    >
+      <sbb-icon svgIcon="plus-medium" aria-hidden="false"></sbb-icon>
+    </button>
+    <button
+      class="FunctionButton"
+      tabindex="-1"
+      (click)="onDeleteTrainrun()"
+      [title]="
+        'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDelete'
+          | translate
+      "
+    >
+      <sbb-icon svgIcon="trash-medium" aria-hidden="false"></sbb-icon>
+    </button>
+  </div>
+</ng-container>

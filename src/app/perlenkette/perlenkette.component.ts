@@ -26,10 +26,11 @@ import {TrainrunDirection} from "../data-structures/business.data.structures";
 import {TrainrunsectionHelper} from "../services/util/trainrunsection.helper";
 import {TrainrunSectionService} from "../services/data/trainrunsection.service";
 import {TrainrunService} from "../services/data/trainrun.service";
-import {
-  TrainrunDialogParameter,
-  TrainrunDialogType
-} from "../view/dialogs/trainrun-and-section-dialog/trainrun-and-section-dialog.component";
+
+enum ShowTrainrunEditTab {
+  sbb_trainrun_tab,
+  sbb_trainrun_roundtrip_tab
+}
 
 @Component({
   selector: "sbb-perlenkette",
@@ -60,6 +61,8 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
   private trainrunSectionHelper: TrainrunsectionHelper;
   public arrowDirection: string | null = null;
 
+  public showTrainrunEditTab: ShowTrainrunEditTab = ShowTrainrunEditTab.sbb_trainrun_tab;
+
   constructor(
     private readonly loadPerlenketteService: LoadPerlenketteService,
     readonly filterService: FilterService,
@@ -87,17 +90,25 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
       .pipe(takeUntil(this.destroyed$))
       .subscribe((trainrunSectionId: number) => {
         this.gotoTrainrunSection(trainrunSectionId);
+        this.trainrunSectionService.setTrainrunSectionAsSelected(trainrunSectionId);
       });
 
     this.trainrunService.trainruns
       .pipe(takeUntil(this.destroyed$))
       .subscribe((trainrunList) => {
-        if (!trainrunList.length) {
-          return;
+          if (!this.trainrunSectionService.getSelectedTrainrunSection()) {
+            this.trainrunSectionService.setTrainrunSectionAsSelected(
+              this.perlenketteTrainrun.pathItems
+                .find(s => s.isPerlenketteSection())
+                .getPerlenketteSection().trainrunSectionId
+            );
+          }
+          if (!trainrunList.length) {
+            return;
+          }
+          this.arrowDirection = this.getArrowDirectionForOneWayTrainrun();
         }
-        this.arrowDirection = this.getArrowDirectionForOneWayTrainrun();
-      }
-    );
+      );
 
     this.svgPoint = new Vec2D(0, -64);
   }
@@ -109,6 +120,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
   trainrunNameClicked(event: MouseEvent) {
     event.stopPropagation();
     this.trainrunEditorVisible = !this.trainrunEditorVisible;
+    this.showTrainrunEditTab = ShowTrainrunEditTab.sbb_trainrun_tab;
   }
 
   getShowAllLockStates(): boolean {
@@ -119,21 +131,29 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     this.showAllLockStates = !this.showAllLockStates;
   }
 
+  isSbbTrainrunTab(): boolean {
+    return this.showTrainrunEditTab === ShowTrainrunEditTab.sbb_trainrun_tab;
+  }
+
+  isSbbTrainrunRoundtripTab(): boolean {
+    return this.showTrainrunEditTab === ShowTrainrunEditTab.sbb_trainrun_roundtrip_tab;
+  }
+
   showTrainrunDialogOneWay(event: MouseEvent) {
     event.stopPropagation();
-    if ( !this.trainrunService.getSelectedTrainrun() ) {
+    if (!this.trainrunService.getSelectedTrainrun()) {
       return;
     }
-    if ( !this.trainrunSectionService.getSelectedTrainrunSection()) {
-      const pItemSection = this.perlenketteTrainrun.pathItems.find( item => item.isPerlenketteSection() );
+    if (!this.trainrunSectionService.getSelectedTrainrunSection()) {
+      const pItemSection = this.perlenketteTrainrun.pathItems.find(item => item.isPerlenketteSection());
       this.trainrunSectionService.setTrainrunSectionAsSelected(pItemSection.getPerlenketteSection().trainrunSectionId);
     }
-
-    const parameter = new TrainrunDialogParameter(
-      TrainrunDialogType.TRAINRUN_ONEWAY_DIALOG,
-      new Vec2D(this.contentHeight, this.contentWidth)
-    );
-    this.uiInteractionService.showTrainrunDialog(parameter);
+    // toogle
+    if (this.showTrainrunEditTab === ShowTrainrunEditTab.sbb_trainrun_tab){
+      this.showTrainrunEditTab = ShowTrainrunEditTab.sbb_trainrun_roundtrip_tab;
+    } else {
+      this.showTrainrunEditTab = ShowTrainrunEditTab.sbb_trainrun_tab;
+    }
   }
 
   private updatePerlenkette(perlenketteTrainrun: PerlenketteTrainrun) {

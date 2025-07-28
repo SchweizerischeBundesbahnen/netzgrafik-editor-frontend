@@ -1,12 +1,17 @@
 <div (click)="disableSectionView()">
 
   <div>
-    <div [attr.style]="'pointer-events: none; margin: 0px; position: absolute; padding-left: '+(contentWidth-55)+'px; padding-top: '+(contentHeight-40)+'px;'">
+    <div
+      [attr.style]="'pointer-events: none; margin: 0px; position: absolute; padding-left: '+(contentWidth-55)+'px; padding-top: '+(contentHeight-40)+'px;'">
       <ng-container *ngIf="!getShowAllLockStates()">
-        <sbb-icon class="ToggleAllEyesButton" svgIcon="eye-disabled-small" style="pointer-events:auto;" (mouseup)="toggleShowAllLockStates()" [title]="'app.perlenkette.show-only-closed-locks' | translate"></sbb-icon>
+        <sbb-icon class="ToggleAllEyesButton" svgIcon="eye-disabled-small"
+                  style="pointer-events:auto;" (mouseup)="toggleShowAllLockStates()"
+                  [title]="'app.perlenkette.show-only-closed-locks' | translate"></sbb-icon>
       </ng-container>
       <ng-container *ngIf="getShowAllLockStates()">
-        <sbb-icon class="ToggleAllEyesButton" svgIcon="eye-small" style="pointer-events:auto;" (mouseup)="toggleShowAllLockStates()" [title]="'app.perlenkette.show-all-locks' | translate"></sbb-icon>
+        <sbb-icon class="ToggleAllEyesButton" svgIcon="eye-small" style="pointer-events:auto;"
+                  (mouseup)="toggleShowAllLockStates()"
+                  [title]="'app.perlenkette.show-all-locks' | translate"></sbb-icon>
       </ng-container>
     </div>
   </div>
@@ -22,17 +27,12 @@
           <ng-container *ngIf="showTrainrunName()">
             <p
               class="alignleft trainname"
-              (click)="showTrainrunDialogOneWay($event)"
+              (click)="trainrunNameClicked($event)"
             >
               <span class="trainname"
               >{{ perlenketteTrainrun.categoryShortName
                 }}{{ perlenketteTrainrun.title }}</span
               >
-              <span class="station"
-                    style="transform: translateY(-2px);"
-                    (click)="showTrainrunDialogOneWay($event)">
-                 &#8942;
-               </span>
             </p>
 
             <span class="trainrun-od alignright" (click)="trainrunNameClicked($event)">
@@ -42,15 +42,15 @@
                   .fullName
                 }}</span>
                 @if (arrowDirection !== null) {
-                  <sbb-icon
-                    [svgIcon]="arrowDirection"
-                    aria-hidden="false"
-                    height="13px"
-                    width="13px"
-                    style="transform: translateY(-2px);"
-                  ></sbb-icon>
+              <sbb-icon
+                [svgIcon]="arrowDirection"
+                aria-hidden="false"
+                height="13px"
+                width="13px"
+                style="transform: translateY(-2px);"
+              ></sbb-icon>
                 } @else {
-                  <span class="arrow">-</span>
+              <span class="arrow">-</span>
                 }
               <span class="station" (click)="trainrunNameClicked($event)"
                     style="transform: translateY(-2px);">{{
@@ -67,14 +67,14 @@
                   .fullName
                 }}</span>
               @if (arrowDirection !== null) {
-                <sbb-icon
-                  [svgIcon]="arrowDirection"
-                  aria-hidden="false"
-                  height="13px"
-                  width="13px"
-                ></sbb-icon>
+              <sbb-icon
+                [svgIcon]="arrowDirection"
+                aria-hidden="false"
+                height="13px"
+                width="13px"
+              ></sbb-icon>
               } @else {
-                <span class="arrow">-</span>
+              <span class="arrow">-</span>
               }
               <span class="station" (click)="scrollLast($event)">{{
                 perlenketteTrainrun.pathItems.at(-1).getPerlenketteNode()
@@ -83,33 +83,52 @@
             </span>
           </ng-container>
         </div>
-        <ng-container *ngIf="showTrainrunEditor()">
-          <sbb-icon
-            svgIcon="chevron-up-medium"
-            (click)="trainrunNameClicked($event)"
-          ></sbb-icon>
-        </ng-container>
+        &nbsp;
         <ng-container *ngIf="!showTrainrunEditor()">
           <sbb-icon
-            svgIcon="chevron-down-medium"
+            svgIcon="controls-medium"
             (click)="trainrunNameClicked($event)"
           ></sbb-icon>
         </ng-container>
+        <ng-container *ngIf="showTrainrunEditor()">
+          <ng-container *ngIf="isSbbTrainrunTab()">
+            <sbb-icon svgIcon="circle-three-dots-medium"
+                      (click)="showTrainrunDialogOneWay($event)"
+            ></sbb-icon>
+          </ng-container>
+          <ng-container *ngIf="isSbbTrainrunRoundtripTab()">
+            <sbb-icon svgIcon="cross-medium"
+                      (click)="showTrainrunDialogOneWay($event)"
+            ></sbb-icon>
+          </ng-container>
+        </ng-container>
+
       </div>
     </div>
 
     <!--- Trainrun Editor --->
     <ng-container *ngIf="showTrainrunEditor()">
       <p class="trainRunEditor">
-        <sbb-trainrun-tab
-          class="TrainrunTabTrainrunEditor"
-          [toolbarVisible]="false"
-          [isIntegratedComponent]="true"
-        >
-        </sbb-trainrun-tab>
+        <ng-container *ngIf="isSbbTrainrunTab()">
+          <sbb-trainrun-tab
+            class="TrainrunTabTrainrunEditor"
+            [toolbarVisible]="false"
+            [isIntegratedComponent]="true"
+          >
+          </sbb-trainrun-tab>
+        </ng-container>
+        <ng-container *ngIf="isSbbTrainrunRoundtripTab()">
+          <sbb-trainrun-roundtrip-tab
+            class="TrainrunTabTrainrunEditor"
+            [toolbarVisible]="false"
+            [isIntegratedComponent]="true"
+          >
+          </sbb-trainrun-roundtrip-tab>
+        </ng-container>
       </p>
       <div class="sepdiv"></div>
     </ng-container>
+
 
     <!--- Station List (navigation) --->
     <ng-container *ngFor="let pathItem of perlenketteTrainrun.pathItems">
@@ -121,9 +140,9 @@
           >{{ pathItem.getPerlenketteNode().shortName }}</span
           >
 
-        <ng-container *ngIf="isLastNodeButNotVeryLast(pathItem)">
-          <span [class]="getSmallstationClassTag(pathItem)"> &#x2022; </span>
-        </ng-container>
+          <ng-container *ngIf="isLastNodeButNotVeryLast(pathItem)">
+            <span [class]="getSmallstationClassTag(pathItem)"> &#x2022; </span>
+          </ng-container>
       </div>
     </ng-container>
 
