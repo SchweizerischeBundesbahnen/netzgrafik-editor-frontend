@@ -1,3 +1,5 @@
+@import "../../../rastering/definitions";
+
 ::ng-deep .sbb-trainrun-chip-group {
   display: flex;
 }
@@ -65,6 +67,15 @@
     font-size: 14px;
     color: var(--NODE_TEXT_FOCUS);
     cursor: pointer;
+    user-select: none;
+  }
+
+  .toggle-label:hover {
+    background: var(--COLOR_TRANSITION_GRAYEDOUT);
+  }
+
+  .toggle-label:active {
+    background: $COLOR_MUTED_SILVER;
   }
 }
 
