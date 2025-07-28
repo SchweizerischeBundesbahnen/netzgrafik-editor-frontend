@@ -7,6 +7,7 @@
   align-content: center;
   height: 40px;
   font-family: "SBBWeb Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  pointer-events: none;
 }
 
 .TrainrunSection {
@@ -17,7 +18,7 @@
   row-gap: 6px;
   padding-top: 13px;
   width: 564px;
-  height: 210px
+  height: 210px;
 }
 
 .OneWayCard {
@@ -29,6 +30,7 @@
   * > text.edge_text {
     font-size: 10px;
   }
+  cursor: pointer;
 }
 
 .OneWayCard.muted {
