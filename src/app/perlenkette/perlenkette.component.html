@@ -28,6 +28,11 @@
               >{{ perlenketteTrainrun.categoryShortName
                 }}{{ perlenketteTrainrun.title }}</span
               >
+              <span class="station"
+                    style="transform: translateY(-2px);"
+                    (click)="showTrainrunDialogOneWay($event)">
+                 &#8942;
+               </span>
             </p>
 
             <span class="trainrun-od alignright" (click)="trainrunNameClicked($event)">

@@ -25,6 +25,7 @@ export enum TrainrunDialogType {
   TRAINRUN_DIALOG,
   TRAINRUN_SECTION_DIALOG,
   TRAINRUN_FILTERABLE_LABELS_DIALOG,
+  TRAINRUN_ONEWAY_DIALOG,
 }
 
 export class TrainrunDialogParameter {

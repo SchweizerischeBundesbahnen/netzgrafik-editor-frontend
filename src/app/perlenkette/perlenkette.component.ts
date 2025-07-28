@@ -26,6 +26,7 @@ import {TrainrunDirection} from "../data-structures/business.data.structures";
 import {TrainrunsectionHelper} from "../services/util/trainrunsection.helper";
 import {TrainrunSectionService} from "../services/data/trainrunsection.service";
 import {TrainrunService} from "../services/data/trainrun.service";
+import {TrainrunDialogParameter, TrainrunDialogType} from "../view/dialogs/trainrun-and-section-dialog/trainrun-and-section-dialog.component";
 
 @Component({
   selector: "sbb-perlenkette",
@@ -113,6 +114,23 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
 
   toggleShowAllLockStates() {
     this.showAllLockStates = !this.showAllLockStates;
+  }
+
+  showTrainrunDialogOneWay(event: MouseEvent) {
+    event.stopPropagation();
+    if ( !this.trainrunService.getSelectedTrainrun() ) {
+      return;
+    }
+    if ( !this.trainrunSectionService.getSelectedTrainrunSection()) {
+      const pItemSection = this.perlenketteTrainrun.pathItems.find( item => item.isPerlenketteSection() );
+      this.trainrunSectionService.setTrainrunSectionAsSelected(pItemSection.getPerlenketteSection().trainrunSectionId);
+    }
+
+    const parameter = new TrainrunDialogParameter(
+      TrainrunDialogType.TRAINRUN_ONEWAY_DIALOG,
+      new Vec2D(this.contentHeight, this.contentWidth)
+    );
+    this.uiInteractionService.showTrainrunDialog(parameter);
   }
 
   private updatePerlenkette(perlenketteTrainrun: PerlenketteTrainrun) {
