@@ -1,4 +1,6 @@
-<div sbbDialogContent [class]="getContentClassTag()">
+<div sbbDialogContent [class]="getContentClassTag()"
+    [style]="getContentStyleTag()"
+>
   <div class="toggle-container">
     <span class="toggle-label">{{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.round-trip' | translate }}</span>
     <label class="toggle-switch">
