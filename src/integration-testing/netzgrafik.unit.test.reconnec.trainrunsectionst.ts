@@ -79,26 +79,13 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
           positionY: 32,
           ports: [
             {
-              id: 2,
-              trainrunSectionId: 1,
-              positionIndex: 0,
-              positionAlignment: 2,
-            },
-            {
               id: 8,
               trainrunSectionId: 4,
               positionIndex: 1,
               positionAlignment: 2,
             },
           ],
-          transitions: [
-            {
-              id: 4,
-              port1Id: 8,
-              port2Id: 2,
-              isNonStopTransit: false,
-            },
-          ],
+          transitions: [],
           connections: [],
           resourceId: 2,
           perronkanten: 10,
@@ -139,7 +126,14 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
           fullName: "Rothrist",
           positionX: 320,
           positionY: 32,
-          ports: [],
+          ports: [
+            {
+              id: 11,
+              trainrunSectionId: 1,
+              positionIndex: 0,
+              positionAlignment: 1,
+            },
+          ],
           transitions: [],
           connections: [],
           resourceId: 8,
@@ -198,12 +192,12 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
               id: 9,
               trainrunSectionId: 1,
               positionIndex: 0,
-              positionAlignment: 3,
+              positionAlignment: 0,
             },
             {
               id: 10,
               trainrunSectionId: 4,
-              positionIndex: 1,
+              positionIndex: 0,
               positionAlignment: 3,
             },
           ],
@@ -253,10 +247,10 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
       trainrunSections: [
         {
           id: 1,
-          sourceNodeId: 8,
-          sourcePortId: 9,
-          targetNodeId: 1,
-          targetPortId: 2,
+          sourceNodeId: 7,
+          sourcePortId: 11,
+          targetNodeId: 8,
+          targetPortId: 9,
           travelTime: {
             time: 10,
             consecutiveTime: 10,
@@ -299,50 +293,51 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
           path: {
             path: [
               {
-                x: 418,
-                y: 208,
+                x: 336,
+                y: 98,
               },
               {
-                x: 482,
-                y: 208,
+                x: 336,
+                y: 162,
               },
               {
-                x: 766,
-                y: 48,
+                x: 336,
+                y: 126,
               },
               {
-                x: 830,
-                y: 48,
+                x: 336,
+                y: 190,
               },
             ],
             textPositions: {
               0: {
-                x: 436,
-                y: 220,
+                x: 324,
+                y: 116,
               },
               1: {
-                x: 464,
-                y: 196,
+                x: 348,
+                y: 144,
               },
               2: {
-                x: 812,
-                y: 36,
+                x: 348,
+                y: 172,
               },
               3: {
-                x: 784,
-                y: 60,
+                x: 324,
+                y: 144,
               },
+              
               4: {
-                x: 624,
-                y: 116,
+                x: 324,
+                y: 144,
               },
               5: {
-                x: 624,
-                y: 116,
+                x: 324,
+                y: 144,
               },
               6: {
-                x: 624,
-                y: 140,
+                x: 348,
+                y: 144,
               },
             },
           },
