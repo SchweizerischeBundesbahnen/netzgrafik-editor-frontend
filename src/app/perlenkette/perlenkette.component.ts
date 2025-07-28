@@ -489,4 +489,6 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
       return "arrow-left-medium";
     }
   }
+
+  protected readonly ShowTrainrunEditTab = ShowTrainrunEditTab;
 }
