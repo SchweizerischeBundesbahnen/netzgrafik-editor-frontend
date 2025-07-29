@@ -1,0 +1,17 @@
+<div class="toggle-container">
+    <span class="toggle-label"
+          (click)="onToggle(false)"
+    >{{ labelFalse }}</span>
+  <label class="toggle-switch">
+    <input
+      sbbInput
+      type="checkbox"
+      [checked]="checked"
+      (change)="onChnaged($event.target.checked)"
+    />
+    <span class="slider"></span>
+  </label>
+  <span class="toggle-label"
+        (click)="onToggle(true)"
+  >{{ labelTrue }}</span>
+</div>

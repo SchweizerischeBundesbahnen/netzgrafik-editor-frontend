@@ -84,10 +84,6 @@ export class TrainrunRoundtripTabComponent implements OnInit, OnDestroy {
     return retVal + " readonly";
   }
 
-  onToggleOneWay(check){
-    this.onIsOneWayChanged(check);
-  }
-
   onIsOneWayChanged(isChecked: boolean) {
     this.isOneWay = isChecked;
     if (!isChecked && this.selectedTrainrun.getTrainrunDirection() !== TrainrunDirection.ROUND_TRIP) {
