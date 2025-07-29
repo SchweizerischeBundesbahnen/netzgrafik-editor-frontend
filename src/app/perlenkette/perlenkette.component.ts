@@ -63,7 +63,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
 
   public showTrainrunEditTab: ShowTrainrunEditTab = ShowTrainrunEditTab.sbb_trainrun_tab;
 
-  sbbToogleValue = "General";
+  sbbToogleValue = ShowTrainrunEditTab.sbb_trainrun_tab;
 
   constructor(
     private readonly loadPerlenketteService: LoadPerlenketteService,
@@ -120,11 +120,11 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
   }
 
   isSbbToogleRoundtrip() : boolean {
-    return this.sbbToogleValue === "Roundtrip";
+    return this.sbbToogleValue === ShowTrainrunEditTab.sbb_trainrun_roundtrip_tab;
   }
 
   isSbbToogleGeneral() : boolean {
-    return this.sbbToogleValue === "General";
+    return this.sbbToogleValue === ShowTrainrunEditTab.sbb_trainrun_tab;
   }
 
   showTrainrunEditor(): boolean {
