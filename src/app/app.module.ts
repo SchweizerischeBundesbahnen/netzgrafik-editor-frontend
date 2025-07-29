@@ -105,6 +105,7 @@ import {TrainRunNodeComponent} from "./streckengrafik/components/train-run-node/
 import {ActionMenuComponent} from "./view/action-menu/action-menu/action-menu.component";
 import {I18nModule} from "./core/i18n/i18n.module";
 import {OriginDestinationComponent} from "./services/analytics/origin-destination/components/origin-destination.component";
+import {SbbToggleModule} from "@sbb-esta/angular/toggle";
 
 @NgModule({
   declarations: [
@@ -220,6 +221,7 @@ import {OriginDestinationComponent} from "./services/analytics/origin-destinatio
     SbbSelectModule,
     SbbCheckboxModule,
     SbbRadioButtonModule,
+    SbbToggleModule,
     SbbTableModule,
     SbbIconModule,
     SbbAccordionModule,

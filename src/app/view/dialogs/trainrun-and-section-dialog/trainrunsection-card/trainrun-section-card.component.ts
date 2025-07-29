@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnDestroy,
-} from "@angular/core";
+import {AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy,} from "@angular/core";
 import {TrainrunSectionService} from "../../../../services/data/trainrunsection.service";
 import {TrainrunSection} from "../../../../models/trainrunsection.model";
 import {TrainrunService} from "../../../../services/data/trainrun.service";
@@ -19,7 +13,9 @@ import {
 } from "../../../../data-structures/business.data.structures";
 import {StaticDomTags} from "../../../editor-main-view/data-views/static.dom.tags";
 import {ColorRefType} from "../../../../data-structures/technical.data.structures";
-import {TrainrunSectionTimesService} from "../../../../services/data/trainrun-section-times.service";
+import {
+  TrainrunSectionTimesService
+} from "../../../../services/data/trainrun-section-times.service";
 import {LeftAndRightTimeStructure} from "../trainrunsection-tab/trainrun-section-tab.component";
 
 @Component({
@@ -29,8 +25,8 @@ import {LeftAndRightTimeStructure} from "../trainrunsection-tab/trainrun-section
   providers: [TrainrunSectionTimesService],
 })
 export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
-  @Input()
-  trainrunDialogParameter: TrainrunDialogParameter;
+  @Input() trainrunDialogParameter: TrainrunDialogParameter;
+  @Input() innerContentScaleFactor = "1.0";
 
   public selectedTrainrunSection: TrainrunSection;
   public startNode: string[] = ["", ""];
@@ -130,6 +126,10 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
     this.changeDetection.detectChanges();
   }
 
+  getInnerContentStyleTag(): string {
+    return "transform: scale(" + this.innerContentScaleFactor + ");";
+  }
+
   getEdgeLineClassAttrString(layer: number, cardPosition: string) {
     return (
       StaticDomTags.EDGE_LINE_CLASS +
@@ -181,6 +181,9 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
   }
 
   onTrainrunSectionCardClick(position: "top" | "bottom") {
+    if (this.chosenCard === position) {
+      return;
+    }
     // Get the left and right nodes to determine the cards order
     const leftNode = this.trainrunSectionHelper.getNextStopLeftNode(this.selectedTrainrunSection, this.nodesOrdered);
     const rightNode = this.trainrunSectionHelper.getNextStopRightNode(this.selectedTrainrunSection, this.nodesOrdered);

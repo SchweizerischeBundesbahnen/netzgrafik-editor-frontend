@@ -1,6 +1,10 @@
-<div sbbDialogContent [class]="getContentClassTag()">
+<div sbbDialogContent [class]="getContentClassTag()"
+    [style]="getContentStyleTag()"
+>
   <div class="toggle-container">
-    <span class="toggle-label">{{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.round-trip' | translate }}</span>
+    <span class="toggle-label"
+          (click)="onToggleOneWay(false)"
+    >{{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.round-trip' | translate }}</span>
     <label class="toggle-switch">
       <input
         sbbInput
@@ -10,32 +14,37 @@
       />
       <span class="slider"></span>
     </label>
-    <span class="toggle-label">{{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.one-way' | translate }}</span>
+    <span class="toggle-label"
+          (click)="onToggleOneWay(true)"
+    >{{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.one-way' | translate }}</span>
   </div>
-  <sbb-trainrunsection-card *ngIf="isOneWay"></sbb-trainrunsection-card>
+  <sbb-trainrunsection-card *ngIf="isOneWay"
+                            [innerContentScaleFactor]="innerContentScaleFactor">
+  </sbb-trainrunsection-card>
 </div>
-
-<div sbbDialogActions [class]="getContentFooterClassTag()">
-  <button
-    class="FunctionButton"
-    tabindex="-1"
-    (click)="onDuplicateTrainrun()"
-    [title]="
-      'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDuplicate'
-        | translate
-    "
-  >
-    <sbb-icon svgIcon="plus-medium" aria-hidden="false"></sbb-icon>
-  </button>
-  <button
-    class="FunctionButton"
-    tabindex="-1"
-    (click)="onDeleteTrainrun()"
-    [title]="
-      'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDelete'
-        | translate
-    "
-  >
-    <sbb-icon svgIcon="trash-medium" aria-hidden="false"></sbb-icon>
-  </button>
-</div>
+<ng-container *ngIf="toolbarVisible">
+  <div sbbDialogActions [class]="getContentFooterClassTag()">
+    <button
+      class="FunctionButton"
+      tabindex="-1"
+      (click)="onDuplicateTrainrun()"
+      [title]="
+        'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDuplicate'
+          | translate
+      "
+    >
+      <sbb-icon svgIcon="plus-medium" aria-hidden="false"></sbb-icon>
+    </button>
+    <button
+      class="FunctionButton"
+      tabindex="-1"
+      (click)="onDeleteTrainrun()"
+      [title]="
+        'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDelete'
+          | translate
+      "
+    >
+      <sbb-icon svgIcon="trash-medium" aria-hidden="false"></sbb-icon>
+    </button>
+  </div>
+</ng-container>

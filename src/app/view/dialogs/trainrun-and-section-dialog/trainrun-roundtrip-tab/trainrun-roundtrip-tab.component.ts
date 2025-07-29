@@ -2,6 +2,7 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
+  Input,
   OnDestroy,
   OnInit,
   Output,
@@ -24,7 +25,10 @@ import {TrainrunDirection} from "src/app/data-structures/business.data.structure
 })
 export class TrainrunRoundtripTabComponent implements OnInit, OnDestroy {
   @Output() trainrunDeleted = new EventEmitter<void>();
-
+  @Input() toolbarVisible = true;
+  @Input() isIntegratedComponent = false;
+  @Input() minHeightPx = "250px";
+  @Input() innerContentScaleFactor = "1.0";
   public selectedTrainrun: Trainrun;
   private destroyed = new Subject<void>();
   public isOneWay: boolean = false;
@@ -58,11 +62,18 @@ export class TrainrunRoundtripTabComponent implements OnInit, OnDestroy {
   }
 
   getContentClassTag(): string {
-    const retVal = "EditTrainrunRoundTripDialogTabContent";
+    let retVal = "EditTrainrunRoundTripDialogTabContent";
+    if (this.isIntegratedComponent) {
+      retVal += " IntegratedComponent ";
+    }
     if (this.versionControlService.getVariantIsWritable()) {
       return retVal;
     }
     return retVal + " readonly";
+  }
+
+  getContentStyleTag(): string {
+    return "min-height: " + this.minHeightPx + ";";
   }
 
   getContentFooterClassTag(): string {
@@ -71,6 +82,10 @@ export class TrainrunRoundtripTabComponent implements OnInit, OnDestroy {
       return retVal;
     }
     return retVal + " readonly";
+  }
+
+  onToggleOneWay(check){
+    this.onIsOneWayChanged(check);
   }
 
   onIsOneWayChanged(isChecked: boolean) {

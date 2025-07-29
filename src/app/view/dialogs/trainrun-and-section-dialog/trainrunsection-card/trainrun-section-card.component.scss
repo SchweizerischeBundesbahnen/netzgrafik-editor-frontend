@@ -7,17 +7,15 @@
   align-content: center;
   height: 40px;
   font-family: "SBBWeb Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  pointer-events: none;
 }
 
 .TrainrunSection {
   display: flex;
   flex-direction: column;
-  justify-self: center;
   justify-content: space-around;
   row-gap: 6px;
   padding-top: 13px;
-  width: 564px;
-  height: 210px
 }
 
 .OneWayCard {
@@ -29,6 +27,7 @@
   * > text.edge_text {
     font-size: 10px;
   }
+  cursor: pointer;
 }
 
 .OneWayCard.muted {
@@ -37,6 +36,14 @@
 
 .OneWayCard.selected {
   border: 1px solid $COLOR_Focus;
+}
+
+.OneWayCard:hover {
+  background: var(--COLOR_TRANSITION_GRAYEDOUT);
+}
+
+.OneWayCard:active {
+  background-color: $COLOR_MUTED_SILVER;
 }
 
 .TrainFreqContainer {
