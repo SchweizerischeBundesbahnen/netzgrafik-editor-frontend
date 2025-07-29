@@ -106,9 +106,7 @@ import {ActionMenuComponent} from "./view/action-menu/action-menu/action-menu.co
 import {I18nModule} from "./core/i18n/i18n.module";
 import {OriginDestinationComponent} from "./services/analytics/origin-destination/components/origin-destination.component";
 import {SbbToggleModule} from "@sbb-esta/angular/toggle";
-import {
-  ToggleSwitchButtonComponent
-} from "./view/dialogs/trainrun-and-section-dialog/trainrun-roundtrip-tab/toggle-switch-button/toggle-switch-button.component";
+import {ToggleSwitchButtonComponent} from "./view/toggle-switch-button/toggle-switch-button.component";
 
 @NgModule({
   declarations: [
