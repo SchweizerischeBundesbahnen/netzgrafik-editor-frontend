@@ -120,11 +120,11 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
   }
 
   isSbbToogleRoundtrip() : boolean {
-    return this.sbbToogleValue === "ROUND_TRIP";
+    return this.sbbToogleValue === ShowTrainrunEditTab.sbb_trainrun_roundtrip_tab;
   }
 
   isSbbToogleGeneral() : boolean {
-    return this.sbbToogleValue === "GENERAL";
+    return this.sbbToogleValue === ShowTrainrunEditTab.sbb_trainrun_tab;
   }
 
   showTrainrunEditor(): boolean {
