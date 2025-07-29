@@ -28,8 +28,8 @@ import {TrainrunSectionService} from "../services/data/trainrunsection.service";
 import {TrainrunService} from "../services/data/trainrun.service";
 
 enum ShowTrainrunEditTab {
-  sbb_trainrun_tab,
-  sbb_trainrun_roundtrip_tab
+  sbb_trainrun_tab="GENERAL",
+  sbb_trainrun_roundtrip_tab="ROUND_TRIP",
 }
 
 @Component({
