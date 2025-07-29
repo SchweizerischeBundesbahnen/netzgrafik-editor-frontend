@@ -1,15 +1,13 @@
 <div sbbDialogContent [class]="getContentClassTag()"
     [style]="getContentStyleTag()"
 >
-  <div class="toggle-container">
-    <sbb-toggle-switch-button
-      [labelFalse]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.round-trip' | translate"
-      [labelTrue]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.one-way' | translate"
-      [checked] = "isOneWay"
-      (changed)="onIsOneWayChanged($event)"
-    >
-    </sbb-toggle-switch-button>
-  </div>
+  <sbb-toggle-switch-button
+    [labelFalse]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.round-trip' | translate"
+    [labelTrue]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.one-way' | translate"
+    [checked] = "isOneWay"
+    (changed)="onIsOneWayChanged($event)"
+  >
+  </sbb-toggle-switch-button>
   <sbb-trainrunsection-card *ngIf="isOneWay"
                             [innerContentScaleFactor]="innerContentScaleFactor">
   </sbb-trainrunsection-card>
