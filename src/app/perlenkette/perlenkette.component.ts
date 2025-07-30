@@ -63,7 +63,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
 
   public showTrainrunEditTab: ShowTrainrunEditTab = ShowTrainrunEditTab.sbb_trainrun_tab;
 
-  sbbToogleValue = "GENERAL";
+  sbbToogleValue = ShowTrainrunEditTab.sbb_trainrun_tab;
 
   constructor(
     private readonly loadPerlenketteService: LoadPerlenketteService,
