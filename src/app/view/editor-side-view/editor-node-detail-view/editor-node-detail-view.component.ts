@@ -199,7 +199,6 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
   }
 
   haltezeitIPVNoHaltChanged(check: boolean) {
-    console.log("haltezeitIPVNoHaltChanged", check);
     this.nodeProperties.nodeTrainrunCategoryHaltezeit["HaltezeitIPV"].no_halt = check;
     this.nodeService.changeHaltezeit(
       this.nodeProperties.nodeId,
