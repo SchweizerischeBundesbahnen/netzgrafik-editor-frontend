@@ -72,7 +72,7 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
     private nodeService: NodeService,
     private labelService: LabelService,
     private labelGroupService: LabelGroupService,
-    public versionControlService : VersionControlService,
+    public versionControlService: VersionControlService,
     private cd: ChangeDetectorRef,
   ) {}
 
@@ -194,39 +194,45 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
   onHaltezeitChanged() {
     this.nodeService.changeHaltezeit(
       this.nodeProperties.nodeId,
-      this.nodeProperties.nodeTrainrunCategoryHaltezeit,
+      this.nodeProperties.nodeTrainrunCategoryHaltezeit
     );
   }
 
-  haltezeitIPVNoHaltChanged() {
+  haltezeitIPVNoHaltChanged(check: boolean) {
+    console.log("haltezeitIPVNoHaltChanged", check);
+    this.nodeProperties.nodeTrainrunCategoryHaltezeit["HaltezeitIPV"].no_halt = check;
     this.nodeService.changeHaltezeit(
       this.nodeProperties.nodeId,
-      this.nodeProperties.nodeTrainrunCategoryHaltezeit,
+      this.nodeProperties.nodeTrainrunCategoryHaltezeit
     );
   }
 
-  haltezeitANoHaltChanged() {
+  haltezeitANoHaltChanged(check: boolean) {
+    this.nodeProperties.nodeTrainrunCategoryHaltezeit["HaltezeitA"].no_halt = check;
     this.nodeService.changeHaltezeit(
       this.nodeProperties.nodeId,
-      this.nodeProperties.nodeTrainrunCategoryHaltezeit,
+      this.nodeProperties.nodeTrainrunCategoryHaltezeit
     );
   }
 
-  haltezeitBNoHaltChanged() {
+  haltezeitBNoHaltChanged(check: boolean) {
+    this.nodeProperties.nodeTrainrunCategoryHaltezeit["HaltezeitB"].no_halt = check;
     this.nodeService.changeHaltezeit(
       this.nodeProperties.nodeId,
-      this.nodeProperties.nodeTrainrunCategoryHaltezeit,
+      this.nodeProperties.nodeTrainrunCategoryHaltezeit
     );
   }
 
-  haltezeitCNoHaltChanged() {
+  haltezeitCNoHaltChanged(check: boolean) {
+    this.nodeProperties.nodeTrainrunCategoryHaltezeit["HaltezeitC"].no_halt = check;
     this.nodeService.changeHaltezeit(
       this.nodeProperties.nodeId,
-      this.nodeProperties.nodeTrainrunCategoryHaltezeit,
+      this.nodeProperties.nodeTrainrunCategoryHaltezeit
     );
   }
 
-  haltezeitDNoHaltChanged() {
+  haltezeitDNoHaltChanged(check: boolean) {
+    this.nodeProperties.nodeTrainrunCategoryHaltezeit["HaltezeitD"].no_halt = check;
     this.nodeService.changeHaltezeit(
       this.nodeProperties.nodeId,
       this.nodeProperties.nodeTrainrunCategoryHaltezeit,

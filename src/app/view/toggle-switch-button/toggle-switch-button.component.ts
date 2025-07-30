@@ -15,6 +15,14 @@ export class ToggleSwitchButtonComponent {
   }
 
   onToggle(check: boolean) {
+    if (this.labelFalse === ""){
+      this.onChange(!this.checked);
+      return;
+    }
+    if (this.labelTrue === ""){
+      this.onChange(!this.checked);
+      return;
+    }
     this.onChange(check);
   }
 

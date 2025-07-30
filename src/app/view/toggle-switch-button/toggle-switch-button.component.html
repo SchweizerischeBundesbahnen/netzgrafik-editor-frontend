@@ -7,6 +7,7 @@
     <input
       sbbInput
       type="checkbox"
+      [class]="labelFalse === '' ? 'only-label-true' : ''"
       [checked]="checked"
       (change)="onChange($event.target.checked)"
     />
