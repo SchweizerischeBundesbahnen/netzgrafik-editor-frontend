@@ -15,11 +15,11 @@ export class ToggleSwitchButtonComponent {
   }
 
   onToggle(check: boolean) {
-    if (this.labelFalse === ""){
+    if (this.labelFalse === "") {
       this.onChange(!this.checked);
       return;
     }
-    if (this.labelTrue === ""){
+    if (this.labelTrue === "") {
       this.onChange(!this.checked);
       return;
     }
@@ -32,6 +32,29 @@ export class ToggleSwitchButtonComponent {
     }
     this.checked = isChecked;
     this.checkedChanged.next(this.checked);
+  }
+
+  createCheckboxClassTag(): string {
+    if (this.labelFalse === "") {
+      return "only-label-true";
+    }
+    if (this.labelTrue === "") {
+      return "only-label-true";
+    }
+    return "";
+  }
+
+  createLabelCheckedTag(isTrueLabel: boolean): string {
+    let retVal = "toggle-label";
+    if (this.labelTrue !== "" && this.labelFalse !== "") {
+      if (!isTrueLabel && !this.checked) {
+        retVal += " checked ";
+      }
+      if (isTrueLabel && this.checked) {
+        retVal += " checked ";
+      }
+    }
+    return retVal;
   }
 
 }

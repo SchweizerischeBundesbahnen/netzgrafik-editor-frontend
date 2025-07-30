@@ -57,10 +57,12 @@
   }
 
   input.only-label-true + .slider:before {
+    scale: 0.66;
     background-color: var(--sbb-toggle-border-color-inactive);
   }
 
   input.only-label-true:checked + .slider:before {
+    scale: 1;
     background-color: var(--NODE_TEXT_FOCUS);
   }
 
@@ -77,5 +79,12 @@
 
   .toggle-label:active {
     background: $COLOR_MUTED_SILVER;
+  }
+
+  .toggle-label.checked {
+    font-weight: bold;
+  }
+  .toggle-label.checked {
+    font-weight: bold;
   }
 }

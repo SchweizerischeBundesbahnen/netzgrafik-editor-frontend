@@ -1,19 +1,19 @@
 <div class="toggle-switch-button-component">
   <span *ngIf="labelFalse !== ''"
-        class="toggle-label"
+        [class]="createLabelCheckedTag(false)"
         (click)="onToggle(false)"
   >{{ labelFalse }}</span>
   <label class="toggle-switch">
     <input
       type="checkbox"
-      [class]="labelFalse === '' ? 'only-label-true' : ''"
+      [class]="createCheckboxClassTag()"
       [checked]="checked"
       (change)="onChange($event.target.checked)"
     />
     <span class="slider"></span>
   </label>
   <span *ngIf="labelTrue !== ''"
-        class="toggle-label"
+        [class]="createLabelCheckedTag(true)"
         (click)="onToggle(true)"
   >{{ labelTrue }}</span>
 </div>
