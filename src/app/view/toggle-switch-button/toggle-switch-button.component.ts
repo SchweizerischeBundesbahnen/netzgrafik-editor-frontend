@@ -6,7 +6,7 @@ import {Component, EventEmitter, Input, Output,} from "@angular/core";
   styleUrls: ["./toggle-switch-button.component.scss"],
 })
 export class ToggleSwitchButtonComponent {
-  @Output() changed = new EventEmitter<boolean>();
+  @Output() checkedChanged = new EventEmitter<boolean>();
   @Input() checked = false;
   @Input() labelFalse: string = "";
   @Input() labelTrue: string = "";
@@ -15,12 +15,15 @@ export class ToggleSwitchButtonComponent {
   }
 
   onToggle(check: boolean) {
-    this.onChnaged(check);
+    this.onChange(check);
   }
 
-  onChnaged(isChecked: boolean) {
+  onChange(isChecked: boolean) {
+    if (this.checked === isChecked) {
+      return;
+    }
     this.checked = isChecked;
-    this.changed.next(this.checked);
+    this.checkedChanged.next(this.checked);
   }
 
 }

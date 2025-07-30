@@ -5,7 +5,7 @@
     [labelFalse]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.round-trip' | translate"
     [labelTrue]="'app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.one-way' | translate"
     [checked] = "isOneWay"
-    (changed)="onIsOneWayChanged($event)"
+    (checkedChanged)="onIsOneWayChanged($event)"
   >
   </sbb-toggle-switch-button>
   <sbb-trainrunsection-card *ngIf="isOneWay"

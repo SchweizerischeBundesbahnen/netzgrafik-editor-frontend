@@ -1,5 +1,6 @@
 <div class="toggle-switch-button-component">
-  <span class="toggle-label"
+  <span *ngIf="labelFalse !== ''"
+        class="toggle-label"
         (click)="onToggle(false)"
   >{{ labelFalse }}</span>
   <label class="toggle-switch">
@@ -7,11 +8,12 @@
       sbbInput
       type="checkbox"
       [checked]="checked"
-      (change)="onChnaged($event.target.checked)"
+      (change)="onChange($event.target.checked)"
     />
     <span class="slider"></span>
   </label>
-  <span class="toggle-label"
+  <span *ngIf="labelTrue !== ''"
+        class="toggle-label"
         (click)="onToggle(true)"
   >{{ labelTrue }}</span>
 </div>
