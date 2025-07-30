@@ -232,7 +232,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     setTimeout(() => {
       element.focus();
       element.select();
-    }, 800);
+    }, 100);
   }
 
   getEdgeLineClassAttrString(layer: number) {
