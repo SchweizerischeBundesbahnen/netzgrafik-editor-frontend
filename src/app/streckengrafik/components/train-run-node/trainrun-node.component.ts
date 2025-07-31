@@ -261,41 +261,43 @@ export class TrainRunNodeComponent implements OnInit, OnDestroy {
         }
         if (this.sgTrainrunItem.backward) {
           let path = "";
-          if (tn.departurePathSection !== undefined) {
-            if (tn.departurePathSection.backward) {
-              const x0 = doRot ? nodeWidth : 0;
+          // Extremity node on the target side (backward)
+          if (tn.departurePathSection !== undefined && tn.departurePathSection.backward) {
+            const x0 = doRot ? nodeWidth : 0;
+            path +=
+              " M " +
+              x0 +
+              " " +
+              departureTime +
+              " L " +
+              (track + this.halfStrokeWidth) +
+              " " +
+              departureTime;
+            if(this.sgTrainrunItem.getTrainrunNode().isTurnaround){
               path +=
-                " M " +
-                x0 +
-                " " +
-                departureTime +
-                " L " +
-                (track + this.halfStrokeWidth) +
-                " " +
-                departureTime;
-              path +=
-                " M " +
-                x0 +
-                " " +
-                arrivalTime +
-                " L " +
-                (track + this.halfStrokeWidth) +
-                " " +
-                arrivalTime;
+              " M " +
+              x0 +
+              " " +
+              arrivalTime +
+              " L " +
+              (track + this.halfStrokeWidth) +
+              " " +
+              arrivalTime;
             }
           }
-          if (tn.arrivalPathSection !== undefined) {
-            if (tn.arrivalPathSection.backward) {
-              const x1 = doRot ? 0 : nodeWidth;
-              path +=
-                " M " +
-                (track - this.halfStrokeWidth) +
-                " " +
-                arrivalTime +
-                " L " +
-                x1 +
-                " " +
-                arrivalTime;
+          // Extremity node on the source side (backward)
+          if (tn.arrivalPathSection !== undefined && tn.arrivalPathSection.backward) {
+            const x1 = doRot ? 0 : nodeWidth;
+            path +=
+              " M " +
+              (track - this.halfStrokeWidth) +
+              " " +
+              arrivalTime +
+              " L " +
+              x1 +
+              " " +
+              arrivalTime;
+            if(this.sgTrainrunItem.getTrainrunNode().isTurnaround){
               path +=
                 " M " +
                 (track - this.halfStrokeWidth) +
@@ -310,18 +312,19 @@ export class TrainRunNodeComponent implements OnInit, OnDestroy {
           return path;
         }
         let path = "";
-        if (tn.arrivalPathSection !== undefined) {
-          if (!tn.arrivalPathSection.backward) {
-            const x0 = doRot ? nodeWidth : 0;
-            path +=
-              " M " +
-              x0 +
-              " " +
-              arrivalTime +
-              " L " +
-              (track + this.halfStrokeWidth) +
-              " " +
-              arrivalTime;
+        // Extremity node on the target side (forward)
+        if (tn.arrivalPathSection !== undefined && !tn.arrivalPathSection.backward) {
+          const x0 = doRot ? nodeWidth : 0;
+          path +=
+            " M " +
+            x0 +
+            " " +
+            arrivalTime +
+            " L " +
+            (track + this.halfStrokeWidth) +
+            " " +
+            arrivalTime;
+          if(this.sgTrainrunItem.getTrainrunNode().isTurnaround){
             path +=
               " M " +
               x0 +
@@ -333,18 +336,19 @@ export class TrainRunNodeComponent implements OnInit, OnDestroy {
               departureTime;
           }
         }
-        if (tn.departurePathSection !== undefined) {
-          if (!tn.departurePathSection.backward) {
-            const x1 = doRot ? 0 : nodeWidth;
-            path +=
-              " M " +
-              (track - this.halfStrokeWidth) +
-              " " +
-              departureTime +
-              " L " +
-              x1 +
-              " " +
-              departureTime;
+        // Extremity node on the source side (forward)
+        if (tn.departurePathSection !== undefined && !tn.departurePathSection.backward) {
+          const x1 = doRot ? 0 : nodeWidth;
+          path +=
+            " M " +
+            (track - this.halfStrokeWidth) +
+            " " +
+            departureTime +
+            " L " +
+            x1 +
+            " " +
+            departureTime;
+          if(this.sgTrainrunItem.getTrainrunNode().isTurnaround){
             path +=
               " M " +
               (track - this.halfStrokeWidth) +

@@ -178,6 +178,10 @@ export class StaticDomTags {
   static EDGE_LINE_LAYER_3 = StaticDomTags.LINE_LAYER + "_3";
   static EDGE_LINE_GRAYEDOUT = StaticDomTags.TAG_GRAYEDOUT;
 
+  static EDGE_LINE_ARROW_SVG = "path";
+  static EDGE_LINE_ARROW_CLASS = "edge_line_arrow";
+  static EDGE_LINE_ARROW_DOM_REF = "path.edge_line_arrow";
+
   static EDGE_LINE_PIN_SVG = "circle";
   static EDGE_LINE_PIN_CLASS = "edge_line_pin";
   static EDGE_LINE_PIN_DOM_REF = "circle.edge_line_pin";
