@@ -11,50 +11,32 @@ export class ToggleSwitchButtonComponent {
   @Input() labelFalse: string = "";
   @Input() labelTrue: string = "";
 
-  constructor() {
-  }
-
   onToggle(check: boolean) {
-    if (this.labelFalse === "") {
-      this.onChange(!this.checked);
-      return;
-    }
-    if (this.labelTrue === "") {
-      this.onChange(!this.checked);
-      return;
-    }
     this.onChange(check);
   }
 
   onChange(isChecked: boolean) {
-    if (this.checked === isChecked) {
-      return;
+    if (this.checked !== isChecked) {
+      this.checked = isChecked;
+      this.checkedChanged.next(this.checked);
     }
-    this.checked = isChecked;
-    this.checkedChanged.next(this.checked);
   }
 
   createCheckboxClassTag(): string {
-    if (this.labelFalse === "") {
+    if (!this.labelFalse) {
       return "only-label-true";
     }
-    if (this.labelTrue === "") {
-      return "only-label-true";
+    if (!this.labelTrue) {
+      return "only-label-false";
     }
     return "";
   }
 
   createLabelCheckedTag(isTrueLabel: boolean): string {
-    let retVal = "toggle-label";
-    if (this.labelTrue !== "" && this.labelFalse !== "") {
-      if (!isTrueLabel && !this.checked) {
-        retVal += " checked ";
-      }
-      if (isTrueLabel && this.checked) {
-        retVal += " checked ";
-      }
+    const base = "toggle-label";
+    if (!this.labelTrue || !this.labelFalse) {
+      return base;
     }
-    return retVal;
+    return isTrueLabel === this.checked ? `${base} checked` : base;
   }
-
 }
