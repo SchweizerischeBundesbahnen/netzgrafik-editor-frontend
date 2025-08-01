@@ -52,6 +52,34 @@
       </button>
     </div>
 
+    <div *ngIf="isOneWayActive() || isAsymmetryActive()">
+      <sbb-label class="sbb-mt-m">{{ 'app.view.editor-filter-view.symmetry' | translate }}</sbb-label>
+      <div class="sbb-trainrun-chip-group">
+        <ng-container *ngIf="isOneWayActive()">
+          <button
+            *ngFor="let direction of dataService.getTrainrunDirections()"
+            [class]="getTrainrunDirectionClassname(direction)"
+            (click)="onTrainrunDirectionChanged(direction)"
+            mode="ghost"
+            [title]="getTrainrunDirectionTooltip(direction)"
+          >
+            {{ makeTrainrunDirectionButtonLabel(direction) }}
+          </button>
+        </ng-container>
+        <ng-container *ngIf="isAsymmetryActive()">
+          <button
+            *ngFor="let symmetry of [true, false]"
+            [class]="getTrainrunSectionSymmetryClassname(symmetry)"
+            (click)="onTrainrunSectionSymmetryChanged(symmetry)"
+            mode="ghost"
+            [title]="getTrainrunSectionSymmetryTooltip(symmetry)"
+          >
+            {{ makeTrainrunSectionSymmetryButtonLabel(symmetry) }}
+          </button>
+        </ng-container>
+      </div>
+    </div>
+
     <button
       sbb-secondary-button
       class="sbb-mt-m"
@@ -116,18 +144,32 @@
       </ng-container>
     </sbb-expansion-panel-header>
 
-    <sbb-label>{{ 'app.view.editor-filter-view.times' | translate }}</sbb-label>
-    <div class="sbb-mt-m">
-      <sbb-form-field [label]="'app.view.editor-filter-view.decimal-displayed' | translate">
-        <input
-          sbbInput
-          type="number"
-          pattern="^[.0-9]*"
-          [(ngModel)]="timeDisplayPrecision"
-          (change)="onTimeDisplayPrecisionChanged()"
-        />
-      </sbb-form-field>
+    <sbb-form-field [label]="'app.view.editor-filter-view.decimal-displayed' | translate">
+      <input
+        sbbInput
+        type="number"
+        pattern="^[.0-9]*"
+        [(ngModel)]="timeDisplayPrecision"
+        (change)="onTimeDisplayPrecisionChanged()"
+      />
+    </sbb-form-field>
+
+    <sbb-label>{{ 'app.view.editor-filter-view.Round-trips' | translate }}</sbb-label>
+    <div class="sbb-checkbox-group-vertical">
+      <sbb-checkbox
+        [(ngModel)]="filterTrainrunDirectionArrows"
+        (change)="filterTrainrunDirectionArrowsChanged()"
+        >{{ 'app.view.editor-filter-view.display-trainrun-direction-arrows' | translate }}
+      </sbb-checkbox>
+      <sbb-checkbox
+        [(ngModel)]="filterTrainrunSectionSymmetryArrows"
+        (change)="filterTrainrunSectionSymmetryArrowsChanged()"
+        >{{ 'app.view.editor-filter-view.display-trainrun-section-symmetry-arrows' | translate }}
+      </sbb-checkbox>
     </div>
+    
+    <br />
+    <sbb-label>{{ 'app.view.editor-filter-view.times' | translate }}</sbb-label>
     <div class="sbb-checkbox-group-vertical">
       <sbb-checkbox
         [(ngModel)]="filterArrivalDepartureTime"

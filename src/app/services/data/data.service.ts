@@ -2,6 +2,7 @@ import {Injectable, OnDestroy} from "@angular/core";
 import {
   NetzgrafikDto,
   TrainrunCategory,
+  TrainrunDirection,
   TrainrunFrequency,
   TrainrunTimeCategory,
 } from "../../data-structures/business.data.structures";
@@ -20,6 +21,7 @@ import {LabelGroupService} from "./labelgroup.service";
 import {DataMigration} from "../../utils/data-migration";
 import {FilterService} from "../ui/filter.service";
 import {NetzgrafikColoringService} from "./netzgrafikColoring.service";
+import {Trainrun} from "src/app/models/trainrun.model";
 
 export class NetzgrafikLoadedInfo {
   constructor(
@@ -107,6 +109,14 @@ export class DataService implements OnDestroy {
     );
 
     this.initializeDataServices();
+
+    // Ensure that all trainrun sections have a consistent chain direction
+    this.trainrunService.getTrainruns().forEach((trainrun) => {
+      this.trainrunSectionService.enforceConsistentSectionDirection(
+        trainrun.getId(),
+      );
+    });
+
     this.netzgrafikLoadedInfoSubject.next(
       new NetzgrafikLoadedInfo(false, preview),
     );
@@ -210,6 +220,20 @@ export class DataService implements OnDestroy {
     };
   }
 
+  getTrainruns(): Trainrun[] {
+    return this.trainrunService.getTrainruns();
+  }
+
+  getTrainrunSections() {
+    return this.trainrunSectionService.getTrainrunSections();
+  }
+
+  getTrainrunSectionsByTrainrunId(trainrunId: number) {
+    return this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(
+      trainrunId,
+    );
+  }
+
   getTrainrunCategory(categoryId: number): TrainrunCategory {
     const found = this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunCategories.find(
       (trainrunCategory) => trainrunCategory.id === categoryId,
@@ -251,6 +275,10 @@ export class DataService implements OnDestroy {
   getTrainrunTimeCategories(): TrainrunTimeCategory[] {
     return this.netzgrafikDtoStore.netzgrafikDto.metadata
       .trainrunTimeCategories;
+  }
+
+  getTrainrunDirections(): TrainrunDirection[] {
+    return Object.values(TrainrunDirection);
   }
 
   getBPStammdaten(betriebspunktName: string): Stammdaten {

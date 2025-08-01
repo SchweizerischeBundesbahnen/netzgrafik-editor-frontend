@@ -342,6 +342,7 @@ export class TrainrunSectionService implements OnDestroy {
     targetArrival: number,
     targetDeparture: number,
     travelTime: number,
+    backwardTravelTime: number,
     emit: boolean = true
   ) {
     const trainrunSection = this.getTrainrunSectionFromId(trsId);
@@ -350,6 +351,7 @@ export class TrainrunSectionService implements OnDestroy {
     trainrunSection.setTargetArrival(targetArrival);
     trainrunSection.setTargetDeparture(targetDeparture);
     trainrunSection.setTravelTime(travelTime);
+    trainrunSection.setBackwardTravelTime(backwardTravelTime);
     TrainrunSectionValidator.validateOneSection(trainrunSection);
     this.trainrunService.propagateConsecutiveTimesForTrainrun(
       trainrunSection.getId(),
@@ -359,6 +361,20 @@ export class TrainrunSectionService implements OnDestroy {
     if (emit) {
       this.operation.emit(new TrainrunOperation(OperationType.update, trainrunSection.getTrainrun()));
     }
+  }
+
+  updateSourceSymmetry(trainrunSectionId: number, isLeftNodeSymmetric: boolean) {
+    const trainrunSection = this.getTrainrunSectionFromId(trainrunSectionId);
+    trainrunSection.setSourceSymmetry(isLeftNodeSymmetric);
+    this.trainrunSectionsUpdated();
+    this.operation.emit(new TrainrunOperation(OperationType.update, trainrunSection.getTrainrun()));
+  }
+
+  updateTargetSymmetry(trainrunSectionId: number, isRightNodeSymmetric: boolean) {
+    const trainrunSection = this.getTrainrunSectionFromId(trainrunSectionId);
+    trainrunSection.setTargetSymmetry(isRightNodeSymmetric);
+    this.trainrunSectionsUpdated();
+    this.operation.emit(new TrainrunOperation(OperationType.update, trainrunSection.getTrainrun()));
   }
 
   private propagateTimeAlongTrainrunFixStartTrainrunSection(
@@ -638,6 +654,7 @@ export class TrainrunSectionService implements OnDestroy {
     }
     if (travelTimeLock !== undefined) {
       trainrunSection.setTravelTimeLock(travelTimeLock);
+      trainrunSection.setBackwardTravelTimeLock(travelTimeLock);
     }
     if (enforceUpdate) {
       this.trainrunSectionsUpdated();
@@ -697,8 +714,12 @@ export class TrainrunSectionService implements OnDestroy {
       );
     }
 
-    const sourceNode = this.nodeService.getNodeFromId(sourceNodeId);
-    const targetNode = this.nodeService.getNodeFromId(targetNodeId);
+    const {sourceNode, targetNode} = this.enforceSourceTargetDirection(
+      trainrunSection,
+      this.nodeService.getNodeFromId(sourceNodeId),
+      this.nodeService.getNodeFromId(targetNodeId),
+    );
+
     trainrunSection.setSourceAndTargetNodeReference(sourceNode, targetNode);
     this.trainrunSectionsStore.trainrunSections.push(trainrunSection);
     this.logger.log(
@@ -715,6 +736,10 @@ export class TrainrunSectionService implements OnDestroy {
 
     this.setTrainrunSectionAsSelected(trainrunSection.getId());
     this.propagateTimesForNewTrainrunSection(trainrunSection);
+
+    // Ensure consistent section direction considering the previous ones
+    this.enforceConsistentSectionDirection(trainrunSection.getTrainrunId());
+
     //this.trainrunSectionsUpdated();
     this.trainrunService.trainrunsUpdated();
 
@@ -929,10 +954,14 @@ export class TrainrunSectionService implements OnDestroy {
     precision = 0
   ) {
     const newTotalTravelTime = timeStructure.travelTime;
-
     const oldTotalTravelTime =
       this.trainrunService.getCumulativeTravelTime(trainrunSection);
     const travelTimeFactor = newTotalTravelTime / oldTotalTravelTime;
+
+    const newTotalBackwardTravelTime = timeStructure.backwardTravelTime;
+    const oldTotalBackwardTravelTime =
+      this.trainrunService.getCumulativeBackwardTravelTime(trainrunSection);
+    const backwardTravelTimeFactor = newTotalBackwardTravelTime / oldTotalBackwardTravelTime;
 
     // prepare data structure for the first trainrunsection
     const bothLastNonStopNodes =
@@ -951,6 +980,7 @@ export class TrainrunSectionService implements OnDestroy {
     const trsTimeStructure =
       TrainrunsectionHelper.getDefaultTimeStructure(timeStructure);
     let summedTravelTime = 0;
+    let summedBackwardTravelTime = 0;
 
     const iterator = this.trainrunService.getNonStopIterator(leftNode, trs);
     while (iterator.hasNext()) {
@@ -967,10 +997,23 @@ export class TrainrunSectionService implements OnDestroy {
         isRightNodeNonStop,
         precision
       );
-      trsTimeStructure.rightArrivalTime =
-        TrainrunsectionHelper.getRightArrivalTime(trsTimeStructure, precision);
-      trsTimeStructure.rightDepartureTime =
-        TrainrunsectionHelper.getRightDepartureTime(trsTimeStructure, precision);
+      trsTimeStructure.backwardTravelTime = TrainrunsectionHelper.getTravelTime(
+        newTotalBackwardTravelTime,
+        summedBackwardTravelTime,
+        backwardTravelTimeFactor,
+        nextPair.trainrunSection.getBackwardTravelTime(),
+        isRightNodeNonStop,
+        precision
+      );
+      // TODO: delete the commented area below but potential bug around here for asymmetry
+      // check for non-stops
+      // trsTimeStructure.rightArrivalTime = TrainrunsectionHelper.getRightArrivalTime(trsTimeStructure, precision);
+      // trsTimeStructure.rightDepartureTime =
+      //   TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
+      //     trainrunSection.getTargetSymmetry(),
+      //     trsTimeStructure.rightDepartureTime,
+      //     trsTimeStructure.rightArrivalTime,
+      //   );
       const rightIsTarget =
         nextPair.node.getId() ===
         nextPair.trainrunSection.getTargetNode().getId();
@@ -988,12 +1031,18 @@ export class TrainrunSectionService implements OnDestroy {
         rightIsTarget
           ? trsTimeStructure.rightDepartureTime
           : trsTimeStructure.leftDepartureTime,
-        trsTimeStructure.travelTime,
+        rightIsTarget
+          ? trsTimeStructure.travelTime
+          : trsTimeStructure.backwardTravelTime,
+        rightIsTarget
+          ? trsTimeStructure.backwardTravelTime
+          : trsTimeStructure.travelTime,
       );
 
       trsTimeStructure.leftDepartureTime = trsTimeStructure.rightArrivalTime;
       trsTimeStructure.leftArrivalTime = trsTimeStructure.rightDepartureTime;
       summedTravelTime += trsTimeStructure.travelTime;
+      summedBackwardTravelTime += trsTimeStructure.backwardTravelTime;
     }
 
     this.trainrunSectionsUpdated();
@@ -1204,6 +1253,12 @@ export class TrainrunSectionService implements OnDestroy {
     this.informSelectedTrainrunClickSubject.next(informSelectedTrainrunClick);
   }
 
+  invertTrainrunSectionsSourceAndTarget(trainrunId: number){
+    this.getAllTrainrunSectionsForTrainrun(trainrunId).forEach((trainrunSection) => {
+      this.invertTrainrunSectionSourceAndTarget(trainrunSection);
+    });
+  }
+
   private copyTrainrunSection(
     existingTrainrunSection: TrainrunSection,
     newTrainrunId: number,
@@ -1214,6 +1269,17 @@ export class TrainrunSectionService implements OnDestroy {
     );
     trainrunSection.setTravelTimeDto(
       JSON.parse(JSON.stringify(existingTrainrunSection.getTravelTimeDto())),
+    );
+    trainrunSection.setBackwardTravelTimeDto(
+      JSON.parse(
+        JSON.stringify(existingTrainrunSection.getBackwardTravelTimeDto()),
+      ),
+    );
+    trainrunSection.setSourceSymmetry(
+      JSON.parse(JSON.stringify(existingTrainrunSection.getSourceSymmetry())),
+    );
+    trainrunSection.setTargetSymmetry(
+      JSON.parse(JSON.stringify(existingTrainrunSection.getTargetSymmetry())),
     );
     trainrunSection.setSourceArrivalDto(
       JSON.parse(JSON.stringify(existingTrainrunSection.getSourceArrivalDto())),
@@ -1475,11 +1541,14 @@ export class TrainrunSectionService implements OnDestroy {
     const targetNode = this.nodeService.getNodeFromId(targetNodeId);
     newTrainrunSection.setSourceAndTargetNodeReference(sourceNode, targetNode);
 
+    newTrainrunSection.setSourceSymmetry(trainrunSection.sourceSymmetry);
+    newTrainrunSection.setTargetSymmetry(trainrunSection.targetSymmetry);
     newTrainrunSection.setSourceArrivalDto(trainrunSection.sourceArrival);
     newTrainrunSection.setTargetArrivalDto(trainrunSection.targetArrival);
     newTrainrunSection.setSourceDepartureDto(trainrunSection.sourceDeparture);
     newTrainrunSection.setTargetDepartureDto(trainrunSection.targetDeparture);
     newTrainrunSection.setTravelTimeDto(trainrunSection.travelTime);
+    newTrainrunSection.setBackwardTravelTimeDto(trainrunSection.backwardTravelTime);
     newTrainrunSection.setNumberOfStops(trainrunSection.numberOfStops);
     this.trainrunSectionsStore.trainrunSections.push(newTrainrunSection);
     const sourceIsNonStop = this.getIsNonStop(
@@ -1518,5 +1587,156 @@ export class TrainrunSectionService implements OnDestroy {
       });
     });
     return returnValue;
+  }
+
+  /**
+   * Enforce [source → target] [source → target] sections, disallow
+   * [source → target] [target → source] and [target → source] [source → target]
+   * Returns an object with the (possibly swapped) sourceNode and targetNode.
+   */
+  private enforceSourceTargetDirection(
+    trainrunSection: TrainrunSection,
+    sourceNode: Node,
+    targetNode: Node
+  ): { sourceNode: Node; targetNode: Node } {
+    const isUpdate = this.trainrunSectionsStore.trainrunSections.some(
+      (s) => trainrunSection.getTrainrunId() === s.getTrainrunId()
+    );
+    if (isUpdate) {
+      const {
+        endNode1: trainrunTargetNode,
+        endNode2: trainrunSourceNode,
+      } = this.trainrunService.getBothEndNodesWithTrainrunId(
+        trainrunSection.getTrainrunId()
+      );
+      if (
+        sourceNode.getId() === trainrunSourceNode.getId() ||
+        targetNode.getId() === trainrunTargetNode.getId()
+      ) {
+        return {sourceNode: targetNode, targetNode: sourceNode};
+      }
+    }
+    return {sourceNode, targetNode};
+  }
+
+  private findConnectedPortId(node: Node, portId: number): number | null {
+    const transition = node.getTransitions().find(
+      (tr) => tr.getPortId1() === portId || tr.getPortId2() === portId
+    );
+    if (!transition) {
+      return null;
+    }
+    return transition.getPortId1() === portId ? transition.getPortId2() : transition.getPortId1();
+  }
+
+  /**
+   * Ensure all sections for a trainrun sections chain is [source → target] [source → target]
+   * consistent and invert sections if needed.
+   */
+  enforceConsistentSectionDirection(trainrunId: number) {
+    const sections = this.getAllTrainrunSectionsForTrainrun(trainrunId);
+    if (sections.length < 2) return;
+
+    // Build a map of sections keyed by the outgoing port ID they are connected to.
+    // Find the leaf (departure/arrival) sections: these are the ones without
+    // a transition for their source or target port.
+    const sectionsByConnectedPortId = new Map<number, TrainrunSection>();
+    const leafSectionsAndNodes: [TrainrunSection, number][] = [];
+
+    for (const section of sections) {
+      const sourceNode = section.getSourceNode();
+      const targetNode = section.getTargetNode();
+
+      const sourceConnectedPortId = this.findConnectedPortId(sourceNode, section.getSourcePortId());
+      const targetConnectedPortId = this.findConnectedPortId(targetNode, section.getTargetPortId());
+
+      if (sourceConnectedPortId !== null && sourceConnectedPortId !== undefined) {
+        sectionsByConnectedPortId.set(sourceConnectedPortId, section);
+      } else {
+        leafSectionsAndNodes.push([section, section.getSourceNodeId()]);
+      }
+      if (targetConnectedPortId !== null && targetConnectedPortId !== undefined) {
+        sectionsByConnectedPortId.set(targetConnectedPortId, section);
+      } else {
+        leafSectionsAndNodes.push([section, section.getTargetNodeId()]);
+      }
+    }
+
+    // Use first leaf as starting point and its direction as reference for the whole trainrun.
+    if (leafSectionsAndNodes.length === 0) return;
+    const [firstSection, firstNodeId] = leafSectionsAndNodes[0];
+    let referenceDirection: "ltr" | "rtl";
+    if (firstSection.getSourceNodeId() === firstNodeId) {
+      // Reference direction is left-to-right
+      referenceDirection = "ltr";
+    } else {
+      // Reference direction is right-to-left
+      referenceDirection = "rtl";
+    }
+
+    // Start with a leaf node and walk over the path. Ignore any leaf node we've
+    // already seen (because we've reached it at the end of a previous walk).
+    const seenSectionIds = new Set<number>();
+    let section: TrainrunSection | undefined = firstSection;
+    let nodeId = firstNodeId;
+    while (section) {
+      if (seenSectionIds.has(section.getId())) {
+        // /!\ TODO: makes files unusable if a cycle is detected.
+        throw new Error("Cycle detected in trainrun");
+      }
+      seenSectionIds.add(section.getId());
+
+      if (
+        (referenceDirection === "rtl" && section.getSourceNodeId() === nodeId) ||
+        (referenceDirection === "ltr" && section.getTargetNodeId() === nodeId)
+      ) {
+        // Section is in the wrong direction, invert it
+        this.invertTrainrunSectionSourceAndTarget(section);
+      }
+      nodeId = referenceDirection === "ltr"
+        ? section.getTargetNodeId()
+        : section.getSourceNodeId();
+      section = sectionsByConnectedPortId.get(
+        referenceDirection === "ltr"
+          ? section.getTargetPortId()
+          : section.getSourcePortId()
+      );
+    }
+  }
+
+  private invertTrainrunSectionSourceAndTarget(trainrunSection: TrainrunSection) {
+    // Swap nodes
+    trainrunSection.setSourceAndTargetNodeReference(
+      trainrunSection.getTargetNode(),
+      trainrunSection.getSourceNode(),
+    );
+
+    // Swap ports
+    const oldSourcePortId = trainrunSection.getSourcePortId();
+    const oldTargetPortId = trainrunSection.getTargetPortId();
+    trainrunSection.setSourcePortId(oldTargetPortId);
+    trainrunSection.setTargetPortId(oldSourcePortId);
+
+    // Swap Timelocks
+    const oldSourceDepartureDto = trainrunSection.getSourceDepartureDto();
+    const oldTargetArrivalDto = trainrunSection.getTargetArrivalDto();
+    const oldTargetDepartureDto = trainrunSection.getTargetDepartureDto();
+    const oldSourceArrivalDto = trainrunSection.getSourceArrivalDto();
+
+    // Source departure becomes target departure
+    trainrunSection.setSourceDepartureDto(oldTargetDepartureDto);
+
+    // Target arrival becomes source arrival
+    trainrunSection.setTargetArrivalDto(oldSourceArrivalDto);
+
+    // Target departure becomes source departure
+    trainrunSection.setTargetDepartureDto(oldSourceDepartureDto);
+
+    // Source arrival becomes target arrival
+    trainrunSection.setSourceArrivalDto(oldTargetArrivalDto);
+
+    // Update visuals and geometry
+    trainrunSection.routeEdgeAndPlaceText();
+    trainrunSection.convertVec2DToPath();
   }
 }

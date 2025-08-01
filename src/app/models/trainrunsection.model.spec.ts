@@ -162,6 +162,7 @@ describe("TrainrunSection Model Test", () => {
     ts.setSourceDepartureLock(false);
     ts.setSourceArrivalLock(false);
     ts.setTravelTimeLock(false);
+    ts.setBackwardTravelTimeLock(false);
     expect(ts.getTargetDepartureLock()).toBe(false);
     expect(ts.getTargetArrivalLock()).toBe(false);
     expect(ts.getSourceDepartureLock()).toBe(false);
@@ -176,6 +177,7 @@ describe("TrainrunSection Model Test", () => {
     ts.setSourceDepartureLock(false);
     ts.setSourceArrivalLock(false);
     ts.setTravelTimeLock(false);
+    ts.setBackwardTravelTimeLock(false);
     ts.setTargetDepartureLock(true);
     expect(ts.getTargetDepartureLock()).toBe(true);
     expect(ts.getTargetArrivalLock()).toBe(false);
@@ -191,6 +193,7 @@ describe("TrainrunSection Model Test", () => {
     ts.setSourceDepartureLock(false);
     ts.setSourceArrivalLock(false);
     ts.setTravelTimeLock(false);
+    ts.setBackwardTravelTimeLock(false);
     ts.setTargetArrivalLock(true);
     expect(ts.getTargetDepartureLock()).toBe(false);
     expect(ts.getTargetArrivalLock()).toBe(true);
@@ -206,6 +209,7 @@ describe("TrainrunSection Model Test", () => {
     ts.setSourceDepartureLock(false);
     ts.setSourceArrivalLock(false);
     ts.setTravelTimeLock(false);
+    ts.setBackwardTravelTimeLock(false);
     ts.setSourceDepartureLock(true);
     expect(ts.getTargetDepartureLock()).toBe(false);
     expect(ts.getTargetArrivalLock()).toBe(false);
@@ -221,6 +225,7 @@ describe("TrainrunSection Model Test", () => {
     ts.setSourceDepartureLock(false);
     ts.setSourceArrivalLock(false);
     ts.setTravelTimeLock(false);
+    ts.setBackwardTravelTimeLock(false);
     ts.setSourceArrivalLock(true);
     expect(ts.getTargetDepartureLock()).toBe(false);
     expect(ts.getTargetArrivalLock()).toBe(false);
@@ -236,7 +241,9 @@ describe("TrainrunSection Model Test", () => {
     ts.setSourceDepartureLock(false);
     ts.setSourceArrivalLock(false);
     ts.setTravelTimeLock(false);
+    ts.setBackwardTravelTimeLock(false);
     ts.setTravelTimeLock(true);
+    ts.setBackwardTravelTimeLock(true);
     expect(ts.getTargetDepartureLock()).toBe(false);
     expect(ts.getTargetArrivalLock()).toBe(false);
     expect(ts.getSourceDepartureLock()).toBe(false);

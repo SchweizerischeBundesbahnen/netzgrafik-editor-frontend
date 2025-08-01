@@ -287,6 +287,10 @@
             "delete": "Löschen",
             "deleteConfirmationQuestion": "Soll der gesamte Zuglauf definitiv gelöscht werden?"
           },
+          "trainrun-roundtrip-tab": {
+            "one-way": "Einzelfahrt",
+            "round-trip": "Rundreise"
+          },
           "trainrun-section-tab": {
             "warningTwoLocks": "Warnung: Zu viele Zeiten sind gelockt!",
             "propagateTimesToLeft": "Zeiten nach links propagieren",
@@ -347,6 +351,11 @@
         "filterable-labels-nodes": "Filterbare Labels: Knoten",
         "filterable-labels-notes": "Filterbare Labels: Kommentare",
         "display": "Anzeigen",
+        "Round-trips": "Rundreisen",
+        "round-trips": "Rundreisen",
+        "one-ways": "Einzelfahrten",
+        "display-trainrun-direction-arrows": "Zugfahrt-Richtungs-Pfeile anzeigen",
+        "display-trainrun-section-symmetry-arrows": "Zugfahrt-Knoten-Asymmetrie-Pfeile anzeigen",
         "times": "Zeiten",
         "decimal-displayed": "Anzahl Nachkommastellenanzeigen",
         "display-arrival-departure-times": "Abfahrt- und Ankuftszeiten anzeigen",
@@ -372,6 +381,13 @@
         "hide-trainrun-time-category": "{$trainrunTimeCategory} ausblenden",
         "show-trainrun-frequency": "{$trainrunFrequency} einblenden",
         "hide-trainrun-frequency": "{$trainrunFrequency} ausblenden",
+        "symmetry": "Symmetrie",
+        "show-trainrun-direction": "{$trainrunDirection} einblenden",
+        "hide-trainrun-direction": "{$trainrunDirection} ausblenden",
+        "show-asymmetric-trainruns": "Asymmetrische Zugfahrten einblenden",
+        "hide-asymmetric-trainruns": "Asymmetrische Zugfahrten ausblenden",
+        "symmetric": "Symm.",
+        "asymmetric": "Asymm.",
         "filterable-label-filter": {
           "no-labels-available": "Keine Labels vorhanden",
           "or": "Oder",
