@@ -53,7 +53,10 @@
   }
 
   input.only-one-label-true + .slider:before {
-    background-color: var(--sbb-form-input-background-color);
+    height: 14px;
+    width: 14px;
+    transform: translate(3px, -2px);
+    background-color: var(--COLOR_Default);//var(--sbb-selection-container-icon-color-default);
     border: 1px solid var(--sbb-form-input-border-color-disabled);
     border-radius: 50%;
   }
@@ -63,6 +66,8 @@
   }
 
   input.only-one-label-true:checked + .slider:before {
+    height: 18px;
+    width: 18px;
     background: white;
   }
 
