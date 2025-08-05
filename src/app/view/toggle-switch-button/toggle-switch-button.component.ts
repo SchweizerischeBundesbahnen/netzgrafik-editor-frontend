@@ -24,10 +24,10 @@ export class ToggleSwitchButtonComponent {
 
   createCheckboxClassTag(): string {
     if (!this.labelFalse) {
-      return "only-label-true";
+      return "only-one-label-true";
     }
     if (!this.labelTrue) {
-      return "only-label-false";
+      return "only-one-label-false";
     }
     return "";
   }
