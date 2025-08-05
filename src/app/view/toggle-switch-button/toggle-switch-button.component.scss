@@ -54,8 +54,8 @@
   }
 
   input.only-one-label-true + .slider:before {
-    background-color: var(--COLOR_Default);
-    border: 1px solid var(--NODE_COLOR_BACKGROUND);
+    background-color: white;
+    border: 1px solid var(--sbb-color-silver);
     border-radius: 50%;
   }
 
