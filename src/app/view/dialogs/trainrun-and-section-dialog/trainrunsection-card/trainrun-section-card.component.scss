@@ -19,7 +19,7 @@
 }
 
 .OneWayCard {
-  border-radius: 4px;
+  border-radius: 8px;
   display: flex;
   padding: 1rem 0;
   justify-content: space-around;
@@ -32,17 +32,17 @@
 }
 
 .OneWayCard.muted {
-  border: 1px solid $COLOR_MUTED_SILVER;
+  border: 1px solid var(--sbb-toggle-background-color-inactive);
   background: var(--sbb-toggle-background-color-inactive);
-}
-
-.OneWayCard.selected {
-  border: 1px solid $COLOR_Default;
-  background: var(--sbb-toggle-background-color-active);
 }
 
 .OneWayCard:hover {
   border: 1px solid $COLOR_Default;
+}
+
+.OneWayCard.selected {
+  border: 1px solid var(--sbb-toggle-border-color-active);
+  background: var(--sbb-toggle-background-color-active);
 }
 
 .OneWayCard:active {
