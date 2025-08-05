@@ -148,7 +148,9 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
       StaticDomTags.makeClassTag(
         StaticDomTags.TAG_LINEPATTERN_REF,
         this.timeCategoryLinePattern,
-      )
+      ) +
+      " " +
+      StaticDomTags.TAG_FOCUS
     );
   }
 
@@ -165,7 +167,9 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
       StaticDomTags.makeClassTag(
         StaticDomTags.TAG_COLOR_REF,
         this.getColorRefTag(cardPosition),
-      )
+      ) +
+      " " +
+      StaticDomTags.TAG_FOCUS
     );
   }
 
@@ -176,7 +180,9 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
       StaticDomTags.makeClassTag(
         StaticDomTags.TAG_COLOR_REF,
         this.getColorRefTag(cardPosition),
-      )
+      ) +
+      " " +
+      StaticDomTags.TAG_FOCUS
     );
   }
 
