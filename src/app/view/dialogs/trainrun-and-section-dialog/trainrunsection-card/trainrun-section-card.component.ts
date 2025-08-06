@@ -194,7 +194,7 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
     const rightNode = this.trainrunSectionHelper.getNextStopRightNode(this.selectedTrainrunSection, this.nodesOrdered);
 
     const wantedSourceNode = position === "top" ? leftNode : rightNode;
-    if (wantedSourceNode !== this.selectedTrainrunSection.getSourceNode()) {
+    if (wantedSourceNode !== this.trainrunSectionHelper.getNextStopLeftNode(this.selectedTrainrunSection, this.nodesOrdered)){
       this.trainrunSectionService.invertTrainrunSectionsSourceAndTarget(
         this.selectedTrainrunSection.getTrainrunId(),
       );
