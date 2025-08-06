@@ -48,7 +48,7 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     public dataService: DataService,
     public uiInteractionService: UiInteractionService,
     public filterService: FilterService,
-    public versionControlService : VersionControlService,
+    public versionControlService: VersionControlService,
   ) {
     this.activeFilterName = undefined;
     this.activeEditFilterSettingId = undefined;
@@ -197,72 +197,72 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     this.filterService.setTimeDisplayPrecision(this.timeDisplayPrecision);
   }
 
-  filterAllEmptyNodesChanged() {
-    if (!this.filterAllEmptyNodes) {
+  filterAllEmptyNodesChanged(check: boolean) {
+    if (!check) {
       this.filterService.enableFilterAllEmptyNodes();
     } else {
       this.filterService.disableFilterAllEmptyNodes();
     }
   }
 
-  filterNotesChanged() {
-    if (!this.filterNotes) {
+  filterNotesChanged(check: boolean) {
+    if (!check) {
       this.filterService.enableFilterNotes();
     } else {
       this.filterService.disableFilterNotes();
     }
   }
 
-  filterAllNonStopNodesChanged() {
-    if (!this.filterAllNonStopNodes) {
+  filterAllNonStopNodesChanged(check : boolean) {
+    if (!check) {
       this.filterService.enableFilterAllNonStopNodes();
     } else {
       this.filterService.disableFilterAllNonStopNodes();
     }
   }
 
-  filterTrainrunDirectionArrowsChanged() {
-    if (this.filterTrainrunDirectionArrows) {
+  filterTrainrunDirectionArrowsChanged(check: boolean) {
+    if (check) {
       this.filterService.enableFilterTrainrunDirectionArrows();
     } else {
       this.filterService.disableFilterTrainrunDirectionArrows();
     }
   }
 
-  filterArrivalDepartureTimeChanged() {
-    if (this.filterArrivalDepartureTime) {
+  filterArrivalDepartureTimeChanged(check: boolean) {
+    if (check) {
       this.filterService.enableFilterArrivalDepartureTime();
     } else {
       this.filterService.disableFilterArrivalDepartureTime();
     }
   }
 
-  filterShowNonStopTimeChanged() {
-    if (this.filterShowNonStopTime) {
+  filterShowNonStopTimeChanged(check: boolean) {
+    if (check) {
       this.filterService.enableFilterShowNonStopTime();
     } else {
       this.filterService.disableFilterShowNonStopTime();
     }
   }
 
-  filterTravelTimeChanged() {
-    if (this.filterTravelTime) {
+  filterTravelTimeChanged(check: boolean) {
+    if (check) {
       this.filterService.enableFilterTravelTime();
     } else {
       this.filterService.disableFilterTravelTime();
     }
   }
 
-  filterTrainrunNameChanged() {
-    if (this.filterTrainrunName) {
+  filterTrainrunNameChanged(check :boolean) {
+    if (check) {
       this.filterService.enableFilterTrainrunName();
     } else {
       this.filterService.disableFilterTrainrunName();
     }
   }
 
-  filterConnectionsChanged() {
-    if (this.filterConnections) {
+  filterConnectionsChanged(check: boolean) {
+    if (check) {
       this.filterService.enableFilterConnections();
     } else {
       this.filterService.disableFilterConnections();
