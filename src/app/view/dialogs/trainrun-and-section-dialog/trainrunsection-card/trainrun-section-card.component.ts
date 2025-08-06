@@ -148,16 +148,19 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
       StaticDomTags.makeClassTag(
         StaticDomTags.TAG_LINEPATTERN_REF,
         this.timeCategoryLinePattern,
-      ) +
-      " " +
-      StaticDomTags.TAG_FOCUS
+      )
     );
   }
 
   getColorRefTag(cardPosition: string) {
-    const colorRefTag =
-      cardPosition === this.chosenCard ? this.categoryColorRef : "NORMAL";
-    return colorRefTag;
+    return this.categoryColorRef + " " +
+      (this.chosenCard === cardPosition ?
+        StaticDomTags.TAG_FOCUS :
+        (this.chosenCard === null ? "" : StaticDomTags.TAG_MUTED));
+  }
+
+  getOneWayCardBetriebspunktClassTag(cardPosition: string) {
+    return "OneWayCardBetriebspunkt " + this.getColorRefTag(cardPosition);
   }
 
   getEdgeLineTextClass(cardPosition: string) {
@@ -167,9 +170,7 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
       StaticDomTags.makeClassTag(
         StaticDomTags.TAG_COLOR_REF,
         this.getColorRefTag(cardPosition),
-      ) +
-      " " +
-      StaticDomTags.TAG_FOCUS
+      )
     );
   }
 
@@ -180,9 +181,7 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
       StaticDomTags.makeClassTag(
         StaticDomTags.TAG_COLOR_REF,
         this.getColorRefTag(cardPosition),
-      ) +
-      " " +
-      StaticDomTags.TAG_FOCUS
+      )
     );
   }
 

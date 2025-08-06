@@ -10,6 +10,10 @@
   pointer-events: none;
 }
 
+div.OneWayCardBetriebspunkt.muted {
+  opacity: 0.5;
+}
+
 .TrainrunSection {
   display: flex;
   flex-direction: column;
@@ -24,9 +28,11 @@
   padding: 1rem 0;
   justify-content: space-around;
   align-items: center;
+
   * > text.edge_text {
-    font-size: 10px;
+    font-size: 8px;
   }
+
   cursor: pointer;
   user-select: none;
 }

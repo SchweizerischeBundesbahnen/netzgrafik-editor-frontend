@@ -1,7 +1,7 @@
 <div class="TrainrunSection" [style]="getInnerContentStyleTag()">
   <div [ngClass]="['OneWayCard', chosenCard === 'top' ? 'selected' : 'muted']"
        (click)="onTrainrunSectionCardClick('top')">
-    <div class="OneWayCardBetriebspunkt">
+    <div [class]="getOneWayCardBetriebspunktClassTag('top')">
       <b>{{ startNode[1] }}</b> ({{ startNode[0] }})
     </div>
     <div class="TrainFreqContainer">
@@ -27,14 +27,14 @@
         <path [class]="getEdgeLineClassAttrString(3, 'top')" d="M0,12L48,12"></path>
       </svg>
     </div>
-    <div class="OneWayCardBetriebspunkt">
+    <div [class]="getOneWayCardBetriebspunktClassTag('top')">
       <b>{{ endNode[1] }}</b> ({{ endNode[0] }})
     </div>
   </div>
 
   <div [ngClass]="['OneWayCard', chosenCard === 'bottom' ? 'selected' : 'muted']"
        (click)="onTrainrunSectionCardClick('bottom')">
-    <div class="OneWayCardBetriebspunkt">
+    <div [class]="getOneWayCardBetriebspunktClassTag('bottom')">
       <b>{{ startNode[1] }}</b> ({{ startNode[0] }})
     </div>
     <div class="TrainFreqContainer">
@@ -60,7 +60,7 @@
         <path [class]="getEdgeLineClassAttrString(3, 'bottom')" d="M0,12L48,12"></path>
       </svg>
     </div>
-    <div class="OneWayCardBetriebspunkt">
+    <div [class]="getOneWayCardBetriebspunktClassTag('bottom')">
       <b>{{ endNode[1] }}</b> ({{ endNode[0] }})
     </div>
   </div>
