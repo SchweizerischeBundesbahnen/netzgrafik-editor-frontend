@@ -73,6 +73,8 @@ export class EditorView implements SVGMouseControllerObserver {
   getSelectedTrainrun = null;
   getCumulativeTravelTime = null;
   getCumulativeTravelTimeAndNodePath = null;
+  getCumulativeBackwardTravelTime = null;
+  getCumulativeBackwardTravelTimeAndNodePath = null;
   unselectAllTrainruns = null;
   isAnyTrainSelected = null;
   getConnectedTrainrunIds = null;
@@ -82,7 +84,10 @@ export class EditorView implements SVGMouseControllerObserver {
   combineTwoTrainruns = null;
   getNodeFromConnection = null;
   isFilterTravelTimeEnabled = null;
+  isFilterBackwardTravelTimeEnabled = null;
   isFilterTrainrunNameEnabled = null;
+  isFilterDirectionArrowsEnabled = null;
+  isFilterAsymmetryArrowsEnabled = null;
   isFilterArrivalDepartureTimeEnabled = null;
   isFilterShowNonStopTimeEnabled = null;
   isFilterTrainrunCategoryEnabled = null;
@@ -241,8 +246,16 @@ export class EditorView implements SVGMouseControllerObserver {
     this.getCumulativeTravelTime = callback;
   }
 
+  bindGetCumulativeBackwardTravelTime(callback) {
+    this.getCumulativeBackwardTravelTime = callback;
+  }
+
   bindGetCumulativeTravelTimeAndNodePath(callback) {
     this.getCumulativeTravelTimeAndNodePath = callback;
+  }
+
+  bindGetCumulativeBackwardTravelTimeAndNodePath(callback) {
+    this.getCumulativeBackwardTravelTimeAndNodePath = callback;
   }
 
   bindUnselectAllTrainruns(callback) {
@@ -281,8 +294,20 @@ export class EditorView implements SVGMouseControllerObserver {
     this.isFilterTravelTimeEnabled = callback;
   }
 
+  bindIsFilterBackwardTravelTimeEnabled(callback) {
+    this.isFilterBackwardTravelTimeEnabled = callback;
+  }
+
   bindIsfilterTrainrunNameEnabled(callback) {
     this.isFilterTrainrunNameEnabled = callback;
+  }
+
+  bindIsFilterDirectionArrowsEnabled(callback) {
+    this.isFilterDirectionArrowsEnabled = callback;
+  }
+
+  bindIsFilterAsymmetryArrowsEnabled(callback) {
+    this.isFilterAsymmetryArrowsEnabled = callback;
   }
 
   bindIsfilterArrivalDepartureTimeEnabled(callback) {
