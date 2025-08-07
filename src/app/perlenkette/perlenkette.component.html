@@ -41,9 +41,9 @@
                 perlenketteTrainrun.pathItems.at(0).getPerlenketteNode()
                   .fullName
                 }}</span>
-                @if (arrowDirection !== null) {
+                @if (getArrowDirectionForOneWayTrainrun() !== null) {
               <sbb-icon
-                [svgIcon]="arrowDirection"
+                [svgIcon]="getArrowDirectionForOneWayTrainrun()"
                 aria-hidden="false"
                 height="13px"
                 width="13px"
@@ -66,9 +66,9 @@
                 perlenketteTrainrun.pathItems.at(0).getPerlenketteNode()
                   .fullName
                 }}</span>
-              @if (arrowDirection !== null) {
+              @if (getArrowDirectionForOneWayTrainrun() !== null) {
               <sbb-icon
-                [svgIcon]="arrowDirection"
+                [svgIcon]="getArrowDirectionForOneWayTrainrun()"
                 aria-hidden="false"
                 height="13px"
                 width="13px"

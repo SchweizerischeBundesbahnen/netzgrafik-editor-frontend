@@ -70,7 +70,6 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
   public selectedTrainrun: Trainrun;
   public nextStopLeftNodeName: string;
   public nextStopRightNodeName: string;
-  public arrowDirection: string | null = null;
 
   public data = null;
 
@@ -97,7 +96,6 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
           this.closeDialog();
           return;
         }
-        this.arrowDirection = this.getArrowDirectionForOneWayTrainrun();
       }
     );
 
@@ -129,8 +127,6 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
 
         this.nextStopLeftNodeName = nextStopLeftNode.getFullName();
         this.nextStopRightNodeName = nextStopRightNode.getFullName();
-        this.arrowDirection = this.getArrowDirectionForOneWayTrainrun();
-
         this.openDialog(parameter);
       }
     );
@@ -244,7 +240,7 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
     };
   }
 
-  private getArrowDirectionForOneWayTrainrun(): string {
+  getArrowDirectionForOneWayTrainrun(): string {
     if (!this.selectedTrainrun || this.selectedTrainrun.isRoundTrip()) {
       return "minus-medium";
     }

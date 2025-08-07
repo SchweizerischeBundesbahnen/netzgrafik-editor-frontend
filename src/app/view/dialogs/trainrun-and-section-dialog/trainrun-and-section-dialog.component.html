@@ -27,14 +27,14 @@
           ></sbb-trainrun-tab>
         </sbb-tab>
         <sbb-tab id="trainrun-section-tab">
-          @if (arrowDirection !== null) {
+          @if (getArrowDirectionForOneWayTrainrun() !== null) {
               <ng-template
                 sbb-tab-label
               >
                 <span style="transform: translateY(-2px);" class="onewayTrip">{{ nextStopLeftNodeName }}</span>
                 <sbb-icon
                   style="transform: translateY(-2px);"
-                  [svgIcon]="arrowDirection"
+                  [svgIcon]="getArrowDirectionForOneWayTrainrun()"
                   aria-hidden="false"
                   height="13px"
                   width="13px"

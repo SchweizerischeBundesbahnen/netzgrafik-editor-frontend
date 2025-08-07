@@ -59,7 +59,6 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
   private showAllLockStates = false;
 
   private trainrunSectionHelper: TrainrunsectionHelper;
-  public arrowDirection: string | null = null;
 
   public showTrainrunEditTab: ShowTrainrunEditTab = ShowTrainrunEditTab.sbb_trainrun_tab;
 
@@ -108,7 +107,6 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
           if (!trainrunList.length) {
             return;
           }
-          this.arrowDirection = this.getArrowDirectionForOneWayTrainrun();
         }
       );
 
@@ -477,7 +475,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     );
   }
 
-  private getArrowDirectionForOneWayTrainrun(): string {
+  getArrowDirectionForOneWayTrainrun(): string {
     if (!this.perlenketteTrainrun || this.perlenketteTrainrun.direction === Direction.ROUND_TRIP) return "minus-medium";
     const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
       this.trainrunSectionService.getSelectedTrainrunSection()
