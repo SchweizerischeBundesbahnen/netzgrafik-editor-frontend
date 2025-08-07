@@ -697,11 +697,8 @@ export class TrainrunSectionService implements OnDestroy {
       );
     }
 
-    const {sourceNode, targetNode} = this.enforceSourceTargetDirection(
-      trainrunSection,
-      this.nodeService.getNodeFromId(sourceNodeId),
-      this.nodeService.getNodeFromId(targetNodeId),
-    );
+    const sourceNode = this.nodeService.getNodeFromId(sourceNodeId);
+    const targetNode = this.nodeService.getNodeFromId(targetNodeId);
 
     trainrunSection.setSourceAndTargetNodeReference(sourceNode, targetNode);
     this.trainrunSectionsStore.trainrunSections.push(trainrunSection);
@@ -1609,43 +1606,46 @@ export class TrainrunSectionService implements OnDestroy {
 
     // Use first leaf as starting point and its direction as reference for the whole trainrun.
     if (leafSectionsAndNodes.length === 0) return;
-    const [firstSection, firstNodeId] = leafSectionsAndNodes[0];
-    let referenceDirection: "ltr" | "rtl";
-    if (firstSection.getSourceNodeId() === firstNodeId) {
-      // Reference direction is left-to-right
-      referenceDirection = "ltr";
-    } else {
-      // Reference direction is right-to-left
-      referenceDirection = "rtl";
-    }
-
-    // Start with a leaf node and walk over the path. Ignore any leaf node we've
-    // already seen (because we've reached it at the end of a previous walk).
     const seenSectionIds = new Set<number>();
-    let section: TrainrunSection | undefined = firstSection;
-    let nodeId = firstNodeId;
-    while (section) {
-      if (seenSectionIds.has(section.getId())) {
-        // /!\ TODO: makes files unusable if a cycle is detected.
-        throw new Error("Cycle detected in trainrun");
-      }
-      seenSectionIds.add(section.getId());
 
-      if (
-        (referenceDirection === "rtl" && section.getSourceNodeId() === nodeId) ||
-        (referenceDirection === "ltr" && section.getTargetNodeId() === nodeId)
-      ) {
-        // Section is in the wrong direction, invert it
-        this.invertTrainrunSectionSourceAndTarget(section);
+    for (const [startSection, startNodeId] of leafSectionsAndNodes) {
+      if (seenSectionIds.has(startSection.getId())) continue;
+
+      let referenceDirection: "sourceToTarget" | "targetToSource";
+      if (startSection.getSourceNodeId() === startNodeId) {
+        referenceDirection = "sourceToTarget";
+      } else {
+        referenceDirection = "targetToSource";
       }
-      nodeId = referenceDirection === "ltr"
-        ? section.getTargetNodeId()
-        : section.getSourceNodeId();
-      section = sectionsByConnectedPortId.get(
-        referenceDirection === "ltr"
-          ? section.getTargetPortId()
-          : section.getSourcePortId()
-      );
+
+      // Start with a leaf node and walk over the path. Ignore any leaf node we've
+      // already seen (because we've reached it at the end of a previous walk).
+      // const seenSectionIds = new Set<number>();
+      let section: TrainrunSection | undefined = startSection;
+      let nodeId = startNodeId;
+      while (section) {
+        if (seenSectionIds.has(section.getId())) {
+          // /!\ TODO: makes files unusable if a cycle is detected.
+          throw new Error("Cycle detected in trainrun");
+        }
+        seenSectionIds.add(section.getId());
+
+        if (
+          (referenceDirection === "targetToSource" && section.getSourceNodeId() === nodeId) ||
+          (referenceDirection === "sourceToTarget" && section.getTargetNodeId() === nodeId)
+        ) {
+          // Section is in the wrong direction, invert it
+          this.invertTrainrunSectionSourceAndTarget(section);
+        }
+        nodeId = referenceDirection === "sourceToTarget"
+          ? section.getTargetNodeId()
+          : section.getSourceNodeId();
+        section = sectionsByConnectedPortId.get(
+          referenceDirection === "sourceToTarget"
+            ? section.getTargetPortId()
+            : section.getSourcePortId()
+        );
+      }
     }
   }
 
