@@ -76,7 +76,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   private trainrunSectionHelper: TrainrunsectionHelper;
   private destroyed = new Subject<void>();
 
-  public get isTopTrainrunSectionInfosDisplayed(): boolean {
+  public get isTopTrainrunSectionInfoDisplayed(): boolean {
     if (this.selectedTrainrunSection === null) {
       return false;
     }
@@ -86,7 +86,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     return this.isRoundTrip() || isTargetRightOrBottom;
   }
 
-  public get isBottomTrainrunSectionInfosDisplayed(): boolean {
+  public get isBottomTrainrunSectionInfoDisplayed(): boolean {
     if (this.selectedTrainrunSection === null) {
       return false;
     }
@@ -298,9 +298,9 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   };
 
   getArrowTranslateAndRotate() {
-    if(this.isTopTrainrunSectionInfosDisplayed && !this.isBottomTrainrunSectionInfosDisplayed) {
+    if (this.isTopTrainrunSectionInfoDisplayed && !this.isBottomTrainrunSectionInfoDisplayed) {
       return "translate(60, 16) rotate(0)";
-    } else if(!this.isTopTrainrunSectionInfosDisplayed && this.isBottomTrainrunSectionInfosDisplayed) {
+    } else if (!this.isTopTrainrunSectionInfoDisplayed && this.isBottomTrainrunSectionInfoDisplayed) {
       return "translate(60, 16) rotate(180)";
     }
     return "";
