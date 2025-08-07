@@ -211,12 +211,12 @@ export class PerlenketteSectionComponent
     if (this.trainrunSection === null) {
       return false;
     }
-    const isTargetLeftOrTop = TrainrunsectionHelper.isTargetLeftOrTop(
+    const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
       this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(
         this.trainrunSection.getTrainrunId()
       )[0]
     );
-    return this.trainrunSection.getTrainrun().isRoundTrip() || isTargetLeftOrTop;
+    return this.trainrunSection.getTrainrun().isRoundTrip() || !isTargetRightOrBottom;
   }
   
   isRightSideDisplayed(): boolean {

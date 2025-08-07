@@ -90,10 +90,10 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     if (this.selectedTrainrunSection === null) {
       return false;
     }
-    const isTargetLeftOrTop = TrainrunsectionHelper.isTargetLeftOrTop(
+    const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
       this.selectedTrainrunSection,
     );
-    return this.isRoundTrip() || isTargetLeftOrTop;
+    return this.isRoundTrip() || !isTargetRightOrBottom;
   }
 
   constructor(
