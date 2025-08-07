@@ -1109,11 +1109,8 @@ export class TrainrunSectionsView {
     const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(trainrunSection);
 
     // Use the first segment of the section to determine the direction
-    const [pos0, pos1] = isTargetRightOrBottom
-      ? [positions[0], positions[1]]
-      : [positions[1], positions[0]];
-    const xDiff = pos1.getX() - pos0.getX();
-    const yDiff = pos1.getY() - pos0.getY();
+    const xDiff = positions[1].getX() - positions[0].getX();
+    const yDiff = positions[1].getY() - positions[0].getY();
 
     // Compute angle
     let angle: number;
@@ -1157,9 +1154,7 @@ export class TrainrunSectionsView {
     (["BEGINNING_ARROW", "ENDING_ARROW"] as const).forEach((arrowType) => {
       groupLinesEnter
         .append(StaticDomTags.EDGE_LINE_ARROW_SVG)
-        .attr(StaticDomTags.TAG_HIDDEN, () =>
-          !this.editorView.isFilterTrainrunDirectionArrowsEnabled() ? "" : null,
-        )
+        .classed(StaticDomTags.TAG_HIDDEN, !this.editorView.isFilterTrainrunDirectionArrowsEnabled())
         .attr("d", (d: TrainrunSectionViewObject) => {
           const tsDirection = d.trainrunSection
             .getTrainrun()
