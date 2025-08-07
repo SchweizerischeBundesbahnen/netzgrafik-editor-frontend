@@ -1,0 +1,52 @@
+@import "../../../rastering/definitions";
+
+::ng-deep div.OneWayCardBetriebspunkt {
+  max-width: 160px;
+  padding: 1px;
+  text-align: center;
+  align-content: center;
+  height: 40px;
+  font-family: "SBBWeb Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  pointer-events: none;
+}
+
+.TrainrunSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  row-gap: 6px;
+  padding-top: 13px;
+}
+
+.OneWayCard {
+  border-radius: 15px;
+  display: flex;
+  padding: 1rem 0;
+  justify-content: space-around;
+  align-items: center;
+  * > text.edge_text {
+    font-size: 10px;
+  }
+  cursor: pointer;
+}
+
+.OneWayCard.muted {
+  border: 1px solid $COLOR_MUTED_SILVER;
+}
+
+.OneWayCard.selected {
+  border: 1px solid $COLOR_Focus;
+}
+
+.OneWayCard:hover {
+  background: var(--COLOR_TRANSITION_GRAYEDOUT);
+}
+
+.OneWayCard:active {
+  background-color: $COLOR_MUTED_SILVER;
+}
+
+.TrainFreqContainer {
+  display: flex;
+  align-items: center;
+}

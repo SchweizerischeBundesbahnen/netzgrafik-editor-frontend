@@ -252,15 +252,17 @@ const buildSectionEdges = (
       console.log("Ignoring trainrun (no root found): ", trainrun.getId());
       return;
     }
-    edges.push(
-      ...buildSectionEdgesFromIterator(
-        tsIterator,
-        false,
-        timeLimit,
-        tsSuccessor,
-      ),
+    // Forward edges are calculated first, so we can use the successor map.
+    const forwardEdges = buildSectionEdgesFromIterator(
+      tsIterator,
+      false,
+      timeLimit,
+      tsSuccessor,
     );
-    // Don't forget the reverse direction.
+    // Add forward edges to round trip and one-way trainruns.
+    edges.push(...forwardEdges);
+    if (!trainrun.isRoundTrip()) return;
+    // Don't forget the reverse direction for round trip trainruns.
     const ts = tsIterator.current().trainrunSection;
     const nextIterator = trainrunService.getIterator(
       tsIterator.current().node,

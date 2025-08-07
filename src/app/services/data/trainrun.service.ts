@@ -4,6 +4,7 @@ import {
   LabelRef,
   NetzgrafikDto,
   TrainrunCategory,
+  Direction,
   TrainrunDto,
   TrainrunFrequency,
   TrainrunTimeCategory,
@@ -24,6 +25,7 @@ import {Transition} from "../../models/transition.model";
 import {Port} from "../../models/port.model";
 import {Connection} from "../../models/connection.model";
 import {Operation, OperationType, TrainrunOperation} from "../../models/operation.model";
+import {LeftAndRightTimeStructure} from "src/app/view/dialogs/trainrun-and-section-dialog/trainrunsection-tab/trainrun-section-tab.component";
 
 @Injectable({
   providedIn: "root",
@@ -170,6 +172,60 @@ export class TrainrunService {
     return trainrun;
   }
 
+  getTrainrunTimeStructure(): Omit<LeftAndRightTimeStructure, "travelTime"> {
+    const selectedTrainrun = this.getSelectedTrainrun();
+    if (!selectedTrainrun){
+      return undefined;
+    }
+    const selectedTrainrunId = selectedTrainrun.getId();
+    const trainrunSections =
+      this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(
+        selectedTrainrunId,
+      );
+    const [leftNode, rightNode] = [this.getStartNodeWithTrainrunId(selectedTrainrunId), this.getEndNodeWithTrainrunId(selectedTrainrunId)];
+
+    // leftNode -> rightNode
+    let firstTrainrunSection = trainrunSections.find(ts => ts.getSourceNodeId() === leftNode.getId());
+    let lastTrainrunSection = trainrunSections.reverse().find(ts => ts.getTargetNodeId() === rightNode.getId());
+    let isLeftToRight = true;
+
+    // rightNode -> leftNode
+    if (!firstTrainrunSection && !lastTrainrunSection) {
+      firstTrainrunSection = trainrunSections.find(ts => ts.getSourceNodeId() === rightNode.getId());
+      lastTrainrunSection = trainrunSections.reverse().find(ts => ts.getTargetNodeId() === leftNode.getId());
+      isLeftToRight = false;
+    }
+
+    let leftTimes, rightTimes;
+
+    if (isLeftToRight) {
+      // leftNode -> rightNode: left times from first section, right times from last section
+      leftTimes = {
+        leftDepartureTime: firstTrainrunSection.getSourceDeparture(),
+        leftArrivalTime: firstTrainrunSection.getSourceArrival()
+      };
+      rightTimes = {
+        rightDepartureTime: lastTrainrunSection.getTargetDeparture(),
+        rightArrivalTime: lastTrainrunSection.getTargetArrival()
+      };
+    } else {
+      // rightNode -> leftNode: left times from last section, right times from first section
+      leftTimes = {
+        leftDepartureTime: lastTrainrunSection.getTargetDeparture(),
+        leftArrivalTime: lastTrainrunSection.getTargetArrival()
+      };
+      rightTimes = {
+        rightDepartureTime: firstTrainrunSection.getSourceDeparture(),
+        rightArrivalTime: firstTrainrunSection.getSourceArrival()
+      };
+    }
+
+    return {
+      ...leftTimes,
+      ...rightTimes,
+    };
+  }
+
   deleteTrainrun(trainrun: Trainrun, enforceUpdate = true) {
     const deletetLabelIds = this.labelService.clearLabel(
       trainrun.getLabelIds(),
@@ -294,6 +350,16 @@ export class TrainrunService {
   updateTrainrunTitle(trainrun: Trainrun, title: string) {
     this.getTrainrunFromId(trainrun.getId()).setTitle(title);
     this.nodeService.reorderPortsOnNodesForTrainrun(trainrun, false);
+    this.trainrunsUpdated();
+    this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
+  }
+
+  updateDirection(
+    trainrun: Trainrun,
+    direction: Direction,
+  ) {
+    const trainrunSection = this.getTrainrunFromId(trainrun.getId());
+    trainrunSection.setDirection(direction);
     this.trainrunsUpdated();
     this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
   }
@@ -531,6 +597,7 @@ export class TrainrunService {
     copiedtrainrun.setTrainrunCategory(trainrun.getTrainrunCategory());
     copiedtrainrun.setTrainrunFrequency(trainrun.getTrainrunFrequency());
     copiedtrainrun.setTrainrunTimeCategory(trainrun.getTrainrunTimeCategory());
+    copiedtrainrun.setDirection(trainrun.getDirection());
     copiedtrainrun.setTitle(trainrun.getTitle() + postfix);
     copiedtrainrun.setLabelIds(trainrun.getLabelIds());
     this.trainrunsStore.trainruns.push(copiedtrainrun);
@@ -668,6 +735,14 @@ export class TrainrunService {
   getStartNodeWithTrainrunId(trainrunId: number): Node {
     const bothEndNodes = this.getBothEndNodesWithTrainrunId(trainrunId);
     return GeneralViewFunctions.getLeftOrTopNode(
+      bothEndNodes.endNode1,
+      bothEndNodes.endNode2,
+    );
+  }
+
+  getEndNodeWithTrainrunId(trainrunId: number): Node {
+    const bothEndNodes = this.getBothEndNodesWithTrainrunId(trainrunId);
+    return GeneralViewFunctions.getRightOrBottomNode(
       bothEndNodes.endNode1,
       bothEndNodes.endNode2,
     );
@@ -868,6 +943,7 @@ export class TrainrunService {
     newTrainrun.setTrainrunTimeCategory(
       this.dataService.getTrainrunTimeCategory(trainrun.trainrunTimeCategoryId),
     );
+    newTrainrun.setDirection(trainrun.direction);
     newTrainrun.setTitle(trainrun.name);
     newTrainrun.setLabelIds(trainrun.labelIds);
     this.trainrunsStore.trainruns.push(newTrainrun);
