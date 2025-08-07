@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from "@angular/core";
 import {FilterService} from "../../services/ui/filter.service";
 import {
   TrainrunCategory,
-  TrainrunDirection,
+  Direction,
   TrainrunFrequency,
   TrainrunTimeCategory,
 } from "../../data-structures/business.data.structures";
@@ -25,7 +25,7 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
   filterAllEmptyNodes: boolean;
   filterNotes: boolean;
   filterAllNonStopNodes: boolean;
-  filterTrainrunDirectionArrows: boolean;
+  filterDirectionArrows: boolean;
   filterArrivalDepartureTime: boolean;
   filterShowNonStopTime: boolean;
   filterTravelTime: boolean;
@@ -71,8 +71,8 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
   }
 
   updateFilterData() {
-    this.filterTrainrunDirectionArrows =
-      this.filterService.isFilterTrainrunDirectionArrowsEnabled();
+    this.filterDirectionArrows =
+      this.filterService.isFilterDirectionArrowsEnabled();
     this.filterArrivalDepartureTime =
       this.filterService.isFilterArrivalDepartureTimeEnabled();
     this.filterShowNonStopTime =
@@ -221,11 +221,11 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     }
   }
 
-  filterTrainrunDirectionArrowsChanged() {
-    if (this.filterTrainrunDirectionArrows) {
-      this.filterService.enableFilterTrainrunDirectionArrows();
+  filterDirectionArrowsChanged() {
+    if (this.filterDirectionArrows) {
+      this.filterService.enableFilterDirectionArrows();
     } else {
-      this.filterService.disableFilterTrainrunDirectionArrows();
+      this.filterService.disableFilterDirectionArrows();
     }
   }
 
@@ -315,25 +315,25 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     );
   }
 
-  getTrainrunDirectionClassname(trainrunDirection: TrainrunDirection): string {
+  getDirectionClassname(direction: Direction): string {
     if (
-      this.filterService.isFilterTrainrunDirectionEnabled(
-        trainrunDirection,
+      this.filterService.isFilterDirectionEnabled(
+        direction,
       )
     ) {
       return (
-        "TrainrunDialog TrainrunDirection " +
+        "TrainrunDialog Direction " +
         StaticDomTags.TAG_SELECTED
       );
     }
     return (
-      "TrainrunDialog TrainrunDirection "
+      "TrainrunDialog Direction "
     );
   }
 
   isAsymmetryActive(): boolean {
     for (const trainrun of this.dataService.getTrainruns()) {
-      if (trainrun.getTrainrunDirection() !== TrainrunDirection.ROUND_TRIP) return true;
+      if (trainrun.getDirection() !== Direction.ROUND_TRIP) return true;
     }
     return false;
   }
@@ -354,25 +354,25 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     return $localize`:@@app.view.editor-filter-view.hide-trainrun-time-category:Hide ${trainrunTimeCategory.name}:trainrunTimeCategory:`;
   }
 
-  private getTrainrunDirectionTranslation(trainrunDirection: TrainrunDirection): string {
-    switch (trainrunDirection) {
-      case TrainrunDirection.ROUND_TRIP:
+  private getDirectionTranslation(direction: Direction): string {
+    switch (direction) {
+      case Direction.ROUND_TRIP:
         return $localize`:@@app.view.editor-filter-view.round-trips:Round trips`;
-      case TrainrunDirection.ONE_WAY:
+      case Direction.ONE_WAY:
         return $localize`:@@app.view.editor-filter-view.one-ways:One-ways`;
       default:
-        return trainrunDirection;
+        return direction;
     }
   }
 
-  getTrainrunDirectionTooltip(trainrunDirection: TrainrunDirection): string {
-    const trainrunDirectionTranslation = this.getTrainrunDirectionTranslation(trainrunDirection);
+  getDirectionTooltip(direction: Direction): string {
+    const directionTranslation = this.getDirectionTranslation(direction);
     if (
-      !this.filterService.isFilterTrainrunDirectionEnabled(trainrunDirection)
+      !this.filterService.isFilterDirectionEnabled(direction)
     ) {
-      return $localize`:@@app.view.editor-filter-view.show-trainrun-direction:Show ${trainrunDirectionTranslation}:trainrunDirection:`;
+      return $localize`:@@app.view.editor-filter-view.show-direction:Show ${directionTranslation}:direction:`;
     }
-    return $localize`:@@app.view.editor-filter-view.hide-trainrun-direction:Hide ${trainrunDirectionTranslation}:trainrunDirection:`;
+    return $localize`:@@app.view.editor-filter-view.hide-direction:Hide ${directionTranslation}:direction:`;
   }
 
   makeCategoryButtonLabel(trainrunCategory: TrainrunCategory): string {
@@ -393,10 +393,10 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     return label;
   }
 
-  makeTrainrunDirectionButtonLabel(
-    trainrunDirection: TrainrunDirection,
+  makeDirectionButtonLabel(
+    direction: Direction,
   ): string {
-    if (trainrunDirection === TrainrunDirection.ROUND_TRIP) {
+    if (direction === Direction.ROUND_TRIP) {
       return "↔";
     } else {
       return "→";
@@ -425,13 +425,13 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     }
   }
 
-  onTrainrunDirectionChanged(trainrunDirection: TrainrunDirection) {
+  onDirectionChanged(direction: Direction) {
     if (
-      !this.filterService.isFilterTrainrunDirectionEnabled(trainrunDirection)
+      !this.filterService.isFilterDirectionEnabled(direction)
     ) {
-      this.filterService.enableFilterTrainrunDirection(trainrunDirection);
+      this.filterService.enableFilterDirection(direction);
     } else {
-      this.filterService.disableFilterTrainrunDirection(trainrunDirection);
+      this.filterService.disableFilterDirection(direction);
     }
   }
 
@@ -488,7 +488,7 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     this.filterService.resetFilterTrainrunCategory();
     this.filterService.resetFilterTrainrunFrequency();
     this.filterService.resetFilterTrainrunTimeCategory();
-    this.filterService.resetFilterTrainrunDirection();
+    this.filterService.resetFilterDirection();
   }
 
   onResetNodeFilter() {
@@ -507,14 +507,14 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
   onResetDisplayFilter() {
     this.onResetNodeFilter();
     this.onResetNoteFilter();
-    this.filterService.enableFilterTrainrunDirectionArrows();
+    this.filterService.enableFilterDirectionArrows();
     this.filterService.enableFilterArrivalDepartureTime();
     this.filterService.enableFilterTravelTime();
     this.filterService.enableFilterTrainrunName();
     this.filterService.enableFilterShowNonStopTime();
     this.filterService.enableFilterConnections();
-    this.filterTrainrunDirectionArrows =
-      this.filterService.isFilterTrainrunDirectionArrowsEnabled();
+    this.filterDirectionArrows =
+      this.filterService.isFilterDirectionArrowsEnabled();
     this.filterArrivalDepartureTime =
       this.filterService.isFilterArrivalDepartureTimeEnabled();
     this.filterTravelTime = this.filterService.isFilterTravelTimeEnabled();

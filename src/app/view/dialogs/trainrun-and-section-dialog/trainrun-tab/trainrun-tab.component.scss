@@ -101,14 +101,14 @@
   opacity: 1.0;
 }
 
-::ng-deep button.TrainrunDirection {
+::ng-deep button.Direction {
   color: var(--NODE_TEXT_FOCUS);
   background-color: var(--NODE_COLOR_BACKGROUND);
   border-color: transparent;
   opacity: 1.0;
 }
 
-::ng-deep button.TrainrunDirection.selected {
+::ng-deep button.Direction.selected {
   color: white;
   background-color: $COLOR_Default;
   border-color: transparent;

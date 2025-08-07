@@ -4,7 +4,7 @@ import {
   LabelRef,
   NetzgrafikDto,
   TrainrunCategory,
-  TrainrunDirection,
+  Direction,
   TrainrunDto,
   TrainrunFrequency,
   TrainrunTimeCategory,
@@ -354,12 +354,12 @@ export class TrainrunService {
     this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
   }
 
-  updateTrainrunDirection(
+  updateDirection(
     trainrun: Trainrun,
-    trainrunDirection: TrainrunDirection,
+    direction: Direction,
   ) {
     const trainrunSection = this.getTrainrunFromId(trainrun.getId());
-    trainrunSection.setTrainrunDirection(trainrunDirection);
+    trainrunSection.setDirection(direction);
     this.trainrunsUpdated();
     this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
   }
@@ -597,7 +597,7 @@ export class TrainrunService {
     copiedtrainrun.setTrainrunCategory(trainrun.getTrainrunCategory());
     copiedtrainrun.setTrainrunFrequency(trainrun.getTrainrunFrequency());
     copiedtrainrun.setTrainrunTimeCategory(trainrun.getTrainrunTimeCategory());
-    copiedtrainrun.setTrainrunDirection(trainrun.getTrainrunDirection());
+    copiedtrainrun.setDirection(trainrun.getDirection());
     copiedtrainrun.setTitle(trainrun.getTitle() + postfix);
     copiedtrainrun.setLabelIds(trainrun.getLabelIds());
     this.trainrunsStore.trainruns.push(copiedtrainrun);
@@ -943,7 +943,7 @@ export class TrainrunService {
     newTrainrun.setTrainrunTimeCategory(
       this.dataService.getTrainrunTimeCategory(trainrun.trainrunTimeCategoryId),
     );
-    newTrainrun.setTrainrunDirection(trainrun.trainrunDirection);
+    newTrainrun.setDirection(trainrun.direction);
     newTrainrun.setTitle(trainrun.name);
     newTrainrun.setLabelIds(trainrun.labelIds);
     this.trainrunsStore.trainruns.push(newTrainrun);

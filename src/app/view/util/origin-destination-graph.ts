@@ -2,7 +2,7 @@ import {Trainrun} from "src/app/models/trainrun.model";
 import {TrainrunService} from "src/app/services/data/trainrun.service";
 import {TrainrunIterator} from "src/app/services/util/trainrun.iterator";
 import {Node} from "src/app/models/node.model";
-import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
+import {Direction} from "src/app/data-structures/business.data.structures";
 
 // A vertex indicates a "state": e.g. arriving at a node at a certain time and from a given trainrun.
 export class Vertex {
@@ -262,7 +262,7 @@ const buildSectionEdges = (
     );
     // Add forward edges to round trip and one-way trainruns.
     edges.push(...forwardEdges);
-    if (trainrun.getTrainrunDirection() === TrainrunDirection.ONE_WAY) return;
+    if (trainrun.getDirection() === Direction.ONE_WAY) return;
     // Don't forget the reverse direction for round trip trainruns.
     const ts = tsIterator.current().trainrunSection;
     const nextIterator = trainrunService.getIterator(

@@ -3,7 +3,7 @@ import {
   FilterDataDto,
   LabelRef,
   TrainrunCategory,
-  TrainrunDirection,
+  Direction,
   TrainrunFrequency,
   TrainrunTimeCategory,
 } from "../../data-structures/business.data.structures";
@@ -401,7 +401,7 @@ export class FilterService implements OnDestroy {
       this.isFilterTrainrunFrequencyEnabled(trainrun.getTrainrunFrequency()) &&
       this.isFilterTrainrunCategoryEnabled(trainrun.getTrainrunCategory()) &&
       this.isFilterTrainrunTimeCategoryEnabled(trainrun.getTrainrunTimeCategory()) &&
-      this.isFilterTrainrunDirectionEnabled(trainrun.getTrainrunDirection())
+      this.isFilterDirectionEnabled(trainrun.getDirection())
     );
   }
 
@@ -566,17 +566,17 @@ export class FilterService implements OnDestroy {
     this.filterSubject.next();
   }
 
-  isFilterTrainrunDirectionArrowsEnabled(): boolean {
-    return this.activeFilterSetting.filterTrainrunDirectionArrows;
+  isFilterDirectionArrowsEnabled(): boolean {
+    return this.activeFilterSetting.filterDirectionArrows;
   }
 
-  enableFilterTrainrunDirectionArrows() {
-    this.activeFilterSetting.filterTrainrunDirectionArrows = true;
+  enableFilterDirectionArrows() {
+    this.activeFilterSetting.filterDirectionArrows = true;
     this.filterChanged();
   }
 
-  disableFilterTrainrunDirectionArrows() {
-    this.activeFilterSetting.filterTrainrunDirectionArrows = false;
+  disableFilterDirectionArrows() {
+    this.activeFilterSetting.filterDirectionArrows = false;
     this.filterChanged();
   }
 
@@ -742,35 +742,35 @@ export class FilterService implements OnDestroy {
     this.filterChanged();
   }
 
-  isFilterTrainrunDirectionEnabled(
-    trainrunDirection: TrainrunDirection,
+  isFilterDirectionEnabled(
+    direction: Direction,
   ): boolean {
-    return this.activeFilterSetting.filterTrainrunDirection.includes(
-      trainrunDirection,
+    return this.activeFilterSetting.filterDirection.includes(
+      direction,
     );
   }
 
-  enableFilterTrainrunDirection(trainrunDirection: TrainrunDirection) {
+  enableFilterDirection(direction: Direction) {
     if (
-      !this.activeFilterSetting.filterTrainrunDirection.includes(
-        trainrunDirection,
+      !this.activeFilterSetting.filterDirection.includes(
+        direction,
       )
     ) {
-      this.activeFilterSetting.filterTrainrunDirection.push(trainrunDirection);
+      this.activeFilterSetting.filterDirection.push(direction);
       this.filterChanged();
     }
   }
 
-  disableFilterTrainrunDirection(trainrunDirection: TrainrunDirection) {
-    this.activeFilterSetting.filterTrainrunDirection =
-      this.activeFilterSetting.filterTrainrunDirection.filter(
-        (direction) => direction !== trainrunDirection,
+  disableFilterDirection(direction: Direction) {
+    this.activeFilterSetting.filterDirection =
+      this.activeFilterSetting.filterDirection.filter(
+        (dir) => dir !== direction,
       );
     this.filterChanged();
   }
 
-  resetFilterTrainrunDirection() {
-    this.activeFilterSetting.filterTrainrunDirection = Object.values(TrainrunDirection);
+  resetFilterDirection() {
+    this.activeFilterSetting.filterDirection = Object.values(Direction);
     this.filterChanged();
   }
 
@@ -817,9 +817,9 @@ export class FilterService implements OnDestroy {
         }
       });
     this.dataService
-      .getTrainrunDirections()
-      .forEach((direction: TrainrunDirection) => {
-        const isFilter = this.isFilterTrainrunDirectionEnabled(direction);
+      .getDirections()
+      .forEach((direction: Direction) => {
+        const isFilter = this.isFilterDirectionEnabled(direction);
         if (!isFilter) {
           isActive = false;
           return;
@@ -837,7 +837,7 @@ export class FilterService implements OnDestroy {
   isDisplayFilteringActive(): boolean {
     return (
       !this.isFilterNotesEnabled() &&
-      this.isFilterTrainrunDirectionArrowsEnabled() &&
+      this.isFilterDirectionArrowsEnabled() &&
       this.isFilterArrivalDepartureTimeEnabled() &&
       this.isFilterConnectionsEnabled() &&
       this.isFilterTrainrunNameEnabled() &&
@@ -948,9 +948,9 @@ export class FilterService implements OnDestroy {
         filterSetting.filterTrainrunTimeCategory =
           this.dataService.getTrainrunTimeCategories();
       }
-      if (filterSetting.filterTrainrunDirection === null) {
-        filterSetting.filterTrainrunDirection =
-          this.dataService.getTrainrunDirections();
+      if (filterSetting.filterDirection === null) {
+        filterSetting.filterDirection =
+          this.dataService.getDirections();
       }
     }
   }

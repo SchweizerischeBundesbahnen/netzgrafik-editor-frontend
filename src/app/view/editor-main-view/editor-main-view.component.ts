@@ -427,8 +427,8 @@ export class EditorMainViewComponent implements AfterViewInit, OnDestroy {
       this.filterService.isFilterTrainrunNameEnabled(),
     );
 
-    this.editorView.bindIsFilterTrainrunDirectionArrowsEnabled(() =>
-      this.filterService.isFilterTrainrunDirectionArrowsEnabled(),
+    this.editorView.bindIsFilterDirectionArrowsEnabled(() =>
+      this.filterService.isFilterDirectionArrowsEnabled(),
     );
 
     this.editorView.bindIsfilterArrivalDepartureTimeEnabled(() =>

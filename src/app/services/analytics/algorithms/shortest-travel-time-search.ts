@@ -7,7 +7,7 @@ import {TrainrunService} from "../../data/trainrun.service";
 import {ShortestDistanceNode} from "./shortest-distance-node";
 import {ShortestDistanceEdge} from "./shortest-distance-edge";
 import {FilterService} from "../../ui/filter.service";
-import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
+import {Direction} from "src/app/data-structures/business.data.structures";
 
 //
 // The shortest travel time search method is based on the Dijkstra Algorithm.
@@ -150,10 +150,10 @@ export class ShortestTravelTimeSearch {
   ): boolean {
     const direction = departureTrainrunSection
       .getTrainrun()
-      .getTrainrunDirection();
+      .getDirection();
     // ROUND_TRIP: always compatible
     // ONE_WAY: only allow if currentNode is the source node
-    return direction === TrainrunDirection.ROUND_TRIP ||
+    return direction === Direction.ROUND_TRIP ||
       departureTrainrunSection.getSourceNodeId() === currentNode.getId();
   }
 

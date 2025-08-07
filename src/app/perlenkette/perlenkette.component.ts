@@ -22,7 +22,7 @@ import {NodeService} from "../services/data/node.service";
 import {takeUntil} from "rxjs/operators";
 import {PerlenketteConnection} from "./model/perlenketteConnection";
 import {VersionControlService} from "../services/data/version-control.service";
-import {TrainrunDirection} from "../data-structures/business.data.structures";
+import {Direction} from "../data-structures/business.data.structures";
 import {TrainrunsectionHelper} from "../services/util/trainrunsection.helper";
 import {TrainrunSectionService} from "../services/data/trainrunsection.service";
 import {TrainrunService} from "../services/data/trainrun.service";
@@ -478,12 +478,12 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
   }
 
   private getArrowDirectionForOneWayTrainrun(): string {
-    const trainrunDirection = this.perlenketteTrainrun.trainrunDirection;
-    if (!this.perlenketteTrainrun || trainrunDirection === TrainrunDirection.ROUND_TRIP) return "minus-medium";
+    const direction = this.perlenketteTrainrun.direction;
+    if (!this.perlenketteTrainrun || direction === Direction.ROUND_TRIP) return "minus-medium";
     const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
       this.trainrunSectionService.getSelectedTrainrunSection()
     );
-    if (trainrunDirection === TrainrunDirection.ONE_WAY && isTargetRightOrBottom) {
+    if (direction === Direction.ONE_WAY && isTargetRightOrBottom) {
       return "arrow-right-medium";
     } else {
       return "arrow-left-medium";

@@ -4,7 +4,7 @@ import {Node} from "../../models/node.model";
 import {ResourceService} from "../../services/data/resource.service";
 import {TrainrunSectionService} from "../../services/data/trainrunsection.service";
 import {TrainrunService} from "../../services/data/trainrun.service";
-import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
+import {Direction} from "src/app/data-structures/business.data.structures";
 
 export class KnotenAuslastungDataPreparation {
   static MAX_NR_MINUTES = 60;
@@ -33,7 +33,7 @@ export class KnotenAuslastungDataPreparation {
     isTargetNode: boolean,
   ) {
     let directionLoops: number[] = [0, 1];
-    if (trainrunSection.getTrainrun().getTrainrunDirection() !== TrainrunDirection.ROUND_TRIP) {
+    if (trainrunSection.getTrainrun().getDirection() !== Direction.ROUND_TRIP) {
       directionLoops = isTargetNode ? [0] : [1];
     }
 
@@ -184,7 +184,7 @@ export class KnotenAuslastungDataPreparation {
 
     // Add trainrun sections that are connected to an intermediate node.
     sortedTransitions.forEach((transition: Transition) => {
-      const direction = transition.getTrainrun().getTrainrunDirection();
+      const direction = transition.getTrainrun().getDirection();
       const trainrunSection1 = node
         .getPort(transition.getPortId1())
         .getTrainrunSection();
@@ -197,14 +197,14 @@ export class KnotenAuslastungDataPreparation {
         : [trainrunSection2, trainrunSection1];
 
       const isTargetNode = tsToNode.getTargetNodeId() === node.getId();
-      if (direction === TrainrunDirection.ROUND_TRIP || isTargetNode) {
+      if (direction === Direction.ROUND_TRIP || isTargetNode) {
         this.addSectionsAtTransitionToMatrix(
           tsToNode,
           tsFromNode,
           node.getId(),
         );
       }
-      if (direction === TrainrunDirection.ROUND_TRIP || !isTargetNode) {
+      if (direction === Direction.ROUND_TRIP || !isTargetNode) {
         this.addSectionsAtTransitionToMatrix(
           tsFromNode,
           tsToNode,

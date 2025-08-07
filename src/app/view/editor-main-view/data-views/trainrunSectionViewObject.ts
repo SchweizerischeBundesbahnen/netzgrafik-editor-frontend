@@ -14,7 +14,7 @@ export class TrainrunSectionViewObject {
     hiddenTagTarget: boolean,
     hiddenTagTraveltime: boolean,
     hiddenTagTrainrunName: boolean,
-    hiddenTagTrainrunDirectionArrows: boolean,
+    hiddenTagDirectionArrows: boolean,
   ) {
     this.key = TrainrunSectionViewObject.generateKey(
       editorView,
@@ -26,7 +26,7 @@ export class TrainrunSectionViewObject {
       hiddenTagTarget,
       hiddenTagTraveltime,
       hiddenTagTrainrunName,
-      hiddenTagTrainrunDirectionArrows,
+      hiddenTagDirectionArrows,
     );
   }
 
@@ -40,7 +40,7 @@ export class TrainrunSectionViewObject {
     hiddenTagTarget: boolean,
     hiddenTagTraveltime: boolean,
     hiddenTagTrainrunName: boolean,
-    hiddenTagTrainrunDirectionArrows: boolean,
+    hiddenTagDirectionArrows: boolean,
   ): string {
     const cumulativeTravelTimeData =
       editorView.getCumulativeTravelTimeAndNodePath(d);
@@ -108,7 +108,7 @@ export class TrainrunSectionViewObject {
       "_" +
       d.getTrainrun().getTrainrunFrequency().offset +
       "_" +
-      d.getTrainrun().getTrainrunDirection() +
+      d.getTrainrun().getDirection() +
       "_" +
       isNonStopAtSource +
       "_" +
@@ -124,7 +124,7 @@ export class TrainrunSectionViewObject {
       "_" +
       hiddenTagTrainrunName +
       "_" +
-      hiddenTagTrainrunDirectionArrows +
+      hiddenTagDirectionArrows +
       "_" +
       editorView.isTemporaryDisableFilteringOfItemsInViewEnabled() +
       "_" +

@@ -23,7 +23,7 @@ import {IsTrainrunSelectedService} from "../../services/data/is-trainrun-section
 import {NodeService} from "../../services/data/node.service";
 import {TrainrunBranchType} from "../model/enum/trainrun-branch-type-type";
 import {MultiSelectNodeGraph} from "../../utils/multi-select-node-graph";
-import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
+import {Direction} from "src/app/data-structures/business.data.structures";
 import {TrainrunsectionHelper} from "src/app/services/util/trainrunsection.helper";
 
 @Injectable({
@@ -183,7 +183,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       undefined,
       [],
       false,
-      TrainrunDirection.ROUND_TRIP,
+      Direction.ROUND_TRIP,
     );
 
     // create a new graph object
@@ -683,7 +683,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
         trainrun.getCategoryColorRef(),
         pathItems,
         TrainrunsectionHelper.isTargetRightOrBottom(trainrunSection),
-        trainrun.getTrainrunDirection(),
+        trainrun.getDirection(),
       ),
       visitedTrainrunSections: visitedTrainrunSections
     };

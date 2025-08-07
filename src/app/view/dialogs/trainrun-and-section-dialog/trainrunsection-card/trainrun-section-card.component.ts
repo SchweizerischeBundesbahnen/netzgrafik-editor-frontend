@@ -9,7 +9,7 @@ import {Subject} from "rxjs";
 import {Node} from "../../../../models/node.model";
 import {
   LinePatternRefs,
-  TrainrunDirection,
+  Direction,
 } from "../../../../data-structures/business.data.structures";
 import {StaticDomTags} from "../../../editor-main-view/data-views/static.dom.tags";
 import {ColorRefType} from "../../../../data-structures/technical.data.structures";
@@ -34,7 +34,7 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
   public frequencyLinePattern: LinePatternRefs;
   public categoryColorRef: ColorRefType;
   public timeCategoryLinePattern: LinePatternRefs;
-  public TrainrunDirection = TrainrunDirection;
+  public direction = Direction;
   public chosenCard: "top" | "bottom" | null = null;
   public trainrunTimeStructure: Omit<LeftAndRightTimeStructure, "travelTime">;
 
@@ -99,8 +99,7 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
     this.trainrunTimeStructure =
       this.trainrunService.getTrainrunTimeStructure();
 
-    const selectedTrainrunDirection = selectedTrainrun.getTrainrunDirection();
-    if (selectedTrainrunDirection !== TrainrunDirection.ROUND_TRIP) {
+    if (selectedTrainrun.getDirection() !== Direction.ROUND_TRIP) {
       this.chosenCard = TrainrunsectionHelper.isTargetRightOrBottom(
         this.selectedTrainrunSection,
       ) ? "top" : "bottom";
@@ -195,9 +194,9 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
       );
     }
     this.chosenCard = position;
-    this.trainrunService.updateTrainrunDirection(
+    this.trainrunService.updateDirection(
       this.selectedTrainrunSection.getTrainrun(),
-      TrainrunDirection.ONE_WAY,
+      Direction.ONE_WAY,
     );
   }
 }

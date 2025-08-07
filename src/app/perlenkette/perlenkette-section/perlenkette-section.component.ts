@@ -34,7 +34,7 @@ import {
 import {StaticDomTags} from "../../view/editor-main-view/data-views/static.dom.tags";
 import {MathUtils} from "../../utils/math";
 import {VersionControlService} from "../../services/data/version-control.service";
-import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
+import {Direction} from "src/app/data-structures/business.data.structures";
 
 export interface TopAndBottomTimeStructure {
   leftDepartureTime: number;
@@ -175,8 +175,8 @@ export class PerlenketteSectionComponent
 
   getIsTrainrunRoundTrip(): boolean {
     return (
-      this.trainrunSection.getTrainrun().getTrainrunDirection() ===
-      TrainrunDirection.ROUND_TRIP
+      this.trainrunSection.getTrainrun().getDirection() ===
+      Direction.ROUND_TRIP
     );
   }
 
@@ -215,30 +215,30 @@ export class PerlenketteSectionComponent
     if (this.trainrunSection === null) {
       return false;
     }
-    const trainrunDirection = this.trainrunSection
+    const direction = this.trainrunSection
       .getTrainrun()
-      .getTrainrunDirection();
+      .getDirection();
     const isTargetLeftOrTop = TrainrunsectionHelper.isTargetLeftOrTop(
       this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(
         this.trainrunSection.getTrainrunId()
       )[0]
     );
-    return trainrunDirection === TrainrunDirection.ROUND_TRIP || isTargetLeftOrTop;
+    return direction === Direction.ROUND_TRIP || isTargetLeftOrTop;
   }
   
   isRightSideDisplayed(): boolean {
     if (this.trainrunSection === null) {
       return false;
     }
-    const trainrunDirection = this.trainrunSection
+    const direction = this.trainrunSection
       .getTrainrun()
-      .getTrainrunDirection();
+      .getDirection();
     const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
       this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(
         this.trainrunSection.getTrainrunId()
       )[0]
     );
-    return trainrunDirection === TrainrunDirection.ROUND_TRIP || isTargetRightOrBottom;
+    return direction === Direction.ROUND_TRIP || isTargetRightOrBottom;
   }
 
   getVariantIsWritable(): boolean {
