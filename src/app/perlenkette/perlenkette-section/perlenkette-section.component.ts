@@ -34,7 +34,6 @@ import {
 import {StaticDomTags} from "../../view/editor-main-view/data-views/static.dom.tags";
 import {MathUtils} from "../../utils/math";
 import {VersionControlService} from "../../services/data/version-control.service";
-import {Direction} from "src/app/data-structures/business.data.structures";
 
 export interface TopAndBottomTimeStructure {
   leftDepartureTime: number;
@@ -173,11 +172,8 @@ export class PerlenketteSectionComponent
     this.destroyed$.complete();
   }
 
-  getIsTrainrunRoundTrip(): boolean {
-    return (
-      this.trainrunSection.getTrainrun().getDirection() ===
-      Direction.ROUND_TRIP
-    );
+  isRoundTrip(): boolean {
+    return this.trainrunSection.getTrainrun().isRoundTrip();
   }
 
   getEdgeLineArrowClass() {
@@ -215,30 +211,24 @@ export class PerlenketteSectionComponent
     if (this.trainrunSection === null) {
       return false;
     }
-    const direction = this.trainrunSection
-      .getTrainrun()
-      .getDirection();
     const isTargetLeftOrTop = TrainrunsectionHelper.isTargetLeftOrTop(
       this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(
         this.trainrunSection.getTrainrunId()
       )[0]
     );
-    return direction === Direction.ROUND_TRIP || isTargetLeftOrTop;
+    return this.trainrunSection.getTrainrun().isRoundTrip() || isTargetLeftOrTop;
   }
   
   isRightSideDisplayed(): boolean {
     if (this.trainrunSection === null) {
       return false;
     }
-    const direction = this.trainrunSection
-      .getTrainrun()
-      .getDirection();
     const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
       this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(
         this.trainrunSection.getTrainrunId()
       )[0]
     );
-    return direction === Direction.ROUND_TRIP || isTargetRightOrBottom;
+    return this.trainrunSection.getTrainrun().isRoundTrip() || isTargetRightOrBottom;
   }
 
   getVariantIsWritable(): boolean {

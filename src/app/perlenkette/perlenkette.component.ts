@@ -478,12 +478,11 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
   }
 
   private getArrowDirectionForOneWayTrainrun(): string {
-    const direction = this.perlenketteTrainrun.direction;
-    if (!this.perlenketteTrainrun || direction === Direction.ROUND_TRIP) return "minus-medium";
+    if (!this.perlenketteTrainrun || this.perlenketteTrainrun.direction === Direction.ROUND_TRIP) return "minus-medium";
     const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
       this.trainrunSectionService.getSelectedTrainrunSection()
     );
-    if (direction === Direction.ONE_WAY && isTargetRightOrBottom) {
+    if (isTargetRightOrBottom) {
       return "arrow-right-medium";
     } else {
       return "arrow-left-medium";

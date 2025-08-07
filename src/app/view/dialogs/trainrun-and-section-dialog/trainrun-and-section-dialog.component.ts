@@ -16,10 +16,7 @@ import {Node} from "../../../models/node.model";
 import {Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
 import {DataService} from "../../../services/data/data.service";
-import {
-  Direction,
-  TrainrunFrequency,
-} from "../../../data-structures/business.data.structures";
+import {TrainrunFrequency} from "../../../data-structures/business.data.structures";
 
 export enum TrainrunDialogType {
   TRAINRUN_DIALOG,
@@ -254,8 +251,7 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
     const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
       this.trainrunSectionService.getSelectedTrainrunSection(),
     );
-    const direction = this.selectedTrainrun.getDirection();
-    if (direction === Direction.ONE_WAY && isTargetRightOrBottom) {
+    if (isTargetRightOrBottom) {
       return "arrow-right-medium";
     } else {
       return "arrow-left-medium";

@@ -32,7 +32,6 @@ export class TrainrunRoundtripTabComponent implements OnInit, OnDestroy {
   public selectedTrainrun: Trainrun;
   private destroyed = new Subject<void>();
   public isOneWay: boolean = false;
-  public direction: Direction = Direction.ROUND_TRIP;
 
   constructor(
     public dataService: DataService,
@@ -90,7 +89,7 @@ export class TrainrunRoundtripTabComponent implements OnInit, OnDestroy {
 
   onIsOneWayChanged(isChecked: boolean) {
     this.isOneWay = isChecked;
-    if (!isChecked && this.selectedTrainrun.getDirection() !== Direction.ROUND_TRIP) {
+    if (!isChecked && !this.selectedTrainrun.isRoundTrip()) {
       this.trainrunService.updateDirection(
         this.selectedTrainrun,
         Direction.ROUND_TRIP,
@@ -126,10 +125,7 @@ export class TrainrunRoundtripTabComponent implements OnInit, OnDestroy {
 
   private initializeWithCurrentSelectedTrainrun() {
     this.selectedTrainrun = this.trainrunService.getSelectedTrainrun();
-    if (this.selectedTrainrun) {
-      this.isOneWay = !this.selectedTrainrun.isRoundTrip();
-      this.direction = this.selectedTrainrun.getDirection();
-    }
+    if (this.selectedTrainrun) this.isOneWay = !this.selectedTrainrun.isRoundTrip();
   }
 
   private updateTrainrunLabelsAutoCompleteOptions() {

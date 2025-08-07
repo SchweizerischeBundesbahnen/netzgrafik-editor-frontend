@@ -99,7 +99,7 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
     this.trainrunTimeStructure =
       this.trainrunService.getTrainrunTimeStructure();
 
-    if (selectedTrainrun.getDirection() !== Direction.ROUND_TRIP) {
+    if (!selectedTrainrun.isRoundTrip()) {
       this.chosenCard = TrainrunsectionHelper.isTargetRightOrBottom(
         this.selectedTrainrunSection,
       ) ? "top" : "bottom";

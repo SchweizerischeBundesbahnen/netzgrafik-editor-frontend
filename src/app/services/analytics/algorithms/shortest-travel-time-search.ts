@@ -148,12 +148,9 @@ export class ShortestTravelTimeSearch {
     currentNode: Node,
     departureTrainrunSection: TrainrunSection,
   ): boolean {
-    const direction = departureTrainrunSection
-      .getTrainrun()
-      .getDirection();
     // ROUND_TRIP: always compatible
     // ONE_WAY: only allow if currentNode is the source node
-    return direction === Direction.ROUND_TRIP ||
+    return departureTrainrunSection.getTrainrun().isRoundTrip() ||
       departureTrainrunSection.getSourceNodeId() === currentNode.getId();
   }
 

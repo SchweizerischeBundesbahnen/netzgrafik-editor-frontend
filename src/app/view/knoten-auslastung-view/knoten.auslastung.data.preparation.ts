@@ -33,7 +33,7 @@ export class KnotenAuslastungDataPreparation {
     isTargetNode: boolean,
   ) {
     let directionLoops: number[] = [0, 1];
-    if (trainrunSection.getTrainrun().getDirection() !== Direction.ROUND_TRIP) {
+    if (!trainrunSection.getTrainrun().isRoundTrip()) {
       directionLoops = isTargetNode ? [0] : [1];
     }
 
@@ -184,7 +184,7 @@ export class KnotenAuslastungDataPreparation {
 
     // Add trainrun sections that are connected to an intermediate node.
     sortedTransitions.forEach((transition: Transition) => {
-      const direction = transition.getTrainrun().getDirection();
+      const isRoundTrip = transition.getTrainrun().isRoundTrip();
       const trainrunSection1 = node
         .getPort(transition.getPortId1())
         .getTrainrunSection();
@@ -197,14 +197,14 @@ export class KnotenAuslastungDataPreparation {
         : [trainrunSection2, trainrunSection1];
 
       const isTargetNode = tsToNode.getTargetNodeId() === node.getId();
-      if (direction === Direction.ROUND_TRIP || isTargetNode) {
+      if (isRoundTrip || isTargetNode) {
         this.addSectionsAtTransitionToMatrix(
           tsToNode,
           tsFromNode,
           node.getId(),
         );
       }
-      if (direction === Direction.ROUND_TRIP || !isTargetNode) {
+      if (isRoundTrip || !isTargetNode) {
         this.addSectionsAtTransitionToMatrix(
           tsFromNode,
           tsToNode,

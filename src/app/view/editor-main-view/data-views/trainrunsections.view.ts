@@ -1040,10 +1040,7 @@ export class TrainrunSectionsView {
 
     groupEnter
       .filter((d: TrainrunSectionViewObject) => {
-        const direction = d.trainrunSection
-          .getTrainrun()
-          .getDirection();
-        const displayTextBackground = direction === Direction.ROUND_TRIP || isOneWayText;
+        const displayTextBackground = d.trainrunSection.getTrainrun().isRoundTrip() || isOneWayText;
         return (
           this.filterTrainrunsectionAtNode(d.trainrunSection, atSource) &&
           this.filterTimeTrainrunsectionNonStop(
@@ -1156,10 +1153,7 @@ export class TrainrunSectionsView {
         .append(StaticDomTags.EDGE_LINE_ARROW_SVG)
         .classed(StaticDomTags.TAG_HIDDEN, !this.editorView.isFilterDirectionArrowsEnabled())
         .attr("d", (d: TrainrunSectionViewObject) => {
-          const tsDirection = d.trainrunSection
-            .getTrainrun()
-            .getDirection();
-          return tsDirection === Direction.ROUND_TRIP
+          return d.trainrunSection.getTrainrun().isRoundTrip()
             ? ""
             : "M-5,-7L3,0L-5,7Z";
         })
@@ -1486,11 +1480,8 @@ export class TrainrunSectionsView {
 
     const renderingObjects = groupEnter
       .filter((d: TrainrunSectionViewObject) => {
-        const direction = d.trainrunSection
-          .getTrainrun()
-          .getDirection();
         const displayTextElement =
-          direction === Direction.ROUND_TRIP ||
+         d.trainrunSection.getTrainrun().isRoundTrip() ||
           isDefaultText ||
           isOneWayText;
 

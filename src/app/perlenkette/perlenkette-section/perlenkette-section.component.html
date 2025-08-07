@@ -31,13 +31,13 @@
         class="edge_line layer_3"
       ></path>
       <path
-        *ngIf="!getIsTrainrunRoundTrip()"
+        *ngIf="!isRoundTrip()"
         [class]="getEdgeLineArrowClass()" d="M0,4L0,6L8,6L8,10L14,5L8,0L8,4Z"
         [attr.transform]="getArrowTranslateAndRotate(35)"
         [attr.hidden]="!filterService.isFilterDirectionArrowsEnabled() ? '' : null"
       ></path>
       <path
-        *ngIf="!getIsTrainrunRoundTrip()"
+        *ngIf="!isRoundTrip()"
         [class]="getEdgeLineArrowClass()" d="M0,4L0,6L8,6L8,10L14,5L8,0L8,4Z"
         [attr.transform]="getArrowTranslateAndRotate(130)"
         [attr.hidden]="!filterService.isFilterDirectionArrowsEnabled() ? '' : null"
@@ -282,13 +282,13 @@
             class="edge_line layer_3"
           ></path>
           <path
-            *ngIf="!getIsTrainrunRoundTrip()"
+            *ngIf="!isRoundTrip()"
             [class]="getEdgeLineArrowClass()" d="M0,4L0,6L8,6L8,10L14,5L8,0L8,4Z"
             [attr.transform]="getArrowTranslateAndRotate(35)"
             [attr.hidden]="!filterService.isFilterDirectionArrowsEnabled() ? '' : null"
           ></path>
           <path
-            *ngIf="!getIsTrainrunRoundTrip()"
+            *ngIf="!isRoundTrip()"
             [class]="getEdgeLineArrowClass()" d="M0,4L0,6L8,6L8,10L14,5L8,0L8,4Z"
             [attr.transform]="getArrowTranslateAndRotate(130)"
             [attr.hidden]="!filterService.isFilterDirectionArrowsEnabled() ? '' : null"
@@ -669,13 +669,13 @@
             class="edge_line layer_3"
           ></path>
           <path
-            *ngIf="!getIsTrainrunRoundTrip()"
+            *ngIf="!isRoundTrip()"
             [class]="getEdgeLineArrowClass()" d="M0,4L0,6L8,6L8,10L14,5L8,0L8,4Z"
             [attr.transform]="getArrowTranslateAndRotate(35)"
             [attr.hidden]="!filterService.isFilterDirectionArrowsEnabled() ? '' : null"
           ></path>
           <path
-            *ngIf="!getIsTrainrunRoundTrip()"
+            *ngIf="!isRoundTrip()"
             [class]="getEdgeLineArrowClass()" d="M0,4L0,6L8,6L8,10L14,5L8,0L8,4Z"
             [attr.transform]="getArrowTranslateAndRotate(130)"
             [attr.hidden]="!filterService.isFilterDirectionArrowsEnabled() ? '' : null"
