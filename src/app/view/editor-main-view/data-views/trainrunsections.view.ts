@@ -29,7 +29,7 @@ import {Transition} from "../../../models/transition.model";
 import {InformSelectedTrainrunClick} from "../../../services/data/trainrunsection.service";
 import {LevelOfDetail} from "../../../services/ui/level.of.detail.service";
 import {LinePatternRefs} from "../../../data-structures/business.data.structures";
-import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
+import {Direction} from "src/app/data-structures/business.data.structures";
 import {GeneralViewFunctions} from "../../util/generalViewFunctions";
 import {TrainrunsectionHelper} from "src/app/services/util/trainrunsection.helper";
 
@@ -1040,10 +1040,7 @@ export class TrainrunSectionsView {
 
     groupEnter
       .filter((d: TrainrunSectionViewObject) => {
-        const trainrunDirection = d.trainrunSection
-          .getTrainrun()
-          .getTrainrunDirection();
-        const displayTextBackground = trainrunDirection === TrainrunDirection.ROUND_TRIP || isOneWayText;
+        const displayTextBackground = d.trainrunSection.getTrainrun().isRoundTrip() || isOneWayText;
         return (
           this.filterTrainrunsectionAtNode(d.trainrunSection, atSource) &&
           this.filterTimeTrainrunsectionNonStop(
@@ -1109,11 +1106,8 @@ export class TrainrunSectionsView {
     const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(trainrunSection);
 
     // Use the first segment of the section to determine the direction
-    const [pos0, pos1] = isTargetRightOrBottom
-      ? [positions[0], positions[1]]
-      : [positions[1], positions[0]];
-    const xDiff = pos1.getX() - pos0.getX();
-    const yDiff = pos1.getY() - pos0.getY();
+    const xDiff = positions[1].getX() - positions[0].getX();
+    const yDiff = positions[1].getY() - positions[0].getY();
 
     // Compute angle
     let angle: number;
@@ -1157,14 +1151,9 @@ export class TrainrunSectionsView {
     (["BEGINNING_ARROW", "ENDING_ARROW"] as const).forEach((arrowType) => {
       groupLinesEnter
         .append(StaticDomTags.EDGE_LINE_ARROW_SVG)
-        .attr(StaticDomTags.TAG_HIDDEN, () =>
-          !this.editorView.isFilterTrainrunDirectionArrowsEnabled() ? "" : null,
-        )
+        .classed(StaticDomTags.TAG_HIDDEN, !this.editorView.isFilterDirectionArrowsEnabled())
         .attr("d", (d: TrainrunSectionViewObject) => {
-          const tsDirection = d.trainrunSection
-            .getTrainrun()
-            .getTrainrunDirection();
-          return tsDirection === TrainrunDirection.ROUND_TRIP
+          return d.trainrunSection.getTrainrun().isRoundTrip()
             ? ""
             : "M-5,-7L3,0L-5,7Z";
         })
@@ -1491,11 +1480,8 @@ export class TrainrunSectionsView {
 
     const renderingObjects = groupEnter
       .filter((d: TrainrunSectionViewObject) => {
-        const trainrunDirection = d.trainrunSection
-          .getTrainrun()
-          .getTrainrunDirection();
         const displayTextElement =
-          trainrunDirection === TrainrunDirection.ROUND_TRIP ||
+         d.trainrunSection.getTrainrun().isRoundTrip() ||
           isDefaultText ||
           isOneWayText;
 
@@ -1848,7 +1834,7 @@ export class TrainrunSectionsView {
             TrainrunSectionText.TrainrunSectionTravelTime,
           ),
           this.getHiddenTagForTime(d, TrainrunSectionText.TrainrunSectionName),
-          !this.editorView.isFilterTrainrunDirectionArrowsEnabled(),
+          !this.editorView.isFilterDirectionArrowsEnabled(),
         ),
       );
     });

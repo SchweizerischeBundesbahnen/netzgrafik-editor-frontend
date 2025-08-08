@@ -16,10 +16,7 @@ import {Node} from "../../../models/node.model";
 import {Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
 import {DataService} from "../../../services/data/data.service";
-import {
-  TrainrunDirection,
-  TrainrunFrequency,
-} from "../../../data-structures/business.data.structures";
+import {TrainrunFrequency} from "../../../data-structures/business.data.structures";
 
 export enum TrainrunDialogType {
   TRAINRUN_DIALOG,
@@ -73,7 +70,6 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
   public selectedTrainrun: Trainrun;
   public nextStopLeftNodeName: string;
   public nextStopRightNodeName: string;
-  public arrowDirection: string | null = null;
 
   public data = null;
 
@@ -100,7 +96,6 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
           this.closeDialog();
           return;
         }
-        this.arrowDirection = this.getArrowDirectionForOneWayTrainrun();
       }
     );
 
@@ -132,8 +127,6 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
 
         this.nextStopLeftNodeName = nextStopLeftNode.getFullName();
         this.nextStopRightNodeName = nextStopRightNode.getFullName();
-        this.arrowDirection = this.getArrowDirectionForOneWayTrainrun();
-
         this.openDialog(parameter);
       }
     );
@@ -247,15 +240,14 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
     };
   }
 
-  private getArrowDirectionForOneWayTrainrun(): string {
+  getArrowDirectionForOneWayTrainrun(): string {
     if (!this.selectedTrainrun || this.selectedTrainrun.isRoundTrip()) {
       return "minus-medium";
     }
     const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
       this.trainrunSectionService.getSelectedTrainrunSection(),
     );
-    const trainrunDirection = this.selectedTrainrun.getTrainrunDirection();
-    if (trainrunDirection === TrainrunDirection.ONE_WAY && isTargetRightOrBottom) {
+    if (isTargetRightOrBottom) {
       return "arrow-right-medium";
     } else {
       return "arrow-left-medium";

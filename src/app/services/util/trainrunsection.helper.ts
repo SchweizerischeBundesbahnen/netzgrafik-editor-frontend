@@ -275,20 +275,6 @@ export class TrainrunsectionHelper {
     return timeStructure;
   }
 
-  getLeftNode(trainrunSection: TrainrunSection): Node {
-    return GeneralViewFunctions.getLeftOrTopNode(
-      trainrunSection.getSourceNode(),
-      trainrunSection.getTargetNode(),
-    );
-  }
-
-  getRightNode(trainrunSection: TrainrunSection): Node {
-    return GeneralViewFunctions.getRightOrBottomNode(
-      trainrunSection.getSourceNode(),
-      trainrunSection.getTargetNode(),
-    );
-  }
-
   getLeftAndRightTimes(
     trainrunSection: TrainrunSection,
     orderedNodes: Node[],
@@ -376,29 +362,10 @@ export class TrainrunsectionHelper {
     return rightNode;
   }
 
-  getIsTargetRight(trainrunSection: TrainrunSection): boolean {
-    return (
-      trainrunSection.getTargetNode() === this.getRightNode(trainrunSection)
-    );
-  }
-
-  getIsTargetLeft(trainrunSection: TrainrunSection): boolean {
-    return (
-      trainrunSection.getTargetNode() === this.getLeftNode(trainrunSection)
-    );
-  }
-
   static isTargetRightOrBottom(trainrunSection: TrainrunSection): boolean {
     const sourceNode = trainrunSection.getSourceNode();
     const targetNode = trainrunSection.getTargetNode();
 
     return GeneralViewFunctions.getRightOrBottomNode(sourceNode, targetNode) === targetNode;
-  }
-
-  static isTargetLeftOrTop(trainrunSection: TrainrunSection): boolean {
-    const sourceNode = trainrunSection.getSourceNode();
-    const targetNode = trainrunSection.getTargetNode();
-
-    return GeneralViewFunctions.getLeftOrTopNode(sourceNode, targetNode) === targetNode;
   }
 }

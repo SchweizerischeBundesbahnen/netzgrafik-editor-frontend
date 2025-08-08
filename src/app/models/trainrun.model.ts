@@ -1,7 +1,7 @@
 import {
   LinePatternRefs,
   TrainrunCategory,
-  TrainrunDirection,
+  Direction,
   TrainrunDto,
   TrainrunFrequency,
   TrainrunTimeCategory,
@@ -24,7 +24,7 @@ export class Trainrun {
   private trainrunTimeCategory: TrainrunTimeCategory;
   private isSelected: boolean;
   private labelIds: number[];
-  private trainrunDirection: TrainrunDirection;
+  private direction: Direction;
 
   constructor(
     {
@@ -34,7 +34,7 @@ export class Trainrun {
       frequencyId,
       trainrunTimeCategoryId,
       labelIds,
-      trainrunDirection = TrainrunDirection.ROUND_TRIP, // temporary, to allow migration of old trainruns
+      direction = Direction.ROUND_TRIP, // temporary, to allow migration of old trainruns
     }: TrainrunDto = {
       id: Trainrun.incrementId(),
       name: Trainrun.DEFAULT_TRAINRUN_NAME,
@@ -42,7 +42,7 @@ export class Trainrun {
       frequencyId: Trainrun.DEFAULT_TRAINRUN_FREQUENCY,
       trainrunTimeCategoryId: Trainrun.DEFAULT_TRAINRUN_TIME_CATEGORY,
       labelIds: [],
-      trainrunDirection: TrainrunDirection.ROUND_TRIP
+      direction: Direction.ROUND_TRIP
     },
   ) {
     this.id = id;
@@ -52,7 +52,7 @@ export class Trainrun {
     this.isSelected = false;
     this.trainrunTimeCategoryId = trainrunTimeCategoryId;
     this.labelIds = labelIds;
-    this.trainrunDirection = trainrunDirection;
+    this.direction = direction;
 
     if (Trainrun.currentId < this.id) {
       Trainrun.currentId = this.id;
@@ -154,15 +154,15 @@ export class Trainrun {
   }
 
   isRoundTrip(): boolean {
-    return this.trainrunDirection === TrainrunDirection.ROUND_TRIP;
+    return this.direction === Direction.ROUND_TRIP;
   }
 
-  getTrainrunDirection(): TrainrunDirection {
-    return this.trainrunDirection;
+  getDirection(): Direction {
+    return this.direction;
   }
 
-  setTrainrunDirection(trainrunDirection: TrainrunDirection) {
-    this.trainrunDirection = trainrunDirection;
+  setDirection(direction: Direction) {
+    this.direction = direction;
   }
 
   getDto(): TrainrunDto {
@@ -173,7 +173,7 @@ export class Trainrun {
       frequencyId: this.trainrunFrequency.id,
       trainrunTimeCategoryId: this.trainrunTimeCategory.id,
       labelIds: this.labelIds,
-      trainrunDirection: this.trainrunDirection,
+      direction: this.direction,
     };
   }
 }

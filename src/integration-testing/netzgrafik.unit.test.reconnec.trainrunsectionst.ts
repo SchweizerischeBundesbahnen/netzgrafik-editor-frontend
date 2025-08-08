@@ -2,7 +2,7 @@ import {
   HaltezeitFachCategories,
   LinePatternRefs,
   NetzgrafikDto,
-  TrainrunDirection,
+  Direction,
 } from "../app/data-structures/business.data.structures";
 
 export class NetzgrafikUnitTestingReconnectTrainrunSection {
@@ -643,7 +643,7 @@ export class NetzgrafikUnitTestingReconnectTrainrunSection {
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
           labelIds: [],
-          trainrunDirection: TrainrunDirection.ROUND_TRIP,
+          direction: Direction.ROUND_TRIP,
         },
       ],
       resources: [

@@ -199,7 +199,7 @@ export interface TrainrunDto {
   frequencyId: number; // reference to the trainrun frequency
   trainrunTimeCategoryId: number; // reference to the trainrun time category
   labelIds: number[];
-  trainrunDirection: TrainrunDirection; // direction of the trainrun
+  direction: Direction; // direction of the trainrun
 }
 
 /**
@@ -290,7 +290,7 @@ export interface FilterSettingDto {
   filterNodeLabels: number[]; // labels to filter out (labels only of type - LabelRef: node)
   filterNoteLabels: number[]; // labels to filter out (labels only of type - LabelRef: note)
   filterTrainrunLabels: number[]; // labels to filter out (labels only of type - LabelRef: trainrun)
-  filterTrainrunDirectionArrows: boolean; // flag for trainrun direction arrows (hide/show)
+  filterDirectionArrows: boolean; // flag for trainrun direction arrows (hide/show)
   filterArrivalDepartureTime: boolean; // flag for arrival and departure time filtering (hide/show)
   filterTravelTime: boolean; // flag for travel time filter (hide/show)
   filterTrainrunName: boolean; // flag for trainrun time filter (hide/show)
@@ -299,7 +299,7 @@ export interface FilterSettingDto {
   filterTrainrunCategory: TrainrunCategory[]; // list of category to filter out
   filterTrainrunFrequency: TrainrunFrequency[]; // list of frequency to filter out
   filterTrainrunTimeCategory: TrainrunTimeCategory[]; // list of time categroy to filter out
-  filterTrainrunDirection: TrainrunDirection[]; // list of trainrun direction to filter out
+  filterDirection: Direction[]; // list of trainrun direction to filter out
   filterAllEmptyNodes: boolean; // flag to filter all empty nodes (hide/show)
   filterAllNonStopNodes: boolean; // flag to filter all only non-stop nodes (hide/show)
   filterNotes: boolean; // flag to filter notes (hide/show)
@@ -333,7 +333,7 @@ export interface NetzgrafikDto {
 /**
  * Represents the trainrun direction.
  */
-export enum TrainrunDirection {
+export enum Direction {
   ROUND_TRIP = "round_trip",
   ONE_WAY = "one_way",
 }

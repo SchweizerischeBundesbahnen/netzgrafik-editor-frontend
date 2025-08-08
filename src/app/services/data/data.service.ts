@@ -2,7 +2,7 @@ import {Injectable, OnDestroy} from "@angular/core";
 import {
   NetzgrafikDto,
   TrainrunCategory,
-  TrainrunDirection,
+  Direction,
   TrainrunFrequency,
   TrainrunTimeCategory,
 } from "../../data-structures/business.data.structures";
@@ -267,8 +267,8 @@ export class DataService implements OnDestroy {
       .trainrunTimeCategories;
   }
 
-  getTrainrunDirections(): TrainrunDirection[] {
-    return Object.values(TrainrunDirection);
+  getDirections(): Direction[] {
+    return Object.values(Direction);
   }
 
   getBPStammdaten(betriebspunktName: string): Stammdaten {

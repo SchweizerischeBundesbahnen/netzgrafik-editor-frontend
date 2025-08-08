@@ -392,7 +392,7 @@ More details about TimeLock
       "frequencyId": 3,
       "trainrunTimeCategoryId": 0,
       "labelIds": [],
-      "trainrunDirection": "round-trip"
+      "trainrunDirection": "round_trip"
     }
   ],
 ```

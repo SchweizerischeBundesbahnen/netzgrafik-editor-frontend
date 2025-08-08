@@ -16,7 +16,7 @@ import {TrainrunBranchType} from "../model/enum/trainrun-branch-type-type";
 import {PathItem} from "../model/pathItem";
 import {TrackData} from "../model/trackData";
 import {Sg2TrainrunPathService} from "./sg-2-trainrun-path.service";
-import {TrainrunDirection} from "src/app/data-structures/business.data.structures";
+import {Direction} from "src/app/data-structures/business.data.structures";
 
 @Injectable({
   providedIn: "root",
@@ -89,7 +89,7 @@ export class Sg3TrainrunsService implements OnDestroy {
       const trainrunItems: SgTrainrunItem[] = [];
 
       trainrunItem.pathItems.forEach((pathItem) => {
-        if (trainrunItem.trainrunDirection === TrainrunDirection.ONE_WAY && pathItem.backward === trainrunItem.leftToRight) return;
+        if (trainrunItem.direction === Direction.ONE_WAY && pathItem.backward === trainrunItem.leftToRight) return;
         // Node items
         if (pathItem.isNode()) {
           const pathNodes: SgPathNode[] = this.searchAllPathNodes(
@@ -107,7 +107,7 @@ export class Sg3TrainrunsService implements OnDestroy {
               Departure node: occupation from (departure - haltezeit) to departure
               Arrival node: occupation from arrival to (arrival + haltezeit)
             */
-            if (trainrunItem.trainrunDirection === TrainrunDirection.ONE_WAY) {
+            if (trainrunItem.direction === Direction.ONE_WAY) {
               if (trainrunItem.leftToRight) {
                 if (pathNode.departurePathSection === undefined) {
                   departureTime = pathItem.arrivalTime + pathNodeHaltezeit;

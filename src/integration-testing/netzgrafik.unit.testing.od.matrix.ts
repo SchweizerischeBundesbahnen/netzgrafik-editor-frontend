@@ -2,7 +2,7 @@ import {
   HaltezeitFachCategories,
   LinePatternRefs,
   NetzgrafikDto,
-  TrainrunDirection,
+  Direction,
 } from "../app/data-structures/business.data.structures";
 
 export class NetzgrafikUnitTestingOdMatrix {
@@ -1842,7 +1842,7 @@ export class NetzgrafikUnitTestingOdMatrix {
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
           labelIds: [],
-          trainrunDirection: TrainrunDirection.ROUND_TRIP,
+          direction: Direction.ROUND_TRIP,
         },
         {
           id: 5,
@@ -1851,7 +1851,7 @@ export class NetzgrafikUnitTestingOdMatrix {
           frequencyId: 2,
           trainrunTimeCategoryId: 0,
           labelIds: [],
-          trainrunDirection: TrainrunDirection.ROUND_TRIP,
+          direction: Direction.ROUND_TRIP,
         },
         {
           id: 6,
@@ -1860,7 +1860,7 @@ export class NetzgrafikUnitTestingOdMatrix {
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
           labelIds: [],
-          trainrunDirection: TrainrunDirection.ROUND_TRIP,
+          direction: Direction.ROUND_TRIP,
         },
         {
           id: 7,
@@ -1869,7 +1869,7 @@ export class NetzgrafikUnitTestingOdMatrix {
           frequencyId: 0,
           trainrunTimeCategoryId: 0,
           labelIds: [],
-          trainrunDirection: TrainrunDirection.ROUND_TRIP,
+          direction: Direction.ROUND_TRIP,
         },
         {
           id: 8,
@@ -1878,7 +1878,7 @@ export class NetzgrafikUnitTestingOdMatrix {
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
           labelIds: [],
-          trainrunDirection: TrainrunDirection.ROUND_TRIP,
+          direction: Direction.ROUND_TRIP,
         },
         {
           id: 2,
@@ -1887,7 +1887,7 @@ export class NetzgrafikUnitTestingOdMatrix {
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
           labelIds: [],
-          trainrunDirection: TrainrunDirection.ROUND_TRIP,
+          direction: Direction.ROUND_TRIP,
         },
       ],
       resources: [
