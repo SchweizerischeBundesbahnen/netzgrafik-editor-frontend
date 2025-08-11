@@ -35,7 +35,7 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
   public categoryColorRef: ColorRefType;
   public timeCategoryLinePattern: LinePatternRefs;
   public direction = Direction;
-  public chosenCard: "top" | "bottom" | null = null;
+  public chosenCard: "top" | "bottom";
   public trainrunTimeStructure: Omit<LeftAndRightTimeStructure, "travelTime">;
 
   private trainrunSectionHelper: TrainrunsectionHelper;
@@ -66,6 +66,8 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
       .subscribe(() => {
         this.updateAllValues();
       });
+    // Initialize the selected trainrun as one-way, selecting the [source] → [target] card
+    this.onTrainrunSectionCardClick("top");
   }
 
   updateAllValues() {

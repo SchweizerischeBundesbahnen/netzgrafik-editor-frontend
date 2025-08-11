@@ -3,7 +3,7 @@
 >
   <div class="toggle-container">
     <span class="toggle-label"
-          (click)="onToggleOneWay(false)"
+          (click)="onIsOneWayChanged(false)"
     >{{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.round-trip' | translate }}</span>
     <label class="toggle-switch">
       <input
@@ -15,7 +15,7 @@
       <span class="slider"></span>
     </label>
     <span class="toggle-label"
-          (click)="onToggleOneWay(true)"
+          (click)="onIsOneWayChanged(true)"
     >{{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.one-way' | translate }}</span>
   </div>
   <sbb-trainrunsection-card *ngIf="isOneWay"
