@@ -186,13 +186,13 @@ export class TrainrunService {
 
     // leftNode -> rightNode
     let firstTrainrunSection = trainrunSections.find(ts => ts.getSourceNodeId() === leftNode.getId());
-    let lastTrainrunSection = trainrunSections.reverse().find(ts => ts.getTargetNodeId() === rightNode.getId());
+    let lastTrainrunSection = [...trainrunSections].reverse().find(ts => ts.getTargetNodeId() === rightNode.getId());
     let isLeftToRight = true;
 
     // rightNode -> leftNode
     if (!firstTrainrunSection && !lastTrainrunSection) {
       firstTrainrunSection = trainrunSections.find(ts => ts.getSourceNodeId() === rightNode.getId());
-      lastTrainrunSection = trainrunSections.reverse().find(ts => ts.getTargetNodeId() === leftNode.getId());
+      lastTrainrunSection = [...trainrunSections].reverse().find(ts => ts.getTargetNodeId() === leftNode.getId());
       isLeftToRight = false;
     }
 
