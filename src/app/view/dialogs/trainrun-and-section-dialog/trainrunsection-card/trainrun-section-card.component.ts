@@ -36,7 +36,6 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
   public timeCategoryLinePattern: LinePatternRefs;
   public direction = Direction;
   public chosenCard: "top" | "bottom";
-  public trainrunTimeStructure: Omit<LeftAndRightTimeStructure, "travelTime">;
 
   private trainrunSectionHelper: TrainrunsectionHelper;
   private destroyed = new Subject<void>();
@@ -97,8 +96,6 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
       this.selectedTrainrunSection.getTrainrunId(),
     );
     this.endNode = [endNode.getFullName(), endNode.getBetriebspunktName()];
-
-    this.trainrunTimeStructure = this.getTrainrunTimeStructure();
 
     if (!selectedTrainrun.isRoundTrip()) {
       this.chosenCard = TrainrunsectionHelper.isTargetRightOrBottom(
@@ -201,7 +198,7 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
     );
   }
 
-  private getTrainrunTimeStructure(): Omit<LeftAndRightTimeStructure, "travelTime"> {
+  getTrainrunTimeStructure(): Omit<LeftAndRightTimeStructure, "travelTime"> {
     const selectedTrainrun = this.trainrunService.getSelectedTrainrun();
     if (!selectedTrainrun){
       return undefined;
@@ -211,50 +208,27 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
       this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(
         selectedTrainrunId,
       );
-    const [leftNode, rightNode] = [
+    const [startNode, endNode] = [
       this.trainrunService.getStartNodeWithTrainrunId(selectedTrainrunId),
       this.trainrunService.getEndNodeWithTrainrunId(selectedTrainrunId),
     ];
 
-    // leftNode -> rightNode
-    let firstTrainrunSection = trainrunSections.find(ts => ts.getSourceNodeId() === leftNode.getId());
-    let lastTrainrunSection = [...trainrunSections].reverse().find(ts => ts.getTargetNodeId() === rightNode.getId());
-    let isLeftToRight = true;
+    // Try to find startNode → endNode
+    let firstTrainrunSection = trainrunSections.find(ts => ts.getSourceNodeId() === startNode.getId());
+    let lastTrainrunSection = [...trainrunSections].reverse().find(ts => ts.getTargetNodeId() === endNode.getId());
 
-    // rightNode -> leftNode
+    // If not found, try endNode → startNode and swap
     if (!firstTrainrunSection && !lastTrainrunSection) {
-      firstTrainrunSection = trainrunSections.find(ts => ts.getSourceNodeId() === rightNode.getId());
-      lastTrainrunSection = [...trainrunSections].reverse().find(ts => ts.getTargetNodeId() === leftNode.getId());
-      isLeftToRight = false;
-    }
-
-    let leftTimes, rightTimes;
-
-    if (isLeftToRight) {
-      // leftNode -> rightNode: left times from first section, right times from last section
-      leftTimes = {
-        leftDepartureTime: firstTrainrunSection.getSourceDeparture(),
-        leftArrivalTime: firstTrainrunSection.getSourceArrival()
-      };
-      rightTimes = {
-        rightDepartureTime: lastTrainrunSection.getTargetDeparture(),
-        rightArrivalTime: lastTrainrunSection.getTargetArrival()
-      };
-    } else {
-      // rightNode -> leftNode: left times from last section, right times from first section
-      leftTimes = {
-        leftDepartureTime: lastTrainrunSection.getTargetDeparture(),
-        leftArrivalTime: lastTrainrunSection.getTargetArrival()
-      };
-      rightTimes = {
-        rightDepartureTime: firstTrainrunSection.getSourceDeparture(),
-        rightArrivalTime: firstTrainrunSection.getSourceArrival()
-      };
+      firstTrainrunSection = trainrunSections.find(ts => ts.getSourceNodeId() === endNode.getId());
+      lastTrainrunSection = [...trainrunSections].reverse().find(ts => ts.getTargetNodeId() === startNode.getId());
+      [firstTrainrunSection, lastTrainrunSection] = [lastTrainrunSection, firstTrainrunSection];
     }
 
     return {
-      ...leftTimes,
-      ...rightTimes,
+      leftDepartureTime: firstTrainrunSection.getSourceDeparture(),
+      leftArrivalTime: firstTrainrunSection.getSourceArrival(),
+      rightDepartureTime: lastTrainrunSection.getTargetDeparture(),
+      rightArrivalTime: lastTrainrunSection.getTargetArrival(),
     };
   }
 }

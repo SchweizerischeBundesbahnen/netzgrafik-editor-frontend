@@ -25,7 +25,6 @@ import {Transition} from "../../models/transition.model";
 import {Port} from "../../models/port.model";
 import {Connection} from "../../models/connection.model";
 import {Operation, OperationType, TrainrunOperation} from "../../models/operation.model";
-import {LeftAndRightTimeStructure} from "src/app/view/dialogs/trainrun-and-section-dialog/trainrunsection-tab/trainrun-section-tab.component";
 
 @Injectable({
   providedIn: "root",
