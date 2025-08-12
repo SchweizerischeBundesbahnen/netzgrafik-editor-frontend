@@ -1151,8 +1151,11 @@ export class TrainrunSectionsView {
     (["BEGINNING_ARROW", "ENDING_ARROW"] as const).forEach((arrowType) => {
       groupLinesEnter
         .append(StaticDomTags.EDGE_LINE_ARROW_SVG)
-        .attr(StaticDomTags.TAG_HIDDEN, () =>
-          !this.editorView.isFilterDirectionArrowsEnabled() ? "" : null,
+        .attr(StaticDomTags.TAG_HIDDEN, (d: TrainrunSectionViewObject) =>
+          // Hide arrow if arrows are filtered out or if the node on this side is filtered out
+          !this.editorView.isFilterDirectionArrowsEnabled() ||
+          !this.filterTrainrunsectionAtNode(d.trainrunSection, arrowType === "BEGINNING_ARROW")
+          ? "" : null,
         )
         .attr("d", (d: TrainrunSectionViewObject) => {
           return d.trainrunSection.getTrainrun().isRoundTrip()
