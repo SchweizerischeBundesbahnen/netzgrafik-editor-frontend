@@ -85,4 +85,12 @@
   .toggle-label.checked {
     font-weight: bolder;
   }
+
+  input:focus-visible + .slider {
+    background: $COLOR_Default_Selection;
+  }
+
+  input:checked:focus-visible + .slider {
+    background: $COLOR_Default_Selection;
+  }
 }
