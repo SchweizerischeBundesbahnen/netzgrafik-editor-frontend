@@ -284,7 +284,7 @@
   cursor: pointer;
 }
 
-::ng-deep path.edge_line_arrow.editor:hover {
+::ng-deep path.edge_line_arrow.editor.selected:hover {
   stroke: $COLOR_Edit;
   stroke-width: 3.0px;
 }
