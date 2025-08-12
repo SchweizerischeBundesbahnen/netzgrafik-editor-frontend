@@ -217,11 +217,17 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
     let firstTrainrunSection = trainrunSections.find(ts => ts.getSourceNodeId() === startNode.getId());
     let lastTrainrunSection = [...trainrunSections].reverse().find(ts => ts.getTargetNodeId() === endNode.getId());
 
-    // If not found, try endNode → startNode and swap
+    // If not found, swap first and last sections (and source and target nodes)
     if (!firstTrainrunSection && !lastTrainrunSection) {
       firstTrainrunSection = trainrunSections.find(ts => ts.getSourceNodeId() === endNode.getId());
       lastTrainrunSection = [...trainrunSections].reverse().find(ts => ts.getTargetNodeId() === startNode.getId());
       [firstTrainrunSection, lastTrainrunSection] = [lastTrainrunSection, firstTrainrunSection];
+      return {
+        leftDepartureTime: firstTrainrunSection.getTargetDeparture(),
+        leftArrivalTime: firstTrainrunSection.getTargetArrival(),
+        rightDepartureTime: lastTrainrunSection.getSourceDeparture(),
+        rightArrivalTime: lastTrainrunSection.getSourceArrival(),
+      };
     }
 
     return {
