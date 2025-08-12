@@ -1181,7 +1181,7 @@ export class TrainrunSectionsView {
         .classed(StaticDomTags.TAG_SELECTED, (d: TrainrunSectionViewObject) =>
           d.trainrunSection.getTrainrun().selected(),
         )
-        .classed("editor", true)
+        .classed(StaticDomTags.TAG_LINE_ARROW_EDITOR, true)
         .classed(StaticDomTags.TAG_MUTED, (d: TrainrunSectionViewObject) =>
           TrainrunSectionsView.isMuted(
             d.trainrunSection,

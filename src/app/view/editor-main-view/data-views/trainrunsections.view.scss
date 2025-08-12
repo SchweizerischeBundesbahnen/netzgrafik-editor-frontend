@@ -284,9 +284,12 @@
   cursor: pointer;
 }
 
+::ng-deep path.edge_line_arrow.editor:hover {
+  stroke-width: 3.0px;
+}
+
 ::ng-deep path.edge_line_arrow.editor.selected:hover {
   stroke: $COLOR_Edit;
-  stroke-width: 3.0px;
 }
 
 ::ng-deep text.edge_text:hover {
