@@ -67,6 +67,7 @@ export class EditorView implements SVGMouseControllerObserver {
   showNodeInformation = null;
   showTrainrunInformation = null;
   showTrainrunSectionInformation = null;
+  showTrainrunOneWayInformation = null;
   setTrainrunAsSelected = null;
   clickSelectedTrainrunSection = null;
   setTrainrunSectionAsSelected = null;
@@ -220,6 +221,10 @@ export class EditorView implements SVGMouseControllerObserver {
 
   bindShowTrainrunSectionInformation(callback) {
     this.showTrainrunSectionInformation = callback;
+  }
+
+  bindShowTrainrunOneWayInformation(callback) {
+    this.showTrainrunOneWayInformation = callback;
   }
 
   bindSetTrainrunAsSelected(callback) {
