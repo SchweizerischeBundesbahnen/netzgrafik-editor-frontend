@@ -35,8 +35,7 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
   public categoryColorRef: ColorRefType;
   public timeCategoryLinePattern: LinePatternRefs;
   public direction = Direction;
-  public chosenCard: "top" | "bottom" | null = null;
-  public trainrunTimeStructure: Omit<LeftAndRightTimeStructure, "travelTime">;
+  public chosenCard: "top" | "bottom";
 
   private trainrunSectionHelper: TrainrunsectionHelper;
   private destroyed = new Subject<void>();
@@ -66,6 +65,8 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
       .subscribe(() => {
         this.updateAllValues();
       });
+    // Initialize the selected trainrun as one-way, selecting the [source] → [target] card
+    this.onTrainrunSectionCardClick("top");
   }
 
   updateAllValues() {
@@ -95,9 +96,6 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
       this.selectedTrainrunSection.getTrainrunId(),
     );
     this.endNode = [endNode.getFullName(), endNode.getBetriebspunktName()];
-
-    this.trainrunTimeStructure =
-      this.trainrunService.getTrainrunTimeStructure();
 
     if (!selectedTrainrun.isRoundTrip()) {
       this.chosenCard = TrainrunsectionHelper.isTargetRightOrBottom(
@@ -203,5 +201,39 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
       this.selectedTrainrunSection.getTrainrun(),
       Direction.ONE_WAY,
     );
+  }
+
+  getTrainrunTimeStructure(): Omit<LeftAndRightTimeStructure, "travelTime"> {
+    const selectedTrainrun = this.trainrunService.getSelectedTrainrun();
+    if (!selectedTrainrun){
+      return undefined;
+    }
+    const selectedTrainrunId = selectedTrainrun.getId();
+    const trainrunSections =
+      this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(
+        selectedTrainrunId,
+      );
+    const [startNode, endNode] = [
+      this.trainrunService.getStartNodeWithTrainrunId(selectedTrainrunId),
+      this.trainrunService.getEndNodeWithTrainrunId(selectedTrainrunId),
+    ];
+
+    // Try to find startNode → endNode
+    let firstTrainrunSection = trainrunSections.find(ts => ts.getSourceNodeId() === startNode.getId());
+    let lastTrainrunSection = [...trainrunSections].reverse().find(ts => ts.getTargetNodeId() === endNode.getId());
+
+    // If not found, try endNode → startNode and swap
+    if (!firstTrainrunSection && !lastTrainrunSection) {
+      firstTrainrunSection = trainrunSections.find(ts => ts.getSourceNodeId() === endNode.getId());
+      lastTrainrunSection = [...trainrunSections].reverse().find(ts => ts.getTargetNodeId() === startNode.getId());
+      [firstTrainrunSection, lastTrainrunSection] = [lastTrainrunSection, firstTrainrunSection];
+    }
+
+    return {
+      leftDepartureTime: firstTrainrunSection.getSourceDeparture(),
+      leftArrivalTime: firstTrainrunSection.getSourceArrival(),
+      rightDepartureTime: lastTrainrunSection.getTargetDeparture(),
+      rightArrivalTime: lastTrainrunSection.getTargetArrival(),
+    };
   }
 }
