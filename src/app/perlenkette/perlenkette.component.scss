@@ -7,6 +7,10 @@
   overflow: hidden;
 }
 
+::ng-deep .sbb-toggle-option-selected .sbb-toggle-option-button {
+  border-bottom: none;
+}
+
 .TitleArea {
   margin: 10px 10px 0px 10px;
   padding: 0 4px;
@@ -31,6 +35,11 @@
     align-items: center;
     padding: 24px 0;
   }
+}
+
+.trainrun-od {
+  display: flex;
+  align-items: center;
 }
 
 .alignleft {
@@ -119,7 +128,7 @@ span.smallstation:hover {
   width: 100%;
   overflow: auto;
   padding: 0px;
-  min-height: 300px;
+  min-height: auto;
 }
 
 .highlight {

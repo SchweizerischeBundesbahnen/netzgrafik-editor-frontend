@@ -110,6 +110,7 @@ export class LoadPerlenketteService implements OnDestroy {
       trainrun.getCategoryShortName(),
       trainrun.getCategoryColorRef(),
       this.getPerlenketteItem(trainrun),
+      trainrun.getDirection(),
     );
   }
 

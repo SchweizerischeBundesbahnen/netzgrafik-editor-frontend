@@ -117,11 +117,14 @@ export interface TrainrunSectionDto {
   targetNodeId: number; // reference to the node by Node.id
   targetPortId: number; // reference to the node by Node.id
 
+  sourceSymmetry: boolean; // binds sourceDeparture and sourceArrival times
+  targetSymmetry: boolean; // binds targetDeparture and targetArrival times
   sourceArrival: TimeLockDto; // declares the soruce arrival time
   sourceDeparture: TimeLockDto; // declares the soruce departure time
   targetArrival: TimeLockDto; // declares the target arrival time
   targetDeparture: TimeLockDto; // declares the target departure time
-  travelTime: TimeLockDto; // declares the travel arrival time
+  travelTime: TimeLockDto; // declares the travel time (forward direction)
+  backwardTravelTime: TimeLockDto; // declares the travel time in the opposite direction
 
   numberOfStops: number; // number of stops - not declared in detail (no node attached)
 
@@ -198,8 +201,8 @@ export interface TrainrunDto {
   categoryId: number; // reference to the trainrun category
   frequencyId: number; // reference to the trainrun frequency
   trainrunTimeCategoryId: number; // reference to the trainrun time category
-
   labelIds: number[];
+  direction: Direction; // direction of the trainrun
 }
 
 /**
@@ -290,14 +293,19 @@ export interface FilterSettingDto {
   filterNodeLabels: number[]; // labels to filter out (labels only of type - LabelRef: node)
   filterNoteLabels: number[]; // labels to filter out (labels only of type - LabelRef: note)
   filterTrainrunLabels: number[]; // labels to filter out (labels only of type - LabelRef: trainrun)
+  filterDirectionArrows: boolean; // flag for trainrun direction arrows (hide/show)
+  filterAsymmetryArrows: boolean; // flag for trainrun section asymmetry arrows (hide/show)
   filterArrivalDepartureTime: boolean; // flag for arrival and departure time filtering (hide/show)
   filterTravelTime: boolean; // flag for travel time filter (hide/show)
+  filterBackwardTravelTime: boolean; // flag for trainrun section backward travel times (hide/show)
   filterTrainrunName: boolean; // flag for trainrun time filter (hide/show)
   filterConnections: boolean; // flag for connections filtering (hide/show)
   filterShowNonStopTime: boolean; // flag for non-stop time filtering (hide/show)
   filterTrainrunCategory: TrainrunCategory[]; // list of category to filter out
   filterTrainrunFrequency: TrainrunFrequency[]; // list of frequency to filter out
   filterTrainrunTimeCategory: TrainrunTimeCategory[]; // list of time categroy to filter out
+  filterDirection: Direction[]; // list of trainrun direction to filter out
+  filterSymmetry: boolean[]; // list of trainrun symmetry values (true/false) to filter out
   filterAllEmptyNodes: boolean; // flag to filter all empty nodes (hide/show)
   filterAllNonStopNodes: boolean; // flag to filter all only non-stop nodes (hide/show)
   filterNotes: boolean; // flag to filter notes (hide/show)
@@ -326,4 +334,12 @@ export interface NetzgrafikDto {
   labels: LabelDto[]; // list of all labels - DB table (filterable labels)
   labelGroups: LabelGroupDto[]; // list of all label groups - DB table (filterable groups)
   filterData: FilterDataDto; // reference to the filter settings (predefined filters)
+}
+
+/**
+ * Represents the trainrun direction.
+ */
+export enum Direction {
+  ROUND_TRIP = "round_trip",
+  ONE_WAY = "one_way",
 }

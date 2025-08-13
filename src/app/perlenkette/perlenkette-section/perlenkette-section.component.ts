@@ -172,6 +172,65 @@ export class PerlenketteSectionComponent
     this.destroyed$.complete();
   }
 
+  isRoundTrip(): boolean {
+    return this.trainrunSection.getTrainrun().isRoundTrip();
+  }
+
+  getEdgeLineArrowClass() {
+    const trainrun = this.trainrunSection.getTrainrun();
+    return (
+      StaticDomTags.EDGE_LINE_ARROW_CLASS +
+      StaticDomTags.makeClassTag(
+        StaticDomTags.FREQ_LINE_PATTERN,
+        trainrun.getFrequencyLinePatternRef(),
+      ) +
+      " " +
+      StaticDomTags.TAG_UI_DIALOG +
+      " " +
+      StaticDomTags.makeClassTag(
+        StaticDomTags.TAG_COLOR_REF,
+        trainrun.getCategoryColorRef(),
+      ) +
+      StaticDomTags.makeClassTag(
+        StaticDomTags.TAG_LINEPATTERN_REF,
+        trainrun.getTimeCategoryLinePatternRef(),
+      )
+    );
+  };
+
+  getArrowTranslateAndRotate(y: number) {
+    if (this.isRightSideDisplayed() && !this.isLeftSideDisplayed()) {
+      return `translate(142, ${y}) rotate(90)`;
+    } else if (!this.isRightSideDisplayed() && this.isLeftSideDisplayed()) {
+      return `translate(132, ${y + 15}) rotate(-90)`;
+    }
+    return "";
+  };
+  
+  isLeftSideDisplayed(): boolean {
+    if (this.trainrunSection === null) {
+      return false;
+    }
+    const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
+      this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(
+        this.trainrunSection.getTrainrunId()
+      )[0]
+    );
+    return this.trainrunSection.getTrainrun().isRoundTrip() || !isTargetRightOrBottom;
+  }
+  
+  isRightSideDisplayed(): boolean {
+    if (this.trainrunSection === null) {
+      return false;
+    }
+    const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
+      this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(
+        this.trainrunSection.getTrainrunId()
+      )[0]
+    );
+    return this.trainrunSection.getTrainrun().isRoundTrip() || isTargetRightOrBottom;
+  }
+
   getVariantIsWritable(): boolean {
     return this.versionControlService.getVariantIsWritable();
   }
@@ -1110,6 +1169,7 @@ export class PerlenketteSectionComponent
     const targetArrival = this.getSectionTargetArrivalTime();
     const targetDeparture = this.getSectionTargetDepartureTime();
     const travelTime = this.getSectionTravelTime();
+    const backwardTravelTime = this.trainrunSection.getBackwardTravelTime();
 
     this.trainrunSectionService.updateTrainrunSectionTime(
       trsId,
@@ -1118,6 +1178,7 @@ export class PerlenketteSectionComponent
       targetArrival,
       targetDeparture,
       travelTime,
+      backwardTravelTime,
     );
     this.trainrunSectionService.trainrunSectionsUpdated();
   }

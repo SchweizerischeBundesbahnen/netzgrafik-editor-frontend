@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from "@angular/core";
 import {FilterService} from "../../services/ui/filter.service";
 import {
   TrainrunCategory,
+  Direction,
   TrainrunFrequency,
   TrainrunTimeCategory,
 } from "../../data-structures/business.data.structures";
@@ -24,9 +25,12 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
   filterAllEmptyNodes: boolean;
   filterNotes: boolean;
   filterAllNonStopNodes: boolean;
+  filterDirectionArrows: boolean;
+  filterAsymmetryArrows: boolean;
   filterArrivalDepartureTime: boolean;
   filterShowNonStopTime: boolean;
   filterTravelTime: boolean;
+  filterBackwardTravelTime: boolean;
   filterTrainrunName: boolean;
   filterConnections: boolean;
   timeDisplayPrecision: number;
@@ -69,11 +73,16 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
   }
 
   updateFilterData() {
+    this.filterDirectionArrows =
+      this.filterService.isFilterDirectionArrowsEnabled();
+    this.filterAsymmetryArrows =
+      this.filterService.isFilterAsymmetryArrowsEnabled();
     this.filterArrivalDepartureTime =
       this.filterService.isFilterArrivalDepartureTimeEnabled();
     this.filterShowNonStopTime =
       this.filterService.isFilterShowNonStopTimeEnabled();
     this.filterTravelTime = this.filterService.isFilterTravelTimeEnabled();
+    this.filterBackwardTravelTime = this.filterService.isFilterBackwardTravelTimeEnabled();
     this.filterTrainrunName = this.filterService.isFilterTrainrunNameEnabled();
     this.filterConnections = this.filterService.isFilterConnectionsEnabled();
     this.filterNotes = !this.filterService.isFilterNotesEnabled();
@@ -217,6 +226,22 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     }
   }
 
+  filterDirectionArrowsChanged() {
+    if (this.filterDirectionArrows) {
+      this.filterService.enableFilterDirectionArrows();
+    } else {
+      this.filterService.disableFilterDirectionArrows();
+    }
+  }
+
+  filterAsymmetryArrowsChanged() {
+    if (this.filterAsymmetryArrows) {
+      this.filterService.enableFilterAsymmetryArrows();
+    } else {
+      this.filterService.disableFilterAsymmetryArrows();
+    }
+  }
+
   filterArrivalDepartureTimeChanged() {
     if (this.filterArrivalDepartureTime) {
       this.filterService.enableFilterArrivalDepartureTime();
@@ -238,6 +263,14 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
       this.filterService.enableFilterTravelTime();
     } else {
       this.filterService.disableFilterTravelTime();
+    }
+  }
+
+  filterBackwardTravelTimeChanged() {
+    if (this.filterBackwardTravelTime) {
+      this.filterService.enableFilterBackwardTravelTime();
+    } else {
+      this.filterService.disableFilterBackwardTravelTime();
     }
   }
 
@@ -303,6 +336,48 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     );
   }
 
+  getDirectionClassname(direction: Direction): string {
+    if (
+      this.filterService.isFilterDirectionEnabled(
+        direction,
+      )
+    ) {
+      return (
+        "TrainrunDialog Direction " +
+        StaticDomTags.TAG_SELECTED
+      );
+    }
+    return (
+      "TrainrunDialog Direction "
+    );
+  }
+
+  getSymmetryClassname(symmetry: boolean): string {
+    if (this.filterService.isFilterSymmetryEnabled(symmetry)) {
+      return (
+        "TrainrunDialog Symmetry " +
+        StaticDomTags.TAG_SELECTED
+      );
+    }
+    return (
+      "TrainrunDialog Symmetry "
+    );
+  }
+
+  hasOneWayTrainruns(): boolean {
+    for (const trainrun of this.dataService.getTrainruns()) {
+      if (!trainrun.isRoundTrip()) return true;
+    }
+    return false;
+  }
+
+  isAsymmetryActive(): boolean {
+    for (const section of this.dataService.getTrainrunSections()) {
+      if (!section.isSymmetric()) return true;
+    }
+    return false;
+  }
+
   getCategoryTooltip(trainrunCategory: TrainrunCategory): string {
     if (!this.filterService.isFilterTrainrunCategoryEnabled(trainrunCategory)) {
       return $localize`:@@app.view.editor-filter-view.show-trainrun-category:Show ${trainrunCategory.name}:trainrunCategory:`;
@@ -318,6 +393,35 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     */
     return $localize`:@@app.view.editor-filter-view.hide-trainrun-time-category:Hide ${trainrunTimeCategory.name}:trainrunTimeCategory:`;
   }
+
+  private getDirectionTranslation(direction: Direction): string {
+    switch (direction) {
+      case Direction.ROUND_TRIP:
+        return $localize`:@@app.view.editor-filter-view.round-trips:Round trips`;
+      case Direction.ONE_WAY:
+        return $localize`:@@app.view.editor-filter-view.one-ways:One-ways`;
+      default:
+        return direction;
+    }
+  }
+
+  getDirectionTooltip(direction: Direction): string {
+    const directionTranslation = this.getDirectionTranslation(direction);
+    if (
+      !this.filterService.isFilterDirectionEnabled(direction)
+    ) {
+      return $localize`:@@app.view.editor-filter-view.show-direction:Show ${directionTranslation}:direction:`;
+    }
+    return $localize`:@@app.view.editor-filter-view.hide-direction:Hide ${directionTranslation}:direction:`;
+  }
+
+  getSymmetryTooltip(symmetry: boolean): string {
+    if (!this.filterService.isFilterSymmetryEnabled(symmetry)) {
+      return $localize`:@@app.view.editor-filter-view.show-asymmetric-trainruns:Show asymmetric trainruns`;
+    }
+    return $localize`:@@app.view.editor-filter-view.hide-asymmetric-trainruns:Hide asymmetric trainruns`;
+  }
+
 
   makeCategoryButtonLabel(trainrunCategory: TrainrunCategory): string {
     const label = trainrunCategory.shortName.toUpperCase();
@@ -335,6 +439,24 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
       return label.substring(0, 3) + "...";
     }
     return label;
+  }
+
+  makeDirectionButtonLabel(
+    direction: Direction,
+  ): string {
+    if (direction === Direction.ROUND_TRIP) {
+      return "↔";
+    } else {
+      return "→";
+    }
+  }
+
+  makeSymmetryButtonLabel(symmetry: boolean): string {
+    if (symmetry) {
+      return $localize`:@@app.view.editor-filter-view.symmetric-short:Symm.`;
+    } else {
+      return $localize`:@@app.view.editor-filter-view.asymmetric-short:Asymm.`;
+    }
   }
 
   onCategoryChanged(trainrunCategory: TrainrunCategory) {
@@ -356,6 +478,26 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
       this.filterService.disableFilterTrainrunTimeCategory(
         trainrunTimeCategory,
       );
+    }
+  }
+
+  onDirectionChanged(direction: Direction) {
+    if (
+      !this.filterService.isFilterDirectionEnabled(direction)
+    ) {
+      this.filterService.enableFilterDirection(direction);
+    } else {
+      this.filterService.disableFilterDirection(direction);
+    }
+  }
+
+  onSymmetryChanged(symmetry: boolean) {
+    if (
+      !this.filterService.isFilterSymmetryEnabled(symmetry)
+    ) {
+      this.filterService.enableFilterSymmetry(symmetry);
+    } else {
+      this.filterService.disableFilterSymmetry(symmetry);
     }
   }
 
@@ -412,6 +554,8 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
     this.filterService.resetFilterTrainrunCategory();
     this.filterService.resetFilterTrainrunFrequency();
     this.filterService.resetFilterTrainrunTimeCategory();
+    this.filterService.resetFilterDirection();
+    this.filterService.resetFilterSymmetry();
   }
 
   onResetNodeFilter() {
@@ -430,14 +574,22 @@ export class EditorFilterViewComponent implements OnInit, OnDestroy {
   onResetDisplayFilter() {
     this.onResetNodeFilter();
     this.onResetNoteFilter();
+    this.filterService.enableFilterDirectionArrows();
+    this.filterService.enableFilterAsymmetryArrows();
     this.filterService.enableFilterArrivalDepartureTime();
     this.filterService.enableFilterTravelTime();
+    this.filterService.enableFilterBackwardTravelTime();
     this.filterService.enableFilterTrainrunName();
     this.filterService.enableFilterShowNonStopTime();
     this.filterService.enableFilterConnections();
+    this.filterDirectionArrows =
+      this.filterService.isFilterDirectionArrowsEnabled();
+    this.filterAsymmetryArrows =
+      this.filterService.isFilterAsymmetryArrowsEnabled();
     this.filterArrivalDepartureTime =
       this.filterService.isFilterArrivalDepartureTimeEnabled();
     this.filterTravelTime = this.filterService.isFilterTravelTimeEnabled();
+    this.filterBackwardTravelTime = this.filterService.isFilterBackwardTravelTimeEnabled();
     this.filterTrainrunName = this.filterService.isFilterTrainrunNameEnabled();
     this.filterConnections = this.filterService.isFilterConnectionsEnabled();
     this.filterShowNonStopTime =

@@ -1,6 +1,7 @@
 import {
   FilterSettingDto,
   TrainrunCategory,
+  Direction,
   TrainrunFrequency,
   TrainrunTimeCategory,
 } from "../data-structures/business.data.structures";
@@ -18,14 +19,19 @@ export class FilterSetting {
   public filterNodeLabels: number[];
   public filterNoteLabels: number[];
   public filterTrainrunLabels: number[];
+  public filterDirectionArrows: boolean;
+  public filterAsymmetryArrows: boolean;
   public filterArrivalDepartureTime;
   public filterTravelTime;
+  public filterBackwardTravelTime: boolean;
   public filterTrainrunName;
   public filterConnections;
   public filterShowNonStopTime;
   public filterTrainrunCategory: TrainrunCategory[];
   public filterTrainrunFrequency: TrainrunFrequency[];
   public filterTrainrunTimeCategory: TrainrunTimeCategory[];
+  public filterDirection: Direction[];
+  public filterSymmetry: boolean[];
   public filterAllEmptyNodes;
   public filterAllNonStopNodes;
   public filterNotes;
@@ -41,14 +47,19 @@ export class FilterSetting {
       filterNodeLabels,
       filterNoteLabels,
       filterTrainrunLabels,
+      filterDirectionArrows,
+      filterAsymmetryArrows,
       filterArrivalDepartureTime,
       filterTravelTime,
+      filterBackwardTravelTime,
       filterTrainrunName,
       filterConnections,
       filterShowNonStopTime,
       filterTrainrunCategory,
       filterTrainrunFrequency,
       filterTrainrunTimeCategory,
+      filterDirection: filterDirection,
+      filterSymmetry: filterSymmetry,
       filterAllEmptyNodes,
       filterAllNonStopNodes,
       filterNotes,
@@ -62,14 +73,19 @@ export class FilterSetting {
       filterNodeLabels: [],
       filterNoteLabels: [],
       filterTrainrunLabels: [],
+      filterDirectionArrows: true,
+      filterAsymmetryArrows: true,
       filterArrivalDepartureTime: true,
       filterTravelTime: true,
+      filterBackwardTravelTime: true,
       filterTrainrunName: true,
       filterConnections: true,
       filterShowNonStopTime: true,
       filterTrainrunCategory: null,
       filterTrainrunFrequency: null,
       filterTrainrunTimeCategory: null,
+      filterDirection: null,
+      filterSymmetry: null,
       filterAllEmptyNodes: false,
       filterAllNonStopNodes: false,
       filterNotes: false,
@@ -84,14 +100,19 @@ export class FilterSetting {
     this.filterNodeLabels = filterNodeLabels;
     this.filterNoteLabels = filterNoteLabels;
     this.filterTrainrunLabels = filterTrainrunLabels;
+    this.filterDirectionArrows = filterDirectionArrows;
+    this.filterAsymmetryArrows = filterAsymmetryArrows;
     this.filterArrivalDepartureTime = filterArrivalDepartureTime;
     this.filterTravelTime = filterTravelTime;
+    this.filterBackwardTravelTime = filterBackwardTravelTime;
     this.filterTrainrunName = filterTrainrunName;
     this.filterConnections = filterConnections;
     this.filterShowNonStopTime = filterShowNonStopTime;
     this.filterTrainrunCategory = filterTrainrunCategory;
     this.filterTrainrunFrequency = filterTrainrunFrequency;
     this.filterTrainrunTimeCategory = filterTrainrunTimeCategory;
+    this.filterDirection = filterDirection;
+    this.filterSymmetry = filterSymmetry;
     this.filterAllEmptyNodes = filterAllEmptyNodes;
     this.filterAllNonStopNodes = filterAllNonStopNodes;
     this.filterNotes = filterNotes;
@@ -163,14 +184,19 @@ export class FilterSetting {
       this.filterNodeLabels.length === 0 &&
       this.filterNoteLabels.length === 0 &&
       this.filterTrainrunLabels.length === 0 &&
+      this.filterDirectionArrows === true &&
+      this.filterAsymmetryArrows === true &&
       this.filterArrivalDepartureTime === true &&
       this.filterTravelTime === true &&
+      this.filterBackwardTravelTime === true &&
       this.filterTrainrunName === true &&
       this.filterConnections === true &&
       this.filterShowNonStopTime === true &&
       this.filterTrainrunCategory.length === trainrunCategoriesLength &&
       this.filterTrainrunFrequency.length === frainrunFrequenciesLength &&
       this.filterTrainrunTimeCategory.length === trainrunTimeCategoryLength &&
+      this.filterDirection.length === Object.values(Direction).length &&
+      this.filterSymmetry.length === 2 &&
       this.filterAllEmptyNodes === false &&
       this.filterAllNonStopNodes === false &&
       this.filterNotes === false &&
@@ -188,14 +214,19 @@ export class FilterSetting {
       filterNodeLabels: this.filterNodeLabels,
       filterNoteLabels: this.filterNoteLabels,
       filterTrainrunLabels: this.filterTrainrunLabels,
+      filterDirectionArrows: this.filterDirectionArrows,
+      filterAsymmetryArrows: this.filterAsymmetryArrows,
       filterArrivalDepartureTime: this.filterArrivalDepartureTime,
       filterTravelTime: this.filterTravelTime,
+      filterBackwardTravelTime: this.filterBackwardTravelTime,
       filterTrainrunName: this.filterTrainrunName,
       filterConnections: this.filterConnections,
       filterShowNonStopTime: this.filterShowNonStopTime,
       filterTrainrunCategory: this.filterTrainrunCategory,
       filterTrainrunFrequency: this.filterTrainrunFrequency,
       filterTrainrunTimeCategory: this.filterTrainrunTimeCategory,
+      filterDirection: this.filterDirection,
+      filterSymmetry: this.filterSymmetry,
       filterAllEmptyNodes: this.filterAllEmptyNodes,
       filterAllNonStopNodes: this.filterAllNonStopNodes,
       filterNotes: this.filterNotes,
