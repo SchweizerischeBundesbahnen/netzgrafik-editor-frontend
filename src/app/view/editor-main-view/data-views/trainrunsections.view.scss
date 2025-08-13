@@ -279,3 +279,19 @@
   opacity: 1;
   stroke-width: 0.5px;
 }
+
+::ng-deep path.edge_line_arrow.editor {
+  cursor: pointer;
+}
+
+::ng-deep path.edge_line_arrow.editor:hover {
+  stroke-width: 3.0px;
+}
+
+::ng-deep path.edge_line_arrow.editor.selected:hover {
+  stroke: $COLOR_Edit;
+}
+
+::ng-deep text.edge_text:hover {
+  font-weight: bold;
+}

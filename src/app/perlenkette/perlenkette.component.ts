@@ -28,8 +28,8 @@ import {TrainrunSectionService} from "../services/data/trainrunsection.service";
 import {TrainrunService} from "../services/data/trainrun.service";
 
 enum ShowTrainrunEditTab {
-  sbb_trainrun_tab="GENERAL",
-  sbb_trainrun_roundtrip_tab="ROUND_TRIP",
+  sbb_trainrun_tab = "GENERAL",
+  sbb_trainrun_roundtrip_tab = "ROUND_TRIP",
 }
 
 @Component({
@@ -117,11 +117,11 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     this.sbbToogleValue = event.value;
   }
 
-  isSbbToogleRoundtrip() : boolean {
+  isSbbToogleRoundtrip(): boolean {
     return this.sbbToogleValue === ShowTrainrunEditTab.sbb_trainrun_roundtrip_tab;
   }
 
-  isSbbToogleGeneral() : boolean {
+  isSbbToogleGeneral(): boolean {
     return this.sbbToogleValue === ShowTrainrunEditTab.sbb_trainrun_tab;
   }
 
