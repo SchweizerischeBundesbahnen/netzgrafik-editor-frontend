@@ -4,6 +4,7 @@ import {
   LabelRef,
   NetzgrafikDto,
   TrainrunCategory,
+  Direction,
   TrainrunDto,
   TrainrunFrequency,
   TrainrunTimeCategory,
@@ -298,6 +299,16 @@ export class TrainrunService {
     this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
   }
 
+  updateDirection(
+    trainrun: Trainrun,
+    direction: Direction,
+  ) {
+    const trainrunSection = this.getTrainrunFromId(trainrun.getId());
+    trainrunSection.setDirection(direction);
+    this.trainrunsUpdated();
+    this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
+  }
+
   getTrainruns(): Trainrun[] {
     return Object.assign({}, this.trainrunsStore).trainruns;
   }
@@ -531,6 +542,7 @@ export class TrainrunService {
     copiedtrainrun.setTrainrunCategory(trainrun.getTrainrunCategory());
     copiedtrainrun.setTrainrunFrequency(trainrun.getTrainrunFrequency());
     copiedtrainrun.setTrainrunTimeCategory(trainrun.getTrainrunTimeCategory());
+    copiedtrainrun.setDirection(trainrun.getDirection());
     copiedtrainrun.setTitle(trainrun.getTitle() + postfix);
     copiedtrainrun.setLabelIds(trainrun.getLabelIds());
     this.trainrunsStore.trainruns.push(copiedtrainrun);
@@ -668,6 +680,14 @@ export class TrainrunService {
   getStartNodeWithTrainrunId(trainrunId: number): Node {
     const bothEndNodes = this.getBothEndNodesWithTrainrunId(trainrunId);
     return GeneralViewFunctions.getLeftOrTopNode(
+      bothEndNodes.endNode1,
+      bothEndNodes.endNode2,
+    );
+  }
+
+  getEndNodeWithTrainrunId(trainrunId: number): Node {
+    const bothEndNodes = this.getBothEndNodesWithTrainrunId(trainrunId);
+    return GeneralViewFunctions.getRightOrBottomNode(
       bothEndNodes.endNode1,
       bothEndNodes.endNode2,
     );
@@ -868,6 +888,7 @@ export class TrainrunService {
     newTrainrun.setTrainrunTimeCategory(
       this.dataService.getTrainrunTimeCategory(trainrun.trainrunTimeCategoryId),
     );
+    newTrainrun.setDirection(trainrun.direction);
     newTrainrun.setTitle(trainrun.name);
     newTrainrun.setLabelIds(trainrun.labelIds);
     this.trainrunsStore.trainruns.push(newTrainrun);

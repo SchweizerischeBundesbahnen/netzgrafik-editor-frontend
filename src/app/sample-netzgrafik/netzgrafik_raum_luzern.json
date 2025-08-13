@@ -8490,7 +8490,8 @@
       "categoryId": 2,
       "frequencyId": 2,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 1,
@@ -8498,7 +8499,8 @@
       "categoryId": 0,
       "frequencyId": 4,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 2,
@@ -8506,7 +8508,8 @@
       "categoryId": 2,
       "frequencyId": 2,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 3,
@@ -8514,7 +8517,8 @@
       "categoryId": 4,
       "frequencyId": 2,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 4,
@@ -8522,7 +8526,8 @@
       "categoryId": 2,
       "frequencyId": 3,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 5,
@@ -8530,7 +8535,8 @@
       "categoryId": 2,
       "frequencyId": 3,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 6,
@@ -8538,7 +8544,8 @@
       "categoryId": 2,
       "frequencyId": 3,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 7,
@@ -8546,7 +8553,8 @@
       "categoryId": 1,
       "frequencyId": 3,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 9,
@@ -8554,7 +8562,8 @@
       "categoryId": 4,
       "frequencyId": 0,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 10,
@@ -8562,7 +8571,8 @@
       "categoryId": 4,
       "frequencyId": 3,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 11,
@@ -8570,7 +8580,8 @@
       "categoryId": 3,
       "frequencyId": 3,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 12,
@@ -8578,7 +8589,8 @@
       "categoryId": 4,
       "frequencyId": 3,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 13,
@@ -8586,7 +8598,8 @@
       "categoryId": 4,
       "frequencyId": 3,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 14,
@@ -8594,7 +8607,8 @@
       "categoryId": 4,
       "frequencyId": 3,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 15,
@@ -8602,7 +8616,8 @@
       "categoryId": 3,
       "frequencyId": 3,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 16,
@@ -8610,7 +8625,8 @@
       "categoryId": 1,
       "frequencyId": 3,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     }
   ],
   "resources": [],

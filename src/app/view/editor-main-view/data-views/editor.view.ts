@@ -83,6 +83,7 @@ export class EditorView implements SVGMouseControllerObserver {
   getNodeFromConnection = null;
   isFilterTravelTimeEnabled = null;
   isFilterTrainrunNameEnabled = null;
+  isFilterDirectionArrowsEnabled = null;
   isFilterArrivalDepartureTimeEnabled = null;
   isFilterShowNonStopTimeEnabled = null;
   isFilterTrainrunCategoryEnabled = null;
@@ -283,6 +284,10 @@ export class EditorView implements SVGMouseControllerObserver {
 
   bindIsfilterTrainrunNameEnabled(callback) {
     this.isFilterTrainrunNameEnabled = callback;
+  }
+
+  bindIsFilterDirectionArrowsEnabled(callback) {
+    this.isFilterDirectionArrowsEnabled = callback;
   }
 
   bindIsfilterArrivalDepartureTimeEnabled(callback) {

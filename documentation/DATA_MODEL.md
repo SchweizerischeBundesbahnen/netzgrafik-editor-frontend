@@ -31,6 +31,7 @@ category, frequency and time category, which define the behaviour of a trainrun.
   or every hour.
 - ***TimeCategory*** defines the time categorisation of the trainrun, e.g. peak times or
   off-peak times or occasional.
+- ***Direction*** defines the direction of the trainrun (`round_trip` or `one_way`).
 
 By combining the nodes and trainrun sections in this data model, we can create a representation of
 the trainrun network, mapping out the connections and relationships between the different stations

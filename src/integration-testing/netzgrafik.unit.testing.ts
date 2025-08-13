@@ -3,6 +3,7 @@ import {
   LabelRef,
   LinePatternRefs,
   NetzgrafikDto,
+  Direction,
 } from "../app/data-structures/business.data.structures";
 import {TrainrunSectionText} from "../app/data-structures/technical.data.structures";
 
@@ -784,6 +785,7 @@ export class NetzgrafikUnitTesting {
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
           labelIds: [0],
+          direction: Direction.ROUND_TRIP,
         },
         {
           id: 1,
@@ -792,6 +794,7 @@ export class NetzgrafikUnitTesting {
           frequencyId: 2,
           trainrunTimeCategoryId: 0,
           labelIds: [1],
+          direction: Direction.ROUND_TRIP,
         },
         {
           id: 2,
@@ -800,6 +803,7 @@ export class NetzgrafikUnitTesting {
           frequencyId: 1,
           trainrunTimeCategoryId: 0,
           labelIds: [1, 2],
+          direction: Direction.ROUND_TRIP,
         },
         {
           id: 3,
@@ -808,6 +812,7 @@ export class NetzgrafikUnitTesting {
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
           labelIds: [0, 1, 2],
+          direction: Direction.ROUND_TRIP,
         },
         {
           id: 4,
@@ -816,6 +821,7 @@ export class NetzgrafikUnitTesting {
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
           labelIds: [],
+          direction: Direction.ROUND_TRIP,
         },
       ],
       resources: [],
