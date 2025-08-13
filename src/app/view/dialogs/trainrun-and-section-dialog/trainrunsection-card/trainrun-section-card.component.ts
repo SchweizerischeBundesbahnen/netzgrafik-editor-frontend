@@ -66,7 +66,9 @@ export class TrainrunSectionCardComponent implements AfterViewInit, OnDestroy {
         this.updateAllValues();
       });
     // Initialize the selected trainrun as one-way, selecting the [source] → [target] card
-    this.onTrainrunSectionCardClick("top");
+    if (this.selectedTrainrunSection.getTrainrun().isRoundTrip()) {
+      this.onTrainrunSectionCardClick("top");
+    }
   }
 
   updateAllValues() {
