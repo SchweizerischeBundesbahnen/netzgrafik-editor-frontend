@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.10.0](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.29...netzgrafik-frontend-v2.10.0) (2025-08-13)
+
+
+### Features
+
+* display origin-destination matrix ([403b23b](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/commit/403b23bf2c862444e7ad7c8e17fd3f94a9a4a97a))
+* display origin-destination matrix ([09a43cd](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/commit/09a43cdfc96038d88027aa74a8479886d3f4c25b))
+
 ## [2.9.29](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/compare/netzgrafik-frontend-v2.9.28...netzgrafik-frontend-v2.9.29) (2025-05-13)
 
 
