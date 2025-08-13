@@ -13,7 +13,7 @@ and outlines more general ideas.
 | ?       |            | Check conformity of business rules                                                                                           | ❓ time horizon not yet clear   | –       |
 | ?       |            | Comparison of variants                                                                                                       | ❓ time horizon not yet clear   | –       |
 | ?       |            | Merge different variants                                                                                                     | ⚠️ Partial implemented / time horizon not yet clear  | [Partially implemented](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/Merge_Netzgrafik.md) |
-| 2.11    | Dec 2025   | Asymmetric travel times                                                                                                      | ⏳ Planned   | #421    |
+| 2.11    | Dec 2025   | Asymmetric travel times                                                                                                      | ⏳ Planned / date not yet confirmed  | #421    |
 | 2.10    | Oct 2025   | One-way train runs                                                                                                           | ⏳ Planned   | #438    |
 | 2.9     | Nov 2024   | UI integration of O/D-Matrix (visualization and analytics)                                                                   | ✔️ Done     | #126    |
 | 2.8     | Oct 2024   | Origin-Destination Matrix export as CSV                                                                                      | ✔️ Done     | #301    |
