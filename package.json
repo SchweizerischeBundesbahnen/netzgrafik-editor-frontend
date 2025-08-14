@@ -39,6 +39,7 @@
     "@angular/platform-browser": "^17.0.9",
     "@angular/platform-browser-dynamic": "^17.0.9",
     "@angular/router": "^17.0.9",
+    "@nestjs/common": "^10.4.16",
     "@sbb-esta/angular": "^17.5.3",
     "angular-oauth2-oidc": "^15.0.1",
     "angular-server-side-configuration": "^17.0.5",
@@ -51,6 +52,7 @@
     "save-svg-as-png": "^1.4.17",
     "tslib": "^2.5.3",
     "uuid": "^8.3.2",
+    "webpack-dev-server": "^5.2.1",
     "zone.js": "~0.14.10"
   },
   "optionalDependencies": {
