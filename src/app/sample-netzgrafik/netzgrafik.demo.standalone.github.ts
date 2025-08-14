@@ -25585,11 +25585,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 4,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 76,
@@ -25597,11 +25593,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 4,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 77,
@@ -25609,11 +25601,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 5,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 78,
@@ -25621,11 +25609,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 4,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 79,
@@ -25633,11 +25617,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 80,
@@ -25645,11 +25625,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 81,
@@ -25657,11 +25633,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 82,
@@ -25669,11 +25641,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 83,
@@ -25681,11 +25649,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 84,
@@ -25693,11 +25657,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 85,
@@ -25705,11 +25665,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 4,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 86,
@@ -25717,11 +25673,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 87,
@@ -25729,11 +25681,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 88,
@@ -25741,11 +25689,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 89,
@@ -25753,11 +25697,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 90,
@@ -25765,11 +25705,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 91,
@@ -25777,11 +25713,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            1,
-            9,
-            5
-          ]
+          labelIds: []
         },
         {
           id: 92,
@@ -25789,11 +25721,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            1,
-            9,
-            5
-          ]
+          labelIds: []
         },
         {
           id: 93,
@@ -25801,11 +25729,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 94,
@@ -25813,11 +25737,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 95,
@@ -25825,11 +25745,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 96,
@@ -25837,11 +25753,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         },
         {
           id: 97,
@@ -25849,11 +25761,7 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: [
-            3,
-            8,
-            4
-          ]
+          labelIds: []
         }
       ],
       resources: [
