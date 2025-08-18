@@ -8,9 +8,9 @@ import {NetzgrafikDemoStandaloneGithub} from "./netzgrafik.demo.standalone.githu
 
 export class NetzgrafikDefault {
   static getDefaultNetzgrafik(): NetzgrafikDto {
-    if (environment.standalonedemo) {
-      return NetzgrafikDemoStandaloneGithub.getNetzgrafikDemoStandaloneGithub();
-    }
+    // if (environment.standalonedemo) {
+    //   return NetzgrafikDemoStandaloneGithub.getNetzgrafikDemoStandaloneGithub();
+    // }
     return {
       nodes: [
         {
