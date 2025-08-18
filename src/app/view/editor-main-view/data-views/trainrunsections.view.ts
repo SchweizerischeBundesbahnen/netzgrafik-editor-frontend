@@ -1030,6 +1030,23 @@ export class TrainrunSectionsView {
           !trainrunSection.getTrainrun().selected() &&
           TrainrunSectionsView.isBothSideNonStop(trainrunSection)
         );
+      case TrainrunSectionText.TrainrunSectionBackwardTravelTime:
+        if (
+          !trainrunSection.getTrainrun().isRoundTrip() ||
+          trainrunSection.isSymmetric() ||
+          trainrunSection.areTravelTimesEqual() ||
+          !this.editorView.isFilterTravelTimeEnabled() ||
+          !this.editorView.isFilterBackwardTravelTimeEnabled()
+        ) {
+          return true;
+        }
+        if (this.editorView.isFilterShowNonStopTimeEnabled()) {
+          return false;
+        }
+        return (
+          !trainrunSection.getTrainrun().selected() &&
+          TrainrunSectionsView.isBothSideNonStop(trainrunSection)
+        );
       case TrainrunSectionText.TrainrunSectionName: {
         if (!this.editorView.isFilterTrainrunNameEnabled()) {
           return true;
@@ -1264,6 +1281,12 @@ export class TrainrunSectionsView {
     (["BEGINNING_ARROW", "ENDING_ARROW"] as const).forEach((arrowType) => {
       groupLinesEnter
         .append(StaticDomTags.EDGE_LINE_ARROW_SVG)
+        .attr(StaticDomTags.TAG_HIDDEN, (d: TrainrunSectionViewObject) =>
+          // Hide arrow if asymmetry arrows are filtered out or if the node on this side is filtered out
+          !this.editorView.isFilterAsymmetryArrowsEnabled() ||
+          !this.filterTrainrunsectionAtNode(d.trainrunSection, arrowType === "BEGINNING_ARROW")
+          ? "" : null,
+        )
         .attr("d", (d: TrainrunSectionViewObject) => {
           if (arrowType === "BEGINNING_ARROW") {
             return d.trainrunSection.isSourceSymmetricOrTimesSymmetric()
@@ -1953,8 +1976,13 @@ export class TrainrunSectionsView {
             d,
             TrainrunSectionText.TrainrunSectionTravelTime,
           ),
+          this.getHiddenTagForTime(
+            d,
+            TrainrunSectionText.TrainrunSectionBackwardTravelTime,
+          ),
           this.getHiddenTagForTime(d, TrainrunSectionText.TrainrunSectionName),
           !this.editorView.isFilterDirectionArrowsEnabled(),
+          !this.editorView.isFilterAsymmetryArrowsEnabled(),
         ),
       );
     });

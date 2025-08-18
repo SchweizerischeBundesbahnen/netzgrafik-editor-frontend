@@ -224,6 +224,16 @@ export class DataService implements OnDestroy {
     return this.trainrunService.getTrainruns();
   }
 
+  getTrainrunSections() {
+    return this.trainrunSectionService.getTrainrunSections();
+  }
+
+  getTrainrunSectionsByTrainrunId(trainrunId: number) {
+    return this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(
+      trainrunId,
+    );
+  }
+
   getTrainrunCategory(categoryId: number): TrainrunCategory {
     const found = this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunCategories.find(
       (trainrunCategory) => trainrunCategory.id === categoryId,
