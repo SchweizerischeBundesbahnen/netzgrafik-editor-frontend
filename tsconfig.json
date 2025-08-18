@@ -7,15 +7,15 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "module": "es2020",
+    "module": "es2023",
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "ES2022",
+    "target": "ES2023",
     "typeRoots": [
       "node_modules/@types"
     ],
     "lib": [
-      "es2018",
+      "es2023",
       "dom"
     ],
     "resolveJsonModule": true,
