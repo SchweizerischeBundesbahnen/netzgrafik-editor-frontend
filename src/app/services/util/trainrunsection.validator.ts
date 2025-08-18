@@ -21,9 +21,12 @@ export class TrainrunSectionValidator {
     } else {
       trainrunSection.resetTargetArrivalWarning();
     }
-
+    
+    const travelTime = trainrunSection.isSymmetric() ?
+      trainrunSection.getTravelTime() :
+      trainrunSection.getBackwardTravelTime();
     const calculatedSourceArrivalTime =
-      (trainrunSection.getTargetDeparture() + trainrunSection.getTravelTime()) % 60;
+      (trainrunSection.getTargetDeparture() + travelTime) % 60;
     if (Math.abs(calculatedSourceArrivalTime - trainrunSection.getSourceArrival()) > 1 / 60) {
       trainrunSection.setSourceArrivalWarning(
         $localize`:@@app.services.util.trainrunsection-validator.source-arrival-not-reacheable.title:Source Arrival Warning`,
@@ -35,6 +38,9 @@ export class TrainrunSectionValidator {
   }
 
   static validateUnsymmetricTimesOneSection(trainrunSection: TrainrunSection) {
+    if (!trainrunSection.isSymmetric()) {
+      return;
+    }
     // check for broken symmetry (times)
     trainrunSection.resetSourceDepartureWarning();
     trainrunSection.resetTargetDepartureWarning();
@@ -64,6 +70,17 @@ export class TrainrunSectionValidator {
       );
     } else {
       trainrunSection.resetTravelTimeWarning();
+    }
+  }
+
+  static validateBackwardTravelTime(trainrunSection: TrainrunSection) {
+    if (trainrunSection.getBackwardTravelTime() < 1) {
+      trainrunSection.setBackwardTravelTimeWarning(
+        $localize`:@@app.services.util.trainrunsection-validator.travel-time-less-than-1.title:Travel Time less than 1`,
+        $localize`:@@app.services.util.trainrunsection-validator.travel-time-less-than-1.description:Travel time must be greater than or equal to 1`,
+      );
+    } else {
+      trainrunSection.resetBackwardTravelTimeWarning();
     }
   }
 }

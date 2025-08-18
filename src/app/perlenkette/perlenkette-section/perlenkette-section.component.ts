@@ -1169,6 +1169,7 @@ export class PerlenketteSectionComponent
     const targetArrival = this.getSectionTargetArrivalTime();
     const targetDeparture = this.getSectionTargetDepartureTime();
     const travelTime = this.getSectionTravelTime();
+    const backwardTravelTime = this.trainrunSection.getBackwardTravelTime();
 
     this.trainrunSectionService.updateTrainrunSectionTime(
       trsId,
@@ -1177,6 +1178,7 @@ export class PerlenketteSectionComponent
       targetArrival,
       targetDeparture,
       travelTime,
+      backwardTravelTime,
     );
     this.trainrunSectionService.trainrunSectionsUpdated();
   }

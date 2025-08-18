@@ -11,6 +11,7 @@ import {FilterService} from "../ui/filter.service";
 import {TrainrunSection} from "../../models/trainrunsection.model";
 import {Node} from "../../models/node.model";
 import {LoadPerlenketteService} from "../../perlenkette/service/load-perlenkette.service";
+import {NodeSide, SymmetryReference} from "../../view/dialogs/symmetry-selection-dialog/symmetry-selection-dialog.component";
 
 @Injectable({
   providedIn: "root",
@@ -26,6 +27,7 @@ export class TrainrunSectionTimesService {
     rightDepartureTime: 0,
     rightArrivalTime: 0,
     travelTime: 0,
+    bottomTravelTime: 0,
   };
 
   private nodesOrdered: Node[] = [];
@@ -42,6 +44,7 @@ export class TrainrunSectionTimesService {
   private offsetTransformationActive = false;
 
   private highlightTravelTimeElement: boolean;
+  private highlightBottomTravelTimeElement: boolean;
 
   private initialLeftAndRightElement: LeftAndRightElement =
     LeftAndRightElement.LeftArrival;
@@ -111,6 +114,14 @@ export class TrainrunSectionTimesService {
     this.highlightTravelTimeElement = highlightTravelTimeElement;
   }
 
+  public getHighlightBottomTravelTimeElement() {
+    return this.highlightBottomTravelTimeElement;
+  }
+
+  public setHighlightBottomTravelTimeElement(highlightBottomTravelTimeElement: boolean) {
+    this.highlightBottomTravelTimeElement = highlightBottomTravelTimeElement;
+  }
+
   public setInitialLeftAndRightElement(
     initialLeftAndRightElement: LeftAndRightElement,
   ) {
@@ -144,30 +155,35 @@ export class TrainrunSectionTimesService {
     this.roundAllTimes();
     this.removeOffsetAndBackTransformTimeStructure();
 
-    this.timeStructure.leftArrivalTime = TrainrunsectionHelper.getSymmetricTime(
-      this.timeStructure.leftDepartureTime,
-    );
     if (!this.lockStructure.rightLock) {
-      this.timeStructure.rightArrivalTime =
-        this.timeStructure.leftDepartureTime +
-        (this.timeStructure.travelTime % 60);
+      this.timeStructure.rightArrivalTime = this.timeStructure.leftDepartureTime + (this.timeStructure.travelTime % 60);
       this.timeStructure.rightArrivalTime %= 60;
-      this.timeStructure.rightDepartureTime =
-        TrainrunsectionHelper.getSymmetricTime(
-          this.timeStructure.rightArrivalTime,
-        );
-    } else if (
-      !this.lockStructure.travelTimeLock &&
-      this.lockStructure.rightLock
-    ) {
-      const extraHour =
-        this.timeStructure.travelTime - (this.timeStructure.travelTime % 60);
-      this.timeStructure.travelTime =
-        this.timeStructure.rightArrivalTime -
-        this.timeStructure.leftDepartureTime;
-      this.timeStructure.travelTime +=
-        this.timeStructure.travelTime < 0 ? 60 : 0;
-      this.timeStructure.travelTime += extraHour;
+      this.timeStructure.rightDepartureTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
+        this.isRightNodeSymmetric(),
+        this.timeStructure.rightDepartureTime,
+        this.timeStructure.rightArrivalTime,
+      );
+      if (this.isLeftNodeSymmetric()) {
+        this.timeStructure.leftArrivalTime = TrainrunsectionHelper.getSymmetricTime(this.timeStructure.leftDepartureTime);
+      } else if (this.isRightNodeSymmetric()) {
+        if (this.lockStructure.leftLock && !this.lockStructure.travelTimeLock) {
+          this.timeStructure.bottomTravelTime = this.timeStructure.leftArrivalTime - this.timeStructure.rightDepartureTime;
+          this.timeStructure.bottomTravelTime += this.timeStructure.bottomTravelTime <= 0 ? 60 : 0;
+        } else {
+          this.timeStructure.leftArrivalTime = this.timeStructure.rightDepartureTime + (this.timeStructure.bottomTravelTime % 60);
+          this.timeStructure.leftArrivalTime %= 60;
+        }
+      }
+    } else if (!this.lockStructure.travelTimeLock && this.lockStructure.rightLock) {
+      this.timeStructure.leftArrivalTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
+        this.isLeftNodeSymmetric(),
+        this.timeStructure.leftArrivalTime,
+        this.timeStructure.leftDepartureTime,
+      );
+      this.timeStructure.travelTime = this.timeStructure.rightArrivalTime - this.timeStructure.leftDepartureTime;
+      this.timeStructure.travelTime += this.timeStructure.travelTime <= 0 ? 60 : 0;
+      this.timeStructure.bottomTravelTime = this.timeStructure.leftArrivalTime - this.timeStructure.rightDepartureTime;
+      this.timeStructure.bottomTravelTime += this.timeStructure.bottomTravelTime <= 0 ? 60 : 0;
     } else {
       this.showWarningTwoLocks = true;
     }
@@ -199,32 +215,42 @@ export class TrainrunSectionTimesService {
     this.roundAllTimes();
     this.removeOffsetAndBackTransformTimeStructure();
 
-    this.timeStructure.leftDepartureTime =
-      TrainrunsectionHelper.getSymmetricTime(
+    if (!this.lockStructure.rightLock) {
+      this.timeStructure.rightDepartureTime = this.timeStructure.leftArrivalTime - (this.timeStructure.bottomTravelTime % 60);
+      this.timeStructure.rightDepartureTime += this.timeStructure.rightDepartureTime < 0 ? 60 : 0;
+      this.timeStructure.rightArrivalTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
+        this.isRightNodeSymmetric(),
+        this.timeStructure.rightArrivalTime,
+        this.timeStructure.rightDepartureTime,
+      );
+      this.timeStructure.leftDepartureTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
+        this.isLeftNodeSymmetric(),
+        this.timeStructure.leftDepartureTime,
         this.timeStructure.leftArrivalTime,
       );
-    if (!this.lockStructure.rightLock) {
-      this.timeStructure.rightDepartureTime =
-        this.timeStructure.leftArrivalTime -
-        (this.timeStructure.travelTime % 60);
-      this.timeStructure.rightDepartureTime +=
-        this.timeStructure.rightDepartureTime < 0 ? 60 : 0;
-      this.timeStructure.rightArrivalTime =
-        TrainrunsectionHelper.getSymmetricTime(
-          this.timeStructure.rightDepartureTime,
-        );
-    } else if (
-      !this.lockStructure.travelTimeLock &&
-      this.lockStructure.rightLock
-    ) {
-      const extraHour =
-        this.timeStructure.travelTime - (this.timeStructure.travelTime % 60);
-      this.timeStructure.travelTime =
-        this.timeStructure.leftArrivalTime -
-        this.timeStructure.rightDepartureTime;
-      this.timeStructure.travelTime +=
-        this.timeStructure.travelTime < 0 ? 60 : 0;
-      this.timeStructure.travelTime += extraHour;
+      if (!this.isRightNodeSymmetric()) {
+        this.timeStructure.rightArrivalTime = this.timeStructure.leftDepartureTime + (this.timeStructure.travelTime % 60);
+        this.timeStructure.rightArrivalTime %= 60;
+      }
+      if (!this.isLeftNodeSymmetric()) {
+        if (this.lockStructure.leftLock) {
+          this.timeStructure.travelTime = this.timeStructure.rightArrivalTime - this.timeStructure.leftDepartureTime;
+          this.timeStructure.travelTime += this.timeStructure.travelTime <= 0 ? 60 : 0;
+        } else {
+          this.timeStructure.leftDepartureTime = this.timeStructure.rightArrivalTime - (this.timeStructure.travelTime % 60);
+          this.timeStructure.leftDepartureTime += this.timeStructure.leftDepartureTime < 0 ? 60 : 0;
+        }
+      }
+    } else if (!this.lockStructure.travelTimeLock && this.lockStructure.rightLock) {
+      this.timeStructure.leftDepartureTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
+        this.isLeftNodeSymmetric(),
+        this.timeStructure.leftDepartureTime,
+        this.timeStructure.leftArrivalTime,
+      );
+      this.timeStructure.travelTime =  this.timeStructure.rightArrivalTime - this.timeStructure.leftDepartureTime;
+      this.timeStructure.travelTime += this.timeStructure.travelTime <= 0 ? 60 : 0;
+      this.timeStructure.bottomTravelTime = this.timeStructure.leftArrivalTime - this.timeStructure.rightDepartureTime;
+      this.timeStructure.bottomTravelTime += this.timeStructure.bottomTravelTime <= 0 ? 60 : 0;
     } else {
       this.showWarningTwoLocks = true;
     }
@@ -255,33 +281,43 @@ export class TrainrunSectionTimesService {
     this.showWarningTwoLocks = false;
     this.roundAllTimes();
     this.removeOffsetAndBackTransformTimeStructure();
-    this.timeStructure.rightDepartureTime =
-      TrainrunsectionHelper.getSymmetricTime(
-        this.timeStructure.rightArrivalTime,
-      );
 
     if (!this.lockStructure.leftLock) {
-      this.timeStructure.leftDepartureTime =
-        this.timeStructure.rightArrivalTime -
-        (this.timeStructure.travelTime % 60);
-      this.timeStructure.leftDepartureTime +=
-        this.timeStructure.leftDepartureTime < 0 ? 60 : 0;
-      this.timeStructure.leftArrivalTime =
-        TrainrunsectionHelper.getSymmetricTime(
-          this.timeStructure.leftDepartureTime,
-        );
-    } else if (
-      !this.lockStructure.travelTimeLock &&
-      this.lockStructure.leftLock
-    ) {
-      const extraHour =
-        this.timeStructure.travelTime - (this.timeStructure.travelTime % 60);
-      this.timeStructure.travelTime =
-        this.timeStructure.rightArrivalTime -
-        this.timeStructure.leftDepartureTime;
-      this.timeStructure.travelTime +=
-        this.timeStructure.travelTime < 0 ? 60 : 0;
-      this.timeStructure.travelTime += extraHour;
+      this.timeStructure.leftDepartureTime = this.timeStructure.rightArrivalTime - (this.timeStructure.travelTime % 60);
+      this.timeStructure.leftDepartureTime += this.timeStructure.leftDepartureTime < 0 ? 60 : 0;
+      this.timeStructure.rightDepartureTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
+        this.isRightNodeSymmetric(),
+        this.timeStructure.rightDepartureTime,
+        this.timeStructure.rightArrivalTime,
+      );
+      this.timeStructure.rightDepartureTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
+        this.isRightNodeSymmetric(),
+        this.timeStructure.rightDepartureTime,
+        this.timeStructure.rightArrivalTime,
+      );
+      if (!this.isLeftNodeSymmetric()) {
+        this.timeStructure.leftArrivalTime = this.timeStructure.rightDepartureTime + (this.timeStructure.bottomTravelTime % 60);
+        this.timeStructure.leftArrivalTime %= 60;
+      }
+      if (!this.isRightNodeSymmetric()) {
+        if (this.lockStructure.rightLock) {
+          this.timeStructure.bottomTravelTime = this.timeStructure.leftArrivalTime - this.timeStructure.rightDepartureTime;
+          this.timeStructure.bottomTravelTime += this.timeStructure.bottomTravelTime <= 0 ? 60 : 0;
+        } else {
+          this.timeStructure.rightDepartureTime = this.timeStructure.leftArrivalTime - (this.timeStructure.bottomTravelTime % 60);
+          this.timeStructure.rightDepartureTime += this.timeStructure.rightDepartureTime < 0 ? 60 : 0;
+        }
+      }
+    } else if (!this.lockStructure.travelTimeLock && this.lockStructure.leftLock) {
+      this.timeStructure.rightDepartureTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
+        this.isRightNodeSymmetric(),
+        this.timeStructure.rightDepartureTime,
+        this.timeStructure.rightArrivalTime,
+      );
+      this.timeStructure.travelTime = this.timeStructure.rightArrivalTime - this.timeStructure.leftDepartureTime;
+      this.timeStructure.travelTime += this.timeStructure.travelTime <= 0 ? 60 : 0;
+      this.timeStructure.bottomTravelTime = this.timeStructure.leftArrivalTime - this.timeStructure.rightDepartureTime;
+      this.timeStructure.bottomTravelTime += this.timeStructure.bottomTravelTime <= 0 ? 60 : 0;
     } else {
       this.showWarningTwoLocks = true;
     }
@@ -313,31 +349,39 @@ export class TrainrunSectionTimesService {
     this.roundAllTimes();
     this.removeOffsetAndBackTransformTimeStructure();
 
-    this.timeStructure.rightArrivalTime =
-      TrainrunsectionHelper.getSymmetricTime(
+    if (!this.lockStructure.leftLock) {
+      this.timeStructure.leftArrivalTime = this.timeStructure.rightDepartureTime + (this.timeStructure.bottomTravelTime % 60);
+      this.timeStructure.leftArrivalTime %= 60;
+      this.timeStructure.leftDepartureTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
+        this.isLeftNodeSymmetric(),
+        this.timeStructure.leftDepartureTime,
+        this.timeStructure.leftArrivalTime,
+      );
+      if (this.isRightNodeSymmetric()) {
+        this.timeStructure.rightArrivalTime = TrainrunsectionHelper.getSymmetricTime(this.timeStructure.rightDepartureTime);
+      } else if (this.isLeftNodeSymmetric()) {
+        if (this.lockStructure.rightLock && !this.lockStructure.travelTimeLock) {
+          this.timeStructure.travelTime = this.timeStructure.rightArrivalTime - this.timeStructure.leftDepartureTime;
+          this.timeStructure.travelTime += this.timeStructure.travelTime <= 0 ? 60 : 0;
+        } else {
+          this.timeStructure.rightArrivalTime = this.timeStructure.leftDepartureTime + (this.timeStructure.travelTime % 60);
+          this.timeStructure.rightArrivalTime %= 60;
+        }
+      }
+      if (!this.isLeftNodeSymmetric()) {
+        this.timeStructure.leftDepartureTime = this.timeStructure.rightArrivalTime - (this.timeStructure.travelTime % 60);
+        this.timeStructure.leftDepartureTime += this.timeStructure.leftDepartureTime < 0 ? 60 : 0;
+      }
+    } else if (!this.lockStructure.travelTimeLock && this.lockStructure.leftLock) {
+      this.timeStructure.rightArrivalTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
+        this.isRightNodeSymmetric(),
+        this.timeStructure.rightArrivalTime,
         this.timeStructure.rightDepartureTime,
       );
-    if (!this.lockStructure.leftLock) {
-      this.timeStructure.leftArrivalTime =
-        this.timeStructure.rightDepartureTime +
-        (this.timeStructure.travelTime % 60);
-      this.timeStructure.leftArrivalTime %= 60;
-      this.timeStructure.leftDepartureTime =
-        TrainrunsectionHelper.getSymmetricTime(
-          this.timeStructure.leftArrivalTime,
-        );
-    } else if (
-      !this.lockStructure.travelTimeLock &&
-      this.lockStructure.leftLock
-    ) {
-      const extraHour =
-        this.timeStructure.travelTime - (this.timeStructure.travelTime % 60);
-      this.timeStructure.travelTime =
-        this.timeStructure.leftArrivalTime -
-        this.timeStructure.rightDepartureTime;
-      this.timeStructure.travelTime +=
-        this.timeStructure.travelTime < 0 ? 60 : 0;
-      this.timeStructure.travelTime += extraHour;
+      this.timeStructure.travelTime = this.timeStructure.rightArrivalTime - this.timeStructure.leftDepartureTime;
+      this.timeStructure.travelTime += this.timeStructure.travelTime <= 0 ? 60 : 0;
+      this.timeStructure.bottomTravelTime = this.timeStructure.leftArrivalTime - this.timeStructure.rightDepartureTime;
+      this.timeStructure.bottomTravelTime += this.timeStructure.bottomTravelTime <= 0 ? 60 : 0;
     } else {
       this.showWarningTwoLocks = true;
     }
@@ -347,55 +391,123 @@ export class TrainrunSectionTimesService {
   }
 
   /* Travel Time */
-  onInputTravelTimeElementButtonPlus() {
+  onTravelTimeButtonPlus() {
     this.timeStructure.travelTime += this.getTimeButtonPlusMinusStep(
       this.timeStructure.travelTime,
     );
     this.highlightTravelTimeElement = false;
-    this.onInputTravelTimeChanged();
+    this.onTravelTimeChanged();
   }
 
-  onInputTravelTimeElementButtonMinus() {
+  onTravelTimeButtonMinus() {
     this.timeStructure.travelTime -= this.getTimeButtonPlusMinusStep(
       this.timeStructure.travelTime,
     );
     this.timeStructure.travelTime = Math.max(1, this.timeStructure.travelTime);
     this.highlightTravelTimeElement = false;
-    this.onInputTravelTimeChanged();
+    this.onTravelTimeChanged();
   }
 
-  updateTravelTimeChanged() {
+  onTravelTimeChanged() {
     this.showWarningTwoLocks = false;
     this.roundAllTimes();
+    this.removeOffsetAndBackTransformTimeStructure();
+
+    if (this.selectedTrainrunSection.isSymmetric()) {
+      this.timeStructure.bottomTravelTime = this.timeStructure.travelTime;
+    }
 
     if (!this.lockStructure.rightLock) {
-      this.timeStructure.rightArrivalTime =
-        this.timeStructure.leftDepartureTime + this.timeStructure.travelTime;
-      this.timeStructure.rightArrivalTime +=
-        this.timeStructure.rightArrivalTime < 0 ? 60 : 0;
+      this.timeStructure.rightArrivalTime = this.timeStructure.leftDepartureTime + this.timeStructure.travelTime;
+      this.timeStructure.rightArrivalTime += this.timeStructure.rightArrivalTime < 0 ? 60 : 0;
       this.timeStructure.rightArrivalTime %= 60;
-      this.timeStructure.rightDepartureTime =
-        TrainrunsectionHelper.getSymmetricTime(
-          this.timeStructure.rightArrivalTime,
-        );
-    } else if (!this.lockStructure.leftLock) {
-      this.timeStructure.leftArrivalTime =
-        this.timeStructure.rightDepartureTime + this.timeStructure.travelTime;
-      this.timeStructure.leftArrivalTime +=
-        this.timeStructure.leftArrivalTime < 0 ? 60 : 0;
-      this.timeStructure.leftArrivalTime %= 60;
-      this.timeStructure.leftDepartureTime =
-        TrainrunsectionHelper.getSymmetricTime(
-          this.timeStructure.leftArrivalTime,
-        );
+      this.timeStructure.rightDepartureTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
+        this.isRightNodeSymmetric(),
+        this.timeStructure.rightDepartureTime,
+        this.timeStructure.rightArrivalTime,
+      );
+      if (!this.selectedTrainrunSection.isSymmetric()) {
+        if (this.lockStructure.leftLock) {
+          this.timeStructure.bottomTravelTime = this.timeStructure.leftArrivalTime - this.timeStructure.rightDepartureTime;
+          this.timeStructure.bottomTravelTime += this.timeStructure.bottomTravelTime <= 0 ? 60 : 0;
+        } else {
+          this.timeStructure.leftArrivalTime = this.timeStructure.rightDepartureTime + this.timeStructure.bottomTravelTime;
+          this.timeStructure.leftArrivalTime += this.timeStructure.leftArrivalTime < 0 ? 60 : 0;
+          this.timeStructure.leftArrivalTime %= 60;
+        }
+      }
+    } else if (!this.lockStructure.leftLock && this.lockStructure.rightLock) {
+      this.timeStructure.leftDepartureTime = this.timeStructure.rightArrivalTime - this.timeStructure.travelTime;
+      this.timeStructure.leftDepartureTime += this.timeStructure.leftDepartureTime < 0 ? 60 : 0;
+      this.timeStructure.leftDepartureTime %= 60;
+      if (this.isLeftNodeSymmetric()) {
+        this.timeStructure.leftArrivalTime = TrainrunsectionHelper.getSymmetricTime(this.timeStructure.leftDepartureTime);
+        this.timeStructure.bottomTravelTime = this.timeStructure.leftArrivalTime - this.timeStructure.rightDepartureTime;
+        this.timeStructure.bottomTravelTime += this.timeStructure.bottomTravelTime <= 0 ? 60 : 0;
+      }
     } else {
       this.showWarningTwoLocks = true;
     }
+
+    this.updateTrainrunSectionTime();
+    this.applyOffsetAndTransformTimeStructure();
   }
 
-  onInputTravelTimeChanged() {
+  /* Bottom Travel Time */
+  onBottomTravelTimeButtonPlus() {
+    this.timeStructure.bottomTravelTime += this.getTimeButtonPlusMinusStep(
+      this.timeStructure.bottomTravelTime,
+    );
+    this.highlightBottomTravelTimeElement = false;
+    this.onBottomTravelTimeChanged();
+  }
+
+  onBottomTravelTimeButtonMinus() {
+    this.timeStructure.bottomTravelTime -= this.getTimeButtonPlusMinusStep(
+      this.timeStructure.bottomTravelTime,
+    );
+    this.timeStructure.bottomTravelTime = Math.max(1, this.timeStructure.bottomTravelTime);
+    this.highlightBottomTravelTimeElement = false;
+    this.onBottomTravelTimeChanged();
+  }
+
+  onBottomTravelTimeChanged() {
+    this.showWarningTwoLocks = false;
+    this.roundAllTimes();
     this.removeOffsetAndBackTransformTimeStructure();
-    this.updateTravelTimeChanged();
+    
+    if (!this.lockStructure.leftLock) {
+      this.timeStructure.leftArrivalTime = this.timeStructure.rightDepartureTime + this.timeStructure.bottomTravelTime;
+      this.timeStructure.leftArrivalTime += this.timeStructure.leftArrivalTime < 0 ? 60 : 0;
+      this.timeStructure.leftArrivalTime %= 60;
+      this.timeStructure.leftDepartureTime = TrainrunsectionHelper.getAdjustedTimeBasedOnSymmetry(
+        this.isLeftNodeSymmetric(),
+        this.timeStructure.leftDepartureTime,
+        this.timeStructure.leftArrivalTime,
+      );
+      if (!this.selectedTrainrunSection.isSymmetric()) {
+        if (this.lockStructure.rightLock) {
+          this.timeStructure.travelTime = this.timeStructure.rightArrivalTime - this.timeStructure.leftDepartureTime;
+          this.timeStructure.travelTime += this.timeStructure.travelTime <= 0 ? 60 : 0;
+        } else {
+          this.timeStructure.rightArrivalTime = this.timeStructure.leftDepartureTime + this.timeStructure.travelTime;
+          this.timeStructure.rightArrivalTime += this.timeStructure.rightArrivalTime < 0 ? 60 : 0;
+          this.timeStructure.rightArrivalTime %= 60;
+        }
+      }
+    } else if (this.lockStructure.leftLock && !this.lockStructure.rightLock) {
+      this.timeStructure.rightDepartureTime = this.timeStructure.leftArrivalTime - this.timeStructure.bottomTravelTime;
+      this.timeStructure.rightDepartureTime += this.timeStructure.rightDepartureTime < 0 ? 60 : 0;
+      this.timeStructure.rightDepartureTime %= 60;
+      if (this.isRightNodeSymmetric()) {
+        this.timeStructure.rightArrivalTime = TrainrunsectionHelper.getSymmetricTime(this.timeStructure.rightDepartureTime);
+        this.timeStructure.travelTime = this.timeStructure.rightArrivalTime - this.timeStructure.leftDepartureTime;
+        this.timeStructure.travelTime += this.timeStructure.travelTime <= 0 ? 60 : 0;
+      }
+    } else {
+      this.showWarningTwoLocks = true;
+    }
+
     this.updateTrainrunSectionTime();
     this.applyOffsetAndTransformTimeStructure();
   }
@@ -453,6 +565,49 @@ export class TrainrunSectionTimesService {
     );
   }
 
+  /* Symmetry */
+  onLeftNodeSymmetryChanged(isLeftNodeSymmetric: boolean, isPositionSwapped: boolean, reference: SymmetryReference = null) {
+    if (isPositionSwapped) {
+      this.trainrunSectionService.updateTargetSymmetry(
+        this.selectedTrainrunSection.getId(),
+        isLeftNodeSymmetric
+      );
+    } else {
+      this.trainrunSectionService.updateSourceSymmetry(
+        this.selectedTrainrunSection.getId(),
+        isLeftNodeSymmetric
+      );
+    }
+
+    if (!reference) return;
+
+    this.removeOffsetAndBackTransformTimeStructure();
+    this.timeStructure = this.calculateTimeStructureAfterSymmetrySelection(NodeSide.Left, reference);
+    this.updateTrainrunSectionTime();
+    this.applyOffsetAndTransformTimeStructure();
+  }
+
+  onRightNodeSymmetryChanged(isRightNodeSymmetric: boolean, isPositionSwapped: boolean, reference: SymmetryReference = null) {
+    if (isPositionSwapped) {
+      this.trainrunSectionService.updateSourceSymmetry(
+        this.selectedTrainrunSection.getId(),
+        isRightNodeSymmetric
+      );
+    } else {
+      this.trainrunSectionService.updateTargetSymmetry(
+        this.selectedTrainrunSection.getId(),
+        isRightNodeSymmetric
+      );
+    }
+
+    if (!reference) return;
+
+    this.removeOffsetAndBackTransformTimeStructure();
+    this.timeStructure = this.calculateTimeStructureAfterSymmetrySelection(NodeSide.Right, reference);
+    this.updateTrainrunSectionTime();
+    this.applyOffsetAndTransformTimeStructure();
+  }
+
   /* Buttons in Footer */
   onPropagateTimeLeft(trainrunSection: TrainrunSection) {
     const nextStopRightNodeId = this.trainrunSectionHelper
@@ -482,7 +637,11 @@ export class TrainrunSectionTimesService {
         this.selectedTrainrunSection,
         this.nodesOrdered,
       );
-    this.timeStructure = Object.assign({}, this.originalTimeStructure);
+
+    // TODO: not sure if it's important to keep this, but it breaks the asymmetry
+    if (this.selectedTrainrunSection.isSymmetric()) {
+      this.timeStructure = Object.assign({}, this.originalTimeStructure);
+    }
 
     const maxMinutes = 7 * 24 * 60;
     if (
@@ -569,6 +728,10 @@ export class TrainrunSectionTimesService {
       this.timeStructure.travelTime,
       timeDisplayPrecision,
     );
+    this.timeStructure.bottomTravelTime = MathUtils.round(
+      this.timeStructure.bottomTravelTime,
+      timeDisplayPrecision,
+    );
   }
 
   private fixAllTimesPrecision() {
@@ -588,6 +751,9 @@ export class TrainrunSectionTimesService {
     this.timeStructure.travelTime =
       Math.round(this.timeStructure.travelTime * timeDisplayPrecision) /
       timeDisplayPrecision;
+    this.timeStructure.bottomTravelTime =
+      Math.round(this.timeStructure.bottomTravelTime * timeDisplayPrecision) /
+      timeDisplayPrecision;
   }
 
   private updateTrainrunSectionTime() {
@@ -600,5 +766,85 @@ export class TrainrunSectionTimesService {
       this.selectedTrainrunSection,
       this.filterService.getTimeDisplayPrecision()
     );
+  }
+
+  private isLeftNodeSymmetric(): boolean {
+    if (TrainrunsectionHelper.isTargetRightOrBottom(this.selectedTrainrunSection)) {
+      return this.selectedTrainrunSection.getSourceSymmetry();
+    } else {
+      return this.selectedTrainrunSection.getTargetSymmetry();
+    }
+  }
+
+  private isRightNodeSymmetric(): boolean {
+    if (TrainrunsectionHelper.isTargetRightOrBottom(this.selectedTrainrunSection)) {
+      return this.selectedTrainrunSection.getTargetSymmetry();
+    } else {
+      return this.selectedTrainrunSection.getSourceSymmetry();
+    }
+  }
+
+  calculateTimeStructureAfterSymmetrySelection(nodeSide: NodeSide, reference: SymmetryReference): LeftAndRightTimeStructure {
+    const timeStructure = Object.assign({}, this.timeStructure);
+    if (nodeSide === NodeSide.Left) {
+      if (reference === SymmetryReference.Top) {
+        timeStructure.leftArrivalTime = TrainrunsectionHelper.getSymmetricTime(timeStructure.leftDepartureTime);
+      } else {
+        timeStructure.leftDepartureTime = TrainrunsectionHelper.getSymmetricTime(timeStructure.leftArrivalTime);
+      }
+      if (this.isRightNodeSymmetric()) {
+        if (reference === SymmetryReference.Top) {
+          timeStructure.bottomTravelTime = timeStructure.travelTime;
+        } else {
+          timeStructure.travelTime = timeStructure.bottomTravelTime;
+        }
+        timeStructure.rightArrivalTime = timeStructure.leftDepartureTime + timeStructure.travelTime;
+        timeStructure.rightArrivalTime %= 60;
+        timeStructure.rightDepartureTime = TrainrunsectionHelper.getSymmetricTime(timeStructure.rightArrivalTime);
+      } else {
+        if (!this.lockStructure.rightLock) {
+          timeStructure.rightDepartureTime = timeStructure.leftArrivalTime - timeStructure.bottomTravelTime;
+          timeStructure.rightDepartureTime += timeStructure.rightDepartureTime < 0 ? 60 : 0;
+          timeStructure.rightDepartureTime %= 60;
+          timeStructure.rightArrivalTime = timeStructure.leftDepartureTime + timeStructure.travelTime;
+          timeStructure.rightArrivalTime %= 60;
+        } else if (!this.lockStructure.travelTimeLock) {
+          timeStructure.travelTime = timeStructure.rightArrivalTime - timeStructure.leftDepartureTime;
+          timeStructure.travelTime += timeStructure.travelTime <= 0 ? 60 : 0;
+          timeStructure.bottomTravelTime = timeStructure.leftArrivalTime - timeStructure.rightDepartureTime;
+          timeStructure.bottomTravelTime += timeStructure.bottomTravelTime <= 0 ? 60 : 0;
+        }
+      }
+    } else {
+      if (reference === SymmetryReference.Top) {
+        timeStructure.rightDepartureTime = TrainrunsectionHelper.getSymmetricTime(timeStructure.rightArrivalTime);
+      } else {
+        timeStructure.rightArrivalTime = TrainrunsectionHelper.getSymmetricTime(timeStructure.rightDepartureTime);
+      }
+      if (this.isLeftNodeSymmetric()) {
+        if (reference === SymmetryReference.Top) {
+          timeStructure.bottomTravelTime = timeStructure.travelTime;
+        } else {
+          timeStructure.travelTime = timeStructure.bottomTravelTime;
+        }
+        timeStructure.leftArrivalTime = timeStructure.rightDepartureTime + timeStructure.bottomTravelTime;
+        timeStructure.leftArrivalTime %= 60;
+        timeStructure.leftDepartureTime = TrainrunsectionHelper.getSymmetricTime(timeStructure.leftArrivalTime);
+      } else {
+        if (!this.lockStructure.leftLock) {
+          timeStructure.leftDepartureTime = timeStructure.rightArrivalTime - timeStructure.travelTime;
+          timeStructure.leftDepartureTime += timeStructure.leftDepartureTime < 0 ? 60 : 0;
+          timeStructure.leftDepartureTime %= 60;
+          timeStructure.leftArrivalTime = timeStructure.rightDepartureTime + timeStructure.bottomTravelTime;
+          timeStructure.leftArrivalTime %= 60;
+        } else if (!this.lockStructure.travelTimeLock) {
+          timeStructure.travelTime = timeStructure.rightArrivalTime - timeStructure.leftDepartureTime;
+          timeStructure.travelTime += timeStructure.travelTime <= 0 ? 60 : 0;
+          timeStructure.bottomTravelTime = timeStructure.leftArrivalTime - timeStructure.rightDepartureTime;
+          timeStructure.bottomTravelTime += timeStructure.bottomTravelTime <= 0 ? 60 : 0;
+        }
+      }
+    }
+    return timeStructure;
   }
 }

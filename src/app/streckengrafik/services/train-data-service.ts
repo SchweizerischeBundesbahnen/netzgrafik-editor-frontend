@@ -99,6 +99,8 @@ export class TrainDataService implements OnDestroy {
         return trainrunSection.getTargetArrivalFormattedDisplayHtmlStyle();
       case TrainrunSectionText.TrainrunSectionTravelTime:
         return trainrunSection.getTravelTimeFormattedDisplayHtmlStyle();
+      case TrainrunSectionText.TrainrunSectionBackwardTravelTime:
+        return trainrunSection.getBackwardTravelTimeFormattedDisplayHtmlStyle();
       default:
         return undefined;
     }
@@ -125,6 +127,8 @@ export class TrainDataService implements OnDestroy {
         return trainrunSection.getTargetArrivalFormattedDisplayText(offset);
       case TrainrunSectionText.TrainrunSectionTravelTime:
         return trainrunSection.getTravelTimeFormattedDisplayText(offset);
+      case TrainrunSectionText.TrainrunSectionBackwardTravelTime:
+        return trainrunSection.getBackwardTravelTimeFormattedDisplayText(offset);
       default:
         return undefined;
     }
@@ -150,6 +154,8 @@ export class TrainDataService implements OnDestroy {
         return trainrunSection.getTargetArrivalFormatterColorRef();
       case TrainrunSectionText.TrainrunSectionTravelTime:
         return trainrunSection.getTravelTimeFormatterColorRef();
+      case TrainrunSectionText.TrainrunSectionBackwardTravelTime:
+        return trainrunSection.getBackwardTravelTimeFormatterColorRef();
       default:
         return undefined;
     }
@@ -175,6 +181,8 @@ export class TrainDataService implements OnDestroy {
         return trainrunSection.getTargetArrivalFormattedDisplayTextWidth();
       case TrainrunSectionText.TrainrunSectionTravelTime:
         return trainrunSection.getTravelTimeFormattedDisplayTextWidth();
+      case TrainrunSectionText.TrainrunSectionBackwardTravelTime:
+        return trainrunSection.getBackwardTravelTimeFormattedDisplayTextWidth();
       default:
         return undefined;
     }

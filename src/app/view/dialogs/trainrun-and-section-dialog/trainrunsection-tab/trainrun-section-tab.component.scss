@@ -205,6 +205,9 @@ input.NumberOfStopsInputElement.IsActive {
   grid-row: 3;
 }
 
+::ng-deep .LeftSymmetryToggle { grid-column: 3; grid-row: 2; }
+::ng-deep .RightSymmetryToggle { grid-column: 15; grid-row: 2; }
+
 ::ng-deep .TravelTime {
   grid-column: 7/11;
   grid-row: 2;
@@ -229,8 +232,26 @@ input.NumberOfStopsInputElement.IsActive {
   grid-row: 2;
 }
 
+::ng-deep .TopTravelTime { grid-column: 8/12; grid-row: 1; }
+::ng-deep div.TopTravelTime { border: 1px solid var(--sbb-menu-item-label); }
+::ng-deep .TopTravelTimeMinus { grid-column: 8; grid-row: 1; }
+::ng-deep .TopTravelTimeTime  { grid-column: 9 / span 2; grid-row: 1; }
+::ng-deep .TopTravelTimePlus  { grid-column: 11; grid-row: 1; }
+
+::ng-deep .BottomTravelTime { grid-column: 7/11; grid-row: 3; }
+::ng-deep div.BottomTravelTime { border: 1px solid var(--sbb-menu-item-label); }
+::ng-deep .BottomTravelTimeMinus { grid-column: 7; grid-row: 3; }
+::ng-deep .BottomTravelTimeTime  { grid-column: 8 / span 2; grid-row: 3; }
+::ng-deep .BottomTravelTimePlus  { grid-column: 10; grid-row: 3; }
+
 ::ng-deep .TravelTimeLock {
   grid-column: 11;
+  grid-row: 2;
+  background: var(--sbb-header-lean-background-color);
+}
+
+::ng-deep .TopTravelTimeLock {
+  grid-column: 9;
   grid-row: 2;
   background: var(--sbb-header-lean-background-color);
 }
@@ -288,6 +309,34 @@ input.NumberOfStopsInputElement.IsActive {
 }
 
 ::ng-deep input.InputTravelTimeElementHighlighted:read-only {
+  color: lightgray;
+}
+
+::ng-deep input.InputBottomTravelTimeElement {
+  padding: 6px;
+  width: 63px;
+  height: 30px;
+  border: 0px solid var(--sbb-background-color);
+  text-align: center;
+  margin: 1px;
+}
+
+::ng-deep input.InputBottomTravelTimeElement:read-only {
+  color: lightgray;
+}
+
+::ng-deep input.InputBottomTravelTimeElementHighlighted {
+  padding: 6px;
+  width: 63px;
+  height: 30px;
+  border: 0px solid var(--sbb-background-color);
+  text-align: center;
+  margin: 1px;
+  background: $COLOR_Edit;
+  color: white;
+}
+
+::ng-deep input.InputBottomTravelTimeElementHighlighted:read-only {
   color: lightgray;
 }
 
@@ -391,8 +440,7 @@ input.NumberOfStopsInputElement.IsActive {
   background-color: $COLOR_MUTED_SILVER;
 }
 
-::ng-deep
-div.sbb-dialog-content.sbb-scrollbar.EditTrainrunSectionDialogTabContent {
+::ng-deep div.sbb-dialog-content.sbb-scrollbar.EditTrainrunSectionDialogTabContent {
   border-style: none;
   min-height: 250px;
   max-height: 250px;
@@ -415,4 +463,62 @@ div.sbb-dialog-content.sbb-scrollbar.EditTrainrunSectionDialogTabContent {
 ::ng-deep div.EditTrainrunDialogTabFooter.readonly {
   pointer-events: none;
   opacity: 0.5;
+}
+
+.toggle-container {
+  border-style: none;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 9px;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--sbb-toggle-background-color-inactive);
+  border: 1px solid var(--sbb-toggle-border-color-inactive);
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.toggle-switch input:disabled + .slider {
+  cursor: default;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border: 1px solid var(--sbb-toggle-border-color-inactive);
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--sbb-form-label-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
 }

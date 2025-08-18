@@ -15,6 +15,7 @@ import {
 } from "../data-structures/technical.data.structures";
 import {TrainrunSectionValidator} from "../services/util/trainrunsection.validator";
 import {formatDate} from "@angular/common";
+import {TrainrunsectionHelper} from "../services/util/trainrunsection.helper";
 
 export class TrainrunSection {
   private static currentId = 0;
@@ -133,6 +134,7 @@ export class TrainrunSection {
           [TrainrunSectionText.TargetDeparture]: {x: 0, y: 0},
           [TrainrunSectionText.TrainrunSectionName]: {x: 0, y: 0},
           [TrainrunSectionText.TrainrunSectionTravelTime]: {x: 0, y: 0},
+          [TrainrunSectionText.TrainrunSectionBackwardTravelTime]: {x: 0, y: 0},
           [TrainrunSectionText.TrainrunSectionNumberOfStops]: {x: 0, y: 0},
         },
       },
@@ -295,6 +297,21 @@ export class TrainrunSection {
     return this.targetSymmetry;
   }
 
+  isSymmetric(): boolean {
+    return this.sourceSymmetry && this.targetSymmetry;
+  }
+
+  isSourceSymmetricOrTimesSymmetric(): boolean {
+    return this.sourceSymmetry || TrainrunsectionHelper.getSymmetricTime(this.sourceDeparture.time) === this.sourceArrival.time;
+  }
+
+  isTargetSymmetricOrTimesSymmetric(): boolean {
+    return this.targetSymmetry || TrainrunsectionHelper.getSymmetricTime(this.targetDeparture.time) === this.targetArrival.time;
+  }
+
+  areTravelTimesEqual(): boolean {
+    return this.travelTime.time === this.backwardTravelTime.time;
+  }
 
   getSourceArrivalDto(): TimeLockDto {
     return this.sourceArrival;
@@ -352,6 +369,10 @@ export class TrainrunSection {
     return TrainrunSection.formatDisplayText(this.travelTime, offset);
   }
 
+  getBackwardTravelTimeFormattedDisplayText(offset = 0): string {
+    return TrainrunSection.formatDisplayText(this.backwardTravelTime, offset);
+  }
+
   getSourceDepartureFormattedDisplayText(offset = 0): string {
     return TrainrunSection.formatDisplayText(this.sourceDeparture, offset);
   }
@@ -370,6 +391,10 @@ export class TrainrunSection {
 
   getTravelTimeFormattedDisplayTextWidth(): number {
     return TrainrunSection.getDisplayTextWidth(this.travelTime);
+  }
+
+  getBackwardTravelTimeFormattedDisplayTextWidth(): number {
+    return TrainrunSection.getDisplayTextWidth(this.backwardTravelTime);
   }
 
   getSourceDepartureFormattedDisplayTextWidth(): number {
@@ -392,6 +417,10 @@ export class TrainrunSection {
     return TrainrunSection.getDisplayHtmlStyle(this.travelTime);
   }
 
+  getBackwardTravelTimeFormattedDisplayHtmlStyle(): string {
+    return TrainrunSection.getDisplayHtmlStyle(this.backwardTravelTime);
+  }
+
   getSourceDepartureFormattedDisplayHtmlStyle(): string {
     return TrainrunSection.getDisplayHtmlStyle(this.sourceDeparture);
   }
@@ -410,6 +439,10 @@ export class TrainrunSection {
 
   getTravelTimeFormatterColorRef(): ColorRefType {
     return TrainrunSection.getDisplayColorRef(this.travelTime);
+  }
+
+  getBackwardTravelTimeFormatterColorRef(): ColorRefType {
+    return TrainrunSection.getDisplayColorRef(this.backwardTravelTime);
   }
 
   getSourceDepartureFormatterColorRef(): ColorRefType {
@@ -466,6 +499,10 @@ export class TrainrunSection {
     return this.travelTime.lock;
   }
 
+  getBackwardTravelTimeLock(): boolean {
+    return this.backwardTravelTime.lock;
+  }
+
   getSourceDepartureLock(): boolean {
     return this.sourceDeparture.lock;
   }
@@ -512,6 +549,10 @@ export class TrainrunSection {
 
   hasTravelTimeWarning(): boolean {
     return this.travelTime.warning !== null;
+  }
+
+  hasBackwardTravelTimeWarning(): boolean {
+    return this.backwardTravelTime.warning !== null;
   }
 
   hasSourceDepartureWarning(): boolean {
@@ -565,6 +606,16 @@ export class TrainrunSection {
     };
   }
 
+  setBackwardTravelTimeWarning(
+    warningTitle: string,
+    warningDescription: string,
+  ) {
+    this.backwardTravelTime.warning = {
+      title: warningTitle,
+      description: warningDescription,
+    };
+  }
+
   getTargetArrivalWarning() {
     return this.targetArrival.warning;
   }
@@ -585,6 +636,10 @@ export class TrainrunSection {
     return this.travelTime.warning;
   }
 
+  getBackwardTravelTimeWarning() {
+    return this.backwardTravelTime.warning;
+  }
+
   resetTargetArrivalWarning() {
     this.targetArrival.warning = null;
   }
@@ -603,6 +658,10 @@ export class TrainrunSection {
 
   resetTravelTimeWarning() {
     this.travelTime.warning = null;
+  }
+
+  resetBackwardTravelTimeWarning() {
+    this.backwardTravelTime.warning = null;
   }
 
   getTrainrunId(): number {

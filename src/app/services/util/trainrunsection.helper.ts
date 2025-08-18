@@ -16,6 +16,7 @@ export enum LeftAndRightElement {
   RightDeparture,
   RightArrival,
   TravelTime,
+  BottomTravelTime,
   LeftRightTrainrunName,
   RightLeftTrainrunName,
 }
@@ -29,14 +30,15 @@ export class TrainrunsectionHelper {
   }
 
   static getDefaultTimeStructure(
-    timeStructure: LeftAndRightTimeStructure,
+    timeStructure: LeftAndRightTimeStructure
   ): LeftAndRightTimeStructure {
     return {
       leftDepartureTime: timeStructure.leftDepartureTime,
       leftArrivalTime: timeStructure.leftArrivalTime,
-      rightDepartureTime: 0,
-      rightArrivalTime: 0,
+      rightDepartureTime: timeStructure.rightDepartureTime,
+      rightArrivalTime: timeStructure.rightArrivalTime,
       travelTime: 0,
+      bottomTravelTime: 0,
     };
   }
 
@@ -69,6 +71,7 @@ export class TrainrunsectionHelper {
     );
   }
 
+  // TODO: remove this method
   static getRightDepartureTime(
     timeStructure: LeftAndRightTimeStructure,
     precision = TrainrunSectionService.TIME_PRECISION
@@ -79,6 +82,7 @@ export class TrainrunsectionHelper {
     );
   }
 
+  // TODO: remove this method
   getLeftBetriebspunkt(
     trainrunSection: TrainrunSection,
     orderedNodes: Node[],
@@ -246,6 +250,9 @@ export class TrainrunsectionHelper {
 
       case TrainrunSectionText.TrainrunSectionTravelTime:
         return LeftAndRightElement.TravelTime;
+
+      case TrainrunSectionText.TrainrunSectionBackwardTravelTime:
+        return LeftAndRightElement.BottomTravelTime;
     }
     return undefined;
   }
@@ -269,7 +276,8 @@ export class TrainrunsectionHelper {
       mappedTimeStructure.leftArrivalTime = timeStructure.rightArrivalTime;
       mappedTimeStructure.rightDepartureTime = timeStructure.leftDepartureTime;
       mappedTimeStructure.leftDepartureTime = timeStructure.rightDepartureTime;
-      mappedTimeStructure.travelTime = timeStructure.travelTime;
+      mappedTimeStructure.travelTime = timeStructure.bottomTravelTime;
+      mappedTimeStructure.bottomTravelTime = timeStructure.travelTime;
       return mappedTimeStructure;
     }
     return timeStructure;
@@ -294,15 +302,22 @@ export class TrainrunsectionHelper {
       lastRightNode.getId() === bothLastNonStopNodes.lastNonStopNode1.getId()
         ? bothLastNonStopTrainrunSections.lastNonStopTrainrunSection1
         : bothLastNonStopTrainrunSections.lastNonStopTrainrunSection2;
-    const cumulativeTravelTime =
-      this.trainrunService.getCumulativeTravelTime(trainrunSection);
+
+    const targetIsRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(trainrunSection);
+    const travelTime = targetIsRightOrBottom
+      ? this.trainrunService.getCumulativeTravelTime(trainrunSection)
+      : this.trainrunService.getCumulativeBackwardTravelTime(trainrunSection);
+    const bottomTravelTime = targetIsRightOrBottom
+      ? this.trainrunService.getCumulativeBackwardTravelTime(trainrunSection)
+      : this.trainrunService.getCumulativeTravelTime(trainrunSection);
 
     return {
       leftDepartureTime: lastLeftNode.getDepartureTime(leftTrainrunSection),
       leftArrivalTime: lastLeftNode.getArrivalTime(leftTrainrunSection),
       rightDepartureTime: lastRightNode.getDepartureTime(rightTrainrunSection),
       rightArrivalTime: lastRightNode.getArrivalTime(rightTrainrunSection),
-      travelTime: cumulativeTravelTime,
+      travelTime,
+      bottomTravelTime,
     };
   }
 
@@ -367,5 +382,16 @@ export class TrainrunsectionHelper {
     const targetNode = trainrunSection.getTargetNode();
 
     return GeneralViewFunctions.getRightOrBottomNode(sourceNode, targetNode) === targetNode;
+  }
+
+  static getAdjustedTimeBasedOnSymmetry(
+    isSymmetricOnNode: boolean,
+    defaultTime: number,
+    symmetricTime: number,
+  ): number {
+    if (isSymmetricOnNode) {
+      return TrainrunsectionHelper.getSymmetricTime(symmetricTime);
+    }
+    return defaultTime;
   }
 }

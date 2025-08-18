@@ -47,6 +47,11 @@ export class TrainrunSectionViewObject {
     const cumulativeTravelTime =
       cumulativeTravelTimeData[cumulativeTravelTimeData.length - 1]
         .sumTravelTime;
+    const cumulativeBackwardTravelTimeData = 
+      editorView.getCumulativeBackwardTravelTimeAndNodePath(d);
+    const cumulativeBackwardTravelTime =
+      cumulativeBackwardTravelTimeData[cumulativeBackwardTravelTimeData.length - 1]
+        .sumTravelTime;
 
     let key =
       "#" +
@@ -61,6 +66,10 @@ export class TrainrunSectionViewObject {
       d.getTravelTime() +
       "_" +
       cumulativeTravelTime +
+      "_" +
+      d.getBackwardTravelTime() +
+      "_" +
+      cumulativeBackwardTravelTime +
       "_" +
       editorView.getTimeDisplayPrecision() +
       "_" +
@@ -147,6 +156,14 @@ export class TrainrunSectionViewObject {
       editorView.trainrunSectionPreviewLineView.getVariantIsWritable();
 
     cumulativeTravelTimeData.forEach((data) => {
+      key += "_" + data.node.getId();
+      key += "_" + editorView.isJunctionNode(data.node);
+      key += "_" + editorView.checkFilterNonStopNode(data.node);
+      key += "_" + editorView.checkFilterNode(data.node);
+    });
+
+    
+    cumulativeBackwardTravelTimeData.forEach((data) => {
       key += "_" + data.node.getId();
       key += "_" + editorView.isJunctionNode(data.node);
       key += "_" + editorView.checkFilterNonStopNode(data.node);

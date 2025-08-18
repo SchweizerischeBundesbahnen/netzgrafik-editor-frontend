@@ -26,6 +26,12 @@ import {
   TrainrunSectionTimesService
 } from "../../../../services/data/trainrun-section-times.service";
 import {VersionControlService} from "../../../../services/data/version-control.service";
+import {UiInteractionService} from "../../../../services/ui/ui.interaction.service";
+import {
+  SymmetrySelectionDialogParameter,
+  SymmetryReference,
+  NodeSide
+} from "../../symmetry-selection-dialog/symmetry-selection-dialog.component";
 
 export interface LeftAndRightTimeStructure {
   leftDepartureTime: number;
@@ -33,6 +39,7 @@ export interface LeftAndRightTimeStructure {
   rightDepartureTime: number;
   rightArrivalTime: number;
   travelTime: number;
+  bottomTravelTime: number;
 }
 
 export interface LeftAndRightLockStructure {
@@ -60,6 +67,10 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   rightArrivalTimeInputElement: ElementRef;
   @ViewChild("travelTimeInputElement")
   travelTimeInputElement: ElementRef;
+  @ViewChild("bottomTravelTimeInputElement")
+  bottomTravelTimeInputElement: ElementRef;
+  @ViewChild("leftSymmetryToggle") leftSymmetryToggle: ElementRef;
+  @ViewChild("rightSymmetryToggle") rightSymmetryToggle: ElementRef;
 
   public selectedTrainrunSection: TrainrunSection;
   public leftBetriebspunkt: string[] = ["", ""];
@@ -77,23 +88,15 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   private destroyed = new Subject<void>();
 
   public get isTopTrainrunSectionInfoDisplayed(): boolean {
-    if (this.selectedTrainrunSection === null) {
-      return false;
-    }
-    const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
-      this.selectedTrainrunSection,
-    );
-    return this.isRoundTrip() || isTargetRightOrBottom;
+    return this.isRoundTrip() || !this.isPositionSwapped();
   }
 
   public get isBottomTrainrunSectionInfoDisplayed(): boolean {
-    if (this.selectedTrainrunSection === null) {
-      return false;
-    }
-    const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
-      this.selectedTrainrunSection,
-    );
-    return this.isRoundTrip() || !isTargetRightOrBottom;
+    return this.isRoundTrip() || this.isPositionSwapped();
+  }
+
+  public get isSymmetric(): boolean {
+    return this.selectedTrainrunSection.isSymmetric();
   }
 
   constructor(
@@ -104,6 +107,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     private changeDetection: ChangeDetectorRef,
     public trainrunSectionTimesService: TrainrunSectionTimesService,
     private versionControlService: VersionControlService,
+    private uiInteractionService: UiInteractionService,
   ) {
 
     this.trainrunSectionHelper = new TrainrunsectionHelper(
@@ -151,6 +155,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
       .getTrainrun()
       .getTimeCategoryLinePatternRef();
     this.trainrunSectionTimesService.setHighlightTravelTimeElement(false);
+    this.trainrunSectionTimesService.setHighlightBottomTravelTimeElement(false);
     this.numberOfStops = this.selectedTrainrunSection.getNumberOfStops();
     this.trainrunSectionTimesService.applyOffsetAndTransformTimeStructure();
 
@@ -240,9 +245,10 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
         );
         break;
       case LeftAndRightElement.TravelTime:
-        this.setFocusAndSelectInputElement(
-          this.travelTimeInputElement.nativeElement,
-        );
+          this.setFocusAndSelectInputElement(this.travelTimeInputElement.nativeElement);
+        break;
+      case LeftAndRightElement.BottomTravelTime:
+          this.setFocusAndSelectInputElement(this.bottomTravelTimeInputElement.nativeElement);
         break;
     }
   }
@@ -329,6 +335,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   onInputNumberOfStopsElementButtonPlus() {
     this.numberOfStops += 1;
     this.trainrunSectionTimesService.setHighlightTravelTimeElement(false);
+    this.trainrunSectionTimesService.setHighlightBottomTravelTimeElement(false);
     this.onNumberOfStopsChanged();
   }
 
@@ -352,6 +359,102 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
       return "NumberOfStopsInputElement show" + activeTag;
     }
     return "NumberOfStopsInputElement" + activeTag;
+  }
+
+  isRoundTrip() {
+    return this.selectedTrainrunSection.getTrainrun().isRoundTrip();
+  }
+
+  isLeftNodeSymmetric(): boolean {
+    if (TrainrunsectionHelper.isTargetRightOrBottom(this.selectedTrainrunSection)) {
+      return this.selectedTrainrunSection.getSourceSymmetry();
+    } else {
+      return this.selectedTrainrunSection.getTargetSymmetry();
+    }
+  }
+
+  isRightNodeSymmetric(): boolean {
+    if (TrainrunsectionHelper.isTargetRightOrBottom(this.selectedTrainrunSection)) {
+      return this.selectedTrainrunSection.getTargetSymmetry();
+    } else {
+      return this.selectedTrainrunSection.getSourceSymmetry();
+    }
+  }
+
+  isLeftToggleDisabled(): boolean {
+    return !this.isLeftNodeSymmetric() && (
+      (this.trainrunSectionTimesService.getLockStructure().travelTimeLock && this.trainrunSectionTimesService.getLockStructure().rightLock) ||
+      (this.isRightNodeSymmetric() && this.trainrunSectionTimesService.getLockStructure().travelTimeLock)
+    );
+  }
+
+  isRightToggleDisabled(): boolean {
+    return !this.isRightNodeSymmetric() && (
+      (this.trainrunSectionTimesService.getLockStructure().travelTimeLock && this.trainrunSectionTimesService.getLockStructure().leftLock) ||
+      (this.isLeftNodeSymmetric() && this.trainrunSectionTimesService.getLockStructure().travelTimeLock)
+    );
+  }
+
+  onLeftNodeSymmetryToggleChanged(symmetry: boolean) {
+    // Symmetry -> Asymmetry
+    if (!symmetry) {
+      this.trainrunSectionTimesService.onLeftNodeSymmetryChanged(
+        symmetry,
+        this.isPositionSwapped()
+      );
+      return;
+    }
+
+    // Asymmetry -> Symmetry, show the dialog to choose symmetry reference
+    const originalLeftSymmetryState = this.isLeftNodeSymmetric();
+    this.showSymmetrySelectionDialog(NodeSide.Left).then((reference: SymmetryReference | null) => {
+      if (!Object.values(SymmetryReference).includes(reference)) {
+        // User cancelled (user clicks Cancel / X / outside the dialog), don't enable symmetry
+        this.revertLeftToggleState(originalLeftSymmetryState);
+        return;
+      }
+      this.trainrunSectionTimesService.onLeftNodeSymmetryChanged(
+        symmetry,
+        this.isPositionSwapped(),
+        reference
+      );
+    });
+  }
+
+  onRightNodeSymmetryToggleChanged(symmetry: boolean) {
+    // Symmetry -> Asymmetry
+    if (!symmetry) {
+      this.trainrunSectionTimesService.onRightNodeSymmetryChanged(
+        symmetry,
+        this.isPositionSwapped()
+      );
+      return;
+    }
+
+    // Asymmetry -> Symmetry, show the dialog to choose symmetry reference
+    const originalRightSymmetryState = this.isRightNodeSymmetric();
+    this.showSymmetrySelectionDialog(NodeSide.Right).then((reference: SymmetryReference | null) => {
+      if (!Object.values(SymmetryReference).includes(reference)) {
+        // User cancelled (user clicks Cancel / X / outside the dialog), don't enable symmetry
+        this.revertRightToggleState(originalRightSymmetryState);
+        return;
+      }
+      this.trainrunSectionTimesService.onRightNodeSymmetryChanged(
+        symmetry,
+        this.isPositionSwapped(),
+        reference
+      );
+    });
+  }
+
+  getTravelTimeScssClass(): string {
+    if (this.isSymmetric) {
+      // If symmetric, travel time is displayed at the center
+      return "";
+    }
+    // If not symmetric, travel time is displayed at the top
+    // (and bottom travel time at the bottom)
+    return "Top";
   }
 
   private resetOffsetAfterTrainrunChanged() {
@@ -387,7 +490,37 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  private isRoundTrip() {
-    return this.selectedTrainrunSection.getTrainrun().isRoundTrip();
+  private isPositionSwapped(): boolean {
+    return !TrainrunsectionHelper.isTargetRightOrBottom(this.selectedTrainrunSection);
+  }
+
+  private showSymmetrySelectionDialog(nodeSide: NodeSide): Promise<SymmetryReference | null> {
+    const parameter = new SymmetrySelectionDialogParameter(
+      nodeSide,
+      this.trainrunSectionService,
+      this.trainrunSectionTimesService
+    );
+
+    return new Promise<SymmetryReference | null>((resolve) => {
+      parameter.dialogFeedback
+        .subscribe((result: SymmetryReference | null) => {
+          resolve(result);
+        });
+      this.uiInteractionService.showSymmetrySelectionDialog(parameter);
+    });
+  }
+
+  private revertLeftToggleState(originalState: boolean): void {
+    if (this.leftSymmetryToggle && this.leftSymmetryToggle.nativeElement) {
+      this.leftSymmetryToggle.nativeElement.checked = !originalState;
+    }
+    this.changeDetection.detectChanges();
+  }
+
+  private revertRightToggleState(originalState: boolean): void {
+    if (this.rightSymmetryToggle && this.rightSymmetryToggle.nativeElement) {
+      this.rightSymmetryToggle.nativeElement.checked = !originalState;
+    }
+    this.changeDetection.detectChanges();
   }
 }
