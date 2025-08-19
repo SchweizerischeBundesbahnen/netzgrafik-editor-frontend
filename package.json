@@ -46,7 +46,7 @@
     "extract-i18n": "^1.0.0",
     "ngx-editor": "^15.0.1",
     "papaparse": "^5.3.2",
-    "rxjs": "~7.5.7",
+    "rxjs": "^7.8.2",
     "save-svg-as-png": "^1.4.17",
     "tslib": "^2.5.3",
     "uuid": "^8.3.2",
@@ -84,10 +84,10 @@
     "karma-browserstack-launcher": "^1.6.0",
     "karma-chrome-launcher": "^3.1.1",
     "karma-coverage": "^2.2.1",
-    "karma-jasmine": "~5.0.1",
+    "karma-jasmine": "^5.1.0",
     "karma-jasmine-html-reporter": "^1.7.0",
     "karma-sonarqube-reporter": "^1.4.0",
-    "prettier": "3.2.5",
+    "prettier": "^3.6.2",
     "ts-node": "~10.9.2",
     "typescript": "~5.2.2"
   }
