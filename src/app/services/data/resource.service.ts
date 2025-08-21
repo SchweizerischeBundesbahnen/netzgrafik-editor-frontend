@@ -13,21 +13,15 @@ export class ResourceService {
   resourceStore: {resources: Resource[]} = {resources: []}; // store the data in memory
 
   setResourceData(resourceDto: ResourceDto[]) {
-    this.resourceStore.resources = resourceDto.map(
-      (trainrunDto) => new Resource(trainrunDto),
-    );
+    this.resourceStore.resources = resourceDto.map((trainrunDto) => new Resource(trainrunDto));
   }
 
   getResource(resourceId: number): Resource {
-    return this.resourceStore.resources.find(
-      (res: Resource) => res.getId() === resourceId,
-    );
+    return this.resourceStore.resources.find((res: Resource) => res.getId() === resourceId);
   }
 
   changeCapacity(resourceId: number, capacity: number) {
-    this.resourceStore.resources
-      .find((res) => res.getId() === resourceId)
-      .setCapacity(capacity);
+    this.resourceStore.resources.find((res) => res.getId() === resourceId).setCapacity(capacity);
     this.resourceUpdated();
   }
 

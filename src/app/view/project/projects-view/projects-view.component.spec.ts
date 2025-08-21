@@ -35,9 +35,7 @@ describe("ProjectsViewComponent", () => {
     })
       .overrideComponent(ProjectsViewComponent, {
         set: {
-          providers: [
-            {provide: ProjectsViewService, useValue: projectViewService},
-          ],
+          providers: [{provide: ProjectsViewService, useValue: projectViewService}],
         },
       })
       .compileComponents();

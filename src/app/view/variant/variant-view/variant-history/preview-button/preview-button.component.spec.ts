@@ -11,7 +11,7 @@ describe("PreviewButtonComponent", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PreviewButtonComponent],
-      imports:[I18nModule],
+      imports: [I18nModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });

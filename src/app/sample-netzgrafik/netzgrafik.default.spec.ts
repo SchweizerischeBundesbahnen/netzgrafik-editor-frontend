@@ -37,16 +37,8 @@ describe("NetzgrafikDefault", () => {
     labelGroupService = new LabelGroupService(logService);
     labelService = new LabelService(logService, labelGroupService);
     filterService = new FilterService(labelService, labelGroupService);
-    trainrunService = new TrainrunService(
-      logService,
-      labelService,
-      filterService,
-    );
-    trainrunSectionService = new TrainrunSectionService(
-      logService,
-      trainrunService,
-      filterService,
-    );
+    trainrunService = new TrainrunService(logService, labelService, filterService);
+    trainrunSectionService = new TrainrunSectionService(logService, trainrunService, filterService);
     nodeService = new NodeService(
       logService,
       resourceService,
@@ -77,9 +69,7 @@ describe("NetzgrafikDefault", () => {
     dataService.loadNetzgrafikDto(inputDto);
 
     const outputJson = dataService.getNetzgrafikDto();
-    expect(JSON.stringify(inputDto, null, 2)).toEqual(
-      JSON.stringify(outputJson, null, 2),
-    );
+    expect(JSON.stringify(inputDto, null, 2)).toEqual(JSON.stringify(outputJson, null, 2));
   });
 
   it("should load and serialize demo netzgrafikDto (complete variant) without changes", () => {
@@ -88,8 +78,6 @@ describe("NetzgrafikDefault", () => {
     dataService.loadNetzgrafikDto(inputDto);
 
     const outputJson = dataService.getNetzgrafikDto();
-    expect(JSON.stringify(inputDto, null, 2)).toEqual(
-      JSON.stringify(outputJson, null, 2),
-    );
+    expect(JSON.stringify(inputDto, null, 2)).toEqual(JSON.stringify(outputJson, null, 2));
   });
 });

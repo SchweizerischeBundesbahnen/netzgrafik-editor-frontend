@@ -45,12 +45,10 @@ export class TrainrunRoundtripTabComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.trainrunSectionService.trainrunSections
-      .pipe(takeUntil(this.destroyed))
-      .subscribe(() => {
-        this.initializeWithCurrentSelectedTrainrun();
-        this.updateTrainrunLabelsAutoCompleteOptions();
-      });
+    this.trainrunSectionService.trainrunSections.pipe(takeUntil(this.destroyed)).subscribe(() => {
+      this.initializeWithCurrentSelectedTrainrun();
+      this.updateTrainrunLabelsAutoCompleteOptions();
+    });
 
     this.updateTrainrunLabelsAutoCompleteOptions();
   }
@@ -86,20 +84,14 @@ export class TrainrunRoundtripTabComponent implements OnInit, OnDestroy {
   onIsOneWayChanged(isChecked: boolean) {
     this.isOneWay = isChecked;
     if (!isChecked && !this.selectedTrainrun.isRoundTrip()) {
-      this.trainrunService.updateDirection(
-        this.selectedTrainrun,
-        Direction.ROUND_TRIP,
-      );
+      this.trainrunService.updateDirection(this.selectedTrainrun, Direction.ROUND_TRIP);
     }
   }
 
   onDeleteTrainrun() {
     const dialogTitle = $localize`:@@app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.delete:Delete`;
     const dialogContent = $localize`:@@app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.deleteConfirmationQuestion:Should the entire train route be definitively deleted?`;
-    const confirmationDialogParamter = new ConfirmationDialogParameter(
-      dialogTitle,
-      dialogContent,
-    );
+    const confirmationDialogParamter = new ConfirmationDialogParameter(dialogTitle, dialogContent);
     this.uiInteractionService
       .showConfirmationDiagramDialog(confirmationDialogParamter)
       .subscribe((confirmed: boolean) => {
@@ -113,9 +105,7 @@ export class TrainrunRoundtripTabComponent implements OnInit, OnDestroy {
   }
 
   onDuplicateTrainrun() {
-    this.trainrunService.duplicateTrainrunAndSections(
-      this.selectedTrainrun.getId(),
-    );
+    this.trainrunService.duplicateTrainrunAndSections(this.selectedTrainrun.getId());
     this.initializeWithCurrentSelectedTrainrun();
   }
 

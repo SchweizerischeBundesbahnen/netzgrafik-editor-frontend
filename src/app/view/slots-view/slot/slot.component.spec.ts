@@ -10,7 +10,7 @@ describe("SlotComponent", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SlotComponent],
-      imports:[I18nModule],
+      imports: [I18nModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });

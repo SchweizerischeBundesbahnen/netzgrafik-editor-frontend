@@ -42,7 +42,7 @@ export class Trainrun {
       frequencyId: Trainrun.DEFAULT_TRAINRUN_FREQUENCY,
       trainrunTimeCategoryId: Trainrun.DEFAULT_TRAINRUN_TIME_CATEGORY,
       labelIds: [],
-      direction: Direction.ROUND_TRIP
+      direction: Direction.ROUND_TRIP,
     },
   ) {
     this.id = id;

@@ -40,12 +40,10 @@ export class DataService implements OnDestroy {
 
   private destroyed = new Subject<void>();
 
-  private readonly netzgrafikLoadedInfoSubject =
-    new BehaviorSubject<NetzgrafikLoadedInfo>(
-      new NetzgrafikLoadedInfo(true, false),
-    );
-  private readonly netzgrafikLoadedInfo =
-    this.netzgrafikLoadedInfoSubject.asObservable();
+  private readonly netzgrafikLoadedInfoSubject = new BehaviorSubject<NetzgrafikLoadedInfo>(
+    new NetzgrafikLoadedInfo(true, false),
+  );
+  private readonly netzgrafikLoadedInfo = this.netzgrafikLoadedInfoSubject.asObservable();
 
   constructor(
     private resourceService: ResourceService,
@@ -75,35 +73,21 @@ export class DataService implements OnDestroy {
   }
 
   loadNetzgrafikDto(netzgrafikDto: NetzgrafikDto, preview = false) {
-    this.netzgrafikLoadedInfoSubject.next(
-      new NetzgrafikLoadedInfo(true, preview),
-    );
+    this.netzgrafikLoadedInfoSubject.next(new NetzgrafikLoadedInfo(true, preview));
 
     DataMigration.migrateNetzgrafikDto(netzgrafikDto);
 
     this.netzgrafikDtoStore.netzgrafikDto = netzgrafikDto;
-    this.resourceService.setResourceData(
-      this.netzgrafikDtoStore.netzgrafikDto.resources,
-    );
+    this.resourceService.setResourceData(this.netzgrafikDtoStore.netzgrafikDto.resources);
     this.nodeService.setNodeData(this.netzgrafikDtoStore.netzgrafikDto.nodes);
     this.trainrunSectionService.setTrainrunSectionsDataAndValidate(
       this.netzgrafikDtoStore.netzgrafikDto.trainrunSections,
     );
-    this.trainrunService.setTrainrunData(
-      this.netzgrafikDtoStore.netzgrafikDto.trainruns,
-    );
-    this.noteService.setNoteData(
-      this.netzgrafikDtoStore.netzgrafikDto.freeFloatingTexts,
-    );
-    this.labelService.setLabelData(
-      this.netzgrafikDtoStore.netzgrafikDto.labels,
-    );
-    this.labelGroupService.setLabelGroupData(
-      this.netzgrafikDtoStore.netzgrafikDto.labelGroups,
-    );
-    this.filterService.setFilterData(
-      this.netzgrafikDtoStore.netzgrafikDto.filterData,
-    );
+    this.trainrunService.setTrainrunData(this.netzgrafikDtoStore.netzgrafikDto.trainruns);
+    this.noteService.setNoteData(this.netzgrafikDtoStore.netzgrafikDto.freeFloatingTexts);
+    this.labelService.setLabelData(this.netzgrafikDtoStore.netzgrafikDto.labels);
+    this.labelGroupService.setLabelGroupData(this.netzgrafikDtoStore.netzgrafikDto.labelGroups);
+    this.filterService.setFilterData(this.netzgrafikDtoStore.netzgrafikDto.filterData);
     this.netzgrafikColoringService.setNetzgrafikColors(
       this.netzgrafikDtoStore.netzgrafikDto.metadata.netzgrafikColors,
     );
@@ -112,39 +96,25 @@ export class DataService implements OnDestroy {
 
     // Ensure that all trainrun sections have a consistent chain direction
     this.trainrunService.getTrainruns().forEach((trainrun) => {
-      this.trainrunSectionService.enforceConsistentSectionDirection(
-        trainrun.getId(),
-      );
+      this.trainrunSectionService.enforceConsistentSectionDirection(trainrun.getId());
     });
 
-    this.netzgrafikLoadedInfoSubject.next(
-      new NetzgrafikLoadedInfo(false, preview),
-    );
+    this.netzgrafikLoadedInfoSubject.next(new NetzgrafikLoadedInfo(false, preview));
   }
 
-  insertCopyNetzgrafikDto(
-    netzgrafikDto: NetzgrafikDto,
-    enforceUpdate = true
-  ) {
+  insertCopyNetzgrafikDto(netzgrafikDto: NetzgrafikDto, enforceUpdate = true) {
     this.nodeService.unselectAllNodes();
     const nodeMap = this.nodeService.mergeNodes(netzgrafikDto.nodes);
-    const trainrunMap = this.trainrunService.createNewTrainrunsFromDtoList(
-      netzgrafikDto.trainruns,
-    );
-    const trainrunSectionMap =
-      this.trainrunSectionService.createNewTrainrunSectionsFromDtoList(
-        netzgrafikDto.trainrunSections,
-        nodeMap,
-        trainrunMap,
-        netzgrafikDto.nodes,
-        enforceUpdate
-      );
-    this.nodeService.mergeLabelNode(netzgrafikDto, nodeMap);
-    this.nodeService.mergeConnections(
-      netzgrafikDto,
-      trainrunSectionMap,
+    const trainrunMap = this.trainrunService.createNewTrainrunsFromDtoList(netzgrafikDto.trainruns);
+    const trainrunSectionMap = this.trainrunSectionService.createNewTrainrunSectionsFromDtoList(
+      netzgrafikDto.trainrunSections,
       nodeMap,
+      trainrunMap,
+      netzgrafikDto.nodes,
+      enforceUpdate,
     );
+    this.nodeService.mergeLabelNode(netzgrafikDto, nodeMap);
+    this.nodeService.mergeConnections(netzgrafikDto, trainrunSectionMap, nodeMap);
     if (enforceUpdate) {
       this.nodeService.connectionsUpdated();
       this.nodeService.transitionsUpdated();
@@ -156,9 +126,7 @@ export class DataService implements OnDestroy {
   mergeNetzgrafikDto(netzgrafikDto: NetzgrafikDto) {
     this.nodeService.unselectAllNodes();
     const nodeMap = this.nodeService.mergeNodes(netzgrafikDto.nodes);
-    const trainrunMap = this.trainrunService.mergeTrainruns(
-      netzgrafikDto.trainruns,
-    );
+    const trainrunMap = this.trainrunService.mergeTrainruns(netzgrafikDto.trainruns);
     this.trainrunSectionService.mergeTrainrunSections(
       netzgrafikDto.trainrunSections,
       nodeMap,
@@ -239,7 +207,9 @@ export class DataService implements OnDestroy {
       (trainrunFrequency) => trainrunFrequency.id === frequencyId,
     );
     if (found === undefined) {
-      return this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunFrequencies.find((freq) => true);
+      return this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunFrequencies.find(
+        (freq) => true,
+      );
     }
     return found;
   }
@@ -249,7 +219,9 @@ export class DataService implements OnDestroy {
       (trainrunTimeCategory) => trainrunTimeCategory.id === timeCategoryId,
     );
     if (found === undefined) {
-      return this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunTimeCategories.find((freq) => true);
+      return this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunTimeCategories.find(
+        (freq) => true,
+      );
     }
     return found;
   }
@@ -263,8 +235,7 @@ export class DataService implements OnDestroy {
   }
 
   getTrainrunTimeCategories(): TrainrunTimeCategory[] {
-    return this.netzgrafikDtoStore.netzgrafikDto.metadata
-      .trainrunTimeCategories;
+    return this.netzgrafikDtoStore.netzgrafikDto.metadata.trainrunTimeCategories;
   }
 
   getDirections(): Direction[] {

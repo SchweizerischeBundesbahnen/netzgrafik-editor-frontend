@@ -51,8 +51,7 @@ describe("VariantsViewComponent", () => {
       }),
     };
     variantControllerBackendService = {
-      createVariant: (projectId: number, variantCreateDto: VariantCreateDto) =>
-        of(10 as any),
+      createVariant: (projectId: number, variantCreateDto: VariantCreateDto) => of(10 as any),
     };
 
     await TestBed.configureTestingModule({

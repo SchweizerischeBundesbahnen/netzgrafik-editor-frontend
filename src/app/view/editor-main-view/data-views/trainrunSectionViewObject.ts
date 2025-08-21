@@ -42,11 +42,9 @@ export class TrainrunSectionViewObject {
     hiddenTagTrainrunName: boolean,
     hiddenTagDirectionArrows: boolean,
   ): string {
-    const cumulativeTravelTimeData =
-      editorView.getCumulativeTravelTimeAndNodePath(d);
+    const cumulativeTravelTimeData = editorView.getCumulativeTravelTimeAndNodePath(d);
     const cumulativeTravelTime =
-      cumulativeTravelTimeData[cumulativeTravelTimeData.length - 1]
-        .sumTravelTime;
+      cumulativeTravelTimeData[cumulativeTravelTimeData.length - 1].sumTravelTime;
 
     let key =
       "#" +
@@ -142,7 +140,7 @@ export class TrainrunSectionViewObject {
       "_" +
       editorView.checkFilterNode(d.getTargetNode()) +
       "_" +
-      editorView.getLevelOfDetail()  +
+      editorView.getLevelOfDetail() +
       "_" +
       editorView.trainrunSectionPreviewLineView.getVariantIsWritable();
 
