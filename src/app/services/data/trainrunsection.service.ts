@@ -699,6 +699,7 @@ export class TrainrunSectionService implements OnDestroy {
 
     const sourceNode = this.nodeService.getNodeFromId(sourceNodeId);
     const targetNode = this.nodeService.getNodeFromId(targetNodeId);
+
     trainrunSection.setSourceAndTargetNodeReference(sourceNode, targetNode);
     this.trainrunSectionsStore.trainrunSections.push(trainrunSection);
     this.logger.log(
@@ -715,6 +716,10 @@ export class TrainrunSectionService implements OnDestroy {
 
     this.setTrainrunSectionAsSelected(trainrunSection.getId());
     this.propagateTimesForNewTrainrunSection(trainrunSection);
+
+    // Ensure consistent section direction considering the previous ones
+    this.enforceConsistentSectionDirection(trainrunSection.getTrainrunId());
+
     //this.trainrunSectionsUpdated();
     this.trainrunService.trainrunsUpdated();
 
@@ -1204,6 +1209,12 @@ export class TrainrunSectionService implements OnDestroy {
     this.informSelectedTrainrunClickSubject.next(informSelectedTrainrunClick);
   }
 
+  invertTrainrunSectionsSourceAndTarget(trainrunId: number){
+    this.getAllTrainrunSectionsForTrainrun(trainrunId).forEach((trainrunSection) => {
+      this.invertTrainrunSectionSourceAndTarget(trainrunSection);
+    });
+  }
+
   private copyTrainrunSection(
     existingTrainrunSection: TrainrunSection,
     newTrainrunId: number,
@@ -1518,5 +1529,129 @@ export class TrainrunSectionService implements OnDestroy {
       });
     });
     return returnValue;
+  }
+
+  private findConnectedPortId(node: Node, portId: number): number | null {
+    const transition = node.getTransitions().find(
+      (tr) => tr.getPortId1() === portId || tr.getPortId2() === portId
+    );
+    if (!transition) {
+      return null;
+    }
+    return transition.getPortId1() === portId ? transition.getPortId2() : transition.getPortId1();
+  }
+
+  /**
+   * Ensure all sections for a trainrun sections chain is [source → target] [source → target]
+   * consistent and invert sections if needed.
+   */
+  enforceConsistentSectionDirection(trainrunId: number) {
+    const sections = this.getAllTrainrunSectionsForTrainrun(trainrunId);
+    if (sections.length < 2) return;
+
+    // Build a map of sections keyed by the outgoing port ID they are connected to.
+    // Find the leaf (departure/arrival) sections: these are the ones without
+    // a transition for their source or target port.
+    const sectionsByConnectedPortId = new Map<number, TrainrunSection>();
+    const leafSectionsAndNodes: [TrainrunSection, number][] = [];
+
+    for (const section of sections) {
+      const sourceNode = section.getSourceNode();
+      const targetNode = section.getTargetNode();
+
+      const sourceConnectedPortId = this.findConnectedPortId(sourceNode, section.getSourcePortId());
+      const targetConnectedPortId = this.findConnectedPortId(targetNode, section.getTargetPortId());
+
+      if (sourceConnectedPortId !== null && sourceConnectedPortId !== undefined) {
+        sectionsByConnectedPortId.set(sourceConnectedPortId, section);
+      } else {
+        leafSectionsAndNodes.push([section, section.getSourceNodeId()]);
+      }
+      if (targetConnectedPortId !== null && targetConnectedPortId !== undefined) {
+        sectionsByConnectedPortId.set(targetConnectedPortId, section);
+      } else {
+        leafSectionsAndNodes.push([section, section.getTargetNodeId()]);
+      }
+    }
+
+    // Use first leaf as starting point and its direction as reference for the whole trainrun.
+    if (leafSectionsAndNodes.length === 0) return;
+    const seenSectionIds = new Set<number>();
+
+    for (const [startSection, startNodeId] of leafSectionsAndNodes) {
+      if (seenSectionIds.has(startSection.getId())) continue;
+
+      let referenceDirection: "sourceToTarget" | "targetToSource";
+      if (startSection.getSourceNodeId() === startNodeId) {
+        referenceDirection = "sourceToTarget";
+      } else {
+        referenceDirection = "targetToSource";
+      }
+
+      // Start with a leaf node and walk over the path. Ignore any leaf node we've
+      // already seen (because we've reached it at the end of a previous walk).
+      // const seenSectionIds = new Set<number>();
+      let section: TrainrunSection | undefined = startSection;
+      let nodeId = startNodeId;
+      while (section) {
+        if (seenSectionIds.has(section.getId())) {
+          // /!\ TODO: makes files unusable if a cycle is detected.
+          throw new Error("Cycle detected in trainrun");
+        }
+        seenSectionIds.add(section.getId());
+
+        if (
+          (referenceDirection === "targetToSource" && section.getSourceNodeId() === nodeId) ||
+          (referenceDirection === "sourceToTarget" && section.getTargetNodeId() === nodeId)
+        ) {
+          // Section is in the wrong direction, invert it
+          this.invertTrainrunSectionSourceAndTarget(section);
+        }
+        nodeId = referenceDirection === "sourceToTarget"
+          ? section.getTargetNodeId()
+          : section.getSourceNodeId();
+        section = sectionsByConnectedPortId.get(
+          referenceDirection === "sourceToTarget"
+            ? section.getTargetPortId()
+            : section.getSourcePortId()
+        );
+      }
+    }
+  }
+
+  private invertTrainrunSectionSourceAndTarget(trainrunSection: TrainrunSection) {
+    // Swap nodes
+    trainrunSection.setSourceAndTargetNodeReference(
+      trainrunSection.getTargetNode(),
+      trainrunSection.getSourceNode(),
+    );
+
+    // Swap ports
+    const oldSourcePortId = trainrunSection.getSourcePortId();
+    const oldTargetPortId = trainrunSection.getTargetPortId();
+    trainrunSection.setSourcePortId(oldTargetPortId);
+    trainrunSection.setTargetPortId(oldSourcePortId);
+
+    // Swap Timelocks
+    const oldSourceDepartureDto = trainrunSection.getSourceDepartureDto();
+    const oldTargetArrivalDto = trainrunSection.getTargetArrivalDto();
+    const oldTargetDepartureDto = trainrunSection.getTargetDepartureDto();
+    const oldSourceArrivalDto = trainrunSection.getSourceArrivalDto();
+
+    // Source departure becomes target departure
+    trainrunSection.setSourceDepartureDto(oldTargetDepartureDto);
+
+    // Target arrival becomes source arrival
+    trainrunSection.setTargetArrivalDto(oldSourceArrivalDto);
+
+    // Target departure becomes source departure
+    trainrunSection.setTargetDepartureDto(oldSourceDepartureDto);
+
+    // Source arrival becomes target arrival
+    trainrunSection.setSourceArrivalDto(oldTargetArrivalDto);
+
+    // Update visuals and geometry
+    trainrunSection.routeEdgeAndPlaceText();
+    trainrunSection.convertVec2DToPath();
   }
 }
