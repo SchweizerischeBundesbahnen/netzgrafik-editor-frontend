@@ -3,6 +3,7 @@ import {
   FilterDataDto,
   LabelRef,
   TrainrunCategory,
+  Direction,
   TrainrunFrequency,
   TrainrunTimeCategory,
 } from "../../data-structures/business.data.structures";
@@ -399,7 +400,8 @@ export class FilterService implements OnDestroy {
       filterTrainrunSection &&
       this.isFilterTrainrunFrequencyEnabled(trainrun.getTrainrunFrequency()) &&
       this.isFilterTrainrunCategoryEnabled(trainrun.getTrainrunCategory()) &&
-      this.isFilterTrainrunTimeCategoryEnabled(trainrun.getTrainrunTimeCategory())
+      this.isFilterTrainrunTimeCategoryEnabled(trainrun.getTrainrunTimeCategory()) &&
+      this.isFilterDirectionEnabled(trainrun.getDirection())
     );
   }
 
@@ -564,6 +566,20 @@ export class FilterService implements OnDestroy {
     this.filterSubject.next();
   }
 
+  isFilterDirectionArrowsEnabled(): boolean {
+    return this.activeFilterSetting.filterDirectionArrows;
+  }
+
+  enableFilterDirectionArrows() {
+    this.activeFilterSetting.filterDirectionArrows = true;
+    this.filterChanged();
+  }
+
+  disableFilterDirectionArrows() {
+    this.activeFilterSetting.filterDirectionArrows = false;
+    this.filterChanged();
+  }
+
   isFilterArrivalDepartureTimeEnabled(): boolean {
     return this.activeFilterSetting.filterArrivalDepartureTime;
   }
@@ -726,6 +742,38 @@ export class FilterService implements OnDestroy {
     this.filterChanged();
   }
 
+  isFilterDirectionEnabled(
+    direction: Direction,
+  ): boolean {
+    return this.activeFilterSetting.filterDirection.includes(
+      direction,
+    );
+  }
+
+  enableFilterDirection(direction: Direction) {
+    if (
+      !this.activeFilterSetting.filterDirection.includes(
+        direction,
+      )
+    ) {
+      this.activeFilterSetting.filterDirection.push(direction);
+      this.filterChanged();
+    }
+  }
+
+  disableFilterDirection(direction: Direction) {
+    this.activeFilterSetting.filterDirection =
+      this.activeFilterSetting.filterDirection.filter(
+        (dir) => dir !== direction,
+      );
+    this.filterChanged();
+  }
+
+  resetFilterDirection() {
+    this.activeFilterSetting.filterDirection = Object.values(Direction);
+    this.filterChanged();
+  }
+
   isAnyFilterActive(): boolean {
     return (
       !this.isDisplayFilteringActive() ||
@@ -768,6 +816,15 @@ export class FilterService implements OnDestroy {
           return;
         }
       });
+    this.dataService
+      .getDirections()
+      .forEach((direction: Direction) => {
+        const isFilter = this.isFilterDirectionEnabled(direction);
+        if (!isFilter) {
+          isActive = false;
+          return;
+        }
+      });
     return isActive;
   }
 
@@ -780,6 +837,7 @@ export class FilterService implements OnDestroy {
   isDisplayFilteringActive(): boolean {
     return (
       !this.isFilterNotesEnabled() &&
+      this.isFilterDirectionArrowsEnabled() &&
       this.isFilterArrivalDepartureTimeEnabled() &&
       this.isFilterConnectionsEnabled() &&
       this.isFilterTrainrunNameEnabled() &&
@@ -889,6 +947,10 @@ export class FilterService implements OnDestroy {
       if (filterSetting.filterTrainrunTimeCategory === null) {
         filterSetting.filterTrainrunTimeCategory =
           this.dataService.getTrainrunTimeCategories();
+      }
+      if (filterSetting.filterDirection === null) {
+        filterSetting.filterDirection =
+          this.dataService.getDirections();
       }
     }
   }
