@@ -28,8 +28,8 @@ import {TrainrunSectionService} from "../services/data/trainrunsection.service";
 import {TrainrunService} from "../services/data/trainrun.service";
 
 enum ShowTrainrunEditTab {
-  sbb_trainrun_tab="GENERAL",
-  sbb_trainrun_roundtrip_tab="ROUND_TRIP",
+  sbb_trainrun_tab = "GENERAL",
+  sbb_trainrun_roundtrip_tab = "ROUND_TRIP",
 }
 
 @Component({
@@ -75,9 +75,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     private trainrunSectionService: TrainrunSectionService,
   ) {
     this.selectedPerlenketteConnection = undefined;
-    this.trainrunSectionHelper = new TrainrunsectionHelper(
-      this.trainrunService,
-    );
+    this.trainrunSectionHelper = new TrainrunsectionHelper(this.trainrunService);
 
     this.loadPerlenketteService
       .getPerlenketteData()
@@ -94,21 +92,18 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
         this.trainrunSectionService.setTrainrunSectionAsSelected(trainrunSectionId);
       });
 
-    this.trainrunService.trainruns
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe((trainrunList) => {
-          if (!this.trainrunSectionService.getSelectedTrainrunSection()) {
-            this.trainrunSectionService.setTrainrunSectionAsSelected(
-              this.perlenketteTrainrun.pathItems
-                .find(s => s.isPerlenketteSection())
-                .getPerlenketteSection().trainrunSectionId
-            );
-          }
-          if (!trainrunList.length) {
-            return;
-          }
-        }
-      );
+    this.trainrunService.trainruns.pipe(takeUntil(this.destroyed$)).subscribe((trainrunList) => {
+      if (!this.trainrunSectionService.getSelectedTrainrunSection()) {
+        this.trainrunSectionService.setTrainrunSectionAsSelected(
+          this.perlenketteTrainrun.pathItems
+            .find((s) => s.isPerlenketteSection())
+            .getPerlenketteSection().trainrunSectionId,
+        );
+      }
+      if (!trainrunList.length) {
+        return;
+      }
+    });
 
     this.svgPoint = new Vec2D(0, -64);
   }
@@ -117,11 +112,11 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     this.sbbToogleValue = event.value;
   }
 
-  isSbbToogleRoundtrip() : boolean {
+  isSbbToogleRoundtrip(): boolean {
     return this.sbbToogleValue === ShowTrainrunEditTab.sbb_trainrun_roundtrip_tab;
   }
 
-  isSbbToogleGeneral() : boolean {
+  isSbbToogleGeneral(): boolean {
     return this.sbbToogleValue === ShowTrainrunEditTab.sbb_trainrun_tab;
   }
 
@@ -157,8 +152,12 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
       return;
     }
     if (!this.trainrunSectionService.getSelectedTrainrunSection()) {
-      const pItemSection = this.perlenketteTrainrun.pathItems.find(item => item.isPerlenketteSection());
-      this.trainrunSectionService.setTrainrunSectionAsSelected(pItemSection.getPerlenketteSection().trainrunSectionId);
+      const pItemSection = this.perlenketteTrainrun.pathItems.find((item) =>
+        item.isPerlenketteSection(),
+      );
+      this.trainrunSectionService.setTrainrunSectionAsSelected(
+        pItemSection.getPerlenketteSection().trainrunSectionId,
+      );
     }
     // toogle
     if (this.showTrainrunEditTab === ShowTrainrunEditTab.sbb_trainrun_tab) {
@@ -173,9 +172,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     if (this.perlenketteTrainrun) {
       originalPathItems = this.perlenketteTrainrun.pathItems;
 
-      if (
-        this.perlenketteTrainrun.trainrunId !== perlenketteTrainrun.trainrunId
-      ) {
+      if (this.perlenketteTrainrun.trainrunId !== perlenketteTrainrun.trainrunId) {
         this.svgPoint.setY(-64);
       }
     }
@@ -185,13 +182,10 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     if (originalPathItems) {
       this.perlenketteTrainrun.pathItems.forEach((pathItem) => {
         originalPathItems.forEach((originalPathItem) => {
-          if (
-            pathItem.isPerlenketteSection() &&
-            originalPathItem.isPerlenketteSection()
-          ) {
+          if (pathItem.isPerlenketteSection() && originalPathItem.isPerlenketteSection()) {
             if (
               pathItem.getPerlenketteSection().trainrunSectionId ===
-              originalPathItem.getPerlenketteSection().trainrunSectionId &&
+                originalPathItem.getPerlenketteSection().trainrunSectionId &&
               originalPathItem.getPerlenketteSection().isBeingEdited
             ) {
               pathItem.getPerlenketteSection().isBeingEdited =
@@ -204,10 +198,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
   }
 
   ngAfterContentChecked() {
-    this.contentWidth = Math.max(
-      460,
-      document.getElementById("cd-layout-aside").clientWidth,
-    );
+    this.contentWidth = Math.max(460, document.getElementById("cd-layout-aside").clientWidth);
 
     const mainContentElement = document.getElementById("cd-layout-content");
     this.contentHeight = mainContentElement.clientHeight;
@@ -221,14 +212,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
   }
 
   getPerlenketteViewBox(): string {
-    return (
-      "0 " +
-      this.svgPoint.getY() +
-      " " +
-      this.contentWidth +
-      " " +
-      this.contentHeight
-    );
+    return "0 " + this.svgPoint.getY() + " " + this.contentWidth + " " + this.contentHeight;
   }
 
   showTrainrunName(): boolean {
@@ -252,8 +236,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
   }
 
   getClosestPerlenketteItem(): PerlenketteNode {
-    let retEl: PerlenketteNode =
-      this.perlenketteRenderingElementsHeight.keys()[0];
+    let retEl: PerlenketteNode = this.perlenketteRenderingElementsHeight.keys()[0];
     let currentY = 0;
     this.perlenketteRenderingElementsHeight.forEach((pItem, idx) => {
       const el = pItem[0];
@@ -264,10 +247,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
           if (retEl === undefined || currentY < Math.max(0, offY)) {
             retEl = el.getPerlenketteNode();
           }
-          if (
-            Math.max(0, offY) - currentY <
-            Math.max(0, offY) + height - currentY
-          ) {
+          if (Math.max(0, offY) - currentY < Math.max(0, offY) + height - currentY) {
             retEl = el.getPerlenketteNode();
           }
         }
@@ -334,7 +314,10 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
   }
 
   isLastNodeButNotVeryLast(item: PerlenketteItem) {
-    if (this.perlenketteTrainrun.pathItems.indexOf(item) === this.perlenketteTrainrun.pathItems.length - 1) {
+    if (
+      this.perlenketteTrainrun.pathItems.indexOf(item) ===
+      this.perlenketteTrainrun.pathItems.length - 1
+    ) {
       return false;
     }
     return this.isLastNode(item);
@@ -391,43 +374,30 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     const pathItem: PerlenketteItem = this.perlenketteTrainrun.pathItems.find(
       (item: PerlenketteItem) => {
         if (item.isPerlenketteSection()) {
-          return (
-            item.getPerlenketteSection().trainrunSectionId === trainrunSectionId
-          );
+          return item.getPerlenketteSection().trainrunSectionId === trainrunSectionId;
         }
         return false;
       },
     );
     if (pathItem !== undefined) {
-      const pItemHeight = this.perlenketteRenderingElementsHeight.find(
-        (pItem) => {
-          return pItem[0] === pathItem;
-        },
-      );
+      const pItemHeight = this.perlenketteRenderingElementsHeight.find((pItem) => {
+        return pItem[0] === pathItem;
+      });
       const delta = pItemHeight !== undefined ? pItemHeight[1] : 0;
       const currentY = this.getGotoCurrentY(pathItem) + delta;
       this.updateSvgPointY(pathItem, currentY - this.contentHeight / 4);
     }
   }
 
-  moveNetzgrafikEditorFocalViewPoint(
-    pathItem: PerlenketteItem,
-    offset = new Vec2D(0, 0),
-  ) {
-    if (
-      this.uiInteractionService.getEditorMode() === EditorMode.NetzgrafikEditing
-    ) {
+  moveNetzgrafikEditorFocalViewPoint(pathItem: PerlenketteItem, offset = new Vec2D(0, 0)) {
+    if (this.uiInteractionService.getEditorMode() === EditorMode.NetzgrafikEditing) {
       if (pathItem.isPerlenketteNode()) {
         const pNode = pathItem.getPerlenketteNode();
         const node = this.nodeService.getNodeFromId(pNode.nodeId);
         if (node !== undefined) {
-          const x =
-            node.getPositionX() + node.getNodeWidth() / 2.0 + offset.getX();
-          const y =
-            node.getPositionY() + node.getNodeHeight() / 2.0 + offset.getY();
-          this.uiInteractionService.moveNetzgrafikEditorFocalViewPoint(
-            new Vec2D(x, y),
-          );
+          const x = node.getPositionX() + node.getNodeWidth() / 2.0 + offset.getX();
+          const y = node.getPositionY() + node.getNodeHeight() / 2.0 + offset.getY();
+          this.uiInteractionService.moveNetzgrafikEditorFocalViewPoint(new Vec2D(x, y));
         }
       }
     }
@@ -468,17 +438,16 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
 
   private updateSvgPointY(pathItem: PerlenketteItem, y: number) {
     this.svgPoint.setY(
-      Math.max(
-        -this.contentHeight / 4,
-        Math.min(this.renderedElementsHeight - 48, y),
-      ),
+      Math.max(-this.contentHeight / 4, Math.min(this.renderedElementsHeight - 48, y)),
     );
   }
 
   getArrowDirectionForOneWayTrainrun(): string {
-    if (!this.perlenketteTrainrun || this.perlenketteTrainrun.direction === Direction.ROUND_TRIP) return "minus-medium";
+    if (!this.perlenketteTrainrun || this.perlenketteTrainrun.direction === Direction.ROUND_TRIP) {
+      return "minus-medium";
+    }
     const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
-      this.trainrunSectionService.getSelectedTrainrunSection()
+      this.trainrunSectionService.getSelectedTrainrunSection(),
     );
     if (isTargetRightOrBottom) {
       return "arrow-right-medium";

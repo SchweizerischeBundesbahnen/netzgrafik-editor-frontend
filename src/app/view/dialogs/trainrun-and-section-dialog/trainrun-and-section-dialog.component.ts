@@ -1,9 +1,5 @@
 import {Component, OnDestroy, TemplateRef, ViewChild} from "@angular/core";
-import {
-  SbbDialog,
-  SbbDialogConfig,
-  SbbDialogPosition,
-} from "@sbb-esta/angular/dialog";
+import {SbbDialog, SbbDialogConfig, SbbDialogPosition} from "@sbb-esta/angular/dialog";
 import {Vec2D} from "../../../utils/vec2D";
 import {Trainrun} from "../../../models/trainrun.model";
 import {TrainrunService} from "../../../services/data/trainrun.service";
@@ -89,15 +85,12 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
     private trainrunSectionService: TrainrunSectionService,
     private dataService: DataService,
   ) {
-    this.trainrunService.trainruns
-      .pipe(takeUntil(this.destroyed))
-      .subscribe((trainrunList) => {
-        if (!trainrunList.length) {
-          this.closeDialog();
-          return;
-        }
+    this.trainrunService.trainruns.pipe(takeUntil(this.destroyed)).subscribe((trainrunList) => {
+      if (!trainrunList.length) {
+        this.closeDialog();
+        return;
       }
-    );
+    });
 
     this.uiInteractionService.trainrunDialog
       .pipe(takeUntil(this.destroyed))
@@ -108,28 +101,23 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
         }
 
         this.data = parameter;
-        const selectedTrainrunSection =
-          this.trainrunSectionService.getSelectedTrainrunSection();
+        const selectedTrainrunSection = this.trainrunSectionService.getSelectedTrainrunSection();
         this.selectedTrainrun = this.trainrunService.getSelectedTrainrun();
-        this.trainrunSectionHelper = new TrainrunsectionHelper(
-          this.trainrunService,
-        );
+        this.trainrunSectionHelper = new TrainrunsectionHelper(this.trainrunService);
 
         const nextStopLeftNode = this.trainrunSectionHelper.getNextStopLeftNode(
           selectedTrainrunSection,
           parameter.nodesOrdered,
         );
-        const nextStopRightNode =
-          this.trainrunSectionHelper.getNextStopRightNode(
-            selectedTrainrunSection,
-            parameter.nodesOrdered,
-          );
+        const nextStopRightNode = this.trainrunSectionHelper.getNextStopRightNode(
+          selectedTrainrunSection,
+          parameter.nodesOrdered,
+        );
 
         this.nextStopLeftNodeName = nextStopLeftNode.getFullName();
         this.nextStopRightNodeName = nextStopRightNode.getFullName();
         this.openDialog(parameter);
-      }
-    );
+      });
   }
 
   static getDialogConfig(
@@ -181,13 +169,9 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
       this.dialogConfig,
     );
     this.dialogPos = {
-      bottom:
-        parseInt(this.dialogConfig.position.top, 10) +
-        parseInt(this.dialogConfig.height, 10),
+      bottom: parseInt(this.dialogConfig.position.top, 10) + parseInt(this.dialogConfig.height, 10),
       left: parseInt(this.dialogConfig.position.left, 10),
-      right:
-        parseInt(this.dialogConfig.position.left, 10) +
-        parseInt(this.dialogConfig.width, 10),
+      right: parseInt(this.dialogConfig.position.left, 10) + parseInt(this.dialogConfig.width, 10),
       top: parseInt(this.dialogConfig.position.top, 10),
     };
   }
@@ -200,10 +184,7 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
     if (event.buttons === 1) {
       const eventTarget = event.target as HTMLElement;
       if (eventTarget.className === "sbb-tab-labels") {
-        this.dialogMovementLastPosition = new Vec2D(
-          event.screenX,
-          event.screenY,
-        );
+        this.dialogMovementLastPosition = new Vec2D(event.screenX, event.screenY);
       }
     }
   }

@@ -1,10 +1,8 @@
-<div sbbDialogContent [class]="getContentClassTag()"
-    [style]="getContentStyleTag()"
->
+<div sbbDialogContent [class]="getContentClassTag()" [style]="getContentStyleTag()">
   <div class="toggle-container">
-    <span class="toggle-label"
-          (click)="onIsOneWayChanged(false)"
-    >{{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.round-trip' | translate }}</span>
+    <span class="toggle-label" (click)="onIsOneWayChanged(false)">{{
+      "app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.round-trip" | translate
+    }}</span>
     <label class="toggle-switch">
       <input
         sbbInput
@@ -14,12 +12,11 @@
       />
       <span class="slider"></span>
     </label>
-    <span class="toggle-label"
-          (click)="onIsOneWayChanged(true)"
-    >{{ 'app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.one-way' | translate }}</span>
+    <span class="toggle-label" (click)="onIsOneWayChanged(true)">{{
+      "app.view.dialogs.trainrun-and-section-dialog.trainrun-roundtrip-tab.one-way" | translate
+    }}</span>
   </div>
-  <sbb-trainrunsection-card *ngIf="isOneWay"
-                            [innerContentScaleFactor]="innerContentScaleFactor">
+  <sbb-trainrunsection-card *ngIf="isOneWay" [innerContentScaleFactor]="innerContentScaleFactor">
   </sbb-trainrunsection-card>
 </div>
 <ng-container *ngIf="toolbarVisible">
@@ -29,8 +26,7 @@
       tabindex="-1"
       (click)="onDuplicateTrainrun()"
       [title]="
-        'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDuplicate'
-          | translate
+        'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDuplicate' | translate
       "
     >
       <sbb-icon svgIcon="plus-medium" aria-hidden="false"></sbb-icon>
@@ -40,8 +36,7 @@
       tabindex="-1"
       (click)="onDeleteTrainrun()"
       [title]="
-        'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDelete'
-          | translate
+        'app.view.dialogs.trainrun-and-section-dialog.trainrun-tab.trainrunDelete' | translate
       "
     >
       <sbb-icon svgIcon="trash-medium" aria-hidden="false"></sbb-icon>

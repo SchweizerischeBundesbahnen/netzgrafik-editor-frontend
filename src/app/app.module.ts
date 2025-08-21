@@ -243,9 +243,7 @@ import {SbbToggleModule} from "@sbb-esta/angular/toggle";
   ],
   bootstrap: environment.customElement ? [] : [AppComponent],
   providers: [
-    ...(environment.backendUrl
-      ? [{provide: BASE_PATH, useValue: environment.backendUrl}]
-      : []),
+    ...(environment.backendUrl ? [{provide: BASE_PATH, useValue: environment.backendUrl}] : []),
     {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
   ],
 })

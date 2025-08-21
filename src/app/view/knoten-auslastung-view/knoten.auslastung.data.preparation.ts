@@ -27,11 +27,7 @@ export class KnotenAuslastungDataPreparation {
     return trainrunName;
   }
 
-  addExtremitySectionToMatrix(
-    trainrunSection: TrainrunSection,
-    node: Node,
-    isTargetNode: boolean,
-  ) {
+  addExtremitySectionToMatrix(trainrunSection: TrainrunSection, node: Node, isTargetNode: boolean) {
     let directionLoops: number[] = [0, 1];
     if (!trainrunSection.getTrainrun().isRoundTrip()) {
       directionLoops = isTargetNode ? [0] : [1];
@@ -40,9 +36,7 @@ export class KnotenAuslastungDataPreparation {
     for (const directionLoop of directionLoops) {
       const haltezeit = node.getTrainrunCategoryHaltezeit();
       const delta = Math.floor(
-        haltezeit[
-          trainrunSection.getTrainrun().getTrainrunCategory().fachCategory
-        ].haltezeit,
+        haltezeit[trainrunSection.getTrainrun().getTrainrunCategory().fachCategory].haltezeit,
       );
       let arrivalTime = isTargetNode
         ? trainrunSection.getTargetArrivalConsecutiveTime()
@@ -70,11 +64,7 @@ export class KnotenAuslastungDataPreparation {
         const freqArrivalTime = Math.round(arrivalTime + freqLoop) % 60;
         const freqDeparturetime = Math.round(freqArrivalTime + delta);
         let freeIdx = 0;
-        for (
-          let uLoop = freqArrivalTime;
-          uLoop <= freqDeparturetime;
-          uLoop += 1
-        ) {
+        for (let uLoop = freqArrivalTime; uLoop <= freqDeparturetime; uLoop += 1) {
           while (freeIdx < KnotenAuslastungDataPreparation.MAX_NR_TRACKS - 1) {
             if (this.matrix[uLoop % 60][freeIdx] === undefined) {
               break;
@@ -82,20 +72,13 @@ export class KnotenAuslastungDataPreparation {
             freeIdx += 1;
           }
         }
-        for (
-          let uLoop = freqArrivalTime;
-          uLoop <= freqDeparturetime;
-          uLoop += 1
-        ) {
-          this.matrix[uLoop % 60][freeIdx] =
-            trainrunSection.getTrainrunId();
+        for (let uLoop = freqArrivalTime; uLoop <= freqDeparturetime; uLoop += 1) {
+          this.matrix[uLoop % 60][freeIdx] = trainrunSection.getTrainrunId();
         }
         this.nbrUsedOfTrackFound = Math.max(this.nbrUsedOfTrackFound, freeIdx);
         this.nodeDatas.push({
           trainrunSection: trainrunSection,
-          name: KnotenAuslastungDataPreparation.getTrainrunLabel(
-            trainrunSection,
-          ),
+          name: KnotenAuslastungDataPreparation.getTrainrunLabel(trainrunSection),
           tooltip: this.getTrainrunTooltip(trainrunSection, targetNode),
           color: freeIdx,
           startAngle: (freqArrivalTime / 60) * (2 * Math.PI),
@@ -143,93 +126,55 @@ export class KnotenAuslastungDataPreparation {
     }
     this.matrix = new Array(KnotenAuslastungDataPreparation.MAX_NR_MINUTES)
       .fill(undefined)
-      .map(() =>
-        new Array(KnotenAuslastungDataPreparation.MAX_NR_TRACKS).fill(
-          undefined,
-        ),
-      );
+      .map(() => new Array(KnotenAuslastungDataPreparation.MAX_NR_TRACKS).fill(undefined));
 
     this.nbrUsedOfTrackFound = -1;
     this.nodeDatas = [];
     this.resourceDatas = [];
 
     const sortedTransitions = Object.assign([], node.getTransitions());
-    sortedTransitions.sort(
-      (transition1: Transition, transition2: Transition) => {
-        const trainrunSection11 = node
-          .getPort(transition1.getPortId1())
-          .getTrainrunSection();
-        const trainrunSection12 = node
-          .getPort(transition1.getPortId2())
-          .getTrainrunSection();
-        const trainrunSection21 = node
-          .getPort(transition2.getPortId1())
-          .getTrainrunSection();
-        const trainrunSection22 = node
-          .getPort(transition2.getPortId2())
-          .getTrainrunSection();
-        const delta1 = this.getRealStopTime(
-          trainrunSection11,
-          trainrunSection12,
-          node,
-        );
-        const delta2 = this.getRealStopTime(
-          trainrunSection21,
-          trainrunSection22,
-          node,
-        );
-        return delta2 - delta1; // sort in descending order
-      },
-    );
+    sortedTransitions.sort((transition1: Transition, transition2: Transition) => {
+      const trainrunSection11 = node.getPort(transition1.getPortId1()).getTrainrunSection();
+      const trainrunSection12 = node.getPort(transition1.getPortId2()).getTrainrunSection();
+      const trainrunSection21 = node.getPort(transition2.getPortId1()).getTrainrunSection();
+      const trainrunSection22 = node.getPort(transition2.getPortId2()).getTrainrunSection();
+      const delta1 = this.getRealStopTime(trainrunSection11, trainrunSection12, node);
+      const delta2 = this.getRealStopTime(trainrunSection21, trainrunSection22, node);
+      return delta2 - delta1; // sort in descending order
+    });
 
     // Add trainrun sections that are connected to an intermediate node.
     sortedTransitions.forEach((transition: Transition) => {
       const isRoundTrip = transition.getTrainrun().isRoundTrip();
-      const trainrunSection1 = node
-        .getPort(transition.getPortId1())
-        .getTrainrunSection();
-      const trainrunSection2 = node
-        .getPort(transition.getPortId2())
-        .getTrainrunSection();
-      
-      const [tsFromNode, tsToNode] = trainrunSection1.getSourceNodeId() === node.getId()
-        ? [trainrunSection1, trainrunSection2]
-        : [trainrunSection2, trainrunSection1];
+      const trainrunSection1 = node.getPort(transition.getPortId1()).getTrainrunSection();
+      const trainrunSection2 = node.getPort(transition.getPortId2()).getTrainrunSection();
+
+      const [tsFromNode, tsToNode] =
+        trainrunSection1.getSourceNodeId() === node.getId()
+          ? [trainrunSection1, trainrunSection2]
+          : [trainrunSection2, trainrunSection1];
 
       const isTargetNode = tsToNode.getTargetNodeId() === node.getId();
       if (isRoundTrip || isTargetNode) {
-        this.addSectionsAtTransitionToMatrix(
-          tsToNode,
-          tsFromNode,
-          node.getId(),
-        );
+        this.addSectionsAtTransitionToMatrix(tsToNode, tsFromNode, node.getId());
       }
       if (isRoundTrip || !isTargetNode) {
-        this.addSectionsAtTransitionToMatrix(
-          tsFromNode,
-          tsToNode,
-          node.getId(),
-        );
+        this.addSectionsAtTransitionToMatrix(tsFromNode, tsToNode, node.getId());
       }
     });
 
     // Add trainrun sections that are connected to the 1st and the last nodes of the trainrun.
-    this.trainrunSectionService
-      .getTrainrunSections()
-      .forEach((ts: TrainrunSection) => {
-        const isSourceNode = ts.getSourceNodeId() === node.getId();
-        const isTargetNode = ts.getTargetNodeId() === node.getId();
-        const isExtremitySection = (isSourceNode || isTargetNode) && node.getNextTrainrunSection(ts) === undefined;
-        if (isExtremitySection) {
-          this.addExtremitySectionToMatrix(ts, node, isTargetNode);
-        }
-      });
+    this.trainrunSectionService.getTrainrunSections().forEach((ts: TrainrunSection) => {
+      const isSourceNode = ts.getSourceNodeId() === node.getId();
+      const isTargetNode = ts.getTargetNodeId() === node.getId();
+      const isExtremitySection =
+        (isSourceNode || isTargetNode) && node.getNextTrainrunSection(ts) === undefined;
+      if (isExtremitySection) {
+        this.addExtremitySectionToMatrix(ts, node, isTargetNode);
+      }
+    });
 
-    for (
-      let trackLoop = 0;
-      trackLoop <= Math.max(this.nbrUsedOfTrackFound, 0);
-      trackLoop += 1
-    ) {
+    for (let trackLoop = 0; trackLoop <= Math.max(this.nbrUsedOfTrackFound, 0); trackLoop += 1) {
       for (let timeLoop = 0; timeLoop < 60; timeLoop += 5) {
         this.resourceDatas.push({
           startAngle: ((timeLoop + 0.1) / 60) * 2 * Math.PI,
@@ -237,10 +182,7 @@ export class KnotenAuslastungDataPreparation {
           innerRadius: trackLoop,
           outerRadius: trackLoop,
           capacityLimitReached:
-            trackLoop >=
-            this.resourceService
-              .getResource(node.getResourceId())
-              .getCapacity(),
+            trackLoop >= this.resourceService.getResource(node.getResourceId()).getCapacity(),
         });
       }
     }
@@ -258,16 +200,10 @@ export class KnotenAuslastungDataPreparation {
     return this.resourceDatas;
   }
 
-  private getTrainrunTooltip(
-    trainrunSection: TrainrunSection,
-    targetNode: Node,
-  ): string {
+  private getTrainrunTooltip(trainrunSection: TrainrunSection, targetNode: Node): string {
     let trainrunName = trainrunSection.getTrainrun().getCategoryShortName();
     trainrunName += trainrunSection.getTrainrun().getTitle();
-    const endNode1 = this.trainrunService.getEndNode(
-      targetNode,
-      trainrunSection,
-    );
+    const endNode1 = this.trainrunService.getEndNode(targetNode, trainrunSection);
     trainrunName += " &#x2192; " + endNode1.getBetriebspunktName();
     return trainrunName;
   }
@@ -304,11 +240,7 @@ export class KnotenAuslastungDataPreparation {
       const freqDeparturetime = Math.round(freqArrivalTime + delta);
 
       let freeIdx = 0;
-      for (
-        let uLoop = freqArrivalTime;
-        uLoop <= freqDeparturetime;
-        uLoop += 1
-      ) {
+      for (let uLoop = freqArrivalTime; uLoop <= freqDeparturetime; uLoop += 1) {
         while (freeIdx < KnotenAuslastungDataPreparation.MAX_NR_TRACKS - 1) {
           if (this.matrix[uLoop % 60][freeIdx] === undefined) {
             break;
@@ -316,19 +248,13 @@ export class KnotenAuslastungDataPreparation {
           freeIdx += 1;
         }
       }
-      for (
-        let uLoop = freqArrivalTime;
-        uLoop <= freqDeparturetime;
-        uLoop += 1
-      ) {
+      for (let uLoop = freqArrivalTime; uLoop <= freqDeparturetime; uLoop += 1) {
         this.matrix[uLoop % 60][freeIdx] = trainrunSection1.getTrainrunId();
       }
       this.nbrUsedOfTrackFound = Math.max(this.nbrUsedOfTrackFound, freeIdx);
       this.nodeDatas.push({
         trainrunSection: trainrunSection1,
-        name: KnotenAuslastungDataPreparation.getTrainrunLabel(
-          trainrunSection1,
-        ),
+        name: KnotenAuslastungDataPreparation.getTrainrunLabel(trainrunSection1),
         tooltip: this.getTrainrunTooltip(trainrunSection1, targetNode),
         color: freeIdx,
         startAngle: (freqArrivalTime / 60) * (2 * Math.PI),

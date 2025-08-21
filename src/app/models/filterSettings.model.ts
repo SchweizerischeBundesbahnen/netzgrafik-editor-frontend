@@ -105,8 +105,7 @@ export class FilterSetting {
     this.filterAllNonStopNodes = filterAllNonStopNodes;
     this.filterNotes = filterNotes;
     this.timeDisplayPrecision = timeDisplayPrecision;
-    this.isTemporaryDisableFilteringOfItemsInView =
-      isTemporaryDisableFilteringOfItemsInView;
+    this.isTemporaryDisableFilteringOfItemsInView = isTemporaryDisableFilteringOfItemsInView;
     this.temporaryEmptyAndNonStopFilteringSwitchedOff =
       temporaryEmptyAndNonStopFilteringSwitchedOff;
 
@@ -124,9 +123,7 @@ export class FilterSetting {
   }
 
   copy(): FilterSetting {
-    const newFilterSettting = new FilterSetting(
-      Object.assign({}, this.getDto()),
-    );
+    const newFilterSettting = new FilterSetting(Object.assign({}, this.getDto()));
     newFilterSettting.id = FilterSetting.incrementId();
     return newFilterSettting;
   }
@@ -135,9 +132,7 @@ export class FilterSetting {
     const self = this.getDto();
     let eq = true;
     Object.keys(self).forEach((key) => {
-      if (
-        key !== FilterSetting.isTemporaryDisableFilteringOfItemsInViewAttribute
-      ) {
+      if (key !== FilterSetting.isTemporaryDisableFilteringOfItemsInViewAttribute) {
         if (JSON.stringify(this[key]) !== JSON.stringify(fs[key])) {
           eq = false;
         }
@@ -149,10 +144,7 @@ export class FilterSetting {
   copyFilteringAttributes(fs: FilterSetting) {
     Object.keys(this).forEach((key) => {
       if (this[key] !== fs[key]) {
-        if (
-          key !==
-          FilterSetting.isTemporaryDisableFilteringOfItemsInViewAttribute
-        ) {
+        if (key !== FilterSetting.isTemporaryDisableFilteringOfItemsInViewAttribute) {
           if (Array.isArray(fs[key])) {
             this[key] = Object.assign([], fs[key]);
           } else {
@@ -213,8 +205,7 @@ export class FilterSetting {
       filterAllNonStopNodes: this.filterAllNonStopNodes,
       filterNotes: this.filterNotes,
       timeDisplayPrecision: this.timeDisplayPrecision,
-      isTemporaryDisableFilteringOfItemsInView:
-        this.isTemporaryDisableFilteringOfItemsInView,
+      isTemporaryDisableFilteringOfItemsInView: this.isTemporaryDisableFilteringOfItemsInView,
       temporaryEmptyAndNonStopFilteringSwitchedOff:
         this.temporaryEmptyAndNonStopFilteringSwitchedOff,
     };

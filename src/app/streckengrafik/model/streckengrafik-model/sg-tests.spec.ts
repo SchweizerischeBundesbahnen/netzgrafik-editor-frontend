@@ -115,20 +115,7 @@ describe("StreckengrafikModelTests", () => {
       0,
       true,
       new TrackData(3),
-      new SgPathNode(
-        0,
-        0,
-        "TEST",
-        20,
-        10,
-        0,
-        0,
-        new TrackData(2),
-        undefined,
-        false,
-        0,
-        12,
-      ),
+      new SgPathNode(0, 0, "TEST", 20, 10, 0, 0, new TrackData(2), undefined, false, 0, 12),
       undefined,
       undefined,
       undefined,
@@ -195,69 +182,26 @@ describe("StreckengrafikModelTests", () => {
     expect(TrainrunItem.equalTrainrunItems([item0], [item0])).toBe(true);
     expect(TrainrunItem.equalTrainrunItems([item0], [item2])).toBe(false);
     expect(TrainrunItem.equalTrainrunItems([item0], [item1])).toBe(true);
-    expect(
-      TrainrunItem.equalTrainrunItems(
-        [item0, item1, item2],
-        [item0, item1, item2],
-      ),
-    ).toBe(true);
-    expect(
-      TrainrunItem.equalTrainrunItems(
-        [item0, item2, item1],
-        [item0, item1, item2],
-      ),
-    ).toBe(true);
-    expect(TrainrunItem.equalTrainrunItems([], [])).toBe(true);
-    expect(TrainrunItem.equalTrainrunItems([item0], [])).toBe(false);
-    expect(TrainrunItem.equalTrainrunItems([item0], [item2, item1])).toBe(
-      false,
-    );
-    expect(TrainrunItem.equalTrainrunItems(undefined, [item2, item1])).toBe(
+    expect(TrainrunItem.equalTrainrunItems([item0, item1, item2], [item0, item1, item2])).toBe(
       true,
     );
+    expect(TrainrunItem.equalTrainrunItems([item0, item2, item1], [item0, item1, item2])).toBe(
+      true,
+    );
+    expect(TrainrunItem.equalTrainrunItems([], [])).toBe(true);
+    expect(TrainrunItem.equalTrainrunItems([item0], [])).toBe(false);
+    expect(TrainrunItem.equalTrainrunItems([item0], [item2, item1])).toBe(false);
+    expect(TrainrunItem.equalTrainrunItems(undefined, [item2, item1])).toBe(true);
     expect(TrainrunItem.equalTrainrunItems([item0], undefined)).toBe(true);
     const a = [item0];
     expect(TrainrunItem.equalTrainrunItems(a, a)).toBe(true);
   });
 
   it("Streckengrafik-Model - Test - TrainrunItem  - 002", () => {
-    const node0 = new PathNode(
-      0,
-      0,
-      9,
-      "AA",
-      10,
-      new TrackData(2),
-      false,
-      undefined,
-      false,
-      false,
-    );
-    const node1 = new PathNode(
-      0,
-      0,
-      9,
-      "BB",
-      10,
-      new TrackData(2),
-      false,
-      undefined,
-      false,
-      false,
-    );
+    const node0 = new PathNode(0, 0, 9, "AA", 10, new TrackData(2), false, undefined, false, false);
+    const node1 = new PathNode(0, 0, 9, "BB", 10, new TrackData(2), false, undefined, false, false);
 
-    const node2 = new PathNode(
-      1,
-      2,
-      9,
-      "CC",
-      10,
-      new TrackData(1),
-      true,
-      undefined,
-      false,
-      false,
-    );
+    const node2 = new PathNode(1, 2, 9, "CC", 10, new TrackData(1), true, undefined, false, false);
 
     const item0: TrainrunItem = new TrainrunItem(
       1,
@@ -352,18 +296,7 @@ describe("StreckengrafikModelTests", () => {
   });
 
   it("Streckengrafik-Model - Test - TrainrunItem  - 003", () => {
-    const node0 = new PathNode(
-      0,
-      0,
-      9,
-      "AA",
-      10,
-      new TrackData(2),
-      false,
-      undefined,
-      false,
-      true,
-    );
+    const node0 = new PathNode(0, 0, 9, "AA", 10, new TrackData(2), false, undefined, false, true);
     expect(node0.xPath()).toBe(60);
     expect(node0.getPathSection()).toBe(undefined);
   });

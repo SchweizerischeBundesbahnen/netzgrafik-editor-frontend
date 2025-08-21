@@ -36,16 +36,8 @@ describe("Reconnect TrainrunSection Test", () => {
     labelGroupService = new LabelGroupService(logService);
     labelService = new LabelService(logService, labelGroupService);
     filterService = new FilterService(labelService, labelGroupService);
-    trainrunService = new TrainrunService(
-      logService,
-      labelService,
-      filterService,
-    );
-    trainrunSectionService = new TrainrunSectionService(
-      logService,
-      trainrunService,
-      filterService,
-    );
+    trainrunService = new TrainrunService(logService, labelService, filterService);
+    trainrunSectionService = new TrainrunSectionService(logService, trainrunService, filterService);
     nodeService = new NodeService(
       logService,
       resourceService,
@@ -74,8 +66,7 @@ describe("Reconnect TrainrunSection Test", () => {
     dataService.loadNetzgrafikDto(
       NetzgrafikUnitTestingReconnectTrainrunSection.getUnitTestReconnectTrainrunSectionNetzgrafik(),
     );
-    const trainrunSectionOfInterest1 =
-      trainrunSectionService.getTrainrunSectionFromId(6);
+    const trainrunSectionOfInterest1 = trainrunSectionService.getTrainrunSectionFromId(6);
 
     trainrunSectionService.reconnectTrainrunSection(
       12,
@@ -91,8 +82,7 @@ describe("Reconnect TrainrunSection Test", () => {
     );
     expect(endNode1.getId()).toBe(11);
 
-    const trainrunSectionOfInterest2 =
-      trainrunSectionService.getTrainrunSectionFromId(7);
+    const trainrunSectionOfInterest2 = trainrunSectionService.getTrainrunSectionFromId(7);
     trainrunSectionService.reconnectTrainrunSection(
       12,
       11,
@@ -107,8 +97,7 @@ describe("Reconnect TrainrunSection Test", () => {
     );
     expect(endNode2.getId()).toBe(11);
 
-    const trainrunSectionOfInterest4 =
-      trainrunSectionService.getTrainrunSectionFromId(8);
+    const trainrunSectionOfInterest4 = trainrunSectionService.getTrainrunSectionFromId(8);
     trainrunSectionService.reconnectTrainrunSection(
       11,
       14,

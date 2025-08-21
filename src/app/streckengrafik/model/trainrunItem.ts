@@ -57,10 +57,7 @@ export class TrainrunItem {
     return equal;
   }
 
-  static equalTrainrunItems(
-    trainrunItems1: TrainrunItem[],
-    trainrunItems2: TrainrunItem[],
-  ) {
+  static equalTrainrunItems(trainrunItems1: TrainrunItem[], trainrunItems2: TrainrunItem[]) {
     if (trainrunItems1 === undefined) {
       return true;
     }

@@ -3,8 +3,8 @@ text.edge_text {
   font-size: 10px;
   stroke: var(--NODE_DOCKABLE);
   stroke-width: 0.5em;
-  paint-order:stroke;
-  stroke-linejoin:round
+  paint-order: stroke;
+  stroke-linejoin: round;
 }
 
 text.edge_text.selected.Streckengrafik {
