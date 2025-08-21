@@ -76,6 +76,7 @@ describe("Reconnect TrainrunSection Test", () => {
     );
     const trainrunSectionOfInterest1 =
       trainrunSectionService.getTrainrunSectionFromId(1);
+
     trainrunSectionService.reconnectTrainrunSection(
       1,
       7,

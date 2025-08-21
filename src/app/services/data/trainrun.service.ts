@@ -4,6 +4,7 @@ import {
   LabelRef,
   NetzgrafikDto,
   TrainrunCategory,
+  Direction,
   TrainrunDto,
   TrainrunFrequency,
   TrainrunTimeCategory,
@@ -531,6 +532,7 @@ export class TrainrunService {
     copiedtrainrun.setTrainrunCategory(trainrun.getTrainrunCategory());
     copiedtrainrun.setTrainrunFrequency(trainrun.getTrainrunFrequency());
     copiedtrainrun.setTrainrunTimeCategory(trainrun.getTrainrunTimeCategory());
+    copiedtrainrun.setDirection(trainrun.getDirection());
     copiedtrainrun.setTitle(trainrun.getTitle() + postfix);
     copiedtrainrun.setLabelIds(trainrun.getLabelIds());
     this.trainrunsStore.trainruns.push(copiedtrainrun);
@@ -868,6 +870,7 @@ export class TrainrunService {
     newTrainrun.setTrainrunTimeCategory(
       this.dataService.getTrainrunTimeCategory(trainrun.trainrunTimeCategoryId),
     );
+    newTrainrun.setDirection(trainrun.direction);
     newTrainrun.setTitle(trainrun.name);
     newTrainrun.setLabelIds(trainrun.labelIds);
     this.trainrunsStore.trainruns.push(newTrainrun);

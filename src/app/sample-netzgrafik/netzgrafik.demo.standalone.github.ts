@@ -2,6 +2,7 @@ import {
   HaltezeitFachCategories,
   LinePatternRefs,
   NetzgrafikDto,
+  Direction,
 } from "../data-structures/business.data.structures";
 
 export class NetzgrafikDemoStandaloneGithub {
@@ -25585,7 +25586,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 4,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 76,
@@ -25593,7 +25599,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 4,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 77,
@@ -25601,7 +25612,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 5,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 78,
@@ -25609,7 +25625,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 4,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 79,
@@ -25617,7 +25638,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 80,
@@ -25625,7 +25651,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 81,
@@ -25633,7 +25664,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 82,
@@ -25641,7 +25677,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 83,
@@ -25649,7 +25690,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 84,
@@ -25657,7 +25703,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 85,
@@ -25665,7 +25716,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 4,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 86,
@@ -25673,7 +25729,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 87,
@@ -25681,7 +25742,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 88,
@@ -25689,7 +25755,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 89,
@@ -25697,7 +25768,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 90,
@@ -25705,7 +25781,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 91,
@@ -25713,7 +25794,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            1,
+            9,
+            5
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 92,
@@ -25721,7 +25807,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            1,
+            9,
+            5
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 93,
@@ -25729,7 +25820,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 94,
@@ -25737,7 +25833,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 95,
@@ -25745,7 +25846,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 96,
@@ -25753,7 +25859,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 1,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         },
         {
           id: 97,
@@ -25761,7 +25872,12 @@ export class NetzgrafikDemoStandaloneGithub {
           categoryId: 2,
           frequencyId: 3,
           trainrunTimeCategoryId: 0,
-          labelIds: []
+          labelIds: [
+            3,
+            8,
+            4
+          ],
+          direction: Direction.ROUND_TRIP
         }
       ],
       resources: [
