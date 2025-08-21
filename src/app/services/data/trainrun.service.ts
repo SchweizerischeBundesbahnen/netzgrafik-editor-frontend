@@ -299,6 +299,16 @@ export class TrainrunService {
     this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
   }
 
+  updateDirection(
+    trainrun: Trainrun,
+    direction: Direction,
+  ) {
+    const trainrunSection = this.getTrainrunFromId(trainrun.getId());
+    trainrunSection.setDirection(direction);
+    this.trainrunsUpdated();
+    this.operation.emit(new TrainrunOperation(OperationType.update, trainrun));
+  }
+
   getTrainruns(): Trainrun[] {
     return Object.assign({}, this.trainrunsStore).trainruns;
   }
@@ -670,6 +680,14 @@ export class TrainrunService {
   getStartNodeWithTrainrunId(trainrunId: number): Node {
     const bothEndNodes = this.getBothEndNodesWithTrainrunId(trainrunId);
     return GeneralViewFunctions.getLeftOrTopNode(
+      bothEndNodes.endNode1,
+      bothEndNodes.endNode2,
+    );
+  }
+
+  getEndNodeWithTrainrunId(trainrunId: number): Node {
+    const bothEndNodes = this.getBothEndNodesWithTrainrunId(trainrunId);
+    return GeneralViewFunctions.getRightOrBottomNode(
       bothEndNodes.endNode1,
       bothEndNodes.endNode2,
     );
