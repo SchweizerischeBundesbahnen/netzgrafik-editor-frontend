@@ -455,23 +455,23 @@ export class TrainrunSectionTimesService {
 
   /* Buttons in Footer */
   onPropagateTimeLeft(trainrunSection: TrainrunSection) {
-    const rightNodeId = this.trainrunSectionHelper
-      .getRightNode(trainrunSection, this.nodesOrdered)
+    const nextStopRightNodeId = this.trainrunSectionHelper
+      .getNextStopRightNode(trainrunSection, this.nodesOrdered)
       .getId();
     this.trainrunSectionService.propagateTimeAlongTrainrun(
       trainrunSection.getId(),
-      rightNodeId,
+      nextStopRightNodeId,
     );
     this.loadPerlenketteService.render();
   }
 
   onPropagateTimeRight(trainrunSection: TrainrunSection) {
-    const leftNodeId = this.trainrunSectionHelper
-      .getLeftNode(trainrunSection, this.nodesOrdered)
+    const nextStopLeftNodeId = this.trainrunSectionHelper
+      .getNextStopLeftNode(trainrunSection, this.nodesOrdered)
       .getId();
     this.trainrunSectionService.propagateTimeAlongTrainrun(
       trainrunSection.getId(),
-      leftNodeId,
+      nextStopLeftNodeId,
     );
     this.loadPerlenketteService.render();
   }

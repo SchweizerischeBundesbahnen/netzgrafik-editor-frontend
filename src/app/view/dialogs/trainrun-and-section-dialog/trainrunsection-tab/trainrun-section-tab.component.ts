@@ -76,6 +76,25 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   private trainrunSectionHelper: TrainrunsectionHelper;
   private destroyed = new Subject<void>();
 
+  public get isTopTrainrunSectionInfoDisplayed(): boolean {
+    if (this.selectedTrainrunSection === null) {
+      return false;
+    }
+    const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
+      this.selectedTrainrunSection,
+    );
+    return this.isRoundTrip() || isTargetRightOrBottom;
+  }
+
+  public get isBottomTrainrunSectionInfoDisplayed(): boolean {
+    if (this.selectedTrainrunSection === null) {
+      return false;
+    }
+    const isTargetRightOrBottom = TrainrunsectionHelper.isTargetRightOrBottom(
+      this.selectedTrainrunSection,
+    );
+    return this.isRoundTrip() || !isTargetRightOrBottom;
+  }
 
   constructor(
     private dataService: DataService,
@@ -232,7 +251,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     setTimeout(() => {
       element.focus();
       element.select();
-    }, 100);
+    }, 800);
   }
 
   getEdgeLineClassAttrString(layer: number) {
@@ -256,6 +275,36 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
       )
     );
   }
+
+  getEdgeLineArrowClassAttrString() {
+    return (
+      StaticDomTags.EDGE_LINE_ARROW_CLASS +
+      StaticDomTags.makeClassTag(
+        StaticDomTags.FREQ_LINE_PATTERN,
+        this.frequencyLinePattern,
+      ) +
+      " " +
+      StaticDomTags.TAG_UI_DIALOG +
+      " " +
+      StaticDomTags.makeClassTag(
+        StaticDomTags.TAG_COLOR_REF,
+        this.categoryColorRef,
+      ) +
+      StaticDomTags.makeClassTag(
+        StaticDomTags.TAG_LINEPATTERN_REF,
+        this.timeCategoryLinePattern,
+      )
+    );
+  };
+
+  getArrowTranslateAndRotate() {
+    if (this.isTopTrainrunSectionInfoDisplayed && !this.isBottomTrainrunSectionInfoDisplayed) {
+      return "translate(60, 16) rotate(0)";
+    } else if (!this.isTopTrainrunSectionInfoDisplayed && this.isBottomTrainrunSectionInfoDisplayed) {
+      return "translate(60, 16) rotate(180)";
+    }
+    return "";
+  };
 
   /* methods for tabbing */
   setFocusToBeginningOfLoop() {
@@ -336,5 +385,9 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
         this.trainrunDialogParameter.offset,
       );
     }
+  }
+
+  private isRoundTrip() {
+    return this.selectedTrainrunSection.getTrainrun().isRoundTrip();
   }
 }
