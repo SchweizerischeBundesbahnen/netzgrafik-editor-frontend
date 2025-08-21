@@ -23,7 +23,8 @@ import {IsTrainrunSelectedService} from "../../services/data/is-trainrun-section
 import {NodeService} from "../../services/data/node.service";
 import {TrainrunBranchType} from "../model/enum/trainrun-branch-type-type";
 import {MultiSelectNodeGraph} from "../../utils/multi-select-node-graph";
-
+import {Direction} from "src/app/data-structures/business.data.structures";
+import {TrainrunsectionHelper} from "src/app/services/util/trainrunsection.helper";
 
 @Injectable({
   providedIn: "root",
@@ -180,7 +181,9 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
       undefined,
       undefined,
       undefined,
-      []
+      [],
+      false,
+      Direction.ROUND_TRIP,
     );
 
     // create a new graph object
@@ -480,6 +483,9 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
         trainrunSectionGroup.trainrunSectionWithNodes.trainrunSection;
       const fromNode = trainrunSectionGroup.trainrunSectionWithNodes.fromNode;
       const toNode = trainrunSectionGroup.trainrunSectionWithNodes.toNode;
+      const fromNodeHaltezeit = fromNode.getTrainrunCategoryHaltezeit();
+      const toNodeHaltezeit = toNode.getTrainrunCategoryHaltezeit();
+      const trainrunFachCategory = trainrun.getTrainrunCategory().fachCategory;
       let toTrainrunSection = undefined;
       if (trainrunSectionGroup.toTrainrunSectionWithNodes) {
         toTrainrunSection =
@@ -500,7 +506,8 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
           index++,
           new TrackData(1), //forward track 1
           false,
-          !this.filterService.filterNode(fromNode),
+          fromNodeHaltezeit[trainrunFachCategory].haltezeit,
+          !this.filterService.filterNode(fromNode)
         );
         trainrunStartTime = sourcePathNode.departureTime;
         forwardStartNode = sourcePathNode;
@@ -513,6 +520,7 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
         toNode.getArrivalConsecutiveTime(trainrunSection),
         trainrunSection.getNumberOfStops(),
         new TrackData(1),
+        false,
       );
       trainrunEndTime = toNode.getArrivalConsecutiveTime(trainrunSection);
       pathItems.push(pathSection);
@@ -529,7 +537,8 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
         index++,
         new TrackData(1), // forward
         false,
-        !this.filterService.filterNode(toNode),
+        toNodeHaltezeit[trainrunFachCategory].haltezeit,
+        !this.filterService.filterNode(toNode)
       );
 
       if (toNode.getId() === forwardBackwardNodes.startBackwardNode.getId()) {
@@ -548,6 +557,9 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
           trainrunSectionGroup.trainrunSectionWithNodes.trainrunSection;
         const fromNode = trainrunSectionGroup.trainrunSectionWithNodes.fromNode;
         const toNode = trainrunSectionGroup.trainrunSectionWithNodes.toNode;
+        const fromNodeHaltezeit = fromNode.getTrainrunCategoryHaltezeit();
+        const toNodeHaltezeit = toNode.getTrainrunCategoryHaltezeit();
+        const trainrunFachCategory = trainrun.getTrainrunCategory().fachCategory;
         let toTrainrunSection = undefined;
         if (trainrunSectionGroup.toTrainrunSectionWithNodes) {
           toTrainrunSection =
@@ -567,7 +579,8 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
             index-- - 1,
             new TrackData(2), // backward
             true,
-            !this.filterService.filterNode(fromNode),
+            fromNodeHaltezeit[trainrunFachCategory].haltezeit,
+            !this.filterService.filterNode(fromNode)
           );
           backwardStartNode = sourcePathNode;
           pathItems.push(sourcePathNode);
@@ -596,7 +609,8 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
           index-- - 1,
           new TrackData(2), // backward
           true,
-          !this.filterService.filterNode(toNode),
+          toNodeHaltezeit[trainrunFachCategory].haltezeit,
+          !this.filterService.filterNode(toNode)
         );
 
         if (toNode.getId() === forwardBackwardNodes.startForwardNode.getId()) {
@@ -657,7 +671,6 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
         pathSection.departureBranchEndNode = this.getLastPathNode(pathItems);
       }
     });
-
     return {
       trainrunItem: new TrainrunItem(
         trainrun.getId(),
@@ -668,7 +681,9 @@ export class Sg1LoadTrainrunItemService implements OnDestroy {
         trainrun.getTitle(),
         trainrun.getCategoryShortName(),
         trainrun.getCategoryColorRef(),
-        pathItems
+        pathItems,
+        TrainrunsectionHelper.isTargetRightOrBottom(trainrunSection),
+        trainrun.getDirection(),
       ),
       visitedTrainrunSections: visitedTrainrunSections
     };
