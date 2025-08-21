@@ -3777,7 +3777,8 @@
       "categoryId": 0,
       "frequencyId": 0,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 2,
@@ -3785,7 +3786,8 @@
       "categoryId": 0,
       "frequencyId": 1,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 3,
@@ -3793,7 +3795,8 @@
       "categoryId": 1,
       "frequencyId": 2,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 4,
@@ -3801,7 +3804,8 @@
       "categoryId": 2,
       "frequencyId": 3,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 5,
@@ -3809,7 +3813,8 @@
       "categoryId": 3,
       "frequencyId": 4,
       "trainrunTimeCategoryId": 0,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 6,
@@ -3817,7 +3822,8 @@
       "categoryId": 4,
       "frequencyId": 4,
       "trainrunTimeCategoryId": 1,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 7,
@@ -3825,7 +3831,8 @@
       "categoryId": 5,
       "frequencyId": 3,
       "trainrunTimeCategoryId": 2,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 8,
@@ -3833,7 +3840,8 @@
       "categoryId": 3,
       "frequencyId": 2,
       "trainrunTimeCategoryId": 1,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 9,
@@ -3841,7 +3849,8 @@
       "categoryId": 6,
       "frequencyId": 4,
       "trainrunTimeCategoryId": 2,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 10,
@@ -3849,7 +3858,8 @@
       "categoryId": 5,
       "frequencyId": 2,
       "trainrunTimeCategoryId": 1,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     },
     {
       "id": 11,
@@ -3857,7 +3867,8 @@
       "categoryId": 3,
       "frequencyId": 3,
       "trainrunTimeCategoryId": 1,
-      "labels": []
+      "labels": [],
+      "direction": "round_trip"
     }
   ],
   "resources": [

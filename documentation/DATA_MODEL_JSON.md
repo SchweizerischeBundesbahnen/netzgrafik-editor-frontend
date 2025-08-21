@@ -391,7 +391,8 @@ More details about TimeLock
       "categoryId": 1,
       "frequencyId": 3,
       "trainrunTimeCategoryId": 0,
-      "labelIds": []
+      "labelIds": [],
+      "direction": "round_trip"
     }
   ],
 ```
@@ -401,8 +402,7 @@ More details about TimeLock
 - **frequencyId**: Reference to the [trainrunFrequencies](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#metadata) : numeric
 - **trainrunTimeCategoryId**: Reference to the [trainrunTimeCategories](https://github.com/SchweizerischeBundesbahnen/netzgrafik-editor-frontend/blob/main/documentation/DATA_MODEL_JSON.md#metadata) : numeric 
 - **labelIds**: Filterable labels assigned to the node are stored in this array of label identifiers : Array of integer
-
-
+- **direction**: Direction of the trainrun : Direction (enum value)
 
 ---
 
