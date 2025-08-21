@@ -12,20 +12,23 @@ import {LinePatternRefs} from "src/app/data-structures/business.data.structures"
 import {TrainrunsectionHelper} from "../../../services/util/trainrunsection.helper";
 import {Node} from "src/app/models/node.model";
 import {TrainrunSectionTimesService} from "src/app/services/data/trainrun-section-times.service";
+import {TrainrunService} from "src/app/services/data/trainrun.service";
 
 export enum SymmetryReference {
-  Top = "top",
-  Bottom = "bottom",
+  Top,
+  Bottom,
 }
 
-export enum NodeSide {
-  Left = "left",
-  Right = "right",
+export enum SymmetryOn {
+  LeftNode,
+  RightNode,
+  Trainrun,
+  TrainrunSection,
 }
 
 export class SymmetrySelectionDialogParameter {
   private trainrunSection: TrainrunSection;
-  public readonly nodeSide: NodeSide;
+  public readonly symmetryOn: SymmetryOn;
   public readonly topSymmetryTimeStructure: LeftAndRightTimeStructure;
   public readonly bottomSymmetryTimeStructure: LeftAndRightTimeStructure;
   public readonly startNode: string[];
@@ -34,7 +37,8 @@ export class SymmetrySelectionDialogParameter {
   public dialogFeedback: Observable<SymmetryReference | null>;
 
   constructor(
-    nodeSide: NodeSide,
+    symmetryOn: SymmetryOn,
+    private trainrunService: TrainrunService,
     private trainrunSectionService: TrainrunSectionService,
     public trainrunSectionTimesService: TrainrunSectionTimesService,
   ) {
@@ -48,16 +52,30 @@ export class SymmetrySelectionDialogParameter {
     // Calculate both symmetry alternatives for card preview
     this.topSymmetryTimeStructure =
       this.trainrunSectionTimesService.calculateTimeStructureAfterSymmetrySelection(
-        nodeSide,
+        symmetryOn,
         SymmetryReference.Top,
       );
     this.bottomSymmetryTimeStructure =
       this.trainrunSectionTimesService.calculateTimeStructureAfterSymmetrySelection(
-        nodeSide,
+        symmetryOn,
         SymmetryReference.Bottom,
       );
 
-    const nodes = this.getNodesFromTrainrunSection(this.trainrunSection);
+    // Determine start and end nodes based on symmetryOn
+    let nodes: {startNode: Node; endNode: Node};
+    if (symmetryOn === SymmetryOn.Trainrun) {
+      nodes = {
+        startNode: this.trainrunService.getStartNodeWithTrainrunId(
+          this.trainrunSection.getTrainrunId(),
+        ),
+        endNode: this.trainrunService.getEndNodeWithTrainrunId(
+          this.trainrunSection.getTrainrunId(),
+        ),
+      };
+    } else {
+      nodes = this.getNodesFromTrainrunSection(this.trainrunSection);
+    }
+
     this.startNode = [
       nodes.startNode.getFullName(),
       nodes.startNode.getBetriebspunktName(),
@@ -163,8 +181,14 @@ export class SymmetrySelectionDialogComponent implements OnDestroy {
     this.destroyed.complete();
   }
 
-  onCardSelection(direction: SymmetryReference) {
-    this.selectedSymmetryReference = direction;
+  onCardSelection(reference: SymmetryReference) {
+    this.selectedSymmetryReference = reference;
+  }
+  
+  isConfirmButtonDisabled() {
+    return !Object.values(SymmetryReference).includes(
+      this.selectedSymmetryReference,
+    );
   }
 
   onConfirm() {
@@ -183,12 +207,12 @@ export class SymmetrySelectionDialogComponent implements OnDestroy {
       this.symmetrySelectionDialogTemplate,
       dialogConfig,
     );
-    dialogRef.afterClosed().subscribe((result: SymmetryReference | null) => {
-      parameter.subject.next(result);
+    dialogRef.afterClosed().subscribe((reference: SymmetryReference | null) => {
+      parameter.subject.next(reference);
     });
   }
 
-  getEdgeLineClassAttrString(layer: number, cardPosition: string) {
+  getEdgeLineClassAttrString(layer: number, symmetryCard: SymmetryReference) {
     return (
       StaticDomTags.EDGE_LINE_CLASS +
       StaticDomTags.makeClassTag(StaticDomTags.LINE_LAYER, "" + layer) +
@@ -201,7 +225,7 @@ export class SymmetrySelectionDialogComponent implements OnDestroy {
       " " +
       StaticDomTags.makeClassTag(
         StaticDomTags.TAG_COLOR_REF,
-        this.getColorRefTag(cardPosition),
+        this.getColorRefTag(symmetryCard),
       ) +
       StaticDomTags.makeClassTag(
         StaticDomTags.TAG_LINEPATTERN_REF,
@@ -209,32 +233,33 @@ export class SymmetrySelectionDialogComponent implements OnDestroy {
       )
     );
   }
-  getColorRefTag(cardPosition: string) {
+
+  getColorRefTag(symmetryCard: SymmetryReference) {
     const colorRefTag =
-      cardPosition === this.selectedSymmetryReference
+      symmetryCard === this.selectedSymmetryReference
         ? this.categoryColorRef
         : "NORMAL";
     return colorRefTag;
   }
 
-  getEdgeLineTextClass(cardPosition: string) {
+  getEdgeLineTextClass(symmetryCard: SymmetryReference) {
     return (
       StaticDomTags.EDGE_LINE_TEXT_CLASS +
       " " +
       StaticDomTags.makeClassTag(
         StaticDomTags.TAG_COLOR_REF,
-        this.getColorRefTag(cardPosition),
+        this.getColorRefTag(symmetryCard),
       )
     );
   }
 
-  getEdgeLineArrowClass(cardPosition: string) {
+  getEdgeLineArrowClass(symmetryCard: SymmetryReference) {
     return (
       StaticDomTags.EDGE_LINE_ARROW_CLASS +
       " " +
       StaticDomTags.makeClassTag(
         StaticDomTags.TAG_COLOR_REF,
-        this.getColorRefTag(cardPosition),
+        this.getColorRefTag(symmetryCard),
       )
     );
   }

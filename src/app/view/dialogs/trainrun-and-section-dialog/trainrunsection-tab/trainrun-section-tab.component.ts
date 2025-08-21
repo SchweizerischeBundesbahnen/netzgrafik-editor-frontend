@@ -30,7 +30,7 @@ import {UiInteractionService} from "../../../../services/ui/ui.interaction.servi
 import {
   SymmetrySelectionDialogParameter,
   SymmetryReference,
-  NodeSide
+  SymmetryOn
 } from "../../symmetry-selection-dialog/symmetry-selection-dialog.component";
 
 export interface LeftAndRightTimeStructure {
@@ -88,11 +88,11 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
   private destroyed = new Subject<void>();
 
   public get isTopTrainrunSectionInfoDisplayed(): boolean {
-    return this.isRoundTrip() || !this.isPositionSwapped();
+    return this.isRoundTrip() || TrainrunsectionHelper.isPositionSwapped(this.selectedTrainrunSection);
   }
 
   public get isBottomTrainrunSectionInfoDisplayed(): boolean {
-    return this.isRoundTrip() || this.isPositionSwapped();
+    return this.isRoundTrip() || TrainrunsectionHelper.isPositionSwapped(this.selectedTrainrunSection);
   }
 
   public get isSymmetric(): boolean {
@@ -400,22 +400,22 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     if (!symmetry) {
       this.trainrunSectionTimesService.onLeftNodeSymmetryChanged(
         symmetry,
-        this.isPositionSwapped()
+        TrainrunsectionHelper.isPositionSwapped(this.selectedTrainrunSection)
       );
       return;
     }
 
     // Asymmetry -> Symmetry, show the dialog to choose symmetry reference
     const originalLeftSymmetryState = this.isLeftNodeSymmetric();
-    this.showSymmetrySelectionDialog(NodeSide.Left).then((reference: SymmetryReference | null) => {
-      if (!Object.values(SymmetryReference).includes(reference)) {
+    this.showSymmetrySelectionDialog(SymmetryOn.LeftNode).then((reference: SymmetryReference | null) => {
+      if (!(reference in SymmetryReference)) {
         // User cancelled (user clicks Cancel / X / outside the dialog), don't enable symmetry
         this.revertLeftToggleState(originalLeftSymmetryState);
         return;
       }
       this.trainrunSectionTimesService.onLeftNodeSymmetryChanged(
         symmetry,
-        this.isPositionSwapped(),
+        TrainrunsectionHelper.isPositionSwapped(this.selectedTrainrunSection),
         reference
       );
     });
@@ -426,22 +426,22 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     if (!symmetry) {
       this.trainrunSectionTimesService.onRightNodeSymmetryChanged(
         symmetry,
-        this.isPositionSwapped()
+        TrainrunsectionHelper.isPositionSwapped(this.selectedTrainrunSection),
       );
       return;
     }
 
     // Asymmetry -> Symmetry, show the dialog to choose symmetry reference
     const originalRightSymmetryState = this.isRightNodeSymmetric();
-    this.showSymmetrySelectionDialog(NodeSide.Right).then((reference: SymmetryReference | null) => {
-      if (!Object.values(SymmetryReference).includes(reference)) {
+    this.showSymmetrySelectionDialog(SymmetryOn.RightNode).then((reference: SymmetryReference | null) => {
+      if (!(reference in SymmetryReference)) {
         // User cancelled (user clicks Cancel / X / outside the dialog), don't enable symmetry
         this.revertRightToggleState(originalRightSymmetryState);
         return;
       }
       this.trainrunSectionTimesService.onRightNodeSymmetryChanged(
         symmetry,
-        this.isPositionSwapped(),
+        TrainrunsectionHelper.isPositionSwapped(this.selectedTrainrunSection),
         reference
       );
     });
@@ -490,13 +490,10 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  private isPositionSwapped(): boolean {
-    return !TrainrunsectionHelper.isTargetRightOrBottom(this.selectedTrainrunSection);
-  }
-
-  private showSymmetrySelectionDialog(nodeSide: NodeSide): Promise<SymmetryReference | null> {
+  private showSymmetrySelectionDialog(symmetryOn: SymmetryOn): Promise<SymmetryReference | null> {
     const parameter = new SymmetrySelectionDialogParameter(
-      nodeSide,
+      symmetryOn,
+      this.trainrunService,
       this.trainrunSectionService,
       this.trainrunSectionTimesService
     );

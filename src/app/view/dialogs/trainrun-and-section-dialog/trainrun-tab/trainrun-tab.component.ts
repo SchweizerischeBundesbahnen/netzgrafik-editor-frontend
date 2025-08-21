@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from "@angular/core";
+import {ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild} from "@angular/core";
 import {
   TrainrunCategory,
   TrainrunFrequency,
@@ -15,6 +15,8 @@ import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
 import {TrainrunDialogParameter} from "../trainrun-and-section-dialog.component";
 import {VersionControlService} from "../../../../services/data/version-control.service";
+import {SymmetryOn, SymmetryReference, SymmetrySelectionDialogParameter} from "../../symmetry-selection-dialog/symmetry-selection-dialog.component";
+import {TrainrunSectionTimesService} from "src/app/services/data/trainrun-section-times.service";
 
 @Component({
   selector: "sbb-trainrun-tab",
@@ -26,6 +28,8 @@ export class TrainrunTabComponent implements OnDestroy {
   @Input() toolbarVisible = true;
   @Input() isIntegratedComponent = false;
   @Input() trainrunDialogParameter: TrainrunDialogParameter;
+
+  @ViewChild("trainrunSymmetryToggle") trainrunSymmetryToggle: ElementRef;
 
   public selectedTrainrun: Trainrun;
   public selectedFrequency: TrainrunFrequency;
@@ -41,6 +45,8 @@ export class TrainrunTabComponent implements OnDestroy {
     private trainrunSectionService: TrainrunSectionService,
     private uiInteractionService: UiInteractionService,
     private versionControlService: VersionControlService,
+    private changeDetectionRef: ChangeDetectorRef,
+    public trainrunSectionTimesService: TrainrunSectionTimesService,
   ) {
     this.initializeWithCurrentSelectedTrainrun();
     this.trainrunService.trainruns
@@ -196,6 +202,24 @@ export class TrainrunTabComponent implements OnDestroy {
     this.initializeWithCurrentSelectedTrainrun();
   }
 
+  isSymmetric(): boolean {
+    return this.trainrunSectionService.isTrainrunSymmetric(this.selectedTrainrun.getId());
+  }
+
+  onTrainrunSymmetryToggleChanged() {
+    this.showSymmetrySelectionDialog(SymmetryOn.Trainrun).then((reference: SymmetryReference | null) => {
+      if (!(reference in SymmetryReference)) {
+        // User cancelled (user clicks Cancel / X / outside the dialog), don't enable symmetry
+        this.revertTrainrunSymmetryToggleState(false);
+        return;
+      }
+      this.trainrunSectionTimesService.onTrainrunSymmetryChanged(
+        this.selectedTrainrun.getId(),
+        reference,
+      );
+    });
+  }
+
   private initializeWithCurrentSelectedTrainrun() {
     this.selectedTrainrun = this.trainrunService.getSelectedTrainrun();
     if (this.selectedTrainrun !== null) {
@@ -205,5 +229,29 @@ export class TrainrunTabComponent implements OnDestroy {
         this.selectedTrainrun.getTrainrunTimeCategory();
       this.trainrunTitle = this.selectedTrainrun.getTitle();
     }
+  }
+
+  private showSymmetrySelectionDialog(symmetryOn: SymmetryOn): Promise<SymmetryReference | null> {
+    const parameter = new SymmetrySelectionDialogParameter(
+      symmetryOn,
+      this.trainrunService,
+      this.trainrunSectionService,
+      this.trainrunSectionTimesService
+    );
+
+    return new Promise<SymmetryReference | null>((resolve) => {
+      parameter.dialogFeedback
+        .subscribe((result: SymmetryReference | null) => {
+          resolve(result);
+        });
+      this.uiInteractionService.showSymmetrySelectionDialog(parameter);
+    });
+  }
+
+  private revertTrainrunSymmetryToggleState(originalState: boolean) {
+    if (this.trainrunSymmetryToggle && this.trainrunSymmetryToggle.nativeElement) {
+      this.trainrunSymmetryToggle.nativeElement.checked = !originalState;
+    }
+    this.changeDetectionRef.detectChanges();
   }
 }

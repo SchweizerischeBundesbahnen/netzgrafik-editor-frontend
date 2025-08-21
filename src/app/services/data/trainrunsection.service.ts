@@ -1256,6 +1256,10 @@ export class TrainrunSectionService implements OnDestroy {
     });
   }
 
+  isTrainrunSymmetric(trainrunId: number): boolean {
+    return this.getAllTrainrunSectionsForTrainrun(trainrunId).every((section) => section.isSymmetric());
+  }
+
   private copyTrainrunSection(
     existingTrainrunSection: TrainrunSection,
     newTrainrunId: number,
@@ -1586,6 +1590,7 @@ export class TrainrunSectionService implements OnDestroy {
     return returnValue;
   }
 
+  // TODO: remove this func
   /**
    * Enforce [source → target] [source → target] sections, disallow
    * [source → target] [target → source] and [target → source] [source → target]

@@ -61,6 +61,7 @@ export class TrainrunsectionHelper {
     }
   }
 
+  // TODO: remove this method
   static getRightArrivalTime(
     timeStructure: LeftAndRightTimeStructure,
     precision = TrainrunSectionService.TIME_PRECISION
@@ -82,7 +83,6 @@ export class TrainrunsectionHelper {
     );
   }
 
-  // TODO: remove this method
   getLeftBetriebspunkt(
     trainrunSection: TrainrunSection,
     orderedNodes: Node[],
@@ -382,6 +382,10 @@ export class TrainrunsectionHelper {
     const targetNode = trainrunSection.getTargetNode();
 
     return GeneralViewFunctions.getRightOrBottomNode(sourceNode, targetNode) === targetNode;
+  }
+  
+  static isPositionSwapped(trainrunSection: TrainrunSection): boolean {
+    return !TrainrunsectionHelper.isTargetRightOrBottom(trainrunSection);
   }
 
   static getAdjustedTimeBasedOnSymmetry(

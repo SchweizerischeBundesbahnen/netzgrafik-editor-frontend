@@ -77,7 +77,7 @@ export class TrainrunSection {
       sourcePortId: 0,
       targetNodeId: 0,
       targetPortId: 0,
-      sourceSymmetry: true,
+      sourceSymmetry: false,
       targetSymmetry: true,
       sourceDeparture: {
         time: 0,

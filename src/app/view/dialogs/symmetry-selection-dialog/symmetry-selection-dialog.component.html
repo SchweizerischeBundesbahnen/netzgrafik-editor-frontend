@@ -298,7 +298,7 @@
   <div sbbDialogActions>
     <button
       sbb-button
-      [disabled]="!selectedSymmetryReference"
+      [disabled]="isConfirmButtonDisabled()"
       (click)="onConfirm()"
     >
       {{ "app.view.dialogs.symmetry-dialog.apply-symmetry" | translate }}
