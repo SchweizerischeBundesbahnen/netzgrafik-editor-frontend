@@ -7,6 +7,7 @@ import {TrainrunService} from "../../data/trainrun.service";
 import {ShortestDistanceNode} from "./shortest-distance-node";
 import {ShortestDistanceEdge} from "./shortest-distance-edge";
 import {FilterService} from "../../ui/filter.service";
+import {Direction} from "src/app/data-structures/business.data.structures";
 
 //
 // The shortest travel time search method is based on the Dijkstra Algorithm.
@@ -26,12 +27,12 @@ export class ShortestTravelTimeSearch {
     this.simulationChangeTrainPenalty = 0;
   }
 
-  private static getInitalShortestDistanceEdges(
+  private static getInitialShortestDistanceEdges(
     node: Node,
     initDepartureTime: number,
   ): ShortestDistanceEdge[] {
-    const initalEdges: ShortestDistanceEdge[] = [];
-    initalEdges.push(
+    const initialEdges: ShortestDistanceEdge[] = [];
+    initialEdges.push(
       new ShortestDistanceEdge(
         node,
         node,
@@ -40,7 +41,7 @@ export class ShortestTravelTimeSearch {
         [],
       ),
     );
-    return initalEdges;
+    return initialEdges;
   }
 
   private static correctHourOverflowFromToTime(
@@ -143,21 +144,31 @@ export class ShortestTravelTimeSearch {
     return !trans.getIsNonStopTransit();
   }
 
+  private static isDirectionCompatible(
+    currentNode: Node,
+    departureTrainrunSection: TrainrunSection,
+  ): boolean {
+    // ROUND_TRIP: always compatible
+    // ONE_WAY: only allow if currentNode is the source node
+    return departureTrainrunSection.getTrainrun().isRoundTrip() ||
+      departureTrainrunSection.getSourceNodeId() === currentNode.getId();
+  }
+
   calculateShortestDistanceNodesFromStartingNode(
     departureNodeId: number,
   ): ShortestDistanceNode[] {
     const departureNode = this.nodeService.getNodeFromId(departureNodeId);
-    const initalShortestDistanceNode = new ShortestDistanceNode(
+    const initialShortestDistanceNode = new ShortestDistanceNode(
       departureNode,
       0,
     );
     const shortestDistanceEdgeStack: ShortestDistanceEdge[] =
-      ShortestTravelTimeSearch.getInitalShortestDistanceEdges(
+      ShortestTravelTimeSearch.getInitialShortestDistanceEdges(
         departureNode,
         this.getSimulationDepartureMinute(),
       );
     const initialFinalShortestDistanceNodes: ShortestDistanceNode[] = [
-      initalShortestDistanceNode,
+      initialShortestDistanceNode,
     ];
     return Object.assign(
       [],
@@ -175,23 +186,23 @@ export class ShortestTravelTimeSearch {
     const departureNode = this.nodeService.getNodeFromId(departureNodeId);
     const departureTrainrunSection =
       this.trainrunSectionService.getTrainrunSectionFromId(trainrunSectionId);
-    const initalShortestDistanceNodeFrom = new ShortestDistanceNode(
+    const initialShortestDistanceNodeFrom = new ShortestDistanceNode(
       departureNode,
       0,
     );
-    const initalShortestDistanceNodeTo = new ShortestDistanceNode(
+    const initialShortestDistanceNodeTo = new ShortestDistanceNode(
       departureNode.getOppositeNode(departureTrainrunSection),
       departureTrainrunSection.getTravelTime(),
     );
-    initalShortestDistanceNodeTo.setPath([departureTrainrunSection]);
+    initialShortestDistanceNodeTo.setPath([departureTrainrunSection]);
     const outgoingEdge = this.getOutgoingEdge(
       departureTrainrunSection,
       departureNode,
     );
     const shortestDistanceEdgeStack: ShortestDistanceEdge[] = [outgoingEdge];
     let initialFinalShortestDistanceNodes: ShortestDistanceNode[] = [
-      initalShortestDistanceNodeFrom,
-      initalShortestDistanceNodeTo,
+      initialShortestDistanceNodeFrom,
+      initialShortestDistanceNodeTo,
     ];
     initialFinalShortestDistanceNodes =
       ShortestTravelTimeSearch.updateFinalAndStackData(
@@ -312,12 +323,19 @@ export class ShortestTravelTimeSearch {
       incomingEdge
         .getToNode()
         .getPorts()
-        .filter((p: Port) =>
-          ShortestTravelTimeSearch.isEdgeChangeAllowed(
+        .filter((p: Port) => {
+          // only allow sections that go "away" from the current node
+          const isDirectionCompatible = ShortestTravelTimeSearch.isDirectionCompatible(
+              incomingEdge.getToNode(),
+              p.getTrainrunSection(),
+            );
+          const isEdgeChangeAllowed = ShortestTravelTimeSearch.isEdgeChangeAllowed(
             incomingEdge,
             p.getTrainrunSection(),
-          ),
-        )
+          );
+
+          return isDirectionCompatible && isEdgeChangeAllowed;
+        })
         .forEach((p: Port) => {
           const outgoingTrainrunSection: TrainrunSection =
             p.getTrainrunSection();
@@ -363,7 +381,7 @@ export class ShortestTravelTimeSearch {
           }
         });
 
-      // get next edge to visite -> visited the closed (smallest distance) next edge before others (pop)
+      // get next edge to visit -> visited the closed (smallest distance) next edge before others (pop)
       incomingEdge = this.getNextShortestDistanceEdge(
         shortestDistanceEdgeStack,
       );
