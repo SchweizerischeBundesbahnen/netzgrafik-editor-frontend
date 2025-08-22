@@ -1107,10 +1107,31 @@ export class Sg6TrackService implements OnDestroy {
           }
         }
         if (path.isSection()) {
-          if (
-            path.getPathSection().arrivalNodeId + ":" + path.getPathSection().departureNodeId ===
-            key
-          ) {
+          // This code checks if the current path section matches a specified key
+          // before copying track data to it. There are two main conditions:
+          //
+          // 1. **Common Behavior**:
+          //    - We copy the track data if the arrival and departure node IDs of the
+          //      path section match the key in the correct order (arrival:departure).
+          //
+          // 2. **One-Way Check**:
+          //    - For one-way train runs (non-round trips), we also check if the
+          //      section's departure and arrival node IDs match the key in reverse
+          //      order (departure:arrival). This allows us to handle one-way
+          //      template train runs correctly.
+          //
+          // If either condition is satisfied, the track data will be assigned to
+          // the path section.
+          const checkCommonBehavior =
+            path.getPathSection().arrivalNodeId + ":" + path.getPathSection().departureNodeId === key;
+
+          const ts =
+            this.trainrunSectionService.getTrainrunSectionFromId(path.getPathSection().trainrunSectionId);
+          const checkOneWayOppositeDirection =
+            (!ts.getTrainrun().isRoundTrip()) &&
+            (path.getPathSection().departureNodeId + ":" + path.getPathSection().arrivalNodeId === key);
+
+          if (checkCommonBehavior || checkOneWayOppositeDirection) {
             path.getPathSection().trackData = trackData;
           }
         }
