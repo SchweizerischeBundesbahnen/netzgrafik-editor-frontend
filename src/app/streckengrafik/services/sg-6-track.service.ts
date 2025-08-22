@@ -1125,8 +1125,7 @@ export class Sg6TrackService implements OnDestroy {
           const ps = path.getPathSection();
           const keyCommonBehavior = ps.arrivalNodeId + ":" + ps.departureNodeId;
           const keyOneWaySpecialCase = ps.departureNodeId + ":" + ps.arrivalNodeId;
-          const ts =
-            this.trainrunSectionService.getTrainrunSectionFromId(ps.trainrunSectionId);
+          const ts = this.trainrunSectionService.getTrainrunSectionFromId(ps.trainrunSectionId);
           const isRoundTrip = ts.getTrainrun().isRoundTrip();
 
           if (keyCommonBehavior === key || (!isRoundTrip && keyOneWaySpecialCase === key)) {
