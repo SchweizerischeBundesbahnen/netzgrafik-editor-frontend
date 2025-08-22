@@ -26,6 +26,12 @@ import {Direction} from "../data-structures/business.data.structures";
 import {TrainrunsectionHelper} from "../services/util/trainrunsection.helper";
 import {TrainrunSectionService} from "../services/data/trainrunsection.service";
 import {TrainrunService} from "../services/data/trainrun.service";
+import {
+  SymmetryOn,
+  SymmetryReference,
+  SymmetrySelectionDialogParameter,
+} from "../view/dialogs/symmetry-selection-dialog/symmetry-selection-dialog.component";
+import {TrainrunSectionTimesService} from "../services/data/trainrun-section-times.service";
 
 enum ShowTrainrunEditTab {
   sbb_trainrun_tab = "GENERAL",
@@ -41,6 +47,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
   perlenketteTrainrun: PerlenketteTrainrun;
   @ViewChild("svgPerlenkette") svgPerlenkette: ElementRef<SVGSVGElement>;
   @ViewChild("drawingContainer") drawingContainer: ElementRef;
+  @ViewChild("trainrunSymmetryToggle") trainrunSymmetryToggle: ElementRef;
   @Input() sidebarElementHeight: number;
 
   private readonly destroyed$ = new Subject<void>();
@@ -73,6 +80,7 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     private changeDetectorRef: ChangeDetectorRef,
     private trainrunService: TrainrunService,
     private trainrunSectionService: TrainrunSectionService,
+    public trainrunSectionTimesService: TrainrunSectionTimesService,
   ) {
     this.selectedPerlenketteConnection = undefined;
     this.trainrunSectionHelper = new TrainrunsectionHelper(this.trainrunService);
@@ -456,5 +464,48 @@ export class PerlenketteComponent implements AfterContentChecked, OnDestroy {
     }
   }
 
+  isSymmetric(): boolean {
+    return this.trainrunSectionService.isTrainrunSymmetric(this.perlenketteTrainrun.trainrunId);
+  }
+
+  onTrainrunSymmetryToggleChanged() {
+    this.showSymmetrySelectionDialog(SymmetryOn.Trainrun).then(
+      (reference: SymmetryReference | null) => {
+        if (!(reference in SymmetryReference)) {
+          // User cancelled (user clicks Cancel / X / outside the dialog), don't enable symmetry
+          this.revertTrainrunSymmetryToggleState(false);
+          return;
+        }
+        this.trainrunSectionTimesService.onTrainrunSymmetryChanged(
+          this.perlenketteTrainrun.trainrunId,
+          reference,
+        );
+      },
+    );
+  }
+
   protected readonly ShowTrainrunEditTab = ShowTrainrunEditTab;
+
+  private showSymmetrySelectionDialog(symmetryOn: SymmetryOn): Promise<SymmetryReference | null> {
+    const parameter = new SymmetrySelectionDialogParameter(
+      symmetryOn,
+      this.trainrunService,
+      this.trainrunSectionService,
+      this.trainrunSectionTimesService,
+    );
+
+    return new Promise<SymmetryReference | null>((resolve) => {
+      parameter.dialogFeedback.subscribe((result: SymmetryReference | null) => {
+        resolve(result);
+      });
+      this.uiInteractionService.showSymmetrySelectionDialog(parameter);
+    });
+  }
+
+  private revertTrainrunSymmetryToggleState(originalState: boolean) {
+    if (this.trainrunSymmetryToggle && this.trainrunSymmetryToggle.nativeElement) {
+      this.trainrunSymmetryToggle.nativeElement.checked = !originalState;
+    }
+    this.changeDetectorRef.detectChanges();
+  }
 }

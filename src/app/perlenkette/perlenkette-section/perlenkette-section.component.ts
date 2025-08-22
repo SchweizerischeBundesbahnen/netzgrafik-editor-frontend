@@ -1052,6 +1052,7 @@ export class PerlenketteSectionComponent implements OnInit, AfterContentInit, On
     const targetArrival = this.getSectionTargetArrivalTime();
     const targetDeparture = this.getSectionTargetDepartureTime();
     const travelTime = this.getSectionTravelTime();
+    const backwardTravelTime = this.trainrunSection.getBackwardTravelTime();
 
     this.trainrunSectionService.updateTrainrunSectionTime(
       trsId,
@@ -1060,6 +1061,7 @@ export class PerlenketteSectionComponent implements OnInit, AfterContentInit, On
       targetArrival,
       targetDeparture,
       travelTime,
+      backwardTravelTime,
     );
     this.trainrunSectionService.trainrunSectionsUpdated();
   }

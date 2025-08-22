@@ -1,6 +1,20 @@
-@import "../../../rastering/definitions";
+@import "../../rastering/definitions";
 
-::ng-deep div.OneWayCardBetriebspunkt {
+// Style sbbDialogContent only within this component
+:host ::ng-deep [sbbDialogContent] {
+  flex: inherit;
+}
+
+.symmetry-selection-content {
+  padding: 0;
+  width: 100%;
+  min-width: 400px;
+  height: inherit;
+  min-height: inherit;
+  max-height: inherit;
+}
+
+::ng-deep div.SymmetryCardBetriebspunkt {
   max-width: 160px;
   padding: 1px;
   text-align: center;
@@ -14,10 +28,11 @@
   flex-direction: column;
   justify-content: space-around;
   row-gap: 6px;
-  padding-top: 13px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
-.OneWayCard {
+.SymmetryCard {
   border-radius: 15px;
   display: flex;
   padding: 1rem 0;
@@ -27,24 +42,25 @@
   * {
     cursor: pointer;
   }
+
   * > text.edge_text {
     font-size: 10px;
   }
 }
 
-.OneWayCard.muted {
+.SymmetryCard.muted {
   border: 1px solid $COLOR_MUTED_SILVER;
 }
 
-.OneWayCard.selected {
+.SymmetryCard.selected {
   border: 1px solid $COLOR_Focus;
 }
 
-.OneWayCard:hover {
+.SymmetryCard:hover {
   background: var(--COLOR_TRANSITION_GRAYEDOUT);
 }
 
-.OneWayCard:active {
+.SymmetryCard:active {
   background-color: $COLOR_MUTED_SILVER;
 }
 

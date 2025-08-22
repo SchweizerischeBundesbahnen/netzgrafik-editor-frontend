@@ -149,21 +149,37 @@
       <div class="sepdiv"></div>
     </ng-container>
 
-    <!--- Station List (navigation) --->
-    <ng-container *ngFor="let pathItem of perlenketteTrainrun.pathItems">
-      <div *ngIf="pathItem.isPerlenketteNode()">
-        <p class="alignleft" style="line-height: 10px">
-          <span [class]="getSmallstationClassTag(pathItem)" (click)="goto(pathItem)">{{
-            pathItem.getPerlenketteNode().shortName
-          }}</span>
+    <div class="station-toggle-container">
+      <!--- Station List (navigation) --->
+      <div class="station-list">
+        <ng-container *ngFor="let pathItem of perlenketteTrainrun.pathItems">
+          <div *ngIf="pathItem.isPerlenketteNode()">
+            <p class="alignleft" style="line-height: 20px">
+              <span [class]="getSmallstationClassTag(pathItem)" (click)="goto(pathItem)">{{
+                pathItem.getPerlenketteNode().shortName
+              }}</span>
 
-          <ng-container *ngIf="isLastNodeButNotVeryLast(pathItem)">
-            <span [class]="getSmallstationClassTag(pathItem)"> &#x2022; </span>
-          </ng-container>
-        </p>
+              <ng-container *ngIf="isLastNodeButNotVeryLast(pathItem)">
+                <span [class]="getSmallstationClassTag(pathItem)"> &#x2022; </span>
+              </ng-container>
+            </p>
+          </div>
+        </ng-container>
       </div>
-    </ng-container>
 
+      <div class="toggle-container" *ngIf="!isSymmetric()">
+        <label class="toggle-switch">
+          <input
+            sbbInput
+            type="checkbox"
+            [checked]="!isSymmetric()"
+            (change)="onTrainrunSymmetryToggleChanged()"
+            #trainrunSymmetryToggle
+          />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
     <div class="sepdiv"></div>
   </div>
 
