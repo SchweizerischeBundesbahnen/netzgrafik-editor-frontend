@@ -1123,13 +1123,16 @@ export class Sg6TrackService implements OnDestroy {
           // If either condition is satisfied, the track data will be assigned to
           // the path section.
           const checkCommonBehavior =
-            path.getPathSection().arrivalNodeId + ":" + path.getPathSection().departureNodeId === key;
+            path.getPathSection().arrivalNodeId + ":" + path.getPathSection().departureNodeId ===
+            key;
 
-          const ts =
-            this.trainrunSectionService.getTrainrunSectionFromId(path.getPathSection().trainrunSectionId);
+          const ts = this.trainrunSectionService.getTrainrunSectionFromId(
+            path.getPathSection().trainrunSectionId,
+          );
           const checkOneWayOppositeDirection =
-            (!ts.getTrainrun().isRoundTrip()) &&
-            (path.getPathSection().departureNodeId + ":" + path.getPathSection().arrivalNodeId === key);
+            !ts.getTrainrun().isRoundTrip() &&
+            path.getPathSection().departureNodeId + ":" + path.getPathSection().arrivalNodeId ===
+              key;
 
           if (checkCommonBehavior || checkOneWayOppositeDirection) {
             path.getPathSection().trackData = trackData;
