@@ -31,9 +31,20 @@ import { MathUtils } from "src/app/utils/math";
 
 interface ContainertoExportData {
   documentToExport: HTMLElement;
-  exportParameter: SvgExportOptions;
+  exportParameter: param;
   essentialProps: string[];
 }
+
+class param {
+ encoderOptions: number;
+ scale: number;
+ left: number;
+ top: number;
+ width: number;
+ height: number;
+ backgroundColor: string;
+}
+
 
 @Component({
   selector: "sbb-editor-tools-view-component",
