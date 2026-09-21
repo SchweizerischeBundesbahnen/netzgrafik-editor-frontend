@@ -180,7 +180,10 @@ export class EditorToolsViewComponent {
       let h = containerInfo.documentToExport.clientHeight;
       canvas.width = w;
       canvas.height = h;
-      canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+      let context = canvas.getContext("2d");
+      context.fillStyle = containerInfo.exportParameter.backgroundColor;
+      context.fillRect(0,0,canvas.width, canvas.height);
+      context.drawImage(img, 0, 0, w, h)
       let dataURL = canvas.toDataURL("image/png");
       let a = document.createElement("a");
       a.download = download;
@@ -191,12 +194,6 @@ export class EditorToolsViewComponent {
       document.body.removeChild(a);
     }
 
-
-    // saveSvgAsPng(
-    //   containerInfo.documentToExport,
-    //   this.getFilenameToExport() + ".png",
-    //   containerInfo.exportParameter,
-    // );
 
     this.levelOfDetailService.enableLevelOfDetailRendering();
   }
