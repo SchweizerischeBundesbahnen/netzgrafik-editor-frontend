@@ -1,6 +1,5 @@
 import { parse } from "papaparse";
 import { Component, ElementRef, ViewChild, ChangeDetectionStrategy } from "@angular/core";
-// import { SvgExportOptions, svgAsDataUri, saveSvgAsPng } from "save-svg-as-png";
 import { DataService } from "../../services/data/data.service";
 import { TrainrunService } from "../../services/data/trainrun.service";
 import { NodeService } from "../../services/data/node.service";
@@ -525,6 +524,7 @@ export class EditorToolsViewComponent {
       "text-anchor",
       "dominant-baseline",
       "rx",
+      "background-color",
     ];
 
     return {
@@ -536,7 +536,7 @@ export class EditorToolsViewComponent {
 
   private prepareStyleForExport(containerInfo: ContainertoExportData) {
     const element2export = containerInfo.documentToExport;
-
+    element2export.style.backgroundColor = containerInfo.exportParameter.backgroundColor;
     const elements = element2export.querySelectorAll("*");
     elements.forEach((el) => {
       const style = window.getComputedStyle(el);
