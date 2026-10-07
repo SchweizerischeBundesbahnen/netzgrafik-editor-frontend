@@ -1,6 +1,6 @@
 import { parse } from "papaparse";
 import { Component, ElementRef, ViewChild, ChangeDetectionStrategy } from "@angular/core";
-import { SvgExportOptions, svgAsDataUri, saveSvgAsPng } from "save-svg-as-png";
+// import { SvgExportOptions, svgAsDataUri, saveSvgAsPng } from "save-svg-as-png";
 import { DataService } from "../../services/data/data.service";
 import { TrainrunService } from "../../services/data/trainrun.service";
 import { NodeService } from "../../services/data/node.service";
@@ -158,18 +158,19 @@ export class EditorToolsViewComponent {
     const scaleToTargetWidth = 2000 / containerInfo.exportParameter.width;
     containerInfo.exportParameter.scale = scaleToTargetWidth;
 
-    svgAsDataUri(containerInfo.documentToExport, containerInfo.exportParameter).then(
-      (uri: string) => {
+    let svgData = new XMLSerializer().serializeToString(containerInfo.documentToExport);
+    
         const a = document.createElement("a");
         document.body.appendChild(a);
-        a.href = uri;
+        a.href = "data:image/svg+xml;utf8," + svgData;
         a.download = this.getFilenameToExport() + ".svg";
+        a.dataset.downloadurl = ["svg", a.download, a.href].join(':');
         a.click();
         URL.revokeObjectURL(a.href);
         a.remove();
         this.levelOfDetailService.enableLevelOfDetailRendering();
-      },
-    );
+      
+    
   }
 
   onExportContainerAsPNG() {
@@ -516,12 +517,14 @@ export class EditorToolsViewComponent {
       "stroke",
       "stroke-width",
       "stroke-dasharray",
+      "stroke-opacity",
       "font-family",
       "font-size",
       "font-weight",
       "opacity",
       "text-anchor",
       "dominant-baseline",
+      "rx",
     ];
 
     return {
