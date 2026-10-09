@@ -7,7 +7,7 @@ import {environment} from "../environments/environment";
 import packageJson from "../../package.json";
 import {Observable, merge} from "rxjs";
 import {ProjectDto} from "./api/generated";
-import {NetzgrafikDto} from "./data-structures/business.data.structures";
+import {FreeFloatingTextDto, NetzgrafikDto} from "./data-structures/business.data.structures";
 import {Operation} from "./models/operation.model";
 import {LabelService} from "./services/data/label.service";
 import {NodeService} from "./services/data/node.service";
@@ -33,6 +33,8 @@ export class AppComponent implements OnInit {
   readonly authenticated: Promise<unknown>;
   protected currentLanguage: string = this.i18nService.language;
   private netzgrafikDtoIsSet = false;
+  private initialized = false;
+  private pendingNotes: FreeFloatingTextDto[] | undefined;
 
   projectInMenu: Observable<ProjectDto | null>;
 
@@ -72,6 +74,11 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     if (this.disableBackend && !this.netzgrafikDtoIsSet) {
       this.netzgrafikDto = NetzgrafikDefault.getDefaultNetzgrafik();
+    }
+    this.initialized = true;
+    if (this.pendingNotes !== undefined) {
+      this.noteService.syncNotes(this.pendingNotes);
+      this.pendingNotes = undefined;
     }
   }
 
@@ -115,6 +122,19 @@ export class AppComponent implements OnInit {
       this.filterService.setActiveFilterSetting(filterSetting);
     } else {
       throw new Error(`FilterSetting with id ${id} not found`);
+    }
+  }
+
+  @Input()
+  get notes(): FreeFloatingTextDto[] {
+    return this.noteService.getDtos();
+  }
+
+  set notes(notes: FreeFloatingTextDto[]) {
+    if (this.initialized) {
+      this.noteService.syncNotes(notes);
+    } else {
+      this.pendingNotes = notes;
     }
   }
 
