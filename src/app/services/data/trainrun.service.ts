@@ -280,6 +280,7 @@ export class TrainrunService {
   ) {
     const trainrunSection = this.getTrainrunFromId(trainrun.getId());
     trainrunSection.setDirection(direction);
+    this.trainrunSectionService.trainrunSectionsUpdated();
     this.trainrunsUpdated();
     this.operation.emit(
       new TrainrunUpdateOperation(trainrun, ["direction", "nodes", "times"], oneWayDirection),
