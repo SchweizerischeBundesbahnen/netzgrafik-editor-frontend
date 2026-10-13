@@ -221,7 +221,7 @@ export class TrainrunSectionTabComponent implements AfterViewInit, OnDestroy {
         this.travelTimeInputElement.focusAndSelectInput();
         break;
       case LeftAndRightElement.BottomTravelTime:
-        this.bottomTravelTimeInputElement.focusAndSelectInput();
+        this.bottomTravelTimeInputElement?.focusAndSelectInput();
         break;
     }
   }
