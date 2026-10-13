@@ -442,7 +442,8 @@ export class SimpleTrainrunSectionRouter {
     let backwardTravelTimePosition = trainrunSectionBackwardTravelTimePos;
 
     // Trainrun section name element is always positioned above the section line.
-    // If both travel time and backward travel time are equal, only one of them is displayed.
+    // If both travel time and backward travel time are equal, or the trainrun is one-way,
+    // only one of them is displayed.
     // This makes sure that, in this case, the travel time is displayed next to the trainrun section name.
     const section = sourcePort.getTrainrunSection();
     const targetIsLeftOfSource = t1.getX() < s1.getX();
@@ -451,7 +452,10 @@ export class SimpleTrainrunSectionRouter {
 
     const targetIsLeftOrBottom =
       targetIsLeftOfSource || (targetIsVerticallyAlignedWithSource && targetIsBelowSource);
-    if (section.areTravelTimesEqual() && targetIsLeftOrBottom) {
+    if (
+      (section.areTravelTimesEqual() || !section.getTrainrun().isRoundTrip()) &&
+      targetIsLeftOrBottom
+    ) {
       travelTimePosition = trainrunSectionBackwardTravelTimePos;
       backwardTravelTimePosition = trainrunSectionTravelTimePos;
     }
