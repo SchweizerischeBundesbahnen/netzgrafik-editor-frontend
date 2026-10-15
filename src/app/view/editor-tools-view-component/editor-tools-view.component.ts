@@ -1,14 +1,14 @@
-import { parse } from "papaparse";
-import { Component, ElementRef, ViewChild, ChangeDetectionStrategy } from "@angular/core";
-import { DataService } from "../../services/data/data.service";
-import { TrainrunService } from "../../services/data/trainrun.service";
-import { NodeService } from "../../services/data/node.service";
-import { FilterService } from "../../services/ui/filter.service";
-import { TrainrunSectionService } from "../../services/data/trainrunsection.service";
-import { UiInteractionService } from "../../services/ui/ui.interaction.service";
-import { BaseDataService } from "../../services/data/basedata.service";
-import { LogService } from "../../logger/log.service";
-import { VersionControlService } from "../../services/data/version-control.service";
+import {parse} from "papaparse";
+import {Component, ElementRef, ViewChild, ChangeDetectionStrategy} from "@angular/core";
+import {DataService} from "../../services/data/data.service";
+import {TrainrunService} from "../../services/data/trainrun.service";
+import {NodeService} from "../../services/data/node.service";
+import {FilterService} from "../../services/ui/filter.service";
+import {TrainrunSectionService} from "../../services/data/trainrunsection.service";
+import {UiInteractionService} from "../../services/ui/ui.interaction.service";
+import {BaseDataService} from "../../services/data/basedata.service";
+import {LogService} from "../../logger/log.service";
+import {VersionControlService} from "../../services/data/version-control.service";
 import {
   Direction,
   HaltezeitFachCategories,
@@ -16,17 +16,17 @@ import {
   NodeDto,
   TrainrunCategoryHaltezeit,
 } from "../../data-structures/business.data.structures";
-import { downloadBlob } from "../util/download-utils";
-import { map } from "rxjs/operators";
-import { LabelService } from "../../services/data/label.service";
-import { ViewportCullService } from "../../services/ui/viewport.cull.service";
-import { LevelOfDetailService } from "../../services/ui/level.of.detail.service";
-import { TrainrunSectionValidator } from "../../services/util/trainrunsection.validator";
-import { OriginDestinationService } from "src/app/services/analytics/origin-destination/components/origin-destination.service";
-import { EditorMode } from "../editor-menu/editor-mode";
-import { NODE_TEXT_AREA_HEIGHT, RASTERING_BASIC_GRID_SIZE } from "../rastering/definitions";
-import { ResourceService } from "../../services/data/resource.service";
-import { MathUtils } from "src/app/utils/math";
+import {downloadBlob} from "../util/download-utils";
+import {map} from "rxjs/operators";
+import {LabelService} from "../../services/data/label.service";
+import {ViewportCullService} from "../../services/ui/viewport.cull.service";
+import {LevelOfDetailService} from "../../services/ui/level.of.detail.service";
+import {TrainrunSectionValidator} from "../../services/util/trainrunsection.validator";
+import {OriginDestinationService} from "src/app/services/analytics/origin-destination/components/origin-destination.service";
+import {EditorMode} from "../editor-menu/editor-mode";
+import {NODE_TEXT_AREA_HEIGHT, RASTERING_BASIC_GRID_SIZE} from "../rastering/definitions";
+import {ResourceService} from "../../services/data/resource.service";
+import {MathUtils} from "src/app/utils/math";
 
 interface ContainertoExportData {
   documentToExport: HTMLElement;
@@ -35,15 +35,14 @@ interface ContainertoExportData {
 }
 
 class param {
- encoderOptions: number;
- scale: number;
- left: number;
- top: number;
- width: number;
- height: number;
- backgroundColor: string;
+  encoderOptions: number;
+  scale: number;
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+  backgroundColor: string;
 }
-
 
 @Component({
   selector: "sbb-editor-tools-view-component",
@@ -53,9 +52,9 @@ class param {
   standalone: false,
 })
 export class EditorToolsViewComponent {
-  @ViewChild("baseDataFileInput", { static: false })
+  @ViewChild("baseDataFileInput", {static: false})
   baseDataFileInput: ElementRef;
-  @ViewChild("netzgrafikJsonFileInput", { static: false })
+  @ViewChild("netzgrafikJsonFileInput", {static: false})
   netzgrafikJsonFileInput: ElementRef;
 
   public isDeletable$ = this.versionControlService.variant$.pipe(map((v) => v?.isDeletable));
@@ -76,7 +75,7 @@ export class EditorToolsViewComponent {
     private levelOfDetailService: LevelOfDetailService,
     private originDestinationService: OriginDestinationService,
     private resourceService: ResourceService,
-  ) { }
+  ) {}
 
   onLoadButton() {
     this.netzgrafikJsonFileInput.nativeElement.click();
@@ -128,11 +127,11 @@ export class EditorToolsViewComponent {
 
   onSave() {
     const data: NetzgrafikDto = this.dataService.getNetzgrafikDto();
-    const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+    const blob = new Blob([JSON.stringify(data)], {type: "application/json"});
     downloadBlob(
       blob,
       $localize`:@@app.view.editor-side-view.editor-tools-view-component.netzgrafikFile:netzgrafik` +
-      ".json",
+        ".json",
     );
   }
 
@@ -158,18 +157,16 @@ export class EditorToolsViewComponent {
     containerInfo.exportParameter.scale = scaleToTargetWidth;
 
     let svgData = new XMLSerializer().serializeToString(containerInfo.documentToExport);
-    
-        const a = document.createElement("a");
-        document.body.appendChild(a);
-        a.href = "data:image/svg+xml;utf8," + svgData;
-        a.download = this.getFilenameToExport() + ".svg";
-        a.dataset.downloadurl = ["svg", a.download, a.href].join(':');
-        a.click();
-        URL.revokeObjectURL(a.href);
-        a.remove();
-        this.levelOfDetailService.enableLevelOfDetailRendering();
-      
-    
+
+    const a = document.createElement("a");
+    document.body.appendChild(a);
+    a.href = "data:image/svg+xml;utf8," + svgData;
+    a.download = this.getFilenameToExport() + ".svg";
+    a.dataset.downloadurl = ["svg", a.download, a.href].join(":");
+    a.click();
+    URL.revokeObjectURL(a.href);
+    a.remove();
+    this.levelOfDetailService.enableLevelOfDetailRendering();
   }
 
   onExportContainerAsPNG() {
@@ -193,18 +190,17 @@ export class EditorToolsViewComponent {
       canvas.height = h;
       let context = canvas.getContext("2d");
       context.fillStyle = containerInfo.exportParameter.backgroundColor;
-      context.fillRect(0,0,canvas.width, canvas.height);
-      context.drawImage(img, 0, 0, w, h)
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(img, 0, 0, w, h);
       let dataURL = canvas.toDataURL("image/png");
       let a = document.createElement("a");
       a.download = download;
       a.href = dataURL;
-      a.dataset.downloadurl = ["image/png", a.download, a.href].join(':');
+      a.dataset.downloadurl = ["image/png", a.download, a.href].join(":");
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-    }
-
+    };
 
     this.levelOfDetailService.enableLevelOfDetailRendering();
   }
@@ -758,7 +754,7 @@ export class EditorToolsViewComponent {
     return (
       netzgrafikDto.nodes.find((n: NodeDto) => n.ports === undefined) !== undefined ||
       netzgrafikDto.nodes.filter((n: NodeDto) => n.ports?.length === 0).length ===
-      netzgrafikDto.nodes.length
+        netzgrafikDto.nodes.length
     );
   }
 
