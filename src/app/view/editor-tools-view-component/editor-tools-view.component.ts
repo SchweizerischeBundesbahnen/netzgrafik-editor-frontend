@@ -524,6 +524,7 @@ export class EditorToolsViewComponent {
       "text-anchor",
       "dominant-baseline",
       "rx",
+      "ry",
       "background-color",
     ];
 
