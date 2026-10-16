@@ -29,6 +29,7 @@ import {Vec2D} from "../../../utils/vec2D";
 import {TrainrunSectionViewObject} from "./trainrunSectionViewObject";
 import {NoteViewObject} from "./noteViewObject";
 import {NodeViewObject} from "./nodeViewObject";
+import {DYNAMIC_DETAIL_MODES} from "src/app/services/ui/level.of.detail.service";
 
 export class EditorKeyEvents {
   private editorMode: EditorMode;
@@ -695,10 +696,7 @@ export class EditorKeyEvents {
   }
 
   private onSelectAll(): boolean {
-    if (
-      this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving ||
-      this.uiInteractionService.getEditorMode() === EditorMode.NetzgrafikEditing
-    ) {
+    if (DYNAMIC_DETAIL_MODES.includes(this.uiInteractionService.getEditorMode())) {
       this.uiInteractionService.setEditorMode(EditorMode.MultiNodeMoving);
       this.noteService.getNotes().forEach((n: Note) => {
         if (this.filterService.filterNote(n)) {
