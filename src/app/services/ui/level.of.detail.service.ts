@@ -12,6 +12,12 @@ export enum LevelOfDetail {
   LEVEL0, // approximated geometry <= 10%
 }
 
+export const DYNAMIC_DETAIL_MODES = [
+  EditorMode.NetzgrafikEditing,
+  EditorMode.MultiNodeMoving,
+  EditorMode.NoteEditing,
+];
+
 @Injectable({
   providedIn: "root",
 })
@@ -36,7 +42,7 @@ export class LevelOfDetailService implements OnDestroy {
     this.uiInteractionService.zoomFactorObservable
       .pipe(takeUntil(this.destroyed))
       .subscribe((changedZoomFactor) => {
-        if (this.uiInteractionService.getEditorMode() !== EditorMode.NetzgrafikEditing) {
+        if (DYNAMIC_DETAIL_MODES.includes(this.uiInteractionService.getEditorMode())) {
           // don't change level of detail
           return;
         }
