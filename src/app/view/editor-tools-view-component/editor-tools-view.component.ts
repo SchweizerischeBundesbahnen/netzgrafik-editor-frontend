@@ -1,6 +1,6 @@
 import {parse} from "papaparse";
 import {Component, ElementRef, ViewChild, ChangeDetectionStrategy} from "@angular/core";
-import {SvgExportOptions, svgAsDataUri, saveSvgAsPng} from "save-svg-as-png";
+import {SvgExportOptions, saveSvgAsPng} from "save-svg-as-png";
 import {DataService} from "../../services/data/data.service";
 import {TrainrunService} from "../../services/data/trainrun.service";
 import {NodeService} from "../../services/data/node.service";
@@ -134,8 +134,7 @@ export class EditorToolsViewComponent {
   }
 
   onExportContainerAsSVG() {
-    // option 2: save svg as svg
-    // https://www.npmjs.com/package/save-svg-as-png
+    // option 2: serialize the SVG natively
     this.levelOfDetailService.disableLevelOfDetailRendering();
     this.viewportCullService.onViewportChangeUpdateRendering(false);
 
@@ -147,18 +146,22 @@ export class EditorToolsViewComponent {
     const scaleToTargetWidth = 2000 / containerInfo.exportParameter.width;
     containerInfo.exportParameter.scale = scaleToTargetWidth;
 
-    svgAsDataUri(containerInfo.documentToExport, containerInfo.exportParameter).then(
-      (uri: string) => {
-        const a = document.createElement("a");
-        document.body.appendChild(a);
-        a.href = uri;
-        a.download = this.getFilenameToExport() + ".svg";
-        a.click();
-        URL.revokeObjectURL(a.href);
-        a.remove();
-        this.levelOfDetailService.enableLevelOfDetailRendering();
-      },
+    const clone = this.cloneSvgForExport(
+      containerInfo.documentToExport,
+      containerInfo.exportParameter,
     );
+    const svgString = new XMLSerializer().serializeToString(clone);
+    const blob = new Blob([svgString], {type: "image/svg+xml;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    document.body.appendChild(a);
+    a.href = url;
+    a.download = this.getFilenameToExport() + ".svg";
+    a.click();
+    URL.revokeObjectURL(url);
+    a.remove();
+    this.levelOfDetailService.enableLevelOfDetailRendering();
   }
 
   onExportContainerAsPNG() {
@@ -177,6 +180,24 @@ export class EditorToolsViewComponent {
     );
 
     this.levelOfDetailService.enableLevelOfDetailRendering();
+  }
+
+  // Clones the exported element and sets the crop (viewBox) and output pixel size for serialization.
+  private cloneSvgForExport(svgElement: HTMLElement, options: SvgExportOptions): SVGSVGElement {
+    const left = options.left ?? 0;
+    const top = options.top ?? 0;
+    const width = options.width;
+    const height = options.height;
+    const scale = options.scale ?? 1;
+
+    const clone = svgElement.cloneNode(true) as unknown as SVGSVGElement;
+    clone.setAttribute("viewBox", `${left} ${top} ${width} ${height}`);
+    clone.setAttribute("width", `${width * scale}`);
+    clone.setAttribute("height", `${height * scale}`);
+    if (options.backgroundColor) {
+      clone.style.backgroundColor = options.backgroundColor;
+    }
+    return clone;
   }
 
   onLoadBaseDataButton() {
