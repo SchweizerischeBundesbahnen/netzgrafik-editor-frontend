@@ -221,7 +221,7 @@ export class NodeService implements OnDestroy {
     });
   }
 
-  duplicateNode(nodeId: number): Node {
+  duplicateNode(nodeId: number, enforceUpdate = true): Node {
     const node = this.getNodeFromId(nodeId);
     const newNode = this.addNodeWithPosition(
       node.getPositionX(),
@@ -229,6 +229,7 @@ export class NodeService implements OnDestroy {
       node.getBetriebspunktName(),
       node.getFullName(),
       Object.assign([], node.getLabelIds()),
+      enforceUpdate,
     );
     newNode.setHaltezeit(JSON.parse(JSON.stringify(node.getTrainrunCategoryHaltezeit())));
     newNode.setConnectionTime(node.getConnectionTime());
