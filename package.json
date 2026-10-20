@@ -40,7 +40,7 @@
     "benchmark": "ng test -c benchmark"
   },
   "dependencies": {
-    "@angular/animations": "22.2.1",
+    "@angular/animations": "22.2.2",
     "@angular/cdk": "22.2.2",
     "@angular/common": "22.2.2",
     "@angular/compiler": "22.2.2",
