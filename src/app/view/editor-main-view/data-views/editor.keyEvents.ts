@@ -534,7 +534,7 @@ export class EditorKeyEvents {
 
     // >>> Pass 2.3 -- remove all duplicate trainrun sections that are not encapsulated by marked nodes
     const newTrainrunSectionToModify: TrainrunSection[] = [];
-    for (const t of collectedTrainruns.values()) {
+    collectedTrainruns.forEach((t: Trainrun) => {
       const newTrainrun = this.trainrunService.duplicateTrainrunAndSections(t.getId(), false, "");
       const newTrainrunSections = this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(
         newTrainrun.getId(),
@@ -546,7 +546,7 @@ export class EditorKeyEvents {
           this.trainrunSectionService.deleteTrainrunSection(ts.getId(), false);
         }
       });
-    }
+    });
 
     // --- Pass 3 ----  duplicate all nodes and calculate the max notes offset (position move to)
     this.nodeService.unselectAllNodes(false);
@@ -609,9 +609,9 @@ export class EditorKeyEvents {
 
     // --- Pass 5 ---- unselect all trainruns and select all new nodes
     this.trainrunService.unselectAllTrainruns(false);
-    for (const n of newNodes.values()) {
+    newNodes.forEach((n: Node) => {
       n.select();
-    }
+    });
 
     // Publish the batched changes once after the duplicate is complete.
     this.nodeService.transitionsUpdated();
