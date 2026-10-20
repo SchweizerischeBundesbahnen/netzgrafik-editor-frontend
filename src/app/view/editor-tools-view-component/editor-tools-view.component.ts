@@ -454,8 +454,10 @@ export class EditorToolsViewComponent {
 
     const essentialProps = [
       "fill",
+      "fill-opacity",
       "stroke",
       "stroke-width",
+      "stroke-opacity",
       "stroke-dasharray",
       "font-family",
       "font-size",
@@ -517,8 +519,10 @@ export class EditorToolsViewComponent {
 
     const essentialProps = [
       "fill",
+      "fill-opacity",
       "stroke",
       "stroke-width",
+      "stroke-opacity",
       "stroke-dasharray",
       "font-family",
       "font-size",
@@ -557,8 +561,10 @@ export class EditorToolsViewComponent {
 
     const essentialProps = [
       "fill",
+      "fill-opacity",
       "stroke",
       "stroke-width",
+      "stroke-opacity",
       "stroke-dasharray",
       "font-family",
       "font-size",
