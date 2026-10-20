@@ -96,8 +96,7 @@ export class NoteService {
         round,
       );
       note.setPosition(newPosition.getX(), newPosition.getY());
-      this.moveNoteToFront(noteId, enforceUpdate);
-      return;
+      this.moveNoteToFront(noteId, false);
     } else {
       note.setPosition(posX, posY);
     }
@@ -122,6 +121,10 @@ export class NoteService {
 
   getNotes(): Note[] {
     return Object.assign({}, this.notesStore).notes;
+  }
+
+  getVisibleNotes(): Note[] {
+    return this.getNotes().filter((n) => this.filterService.filterNote(n));
   }
 
   getSelectedNotes(): Note[] {

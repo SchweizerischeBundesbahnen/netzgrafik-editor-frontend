@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, ChangeDetectionStrategy} from "@angular/core";
 import {UiInteractionService} from "../services/ui/ui.interaction.service";
 import {map, takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
@@ -13,21 +13,14 @@ import {EditorView} from "../view/editor-main-view/data-views/editor.view";
 import {environment} from "../../environments/environment";
 import {NodeService} from "../services/data/node.service";
 
-export enum IconSidebarMode {
-  VARIANTEN = "varianten",
-  FILTER = "filter",
-  NONE = "none",
-  PROPERTIES = "properties",
-}
-
 @Component({
   selector: "sbb-netzgrafik-editor",
   templateUrl: "./netzgrafik-application.component.html",
   styleUrls: ["./netzgrafik-application.component.scss"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class NetzgrafikApplicationComponent {
-  mode = IconSidebarMode.NONE;
   expanded = false;
 
   readonly disableBackend = environment.disableBackend;
@@ -90,10 +83,6 @@ export class NetzgrafikApplicationComponent {
 
   onPropertiesClicked() {
     this.uiInteractionService.showOrCloseFilter(FilterWindowType.PROPERTIES);
-  }
-
-  setMode(mode: string) {
-    this.mode = mode as IconSidebarMode;
   }
 
   getFilterStyle() {

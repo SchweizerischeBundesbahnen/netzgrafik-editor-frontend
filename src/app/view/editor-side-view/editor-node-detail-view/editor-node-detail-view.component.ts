@@ -1,4 +1,12 @@
-import {ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output} from "@angular/core";
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import {UiInteractionService} from "../../../services/ui/ui.interaction.service";
 import {NodeService} from "../../../services/data/node.service";
 import {
@@ -33,6 +41,7 @@ interface NodeProperties {
   selector: "sbb-editor-node-detail-view",
   templateUrl: "./editor-node-detail-view.component.html",
   styleUrls: ["./editor-node-detail-view.component.scss"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
@@ -89,13 +98,13 @@ export class EditorNodeDetailViewComponent implements OnInit, OnDestroy {
     this.destroyed.complete();
   }
 
-  onBetriebspunktNameChanged(event: any) {
-    this.nodeService.changeNodeBetriebspunktName(this.nodeProperties.nodeId, event.target.value);
+  onBetriebspunktNameChanged(name: string) {
+    this.nodeService.changeNodeBetriebspunktName(this.nodeProperties.nodeId, name);
     this.uiInteractionService.updateNodeBaseData();
   }
 
-  onFullNameChanged(event: any) {
-    this.nodeService.changeNodeFullName(this.nodeProperties.nodeId, event.target.value);
+  onFullNameChanged(name: string) {
+    this.nodeService.changeNodeFullName(this.nodeProperties.nodeId, name);
   }
 
   onConnectionTimeChanged() {

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, TemplateRef, ViewChild} from "@angular/core";
+import {Component, OnDestroy, TemplateRef, ViewChild, ChangeDetectionStrategy} from "@angular/core";
 import {
   SbbDialog,
   SbbDialogRef,
@@ -56,6 +56,7 @@ export class TrainrunDialogParameter {
   selector: "sbb-trainrun-and-section-dialog",
   templateUrl: "./trainrun-and-section-dialog.component.html",
   styleUrls: ["./trainrun-and-section-dialog.component.scss"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TrainrunAndSectionDialogComponent implements OnDestroy {
@@ -68,7 +69,7 @@ export class TrainrunAndSectionDialogComponent implements OnDestroy {
 
   public data: TrainrunDialogParameter = null;
 
-  private dialogRef: SbbDialogRef<unknown, unknown> = null;
+  private dialogRef: SbbDialogRef<void, unknown> = null;
   private dialogConfig: SbbDialogConfig = null;
   private dialogPos: Record<"top" | "bottom" | "left" | "right", number> = null;
   private dialogMovementLastPosition: Vec2D = undefined;

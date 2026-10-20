@@ -30,6 +30,8 @@ const EMPTY_TEXT_POSITIONS: TrainrunSectionTextPositions = {
 // Only TrainrunSectionService.updateTrainrunReference() should call setTrainrun().
 // Importing this token signals intentional low-level access; prefer the service method.
 export const _TRAINRUN_UPDATE_TOKEN: unique symbol = Symbol("TrainrunSectionUpdate");
+type TrainrunSectionOptions = Omit<TrainrunSectionDto, "id"> &
+  Partial<Pick<TrainrunSectionDto, "id">>;
 
 export class TrainrunSection {
   private static currentId = 0;
@@ -66,7 +68,7 @@ export class TrainrunSection {
 
   constructor(
     {
-      id,
+      id = TrainrunSection.incrementId(),
       sourceNodeId,
       sourcePortId,
       targetNodeId,
@@ -88,8 +90,7 @@ export class TrainrunSection {
         textPositions: {...EMPTY_TEXT_POSITIONS},
       },
       warnings,
-    }: TrainrunSectionDto = {
-      id: TrainrunSection.incrementId(),
+    }: TrainrunSectionOptions = {
       sourceNodeId: 0,
       sourcePortId: 0,
       targetNodeId: 0,

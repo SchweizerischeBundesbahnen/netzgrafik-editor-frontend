@@ -29,6 +29,7 @@ import {Vec2D} from "../../../utils/vec2D";
 import {TrainrunSectionViewObject} from "./trainrunSectionViewObject";
 import {NoteViewObject} from "./noteViewObject";
 import {NodeViewObject} from "./nodeViewObject";
+import {DYNAMIC_DETAIL_MODES} from "src/app/services/ui/level.of.detail.service";
 
 export class EditorKeyEvents {
   private editorMode: EditorMode;
@@ -360,46 +361,43 @@ export class EditorKeyEvents {
 
   private getSelectedTrainSectionId(): number {
     let selectedTrainrunSectionId: number = undefined;
-    d3.select(StaticDomTags.EDGE_LINE_DOM_REF + "." + StaticDomTags.TAG_SELECTED).classed(
-      "KeyEventHandling",
-      (tsvo: TrainrunSectionViewObject) => {
-        if (tsvo === undefined) {
-          const trainRun = this.trainrunService.getSelectedTrainrun();
-          if (trainRun !== null) {
-            selectedTrainrunSectionId = trainRun.getId();
-          }
-          return false;
-        }
-        if (tsvo.trainrunSection.getTrainrun().selected()) {
-          selectedTrainrunSectionId = tsvo.trainrunSection.getTrainrunId();
+    d3.select<SVGElement, TrainrunSectionViewObject>(
+      StaticDomTags.EDGE_LINE_DOM_REF + "." + StaticDomTags.TAG_SELECTED,
+    ).classed("KeyEventHandling", (tsvo: TrainrunSectionViewObject) => {
+      if (tsvo === undefined) {
+        const trainRun = this.trainrunService.getSelectedTrainrun();
+        if (trainRun !== null) {
+          selectedTrainrunSectionId = trainRun.getId();
         }
         return false;
-      },
-    );
+      }
+      if (tsvo.trainrunSection.getTrainrun().selected()) {
+        selectedTrainrunSectionId = tsvo.trainrunSection.getTrainrunId();
+      }
+      return false;
+    });
     return selectedTrainrunSectionId;
   }
 
   private getHoveredNoteId(): number {
     let noteHoveredId: number = undefined;
-    d3.select(StaticDomTags.NOTE_ROOT_DOM_REF + "." + StaticDomTags.TAG_HOVER).classed(
-      "KeyEventHandling",
-      (nvo: NoteViewObject) => {
-        noteHoveredId = nvo.note.getId();
-        return false;
-      },
-    );
+    d3.select<SVGElement, NoteViewObject>(
+      StaticDomTags.NOTE_ROOT_DOM_REF + "." + StaticDomTags.TAG_HOVER,
+    ).classed("KeyEventHandling", (nvo: NoteViewObject) => {
+      noteHoveredId = nvo.note.getId();
+      return false;
+    });
     return noteHoveredId;
   }
 
   private getHoveredNodeId(): number {
     let hoveredNodeId: number = undefined;
-    d3.select(StaticDomTags.NODE_ROOT_DOM_REF + "." + StaticDomTags.TAG_HOVER).classed(
-      "KeyEventHandling",
-      (nvo: NodeViewObject) => {
-        hoveredNodeId = nvo.node.getId();
-        return false;
-      },
-    );
+    d3.select<SVGElement, NodeViewObject>(
+      StaticDomTags.NODE_ROOT_DOM_REF + "." + StaticDomTags.TAG_HOVER,
+    ).classed("KeyEventHandling", (nvo: NodeViewObject) => {
+      hoveredNodeId = nvo.node.getId();
+      return false;
+    });
     return hoveredNodeId;
   }
 
@@ -527,16 +525,16 @@ export class EditorKeyEvents {
       );
 
     // >>> Pass 2.2 -- collect all trainruns to duplicate
-    const collectedTrainrun: Trainrun[] = [];
+    const collectedTrainruns = new Map<number, Trainrun>();
     collectedTrainrunSectionBetweenSelectedNodes.forEach((ts: TrainrunSection) => {
-      if (collectedTrainrun.find((t: Trainrun) => t.getId() === ts.getTrainrunId()) === undefined) {
-        collectedTrainrun.push(ts.getTrainrun());
+      if (!collectedTrainruns.has(ts.getTrainrunId())) {
+        collectedTrainruns.set(ts.getTrainrunId(), ts.getTrainrun());
       }
     });
 
     // >>> Pass 2.3 -- remove all duplicate trainrun sections that are not encapsulated by marked nodes
     const newTrainrunSectionToModify: TrainrunSection[] = [];
-    collectedTrainrun.forEach((t: Trainrun) => {
+    collectedTrainruns.forEach((t: Trainrun) => {
       const newTrainrun = this.trainrunService.duplicateTrainrunAndSections(t.getId(), false, "");
       const newTrainrunSections = this.trainrunSectionService.getAllTrainrunSectionsForTrainrun(
         newTrainrun.getId(),
@@ -550,9 +548,9 @@ export class EditorKeyEvents {
       });
     });
 
-    // --- Pass 3 ----  duplicate all notes and calculate the max notes offset (position move to)
+    // --- Pass 3 ----  duplicate all nodes and calculate the max notes offset (position move to)
     this.nodeService.unselectAllNodes(false);
-    const newNodes: Node[] = [];
+    const newNodes = new Map<number, Node>();
     let maxW = 0;
     let maxH = 0;
     collectedSelectedNodes.forEach((n: Node) => {
@@ -561,7 +559,7 @@ export class EditorKeyEvents {
     });
     collectedSelectedNodes.forEach((n: Node) => {
       const cNode = this.duplicateNode(n, maxW, maxH, false);
-      newNodes.push(cNode);
+      newNodes.set(n.getId(), cNode);
     });
 
     // --- Pass 4 ---- reconnect the duplicated trainrun sections to the new created (duplicated) nodes
@@ -569,8 +567,8 @@ export class EditorKeyEvents {
     const srcNonStop: boolean[] = [];
     const trgNonStop: boolean[] = [];
     newTrainrunSectionToModify.forEach((ts: TrainrunSection) => {
-      const newSrcNodeId = newNodes[collectedSelectedNodes.indexOf(ts.getSourceNode())].getId();
-      const newTrgNodeId = newNodes[collectedSelectedNodes.indexOf(ts.getTargetNode())].getId();
+      const newSrcNodeId = newNodes.get(ts.getSourceNode().getId())!.getId();
+      const newTrgNodeId = newNodes.get(ts.getTargetNode().getId())!.getId();
 
       const transSrc = ts.getSourceNode().getTransition(ts.getId());
       const transNonStopSrc = transSrc !== undefined ? transSrc.getIsNonStopTransit() : false;
@@ -610,16 +608,13 @@ export class EditorKeyEvents {
     });
 
     // --- Pass 5 ---- unselect all trainruns and select all new nodes
-    this.trainrunService.unselectAllTrainruns();
-    newNodes.forEach((n: Node) => {
-      n.select();
-    });
+    this.trainrunService.unselectAllTrainruns(false);
+    newNodes.forEach((n: Node) => n.select());
 
-    // call update - due of disabled update (signal) in the passes 1-5
-    this.nodeService.nodesUpdated();
+    // Publish the batched changes once after the duplicate is complete.
     this.nodeService.transitionsUpdated();
     this.nodeService.connectionsUpdated();
-    this.trainrunService.trainrunsUpdated();
+    this.trainrunSectionService.trainrunSectionsUpdated();
     this.trainrunService.trainrunsUpdated();
     return true;
   }
@@ -675,7 +670,7 @@ export class EditorKeyEvents {
     nodeHeight: number,
     enforceUpdate = true,
   ): Node {
-    const newNode = this.nodeService.duplicateNode(node.getId());
+    const newNode = this.nodeService.duplicateNode(node.getId(), enforceUpdate);
     this.nodeService.changeNodePosition(
       newNode.getId(),
       newNode.getPositionX() + nodeWidth + RASTERING_BASIC_GRID_SIZE,
@@ -698,10 +693,7 @@ export class EditorKeyEvents {
   }
 
   private onSelectAll(): boolean {
-    if (
-      this.uiInteractionService.getEditorMode() === EditorMode.MultiNodeMoving ||
-      this.uiInteractionService.getEditorMode() === EditorMode.NetzgrafikEditing
-    ) {
+    if (DYNAMIC_DETAIL_MODES.includes(this.uiInteractionService.getEditorMode())) {
       this.uiInteractionService.setEditorMode(EditorMode.MultiNodeMoving);
       this.noteService.getNotes().forEach((n: Note) => {
         if (this.filterService.filterNote(n)) {

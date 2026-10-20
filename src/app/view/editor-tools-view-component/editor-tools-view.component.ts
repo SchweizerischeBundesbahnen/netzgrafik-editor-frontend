@@ -1,5 +1,5 @@
 import {parse} from "papaparse";
-import {Component, ElementRef, ViewChild} from "@angular/core";
+import {Component, ElementRef, ViewChild, ChangeDetectionStrategy} from "@angular/core";
 import {SvgExportOptions, svgAsDataUri, saveSvgAsPng} from "save-svg-as-png";
 import {DataService} from "../../services/data/data.service";
 import {TrainrunService} from "../../services/data/trainrun.service";
@@ -39,6 +39,7 @@ interface ContainertoExportData {
   selector: "sbb-editor-tools-view-component",
   templateUrl: "./editor-tools-view.component.html",
   styleUrls: ["./editor-tools-view.component.scss"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class EditorToolsViewComponent {
@@ -80,7 +81,7 @@ export class EditorToolsViewComponent {
     const file = fileInput.files[0];
     const reader = new FileReader();
     reader.onload = () => {
-      let netzgrafikDto: any;
+      let netzgrafikDto: NetzgrafikDto;
       try {
         netzgrafikDto = JSON.parse(reader.result.toString());
       } catch {
@@ -240,7 +241,10 @@ export class EditorToolsViewComponent {
     });
     const url = window.URL.createObjectURL(blob);
 
-    const nav = window.navigator as any;
+    const nav = window.navigator as Navigator & {
+      msSaveOrOpenBlob?: unknown;
+      msSaveBlob?: (blob: Blob, filename: string) => void;
+    };
     if (nav.msSaveOrOpenBlob) {
       nav.msSaveBlob(blob, filename);
     } else {
@@ -462,7 +466,7 @@ export class EditorToolsViewComponent {
     if (htmlElementToExport === null) {
       return undefined;
     }
-    const boundingBox = this.nodeService.getNetzgrafikBoundingBox();
+    const boundingBox = this.uiInteractionService.getNetzgrafikBoundingBox();
     const param = {
       encoderOptions: 1.0,
       scale: 1.0,
@@ -581,9 +585,6 @@ export class EditorToolsViewComponent {
       .getTrainruns()
       .filter((trainrun) => this.filterService.filterTrainrun(trainrun))
       .forEach((trainrun) => {
-        let startBetriebspunktName = "";
-        let endBetriebspunktName = "";
-
         // Retrieve start -> end with:
         // start {startNode, startTrainrunSection}
         // end {iterator.current.node, iterator.current.trainrunSection}
@@ -594,8 +595,8 @@ export class EditorToolsViewComponent {
           iterator.next();
         }
 
-        startBetriebspunktName = startNode.getBetriebspunktName();
-        endBetriebspunktName = iterator.current().node.getBetriebspunktName();
+        const startBetriebspunktName = startNode.getBetriebspunktName();
+        const endBetriebspunktName = iterator.current().node.getBetriebspunktName();
         const departureTimeAtStart =
           startTrainrunSection.getSourceNodeId() === startNode.getId()
             ? startTrainrunSection.getSourceDepartureConsecutiveTime()

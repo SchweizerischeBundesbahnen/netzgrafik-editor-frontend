@@ -1,5 +1,13 @@
 import {OriginDestination, OriginDestinationService} from "./origin-destination.service";
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import * as d3 from "d3";
 
 import {Subject, takeUntil, merge} from "rxjs";
@@ -28,6 +36,7 @@ type ColorSetName = "red" | "blue" | "orange" | "gray";
   selector: "sbb-origin-destination",
   templateUrl: "./origin-destination.component.html",
   styleUrls: ["./origin-destination.component.scss"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class OriginDestinationComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -206,7 +215,7 @@ export class OriginDestinationComponent implements OnInit, AfterViewInit, OnDest
       .style("user-select", "none")
       .call((g) =>
         g
-          .selectAll("text")
+          .selectAll<SVGElement, string>("text")
           .attr("data-destination-label", (d: string) => d)
           .style("text-anchor", "start")
           .attr("dx", "-0.8em")
@@ -237,7 +246,9 @@ export class OriginDestinationComponent implements OnInit, AfterViewInit, OnDest
           ),
       )
       .style("user-select", "none")
-      .call((g) => g.selectAll("text").attr("data-origin-label", (d: string) => d))
+      .call((g) =>
+        g.selectAll<SVGElement, string>("text").attr("data-origin-label", (d: string) => d),
+      )
       .select(".domain")
       .remove();
 
@@ -298,7 +309,7 @@ export class OriginDestinationComponent implements OnInit, AfterViewInit, OnDest
 
     const mouseleave = (event: MouseEvent, d: OriginDestination) => {
       tooltip.style("opacity", 0);
-      d3.select(D3Utils.getMouseEventCurrentTarget(event))
+      d3.select<SVGElement, OriginDestination>(D3Utils.getMouseEventCurrentTarget(event))
         .style("stroke", "none")
         .style("opacity", (d: OriginDestination) => (d.originId === d.destinationId ? 0 : 0.8));
 

@@ -9,6 +9,7 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import {interval, Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
@@ -26,6 +27,7 @@ import {StreckengrafikDrawingContext} from "../model/util/streckengrafik.drawing
   selector: "sbb-streckengrafik",
   templateUrl: "./streckengrafik.component.html",
   styleUrls: ["./streckengrafik.component.scss"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class StreckengrafikComponent implements OnInit, OnDestroy, AfterViewInit {
@@ -259,7 +261,7 @@ export class StreckengrafikComponent implements OnInit, OnDestroy, AfterViewInit
     if (this.viewBoxChangeInfo.width === 0 && this.viewBoxChangeInfo.height === 0) {
       return;
     }
-    let viewBox = "";
+    let viewBox: string;
     if (this.pathAlignmentHorizontal) {
       viewBox =
         "0 " +

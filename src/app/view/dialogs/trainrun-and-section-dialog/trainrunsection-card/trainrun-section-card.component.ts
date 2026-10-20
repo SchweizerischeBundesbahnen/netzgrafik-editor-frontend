@@ -1,4 +1,12 @@
-import {AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from "@angular/core";
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import {TrainrunSectionService} from "../../../../services/data/trainrunsection.service";
 import {TrainrunService} from "../../../../services/data/trainrun.service";
 import {takeUntil} from "rxjs/operators";
@@ -18,6 +26,7 @@ import {TrainrunSectionsView} from "../../../editor-main-view/data-views/trainru
   templateUrl: "./trainrun-section-card.component.html",
   styleUrls: ["./trainrun-section-card.component.scss"],
   providers: [TrainrunSectionTimesService],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TrainrunSectionCardComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -186,9 +195,11 @@ export class TrainrunSectionCardComponent implements OnInit, AfterViewInit, OnDe
       trainrunSection = this.trainrunService.getLeftOrTopExtremitySection();
     }
 
+    let oneWayDirection: "forward" | "backward" = "forward";
     if (this.leftNode === this.rightNode) {
       // Cyclic trainrun
       // This ensures the two cards represent different directions
+      oneWayDirection = "backward";
       this.trainrunSectionService.invertTrainrunSectionsSourceAndTarget(
         trainrunSection.getTrainrunId(),
       );
@@ -196,6 +207,7 @@ export class TrainrunSectionCardComponent implements OnInit, AfterViewInit, OnDe
       // Non-cyclic trainrun
       const referenceNode = position === "top" ? this.leftNode : this.rightNode;
       if (referenceNode !== trainrunSection.getSourceNode()) {
+        oneWayDirection = "backward";
         this.trainrunSectionService.invertTrainrunSectionsSourceAndTarget(
           trainrunSection.getTrainrunId(),
         );
@@ -203,7 +215,7 @@ export class TrainrunSectionCardComponent implements OnInit, AfterViewInit, OnDe
     }
 
     this.chosenCard = position;
-    this.trainrunService.updateDirection(selectedTrainrun, Direction.ONE_WAY);
+    this.trainrunService.updateDirection(selectedTrainrun, Direction.ONE_WAY, oneWayDirection);
   }
 
   getTrainrunTimeStructure(): Omit<LeftAndRightTimeStructure, "travelTime" | "bottomTravelTime"> {

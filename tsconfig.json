@@ -1,8 +1,9 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "rootDir": ".",
     "outDir": "./dist/out-tsc",
+    "paths": {"*": ["./*"]},
     "sourceMap": true,
     "declaration": false,
     "esModuleInterop": true,
@@ -15,11 +16,14 @@
     "lib": ["es2023", "dom"],
     "resolveJsonModule": true,
     "useDefineForClassFields": false,
+    "strict": true,
+    "strictNullChecks": false,
     "noImplicitAny": true,
     "noUnusedParameters": true
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "strictInjectionParameters": true,
+    "strictTemplates": true
   }
 }

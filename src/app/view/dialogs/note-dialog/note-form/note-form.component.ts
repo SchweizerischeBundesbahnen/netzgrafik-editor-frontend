@@ -1,10 +1,11 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, ChangeDetectionStrategy} from "@angular/core";
 import {FormModel} from "../../../../utils/form-model";
 
 @Component({
   selector: "sbb-note-form",
   templateUrl: "./note-form.component.html",
   styleUrls: ["./note-form.component.scss"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class NoteFormComponent {
@@ -37,7 +38,7 @@ export class NoteFormComponent {
   }
 }
 
-export interface NoteFormComponentModel {
+export type NoteFormComponentModel = {
   id: number;
   noteTitle: string;
   noteText: string;
@@ -54,4 +55,4 @@ export interface NoteFormComponentModel {
   ) => void;
   deleteNoteCallback: (noteId: number) => void;
   updateNoteCallback: () => void;
-}
+};

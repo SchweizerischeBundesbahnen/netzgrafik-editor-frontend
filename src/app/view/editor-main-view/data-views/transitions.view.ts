@@ -11,8 +11,8 @@ import {TransitionViewObject} from "./transitionViewObject";
 import {LinePatternRefs} from "../../../data-structures/business.data.structures";
 
 export class TransitionsView {
-  transitionsGroup: d3.Selection<SVGElement, undefined, Element, undefined>;
-  selectedTransitionsGroup: d3.Selection<SVGElement, undefined, Element, undefined>;
+  transitionsGroup: d3.Selection<SVGGElement, undefined, Element, undefined>;
+  selectedTransitionsGroup: d3.Selection<SVGGElement, undefined, Element, undefined>;
   editorView: EditorView;
 
   constructor(editorView: EditorView) {
@@ -82,7 +82,7 @@ export class TransitionsView {
   }
 
   static createTransitionLineLayer(
-    grpEnter: d3.Selection<SVGElement, TransitionViewObject, Element, undefined>,
+    grpEnter: d3.Selection<SVGGElement, TransitionViewObject, Element, undefined>,
     classRef: string,
     levelFreqFilter: LinePatternRefs[],
     selectedTrainrun: Trainrun,
@@ -118,11 +118,11 @@ export class TransitionsView {
       .classed(StaticDomTags.TAG_SELECTED, (t: TransitionViewObject) =>
         t.transition.getTrainrun().selected(),
       )
-      .attr("d", (t: TransitionViewObject) => D3Utils.getPathAsSVGString(t.transition.getPath()));
+      .attr("d", (t: TransitionViewObject) => D3Utils.getPathAsSVGString(t.path));
   }
 
   createNonStopToggle(
-    grpEnter: d3.Selection<SVGElement, TransitionViewObject, Element, undefined>,
+    grpEnter: d3.Selection<SVGGElement, TransitionViewObject, Element, undefined>,
     selectedTrainrun: Trainrun,
     connectedTrainIds: number[],
   ) {
@@ -147,7 +147,7 @@ export class TransitionsView {
       )
       .attr("points", (t: TransitionViewObject) =>
         D3Utils.makeHexagonSVGPoints(
-          Vec2D.scale(Vec2D.add(t.transition.getPath()[1], t.transition.getPath()[2]), 0.5),
+          Vec2D.scale(Vec2D.add(t.path[1], t.path[2]), 0.5),
           StaticDomTags.TRANSITION_BUTTON_SIZE,
         ),
       )
@@ -166,7 +166,7 @@ export class TransitionsView {
       );
   }
 
-  setGroup(transitionsGroup: d3.Selection<SVGElement, undefined, Element, undefined>) {
+  setGroup(transitionsGroup: d3.Selection<SVGGElement, undefined, Element, undefined>) {
     transitionsGroup.attr("class", "TransitionsView");
     this.transitionsGroup = transitionsGroup.append(StaticDomTags.GROUP_SVG);
     this.transitionsGroup.attr("class", "transitions");
@@ -196,8 +196,9 @@ export class TransitionsView {
 
     const transitions = inputTransitions.filter(
       (t) =>
-        this.editorView.doCullCheckPositionsInViewport(t.getPath()) &&
-        this.filtertransitionToDisplay(t, t.getTrainrun()),
+        this.editorView.doCullCheckPositionsInViewport(
+          new TransitionViewObject(this.editorView, t).path,
+        ) && this.filtertransitionToDisplay(t, t.getTrainrun()),
     );
 
     this.createTransitions(transitions, selectedTrainrun, connectedTrainIds, true);
@@ -220,7 +221,7 @@ export class TransitionsView {
     }
 
     const transitionsGroup = rootGroup
-      .selectAll(StaticDomTags.TRANSITION_ROOT_CONTAINER_DOM_REF)
+      .selectAll<SVGElement, TransitionViewObject>(StaticDomTags.TRANSITION_ROOT_CONTAINER_DOM_REF)
       .data(
         TransitionsView.createTransitionViewObjects(
           this.editorView,

@@ -19,8 +19,11 @@ import {Transition} from "../../models/transition.model";
 import {takeUntil} from "rxjs/operators";
 import {FilterService} from "../ui/filter.service";
 import {DirectedTrainrunSectionProxy, TrainrunIterator} from "../util/trainrun.iterator";
-import {Operation, OperationType, TrainrunOperation} from "../../models/operation.model";
-
+import {
+  Operation,
+  TrainrunCreateOperation,
+  TrainrunUpdateOperation,
+} from "../../models/operation.model";
 interface DepartureAndArrivalTimes {
   nodeFromDepartureTime: number;
   nodeFromArrivalTime: number;
@@ -353,7 +356,9 @@ export class TrainrunSectionService implements OnDestroy {
     const trainrunSection = this.getTrainrunSectionFromId(trs.getId());
     trainrunSection.setNumberOfStops(numberOfStops);
     this.trainrunSectionsUpdated();
-    this.operation.emit(new TrainrunOperation(OperationType.update, trainrunSection.getTrainrun()));
+    this.operation.emit(
+      new TrainrunUpdateOperation(trainrunSection.getTrainrun(), ["numberOfStops"]),
+    );
   }
 
   updateTrainrunSectionTime(
@@ -439,7 +444,7 @@ export class TrainrunSectionService implements OnDestroy {
 
     this.iterateAlongTrainrunUntilEndAndPropagateTime(fromNode, fromTrainrunSectionId);
     this.trainrunSectionsUpdated();
-    this.operation.emit(new TrainrunOperation(OperationType.update, trainrunSection.getTrainrun()));
+    this.operation.emit(new TrainrunUpdateOperation(trainrunSection.getTrainrun(), ["times"]));
   }
 
   propagateTrainrunSectionTime(
@@ -671,12 +676,14 @@ export class TrainrunSectionService implements OnDestroy {
     this.trainrunService.trainrunsUpdated();
 
     if (initialTrainrunsLength !== this.trainrunService.trainrunsStore.trainruns.length) {
-      this.operation.emit(
-        new TrainrunOperation(OperationType.create, trainrunSection.getTrainrun()),
-      );
+      this.operation.emit(new TrainrunCreateOperation(trainrunSection.getTrainrun()));
     } else {
       this.operation.emit(
-        new TrainrunOperation(OperationType.update, trainrunSection.getTrainrun()),
+        new TrainrunUpdateOperation(trainrunSection.getTrainrun(), [
+          "nodes",
+          "times",
+          "numberOfStops",
+        ]),
       );
     }
 
@@ -729,10 +736,7 @@ export class TrainrunSectionService implements OnDestroy {
     const orderingType = this.nodeService.getCurrentOrderingAlgorithm();
     nodeToNew.addPortWithRespectToOppositeNode(nodeFrom, trainrunSection, orderingType);
     if (this.nodeService.isConditionToAddTransitionFullfilled(nodeToNew, trainrunSection)) {
-      this.nodeService.addTransitionAndComputeRoutingFromFreePorts(
-        nodeToNew,
-        trainrunSection.getTrainrun(),
-      );
+      this.nodeService.addTransition(nodeToNew, trainrunSection.getTrainrun());
     }
     nodeFrom.reAlignPortWithRespectToOppositeNode(nodeToNew, trainrunSection, orderingType);
 
@@ -756,7 +760,13 @@ export class TrainrunSectionService implements OnDestroy {
       this.nodeService.transitionsUpdated();
       this.trainrunSectionsUpdated();
     }
-    this.operation.emit(new TrainrunOperation(OperationType.update, trainrunSection.getTrainrun()));
+    this.operation.emit(
+      new TrainrunUpdateOperation(trainrunSection.getTrainrun(), [
+        "nodes",
+        "numberOfStops",
+        "times",
+      ]),
+    );
   }
 
   deleteListOfTrainrunSections(trainrunSections: TrainrunSection[], enforceUpdate = true) {
@@ -830,7 +840,11 @@ export class TrainrunSectionService implements OnDestroy {
     }
     if (this.getTrainrunSections().length) {
       this.operation.emit(
-        new TrainrunOperation(OperationType.update, trainrunSection.getTrainrun()),
+        new TrainrunUpdateOperation(trainrunSection.getTrainrun(), [
+          "nodes",
+          "numberOfStops",
+          "times",
+        ]),
       );
     }
   }
@@ -874,7 +888,7 @@ export class TrainrunSectionService implements OnDestroy {
   ) {
     this.updateTrainrunSectionLeftAndRightTimes(section, timeStructure);
     this.operation.emit(
-      new TrainrunOperation(OperationType.update, section.trainrunSection.getTrainrun()),
+      new TrainrunUpdateOperation(section.trainrunSection.getTrainrun(), ["times"]),
     );
   }
 
@@ -941,7 +955,7 @@ export class TrainrunSectionService implements OnDestroy {
 
     this.trainrunSectionsUpdated();
     this.nodeService.connectionsUpdated();
-    this.operation.emit(new TrainrunOperation(OperationType.update, trainrunSection.getTrainrun()));
+    this.operation.emit(new TrainrunUpdateOperation(trainrunSection.getTrainrun(), ["times"]));
   }
 
   private setTimeStructureInDirection({
@@ -1119,6 +1133,13 @@ export class TrainrunSectionService implements OnDestroy {
     this.nodeService.connectionsUpdated();
     this.nodeService.nodesUpdated();
     this.trainrunSectionsUpdated();
+    this.operation.emit(
+      new TrainrunUpdateOperation(trainrunSection1.getTrainrun(), [
+        "nodes",
+        "times",
+        "numberOfStops",
+      ]),
+    );
   }
 
   setWarningOnNode(
@@ -1375,7 +1396,10 @@ export class TrainrunSectionService implements OnDestroy {
     const trainrunId = trainrunMap.get(trainrunSection.trainrunId);
     const trainrun = this.trainrunService.getTrainrunFromId(trainrunId);
 
-    const newTrainrunSection: TrainrunSection = new TrainrunSection(trainrunSection);
+    const newTrainrunSection: TrainrunSection = new TrainrunSection({
+      ...trainrunSection,
+      id: undefined,
+    });
     this.updateTrainrunReference(newTrainrunSection, trainrun);
 
     const sourceNodeId = nodeMap.get(trainrunSection.sourceNodeId);
@@ -1527,18 +1551,26 @@ export class TrainrunSectionService implements OnDestroy {
 
     // Swap Timelocks
     const oldSourceDepartureDto = trainrunSection.getSourceDepartureDto();
+    const oldTravelTime = trainrunSection.getTravelTimeDto();
     const oldTargetArrivalDto = trainrunSection.getTargetArrivalDto();
     const oldTargetDepartureDto = trainrunSection.getTargetDepartureDto();
+    const oldBackwardTravelTime = trainrunSection.getBackwardTravelTimeDto();
     const oldSourceArrivalDto = trainrunSection.getSourceArrivalDto();
 
     // Source departure becomes target departure
     trainrunSection.setSourceDepartureDto(oldTargetDepartureDto);
+
+    // Travel time becomes backward travel time
+    trainrunSection.setTravelTimeDto(oldBackwardTravelTime);
 
     // Target arrival becomes source arrival
     trainrunSection.setTargetArrivalDto(oldSourceArrivalDto);
 
     // Target departure becomes source departure
     trainrunSection.setTargetDepartureDto(oldSourceDepartureDto);
+
+    // Backward travel time becomes travel time
+    trainrunSection.setBackwardTravelTimeDto(oldTravelTime);
 
     // Source arrival becomes target arrival
     trainrunSection.setSourceArrivalDto(oldTargetArrivalDto);

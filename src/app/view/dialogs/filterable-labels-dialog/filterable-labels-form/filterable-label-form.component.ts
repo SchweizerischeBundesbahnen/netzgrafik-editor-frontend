@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input, OnInit, ChangeDetectionStrategy} from "@angular/core";
 import {FormModel} from "../../../../utils/form-model";
 import {Validators} from "@angular/forms";
 
@@ -6,6 +6,7 @@ import {Validators} from "@angular/forms";
   selector: "sbb-filterable-label-form",
   templateUrl: "./filterable-label-form.component.html",
   styleUrls: ["./filterable-label-form.component.scss"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class FilterableLabelFormComponent implements OnInit {
@@ -28,11 +29,11 @@ export class FilterableLabelFormComponent implements OnInit {
   }
 }
 
-export interface FilterableLabelsFormComponentModel {
+export type FilterableLabelsFormComponentModel = {
   name: string;
   dialogTitle: string;
   saveLabelCallback: (newLabel: string) => void;
   deleteLabelCallback: (originalLabel: string) => void;
   transferLabelCallback: (originalLabel: string) => void;
   updateLabelCallback?: (value: string) => void;
-}
+};

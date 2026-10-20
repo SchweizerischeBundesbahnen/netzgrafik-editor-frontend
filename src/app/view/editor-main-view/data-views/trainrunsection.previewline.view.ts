@@ -23,7 +23,7 @@ export class DragIntermediateStopInfo {
   constructor(
     public trainrunSection: TrainrunSection,
     public intermediateStopIndex: number,
-    public domRef: any,
+    public domRef: SVGElement,
   ) {}
 }
 
@@ -34,7 +34,7 @@ export class DragTransitionInfo {
     public trainrunSection2: TrainrunSection,
     public transition: Transition,
     public insideNode: boolean,
-    public domRef: any,
+    public domRef: SVGElement,
   ) {}
 
   setInsideNode(flag: boolean) {
@@ -61,13 +61,13 @@ export class TrainrunSectionPreviewLineView {
     private trainrunSectionService: TrainrunSectionService,
   ) {}
 
-  static setGroup(nodeGroup: d3.Selection<SVGElement, undefined, Element, undefined>) {
+  static setGroup(nodeGroup: d3.Selection<SVGGElement, undefined, Element, undefined>) {
     nodeGroup
       .append(StaticDomTags.PREVIEW_LINE_ROOT_SVG)
       .attr("class", StaticDomTags.PREVIEW_LINE_ROOT_CLASS);
   }
 
-  static setConnectionGroup(nodeGroup: d3.Selection<SVGElement, undefined, Element, undefined>) {
+  static setConnectionGroup(nodeGroup: d3.Selection<SVGGElement, undefined, Element, undefined>) {
     nodeGroup
       .append(StaticDomTags.PREVIEW_CONNECTION_LINE_ROOT_SVG)
       .attr("class", StaticDomTags.PREVIEW_CONNECTION_LINE_ROOT_CLASS);
@@ -199,8 +199,13 @@ export class TrainrunSectionPreviewLineView {
       this.hideConnectionPreviewLine();
       this.displayTrainrunSectionPreviewLine();
       if (this.dragTransitionInfo.insideNode) {
-        const startPos = this.dragTransitionInfo.transition.getPath()[0];
-        const endPos = this.dragTransitionInfo.transition.getPath()[3];
+        const node = this.dragTransitionInfo.node;
+        const transition = this.dragTransitionInfo.transition;
+        const port1 = node.getPort(transition.getPortId1());
+        const port2 = node.getPort(transition.getPortId2());
+        const path = SimpleTrainrunSectionRouter.routeTransition(node, port1, port2);
+        const startPos = path[0];
+        const endPos = path[3];
         D3Utils.updateIntermediateStopOrTransitionPreviewLine(event, startPos, endPos);
       } else {
         const node1 =

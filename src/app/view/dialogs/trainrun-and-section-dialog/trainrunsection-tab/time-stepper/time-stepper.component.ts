@@ -1,16 +1,25 @@
-import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 
 @Component({
   selector: "sbb-time-stepper",
   templateUrl: "./time-stepper.component.html",
   styleUrls: ["./time-stepper.component.scss"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class TimeStepperComponent {
   @Input() isDisplayed = true;
   @Input() containerClass: string;
   @Input() inputId: string;
-  @Input() inputClass: string | string[];
+  @Input() inputClass: string | string[] | Record<string, boolean>;
   @Input() tabIndex: number;
   @Input() value: number;
   @Input() min: number = 0;

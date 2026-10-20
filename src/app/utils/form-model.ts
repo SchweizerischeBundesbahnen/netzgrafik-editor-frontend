@@ -1,6 +1,6 @@
 import {UntypedFormControl, UntypedFormGroup, ValidatorFn} from "@angular/forms";
 
-export class FormModel<T> {
+export class FormModel<T extends {[s: string]: unknown}> {
   private readonly keys: string[];
   private readonly form: UntypedFormGroup;
   private readonly controls: {[key: string]: UntypedFormControl} = {};
@@ -32,7 +32,7 @@ export class FormModel<T> {
       this.validatorsByKey.set(key as string, []);
     }
 
-    const validators = this.validatorsByKey.get(key as string);
+    const validators = this.validatorsByKey.get(key as string)!;
     validators.push(validator);
 
     this.controls[key as string].setValidators(validators);
@@ -44,7 +44,7 @@ export class FormModel<T> {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
-      const object: {[key: string]: any} = {};
+      const object: {[key: string]: unknown} = {};
       this.keys.forEach((key) => (object[key] = this.controls[key].value));
 
       return object as T;

@@ -2,7 +2,6 @@ import {defineConfig} from "eslint/config";
 import js from "@eslint/js";
 import angular from "angular-eslint";
 import tseslint from "typescript-eslint";
-import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 
 export default defineConfig([
   {
@@ -13,7 +12,6 @@ export default defineConfig([
     extends: [
       ...tseslint.config(js.configs.recommended, ...tseslint.configs.recommended),
       angular.configs.tsRecommended,
-      eslintPluginPrettierRecommended,
     ],
     processor: angular.processInlineTemplates,
     languageOptions: {
@@ -42,6 +40,7 @@ export default defineConfig([
       // TODO: enable all recommended @angular-eslint rules
       "@angular-eslint/prefer-standalone": "off",
       "@angular-eslint/prefer-inject": "off",
+      "@angular-eslint/prefer-on-push-component-change-detection": "off",
       "@typescript-eslint/no-non-null-assertion": "off",
       "@typescript-eslint/explicit-module-boundary-types": "off",
       "@typescript-eslint/no-empty-function": [
@@ -50,7 +49,7 @@ export default defineConfig([
           allow: ["private-constructors"],
         },
       ],
-      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/no-unused-expressions": [
         "error",
         {

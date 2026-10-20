@@ -26,14 +26,14 @@ import {Trainrun} from "../../../models/trainrun.model";
 import {TrainrunSectionViewObject} from "./trainrunSectionViewObject";
 import {Node} from "../../../models/node.model";
 import {EditorMode} from "../../editor-menu/editor-mode";
-import {Transition} from "../../../models/transition.model";
 import {InformSelectedTrainrunClick} from "../../../services/data/trainrunsection.service";
 import {LevelOfDetail} from "../../../services/ui/level.of.detail.service";
 import {LinePatternRefs} from "../../../data-structures/business.data.structures";
 import {TrainrunsectionHelper} from "src/app/services/util/trainrunsection.helper";
+import {TransitionViewObject} from "./transitionViewObject";
 
 export class TrainrunSectionsView {
-  trainrunSectionGroup: d3.Selection<SVGElement, undefined, Element, undefined>;
+  trainrunSectionGroup: d3.Selection<SVGGElement, undefined, Element, undefined>;
 
   constructor(private editorView: EditorView) {}
 
@@ -118,7 +118,7 @@ export class TrainrunSectionsView {
     if (Vec2D.equal(path[3], position)) {
       delta = Vec2D.sub(path[2], path[3]);
     }
-    let rotate = 0;
+    let rotate: number;
     if (delta.getX() !== 0.0) {
       if (delta.getX() < 0.0) {
         rotate = -Math.PI / 2;
@@ -714,15 +714,13 @@ export class TrainrunSectionsView {
       nextNode,
       editorView,
     );
-    let virtualTravelTime: number = info.virtualTravelTime;
-    if (virtualTravelTime === 0) {
+    if (info.virtualTravelTime === 0) {
       info = TrainrunSectionsView.calcInternalVirtualSectionTimeForHiddenJunctions(
         cumulativeTravelTimeData.reverse(),
         startNode,
         nextNode,
         editorView,
       );
-      virtualTravelTime = info.virtualTravelTime;
     }
     if (!info.isBreak) {
       return TrainrunSectionsView.filterVirtualTravelTime(startNode, info);
@@ -970,7 +968,7 @@ export class TrainrunSectionsView {
     }
   }
 
-  setGroup(trainrunSectionGroup: d3.Selection<SVGElement, undefined, Element, undefined>) {
+  setGroup(trainrunSectionGroup: d3.Selection<SVGGElement, undefined, Element, undefined>) {
     trainrunSectionGroup.attr("class", "TrainrunSectionsView");
     this.trainrunSectionGroup = trainrunSectionGroup
       .append(StaticDomTags.GROUP_SVG)
@@ -978,7 +976,7 @@ export class TrainrunSectionsView {
   }
 
   createTrainrunSectionTextBackgrounds(
-    groupEnter: d3.Selection<SVGElement, TrainrunSectionViewObject, Element, undefined>,
+    groupEnter: d3.Selection<SVGGElement, TrainrunSectionViewObject, Element, undefined>,
     lineTextElement: TrainrunSectionText,
     selectedTrainrun: Trainrun,
     connectedTrainIds: number[],
@@ -1103,7 +1101,7 @@ export class TrainrunSectionsView {
    * @param enableEvents - Optional flag to enable or disable mouse event handlers on the arrows. Defaults to true.
    */
   createDirectionArrows(
-    groupLinesEnter: d3.Selection<SVGElement, TrainrunSectionViewObject, Element, undefined>,
+    groupLinesEnter: d3.Selection<SVGGElement, TrainrunSectionViewObject, Element, undefined>,
     selectedTrainrun: Trainrun,
     connectedTrainIds: number[],
     enableEvents = true,
@@ -1164,7 +1162,7 @@ export class TrainrunSectionsView {
   }
 
   createAsymmetryArrows(
-    groupLinesEnter: d3.Selection<SVGElement, TrainrunSectionViewObject, Element, undefined>,
+    groupLinesEnter: d3.Selection<SVGGElement, TrainrunSectionViewObject, Element, undefined>,
     selectedTrainrun: Trainrun,
     connectedTrainIds: number[],
     enableEvents = true,
@@ -1239,7 +1237,7 @@ export class TrainrunSectionsView {
   }
 
   createTrainrunSection(
-    groupEnter: d3.Selection<SVGElement, TrainrunSectionViewObject, Element, undefined>,
+    groupEnter: d3.Selection<SVGGElement, TrainrunSectionViewObject, Element, undefined>,
     classRef: string,
     levelFreqFilter: LinePatternRefs[],
     selectedTrainrun: Trainrun,
@@ -1295,7 +1293,7 @@ export class TrainrunSectionsView {
   }
 
   createTrainrunsectionSemicircleAtNode(
-    groupEnter: d3.Selection<SVGElement, TrainrunSectionViewObject, Element, undefined>,
+    groupEnter: d3.Selection<SVGGElement, TrainrunSectionViewObject, Element, undefined>,
     selectedTrainrun: Trainrun,
     connectedTrainIds: number[],
     atSource: boolean,
@@ -1361,7 +1359,7 @@ export class TrainrunSectionsView {
   }
 
   createTrainrunsectionSemicircles(
-    groupEnter: d3.Selection<SVGElement, TrainrunSectionViewObject, Element, undefined>,
+    groupEnter: d3.Selection<SVGGElement, TrainrunSectionViewObject, Element, undefined>,
     selectedTrainrun: Trainrun,
     connectedTrainIds: number[],
   ) {
@@ -1386,7 +1384,7 @@ export class TrainrunSectionsView {
   }
 
   createPinOnTrainrunsection(
-    groupEnter: d3.Selection<SVGElement, TrainrunSectionViewObject, Element, undefined>,
+    groupEnter: d3.Selection<SVGGElement, TrainrunSectionViewObject, Element, undefined>,
     selectedTrainrun: Trainrun,
     connectedTrainIds: number[],
     atSource: boolean,
@@ -1470,7 +1468,7 @@ export class TrainrunSectionsView {
   }
 
   private createInternTrainrunSectionElementFilteringWarningElements(
-    groupEnter: d3.Selection<SVGElement, TrainrunSectionViewObject, Element, undefined>,
+    groupEnter: d3.Selection<SVGGElement, TrainrunSectionViewObject, Element, undefined>,
     selectedTrainrun: Trainrun,
     connectedTrainIds: number[],
     textElement: TrainrunSectionText,
@@ -1581,7 +1579,7 @@ export class TrainrunSectionsView {
   }
 
   createTrainrunSectionElement(
-    groupEnter: d3.Selection<SVGElement, TrainrunSectionViewObject, Element, undefined>,
+    groupEnter: d3.Selection<SVGGElement, TrainrunSectionViewObject, Element, undefined>,
     selectedTrainrun: Trainrun,
     connectedTrainIds: number[],
     textElement: TrainrunSectionText,
@@ -1609,7 +1607,7 @@ export class TrainrunSectionsView {
   }
 
   createTrainrunSectionGotoInfoElement(
-    groupEnter: d3.Selection<SVGElement, TrainrunSectionViewObject, Element, undefined>,
+    groupEnter: d3.Selection<SVGGElement, TrainrunSectionViewObject, Element, undefined>,
     selectedTrainrun: Trainrun,
     connectedTrainIds: number[],
     atSource: boolean,
@@ -1664,7 +1662,7 @@ export class TrainrunSectionsView {
   }
 
   createNumberOfStopsTextElement(
-    groupEnter: d3.Selection<SVGElement, undefined, Element, undefined>,
+    groupEnter: d3.Selection<SVGGElement, undefined, Element, undefined>,
     trainrunSection: TrainrunSection,
     selectedTrainrun: Trainrun,
     connectedTrainIds: number[],
@@ -1709,7 +1707,7 @@ export class TrainrunSectionsView {
   }
 
   createIntermediateStops(
-    groupEnter: d3.Selection<SVGElement, undefined, Element, undefined>,
+    groupEnter: d3.Selection<SVGGElement, undefined, Element, undefined>,
     trainrunSection: TrainrunSection,
     selectedTrainrun: Trainrun,
     connectedTrainIds: number[],
@@ -1813,7 +1811,7 @@ export class TrainrunSectionsView {
     );
 
     const group = this.trainrunSectionGroup
-      .selectAll(StaticDomTags.EDGE_ROOT_CONTAINER_DOM_REF)
+      .selectAll<SVGElement, TrainrunSectionViewObject>(StaticDomTags.EDGE_ROOT_CONTAINER_DOM_REF)
       .data(
         this.createViewTrainrunSectionDataObjects(this.editorView, filteredTrainrunSections),
         (d: TrainrunSectionViewObject) => d.key,
@@ -2068,7 +2066,7 @@ export class TrainrunSectionsView {
       return;
     }
     const obj = d3
-      .selectAll(
+      .selectAll<SVGElement, TrainrunSectionViewObject>(
         StaticDomTags.EDGE_LINE_PIN_DOM_REF +
           "." +
           (atSource ? StaticDomTags.EDGE_IS_TARGET : StaticDomTags.EDGE_IS_SOURCE),
@@ -2222,9 +2220,12 @@ export class TrainrunSectionsView {
       );
       transformedPath = transformedPath.reverse();
 
-      const transitionObject: Transition = srcNode.getTransition(ts.getId());
+      const transitionObject = new TransitionViewObject(
+        this.editorView,
+        srcNode.getTransition(ts.getId()),
+      );
       if (transitionObject !== undefined) {
-        const tPath = Object.assign([], transitionObject.getPath());
+        const tPath = Object.assign([], transitionObject.path);
         const n0 = Vec2D.norm(Vec2D.sub(element, tPath[0]));
         const n1 = Vec2D.norm(Vec2D.sub(element, tPath[3]));
         if (n0 <= n1) {
@@ -2263,9 +2264,12 @@ export class TrainrunSectionsView {
         transformedPath,
       );
 
-      const transitionObject: Transition = trgNode.getTransition(ts.getId());
+      const transitionObject = new TransitionViewObject(
+        this.editorView,
+        trgNode.getTransition(ts.getId()),
+      );
       if (transitionObject !== undefined) {
-        const tPath = Object.assign([], transitionObject.getPath());
+        const tPath = Object.assign([], transitionObject.path);
         const n0 = Vec2D.norm(Vec2D.sub(element, tPath[0]));
         const n1 = Vec2D.norm(Vec2D.sub(element, tPath[3]));
         if (n0 <= n1) {
@@ -2329,10 +2333,10 @@ export class TrainrunSectionsView {
   }
 
   private oneNodeHiddenTrainrunSectionsRendering(
-    inGroupLines: d3.Selection<SVGElement, TrainrunSectionViewObject, Element, undefined>,
+    inGroupLines: d3.Selection<SVGGElement, TrainrunSectionViewObject, Element, undefined>,
     selectedTrainrun: Trainrun,
     connectedTrainIds: number[],
-    inGroupLabels: d3.Selection<SVGElement, TrainrunSectionViewObject, Element, undefined>,
+    inGroupLabels: d3.Selection<SVGGElement, TrainrunSectionViewObject, Element, undefined>,
   ) {
     const groupLines = inGroupLines.filter(
       (d: TrainrunSectionViewObject) =>
@@ -2448,7 +2452,7 @@ export class TrainrunSectionsView {
   }
 
   private defaultTrainrunSectionsRendering(
-    inGroupLines: d3.Selection<SVGElement, TrainrunSectionViewObject, Element, undefined>,
+    inGroupLines: d3.Selection<SVGGElement, TrainrunSectionViewObject, Element, undefined>,
     selectedTrainrun: Trainrun,
     connectedTrainIds: number[],
     inGroupLabels: d3.Selection<SVGGElement, TrainrunSectionViewObject, Element, undefined>,
@@ -2604,7 +2608,7 @@ export class TrainrunSectionsView {
   }
 
   make4LayerTrainrunSectionLines(
-    groupLines: d3.Selection<SVGElement, TrainrunSectionViewObject, Element, undefined>,
+    groupLines: d3.Selection<SVGGElement, TrainrunSectionViewObject, Element, undefined>,
     selectedTrainrun: Trainrun,
     connectedTrainIds: number[],
     enableEvents: boolean,
@@ -2648,7 +2652,7 @@ export class TrainrunSectionsView {
     lineOrientationVector: Vec2D,
     stopIndex: number,
     drawNumberOfStops: number,
-    groupEnter: d3.Selection<SVGElement, undefined, Element, undefined>,
+    groupEnter: d3.Selection<SVGGElement, undefined, Element, undefined>,
     selectedTrainrun: Trainrun,
     connectedTrainIds: number[],
     numberOfStops: number,

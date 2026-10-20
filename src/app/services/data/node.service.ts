@@ -35,7 +35,7 @@ import {
   NodeOperation,
   Operation,
   OperationType,
-  TrainrunOperation,
+  TrainrunUpdateOperation,
 } from "../../models/operation.model";
 
 @Injectable({
@@ -200,8 +200,7 @@ export class NodeService implements OnDestroy {
     if (this.usesOptimizePorts()) {
       optimizePorts(this.nodesStore.nodes, this.getClutterWeights());
       this.nodesStore.nodes.forEach((node) => {
-        node.updateTransitionsRouting();
-        node.updateConnectionsRouting();
+        node.validateConnections();
         this.trainrunSectionService.updateTrainrunSectionRouting(node, false);
       });
     } else {
@@ -213,16 +212,16 @@ export class NodeService implements OnDestroy {
   }
 
   validateConnections(node: Node) {
-    this.getNodeFromId(node.getId()).validateAllConnections();
+    this.getNodeFromId(node.getId()).validateConnections();
   }
 
   validateAllConnections() {
     this.nodesStore.nodes.forEach((node) => {
-      node.validateAllConnections();
+      node.validateConnections();
     });
   }
 
-  duplicateNode(nodeId: number): Node {
+  duplicateNode(nodeId: number, enforceUpdate = true): Node {
     const node = this.getNodeFromId(nodeId);
     const newNode = this.addNodeWithPosition(
       node.getPositionX(),
@@ -230,6 +229,7 @@ export class NodeService implements OnDestroy {
       node.getBetriebspunktName(),
       node.getFullName(),
       Object.assign([], node.getLabelIds()),
+      enforceUpdate,
     );
     newNode.setHaltezeit(JSON.parse(JSON.stringify(node.getTrainrunCategoryHaltezeit())));
     newNode.setConnectionTime(node.getConnectionTime());
@@ -517,6 +517,13 @@ export class NodeService implements OnDestroy {
       this.transitionsUpdated();
       this.nodesUpdated();
     }
+    this.operation.emit(
+      new TrainrunUpdateOperation(trainrunSection1.getTrainrun(), [
+        "nodes",
+        "times",
+        "numberOfStops",
+      ]),
+    );
 
     return trainrunSection1;
   }
@@ -599,7 +606,7 @@ export class NodeService implements OnDestroy {
     this.transitionsUpdated();
     this.nodesUpdated();
     this.operation.emit(
-      new TrainrunOperation(OperationType.update, trainrunSections.trainrunSection1.getTrainrun()),
+      new TrainrunUpdateOperation(trainrunSections.trainrunSection1.getTrainrun(), ["times"]),
     );
   }
 
@@ -613,20 +620,20 @@ export class NodeService implements OnDestroy {
     return !checkPort1 || !checkPort2;
   }
 
-  addTransitionAndComputeRoutingFromFreePorts(node: Node, trainrun: Trainrun, isNonStop = false) {
+  addTransition(node: Node, trainrun: Trainrun, isNonStop = false) {
     const freePorts = node.getFreePortsForTrainrun(trainrun.getId());
     if (freePorts.length <= 1) {
       return;
     }
     if (this.checkExistsNoCycleTrainrunAfterFreePortsConnecting(freePorts[0], freePorts[1])) {
-      node.addTransitionAndComputeRouting(freePorts[0], freePorts[1], trainrun, isNonStop);
+      node.addTransition(freePorts[0], freePorts[1], trainrun, isNonStop);
     } else {
       if (freePorts.length === 3) {
         if (this.checkExistsNoCycleTrainrunAfterFreePortsConnecting(freePorts[0], freePorts[2])) {
-          node.addTransitionAndComputeRouting(freePorts[0], freePorts[2], trainrun, isNonStop);
+          node.addTransition(freePorts[0], freePorts[2], trainrun, isNonStop);
         } else {
           if (this.checkExistsNoCycleTrainrunAfterFreePortsConnecting(freePorts[1], freePorts[2])) {
-            node.addTransitionAndComputeRouting(freePorts[1], freePorts[2], trainrun, isNonStop);
+            node.addTransition(freePorts[1], freePorts[2], trainrun, isNonStop);
           }
         }
       }
@@ -641,7 +648,7 @@ export class NodeService implements OnDestroy {
     const node = this.getNodeFromId(nodeId);
     const port1 = node.getPortOfTrainrunSection(trainrunSection1.getId());
     const port2 = node.getPortOfTrainrunSection(trainrunSection2.getId());
-    node.addTransitionAndComputeRouting(port1, port2, trainrunSection1.getTrainrun());
+    node.addTransition(port1, port2, trainrunSection1.getTrainrun());
   }
 
   addTransitionToNodes(
@@ -652,18 +659,10 @@ export class NodeService implements OnDestroy {
     targetIsNonStop = false,
   ) {
     const sourceNode = this.getNodeFromId(sourceNodeId);
-    this.addTransitionAndComputeRoutingFromFreePorts(
-      sourceNode,
-      trainrunSection.getTrainrun(),
-      sourceIsNonStop,
-    );
+    this.addTransition(sourceNode, trainrunSection.getTrainrun(), sourceIsNonStop);
 
     const targetNode = this.getNodeFromId(targetNodeId);
-    this.addTransitionAndComputeRoutingFromFreePorts(
-      targetNode,
-      trainrunSection.getTrainrun(),
-      targetIsNonStop,
-    );
+    this.addTransition(targetNode, trainrunSection.getTrainrun(), targetIsNonStop);
   }
 
   isConditionToAddTransitionFullfilled(node: Node, trainrunSection: TrainrunSection): boolean {
@@ -716,7 +715,7 @@ export class NodeService implements OnDestroy {
       if (conFound !== undefined) {
         return;
       }
-      node.addConnectionAndComputeRouting(portFrom, portTo);
+      node.addConnection(portFrom, portTo);
     }
     this.connectionsUpdated();
   }
@@ -1086,12 +1085,12 @@ export class NodeService implements OnDestroy {
     }
     // source node
     if (this.isConditionToAddTransitionFullfilled(sourceNode, trainrunSection)) {
-      this.addTransitionAndComputeRoutingFromFreePorts(sourceNode, trainrun);
+      this.addTransition(sourceNode, trainrun);
     }
 
     // target node
     if (this.isConditionToAddTransitionFullfilled(targetNode, trainrunSection)) {
-      this.addTransitionAndComputeRoutingFromFreePorts(targetNode, trainrun);
+      this.addTransition(targetNode, trainrun);
     }
     if (enforceUpdate) {
       this.transitionsUpdated();
@@ -1175,26 +1174,6 @@ export class NodeService implements OnDestroy {
     return nodeLabels;
   }
 
-  getNetzgrafikBoundingBox() {
-    let minX: number | undefined;
-    let maxX: number | undefined;
-    let minY: number | undefined;
-    let maxY: number | undefined;
-    this.nodesStore.nodes.forEach((n) => {
-      minX = minX === undefined ? n.getPositionX() : Math.min(minX, n.getPositionX());
-      maxX =
-        maxX === undefined
-          ? n.getPositionX() + n.getNodeWidth()
-          : Math.max(maxX, n.getPositionX() + n.getNodeWidth());
-      minY = minY === undefined ? n.getPositionY() : Math.min(minY, n.getPositionY());
-      maxY =
-        maxY === undefined
-          ? n.getPositionY() + n.getNodeHeight()
-          : Math.max(maxY, n.getPositionY() + n.getNodeHeight());
-    });
-    return {minCoordX: minX, minCoordY: minY, maxCoordX: maxX, maxCoordY: maxY};
-  }
-
   private deleteNodeWithoutUpdate(nodeId: number, enforceUpdate = true) {
     const node = this.getNodeFromId(nodeId);
     const connectedTrainrunSections = node.getConnectedTrainrunSections();
@@ -1235,8 +1214,7 @@ export class NodeService implements OnDestroy {
       if (this.usesOptimizePorts()) {
         optimizePorts(this.nodesStore.nodes, this.getClutterWeights());
         this.nodesStore.nodes.forEach((n) => {
-          n.updateTransitionsRouting();
-          n.updateConnectionsRouting();
+          n.validateConnections();
           this.trainrunSectionService.updateTrainrunSectionRouting(n, enforceUpdate);
         });
       } else {
@@ -1250,8 +1228,7 @@ export class NodeService implements OnDestroy {
       this.operation.emit(new NodeOperation(OperationType.update, node));
     }
 
-    node.updateTransitionsRouting();
-    node.updateConnectionsRouting();
+    node.validateConnections();
     this.trainrunSectionService.updateTrainrunSectionRouting(node, enforceUpdate);
   }
 
