@@ -239,16 +239,19 @@ export class TrainrunSectionViewObject {
       editorView,
       this.firstSection,
       TrainrunSectionText.TrainrunSectionTravelTime,
+      this.lastSection,
     );
     const hiddenTagBackwardTravelTime = TrainrunSectionsView.getHiddenTagForTime(
       editorView,
       this.firstSection,
       TrainrunSectionText.TrainrunSectionBackwardTravelTime,
+      this.lastSection,
     );
     const hiddenTagTrainrunName = TrainrunSectionsView.getHiddenTagForTime(
       editorView,
       this.firstSection,
       TrainrunSectionText.TrainrunSectionName,
+      this.lastSection,
     );
     const hiddenTagDirectionArrows =
       !editorView.isTemporaryDisableFilteringOfItemsInViewEnabled() &&
