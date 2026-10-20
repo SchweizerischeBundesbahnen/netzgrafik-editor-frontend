@@ -59,8 +59,8 @@ export class Sg6TrackService implements OnDestroy {
     }
 
     const trainruns = this.selectedTrainrun.trainruns;
+    this.calculateAndApplyNodeReservations(trainruns);
     const sectionTracks = this.estimateSectionTracks(trainruns);
-    this.estimateNodeReservations(trainruns);
     this.applySectionTracks(trainruns, sectionTracks);
     this.selectedTrainrunSubject.next(this.selectedTrainrun);
   }
@@ -134,7 +134,7 @@ export class Sg6TrackService implements OnDestroy {
     return sectionsByKey;
   }
 
-  private estimateNodeReservations(trainruns: SgTrainrun[]): void {
+  private calculateAndApplyNodeReservations(trainruns: SgTrainrun[]): void {
     const nodesById = this.collectNodesById(trainruns);
     const visibleTrainrunIds = new Set(
       this.trainrunService.getVisibleTrainruns().map((trainrun) => trainrun.getId()),
@@ -164,7 +164,7 @@ export class Sg6TrackService implements OnDestroy {
       new Set(nodes.map((node) => node.sgPathNode)).forEach((pathNode) => {
         pathNode.trackData.track = trackCount;
       });
-      nodes.forEach((node) => {
+      nodes.forEach((node : SgTrainrunNode) => {
         const reservations = estimates.flatMap((estimate) =>
           estimate.occupancies
             .filter((occupancy) => occupancy.trainrunId === node.trainrunId)
@@ -180,7 +180,7 @@ export class Sg6TrackService implements OnDestroy {
               headwayUntilTime: occupancy.headwayUntilMinute,
             })),
         );
-        node.trackReservations = reservations;
+        node.trackReservations = reservations; 
         if (reservations.length > 0) {
           node.minimumHeadwayTime = Math.min(
             ...reservations.map(

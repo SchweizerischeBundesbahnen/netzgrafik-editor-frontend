@@ -6,45 +6,36 @@ import {Transition} from "../../models/transition.model";
 import {Port} from "../../models/port.model";
 import {Direction} from "../../data-structures/business.data.structures";
 import {PortAlignment} from "../../data-structures/technical.data.structures";
+import {MathUtils} from "src/app/utils/math";
 
-interface SectionTrackEstimateInput {
-  departureMinute: number;
-  arrivalMinute: number;
-  backward: boolean;
-  frequencyMinutes: number;
-  sectionHeadwayMinutes: number;
-}
+// ---------------------------------------------------------------------------
+// Public types
+// ---------------------------------------------------------------------------
 
+/**
+ * Estimated track requirement along a section. `start` and `end` are normalized
+ * section positions from 0 to 1; `tracks` is the required number of parallel tracks.
+ */
 export interface TrackSegmentEstimate {
   start: number;
   end: number;
   tracks: number;
 }
 
-type TrainrunSectionDirection = "forward" | "backward";
-type NodeTrackPass = 1 | 2 | 3;
-type NodeTrackTransit = "stop" | "non-stop" | "endpoint";
-
-interface NodeTrackTrainrunOccurrence {
-  node: Node;
-  trainrun: Trainrun;
-  arrivalSection?: TrainrunSection;
-  arrivalDirection?: TrainrunSectionDirection;
-  departureSection?: TrainrunSection;
-  departureDirection?: TrainrunSectionDirection;
-  transition?: Transition;
-  trackGroupId?: string;
-  // 1 = runs through the node, 2 = round-trip turnaround, 3 = one-way start or end.
-  pass: NodeTrackPass;
-  occurrenceIndex: number;
-}
-
+/**
+ * Optional inputs for node-track estimation. Time values are expressed in minutes;
+ * forward and backward tracks are separated by default.
+ */
 export interface NodeTrackEstimatorOptions {
   windowStartMinutes?: number;
   windowEndMinutes?: number;
   separateForwardBackwardTracks?: boolean;
 }
 
+/**
+ * One periodic trainrun occurrence occupying a node track. `headwayUntilMinute`
+ * marks the end of the blocking interval used for track allocation.
+ */
 export interface NodeTrackOccupancy {
   arrivalMinute: number;
   departureMinute: number;
@@ -58,14 +49,73 @@ export interface NodeTrackOccupancy {
   occurrenceIndex: number;
 }
 
+/** Estimated node-track occupancy, with one entry per allocated track. */
 export interface NodeTrackEstimate {
   track: number;
   occupancies: NodeTrackOccupancy[];
 }
 
+// ---------------------------------------------------------------------------
+// Internal types
+// ---------------------------------------------------------------------------
+
+interface SectionTrackEstimateInput {
+  departureMinute: number;
+  arrivalMinute: number;
+  backward: boolean;
+  frequencyMinutes: number;
+  sectionHeadwayMinutes: number;
+}
+
+type TrainrunSectionDirection = "forward" | "backward";
+
+/** Structural type of a trainrun occurrence at a node. */
+enum NodeTrackOccurrenceType {
+  TRANSIT = 1,
+  ROUND_TRIP_TURNAROUND = 2,
+  ONE_WAY_ENDPOINT = 3,
+}
+
+/** Node operation relevant for allocation: stopping, non-stop transit, or endpoint. */
+type NodeTrackTransit = "stop" | "non-stop" | "endpoint";
+
+/** One directed visit of a trainrun at a node, including its incoming and outgoing sections. */
+interface NodeTrackTrainrunOccurrence {
+  node: Node;
+  trainrun: Trainrun;
+  arrivalSection?: TrainrunSection;
+  arrivalDirection?: TrainrunSectionDirection;
+  departureSection?: TrainrunSection;
+  departureDirection?: TrainrunSectionDirection;
+  transition?: Transition;
+  trackGroupId?: string;
+  /** Classifies whether the train transits, turns around, or starts/ends here. */
+  occurrenceType: NodeTrackOccurrenceType;
+  occurrenceIndex: number;
+}
+
+/** Timing parameters required to calculate one node-track occupancy. */
+interface NodeTimingContext {
+  frequency: number;
+  haltezeit: number;
+  nodeHeadway: number;
+  minimalTurnaround: number;
+}
+
+/** Arrival, departure, and blocking-end times for one node-track occurrence. */
+interface NodeTrackTimes {
+  arrivalMinute: number;
+  departureMinute: number;
+  headwayUntilMinute: number;
+}
+
+/**
+ * Group of periodic occupancies assigned to one physical track strand,
+ * including the metadata needed for track allocation.
+ */
 interface NodeTrackBlock {
   occurrenceIndex: number;
-  pass: NodeTrackPass;
+  occurrenceType: NodeTrackOccurrenceType;
   trackGroupId?: string;
   corridorKey: string;
   transit: NodeTrackTransit;
@@ -76,17 +126,13 @@ interface NodeTrackBlock {
   firstArrival: number;
 }
 
+/** Expanded internal time window used to calculate node-track occupancies. */
 interface NodeTrackEstimationWindow {
   calculationStartMinutes: number;
   windowEndMinutes: number;
 }
 
-interface NodeTrackTimes {
-  arrivalMinute: number;
-  departureMinute: number;
-  headwayUntilMinute: number;
-}
-
+/** Matrix context used to project section occupancies over distance and time. */
 interface TrackProjectionContext {
   distanceCells: number;
   timeCells: number;
@@ -97,22 +143,46 @@ interface TrackProjectionContext {
   tracksMatrix: number[];
 }
 
+type TimeKind = "arrival" | "departure";
+type TimeScale = "consecutive" | "periodic";
+
+/** Which section end must sit on the node, and how to read the time there. */
+interface TimeAccessor {
+  nodeEnd: "source" | "target";
+  read: (section: TrainrunSection) => number;
+}
+
+// ---------------------------------------------------------------------------
+// Service
+// ---------------------------------------------------------------------------
+
 @Injectable({providedIn: "root"})
 export class InfrastructureEstimatorService {
   static readonly DEFAULT_DISTANCE_RESOLUTION = 15;
   static readonly DEFAULT_TIME_RESOLUTION = 15;
-  static readonly DEFAULT_MINIMUM_HEADWAY_TIME = 0;
+  static readonly DEFAULT_MINIMUM_HEADWAY_TIME = 1;
 
+  // =========================================================================
+  // Section tracks (corridor between two nodes)
+  // =========================================================================
+
+  /**
+   * Estimates the number of tracks needed on the corridor fromNode -> toNode.
+   * The calculation is oriented: from -> to is not the same as to -> from.
+   * Sections are passed explicitly so the service stays stateless.
+   * 
+   * @param fromNode The starting node of the corridor.
+   * @param toNode The ending node of the corridor.
+   * @param trainrunSections The sections of trainruns traveling through the corridor.
+   * @param minHeadwayTime The minimum headway time between trains on the same track.
+   * @returns An array of track segment estimates for the corridor.
+   */
   estimateSectionTracks(
     fromNode: Node,
     toNode: Node,
     trainrunSections: TrainrunSection[],
     minHeadwayTime = InfrastructureEstimatorService.DEFAULT_MINIMUM_HEADWAY_TIME,
   ): TrackSegmentEstimate[] {
-    // We have to pass the cooridor between two node (from -> to) node. the calcualtion is
-    // oriented - means passing from -> to is not the same as passing from to -> from.
-    // the trainrun sections could also been retrieved from the nodes (port) but as the methode
-    // must be stateless thus we have to pass the entire trainrun sections
     const matchingSections = this.findMatchingSections(fromNode, toNode, trainrunSections);
     if (matchingSections.length === 0) {
       return [];
@@ -124,349 +194,365 @@ export class InfrastructureEstimatorService {
       matchingSections,
       minHeadwayTime,
     );
-    const maximumFrequency = this.getMaximumFrequency(sections);
+    const maximumFrequency = this.maxOf(sections, (section) => section.frequencyMinutes);
     const maximumTravelTime = this.getMaximumTravelTime(sections);
     const unrollingWindow = Math.max(maximumFrequency, maximumTravelTime);
-    const frequencyOffsetWindow = this.getMaximumFrequencyOffsetWindow(sections, unrollingWindow);
     if (unrollingWindow <= 0 || maximumFrequency <= 0) {
       return [];
     }
+
+    const frequencyOffsetWindow = this.getMaximumFrequencyOffsetWindow(sections, unrollingWindow);
     return this.estimateTrackSegments(sections, maximumFrequency, frequencyOffsetWindow);
   }
 
+  // =========================================================================
+  // Node tracks
+  // =========================================================================
+
+  /**
+   * Estimates track usage inside one node. Sections are passed explicitly.
+   *
+   * @param node The node for which to estimate track usage.
+   * @param trainrunSections The sections of trainruns visiting the node.
+   * @param options Additional options for the estimation.
+   * @returns An array of node track estimates.
+   */
   estimateNodeTracks(
     node: Node,
     trainrunSections: TrainrunSection[],
     options: NodeTrackEstimatorOptions = {},
   ): NodeTrackEstimate[] {
-    // The input parameters are the node for which we want to estimate track usage,
-    // the trainrun sections that pass through this node. We could just use the node to
-    // retrieve alle trainrun sections which have a arrival or departure at this node (ports).
-    // But we like to have an stateless approach where all necessary data is passed explicitly.
-    // The NodeTrackEstimator operates purely on the provided occurrences and options,
-    // without relying on any external state.
     const occurrences = this.createNodeTrackOccurrences(node, trainrunSections);
-    return this.estimateNodeTracksForNode(occurrences, options);
-  }
-
-  private estimateNodeTracksForNode(
-    occurrences: NodeTrackTrainrunOccurrence[],
-    options: NodeTrackEstimatorOptions,
-  ): NodeTrackEstimate[] {
-    const maximumFrequency = this.getMaximumNodeTrackFrequency(occurrences);
+    const maximumFrequency = this.maxOf(occurrences, (o) => o.trainrun.getFrequency());
     if (maximumFrequency === 0) {
       return [];
     }
 
     const window = this.getNodeTrackEstimationWindow(options, maximumFrequency);
-    const blocks = this.createSortedNodeTrackBlocks(occurrences, window);
-    const tracks = this.allocateNodeTracks(blocks, options);
-    return this.createNodeTrackEstimates(tracks);
+    // Build every occurrence first; allocation happens only after the order is stable.
+    const blocks = occurrences
+      .flatMap((occurrence) => this.createNodeTrackBlocks(occurrence, window))
+      .sort((first, second) => this.compareNodeTrackBlocks(first, second));
+
+    const separateDirections = options.separateForwardBackwardTracks ?? true;
+    const tracks = separateDirections
+      ? this.allocateDirectionalNodeTracks(blocks)
+      : this.allocateSharedNodeTracks(blocks);
+
+    return tracks.map((track, index) => ({
+      track: index + 1,
+      occupancies: track.occupancies.sort((a, b) => a.arrivalMinute - b.arrivalMinute),
+    }));
   }
 
-  private getMaximumNodeTrackFrequency(occurrences: NodeTrackTrainrunOccurrence[]): number {
-    return occurrences.reduce(
-      (maximum, occurrence) => Math.max(maximum, occurrence.trainrun.getFrequency()),
-      0,
+  private findMatchingSections(
+    fromNode: Node,
+    toNode: Node,
+    trainrunSections: TrainrunSection[],
+  ): TrainrunSection[] {
+    const fromNodeId = fromNode.getId();
+    const toNodeId = toNode.getId();
+    const unique = new Map<number, TrainrunSection>();
+    for (const section of trainrunSections) {
+      const sourceNodeId = section.getSourceNodeId();
+      const targetNodeId = section.getTargetNodeId();
+      const connects =
+        (sourceNodeId === fromNodeId && targetNodeId === toNodeId) ||
+        (sourceNodeId === toNodeId && targetNodeId === fromNodeId);
+      if (connects) {
+        unique.set(section.getId(), section);
+      }
+    }
+    return [...unique.values()];
+  }
+
+  private createDirectionalTrackInputs(
+    fromNode: Node,
+    toNode: Node,
+    trainrunSections: TrainrunSection[],
+    minHeadwayTime: number,
+  ): SectionTrackEstimateInput[] {
+    return trainrunSections.flatMap((section) => {
+      const trainrun = section.getTrainrun();
+      const isForward =
+        section.getSourceNodeId() === fromNode.getId() &&
+        section.getTargetNodeId() === toNode.getId();
+
+      // "near" = the fromNode end of the section, "far" = the toNode end.
+      const times = isForward
+        ? {
+            departureNear: section.getSourceDepartureConsecutiveTime(),
+            arrivalFar: section.getTargetArrivalConsecutiveTime(),
+            departureFar: section.getTargetDepartureConsecutiveTime(),
+            arrivalNear: section.getSourceArrivalConsecutiveTime(),
+          }
+        : {
+            departureNear: section.getTargetDepartureConsecutiveTime(),
+            arrivalFar: section.getSourceArrivalConsecutiveTime(),
+            departureFar: section.getSourceDepartureConsecutiveTime(),
+            arrivalNear: section.getTargetArrivalConsecutiveTime(),
+          };
+
+      const forward: SectionTrackEstimateInput = {
+        departureMinute: times.departureNear,
+        arrivalMinute: times.arrivalFar,
+        backward: false,
+        frequencyMinutes: trainrun.getFrequency(),
+        sectionHeadwayMinutes: this.getSectionHeadway(trainrun, minHeadwayTime),
+      };
+      const backward: SectionTrackEstimateInput = {
+        departureMinute: times.departureFar,
+        arrivalMinute: times.arrivalNear,
+        backward: true,
+        frequencyMinutes: trainrun.getFrequency(),
+        sectionHeadwayMinutes: this.getSectionHeadway(trainrun, minHeadwayTime),
+      };
+
+      // A one-way trainrun contributes only in its actual travel direction.
+      if (trainrun.getDirection() === Direction.ONE_WAY) {
+        return isForward ? [forward] : [backward];
+      }
+      return [forward, backward];
+    });
+  }
+
+  private getSectionHeadway(trainrun: Trainrun, minHeadwayTime: number): number {
+    const categoryHeadway = trainrun.getTrainrunCategory()?.sectionHeadway;
+    return MathUtils.isPositiveNumber(categoryHeadway)
+      ? Math.max(minHeadwayTime, categoryHeadway)
+      : minHeadwayTime;
+  }
+
+  private getMaximumTravelTime(sections: SectionTrackEstimateInput[]): number {
+    return this.maxOf(sections, (section) =>
+      Math.round(section.arrivalMinute - section.departureMinute),
     );
   }
 
+  /** Rounds the window up to a whole multiple of every section frequency. */
+  private getMaximumFrequencyOffsetWindow(
+    sections: SectionTrackEstimateInput[],
+    minimumWindowMinutes: number,
+  ): number {
+    return sections.reduce((maximum, section) => {
+      if (section.frequencyMinutes <= 0) {
+        return maximum;
+      }
+      const rounded =
+        Math.ceil(minimumWindowMinutes / section.frequencyMinutes) * section.frequencyMinutes;
+      return Math.max(maximum, rounded);
+    }, minimumWindowMinutes);
+  }
+
+  private estimateTrackSegments(
+    sections: SectionTrackEstimateInput[],
+    maximumFrequencyMinutes: number,
+    frequencyOffsetWindowMinutes: number,
+  ): TrackSegmentEstimate[] {
+    const distanceResolution = InfrastructureEstimatorService.DEFAULT_DISTANCE_RESOLUTION;
+    const timeResolution = InfrastructureEstimatorService.DEFAULT_TIME_RESOLUTION;
+    if (frequencyOffsetWindowMinutes <= 0 || distanceResolution <= 0 || timeResolution <= 0) {
+      return [];
+    }
+
+    const maximumTravelTime = Math.max(this.getMaximumTravelTime(sections), 1);
+    const distanceCells = distanceResolution * maximumTravelTime;
+    const timeCells = timeResolution * 2 * frequencyOffsetWindowMinutes;
+
+    const context: TrackProjectionContext = {
+      distanceCells,
+      timeCells,
+      timeResolution,
+      maximumFrequency: maximumFrequencyMinutes,
+      frequencyOffsetWindow: frequencyOffsetWindowMinutes,
+      dataMatrix: Array.from({length: distanceCells}, () => new Array<number>(timeCells).fill(0)),
+      tracksMatrix: new Array<number>(distanceCells).fill(0),
+    };
+
+    sections.forEach((section) => this.projectSectionIntoMatrices(section, context));
+    return this.mergeTracks(context.tracksMatrix);
+  }
+
+  /**
+   * Draws one section as a diagonal band into the time/distance matrix:
+   * repeated over the whole frequency window and widened by its headway.
+   * Business-critical geometry - do not simplify without tests.
+   */
+  private projectSectionIntoMatrices(
+    section: SectionTrackEstimateInput,
+    context: TrackProjectionContext,
+  ): void {
+    if (section.frequencyMinutes <= 0) {
+      return;
+    }
+
+    const travelTime = section.arrivalMinute - section.departureMinute;
+    const maximumFrequencyOffset =
+      Math.ceil(context.frequencyOffsetWindow / section.frequencyMinutes) *
+      section.frequencyMinutes;
+    const bandWidth = context.timeResolution * section.sectionHeadwayMinutes;
+
+    for (let distanceCell = 0; distanceCell < context.distanceCells; distanceCell++) {
+      // Backward sections are projected from the opposite end of the section.
+      const matrixDistanceCell = section.backward
+        ? context.distanceCells - distanceCell - 1
+        : distanceCell;
+      const baseTime =
+        (section.departureMinute % context.maximumFrequency) +
+        (travelTime * distanceCell) / (context.distanceCells - 0.5);
+
+      for (
+        let frequencyOffset = -maximumFrequencyOffset;
+        frequencyOffset <= maximumFrequencyOffset;
+        frequencyOffset += section.frequencyMinutes
+      ) {
+        const bandStart = Math.round(context.timeResolution * (baseTime + frequencyOffset));
+        for (let bandOffset = 0; bandOffset < bandWidth; bandOffset++) {
+          const timeCell = bandStart + bandOffset;
+          if (timeCell < 0 || timeCell >= context.timeCells) {
+            continue;
+          }
+          const occupancy = ++context.dataMatrix[matrixDistanceCell][timeCell];
+          context.tracksMatrix[matrixDistanceCell] = Math.max(
+            context.tracksMatrix[matrixDistanceCell],
+            occupancy,
+          );
+        }
+      }
+    }
+  }
+
+  /** Turns per-cell occupancy into normalized intervals, merging equal neighbours. */
+  private mergeTracks(tracksMatrix: number[]): TrackSegmentEstimate[] {
+    const cellCount = tracksMatrix.length;
+    if (cellCount === 0) {
+      return [];
+    }
+
+    const segments: TrackSegmentEstimate[] = [];
+    let segmentStartCell = 0;
+    for (let cell = 1; cell <= cellCount; cell++) {
+      const isSameValue = cell < cellCount && tracksMatrix[cell] === tracksMatrix[segmentStartCell];
+      if (isSameValue) {
+        continue;
+      }
+      segments.push({
+        start: segmentStartCell / cellCount,
+        end: cell / cellCount,
+        tracks: tracksMatrix[segmentStartCell],
+      });
+      segmentStartCell = cell;
+    }
+    return segments;
+  }
+
+  /** Expanded internal time window used to calculate node-track occupancies. */
   private getNodeTrackEstimationWindow(
     options: NodeTrackEstimatorOptions,
     maximumFrequency: number,
   ): NodeTrackEstimationWindow {
-    // Keep extra cycles around the requested range; the viewport owns final culling.
-    const requestedWindowEndMinutes = Math.max(
-      options.windowEndMinutes ?? maximumFrequency,
-      maximumFrequency,
-    );
-    const windowStartMinutes =
-      options.windowStartMinutes ?? requestedWindowEndMinutes - maximumFrequency;
-    const expansionMinutes = 2 * maximumFrequency;
+    const requestedEnd = Math.max(options.windowEndMinutes ?? maximumFrequency, maximumFrequency);
+    const requestedStart = options.windowStartMinutes ?? requestedEnd - maximumFrequency;
+    const expansion = 2 * maximumFrequency;
     return {
-      calculationStartMinutes: windowStartMinutes - expansionMinutes,
-      windowEndMinutes: requestedWindowEndMinutes + expansionMinutes,
+      calculationStartMinutes: requestedStart - expansion,
+      windowEndMinutes: requestedEnd + expansion,
     };
   }
 
-  private createSortedNodeTrackBlocks(
-    occurrences: NodeTrackTrainrunOccurrence[],
-    window: NodeTrackEstimationWindow,
-  ): NodeTrackBlock[] {
-    // Build every occurrence first; allocation happens only after the order is stable.
-    return occurrences
-      .flatMap((occurrence) => this.createNodeTrackBlocks(occurrence, window))
-      .sort((first, second) => this.compareNodeTrackBlocks(first, second));
-  }
+  // --- occurrence creation -------------------------------------------------
 
-  private compareNodeTrackBlocks(first: NodeTrackBlock, second: NodeTrackBlock): number {
-    return (
-      first.categoryOrder - second.categoryOrder ||
-      first.categoryShortName.localeCompare(second.categoryShortName) ||
-      first.trainrunTitle.localeCompare(second.trainrunTitle) ||
-      first.firstArrival - second.firstArrival ||
-      first.occurrenceIndex - second.occurrenceIndex
-    );
-  }
+  private createNodeTrackOccurrences(
+    node: Node,
+    trainrunSections: TrainrunSection[],
+  ): NodeTrackTrainrunOccurrence[] {
+    const nodeId = node.getId();
+    const allowedSectionIds = new Set(trainrunSections.map((section) => section.getId()));
+    const occurrences: NodeTrackTrainrunOccurrence[] = [];
+    const visitedTransitionIds = new Set<number>();
+    const endingRoundTrip: TrainrunSection[] = [];
+    const endingOneWay: TrainrunSection[] = [];
 
-  private allocateNodeTracks(
-    blocks: NodeTrackBlock[],
-    options: NodeTrackEstimatorOptions,
-  ): NodeTrackEstimate[] {
-    const separateDirections = options.separateForwardBackwardTracks ?? true;
-    return separateDirections
-      ? this.allocateDirectionalNodeTracks(blocks)
-      : this.allocateSharedNodeTracks(blocks);
-  }
-
-  private createNodeTrackEstimates(tracks: NodeTrackEstimate[]): NodeTrackEstimate[] {
-    return tracks.map((track, index) => ({
-      track: index + 1,
-      occupancies: track.occupancies.sort(
-        (first, second) => first.arrivalMinute - second.arrivalMinute,
-      ),
-    }));
-  }
-
-  private allocateSharedNodeTracks(blocks: NodeTrackBlock[]): NodeTrackEstimate[] {
-    const tracks: NodeTrackEstimate[] = [];
-    this.appendNodeTrackBlocks(tracks, this.filterNodeTrackBlocksByPass(blocks, 1));
-    this.appendNodeTrackBlocks(tracks, this.filterNodeTrackBlocksByPass(blocks, 2));
-    this.appendNodeTrackBlocks(tracks, this.filterNodeTrackBlocksByPass(blocks, 3));
-    return tracks;
-  }
-
-  private allocateDirectionalNodeTracks(blocks: NodeTrackBlock[]): NodeTrackEstimate[] {
-    const corridorGroups = this.groupNodeTrackBlocksByCorridor(blocks);
-    const tracks = corridorGroups.flatMap((corridorGroup) => {
-      const directionalGroups = this.groupNodeTrackBlocksByDirection(corridorGroup);
-      const forwardTracks = this.allocateDirectionalBlockGroups(directionalGroups[0] ?? []);
-      const backwardTracks = this.allocateDirectionalBlockGroups(directionalGroups[1] ?? []);
-      return [...forwardTracks, ...backwardTracks.reverse()];
-    });
-
-    // Turnarounds and one-way endpoints use the tracks created by through-trains.
-    this.appendNodeTrackBlocks(tracks, this.filterNodeTrackBlocksByPass(blocks, 2));
-    this.appendNodeTrackBlocks(tracks, this.filterNodeTrackBlocksByPass(blocks, 3));
-    return tracks;
-  }
-
-  private groupNodeTrackBlocksByCorridor(blocks: NodeTrackBlock[]): NodeTrackBlock[][] {
-    const corridorGroups = new Map<string, NodeTrackBlock[]>();
-    this.filterNodeTrackBlocksByPass(blocks, 1).forEach((block) => {
-      corridorGroups.set(block.corridorKey, [
-        ...(corridorGroups.get(block.corridorKey) ?? []),
-        block,
-      ]);
-    });
-    return Array.from(corridorGroups.values()).sort(
-      (first, second) =>
-        this.getFirstNodeTrackOccurrenceIndex(first) -
-        this.getFirstNodeTrackOccurrenceIndex(second),
-    );
-  }
-
-  private groupNodeTrackBlocksByDirection(blocks: NodeTrackBlock[]): NodeTrackBlock[][] {
-    const directionGroups = new Map<string, NodeTrackBlock[]>();
-    blocks.forEach((block) => {
-      if (block.trackGroupId === undefined) {
-        return;
+    // Step 1: one occurrence per connected transition (A -> X -> B).
+    for (const port of this.getOrderedNodePorts(node)) {
+      const section1 = this.getNodeTrackSection(port, allowedSectionIds);
+      if (section1 === undefined) {
+        continue;
       }
-      directionGroups.set(block.trackGroupId, [
-        ...(directionGroups.get(block.trackGroupId) ?? []),
-        block,
-      ]);
-    });
-    return Array.from(directionGroups.values()).sort(
-      (first, second) =>
-        this.getFirstNodeTrackOccurrenceIndex(first) -
-        this.getFirstNodeTrackOccurrenceIndex(second),
-    );
-  }
 
-  private allocateDirectionalBlockGroups(blocks: NodeTrackBlock[]): NodeTrackEstimate[] {
-    const tracks: NodeTrackEstimate[] = [];
-    const stopBlocks = blocks.filter((block) => block.transit === "stop");
-    this.appendNodeTrackBlocks(tracks, stopBlocks);
-
-    // Non-stop movements do not share the stop-train allocation block.
-    blocks
-      .filter((block) => block.transit !== "stop")
-      .forEach((block) => this.appendNodeTrackBlocks(tracks, [block]));
-    return tracks;
-  }
-
-  private getFirstNodeTrackOccurrenceIndex(blocks: NodeTrackBlock[]): number {
-    return Math.min(...blocks.map((block) => block.occurrenceIndex));
-  }
-
-  private filterNodeTrackBlocksByPass(
-    blocks: NodeTrackBlock[],
-    pass: NodeTrackPass,
-  ): NodeTrackBlock[] {
-    return blocks.filter((block) => block.pass === pass);
-  }
-
-  private appendNodeTrackBlocks(tracks: NodeTrackEstimate[], blocks: NodeTrackBlock[]): void {
-    blocks.forEach((block) => {
-      const firstFitIndex = tracks.findIndex((candidate) =>
-        this.canPlaceNodeTrackBlock(candidate, block),
-      );
-      const track = firstFitIndex >= 0 ? tracks[firstFitIndex] : undefined;
-      const selectedTrack = track ?? {
-        track: tracks.length + 1,
-        occupancies: [...block.occupancies],
-      };
-      if (track === undefined) {
-        tracks.push(selectedTrack);
-        return;
+      if (node.isEndNode(section1)) {
+        const isOneWay = section1.getTrainrun().getDirection() === Direction.ONE_WAY;
+        (isOneWay ? endingOneWay : endingRoundTrip).push(section1);
+        continue;
       }
-      track.occupancies.push(...block.occupancies);
-    });
-  }
 
-  private createNodeTrackBlocks(
-    occurrence: NodeTrackTrainrunOccurrence,
-    window: NodeTrackEstimationWindow,
-  ): NodeTrackBlock[] {
-    const times = this.getNodeTrackTimes(occurrence);
-    const frequency = occurrence.trainrun.getFrequency();
-    if (times === undefined || frequency <= 0) {
-      return [];
+      const transition = node.getTransitionFromPortId(port.getId());
+      if (visitedTransitionIds.has(transition.getId())) {
+        continue;
+      }
+      visitedTransitionIds.add(transition.getId());
+
+      const otherPortId =
+        transition.getPortId1() === port.getId()
+          ? transition.getPortId2()
+          : transition.getPortId1();
+      const section2 = this.getNodeTrackSection(node.getPort(otherPortId), allowedSectionIds);
+      if (section2 === undefined) {
+        continue;
+      }
+
+      // The incoming section is the one ending at this node.
+      const incoming = section1.getTargetNodeId() === nodeId ? section1 : section2;
+      const outgoing = incoming === section1 ? section2 : section1;
+      const trainrun = incoming.getTrainrun();
+
+      this.addNodeTrackOccurrence(occurrences, node, trainrun, incoming, outgoing, transition);
+      if (trainrun.getDirection() !== Direction.ONE_WAY) {
+        this.addNodeTrackOccurrence(occurrences, node, trainrun, outgoing, incoming, transition);
+      }
     }
 
-    const pass = occurrence.pass;
-    const offsets = this.getNodeTrackOffsets(times, frequency, window);
-    const strandCount = this.getNodeTrackStrandCount(times, frequency);
-    const strands = this.groupNodeTrackOccupanciesByStrand(
-      occurrence,
-      times,
-      frequency,
-      offsets,
-      strandCount,
-      pass,
-    );
-    return this.createBlocksFromNodeTrackStrands(occurrence, strands, pass);
-  }
-
-  private getNodeTrackOffsets(
-    times: NodeTrackTimes,
-    frequency: number,
-    window: NodeTrackEstimationWindow,
-  ): number[] {
-    const firstOffset = Math.floor(
-      (window.calculationStartMinutes - times.headwayUntilMinute) / frequency,
-    );
-    const lastOffset = Math.ceil((window.windowEndMinutes - times.arrivalMinute) / frequency);
-    return Array.from(
-      {length: lastOffset - firstOffset + 1},
-      (_, index) => firstOffset + index,
-    ).filter((offset) => {
-      const shiftedArrival = times.arrivalMinute + offset * frequency;
-      const shiftedHeadway = times.headwayUntilMinute + offset * frequency;
-      return (
-        shiftedHeadway > window.calculationStartMinutes && shiftedArrival < window.windowEndMinutes
+    // Step 2: round-trip trains turning around at an unconnected port.
+    for (const section of endingRoundTrip) {
+      this.addNodeTrackOccurrence(
+        occurrences,
+        node,
+        section.getTrainrun(),
+        section,
+        section,
+        undefined,
       );
-    });
-  }
-
-  private getNodeTrackStrandCount(times: NodeTrackTimes, frequency: number): number {
-    // A block longer than one frequency cycle needs more than one physical strand.
-    return Math.max(1, Math.ceil((times.headwayUntilMinute - times.arrivalMinute) / frequency));
-  }
-
-  private groupNodeTrackOccupanciesByStrand(
-    occurrence: NodeTrackTrainrunOccurrence,
-    times: NodeTrackTimes,
-    frequency: number,
-    offsets: number[],
-    strandCount: number,
-    pass: NodeTrackPass,
-  ): Map<number, NodeTrackOccupancy[]> {
-    const strands = new Map<number, NodeTrackOccupancy[]>();
-    offsets.forEach((offset) => {
-      const strand = this.modulo(offset + (pass === 2 ? 1 : 0), strandCount);
-      const occupancies = strands.get(strand) ?? [];
-      occupancies.push({
-        arrivalMinute: times.arrivalMinute + offset * frequency,
-        departureMinute: times.departureMinute + offset * frequency,
-        headwayUntilMinute: times.headwayUntilMinute + offset * frequency,
-        trainrunId: occurrence.trainrun.getId(),
-        arrivalSectionId: occurrence.arrivalSection?.getId(),
-        departureSectionId: occurrence.departureSection?.getId(),
-        transitionId: occurrence.transition?.getId(),
-        direction: occurrence.trainrun.getDirection(),
-        trackGroupId: occurrence.trackGroupId,
-        occurrenceIndex: occurrence.occurrenceIndex,
-      });
-      strands.set(strand, occupancies);
-    });
-    return strands;
-  }
-
-  private createBlocksFromNodeTrackStrands(
-    occurrence: NodeTrackTrainrunOccurrence,
-    strands: Map<number, NodeTrackOccupancy[]>,
-    pass: NodeTrackPass,
-  ): NodeTrackBlock[] {
-    return Array.from(strands.entries())
-      .sort(([firstStrand], [secondStrand]) => firstStrand - secondStrand)
-      .map(([, occupancies]) => occupancies)
-      .filter((occupancies) => occupancies.length > 0)
-      .map((occupancies) => ({
-        occurrenceIndex: occurrence.occurrenceIndex,
-        pass,
-        trackGroupId: occurrence.trackGroupId,
-        corridorKey: this.getNodeTrackCorridorKey(occurrence),
-        transit:
-          occurrence.transition === undefined
-            ? "endpoint"
-            : occurrence.transition.getIsNonStopTransit()
-              ? "non-stop"
-              : "stop",
-        occupancies,
-        categoryOrder: occurrence.trainrun.getTrainrunCategory().order,
-        categoryShortName: occurrence.trainrun.getCategoryShortName(),
-        trainrunTitle: occurrence.trainrun.getTitle(),
-        firstArrival: Math.min(...occupancies.map((occupancy) => occupancy.arrivalMinute)),
-      }));
-  }
-
-  /** Undirected neighbour pair of a movement, so A -> X -> B and B -> X -> A share one space. */
-  private getNodeTrackCorridorKey(occurrence: NodeTrackTrainrunOccurrence): string {
-    const fromNodeId = this.getOppositeNodeId(occurrence.node, occurrence.arrivalSection);
-    const toNodeId = this.getOppositeNodeId(occurrence.node, occurrence.departureSection);
-    if (fromNodeId === undefined || toNodeId === undefined) {
-      return `${fromNodeId ?? "start"}-${toNodeId ?? "end"}`;
     }
-    return `${Math.min(fromNodeId, toNodeId)}-${Math.max(fromNodeId, toNodeId)}`;
+
+    // Step 3: one-way trains starting or ending here.
+    for (const section of endingOneWay) {
+      const startsHere = section.getSourceNodeId() === nodeId;
+      this.addNodeTrackOccurrence(
+        occurrences,
+        node,
+        section.getTrainrun(),
+        startsHere ? undefined : section,
+        startsHere ? section : undefined,
+        undefined,
+      );
+    }
+
+    return occurrences;
   }
 
-  private getOppositeNodeId(node: Node, section: TrainrunSection | undefined): number | undefined {
-    return section === undefined ? undefined : node.getOppositeNode(section)?.getId();
-  }
-
-  private modulo(value: number, divisor: number): number {
-    return ((value % divisor) + divisor) % divisor;
-  }
-
-  private canPlaceNodeTrackBlock(track: NodeTrackEstimate, block: NodeTrackBlock): boolean {
-    return this.getNodeTrackBlockConflicts(track, block).length === 0;
-  }
-
-  private getNodeTrackBlockConflicts(track: NodeTrackEstimate, block: NodeTrackBlock): number[] {
-    return Array.from(
-      new Set(
-        block.occupancies.flatMap((candidate) =>
-          track.occupancies
-            .filter(
-              (existing) =>
-                candidate.headwayUntilMinute > existing.arrivalMinute &&
-                existing.headwayUntilMinute > candidate.arrivalMinute,
-            )
-            .map((existing) => existing.occurrenceIndex),
-        ),
-      ),
+  /** Stable port order keeps track allocation reproducible across runs. */
+  private getOrderedNodePorts(node: Node): ReturnType<Node["getPorts"]> {
+    const alignmentOrder = [
+      PortAlignment.Left,
+      PortAlignment.Top,
+      PortAlignment.Right,
+      PortAlignment.Bottom,
+    ];
+    return [...node.getPorts()].sort(
+      (first, second) =>
+        alignmentOrder.indexOf(first.getPositionAlignment()) -
+          alignmentOrder.indexOf(second.getPositionAlignment()) ||
+        first.getPositionIndex() - second.getPositionIndex(),
     );
   }
 
@@ -486,178 +572,50 @@ export class InfrastructureEstimatorService {
     departureSection: TrainrunSection | undefined,
     transition: Transition | undefined,
   ): void {
-    const sectionAtNode = arrivalSection ?? departureSection;
-    const pass = this.getNodeTrackOccurrencePass(node, trainrun, sectionAtNode);
-    const arrivalDirection =
-      arrivalSection === undefined
-        ? undefined
-        : this.getNodeArrivalSectionDirection(node, arrivalSection);
-    const departureDirection =
-      departureSection === undefined
-        ? undefined
-        : this.getNodeDepartureSectionDirection(node, departureSection);
-    occurrences.push(
-      this.createNodeTrackOccurrence(
-        node,
-        trainrun,
-        pass,
-        arrivalSection,
-        arrivalDirection,
-        departureSection,
-        departureDirection,
-        transition,
-        occurrences.length,
-      ),
-    );
-  }
-
-  private getNodeTrackOccurrencePass(
-    node: Node,
-    trainrun: Trainrun,
-    sectionAtNode: TrainrunSection | undefined,
-  ): NodeTrackPass {
-    if (sectionAtNode !== undefined && !node.isEndNode(sectionAtNode)) {
-      return 1;
-    }
-    // Without a transition, distinguish a round-trip from a one-way endpoint.
-    return trainrun.getDirection() === Direction.ONE_WAY ? 3 : 2;
-  }
-
-  private createNodeTrackOccurrences(
-    node: Node,
-    trainrunSections: TrainrunSection[],
-  ): NodeTrackTrainrunOccurrence[] {
     const nodeId = node.getId();
-    const allowedSectionIds = new Set(trainrunSections.map((section) => section.getId()));
-
-    const occurrences: NodeTrackTrainrunOccurrence[] = [];
-
-    const orderedPorts = this.getOrderedNodePorts(node);
-
-    const visitedTransitionIds = new Set<number>();
-    const endingRoundTrip: TrainrunSection[] = [];
-    const endingOneWay: TrainrunSection[] = [];
-
-    // Step 1: create occurrences for every connected transition.
-    for (const port of orderedPorts) {
-      const section1 = this.getNodeTrackSection(port, allowedSectionIds);
-      if (section1 === undefined) {
-        continue;
-      }
-      const transition = node.getTransitionFromPortId(port.getId());
-      if (node.isEndNode(section1)) {
-        if (section1.getTrainrun().getDirection() === Direction.ONE_WAY) {
-          endingOneWay.push(section1);
-        } else {
-          endingRoundTrip.push(section1);
-        }
-        continue;
-      }
-      if (visitedTransitionIds.has(transition.getId())) {
-        continue;
-      }
-      visitedTransitionIds.add(transition.getId());
-      const otherPortId =
-        transition.getPortId1() === port.getId()
-          ? transition.getPortId2()
-          : transition.getPortId1();
-      const section2 = this.getNodeTrackSection(node.getPort(otherPortId), allowedSectionIds);
-      if (section2 === undefined) {
-        continue;
-      }
-      // A -> X -> B: the incoming section is the one ending at X.
-      const incoming = section1.getTargetNodeId() === nodeId ? section1 : section2;
-      const outgoing = incoming === section1 ? section2 : section1;
-      const trainrun = incoming.getTrainrun();
-      this.addNodeTrackOccurrence(occurrences, node, trainrun, incoming, outgoing, transition);
-      if (trainrun.getDirection() !== Direction.ONE_WAY) {
-        this.addNodeTrackOccurrence(occurrences, node, trainrun, outgoing, incoming, transition);
-      }
-    }
-
-    // Step 2: add round-trip trains that turn around at an unconnected port.
-    for (const section of endingRoundTrip) {
-      this.addNodeTrackOccurrence(
-        occurrences,
-        node,
-        section.getTrainrun(),
-        section,
-        section,
-        undefined,
-      );
-    }
-
-    // Step 3: add one-way trains that start or end at this node.
-    for (const section of endingOneWay) {
-      const startsHere = section.getSourceNodeId() === nodeId;
-      this.addNodeTrackOccurrence(
-        occurrences,
-        node,
-        section.getTrainrun(),
-        startsHere ? undefined : section,
-        startsHere ? section : undefined,
-        undefined,
-      );
-    }
-
-    return occurrences;
-  }
-
-  private getOrderedNodePorts(node: Node): ReturnType<Node["getPorts"]> {
-    // Stable port order keeps track allocation reproducible across runs.
-    const alignmentOrder = [
-      PortAlignment.Left,
-      PortAlignment.Top,
-      PortAlignment.Right,
-      PortAlignment.Bottom,
-    ];
-    return [...node.getPorts()].sort(
-      (first, second) =>
-        alignmentOrder.indexOf(first.getPositionAlignment()) -
-          alignmentOrder.indexOf(second.getPositionAlignment()) ||
-        first.getPositionIndex() - second.getPositionIndex(),
-    );
-  }
-
-  private createNodeTrackOccurrence(
-    node: Node,
-    trainrun: Trainrun,
-    pass: NodeTrackPass,
-    arrivalSection: TrainrunSection | undefined,
-    arrivalDirection: TrainrunSectionDirection | undefined,
-    departureSection: TrainrunSection | undefined,
-    departureDirection: TrainrunSectionDirection | undefined,
-    transition: Transition | undefined,
-    occurrenceIndex: number,
-  ): NodeTrackTrainrunOccurrence {
-    return {
+    occurrences.push({
       node,
       trainrun,
       arrivalSection,
-      arrivalDirection,
+      arrivalDirection:
+        arrivalSection === undefined
+          ? undefined
+          : arrivalSection.getTargetNodeId() === nodeId
+            ? "forward"
+            : "backward",
       departureSection,
-      departureDirection,
+      departureDirection:
+        departureSection === undefined
+          ? undefined
+          : departureSection.getSourceNodeId() === nodeId
+            ? "forward"
+            : "backward",
       transition,
       trackGroupId: this.getNodeTrackGroupId(node, arrivalSection, departureSection),
-      pass,
-      occurrenceIndex,
-    };
+      occurrenceType: this.getNodeTrackOccurrenceType(
+        node,
+        trainrun,
+        arrivalSection ?? departureSection,
+      ),
+      occurrenceIndex: occurrences.length,
+    });
   }
 
-  private getNodeArrivalSectionDirection(
+  private getNodeTrackOccurrenceType(
     node: Node,
-    section: TrainrunSection,
-  ): TrainrunSectionDirection {
-    return section.getTargetNodeId() === node.getId() ? "forward" : "backward";
+    trainrun: Trainrun,
+    sectionAtNode: TrainrunSection | undefined,
+  ): NodeTrackOccurrenceType {
+    if (sectionAtNode !== undefined && !node.isEndNode(sectionAtNode)) {
+      return NodeTrackOccurrenceType.TRANSIT;
+    }
+    // Without a transition, distinguish a round-trip from a one-way endpoint.
+    return trainrun.getDirection() === Direction.ONE_WAY
+      ? NodeTrackOccurrenceType.ONE_WAY_ENDPOINT
+      : NodeTrackOccurrenceType.ROUND_TRIP_TURNAROUND;
   }
 
-  private getNodeDepartureSectionDirection(
-    node: Node,
-    section: TrainrunSection,
-  ): TrainrunSectionDirection {
-    return section.getSourceNodeId() === node.getId() ? "forward" : "backward";
-  }
-
+  /** Directed identity of a movement: "<from>-><node>-><to>". */
   private getNodeTrackGroupId(
     node: Node,
     arrivalSection: TrainrunSection | undefined,
@@ -666,134 +624,300 @@ export class InfrastructureEstimatorService {
     if (arrivalSection === undefined && departureSection === undefined) {
       return undefined;
     }
-    const nodeId = node.getId();
-    const incomingNodeId =
-      arrivalSection === undefined
-        ? undefined
-        : arrivalSection.getTargetNodeId() === nodeId
-          ? arrivalSection.getSourceNodeId()
-          : arrivalSection.getTargetNodeId();
-    const outgoingNodeId =
-      departureSection === undefined
-        ? undefined
-        : departureSection.getSourceNodeId() === nodeId
-          ? departureSection.getTargetNodeId()
-          : departureSection.getSourceNodeId();
-    return `${incomingNodeId ?? "start"}->${nodeId}->${outgoingNodeId ?? "end"}`;
+    const from = this.getOppositeNodeId(node, arrivalSection) ?? "start";
+    const to = this.getOppositeNodeId(node, departureSection) ?? "end";
+    return `${from}->${node.getId()}->${to}`;
   }
 
-  private getNodeTrackTimes(occurrence: NodeTrackTrainrunOccurrence): NodeTrackTimes | undefined {
-    // Step 1: resolve the timetable values at this node.
-    const sectionTimes = this.getNodeSectionTimes(occurrence);
-    const haltezeit = this.getNodeHaltezeit(occurrence.node, occurrence.trainrun);
-    const category = occurrence.trainrun.getTrainrunCategory();
-    const nodeHeadway = this.getNodeHeadway(occurrence, category);
-    const endpoint = this.getNodeEndpointTimes(occurrence, sectionTimes, haltezeit, nodeHeadway);
-    if (endpoint !== undefined) {
-      return endpoint;
+  /** Undirected neighbour pair, so A -> X -> B and B -> X -> A share one space. */
+  private getNodeTrackCorridorKey(occurrence: NodeTrackTrainrunOccurrence): string {
+    const fromNodeId = this.getOppositeNodeId(occurrence.node, occurrence.arrivalSection);
+    const toNodeId = this.getOppositeNodeId(occurrence.node, occurrence.departureSection);
+    if (fromNodeId === undefined || toNodeId === undefined) {
+      return `${fromNodeId ?? "start"}-${toNodeId ?? "end"}`;
     }
-    if (sectionTimes.arrivalMinute === undefined || sectionTimes.departureMinute === undefined) {
+    return `${Math.min(fromNodeId, toNodeId)}-${Math.max(fromNodeId, toNodeId)}`;
+  }
+
+  private getOppositeNodeId(node: Node, section: TrainrunSection | undefined): number | undefined {
+    if (section === undefined) {
       return undefined;
     }
+    const nodeId = node.getId();
+    return section.getSourceNodeId() === nodeId
+      ? section.getTargetNodeId()
+      : section.getSourceNodeId();
+  }
 
-    // Step 2: align departure with arrival in the train's frequency cycle.
-    const frequency = occurrence.trainrun.getFrequency();
-    const consecutiveDepartureMinute =
-      this.getPeriodicTurnaroundDepartureMinute(
-        occurrence,
-        sectionTimes.arrivalMinute,
-        frequency,
-        category.minimalTurnaroundTime,
-        haltezeit,
-      ) ??
-      this.getConsecutiveDepartureMinute(
-        sectionTimes.arrivalMinute,
-        sectionTimes.departureMinute,
-        frequency,
+  // --- block creation ------------------------------------------------------
+
+  private createNodeTrackBlocks(
+    occurrence: NodeTrackTrainrunOccurrence,
+    window: NodeTrackEstimationWindow,
+  ): NodeTrackBlock[] {
+    const timing = this.createNodeTimingContext(occurrence);
+    const times = this.getNodeTrackTimes(occurrence, timing);
+    if (times === undefined || timing.frequency <= 0) {
+      return [];
+    }
+
+    const offsets = this.getNodeTrackOffsets(times, timing.frequency, window);
+    // A block longer than one frequency cycle needs more than one physical strand.
+    const strandCount = Math.max(
+      1,
+      Math.ceil((times.headwayUntilMinute - times.arrivalMinute) / timing.frequency),
+    );
+
+    const strands = new Map<number, NodeTrackOccupancy[]>();
+    for (const offset of offsets) {
+      const strand = MathUtils.modulo(
+        offset +
+          (occurrence.occurrenceType === NodeTrackOccurrenceType.ROUND_TRIP_TURNAROUND ? 1 : 0),
+        strandCount,
       );
-    // Step 3: apply the turnaround rule for node-track estimation.
-    return this.getTurnaroundNodeTrackTimes(
-      occurrence,
-      sectionTimes.arrivalMinute,
-      consecutiveDepartureMinute,
+      this.pushToGroup(strands, strand, this.createOccupancy(occurrence, times, timing, offset));
+    }
+
+    return [...strands.entries()]
+      .sort(([first], [second]) => first - second)
+      .map(([, occupancies]) => this.createBlock(occurrence, occupancies));
+  }
+
+  private createOccupancy(
+    occurrence: NodeTrackTrainrunOccurrence,
+    times: NodeTrackTimes,
+    timing: NodeTimingContext,
+    offset: number,
+  ): NodeTrackOccupancy {
+    const shift = offset * timing.frequency;
+    return {
+      arrivalMinute: times.arrivalMinute + shift,
+      departureMinute: times.departureMinute + shift,
+      headwayUntilMinute: times.headwayUntilMinute + shift,
+      trainrunId: occurrence.trainrun.getId(),
+      arrivalSectionId: occurrence.arrivalSection?.getId(),
+      departureSectionId: occurrence.departureSection?.getId(),
+      transitionId: occurrence.transition?.getId(),
+      direction: occurrence.trainrun.getDirection(),
+      trackGroupId: occurrence.trackGroupId,
+      occurrenceIndex: occurrence.occurrenceIndex,
+    };
+  }
+
+  private createBlock(
+    occurrence: NodeTrackTrainrunOccurrence,
+    occupancies: NodeTrackOccupancy[],
+  ): NodeTrackBlock {
+    const transit: NodeTrackTransit =
+      occurrence.transition === undefined
+        ? "endpoint"
+        : occurrence.transition.getIsNonStopTransit()
+          ? "non-stop"
+          : "stop";
+    return {
+      occurrenceIndex: occurrence.occurrenceIndex,
+      occurrenceType: occurrence.occurrenceType,
+      trackGroupId: occurrence.trackGroupId,
+      corridorKey: this.getNodeTrackCorridorKey(occurrence),
+      transit,
+      occupancies,
+      categoryOrder: occurrence.trainrun.getTrainrunCategory().order,
+      categoryShortName: occurrence.trainrun.getCategoryShortName(),
+      trainrunTitle: occurrence.trainrun.getTitle(),
+      firstArrival: Math.min(...occupancies.map((occupancy) => occupancy.arrivalMinute)),
+    };
+  }
+
+  /** All frequency repetitions whose occupancy overlaps the calculation window. */
+  private getNodeTrackOffsets(
+    times: NodeTrackTimes,
+    frequency: number,
+    window: NodeTrackEstimationWindow,
+  ): number[] {
+    const firstOffset = Math.floor(
+      (window.calculationStartMinutes - times.headwayUntilMinute) / frequency,
+    );
+    const lastOffset = Math.ceil((window.windowEndMinutes - times.arrivalMinute) / frequency);
+
+    const offsets: number[] = [];
+    for (let offset = firstOffset; offset <= lastOffset; offset++) {
+      const shift = offset * frequency;
+      const overlapsWindow =
+        times.headwayUntilMinute + shift > window.calculationStartMinutes &&
+        times.arrivalMinute + shift < window.windowEndMinutes;
+      if (overlapsWindow) {
+        offsets.push(offset);
+      }
+    }
+    return offsets;
+  }
+
+  private compareNodeTrackBlocks(first: NodeTrackBlock, second: NodeTrackBlock): number {
+    return (
+      first.categoryOrder - second.categoryOrder ||
+      first.categoryShortName.localeCompare(second.categoryShortName) ||
+      first.trainrunTitle.localeCompare(second.trainrunTitle) ||
+      first.firstArrival - second.firstArrival ||
+      first.occurrenceIndex - second.occurrenceIndex
+    );
+  }
+
+  // --- allocation ----------------------------------------------------------
+
+  private allocateSharedNodeTracks(blocks: NodeTrackBlock[]): NodeTrackEstimate[] {
+    const tracks: NodeTrackEstimate[] = [];
+    for (const occurrenceType of Object.values(NodeTrackOccurrenceType).filter(
+      (occurrenceType): occurrenceType is NodeTrackOccurrenceType =>
+        typeof occurrenceType === "number",
+    )) {
+      this.appendNodeTrackBlocks(tracks, this.byOccurrenceType(blocks, occurrenceType));
+    }
+    return tracks;
+  }
+
+  private allocateDirectionalNodeTracks(blocks: NodeTrackBlock[]): NodeTrackEstimate[] {
+    const throughBlocks = this.byOccurrenceType(blocks, NodeTrackOccurrenceType.TRANSIT);
+    const corridorGroups = this.groupBlocks(throughBlocks, (block) => block.corridorKey);
+
+    const tracks = corridorGroups.flatMap((corridorGroup) => {
+      const [forwardGroup = [], backwardGroup = []] = this.groupBlocks(
+        corridorGroup,
+        (block) => block.trackGroupId,
+      );
+      const forwardTracks = this.allocateDirectionalBlockGroup(forwardGroup);
+      const backwardTracks = this.allocateDirectionalBlockGroup(backwardGroup);
+      return [...forwardTracks, ...backwardTracks.reverse()];
+    });
+
+    // Turnarounds and one-way endpoints reuse the tracks created by through-trains.
+    this.appendNodeTrackBlocks(
+      tracks,
+      this.byOccurrenceType(blocks, NodeTrackOccurrenceType.ROUND_TRIP_TURNAROUND),
+    );
+    this.appendNodeTrackBlocks(
+      tracks,
+      this.byOccurrenceType(blocks, NodeTrackOccurrenceType.ONE_WAY_ENDPOINT),
+    );
+    return tracks;
+  }
+
+  private allocateDirectionalBlockGroup(blocks: NodeTrackBlock[]): NodeTrackEstimate[] {
+    const tracks: NodeTrackEstimate[] = [];
+    this.appendNodeTrackBlocks(
+      tracks,
+      blocks.filter((block) => block.transit === "stop"),
+    );
+    // Non-stop movements do not share the stop-train allocation block.
+    blocks
+      .filter((block) => block.transit !== "stop")
+      .forEach((block) => this.appendNodeTrackBlocks(tracks, [block]));
+    return tracks;
+  }
+
+  /** First-fit placement: reuse the first track without a time overlap. */
+  private appendNodeTrackBlocks(tracks: NodeTrackEstimate[], blocks: NodeTrackBlock[]): void {
+    for (const block of blocks) {
+      const freeTrack = tracks.find((track) => !this.overlaps(track, block));
+      if (freeTrack !== undefined) {
+        freeTrack.occupancies.push(...block.occupancies);
+      } else {
+        tracks.push({track: tracks.length + 1, occupancies: [...block.occupancies]});
+      }
+    }
+  }
+
+  private overlaps(track: NodeTrackEstimate, block: NodeTrackBlock): boolean {
+    return block.occupancies.some((candidate) =>
+      track.occupancies.some(
+        (existing) =>
+          candidate.headwayUntilMinute > existing.arrivalMinute &&
+          existing.headwayUntilMinute > candidate.arrivalMinute,
+      ),
+    );
+  }
+
+  private byOccurrenceType(
+    blocks: NodeTrackBlock[],
+    occurrenceType: NodeTrackOccurrenceType,
+  ): NodeTrackBlock[] {
+    return blocks.filter((block) => block.occurrenceType === occurrenceType);
+  }
+
+  /**
+   * Groups blocks by key, dropping blocks without a key, and sorts the groups
+   * by their earliest occurrence index so the result is deterministic.
+   */
+  private groupBlocks(
+    blocks: NodeTrackBlock[],
+    keyOf: (block: NodeTrackBlock) => string | undefined,
+  ): NodeTrackBlock[][] {
+    const groups = new Map<string, NodeTrackBlock[]>();
+    for (const block of blocks) {
+      const key = keyOf(block);
+      if (key !== undefined) {
+        this.pushToGroup(groups, key, block);
+      }
+    }
+    const firstIndex = (group: NodeTrackBlock[]) =>
+      Math.min(...group.map((block) => block.occurrenceIndex));
+    return [...groups.values()].sort((first, second) => firstIndex(first) - firstIndex(second));
+  }
+
+  // --- timing --------------------------------------------------------------
+
+  private createNodeTimingContext(occurrence: NodeTrackTrainrunOccurrence): NodeTimingContext {
+    const category = occurrence.trainrun.getTrainrunCategory();
+    const haltezeit = this.getNodeHaltezeit(occurrence.node, occurrence.trainrun);
+    const nodeHeadway = occurrence.transition?.getIsNonStopTransit()
+      ? category.nodeHeadwayNonStop
+      : category.nodeHeadwayStop;
+    return {
+      frequency: occurrence.trainrun.getFrequency(),
       haltezeit,
       nodeHeadway,
-      category.minimalTurnaroundTime,
-      frequency,
-    );
-  }
-
-  private getPeriodicTurnaroundDepartureMinute(
-    occurrence: NodeTrackTrainrunOccurrence,
-    arrivalMinute: number,
-    frequency: number,
-    categoryMinimalTurnaroundTime: number,
-    haltezeit: number,
-  ): number | undefined {
-    if (
-      occurrence.pass !== 2 ||
-      occurrence.arrivalSection === undefined ||
-      occurrence.arrivalSection !== occurrence.departureSection ||
-      frequency <= 0
-    ) {
-      return undefined;
-    }
-
-    const arrivalClockTime = this.getNodePeriodicArrivalTime(
-      occurrence.node,
-      occurrence.arrivalSection,
-      occurrence.arrivalDirection,
-    );
-    const departureClockTime = this.getNodePeriodicDepartureTime(
-      occurrence.node,
-      occurrence.departureSection,
-      occurrence.departureDirection,
-    );
-    if (arrivalClockTime === undefined || departureClockTime === undefined) {
-      return undefined;
-    }
-
-    const minimumTurnaroundTime =
-      Number.isFinite(categoryMinimalTurnaroundTime) && categoryMinimalTurnaroundTime > 0
-        ? categoryMinimalTurnaroundTime
-        : haltezeit;
-    const frequencyOverHour = frequency > 60 ? frequency - 60 : 0;
-    let consecutiveDepartureMinute =
-      arrivalMinute < departureClockTime ? departureClockTime + frequency : departureClockTime;
-    consecutiveDepartureMinute += frequencyOverHour;
-
-    while (consecutiveDepartureMinute - frequency > arrivalMinute) {
-      consecutiveDepartureMinute -= frequency;
-    }
-    if (consecutiveDepartureMinute - arrivalMinute < minimumTurnaroundTime) {
-      consecutiveDepartureMinute += frequency;
-    }
-    return consecutiveDepartureMinute;
-  }
-
-  private getNodeSectionTimes(occurrence: NodeTrackTrainrunOccurrence): {
-    arrivalMinute: number | undefined;
-    departureMinute: number | undefined;
-  } {
-    return {
-      arrivalMinute: this.getNodeArrivalTime(
-        occurrence.node,
-        occurrence.arrivalSection,
-        occurrence.arrivalDirection,
-      ),
-      departureMinute: this.getNodeDepartureTime(
-        occurrence.node,
-        occurrence.departureSection,
-        occurrence.departureDirection,
-      ),
+      // Fall back to the dwell time when the category has no turnaround rule.
+      minimalTurnaround: MathUtils.isPositiveNumber(category.minimalTurnaroundTime)
+        ? category.minimalTurnaroundTime
+        : haltezeit,
     };
+  }
+
+  private getNodeHaltezeit(node: Node, trainrun: Trainrun): number {
+    const haltezeit =
+      node.getTrainrunCategoryHaltezeit()[trainrun.getTrainrunCategory().fachCategory]?.haltezeit;
+    return MathUtils.isFiniteNumber(haltezeit) ? Math.max(0, haltezeit) : 0;
+  }
+
+  private getNodeTrackTimes(
+    occurrence: NodeTrackTrainrunOccurrence,
+    timing: NodeTimingContext,
+  ): NodeTrackTimes | undefined {
+    const arrival = this.getNodeTime(occurrence, "arrival", "consecutive");
+    const departure = this.getNodeTime(occurrence, "departure", "consecutive");
+
+    // Step 1: a train that starts or ends here only occupies one side.
+    const endpointTimes = this.getNodeEndpointTimes(occurrence, arrival, departure, timing);
+    if (endpointTimes !== undefined) {
+      return endpointTimes;
+    }
+    if (arrival === undefined || departure === undefined) {
+      return undefined;
+    }
+
+    // Step 2: align departure with arrival inside the frequency cycle.
+    const alignedDeparture =
+      this.getPeriodicTurnaroundDeparture(occurrence, arrival, timing) ??
+      this.getConsecutiveDeparture(arrival, departure, timing.frequency);
+
+    // Step 3: apply the turnaround rule.
+    return this.getTurnaroundNodeTrackTimes(occurrence, arrival, alignedDeparture, timing);
   }
 
   private getNodeEndpointTimes(
     occurrence: NodeTrackTrainrunOccurrence,
-    sectionTimes: {arrivalMinute: number | undefined; departureMinute: number | undefined},
-    haltezeit: number,
-    nodeHeadway: number,
+    arrival: number | undefined,
+    departure: number | undefined,
+    timing: NodeTimingContext,
   ): NodeTrackTimes | undefined {
     const isStart =
       occurrence.departureSection !== undefined && occurrence.arrivalSection === undefined;
@@ -803,402 +927,188 @@ export class InfrastructureEstimatorService {
       return undefined;
     }
 
-    const startTime = sectionTimes.departureMinute ?? sectionTimes.arrivalMinute;
-    const endTime = sectionTimes.arrivalMinute ?? sectionTimes.departureMinute;
+    const startTime = departure ?? arrival;
+    const endTime = arrival ?? departure;
     if (startTime === undefined || endTime === undefined) {
       return undefined;
     }
-    const releaseTime = isEnd ? endTime + haltezeit : startTime;
+
+    const releaseTime = isEnd ? endTime + timing.haltezeit : startTime;
     return {
-      arrivalMinute: isStart ? startTime - haltezeit : endTime,
+      arrivalMinute: isStart ? startTime - timing.haltezeit : endTime,
       departureMinute: releaseTime,
-      headwayUntilMinute: releaseTime + nodeHeadway,
+      headwayUntilMinute: releaseTime + timing.nodeHeadway,
     };
   }
 
-  private getConsecutiveDepartureMinute(
+  /**
+   * Round-trip turnaround on a single section: the train leaves on the periodic
+   * departure slot of a later cycle. Frequencies above 60 min need an extra
+   * correction because the periodic times are hour-based.
+   */
+  private getPeriodicTurnaroundDeparture(
+    occurrence: NodeTrackTrainrunOccurrence,
+    arrivalMinute: number,
+    timing: NodeTimingContext,
+  ): number | undefined {
+    const isSingleSectionTurnaround =
+      occurrence.occurrenceType === NodeTrackOccurrenceType.ROUND_TRIP_TURNAROUND &&
+      occurrence.arrivalSection !== undefined &&
+      occurrence.arrivalSection === occurrence.departureSection;
+    if (!isSingleSectionTurnaround || timing.frequency <= 0) {
+      return undefined;
+    }
+
+    const periodicArrival = this.getNodeTime(occurrence, "arrival", "periodic");
+    const periodicDeparture = this.getNodeTime(occurrence, "departure", "periodic");
+    if (periodicArrival === undefined || periodicDeparture === undefined) {
+      return undefined;
+    }
+
+    const frequencyOverHour = timing.frequency > 60 ? timing.frequency - 60 : 0;
+    let departure =
+      (arrivalMinute < periodicDeparture
+        ? periodicDeparture + timing.frequency
+        : periodicDeparture) + frequencyOverHour;
+
+    while (departure - timing.frequency > arrivalMinute) {
+      departure -= timing.frequency;
+    }
+    if (departure - arrivalMinute < timing.minimalTurnaround) {
+      departure += timing.frequency;
+    }
+    return departure;
+  }
+
+  private getConsecutiveDeparture(
     arrivalMinute: number,
     departureMinute: number,
     frequency: number,
   ): number {
-    return frequency > 0
-      ? departureMinute +
-          Math.ceil(Math.max(0, arrivalMinute - departureMinute) / frequency) * frequency
-      : departureMinute;
+    if (frequency <= 0) {
+      return departureMinute;
+    }
+    const cycles = Math.ceil(Math.max(0, arrivalMinute - departureMinute) / frequency);
+    return departureMinute + cycles * frequency;
   }
 
   private getTurnaroundNodeTrackTimes(
     occurrence: NodeTrackTrainrunOccurrence,
     arrivalMinute: number,
     departureMinute: number,
-    haltezeit: number,
-    nodeHeadway: number,
-    categoryMinimalTurnaroundTime: number,
-    frequency: number,
+    timing: NodeTimingContext,
   ): NodeTrackTimes {
     const isTurnaround = occurrence.transition === undefined;
-    const adjustedDeparture = this.adjustTurnaroundDeparture(
+    const departure = this.adjustTurnaroundDeparture(
       occurrence,
       arrivalMinute,
       departureMinute,
-      categoryMinimalTurnaroundTime,
-      haltezeit,
-      frequency,
+      timing,
     );
-    const minimalTurnaroundTime =
-      Number.isFinite(categoryMinimalTurnaroundTime) && categoryMinimalTurnaroundTime > 0
-        ? categoryMinimalTurnaroundTime
-        : haltezeit;
     return {
       arrivalMinute,
-      departureMinute: adjustedDeparture,
+      departureMinute: departure,
       headwayUntilMinute: isTurnaround
-        ? Math.max(adjustedDeparture + nodeHeadway, arrivalMinute + minimalTurnaroundTime)
-        : adjustedDeparture + nodeHeadway,
+        ? Math.max(departure + timing.nodeHeadway, arrivalMinute + timing.minimalTurnaround)
+        : departure + timing.nodeHeadway,
     };
   }
 
+  /** Pushes the departure forward in whole cycles until the turnaround is feasible. */
   private adjustTurnaroundDeparture(
     occurrence: NodeTrackTrainrunOccurrence,
     arrivalMinute: number,
     departureMinute: number,
-    categoryMinimalTurnaroundTime: number,
-    haltezeit: number,
-    frequency: number,
+    timing: NodeTimingContext,
   ): number {
-    if (occurrence.transition !== undefined || frequency <= 0) {
+    if (occurrence.transition !== undefined || timing.frequency <= 0) {
       return departureMinute;
     }
-    let adjustedDeparture = departureMinute;
-    if (occurrence.pass === 2 && adjustedDeparture <= arrivalMinute) {
-      const cyclesUntilAfterArrival =
-        Math.floor((arrivalMinute - adjustedDeparture) / frequency) + 1;
-      adjustedDeparture += cyclesUntilAfterArrival * frequency;
-    }
-    const minimalTurnaroundTime =
-      Number.isFinite(categoryMinimalTurnaroundTime) && categoryMinimalTurnaroundTime > 0
-        ? categoryMinimalTurnaroundTime
-        : haltezeit;
-    const turnaroundTime = adjustedDeparture - arrivalMinute;
-    if (turnaroundTime > 0 && turnaroundTime < minimalTurnaroundTime) {
-      adjustedDeparture +=
-        Math.ceil((minimalTurnaroundTime - turnaroundTime) / frequency) * frequency;
-    }
-    return adjustedDeparture;
-  }
 
-  private getNodeArrivalTime(
-    node: Node,
-    section: TrainrunSection | undefined,
-    direction: TrainrunSectionDirection | undefined,
-  ): number | undefined {
-    if (section === undefined || direction === undefined) {
-      return undefined;
-    }
-    if (direction === "forward" && section.getTargetNodeId() === node.getId()) {
-      return section.getTargetArrivalConsecutiveTime();
-    }
-    if (direction === "backward" && section.getSourceNodeId() === node.getId()) {
-      return section.getSourceArrivalConsecutiveTime();
-    }
-    return undefined;
-  }
-
-  private getNodeDepartureTime(
-    node: Node,
-    section: TrainrunSection | undefined,
-    direction: TrainrunSectionDirection | undefined,
-  ): number | undefined {
-    if (section === undefined || direction === undefined) {
-      return undefined;
-    }
-    if (direction === "forward" && section.getSourceNodeId() === node.getId()) {
-      return section.getSourceDepartureConsecutiveTime();
-    }
-    if (direction === "backward" && section.getTargetNodeId() === node.getId()) {
-      return section.getTargetDepartureConsecutiveTime();
-    }
-    return undefined;
-  }
-
-  private getNodePeriodicArrivalTime(
-    node: Node,
-    section: TrainrunSection | undefined,
-    direction: TrainrunSectionDirection | undefined,
-  ): number | undefined {
-    if (section === undefined || direction === undefined) {
-      return undefined;
-    }
-    if (direction === "forward" && section.getTargetNodeId() === node.getId()) {
-      return section.getTargetArrival();
-    }
-    if (direction === "backward" && section.getSourceNodeId() === node.getId()) {
-      return section.getSourceArrival();
-    }
-    return undefined;
-  }
-
-  private getNodePeriodicDepartureTime(
-    node: Node,
-    section: TrainrunSection | undefined,
-    direction: TrainrunSectionDirection | undefined,
-  ): number | undefined {
-    if (section === undefined || direction === undefined) {
-      return undefined;
-    }
-    if (direction === "forward" && section.getSourceNodeId() === node.getId()) {
-      return section.getSourceDeparture();
-    }
-    if (direction === "backward" && section.getTargetNodeId() === node.getId()) {
-      return section.getTargetDeparture();
-    }
-    return undefined;
-  }
-
-  private getNodeHaltezeit(node: Node, trainrun: Trainrun): number {
-    const haltezeit =
-      node.getTrainrunCategoryHaltezeit()[trainrun.getTrainrunCategory().fachCategory]?.haltezeit;
-    return typeof haltezeit === "number" && Number.isFinite(haltezeit) ? Math.max(0, haltezeit) : 0;
-  }
-
-  private getNodeHeadway(
-    occurrence: NodeTrackTrainrunOccurrence,
-    category: Trainrun["trainrunCategory"],
-  ): number {
-    return occurrence.transition?.getIsNonStopTransit()
-      ? category.nodeHeadwayNonStop
-      : category.nodeHeadwayStop;
-  }
-
-  private findMatchingSections(
-    fromNode: Node,
-    toNode: Node,
-    trainrunSections: TrainrunSection[],
-  ): TrainrunSection[] {
-    const fromNodeId = fromNode.getId();
-    const toNodeId = toNode.getId();
-    return Array.from(
-      new Map(
-        trainrunSections
-          .filter((section) => this.connectsNodes(section, fromNodeId, toNodeId))
-          .map((section) => [section.getId(), section] as const),
-      ).values(),
-    );
-  }
-
-  private connectsNodes(section: TrainrunSection, fromNodeId: number, toNodeId: number): boolean {
-    const sourceNodeId = section.getSourceNodeId();
-    const targetNodeId = section.getTargetNodeId();
-    return (
-      (sourceNodeId === fromNodeId && targetNodeId === toNodeId) ||
-      (sourceNodeId === toNodeId && targetNodeId === fromNodeId)
-    );
-  }
-
-  private getMaximumFrequency(sections: SectionTrackEstimateInput[]): number {
-    return sections.reduce((maximum, section) => Math.max(maximum, section.frequencyMinutes), 0);
-  }
-
-  private getMaximumTravelTime(sections: SectionTrackEstimateInput[]): number {
-    return sections.reduce(
-      (maximum, section) =>
-        Math.max(maximum, Math.round(section.arrivalMinute - section.departureMinute)),
-      0,
-    );
-  }
-
-  private getMaximumFrequencyOffsetWindow(
-    sections: SectionTrackEstimateInput[],
-    minimumWindowMinutes: number,
-  ): number {
-    return sections.reduce((maximum, section) => {
-      if (section.frequencyMinutes <= 0) {
-        return maximum;
-      }
-      const sectionWindow =
-        Math.ceil(minimumWindowMinutes / section.frequencyMinutes) * section.frequencyMinutes;
-      return Math.max(maximum, sectionWindow);
-    }, minimumWindowMinutes);
-  }
-
-  private createDirectionalTrackInputs(
-    fromNode: Node,
-    toNode: Node,
-    trainrunSections: TrainrunSection[],
-    minHeadwayTime: number,
-  ): SectionTrackEstimateInput[] {
-    return trainrunSections.flatMap((section) => {
-      const isForward =
-        section.getSourceNodeId() === fromNode.getId() &&
-        section.getTargetNodeId() === toNode.getId();
-      const frequencyMinutes = section.getTrainrun().getFrequency();
-      const categorySectionHeadway = section.getTrainrun().getTrainrunCategory()?.sectionHeadway;
-      const sectionHeadwayMinutes =
-        typeof categorySectionHeadway === "number" && Number.isFinite(categorySectionHeadway)
-          ? Math.max(minHeadwayTime, categorySectionHeadway)
-          : minHeadwayTime;
-      const departureAtFromNode = isForward
-        ? section.getSourceDepartureConsecutiveTime()
-        : section.getTargetDepartureConsecutiveTime();
-      const arrivalAtToNode = isForward
-        ? section.getTargetArrivalConsecutiveTime()
-        : section.getSourceArrivalConsecutiveTime();
-      const departureAtToNode = isForward
-        ? section.getTargetDepartureConsecutiveTime()
-        : section.getSourceDepartureConsecutiveTime();
-      const arrivalAtFromNode = isForward
-        ? section.getSourceArrivalConsecutiveTime()
-        : section.getTargetArrivalConsecutiveTime();
-      const forward = this.createTrackInput(
-        departureAtFromNode,
-        arrivalAtToNode,
-        false,
-        frequencyMinutes,
-        sectionHeadwayMinutes,
-      );
-      const backward = this.createTrackInput(
-        departureAtToNode,
-        arrivalAtFromNode,
-        true,
-        frequencyMinutes,
-        sectionHeadwayMinutes,
-      );
-      // A one-way trainrun contributes only in its actual travel direction.
-      if (section.getTrainrun().getDirection() === Direction.ONE_WAY) {
-        return isForward ? [forward] : [backward];
-      }
-      return [forward, backward];
-    });
-  }
-
-  private createTrackInput(
-    departureMinute: number,
-    arrivalMinute: number,
-    backward: boolean,
-    frequencyMinutes: number,
-    sectionHeadwayMinutes: number,
-  ): SectionTrackEstimateInput {
-    return {
-      departureMinute,
-      arrivalMinute,
-      backward,
-      frequencyMinutes,
-      sectionHeadwayMinutes,
-    };
-  }
-
-  private estimateTrackSegments(
-    sections: SectionTrackEstimateInput[],
-    maximumFrequencyMinutes: number,
-    maximumFrequencyOffsetWindowMinutes: number,
-  ): TrackSegmentEstimate[] {
-    const distanceResolution = InfrastructureEstimatorService.DEFAULT_DISTANCE_RESOLUTION;
-    const timeResolution = InfrastructureEstimatorService.DEFAULT_TIME_RESOLUTION;
-
+    let departure = departureMinute;
     if (
-      maximumFrequencyMinutes <= 0 ||
-      maximumFrequencyOffsetWindowMinutes <= 0 ||
-      distanceResolution <= 0 ||
-      timeResolution <= 0
+      occurrence.occurrenceType === NodeTrackOccurrenceType.ROUND_TRIP_TURNAROUND &&
+      departure <= arrivalMinute
     ) {
-      return [];
+      const cycles = Math.floor((arrivalMinute - departure) / timing.frequency) + 1;
+      departure += cycles * timing.frequency;
     }
 
-    const maximumTravelTime = Math.max(this.getMaximumTravelTime(sections), 1);
-    const distanceCells = distanceResolution * maximumTravelTime;
-    const timeCells = timeResolution * 2 * maximumFrequencyOffsetWindowMinutes;
-    const dataMatrix = Array.from({length: distanceCells}, () =>
-      new Array<number>(timeCells).fill(0),
-    );
-    const tracksMatrix = new Array<number>(distanceCells).fill(0);
-
-    sections.forEach((section) =>
-      this.projectSectionIntoMatrices(section, {
-        distanceCells,
-        timeCells,
-        timeResolution,
-        maximumFrequency: maximumFrequencyMinutes,
-        frequencyOffsetWindow: maximumFrequencyOffsetWindowMinutes,
-        dataMatrix,
-        tracksMatrix,
-      }),
-    );
-
-    return InfrastructureEstimatorService.mergeTracks(tracksMatrix);
+    const turnaroundTime = departure - arrivalMinute;
+    if (turnaroundTime > 0 && turnaroundTime < timing.minimalTurnaround) {
+      departure +=
+        Math.ceil((timing.minimalTurnaround - turnaroundTime) / timing.frequency) *
+        timing.frequency;
+    }
+    return departure;
   }
 
-  private projectSectionIntoMatrices(
-    section: SectionTrackEstimateInput,
-    context: TrackProjectionContext,
-  ): void {
-    if (section.frequencyMinutes <= 0) {
-      return;
+  /** Selects the section end and time getter for one arrival/departure context. */
+  private static getTimeAccessor(
+    kind: TimeKind,
+    scale: TimeScale,
+    direction: TrainrunSectionDirection,
+  ): TimeAccessor {
+    if (kind === "arrival" && scale === "consecutive") {
+      return direction === "forward"
+        ? {nodeEnd: "target", read: (s) => s.getTargetArrivalConsecutiveTime()}
+        : {nodeEnd: "source", read: (s) => s.getSourceArrivalConsecutiveTime()};
     }
 
-    const travelTime = section.arrivalMinute - section.departureMinute;
-    const maximumFrequencyOffset =
-      Math.ceil(context.frequencyOffsetWindow / section.frequencyMinutes) *
-      section.frequencyMinutes;
-    const bandWidth = context.timeResolution * section.sectionHeadwayMinutes;
-    for (let distanceCell = 0; distanceCell < context.distanceCells; distanceCell++) {
-      // Backward sections are projected from the opposite end of the section.
-      const matrixDistanceCell = section.backward
-        ? context.distanceCells - distanceCell - 1
-        : distanceCell;
-      const baseTime =
-        (section.departureMinute % context.maximumFrequency) +
-        (travelTime * distanceCell) / (context.distanceCells - 0.5);
-      for (
-        let frequencyOffset = -maximumFrequencyOffset;
-        frequencyOffset <= maximumFrequencyOffset;
-        frequencyOffset += section.frequencyMinutes
-      ) {
-        // Repeat the trainrun over the frequency window and add its headway band.
-        for (let bandOffset = 0; bandOffset < bandWidth; bandOffset++) {
-          const timeCell =
-            bandOffset + Math.round(context.timeResolution * (baseTime + frequencyOffset));
-
-          if (timeCell >= 0 && timeCell < context.timeCells) {
-            context.dataMatrix[matrixDistanceCell][timeCell]++;
-            context.tracksMatrix[matrixDistanceCell] = Math.max(
-              context.tracksMatrix[matrixDistanceCell],
-              context.dataMatrix[matrixDistanceCell][timeCell],
-            );
-          }
-        }
-      }
+    if (kind === "arrival" && scale === "periodic") {
+      return direction === "forward"
+        ? {nodeEnd: "target", read: (s) => s.getTargetArrival()}
+        : {nodeEnd: "source", read: (s) => s.getSourceArrival()};
     }
+
+    if (kind === "departure" && scale === "consecutive") {
+      return direction === "forward"
+        ? {nodeEnd: "source", read: (s) => s.getSourceDepartureConsecutiveTime()}
+        : {nodeEnd: "target", read: (s) => s.getTargetDepartureConsecutiveTime()};
+    }
+
+    if (kind === "departure" && scale === "periodic") {
+      return direction === "forward"
+        ? {nodeEnd: "source", read: (s) => s.getSourceDeparture()}
+        : {nodeEnd: "target", read: (s) => s.getTargetDeparture()};
+    }
+
+    throw new Error(`Unsupported time accessor: ${kind}/${scale}/${direction}`);
   }
 
-  private static mergeTracks(tracksMatrix: number[]): TrackSegmentEstimate[] {
-    if (tracksMatrix.length === 0) {
-      return [];
+  /** Single entry point for all arrival/departure lookups, see TIME_ACCESSORS. */
+  private getNodeTime(
+    occurrence: NodeTrackTrainrunOccurrence,
+    kind: TimeKind,
+    scale: TimeScale,
+  ): number | undefined {
+    const section = kind === "arrival" ? occurrence.arrivalSection : occurrence.departureSection;
+    const direction =
+      kind === "arrival" ? occurrence.arrivalDirection : occurrence.departureDirection;
+    if (section === undefined || direction === undefined) {
+      return undefined;
     }
 
-    // Convert cell-by-cell occupancy into normalized intervals and merge equal values.
-    const tracks: TrackSegmentEstimate[] = [];
-    let from = 0;
-    for (let distanceCell = 0; distanceCell < tracksMatrix.length; distanceCell++) {
-      const to = (distanceCell + 1) / tracksMatrix.length;
-      tracks.push({start: from, end: Math.min(to, 1), tracks: tracksMatrix[distanceCell]});
-      from = to;
+    const accessor = InfrastructureEstimatorService.getTimeAccessor(kind, scale, direction);
+    const nodeIdAtEnd =
+      accessor.nodeEnd === "target" ? section.getTargetNodeId() : section.getSourceNodeId();
+    return nodeIdAtEnd === occurrence.node.getId() ? accessor.read(section) : undefined;
+  }
+
+  // =========================================================================
+  // Small helpers
+  // =========================================================================
+
+  private maxOf<T>(items: T[], selector: (item: T) => number): number {
+    return items.reduce((maximum, item) => Math.max(maximum, selector(item)), 0);
+  }
+
+  private pushToGroup<K, V>(groups: Map<K, V[]>, key: K, value: V): void {
+    const group = groups.get(key);
+    if (group === undefined) {
+      groups.set(key, [value]);
+    } else {
+      group.push(value);
     }
-
-    const compactTracks: TrackSegmentEstimate[] = [];
-    let start = 0;
-    let end = 0;
-    let value = tracks[0].tracks;
-
-    tracks.forEach((track) => {
-      if (track.tracks !== value) {
-        compactTracks.push({start, end, tracks: value});
-        start = end;
-        value = track.tracks;
-      }
-      end = track.end;
-    });
-    compactTracks.push({start, end: 1, tracks: value});
-
-    return compactTracks;
   }
 }
