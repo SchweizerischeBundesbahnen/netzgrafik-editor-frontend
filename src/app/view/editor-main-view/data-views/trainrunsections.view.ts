@@ -919,10 +919,11 @@ export class TrainrunSectionsView {
 
   static getHiddenTagForTime(
     editorView: EditorView,
-    trainrunSection: TrainrunSection,
+    viewObject: TrainrunSectionViewObject,
     textElement: TrainrunSectionText,
-    lastTrainrunSection: TrainrunSection = trainrunSection,
   ): boolean {
+    const trainrunSection = viewObject.firstSection;
+    const lastTrainrunSection = viewObject.lastSection;
     if (editorView.isTemporaryDisableFilteringOfItemsInViewEnabled()) {
       // disable filtering in view (render all objects)
       return false;
@@ -1085,11 +1086,7 @@ export class TrainrunSectionsView {
       .attr("height", TRAINRUN_SECTION_TEXT_AREA_HEIGHT)
       .classed(TrainrunSectionText[lineTextElement], true)
       .classed(StaticDomTags.TAG_HIDDEN, (d: TrainrunSectionViewObject) =>
-        TrainrunSectionsView.getHiddenTagForTime(
-          this.editorView,
-          d.getExtremitySection(atSource),
-          lineTextElement,
-        ),
+        TrainrunSectionsView.getHiddenTagForTime(this.editorView, d, lineTextElement),
       );
   }
 
@@ -1573,12 +1570,7 @@ export class TrainrunSectionsView {
         TrainrunSectionsView.hasWarning(d.getExtremitySection(atSource), textElement),
       )
       .classed(StaticDomTags.TAG_HIDDEN, (d: TrainrunSectionViewObject) =>
-        TrainrunSectionsView.getHiddenTagForTime(
-          this.editorView,
-          d.firstSection,
-          textElement,
-          d.lastSection,
-        ),
+        TrainrunSectionsView.getHiddenTagForTime(this.editorView, d, textElement),
       )
       .classed(StaticDomTags.TAG_EVENT_DISABLED, !enableEvents)
       .text((d: TrainrunSectionViewObject) =>
