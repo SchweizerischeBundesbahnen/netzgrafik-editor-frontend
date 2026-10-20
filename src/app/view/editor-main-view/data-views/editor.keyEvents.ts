@@ -609,9 +609,7 @@ export class EditorKeyEvents {
 
     // --- Pass 5 ---- unselect all trainruns and select all new nodes
     this.trainrunService.unselectAllTrainruns(false);
-    newNodes.forEach((n: Node) => {
-      n.select();
-    });
+    newNodes.forEach((n: Node) => n.select());
 
     // Publish the batched changes once after the duplicate is complete.
     this.nodeService.transitionsUpdated();
