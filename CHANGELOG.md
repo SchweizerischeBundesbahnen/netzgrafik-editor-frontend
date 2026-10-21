@@ -1,5 +1,35 @@
 # Changelog
 
+## [2.12.1](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/compare/netzgrafik-editor-frontend-v2.12.0...netzgrafik-editor-frontend-v2.12.1) (2026-10-21)
+
+
+### Features
+
+* change note snap from 32px grid to 16px ([e725a36](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/commit/e725a36c876f83d6c4f2b9691246348c1f1cf4dd))
+* fix: include notes, exclude filtered elements from export and center init viewport ([918df92](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/commit/918df92bdd6afc326dea1277e386f8fdad321592))
+
+
+### Bug Fixes
+
+* add style for URL popup ([0d47a86](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/commit/0d47a86ac778682ff76478727514889a69125c0b))
+* allow fonts to be loaded when exporting svg ([#1405](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/issues/1405)) ([2a52333](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/commit/2a5233314dd339d8b8766d2224b7492a5dcf3f86))
+* harmonize font family ([8f8dfd0](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/commit/8f8dfd0ff2d1c0f4c65ae4304623a25801b7cbaf))
+* invert travel times when inverting one-ways ([6b3afce](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/commit/6b3afce339459c9fee0d0e5a51926eb08662cd13))
+* node edit button having node_hover_root style ([8c7219c](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/commit/8c7219cf057940ebd838279bcd0ecc29adecb728))
+* note snapping ([5c05547](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/commit/5c055479f54d1fc98b60b4cd7d187908ce149662))
+* one way travel time position invertion ([1a9d4d3](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/commit/1a9d4d33565b6c456679f0de23f6463e05ba69e7))
+* optimize multi-node duplication performance ([#1419](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/issues/1419)) ([3f0dda9](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/commit/3f0dda93f69b592042b8d0e55bfe72fc6bbdcd16))
+* port ordering translations ([c4d5ed6](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/commit/c4d5ed686a5983597360b770dcdc1352f18ea68d))
+* trainrun-section-tab (bottom)travelTimeInputElement ([d3328f8](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/commit/d3328f892c45f09d91d4bd134b6e061fb496c86d))
+* update selected nodes level of details when zooming ([6befa58](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/commit/6befa58153457eb32a0c14f120faebd52ffc5a9f))
+* update text after switching back to roundtrip ([f6830d8](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/commit/f6830d8372d13c7b0a1d7d47889aa2f199e23cce))
+* **view:** overlapping SummaryTitle css class ([82b85da](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/commit/82b85daef89ce3a9053c5234b68088fd7c56d1eb))
+
+
+### Miscellaneous Chores
+
+* force patch version for frontend ([#1422](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/issues/1422)) ([4205225](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/commit/42052254de71c28229b1b6dad1dc1b6a51c1b479))
+
 ## [2.12.0](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/compare/netzgrafik-editor-frontend-v2.11.1...netzgrafik-editor-frontend-v2.12.0) (2026-10-08)
 
 
