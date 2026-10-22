@@ -173,21 +173,20 @@ export class NodesView {
     text.each(function () {
       const text = d3.select(this);
       const chars = text.text().split("");
+      const width = Number.parseFloat(text.attr("width"));
+      const estimatedCharacterWidth = TEXT_SIZE * 0.55;
 
-      const ellipsis = text.text("").append("tspan").attr("class", "elip").text("…");
-      const width = parseFloat(text.attr("width")) - ellipsis.node().getComputedTextLength();
-      const wordLength = chars.length;
-
-      const tspan = text.insert("tspan", ":first-child").text(chars.join(""));
-
-      while (tspan.node().getComputedTextLength() > width && chars.length) {
-        chars.pop();
-        tspan.text(chars.join(""));
+      if (!Number.isFinite(width) || chars.length * estimatedCharacterWidth <= width) {
+        return;
       }
 
-      if (chars.length === wordLength) {
-        ellipsis.remove();
-      }
+      const maxCharacters = Math.max(
+        0,
+        Math.floor((width - estimatedCharacterWidth) / estimatedCharacterWidth),
+      );
+
+      text.text("").append("tspan").attr("class", "elip").text("…");
+      text.insert("tspan", ":first-child").text(chars.slice(0, maxCharacters).join(""));
     });
   }
 
