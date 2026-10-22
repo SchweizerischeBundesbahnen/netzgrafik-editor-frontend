@@ -213,6 +213,7 @@ export class NodesView {
     this.makeNodeRoot(groupEnter);
     this.makeBackground(groupEnter);
     this.makeLabelArea(groupEnter);
+    this.makeHoverDragBackground(groupEnter);
     this.makeNodeDockable(groupEnter);
     this.makeAnalyticsArea(groupEnter);
     this.makeAnalyticsTextLeftArea(groupEnter);
@@ -226,6 +227,7 @@ export class NodesView {
     this.makeNodeRoot(groupEnter);
     this.makeBackground(groupEnter);
     this.makeLabelArea(groupEnter);
+    this.makeHoverDragBackground(groupEnter);
     this.makeNodeDockable(groupEnter);
     this.makeAnalyticsArea(groupEnter);
     this.makeLabelText(groupEnter);
@@ -235,6 +237,7 @@ export class NodesView {
   makeNodeLODLevel1(groupEnter: d3.Selection<SVGGElement, NodeViewObject, Element, undefined>) {
     this.makeNodeHoverRoot(groupEnter);
     this.makeBackground(groupEnter);
+    this.makeHoverDragBackground(groupEnter);
     this.makeNodeDockable(groupEnter);
     this.makeAnalyticsArea(groupEnter);
     this.makeLabelText(groupEnter);
@@ -242,6 +245,7 @@ export class NodesView {
 
   makeNodeLODLevel0(groupEnter: d3.Selection<SVGGElement, NodeViewObject, Element, undefined>) {
     this.makeNodeHoverRoot(groupEnter);
+    this.makeHoverDragBackground(groupEnter);
     this.makeNodeDockable(groupEnter);
     this.makeAnalyticsArea(groupEnter);
   }

@@ -13,7 +13,6 @@ export enum LevelOfDetail {
 }
 
 export const DYNAMIC_DETAIL_MODES = [
-  EditorMode.NetzgrafikEditing,
   EditorMode.MultiNodeMoving,
   EditorMode.NoteEditing,
 ];
