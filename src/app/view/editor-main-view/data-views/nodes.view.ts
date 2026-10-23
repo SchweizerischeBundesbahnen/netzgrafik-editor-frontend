@@ -32,6 +32,8 @@ export class NodesView {
   draggable: d3.DragBehavior<SVGElement, NodeViewObject, unknown>;
   dragDomObj: SVGElement | null = null;
 
+  // Cache to prevent re-mesuring words that have been already computed.
+  private textWidthCache = new Map<string, number>();
   // Measurement text element used to compute the length of text in the DOM.
   private readonly measurementText = d3
     .select("body")
@@ -1113,7 +1115,12 @@ export class NodesView {
   }
 
   private getComputedTextLength(text: string): number {
-    return this.measurementText.text(text).node()!.getComputedTextLength();
+    let width = this.textWidthCache.get(text);
+    if (width === undefined) {
+      width = this.measurementText.text(text).node()!.getComputedTextLength();
+      this.textWidthCache.set(text, width);
+    }
+    return width;
   }
 
   // Words are separated by spaces or hyphens; a hyphen stays attached to the preceding word.
