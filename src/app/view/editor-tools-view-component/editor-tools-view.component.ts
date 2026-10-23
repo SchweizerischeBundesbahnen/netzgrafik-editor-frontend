@@ -60,6 +60,20 @@ export class EditorToolsViewComponent {
   public isDeletable$ = this.versionControlService.variant$.pipe(map((v) => v?.isDeletable));
   public isWritable$ = this.versionControlService.variant$.pipe(map((v) => v?.isWritable));
 
+  // Fonts to embark in the exports (see src/app/view/rastering/definitions.scss)
+  private static readonly SBB_FONTS = [
+    {
+      family: "SBBWeb Light",
+      weight: "400",
+      url: "https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Light.woff2",
+    },
+    {
+      family: "SBBWeb Roman",
+      weight: "400",
+      url: "https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Roman.woff2",
+    },
+  ];
+
   constructor(
     private dataService: DataService,
     private trainrunService: TrainrunService,
@@ -142,7 +156,7 @@ export class EditorToolsViewComponent {
     }, 1500); // to allow cd-layout-filter to close
   }
 
-  onExportContainerAsSVG() {
+  async onExportContainerAsSVG() {
     // option 2: serialize the SVG natively
     this.levelOfDetailService.disableLevelOfDetailRendering();
     this.viewportCullService.onViewportChangeUpdateRendering(false);
@@ -159,6 +173,7 @@ export class EditorToolsViewComponent {
       containerInfo.documentToExport,
       containerInfo.exportParameter,
     );
+    await this.embedFontsIntoSvgClone(clone);
     const svgString = new XMLSerializer().serializeToString(clone);
     const blob = new Blob([svgString], {type: "image/svg+xml;charset=utf-8"});
     const url = URL.createObjectURL(blob);
@@ -173,7 +188,7 @@ export class EditorToolsViewComponent {
     this.levelOfDetailService.enableLevelOfDetailRendering();
   }
 
-  onExportContainerAsPNG() {
+  async onExportContainerAsPNG() {
     // option 1: rasterize the SVG to PNG natively via canvas
     // Inspired by https://stackoverflow.com/a/74026755
     this.levelOfDetailService.disableLevelOfDetailRendering();
@@ -182,7 +197,7 @@ export class EditorToolsViewComponent {
     const containerInfo = this.getContainerToExport();
     this.prepareStyleForExport(containerInfo);
 
-    this.svgElementToPngDataUrl(containerInfo.documentToExport, containerInfo.exportParameter)
+    await this.svgElementToPngDataUrl(containerInfo.documentToExport, containerInfo.exportParameter)
       .then((dataUrl: string) => {
         const a = document.createElement("a");
         document.body.appendChild(a);
@@ -228,6 +243,7 @@ export class EditorToolsViewComponent {
     const scale = options.scale ?? 1;
 
     const clone = this.cloneSvgForExport(svgElement, options);
+    this.embedFontsIntoSvgClone(clone);
     const svgDataUrl =
       "data:image/svg+xml;charset=utf-8," +
       encodeURIComponent(new XMLSerializer().serializeToString(clone));
@@ -904,5 +920,30 @@ export class EditorToolsViewComponent {
       default:
         return $localize`:@@app.view.editor-side-view.editor-tools-view-component.netzgrafikFile:netzgrafik`;
     }
+  }
+
+  // Get the fonts to embed in the exported files since web polices are missing from the exported data
+  // This adds ~30Ko to the final exported file.
+  private async embedFontsIntoSvgClone(clone: SVGSVGElement): Promise<void> {
+    const rules = await Promise.all(
+      EditorToolsViewComponent.SBB_FONTS.map(async (font) => {
+        const response = await fetch(font.url);
+        const blob = await response.blob();
+        const base64: string = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve((reader.result as string).split(",")[1]);
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        });
+        return (
+          `@font-face{font-family:"${font.family}";font-weight:${font.weight};` +
+          `src:url(data:font/woff2;base64,${base64}) format("woff2");}`
+        );
+      }),
+    );
+
+    const styleElement = document.createElementNS("http://www.w3.org/2000/svg", "style");
+    styleElement.textContent = rules.join("\n");
+    clone.insertBefore(styleElement, clone.firstChild);
   }
 }
