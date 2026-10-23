@@ -2,7 +2,6 @@ import {Injectable, OnDestroy} from "@angular/core";
 import {Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
 import {UiInteractionService} from "./ui.interaction.service";
-import {EditorMode} from "../../view/editor-menu/editor-mode";
 
 export enum LevelOfDetail {
   FULL, // precise >= 50%
@@ -11,12 +10,6 @@ export enum LevelOfDetail {
   LEVEL1, // ... 10 - 20 %
   LEVEL0, // approximated geometry <= 10%
 }
-
-export const DYNAMIC_DETAIL_MODES = [
-  EditorMode.NetzgrafikEditing,
-  EditorMode.MultiNodeMoving,
-  EditorMode.NoteEditing,
-];
 
 @Injectable({
   providedIn: "root",
@@ -42,10 +35,6 @@ export class LevelOfDetailService implements OnDestroy {
     this.uiInteractionService.zoomFactorObservable
       .pipe(takeUntil(this.destroyed))
       .subscribe((changedZoomFactor) => {
-        if (DYNAMIC_DETAIL_MODES.includes(this.uiInteractionService.getEditorMode())) {
-          // don't change level of detail
-          return;
-        }
         this.levelOfDetail = LevelOfDetail.FULL;
         if (changedZoomFactor < 50) {
           this.levelOfDetail = LevelOfDetail.LEVEL3;
