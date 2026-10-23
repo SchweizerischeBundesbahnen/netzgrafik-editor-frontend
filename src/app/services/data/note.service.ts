@@ -128,6 +128,9 @@ export class NoteService {
 
   deleteNote(noteId: number, enforceUpdate = true) {
     const note = this.getNoteFromId(noteId);
+    if (note === undefined) {
+      return;
+    }
     const deletetLabelIds = this.labelService.clearLabel(
       note.getLabelIds(),
       this.makeLabelIDCounterMap(this.getNotes()),
@@ -198,6 +201,9 @@ export class NoteService {
 
   setLabels(noteId: number, labels: string[]) {
     const note = this.getNoteFromId(noteId);
+    if (note === undefined) {
+      return;
+    }
 
     // ensure uniqueness of input labels
     const uniqueLabels = Array.from(new Set(labels));

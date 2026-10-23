@@ -115,6 +115,16 @@ describe("NodeService Test", () => {
     expect(noteService.getNoteFromId(addedDto.id).getLabelIds()).toEqual(addedLabelIds);
   });
 
+  it("deleteNote and setLabels ignore a note removed by syncNotes", () => {
+    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    noteService.syncNotes([]);
+    const operationSpy = spyOn(noteService.operation, "emit");
+
+    expect(() => noteService.deleteNote(3)).not.toThrow();
+    expect(() => noteService.setLabels(3, ["Label"])).not.toThrow();
+    expect(operationSpy).not.toHaveBeenCalled();
+  });
+
   it("getNoteFromId", () => {
     dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
     expect(noteService.getNoteFromId(undefined)).toBe(undefined);
