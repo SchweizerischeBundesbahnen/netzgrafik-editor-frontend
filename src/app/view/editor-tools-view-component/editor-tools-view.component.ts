@@ -140,25 +140,23 @@ export class EditorToolsViewComponent {
     this.viewportCullService.onViewportChangeUpdateRendering(false);
 
     const containerInfo = this.getContainerToExport();
-    this.prepareStyleForExport(containerInfo);
+    const clone = this.prepareStyleForExport(containerInfo);
 
     // SVG scaling does not affect resolution since SVGs are rendered as vector graphics.
     // To ensure a good initial scale, we define the target width as 2000 pixels.
     const scaleToTargetWidth = 2000 / containerInfo.exportParameter.width;
     containerInfo.exportParameter.scale = scaleToTargetWidth;
 
-    svgAsDataUri(containerInfo.documentToExport, containerInfo.exportParameter).then(
-      (uri: string) => {
-        const a = document.createElement("a");
-        document.body.appendChild(a);
-        a.href = uri;
-        a.download = this.getFilenameToExport() + ".svg";
-        a.click();
-        URL.revokeObjectURL(a.href);
-        a.remove();
-        this.levelOfDetailService.enableLevelOfDetailRendering();
-      },
-    );
+    svgAsDataUri(clone, containerInfo.exportParameter).then((uri: string) => {
+      const a = document.createElement("a");
+      document.body.appendChild(a);
+      a.href = uri;
+      a.download = this.getFilenameToExport() + ".svg";
+      a.click();
+      URL.revokeObjectURL(a.href);
+      a.remove();
+      this.levelOfDetailService.enableLevelOfDetailRendering();
+    });
   }
 
   onExportContainerAsPNG() {
@@ -168,13 +166,9 @@ export class EditorToolsViewComponent {
     this.viewportCullService.onViewportChangeUpdateRendering(false);
 
     const containerInfo = this.getContainerToExport();
-    this.prepareStyleForExport(containerInfo);
+    const clone = this.prepareStyleForExport(containerInfo);
 
-    saveSvgAsPng(
-      containerInfo.documentToExport,
-      this.getFilenameToExport() + ".png",
-      containerInfo.exportParameter,
-    );
+    saveSvgAsPng(clone, this.getFilenameToExport() + ".png", containerInfo.exportParameter);
 
     this.levelOfDetailService.enableLevelOfDetailRendering();
   }
@@ -501,11 +495,14 @@ export class EditorToolsViewComponent {
     };
   }
 
-  private prepareStyleForExport(containerInfo: ContainertoExportData) {
-    const element2export = containerInfo.documentToExport;
+  // Clones the live element so inlining styles for export never mutates the working editor DOM.
+  private prepareStyleForExport(containerInfo: ContainertoExportData): SVGSVGElement {
+    const liveElement = containerInfo.documentToExport;
+    const clone = liveElement.cloneNode(true) as unknown as SVGSVGElement;
 
-    const elements = element2export.querySelectorAll("*");
-    elements.forEach((el) => {
+    const liveElements = liveElement.querySelectorAll("*");
+    const clonedElements = clone.querySelectorAll("*");
+    liveElements.forEach((el, index) => {
       const style = window.getComputedStyle(el);
       const essentialPropsArray =
         containerInfo.essentialProps !== undefined
@@ -514,8 +511,10 @@ export class EditorToolsViewComponent {
       const inlineStyle = essentialPropsArray
         .map((key) => `${key}:${style.getPropertyValue(key)};`)
         .join(" ");
-      el.setAttribute("style", inlineStyle);
+      clonedElements[index].setAttribute("style", inlineStyle);
     });
+
+    return clone;
   }
 
   private getContainerToExport(): ContainertoExportData {
