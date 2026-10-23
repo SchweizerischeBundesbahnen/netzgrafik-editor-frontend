@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.12.2](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/compare/netzgrafik-editor-frontend-v2.12.1...netzgrafik-editor-frontend-v2.12.2) (2026-10-23)
+
+
+### Bug Fixes
+
+* adapt node size depending on node name displayed ([a8e02d6](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/commit/a8e02d6ffd712e01d7b45e64bd6c38bf41c11722))
+
 ## [2.12.1](https://github.com/OpenRailAssociation/netzgrafik-editor-frontend/compare/netzgrafik-editor-frontend-v2.12.0...netzgrafik-editor-frontend-v2.12.1) (2026-10-21)
 
 
