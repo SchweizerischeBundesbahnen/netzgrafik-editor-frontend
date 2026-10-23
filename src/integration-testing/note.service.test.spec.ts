@@ -108,8 +108,11 @@ describe("NodeService Test", () => {
     expect(latestNotes).toEqual(noteService.getNotes());
     expect(operationSpy).not.toHaveBeenCalled();
 
+    const addedLabelIds = [...addedDto.labelIds];
     updatedDto.labelIds.push(6);
+    addedDto.labelIds.push(7);
     expect(existingNote.getLabelIds()).toEqual([4, 5]);
+    expect(noteService.getNoteFromId(addedDto.id).getLabelIds()).toEqual(addedLabelIds);
   });
 
   it("getNoteFromId", () => {

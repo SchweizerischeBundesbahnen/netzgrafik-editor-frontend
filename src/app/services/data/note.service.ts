@@ -39,7 +39,7 @@ export class NoteService {
     this.notesStore.notes = notesDto.map((dto) => {
       const note = existingNotes.get(dto.id);
       if (note === undefined) {
-        return new Note(dto);
+        return new Note({...dto, labelIds: [...dto.labelIds]});
       }
       note.setPosition(dto.x, dto.y);
       note.setWidth(dto.width);
