@@ -284,7 +284,7 @@ export class ConnectionsView {
     switch (this.editorView.getLevelOfDetail()) {
       case LevelOfDetail.LEVEL3: {
         //statements;
-        this.makeConnectionLODLevel33(groupEnter);
+        this.makeConnectionLODLevel3(groupEnter);
         break;
       }
       case LevelOfDetail.LEVEL2: {
@@ -316,7 +316,7 @@ export class ConnectionsView {
     this.createConnectionPins(groupEnter);
   }
 
-  makeConnectionLODLevel33(
+  makeConnectionLODLevel3(
     groupEnter: d3.Selection<SVGGElement, ConnectionsViewObject, Element, undefined>,
   ) {
     this.createConnectionCurve(groupEnter);
