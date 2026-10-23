@@ -161,31 +161,34 @@ export class EditorToolsViewComponent {
     this.levelOfDetailService.disableLevelOfDetailRendering();
     this.viewportCullService.onViewportChangeUpdateRendering(false);
 
-    const containerInfo = this.getContainerToExport();
-    this.prepareStyleForExport(containerInfo);
+    try {
+      const containerInfo = this.getContainerToExport();
+      this.prepareStyleForExport(containerInfo);
 
-    // SVG scaling does not affect resolution since SVGs are rendered as vector graphics.
-    // To ensure a good initial scale, we define the target width as 2000 pixels.
-    const scaleToTargetWidth = 2000 / containerInfo.exportParameter.width;
-    containerInfo.exportParameter.scale = scaleToTargetWidth;
+      // SVG scaling does not affect resolution since SVGs are rendered as vector graphics.
+      // To ensure a good initial scale, we define the target width as 2000 pixels.
+      const scaleToTargetWidth = 2000 / containerInfo.exportParameter.width;
+      containerInfo.exportParameter.scale = scaleToTargetWidth;
 
-    const clone = this.cloneSvgForExport(
-      containerInfo.documentToExport,
-      containerInfo.exportParameter,
-    );
-    await this.embedFontsIntoSvgClone(clone);
-    const svgString = new XMLSerializer().serializeToString(clone);
-    const blob = new Blob([svgString], {type: "image/svg+xml;charset=utf-8"});
-    const url = URL.createObjectURL(blob);
+      const clone = this.cloneSvgForExport(
+        containerInfo.documentToExport,
+        containerInfo.exportParameter,
+      );
+      await this.embedFontsIntoSvgClone(clone);
+      const svgString = new XMLSerializer().serializeToString(clone);
+      const blob = new Blob([svgString], {type: "image/svg+xml;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
 
-    const a = document.createElement("a");
-    document.body.appendChild(a);
-    a.href = url;
-    a.download = this.getFilenameToExport() + ".svg";
-    a.click();
-    URL.revokeObjectURL(url);
-    a.remove();
-    this.levelOfDetailService.enableLevelOfDetailRendering();
+      const a = document.createElement("a");
+      document.body.appendChild(a);
+      a.href = url;
+      a.download = this.getFilenameToExport() + ".svg";
+      a.click();
+      URL.revokeObjectURL(url);
+      a.remove();
+    } finally {
+      this.levelOfDetailService.enableLevelOfDetailRendering();
+    }
   }
 
   async onExportContainerAsPNG() {
@@ -234,7 +237,7 @@ export class EditorToolsViewComponent {
   }
 
   // Converts an SVG element into a PNG data URL by drawing it onto a canvas.
-  private svgElementToPngDataUrl(
+  private async svgElementToPngDataUrl(
     svgElement: HTMLElement,
     options: SvgExportOptions,
   ): Promise<string> {
@@ -243,7 +246,7 @@ export class EditorToolsViewComponent {
     const scale = options.scale ?? 1;
 
     const clone = this.cloneSvgForExport(svgElement, options);
-    this.embedFontsIntoSvgClone(clone);
+    await this.embedFontsIntoSvgClone(clone);
     const svgDataUrl =
       "data:image/svg+xml;charset=utf-8," +
       encodeURIComponent(new XMLSerializer().serializeToString(clone));
@@ -922,23 +925,28 @@ export class EditorToolsViewComponent {
     }
   }
 
-  // Get the fonts to embed in the exported files since web polices are missing from the exported data
-  // This adds ~30Ko to the final exported file.
+  /** Get the fonts to embed in the exported files since web polices are missing from the exported data
+   *  This adds ~30Ko to the final exported file.
+   */
   private async embedFontsIntoSvgClone(clone: SVGSVGElement): Promise<void> {
     const rules = await Promise.all(
-      EditorToolsViewComponent.SBB_FONTS.map(async (font) => {
-        const response = await fetch(font.url);
-        const blob = await response.blob();
-        const base64: string = await new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = () => resolve((reader.result as string).split(",")[1]);
-          reader.onerror = reject;
-          reader.readAsDataURL(blob);
-        });
-        return (
-          `@font-face{font-family:"${font.family}";font-weight:${font.weight};` +
-          `src:url(data:font/woff2;base64,${base64}) format("woff2");}`
-        );
+      EditorToolsViewComponent.SBB_FONTS.map(async (font): Promise<string | null> => {
+        try {
+          const response = await fetch(font.url);
+          const blob = await response.blob();
+          const base64: string = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve((reader.result as string).split(",")[1]);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+          });
+          return (
+            `@font-face{font-family:"${font.family}";font-weight:${font.weight};` +
+            `src:url(data:font/woff2;base64,${base64}) format("woff2");}`
+          );
+        } catch (error) {
+          console.warn(`Font embedding skipped for "${font.family}":`, error);
+        }
       }),
     );
 
