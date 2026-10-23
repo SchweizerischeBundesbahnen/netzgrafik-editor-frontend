@@ -568,12 +568,18 @@ export class EditorToolsViewComponent {
       "stroke-width",
       "stroke-opacity",
       "stroke-dasharray",
+      "rx",
+      "ry",
+      "r",
       "font-family",
       "font-size",
       "font-weight",
+      "font-style",
       "opacity",
       "text-anchor",
       "dominant-baseline",
+      "visibility",
+      "display",
     ];
 
     return {
@@ -597,6 +603,14 @@ export class EditorToolsViewComponent {
         .map((key) => `${key}:${style.getPropertyValue(key)};`)
         .join(" ");
       el.setAttribute("style", inlineStyle);
+
+      // Editors such as Inkscape do not support some modern SCSS properties
+      if (el instanceof SVGRectElement) {
+        el.setAttribute("rx", style.getPropertyValue("rx"));
+        el.setAttribute("ry", style.getPropertyValue("ry"));
+      } else if (el instanceof SVGCircleElement) {
+        el.setAttribute("r", style.getPropertyValue("r"));
+      }
     });
   }
 
