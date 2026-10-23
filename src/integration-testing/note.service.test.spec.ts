@@ -74,6 +74,57 @@ describe("NodeService Test", () => {
     expect(note.getDto().id).toBe(3);
   });
 
+  it("syncNotes updates existing notes, adds and removes notes without emitting operations", () => {
+    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    const existingNote = noteService.getNoteFromId(3);
+    const removedNote = noteService.addNote(new Vec2D(0, 0), "Removed", "Removed");
+
+    const updatedDto = {
+      ...existingNote.getDto(),
+      x: 20,
+      y: 30,
+      width: 240,
+      height: 80,
+      title: "Updated title",
+      text: "Updated text",
+      backgroundColor: "#123456",
+      textColor: "#abcdef",
+      labelIds: [4, 5],
+    };
+    const addedDto = {...existingNote.getDto(), id: removedNote.getId() + 1};
+    const operationSpy = spyOn(noteService.operation, "emit");
+    let latestNotes: Note[];
+    noteService.notes.subscribe((updatedNotes) => (latestNotes = updatedNotes));
+
+    noteService.syncNotes([updatedDto, addedDto]);
+
+    expect(noteService.getNoteFromId(3)).toBe(existingNote);
+    expect(noteService.getNotes().map((note) => note.getId())).toEqual([
+      existingNote.getId(),
+      addedDto.id,
+    ]);
+    expect(existingNote.getDto()).toEqual(updatedDto);
+    expect(noteService.getNoteFromId(addedDto.id)).toBeDefined();
+    expect(latestNotes).toEqual(noteService.getNotes());
+    expect(operationSpy).not.toHaveBeenCalled();
+
+    const addedLabelIds = [...addedDto.labelIds];
+    updatedDto.labelIds.push(6);
+    addedDto.labelIds.push(7);
+    expect(existingNote.getLabelIds()).toEqual([4, 5]);
+    expect(noteService.getNoteFromId(addedDto.id).getLabelIds()).toEqual(addedLabelIds);
+  });
+
+  it("deleteNote and setLabels ignore a note removed by syncNotes", () => {
+    dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
+    noteService.syncNotes([]);
+    const operationSpy = spyOn(noteService.operation, "emit");
+
+    expect(() => noteService.deleteNote(3)).not.toThrow();
+    expect(() => noteService.setLabels(3, ["Label"])).not.toThrow();
+    expect(operationSpy).not.toHaveBeenCalled();
+  });
+
   it("getNoteFromId", () => {
     dataService.loadNetzgrafikDto(NetzgrafikUnitTesting.getUnitTestNetzgrafik());
     expect(noteService.getNoteFromId(undefined)).toBe(undefined);

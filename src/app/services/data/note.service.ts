@@ -33,6 +33,27 @@ export class NoteService {
     this.notesStore.notes = notesDto.map((noteDto) => new Note(noteDto));
   }
 
+  // Merges by ID, in place and without emitting operations.
+  syncNotes(notesDto: FreeFloatingTextDto[]) {
+    const existingNotes = new Map(this.notesStore.notes.map((n) => [n.getId(), n]));
+    this.notesStore.notes = notesDto.map((dto) => {
+      const note = existingNotes.get(dto.id);
+      if (note === undefined) {
+        return new Note({...dto, labelIds: [...dto.labelIds]});
+      }
+      note.setPosition(dto.x, dto.y);
+      note.setWidth(dto.width);
+      note.setHeight(dto.height);
+      note.setTitle(dto.title);
+      note.setText(dto.text);
+      note.setBackgroundColor(dto.backgroundColor);
+      note.setTextColor(dto.textColor);
+      note.setLabelIds([...dto.labelIds]);
+      return note;
+    });
+    this.notesUpdated();
+  }
+
   createNewNoteFromDtoList(freeFloatingTexts: FreeFloatingTextDto[]) {
     freeFloatingTexts.forEach((freeFloatingText: FreeFloatingTextDto) => {
       const note: Note = this.addNote(
@@ -107,6 +128,9 @@ export class NoteService {
 
   deleteNote(noteId: number, enforceUpdate = true) {
     const note = this.getNoteFromId(noteId);
+    if (note === undefined) {
+      return;
+    }
     const deletetLabelIds = this.labelService.clearLabel(
       note.getLabelIds(),
       this.makeLabelIDCounterMap(this.getNotes()),
@@ -177,6 +201,9 @@ export class NoteService {
 
   setLabels(noteId: number, labels: string[]) {
     const note = this.getNoteFromId(noteId);
+    if (note === undefined) {
+      return;
+    }
 
     // ensure uniqueness of input labels
     const uniqueLabels = Array.from(new Set(labels));
